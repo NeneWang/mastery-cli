@@ -1,0 +1,4 @@
+save:
+	git add --all
+	git commit -m "Progress :writing_hand:"
+	git push origin HEAD
