@@ -22,7 +22,7 @@ const flags = cli.flags;
 const input = cli.input;
 
 const { clear, debug } = flags;
-const { getMaidHeader } = utils;
+const { getMaidHeader, getTalk } = utils;
 const { MAID_NAME } = constants;
 
 
@@ -36,21 +36,8 @@ const { MAID_NAME } = constants;
 	debug && log(flags);
 
 	if (input.includes('talk')) {
-		let message = ""
-		if (flags.type == "chuck") {
-			const res = await axios.get('http://api.chucknorris.io/jokes/random', {
-				headers: {
-					'Accept-Encoding': 'application/json',
-				}
-			});
-			message = res.data.value;
-
-		}
-		else if (flags.type) {
-
-			message = flags.type;
-		}
-
+		let message = await getTalk()
+		
 		console.log(`${getMaidHeader()} ${chalk(message)}`)
 	}
 

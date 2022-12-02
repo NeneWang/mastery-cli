@@ -26,11 +26,12 @@ var flags = cli.flags;
 var input = cli.input;
 var clear = flags.clear,
     debug = flags.debug;
-var getMaidHeader = utils.getMaidHeader;
+var getMaidHeader = utils.getMaidHeader,
+    getTalk = utils.getTalk;
 var MAID_NAME = constants.MAID_NAME;
 
 (function _callee() {
-  var message, res;
+  var message;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -42,39 +43,18 @@ var MAID_NAME = constants.MAID_NAME;
           debug && log(flags);
 
           if (!input.includes('talk')) {
-            _context.next = 14;
+            _context.next = 8;
             break;
           }
 
-          message = "";
+          _context.next = 6;
+          return regeneratorRuntime.awrap(getTalk());
 
-          if (!(flags.type == "chuck")) {
-            _context.next = 12;
-            break;
-          }
-
-          _context.next = 8;
-          return regeneratorRuntime.awrap(axios.get('http://api.chucknorris.io/jokes/random', {
-            headers: {
-              'Accept-Encoding': 'application/json'
-            }
-          }));
-
-        case 8:
-          res = _context.sent;
-          message = res.data.value;
-          _context.next = 13;
-          break;
-
-        case 12:
-          if (flags.type) {
-            message = flags.type;
-          }
-
-        case 13:
+        case 6:
+          message = _context.sent;
           console.log("".concat(getMaidHeader(), " ").concat(chalk(message)));
 
-        case 14:
+        case 8:
         case "end":
           return _context.stop();
       }
