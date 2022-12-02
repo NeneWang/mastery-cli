@@ -13,7 +13,10 @@ CLI Assistnat tool to keep you in track.
 - [ ] Flashcards in the terminal (text based)
 - [ ] Create Documentation guides
 - [ ] Pomodoro Timers
-- [ ] Objective timers e.g. Doing flashcards,
+- [ ] Daily reports
+  - [ ] Includes weather for tomorrow and raining chance
+  - [ ] What you wrote for your journal the same day 1 year ago. 1 month ago. 1 Week ago + 1 Day ago.
+  - [ ] Report the progress results of 1 year ago, 1 month ago + 1 week ago + 1 day ago.
 - [ ] Pull out excels and tell you about the daily tasks you didnt finish
 - [ ] Tell you which tasks did you finish.
 - [ ] Display daily metrics, or write into the daily metrics for the day where it stores based on datetime and you cna update the json that is being submitted.
