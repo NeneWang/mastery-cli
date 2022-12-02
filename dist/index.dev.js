@@ -48,7 +48,7 @@ var MAID_NAME = constants.MAID_NAME;
           }
 
           _context.next = 6;
-          return regeneratorRuntime.awrap(getTalk());
+          return regeneratorRuntime.awrap(getTalk(flags));
 
         case 6:
           message = _context.sent;

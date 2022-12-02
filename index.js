@@ -36,7 +36,7 @@ const { MAID_NAME } = constants;
 	debug && log(flags);
 
 	if (input.includes('talk')) {
-		let message = await getTalk()
+		let message = await getTalk(flags)
 		
 		console.log(`${getMaidHeader()} ${chalk(message)}`)
 	}
