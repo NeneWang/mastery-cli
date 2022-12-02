@@ -7,8 +7,6 @@
  * @author Nelson <github.com/neneWang>
  */
 
-
-
 const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
@@ -25,10 +23,6 @@ const { clear, debug } = flags;
 const { getMaidHeader, getTalk } = utils;
 const { MAID_NAME } = constants;
 
-
-
-
-
 (async () => {
 	init({ clear });
 	input.includes(`help`) && cli.showHelp(0);
@@ -36,9 +30,8 @@ const { MAID_NAME } = constants;
 	debug && log(flags);
 
 	if (input.includes('talk')) {
-		let message = await getTalk(flags)
-		
-		console.log(`${getMaidHeader()} ${chalk(message)}`)
-	}
+		let message = await getTalk(flags);
 
+		console.log(`${getMaidHeader()} ${chalk(message)}`);
+	}
 })();

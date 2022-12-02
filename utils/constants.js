@@ -1,3 +1,3 @@
-const MAID_NAME = "Maid"
+const MAID_NAME = 'Maid';
 
-module.exports = {MAID_NAME}
+module.exports = { MAID_NAME };
