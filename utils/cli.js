@@ -33,7 +33,7 @@ const flags = {
 };
 
 const commands = {
-	help: { desc: `Print help info` }
+	help: { desc: `talk` }
 };
 
 const helpText = meowHelp({

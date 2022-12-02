@@ -19,6 +19,10 @@ const chalk = require('chalk')
 const input = cli.input;
 const MAID_NAME = "Maid";
 
+const getMaidHeader = () => {
+	return `${chalk.hex("#1da1f2").inverse(` ${MAID_NAME}: `)}`
+}
+
 (async () => {
 	init({ clear });
 	input.includes(`help`) && cli.showHelp(0);
@@ -41,7 +45,7 @@ const MAID_NAME = "Maid";
 			message = flags.type;
 		}
 
-		console.log(`${chalk.hex("#1da1f2")(MAID_NAME)}: ${chalk(message)}`)
+		console.log(`${getMaidHeader()} ${chalk(message)}`)
 	}
 
 })();
