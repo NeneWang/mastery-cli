@@ -15,9 +15,9 @@ const log = require('./utils/log');
 const axios = require('axios');
 const flags = cli.flags;
 const { clear, debug } = flags;
-
-
+const chalk = require('chalk')
 const input = cli.input;
+const MAID_NAME = "Maid";
 
 (async () => {
 	init({ clear });
@@ -25,7 +25,7 @@ const input = cli.input;
 
 	debug && log(flags);
 
-	if (input.includes('joke')) {
+	if (input.includes('talk')) {
 		let message = ""
 		if (flags.type == "chuck") {
 			const res = await axios.get('http://api.chucknorris.io/jokes/random', {
@@ -41,7 +41,7 @@ const input = cli.input;
 			message = flags.type;
 		}
 
-		console.log(message)
+		console.log(`${chalk.hex("#1da1f2")(MAID_NAME)}: ${chalk(message)}`)
 	}
 
 })();
