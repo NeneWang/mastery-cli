@@ -1,5 +1,9 @@
 run:
-	node index.js {c}
+	npm link
+	make test-talk
+
+test-talk:
+	maid talk
 
 save:
 	git add --all

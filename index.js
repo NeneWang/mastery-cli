@@ -12,18 +12,22 @@
 const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
+const utils = require('./utils/utils');
+const constants = require('./utils/constants');
+
 const axios = require('axios');
+const chalk = require('chalk');
+
 const flags = cli.flags;
-const { clear, debug } = flags;
-const chalk = require('chalk')
 const input = cli.input;
-const MAID_NAME = "Maid";
+
+const { clear, debug } = flags;
+const { getMaidHeader } = utils;
+const { MAID_NAME } = constants;
 
 
-// https://www.npmjs.com/package/chalk
-const getMaidHeader = () => {
-	return `${chalk.hex("#1da1f2").inverse(` ${MAID_NAME}: `)}`
-}
+
+
 
 (async () => {
 	init({ clear });
@@ -42,8 +46,8 @@ const getMaidHeader = () => {
 			message = res.data.value;
 
 		}
-		else if (flags.type){
-			
+		else if (flags.type) {
+
 			message = flags.type;
 		}
 
