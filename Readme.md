@@ -3,6 +3,11 @@
 CLI Assistnat tool to keep you in track.
 
 
+## Created Features
+
+- [x] Simple `coa` fix
+- [ ] 
+
 ## Features
 
 - [ ] Save your passwords
