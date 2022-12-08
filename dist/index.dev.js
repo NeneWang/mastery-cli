@@ -77,7 +77,7 @@ var MAID_NAME = constants.MAID_NAME;
             bat.stdout.on('data', function (data) {
               console.log(data.toString());
             });
-            console.log('Pushed to origin. <3');
+            console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
           }
 
         case 9:

@@ -59,7 +59,7 @@ const { MAID_NAME } = constants;
 		});
 
 
-		console.log('Pushed to origin. <3')
+		console.log(`Pushed to origin with commit message: ${commitMessage} <3`)
 
 	}
 
