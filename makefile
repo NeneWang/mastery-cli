@@ -11,7 +11,7 @@ save:
 	git push origin HEAD
 
 new:
-	npm version minor -m "${m}"
+	npm version patch -m "${m}"
 	npm publish
 
 uninstall:
