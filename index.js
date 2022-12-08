@@ -49,9 +49,9 @@ const { MAID_NAME } = constants;
 		if (commitMessage == undefined) {
 			commitMessage = '"CommittedByMaid"'
 		}
-		spawn('git', ['add', '--all']);
-		spawn(`git`, ['commit', '-m', commitMessage]);
-		spawn(`git`, ['push', 'origin', 'head']);
+		// spawn('git', ['add', '--all']);
+		// spawn(`git`, ['commit', '-m', commitMessage]);
+		// spawn(`git`, ['push', 'origin', 'head']);
 
 		exec(`git coa ${commitMessage} && git poh ` );
 		
