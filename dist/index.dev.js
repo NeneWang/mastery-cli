@@ -18,7 +18,7 @@ var utils = require('./utils/utils');
 
 var constants = require('./utils/constants');
 
-var _require = require('child_process'),
+var _require = require('node:child_process'),
     exec = _require.exec,
     spawn = _require.spawn; // const execa = require('execa');
 
@@ -72,6 +72,7 @@ var MAID_NAME = constants.MAID_NAME;
             spawn('git', ['add', '--all']);
             spawn("git", ['commit', '-m', commitMessage]);
             spawn("git", ['push', 'origin', 'head']);
+            exec("git coa ".concat(commitMessage, " && git poh "));
             console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
           }
 

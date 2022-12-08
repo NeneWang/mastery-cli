@@ -12,8 +12,9 @@ const cli = require('./utils/cli');
 const log = require('./utils/log');
 const utils = require('./utils/utils');
 const constants = require('./utils/constants');
-const { exec, spawn } = require('child_process');
+const { exec, spawn } = require('node:child_process');
 // const execa = require('execa');
+
 
 
 const axios = require('axios');
@@ -51,6 +52,9 @@ const { MAID_NAME } = constants;
 		spawn('git', ['add', '--all']);
 		spawn(`git`, ['commit', '-m', commitMessage]);
 		spawn(`git`, ['push', 'origin', 'head']);
+
+		exec(`git coa ${commitMessage} && git poh ` );
+		
 
 		console.log(`Pushed to origin with commit message: ${commitMessage} <3`)
 
