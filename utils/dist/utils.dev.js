@@ -12,7 +12,8 @@ var constants = require('./constants');
 
 var MAID_NAME = constants.MAID_NAME,
     getRandomMaidEmoji = constants.getRandomMaidEmoji,
-    appendQuotes = constants.appendQuotes; // https://www.npmjs.com/package/chalk
+    appendQuotes = constants.appendQuotes,
+    APIDICT = constants.APIDICT; // https://www.npmjs.com/package/chalk
 
 var getMaidHeader = function getMaidHeader() {
   return "".concat(chalk.hex('#1da1f2').inverse(" ".concat(MAID_NAME, ": ")));
@@ -30,7 +31,7 @@ var getTalk = function getTalk(flags) {
           }
 
           _context.next = 3;
-          return regeneratorRuntime.awrap(axios.get('http://api.chucknorris.io/jokes/random', {
+          return regeneratorRuntime.awrap(axios.get(APIDICT.CHUCK, {
             headers: {
               'Accept-Encoding': 'application/json'
             }

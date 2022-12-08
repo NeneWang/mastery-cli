@@ -4,7 +4,7 @@ const { exec, spawn } = require('node:child_process');
 
 const constants = require('./constants');
 
-const { MAID_NAME, getRandomMaidEmoji, appendQuotes } = constants;
+const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT } = constants;
 
 // https://www.npmjs.com/package/chalk
 
@@ -14,7 +14,7 @@ const getMaidHeader = () => {
 
 const getTalk = async flags => {
 	if (flags.type == 'chuck') {
-		const res = await axios.get('http://api.chucknorris.io/jokes/random', {
+		const res = await axios.get(APIDICT.CHUCK, {
 			headers: {
 				'Accept-Encoding': 'application/json'
 			}
