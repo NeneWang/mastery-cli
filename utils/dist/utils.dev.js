@@ -10,7 +10,9 @@ var _require = require('node:child_process'),
 
 var constants = require('./constants');
 
-var MAID_NAME = constants.MAID_NAME; // https://www.npmjs.com/package/chalk
+var MAID_NAME = constants.MAID_NAME,
+    getRandomMaidEmoji = constants.getRandomMaidEmoji,
+    appendQuotes = constants.appendQuotes; // https://www.npmjs.com/package/chalk
 
 var getMaidHeader = function getMaidHeader() {
   return "".concat(chalk.hex('#1da1f2').inverse(" ".concat(MAID_NAME, ": ")));
@@ -61,11 +63,10 @@ var commitpush = function commitpush() {
   console.log(commitMessage);
 
   if (commitMessage == undefined) {
-    commitMessage = '"Committed by Maid :genie_woman: "';
-  } else {
-    commitMessage = '"' + commitMessage + '"';
+    commitMessage = "Committed by Maid " + getRandomMaidEmoji();
   }
 
+  commitMessage = appendQuotes(commitMessage);
   exec("git coa ".concat(commitMessage, " && git poh "));
   console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
 };
