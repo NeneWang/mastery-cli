@@ -18,11 +18,6 @@ var utils = require('./utils/utils');
 
 var constants = require('./utils/constants');
 
-var _require = require('node:child_process'),
-    exec = _require.exec,
-    spawn = _require.spawn; // const execa = require('execa');
-
-
 var axios = require('axios');
 
 var chalk = require('chalk');
@@ -36,7 +31,7 @@ var getMaidHeader = utils.getMaidHeader,
 var MAID_NAME = constants.MAID_NAME;
 
 (function _callee() {
-  var message, commitMessage;
+  var message;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -61,21 +56,7 @@ var MAID_NAME = constants.MAID_NAME;
 
         case 8:
           if (input.includes('coa')) {
-            // Commits all and pushes things
-            commitMessage = process.argv[3];
-            console.log(commitMessage);
-
-            if (commitMessage == undefined) {
-              commitMessage = '"Committed By Maid"';
-            } else {
-              commitMessage = '"' + commitMessage + '"';
-            } // spawn('git', ['add', '--all']);
-            // spawn(`git`, ['commit', '-m', commitMessage]);
-            // spawn(`git`, ['push', 'origin', 'head']);
-
-
-            exec("git coa ".concat(commitMessage, " && git poh "));
-            console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
+            utils.commitpush();
           }
 
         case 9:

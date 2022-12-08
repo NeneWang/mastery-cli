@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const axios = require('axios');
+const { exec, spawn } = require('node:child_process');
 
 const constants = require('./constants');
 
@@ -25,4 +26,20 @@ const getTalk = async flags => {
 	return message;
 };
 
-module.exports = { getMaidHeader, getTalk };
+const commitpush = () => {
+
+	let commitMessage = process.argv[3];
+	console.log(commitMessage)
+	if (commitMessage == undefined) {
+		commitMessage = '"Committed by Maid :genie_woman: "'
+	} else {
+		commitMessage = '"' + commitMessage + '"';
+	}
+
+	exec(`git coa ${commitMessage} && git poh `);
+
+
+	console.log(`Pushed to origin with commit message: ${commitMessage} <3`)
+}
+
+module.exports = { getMaidHeader, getTalk, commitpush };
