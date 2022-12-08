@@ -36,7 +36,7 @@ var getMaidHeader = utils.getMaidHeader,
 var MAID_NAME = constants.MAID_NAME;
 
 (function _callee() {
-  var message, commitMessage;
+  var message, commitMessage, bat;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -66,14 +66,18 @@ var MAID_NAME = constants.MAID_NAME;
             console.log(commitMessage);
 
             if (commitMessage == undefined) {
-              commitMessage = "asdas";
+              commitMessage = "Commit by maid<3";
             } // exec(`mkdir -p ${dirName}`);
             // spawn(`git `);
 
 
-            spawn('git', ['add', '-A']);
+            spawn('git', ['add', '--all']);
             spawn("git", ['commit', '-m', commitMessage]);
-            spawn("git", ['push', 'origin', 'head']);
+            bat = spawn("git", ['push', 'origin', 'head']);
+            bat.stdout.on('data', function (data) {
+              console.log(data.toString());
+            });
+            console.log('Pushed to origin. <3');
           }
 
         case 9:
