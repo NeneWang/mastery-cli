@@ -46,7 +46,7 @@ const { MAID_NAME } = constants;
 		let commitMessage = process.argv[3];
 		console.log(commitMessage)
 		if (commitMessage == undefined) {
-			commitMessage = "Commit by maid "
+			commitMessage = '"Maid"'
 		}
 		// exec(`mkdir -p ${dirName}`);
 		// spawn(`git `);
@@ -55,8 +55,10 @@ const { MAID_NAME } = constants;
 		await spawn(`git`, ['push', 'origin', 'head']);
 
 		// bat.stdout.on('data', (data) => {
-		// 	console.log(data.toString());
+			// console.log(data.toString());
 		// });
+
+		// sd
 
 
 		console.log(`Pushed to origin with commit message: ${commitMessage} <3`)

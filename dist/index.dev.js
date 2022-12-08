@@ -70,7 +70,7 @@ var MAID_NAME = constants.MAID_NAME;
           console.log(commitMessage);
 
           if (commitMessage == undefined) {
-            commitMessage = "Commit by maid ";
+            commitMessage = '"Maid"';
           } // exec(`mkdir -p ${dirName}`);
           // spawn(`git `);
 
@@ -88,8 +88,9 @@ var MAID_NAME = constants.MAID_NAME;
 
         case 18:
           // bat.stdout.on('data', (data) => {
-          // 	console.log(data.toString());
+          // console.log(data.toString());
           // });
+          // sd
           console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
 
         case 19:
