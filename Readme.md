@@ -5,7 +5,7 @@ CLI Assistnat tool to keep you in track.
 
 ## Created Features
 
-- [x] Simple `coa` fix
+- [x] Simple `coa` commit and push
 - [ ] 
 
 ## Features
