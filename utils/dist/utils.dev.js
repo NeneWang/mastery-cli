@@ -72,8 +72,15 @@ var commitpush = function commitpush() {
   console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
 };
 
+var autorelease = function autorelease() {
+  // Maid can auto-release herself
+  var commitMessage = process.argv[3];
+  exec("maid coa && make new m=\"".concat(commitMessage, "\""));
+};
+
 module.exports = {
   getMaidHeader: getMaidHeader,
   getTalk: getTalk,
-  commitpush: commitpush
+  commitpush: commitpush,
+  autorelease: autorelease
 };

@@ -41,4 +41,8 @@ const { MAID_NAME } = constants;
 		utils.commitpush()
 	}
 
+	if (input.includes('update')){
+		utils.autorelease()
+	}
+
 })();

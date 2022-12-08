@@ -43,4 +43,11 @@ const commitpush = () => {
 	console.log(`Pushed to origin with commit message: ${commitMessage} <3`)
 }
 
-module.exports = { getMaidHeader, getTalk, commitpush };
+const autorelease = () => {
+	// Maid can auto-release herself
+	
+	let commitMessage = process.argv[3];
+	exec(`maid coa && make new m="${commitMessage}"`);
+}
+
+module.exports = { getMaidHeader, getTalk, commitpush, autorelease };

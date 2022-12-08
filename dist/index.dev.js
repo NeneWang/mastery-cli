@@ -59,7 +59,11 @@ var MAID_NAME = constants.MAID_NAME;
             utils.commitpush();
           }
 
-        case 9:
+          if (input.includes('update')) {
+            utils.autorelease();
+          }
+
+        case 10:
         case "end":
           return _context.stop();
       }
