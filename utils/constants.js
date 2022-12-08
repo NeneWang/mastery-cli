@@ -7,6 +7,10 @@ const MAID_EMOJIS = ['genie_woman', 'elf_woman', "construction_worker_woman", "z
     'mage_woman', 'sauna_woman', 'woman_juggling', 'woman_pilot', 'woman_office_worker',
     'woman_health_worker'];
 
+let APIDICT = {
+    CHUCK: 'http://api.chucknorris.io/jokes/random'
+}
+
 const getRandomMaidEmoji = () => {
     return `:${get_random(MAID_EMOJIS)}:`
 }
@@ -17,5 +21,5 @@ const appendQuotes = (message) => {
 
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji,
-    appendQuotes
+    appendQuotes, APIDICT
 };
