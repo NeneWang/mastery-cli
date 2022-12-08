@@ -47,7 +47,7 @@ const { MAID_NAME } = constants;
 		let commitMessage = process.argv[3];
 		console.log(commitMessage)
 		if (commitMessage == undefined) {
-			commitMessage = '"CommittedByMaid"'
+			commitMessage = '"Committed By Maid"'
 		}
 		// spawn('git', ['add', '--all']);
 		// spawn(`git`, ['commit', '-m', commitMessage]);

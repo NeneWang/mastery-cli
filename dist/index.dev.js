@@ -66,7 +66,7 @@ var MAID_NAME = constants.MAID_NAME;
             console.log(commitMessage);
 
             if (commitMessage == undefined) {
-              commitMessage = '"CommittedByMaid"';
+              commitMessage = '"Committed By Maid"';
             } // spawn('git', ['add', '--all']);
             // spawn(`git`, ['commit', '-m', commitMessage]);
             // spawn(`git`, ['push', 'origin', 'head']);
