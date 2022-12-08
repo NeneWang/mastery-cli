@@ -15,7 +15,7 @@ new:
 	npm publish
 
 uninstall:
-	npm uninstall -g maid
+	npm uninstall -g maid-cli
 
 install:
-	npm install -g maid
+	npm install -g maid-cli

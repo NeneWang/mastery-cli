@@ -36,7 +36,7 @@ var getMaidHeader = utils.getMaidHeader,
 var MAID_NAME = constants.MAID_NAME;
 
 (function _callee() {
-  var message, commitMessage, bat;
+  var message, commitMessage;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -60,27 +60,39 @@ var MAID_NAME = constants.MAID_NAME;
           console.log("".concat(getMaidHeader(), " ").concat(chalk(message)));
 
         case 8:
-          if (input.includes('coa')) {
-            // Commits all and pushes things
-            commitMessage = process.argv[3];
-            console.log(commitMessage);
-
-            if (commitMessage == undefined) {
-              commitMessage = "Commit by maid<3";
-            } // exec(`mkdir -p ${dirName}`);
-            // spawn(`git `);
-
-
-            spawn('git', ['add', '--all']);
-            spawn("git", ['commit', '-m', commitMessage]);
-            bat = spawn("git", ['push', 'origin', 'head']);
-            bat.stdout.on('data', function (data) {
-              console.log(data.toString());
-            });
-            console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
+          if (!input.includes('coa')) {
+            _context.next = 19;
+            break;
           }
 
-        case 9:
+          // Commits all and pushes things
+          commitMessage = process.argv[3];
+          console.log(commitMessage);
+
+          if (commitMessage == undefined) {
+            commitMessage = "Commit by maid ";
+          } // exec(`mkdir -p ${dirName}`);
+          // spawn(`git `);
+
+
+          _context.next = 14;
+          return regeneratorRuntime.awrap(spawn('git', ['add', '--all']));
+
+        case 14:
+          _context.next = 16;
+          return regeneratorRuntime.awrap(spawn("git", ['commit', '-m', commitMessage]));
+
+        case 16:
+          _context.next = 18;
+          return regeneratorRuntime.awrap(spawn("git", ['push', 'origin', 'head']));
+
+        case 18:
+          // bat.stdout.on('data', (data) => {
+          // 	console.log(data.toString());
+          // });
+          console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
+
+        case 19:
         case "end":
           return _context.stop();
       }
