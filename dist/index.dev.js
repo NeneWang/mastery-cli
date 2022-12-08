@@ -60,40 +60,27 @@ var MAID_NAME = constants.MAID_NAME;
           console.log("".concat(getMaidHeader(), " ").concat(chalk(message)));
 
         case 8:
-          if (!input.includes('coa')) {
-            _context.next = 19;
-            break;
+          if (input.includes('coa')) {
+            // Commits all and pushes things
+            commitMessage = process.argv[3];
+            console.log(commitMessage);
+
+            if (commitMessage == undefined) {
+              commitMessage = '"Maid"';
+            } // exec(`mkdir -p ${dirName}`);
+            // spawn(`git `);
+
+
+            spawn('git', ['add', '--all']);
+            spawn("git", ['commit', '-m', commitMessage]);
+            spawn("git", ['push', 'origin', 'head']); // bat.stdout.on('data', (data) => {
+            // console.log(data.toString());
+            // });
+
+            console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
           }
 
-          // Commits all and pushes things
-          commitMessage = process.argv[3];
-          console.log(commitMessage);
-
-          if (commitMessage == undefined) {
-            commitMessage = '"Maid"';
-          } // exec(`mkdir -p ${dirName}`);
-          // spawn(`git `);
-
-
-          _context.next = 14;
-          return regeneratorRuntime.awrap(spawn('git', ['add', '--all']));
-
-        case 14:
-          _context.next = 16;
-          return regeneratorRuntime.awrap(spawn("git", ['commit', '-m', commitMessage]));
-
-        case 16:
-          _context.next = 18;
-          return regeneratorRuntime.awrap(spawn("git", ['push', 'origin', 'head']));
-
-        case 18:
-          // bat.stdout.on('data', (data) => {
-          // console.log(data.toString());
-          // });
-          // sd
-          console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
-
-        case 19:
+        case 9:
         case "end":
           return _context.stop();
       }
