@@ -11,7 +11,6 @@ save:
 	git push origin HEAD
 
 new:
-	npm link
 	npm version minor -m "${m}"
 	npm publish
 
