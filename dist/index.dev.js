@@ -66,17 +66,14 @@ var MAID_NAME = constants.MAID_NAME;
             console.log(commitMessage);
 
             if (commitMessage == undefined) {
-              commitMessage = '"Maid"';
+              commitMessage = '"CommittedByMaid"';
             } // exec(`mkdir -p ${dirName}`);
             // spawn(`git `);
 
 
             spawn('git', ['add', '--all']);
             spawn("git", ['commit', '-m', commitMessage]);
-            spawn("git", ['push', 'origin', 'head']); // bat.stdout.on('data', (data) => {
-            // console.log(data.toString());
-            // });
-
+            spawn("git", ['push', 'origin', 'head']);
             console.log("Pushed to origin with commit message: ".concat(commitMessage, " <3"));
           }
 
