@@ -9,3 +9,14 @@ save:
 	git add --all
 	git commit -m "Progress :writing_hand:"
 	git push origin HEAD
+
+new:
+	npm link
+	npm version minor -m "Release"
+	npm publish
+
+uninstall:
+	npm uninstall -g maid
+
+install:
+	npm install -g maid
