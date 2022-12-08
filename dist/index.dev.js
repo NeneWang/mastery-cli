@@ -36,25 +36,23 @@ var MAID_NAME = constants.MAID_NAME;
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          init({
-            clear: clear
-          });
+          // init({ clear });
           input.includes("help") && cli.showHelp(0);
           debug && log(flags);
 
           if (!input.includes('talk')) {
-            _context.next = 8;
+            _context.next = 7;
             break;
           }
 
-          _context.next = 6;
+          _context.next = 5;
           return regeneratorRuntime.awrap(getTalk(flags));
 
-        case 6:
+        case 5:
           message = _context.sent;
           console.log("".concat(getMaidHeader(), " ").concat(chalk(message)));
 
-        case 8:
+        case 7:
           if (input.includes('coa')) {
             utils.commitpush();
           }
@@ -63,7 +61,7 @@ var MAID_NAME = constants.MAID_NAME;
             utils.autorelease();
           }
 
-        case 10:
+        case 9:
         case "end":
           return _context.stop();
       }

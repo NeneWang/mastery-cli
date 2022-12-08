@@ -27,7 +27,7 @@ const { getMaidHeader, getTalk } = utils;
 const { MAID_NAME } = constants;
 
 (async () => {
-	init({ clear });
+	// init({ clear });
 	input.includes(`help`) && cli.showHelp(0);
 
 	debug && log(flags);
