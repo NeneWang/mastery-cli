@@ -67,9 +67,7 @@ var MAID_NAME = constants.MAID_NAME;
 
             if (commitMessage == undefined) {
               commitMessage = '"CommittedByMaid"';
-            } // exec(`mkdir -p ${dirName}`);
-            // spawn(`git `);
-
+            }
 
             spawn('git', ['add', '--all']);
             spawn("git", ['commit', '-m', commitMessage]);
