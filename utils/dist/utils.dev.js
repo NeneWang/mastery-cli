@@ -75,7 +75,12 @@ var commitpush = function commitpush() {
 var autorelease = function autorelease() {
   // Maid can auto-release herself
   var commitMessage = process.argv[3];
-  exec("maid coa && make new m=\"".concat(commitMessage, "\""));
+
+  if (commitMessage == undefined) {
+    exec("maid coa && make new m =\"random commit\"");
+  } else {
+    exec("maid coa && make new m=\"".concat(commitMessage, "\""));
+  }
 };
 
 module.exports = {

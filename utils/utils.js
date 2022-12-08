@@ -45,9 +45,14 @@ const commitpush = () => {
 
 const autorelease = () => {
 	// Maid can auto-release herself
-	
+
 	let commitMessage = process.argv[3];
-	exec(`maid coa && make new m="${commitMessage}"`);
+	if (commitMessage == undefined) {
+		exec(`maid coa && make new m ="random commit"`);
+	} else {
+
+		exec(`maid coa && make new m="${commitMessage}"`);
+	}
 }
 
 module.exports = { getMaidHeader, getTalk, commitpush, autorelease };
