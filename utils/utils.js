@@ -84,8 +84,8 @@ class Maid {
 	}
 
 	dayReport = () => {
-		
-		this.say("Weather Report of the week")
+		const todaydate = getToday()
+		this.say(`Weather Report, ${todaydate}`)
 		weatherReport();
 	}
 
@@ -93,6 +93,10 @@ class Maid {
 
 
 
+const getToday = () => {
+	// Returns as string format: "2022/12/09" 
+	return new Date().toJSON().slice(0,10).replace(/-/g,'/'); 
+}
 
 
 const getTalk = async flags => {
@@ -153,5 +157,5 @@ const autorelease = () => {
 
 module.exports = {
 	getTalk, commitpush, autorelease,
-	Maid
+	Maid, getToday
 };
