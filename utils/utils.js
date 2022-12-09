@@ -10,13 +10,29 @@ const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT } = constants;
 
 // https://www.npmjs.com/package/chalk
 
+class DayWeather{
+	constructor(jsonDay){
+		this.datetime = jsonDay?.datetime;
+		this.description = jsonDay?.description;
+		this.isPrecipitation = jsonDay.preciptype ? true : false;
+		this.probability = jsonDay.precipprob ? jsonDay.precipprob : 0;
+
+	}
+}
 
 class WeatherInformation {
 	// A wrapper for weather information. that populates itself
+	
 
 	constructor(jsonData) {
 		this.json = jsonData;
+		this.days_report = jsonData.data.days.map(
+			dayJSON => {
+				return new DayWeather(dayJSON)
+			}
+		)
 	}
+
 
 }
 
@@ -39,11 +55,7 @@ class Maid {
 	}
 
 	dayReport = () => {
-
-
 		weatherReport();
-
-
 	}
 
 }
@@ -76,7 +88,8 @@ const weatherReport = async () => {
 		}
 	});
 	weatherData = new WeatherInformation(res);
-	console.log(weatherData.json)
+	// console.log(weatherData.json)
+	console.log(weatherData.days_report)
 
 
 }
