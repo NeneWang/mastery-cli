@@ -40,7 +40,7 @@ const {Demo, EDemo} = demos;
 
 	if (input.includes('charts')) {
 		// Demo for showing charts
-		const demo = new Demo();
+		const demo = new Demo;
 		demo.chartDemo(EDemo.SCATTER);
 
 	}
