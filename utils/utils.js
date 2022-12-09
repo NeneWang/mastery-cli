@@ -77,8 +77,9 @@ class Maid {
 		return `${chalk.hex(this.headerColor).inverse(` ${this.name}: `)}`;
 	};
 
-	say(message) {
-		if (this.clearOnTalk) init(true);
+	say(message, clearOnTalk = this.clearOnTalk) {
+		
+		if (clearOnTalk) init(true);
 		console.log(`${this.getMaidHeader()} ${chalk(message)}`);
 	}
 

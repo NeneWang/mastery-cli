@@ -61,6 +61,7 @@ const {Demo, EDemo} = demos;
 	}
 
 	if (input.includes('update')) {
+		maid.say("Auto updating sir!")
 		utils.autorelease()
 	}
 

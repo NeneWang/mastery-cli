@@ -79,6 +79,7 @@ var Demo = demos.Demo,
           }
 
           if (input.includes('update')) {
+            maid.say("Auto updating sir!");
             utils.autorelease();
           }
 
