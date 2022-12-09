@@ -6,7 +6,7 @@ const { exec, spawn } = require('node:child_process');
 const init = require('../utils/init');
 const constants = require('./constants');
 
-const { bar, scatter, bg, fg } = chart;
+const { bar, scatter, bg, fg, annotation } = chart;
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT } = constants;
 
@@ -30,9 +30,15 @@ class DayWeather {
 	}
 }
 
+const COLORWEATHERMAP = {
+	snow:'white',
+	rain:'blue',
+	clear:'yellow'
+}
+
 class WeatherInformation {
 	// A wrapper for weather information. that populates itself
-
+	
 
 	constructor(jsonData) {
 		this.json = jsonData;
@@ -48,10 +54,8 @@ class WeatherInformation {
 		// 	{ key: 'G', value: 0, style: bg('yellow') }
 		// ]
 		this.barData = this.days_report.slice(0, 7).map(dWeather => {
-			let barColor = dWeather.isPrecipitation ? dWeather.hasSnow ? 'white' : 'blue' : 'yellow';
-			
-
-
+			let barColor = dWeather.isPrecipitation ? dWeather.hasSnow ? COLORWEATHERMAP.snow : COLORWEATHERMAP.rain : COLORWEATHERMAP.clear;
+	
 			const bar = {key: dWeather.day, value: dWeather.probability, style: bg(barColor)};
 			return bar;
 
@@ -61,6 +65,15 @@ class WeatherInformation {
 
 	chartWeatherBar(){
 		console.log(bar(this.barData));
+		this.printWeatherAnnotations()
+	}
+
+	printWeatherAnnotations(){
+		const notes  = Object.keys(COLORWEATHERMAP).map((weatherlabel) => {
+			return {key: weatherlabel, style: bg(COLORWEATHERMAP[weatherlabel])};
+		 })
+		// console.log('notes', notes);
+		console.log(annotation(notes))
 	}
 }
 

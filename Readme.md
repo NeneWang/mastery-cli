@@ -6,11 +6,15 @@ CLI Assistnat tool to keep you in track.
 ## Created Features
 
 - [x] Simple `coa` commit and push
+- [x] Includes weather for tomorrow and raining chance
+
+
+## In Progress
+
 - [ ] 
 
 ## Features
 
-- [ ] Save your passwords
 - [ ] Clone from Personal Template collections
 - [ ] Clone Make-files examples or have them there
 - [ ] Pullout algorithm questions and automatically test them. You should also test in a file that is being selected
@@ -19,7 +23,6 @@ CLI Assistnat tool to keep you in track.
 - [ ] Create Documentation guides
 - [ ] Pomodoro Timers
 - [ ] Daily reports
-  - [ ] Includes weather for tomorrow and raining chance
   - [ ] What you wrote for your journal the same day 1 year ago. 1 month ago. 1 Week ago + 1 Day ago.
   - [ ] Report the progress results of 1 year ago, 1 month ago + 1 week ago + 1 day ago.
 - [ ] Pull out excels and tell you about the daily tasks you didnt finish
@@ -29,6 +32,9 @@ CLI Assistnat tool to keep you in track.
 - [ ] It should be also be able to open specifics on a specific folder to help you open a file that you were reading such as a specific page on the site.
 - [ ] Display Daily Flashcards of something
 - [ ] Being your wise words
+- [ ] Run python scripts
+  - [ ] Image Downloader from array
+  - [ ] CSV Data Reader
 
 
 
