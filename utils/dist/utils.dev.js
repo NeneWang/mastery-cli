@@ -59,6 +59,36 @@ var getTalk = function getTalk(flags) {
   });
 };
 
+var printReport = function printReport() {
+  weatherReport(); // Plus other stuff in the future
+};
+
+var weatherReport = function weatherReport() {
+  var res;
+  return regeneratorRuntime.async(function weatherReport$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return regeneratorRuntime.awrap(axios.get(APIDICT.WEATHER, {
+            headers: {
+              'Accept-Encoding': 'application/json'
+            }
+          }));
+
+        case 2:
+          res = _context2.sent;
+          weatherData = constants.WeatherInformation(res);
+          console.log(weatherData.json);
+
+        case 5:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  });
+};
+
 var commitpush = function commitpush() {
   var commitMessage = process.argv[3];
   console.log(commitMessage);
@@ -87,5 +117,6 @@ module.exports = {
   getMaidHeader: getMaidHeader,
   getTalk: getTalk,
   commitpush: commitpush,
-  autorelease: autorelease
+  autorelease: autorelease,
+  printReport: printReport
 };

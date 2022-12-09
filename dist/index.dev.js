@@ -26,8 +26,8 @@ var flags = cli.flags;
 var input = cli.input;
 var clear = flags.clear,
     debug = flags.debug;
-var getMaidHeader = utils.getMaidHeader,
-    getTalk = utils.getTalk;
+var getTalk = utils.getTalk,
+    Maid = utils.Maid;
 var MAID_NAME = constants.MAID_NAME;
 
 (function _callee() {
@@ -36,23 +36,27 @@ var MAID_NAME = constants.MAID_NAME;
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          // init({ clear });
           input.includes("help") && cli.showHelp(0);
           debug && log(flags);
+          maid = new Maid();
+
+          if (input.includes('report')) {
+            maid.dayReport();
+          }
 
           if (!input.includes('talk')) {
-            _context.next = 7;
+            _context.next = 9;
             break;
           }
 
-          _context.next = 5;
+          _context.next = 7;
           return regeneratorRuntime.awrap(getTalk(flags));
 
-        case 5:
-          message = _context.sent;
-          console.log("".concat(getMaidHeader(), " ").concat(chalk(message)));
-
         case 7:
+          message = _context.sent;
+          maid.say(message, true);
+
+        case 9:
           if (input.includes('coa')) {
             utils.commitpush();
           }
@@ -61,7 +65,7 @@ var MAID_NAME = constants.MAID_NAME;
             utils.autorelease();
           }
 
-        case 9:
+        case 11:
         case "end":
           return _context.stop();
       }

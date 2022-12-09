@@ -23,18 +23,23 @@ const input = cli.input;
 
 
 const { clear, debug } = flags;
-const { getMaidHeader, getTalk } = utils;
+const { getTalk, Maid } = utils;
 const { MAID_NAME } = constants;
 
 (async () => {
-	// init({ clear });
 	input.includes(`help`) && cli.showHelp(0);
 
 	debug && log(flags);
 
+	maid = new Maid();
+	if(input.includes('report')){
+		maid.dayReport();
+	}
+
 	if (input.includes('talk')) {
 		let message = await getTalk(flags);
-		console.log(`${getMaidHeader()} ${chalk(message)}`);
+		maid.say(message, true);
+		
 	}
 
 	if (input.includes('coa')) {

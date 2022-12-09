@@ -1,5 +1,7 @@
 const chalk = require('chalk');
 const axios = require('axios');
+
+const init = require('../utils/init');
 const { exec, spawn } = require('node:child_process');
 
 const constants = require('./constants');
@@ -8,9 +10,47 @@ const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT } = constants;
 
 // https://www.npmjs.com/package/chalk
 
-const getMaidHeader = () => {
-	return `${chalk.hex('#1da1f2').inverse(` ${MAID_NAME}: `)}`;
-};
+
+class WeatherInformation {
+	// A wrapper for weather information. that populates itself
+
+	constructor(jsonData) {
+		this.json = jsonData;
+	}
+
+}
+
+
+class Maid {
+
+	constructor(name = MAID_NAME, headerColor = '#1da1f2') {
+		this.name = name;
+		this.headerColor = headerColor;
+
+	}
+
+	getMaidHeader = () => {
+		return `${chalk.hex(this.headerColor).inverse(` ${this.name}: `)}`;
+	};
+
+	say(message, clearOnTalk = false) {
+		if (clearOnTalk) init(true);
+		console.log(`${this.getMaidHeader()} ${chalk(message)}`);
+	}
+
+	dayReport = () => {
+
+
+		weatherReport();
+
+
+	}
+
+}
+
+
+
+
 
 const getTalk = async flags => {
 	if (flags.type == 'chuck') {
@@ -25,6 +65,21 @@ const getTalk = async flags => {
 	}
 	return message;
 };
+
+
+
+
+const weatherReport = async () => {
+	const res = await axios.get(APIDICT.WEATHER, {
+		headers: {
+			'Accept-Encoding': 'application/json'
+		}
+	});
+	weatherData = new WeatherInformation(res);
+	console.log(weatherData.json)
+
+
+}
 
 const commitpush = () => {
 
@@ -53,4 +108,7 @@ const autorelease = () => {
 	}
 }
 
-module.exports = { getMaidHeader, getTalk, commitpush, autorelease };
+module.exports = {
+	getTalk, commitpush, autorelease,
+	Maid
+};
