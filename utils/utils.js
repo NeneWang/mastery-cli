@@ -10,8 +10,8 @@ const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT } = constants;
 
 // https://www.npmjs.com/package/chalk
 
-class DayWeather{
-	constructor(jsonDay){
+class DayWeather {
+	constructor(jsonDay) {
 		this.datetime = jsonDay?.datetime;
 		this.description = jsonDay?.description;
 		this.isPrecipitation = jsonDay.preciptype ? true : false;
@@ -22,7 +22,7 @@ class DayWeather{
 
 class WeatherInformation {
 	// A wrapper for weather information. that populates itself
-	
+
 
 	constructor(jsonData) {
 		this.json = jsonData;
@@ -99,9 +99,9 @@ const commitpush = () => {
 	let commitMessage = process.argv[3];
 	console.log(commitMessage)
 	if (commitMessage == undefined) {
-		commitMessage = "Committed by Maid " ;
+		commitMessage = "Committed by Maid ";
 	}
-	commitMessage = appendQuotes(commitMessage+ getRandomMaidEmoji());
+	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
 	exec(`git coa ${commitMessage} && git poh `);
 	console.log(`Pushed to origin with commit message: ${commitMessage} <3`);
