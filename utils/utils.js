@@ -99,14 +99,12 @@ const commitpush = () => {
 	let commitMessage = process.argv[3];
 	console.log(commitMessage)
 	if (commitMessage == undefined) {
-		commitMessage = "Committed by Maid " + getRandomMaidEmoji();
+		commitMessage = "Committed by Maid " ;
 	}
-	commitMessage = appendQuotes(commitMessage)
+	commitMessage = appendQuotes(commitMessage+ getRandomMaidEmoji());
 
 	exec(`git coa ${commitMessage} && git poh `);
-
-
-	console.log(`Pushed to origin with commit message: ${commitMessage} <3`)
+	console.log(`Pushed to origin with commit message: ${commitMessage} <3`);
 }
 
 const autorelease = () => {
