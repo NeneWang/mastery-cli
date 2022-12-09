@@ -26,8 +26,6 @@ const getTalk = async flags => {
 	return message;
 };
 
-
-
 const commitpush = () => {
 
 	let commitMessage = process.argv[3];
