@@ -13,7 +13,8 @@ var bar = chart.bar,
     bg = chart.bg,
     fg = chart.fg;
 var EDemo = {
-  SCATTER: 1
+  SCATTER: 1,
+  BAR: 2
 };
 
 var Demo =
@@ -32,6 +33,10 @@ function () {
       switch (eChartDemo) {
         case EDemo.SCATTER:
           this.scatterDemo();
+          break;
+
+        case EDemo.BAR:
+          this.barDemo();
           break;
       }
     }
@@ -68,6 +73,40 @@ function () {
         legendGap: 18,
         width: 15
       }) + '\n');
+    }
+  }, {
+    key: "barDemo",
+    value: function barDemo() {
+      var barData = [{
+        key: 'A',
+        value: 5,
+        style: '*'
+      }, {
+        key: 'B',
+        value: 3,
+        style: '+'
+      }, {
+        key: 'C',
+        value: 11
+      }, {
+        key: 'D',
+        value: 1,
+        style: bg('red')
+      }, {
+        key: 'E',
+        value: 5,
+        style: bg('green')
+      }, {
+        key: 'F',
+        value: 7,
+        style: bg('blue'),
+        padding: 10
+      }, {
+        key: 'G',
+        value: 0,
+        style: bg('yellow')
+      }];
+      console.log(bar(barData));
     }
   }]);
 

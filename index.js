@@ -36,12 +36,13 @@ const {Demo, EDemo} = demos;
 
 	debug && log(flags);
 
-	maid = new Maid();
+	const maid = new Maid();
+	maid.clearOnTalk = true;
 
 	if (input.includes('charts')) {
 		// Demo for showing charts
 		const demo = new Demo;
-		demo.chartDemo(EDemo.SCATTER);
+		demo.chartDemo(EDemo.BAR);
 
 	}
 

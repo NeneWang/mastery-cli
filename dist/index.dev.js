@@ -41,7 +41,7 @@ var Demo = demos.Demo,
     EDemo = demos.EDemo;
 
 (function _callee() {
-  var demo, message;
+  var maid, demo, message;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -49,11 +49,12 @@ var Demo = demos.Demo,
           input.includes("help") && cli.showHelp(0);
           debug && log(flags);
           maid = new Maid();
+          maid.clearOnTalk = true;
 
           if (input.includes('charts')) {
             // Demo for showing charts
             demo = new Demo();
-            demo.chartDemo(EDemo.SCATTER);
+            demo.chartDemo(EDemo.BAR);
           }
 
           if (input.includes('report')) {
@@ -61,18 +62,18 @@ var Demo = demos.Demo,
           }
 
           if (!input.includes('talk')) {
-            _context.next = 10;
+            _context.next = 11;
             break;
           }
 
-          _context.next = 8;
+          _context.next = 9;
           return regeneratorRuntime.awrap(getTalk(flags));
 
-        case 8:
+        case 9:
           message = _context.sent;
           maid.say(message, true);
 
-        case 10:
+        case 11:
           if (input.includes('coa')) {
             utils.commitpush();
           }
@@ -81,7 +82,7 @@ var Demo = demos.Demo,
             utils.autorelease();
           }
 
-        case 12:
+        case 13:
         case "end":
           return _context.stop();
       }
