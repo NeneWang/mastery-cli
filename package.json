@@ -25,6 +25,7 @@
 		"test": "node test.js"
 	},
 	"dependencies": {
+		"@wangnene2/chart": "^1.0.10",
 		"axios": "^1.2.0",
 		"chalk": "^4.1.2",
 		"cli-alerts": "^1.2.2",

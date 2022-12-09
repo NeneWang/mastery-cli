@@ -18,9 +18,13 @@ var utils = require('./utils/utils');
 
 var constants = require('./utils/constants');
 
+var demos = require('./utils/demo');
+
 var axios = require('axios');
 
 var chalk = require('chalk');
+
+var chart = require('@wangnene2/chart');
 
 var flags = cli.flags;
 var input = cli.input;
@@ -29,9 +33,15 @@ var clear = flags.clear,
 var getTalk = utils.getTalk,
     Maid = utils.Maid;
 var MAID_NAME = constants.MAID_NAME;
+var bar = chart.bar,
+    scatter = chart.scatter,
+    bg = chart.bg,
+    fg = chart.fg;
+var Demo = demos.Demo,
+    EDemo = demos.EDemo;
 
 (function _callee() {
-  var message;
+  var demo, message;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -40,23 +50,29 @@ var MAID_NAME = constants.MAID_NAME;
           debug && log(flags);
           maid = new Maid();
 
+          if (input.includes('charts')) {
+            // Demo for showing charts
+            demo = new Demo();
+            demo.chartDemo(EDemo.SCATTER);
+          }
+
           if (input.includes('report')) {
             maid.dayReport();
           }
 
           if (!input.includes('talk')) {
-            _context.next = 9;
+            _context.next = 10;
             break;
           }
 
-          _context.next = 7;
+          _context.next = 8;
           return regeneratorRuntime.awrap(getTalk(flags));
 
-        case 7:
+        case 8:
           message = _context.sent;
           maid.say(message, true);
 
-        case 9:
+        case 10:
           if (input.includes('coa')) {
             utils.commitpush();
           }
@@ -65,7 +81,7 @@ var MAID_NAME = constants.MAID_NAME;
             utils.autorelease();
           }
 
-        case 11:
+        case 12:
         case "end":
           return _context.stop();
       }
