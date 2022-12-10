@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const axios = require('axios');
 const chart = require('@wangnene2/chart')
 const { exec, spawn } = require('node:child_process');
+const { Toggle, Confirm, prompt, AutoComplete, Survey } = require('enquirer');
 
 const init = require('../utils/init');
 const constants = require('./constants');
@@ -21,8 +22,8 @@ class DayWeather {
 		this.description = jsonDay?.description;
 		this.isPrecipitation = jsonDay.preciptype ? true : false;
 
-		this.hasSnow = this.isPrecipitation? jsonDay.preciptype.includes(SNOW): false;
-		this.hasRain = this.isPrecipitation? jsonDay.preciptype.includes(RAIN): false;
+		this.hasSnow = this.isPrecipitation ? jsonDay.preciptype.includes(SNOW) : false;
+		this.hasRain = this.isPrecipitation ? jsonDay.preciptype.includes(RAIN) : false;
 		this.probability = jsonDay.precipprob ? jsonDay.precipprob : 0;
 		this.day = this.datetime.slice(-2)
 
@@ -31,14 +32,14 @@ class DayWeather {
 }
 
 const COLORWEATHERMAP = {
-	snow:'white',
-	rain:'blue',
-	clear:'yellow'
+	snow: 'white',
+	rain: 'blue',
+	clear: 'yellow'
 }
 
 class WeatherInformation {
 	// A wrapper for weather information. that populates itself
-	
+
 
 	constructor(jsonData) {
 		this.json = jsonData;
@@ -55,23 +56,23 @@ class WeatherInformation {
 		// ]
 		this.barData = this.days_report.slice(0, 7).map(dWeather => {
 			let barColor = dWeather.isPrecipitation ? dWeather.hasSnow ? COLORWEATHERMAP.snow : COLORWEATHERMAP.rain : COLORWEATHERMAP.clear;
-	
-			const bar = {key: dWeather.day, value: dWeather.probability, style: bg(barColor)};
+
+			const bar = { key: dWeather.day, value: dWeather.probability, style: bg(barColor) };
 			return bar;
 
 		})
 		// console.log(bar(barData))
 	}
 
-	chartWeatherBar(){
+	chartWeatherBar() {
 		console.log(bar(this.barData));
 		this.printWeatherAnnotations()
 	}
 
-	printWeatherAnnotations(){
-		const notes  = Object.keys(COLORWEATHERMAP).map((weatherlabel) => {
-			return {key: weatherlabel, style: bg(COLORWEATHERMAP[weatherlabel])};
-		 })
+	printWeatherAnnotations() {
+		const notes = Object.keys(COLORWEATHERMAP).map((weatherlabel) => {
+			return { key: weatherlabel, style: bg(COLORWEATHERMAP[weatherlabel]) };
+		})
 		// console.log('notes', notes);
 		console.log(annotation(notes))
 	}
@@ -80,7 +81,7 @@ class WeatherInformation {
 
 class Maid {
 
-	constructor(name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk=false) {
+	constructor(name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
 		this.name = name;
 		this.headerColor = headerColor;
 		this.clearOnTalk = clearOnTalk;
@@ -91,7 +92,7 @@ class Maid {
 	};
 
 	say(message, clearOnTalk = this.clearOnTalk) {
-		
+
 		if (clearOnTalk) init(true);
 		console.log(`${this.getMaidHeader()} ${chalk(message)}`);
 	}
@@ -102,13 +103,55 @@ class Maid {
 		weatherReport();
 	}
 
+	services = async () => {
+
+		const choices = [
+			'get_credential',
+			'forecast_costs',
+		]
+
+		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1;
+
+		const multiselect = new AutoComplete({
+			name: 'ServiceOption',
+			message: 'What to do on services?',
+			
+			choices: choices
+		})
+
+		let serviceSelected = await multiselect.run();
+
+		// if services == get_credi
+		
+		console.log("service Selected", serviceSelected);
+		if(serviceSelected == choices[CHOICE_CREDENTIAL].value){
+			
+			console.log('Retrieve credentials for...')
+			const creds =  await axios.get(`${APIDICT.DEPLOYED_MAID}/services`, {
+				headers: {
+					'Accept-Encoding': 'application/json'
+				}
+			});
+
+			console.log(creds.data)
+			// Show credentials available
+
+		}else{
+			console.log(choices[CHOICE_CREDENTIAL])
+			console.log(serviceSelected)
+		}
+
+
+
+	}
+
 }
 
 
 
 const getToday = () => {
 	// Returns as string format: "2022/12/09" 
-	return new Date().toJSON().slice(0,10).replace(/-/g,'/'); 
+	return new Date().toJSON().slice(0, 10).replace(/-/g, '/');
 }
 
 
