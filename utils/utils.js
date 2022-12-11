@@ -115,28 +115,36 @@ class Maid {
 		const multiselect = new AutoComplete({
 			name: 'ServiceOption',
 			message: 'What to do on services?',
-			
 			choices: choices
 		})
 
 		let serviceSelected = await multiselect.run();
 
 		// if services == get_credi
-		
+
 		console.log("service Selected", serviceSelected);
-		if(serviceSelected == choices[CHOICE_CREDENTIAL].value){
+		if (serviceSelected == choices[CHOICE_CREDENTIAL].value) {
 			
 			console.log('Retrieve credentials for...')
-			const creds =  await axios.get(`${APIDICT.DEPLOYED_MAID}/services`, {
+			const creds = await axios.get(`${APIDICT.DEPLOYED_MAID}/services`, {
 				headers: {
 					'Accept-Encoding': 'application/json'
 				}
 			});
+			const credentials = await creds.data;
+			const cred_names = getCredentialNames(credentials)
+			const credentialSelect = new AutoComplete({
+				name: 'credentialSelect',
+				message: 'Which Credential?',
+				choices: cred_names 
+			})
+			const credentialNameSelected = await credentialSelect.run()
+			const credentialSelected = getCredentialInformation(credentials, credentialNameSelected);
+			console.log(credentialSelected);
 
-			console.log(creds.data)
 			// Show credentials available
 
-		}else{
+		} else {
 			console.log(choices[CHOICE_CREDENTIAL])
 			console.log(serviceSelected)
 		}
@@ -147,6 +155,22 @@ class Maid {
 
 }
 
+const getCredentialNames = (credentialDict) => {
+	return credentialDict.map(cred => {
+		return cred.name
+	})
+}
+
+const getCredentialInformation = (credentialsDict, credential_name) => {
+	/**
+	 * Retrieves fromt he json the proper credentials as n object
+	 */
+
+	res = credentialsDict.filter(
+		(cred) =>  cred.name == credential_name
+	)
+	return res;
+}
 
 
 const getToday = () => {
