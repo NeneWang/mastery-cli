@@ -1,5 +1,9 @@
 const chalk = require('chalk');
 const axios = require('axios');
+const clipboard = require('copy-paste')
+// const {clipboard}
+// import clipboard from 'clipboardy';
+
 const chart = require('@wangnene2/chart')
 const { exec, spawn } = require('node:child_process');
 const { Toggle, Confirm, prompt, AutoComplete, Survey } = require('enquirer');
@@ -141,6 +145,8 @@ class Maid {
 			const credentialNameSelected = await credentialSelect.run()
 			const credentialSelected = getCredentialInformation(credentials, credentialNameSelected);
 			console.log(credentialSelected);
+			console.log(`Password copied to clipboard, ${credentialSelected.password}`)
+			clipboard.copy(credentialSelected.password)
 
 			// Show credentials available
 
@@ -169,7 +175,7 @@ const getCredentialInformation = (credentialsDict, credential_name) => {
 	res = credentialsDict.filter(
 		(cred) =>  cred.name == credential_name
 	)
-	return res;
+	return res.length >0 ? res[0]: {};
 }
 
 
