@@ -83,6 +83,14 @@ class WeatherInformation {
 }
 
 
+class FeatureExtraction {
+	constructor(feature_name, feature_key = 'feat', style = bg('white'), getDayOnly = true) {
+		this.feature_name = feature_name;
+		this.feature_key = feature_key;
+		this.style = style;
+	}
+};
+
 class Maid {
 
 	constructor(name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
@@ -101,15 +109,17 @@ class Maid {
 		console.log(`${this.getMaidHeader()} ${chalk(message)}`);
 	}
 
-	dayReport = () => {
+	dayReport = async () => {
 		const todaydate = getToday()
-		this.say(`Weather Report, ${todaydate}`)
+		this.say(`Performance Report: ${todaydate}`, false)
+		await this.performanceReport();
+		this.say(`Weather Report: ${todaydate}`, false)
+		// console.log('Weather\n')
 		weatherReport();
-		this.performanceReport();
 	}
 
 	performanceReport = async () => {
-		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/${CONSTANTS.ACCOUNT_ID}`, {
+		const res = await axios.get(`${APIDICT.LOCAL_MAID}/account/report/${CONSTANTS.ACCOUNT_ID}`, {
 			headers: {
 				'Accept-Encoding': 'application/json'
 			}
@@ -117,7 +127,40 @@ class Maid {
 		const responseData = await res.data;
 		// console.log(responseData)
 
-		const { performances, username, days } = await res.data;
+		const features = [
+			new FeatureExtraction('2022-12-10', 'feat'),
+			new FeatureExtraction('2022-12-11', 'feat'),
+			new FeatureExtraction('2022-12-12', 'feat'),
+		]
+
+		this.barChartFeatures(responseData, features, 2);
+		console.log('\n')
+		// const { performances, username, days } = await res.data;
+	}
+
+
+	// Features is a list of FeatureExtraction
+	barChartFeatures = (data, features, lasts = 2) => {
+		/**
+		 * Based on the key it should identify the 
+		 */
+		// const LASTXCHARS = 5;
+		let bars = features.map((feature) => {
+			// Attempt getting that from data or return a 0 as the bar information.
+			const feat_value = data[feature.feature_name] ? data[feature.feature_name][feature.feature_key] : 0;
+			const feat_name_len = feature.feature_name.length;
+			const lastCharacters = lasts > feat_name_len ? 0 : feat_name_len - lasts;
+			const feat_name = lasts > 0 ?  feature.feature_name.substring(lastCharacters) : feature.feature_name
+			const bar = { key: feat_name, value: feat_value, style: feature.style }
+			return bar;
+
+		})
+
+
+		console.log(bar(bars))
+
+
+
 	}
 
 
@@ -262,7 +305,7 @@ class Maid {
 
 
 
-increasePerformance = async (feature_name, increaseBY = 1, debug=false) => {
+increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
 	const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}/${increaseBY}?increase_score=true`)
 	if (debug) console.log(res.data);
 }
@@ -328,17 +371,17 @@ const weatherReport = async () => {
 
 }
 
-class CommitCategoryType{
-	constructor(code, icon_list){
+class CommitCategoryType {
+	constructor(code, icon_list) {
 		this.code = code;
 		this.icon_list = icon_list;
 	}
 
-	randomIcon(){
+	randomIcon() {
 		return get_random(this.icon_list);
 	}
 
-	toString(){
+	toString() {
 		return this.code;
 	}
 
@@ -350,7 +393,7 @@ let ECommitCategory = {
 	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'])
 }
 
-const commitpush = async (addMaidEmoji=true, addCommitEmoji = true) => {
+const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
 
 	let commitMessage = process.argv[3];
 	console.log(commitMessage)
@@ -360,13 +403,13 @@ const commitpush = async (addMaidEmoji=true, addCommitEmoji = true) => {
 
 	// If any category found then increase the score please.
 	commitCat = commitCategory(commitMessage);
-	if(commitCat?.code){
+	if (commitCat?.code) {
 		let _ = await increasePerformance("features");
 		_ = await increasePerformance(commitCat.code);
-		if(addCommitEmoji) commitMessage = commitMessage + " " + commitCat.randomIcon();
+		if (addCommitEmoji) commitMessage = commitMessage + " " + commitCat.randomIcon();
 	}
 
-	
+
 	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
 	exec(`git coa ${commitMessage} && git poh `);
@@ -375,15 +418,15 @@ const commitpush = async (addMaidEmoji=true, addCommitEmoji = true) => {
 
 
 
-const commitCategory = (commitMessage, strict=false) => {
-	if(strict){
+const commitCategory = (commitMessage, strict = false) => {
+	if (strict) {
 		// TODO Strictly runs with space in between?
 		;
 	}
 
-	for( category of Object.values(ECommitCategory)){
+	for (category of Object.values(ECommitCategory)) {
 		console.log(commitMessage)
-		if(commitMessage.includes(category.code)){
+		if (commitMessage.includes(category.code)) {
 			return category;
 		}
 	}
