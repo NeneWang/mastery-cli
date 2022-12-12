@@ -13,7 +13,7 @@ const constants = require('./constants');
 
 const { bar, scatter, bg, fg, annotation } = chart;
 
-const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT } = constants;
+const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS } = constants;
 
 // https://www.npmjs.com/package/chalk
 
@@ -105,7 +105,22 @@ class Maid {
 		const todaydate = getToday()
 		this.say(`Weather Report, ${todaydate}`)
 		weatherReport();
+		this.performanceReport();
 	}
+
+	performanceReport = async () => {
+		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/${CONSTANTS.ACCOUNT_ID}`, {
+			headers: {
+				'Accept-Encoding': 'application/json'
+			}
+		});
+		const responseData = await res.data;
+		// console.log(responseData)
+
+		const { performances, username, days } = await res.data;
+	}
+
+
 
 	services = async () => {
 
@@ -186,6 +201,7 @@ class Maid {
 	}
 
 
+
 	ask = async () => {
 		// Asking some random fnction
 
@@ -244,9 +260,18 @@ class Maid {
 
 }
 
+
+
+increasePerformance = async (feature_name, increaseBY = 1) => {
+	const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}/${increaseBY}?increase_score=true`)
+	console.log(res);
+}
+
+
+
 function getKeyByValue(object, value) {
 	return Object.keys(object).find(key => object[key] === value);
-  }
+}
 
 const getCredentialNames = (credentialDict) => {
 	return credentialDict.map(cred => {
@@ -303,7 +328,13 @@ const weatherReport = async () => {
 
 }
 
-const commitpush = () => {
+let ECommitCategory = {
+	FEAT: 'feat',
+	FIX: 'fix',
+	REFACTOR: 'ref'
+}
+
+const commitpush = async () => {
 
 	let commitMessage = process.argv[3];
 	console.log(commitMessage)
@@ -312,8 +343,34 @@ const commitpush = () => {
 	}
 	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
+	// If any category found then increase the score please.
+	commitCat = commitCategory(commitMessage);
+	if(commitCat){
+		let _ = await increasePerformance("features");
+		
+		_ = await increasePerformance(commitCat);
+		
+	}
+
 	exec(`git coa ${commitMessage} && git poh `);
 	console.log(`Pushed to origin with commit message: ${commitMessage} <3`);
+}
+
+
+
+const commitCategory = (commitMessage, strict=false) => {
+	if(strict){
+		// Strictly runs with space in between?
+		;
+	}
+
+	for( category of Object.values(ECommitCategory)){
+		console.log(commitMessage)
+		if(commitMessage.includes(category)){
+			return category;
+		}
+	}
+	return ""; //No category at all.
 }
 
 const autorelease = () => {
