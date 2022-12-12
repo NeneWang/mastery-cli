@@ -185,7 +185,47 @@ class Maid {
 
 	}
 
-	async createConversion (from = 'USD', to = 'ARS') {
+
+	ask = async () => {
+		// Asking some random fnction
+
+		const choices = [
+			'currency symbol for...',
+			// 'forecast_costs',
+			// 'usd_to_ars',
+			// 'currency_exchange'
+		]
+
+		const CHOICE_CURRENCY = 0;
+
+		const multiselect = new AutoComplete({
+			name: 'question',
+			message: 'What do you want to know?',
+			choices: choices
+		})
+
+		let serviceSelected = await multiselect.run();
+
+		// if services == get_credi
+
+		console.log("service Selected", serviceSelected);
+		if (serviceSelected == choices[CHOICE_CURRENCY].value) {
+
+			const currencySelect = new AutoComplete({
+				name: 'currency',
+				message: 'Which currency?',
+				choices: Object.values(constants.CURRENCY_SIMBOLS)
+			})
+
+			let currencySelected = await currencySelect.run();
+			this.say(`${currencySelected} => ${constants.CURRENCY_SIMBOLS[currencySelected]}`);
+
+		}
+
+
+	}
+
+	async createConversion(from = 'USD', to = 'ARS') {
 
 		var config = {
 			method: 'get',
