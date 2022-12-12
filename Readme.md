@@ -9,15 +9,15 @@ CLI Assistnat tool to keep you in track.
 - [x] Includes weather for tomorrow and raining chance
 - [x] basic credential creation.
 - [x] Currency Conversion
+- [x] Crete database for events
+  - [x] Post that database
+  - [x] Use that database to get publish and edit faetures
+  - [x] Features Progress Tracking
 
+![](./img/2022-12-12-17-14-57.png)
 
 ## In Progress
 
-- [x] Crete database for events
-  - [ ] Post that database
-  - [ ] Use that database to get publish and edit faetures
-  - [ ] Delete Metrics
-  - [ ] 
 - [ ] Create Skelethon Donwloader using templating (cpp testunits, ) 
 
 ## Features
