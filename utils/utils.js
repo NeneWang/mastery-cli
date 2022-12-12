@@ -238,7 +238,7 @@ class Maid {
 		};
 		const res = await axios(config);
 		const exchangeRes = await res.data
-		this.say(`Dollars to ARS during ${exchangeRes.date} is around ${exchangeRes?.info?.rate} ${constants.CURRENCY_SIMBOLS[from]} per ${constants.CURRENCY_SIMBOLS[to]}`)
+		this.say(`${from} to ${to} during ${exchangeRes.date} is around ${exchangeRes?.info?.rate} ${constants.CURRENCY_SIMBOLS[to]} per ${constants.CURRENCY_SIMBOLS[from]}`)
 
 	}
 
