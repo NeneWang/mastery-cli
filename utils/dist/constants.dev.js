@@ -202,6 +202,7 @@ module.exports = {
   MAID_NAME: MAID_NAME,
   MAID_EMOJIS: MAID_EMOJIS,
   getRandomMaidEmoji: getRandomMaidEmoji,
+  get_random: get_random,
   appendQuotes: appendQuotes,
   APIDICT: APIDICT,
   CURRENCY_SIMBOLS: CURRENCY_SIMBOLS,

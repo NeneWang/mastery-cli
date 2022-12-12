@@ -13,7 +13,7 @@ const constants = require('./constants');
 
 const { bar, scatter, bg, fg, annotation } = chart;
 
-const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS } = constants;
+const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random } = constants;
 
 // https://www.npmjs.com/package/chalk
 
@@ -262,9 +262,9 @@ class Maid {
 
 
 
-increasePerformance = async (feature_name, increaseBY = 1) => {
+increasePerformance = async (feature_name, increaseBY = 1, debug=false) => {
 	const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}/${increaseBY}?increase_score=true`)
-	console.log(res);
+	if (debug) console.log(res.data);
 }
 
 
@@ -328,29 +328,46 @@ const weatherReport = async () => {
 
 }
 
+class CommitCategoryType{
+	constructor(code, icon_list){
+		this.code = code;
+		this.icon_list = icon_list;
+	}
+
+	randomIcon(){
+		return get_random(this.icon_list);
+	}
+
+	toString(){
+		return this.code;
+	}
+
+};
+
 let ECommitCategory = {
-	FEAT: 'feat',
-	FIX: 'fix',
-	REFACTOR: 'ref'
+	FEAT: new CommitCategoryType('feat', [':tada:', ':santa:', ':gift:']),
+	FIX: new CommitCategoryType('fix', [':hammer:', ':shipit:', ':ambulance:']),
+	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'])
 }
 
-const commitpush = async () => {
+const commitpush = async (addMaidEmoji=true, addCommitEmoji = true) => {
 
 	let commitMessage = process.argv[3];
 	console.log(commitMessage)
 	if (commitMessage == undefined) {
 		commitMessage = "Committed by Maid ";
 	}
-	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
 	// If any category found then increase the score please.
 	commitCat = commitCategory(commitMessage);
-	if(commitCat){
+	if(commitCat?.code){
 		let _ = await increasePerformance("features");
-		
-		_ = await increasePerformance(commitCat);
-		
+		_ = await increasePerformance(commitCat.code);
+		if(addCommitEmoji) commitMessage = commitMessage + " " + commitCat.randomIcon();
 	}
+
+	
+	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
 	exec(`git coa ${commitMessage} && git poh `);
 	console.log(`Pushed to origin with commit message: ${commitMessage} <3`);
@@ -360,13 +377,13 @@ const commitpush = async () => {
 
 const commitCategory = (commitMessage, strict=false) => {
 	if(strict){
-		// Strictly runs with space in between?
+		// TODO Strictly runs with space in between?
 		;
 	}
 
 	for( category of Object.values(ECommitCategory)){
 		console.log(commitMessage)
-		if(commitMessage.includes(category)){
+		if(commitMessage.includes(category.code)){
 			return category;
 		}
 	}

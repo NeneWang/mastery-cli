@@ -196,6 +196,8 @@ const CONSTANTS = {
     ACCOUNT_ID: 1,
 }
 
+
+
 // https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}
 
 const getRandomMaidEmoji = () => {
@@ -208,7 +210,7 @@ const appendQuotes = (message) => {
 
 
 module.exports = {
-    MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji,
+    MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
     appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS
 };
 
