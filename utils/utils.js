@@ -112,9 +112,11 @@ class Maid {
 		const choices = [
 			'get_credential',
 			'forecast_costs',
+			'usd_to_ars',
+			'currency_exchange'
 		]
 
-		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1;
+		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1, CHOICE_USD_TO_ARS = 2, CHOICE_CURRENCY_EXCHANGE = 3;
 
 		const multiselect = new AutoComplete({
 			name: 'ServiceOption',
@@ -128,7 +130,7 @@ class Maid {
 
 		console.log("service Selected", serviceSelected);
 		if (serviceSelected == choices[CHOICE_CREDENTIAL].value) {
-			
+
 			console.log('Retrieve credentials for...')
 			const creds = await axios.get(`${APIDICT.DEPLOYED_MAID}/services`, {
 				headers: {
@@ -140,7 +142,7 @@ class Maid {
 			const credentialSelect = new AutoComplete({
 				name: 'credentialSelect',
 				message: 'Which Credential?',
-				choices: cred_names 
+				choices: cred_names
 			})
 			const credentialNameSelected = await credentialSelect.run()
 			const credentialSelected = getCredentialInformation(credentials, credentialNameSelected);
@@ -150,12 +152,53 @@ class Maid {
 
 			// Show credentials available
 
-		} else {
+		} else if (serviceSelected == choices[CHOICE_USD_TO_ARS].value) {
+			this.createConversion();
+		} else if (serviceSelected == choices[CHOICE_CURRENCY_EXCHANGE].value) {
+			// Prompt from what to what to exchange.
+
+			const fromCurrency = new AutoComplete({
+				name: 'fromCurrency',
+				message: 'Which Currency from?',
+				choices: Object.keys(constants.CURRENCY_SIMBOLS)
+			})
+
+			const toCurrency = new AutoComplete({
+				name: 'toCurrency',
+				message: 'Which Currency to?',
+				choices: Object.keys(constants.CURRENCY_SIMBOLS)
+			})
+
+			let fromCurrencySelected = await fromCurrency.run();
+			let toCurrencySelected = await toCurrency.run();
+
+			this.createConversion(fromCurrencySelected, toCurrencySelected);
+
+		}
+		else {
 			console.log(choices[CHOICE_CREDENTIAL])
 			console.log(serviceSelected)
 		}
 
 
+
+
+	}
+
+	async createConversion (from = 'USD', to = 'ARS') {
+
+		var config = {
+			method: 'get',
+			url: `${APIDICT.CURRENCY_EXCHANGE}/convert?to=${to}&from=${from}&amount=1`,
+			headers: {
+				'apikey': APIDICT.CURRENCY_EXCHANGE_KEY,
+				'Accept-Encoding': 'application/json'
+			}
+
+		};
+		const res = await axios(config);
+		const exchangeRes = await res.data
+		this.say(`Dollars to ARS during ${exchangeRes.date} is around ${exchangeRes?.info?.rate} ${constants.CURRENCY_SIMBOLS[from]} per ${constants.CURRENCY_SIMBOLS[to]}`)
 
 	}
 
@@ -173,9 +216,9 @@ const getCredentialInformation = (credentialsDict, credential_name) => {
 	 */
 
 	res = credentialsDict.filter(
-		(cred) =>  cred.name == credential_name
+		(cred) => cred.name == credential_name
 	)
-	return res.length >0 ? res[0]: {};
+	return res.length > 0 ? res[0] : {};
 }
 
 
