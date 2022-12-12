@@ -111,6 +111,7 @@ class Maid {
 
 	dayReport = async () => {
 		const todaydate = getToday()
+		
 		this.say(`Performance Report: ${todaydate}`, false)
 		await this.performanceReport();
 		this.say(`Weather Report: ${todaydate}`, false)
@@ -127,11 +128,7 @@ class Maid {
 		const responseData = await res.data;
 		// console.log(responseData)
 
-		const features = [
-			new FeatureExtraction('2022-12-10', 'feat'),
-			new FeatureExtraction('2022-12-11', 'feat'),
-			new FeatureExtraction('2022-12-12', 'feat'),
-		]
+		const features =  populateLastDaysFeatures()
 
 		this.barChartFeatures(responseData, features, 2);
 		console.log('\n')
@@ -301,6 +298,17 @@ class Maid {
 
 	}
 
+}
+
+
+populateLastDaysFeatures = (days=7, feature='feat') => {
+
+	const features = [
+		new FeatureExtraction('2022-12-10', feature),
+		new FeatureExtraction('2022-12-11', feature),
+		new FeatureExtraction('2022-12-12', feature),
+	]
+	return features
 }
 
 
