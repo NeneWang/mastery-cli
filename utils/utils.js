@@ -111,7 +111,7 @@ class Maid {
 
 	dayReport = async () => {
 		const todaydate = getToday()
-		
+
 		this.say(`Performance Report: ${todaydate}`, false)
 		await this.performanceReport();
 		this.say(`Weather Report: ${todaydate}`, false)
@@ -128,9 +128,9 @@ class Maid {
 		const responseData = await res.data;
 		// console.log(responseData)
 
-		const features =  populateLastDaysFeatures()
+		const dayFeaturesToExtract = populateLastDaysFeatures()
 
-		this.barChartFeatures(responseData, features, 2);
+		this.barChartFeatures(responseData, dayFeaturesToExtract, 2);
 		console.log('\n')
 		// const { performances, username, days } = await res.data;
 	}
@@ -147,7 +147,7 @@ class Maid {
 			const feat_value = data[feature.feature_name] ? data[feature.feature_name][feature.feature_key] : 0;
 			const feat_name_len = feature.feature_name.length;
 			const lastCharacters = lasts > feat_name_len ? 0 : feat_name_len - lasts;
-			const feat_name = lasts > 0 ?  feature.feature_name.substring(lastCharacters) : feature.feature_name
+			const feat_name = lasts > 0 ? feature.feature_name.substring(lastCharacters) : feature.feature_name
 			const bar = { key: feat_name, value: feat_value, style: feature.style }
 			return bar;
 
@@ -301,16 +301,27 @@ class Maid {
 }
 
 
-populateLastDaysFeatures = (days=7, feature='feat') => {
+populateLastDaysFeatures = (days = 7, feature = 'feat') => {
 
-	const features = [
-		new FeatureExtraction('2022-12-10', feature),
-		new FeatureExtraction('2022-12-11', feature),
-		new FeatureExtraction('2022-12-12', feature),
-	]
-	return features
+	const lastWeekInclusive = getArrayLastXDays(7);
+	return lastWeekInclusive.map(date => {
+		return new FeatureExtraction(date, feature)
+	})
+
 }
 
+
+getArrayLastXDays = (days=7) => {
+	const pastDays = [...Array(days).keys()].map(index => {
+		const date = new Date();
+		date.setDate(date.getDate() - (days -1 - index ));
+
+		return date.toISOString().slice(0, 10);
+	});
+
+	// console.log(pastDays);
+	return pastDays;
+}
 
 
 increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
