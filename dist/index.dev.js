@@ -78,12 +78,17 @@ var Demo = demos.Demo,
             utils.commitpush();
           }
 
+          if (input.includes('services')) {
+            // Gets all services, keeps asking for things here, which service to get
+            maid.services();
+          }
+
           if (input.includes('update')) {
             maid.say("Auto updating sir!");
             utils.autorelease();
           }
 
-        case 13:
+        case 14:
         case "end":
           return _context.stop();
       }

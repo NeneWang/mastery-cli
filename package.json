@@ -33,6 +33,9 @@
 		"cli-handle-unhandled": "^1.1.1",
 		"cli-meow-help": "^3.1.0",
 		"cli-welcome": "^2.2.2",
+		"clipboardy": "^3.0.0",
+		"copy-paste": "^1.3.0",
+		"enquirer": "^2.3.6",
 		"execa": "^6.1.0",
 		"joke": "^0.0.1-1",
 		"meow": "^9.0.0"

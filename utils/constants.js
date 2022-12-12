@@ -10,6 +10,9 @@ const MAID_EMOJIS = ['genie_woman', 'elf_woman', "construction_worker_woman", "z
 let APIDICT = {
     CHUCK: 'http://api.chucknorris.io/jokes/random',
     WEATHER: 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/New%20york?unitGroup=metric&include=days%2Cevents&key=WR8T3G2K9PYXY26YF6VCRV7YN&contentType=json',
+    LOCAL_MAID: '127.0.0.1:51727',
+    DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com'
+
 }
 
 const getRandomMaidEmoji = () => {
@@ -19,7 +22,6 @@ const getRandomMaidEmoji = () => {
 const appendQuotes = (message) => {
     return `"${message}"`;
 }
-
 
 
 module.exports = {

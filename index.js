@@ -29,7 +29,7 @@ const { clear, debug } = flags;
 const { getTalk, Maid } = utils;
 const { MAID_NAME } = constants;
 const { bar, scatter, bg, fg } = chart;
-const {Demo, EDemo} = demos;
+const { Demo, EDemo } = demos;
 
 (async () => {
 	input.includes(`help`) && cli.showHelp(0);
@@ -58,6 +58,11 @@ const {Demo, EDemo} = demos;
 
 	if (input.includes('coa')) {
 		utils.commitpush()
+	}
+
+	if (input.includes('services')) {
+		// Gets all services, keeps asking for things here, which service to get
+		maid.services();
 	}
 
 	if (input.includes('update')) {
