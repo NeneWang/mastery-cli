@@ -218,7 +218,7 @@ class Maid {
 			})
 
 			let currencySelected = await currencySelect.run();
-			this.say(`${currencySelected} => ${constants.CURRENCY_SIMBOLS[currencySelected]}`);
+			this.say(`${currencySelected} => ${getKeyByValue(constants.CURRENCY_SIMBOLS, currencySelected)}`);
 
 		}
 
@@ -243,6 +243,10 @@ class Maid {
 	}
 
 }
+
+function getKeyByValue(object, value) {
+	return Object.keys(object).find(key => object[key] === value);
+  }
 
 const getCredentialNames = (credentialDict) => {
 	return credentialDict.map(cred => {
