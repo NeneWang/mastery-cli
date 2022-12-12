@@ -7,6 +7,8 @@ CLI Assistnat tool to keep you in track.
 
 - [x] Simple `coa` commit and push
 - [x] Includes weather for tomorrow and raining chance
+- [x] basic credential creation.
+- [x] Currency Conversion
 
 
 ## In Progress
