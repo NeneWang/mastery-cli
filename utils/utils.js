@@ -120,7 +120,7 @@ class Maid {
 	}
 
 	performanceReport = async () => {
-		const res = await axios.get(`${APIDICT.LOCAL_MAID}/account/report/${CONSTANTS.ACCOUNT_ID}`, {
+		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/report/${CONSTANTS.ACCOUNT_ID}`, {
 			headers: {
 				'Accept-Encoding': 'application/json'
 			}
