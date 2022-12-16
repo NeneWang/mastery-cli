@@ -1,11 +1,11 @@
 function get_random(list) {
     return list[Math.floor((Math.random() * list.length))];
 }
-const MAID_NAME = 'Maid';
+const MAID_NAME = "Maid";
 
-const MAID_EMOJIS = ['genie_woman', 'elf_woman', "construction_worker_woman", "zombie_woman", "policewoman",
-    'mage_woman', 'sauna_woman', 'woman_juggling', 'woman_pilot', 'woman_office_worker',
-    'woman_health_worker'];
+const MAID_EMOJIS = ["genie_woman", "elf_woman", "construction_worker_woman", "zombie_woman", "policewoman",
+    "mage_woman", "sauna_woman", "woman_juggling", "woman_pilot", "woman_office_worker",
+    "woman_health_worker"];
 
 const CURRENCY_SIMBOLS = {
     "AED": "United Arab Emirates Dirham",
@@ -221,6 +221,16 @@ const formatObjectFeatures = (userPerformanceData) => {
     return userPerformanceData;
 }
 
+
+
+const qmathformulas = {
+    "sum_simple": { "form": "d_1 + d_2 = y", "replace": ["d_1", "d_2"] },
+    "sub_simple": { "form": "d_1 - d_2 = y", "replace": ["d_1", "d_2"] },
+    "mult_simple": { "form": "d_1 * d_2 = y", "replace": ["d_1", "d_2"] },
+    "div_simple": { "form": "d_1 / d_2 = y", "replace": ["d_1", "d_2"] },
+}
+
+const qmathenabled = ["mult_simple", "div_simple"]
 
 
 module.exports = {

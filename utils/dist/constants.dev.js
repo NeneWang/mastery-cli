@@ -4,8 +4,8 @@ function get_random(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-var MAID_NAME = 'Maid';
-var MAID_EMOJIS = ['genie_woman', 'elf_woman', "construction_worker_woman", "zombie_woman", "policewoman", 'mage_woman', 'sauna_woman', 'woman_juggling', 'woman_pilot', 'woman_office_worker', 'woman_health_worker'];
+var MAID_NAME = "Maid";
+var MAID_EMOJIS = ["genie_woman", "elf_woman", "construction_worker_woman", "zombie_woman", "policewoman", "mage_woman", "sauna_woman", "woman_juggling", "woman_pilot", "woman_office_worker", "woman_health_worker"];
 var CURRENCY_SIMBOLS = {
   "AED": "United Arab Emirates Dirham",
   "AFN": "Afghan Afghani",
@@ -212,6 +212,25 @@ var formatObjectFeatures = function formatObjectFeatures(userPerformanceData) {
   return userPerformanceData;
 };
 
+var qmathformulas = {
+  "sum_simple": {
+    "form": "d_1 + d_2 = y",
+    "replace": ["d_1", "d_2"]
+  },
+  "sub_simple": {
+    "form": "d_1 - d_2 = y",
+    "replace": ["d_1", "d_2"]
+  },
+  "mult_simple": {
+    "form": "d_1 * d_2 = y",
+    "replace": ["d_1", "d_2"]
+  },
+  "div_simple": {
+    "form": "d_1 / d_2 = y",
+    "replace": ["d_1", "d_2"]
+  }
+};
+var qmathenabled = ["mult_simple", "div_simple"];
 module.exports = {
   MAID_NAME: MAID_NAME,
   MAID_EMOJIS: MAID_EMOJIS,

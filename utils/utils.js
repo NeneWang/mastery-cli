@@ -325,6 +325,41 @@ class Maid {
 
 
 
+class MathQuizer{
+
+	constructor(qmathformulas, qmathenabled){
+		enabled.map(formula_name => qmathformulas[formula_name]);
+	}
+
+	/**
+	 * Picks a random question from the enabled list
+	 * OUT: 
+	 * - {form, replace}
+	 */
+	pick_question(){
+		return get_random(this.enabledqmathformulas);
+	};
+	
+	/**
+	 * Compiles chosen form using form and replace
+	 * IN:
+	 * {form, replace}
+	 * OUT:
+	 * - {  question_to_ask (with replace replaced with numbers) , expectedAnswer}
+	 */
+	compile_question(form, replace){
+
+	};
+
+	/**
+	 * Asks question and waits for response, allows repetition.
+	 */
+	ask_question(){
+
+	};
+
+}
+
 /**
  * Based on the speciffied feature it returns the corresponsive barcharts
  */
