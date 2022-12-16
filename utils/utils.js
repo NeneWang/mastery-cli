@@ -53,11 +53,6 @@ class WeatherInformation {
 			}
 		)
 
-		// EXPECTED STRUCTURE
-		// const barData = [
-		// 	{ key: 'F', value: 7, style: bg('blue'), padding: 1 },
-		// 	{ key: 'G', value: 0, style: bg('yellow') }
-		// ]
 		this.barData = this.days_report.slice(0, 7).map(dWeather => {
 			let barColor = dWeather.isPrecipitation ? dWeather.hasSnow ? COLORWEATHERMAP.snow : COLORWEATHERMAP.rain : COLORWEATHERMAP.clear;
 
@@ -441,9 +436,17 @@ const weatherReport = async () => {
 }
 
 class CommitCategoryType {
-	constructor(code, icon_list) {
+	constructor(code, icon_list, feature_name = "") {
 		this.code = code;
 		this.icon_list = icon_list;
+
+		if (feature_name == "") {
+			this.features_name = code;
+		} else {
+			this.feature_name = feature_name;
+		}
+
+
 	}
 
 	randomIcon() {
@@ -459,7 +462,8 @@ class CommitCategoryType {
 let ECommitCategory = {
 	FEAT: new CommitCategoryType('feat', [':tada:', ':santa:', ':gift:']),
 	FIX: new CommitCategoryType('fix', [':hammer:', ':shipit:', ':ambulance:']),
-	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'])
+	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'], feature_name="Refactoring"),
+	ARCHITECTURE: new CommitCategoryType('arc', [':triangular_ruler:', ":japanese_castle:", ":factory:"] )
 }
 
 const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
@@ -473,7 +477,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
 	// If any category found then increase the score please.
 	commitCat = commitCategory(commitMessage);
 	if (commitCat?.code) {
-		let _ = await increasePerformance("features");
+		let _ = await increasePerformance("commits");
 		_ = await increasePerformance(commitCat.code);
 		if (addCommitEmoji) commitMessage = commitMessage + " " + commitCat.randomIcon();
 	}
