@@ -435,10 +435,14 @@ class MathQuizer {
 
 			if(res == question_prompt.expectedAnswer){
 				answerIsCorrect = true;
+				const _ = await increasePerformance("math_ss");
+				console.log("correct!")
 				break;
 			}
 			
 		}
+
+
 		return answerIsCorrect;
 
 
