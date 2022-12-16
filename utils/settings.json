@@ -13,6 +13,8 @@
     "mage_woman", "sauna_woman", "woman_juggling", "woman_pilot", "woman_office_worker",
     "woman_health_worker"],
     "report_show": ["week_features", "poerformance_summary", "weather"], //Order matters,    "quiz_enabled"
-    "enable_quiz": ["math"], //Quick quizes enabled when commiting, 
-    "strict_commit": false
+    "quiz_enable": ["math"], //Quick quizes enabled when commiting, 
+    "quiz_allow_reattempts": 3,
+    "strict_commit": false,
+    "features_ignore": ["features", "boba_tea_drank"], //Fetures to ignore on the report.
 }

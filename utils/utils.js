@@ -6,7 +6,7 @@ const clipboard = require('copy-paste')
 
 const chart = require('@wangnene2/chart')
 const { exec, spawn } = require('node:child_process');
-const { Toggle, Confirm, prompt, AutoComplete, Survey } = require('enquirer');
+const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquirer');
 
 const init = require('../utils/init');
 const constants = require('./constants');
@@ -409,15 +409,37 @@ class MathQuizer {
 	/**
 	 * Asks question and waits for response, allows repetition.
 	 */
-	ask_question() {
+	async ask_question() {
 		const question_form = this.pick_question();
 
 		const ans_constraint = question_form.ans_constraint;
+		let question_prompt = {};
 		if (ans_constraint == undefined) {
-			this.compile_question(question_form.form, question_form.replace, question_form.calculate);
+			question_prompt = this.compile_question(question_form.form, question_form.replace, question_form.calculate);
 		} else {
-			this.compile_valid_question(question_form, ans_constraint);
+			question_prompt = this.compile_valid_question(question_form, ans_constraint);
 		}
+
+		const quiz_allow_reattempts = 3;
+		let answerIsCorrect = false;
+
+		for (let i = 0; i < quiz_allow_reattempts; i++) {
+			// console.log(question_prompt.humanQuestion);
+
+			const question = new Input({
+				name: 'ServiceOption'+i,
+				message: `${question_prompt.question_prompt} attempt: ${i}`,
+			})
+
+			const res = await question.run()
+
+			if(res == question_prompt.expectedAnswer){
+				answerIsCorrect = true;
+				break;
+			}
+			
+		}
+		return answerIsCorrect;
 
 
 	};
