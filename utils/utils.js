@@ -378,7 +378,6 @@ class MathQuizer {
 			return { "expectedAnswer": expectedAnswer[calculate] }
 		}
 	};
-
 	/**
 	 * Asks question and waits for response, allows repetition.
 	 */
