@@ -45,56 +45,58 @@ var Demo = demos.Demo,
     EDemo = demos.EDemo;
 
 (function _callee() {
-  var maid, options, demo, message, mQuizer;
+  var maid, mQuizer, options, demo, message;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           maid = new Maid();
+          mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled);
           options = Object.keys(cmInfo.commands);
           input.includes(options[0]) && cli_meow.showHelp(0);
           debug && log(flags);
           maid.clearOnTalk = true;
 
           if (!input.includes(cmInfo.commands.help.code)) {
-            _context.next = 10;
+            _context.next = 11;
             break;
           }
 
           // Demo for showing charts
           demo = new Demo();
           demo.chartDemo(EDemo.BAR);
-          _context.next = 22;
+          _context.next = 23;
           break;
 
-        case 10:
+        case 11:
           if (!input.includes(cmInfo.commands.report.code)) {
-            _context.next = 14;
+            _context.next = 15;
             break;
           }
 
           maid.dayReport();
-          _context.next = 22;
+          _context.next = 23;
           break;
 
-        case 14:
+        case 15:
           if (!input.includes(cmInfo.commands.talk.code)) {
-            _context.next = 21;
+            _context.next = 22;
             break;
           }
 
-          _context.next = 17;
+          _context.next = 18;
           return regeneratorRuntime.awrap(getTalk(flags));
 
-        case 17:
+        case 18:
           message = _context.sent;
           maid.say(message, true);
-          _context.next = 22;
+          _context.next = 23;
           break;
 
-        case 21:
+        case 22:
           if (input.includes(cmInfo.commands.coa.code)) {
             utils.commitpush();
+            mQuizer.ask_question();
           } else if (input.includes(cmInfo.commands.services.code)) {
             // Gets all services, keeps asking for things here, which service to get
             maid.services();
@@ -104,11 +106,10 @@ var Demo = demos.Demo,
             maid.say("Auto updating sir!");
             utils.autorelease();
           } else if (input.includes("math")) {
-            mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled);
             mQuizer.ask_question();
           }
 
-        case 22:
+        case 23:
         case "end":
           return _context.stop();
       }

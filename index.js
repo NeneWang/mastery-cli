@@ -36,6 +36,7 @@ const { Demo, EDemo } = demos;
 
 (async () => {
 	const maid = new Maid();
+	const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled);
 
 
 	const options = Object.keys(cmInfo.commands);
@@ -60,6 +61,7 @@ const { Demo, EDemo } = demos;
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
 		utils.commitpush()
+		mQuizer.ask_question();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {
 		// Gets all services, keeps asking for things here, which service to get
@@ -73,7 +75,7 @@ const { Demo, EDemo } = demos;
 		utils.autorelease()
 	}
 	else if (input.includes("math")){
-		const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled);
+		
 		mQuizer.ask_question();
 	}
 

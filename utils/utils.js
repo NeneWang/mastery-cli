@@ -631,6 +631,8 @@ let ECommitCategory = {
 
 const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
 
+	
+
 	let commitMessage = process.argv[3];
 	console.log(commitMessage)
 	if (commitMessage == undefined) {
