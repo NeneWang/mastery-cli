@@ -357,20 +357,20 @@ class MathQuizer {
 			console.log('var_name', var_name);
 			const variabledetected = var_name.match(variable_regex);
 			variables[var_name] = this.getRandomFromType(variabledetected[1]);
-
 		}
+
 		console.log("populated variables", variables);
 		return variables;
 	}
 
 	getRandomFromType(type) {
-		const ETypes = {}
+		const ETypes = {};
 		// console.log("getRandom from type called", constants.getRandomInt(100), "using type:", type, type=="d");
-		if (type == "d"){
-			return constants.getRandomInt(99)+1;
-		}else if(type == "sd"){
+		if (type == "d") {
+			return constants.getRandomInt(99) + 1;
+		} else if (type == "sd") {
 
-			return constants.getRandomInt(19)+1;
+			return constants.getRandomInt(19) + 1;
 		}
 	}
 
@@ -380,41 +380,18 @@ class MathQuizer {
 	 * IN:
 	 * {form, replace}
 	 * OUT:
-	 * - {  question_to_ask (with replace replaced with numbers) , expectedAnswer}
+	 * - {  question_prompt (with replace replaced with numbers) , expectedAnswer}
 	 */
 	compile_question(form, replace, calculates = ['y']) {
-
-
-		// const variables = {
-		// 	"d_1": 4,
-		// 	"d_2": 2,
-		// };
 		const variables = this.populateVariables(replace);
-
-		// calculates = calculates;
-
-		// TODO: Populate variables based on naming
-
-		// console.log("Computing using", form, variables);
 		var parser = new Parser();
-		// const question = parser.parse(form).simplify(variables).toString();
 		const question = this.replaceStringVariables(form, variables);
 		const humanQuestion = this.getHumanQuestion(question, calculates);
 		parser.evaluate(form, variables);
 		console.log("expected Answer:", variables.y, ", from expression:", humanQuestion);
 
 
-		return variables.y;
-
-		// return {"expectedAnswer": expectedAnswer.y};
-		// var obj = { z: 3 };
-		// parser.evaluate('y = 2*z', obj)
-		// console.log(obj.y);
-		// return (obj.y)
-
-		for (calculate in calculates) {
-			return { "expectedAnswer": expectedAnswer[calculate] }
-		}
+		return { "question_prompt": humanQuestion, "expectedAnswer": variables.y };
 	};
 
 	replaceStringVariables(formString, variables) {
@@ -434,9 +411,53 @@ class MathQuizer {
 	 */
 	ask_question() {
 		const question_form = this.pick_question();
-		this.compile_question(question_form.form, question_form.replace, question_form.calculate);
+
+		const ans_constraint = question_form.ans_constraint;
+		if (ans_constraint == undefined) {
+			this.compile_question(question_form.form, question_form.replace, question_form.calculate);
+		} else {
+			this.compile_valid_question(question_form, ans_constraint);
+		}
+
 
 	};
+
+	/**
+	 * If constraints avaialable, continue compiling the questions until it is appropriate with that contraints
+	 * @param: constraint: str
+	 * e.g: Gets '-.2' -> Negative Only
+	 * .2 -> with two decimals
+	 * +.0 -> Positive Integer 
+	 */
+	compile_valid_question(question_form, constraint) {
+		// Basically loops until a a result fullfillls the specified constraint.
+
+		const format_reg = /(\W?).(\d)/;
+		const format_parsed = constraint.match(format_reg);
+		const decimals_allowed = format_parsed[2];
+		let foundProper = false;
+		let questionPrompt = {};
+		while (!foundProper) {
+			questionPrompt = this.compile_question(question_form.form, question_form.replace, question_form.calculate);
+			const expectedAnswer = questionPrompt.expectedAnswer;
+			const decimalCounts = countDecimals(expectedAnswer);
+
+			// console.log(`${expectedAnswer} count is ${decimalCounts}`);
+			if (decimals_allowed == 9) {
+				foundProper = true;
+			} else if (decimals_allowed >= decimalCounts) {
+				foundProper = true;
+
+			} else {
+				;
+				// console.log(`${expectedAnswer} is not proper, retrying...`);
+			}
+		}
+
+		return questionPrompt;
+
+
+	}
 
 }
 
