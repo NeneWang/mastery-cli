@@ -1,5 +1,13 @@
 {
     "username": "Nelson",
     "account_id": 1,
-
+    "disable_maid_commit_cateogory": true,
+    "disable_maid_all": false,
+    "commit_categories": [
+        {
+        "code": "feat", "icon_list": [":hammer:", ":shipit:", ":ambulance:"], "feature_name": "feat"
+        }
+    ],
+    "maid_name": "Lily",
+    "report_show": ["week_features", "poerformance_summary", "weather"] //Order matters
 }
