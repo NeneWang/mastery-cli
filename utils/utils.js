@@ -83,7 +83,11 @@ class WeatherInformation {
 }
 
 
+/**
+ * Structure for Bar Charting
+ */
 class FeatureExtraction {
+	
 	constructor(feature_name, feature_key = 'feat', style = bg('white'), getDayOnly = true) {
 		this.feature_name = feature_name;
 		this.feature_key = feature_key;
@@ -304,8 +308,21 @@ class Maid {
 populateLastDaysFeatures = (days = 7, feature = 'feat') => {
 
 	const lastWeekInclusive = getArrayLastXDays(7);
+	const todayDay = lastWeekInclusive[lastWeekInclusive.length - 1];
+	const yesterdayDay = lastWeekInclusive[lastWeekInclusive.length - 2];
 	return lastWeekInclusive.map(date => {
-		return new FeatureExtraction(date, feature)
+		// If date is yesterday then add red to it.
+		// If is today, then add this d
+		let bgcolor = bg('white');
+		if (todayDay == date){
+			console.log("Receiving today as", date)
+			bgcolor = bg('yellow');
+		}else if(date == yesterdayDay) {
+			bgcolor = bg('red');
+			console.log("Receiving yesterday as", date, bgcolor)
+		}
+		
+		return new FeatureExtraction(date, feature, bgcolor);
 	})
 
 }
