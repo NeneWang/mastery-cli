@@ -224,10 +224,10 @@ const formatObjectFeatures = (userPerformanceData) => {
 
 
 const qmathformulas = {
-    "sum_simple": { "form": "d_1 + d_2 = y", "replace": ["d_1", "d_2"] },
-    "sub_simple": { "form": "d_1 - d_2 = y", "replace": ["d_1", "d_2"] },
-    "mult_simple": { "form": "d_1 * d_2 = y", "replace": ["d_1", "d_2"] },
-    "div_simple": { "form": "d_1 / d_2 = y", "replace": ["d_1", "d_2"] },
+    "sum_simple": { "form": "d_1 + d_2 = y", "replace": ["d_1", "d_2"], "calculates": ['y'] },
+    "sub_simple": { "form": "d_1 - d_2 = y", "replace": ["d_1", "d_2"], "calculates": ['y'] },
+    "mult_simple": { "form": "d_1 * d_2 = y", "replace": ["d_1", "d_2"], "calculates": ['y'] },
+    "div_simple": { "form": "d_1 / d_2 = y", "replace": ["d_1", "d_2"], "calculates": ['y'] },
 }
 
 const qmathenabled = ["mult_simple", "div_simple"]

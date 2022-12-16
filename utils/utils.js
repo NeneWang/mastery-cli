@@ -12,6 +12,8 @@ const init = require('../utils/init');
 const constants = require('./constants');
 
 const { bar, scatter, bg, fg, annotation } = chart;
+const Parser = require('expr-eval').Parser;
+const parser = new Parser();
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures } = constants;
 
@@ -325,9 +327,9 @@ class Maid {
 
 
 
-class MathQuizer{
+class MathQuizer {
 
-	constructor(qmathformulas, qmathenabled){
+	constructor(qmathformulas, qmathenabled) {
 		enabled.map(formula_name => qmathformulas[formula_name]);
 	}
 
@@ -336,10 +338,12 @@ class MathQuizer{
 	 * OUT: 
 	 * - {form, replace}
 	 */
-	pick_question(){
+	pick_question() {
 		return get_random(this.enabledqmathformulas);
 	};
-	
+
+
+
 	/**
 	 * Compiles chosen form using form and replace
 	 * IN:
@@ -347,15 +351,33 @@ class MathQuizer{
 	 * OUT:
 	 * - {  question_to_ask (with replace replaced with numbers) , expectedAnswer}
 	 */
-	compile_question(form, replace){
+	compile_question(form, replace, calculates = ['y']) {
 
+
+		variables = {
+			"d_1": 4,
+			"d_2": 2,
+		};
+
+		// calculates = calculates;
+
+		// TODO: Populate variables based on naming
+
+		const expectedAnswer = Parser.evaluate(form, variables);
+		console.log("expected Answer:", expectedAnswer.y);
+		return {"expectedAnswer": expectedAnswer.y};
+
+		for(calculate in calculates){
+			return {"expectedAnswer": expectedAnswer[calculate]}
+		}
 	};
 
 	/**
 	 * Asks question and waits for response, allows repetition.
 	 */
-	ask_question(){
-
+	ask_question() {
+		const question_form = this.pick_question();
+		compile_question(question_form, replace=[]);
 	};
 
 }
@@ -497,8 +519,8 @@ class CommitCategoryType {
 let ECommitCategory = {
 	FEAT: new CommitCategoryType('feat', [':tada:', ':santa:', ':gift:']),
 	FIX: new CommitCategoryType('fix', [':hammer:', ':shipit:', ':ambulance:']),
-	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'], feature_name="Refactoring"),
-	ARCHITECTURE: new CommitCategoryType('arc', [':triangular_ruler:', ":japanese_castle:", ":factory:"] )
+	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'], feature_name = "Refactoring"),
+	ARCHITECTURE: new CommitCategoryType('arc', [':triangular_ruler:', ":japanese_castle:", ":factory:"])
 }
 
 const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {

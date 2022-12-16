@@ -215,19 +215,23 @@ var formatObjectFeatures = function formatObjectFeatures(userPerformanceData) {
 var qmathformulas = {
   "sum_simple": {
     "form": "d_1 + d_2 = y",
-    "replace": ["d_1", "d_2"]
+    "replace": ["d_1", "d_2"],
+    "calculates": ['y']
   },
   "sub_simple": {
     "form": "d_1 - d_2 = y",
-    "replace": ["d_1", "d_2"]
+    "replace": ["d_1", "d_2"],
+    "calculates": ['y']
   },
   "mult_simple": {
     "form": "d_1 * d_2 = y",
-    "replace": ["d_1", "d_2"]
+    "replace": ["d_1", "d_2"],
+    "calculates": ['y']
   },
   "div_simple": {
     "form": "d_1 / d_2 = y",
-    "replace": ["d_1", "d_2"]
+    "replace": ["d_1", "d_2"],
+    "calculates": ['y']
   }
 };
 var qmathenabled = ["mult_simple", "div_simple"];
