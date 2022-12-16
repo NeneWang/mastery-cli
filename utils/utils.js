@@ -362,11 +362,15 @@ class MathQuizer {
 		// calculates = calculates;
 
 		// TODO: Populate variables based on naming
-		console.log("Computing using", form, variables);
+
+		// console.log("Computing using", form, variables);
 		var parser = new Parser();
+		// const question = parser.parse(form).simplify(variables).toString();
+		const question = this.replaceStringVariables(form, variables);
+		const humanQuestion = this.getHumanQuestion(question, calculates);
 		parser.evaluate(form, variables);
-		console.log("expected Answer:", variables.y, ", from expression:", form.toString());
-		
+		console.log("expected Answer:", variables.y, ", from expression:", humanQuestion);
+
 
 		return variables.y;
 
@@ -380,6 +384,19 @@ class MathQuizer {
 			return { "expectedAnswer": expectedAnswer[calculate] }
 		}
 	};
+
+	replaceStringVariables(formString, variables) {
+		for (const variablename of Object.keys(variables)) {
+			formString = formString.replace(variablename, variables[variablename]);
+		}
+		return formString;
+	}
+
+	getHumanQuestion(simpleQuestion, solveFor) {
+		const variablesToSolveFor = solveFor.join(" ")
+		return `solve for ${variablesToSolveFor}, using ${simpleQuestion}`
+	}
+
 	/**
 	 * Asks question and waits for response, allows repetition.
 	 */
