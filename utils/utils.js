@@ -365,14 +365,16 @@ class MathQuizer {
 		console.log("Computing using", form, variables);
 		var parser = new Parser();
 		parser.evaluate(form, variables);
-		console.log("expected Answer:", variables.y);
+		console.log("expected Answer:", variables.y, ", from expression:", form.toString());
+		
 
+		return variables.y;
 
 		// return {"expectedAnswer": expectedAnswer.y};
-		var obj = { z: 3 };
-		parser.evaluate('y = 2*z', obj)
-		console.log(obj.y);
-		return (obj.y)
+		// var obj = { z: 3 };
+		// parser.evaluate('y = 2*z', obj)
+		// console.log(obj.y);
+		// return (obj.y)
 
 		for (calculate in calculates) {
 			return { "expectedAnswer": expectedAnswer[calculate] }
