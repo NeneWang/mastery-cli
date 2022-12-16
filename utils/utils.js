@@ -13,7 +13,7 @@ const constants = require('./constants');
 
 const { bar, scatter, bg, fg, annotation } = chart;
 
-const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random } = constants;
+const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures } = constants;
 
 // https://www.npmjs.com/package/chalk
 
@@ -87,7 +87,7 @@ class WeatherInformation {
  * Structure for Bar Charting
  */
 class FeatureExtraction {
-	
+
 	constructor(feature_name, feature_key = 'feat', style = bg('white'), getDayOnly = true) {
 		this.feature_name = feature_name;
 		this.feature_key = feature_key;
@@ -129,15 +129,39 @@ class Maid {
 				'Accept-Encoding': 'application/json'
 			}
 		});
-		const responseData = await res.data;
+		const userPerformanceData = await res.data;
 		// console.log(responseData)
 
-		const dayFeaturesToExtract = populateLastDaysFeatures()
+		const dayFeaturesToExtract = populateLastDaysFeaturesBarCharts()
 
-		this.barChartFeatures(responseData, dayFeaturesToExtract, 2);
+		this.barChartFeatures(userPerformanceData, dayFeaturesToExtract, 2);
+		this.printUserPerformanceDataSummary(userPerformanceData);
 		console.log('\n')
 		// const { performances, username, days } = await res.data;
 	}
+
+	printUserPerformanceDataSummary(userPerformanceData) {
+		// Print this month
+		// This week average
+		// Today data
+
+		const STATS = ['week_average_exclude_today', 'today', 'month'];
+
+		for (const stat of STATS) {
+			this.printPerformanceStat(stat, userPerformanceData);
+
+		}
+
+	}
+
+	printPerformanceStat(label, userPerformanceData) {
+		let statPerformance = userPerformanceData[label]
+		statPerformance = formatObjectFeatures(statPerformance)
+		console.log(label, statPerformance);
+	}
+
+
+
 
 
 	// Features is a list of FeatureExtraction
@@ -305,33 +329,42 @@ class Maid {
 }
 
 
-populateLastDaysFeatures = (days = 7, feature = 'feat') => {
 
-	const lastWeekInclusive = getArrayLastXDays(7);
+/**
+ * Based on the speciffied feature it returns the corresponsive barcharts
+ */
+populateLastDaysFeaturesBarCharts = (days = 7, feature = 'feat') => {
+
+	const lastWeekInclusive = getArrayLastXDays(days);
 	const todayDay = lastWeekInclusive[lastWeekInclusive.length - 1];
 	const yesterdayDay = lastWeekInclusive[lastWeekInclusive.length - 2];
 	return lastWeekInclusive.map(date => {
-		// If date is yesterday then add red to it.
-		// If is today, then add this d
 		let bgcolor = bg('white');
-		if (todayDay == date){
-			console.log("Receiving today as", date)
+		if (todayDay == date) {
 			bgcolor = bg('yellow');
-		}else if(date == yesterdayDay) {
-			bgcolor = bg('red');
-			console.log("Receiving yesterday as", date, bgcolor)
+		} else if (date == yesterdayDay) {
+			bgcolor = bg('blue');
 		}
-		
 		return new FeatureExtraction(date, feature, bgcolor);
 	})
 
 }
 
+/**
+ * Expected output: {month: {}, lastweek: {}, yesterday: {}, today: {}}
+ */
+populateLastDaysPerformanceReport = (days = 7) => {
+	const lastWeekInclusive = getArrayLastXDays(days);
 
-getArrayLastXDays = (days=7) => {
+
+}
+
+
+
+getArrayLastXDays = (days = 7) => {
 	const pastDays = [...Array(days).keys()].map(index => {
 		const date = new Date();
-		date.setDate(date.getDate() - (days -1 - index ));
+		date.setDate(date.getDate() - (days - 1 - index));
 
 		return date.toISOString().slice(0, 10);
 	});

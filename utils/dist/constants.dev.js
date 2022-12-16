@@ -199,6 +199,19 @@ var appendQuotes = function appendQuotes(message) {
   return "\"".concat(message, "\"");
 };
 
+var formatLastTwoDecimals = function formatLastTwoDecimals(original) {
+  return Math.round(original * 100) / 100;
+};
+
+var formatObjectFeatures = function formatObjectFeatures(userPerformanceData) {
+  for (var _i = 0, _Object$keys = Object.keys(userPerformanceData); _i < _Object$keys.length; _i++) {
+    var feat = _Object$keys[_i];
+    userPerformanceData[feat] = formatLastTwoDecimals(userPerformanceData[feat]);
+  }
+
+  return userPerformanceData;
+};
+
 module.exports = {
   MAID_NAME: MAID_NAME,
   MAID_EMOJIS: MAID_EMOJIS,
@@ -207,5 +220,6 @@ module.exports = {
   appendQuotes: appendQuotes,
   APIDICT: APIDICT,
   CURRENCY_SIMBOLS: CURRENCY_SIMBOLS,
-  CONSTANTS: CONSTANTS
+  CONSTANTS: CONSTANTS,
+  formatObjectFeatures: formatObjectFeatures
 };

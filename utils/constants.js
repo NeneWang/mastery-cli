@@ -190,7 +190,7 @@ let APIDICT = {
     // DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
     CURRENCY_EXCHANGE: 'https://api.apilayer.com/exchangerates_data',
     CURRENCY_EXCHANGE_KEY: '3zPc7CzmznmueYsu3SttUWIE2QZ3ODYd',
-    
+
 }
 
 const CONSTANTS = {
@@ -210,9 +210,22 @@ const appendQuotes = (message) => {
 }
 
 
+const formatLastTwoDecimals = (original) => {
+    return (Math.round(original * 100) / 100);
+}
+
+const formatObjectFeatures = (userPerformanceData) => {
+    for (const feat of Object.keys(userPerformanceData)) {
+        userPerformanceData[feat] = formatLastTwoDecimals(userPerformanceData[feat]);
+    }
+    return userPerformanceData;
+}
+
+
+
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
-    appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS
+    appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures
 };
 
 
