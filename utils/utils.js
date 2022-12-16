@@ -352,14 +352,14 @@ class MathQuizer {
 
 		const variables = {}
 		const variable_regex = /(\w+)_(\d)/;
-		console.log('replace', replace);
+		// console.log('replace', replace);
 		for (const var_name of replace) {
-			console.log('var_name', var_name);
+			// console.log('var_name', var_name);
 			const variabledetected = var_name.match(variable_regex);
 			variables[var_name] = this.getRandomFromType(variabledetected[1]);
 		}
 
-		console.log("populated variables", variables);
+		// console.log("populated variables", variables);
 		return variables;
 	}
 
