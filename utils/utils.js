@@ -388,7 +388,7 @@ class MathQuizer {
 		const question = this.replaceStringVariables(form, variables);
 		const humanQuestion = this.getHumanQuestion(question, calculates);
 		parser.evaluate(form, variables);
-		console.log("expected Answer:", variables.y, ", from expression:", humanQuestion);
+
 
 
 		return { "question_prompt": humanQuestion, "expectedAnswer": variables.y };
@@ -427,21 +427,22 @@ class MathQuizer {
 			// console.log(question_prompt.humanQuestion);
 
 			const question = new Input({
-				name: 'ServiceOption'+i,
+				name: 'ServiceOption' + i,
 				message: `${question_prompt.question_prompt} attempt: ${i}`,
 			})
 
 			const res = await question.run()
 
-			if(res == question_prompt.expectedAnswer){
+			if (res == question_prompt.expectedAnswer) {
 				answerIsCorrect = true;
 				const _ = await increasePerformance("math_ss");
 				console.log("correct!")
 				break;
 			}
-			
+
 		}
 
+		console.log("expected Answer:", question_prompt.expectedAnswer, ", from expression:", question_prompt.question_prompt);
 
 		return answerIsCorrect;
 
