@@ -212,29 +212,40 @@ var formatObjectFeatures = function formatObjectFeatures(userPerformanceData) {
   return userPerformanceData;
 };
 
+var getRandomInt = function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+};
+
 var qmathformulas = {
   "sum_simple": {
-    "form": "y = d_1 + d_2 ",
-    "replace": ["d_1", "d_2"],
+    "form": "y = sd_1 + sd_2 ",
+    "replace": ["sd_1", "sd_2"],
     "calculates": ['y']
   },
   "sub_simple": {
-    "form": "y = d_1 - d_2 ",
-    "replace": ["d_1", "d_2"],
+    "form": "y = sd_1 - sd_2 ",
+    "replace": ["sd_1", "sd_2"],
     "calculates": ['y']
   },
   "mult_simple": {
-    "form": "y = d_1 * d_2",
-    "replace": ["d_1", "d_2"],
+    "form": "y = sd_1 * sd_2",
+    "replace": ["sd_1", "sd_2"],
     "calculates": ['y']
   },
   "div_simple": {
-    "form": "y = d_1 / d_2 ",
-    "replace": ["d_1", "d_2"],
-    "calculates": ['y']
+    "form": "y = sd_1 / sd_2 ",
+    "replace": ["sd_1", "sd_2"],
+    "calculates": ['y'],
+    "ans_constraint": ".2"
   }
 };
 var qmathenabled = ["mult_simple", "div_simple"];
+
+var countDecimals = function countDecimals(value) {
+  if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;
+  return 0;
+};
+
 module.exports = {
   MAID_NAME: MAID_NAME,
   MAID_EMOJIS: MAID_EMOJIS,
@@ -246,5 +257,6 @@ module.exports = {
   CONSTANTS: CONSTANTS,
   formatObjectFeatures: formatObjectFeatures,
   qmathformulas: qmathformulas,
-  qmathenabled: qmathenabled
+  qmathenabled: qmathenabled,
+  getRandomInt: getRandomInt
 };

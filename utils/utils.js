@@ -15,7 +15,7 @@ const { bar, scatter, bg, fg, annotation } = chart;
 const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
-const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures } = constants;
+const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 
 // https://www.npmjs.com/package/chalk
 
@@ -343,6 +343,37 @@ class MathQuizer {
 	};
 
 
+	/**
+	 * PopulateVariables using naming e.g. d_1 => digit
+	 * @param {List[str]} replace : List of Strings
+	 * @Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
+	 */
+	populateVariables(replace) {
+
+		const variables = {}
+		const variable_regex = /(\w+)_(\d)/;
+		console.log('replace', replace);
+		for (const var_name of replace) {
+			console.log('var_name', var_name);
+			const variabledetected = var_name.match(variable_regex);
+			variables[var_name] = this.getRandomFromType(variabledetected[1]);
+
+		}
+		console.log("populated variables", variables);
+		return variables;
+	}
+
+	getRandomFromType(type) {
+		const ETypes = {}
+		// console.log("getRandom from type called", constants.getRandomInt(100), "using type:", type, type=="d");
+		if (type == "d"){
+			return constants.getRandomInt(99)+1;
+		}else if(type == "sd"){
+
+			return constants.getRandomInt(19)+1;
+		}
+	}
+
 
 	/**
 	 * Compiles chosen form using form and replace
@@ -354,10 +385,11 @@ class MathQuizer {
 	compile_question(form, replace, calculates = ['y']) {
 
 
-		const variables = {
-			"d_1": 4,
-			"d_2": 2,
-		};
+		// const variables = {
+		// 	"d_1": 4,
+		// 	"d_2": 2,
+		// };
+		const variables = this.populateVariables(replace);
 
 		// calculates = calculates;
 
@@ -402,7 +434,8 @@ class MathQuizer {
 	 */
 	ask_question() {
 		const question_form = this.pick_question();
-		this.compile_question(question_form.form, []);
+		this.compile_question(question_form.form, question_form.replace, question_form.calculate);
+
 	};
 
 }

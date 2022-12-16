@@ -222,21 +222,32 @@ const formatObjectFeatures = (userPerformanceData) => {
 }
 
 
+const getRandomInt = (max) => {
+    return Math.floor(Math.random() * max);
+}
+
+
 
 const qmathformulas = {
-    "sum_simple": { "form": "y = d_1 + d_2 ", "replace": ["d_1", "d_2"], "calculates": ['y'] },
-    "sub_simple": { "form": "y = d_1 - d_2 ", "replace": ["d_1", "d_2"], "calculates": ['y'] },
-    "mult_simple": { "form": "y = d_1 * d_2", "replace": ["d_1", "d_2"], "calculates": ['y'] },
-    "div_simple": { "form": "y = d_1 / d_2 ", "replace": ["d_1", "d_2"], "calculates": ['y'] },
+    "sum_simple": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], },
+    "sub_simple": { "form": "y = sd_1 - sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'] },
+    "mult_simple": { "form": "y = sd_1 * sd_2", "replace": ["sd_1", "sd_2"], "calculates": ['y'] },
+    "div_simple": { "form": "y = sd_1 / sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "ans_constraint": ".2" },
 }
 
 const qmathenabled = ["mult_simple", "div_simple"]
 
 
+const countDecimals = (value) => {
+    if (Math.floor(value) !== value)
+        return value.toString().split(".")[1].length || 0;
+    return 0;
+}
+
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
     appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures,
-    qmathformulas, qmathenabled
+    qmathformulas, qmathenabled, getRandomInt
 };
 
 
