@@ -45,7 +45,7 @@ var Demo = demos.Demo,
     EDemo = demos.EDemo;
 
 (function _callee() {
-  var maid, options, demo, message;
+  var maid, options, demo, message, mQuizer;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -103,6 +103,9 @@ var Demo = demos.Demo,
           } else if (input.includes(cmInfo.commands.update.code)) {
             maid.say("Auto updating sir!");
             utils.autorelease();
+          } else if (input.includes("math")) {
+            mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled);
+            mQuizer.ask_question();
           }
 
         case 22:

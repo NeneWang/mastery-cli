@@ -72,5 +72,9 @@ const { Demo, EDemo } = demos;
 		maid.say("Auto updating sir!")
 		utils.autorelease()
 	}
+	else if (input.includes("math")){
+		const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled);
+		mQuizer.ask_question();
+	}
 
 })();

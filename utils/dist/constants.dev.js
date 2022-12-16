@@ -214,22 +214,22 @@ var formatObjectFeatures = function formatObjectFeatures(userPerformanceData) {
 
 var qmathformulas = {
   "sum_simple": {
-    "form": "d_1 + d_2 = y",
+    "form": "y = d_1 + d_2 ",
     "replace": ["d_1", "d_2"],
     "calculates": ['y']
   },
   "sub_simple": {
-    "form": "d_1 - d_2 = y",
+    "form": "y = d_1 - d_2 ",
     "replace": ["d_1", "d_2"],
     "calculates": ['y']
   },
   "mult_simple": {
-    "form": "d_1 * d_2 = y",
+    "form": "y = d_1 * d_2",
     "replace": ["d_1", "d_2"],
     "calculates": ['y']
   },
   "div_simple": {
-    "form": "d_1 / d_2 = y",
+    "form": "y = d_1 / d_2 ",
     "replace": ["d_1", "d_2"],
     "calculates": ['y']
   }
@@ -244,5 +244,7 @@ module.exports = {
   APIDICT: APIDICT,
   CURRENCY_SIMBOLS: CURRENCY_SIMBOLS,
   CONSTANTS: CONSTANTS,
-  formatObjectFeatures: formatObjectFeatures
+  formatObjectFeatures: formatObjectFeatures,
+  qmathformulas: qmathformulas,
+  qmathenabled: qmathenabled
 };

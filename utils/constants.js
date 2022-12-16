@@ -224,10 +224,10 @@ const formatObjectFeatures = (userPerformanceData) => {
 
 
 const qmathformulas = {
-    "sum_simple": { "form": "d_1 + d_2 = y", "replace": ["d_1", "d_2"], "calculates": ['y'] },
-    "sub_simple": { "form": "d_1 - d_2 = y", "replace": ["d_1", "d_2"], "calculates": ['y'] },
-    "mult_simple": { "form": "d_1 * d_2 = y", "replace": ["d_1", "d_2"], "calculates": ['y'] },
-    "div_simple": { "form": "d_1 / d_2 = y", "replace": ["d_1", "d_2"], "calculates": ['y'] },
+    "sum_simple": { "form": "y = d_1 + d_2 ", "replace": ["d_1", "d_2"], "calculates": ['y'] },
+    "sub_simple": { "form": "y = d_1 - d_2 ", "replace": ["d_1", "d_2"], "calculates": ['y'] },
+    "mult_simple": { "form": "y = d_1 * d_2", "replace": ["d_1", "d_2"], "calculates": ['y'] },
+    "div_simple": { "form": "y = d_1 / d_2 ", "replace": ["d_1", "d_2"], "calculates": ['y'] },
 }
 
 const qmathenabled = ["mult_simple", "div_simple"]
@@ -235,7 +235,8 @@ const qmathenabled = ["mult_simple", "div_simple"]
 
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
-    appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures
+    appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures,
+    qmathformulas, qmathenabled
 };
 
 

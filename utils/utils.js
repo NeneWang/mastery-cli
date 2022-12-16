@@ -330,7 +330,7 @@ class Maid {
 class MathQuizer {
 
 	constructor(qmathformulas, qmathenabled) {
-		enabled.map(formula_name => qmathformulas[formula_name]);
+		this.enabledqmathformulas = qmathenabled.map(formula_name => qmathformulas[formula_name]);
 	}
 
 	/**
@@ -354,7 +354,7 @@ class MathQuizer {
 	compile_question(form, replace, calculates = ['y']) {
 
 
-		variables = {
+		const variables = {
 			"d_1": 4,
 			"d_2": 2,
 		};
@@ -362,13 +362,20 @@ class MathQuizer {
 		// calculates = calculates;
 
 		// TODO: Populate variables based on naming
+		console.log("Computing using", form, variables);
+		var parser = new Parser();
+		parser.evaluate(form, variables);
+		console.log("expected Answer:", variables.y);
 
-		const expectedAnswer = Parser.evaluate(form, variables);
-		console.log("expected Answer:", expectedAnswer.y);
-		return {"expectedAnswer": expectedAnswer.y};
 
-		for(calculate in calculates){
-			return {"expectedAnswer": expectedAnswer[calculate]}
+		// return {"expectedAnswer": expectedAnswer.y};
+		var obj = { z: 3 };
+		parser.evaluate('y = 2*z', obj)
+		console.log(obj.y);
+		return (obj.y)
+
+		for (calculate in calculates) {
+			return { "expectedAnswer": expectedAnswer[calculate] }
 		}
 	};
 
@@ -377,7 +384,7 @@ class MathQuizer {
 	 */
 	ask_question() {
 		const question_form = this.pick_question();
-		compile_question(question_form, replace=[]);
+		this.compile_question(question_form.form, []);
 	};
 
 }
@@ -577,5 +584,5 @@ const autorelease = () => {
 
 module.exports = {
 	getTalk, commitpush, autorelease,
-	Maid, getToday
+	Maid, getToday, MathQuizer
 };
