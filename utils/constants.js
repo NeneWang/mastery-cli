@@ -235,10 +235,10 @@ const qmathformulas = {
     "sub_simple": { "form": "y = sd_1 - sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'] },
     "mult_simple": { "form": "y = sd_1 * sd_2", "replace": ["sd_1", "sd_2"], "calculates": ['y'] },
     "div_simple": { "form": "y = sd_1 / sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "ans_constraint": ".2" },
-    "sum_simple": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"},
+    "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"},
 }
 
-const qmathenabled = ["mult_simple", "div_simple"]
+const qmathenabled = ["div_simple", "sum_apples"]
 
 
 const countDecimals = (value) => {
