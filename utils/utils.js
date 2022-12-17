@@ -6,14 +6,16 @@ const clipboard = require('copy-paste')
 
 const chart = require('@wangnene2/chart')
 const { exec, spawn } = require('node:child_process');
-const { Toggle, Confirm, prompt, AutoComplete, Survey } = require('enquirer');
+const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquirer');
 
 const init = require('../utils/init');
 const constants = require('./constants');
 
 const { bar, scatter, bg, fg, annotation } = chart;
+const Parser = require('expr-eval').Parser;
+const parser = new Parser();
 
-const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT } = constants;
+const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 
 // https://www.npmjs.com/package/chalk
 
@@ -53,11 +55,6 @@ class WeatherInformation {
 			}
 		)
 
-		// EXPECTED STRUCTURE
-		// const barData = [
-		// 	{ key: 'F', value: 7, style: bg('blue'), padding: 1 },
-		// 	{ key: 'G', value: 0, style: bg('yellow') }
-		// ]
 		this.barData = this.days_report.slice(0, 7).map(dWeather => {
 			let barColor = dWeather.isPrecipitation ? dWeather.hasSnow ? COLORWEATHERMAP.snow : COLORWEATHERMAP.rain : COLORWEATHERMAP.clear;
 
@@ -83,6 +80,18 @@ class WeatherInformation {
 }
 
 
+/**
+ * Structure for Bar Charting
+ */
+class FeatureExtraction {
+
+	constructor(feature_name, feature_key = 'feat', style = bg('white'), getDayOnly = true) {
+		this.feature_name = feature_name;
+		this.feature_key = feature_key;
+		this.style = style;
+	}
+};
+
 class Maid {
 
 	constructor(name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
@@ -101,20 +110,93 @@ class Maid {
 		console.log(`${this.getMaidHeader()} ${chalk(message)}`);
 	}
 
-	dayReport = () => {
+	dayReport = async () => {
 		const todaydate = getToday()
-		this.say(`Weather Report, ${todaydate}`)
+
+		this.say(`Performance Report: ${todaydate}`, false)
+		await this.performanceReport();
+		this.say(`Weather Report: ${todaydate}`, false)
+		// console.log('Weather\n')
 		weatherReport();
 	}
+
+	performanceReport = async () => {
+		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/report/${CONSTANTS.ACCOUNT_ID}`, {
+			headers: {
+				'Accept-Encoding': 'application/json'
+			}
+		});
+		const userPerformanceData = await res.data;
+		// console.log(responseData)
+
+		const dayFeaturesToExtract = populateLastDaysFeaturesBarCharts()
+
+		this.barChartFeatures(userPerformanceData, dayFeaturesToExtract, 2);
+		this.printUserPerformanceDataSummary(userPerformanceData);
+		console.log('\n')
+		// const { performances, username, days } = await res.data;
+	}
+
+	printUserPerformanceDataSummary(userPerformanceData) {
+		// Print this month
+		// This week average
+		// Today data
+
+		const STATS = ['week_average_exclude_today', 'today', 'month'];
+
+		for (const stat of STATS) {
+			this.printPerformanceStat(stat, userPerformanceData);
+
+		}
+
+	}
+
+	printPerformanceStat(label, userPerformanceData) {
+		let statPerformance = userPerformanceData[label]
+		statPerformance = formatObjectFeatures(statPerformance)
+		console.log(label, statPerformance);
+	}
+
+
+
+
+
+	// Features is a list of FeatureExtraction
+	barChartFeatures = (data, features, lasts = 2) => {
+		/**
+		 * Based on the key it should identify the 
+		 */
+		// const LASTXCHARS = 5;
+		let bars = features.map((feature) => {
+			// Attempt getting that from data or return a 0 as the bar information.
+			const feat_value = data[feature.feature_name] ? data[feature.feature_name][feature.feature_key] : 0;
+			const feat_name_len = feature.feature_name.length;
+			const lastCharacters = lasts > feat_name_len ? 0 : feat_name_len - lasts;
+			const feat_name = lasts > 0 ? feature.feature_name.substring(lastCharacters) : feature.feature_name
+			const bar = { key: feat_name, value: feat_value, style: feature.style }
+			return bar;
+
+		})
+
+
+		console.log(bar(bars))
+
+
+
+	}
+
+
 
 	services = async () => {
 
 		const choices = [
 			'get_credential',
 			'forecast_costs',
+			'usd_to_ars',
+			'currency_exchange'
 		]
 
-		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1;
+		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1, CHOICE_USD_TO_ARS = 2, CHOICE_CURRENCY_EXCHANGE = 3;
 
 		const multiselect = new AutoComplete({
 			name: 'ServiceOption',
@@ -128,7 +210,7 @@ class Maid {
 
 		console.log("service Selected", serviceSelected);
 		if (serviceSelected == choices[CHOICE_CREDENTIAL].value) {
-			
+
 			console.log('Retrieve credentials for...')
 			const creds = await axios.get(`${APIDICT.DEPLOYED_MAID}/services`, {
 				headers: {
@@ -140,7 +222,7 @@ class Maid {
 			const credentialSelect = new AutoComplete({
 				name: 'credentialSelect',
 				message: 'Which Credential?',
-				choices: cred_names 
+				choices: cred_names
 			})
 			const credentialNameSelected = await credentialSelect.run()
 			const credentialSelected = getCredentialInformation(credentials, credentialNameSelected);
@@ -150,15 +232,315 @@ class Maid {
 
 			// Show credentials available
 
-		} else {
+		} else if (serviceSelected == choices[CHOICE_USD_TO_ARS].value) {
+			this.createConversion();
+		} else if (serviceSelected == choices[CHOICE_CURRENCY_EXCHANGE].value) {
+			// Prompt from what to what to exchange.
+
+			const fromCurrency = new AutoComplete({
+				name: 'fromCurrency',
+				message: 'Which Currency from?',
+				choices: Object.keys(constants.CURRENCY_SIMBOLS)
+			})
+
+			const toCurrency = new AutoComplete({
+				name: 'toCurrency',
+				message: 'Which Currency to?',
+				choices: Object.keys(constants.CURRENCY_SIMBOLS)
+			})
+
+			let fromCurrencySelected = await fromCurrency.run();
+			let toCurrencySelected = await toCurrency.run();
+
+			this.createConversion(fromCurrencySelected, toCurrencySelected);
+
+		}
+		else {
 			console.log(choices[CHOICE_CREDENTIAL])
 			console.log(serviceSelected)
 		}
 
 
 
+
 	}
 
+
+
+	ask = async () => {
+		// Asking some random fnction
+
+		const choices = [
+			'currency symbol for...',
+			// 'forecast_costs',
+			// 'usd_to_ars',
+			// 'currency_exchange'
+		]
+
+		const CHOICE_CURRENCY = 0;
+
+		const multiselect = new AutoComplete({
+			name: 'question',
+			message: 'What do you want to know?',
+			choices: choices
+		})
+
+		let serviceSelected = await multiselect.run();
+
+		// if services == get_credi
+
+		console.log("service Selected", serviceSelected);
+		if (serviceSelected == choices[CHOICE_CURRENCY].value) {
+
+			const currencySelect = new AutoComplete({
+				name: 'currency',
+				message: 'Which currency?',
+				choices: Object.values(constants.CURRENCY_SIMBOLS)
+			})
+
+			let currencySelected = await currencySelect.run();
+			this.say(`${currencySelected} => ${getKeyByValue(constants.CURRENCY_SIMBOLS, currencySelected)}`);
+
+		}
+
+
+	}
+
+	async createConversion(from = 'USD', to = 'ARS') {
+
+		var config = {
+			method: 'get',
+			url: `${APIDICT.CURRENCY_EXCHANGE}/convert?to=${to}&from=${from}&amount=1`,
+			headers: {
+				'apikey': APIDICT.CURRENCY_EXCHANGE_KEY,
+				'Accept-Encoding': 'application/json'
+			}
+
+		};
+		const res = await axios(config);
+		const exchangeRes = await res.data
+		this.say(`${from} to ${to} during ${exchangeRes.date} is around ${exchangeRes?.info?.rate} ${constants.CURRENCY_SIMBOLS[to]} per ${constants.CURRENCY_SIMBOLS[from]}`)
+
+	}
+
+}
+
+
+
+class MathQuizer {
+
+	constructor(qmathformulas, qmathenabled) {
+		this.enabledqmathformulas = qmathenabled.map(formula_name => qmathformulas[formula_name]);
+	}
+
+	/**
+	 * Picks a random question from the enabled list
+	 * OUT: 
+	 * - {form, replace}
+	 */
+	pick_question() {
+		return get_random(this.enabledqmathformulas);
+	};
+
+
+	/**
+	 * PopulateVariables using naming e.g. d_1 => digit
+	 * @param {List[str]} replace : List of Strings
+	 * @Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
+	 */
+	populateVariables(replace) {
+
+		const variables = {}
+		const variable_regex = /(\w+)_(\d)/;
+		// console.log('replace', replace);
+		for (const var_name of replace) {
+			// console.log('var_name', var_name);
+			const variabledetected = var_name.match(variable_regex);
+			variables[var_name] = this.getRandomFromType(variabledetected[1]);
+		}
+
+		// console.log("populated variables", variables);
+		return variables;
+	}
+
+	getRandomFromType(type) {
+		const ETypes = {};
+		// console.log("getRandom from type called", constants.getRandomInt(100), "using type:", type, type=="d");
+		if (type == "d") {
+			return constants.getRandomInt(99) + 1;
+		} else if (type == "sd") {
+
+			return constants.getRandomInt(19) + 1;
+		}
+	}
+
+
+	/**
+	 * Compiles chosen form using form and replace
+	 * IN:
+	 * {form, replace}
+	 * OUT:
+	 * - {  question_prompt (with replace replaced with numbers) , expectedAnswer}
+	 */
+	compile_question(form, replace, calculates = ['y']) {
+		const variables = this.populateVariables(replace);
+		var parser = new Parser();
+		const question = this.replaceStringVariables(form, variables);
+		const humanQuestion = this.getHumanQuestion(question, calculates);
+		parser.evaluate(form, variables);
+
+
+
+		return { "question_prompt": humanQuestion, "expectedAnswer": variables.y };
+	};
+
+	replaceStringVariables(formString, variables) {
+		for (const variablename of Object.keys(variables)) {
+			formString = formString.replace(variablename, variables[variablename]);
+		}
+		return formString;
+	}
+
+	getHumanQuestion(simpleQuestion, solveFor) {
+		const variablesToSolveFor = solveFor.join(" ")
+		return `solve for ${variablesToSolveFor}, using ${simpleQuestion}`
+	}
+
+	/**
+	 * Asks question and waits for response, allows repetition.
+	 */
+	async ask_question() {
+		const question_form = this.pick_question();
+
+		const ans_constraint = question_form.ans_constraint;
+		let question_prompt = {};
+		if (ans_constraint == undefined) {
+			question_prompt = this.compile_question(question_form.form, question_form.replace, question_form.calculate);
+		} else {
+			question_prompt = this.compile_valid_question(question_form, ans_constraint);
+		}
+
+		const quiz_allow_reattempts = 3;
+		let answerIsCorrect = false;
+
+		for (let i = 0; i < quiz_allow_reattempts; i++) {
+			// console.log(question_prompt.humanQuestion);
+
+			const question = new Input({
+				name: 'ServiceOption' + i,
+				message: `${question_prompt.question_prompt} attempt: ${i}`,
+			})
+
+			const res = await question.run()
+
+			if (res == question_prompt.expectedAnswer) {
+				answerIsCorrect = true;
+				const _ = await increasePerformance("math_ss");
+				console.log("correct!")
+				break;
+			}
+
+		}
+
+		console.log("expected Answer:", question_prompt.expectedAnswer, ", from expression:", question_prompt.question_prompt);
+
+		return answerIsCorrect;
+
+
+	};
+
+	/**
+	 * If constraints avaialable, continue compiling the questions until it is appropriate with that contraints
+	 * @param: constraint: str
+	 * e.g: Gets '-.2' -> Negative Only
+	 * .2 -> with two decimals
+	 * +.0 -> Positive Integer 
+	 */
+	compile_valid_question(question_form, constraint) {
+		// Basically loops until a a result fullfillls the specified constraint.
+
+		const format_reg = /(\W?).(\d)/;
+		const format_parsed = constraint.match(format_reg);
+		const decimals_allowed = format_parsed[2];
+		let foundProper = false;
+		let questionPrompt = {};
+		while (!foundProper) {
+			questionPrompt = this.compile_question(question_form.form, question_form.replace, question_form.calculate);
+			const expectedAnswer = questionPrompt.expectedAnswer;
+			const decimalCounts = countDecimals(expectedAnswer);
+
+			// console.log(`${expectedAnswer} count is ${decimalCounts}`);
+			if (decimals_allowed == 9) {
+				foundProper = true;
+			} else if (decimals_allowed >= decimalCounts) {
+				foundProper = true;
+
+			} else {
+				;
+				// console.log(`${expectedAnswer} is not proper, retrying...`);
+			}
+		}
+
+		return questionPrompt;
+
+
+	}
+
+}
+
+/**
+ * Based on the speciffied feature it returns the corresponsive barcharts
+ */
+populateLastDaysFeaturesBarCharts = (days = 7, feature = 'feat') => {
+
+	const lastWeekInclusive = getArrayLastXDays(days);
+	const todayDay = lastWeekInclusive[lastWeekInclusive.length - 1];
+	const yesterdayDay = lastWeekInclusive[lastWeekInclusive.length - 2];
+	return lastWeekInclusive.map(date => {
+		let bgcolor = bg('white');
+		if (todayDay == date) {
+			bgcolor = bg('yellow');
+		} else if (date == yesterdayDay) {
+			bgcolor = bg('blue');
+		}
+		return new FeatureExtraction(date, feature, bgcolor);
+	})
+
+}
+
+/**
+ * Expected output: {month: {}, lastweek: {}, yesterday: {}, today: {}}
+ */
+populateLastDaysPerformanceReport = (days = 7) => {
+	const lastWeekInclusive = getArrayLastXDays(days);
+
+
+}
+
+
+
+getArrayLastXDays = (days = 7) => {
+	const pastDays = [...Array(days).keys()].map(index => {
+		const date = new Date();
+		date.setDate(date.getDate() - (days - 1 - index));
+
+		return date.toISOString().slice(0, 10);
+	});
+
+	// console.log(pastDays);
+	return pastDays;
+}
+
+
+increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
+	const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}/${increaseBY}?increase_score=true`)
+	if (debug) console.log(res.data);
+}
+
+
+
+function getKeyByValue(object, value) {
+	return Object.keys(object).find(key => object[key] === value);
 }
 
 const getCredentialNames = (credentialDict) => {
@@ -173,9 +555,9 @@ const getCredentialInformation = (credentialsDict, credential_name) => {
 	 */
 
 	res = credentialsDict.filter(
-		(cred) =>  cred.name == credential_name
+		(cred) => cred.name == credential_name
 	)
-	return res.length >0 ? res[0]: {};
+	return res.length > 0 ? res[0] : {};
 }
 
 
@@ -216,17 +598,77 @@ const weatherReport = async () => {
 
 }
 
-const commitpush = () => {
+class CommitCategoryType {
+	constructor(code, icon_list, feature_name = "") {
+		this.code = code;
+		this.icon_list = icon_list;
+
+		if (feature_name == "") {
+			this.features_name = code;
+		} else {
+			this.feature_name = feature_name;
+		}
+
+
+	}
+
+	randomIcon() {
+		return get_random(this.icon_list);
+	}
+
+	toString() {
+		return this.code;
+	}
+
+};
+
+let ECommitCategory = {
+	FEAT: new CommitCategoryType('feat', [':tada:', ':santa:', ':gift:']),
+	FIX: new CommitCategoryType('fix', [':hammer:', ':shipit:', ':ambulance:']),
+	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'], feature_name = "Refactoring"),
+	ARCHITECTURE: new CommitCategoryType('arc', [':triangular_ruler:', ":japanese_castle:", ":factory:"])
+}
+
+const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
+
+	
 
 	let commitMessage = process.argv[3];
 	console.log(commitMessage)
 	if (commitMessage == undefined) {
 		commitMessage = "Committed by Maid ";
 	}
+
+	// If any category found then increase the score please.
+	commitCat = commitCategory(commitMessage);
+	if (commitCat?.code) {
+		let _ = await increasePerformance("commits");
+		_ = await increasePerformance(commitCat.code);
+		if (addCommitEmoji) commitMessage = commitMessage + " " + commitCat.randomIcon();
+	}
+
+
 	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
 	exec(`git coa ${commitMessage} && git poh `);
 	console.log(`Pushed to origin with commit message: ${commitMessage} <3`);
+}
+
+
+
+const commitCategory = (commitMessage, strict = false) => {
+	if (strict) {
+		// TODO Strictly runs with space in between?
+		;
+	}
+
+	for (category of Object.values(ECommitCategory)) {
+		console.log(commitMessage)
+		if (commitMessage.includes(category.code)) {
+			return category;
+		}
+	}
+	return ""; //No category at all.
 }
 
 const autorelease = () => {
@@ -243,5 +685,5 @@ const autorelease = () => {
 
 module.exports = {
 	getTalk, commitpush, autorelease,
-	Maid, getToday
+	Maid, getToday, MathQuizer
 };

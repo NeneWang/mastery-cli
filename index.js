@@ -20,54 +20,63 @@ const axios = require('axios');
 const chalk = require('chalk');
 const chart = require('@wangnene2/chart')
 
-
-const flags = cli.flags;
-const input = cli.input;
-
+const cli_meow = cli[0]
+const cmInfo = cli[1]
+const flags = cli_meow.flags;
+const input = cli_meow.input;
+// const cmInfo = cli.options.cmInfo;
 
 const { clear, debug } = flags;
+// const { cmInfo } = cli;
 const { getTalk, Maid } = utils;
 const { MAID_NAME } = constants;
 const { bar, scatter, bg, fg } = chart;
 const { Demo, EDemo } = demos;
 
-(async () => {
-	input.includes(`help`) && cli.showHelp(0);
 
+(async () => {
+	const maid = new Maid();
+	const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled);
+
+
+	const options = Object.keys(cmInfo.commands);
+	input.includes(options[0]) && cli_meow.showHelp(0);
 	debug && log(flags);
 
-	const maid = new Maid();
 	maid.clearOnTalk = true;
 
-	if (input.includes('charts')) {
+	if (input.includes(cmInfo.commands.help.code)) {
 		// Demo for showing charts
 		const demo = new Demo;
 		demo.chartDemo(EDemo.BAR);
 
 	}
-
-	if (input.includes('report')) {
+	else if (input.includes(cmInfo.commands.report.code)) {
 		maid.dayReport();
 	}
-
-	if (input.includes('talk')) {
+	else if (input.includes(cmInfo.commands.talk.code)) {
 		let message = await getTalk(flags);
 		maid.say(message, true);
 
 	}
-
-	if (input.includes('coa')) {
+	else if (input.includes(cmInfo.commands.coa.code)) {
 		utils.commitpush()
+		mQuizer.ask_question();
 	}
-
-	if (input.includes('services')) {
+	else if (input.includes(cmInfo.commands.services.code)) {
 		// Gets all services, keeps asking for things here, which service to get
 		maid.services();
 	}
-
-	if (input.includes('update')) {
+	else if (input.includes(cmInfo.commands.ask.code)) {
+		maid.ask();
+	}
+	else if (input.includes(cmInfo.commands.update.code)) {
 		maid.say("Auto updating sir!")
 		utils.autorelease()
+	}
+	else if (input.includes("math")){
+		
+		mQuizer.ask_question();
 	}
 
 })();
