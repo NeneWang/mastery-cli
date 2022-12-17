@@ -1,7 +1,5 @@
 "use strict";
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function get_random(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
@@ -219,7 +217,7 @@ var getRandomInt = function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 };
 
-var qmathformulas = _defineProperty({
+var qmathformulas = {
   "sum_simple": {
     "form": "y = sd_1 + sd_2 ",
     "replace": ["sd_1", "sd_2"],
@@ -240,15 +238,15 @@ var qmathformulas = _defineProperty({
     "replace": ["sd_1", "sd_2"],
     "calculates": ['y'],
     "ans_constraint": ".2"
+  },
+  "sum_apples": {
+    "form": "y = sd_1 + sd_2 ",
+    "replace": ["sd_1", "sd_2"],
+    "calculates": ['y'],
+    "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"
   }
-}, "sum_simple", {
-  "form": "y = sd_1 + sd_2 ",
-  "replace": ["sd_1", "sd_2"],
-  "calculates": ['y'],
-  "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"
-});
-
-var qmathenabled = ["mult_simple", "div_simple"];
+};
+var qmathenabled = ["div_simple", "sum_apples"];
 
 var countDecimals = function countDecimals(value) {
   if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;

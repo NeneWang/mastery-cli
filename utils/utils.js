@@ -257,7 +257,7 @@ class Maid {
 
 		}
 		else if (serviceSelected == choices[CHOICE_CREATE_CREDENTIAL].value) {
-			
+
 
 			const question = [
 				{
@@ -280,7 +280,7 @@ class Maid {
 			let answers = await prompt(question)
 
 
-			const dataToPost = {"name": answers.name, "password": answers.password, "account_user": answers.account_user};
+			const dataToPost = { "name": answers.name, "password": answers.password, "account_user": answers.account_user };
 
 			const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/services`, dataToPost);
 			const response_data = res.data;
@@ -415,11 +415,16 @@ class MathQuizer {
 	 * OUT:
 	 * - {  question_prompt (with replace replaced with numbers) , expectedAnswer}
 	 */
-	compile_question(form, replace, calculates = ['y']) {
+	compile_question(question) {
+		const form = question?.form;
+		const replace = question?.replace;
+		const calculates = question?.calculates;
+		const human_form = question.human ? question.human : "";
+
+
 		const variables = this.populateVariables(replace);
 		var parser = new Parser();
-		const question = this.replaceStringVariables(form, variables);
-		const humanQuestion = this.getHumanQuestion(question, calculates);
+		const humanQuestion = this.getHumanQuestion(form, variables, calculates, human_form);
 		parser.evaluate(form, variables);
 
 
@@ -434,9 +439,21 @@ class MathQuizer {
 		return formString;
 	}
 
-	getHumanQuestion(simpleQuestion, solveFor) {
-		const variablesToSolveFor = solveFor.join(" ")
-		return `solve for ${variablesToSolveFor}, using ${simpleQuestion}`
+	getHumanQuestion(form, variables, solveFor, human_form = "") {
+		let question_message = ""
+		if (human_form != "") {
+			question_message = this.replaceStringVariables(human_form, variables);
+
+
+		} else {
+
+			const question = this.replaceStringVariables(form, variables);
+			const variablesToSolveFor = solveFor.join(" ");
+			question_message = `solve for ${variablesToSolveFor}, using ${question}`;
+		}
+
+		return question_message;
+
 	}
 
 	/**
@@ -448,7 +465,7 @@ class MathQuizer {
 		const ans_constraint = question_form.ans_constraint;
 		let question_prompt = {};
 		if (ans_constraint == undefined) {
-			question_prompt = this.compile_question(question_form.form, question_form.replace, question_form.calculate);
+			question_prompt = this.compile_question(question_form);
 		} else {
 			question_prompt = this.compile_valid_question(question_form, ans_constraint);
 		}
@@ -475,7 +492,7 @@ class MathQuizer {
 
 		}
 
-		console.log("expected Answer:", question_prompt.expectedAnswer, ", from expression:", question_prompt.question_prompt);
+		console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt);
 
 		return answerIsCorrect;
 
@@ -498,7 +515,7 @@ class MathQuizer {
 		let foundProper = false;
 		let questionPrompt = {};
 		while (!foundProper) {
-			questionPrompt = this.compile_question(question_form.form, question_form.replace, question_form.calculate);
+			questionPrompt = this.compile_question(question);
 			const expectedAnswer = questionPrompt.expectedAnswer;
 			const decimalCounts = countDecimals(expectedAnswer);
 
