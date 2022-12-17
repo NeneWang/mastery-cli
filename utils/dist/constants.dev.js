@@ -188,7 +188,8 @@ var APIDICT = {
   // DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
   CURRENCY_EXCHANGE: 'https://api.apilayer.com/exchangerates_data',
   CURRENCY_EXCHANGE_KEY: '3zPc7CzmznmueYsu3SttUWIE2QZ3ODYd'
-};
+}; // APIDICT.DEPLOYED_MAID = 'https://jmmgskxdgn.us-east-1.awsapprunner.com'
+
 var CONSTANTS = {
   ACCOUNT_ID: 1
 }; // https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}

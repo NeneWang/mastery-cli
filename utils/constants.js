@@ -193,6 +193,8 @@ let APIDICT = {
 
 }
 
+// APIDICT.DEPLOYED_MAID = 'https://jmmgskxdgn.us-east-1.awsapprunner.com'
+
 const CONSTANTS = {
     ACCOUNT_ID: 1,
 }

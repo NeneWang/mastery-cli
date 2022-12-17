@@ -193,10 +193,11 @@ class Maid {
 			'get_credential',
 			'forecast_costs',
 			'usd_to_ars',
-			'currency_exchange'
+			'currency_exchange',
+			'create_credential',
 		]
 
-		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1, CHOICE_USD_TO_ARS = 2, CHOICE_CURRENCY_EXCHANGE = 3;
+		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1, CHOICE_USD_TO_ARS = 2, CHOICE_CURRENCY_EXCHANGE = 3, CHOICE_CREATE_CREDENTIAL = 4;
 
 		const multiselect = new AutoComplete({
 			name: 'ServiceOption',
@@ -255,9 +256,41 @@ class Maid {
 			this.createConversion(fromCurrencySelected, toCurrencySelected);
 
 		}
+		else if (serviceSelected == choices[CHOICE_CREATE_CREDENTIAL].value) {
+			
+
+			const question = [
+				{
+					type: 'input',
+					name: 'name',
+					message: 'Service name?'
+				},
+				{
+					type: 'password',
+					name: 'password',
+					message: 'password?'
+				},
+				{
+					type: 'input',
+					name: 'account_user',
+					message: 'account user?'
+				}
+			]
+
+			let answers = await prompt(question)
+
+
+			const dataToPost = {"name": answers.name, "password": answers.password, "account_user": answers.account_user};
+
+			const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/services`, dataToPost);
+			const response_data = res.data;
+			response_data.password = "*********************";
+			// this.say(response_data);
+			console.log("created service", response_data);
+		}
 		else {
-			console.log(choices[CHOICE_CREDENTIAL])
-			console.log(serviceSelected)
+			console.log(choices[CHOICE_CREDENTIAL]);
+			console.log(serviceSelected);
 		}
 
 
@@ -631,7 +664,7 @@ let ECommitCategory = {
 
 const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
 
-	
+
 
 	let commitMessage = process.argv[3];
 	console.log(commitMessage)
