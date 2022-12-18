@@ -515,7 +515,7 @@ class MathQuizer {
 		let foundProper = false;
 		let questionPrompt = {};
 		while (!foundProper) {
-			questionPrompt = this.compile_question(question);
+			questionPrompt = this.compile_question(question_form);
 			const expectedAnswer = questionPrompt.expectedAnswer;
 			const decimalCounts = countDecimals(expectedAnswer);
 
