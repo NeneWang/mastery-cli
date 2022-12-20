@@ -26,7 +26,7 @@
 	},
 	"dependencies": {
 		"@wangnene2/chart": "^1.0.13",
-		"axios": "^1.2.0",
+		"axios": "^1.2.1",
 		"chalk": "^4.1.2",
 		"cli-alerts": "^1.2.2",
 		"cli-handle-error": "^4.4.0",
@@ -38,8 +38,10 @@
 		"enquirer": "^2.3.6",
 		"execa": "^6.1.0",
 		"expr-eval": "^2.0.2",
+		"express": "^4.18.2",
 		"joke": "^0.0.1-1",
-		"meow": "^9.0.0"
+		"meow": "^9.0.0",
+		"play-sound": "^1.1.5"
 	},
 	"devDependencies": {
 		"prettier": "^2.8.0"

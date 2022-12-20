@@ -195,9 +195,10 @@ class Maid {
 			'usd_to_ars',
 			'currency_exchange',
 			'create_credential',
+			'swap_double_single_quotes'
 		]
 
-		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1, CHOICE_USD_TO_ARS = 2, CHOICE_CURRENCY_EXCHANGE = 3, CHOICE_CREATE_CREDENTIAL = 4;
+		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1, CHOICE_USD_TO_ARS = 2, CHOICE_CURRENCY_EXCHANGE = 3, CHOICE_CREATE_CREDENTIAL = 4, CHOICE_SWAP_QUOTES = 5;
 
 		const multiselect = new AutoComplete({
 			name: 'ServiceOption',
@@ -288,12 +289,21 @@ class Maid {
 			// this.say(response_data);
 			console.log("created service", response_data);
 		}
+		else if(serviceSelected == choices[CHOICE_SWAP_QUOTES].value){
+			let input = await Input({
+				name: choices[CHOICE_SWAP_QUOTES].value,
+				message: "Enter string to convert"
+			});
+			input.replaceAll("'", "$_'")
+			input.replaceAll("\"", "$_\"")
+			input.replaceAll("$_\"", "'")
+			input.replaceAll("$_'", "\"")
+
+		}
 		else {
 			console.log(choices[CHOICE_CREDENTIAL]);
 			console.log(serviceSelected);
 		}
-
-
 
 
 	}
