@@ -253,7 +253,7 @@ var qmathformulas = {
     "ans_constraint": ".2"
   }
 };
-var qmathenabled = ["div_simple", "precedence"];
+var qmathenabled = ["div_simple", "precedence", "sum_apples"];
 
 var countDecimals = function countDecimals(value) {
   if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;
