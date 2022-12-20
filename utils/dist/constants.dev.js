@@ -255,7 +255,7 @@ var qmathformulas = {
     F_ANS_CONTSTRAINT: ".1"
   }
 };
-var qmathenabled = ["div_simple", "precedence"];
+var qmathenabled = ["div_simple"];
 
 var countDecimals = function countDecimals(value) {
   if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;

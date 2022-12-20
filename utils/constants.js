@@ -241,7 +241,7 @@ const qmathformulas = {
 
 }
 
-const qmathenabled = ["div_simple", "precedence"]
+const qmathenabled = ["div_simple"]
 
 
 const countDecimals = (value) => {
