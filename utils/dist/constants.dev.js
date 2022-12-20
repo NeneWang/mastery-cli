@@ -215,9 +215,9 @@ var formatObjectFeatures = function formatObjectFeatures(userPerformanceData) {
 
 var getRandomInt = function getRandomInt(max) {
   return Math.floor(Math.random() * max);
-};
+}; // const ANS_CONTSTRAING =
 
-var F_ANS_CONTSTRAINT = "ans_constraint";
+
 var qmathformulas = {
   "sum_simple": {
     "form": "y = sd_1 + sd_2 ",
@@ -238,24 +238,23 @@ var qmathformulas = {
     "form": "y = sd_1 / sd_2 ",
     "replace": ["sd_1", "sd_2"],
     "calculates": ['y'],
-    F_ANS_CONTSTRAINT: ".2"
+    "ans_constraint": ".2"
   },
   "sum_apples": {
     "form": "y = sd_1 + sd_2 ",
     "replace": ["sd_1", "sd_2"],
     "calculates": ['y'],
-    "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?",
-    F_ANS_CONTSTRAINT: ".0"
+    "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"
   },
   // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "human": "It goes sppeed "},
   "precedence": {
     "form": "y=sd_2/sd_3*sd_4+3*sd_5+sd_1%1/2",
     "replace": ["sd_1", "sd_2", "sd_3", "sd_4", "sd_5"],
     "calculates": ["y"],
-    F_ANS_CONTSTRAINT: ".1"
+    "ans_constraint": ".0"
   }
 };
-var qmathenabled = ["div_simple"];
+var qmathenabled = ["div_simple", "precedence"];
 
 var countDecimals = function countDecimals(value) {
   if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;
