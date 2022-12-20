@@ -252,7 +252,7 @@ var qmathformulas = {
     "form": "y=sd_2/sd_3*sd_4+3*sd_5+sd_1%1/2",
     "replace": ["sd_1", "sd_2", "sd_3", "sd_4", "sd_5"],
     "calculates": ["y"],
-    F_ANS_CONTSTRAINT: ".2"
+    F_ANS_CONTSTRAINT: ".0"
   }
 };
 var qmathenabled = ["div_simple", "precedence"];
