@@ -61,7 +61,7 @@ const { Demo, EDemo } = demos;
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
 		utils.commitpush();
-		mQuizer.ask_question();
+		const _ = await mQuizer.ask_question();
 		maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {
