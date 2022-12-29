@@ -480,7 +480,7 @@ class MathQuizer {
 
 
 
-		return { "question_prompt": humanQuestion, "expectedAnswer": variables.y };
+		return { "question_prompt": humanQuestion, "expectedAnswer": variables.y, "formula expected:": question?.form };
 	};
 
 	replaceStringVariables(formString, variables) {
