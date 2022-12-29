@@ -288,7 +288,7 @@ const qmathformulas = {
 
 }
 
-let qmathenabled = ["div_simple", "precedence"];
+let qmathenabled = ["div_simple", "precedence", "neg_subs"];
 const bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
 
 qmathenabled = qmathenabled.concat(bus_marketing);

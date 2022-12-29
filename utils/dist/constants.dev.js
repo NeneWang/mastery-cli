@@ -314,7 +314,7 @@ var qmathformulas = {
     "human": "Calculate customer retention rate: \nCustomers at the beginning of the year: ".concat(dtypes.d_3, "\n adquires ").concat(dtypes.md_2, " this year\n and at the end of the year has ").concat(dtypes.d_1, " customers\n")
   }
 };
-var qmathenabled = ["div_simple", "precedence"];
+var qmathenabled = ["div_simple", "precedence", "neg_subs"];
 var bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
 qmathenabled = qmathenabled.concat(bus_marketing);
 qmathenabled = bus_marketing;
