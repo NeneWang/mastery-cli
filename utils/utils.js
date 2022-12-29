@@ -119,7 +119,7 @@ class Maid {
 
 	// Prompts y/n question to clean, if y, cleans.
 	askToClean = async () => {
-		this.say("Would you like me to clean up the terminal?")
+		this.say("Would you like me to clean up the terminal?", false)
 
 		// const response = question('clean', 'y/n', { type: 'confirm' });
 		const cleanPrompt = new Confirm("Clean");
