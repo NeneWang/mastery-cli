@@ -220,33 +220,60 @@ var getRandomInt = function getRandomInt(max) {
 
 
 var dtypes = {
-  SD_1: 'sd_1',
-  SD_2: 'sd_2',
-  SD_3: 'sd_3',
-  SD_4: 'sd_4',
-  SD_5: 'sd_5',
-  SD_6: 'sd_6',
+  // 2-20
+  sd_1: 'sd_1',
+  sd_2: 'sd_2',
+  sd_3: 'sd_3',
+  sd_4: 'sd_4',
+  sd_5: 'sd_5',
+  sd_6: 'sd_6',
+  // 2-50
+  md_1: 'md_1',
+  md_2: 'md_2',
+  md_3: 'md_3',
+  md_4: 'md_4',
+  md_5: 'md_5',
+  md_6: 'md_6',
+  // 2-100
+  d_1: 'd_1',
+  d_2: 'd_2',
+  d_3: 'd_3',
+  d_4: 'd_4',
+  d_5: 'd_5',
+  d_6: 'd_6',
+  // 100-1000
+  ld_1: 'ld_1',
+  ld_2: 'ld_2',
+  ld_3: 'ld_3',
+  ld_4: 'ld_4',
+  ld_5: 'ld_5',
+  ld_6: 'ld_6',
   Y: "y"
 };
 var qmathformulas = {
   "sum_simple": {
     "form": "y = sd_1 + sd_2 ",
-    "replace": [dtypes.SD_1, dtypes.SD_2],
+    "replace": [dtypes.sd_1, dtypes.sd_2],
+    "calculates": ['y']
+  },
+  "neg_subs": {
+    "form": "y = sd_1 - md_2 ",
+    "replace": [dtypes.sd_1, dtypes.md_2],
     "calculates": ['y']
   },
   "sub_simple": {
     "form": "y = sd_1 - sd_2 ",
-    "replace": [dtypes.SD_1, dtypes.SD_2],
+    "replace": [dtypes.sd_1, dtypes.sd_2],
     "calculates": ['y']
   },
   "mult_simple": {
     "form": "y = sd_1 * sd_2",
-    "replace": [dtypes.SD_1, dtypes.SD_2],
+    "replace": [dtypes.sd_1, dtypes.sd_2],
     "calculates": ['y']
   },
   "div_simple": {
     "form": "y = sd_1 / sd_2 ",
-    "replace": [dtypes.SD_1, dtypes.SD_2],
+    "replace": [dtypes.sd_1, dtypes.sd_2],
     "calculates": ['y'],
     "ans_constraint": ".2"
   },
@@ -254,20 +281,43 @@ var qmathformulas = {
   // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": [dtypes.SD_1, dtypes.SD_2], "calculates": ['y'], "human": "It goes sppeed "},
   "precedence": {
     "form": "y=sd_2/sd_3*sd_4+3*sd_5+sd_1%1/2",
-    "replace": [dtypes.SD_1, dtypes.SD_2, "sd_3", "sd_4", "sd_5"],
+    "replace": [dtypes.sd_1, dtypes.sd_2, "sd_3", "sd_4", "sd_5"],
     "calculates": ["y"],
     "ans_constraint": ".0"
   },
   "bus-conversion-rate": {
-    "form": "".concat(dtypes.Y, " = ").concat(dtypes.SD_1, " / ").concat(dtypes.SD_2, " * 100"),
-    "replace": [dtypes.SD_1, dtypes.SD_2],
+    "form": "".concat(dtypes.Y, " = ").concat(dtypes.sd_1, " / ").concat(dtypes.sd_2, " * 100"),
+    "replace": [dtypes.sd_1, dtypes.sd_2],
     "calculates": ["y"],
-    "ans_constraint": ".0"
+    "ans_constraint": ".0",
+    "human": "Calculate conversion rate (in percentage): \nnumber of conversions: ".concat(dtypes.sd_1, "\n number of visitors : ").concat(dtypes.sd_2, "\n")
+  },
+  "bus-clv": {
+    "form": "".concat(dtypes.Y, " = ").concat(dtypes.sd_1, " * ").concat(dtypes.sd_2, " * ").concat(dtypes.sd_3),
+    "replace": [dtypes.sd_1, dtypes.sd_2, dtypes.sd_3],
+    "calculates": ["y"],
+    "ans_constraint": ".0",
+    "human": "Calculate Customer Lifetime Value (CLV): \nAverage purchase value: ".concat(dtypes.sd_1, "\n number of purchases per year: ").concat(dtypes.sd_2, "\n Naverage customer lifespan: ").concat(dtypes.sd_3, "\n")
+  },
+  "bus-roi": {
+    "form": "".concat(dtypes.Y, " = (").concat(dtypes.ld_1, " - ").concat(dtypes.ld_2, ")/ ").concat(dtypes.ld_2),
+    "replace": [dtypes.ld_1, dtypes.ld_2],
+    "calculates": ["y"],
+    "ans_constraint": ".0",
+    "human": "Calculate ROI (Return of Investment): \nnGain from Investments: ".concat(dtypes.ld_1, "\n Cost of Investment: ").concat(dtypes.ld_2, "\n")
+  },
+  "bus-retention": {
+    "form": "".concat(dtypes.Y, " = (").concat(dtypes.d_1, " - ").concat(dtypes.md_2, ") / ").concat(dtypes.d_3),
+    "replace": [dtypes.d_1, dtypes.md_2, dtypes.d_3],
+    "calculates": ["y"],
+    "ans_constraint": ".1",
+    "human": "Calculate customer retention rate: \nCustomers at the beginning of the year: ".concat(dtypes.d_3, "\n adquires ").concat(dtypes.md_2, " this year\n and at the end of the year has ").concat(dtypes.d_1, " customers\n")
   }
 };
 var qmathenabled = ["div_simple", "precedence"];
-var bus_marketing = ["bus-conversion-rate"];
-qmathenabled.concat(bus_marketing);
+var bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
+qmathenabled = qmathenabled.concat(bus_marketing);
+qmathenabled = bus_marketing;
 
 var countDecimals = function countDecimals(value) {
   if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;

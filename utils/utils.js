@@ -442,12 +442,19 @@ class MathQuizer {
 
 	getRandomFromType(type) {
 		const ETypes = {};
+		let ATLEAST = 2;
 		// console.log("getRandom from type called", constants.getRandomInt(100), "using type:", type, type=="d");
 		if (type == "d") {
-			return constants.getRandomInt(99) + 1;
+			return constants.getRandomInt(100 - ATLEAST) + ATLEAST;
 		} else if (type == "sd") {
-
-			return constants.getRandomInt(19) + 1;
+			return constants.getRandomInt(20 - ATLEAST) + ATLEAST;
+		}
+		else if (type == "md") {
+			return constants.getRandomInt(50 - ATLEAST) + ATLEAST;
+		}
+		else if (type == "ld") {
+			ATLEAST = 100;
+			return constants.getRandomInt(1000 - ATLEAST) + ATLEAST;
 		}
 	}
 
@@ -505,40 +512,45 @@ class MathQuizer {
 	 */
 	async ask_question() {
 		const question_form = this.pick_question();
-
-		const ans_constraint = question_form.ans_constraint;
-		let question_prompt = {};
-		if (ans_constraint == undefined) {
-			question_prompt = this.compile_question(question_form);
-		} else {
-			question_prompt = this.compile_valid_question(question_form, ans_constraint);
-		}
-
-		const quiz_allow_reattempts = 3;
-		let answerIsCorrect = false;
-
-		for (let i = 0; i < quiz_allow_reattempts; i++) {
-			// console.log(question_prompt.humanQuestion);
-
-			const question = new Input({
-				name: 'ServiceOption' + i,
-				message: `${question_prompt.question_prompt} attempt: ${i}`,
-			})
-
-			const res = await question.run()
-
-			if (res == question_prompt.expectedAnswer) {
-				answerIsCorrect = true;
-				const _ = await increasePerformance("math_ss");
-				console.log("correct!")
-				break;
+		try {
+			const ans_constraint = question_form.ans_constraint;
+			let question_prompt = {};
+			if (ans_constraint == undefined) {
+				question_prompt = this.compile_question(question_form);
+			} else {
+				question_prompt = this.compile_valid_question(question_form, ans_constraint);
 			}
 
+			const quiz_allow_reattempts = 3;
+			let answerIsCorrect = false;
+
+			for (let i = 0; i < quiz_allow_reattempts; i++) {
+				// console.log(question_prompt.humanQuestion);
+
+				const question = new Input({
+					name: 'ServiceOption' + i,
+					message: `${question_prompt.question_prompt} attempt: ${i}`,
+				})
+
+				const res = await question.run()
+
+				if (res == question_prompt.expectedAnswer) {
+					answerIsCorrect = true;
+					const _ = await increasePerformance("math_ss");
+					console.log("correct!")
+					break;
+				}
+
+			}
+
+			console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt);
+
+			return answerIsCorrect;
+		} catch (err) {
+			console.warn(err, "With question: ", question_form);
+			return false;
 		}
-
-		console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt);
-
-		return answerIsCorrect;
+		return false;
 
 
 	};
