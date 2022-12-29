@@ -75,9 +75,13 @@ const { Demo, EDemo } = demos;
 		maid.say("Auto updating sir!")
 		utils.autorelease()
 	}
-	else if (input.includes("math")){
-		
+	else if (input.includes(cmInfo.commands.math.code)){
 		mQuizer.ask_question();
+	}else if(input.includes(cmInfo.commands.clean.code)){
+		maid.askToClean();
+	}
+	else{
+
 	}
 
 })();

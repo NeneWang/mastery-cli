@@ -113,13 +113,22 @@ class Maid {
 	/**
 	 * Cleans the terminal
 	 */
-	cleanTerminal(){
+	cleanTerminal = () => {
 		console.clear();
 	}
 
 	// Prompts y/n question to clean, if y, cleans.
-	askToClean(){
-		this.cleanTerminal();
+	askToClean = async () => {
+		this.say("Would you like me to clean up the terminal?")
+
+		// const response = question('clean', 'y/n', { type: 'confirm' });
+		const cleanPrompt = new Confirm("Clean");
+		const response = await cleanPrompt.run();
+		console.log(response)
+		if (response) {
+			this.cleanTerminal();
+		}
+
 	}
 
 	dayReport = async () => {

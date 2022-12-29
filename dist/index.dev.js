@@ -119,9 +119,11 @@ var Demo = demos.Demo,
           } else if (input.includes(cmInfo.commands.update.code)) {
             maid.say("Auto updating sir!");
             utils.autorelease();
-          } else if (input.includes("math")) {
+          } else if (input.includes(cmInfo.commands.math.code)) {
             mQuizer.ask_question();
-          }
+          } else if (input.includes(cmInfo.commands.clean.code)) {
+            maid.askToClean();
+          } else {}
 
         case 31:
         case "end":
