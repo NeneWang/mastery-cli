@@ -130,9 +130,17 @@ class Maid {
 		// console.log(responseData)
 
 		const dayFeaturesToExtract = populateLastDaysFeaturesBarCharts()
-
-		this.barChartFeatures(userPerformanceData, dayFeaturesToExtract, 2);
-		this.printUserPerformanceDataSummary(userPerformanceData);
+		try{
+			this.barChartFeatures(userPerformanceData, dayFeaturesToExtract, 2);
+		}
+		catch{
+			console.warn("Error while attempting to plot features bar charts");
+		}
+		try{
+			this.printUserPerformanceDataSummary(userPerformanceData);
+		}catch{
+			console.warn("Wrror while attempting to print performance summary");
+		}
 		console.log('\n')
 		// const { performances, username, days } = await res.data;
 	}

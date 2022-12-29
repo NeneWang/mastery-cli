@@ -240,12 +240,7 @@ var qmathformulas = {
     "calculates": ['y'],
     "ans_constraint": ".2"
   },
-  "sum_apples": {
-    "form": "y = sd_1 + sd_2 ",
-    "replace": ["sd_1", "sd_2"],
-    "calculates": ['y'],
-    "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"
-  },
+  // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"},
   // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "human": "It goes sppeed "},
   "precedence": {
     "form": "y=sd_2/sd_3*sd_4+3*sd_5+sd_1%1/2",
