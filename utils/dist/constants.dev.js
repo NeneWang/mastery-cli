@@ -216,37 +216,51 @@ var formatObjectFeatures = function formatObjectFeatures(userPerformanceData) {
 var getRandomInt = function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }; // const ANS_CONTSTRAING =
+// dtypes allowed
 
 
+var dtypes = {
+  SD_1: 'sd_1',
+  SD_2: 'sd_2',
+  SD_3: 'sd_3',
+  SD_4: 'sd_4',
+  SD_5: 'sd_5',
+  SD_6: 'sd_6',
+  Y: "y"
+};
 var qmathformulas = {
   "sum_simple": {
     "form": "y = sd_1 + sd_2 ",
-    "replace": ["sd_1", "sd_2"],
+    "replace": [dtypes.SD_1, dtypes.SD_2],
     "calculates": ['y']
   },
   "sub_simple": {
     "form": "y = sd_1 - sd_2 ",
-    "replace": ["sd_1", "sd_2"],
+    "replace": [dtypes.SD_1, dtypes.SD_2],
     "calculates": ['y']
   },
   "mult_simple": {
     "form": "y = sd_1 * sd_2",
-    "replace": ["sd_1", "sd_2"],
+    "replace": [dtypes.SD_1, dtypes.SD_2],
     "calculates": ['y']
   },
   "div_simple": {
     "form": "y = sd_1 / sd_2 ",
-    "replace": ["sd_1", "sd_2"],
+    "replace": [dtypes.SD_1, dtypes.SD_2],
     "calculates": ['y'],
     "ans_constraint": ".2"
   },
-  // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"},
-  // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "human": "It goes sppeed "},
+  // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": [dtypes.SD_1, dtypes.SD_2], "calculates": ['y'], "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"},
+  // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": [dtypes.SD_1, dtypes.SD_2], "calculates": ['y'], "human": "It goes sppeed "},
   "precedence": {
     "form": "y=sd_2/sd_3*sd_4+3*sd_5+sd_1%1/2",
-    "replace": ["sd_1", "sd_2", "sd_3", "sd_4", "sd_5"],
+    "replace": [dtypes.SD_1, dtypes.SD_2, "sd_3", "sd_4", "sd_5"],
     "calculates": ["y"],
     "ans_constraint": ".0"
+  },
+  "bus-conversion-rate": {
+    "form": "y = sd_1 / sd_2 * 100",
+    "replace": [dtypes.SD_1, dtypes.SD_2]
   }
 };
 var qmathenabled = ["div_simple", "precedence"];
