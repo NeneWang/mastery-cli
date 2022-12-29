@@ -479,8 +479,8 @@ class MathQuizer {
 		parser.evaluate(form, variables);
 
 
-
-		return { "question_prompt": humanQuestion, "expectedAnswer": variables.y, "formula expected:": question?.form };
+		// console.log("question.form", question.form);
+		return { "question_prompt": humanQuestion, "expectedAnswer": variables.y, "form:": question.form };
 	};
 
 	replaceStringVariables(formString, variables) {
@@ -517,8 +517,10 @@ class MathQuizer {
 			let question_prompt = {};
 			if (ans_constraint == undefined) {
 				question_prompt = this.compile_question(question_form);
+				// console.log("ask question question_prompt", question_prompt);
 			} else {
 				question_prompt = this.compile_valid_question(question_form, ans_constraint);
+				// console.log("ask question else", question_prompt);
 			}
 
 			const quiz_allow_reattempts = 3;
@@ -543,7 +545,7 @@ class MathQuizer {
 
 			}
 
-			console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt);
+			console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt, ", \n Formula:", question_prompt.form);
 
 			return answerIsCorrect;
 		} catch (err) {
@@ -586,7 +588,7 @@ class MathQuizer {
 				// console.log(`${expectedAnswer} is not proper, retrying...`);
 			}
 		}
-
+		questionPrompt.form = question_form.form;
 		return questionPrompt;
 
 
