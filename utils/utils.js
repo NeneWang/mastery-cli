@@ -710,8 +710,8 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
 
 	// If any category found then increase the score please.
 	commitCat = commitCategory(commitMessage);
+	let _ = await increasePerformance("commits");
 	if (commitCat?.code) {
-		let _ = await increasePerformance("commits");
 		_ = await increasePerformance(commitCat.code);
 		if (addCommitEmoji) commitMessage = commitMessage + " " + commitCat.randomIcon();
 	}
