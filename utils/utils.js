@@ -110,6 +110,18 @@ class Maid {
 		console.log(`${this.getMaidHeader()} ${chalk(message)}`);
 	}
 
+	/**
+	 * Cleans the terminal
+	 */
+	cleanTerminal(){
+		console.clear();
+	}
+
+	// Prompts y/n question to clean, if y, cleans.
+	askToClean(){
+		this.cleanTerminal();
+	}
+
 	dayReport = async () => {
 		const todaydate = getToday()
 

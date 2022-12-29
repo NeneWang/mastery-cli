@@ -97,6 +97,7 @@ var Demo = demos.Demo,
           if (input.includes(cmInfo.commands.coa.code)) {
             utils.commitpush();
             mQuizer.ask_question();
+            maid.askToClean();
           } else if (input.includes(cmInfo.commands.services.code)) {
             // Gets all services, keeps asking for things here, which service to get
             maid.services();
