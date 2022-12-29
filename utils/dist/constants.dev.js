@@ -259,11 +259,15 @@ var qmathformulas = {
     "ans_constraint": ".0"
   },
   "bus-conversion-rate": {
-    "form": "y = sd_1 / sd_2 * 100",
-    "replace": [dtypes.SD_1, dtypes.SD_2]
+    "form": "".concat(dtypes.Y, " = ").concat(dtypes.SD_1, " / ").concat(dtypes.SD_2, " * 100"),
+    "replace": [dtypes.SD_1, dtypes.SD_2],
+    "calculates": ["y"],
+    "ans_constraint": ".0"
   }
 };
 var qmathenabled = ["div_simple", "precedence"];
+var bus_marketing = ["bus-conversion-rate"];
+qmathenabled.concat(bus_marketing);
 
 var countDecimals = function countDecimals(value) {
   if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;

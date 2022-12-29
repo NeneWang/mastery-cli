@@ -250,11 +250,14 @@ const qmathformulas = {
     // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": [dtypes.SD_1, dtypes.SD_2], "calculates": ['y'], "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"},
     // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": [dtypes.SD_1, dtypes.SD_2], "calculates": ['y'], "human": "It goes sppeed "},
     "precedence": { "form": "y=sd_2/sd_3*sd_4+3*sd_5+sd_1%1/2", "replace": [dtypes.SD_1, dtypes.SD_2, "sd_3", "sd_4", "sd_5"], "calculates": ["y"], "ans_constraint": ".0" },
-    "bus-conversion-rate": {"form": "y = sd_1 / sd_2 * 100", "replace": [dtypes.SD_1, dtypes.SD_2]}
+    "bus-conversion-rate": {"form": `${dtypes.Y} = ${dtypes.SD_1} / ${dtypes.SD_2} * 100`, "replace": [dtypes.SD_1, dtypes.SD_2], "calculates": ["y"], "ans_constraint": ".0"}
 
 }
 
-const qmathenabled = ["div_simple", "precedence"]
+let qmathenabled = ["div_simple", "precedence"];
+const bus_marketing = ["bus-conversion-rate"];
+
+qmathenabled.concat(bus_marketing);
 
 
 const countDecimals = (value) => {
