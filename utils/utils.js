@@ -130,15 +130,18 @@ class Maid {
 		// console.log(responseData)
 
 		const dayFeaturesToExtract = populateLastDaysFeaturesBarCharts()
-		try{
+		try {
 			this.barChartFeatures(userPerformanceData, dayFeaturesToExtract, 2);
 		}
-		catch{
+		catch {
 			console.warn("Error while attempting to plot features bar charts");
+			try {
+				console.warn("Using day features: ", userPerformanceData)
+			} catch { }
 		}
-		try{
+		try {
 			this.printUserPerformanceDataSummary(userPerformanceData);
-		}catch{
+		} catch {
 			console.warn("Wrror while attempting to print performance summary");
 		}
 		console.log('\n')
@@ -177,14 +180,16 @@ class Maid {
 		// const LASTXCHARS = 5;
 		let bars = features.map((feature) => {
 			// Attempt getting that from data or return a 0 as the bar information.
-			const feat_value = data[feature.feature_name] ? data[feature.feature_name][feature.feature_key] : 0;
+			const feat_value = data.hasOwnProperty(feature.feature_name) ? data[feature.feature_name][feature.feature_key] : 0;
 			const feat_name_len = feature.feature_name.length;
 			const lastCharacters = lasts > feat_name_len ? 0 : feat_name_len - lasts;
 			const feat_name = lasts > 0 ? feature.feature_name.substring(lastCharacters) : feature.feature_name
-			const bar = { key: feat_name, value: feat_value, style: feature.style }
+			const bar = { key: feat_name, value: feat_value != undefined ? feat_value : 0, style: feature.style }
 			return bar;
 
 		})
+		// KEEP for debugging. It will throw error if any of the values are undefined
+		// console.log("bars used:", bars)
 
 
 		console.log(bar(bars))
@@ -297,7 +302,7 @@ class Maid {
 			// this.say(response_data);
 			console.log("created service", response_data);
 		}
-		else if(serviceSelected == choices[CHOICE_SWAP_QUOTES].value){
+		else if (serviceSelected == choices[CHOICE_SWAP_QUOTES].value) {
 			let input = await Input({
 				name: choices[CHOICE_SWAP_QUOTES].value,
 				message: "Enter string to convert"
