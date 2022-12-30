@@ -312,12 +312,44 @@ var qmathformulas = {
     "calculates": ["y"],
     "ans_constraint": ".1",
     "human": "Calculate customer retention rate: \nCustomers at the beginning of the year: ".concat(dtypes.d_3, "\n adquires ").concat(dtypes.md_2, " this year\n and at the end of the year has ").concat(dtypes.d_1, " customers\n")
+  },
+  "stats-variance": {
+    "form": "y = ((sd_1 - (sd_1 + 15) / 2)^2 + (15 - (sd_1 + 15) / 2)^2) / 2",
+    "replace": [dtypes.sd_1],
+    "calculates": ["y"],
+    "ans_constraint": ".3",
+    "human": "Calculate the variance of [ sd_1, 15 ]"
+  },
+  "stats-std": {
+    "form": "y = sqrt(".concat(dtypes.d_1, ")"),
+    "replace": [dtypes.d_1],
+    "calculates": ["y"],
+    "ans_constraint": ".1",
+    "human": "Provided that the variance is ".concat(dtypes.d_1, ", calculate the standard deviation")
+  },
+  "stats-chose": {
+    "form": "y = (".concat(dtypes.sd_1, "/(").concat(dtypes.sd_1, " + ").concat(dtypes.d_2, "))*100"),
+    "replace": [dtypes.sd_1, dtypes.d_2],
+    "calculates": ["y"],
+    "ans_constraint": ".1",
+    "human": "A bag contains ".concat(dtypes.sd_1, " red marbles and ").concat(dtypes.d_2, " blue marbles. If you choose a marble at random, what is the probability that it will be red? (percentage %)")
+  },
+  "stats-select-consecutive": {
+    "form": "y = (".concat(dtypes.sd_1, "/(").concat(dtypes.sd_1, " + ").concat(dtypes.d_2, ") * (").concat(dtypes.sd_1, "- 1)/(").concat(dtypes.sd_1, " + ").concat(dtypes.d_2, " - 1))"),
+    "replace": [dtypes.sd_1, dtypes.d_2],
+    "calculates": ["y"],
+    "ans_constraint": ".2",
+    "human": "A bag contains ".concat(dtypes.sd_1, " red marbles and ").concat(dtypes.d_2, " blue marbles. . If you draw two balls at random without replacement, what is the probability that both will be red?")
   }
-};
+}; // (sd_1 + 20) / 3
+
 var qmathenabled = ["div_simple", "precedence", "neg_subs"];
 var bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
+var stats = ["stats-variance", "stats-std", "stats-chose", "stats-select-consecutive"];
 qmathenabled = qmathenabled.concat(bus_marketing);
 qmathenabled = bus_marketing;
+qmathenabled = stats;
+qmathenabled = ["stats-select-consecutive"];
 
 var countDecimals = function countDecimals(value) {
   if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;
