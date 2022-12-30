@@ -295,17 +295,37 @@ const qmathformulas = {
 }
 
 // (sd_1 + 20) / 3
+const getQmathEnabled = (listOfProblemSets, debugLast=false, lasts=0) => {
+    let qmathEnabled = []
+    for (problemSet of listOfProblemSets) {
+        qmathEnabled = qmathEnabled.concat(problemSet)
+    }
 
-let qmathenabled = ["div_simple", "precedence", "neg_subs"];
+    // For debugging purposes
+    if(lasts > 0) return qmathEnabled.slice(-lasts)
+    if(debugLast) return [qmathEnabled.at(qmathEnabled.length-1)]
+    return qmathenabled;
+}
+
+
+let simple = ["div_simple", "precedence", "neg_subs"];
 const bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
 const stats = ["stats-variance", "stats-std", "stats-chose", "stats-select-consecutive"]
 
 
 
-qmathenabled = qmathenabled.concat(bus_marketing);
-qmathenabled = bus_marketing;
-qmathenabled = stats;
-qmathenabled = ["stats-select-consecutive"]
+const qmathenabled = getQmathEnabled([
+    simple,
+    bus_marketing,
+    stats
+], null, 3);
+
+
+
+// qmathenabled = qmathenabled.concat(bus_marketing);
+// qmathenabled = bus_marketing;
+// qmathenabled = stats;
+// qmathenabled = ["stats-select-consecutive"]
 
 const countDecimals = (value) => {
     if (Math.floor(value) !== value)

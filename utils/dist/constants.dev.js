@@ -343,13 +343,47 @@ var qmathformulas = {
   }
 }; // (sd_1 + 20) / 3
 
-var qmathenabled = ["div_simple", "precedence", "neg_subs"];
+var getQmathEnabled = function getQmathEnabled(listOfProblemSets) {
+  var debugLast = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var lasts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var qmathEnabled = [];
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = listOfProblemSets[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      problemSet = _step.value;
+      qmathEnabled = qmathEnabled.concat(problemSet);
+    } // For debugging purposes
+
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  if (lasts > 0) return qmathEnabled.slice(-lasts);
+  if (debugLast) return [qmathEnabled.at(qmathEnabled.length - 1)];
+  return qmathenabled;
+};
+
+var simple = ["div_simple", "precedence", "neg_subs"];
 var bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
 var stats = ["stats-variance", "stats-std", "stats-chose", "stats-select-consecutive"];
-qmathenabled = qmathenabled.concat(bus_marketing);
-qmathenabled = bus_marketing;
-qmathenabled = stats;
-qmathenabled = ["stats-select-consecutive"];
+var qmathenabled = getQmathEnabled([simple, bus_marketing, stats], null, 3); // qmathenabled = qmathenabled.concat(bus_marketing);
+// qmathenabled = bus_marketing;
+// qmathenabled = stats;
+// qmathenabled = ["stats-select-consecutive"]
 
 var countDecimals = function countDecimals(value) {
   if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;
