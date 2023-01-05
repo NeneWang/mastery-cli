@@ -407,7 +407,7 @@ class Maid {
 class MathQuizer {
 
 	constructor(qmathformulas, qmathenabled) {
-		this.enabledqmathformulas = qmathenabled.map(formula_name => qmathformulas[formula_name]);
+		this.enabledqmathformulas = qmathenabled.map(formula_name => {qmathformulas[formula_name].formula_name = formula_name; return qmathformulas[formula_name]});
 	}
 
 	/**
@@ -415,8 +415,28 @@ class MathQuizer {
 	 * OUT: 
 	 * - {form, replace}
 	 */
-	pick_question() {
-		return get_random(this.enabledqmathformulas);
+	pick_question  = async () => {
+		let potential_questions = this.enabledqmathformulas
+		try{			
+			
+			const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
+			const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, dataToPost);
+			const response_data = res.data;
+
+			console.log("response_data", response_data);
+			console.log("posts", potential_questions)
+			// filter potential question based on this list
+			// let potential_questions = potential_questions.filter(formula_name)
+
+
+			// return get_random(potential_questions);
+
+		}catch(e){
+			// Such as no internet connection
+			console.warn(e)
+		}
+
+		return get_random(potential_questions);
 	};
 
 
