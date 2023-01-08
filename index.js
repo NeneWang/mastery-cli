@@ -60,8 +60,9 @@ const { Demo, EDemo } = demos;
 
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
-		utils.commitpush()
-		mQuizer.ask_question();
+		utils.commitpush();
+		const _ = await mQuizer.ask_question();
+		maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {
 		// Gets all services, keeps asking for things here, which service to get
@@ -74,9 +75,13 @@ const { Demo, EDemo } = demos;
 		maid.say("Auto updating sir!")
 		utils.autorelease()
 	}
-	else if (input.includes("math")){
-		
+	else if (input.includes(cmInfo.commands.math.code)){
 		mQuizer.ask_question();
+	}else if(input.includes(cmInfo.commands.clean.code)){
+		maid.askToClean();
+	}
+	else{
+
 	}
 
 })();

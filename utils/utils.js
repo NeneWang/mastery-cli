@@ -110,6 +110,27 @@ class Maid {
 		console.log(`${this.getMaidHeader()} ${chalk(message)}`);
 	}
 
+	/**
+	 * Cleans the terminal
+	 */
+	cleanTerminal = () => {
+		console.clear();
+	}
+
+	// Prompts y/n question to clean, if y, cleans.
+	askToClean = async () => {
+		this.say("Would you like me to clean up the terminal?", false)
+
+		// const response = question('clean', 'y/n', { type: 'confirm' });
+		const cleanPrompt = new Confirm("Clean");
+		const response = await cleanPrompt.run();
+		console.log(response)
+		if (response) {
+			this.cleanTerminal();
+		}
+
+	}
+
 	dayReport = async () => {
 		const todaydate = getToday()
 
@@ -130,9 +151,20 @@ class Maid {
 		// console.log(responseData)
 
 		const dayFeaturesToExtract = populateLastDaysFeaturesBarCharts()
-
-		this.barChartFeatures(userPerformanceData, dayFeaturesToExtract, 2);
-		this.printUserPerformanceDataSummary(userPerformanceData);
+		try {
+			this.barChartFeatures(userPerformanceData, dayFeaturesToExtract, 2);
+		}
+		catch {
+			console.warn("Error while attempting to plot features bar charts");
+			try {
+				console.warn("Using day features: ", userPerformanceData)
+			} catch { }
+		}
+		try {
+			this.printUserPerformanceDataSummary(userPerformanceData);
+		} catch {
+			console.warn("Wrror while attempting to print performance summary");
+		}
 		console.log('\n')
 		// const { performances, username, days } = await res.data;
 	}
@@ -169,14 +201,16 @@ class Maid {
 		// const LASTXCHARS = 5;
 		let bars = features.map((feature) => {
 			// Attempt getting that from data or return a 0 as the bar information.
-			const feat_value = data[feature.feature_name] ? data[feature.feature_name][feature.feature_key] : 0;
+			const feat_value = data.hasOwnProperty(feature.feature_name) ? data[feature.feature_name][feature.feature_key] : 0;
 			const feat_name_len = feature.feature_name.length;
 			const lastCharacters = lasts > feat_name_len ? 0 : feat_name_len - lasts;
 			const feat_name = lasts > 0 ? feature.feature_name.substring(lastCharacters) : feature.feature_name
-			const bar = { key: feat_name, value: feat_value, style: feature.style }
+			const bar = { key: feat_name, value: feat_value != undefined ? feat_value : 0, style: feature.style }
 			return bar;
 
 		})
+		// KEEP for debugging. It will throw error if any of the values are undefined
+		// console.log("bars used:", bars)
 
 
 		console.log(bar(bars))
@@ -195,9 +229,10 @@ class Maid {
 			'usd_to_ars',
 			'currency_exchange',
 			'create_credential',
+			'swap_double_single_quotes'
 		]
 
-		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1, CHOICE_USD_TO_ARS = 2, CHOICE_CURRENCY_EXCHANGE = 3, CHOICE_CREATE_CREDENTIAL = 4;
+		const CHOICE_CREDENTIAL = 0, CHOICE_COSTS = 1, CHOICE_USD_TO_ARS = 2, CHOICE_CURRENCY_EXCHANGE = 3, CHOICE_CREATE_CREDENTIAL = 4, CHOICE_SWAP_QUOTES = 5;
 
 		const multiselect = new AutoComplete({
 			name: 'ServiceOption',
@@ -288,12 +323,21 @@ class Maid {
 			// this.say(response_data);
 			console.log("created service", response_data);
 		}
+		else if (serviceSelected == choices[CHOICE_SWAP_QUOTES].value) {
+			let input = await Input({
+				name: choices[CHOICE_SWAP_QUOTES].value,
+				message: "Enter string to convert"
+			});
+			input.replaceAll("'", "$_'")
+			input.replaceAll("\"", "$_\"")
+			input.replaceAll("$_\"", "'")
+			input.replaceAll("$_'", "\"")
+
+		}
 		else {
 			console.log(choices[CHOICE_CREDENTIAL]);
 			console.log(serviceSelected);
 		}
-
-
 
 
 	}
@@ -398,12 +442,19 @@ class MathQuizer {
 
 	getRandomFromType(type) {
 		const ETypes = {};
+		let ATLEAST = 2;
 		// console.log("getRandom from type called", constants.getRandomInt(100), "using type:", type, type=="d");
 		if (type == "d") {
-			return constants.getRandomInt(99) + 1;
+			return constants.getRandomInt(100 - ATLEAST) + ATLEAST;
 		} else if (type == "sd") {
-
-			return constants.getRandomInt(19) + 1;
+			return constants.getRandomInt(20 - ATLEAST) + ATLEAST;
+		}
+		else if (type == "md") {
+			return constants.getRandomInt(50 - ATLEAST) + ATLEAST;
+		}
+		else if (type == "ld") {
+			ATLEAST = 100;
+			return constants.getRandomInt(1000 - ATLEAST) + ATLEAST;
 		}
 	}
 
@@ -428,8 +479,8 @@ class MathQuizer {
 		parser.evaluate(form, variables);
 
 
-
-		return { "question_prompt": humanQuestion, "expectedAnswer": variables.y };
+		// console.log("question.form", question.form);
+		return { "question_prompt": humanQuestion, "expectedAnswer": variables.y, "form:": question.form };
 	};
 
 	replaceStringVariables(formString, variables) {
@@ -461,40 +512,47 @@ class MathQuizer {
 	 */
 	async ask_question() {
 		const question_form = this.pick_question();
-
-		const ans_constraint = question_form.ans_constraint;
-		let question_prompt = {};
-		if (ans_constraint == undefined) {
-			question_prompt = this.compile_question(question_form);
-		} else {
-			question_prompt = this.compile_valid_question(question_form, ans_constraint);
-		}
-
-		const quiz_allow_reattempts = 3;
-		let answerIsCorrect = false;
-
-		for (let i = 0; i < quiz_allow_reattempts; i++) {
-			// console.log(question_prompt.humanQuestion);
-
-			const question = new Input({
-				name: 'ServiceOption' + i,
-				message: `${question_prompt.question_prompt} attempt: ${i}`,
-			})
-
-			const res = await question.run()
-
-			if (res == question_prompt.expectedAnswer) {
-				answerIsCorrect = true;
-				const _ = await increasePerformance("math_ss");
-				console.log("correct!")
-				break;
+		try {
+			const ans_constraint = question_form.ans_constraint;
+			let question_prompt = {};
+			if (ans_constraint == undefined) {
+				question_prompt = this.compile_question(question_form);
+				// console.log("ask question question_prompt", question_prompt);
+			} else {
+				question_prompt = this.compile_valid_question(question_form, ans_constraint);
+				// console.log("ask question else", question_prompt);
 			}
 
+			const quiz_allow_reattempts = 3;
+			let answerIsCorrect = false;
+
+			for (let i = 0; i < quiz_allow_reattempts; i++) {
+				// console.log(question_prompt.humanQuestion);
+
+				const question = new Input({
+					name: 'ServiceOption' + i,
+					message: `${question_prompt.question_prompt} attempt: ${i}`,
+				})
+
+				const res = await question.run()
+
+				if (res == question_prompt.expectedAnswer) {
+					answerIsCorrect = true;
+					const _ = await increasePerformance("math_ss");
+					console.log("correct!")
+					break;
+				}
+
+			}
+
+			console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt, ", \n Formula:", question_prompt.form);
+
+			return answerIsCorrect;
+		} catch (err) {
+			console.warn(err, "With question: ", question_form);
+			return false;
 		}
-
-		console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt);
-
-		return answerIsCorrect;
+		return false;
 
 
 	};
@@ -530,7 +588,7 @@ class MathQuizer {
 				// console.log(`${expectedAnswer} is not proper, retrying...`);
 			}
 		}
-
+		questionPrompt.form = question_form.form;
 		return questionPrompt;
 
 
@@ -675,7 +733,8 @@ let ECommitCategory = {
 	FEAT: new CommitCategoryType('feat', [':tada:', ':santa:', ':gift:']),
 	FIX: new CommitCategoryType('fix', [':hammer:', ':shipit:', ':ambulance:']),
 	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'], feature_name = "Refactoring"),
-	ARCHITECTURE: new CommitCategoryType('arc', [':triangular_ruler:', ":japanese_castle:", ":factory:"])
+	ARCHITECTURE: new CommitCategoryType('arc', [':triangular_ruler:', ":japanese_castle:", ":factory:"]),
+	ALGO: new CommitCategoryType('algo', [':herb:', ":crown:", ":japanese_goblin:"])
 }
 
 const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
@@ -690,8 +749,8 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
 
 	// If any category found then increase the score please.
 	commitCat = commitCategory(commitMessage);
+	let _ = await increasePerformance("commits");
 	if (commitCat?.code) {
-		let _ = await increasePerformance("commits");
 		_ = await increasePerformance(commitCat.code);
 		if (addCommitEmoji) commitMessage = commitMessage + " " + commitCat.randomIcon();
 	}

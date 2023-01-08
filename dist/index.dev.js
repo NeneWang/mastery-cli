@@ -45,7 +45,8 @@ var Demo = demos.Demo,
     EDemo = demos.EDemo;
 
 (function _callee() {
-  var maid, mQuizer, options, demo, message;
+  var maid, mQuizer, options, demo, message, _;
+
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -65,7 +66,7 @@ var Demo = demos.Demo,
           // Demo for showing charts
           demo = new Demo();
           demo.chartDemo(EDemo.BAR);
-          _context.next = 23;
+          _context.next = 31;
           break;
 
         case 11:
@@ -75,7 +76,7 @@ var Demo = demos.Demo,
           }
 
           maid.dayReport();
-          _context.next = 23;
+          _context.next = 31;
           break;
 
         case 15:
@@ -90,14 +91,27 @@ var Demo = demos.Demo,
         case 18:
           message = _context.sent;
           maid.say(message, true);
-          _context.next = 23;
+          _context.next = 31;
           break;
 
         case 22:
-          if (input.includes(cmInfo.commands.coa.code)) {
-            utils.commitpush();
-            mQuizer.ask_question();
-          } else if (input.includes(cmInfo.commands.services.code)) {
+          if (!input.includes(cmInfo.commands.coa.code)) {
+            _context.next = 30;
+            break;
+          }
+
+          utils.commitpush();
+          _context.next = 26;
+          return regeneratorRuntime.awrap(mQuizer.ask_question());
+
+        case 26:
+          _ = _context.sent;
+          maid.askToClean();
+          _context.next = 31;
+          break;
+
+        case 30:
+          if (input.includes(cmInfo.commands.services.code)) {
             // Gets all services, keeps asking for things here, which service to get
             maid.services();
           } else if (input.includes(cmInfo.commands.ask.code)) {
@@ -105,11 +119,13 @@ var Demo = demos.Demo,
           } else if (input.includes(cmInfo.commands.update.code)) {
             maid.say("Auto updating sir!");
             utils.autorelease();
-          } else if (input.includes("math")) {
+          } else if (input.includes(cmInfo.commands.math.code)) {
             mQuizer.ask_question();
-          }
+          } else if (input.includes(cmInfo.commands.clean.code)) {
+            maid.askToClean();
+          } else {}
 
-        case 23:
+        case 31:
         case "end":
           return _context.stop();
       }

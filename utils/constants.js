@@ -228,21 +228,108 @@ const getRandomInt = (max) => {
     return Math.floor(Math.random() * max);
 }
 
+// const ANS_CONTSTRAING =
+
+// dtypes allowed
+const dtypes = {
+    // 2-20
+    sd_1: 'sd_1',
+    sd_2: 'sd_2',
+    sd_3: 'sd_3',
+    sd_4: 'sd_4',
+    sd_5: 'sd_5',
+    sd_6: 'sd_6',
+
+    // 2-50
+    md_1: 'md_1',
+    md_2: 'md_2',
+    md_3: 'md_3',
+    md_4: 'md_4',
+    md_5: 'md_5',
+    md_6: 'md_6',
 
 
-const qmathformulas = {
-    "sum_simple": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], },
-    "sub_simple": { "form": "y = sd_1 - sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'] },
-    "mult_simple": { "form": "y = sd_1 * sd_2", "replace": ["sd_1", "sd_2"], "calculates": ['y'] },
-    "div_simple": { "form": "y = sd_1 / sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "ans_constraint": ".2" },
-    "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?" },
-    // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "human": "It goes sppeed "},
-    "precedence": { "form": "y=sd_2/sd_3*sd_4+3*sd_5+sd_1%1/2", "replace": ["sd_1", "sd_2", "sd_3", "sd_4", "sd_5"], "calculates": ["y"], "ans_constraint": ".2" }
+    // 2-100
+    d_1: 'd_1',
+    d_2: 'd_2',
+    d_3: 'd_3',
+    d_4: 'd_4',
+    d_5: 'd_5',
+    d_6: 'd_6',
+
+
+    // 100-1000
+    ld_1: 'ld_1',
+    ld_2: 'ld_2',
+    ld_3: 'ld_3',
+    ld_4: 'ld_4',
+    ld_5: 'ld_5',
+    ld_6: 'ld_6',
+
+
+    Y: "y"
 
 }
 
-const qmathenabled = ["div_simple", "precedence", "sum_apples"]
+const qmathformulas = {
+    "sum_simple": { "form": "y = sd_1 + sd_2 ", "replace": [dtypes.sd_1, dtypes.sd_2], "calculates": ['y'], },
+    "neg_subs": { "form": "y = sd_1 - md_2 ", "replace": [dtypes.sd_1, dtypes.md_2], "calculates": ['y'], },
+    "sub_simple": { "form": "y = sd_1 - sd_2 ", "replace": [dtypes.sd_1, dtypes.sd_2], "calculates": ['y'] },
+    "mult_simple": { "form": "y = sd_1 * sd_2", "replace": [dtypes.sd_1, dtypes.sd_2], "calculates": ['y'] },
+    "div_simple": { "form": "y = sd_1 / sd_2 ", "replace": [dtypes.sd_1, dtypes.sd_2], "calculates": ['y'], "ans_constraint": ".2" },
+    // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": [dtypes.SD_1, dtypes.SD_2], "calculates": ['y'], "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"},
+    // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": [dtypes.SD_1, dtypes.SD_2], "calculates": ['y'], "human": "It goes sppeed "},
+    "precedence": { "form": "y=sd_2/sd_3*sd_4+3*sd_5+sd_1%1/2", "replace": [dtypes.sd_1, dtypes.sd_2, "sd_3", "sd_4", "sd_5"], "calculates": ["y"], "ans_constraint": ".0" },
 
+    "bus-conversion-rate": { "form": `${dtypes.Y} = ${dtypes.sd_1} / ${dtypes.sd_2} * 100`, "replace": [dtypes.sd_1, dtypes.sd_2], "calculates": ["y"], "ans_constraint": ".0", "human": `Calculate conversion rate (in percentage): \nnumber of conversions: ${dtypes.sd_1}\n number of visitors : ${dtypes.sd_2}\n` },
+    "bus-clv": { "form": `${dtypes.Y} = ${dtypes.sd_1} * ${dtypes.sd_2} * ${dtypes.sd_3}`, "replace": [dtypes.sd_1, dtypes.sd_2, dtypes.sd_3], "calculates": ["y"], "ans_constraint": ".0", "human": `Calculate Customer Lifetime Value (CLV): \nAverage purchase value: ${dtypes.sd_1}\n number of purchases per year: ${dtypes.sd_2}\n Naverage customer lifespan: ${dtypes.sd_3}\n` },
+    "bus-roi": { "form": `${dtypes.Y} = (${dtypes.ld_1} - ${dtypes.ld_2})/ ${dtypes.ld_2}`, "replace": [dtypes.ld_1, dtypes.ld_2], "calculates": ["y"], "ans_constraint": ".0", "human": `Calculate ROI (Return of Investment): \nnGain from Investments: ${dtypes.ld_1}\n Cost of Investment: ${dtypes.ld_2}\n` },
+    "bus-retention": { "form": `${dtypes.Y} = (${dtypes.d_1} - ${dtypes.md_2}) / ${dtypes.d_3}`, "replace": [dtypes.d_1, dtypes.md_2, dtypes.d_3], "calculates": ["y"], "ans_constraint": ".1", "human": `Calculate customer retention rate: \nCustomers at the beginning of the year: ${dtypes.d_3}\n adquires ${dtypes.md_2} this year\n and at the end of the year has ${dtypes.d_1} customers\n` },
+
+    "stats-variance": { "form": `y = ((sd_1 - (sd_1 + 15) / 2)^2 + (15 - (sd_1 + 15) / 2)^2) / 2`, "replace": [dtypes.sd_1], "calculates": ["y"], "ans_constraint": ".3", "human": `Calculate the variance of [ sd_1, 15 ]` },
+    "stats-std": { "form": `y = sqrt(${dtypes.d_1})`, "replace": [dtypes.d_1], "calculates": ["y"], "ans_constraint": ".1", "human": `Provided that the variance is ${dtypes.d_1}, calculate the standard deviation` },
+    "stats-chose": { "form": `y = (${dtypes.sd_1}/(${dtypes.sd_1} + ${dtypes.d_2}))*100`, "replace": [dtypes.sd_1, dtypes.d_2], "calculates": ["y"], "ans_constraint": ".1", "human": `A bag contains ${dtypes.sd_1} red marbles and ${dtypes.d_2} blue marbles. If you choose a marble at random, what is the probability that it will be red? (percentage %)` },
+    "stats-select-consecutive": { "form": `y = (${dtypes.sd_1}/(${dtypes.sd_1} + ${dtypes.d_2}) * (${dtypes.sd_1}- 1)/(${dtypes.sd_1} + ${dtypes.d_2} - 1))`, "replace": [dtypes.sd_1, dtypes.d_2], "calculates": ["y"], "ans_constraint": ".2", "human": `A bag contains ${dtypes.sd_1} red marbles and ${dtypes.d_2} blue marbles. . If you draw two balls at random without replacement, what is the probability that both will be red?` },
+
+
+}
+
+// (sd_1 + 20) / 3
+const getQmathEnabled = (listOfProblemSets, debugLast=false, lasts=0) => {
+    let qmathEnabled = []
+    for (problemSet of listOfProblemSets) {
+        qmathEnabled = qmathEnabled.concat(problemSet)
+    }
+
+    // For debugging purposes
+    if(lasts > 0) return qmathEnabled.slice(-lasts)
+    if(debugLast) return [qmathEnabled.at(qmathEnabled.length-1)]
+    return qmathenabled;
+}
+
+<<<<<<< HEAD
+const qmathenabled = ["div_simple", "precedence", "sum_apples"]
+=======
+>>>>>>> f4defa2fe71ceec9b43225e834f3d034513d6761
+
+let simple = ["div_simple", "precedence", "neg_subs"];
+const bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
+const stats = ["stats-variance", "stats-std", "stats-chose", "stats-select-consecutive"]
+
+
+
+const qmathenabled = getQmathEnabled([
+    simple,
+    bus_marketing,
+    stats
+], null, 3);
+
+
+
+// qmathenabled = qmathenabled.concat(bus_marketing);
+// qmathenabled = bus_marketing;
+// qmathenabled = stats;
+// qmathenabled = ["stats-select-consecutive"]
 
 const countDecimals = (value) => {
     if (Math.floor(value) !== value)

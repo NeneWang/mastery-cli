@@ -215,45 +215,179 @@ var formatObjectFeatures = function formatObjectFeatures(userPerformanceData) {
 
 var getRandomInt = function getRandomInt(max) {
   return Math.floor(Math.random() * max);
-};
+}; // const ANS_CONTSTRAING =
+// dtypes allowed
 
+
+var dtypes = {
+  // 2-20
+  sd_1: 'sd_1',
+  sd_2: 'sd_2',
+  sd_3: 'sd_3',
+  sd_4: 'sd_4',
+  sd_5: 'sd_5',
+  sd_6: 'sd_6',
+  // 2-50
+  md_1: 'md_1',
+  md_2: 'md_2',
+  md_3: 'md_3',
+  md_4: 'md_4',
+  md_5: 'md_5',
+  md_6: 'md_6',
+  // 2-100
+  d_1: 'd_1',
+  d_2: 'd_2',
+  d_3: 'd_3',
+  d_4: 'd_4',
+  d_5: 'd_5',
+  d_6: 'd_6',
+  // 100-1000
+  ld_1: 'ld_1',
+  ld_2: 'ld_2',
+  ld_3: 'ld_3',
+  ld_4: 'ld_4',
+  ld_5: 'ld_5',
+  ld_6: 'ld_6',
+  Y: "y"
+};
 var qmathformulas = {
   "sum_simple": {
     "form": "y = sd_1 + sd_2 ",
-    "replace": ["sd_1", "sd_2"],
+    "replace": [dtypes.sd_1, dtypes.sd_2],
+    "calculates": ['y']
+  },
+  "neg_subs": {
+    "form": "y = sd_1 - md_2 ",
+    "replace": [dtypes.sd_1, dtypes.md_2],
     "calculates": ['y']
   },
   "sub_simple": {
     "form": "y = sd_1 - sd_2 ",
-    "replace": ["sd_1", "sd_2"],
+    "replace": [dtypes.sd_1, dtypes.sd_2],
     "calculates": ['y']
   },
   "mult_simple": {
     "form": "y = sd_1 * sd_2",
-    "replace": ["sd_1", "sd_2"],
+    "replace": [dtypes.sd_1, dtypes.sd_2],
     "calculates": ['y']
   },
   "div_simple": {
     "form": "y = sd_1 / sd_2 ",
-    "replace": ["sd_1", "sd_2"],
+    "replace": [dtypes.sd_1, dtypes.sd_2],
     "calculates": ['y'],
     "ans_constraint": ".2"
   },
-  "sum_apples": {
-    "form": "y = sd_1 + sd_2 ",
-    "replace": ["sd_1", "sd_2"],
-    "calculates": ['y'],
-    "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"
-  },
-  // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": ["sd_1", "sd_2"], "calculates": ['y'], "human": "It goes sppeed "},
+  // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": [dtypes.SD_1, dtypes.SD_2], "calculates": ['y'], "human": "I bought sd_1 apples today, and then will buy sd_2 apples tomorrow, how many apples will I have?"},
+  // "sum_apples": { "form": "y = sd_1 + sd_2 ", "replace": [dtypes.SD_1, dtypes.SD_2], "calculates": ['y'], "human": "It goes sppeed "},
   "precedence": {
     "form": "y=sd_2/sd_3*sd_4+3*sd_5+sd_1%1/2",
-    "replace": ["sd_1", "sd_2", "sd_3", "sd_4", "sd_5"],
+    "replace": [dtypes.sd_1, dtypes.sd_2, "sd_3", "sd_4", "sd_5"],
     "calculates": ["y"],
-    "ans_constraint": ".2"
+    "ans_constraint": ".0"
+  },
+  "bus-conversion-rate": {
+    "form": "".concat(dtypes.Y, " = ").concat(dtypes.sd_1, " / ").concat(dtypes.sd_2, " * 100"),
+    "replace": [dtypes.sd_1, dtypes.sd_2],
+    "calculates": ["y"],
+    "ans_constraint": ".0",
+    "human": "Calculate conversion rate (in percentage): \nnumber of conversions: ".concat(dtypes.sd_1, "\n number of visitors : ").concat(dtypes.sd_2, "\n")
+  },
+  "bus-clv": {
+    "form": "".concat(dtypes.Y, " = ").concat(dtypes.sd_1, " * ").concat(dtypes.sd_2, " * ").concat(dtypes.sd_3),
+    "replace": [dtypes.sd_1, dtypes.sd_2, dtypes.sd_3],
+    "calculates": ["y"],
+    "ans_constraint": ".0",
+    "human": "Calculate Customer Lifetime Value (CLV): \nAverage purchase value: ".concat(dtypes.sd_1, "\n number of purchases per year: ").concat(dtypes.sd_2, "\n Naverage customer lifespan: ").concat(dtypes.sd_3, "\n")
+  },
+  "bus-roi": {
+    "form": "".concat(dtypes.Y, " = (").concat(dtypes.ld_1, " - ").concat(dtypes.ld_2, ")/ ").concat(dtypes.ld_2),
+    "replace": [dtypes.ld_1, dtypes.ld_2],
+    "calculates": ["y"],
+    "ans_constraint": ".0",
+    "human": "Calculate ROI (Return of Investment): \nnGain from Investments: ".concat(dtypes.ld_1, "\n Cost of Investment: ").concat(dtypes.ld_2, "\n")
+  },
+  "bus-retention": {
+    "form": "".concat(dtypes.Y, " = (").concat(dtypes.d_1, " - ").concat(dtypes.md_2, ") / ").concat(dtypes.d_3),
+    "replace": [dtypes.d_1, dtypes.md_2, dtypes.d_3],
+    "calculates": ["y"],
+    "ans_constraint": ".1",
+    "human": "Calculate customer retention rate: \nCustomers at the beginning of the year: ".concat(dtypes.d_3, "\n adquires ").concat(dtypes.md_2, " this year\n and at the end of the year has ").concat(dtypes.d_1, " customers\n")
+  },
+  "stats-variance": {
+    "form": "y = ((sd_1 - (sd_1 + 15) / 2)^2 + (15 - (sd_1 + 15) / 2)^2) / 2",
+    "replace": [dtypes.sd_1],
+    "calculates": ["y"],
+    "ans_constraint": ".3",
+    "human": "Calculate the variance of [ sd_1, 15 ]"
+  },
+  "stats-std": {
+    "form": "y = sqrt(".concat(dtypes.d_1, ")"),
+    "replace": [dtypes.d_1],
+    "calculates": ["y"],
+    "ans_constraint": ".1",
+    "human": "Provided that the variance is ".concat(dtypes.d_1, ", calculate the standard deviation")
+  },
+  "stats-chose": {
+    "form": "y = (".concat(dtypes.sd_1, "/(").concat(dtypes.sd_1, " + ").concat(dtypes.d_2, "))*100"),
+    "replace": [dtypes.sd_1, dtypes.d_2],
+    "calculates": ["y"],
+    "ans_constraint": ".1",
+    "human": "A bag contains ".concat(dtypes.sd_1, " red marbles and ").concat(dtypes.d_2, " blue marbles. If you choose a marble at random, what is the probability that it will be red? (percentage %)")
+  },
+  "stats-select-consecutive": {
+    "form": "y = (".concat(dtypes.sd_1, "/(").concat(dtypes.sd_1, " + ").concat(dtypes.d_2, ") * (").concat(dtypes.sd_1, "- 1)/(").concat(dtypes.sd_1, " + ").concat(dtypes.d_2, " - 1))"),
+    "replace": [dtypes.sd_1, dtypes.d_2],
+    "calculates": ["y"],
+    "ans_constraint": ".2",
+    "human": "A bag contains ".concat(dtypes.sd_1, " red marbles and ").concat(dtypes.d_2, " blue marbles. . If you draw two balls at random without replacement, what is the probability that both will be red?")
   }
+}; // (sd_1 + 20) / 3
+
+var getQmathEnabled = function getQmathEnabled(listOfProblemSets) {
+  var debugLast = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var lasts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var qmathEnabled = [];
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = listOfProblemSets[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      problemSet = _step.value;
+      qmathEnabled = qmathEnabled.concat(problemSet);
+    } // For debugging purposes
+
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  if (lasts > 0) return qmathEnabled.slice(-lasts);
+  if (debugLast) return [qmathEnabled.at(qmathEnabled.length - 1)];
+  return qmathenabled;
 };
+<<<<<<< HEAD
 var qmathenabled = ["div_simple", "precedence", "sum_apples"];
+=======
+
+var simple = ["div_simple", "precedence", "neg_subs"];
+var bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
+var stats = ["stats-variance", "stats-std", "stats-chose", "stats-select-consecutive"];
+var qmathenabled = getQmathEnabled([simple, bus_marketing, stats], null, 3); // qmathenabled = qmathenabled.concat(bus_marketing);
+// qmathenabled = bus_marketing;
+// qmathenabled = stats;
+// qmathenabled = ["stats-select-consecutive"]
+>>>>>>> f4defa2fe71ceec9b43225e834f3d034513d6761
 
 var countDecimals = function countDecimals(value) {
   if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;
