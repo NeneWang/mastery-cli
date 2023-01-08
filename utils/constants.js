@@ -307,10 +307,6 @@ const getQmathEnabled = (listOfProblemSets, debugLast=false, lasts=0) => {
     return qmathenabled;
 }
 
-<<<<<<< HEAD
-const qmathenabled = ["div_simple", "precedence", "sum_apples"]
-=======
->>>>>>> f4defa2fe71ceec9b43225e834f3d034513d6761
 
 let simple = ["div_simple", "precedence", "neg_subs"];
 const bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
