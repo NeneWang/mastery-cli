@@ -376,6 +376,9 @@ var getQmathEnabled = function getQmathEnabled(listOfProblemSets) {
   if (debugLast) return [qmathEnabled.at(qmathEnabled.length - 1)];
   return qmathenabled;
 };
+<<<<<<< HEAD
+var qmathenabled = ["div_simple", "precedence", "sum_apples"];
+=======
 
 var simple = ["div_simple", "precedence", "neg_subs"];
 var bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
@@ -384,6 +387,7 @@ var qmathenabled = getQmathEnabled([simple, bus_marketing, stats], null, 3); // 
 // qmathenabled = bus_marketing;
 // qmathenabled = stats;
 // qmathenabled = ["stats-select-consecutive"]
+>>>>>>> f4defa2fe71ceec9b43225e834f3d034513d6761
 
 var countDecimals = function countDecimals(value) {
   if (Math.floor(value) !== value) return value.toString().split(".")[1].length || 0;

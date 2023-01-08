@@ -737,7 +737,6 @@ class CommitCategoryType {
 			this.feature_name = feature_name;
 		}
 
-
 	}
 
 	randomIcon() {
