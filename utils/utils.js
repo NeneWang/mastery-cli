@@ -212,10 +212,7 @@ class Maid {
 		// KEEP for debugging. It will throw error if any of the values are undefined
 		// console.log("bars used:", bars)
 
-
 		console.log(bar(bars))
-
-
 
 	}
 
