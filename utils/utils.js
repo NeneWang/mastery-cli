@@ -448,7 +448,7 @@ class MathQuizer {
 
 		const variables = {}
 		const variable_regex = /(\w+)_(\d)/;
-		console.log('replace', replace);
+		// console.log('replace', replace);
 		for (const var_name of replace) {
 			// console.log('var_name', var_name);
 			const variabledetected = var_name.match(variable_regex);
@@ -559,6 +559,7 @@ class MathQuizer {
 				if (res == question_prompt.expectedAnswer) {
 					answerIsCorrect = true;
 					const _ = await increasePerformance("math_ss");
+					const _2 = await updateConcept(question_prompt.formula_name, true)
 					console.log("correct!")
 					break;
 				}
@@ -663,6 +664,11 @@ getArrayLastXDays = (days = 7) => {
 increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
 	const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}/${increaseBY}?increase_score=true`)
 	if (debug) console.log(res.data);
+}
+
+updateConcept = async (problem_name, debug = false) => {
+	const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}`)
+	if(debug) console.log(res.data)
 }
 
 
