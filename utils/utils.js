@@ -427,7 +427,7 @@ class MathQuizer {
 			// Filter where they have those.
 			console.log("Response Potentail and response", potential_questions, response_data)
 			potential_questions = potential_questions.filter(question => {
-				console.log('Comparing', question.formula_name, question.formula_name in response_data, response_data)
+				console.log('Comparing', question.formula_name, `${question.formula_name}` in response_data, response_data)
 				return 'stats-select-consecutive' in response_data
 			} )
 			console.log("Response filtered", potential_questions)
