@@ -424,8 +424,9 @@ class MathQuizer {
 			console.log("response_data", response_data);
 			// let potential_questions = potential_questions.filter(formula_name)
 
-
-			// return get_random(potential_questions);
+			// Filter where they have those.
+			potential_questions = potential_questions.filter(question.formula_name in response_data )
+			return get_random(potential_questions);
 
 		}catch(e){
 			// Such as no internet connection
