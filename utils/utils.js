@@ -559,7 +559,7 @@ class MathQuizer {
 				if (res == question_prompt.expectedAnswer) {
 					answerIsCorrect = true;
 					const _ = await increasePerformance("math_ss");
-					console.log("Success at:", question_prompt)
+					// console.log("Success at:", question_prompt)
 					console.log("correct!");
 					break;
 				}
