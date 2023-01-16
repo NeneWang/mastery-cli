@@ -421,7 +421,7 @@ class MathQuizer {
 			const response_data = res.data;
 
 			console.log("response_data", response_data);
-			console.log("posts", potential_questions);
+			console.log("posts", potential_questions.map(x => x.formula_name));
 			// let potential_questions = potential_questions.filter(formula_name)
 
 
