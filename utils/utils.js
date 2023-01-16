@@ -432,7 +432,7 @@ class MathQuizer {
 
 		}catch(e){
 			// Such as no internet connection
-			console.warn(e)
+			// console.warn(e)
 		}
 
 		return get_random(potential_questions);
@@ -486,7 +486,7 @@ class MathQuizer {
 	 * - {  question_prompt (with replace replaced with numbers) , expectedAnswer}
 	 */
 	compile_question(question) {
-		console.log("Compile question received", question)
+		// console.log("Compile question received", question)
 		const form = question?.form;
 		const replace = question?.replace;
 		const calculates = question?.calculates;
@@ -531,7 +531,7 @@ class MathQuizer {
 	 * Asks question and waits for response, allows repetition.
 	 */
 	async ask_question() {
-		const question_form = this.pick_question();
+		const question_form = await this.pick_question();
 		try {
 			const ans_constraint = question_form.ans_constraint;
 			let question_prompt = {};
@@ -569,7 +569,7 @@ class MathQuizer {
 
 			return answerIsCorrect;
 		} catch (err) {
-			console.warn(err, "With question: ", question_form);
+			// console.warn(err, "With question: ", question_form);
 			return false;
 		}
 		return false;
