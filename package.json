@@ -1,7 +1,7 @@
 {
 	"name": "maid-cli",
 	"description": "Assistant to keep you on track and productive",
-	"version": "0.6.17",
+	"version": "0.6.18",
 	"license": "UNLICENSED",
 	"bin": {
 		"maid-cli": "index.js",
