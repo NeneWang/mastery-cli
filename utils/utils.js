@@ -404,7 +404,7 @@ class Maid {
 class MathQuizer {
 
 	constructor(qmathformulas, qmathenabled) {
-		this.enabledqmathformulas = qmathenabled.map(formula_name => {qmathformulas[formula_name].formula_name = formula_name; return qmathformulas[formula_name]});
+		this.enabledqmathformulas = qmathenabled.map(formula_name => { qmathformulas[formula_name].formula_name = formula_name; return qmathformulas[formula_name] });
 	}
 
 	/**
@@ -412,11 +412,11 @@ class MathQuizer {
 	 * OUT: 
 	 * - {form, replace}
 	 */
-	pick_question  = async () => {
+	pick_question = async () => {
 		let potential_questions = this.enabledqmathformulas
-		try{			
-			
-			const problem_names =  potential_questions.map(x => x.formula_name)
+		try {
+
+			const problem_names = potential_questions.map(x => x.formula_name)
 			// const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
 			const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, problem_names);
 			const response_data = res.data;
@@ -426,11 +426,11 @@ class MathQuizer {
 
 			// Filter where they have those.
 			// console.log("Response Potentail and response", potential_questions, response_data)
-			potential_questions = potential_questions.filter(question => response_data.indexOf(question.formula_name) !== -1 )
+			potential_questions = potential_questions.filter(question => response_data.indexOf(question.formula_name) !== -1)
 			// console.log("Response filtered", potential_questions)
 			return get_random(potential_questions);
 
-		}catch(e){
+		} catch (e) {
 			// Such as no internet connection
 			// console.warn(e)
 		}
@@ -559,12 +559,13 @@ class MathQuizer {
 				if (res == question_prompt.expectedAnswer) {
 					answerIsCorrect = true;
 					const _ = await increasePerformance("math_ss");
-					const _2 = await updateConcept(question_prompt.formula_name, true)
-					console.log("correct!")
+					console.log("Success at:", question_prompt)
+					console.log("correct!");
 					break;
 				}
 
 			}
+			const _ = await updateConcept(question_form.formula_name, answerIsCorrect);
 
 			console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt, ", \n Formula:", question_prompt.form);
 
@@ -666,9 +667,14 @@ increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
 	if (debug) console.log(res.data);
 }
 
-updateConcept = async (problem_name, debug = false) => {
-	const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}`)
-	if(debug) console.log(res.data)
+updateConcept = async (problem_name, success=true, debug = false) => {
+	try {
+		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}`)
+		if (debug) console.log(res.data)
+	}
+	catch(err){
+		console.warn(err);
+	}
 }
 
 
