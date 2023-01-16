@@ -416,12 +416,12 @@ class MathQuizer {
 		let potential_questions = this.enabledqmathformulas
 		try{			
 			
-			const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
-			const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, dataToPost);
+			const problem_names =  potential_questions.map(x => x.formula_name)
+			// const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
+			const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, problem_names);
 			const response_data = res.data;
 
 			console.log("response_data", response_data);
-			console.log("posts", potential_questions.map(x => x.formula_name));
 			// let potential_questions = potential_questions.filter(formula_name)
 
 
