@@ -182,8 +182,8 @@ var APIDICT = {
   CHUCK: 'http://api.chucknorris.io/jokes/random',
   WEATHER: 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/New%20york?unitGroup=metric&include=days%2Cevents&key=WR8T3G2K9PYXY26YF6VCRV7YN&contentType=json',
   LOCAL_MAID: 'http://127.0.0.1:8000',
-  // DEPLOYED_MAID: 'http://127.0.0.1:8000',
-  DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
+  DEPLOYED_MAID: 'http://127.0.0.1:8000',
+  // DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
   CURRENCY_EXCHANGE: 'https://api.apilayer.com/exchangerates_data',
   CURRENCY_EXCHANGE_KEY: '3zPc7CzmznmueYsu3SttUWIE2QZ3ODYd'
 }; // APIDICT.DEPLOYED_MAID = 'https://jmmgskxdgn.us-east-1.awsapprunner.com'
