@@ -421,13 +421,13 @@ class MathQuizer {
 			const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, problem_names);
 			const response_data = res.data;
 
-			console.log("response_data", response_data);
+			// console.log("response_data", response_data);
 			// let potential_questions = potential_questions.filter(formula_name)
 
 			// Filter where they have those.
-			console.log("Response Potentail and response", potential_questions, response_data)
+			// console.log("Response Potentail and response", potential_questions, response_data)
 			potential_questions = potential_questions.filter(question => response_data.indexOf(question.formula_name) !== -1 )
-			console.log("Response filtered", potential_questions)
+			// console.log("Response filtered", potential_questions)
 			return get_random(potential_questions);
 
 		}catch(e){
