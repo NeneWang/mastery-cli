@@ -425,7 +425,7 @@ class MathQuizer {
 			// let potential_questions = potential_questions.filter(formula_name)
 
 			// Filter where they have those.
-			potential_questions = potential_questions.filter(question.formula_name in response_data )
+			potential_questions = potential_questions.filter(question => question.formula_name in response_data )
 			console.log("Response filtered", potential_questions)
 			return get_random(potential_questions);
 
