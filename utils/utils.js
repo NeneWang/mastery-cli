@@ -486,6 +486,7 @@ class MathQuizer {
 	 * - {  question_prompt (with replace replaced with numbers) , expectedAnswer}
 	 */
 	compile_question(question) {
+		console.log("Compile question received", question)
 		const form = question?.form;
 		const replace = question?.replace;
 		const calculates = question?.calculates;
