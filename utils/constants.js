@@ -318,7 +318,7 @@ const qmathenabled = getQmathEnabled([
     simple,
     bus_marketing,
     stats
-], null, 3);
+], null, 6);
 
 
 

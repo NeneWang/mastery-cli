@@ -380,7 +380,7 @@ var getQmathEnabled = function getQmathEnabled(listOfProblemSets) {
 var simple = ["div_simple", "precedence", "neg_subs"];
 var bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
 var stats = ["stats-variance", "stats-std", "stats-chose", "stats-select-consecutive"];
-var qmathenabled = getQmathEnabled([simple, bus_marketing, stats], null, 3); // qmathenabled = qmathenabled.concat(bus_marketing);
+var qmathenabled = getQmathEnabled([simple, bus_marketing, stats], null, 6); // qmathenabled = qmathenabled.concat(bus_marketing);
 // qmathenabled = bus_marketing;
 // qmathenabled = stats;
 // qmathenabled = ["stats-select-consecutive"]
