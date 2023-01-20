@@ -17,7 +17,7 @@ const parser = new Parser();
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 
-
+const DEBUG = false
 
 class Quizzer {
 
@@ -25,6 +25,7 @@ class Quizzer {
         // TODO: Implement TermStorage Support from the getgo.
         this.terms = terms;
         // this.enabledqmathformulas = qmathenabled.map(formula_name => { qmathformulas[formula_name].formula_name = formula_name; return qmathformulas[formula_name] });
+        // this.enabledqmathformulas = qmathenabled.map(form => form.formula_name);
         this.enabledqmathformulas = qmathenabled;
     }
 
@@ -41,36 +42,36 @@ class Quizzer {
 
             const problem_names = potential_questions.map(x => x.formula_name)
             // const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
-            // console.log(problem_names)
+            // if (DEBUG) console.log(problem_names)
             const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, problem_names);
             const response_data = res.data;
-            // console.log(response_data)
-            // console.log("response_data", response_data);
+            // if (DEBUG) console.log(response_data)
+            // if (DEBUG) console.log("response_data", response_data);
             // let potential_questions = potential_questions.filter(formula_name)
 
             // Filter where they have those.
-            // console.log("Response Potentail and response", potential_questions, response_data)
+            // if (DEBUG) console.log("Response Potentail and response", potential_questions, response_data)
             potential_questions = potential_questions.filter(question => response_data.indexOf(question.formula_name) !== -1)
-            // console.log("Response filtered", potential_questions)
+            if (DEBUG) console.log("Response filtered", potential_questions)
             // return get_random(potential_questions);
 
         } catch (e) {
             // Such as no internet connection
-            // console.warn(e)
+            console.warn(e)
         }
         return potential_questions;
     }
 
     pick_math_question = async () => {
 
-        let potential_questions = this.enabledqmathformulas
-        potential_questions = this.getYoungest(potential_questions);
-
-        return get_random(potential_questions);
+        let potential_questions = this.enabledqmathformulas;
+        potential_questions = await this.getYoungest(potential_questions);
+        // if (DEBUG) console.log("potential_questions", potential_questions);
+        return  await get_random(potential_questions);
     }
 
     pick_term_question = async () => {
-        // console.log("Picking terms from:", this.terms)
+        // if (DEBUG) console.log("Picking terms from:", this.terms)
         let potential_questions = this.terms
         /**
          *  Terms Structure:
@@ -86,7 +87,7 @@ class Quizzer {
          */
         potential_questions = await this.getYoungest(potential_questions)
 
-        // console.log("Left with", potential_questions)
+        // if (DEBUG) console.log("Left with", potential_questions)
 
         return get_random(potential_questions);
     }
@@ -101,21 +102,21 @@ class Quizzer {
 
         const variables = {}
         const variable_regex = /(\w+)_(\d)/;
-        // console.log('replace', replace);
+        // if (DEBUG) console.log('replace', replace);
         for (const var_name of replace) {
-            // console.log('var_name', var_name);
+            // if (DEBUG) console.log('var_name', var_name);
             const variabledetected = var_name.match(variable_regex);
             variables[var_name] = this.getRandomFromType(variabledetected[1]);
         }
 
-        // console.log("populated variables", variables);
+        // if (DEBUG) console.log("populated variables", variables);
         return variables;
     }
 
     getRandomFromType(type) {
         const ETypes = {};
         let ATLEAST = 2;
-        // console.log("getRandom from type called", constants.getRandomInt(100), "using type:", type, type=="d");
+        // if (DEBUG) console.log("getRandom from type called", constants.getRandomInt(100), "using type:", type, type=="d");
         if (type == "d") {
             return constants.getRandomInt(100 - ATLEAST) + ATLEAST;
         } else if (type == "sd") {
@@ -139,20 +140,20 @@ class Quizzer {
      * - {  question_prompt (with replace replaced with numbers) , expectedAnswer}
      */
     compile_question(question) {
-        // console.log("Compile question received", question)
+        // if (DEBUG) console.log("Compile question received", question)
         const form = question?.form;
-        const replace = question?.replace;
+        const replace = question?.replace??[];
         const calculates = question?.calculates;
-        const human_form = question.human ? question.human : "";
+        const human_form = question?.human;
 
-
+        // if (DEBUG) console.log("question", question)
         const variables = this.populateVariables(replace);
         var parser = new Parser();
         const humanQuestion = this.getHumanQuestion(form, variables, calculates, human_form);
         parser.evaluate(form, variables);
 
 
-        // console.log("question.form", question.form);
+        // if (DEBUG) console.log("question.form", question.form);
         return { "question_prompt": humanQuestion, "expectedAnswer": variables.y, "form:": question.form };
     };
 
@@ -185,8 +186,8 @@ class Quizzer {
      */
     async ask_question() {
         // Replace with Chance
-        // console.log("Asking terms", this.terms)
-        const askMath = constants.getRandomBool();
+        // if (DEBUG) console.log("Asking terms", this.terms)
+        const askMath = true;
         if (askMath) {
             await this.ask_math_question()
         } else {
@@ -293,7 +294,7 @@ class Quizzer {
             });
 
         } catch (err) {
-            console.log("Probably no connection, comment has not been made")
+            if (DEBUG) console.log("Probably no connection, comment has not been made")
             if (debug) {
                 console.log(err)
             }
@@ -308,21 +309,22 @@ class Quizzer {
 
         const question_form = await this.pick_math_question();
         try {
-            const ans_constraint = question_form.ans_constraint;
+            if (DEBUG) console.log('question_form', question_form)
+            const ans_constraint = question_form?.ans_constraint??".03";
             let question_prompt = {};
             if (ans_constraint == undefined) {
                 question_prompt = this.compile_question(question_form);
-                // console.log("ask question question_prompt", question_prompt);
+                // if (DEBUG) console.log("ask question question_prompt", question_prompt);
             } else {
                 question_prompt = this.compile_valid_question(question_form, ans_constraint);
-                // console.log("ask question else", question_prompt);
+                // if (DEBUG) console.log("ask question else", question_prompt);
             }
 
             const quiz_allow_reattempts = 3;
             let answerIsCorrect = false;
 
             for (let i = 0; i < quiz_allow_reattempts; i++) {
-                // console.log(question_prompt.humanQuestion);
+                // if (DEBUG) console.log(question_prompt.humanQuestion);
 
                 const question = new Input({
                     name: 'ServiceOption' + i,
@@ -334,7 +336,7 @@ class Quizzer {
                 if (res == question_prompt.expectedAnswer) {
                     answerIsCorrect = true;
                     const _ = await increasePerformance("math_ss");
-                    // console.log("Success at:", question_prompt)
+                    // if (DEBUG) console.log("Success at:", question_prompt)
                     console.log("correct!");
                     break;
                 }
@@ -346,7 +348,7 @@ class Quizzer {
 
             return answerIsCorrect;
         } catch (err) {
-            // console.warn(err, "With question: ", question_form);
+            console.warn(err, "With question: ", question_form);
             return false;
         }
     }
@@ -371,7 +373,7 @@ class Quizzer {
             const expectedAnswer = questionPrompt.expectedAnswer;
             const decimalCounts = countDecimals(expectedAnswer);
 
-            // console.log(`${expectedAnswer} count is ${decimalCounts}`);
+            // if (DEBUG) console.log(`${expectedAnswer} count is ${decimalCounts}`);
             if (decimals_allowed == 9) {
                 foundProper = true;
             } else if (decimals_allowed >= decimalCounts) {
@@ -379,7 +381,7 @@ class Quizzer {
 
             } else {
                 ;
-                // console.log(`${expectedAnswer} is not proper, retrying...`);
+                // if (DEBUG) console.log(`${expectedAnswer} is not proper, retrying...`);
             }
         }
         questionPrompt.form = question_form.form;
