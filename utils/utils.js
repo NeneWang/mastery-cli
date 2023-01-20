@@ -151,7 +151,7 @@ class Maid {
 	 * !important: To prepopulate the msising report first!!
 	 */
 	provideMissingReport = () => {
-		this.say(`${chalk.hex(CONSTANTS.CUTEPINK).inverse('Missing: ')} ${this.missingFeatReport}`)
+		console.log(`${chalk.hex(CONSTANTS.CUTEPINK).inverse('Missing: ')} ${this.missingFeatReport}`)
 	}
 
 	/**
