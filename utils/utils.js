@@ -593,13 +593,20 @@ class MathQuizer {
 				}
 			 */
 			const question = new Input({
-				name: 'ServiceOption',
+				name: 'Term Question',
 				message: `Term: ${term_selected.term} ${term_selected.prompt}\nDesc: ${term_selected.description}\n`,
 			})
 
 			const user_res = await question.run()
 			this.postCommentFromTerm(term_selected, user_res, true)
 			const _ = await increasePerformance("terms");
+			// TODO if enabled, show the previous submissions: In this format (For now, limit to 5 or so)
+			/**
+			 * date: submission answer
+			 * date: submission answer
+			 * ....
+			 */
+			return True
 		} catch (err) {
 			// console.warn(err)
 		}
@@ -635,9 +642,7 @@ class MathQuizer {
 				headers: {},
 				data: data
 			});
-			if (debug) {
-				console.log(res.data)
-			}
+			
 		} catch (err) {
 			console.log("Probably no connection, comment has not been made")
 			if (debug) {
