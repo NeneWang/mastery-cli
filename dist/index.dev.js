@@ -61,7 +61,7 @@ var Demo = demos.Demo,
           debug && log(flags);
           maid.clearOnTalk = true;
 
-          if (!input.includes(cmInfo.commands.help.code)) {
+          if (!input.includes(cmInfo.commands.chart.code)) {
             _context.next = 11;
             break;
           }
@@ -123,10 +123,17 @@ var Demo = demos.Demo,
             maid.say("Auto updating sir!");
             utils.autorelease();
           } else if (input.includes(cmInfo.commands.math.code)) {
+            mQuizer.ask_math_question();
+          } else if (input.includes(cmInfo.commands.quiz.code)) {
             mQuizer.ask_question();
+          } else if (input.includes(cmInfo.commands.term.code)) {
+            mQuizer.ask_term_question();
           } else if (input.includes(cmInfo.commands.clean.code)) {
             maid.askToClean();
-          } else {}
+          } else {
+            cli_meow.showHelp(0);
+            maid.askToClean();
+          }
 
         case 31:
         case "end":

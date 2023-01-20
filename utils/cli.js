@@ -46,6 +46,7 @@ class CommandsInformation {
 		this.commands = {
 			help: new Command('Command hints', 'help'),
 			charts: new Command('Charts Demo', 'charts'),
+			chart: new Command('chart Demo', 'chart'),
 			report: new Command('Report including weather', 'report'),
 			talk: new Command('Says something random', 'talk'),
 			coa: new Command('Commit and push to origin', 'coa'),
@@ -53,6 +54,8 @@ class CommandsInformation {
 			ask: new Command('Ask her about static ifnormation', 'ask'),
 			update: new Command('Auto update Maid API.', 'update'),
 			math: new Command("Runs a math question", 'math'),
+			term: new Command("Runs a term prompt", 'term'),
+			quiz: new Command("quizzes either a term or math prommpt", 'quiz'),
 			clean: new Command("Prompts if to clean the terminal", "clean")
 
 		};
