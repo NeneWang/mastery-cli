@@ -568,9 +568,9 @@ class MathQuizer {
 		console.log("Asking terms", this.terms)
 		const askMath = false
 		if (askMath) {
-			this.ask_math_question()
+			await this.ask_math_question()
 		} else {
-			this.ask_term_question()
+			await this.ask_term_question()
 		}
 	};
 
