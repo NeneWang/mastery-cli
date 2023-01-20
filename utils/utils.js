@@ -160,7 +160,7 @@ class Maid {
 	 *  */
 	populateMissingReport = async() =>{
 		
-		const res = axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
+		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
 		this.missingFeatReport = res.data;
 	}
 
