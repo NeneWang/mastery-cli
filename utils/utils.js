@@ -20,6 +20,7 @@ const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_ran
 const { Quizzer } = require(
 	"./Quizzer"
 );
+const { debug } = require('node:console');
 
 // https://www.npmjs.com/package/chalk
 
@@ -160,8 +161,13 @@ class Maid {
 	 *  */
 	populateMissingReport = async() =>{
 		
-		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
-		this.missingFeatReport = res.data;
+		try{
+			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
+			this.missingFeatReport = res.data;
+		}
+		catch(err){
+			;
+		}
 	}
 
 
