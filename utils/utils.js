@@ -565,7 +565,7 @@ class MathQuizer {
 	 */
 	async ask_question() {
 		// Replace with Chance
-		console.log("Asking terms", this.terms)
+		// console.log("Asking terms", this.terms)
 		const askMath = false
 		if (askMath) {
 			await this.ask_math_question()
@@ -594,7 +594,7 @@ class MathQuizer {
 			 */
 			const question = new Input({
 				name: 'Term Question',
-				message: `Term: ${term_selected.term} ${term_selected.prompt}\nDesc: ${term_selected.description}\n`,
+				message: `Term: ${term_selected.term} \nDesc: ${term_selected.description}\nPrompt: ${term_selected.prompt}\n`,
 			})
 
 			const user_res = await question.run()
