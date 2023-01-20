@@ -151,7 +151,8 @@ class Maid {
 	 * !important: To prepopulate the msising report first!!
 	 */
 	provideMissingReport = () => {
-		console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse('Missing: ')} ${this.missingFeatReport}`)
+		const missingFormatedAsStr = this.missingFeatReport.join(", ")
+		console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(`Missing: ${missingFormatedAsStr}`)}`)
 	}
 
 	/**
