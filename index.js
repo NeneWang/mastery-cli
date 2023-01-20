@@ -64,7 +64,7 @@ const { Demo, EDemo } = demos;
 		maid.populateMissingReport();
 		utils.commitpush();
 		const _ = await mQuizer.ask_question();
-		maid.missingFeatReport();
+		maid.provideMissingReport();
 		maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {

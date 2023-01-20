@@ -110,7 +110,7 @@ var Demo = demos.Demo,
 
         case 27:
           _ = _context.sent;
-          maid.missingFeatReport();
+          maid.provideMissingReport();
           maid.askToClean();
           _context.next = 33;
           break;

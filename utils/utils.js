@@ -150,7 +150,7 @@ class Maid {
 	 * Prints the missing objectives
 	 * !important: To prepopulate the msising report first!!
 	 */
-	missingFeatReport = () => {
+	provideMissingReport = () => {
 		this.say(`${chalk.hex(CONSTANTS.CUTEPINK).inverse('Missing: ')} ${this.missingFeatReport}`)
 	}
 
