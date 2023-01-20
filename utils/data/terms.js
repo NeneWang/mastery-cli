@@ -12,6 +12,16 @@ const cloud = [
     { term: "Concurrent Computing", description: "In concurrent computing, multiple calculations are made within overlapping time frames. It takes advantage of the concept that multiple threads or processes can make progress on a task without waiting for others to complete. This general approach to writing and executing computer programs is called concurrency.  Concurrent computing is different than synchronous (sequential) computing, where calculations are made one after the other, with each waiting for the previous to complete. It's not the same as parallel computing, where calculations are made simultaneously on separate processors.  The three main types of concurrent computing are threading, asynchrony, and preemptive multitasking. Each method has its own special precautions which must be taken to prevent race conditions, where multiple threads or processes access the same shared data in memory in improper order.", prompt: "Whats the difference between different concurrent computing types?" },
 ]
 
+
+// Some things to populate in the future
+const business = []
+
+const pandasMethods = []
+
+const marketingTerms = []
+
+
+
 const termJson = []; // Variable to be returned with the total of the terms to be used
 
 termJson.push(...designPatterns);
