@@ -69,7 +69,7 @@ var Demo = demos.Demo,
           // Demo for showing charts
           demo = new Demo();
           demo.chartDemo(EDemo.BAR);
-          _context.next = 31;
+          _context.next = 33;
           break;
 
         case 11:
@@ -79,7 +79,7 @@ var Demo = demos.Demo,
           }
 
           maid.dayReport();
-          _context.next = 31;
+          _context.next = 33;
           break;
 
         case 15:
@@ -94,26 +94,28 @@ var Demo = demos.Demo,
         case 18:
           message = _context.sent;
           maid.say(message, true);
-          _context.next = 31;
+          _context.next = 33;
           break;
 
         case 22:
           if (!input.includes(cmInfo.commands.coa.code)) {
-            _context.next = 30;
+            _context.next = 32;
             break;
           }
 
+          maid.populateMissingReport();
           utils.commitpush();
-          _context.next = 26;
+          _context.next = 27;
           return regeneratorRuntime.awrap(mQuizer.ask_question());
 
-        case 26:
+        case 27:
           _ = _context.sent;
+          maid.missingFeatReport();
           maid.askToClean();
-          _context.next = 31;
+          _context.next = 33;
           break;
 
-        case 30:
+        case 32:
           if (input.includes(cmInfo.commands.services.code)) {
             // Gets all services, keeps asking for things here, which service to get
             maid.services();
@@ -135,7 +137,7 @@ var Demo = demos.Demo,
             maid.askToClean();
           }
 
-        case 31:
+        case 33:
         case "end":
           return _context.stop();
       }

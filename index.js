@@ -61,8 +61,10 @@ const { Demo, EDemo } = demos;
 
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
+		maid.populateMissingReport();
 		utils.commitpush();
 		const _ = await mQuizer.ask_question();
+		maid.missingFeatReport();
 		maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {

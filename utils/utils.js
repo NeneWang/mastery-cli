@@ -102,6 +102,7 @@ class Maid {
 		this.name = name;
 		this.headerColor = headerColor;
 		this.clearOnTalk = clearOnTalk;
+		this.missing_features_today = []; //To be populated when required.
 	}
 
 	getMaidHeader = () => {
@@ -144,6 +145,24 @@ class Maid {
 		// console.log('Weather\n')
 		weatherReport();
 	}
+
+	/**
+	 * Prints the missing objectives
+	 * !important: To prepopulate the msising report first!!
+	 */
+	missingFeatReport = () => {
+		this.say(`${chalk.hex(CONSTANTS.CUTEPINK).inverse('Missing: ')} ${this.missingFeatReport}`)
+	}
+
+	/**
+	 *  precalculated asynchronous at the start, since usually the missing Feat report is to be shown at the end of the math thing.
+	 *  */
+	populateMissingReport = async() =>{
+		
+		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
+		this.missingFeatReport = res.data;
+	}
+
 
 	performanceReport = async () => {
 		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/report/${CONSTANTS.ACCOUNT_ID}`, {

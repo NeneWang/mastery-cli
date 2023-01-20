@@ -1,5 +1,13 @@
 
 
+/**
+ * <RULES>
+ * 
+ * 1 Creating Collections: It makes sense to create collection for e.g. functions on an array and their hipothetical use.
+ * 2 Strategy > Term:, Or at least bundle a collection of terms, to make it worth more.
+ */
+
+
 const designPatterns = [
     { term: "Singleton Pattern", description: "Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.", prompt: "Example usage for this." },
 ]
