@@ -1,3 +1,9 @@
+
+/**
+ * 
+ * @param {List: any} list A lit of any object
+ * @returns any # picks the object and returns it.
+ */
 function get_random(list) {
     return list[Math.floor((Math.random() * list.length))];
 }
@@ -291,8 +297,56 @@ const qmathformulas = {
     "stats-chose": { "form": `y = (${dtypes.sd_1}/(${dtypes.sd_1} + ${dtypes.d_2}))*100`, "replace": [dtypes.sd_1, dtypes.d_2], "calculates": ["y"], "ans_constraint": ".1", "human": `A bag contains ${dtypes.sd_1} red marbles and ${dtypes.d_2} blue marbles. If you choose a marble at random, what is the probability that it will be red? (percentage %)` },
     "stats-select-consecutive": { "form": `y = (${dtypes.sd_1}/(${dtypes.sd_1} + ${dtypes.d_2}) * (${dtypes.sd_1}- 1)/(${dtypes.sd_1} + ${dtypes.d_2} - 1))`, "replace": [dtypes.sd_1, dtypes.d_2], "calculates": ["y"], "ans_constraint": ".2", "human": `A bag contains ${dtypes.sd_1} red marbles and ${dtypes.d_2} blue marbles. . If you draw two balls at random without replacement, what is the probability that both will be red?` },
 
-
 }
+
+class Term{
+    
+    constructor(term, example ="", description="", references="", category="", prompt="Use the term"){
+      this.term = term;
+      this.example = example;
+      this.description = description;
+      this.references = references;
+      this.category = category;
+      this.prompt = prompt;
+      this.slug = this.slugify(this.term);
+    }
+    
+    /**
+     *  Slugify the term 
+     */
+    slugify = (term) => {
+        return  term.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')
+    }
+
+    get asJson(){
+      return {term: this.term, example: this.example, description: this.description, references: this.references,
+      category: this.category, prompt: this.prompt,
+          formula_name: this.slug
+      };
+    }
+
+};
+
+class TermStorage{
+  constructor(terms = []){
+    this.terms = terms;
+  }
+
+  get jsonTerms(){
+    const res = [];
+    for (const term of this.terms){
+      res.push(term.asJson)
+    }
+    return res;
+  }
+
+};
+
+
+const terms = [new Term("Singleton Pattern")]
+
+const termStorage = new TermStorage(terms);
+const termsEnabled = termStorage.jsonTerms
 
 // (sd_1 + 20) / 3
 const getQmathEnabled = (listOfProblemSets, debugLast=false, lasts=0) => {
@@ -336,7 +390,7 @@ const countDecimals = (value) => {
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
     appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures,
-    qmathformulas, qmathenabled, getRandomInt, countDecimals
+    qmathformulas, qmathenabled, getRandomInt, countDecimals, termsEnabled
 };
 
 

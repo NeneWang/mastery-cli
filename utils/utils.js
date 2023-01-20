@@ -192,7 +192,6 @@ class Maid {
 
 
 
-
 	// Features is a list of FeatureExtraction
 	barChartFeatures = (data, features, lasts = 2) => {
 		/**
@@ -403,24 +402,29 @@ class Maid {
 
 class MathQuizer {
 
-	constructor(qmathformulas, qmathenabled) {
+	constructor(qmathformulas, qmathenabled, terms = [], alsoAskTerms = true) {
+		// TODO: Implement TermStorage Support from the getgo.
+		this.terms = terms;
 		this.enabledqmathformulas = qmathenabled.map(formula_name => { qmathformulas[formula_name].formula_name = formula_name; return qmathformulas[formula_name] });
 	}
 
+
 	/**
 	 * Picks a random question from the enabled list
+	 * NOTE It requires the potential questions to have formula_name as the slug
 	 * OUT: 
 	 * - {form, replace}
 	 */
-	pick_question = async () => {
-		let potential_questions = this.enabledqmathformulas
+	getYoungest = async (potential_questions) => {
+
 		try {
 
 			const problem_names = potential_questions.map(x => x.formula_name)
 			// const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
+			// console.log(problem_names)
 			const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, problem_names);
 			const response_data = res.data;
-
+			// console.log(response_data)
 			// console.log("response_data", response_data);
 			// let potential_questions = potential_questions.filter(formula_name)
 
@@ -428,15 +432,44 @@ class MathQuizer {
 			// console.log("Response Potentail and response", potential_questions, response_data)
 			potential_questions = potential_questions.filter(question => response_data.indexOf(question.formula_name) !== -1)
 			// console.log("Response filtered", potential_questions)
-			return get_random(potential_questions);
+			// return get_random(potential_questions);
 
 		} catch (e) {
 			// Such as no internet connection
-			// console.warn(e)
+			console.warn(e)
 		}
+		return potential_questions;
+	}
+
+	pick_math_question = async () => {
+
+		let potential_questions = this.enabledqmathformulas
+		potential_questions = this.getYoungest(potential_questions);
 
 		return get_random(potential_questions);
-	};
+	}
+
+	pick_term_question = async () => {
+		// console.log("Picking terms from:", this.terms)
+		let potential_questions = this.terms
+		/**
+		 *  Terms Structure:
+			{
+				term: 'Singleton Pattern',
+				example: '',
+				description: '',
+				references: '',
+				category: '',
+				prompt: 'Use the term',
+				formula_name: 'singleton-pattern'
+			}
+		 */
+		potential_questions = await this.getYoungest(potential_questions)
+
+		// console.log("Left with", potential_questions)
+
+		return get_random(potential_questions);
+	}
 
 
 	/**
@@ -531,7 +564,95 @@ class MathQuizer {
 	 * Asks question and waits for response, allows repetition.
 	 */
 	async ask_question() {
-		const question_form = await this.pick_question();
+		// Replace with Chance
+		console.log("Asking terms", this.terms)
+		const askMath = false
+		if (askMath) {
+			this.ask_math_question()
+		} else {
+			this.ask_term_question()
+		}
+	};
+
+	async ask_term_question() {
+		// Fetches a random term form with the youngest one, unless there is no internet
+
+		const term_selected = await this.pick_term_question();
+		try {
+			// Start running the question_attempt
+			/**
+			 *  Term Structure
+				{
+					term: 'Singleton Pattern',
+					example: '',
+					description: '',
+					references: '',
+					category: '',
+					prompt: 'Use the term',
+					formula_name: 'singleton-pattern'
+				}
+			 */
+			const question = new Input({
+				name: 'ServiceOption',
+				message: `Term: ${term_selected.term} ${term_selected.prompt}\nDesc: ${term_selected.description}\n`,
+			})
+
+			const user_res = await question.run()
+			this.postCommentFromTerm(term_selected, user_res, true)
+			const _ = await increasePerformance("terms");
+		} catch (err) {
+			// console.warn(err)
+		}
+	}
+
+	/**
+	 * Based on a term and response written by the user it should post things in the comments based on that.
+		* @param {Term Structure} term_selected: The term which response was answered
+		* @param {str} user_res: Response answered by the user on the terminal
+		* @param {bool} debug ?= False : If to whether to debug api responses, etc.
+	 */
+	async postCommentFromTerm(term_selected, user_res, debug = false) {
+		/**Expected Body Structure: for `https://jmmgskxdgn.us-east-1.awsapprunner.com/comment`
+		 * {
+			"account_id": 0,
+			"body": "string",
+			"title": "string",
+			"concept_slug": "string"
+			}
+		 */
+		try {
+
+			const data = {
+				'account_id': CONSTANTS.ACCOUNT_ID ?? 1, //1
+				'body': user_res ?? "",
+				'title': term_selected.term ?? "title",
+				'concept_slug': term_selected.formula_name ?? "slug"
+			}
+
+			axios({
+				method: 'post',
+				url: `${APIDICT.DEPLOYED_MAID}/comment`,
+				headers: {},
+				data: data
+			});
+			if (debug) {
+				console.log(res.data)
+			}
+		} catch (err) {
+			console.log("Probably no connection, comment has not been made")
+			if (debug) {
+				console.log(err)
+			}
+		}
+
+
+
+
+	}
+
+	async ask_math_question() {
+
+		const question_form = await this.pick_math_question();
 		try {
 			const ans_constraint = question_form.ans_constraint;
 			let question_prompt = {};
@@ -574,10 +695,7 @@ class MathQuizer {
 			// console.warn(err, "With question: ", question_form);
 			return false;
 		}
-		return false;
-
-
-	};
+	}
 
 	/**
 	 * If constraints avaialable, continue compiling the questions until it is appropriate with that contraints
@@ -667,12 +785,12 @@ increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
 	if (debug) console.log(res.data);
 }
 
-updateConcept = async (problem_name, success=true, debug = false) => {
+updateConcept = async (problem_name, success = true, debug = false) => {
 	try {
 		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}`)
 		if (debug) console.log(res.data)
 	}
-	catch(err){
+	catch (err) {
 		console.warn(err);
 	}
 }

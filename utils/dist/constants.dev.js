@@ -1,5 +1,12 @@
 "use strict";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * 
+ * @param {List: any} list A lit of any object
+ * @returns any # picks the object and returns it.
+ */
 function get_random(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
@@ -341,7 +348,14 @@ var qmathformulas = {
     "ans_constraint": ".2",
     "human": "A bag contains ".concat(dtypes.sd_1, " red marbles and ").concat(dtypes.d_2, " blue marbles. . If you draw two balls at random without replacement, what is the probability that both will be red?")
   }
-}; // (sd_1 + 20) / 3
+};
+
+var Term = function Term(id, term, example, description, references, category, prompt) {
+  _classCallCheck(this, Term);
+};
+
+;
+var terms = {}; // (sd_1 + 20) / 3
 
 var getQmathEnabled = function getQmathEnabled(listOfProblemSets) {
   var debugLast = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;

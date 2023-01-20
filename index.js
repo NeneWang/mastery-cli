@@ -18,7 +18,8 @@ const demos = require('./utils/demo');
 
 const axios = require('axios');
 const chalk = require('chalk');
-const chart = require('@wangnene2/chart')
+const chart = require('@wangnene2/chart');
+const { terms } = require('./utils/constants');
 
 const cli_meow = cli[0]
 const cmInfo = cli[1]
@@ -36,7 +37,7 @@ const { Demo, EDemo } = demos;
 
 (async () => {
 	const maid = new Maid();
-	const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled);
+	const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled, constants.termsEnabled);
 
 
 	const options = Object.keys(cmInfo.commands);
