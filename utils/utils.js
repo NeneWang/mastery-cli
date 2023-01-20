@@ -629,7 +629,7 @@ class MathQuizer {
 		});
 
 		for(const row in res.data){
-			console.log(row)
+			console.log(`${Object.keys(row)?.[0]??"date"} - ${Object.values(row)?.[0]??"1"}`);
 		}
 
 	}
