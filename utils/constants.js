@@ -299,68 +299,76 @@ const qmathformulas = {
 
 }
 
-class Term{
-    
-    constructor(term, example ="", description="", prompt="Use the term", references="", category=""){
-      this.term = term;
-      this.example = example;
-      this.description = description;
-      this.references = references;
-      this.category = category;
-      this.prompt = prompt;
-      this.slug = this.slugify(this.term);
+class Term {
+
+    constructor(term, example = "", description = "", prompt = "Use the term", references = "", category = "") {
+        this.term = term;
+        this.example = example;
+        this.description = description;
+        this.references = references;
+        this.category = category;
+        this.prompt = prompt;
+        this.slug = this.slugify(this.term);
     }
-    
+
     /**
      *  Slugify the term 
      */
     slugify = (term) => {
-        return  term.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')
+        return term.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')
     }
 
-    get asJson(){
-      return {term: this.term, example: this.example, description: this.description, references: this.references,
-      category: this.category, prompt: this.prompt,
-          formula_name: this.slug
-      };
+    get asJson() {
+        return {
+            term: this.term, example: this.example, description: this.description, references: this.references,
+            category: this.category, prompt: this.prompt,
+            formula_name: this.slug
+        };
     }
 
 };
 
-class TermStorage{
-  constructor(terms = []){
-    this.terms = terms;
-  }
-
-  get jsonTerms(){
-    const res = [];
-    for (const term of this.terms){
-      res.push(term.asJson)
+class TermStorage {
+    constructor(terms = []) {
+        this.terms = terms;
     }
-    return res;
-  }
+
+    get jsonTerms() {
+        const res = [];
+        for (const term of this.terms) {
+            res.push(term.asJson)
+        }
+        return res;
+    }
 
 };
 
 
-const terms = [
-    new Term("Singleton Pattern", "",  "Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.", "Example usage for this." ),
-    // new Term("")
+const termJson = [
+    { 'term': "Singleton Pattern", 'example': "", 'description': "Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.", 'prompt': "Example usage for this." }
+
 ]
+
+function populateTerms(termJson){
+    return termJson.map(obj => new Term(obj?.term ??"", obj?.example??"", obj?.description??"", obj?.prompt??"", obj?.references??"", obj?.category??"") );
+}
+
+const terms = populateTerms(termJson);
+
 
 const termStorage = new TermStorage(terms);
 const termsEnabled = termStorage.jsonTerms
 
 // (sd_1 + 20) / 3
-const getQmathEnabled = (listOfProblemSets, debugLast=false, lasts=0) => {
+const getQmathEnabled = (listOfProblemSets, debugLast = false, lasts = 0) => {
     let qmathEnabled = []
     for (problemSet of listOfProblemSets) {
         qmathEnabled = qmathEnabled.concat(problemSet)
     }
 
     // For debugging purposes
-    if(lasts > 0) return qmathEnabled.slice(-lasts)
-    if(debugLast) return [qmathEnabled.at(qmathEnabled.length-1)]
+    if (lasts > 0) return qmathEnabled.slice(-lasts)
+    if (debugLast) return [qmathEnabled.at(qmathEnabled.length - 1)]
     return qmathenabled;
 }
 
