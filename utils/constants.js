@@ -192,8 +192,8 @@ let APIDICT = {
     CHUCK: 'http://api.chucknorris.io/jokes/random',
     WEATHER: 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/New%20york?unitGroup=metric&include=days%2Cevents&key=WR8T3G2K9PYXY26YF6VCRV7YN&contentType=json',
     LOCAL_MAID: 'http://127.0.0.1:8000',
-    // DEPLOYED_MAID: 'http://127.0.0.1:8000',
-    DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
+    DEPLOYED_MAID: 'http://127.0.0.1:8000',
+    // DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
     CURRENCY_EXCHANGE: 'https://api.apilayer.com/exchangerates_data',
     CURRENCY_EXCHANGE_KEY: '3zPc7CzmznmueYsu3SttUWIE2QZ3ODYd',
 
@@ -203,6 +203,10 @@ let APIDICT = {
 
 const CONSTANTS = {
     ACCOUNT_ID: 1,
+    CUTEBLUE: '#9ccfe7', // Cornflower
+    CUTEPINK: '#f5a9cb', // Lavander Pink
+    CUTEYELLOW: '#ffffc2', // Very Pale Yello
+    CUTEPURPLE: '#977fd7', // Medium Purple
 }
 
 
@@ -345,7 +349,8 @@ class TermStorage {
 
 
 const termJson = [
-    { 'term': "Singleton Pattern", 'example': "", 'description': "Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.", 'prompt': "Example usage for this." }
+    { 'term': "Singleton Pattern", 'example': "", 'description': "Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.", 'prompt': "Example usage for this." },
+    {term: "Backpropagation Neural Network", description: "A backpropagation neural network is a way to train neural networks. It involves providing a neural network with a set of input values for which the correct output value is known beforehand. The network processes the input and produces an output value, which is compared to the correct value. If the result is incorrect, gradual changes are propagated backward through the network, and the calculation is made again. This process repeats until the desired output is calculated by the network.", prompt: "Design one using that model"}
 
 ]
 

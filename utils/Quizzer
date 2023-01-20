@@ -211,13 +211,16 @@ class Quizzer {
                     formula_name: 'singleton-pattern'
                 }
              */
+            console.log(chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `));
+
+            console.log(`${term_selected.description}\n`)
             const question = new Input({
                 name: 'Term Question',
-                message: `Term: ${term_selected.term} \nDesc: ${term_selected.description}\nPrompt: ${term_selected.prompt}\n`,
-            })
+                message: `${term_selected.prompt}\n`,
+            });
 
-            const user_res = await question.run()
-            this.postCommentFromTerm(term_selected, user_res, true)
+            const user_res = await question.run();
+            this.postCommentFromTerm(term_selected, user_res, true);
             const _ = await increasePerformance("terms");
             // TODO if enabled, show the previous submissions: In this format (For now, limit to 5 or so)
             /**
@@ -228,9 +231,9 @@ class Quizzer {
             await this.printPreviousTerms(term_selected.formula_name)
 
 
-            return True
+            return true
         } catch (err) {
-            // console.warn(err)
+            console.warn(err)
         }
     }
 
@@ -249,7 +252,7 @@ class Quizzer {
         console.log("data", res.data[0])
         for (const row in res.data) {
             const obj = res.data[row]
-            console.log(`${Object.keys(obj)?.[0] ?? "date"} - ${Object.values(obj)?.[0] ?? "1"}`);
+            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
         }
 
     }
