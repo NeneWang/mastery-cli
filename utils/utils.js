@@ -628,7 +628,7 @@ class MathQuizer {
 			}
 		});
 
-		for(const row in res){
+		for(const row in res.data){
 			console.log(row)
 		}
 
