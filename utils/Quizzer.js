@@ -17,7 +17,7 @@ const parser = new Parser();
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 
-const DEBUG = false
+const DEBUG = true
 
 class Quizzer {
 
@@ -313,13 +313,15 @@ class Quizzer {
             const ans_constraint = question_form?.ans_constraint;
             let question_prompt = {};
             if (ans_constraint == undefined) {
-                // Does this even make sense? is not that it should be specificatlly not constrained??
+                // Because we dont need to verify the constraints,
+
                 question_prompt = this.compile_question(question_form);
-                // if (DEBUG) console.log("ask question question_prompt", question_prompt);
+                if (DEBUG) console.log("ask question question_prompt", question_prompt);
             } else {
                 question_prompt = this.compile_valid_question(question_form, ans_constraint);
-                // if (DEBUG) console.log("ask question else", question_prompt);
+                if (DEBUG) console.log("ask question else", question_prompt);
             }
+            
 
             const quiz_allow_reattempts = 3;
             let answerIsCorrect = false;
