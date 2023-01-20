@@ -81,7 +81,7 @@ var business_marketing = [{
 }, {
   formula_name: "bus-roi",
   "form": "Y = (ld_1 - ld_2)/ ld_2",
-  "replace": ['ld_1', 'ld2'],
+  "replace": ['ld_1', 'ld_2'],
   "calculates": ["y"],
   "ans_constraint": ".0",
   "human": "Calculate ROI (Return of Investment): \nnGain from Investments: ld_1\n Cost of Investment: ld_2\n"

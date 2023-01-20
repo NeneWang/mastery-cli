@@ -310,9 +310,10 @@ class Quizzer {
         const question_form = await this.pick_math_question();
         try {
             if (DEBUG) console.log('question_form', question_form)
-            const ans_constraint = question_form?.ans_constraint??".03";
+            const ans_constraint = question_form?.ans_constraint;
             let question_prompt = {};
             if (ans_constraint == undefined) {
+                // Does this even make sense? is not that it should be specificatlly not constrained??
                 question_prompt = this.compile_question(question_form);
                 // if (DEBUG) console.log("ask question question_prompt", question_prompt);
             } else {
