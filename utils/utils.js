@@ -606,10 +606,32 @@ class MathQuizer {
 			 * date: submission answer
 			 * ....
 			 */
+			await this.printPreviousTerms(term_selected.formula_name)
+
+
 			return True
 		} catch (err) {
 			// console.warn(err)
 		}
+	}
+
+	/**
+	 * Print from the term used
+	 * @param term :str # Term (slug) used e.g. singleton-pattern
+	 */
+	printPreviousTerms = async (term) => {
+		
+
+		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}format_simple=true&limit=5`, {
+			headers: {
+				'Accept-Encoding': 'application/json'
+			}
+		});
+
+		for(const row in res){
+			console.log(row)
+		}
+
 	}
 
 	/**
@@ -642,7 +664,7 @@ class MathQuizer {
 				headers: {},
 				data: data
 			});
-			
+
 		} catch (err) {
 			console.log("Probably no connection, comment has not been made")
 			if (debug) {
