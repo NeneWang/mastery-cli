@@ -61,7 +61,7 @@ const { Demo, EDemo } = demos;
 
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
-		utils.commitpush();
+		await utils.commitpush();
 		maid.populateMissingReport();
 		const _ = await mQuizer.ask_question();
 		maid.provideMissingReport();
