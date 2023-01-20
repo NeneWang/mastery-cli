@@ -186,7 +186,7 @@ class Quizzer {
     async ask_question() {
         // Replace with Chance
         // console.log("Asking terms", this.terms)
-        const askMath = false
+        const askMath = constants.getRandomBool();
         if (askMath) {
             await this.ask_math_question()
         } else {
