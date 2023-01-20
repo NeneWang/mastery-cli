@@ -301,7 +301,7 @@ const qmathformulas = {
 
 class Term{
     
-    constructor(term, example ="", description="", references="", category="", prompt="Use the term"){
+    constructor(term, example ="", description="", prompt="Use the term", references="", category=""){
       this.term = term;
       this.example = example;
       this.description = description;
@@ -343,7 +343,10 @@ class TermStorage{
 };
 
 
-const terms = [new Term("Singleton Pattern")]
+const terms = [
+    new Term("Singleton Pattern", "Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.", "Example usage for this." ),
+    // new Term("")
+]
 
 const termStorage = new TermStorage(terms);
 const termsEnabled = termStorage.jsonTerms
