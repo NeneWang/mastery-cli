@@ -315,24 +315,19 @@ const getQmathEnabled = (listOfProblemSets, debugLast = false, lasts = 0) => {
 }
 
 
-let simple = ["div_simple", "precedence", "neg_subs"];
-const bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
-const stats = ["stats-variance", "stats-std", "stats-chose", "stats-select-consecutive"]
+// let simple = ["div_simple", "precedence", "neg_subs"];
+// const bus_marketing = ["bus-conversion-rate", "bus-clv", "bus-roi", "bus-retention"];
+// const stats = ["stats-variance", "stats-std", "stats-chose", "stats-select-consecutive"]
 
 
 
-const qmathenabled = getQmathEnabled([
-    simple,
-    bus_marketing,
-    stats
-], null, 6);
+// const qmathenabled = getQmathEnabled([
+//     simple,
+//     bus_marketing,
+//     stats
+// ], null, 6);
 
 
-
-// qmathenabled = qmathenabled.concat(bus_marketing);
-// qmathenabled = bus_marketing;
-// qmathenabled = stats;
-// qmathenabled = ["stats-select-consecutive"]
 
 const countDecimals = (value) => {
     if (Math.floor(value) !== value)
@@ -343,7 +338,7 @@ const countDecimals = (value) => {
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
     appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures,
-    qmathformulas, qmathenabled, getRandomInt, countDecimals, termsEnabled
+    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled
 };
 
 

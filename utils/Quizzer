@@ -24,7 +24,8 @@ class Quizzer {
     constructor(qmathformulas, qmathenabled, terms = [], alsoAskTerms = true) {
         // TODO: Implement TermStorage Support from the getgo.
         this.terms = terms;
-        this.enabledqmathformulas = qmathenabled.map(formula_name => { qmathformulas[formula_name].formula_name = formula_name; return qmathformulas[formula_name] });
+        // this.enabledqmathformulas = qmathenabled.map(formula_name => { qmathformulas[formula_name].formula_name = formula_name; return qmathformulas[formula_name] });
+        this.enabledqmathformulas = qmathenabled;
     }
 
 
