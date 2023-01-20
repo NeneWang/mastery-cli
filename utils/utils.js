@@ -809,8 +809,11 @@ getArrayLastXDays = (days = 7) => {
 
 
 increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
-	const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}/${increaseBY}?increase_score=true`)
-	if (debug) console.log(res.data);
+	try{
+		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}/${increaseBY}?increase_score=true`)
+	}catch{
+		if (debug) console.log(res.data);
+	}
 }
 
 updateConcept = async (problem_name, success = true, debug = false) => {
