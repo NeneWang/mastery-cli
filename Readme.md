@@ -16,7 +16,7 @@ CLI Assistnat tool to keep you in track.
 - [x] Terms Testing
 - [x] Daily reports [database]
   - [x] What you wrote for your journal the same day 1 year ago. 1 month ago. 1 Week ago + 1 Day ago.
-
+- [x] Indicate Core Progress.
 
 ![](./img/2022-12-12-17-14-57.png)
 
@@ -25,6 +25,7 @@ CLI Assistnat tool to keep you in track.
 
 - [ ] Pullout algorithm questions and automatically test them. You should also test in a file that is being selected 
   - [ ] Markdown database.
+- [ ] Create a heatmap like overtime using the allowed charts
 
 ## Features
 
