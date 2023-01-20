@@ -216,10 +216,13 @@ class Quizzer {
             console.log(`${term_selected.description}\n`)
             const question = new Input({
                 name: 'Term Question',
-                message: `${term_selected.prompt}\n`,
+                message: `${term_selected.prompt} (Ignore with "no")\n`,
             });
 
             const user_res = await question.run();
+            if(user_res === "no"){
+                return false;
+            }
             this.postCommentFromTerm(term_selected, user_res, true);
             const _ = await increasePerformance("terms");
             // TODO if enabled, show the previous submissions: In this format (For now, limit to 5 or so)
@@ -249,7 +252,7 @@ class Quizzer {
                 'Accept-Encoding': 'application/json'
             }
         });
-        console.log("data", res.data[0])
+
         for (const row in res.data) {
             const obj = res.data[row]
             console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
