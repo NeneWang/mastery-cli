@@ -11,6 +11,6 @@ const termJson = [
 
 ];
 
-termJson.concat(designPatterns);
+termJson.push(...designPatterns);
 
 module.exports = { termJson };
