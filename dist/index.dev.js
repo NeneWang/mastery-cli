@@ -103,8 +103,8 @@ var Demo = demos.Demo,
             break;
           }
 
-          maid.populateMissingReport();
           utils.commitpush();
+          maid.populateMissingReport();
           _context.next = 27;
           return regeneratorRuntime.awrap(mQuizer.ask_question());
 
