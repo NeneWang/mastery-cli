@@ -581,8 +581,9 @@ let ECommitCategory = {
 	FEAT: new CommitCategoryType('feat', [':tada:', ':santa:', ':gift:']),
 	FIX: new CommitCategoryType('fix', [':hammer:', ':shipit:', ':ambulance:']),
 	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'], feature_name = "Refactoring"),
-	ARCHITECTURE: new CommitCategoryType('arc', [':triangular_ruler:', ":japanese_castle:", ":factory:"]),
-	ALGO: new CommitCategoryType('algo', [':herb:', ":crown:", ":japanese_goblin:"])
+	ACADEMY: new CommitCategoryType('acad', [':triangular_ruler:', ":japanese_castle:", ":factory:"]),
+	ALGO: new CommitCategoryType('algo', [':herb:', ":crown:", ":japanese_goblin:"]),
+	PROJECT: new CommitCategoryType('pro', [":crown:"])
 }
 
 const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
