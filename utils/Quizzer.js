@@ -17,7 +17,8 @@ const parser = new Parser();
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 
-const DEBUG = true
+// const DEBUG = true
+const DEBUG = false
 
 class Quizzer {
 
@@ -143,7 +144,7 @@ class Quizzer {
         // if (DEBUG) console.log("Compile question received", question)
         const form = question?.form;
         const replace = question?.replace??[];
-        const calculates = question?.calculates;
+        const calculates = question?.calculates??'y';
         const human_form = question?.human;
 
         // if (DEBUG) console.log("question", question)
@@ -151,10 +152,11 @@ class Quizzer {
         var parser = new Parser();
         const humanQuestion = this.getHumanQuestion(form, variables, calculates, human_form);
         parser.evaluate(form, variables);
+        if (DEBUG) console.log("variables", variables)
 
 
         // if (DEBUG) console.log("question.form", question.form);
-        return { "question_prompt": humanQuestion, "expectedAnswer": variables.y, "form:": question.form };
+        return { "question_prompt": humanQuestion, "expectedAnswer": variables?.[calculates], "form:": question.form };
     };
 
     replaceStringVariables(formString, variables) {

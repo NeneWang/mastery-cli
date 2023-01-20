@@ -66,31 +66,31 @@ var mathSimple = [{
 }];
 var business_marketing = [{
   formula_name: "bus-conversion-rate",
-  "form": "Y = sd_1 / sd_2 * 100",
+  "form": "y = sd_1 / sd_2 * 100",
   "replace": ['sd_1', 'sd_2'],
   "calculates": ["y"],
   "ans_constraint": ".0",
   "human": "Calculate conversion rate (in percentage): \nnumber of conversions: sd_1\n number of visitors : sd_2\n"
 }, {
   formula_name: "bus-clv",
-  "form": "Y = sd_1 * sd_2 * sd_3",
+  "form": "y = sd_1 * sd_2 * sd_3",
   "replace": ['sd_1', 'sd_2', 'sd_3'],
   "calculates": ["y"],
   "ans_constraint": ".0",
   "human": "Calculate Customer Lifetime Value (CLV): \nAverage purchase value: sd_1\n number of purchases per year: sd_2\n Naverage customer lifespan: sd_3\n"
 }, {
   formula_name: "bus-roi",
-  "form": "Y = (ld_1 - ld_2)/ ld_2",
+  "form": "y = (ld_1 - ld_2)/ ld_2",
   "replace": ['ld_1', 'ld_2'],
   "calculates": ["y"],
   "ans_constraint": ".0",
   "human": "Calculate ROI (Return of Investment): \nnGain from Investments: ld_1\n Cost of Investment: ld_2\n"
 }, {
   formula_name: "bus-retention",
-  "form": "Y = (d_1 - md_2) / d_3",
+  "form": "y = (d_1 - md_2) / d_3",
   "replace": ['d_1', 'md_2', 'd_3'],
   "calculates": ["y"],
-  "ans_constraint": ".1",
+  "ans_constraint": ".0",
   "human": "Calculate customer retention rate: \nCustomers at the beginning of the year: d_3\n adquires md_2 this year\n and at the end of the year has d_1 customers\n"
 }];
 var statistics_basics = [{
