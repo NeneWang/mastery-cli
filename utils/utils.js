@@ -629,7 +629,8 @@ class MathQuizer {
 		});
 		console.log("data", res.data[0])
 		for(const row in res.data){
-			console.log(`${Object.keys(row)?.[0]??"date"} - ${Object.values(row)?.[0]??"1"}`);
+			const obj = res.data[row]
+			console.log(`${Object.keys(obj)?.[0]??"date"} - ${Object.values(obj)?.[0]??"1"}`);
 		}
 
 	}
