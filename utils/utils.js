@@ -152,7 +152,7 @@ class Maid {
 	 */
 	provideMissingReport = () => {
 		const missingFormatedAsStr = this.missingFeatReport.join(", ")
-		console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(`Missing: ${missingFormatedAsStr}  `)}`)
+		console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
 	}
 
 	/**
