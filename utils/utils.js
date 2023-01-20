@@ -622,7 +622,7 @@ class MathQuizer {
 	printPreviousTerms = async (term) => {
 		
 
-		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}format_simple=true&limit=5`, {
+		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=5`, {
 			headers: {
 				'Accept-Encoding': 'application/json'
 			}
