@@ -1,6 +1,8 @@
 const { qmathformulas } = require('./data/math_formulas');
 const { termJson } = require('./data/terms');
 
+const path = require("path");
+const url = require('url');
 
 /**
  * 
@@ -214,6 +216,20 @@ const CONSTANTS = {
 }
 
 
+/**
+ * Gets clickeable path that could be printed on the console and clicked.
+ * @param {str} fileimage : String containing the relative position of the image from the project root e.g. ./img/unicorn.png
+ * @returns {str} Formatted file:///C:/github/testing/maid-cli/img/unicorn.png
+ */
+const getAbsoluteUri = (fileimage = './img/unicorn.png') => {
+    const absolutePath = path.resolve(path.join(__dirname, '../' ,fileimage)); // Note the ../ because it is inside of constants
+    const fileUrl = url.pathToFileURL(absolutePath);
+    return (fileUrl.toString());
+}
+
+
+
+
 
 // https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}
 
@@ -334,7 +350,7 @@ const countDecimals = (value) => {
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
     appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures,
-    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool
+    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool, getAbsoluteUri
 };
 
 
