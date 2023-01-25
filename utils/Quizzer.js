@@ -43,7 +43,7 @@ class Quizzer {
 
             const problem_names = potential_questions.map(x => x.formula_name)
             // const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
-            // if (DEBUG) console.log(problem_names)
+            if (DEBUG) console.log("problem_names", problem_names)
             const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, problem_names);
             const response_data = res.data;
             // if (DEBUG) console.log(response_data)
@@ -72,7 +72,7 @@ class Quizzer {
     }
 
     pick_term_question = async () => {
-        // if (DEBUG) console.log("Picking terms from:", this.terms)
+        if (DEBUG) console.log("Picking terms from:", this.terms)
         let potential_questions = this.terms
         /**
          *  Terms Structure:
@@ -230,6 +230,9 @@ class Quizzer {
             }
             this.postCommentFromTerm(term_selected, user_res, true);
             const _ = await increasePerformance("terms");
+            // TODO Increase the value of the concept
+            const ISANSWERCORRECT = true
+            const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
             
             // Print the correct example term if exists
             if(term_selected?.example??false){
