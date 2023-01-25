@@ -230,14 +230,19 @@ class Quizzer {
             }
             this.postCommentFromTerm(term_selected, user_res, true);
             const _ = await increasePerformance("terms");
-            // TODO if enabled, show the previous submissions: In this format (For now, limit to 5 or so)
+            
+            // Print the correct example term if exists
+            if(term_selected?.example??false){
+                console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')} ${term_selected.example}`);
+            }
+
             /**
              * date: submission answer
              * date: submission answer
              * ....
              */
             await this.printPreviousTerms(term_selected.formula_name)
-
+            
 
             return true
         } catch (err) {
