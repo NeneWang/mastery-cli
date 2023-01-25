@@ -46,8 +46,8 @@ const marketingTerms = []
 
 const termJson = []; // Variable to be returned with the total of the terms to be used
 
-// termJson.push(...designPatterns);
-// termJson.push(...artificialIntelligence);
+termJson.push(...designPatterns);
+termJson.push(...artificialIntelligence);
 termJson.push(...cloud);
 
 module.exports = { termJson };

@@ -47,9 +47,9 @@ var business = [];
 var pandasMethods = [];
 var marketingTerms = [];
 var termJson = []; // Variable to be returned with the total of the terms to be used
-// termJson.push(...designPatterns);
-// termJson.push(...artificialIntelligence);
 
+termJson.push.apply(termJson, designPatterns);
+termJson.push.apply(termJson, artificialIntelligence);
 termJson.push.apply(termJson, cloud);
 module.exports = {
   termJson: termJson
