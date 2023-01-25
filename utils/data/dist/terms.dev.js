@@ -30,6 +30,12 @@ var designPatterns = [{
     \
     This helps us model good inheritance hierarchies. It helps us prevent model hierarchies that don't conform to the Open/Closed principle. Any inheritance model that adheres to the Liskov Substitution Principle will implicitly follow the Open/Closed principle.",
   prompt: "How could you use this principle? What could you fix in the future, any of your code is violeting this principle?"
+}, {
+  term: "Interface Segregation Principle",
+  description: "Clients should not be forced to depend upon interfaces that they do not use.\
+    Single Responsibility Principle, the goal of the Interface Segregation Principle is to reduce the side effects and frequency of required changes by splitting the software into multiple, independent parts.\
+   Advantages: Doesn't  implement methods we dont need. Increases readability and maintainability of our code.",
+  prompt: "How could you improve your existent code using this principle?"
 }];
 var artificialIntelligence = [{
   term: "Backpropagation Neural Network",
