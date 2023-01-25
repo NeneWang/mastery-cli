@@ -42,7 +42,7 @@ const { Demo, EDemo } = demos;
 	const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled, constants.termsEnabled);
 
 
-	console.log(getAbsoluteUri("./img/unicorn.png"))
+	// console.log(getAbsoluteUri("./img/unicorn.png"))
 	const options = Object.keys(cmInfo.commands);
 	input.includes(options[0]) && cli_meow.showHelp(0);
 	debug && log(flags);

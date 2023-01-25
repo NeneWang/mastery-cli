@@ -222,7 +222,7 @@ const CONSTANTS = {
  * @returns {str} Formatted file:///C:/github/testing/maid-cli/img/unicorn.png
  */
 const getAbsoluteUri = (fileimage = './img/unicorn.png') => {
-    const absolutePath = path.resolve(path.join(__dirname, '../' ,fileimage)); // Note the ../ because it is inside of constants
+    const absolutePath = path.resolve(path.join(__dirname, '../' ,fileimage)); // Note the '../' because it is inside of constants
     const fileUrl = url.pathToFileURL(absolutePath);
     return (fileUrl.toString());
 }
@@ -272,11 +272,12 @@ const getRandomBool = (chances = 0.5) => {
 
 class Term {
 
-    constructor(term, example = "", description = "", prompt = "Use the term", references = "", category = "") {
+    constructor(term, example = "", description = "", prompt = "Use the term", references = "", category = "", attachment="") {
         this.term = term;
         this.example = example;
         this.description = description;
         this.references = references;
+        this.attachment = attachment;
         this.category = category;
         this.prompt = prompt;
         this.slug = this.slugify(this.term);
@@ -317,7 +318,7 @@ class TermStorage {
 
 
 function populateTerms(termJson) {
-    return termJson.map(obj => new Term(obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", obj?.references ?? "", obj?.category ?? ""));
+    return termJson.map(obj => new Term(obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", obj?.references ?? "", obj?.category ?? "", obj?.attachment));
 }
 
 const terms = populateTerms(termJson);

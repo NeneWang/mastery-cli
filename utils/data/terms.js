@@ -35,9 +35,7 @@ const designPatterns = [
         > In the same way that ceo should not double as a truck driver, Higher level clases shouldnt implement low levels classes.",
         prompt: "What other real life alternatives examples are here? And how can you use this to improve your code?"
     },
-    {
-        term: "Creation Paterns", description: ""
-    }
+    
 ]
 
 const artificialIntelligence = [
@@ -46,6 +44,12 @@ const artificialIntelligence = [
 
 const cloud = [
     { term: "Concurrent Computing", example: "yes", description: "In concurrent computing, multiple calculations are made within overlapping time frames. It takes advantage of the concept that multiple threads or processes can make progress on a task without waiting for others to complete. This general approach to writing and executing computer programs is called concurrency.  Concurrent computing is different than synchronous (sequential) computing, where calculations are made one after the other, with each waiting for the previous to complete. It's not the same as parallel computing, where calculations are made simultaneously on separate processors.  The three main types of concurrent computing are threading, asynchrony, and preemptive multitasking. Each method has its own special precautions which must be taken to prevent race conditions, where multiple threads or processes access the same shared data in memory in improper order.", prompt: "Whats the difference between different concurrent computing types?" },
+]
+
+const test = [
+    {
+        term: "Builder Paterns", description: "Test", prompt: "_", attachment: "./img/2023-01-25-15-31-30.png"
+    }
 ]
 
 
@@ -60,8 +64,10 @@ const marketingTerms = []
 
 const termJson = []; // Variable to be returned with the total of the terms to be used
 
-termJson.push(...designPatterns);
-termJson.push(...artificialIntelligence);
+// termJson.push(...designPatterns);
+// termJson.push(...artificialIntelligence);
 termJson.push(...cloud);
+termJson.push(test);
+
 
 module.exports = { termJson };

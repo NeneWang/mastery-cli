@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const axios = require('axios');
 const clipboard = require('copy-paste')
+
 // const {clipboard}
 // import clipboard from 'clipboardy';
 
@@ -15,7 +16,7 @@ const { bar, scatter, bg, fg, annotation } = chart;
 const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
-const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
+const { MAID_NAME,getAbsoluteUri , getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 
 // const DEBUG = true
 const DEBUG = false
@@ -217,7 +218,11 @@ class Quizzer {
                 }
              */
             console.log(chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `));
-
+            
+            if(term_selected?.attachment??false){
+                console.log(`attachment: ${getAbsoluteUri(term_selected?.attachment)}`);
+            }
+            
             console.log(`${term_selected.description}\n`)
             const question = new Input({
                 name: 'Term Question',

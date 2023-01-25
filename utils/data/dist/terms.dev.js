@@ -41,9 +41,6 @@ var designPatterns = [{
   description: "Depends on the dependency states is that high level classes should not depend on low level but on abstractions. Class with abstract methods. Swap one from the other. Advantages: gives flexibility and stability at the level of the entire architecture of your application. It will allow your application to evolve more securely and stable.\
         > In the same way that ceo should not double as a truck driver, Higher level clases shouldnt implement low levels classes.",
   prompt: "What other real life alternatives examples are here? And how can you use this to improve your code?"
-}, {
-  term: "Creation Paterns",
-  description: ""
 }];
 var artificialIntelligence = [{
   term: "Backpropagation Neural Network",
@@ -55,16 +52,23 @@ var cloud = [{
   example: "yes",
   description: "In concurrent computing, multiple calculations are made within overlapping time frames. It takes advantage of the concept that multiple threads or processes can make progress on a task without waiting for others to complete. This general approach to writing and executing computer programs is called concurrency.  Concurrent computing is different than synchronous (sequential) computing, where calculations are made one after the other, with each waiting for the previous to complete. It's not the same as parallel computing, where calculations are made simultaneously on separate processors.  The three main types of concurrent computing are threading, asynchrony, and preemptive multitasking. Each method has its own special precautions which must be taken to prevent race conditions, where multiple threads or processes access the same shared data in memory in improper order.",
   prompt: "Whats the difference between different concurrent computing types?"
+}];
+var test = [{
+  term: "Builder Paterns",
+  description: "Test",
+  prompt: "_",
+  attachment: "./img/2023-01-25-15-31-30.png"
 }]; // Some things to populate in the future
 
 var business = [];
 var pandasMethods = [];
 var marketingTerms = [];
 var termJson = []; // Variable to be returned with the total of the terms to be used
+// termJson.push(...designPatterns);
+// termJson.push(...artificialIntelligence);
 
-termJson.push.apply(termJson, designPatterns);
-termJson.push.apply(termJson, artificialIntelligence);
 termJson.push.apply(termJson, cloud);
+termJson.push(test);
 module.exports = {
   termJson: termJson
 };
