@@ -294,7 +294,7 @@ class Term {
         return {
             term: this.term, example: this.example, description: this.description, references: this.references,
             category: this.category, prompt: this.prompt,
-            formula_name: this.slug
+            formula_name: this.slug, attachment: this.attachment
         };
     }
 

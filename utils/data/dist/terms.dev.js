@@ -54,9 +54,9 @@ var cloud = [{
   prompt: "Whats the difference between different concurrent computing types?"
 }];
 var test = [{
-  term: "Builder Paterns",
-  description: "Test",
-  prompt: "_",
+  term: "Concurrent Computing",
+  example: "yes",
+  description: "In concurrent ",
   attachment: "./img/2023-01-25-15-31-30.png"
 }]; // Some things to populate in the future
 
@@ -64,11 +64,11 @@ var business = [];
 var pandasMethods = [];
 var marketingTerms = [];
 var termJson = []; // Variable to be returned with the total of the terms to be used
-// termJson.push(...designPatterns);
-// termJson.push(...artificialIntelligence);
 
-termJson.push.apply(termJson, cloud);
-termJson.push(test);
+termJson.push.apply(termJson, designPatterns);
+termJson.push.apply(termJson, artificialIntelligence);
+termJson.push.apply(termJson, cloud); // termJson.push(...test);
+
 module.exports = {
   termJson: termJson
 };

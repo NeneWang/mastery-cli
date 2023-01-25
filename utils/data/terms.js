@@ -35,7 +35,7 @@ const designPatterns = [
         > In the same way that ceo should not double as a truck driver, Higher level clases shouldnt implement low levels classes.",
         prompt: "What other real life alternatives examples are here? And how can you use this to improve your code?"
     },
-    
+
 ]
 
 const artificialIntelligence = [
@@ -48,7 +48,7 @@ const cloud = [
 
 const test = [
     {
-        term: "Builder Paterns", description: "Test", prompt: "_", attachment: "./img/2023-01-25-15-31-30.png"
+        term: "Concurrent Computing", example: "yes", description: "In concurrent ", attachment: "./img/2023-01-25-15-31-30.png"
     }
 ]
 
@@ -64,10 +64,10 @@ const marketingTerms = []
 
 const termJson = []; // Variable to be returned with the total of the terms to be used
 
-// termJson.push(...designPatterns);
-// termJson.push(...artificialIntelligence);
+termJson.push(...designPatterns);
+termJson.push(...artificialIntelligence);
 termJson.push(...cloud);
-termJson.push(test);
+// termJson.push(...test);
 
 
 module.exports = { termJson };
