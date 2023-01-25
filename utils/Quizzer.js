@@ -225,7 +225,8 @@ class Quizzer {
             });
 
             const user_res = await question.run();
-            if(user_res === "no"){
+            if(user_res === "no" || user_res === ""){
+                this.printExample(term_selected) //You want to print the example as if it didn't know the answer for the next time.
                 return false;
             }
             this.postCommentFromTerm(term_selected, user_res, true);
@@ -235,9 +236,7 @@ class Quizzer {
             const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
             
             // Print the correct example term if exists
-            if(term_selected?.example??false){
-                console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')} ${term_selected.example}`);
-            }
+           this.printExample(term_selected)
 
             /**
              * date: submission answer
@@ -250,6 +249,16 @@ class Quizzer {
             return true
         } catch (err) {
             console.warn(err)
+        }
+    }
+
+    /**
+     * Prints the example of the term_selected (if available)
+     * @param {TermStructure} term_selected: Term selected from the 
+     */
+    printExample = async(term_selected) => {
+        if(term_selected?.example??false){
+            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')} ${term_selected.example}`);
         }
     }
 

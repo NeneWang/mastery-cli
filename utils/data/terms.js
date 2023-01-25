@@ -29,6 +29,11 @@ const designPatterns = [
     Single Responsibility Principle, the goal of the Interface Segregation Principle is to reduce the side effects and frequency of required changes by splitting the software into multiple, independent parts.\
    Advantages: Doesn't  implement methods we dont need. Increases readability and maintainability of our code.",
         prompt: "How could you improve your existent code using this principle?"
+    },
+    {
+        term: "Dependency Inversion Principle", description: "Depends on the dependency states is that high level classes should not depend on low level but on abstractions. Class with abstract methods. Swap one from the other. Advantages: gives flexibility and stability at the level of the entire architecture of your application. It will allow your application to evolve more securely and stable.\
+        > In the same way that ceo should not double as a truck driver, Higher level clases shouldnt implement low levels classes.",
+        prompt: "What other real life alternatives examples are here? And how can you use this to improve your code?"
     }
 ]
 
