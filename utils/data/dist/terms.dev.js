@@ -98,6 +98,22 @@ var designPatterns = [{
         \n \
         So, the Bridge pattern is a way of connecting two things so they can work together, while still being able to change them independently. It makes the code more flexible and maintainable, but it can also make it more complex."
 }];
+var dataStructures = [{
+  term: "Heap",
+  prompt: "Re explain one of the advantages of using Heaps",
+  description: "Heaps are a specialized tree-based data structure that are used for various purposes such as priority queues, sorting, graph algorithms, and memory management. Here are some advantages and disadvantages of using heaps:\
+        \n\
+        Advantages:\
+        Fast Insertion and Extraction: Heaps have a fast time complexity for insertion and extraction operations, making them suitable for use in situations where elements are frequently added or removed.\
+        Efficient Priority Queue: Heaps can be used to implement priority queues, which are used in many algorithms to efficiently extract the element with the highest or lowest priority.\
+        Sorting: Heapsort is a comparison-based sorting algorithm that has a time complexity of O(n log n) which is efficient for sorting large datasets.\
+        Memory Management: Heaps are used in memory management to allocate memory dynamically to a program at runtime.\Disadvantages:\
+        \n\
+        Slow Random Access: Heaps are not well suited for random access, as the time complexity for searching for a specific element is O(n)\
+        Not Cache-Friendly: Heaps are not cache-friendly, as the elements are not stored contiguously in memory, which can lead to cache misses and slow down the performance of the application.\
+        Complexity: Heaps can be complex to implement, especially when compared to simpler data structures such as arrays or linked lists.\
+        In summary, heaps have advantages such as fast insertion and extraction, efficient priority queue, sorting, and memory management. However, they also have some disadvantages such as slow random access, not being cache-friendly and complexity to implement. It's worth noting that using Heaps is not always the best option, it depends on the problem and the use case, for instance, if you require random access or cache-friendliness, then you might want to consider other data structures like balanced trees."
+}];
 var artificialIntelligence = [{
   term: "Backpropagation Neural Network",
   description: "A backpropagation neural network is a way to train neural networks. It involves providing a neural network with a set of input values for which the correct output value is known beforehand. The network processes the input and produces an output value, which is compared to the correct value. If the result is incorrect, gradual changes are propagated backward through the network, and the calculation is made again. This process repeats until the desired output is calculated by the network.",
@@ -119,11 +135,13 @@ var test = [{
 var business = [];
 var pandasMethods = [];
 var marketingTerms = [];
-var termJson = []; // Variable to be returned with the total of the terms to be used
+var termJson = [];
+; // Variable to be returned with the total of the terms to be used
 
 termJson.push.apply(termJson, designPatterns);
 termJson.push.apply(termJson, artificialIntelligence);
-termJson.push.apply(termJson, cloud); // termJson.push(...test);
+termJson.push.apply(termJson, cloud);
+termJson.push.apply(termJson, dataStructures); // termJson.push(...test);
 
 module.exports = {
   termJson: termJson
