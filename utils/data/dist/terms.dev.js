@@ -7,6 +7,10 @@
  * 2 Strategy > Term:, Or at least bundle a collection of terms, to make it worth more.
  */
 var designPatterns = [{
+  term: "",
+  prompt: "What are the SOLID principles? Mention at least 3",
+  example: "     S - Single-responsiblity Principle     O - Open-closed Principle     L - Liskov Substitution Principle     I - Interface Segregation Principle     D - Dependency Inversion Principle "
+}, {
   term: "Single Responsability Principle",
   description: "The single responsibility principle provides another substantial benefit. Classes, software components and microservices that have only one responsibility are much easier to explain, understand and implement than the ones that provide a solution for everything.",
   prompt: "How could you or are using this SOLID principle?"
@@ -97,6 +101,22 @@ var designPatterns = [{
         The remote control and the TV can change independently of each other. For example, you can change the batteries in the remote control without affecting the TV. You can also buy a new TV that has different features, but you can still use your old remote control to control it. This is similar to how the Bridge pattern allows the abstraction and the implementation to evolve independently.\n \
         \n \
         So, the Bridge pattern is a way of connecting two things so they can work together, while still being able to change them independently. It makes the code more flexible and maintainable, but it can also make it more complex."
+}, {
+  term: "Composite Design Pattern",
+  description: "The Composite design pattern is a way to structure a program so that it can have objects that are made up of other objects. Imagine that you have a school project where you have to build a tree out of different materials like paper, cardboard, and glue. The tree is made up of branches and leaves, and each branch is made up of smaller branches and leaves.\
+        It allows you to treat individual objects and compositions of objects in the same way, making it easier to work with complex structures.\
+        It promotes the Single Responsibility Principle by allowing each class to only handle its own specific part of the structure.\
+        It promotes code reusability, as the same classes can be used to create different structures.\
+        \
+    Disadvantages of using the Composite design pattern include:\
+        It can make code more complex and harder to understand, especially if there are many levels of nesting in the structure.\
+        It can make it harder to debug the code, because it can be difficult to trace through the structure to find the source of an error.\
+        It can lead to performance issues if the structure is too deep or if there are too many elements in the structure.",
+  prompt: "Where do you think it would make sense to implement such design pattern? What applications?"
+}, {
+  term: "Decorator Design Pattern",
+  description: "The Decorator pattern is a way to add new behavior to an object without changing the object's class. Imagine you're a student and you want to decorate a plain notebook with stickers, pictures and drawings. The notebook is your object and the stickers, pictures and drawings are the new behavior you want to add. (The important thing is to make it work at runtime.)",
+  prompt: "Provide an example of how could you use this Design Pattern?"
 }];
 var dataStructures = [{
   term: "Heap",
