@@ -155,6 +155,17 @@ var test = [{
 var business = [];
 var pandasMethods = [];
 var marketingTerms = [];
+var coderTerms = [{
+  term: "Business Logic Modules Overview",
+  description: "Business logic modules are independent code components that multiple business logic units use. Code reuse eases the maintenance of the business logic. Reuse eliminates code duplication and enables you to apply system-wide logic changes quickly and easily.\
+        The system uses two of the metrics to describe the helpdesk performance:\
+        Metric name:  Successful Ticket resolution on time.\
+        Objective statement:  \
+        No less than 99% of the tickets should be resolved within 4 hours.\
+        Business logic: \
+        Resolution should be calculated from Open to Closed.",
+  prompt: "Create an example of a business logic."
+}];
 var termJson = [];
 ; // Variable to be returned with the total of the terms to be used
 

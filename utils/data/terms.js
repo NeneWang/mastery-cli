@@ -9,7 +9,7 @@
 
 
 const designPatterns = [
-    {term: "", prompt: "What are the SOLID principles? Mention at least 3", example: "     S - Single-responsiblity Principle     O - Open-closed Principle     L - Liskov Substitution Principle     I - Interface Segregation Principle     D - Dependency Inversion Principle "},
+    { term: "", prompt: "What are the SOLID principles? Mention at least 3", example: "     S - Single-responsiblity Principle     O - Open-closed Principle     L - Liskov Substitution Principle     I - Interface Segregation Principle     D - Dependency Inversion Principle " },
     { term: "Single Responsability Principle", description: "The single responsibility principle provides another substantial benefit. Classes, software components and microservices that have only one responsibility are much easier to explain, understand and implement than the ones that provide a solution for everything.", prompt: "How could you or are using this SOLID principle?" },
     { term: "Specification Pattern", description: "Specification of which objects satisfy certain business rules should be reusable (DRY). In order to do that we will create a class with sole responsibility of determining, whether object satisfies the rules or not.", prompt: "Example usage of this in current and future projects" },
     {
@@ -149,6 +149,21 @@ const business = [];
 const pandasMethods = [];
 
 const marketingTerms = [];
+
+const coderTerms = [
+    {
+        term: "Business Logic Modules Overview",
+        description: "Business logic modules are independent code components that multiple business logic units use. Code reuse eases the maintenance of the business logic. Reuse eliminates code duplication and enables you to apply system-wide logic changes quickly and easily.\
+        The system uses two of the metrics to describe the helpdesk performance:\
+        Metric name:  Successful Ticket resolution on time.\
+        Objective statement:  \
+        No less than 99% of the tickets should be resolved within 4 hours.\
+        Business logic: \
+        Resolution should be calculated from Open to Closed.", 
+        prompt: "Create an example of a business logic."
+    }
+]
+
 
 
 
