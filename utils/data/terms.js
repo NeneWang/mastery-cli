@@ -103,8 +103,8 @@ const designPatterns = [
     {
         term: "Decorator Design Pattern", description: "The Decorator pattern is a way to add new behavior to an object without changing the object's class. Imagine you're a student and you want to decorate a plain notebook with stickers, pictures and drawings. The notebook is your object and the stickers, pictures and drawings are the new behavior you want to add. (The important thing is to make it work at runtime.)",
         prompt: "Provide an example of how could you use this Design Pattern?"
-    }
-
+    },
+    { term: "Proxy Pattern", description: "A class that functions as an interface to a particular resource. That resource may be remote, expensive to construct, or may require logging or some other functionality.", prompt: "Name an example in how you could use this pattern on", example: "Creating a protection proxy: For protecting business logic", }
 
 ];
 
@@ -159,7 +159,7 @@ const coderTerms = [
         Objective statement:  \
         No less than 99% of the tickets should be resolved within 4 hours.\
         Business logic: \
-        Resolution should be calculated from Open to Closed.", 
+        Resolution should be calculated from Open to Closed.",
         prompt: "Create an example of a business logic."
     }
 ]
