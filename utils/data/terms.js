@@ -164,11 +164,14 @@ const coderTerms = [
     },
     {
         term: "Tech bus terms I", description: "\
-        (a) Enterprise Project (b) Regression (c) Branch Coverage Metric",
+        (a) Enterprise Project (b) Regression (c) Branch Coverage Metric (d) MUT (e) Mock (f) Double",
         example: "\
         (a) An enterprise application is an application that aims at automating or assisting an organizations inner processes. It can take many forms, but usually the characteris- tics of an enterprise software are  High business logic complexity  Long project lifespan  Moderate amounts of data  Low or moderate performance requirement\
         (b)  when a feature stops working as intended after a cer- tain event (usually, a code modification). The terms regression and software bug are synonyms and can be used interchangeably.\
         (c) To calculate the branch coverage metric, you need to sum up all possible branches in your code base and see how many of them are visited by tests.\
+        (d)  a method in the SUT called by the test. The terms MUT and SUT are often used as synonyms, but normally, MUT refers to a method while SUT refers to the whole class\
+        (e) A mock is a special kind of test double that allows you to examine interactions between the system under test and its collaborators.\
+        (f) an overarching term that describes all kinds of non-production-ready, fake dependencies in a test\
         ",
         prompt: "Explain any of the following"
     }
@@ -180,6 +183,26 @@ const unit_testing = [
         term: 'testing upkeeps',
         description: " Refactoring the test when you refactor the underlying code  Running the test on each code change  Dealing with false alarms raised by the test  Spending time reading the test when you’re trying to understand how the underlying code behaves",
         prompt: "What to consider before creating our tests?"
+    },
+    {
+        term: "(a) Shared, (b) private, and (c) out-of-process dependencies (d) volatile (e)", prompt: "Use this definitions on a sentence:",
+        description: "\
+        \
+       (a) A shared dependency is a dependency that is shared between tests and provides means for those tests to affect each other’s outcome. A typical example of shared dependencies is a static mutable field. \
+       (b) A private dependency is a dependency that is not shared\
+       (c) An out-of-process dependency is a dependency that runs outside the application’s execution process; it’s a proxy to data that is not yet in the memory.\
+       (d) that exhibits one of the following: It introduces a requirement to set up and configure a runtime environment inaddition to what is installed on a developer’s machine by default. Databasesand API services are good examples here. They require additional setup andare not installed on machines in your organization by default. It contains nondeterministic behavior. An example would be a random num-ber generator or a class returning the current date and time. These depen-dencies are non-deterministic because they provide different results on eachinvocation\
+       (e) Collaborator: providing access to the database is a collaborator since the database is a shared dependency \
+       \
+        "
+    },
+    {
+        term: "Chicago vs London School of TDD", prompt: "In which situation would you use each of them?",
+        description: "\
+        Chicago school: Test changes in the state, then test the return values\
+        London School: Desing from top down, and test the Interactions between. Characterized with ideas of mocks (Just interfaces) \
+        ",
+        attachment: "./img/2023-02-01-14-34-56.png"
     }
 ]
 
@@ -193,6 +216,7 @@ termJson.push(...artificialIntelligence);
 termJson.push(...cloud);
 termJson.push(...dataStructures);
 termJson.push(...coderTerms);
+termJson.push(...unit_testing);
 // termJson.push(...test);
 
 
