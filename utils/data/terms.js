@@ -161,6 +161,25 @@ const coderTerms = [
         Business logic: \
         Resolution should be calculated from Open to Closed.",
         prompt: "Create an example of a business logic."
+    },
+    {
+        term: "Tech bus terms I", description: "\
+        (a) Enterprise Project (b) Regression (c) Branch Coverage Metric",
+        example: "\
+        (a) An enterprise application is an application that aims at automating or assisting an organizations inner processes. It can take many forms, but usually the characteris- tics of an enterprise software are  High business logic complexity  Long project lifespan  Moderate amounts of data  Low or moderate performance requirement\
+        (b)  when a feature stops working as intended after a cer- tain event (usually, a code modification). The terms regression and software bug are synonyms and can be used interchangeably.\
+        (c) To calculate the branch coverage metric, you need to sum up all possible branches in your code base and see how many of them are visited by tests.\
+        ",
+        prompt: "Explain any of the following"
+    }
+]
+
+
+const unit_testing = [
+    {
+        term: 'testing upkeeps',
+        description: " Refactoring the test when you refactor the underlying code  Running the test on each code change  Dealing with false alarms raised by the test  Spending time reading the test when you’re trying to understand how the underlying code behaves",
+        prompt: "What to consider before creating our tests?"
     }
 ]
 
@@ -173,6 +192,7 @@ termJson.push(...designPatterns);
 termJson.push(...artificialIntelligence);
 termJson.push(...cloud);
 termJson.push(...dataStructures);
+termJson.push(...coderTerms);
 // termJson.push(...test);
 
 
