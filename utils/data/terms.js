@@ -164,14 +164,15 @@ const coderTerms = [
     },
     {
         term: "Tech bus terms I", description: "\
-        (a) Enterprise Project (b) Regression (c) Branch Coverage Metric (d) MUT (e) Mock (f) Double",
+        (a) Enterprise Project (b) Regression (c) Branch Coverage Metric (d) MUT (e) Mock (f) Double (g) SUT",
         example: "\
         (a) An enterprise application is an application that aims at automating or assisting an organizations inner processes. It can take many forms, but usually the characteris- tics of an enterprise software are  High business logic complexity  Long project lifespan  Moderate amounts of data  Low or moderate performance requirement\
         (b)  when a feature stops working as intended after a cer- tain event (usually, a code modification). The terms regression and software bug are synonyms and can be used interchangeably.\
         (c) To calculate the branch coverage metric, you need to sum up all possible branches in your code base and see how many of them are visited by tests.\
-        (d)  a method in the SUT called by the test. The terms MUT and SUT are often used as synonyms, but normally, MUT refers to a method while SUT refers to the whole class\
+        (d)  a method in the SUT called by the test. The terms MUT and SUT are often used as synonyms, but normally, MUT refers to a method while SUT refers to the whole class -> NAME the class under test using variable sut\
         (e) A mock is a special kind of test double that allows you to examine interactions between the system under test and its collaborators.\
         (f) an overarching term that describes all kinds of non-production-ready, fake dependencies in a test\
+        (g) System Under Test\
         ",
         prompt: "Explain any of the following"
     }
@@ -203,7 +204,18 @@ const unit_testing = [
         London School: Desing from top down, and test the Interactions between. Characterized with ideas of mocks (Just interfaces) \
         ",
         attachment: "./img/2023-02-01-14-34-56.png"
-    }
+    },
+    {
+        term: "AAA Pattern", prompt: "Describe when you could use this pattern? (2) What it means if there is more than AAA?, (3) What happens if you find an if? (4) Whats the right length of each section?",
+        description: "The AAA pattern advocates for splitting each test into three parts: arrange, act, and assert. The advatnage being that following increases readability on the future.",
+        example: "(2) Means that probably is an integration test and is time to split it into multiple tests. (3) That would be an antipattern. (4) Act should be one line, Assertion if too large means lack of abstraction and is okay for arrange to be large."
+    },
+    {
+        term: "Namings in Testing", prompt: "(1) How should you call this test ? (Sum_TwoNumbers_ReturnsSum, isDateInvalid) ",
+        description: "Don’t follow a rigid naming policy. You simply can’t fit a high-level description of a complex behavior into the narrow box of such a policy. Allow freedom of expression.  Name the test as if you were describing the scenario to a non-programmer who is familiar with the problem domain. A domain expert or a business analyst is a good example.  Separate words with underscores. Doing so helps improve readability, especially in long names",
+        example: "(1) Sum_of_two_numbers, date_is_a_pastdate // More specific why it's invalid."
+    },
+    {}
 ]
 
 
