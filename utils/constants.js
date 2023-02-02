@@ -222,7 +222,7 @@ const CONSTANTS = {
  * @returns {str} Formatted file:///C:/github/testing/maid-cli/img/unicorn.png
  */
 const getAbsoluteUri = (fileimage = './img/unicorn.png') => {
-    const absolutePath = path.resolve(path.join(__dirname, '../' ,fileimage)); // Note the '../' because it is inside of constants
+    const absolutePath = path.resolve(path.join(__dirname, './data/' ,fileimage)); // Note the '../' because it is inside of constants
     const fileUrl = url.pathToFileURL(absolutePath);
     return (fileUrl.toString());
 }
