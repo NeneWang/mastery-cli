@@ -217,7 +217,7 @@ const unit_testing = [
     },
     {
         term: "Good Pillars Tests", prompt: "What mental guidelines to have to create good code?", 
-        description: "(1) Protection against Regressions (2) Resistance to refactoring",
+        description: "(1) Protection against Regressions (2) Resistance to refactoring (3) Using mocks to assert intra-system communications leads to fragile tests. Mock- ing is legitimate only when it’s used for inter-system communications",
         example: "(1) To maximize the metric of protection against regressions, the test needs to aim at exercising as much code as possible.\
         (2) Aim to keep distance between the actual (current implementation of the class.) \
         "
@@ -236,7 +236,7 @@ const unit_testing = [
         Without encapsulation, you have no practical way to cope with ever-increasing code complexity. When the code’s API doesn’t guide you through what is and what isn’t allowed to be done with that code, you have to keep a lot of information in mind to make sure you don’t introduce inconsistencies with new code changes"
     },
     {
-        term: "Hexagonal Architecture Enphasis", prompt: "How would you refactor or use this Pattern on your projects?",
+        term: "Hexagonal Architecture Enphasis", prompt: "How would you refactor or use this Pattern on your projects?", attachment: "./img/2023-02-02-12-11-43.png",
         description: "Hexagonal architecture emphasizes three important aspects:\
         - Separation of concerns between the domain and application services layers. The domain layer should be responsible for the business logic, while the application services should orchestrate the work between the domain layer and external applications.\n\
         - A one-way flow of dependencies from the application services layer to the domain layer. Classes inside the domain layer should only depend on each other; they should not depend on classes from the application services layer.\n\
