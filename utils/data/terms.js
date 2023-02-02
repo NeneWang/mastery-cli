@@ -213,9 +213,25 @@ const unit_testing = [
     {
         term: "Namings in Testing", prompt: "(1) How should you call this test ? (Sum_TwoNumbers_ReturnsSum, isDateInvalid) ",
         description: "Don’t follow a rigid naming policy. You simply can’t fit a high-level description of a complex behavior into the narrow box of such a policy. Allow freedom of expression.  Name the test as if you were describing the scenario to a non-programmer who is familiar with the problem domain. A domain expert or a business analyst is a good example.  Separate words with underscores. Doing so helps improve readability, especially in long names",
-        example: "(1) Sum_of_two_numbers, date_is_a_pastdate // More specific why it's invalid."
+        example: "(1) Sum_of_two_numbers, delivery_with_pastdate_is_invalid // More specific why it's invalid, it's okay to be verbose."
     },
-    {}
+    {
+        term: "Good Pillars Tests", prompt: "What mental guidelines to have to create good code?", 
+        description: "(1) Protection against Regressions (2) Resistance to refactoring",
+        example: "(1) To maximize the metric of protection against regressions, the test needs to aim at exercising as much code as possible.\
+        (2) Aim to keep distance between the actual (current implementation of the class.) \
+        "
+    },
+    {
+        term: "mock stub", prompt: "Describe difference Mock and Stub, when would you use each?",
+        description: "Mocks help to emulate and examine outcoming interactions. These interactions are calls the SUT makes to its dependencies to change their state.  Stubs help to emulate incoming interactions. These interactions are calls the SUT makes to its dependencies to get input data",
+        attachment: "./img/2023-02-02-10-13-30.png"
+    },
+    {
+        term: 'CQRS Principle', prompt: "Whats the principle useful for?", attachment: "./img/2023-02-02-10-30-14.png",
+        description: "Commoand Query Responsability Segregation It states that every method should either be a command that performs an action, or a query that returns data to the caller, but not both; Useful in event sourcing on the event source. CQRS takes the defining principle of CQS and extends it to specific objects within a system, one retrieving data and one modifying data. CQRS is the broader architectural pattern, and CQS is the general principle of behaviour.",
+    }
+
 ]
 
 
