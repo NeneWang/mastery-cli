@@ -1,11 +1,23 @@
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 /**
  * <RULES>
  * 
  * 1 Creating Collections: It makes sense to create collection for e.g. functions on an array and their hipothetical use.
  * 2 Strategy > Term:, Or at least bundle a collection of terms, to make it worth more.
  */
+var _require = require("./classFall22"),
+    network = _require.network,
+    artificialIntelligence = _require.artificialIntelligence;
+
 var designPatterns = [{
   term: "",
   prompt: "What are the SOLID principles? Mention at least 3",
@@ -139,15 +151,6 @@ var dataStructures = [{
         Complexity: Heaps can be complex to implement, especially when compared to simpler data structures such as arrays or linked lists.\
         In summary, heaps have advantages such as fast insertion and extraction, efficient priority queue, sorting, and memory management. However, they also have some disadvantages such as slow random access, not being cache-friendly and complexity to implement. It's worth noting that using Heaps is not always the best option, it depends on the problem and the use case, for instance, if you require random access or cache-friendliness, then you might want to consider other data structures like balanced trees."
 }];
-var artificialIntelligence = [{
-  term: "Backpropagation Neural Network",
-  description: "A backpropagation neural network is a way to train neural networks. It involves providing a neural network with a set of input values for which the correct output value is known beforehand. The network processes the input and produces an output value, which is compared to the correct value. If the result is incorrect, gradual changes are propagated backward through the network, and the calculation is made again. This process repeats until the desired output is calculated by the network.",
-  prompt: "Design one using that model"
-}, {
-  term: "AI Definitions",
-  prompt: "Define in your own words (at least 1): (a) intelligence, (b) artificial intelligence, (c) agent, (d) rationality, (e) logical reasoning.",
-  description: "Dictionary definitions of intelligence talk about “the capacity to acquire and apply knowledge” or “the faculty of thought and reason” or “the ability to comprehend and profit from experience.” These are all reasonable answers, but if we want something quantifiable we would use something like “the ability to apply knowledge in order to perform better in an environment.” b. We define artificial intelligence as the study and construction of agent programs that perform well in a given environment, for a given agent architecture. c. We define an agent as an entity that takes action in response to percepts from an environment. d. We define rationality as the property of a system which does the “right thing” given what it knows. See Section 2.2 for a more complete discussion. Both describe perfect rationality, however; see Section 27.3. e. We define logical reasoning as the a process of deriving new sentences from old, such that the new sentences are necessarily true if the old ones are true. (Notice that does not refer to any specific syntax oor formal language, but it does require a well-defined notion of truth.)"
-}];
 var cloud = [{
   term: "Concurrent Computing",
   example: "yes",
@@ -230,12 +233,13 @@ var termJson = [];
 // termJson.push(...cloud);
 // termJson.push(...dataStructures);
 
-termJson.push.apply(termJson, artificialIntelligence);
+termJson.push.apply(termJson, _toConsumableArray(artificialIntelligence));
 termJson.push.apply(termJson, cloud);
 termJson.push.apply(termJson, dataStructures);
 termJson.push.apply(termJson, coderTerms);
 termJson.push.apply(termJson, unit_testing); // termJson.push(...test);
 
+termJson.push.apply(termJson, _toConsumableArray(network));
 module.exports = {
   termJson: termJson
 };
