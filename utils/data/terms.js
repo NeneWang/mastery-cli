@@ -186,7 +186,7 @@ const unit_testing = [
         prompt: "What to consider before creating our tests?"
     },
     {
-        term: "(a) Shared, (b) private, and (c) out-of-process dependencies (d) volatile (e)", prompt: "Use this definitions on a sentence:",
+        term: "(a) Shared, (b) private, and (c) out-of-process dependencies (d) volatile (e) Collaborator", prompt: "Use this definitions on a sentence:",
         description: "\
         \
        (a) A shared dependency is a dependency that is shared between tests and provides means for those tests to affect each other’s outcome. A typical example of shared dependencies is a static mutable field. \
@@ -241,7 +241,16 @@ const unit_testing = [
         - Separation of concerns between the domain and application services layers. The domain layer should be responsible for the business logic, while the application services should orchestrate the work between the domain layer and external applications.\n\
         - A one-way flow of dependencies from the application services layer to the domain layer. Classes inside the domain layer should only depend on each other; they should not depend on classes from the application services layer.\n\
         - External applications connect to your application through a common inter- face maintained by the application services layer. No one has a direct access to the domain layer "
-    }
+    },
+    {
+        term: "(a) Mathematical functions", prompt: "Why identifying this is important?",
+        example: "The goal is to cover the functional core exten- sively with output-based tests and leave the mutable shell to a much smaller number of integration tests",
+        description: "\
+        \
+       (a)Methods with no hidden inputs and outputs are called mathematical functions because such methods adhere to the definition of a function in mathematics\n\
+       \
+        "
+    },
 
 
 
