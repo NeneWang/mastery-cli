@@ -186,7 +186,7 @@ const unit_testing = [
         prompt: "What to consider before creating our tests?"
     },
     {
-        term: "(a) Shared, (b) private, and (c) out-of-process dependencies (d) volatile (e) Collaborator", prompt: "Use this definitions on a sentence:",
+        term: "(a) Shared, (b) private, and (c) out-of-process dependencies (d) volatile (e) Collaborator, (f) Cyclomatic Complexity", prompt: "Use this definitions on a sentence:",
         description: "\
         \
        (a) A shared dependency is a dependency that is shared between tests and provides means for those tests to affect each other’s outcome. A typical example of shared dependencies is a static mutable field. \
@@ -194,14 +194,15 @@ const unit_testing = [
        (c) An out-of-process dependency is a dependency that runs outside the application’s execution process; it’s a proxy to data that is not yet in the memory.\
        (d) that exhibits one of the following: It introduces a requirement to set up and configure a runtime environment inaddition to what is installed on a developer’s machine by default. Databasesand API services are good examples here. They require additional setup andare not installed on machines in your organization by default. It contains nondeterministic behavior. An example would be a random num-ber generator or a class returning the current date and time. These depen-dencies are non-deterministic because they provide different results on eachinvocation\
        (e) Collaborator: providing access to the database is a collaborator since the database is a shared dependency \
+       (d) indicates the number of branches in a given program or method. This metric is calculated as 1 + <number of branching points> You can think of it as the amount of tests to reach 100% branch coverage\
        \
         "
     },
     {
         term: "Chicago vs London School of TDD", prompt: "In which situation would you use each of them?",
         description: "\
-        Chicago school: Test changes in the state, then test the return values\
-        London School: Desing from top down, and test the Interactions between. Characterized with ideas of mocks (Just interfaces) \
+        Chicago school: Test changes in the state, then test the return values | Better for Functional Architecture \n\
+        London School: Desing from top down, and test the Interactions between. Characterized with ideas of mocks (Just interfaces) | Better for Object oriented architecture.  \
         ",
         attachment: "./img/2023-02-01-14-34-56.png"
     },
@@ -248,9 +249,14 @@ const unit_testing = [
         description: "\
         \
        (a)Methods with no hidden inputs and outputs are called mathematical functions because such methods adhere to the definition of a function in mathematics\n\
+       Functional functions are easier to mantain as can be wrapped into Chicago Style testing, which abstracts internal workings, while class based functions make this harder.\
        \
         "
     },
+    {
+        term: "Humble Object Pattern", prompt: "When and why would be convenient to use it?",
+        description: ""
+    }
 
 
 
