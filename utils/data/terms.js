@@ -254,8 +254,8 @@ const unit_testing = [
         "
     },
     {
-        term: "Humble Object Pattern", prompt: "When and why would be convenient to use it?",
-        description: ""
+        term: "Humble Object Pattern", prompt: "When and why would be convenient to use it? What preconditions to test and what not to test?", 
+        description: "For example you have a code with logs of logic and time to setup, or also an ", example: "You can break it down into Factory pattern to build the objects, (with those preconditions)"
     }
 
 
