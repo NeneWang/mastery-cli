@@ -217,7 +217,7 @@ const unit_testing = [
         example: "(1) Sum_of_two_numbers, delivery_with_pastdate_is_invalid // More specific why it's invalid, it's okay to be verbose."
     },
     {
-        term: "Good Pillars Tests", prompt: "What mental guidelines to have to create good code?", 
+        term: "Good Pillars Tests", prompt: "What mental guidelines to have to create good code?",
         description: "(1) Protection against Regressions (2) Resistance to refactoring (3) Using mocks to assert intra-system communications leads to fragile tests. Mock- ing is legitimate only when it’s used for inter-system communications",
         example: "(1) To maximize the metric of protection against regressions, the test needs to aim at exercising as much code as possible.\
         (2) Aim to keep distance between the actual (current implementation of the class.) \
@@ -233,7 +233,7 @@ const unit_testing = [
         description: "Commoand Query Responsability Segregation It states that every method should either be a command that performs an action, or a query that returns data to the caller, but not both; Useful in event sourcing on the event source. CQRS takes the defining principle of CQS and extends it to specific objects within a system, one retrieving data and one modifying data. CQRS is the broader architectural pattern, and CQS is the general principle of behaviour.",
     },
     {
-        term: "Encapsulating APIs", prompt: "What mental guidelines to follow when encapsulating API?", attachment: "./img/2023-02-02-10-51-02.png" , description: "\
+        term: "Encapsulating APIs", prompt: "What mental guidelines to follow when encapsulating API?", attachment: "./img/2023-02-02-10-51-02.png", description: "\
         Without encapsulation, you have no practical way to cope with ever-increasing code complexity. When the code’s API doesn’t guide you through what is and what isn’t allowed to be done with that code, you have to keep a lot of information in mind to make sure you don’t introduce inconsistencies with new code changes"
     },
     {
@@ -254,9 +254,33 @@ const unit_testing = [
         "
     },
     {
-        term: "Humble Object Pattern", prompt: "When and why would be convenient to use it? What preconditions to test and what not to test?", 
+        term: "Humble Object Pattern", prompt: "When and why would be convenient to use it? What preconditions to test and what not to test?",
         description: "For example you have a code with logs of logic and time to setup, or also an ", example: "You can break it down into Factory pattern to build the objects, (with those preconditions)"
+    },
+    {
+        term: "end to end vs integration test", prompt: "What is the difference between integration and end to end test?"
+    },
+    {
+        term: "integration testing", prompt: "Think of how would you design a passable Integration Testing for your current project?",
+        description: "To have in mind: (1) Make the domain model boundaries explicit (2) Reduce the amount of layers (3) Cover one intgegrated Happy path / edge cases are for unit tests (4) Test the controllers"
+    },
+    {
+        term: "support, diagnostic", prompt: "Whats the difference?", description: "Logging should only be done only if is a business requirement", 
+        example: "Support logging produces messages that are intended to be tracked by support staff or system administrators. \n\
+        Diagnostic logging helps developers understand what’s going on inside the applicatio"
+    },
+    {
+        term: "Managaged, Unmanaged", prompt: "Whats the difference? For which should you create a test?", description: "Managed dependencies are dependencies that are directly controlled and managed by a package manager (e.g. npm, pip, gem, etc.). These dependencies are installed and updated automatically when you run a command such as npm install or pip install. \n\
+        Unmanaged dependencies are dependencies that are not managed by a package manager and must be installed and updated manually. This can occur, for example, if you're using a library or package that isn't listed in a public repository, or if you've forked a project and made changes to its dependencies. Use real instances of managed dependencies in integration tests; replace unman-\n\
+        aged dependencies with mocks."
+    },
+    {
+        term: "YAGNI", prompt: "Why Yagni is a good principle? Not good? Why would you use an interface with a single implementation?",
+        description: "Interfaces with a single implementation are not abstractions and don’t provide loose coupling any more than the concrete classes that implement those inter- faces. Trying to anticipate future implementations for such interfaces violates the YAGNI (you aren’t gonna need it) principl\n\
+        A feature creep is avoided. No bloatware is created, i.e. software with functions that are hardly used or not used at all. Functions that are not implemented do not have to be tested, documented and supported. Thus there is no (unnecessary) effort.",
+        example: "The only legit reason would be to enable mocking."
     }
+    
 
 
 
