@@ -286,6 +286,22 @@ const unit_testing = [
 ]
 
 
+const system_design = [
+    {
+        term: "Load Balancing Algorithms", description: "Load balancing refers to efficiently distributing incoming network traffic across a group of backend servers, also known as a server farm or server pool.",
+        prompt: "When would it be useful to have Load balancing going on?"
+    },
+    {
+        term: "Round Robin", description: "Requests are distributed across the group of servers sequentially. \n\
+        Round robin load balancing is a load balancing technique that cyclically forwards client requests via a group of servers to effectively balance the server load. It works best when these servers have similar computational and storage capabilities. ",
+        prompt: "When should u use this?"
+    },
+    {
+        term: "Weighted Server", description: "The weighted round robin load balancing approach is based on the round robin load balancing method. In a weighted round robin, the network administrator assigns a pre-set numerical weight to each server in the pool. The most efficient and top-performing server is given a weighted score of 100. A server with half the processing capability is given a weight of 50, and so on for the rest of the farm’s servers.",
+        prompt: "What if I have weight 75 and 25?"
+    }
+]
+
 
 
 const termJson = [];; // Variable to be returned with the total of the terms to be used
@@ -298,6 +314,8 @@ termJson.push(...cloud);
 termJson.push(...dataStructures);
 termJson.push(...coderTerms);
 termJson.push(...unit_testing);
+termJson.push(...system_design);
+
 // termJson.push(...test);
 
 
