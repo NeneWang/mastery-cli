@@ -299,6 +299,33 @@ const system_design = [
     {
         term: "Weighted Server", description: "The weighted round robin load balancing approach is based on the round robin load balancing method. In a weighted round robin, the network administrator assigns a pre-set numerical weight to each server in the pool. The most efficient and top-performing server is given a weighted score of 100. A server with half the processing capability is given a weight of 50, and so on for the rest of the farm’s servers.",
         prompt: "What if I have weight 75 and 25?"
+    },
+    {
+        term: "Micro-frontends", description: "The micro frontend approach makes it possible to delay loading these other modules until they are required to speed up performance across your site. \n\
+        Benefits: Performance, Faster Feature Rollouts, Reusabiility of code, Technology Agnotism.\n\
+        MFE Standards:\n\
+        - Indenpendece: Each application provides its own development experience, and each will build, version, and release distinctly apart from each other. \n\
+        - Composition: should be manageable by a reasonably small development team. This composition should support horizontal scaling of UI development to many teams and allow engineers to avoid organizational bottlenecks to feature delivery.\n\
+        - Isolation: In the context of a build and dependency resolution system, this means each application is free to bundle and depend on its own set of libraries and frameworks. \n\
+        - Automation.", 
+        prompt: "How could I use Micro front end in one of my current projects, how about in life?"
+    },
+    {
+        term: "Continuous Integration", description: "Developers practicing continuous integration merge their changes back to the main branch as often as possible. The developer's changes are validated by creating a build and running automated tests against the build. By doing so, you avoid integration challenges that can happen when waiting for release day to merge changes into the release branch.\n\n\
+        Continuous integration puts a great emphasis on testing automation to check that the application is not broken whenever new commits are integrated into the main branch.\n\n\
+        What you need (cost) - Your team will need to write automated tests for each new feature, improvement or bug fix. You need a continuous integration server that can monitor the main repository and run the tests automatically for every new commits pushed. Developers need to merge their changes as often as possible, at least once a day.\n\n\
+        What you gain: Less bugs get shipped to production as regressions are captured early by the automated tests. Building the release is easy as all integration issues have been solved early. Less context switching as developers are alerted as soon as they break the build and can work on fixing it before they move to another task. Testing costs are reduced drastically – your CI server can run hundreds of tests in the matter of seconds. Your QA team spends less time testing and can focus on significant improvements to the quality culture.",
+        prompt: "How could you apply Continuous Integration into Business or Academic Fields? (Or on ur personal project? Or design one architecture that accets that"
+    },
+    {
+        term: "Continuous Delivery", description: "Continuous delivery is an extension of continuous integration since it automatically deploys all code changes to a testing and/or production environment after the build stage. \n\n\
+        What you need (cost): You need a strong foundation in continuous integration and your test suite needs to cover enough of your codebase.Deployments need to be automated. The trigger is still manual but once a deployment is started there shouldn't be a need for human intervention. Your team will most likely need to embrace feature flags so that incomplete features do not affect customers in production. What you gain: The complexity of deploying software has been taken away. Your team doesn't have to spend days preparing for a release anymore.  You can release more often, thus accelerating the feedback loop with your customers. There is much less pressure on decisions for small changes, hence encouraging iterating faster.",
+        prompt: "Define the difference between continuous integration and continuous delivery."
+    },
+    {
+        term: "Ringelmann Effect", description: "The Ringelmann effect is the tendency for individual members of a group to become increasingly less productive as the size of their group increases\n\
+        This effect, discovered by French agricultural engineer Maximilien Ringelmann (1861–1931), illustrates the inverse relationship that exists between the size of a group and the magnitude of group members’ individual contribution to the completion of a task",
+        prompt: "How could you use Ringelman Effect in business? How could you design a model to take advantage of this fact?"
     }
 ]
 
