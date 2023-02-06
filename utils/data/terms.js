@@ -220,7 +220,7 @@ const unit_testing = [
 
 
 
-const termJson = [];; // Variable to be returned with the total of the terms to be used
+let termJson = [];; // Variable to be returned with the total of the terms to be used
 
 // termJson.push(...designPatterns);
 // termJson.push(...cloud);
@@ -234,5 +234,7 @@ termJson.push(...unit_testing);
 
 
 termJson.push(...network)
+
+termJson = network;
 
 module.exports = { termJson };

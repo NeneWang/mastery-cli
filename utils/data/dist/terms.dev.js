@@ -1,5 +1,7 @@
 "use strict";
 
+var _termJson, _termJson2, _termJson3, _termJson4, _termJson5, _termJson6;
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -233,13 +235,20 @@ var termJson = [];
 // termJson.push(...cloud);
 // termJson.push(...dataStructures);
 
-termJson.push.apply(termJson, _toConsumableArray(artificialIntelligence));
-termJson.push.apply(termJson, cloud);
-termJson.push.apply(termJson, dataStructures);
-termJson.push.apply(termJson, coderTerms);
-termJson.push.apply(termJson, unit_testing); // termJson.push(...test);
+(_termJson = termJson).push.apply(_termJson, _toConsumableArray(artificialIntelligence));
 
-termJson.push.apply(termJson, _toConsumableArray(network));
+(_termJson2 = termJson).push.apply(_termJson2, cloud);
+
+(_termJson3 = termJson).push.apply(_termJson3, dataStructures);
+
+(_termJson4 = termJson).push.apply(_termJson4, coderTerms);
+
+(_termJson5 = termJson).push.apply(_termJson5, unit_testing); // termJson.push(...test);
+
+
+(_termJson6 = termJson).push.apply(_termJson6, _toConsumableArray(network));
+
+termJson = network;
 module.exports = {
   termJson: termJson
 };
