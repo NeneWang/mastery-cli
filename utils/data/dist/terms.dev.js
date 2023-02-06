@@ -153,6 +153,8 @@ var dataStructures = [{
         Complexity: Heaps can be complex to implement, especially when compared to simpler data structures such as arrays or linked lists.\
         In summary, heaps have advantages such as fast insertion and extraction, efficient priority queue, sorting, and memory management. However, they also have some disadvantages such as slow random access, not being cache-friendly and complexity to implement. It's worth noting that using Heaps is not always the best option, it depends on the problem and the use case, for instance, if you require random access or cache-friendliness, then you might want to consider other data structures like balanced trees."
 }];
+
+
 var cloud = [{
   term: "Concurrent Computing",
   example: "yes",

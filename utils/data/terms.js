@@ -11,7 +11,7 @@
 const { network, artificialIntelligence } = require("./classFall22");
 
 const designPatterns = [
-    { term: "", prompt: "What are the SOLID principles? Mention at least 3", example: "     S - Single-responsiblity Principle     O - Open-closed Principle     L - Liskov Substitution Principle     I - Interface Segregation Principle     D - Dependency Inversion Principle " },
+    { term: "solid", prompt: "What are the SOLID principles? Mention at least 3", example: "     S - Single-responsiblity Principle     O - Open-closed Principle     L - Liskov Substitution Principle     I - Interface Segregation Principle     D - Dependency Inversion Principle " },
     { term: "Single Responsability Principle", description: "The single responsibility principle provides another substantial benefit. Classes, software components and microservices that have only one responsibility are much easier to explain, understand and implement than the ones that provide a solution for everything.", prompt: "How could you or are using this SOLID principle?" },
     { term: "Specification Pattern", description: "Specification of which objects satisfy certain business rules should be reusable (DRY). In order to do that we will create a class with sole responsibility of determining, whether object satisfies the rules or not.", prompt: "Example usage of this in current and future projects" },
     {
@@ -185,7 +185,7 @@ const unit_testing = [
         prompt: "What to consider before creating our tests?"
     },
     {
-        term: "(a) Shared, (b) private, and (c) out-of-process dependencies (d) volatile (e)", prompt: "Use this definitions on a sentence:",
+        term: "(a) Shared, (b) private, and (c) out-of-process dependencies (d) volatile (e) Collaborator, (f) Cyclomatic Complexity", prompt: "Use this definitions on a sentence:",
         description: "\
         \
        (a) A shared dependency is a dependency that is shared between tests and provides means for those tests to affect each other’s outcome. A typical example of shared dependencies is a static mutable field. \
@@ -193,14 +193,15 @@ const unit_testing = [
        (c) An out-of-process dependency is a dependency that runs outside the application’s execution process; it’s a proxy to data that is not yet in the memory.\
        (d) that exhibits one of the following: It introduces a requirement to set up and configure a runtime environment inaddition to what is installed on a developer’s machine by default. Databasesand API services are good examples here. They require additional setup andare not installed on machines in your organization by default. It contains nondeterministic behavior. An example would be a random num-ber generator or a class returning the current date and time. These depen-dencies are non-deterministic because they provide different results on eachinvocation\
        (e) Collaborator: providing access to the database is a collaborator since the database is a shared dependency \
+       (d) indicates the number of branches in a given program or method. This metric is calculated as 1 + <number of branching points> You can think of it as the amount of tests to reach 100% branch coverage\
        \
         "
     },
     {
         term: "Chicago vs London School of TDD", prompt: "In which situation would you use each of them?",
         description: "\
-        Chicago school: Test changes in the state, then test the return values\
-        London School: Desing from top down, and test the Interactions between. Characterized with ideas of mocks (Just interfaces) \
+        Chicago school: Test changes in the state, then test the return values | Better for Functional Architecture \n\
+        London School: Desing from top down, and test the Interactions between. Characterized with ideas of mocks (Just interfaces) | Better for Object oriented architecture.  \
         ",
         attachment: "./img/2023-02-01-14-34-56.png"
     },
@@ -212,11 +213,121 @@ const unit_testing = [
     {
         term: "Namings in Testing", prompt: "(1) How should you call this test ? (Sum_TwoNumbers_ReturnsSum, isDateInvalid) ",
         description: "Don’t follow a rigid naming policy. You simply can’t fit a high-level description of a complex behavior into the narrow box of such a policy. Allow freedom of expression.  Name the test as if you were describing the scenario to a non-programmer who is familiar with the problem domain. A domain expert or a business analyst is a good example.  Separate words with underscores. Doing so helps improve readability, especially in long names",
-        example: "(1) Sum_of_two_numbers, date_is_a_pastdate // More specific why it's invalid."
+        example: "(1) Sum_of_two_numbers, delivery_with_pastdate_is_invalid // More specific why it's invalid, it's okay to be verbose."
     },
-    {}
+    {
+        term: "Good Pillars Tests", prompt: "What mental guidelines to have to create good code?",
+        description: "(1) Protection against Regressions (2) Resistance to refactoring (3) Using mocks to assert intra-system communications leads to fragile tests. Mock- ing is legitimate only when it’s used for inter-system communications",
+        example: "(1) To maximize the metric of protection against regressions, the test needs to aim at exercising as much code as possible.\
+        (2) Aim to keep distance between the actual (current implementation of the class.) \
+        "
+    },
+    {
+        term: "mock stub", prompt: "Describe difference Mock and Stub, when would you use each?",
+        description: "Mocks help to emulate and examine outcoming interactions. These interactions are calls the SUT makes to its dependencies to change their state.  Stubs help to emulate incoming interactions. These interactions are calls the SUT makes to its dependencies to get input data",
+        attachment: "./img/2023-02-02-10-13-30.png"
+    },
+    {
+        term: 'CQRS Principle', prompt: "Whats the principle useful for?", attachment: "./img/2023-02-02-10-30-14.png",
+        description: "Commoand Query Responsability Segregation It states that every method should either be a command that performs an action, or a query that returns data to the caller, but not both; Useful in event sourcing on the event source. CQRS takes the defining principle of CQS and extends it to specific objects within a system, one retrieving data and one modifying data. CQRS is the broader architectural pattern, and CQS is the general principle of behaviour.",
+    },
+    {
+        term: "Encapsulating APIs", prompt: "What mental guidelines to follow when encapsulating API?", attachment: "./img/2023-02-02-10-51-02.png", description: "\
+        Without encapsulation, you have no practical way to cope with ever-increasing code complexity. When the code’s API doesn’t guide you through what is and what isn’t allowed to be done with that code, you have to keep a lot of information in mind to make sure you don’t introduce inconsistencies with new code changes"
+    },
+    {
+        term: "Hexagonal Architecture Enphasis", prompt: "How would you refactor or use this Pattern on your projects?", attachment: "./img/2023-02-02-12-11-43.png",
+        description: "Hexagonal architecture emphasizes three important aspects:\
+        - Separation of concerns between the domain and application services layers. The domain layer should be responsible for the business logic, while the application services should orchestrate the work between the domain layer and external applications.\n\
+        - A one-way flow of dependencies from the application services layer to the domain layer. Classes inside the domain layer should only depend on each other; they should not depend on classes from the application services layer.\n\
+        - External applications connect to your application through a common inter- face maintained by the application services layer. No one has a direct access to the domain layer "
+    },
+    {
+        term: "(a) Mathematical functions", prompt: "Why identifying this is important?",
+        example: "The goal is to cover the functional core exten- sively with output-based tests and leave the mutable shell to a much smaller number of integration tests",
+        description: "\
+        \
+       (a)Methods with no hidden inputs and outputs are called mathematical functions because such methods adhere to the definition of a function in mathematics\n\
+       Functional functions are easier to mantain as can be wrapped into Chicago Style testing, which abstracts internal workings, while class based functions make this harder.\
+       \
+        "
+    },
+    {
+        term: "Humble Object Pattern", prompt: "When and why would be convenient to use it? What preconditions to test and what not to test?",
+        description: "For example you have a code with logs of logic and time to setup, or also an ", example: "You can break it down into Factory pattern to build the objects, (with those preconditions)"
+    },
+    {
+        term: "end to end vs integration test", prompt: "What is the difference between integration and end to end test?"
+    },
+    {
+        term: "integration testing", prompt: "Think of how would you design a passable Integration Testing for your current project?",
+        description: "To have in mind: (1) Make the domain model boundaries explicit (2) Reduce the amount of layers (3) Cover one intgegrated Happy path / edge cases are for unit tests (4) Test the controllers"
+    },
+    {
+        term: "support, diagnostic", prompt: "Whats the difference?", description: "Logging should only be done only if is a business requirement", 
+        example: "Support logging produces messages that are intended to be tracked by support staff or system administrators. \n\
+        Diagnostic logging helps developers understand what’s going on inside the applicatio"
+    },
+    {
+        term: "Managaged, Unmanaged", prompt: "Whats the difference? For which should you create a test?", description: "Managed dependencies are dependencies that are directly controlled and managed by a package manager (e.g. npm, pip, gem, etc.). These dependencies are installed and updated automatically when you run a command such as npm install or pip install. \n\
+        Unmanaged dependencies are dependencies that are not managed by a package manager and must be installed and updated manually. This can occur, for example, if you're using a library or package that isn't listed in a public repository, or if you've forked a project and made changes to its dependencies. Use real instances of managed dependencies in integration tests; replace unman-\n\
+        aged dependencies with mocks."
+    },
+    {
+        term: "YAGNI", prompt: "Why Yagni is a good principle? Not good? Why would you use an interface with a single implementation?",
+        description: "Interfaces with a single implementation are not abstractions and don’t provide loose coupling any more than the concrete classes that implement those inter- faces. Trying to anticipate future implementations for such interfaces violates the YAGNI (you aren’t gonna need it) principl\n\
+        A feature creep is avoided. No bloatware is created, i.e. software with functions that are hardly used or not used at all. Functions that are not implemented do not have to be tested, documented and supported. Thus there is no (unnecessary) effort.",
+        example: "The only legit reason would be to enable mocking."
+    }
+    
+
+
+
 ]
 
+
+const system_design = [
+    {
+        term: "Load Balancing Algorithms", description: "Load balancing refers to efficiently distributing incoming network traffic across a group of backend servers, also known as a server farm or server pool.",
+        prompt: "When would it be useful to have Load balancing going on?"
+    },
+    {
+        term: "Round Robin", description: "Requests are distributed across the group of servers sequentially. \n\
+        Round robin load balancing is a load balancing technique that cyclically forwards client requests via a group of servers to effectively balance the server load. It works best when these servers have similar computational and storage capabilities. ",
+        prompt: "When should u use this?"
+    },
+    {
+        term: "Weighted Server", description: "The weighted round robin load balancing approach is based on the round robin load balancing method. In a weighted round robin, the network administrator assigns a pre-set numerical weight to each server in the pool. The most efficient and top-performing server is given a weighted score of 100. A server with half the processing capability is given a weight of 50, and so on for the rest of the farm’s servers.",
+        prompt: "What if I have weight 75 and 25?"
+    },
+    {
+        term: "Micro-frontends", description: "The micro frontend approach makes it possible to delay loading these other modules until they are required to speed up performance across your site. \n\
+        Benefits: Performance, Faster Feature Rollouts, Reusabiility of code, Technology Agnotism.\n\
+        MFE Standards:\n\
+        - Indenpendece: Each application provides its own development experience, and each will build, version, and release distinctly apart from each other. \n\
+        - Composition: should be manageable by a reasonably small development team. This composition should support horizontal scaling of UI development to many teams and allow engineers to avoid organizational bottlenecks to feature delivery.\n\
+        - Isolation: In the context of a build and dependency resolution system, this means each application is free to bundle and depend on its own set of libraries and frameworks. \n\
+        - Automation.", 
+        prompt: "How could I use Micro front end in one of my current projects, how about in life?"
+    },
+    {
+        term: "Continuous Integration", description: "Developers practicing continuous integration merge their changes back to the main branch as often as possible. The developer's changes are validated by creating a build and running automated tests against the build. By doing so, you avoid integration challenges that can happen when waiting for release day to merge changes into the release branch.\n\n\
+        Continuous integration puts a great emphasis on testing automation to check that the application is not broken whenever new commits are integrated into the main branch.\n\n\
+        What you need (cost) - Your team will need to write automated tests for each new feature, improvement or bug fix. You need a continuous integration server that can monitor the main repository and run the tests automatically for every new commits pushed. Developers need to merge their changes as often as possible, at least once a day.\n\n\
+        What you gain: Less bugs get shipped to production as regressions are captured early by the automated tests. Building the release is easy as all integration issues have been solved early. Less context switching as developers are alerted as soon as they break the build and can work on fixing it before they move to another task. Testing costs are reduced drastically – your CI server can run hundreds of tests in the matter of seconds. Your QA team spends less time testing and can focus on significant improvements to the quality culture.",
+        prompt: "How could you apply Continuous Integration into Business or Academic Fields? (Or on ur personal project? Or design one architecture that accets that"
+    },
+    {
+        term: "Continuous Delivery", description: "Continuous delivery is an extension of continuous integration since it automatically deploys all code changes to a testing and/or production environment after the build stage. \n\n\
+        What you need (cost): You need a strong foundation in continuous integration and your test suite needs to cover enough of your codebase.Deployments need to be automated. The trigger is still manual but once a deployment is started there shouldn't be a need for human intervention. Your team will most likely need to embrace feature flags so that incomplete features do not affect customers in production. What you gain: The complexity of deploying software has been taken away. Your team doesn't have to spend days preparing for a release anymore.  You can release more often, thus accelerating the feedback loop with your customers. There is much less pressure on decisions for small changes, hence encouraging iterating faster.",
+        prompt: "Define the difference between continuous integration and continuous delivery."
+    },
+    {
+        term: "Ringelmann Effect", description: "The Ringelmann effect is the tendency for individual members of a group to become increasingly less productive as the size of their group increases\n\
+        This effect, discovered by French agricultural engineer Maximilien Ringelmann (1861–1931), illustrates the inverse relationship that exists between the size of a group and the magnitude of group members’ individual contribution to the completion of a task",
+        prompt: "How could you use Ringelman Effect in business? How could you design a model to take advantage of this fact?"
+    }
+]
 
 
 
@@ -230,6 +341,8 @@ termJson.push(...cloud);
 termJson.push(...dataStructures);
 termJson.push(...coderTerms);
 termJson.push(...unit_testing);
+termJson.push(...system_design);
+
 // termJson.push(...test);
 
 
