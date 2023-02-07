@@ -57,8 +57,64 @@ var artificialIntelligence = [{
   term: "AI Definitions",
   prompt: "Define in your own words (at least 1): (a) intelligence, (b) artificial intelligence, (c) agent, (d) rationality, (e) logical reasoning.",
   description: "Dictionary definitions of intelligence talk about “the capacity to acquire and apply knowledge” or “the faculty of thought and reason” or “the ability to comprehend and profit from experience.” These are all reasonable answers, but if we want something quantifiable we would use something like “the ability to apply knowledge in order to perform better in an environment.” b. We define artificial intelligence as the study and construction of agent programs that perform well in a given environment, for a given agent architecture. c. We define an agent as an entity that takes action in response to percepts from an environment. d. We define rationality as the property of a system which does the “right thing” given what it knows. See Section 2.2 for a more complete discussion. Both describe perfect rationality, however; see Section 27.3. e. We define logical reasoning as the a process of deriving new sentences from old, such that the new sentences are necessarily true if the old ones are true. (Notice that does not refer to any specific syntax oor formal language, but it does require a well-defined notion of truth.)"
+}]; // From Math for Business
+
+var algebra = [{
+  term: "arithmetic operations",
+  description: "((a/b)/c)",
+  example: "a/(bc)",
+  prompt: "Solve the following"
+}, {
+  term: "y = log_b(x)",
+  description: "y = log_b(x) convert into power expression",
+  example: "x = b^y",
+  prompt: "convert it into the power expression"
+}, {
+  term: "y = log_b(x^r)",
+  description: "log_b(x^r) ",
+  prompt: "what can you do with the r?",
+  example: "r*(log_b(x))"
+}, {
+  term: "log_b(x*y)",
+  description: "log_b(x*y)",
+  prompt: "Convert it into the sum for",
+  example: "log_b(x) + log_b(y)"
+}, {
+  term: "log_b(x/y) ",
+  description: "log_b(x/y)",
+  prompt: "Convert it into the partitioned form",
+  example: "log_b(x) - log_b(y)"
+}, {
+  term: "x^2 + (a+b) x + a*b",
+  description: "x^2 + (a+b) x + a*b",
+  prompt: "factor it into two sections multiplying themselves",
+  example: "(x+a)(x+b)"
+}, {
+  term: "(x - a) ^ 3",
+  prompt: "Expand it into addition form",
+  example: "x^3 - 3a(x^2) + 3(a^2)x - a^3"
+}, {
+  term: "x^3 + a^3",
+  prompt: "Expand it, knowing that is a factor of (x+a)",
+  example: "(x+a)(x^2 - ax + a^2)"
+}, {
+  term: "x^3 - a^3",
+  prompt: "Expand it, knowing that is a factor of (x-a)",
+  example: "(x-a) (x^2 + ax + a^2)"
+}, {
+  term: "x^(2n) - a ^(2n)",
+  prompt: "Expand it into the general formula",
+  example: "(x^n - a^n) * (x^n + a^n)"
+}, {
+  term: "Quadratic formula",
+  description: "Calculate x given: 4*x^2 + 26*x + 12, knwoing that 26^2 = 676",
+  prompt: "Solve using quadratic formula, How to detect if unequal solution, repeated solution or two complex?",
+  example: "{x = -5, x = -2}, You detect by the b^2 - 4 *ac if positive there are two unequal... "
 }];
+var calculousOne = [];
 module.exports = {
   network: network,
-  artificialIntelligence: artificialIntelligence
+  artificialIntelligence: artificialIntelligence,
+  algebra: algebra,
+  calculousOne: calculousOne
 };

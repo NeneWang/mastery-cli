@@ -122,12 +122,30 @@ var statistics_basics = [{
   "ans_constraint": ".2",
   "human": "A bag contains sd_1 red marbles and d_2 blue marbles. . If you draw two balls at random without replacement, what is the probability that both will be red?"
 }];
+var algebra_properties = [{
+  formula_name: "log props",
+  form: "y = sd_1",
+  human: "log_b ( b ^ sd_1 ) = ?",
+  calculates: ['y'],
+  replace: ['sd_1', 'sd_2']
+}, {
+  formula_name: "log props 2",
+  form: "y = sd_1",
+  human: "3 ^(log_3 ( sd_1 ))",
+  calculates: ['y'],
+  replace: ["sd_1", "sd_2"]
+}, {
+  formula_name: "Using Square difference",
+  form: "y = 1",
+  human: "Calculate: ((556^2) - (555^2))/1111"
+}];
 var qmathformulas = []; //To be returned as the set of problems availale
 // Adding the modules that are of interest
+// qmathformulas.push(...mathSimple);
+// qmathformulas.push(...business_marketing);
+// qmathformulas.push(...statistics_basics);
 
-qmathformulas.push.apply(qmathformulas, mathSimple);
-qmathformulas.push.apply(qmathformulas, business_marketing);
-qmathformulas.push.apply(qmathformulas, statistics_basics);
+qmathformulas.push.apply(qmathformulas, algebra_properties);
 module.exports = {
   qmathformulas: qmathformulas
 };

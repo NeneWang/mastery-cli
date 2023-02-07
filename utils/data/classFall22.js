@@ -53,4 +53,62 @@ const artificialIntelligence = [
 
 ];
 
-module.exports = { network, artificialIntelligence };
+
+// From Math for Business
+
+const algebra = [
+    {term: "arithmetic operations", description: "((a/b)/c)", example: "a/(bc)" ,prompt: "Solve the following"},
+    {
+        term: "y = log_b(x)", description: "y = log_b(x) convert into power expression",
+        example: "x = b^y", prompt: "convert it into the power expression"
+    },
+    {
+        term: "y = log_b(x^r)", description: "log_b(x^r) ", prompt: "what can you do with the r?",
+        example: "r*(log_b(x))"
+    },
+    {
+        term: "log_b(x*y)", description: "log_b(x*y)", prompt: "Convert it into the sum for",
+        example: "log_b(x) + log_b(y)"
+    },
+    {
+        term: "log_b(x/y) ", description: "log_b(x/y)",
+        prompt: "Convert it into the partitioned form", example: "log_b(x) - log_b(y)"
+    },
+    {
+        term: "x^2 + (a+b) x + a*b", description: "x^2 + (a+b) x + a*b",
+        prompt: "factor it into two sections multiplying themselves", example: "(x+a)(x+b)"
+    },
+    {
+        term: "(x - a) ^ 3", prompt: "Expand it into addition form",
+        example: "x^3 - 3a(x^2) + 3(a^2)x - a^3"
+    },
+    {
+        term: "x^3 + a^3", prompt: "Expand it, knowing that is a factor of (x+a)",
+        example: "(x+a)(x^2 - ax + a^2)"
+    },
+    {
+        term: "x^3 - a^3", prompt: "Expand it, knowing that is a factor of (x-a)",
+        example: "(x-a) (x^2 + ax + a^2)"
+    },
+    {
+        term: "x^(2n) - a ^(2n)", prompt: "Expand it into the general formula",
+        example: "(x^n - a^n) * (x^n + a^n)"
+    },
+    {
+        term: "Quadratic formula", 
+        description: "Calculate x given: 4*x^2 + 26*x + 12, knwoing that 26^2 = 676",
+        prompt: "Solve using quadratic formula, How to detect if unequal solution, repeated solution or two complex?",
+    
+        example: "{x = -5, x = -2}, You detect by the b^2 - 4 *ac if positive there are two unequal... "
+        
+    }
+
+
+];
+
+const calculousOne =[
+    
+
+];
+
+module.exports = { network, artificialIntelligence, algebra, calculousOne };

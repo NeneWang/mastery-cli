@@ -64,13 +64,33 @@ const statistics_basics = [
     {formula_name: "stats-select-consecutive", "form": `y = (sd_1/(sd_1 + d_2) * (sd_1- 1)/(sd_1 + d_2 - 1))`, "replace": ['sd_1', 'd_2'], "calculates": ["y"], "ans_constraint": ".2", "human": `A bag contains sd_1 red marbles and d_2 blue marbles. . If you draw two balls at random without replacement, what is the probability that both will be red?` },
 ]
 
+
+const algebra_properties = [
+    {
+        formula_name: "log props", form: "y = sd_1", 
+        human: "log_b ( b ^ sd_1 ) = ?", calculates:['y'],
+        replace: ['sd_1', 'sd_2']
+    },
+    {
+        formula_name: "log props 2", form: "y = sd_1", 
+        human: "3 ^(log_3 ( sd_1 ))",
+        calculates: ['y'], replace: ["sd_1", "sd_2"]
+    },
+    {
+        formula_name: "Using Square difference", form: "y = 1",
+        human: "Calculate: ((556^2) - (555^2))/1111"
+    },
+    
+]
+
 const qmathformulas = [] //To be returned as the set of problems availale
 
 // Adding the modules that are of interest
 
-qmathformulas.push(...mathSimple);
-qmathformulas.push(...business_marketing);
-qmathformulas.push(...statistics_basics);
+// qmathformulas.push(...mathSimple);
+// qmathformulas.push(...business_marketing);
+// qmathformulas.push(...statistics_basics);
+qmathformulas.push(...algebra_properties);
 
 
 module.exports = { qmathformulas }
