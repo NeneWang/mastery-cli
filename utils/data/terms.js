@@ -377,13 +377,31 @@ const system_design = [
 
     },
     {
-        term: "ACID Properties", prompt: "Sumarize ACID Properties | How could they be used to refactor/business/UX Design? | What examples can you find?",
+        term: "ACID Properties", prompt: "What are their advantages? | Sumarize ACID Properties | How could they be used to refactor/business/UX Design? | What examples can you find?",
         description: "    Atomicity: Entire transaction will occur at once or doesn't happen at all.\n\
         Consistency: Integrity should be maintained so that the database is consistent before and after the transaction.\n\
         Isolation: Multiple transactions can take place at once without affecting each other.\n\
-        Durability: Once a transaction is successful, all the updates and modifications persist in the database."
+        Durability: Once a transaction is successful, all the updates and modifications persist in the database.",
+        example: "ACID compliance offers multiple benefits: Data integrity. Using ACID-compliant systems guarantees your data will be accurate, valid, and in line with the constraints you impose on the system. Simplified operational logic\n\
+        Database systems that rely on ACID transactions are usually slower at read and write operations, because of the locking mechanism. "
     },
-
+    {
+        term: "BASE Properties", prompt: "When to use BASE properties vs ACID ? What are the advantages and disadvatanges in comparison?",
+        description: "Regarding NoSQL databases, where consistency and correctness are not that big of an issue, but performance and scalability are, BASE properties make more sense.\n\
+        Basic Availability: The database is available most of the time.\n\
+        Soft-State: When storing new data, not all replicas have to be updated instantly, nor do they have to be write-consistent.\n\
+        Eventual-Consistency: Eventually, stores are updated everywhere to make the database consistent.",
+        example: "Marketing and customer service companies who deal with sentiment analysis will prefer the elasticity of BASE when conducting their social network research. Social network feeds are not well structured but contain huge amounts of data which a BASE-modeled database can easily store.\n\
+        Financial institutions will almost exclusively use ACID databases. Money transfers depend on the atomic nature of ACID. \n\
+        An interrupted transaction which is not immediately removed from the database can cause a lot of issues. Money could be debited from one account and, due to an error, never credited to another."
+    },
+    {
+        term: "CAP Theorem", prompt: "How would you rate your current application in the CAP Theorem framework's axis?",
+        description: "CAP theorem states that while designing a distributed system, we can only have two out of three guarantees: Consistency, Availability, and Partition Tolerance (CAP).\n\
+        Consistency: all the systems in a distributed environment see the same data at any time.\n\
+        Availability: For every request, there is going to be a response of success/failure.\n\
+        Partition Tolerance: The system continues to work even when a few of the nodes of the distributed system stop working.",
+    }
 ]
 
 
