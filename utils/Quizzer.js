@@ -18,8 +18,8 @@ const parser = new Parser();
 
 const { MAID_NAME,getAbsoluteUri , getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 
-// const DEBUG = true
-const DEBUG = false
+const DEBUG = true
+// const DEBUG = false
 
 class Quizzer {
 

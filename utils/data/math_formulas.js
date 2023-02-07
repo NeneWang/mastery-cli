@@ -67,17 +67,17 @@ const statistics_basics = [
 
 const algebra_properties = [
     {
-        formula_name: "log props", form: "y = sd_1", 
+        formula_name: "log-props", form: "y = sd_1", 
         human: "log_b ( b ^ sd_1 ) = ?", calculates:['y'],
         replace: ['sd_1', 'sd_2']
     },
     {
-        formula_name: "log props 2", form: "y = sd_1", 
+        formula_name: "log-props-2", form: "y = sd_1", 
         human: "3 ^(log_3 ( sd_1 ))",
         calculates: ['y'], replace: ["sd_1", "sd_2"]
     },
     {
-        formula_name: "Using Square difference", form: "y = 1",
+        formula_name: "using-square-difference", form: "y = 1",
         human: "Calculate: ((556^2) - (555^2))/1111", calculates: ['y']
     },
     

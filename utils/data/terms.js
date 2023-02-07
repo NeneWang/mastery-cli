@@ -337,8 +337,8 @@ const system_design = [
         term: "Availability", description: "A System is said to be available if it is operational. The availability of a system is the percentage it remains usable during its lifetime, excluding time for maintenance, repair, or other problems it might suffer.",
         prompt: "What would be the availability percentage of your current project?"
     },
-    { 
-        term: "Reliability", prompt: "Whats the difference between reliability and availability?", 
+    {
+        term: "Reliability", prompt: "Whats the difference between reliability and availability?",
         description: "Reliability is the probability that a system will remain available for use during a period.\n\n\
         Today every major company invests heavily to achieve some, if not total, reliability. For example, when you upload a photo on Facebook or Instagram, several copies of that data are stored at several locations to ensure that the image is not lost if some system failure occurs. Read in detail ❤️‍🔥.",
         example: "Availability is a measure of the percentage of time that an IT service or component is in an operable state. Reliability, on the other hand, is a measure of the probability that the system will meet defined performance standards in performing its intended function during a specified interval."
@@ -370,7 +370,19 @@ const system_design = [
         if you divide a table into very small chunks, it leads to complex join operations.\n\
         If you added a record using a hash function depending on the number of partitions, and later when you add or remove a partition, all of the data needs to be redistributed with the updated hash function.",
 
-    }
+    },
+    {
+        term: "Indexing", prompt: "how fast can this indexes mean?",
+        description: "As a database grows, the time to fetch a record also increases. Indexing is a technique used to substantially reduce the access time by creating a separate table based on one or more columns of a database. Such a table is called an index; it is sorted and has a pointer pointing to a record in the actual database.",
+
+    },
+    {
+        term: "ACID Properties", prompt: "Sumarize ACID Properties | How could they be used to refactor/business/UX Design? | What examples can you find?",
+        description: "    Atomicity: Entire transaction will occur at once or doesn't happen at all.\n\
+        Consistency: Integrity should be maintained so that the database is consistent before and after the transaction.\n\
+        Isolation: Multiple transactions can take place at once without affecting each other.\n\
+        Durability: Once a transaction is successful, all the updates and modifications persist in the database."
+    },
 
 ]
 
