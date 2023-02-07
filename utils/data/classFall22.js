@@ -99,7 +99,7 @@ const algebra = [
         description: "Calculate x given: 4*x^2 + 26*x + 12, knwoing that 26^2 = 676",
         prompt: "Solve using quadratic formula, How to detect if unequal solution, repeated solution or two complex?",
     
-        example: "{x = -5, x = -2}, You detect by the b^2 - 4 *ac if positive there are two unequal... "
+        example: "{x = -6, x = -1/2}, You detect by the b^2 - 4 *ac if positive there are two unequal... "
         
     }
 

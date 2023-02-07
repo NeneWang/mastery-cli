@@ -8,7 +8,7 @@
  */
 
 
-const { network, artificialIntelligence } = require("./classFall22");
+const { network, artificialIntelligence, algebra, calculousOne } = require("./classFall22");
 
 const designPatterns = [
     { term: "solid", prompt: "What are the SOLID principles? Mention at least 3", example: "     S - Single-responsiblity Principle     O - Open-closed Principle     L - Liskov Substitution Principle     I - Interface Segregation Principle     D - Dependency Inversion Principle " },
@@ -342,12 +342,14 @@ termJson.push(...dataStructures);
 termJson.push(...coderTerms);
 termJson.push(...unit_testing);
 termJson.push(...system_design);
+termJson.push(...algebra);
+termJson.push(...calculousOne)
 
 // termJson.push(...test);
 
 
 termJson.push(...network)
 
-termJson = network;
+// termJson = network;
 
 module.exports = { termJson };

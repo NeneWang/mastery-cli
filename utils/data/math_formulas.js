@@ -78,7 +78,7 @@ const algebra_properties = [
     },
     {
         formula_name: "Using Square difference", form: "y = 1",
-        human: "Calculate: ((556^2) - (555^2))/1111"
+        human: "Calculate: ((556^2) - (555^2))/1111", calculates: ['y']
     },
     
 ]
@@ -87,9 +87,9 @@ const qmathformulas = [] //To be returned as the set of problems availale
 
 // Adding the modules that are of interest
 
-// qmathformulas.push(...mathSimple);
-// qmathformulas.push(...business_marketing);
-// qmathformulas.push(...statistics_basics);
+qmathformulas.push(...mathSimple);
+qmathformulas.push(...business_marketing);
+qmathformulas.push(...statistics_basics);
 qmathformulas.push(...algebra_properties);
 
 
