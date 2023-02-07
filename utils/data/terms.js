@@ -396,12 +396,31 @@ const system_design = [
         An interrupted transaction which is not immediately removed from the database can cause a lot of issues. Money could be debited from one account and, due to an error, never credited to another."
     },
     {
+
         term: "CAP Theorem", prompt: "How would you rate your current application in the CAP Theorem framework's axis?",
         description: "CAP theorem states that while designing a distributed system, we can only have two out of three guarantees: Consistency, Availability, and Partition Tolerance (CAP).\n\
         Consistency: all the systems in a distributed environment see the same data at any time.\n\
         Availability: For every request, there is going to be a response of success/failure.\n\
         Partition Tolerance: The system continues to work even when a few of the nodes of the distributed system stop working.",
-    }
+    },
+    {
+        link: "https://www.youtube.com/watch?v=UF9Iqmg94tk", attachment: "./img/2023-02-07-11-49-30.png",
+        term: "Consistent Hashing", prompt: "What services use this? | Explain how this works in your own words?",
+        description: "This is where the consistent hashing technique is helpful to save us from remapping all the keys of the system and distributing them evenly. This method maps the nodes to specific integers within a range (say [0, 255]) using a hash function. This will be a circular structure starting from 0 to 255. Then we map the keys to some integer of the range and use the next available server on the ring.\n\        To distribute the keys evenly to all the nodes in the system, replicate the nodes to multiple ring parts."
+    },
+    {
+        term: "Sharding", description: "Sharding is a technique used to divide data into multiple smaller parts known as shards (Horizontal partitioning). These shards are not only smaller but faster and more manageable.",
+        prompt: "How does sharding work? EOWords | How could u use sharding in your current project? | What are their advantage and disadvantages? ",
+        example: "application-visible sharding policy using relational databases… \n\
+         Advantages:      If your shard key is well-chosen, and the machinery for getting apps to connect to the right shard instance for a given piece of data is well-done, you can scale your world basically infinitely. If you are going to have a multi-petabyte relational db world, you have to shard.     Sharding also allows your individual instances to not be overly huge, reducing performance and general instance management issues.     Lots of shards mitigate problems that affect individual instances. With one huge DB, an outage takes the whole site down. With 100 shards, a single-instance outage affects only 1% of your dataworld. \n\n\
+         Disadvantages:      Shards can be complicated to get right, particularly if your shard key isn’t obvious.     You occasionally have to worry about splitting shards, or very occasionally about merging shards. This can be quite complicated.     Applications need to be aware of the details of database organization, at least at some level.     Joins across shards are not easily doable. If you need to do cross-shard joining, you probably need a data warehouse or some type of alternate reporting dataworld. Wherever possible, you should restrict “galactic” reporting to joins that can be done within shards and “merged” by applications above the db, or by sending the bits of data (audit tables, etc) to the reporting world and running reports ther"
+    },
+    {
+        term: "Long polling", prompt: "What are the advantages or disadvantages of Long Polling? | How could u use this in a Dog and Cats Images API ? How about in an AI model (or your porjject)",
+        description: "Long polling is different from traditional polling as the server does not have to respond immediately; it accepts the request and lets the client know once the data is ready. This way, the client does not have to keep requesting new data and gets an empty response if no update is available.",
+        example: "Long polling advantages      Long polling is implemented on the back of XMLHttpRequest, which is near-universally supported by devices so there’s usually little need to support further fallback layers.     In cases where exceptions must be handled though, or where a server can be queried for new data but does not support long polling (let alone other more modern technology standards), basic polling can sometimes still be of limited use, and can be implemented using XMLHttpRequest, or via JSONP through simple HTML script tags.\n\
+        \nLong polling disadvantages      Long polling is more resource intensive on the server than a WebSocket connection.     Long polling can come with a latency overhead because it requires several hops between servers and devices. Gateways often have different ideas of how long a typical connection is allowed to stay open, so sometimes close while processing is still underway.     Reliable message ordering can be an issue with long polling because it is possible for multiple HTTP requests from the same client to be in flight simultaneously. For example, if a client has two browser tabs open consuming the same server resource, and the client-side application is persisting data to a local store such as localStorage or IndexedDb, there is no in-built guarantee that duplicate data won’t be written more than once.     Depending on the server implementation, confirmation of message receipt by one client instance may also cause another client instance to never receive an expected message at all, as the server could mistakenly believe that the client has already received the data it is expecting."
+    },
 ]
 
 
