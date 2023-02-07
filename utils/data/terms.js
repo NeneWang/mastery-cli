@@ -424,7 +424,13 @@ const system_design = [
         \nLong polling disadvantages      Long polling is more resource intensive on the server than a WebSocket connection.     Long polling can come with a latency overhead because it requires several hops between servers and devices. Gateways often have different ideas of how long a typical connection is allowed to stay open, so sometimes close while processing is still underway.     Reliable message ordering can be an issue with long polling because it is possible for multiple HTTP requests from the same client to be in flight simultaneously. For example, if a client has two browser tabs open consuming the same server resource, and the client-side application is persisting data to a local store such as localStorage or IndexedDb, there is no in-built guarantee that duplicate data won’t be written more than once.     Depending on the server implementation, confirmation of message receipt by one client instance may also cause another client instance to never receive an expected message at all, as the server could mistakenly believe that the client has already received the data it is expecting."
     },
     {
-        term: "Web Sockets", prompt: ""
+        term: "Web Sockets", prompt: "Why it has this advantages? When could this be used?",
+        description: "Using WebSockets, a bi-directional communication also known as a duplex is possible between a client and a server. A client creates a connection using what is known as a WebSocket handshake. Once the connection is successful, communication can occur between the parties without much overhead and frequent authentication.",
+        example: "This can be used for: Real time Feeds, Real Time Multiplayer Gaming, Collaborative Editing, Data Visualization, Multimedia Chat, Real Time Location, Real Time Recommendation Clicking., Real time Sports: Streaming, Event Updates (w input)"
+    },
+    {
+        term: "Server-Sent Events", prompt: "Whats the difference between this and Web Sockets?",
+        description: "In this protocol, once a connection is established between a client and a server, the server can send frequent data any time using the connection, but the client will need another protocol to send any data to the server. This is useful in scenarios where a server needs to send data continually once a client creates a connection.",
     }
 ]
 
