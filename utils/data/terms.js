@@ -264,7 +264,7 @@ const unit_testing = [
         description: "To have in mind: (1) Make the domain model boundaries explicit (2) Reduce the amount of layers (3) Cover one intgegrated Happy path / edge cases are for unit tests (4) Test the controllers"
     },
     {
-        term: "support, diagnostic", prompt: "Whats the difference?", description: "Logging should only be done only if is a business requirement", 
+        term: "support, diagnostic", prompt: "Whats the difference?", description: "Logging should only be done only if is a business requirement",
         example: "Support logging produces messages that are intended to be tracked by support staff or system administrators. \n\
         Diagnostic logging helps developers understand what’s going on inside the applicatio"
     },
@@ -279,7 +279,7 @@ const unit_testing = [
         A feature creep is avoided. No bloatware is created, i.e. software with functions that are hardly used or not used at all. Functions that are not implemented do not have to be tested, documented and supported. Thus there is no (unnecessary) effort.",
         example: "The only legit reason would be to enable mocking."
     }
-    
+
 
 
 
@@ -307,7 +307,7 @@ const system_design = [
         - Indenpendece: Each application provides its own development experience, and each will build, version, and release distinctly apart from each other. \n\
         - Composition: should be manageable by a reasonably small development team. This composition should support horizontal scaling of UI development to many teams and allow engineers to avoid organizational bottlenecks to feature delivery.\n\
         - Isolation: In the context of a build and dependency resolution system, this means each application is free to bundle and depend on its own set of libraries and frameworks. \n\
-        - Automation.", 
+        - Automation.",
         prompt: "How could I use Micro front end in one of my current projects, how about in life?"
     },
     {
@@ -326,7 +326,45 @@ const system_design = [
         term: "Ringelmann Effect", description: "The Ringelmann effect is the tendency for individual members of a group to become increasingly less productive as the size of their group increases\n\
         This effect, discovered by French agricultural engineer Maximilien Ringelmann (1861–1931), illustrates the inverse relationship that exists between the size of a group and the magnitude of group members’ individual contribution to the completion of a task",
         prompt: "How could you use Ringelman Effect in business? How could you design a model to take advantage of this fact?"
+    },
+    // https://ganeshpr227.medium.com/key-concepts-and-terms-of-system-design-interview-notes-9bf882cf3730
+    {
+        term: "Fault Tolerance", description: "the ability of a system to perform well despite some failures in the system.\n\n\
+        For example, suppose some of the hundreds of thousands of servers serving Youtube videos stop working. In that case, you will still be able to enjoy watching videos because of Youtube's ability to continue its operation without any terrible user experience.",
+        prompt: "How could you improve the current Fault Tolerance of your project?"
+    },
+    {
+        term: "Availability", description: "A System is said to be available if it is operational. The availability of a system is the percentage it remains usable during its lifetime, excluding time for maintenance, repair, or other problems it might suffer.",
+        prompt: "What would be the availability percentage of your current project?"
+    },
+    { 
+        term: "Reliability", prompt: "Whats the difference between reliability and availability?", 
+        description: "Reliability is the probability that a system will remain available for use during a period.\n\n\
+        Today every major company invests heavily to achieve some, if not total, reliability. For example, when you upload a photo on Facebook or Instagram, several copies of that data are stored at several locations to ensure that the image is not lost if some system failure occurs. Read in detail ❤️‍🔥.",
+        example: "Availability is a measure of the percentage of time that an IT service or component is in an operable state. Reliability, on the other hand, is a measure of the probability that the system will meet defined performance standards in performing its intended function during a specified interval."
+    },
+    {
+        link: 'https://medium.com/swlh/6-best-ways-to-scale-your-systems-590c901e6d7',
+        term: "Scalability", prompt: "When scalability becomes important? | \n\
+        Design s scalable system (it can be for business, for software, for your current project)\n\
+        You can use outsourcing,  standarization, Assets,\n\n\
+        As for software: Memory Chaching, Database Sharding, CQRS, Splitting Services, Horizontal Splitting ",
+        description: "Scalability is the ability of a system to increase or decrease performance or cost depending on the demand. A system may need to scale when it needs more data storage or processing power.",
+    },
+    {
+        term: "Vertical Scaling vs Horizonal scalling", prompt: "Whats the difference?",
+        example: "a. Vertical Scaling  When you add more storage, RAM, GPU power, and CPU to an existing system you have, it is called Scaling Vertically. \n\n\
+        b. Horizontal Scaling  When you scale by adding more nodes/servers to tackle increased demands, that's called horizontal scaling."
+    },
+    {
+        term: "Redundanacy & Replication", prompt: "Why they are useful? What are their advantages?",
+        description: "To increase the reliability of a system in case of failures, duplication of resources is performed; this is called achieving redundancy. Having multiple copies of some resources assures us that others can work as a backup if one system has trouble. Redundancy also reduces loads on resources by distributing them over duplicate systems.  Replication is the process of making consistent copies of resources, be it software or hardware, to increase reliability, and fault tolerance, reduce latency, or increase accessibility.",
+    },
+    {
+        term: "Proxies", prompt: "How could you use Proxies in Maid CLI (or other current project?)",
+        description: "Proxies are used to cache requests and responses to serve the clients if multiple requests are made for the same web page or file; they protect you from hackers or any snooper who may want to track your online activity. Proxies are also used to limit access to resources; for example, in places like colleges, hospitals, etc., you cannot use their wifi to access certain websites."
     }
+
 ]
 
 
@@ -343,13 +381,8 @@ termJson.push(...coderTerms);
 termJson.push(...unit_testing);
 termJson.push(...system_design);
 termJson.push(...algebra);
-termJson.push(...calculousOne)
-
-// termJson.push(...test);
-
-
+termJson.push(...calculousOne);
 termJson.push(...network)
-
-// termJson = network;
+// termJson.push(...test);
 
 module.exports = { termJson };
