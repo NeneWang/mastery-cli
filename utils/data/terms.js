@@ -406,7 +406,9 @@ const system_design = [
     {
         link: "https://www.youtube.com/watch?v=UF9Iqmg94tk", attachment: "./img/2023-02-07-11-49-30.png",
         term: "Consistent Hashing", prompt: "What services use this? | Explain how this works in your own words?",
-        description: "This is where the consistent hashing technique is helpful to save us from remapping all the keys of the system and distributing them evenly. This method maps the nodes to specific integers within a range (say [0, 255]) using a hash function. This will be a circular structure starting from 0 to 255. Then we map the keys to some integer of the range and use the next available server on the ring.\n\        To distribute the keys evenly to all the nodes in the system, replicate the nodes to multiple ring parts."
+        description: "This is where the consistent hashing technique is helpful to save us from remapping all the keys of the system and distributing them evenly. This method maps the nodes to specific integers within a range (say [0, 255]) using a hash function. This will be a circular structure starting from 0 to 255. Then we map the keys to some integer of the range and use the next available server on the ring.\n\        To distribute the keys evenly to all the nodes in the system, replicate the nodes to multiple ring parts.",
+        example: "Dynamo DB: Data Partitioning, \n\
+        \nand could advantages from this: Content Delivery Networks: Distribute Web contents Evenly\n Load balancers:: Distributed Persistent connections evenly."
     },
     {
         term: "Sharding", description: "Sharding is a technique used to divide data into multiple smaller parts known as shards (Horizontal partitioning). These shards are not only smaller but faster and more manageable.",
@@ -421,6 +423,9 @@ const system_design = [
         example: "Long polling advantages      Long polling is implemented on the back of XMLHttpRequest, which is near-universally supported by devices so there’s usually little need to support further fallback layers.     In cases where exceptions must be handled though, or where a server can be queried for new data but does not support long polling (let alone other more modern technology standards), basic polling can sometimes still be of limited use, and can be implemented using XMLHttpRequest, or via JSONP through simple HTML script tags.\n\
         \nLong polling disadvantages      Long polling is more resource intensive on the server than a WebSocket connection.     Long polling can come with a latency overhead because it requires several hops between servers and devices. Gateways often have different ideas of how long a typical connection is allowed to stay open, so sometimes close while processing is still underway.     Reliable message ordering can be an issue with long polling because it is possible for multiple HTTP requests from the same client to be in flight simultaneously. For example, if a client has two browser tabs open consuming the same server resource, and the client-side application is persisting data to a local store such as localStorage or IndexedDb, there is no in-built guarantee that duplicate data won’t be written more than once.     Depending on the server implementation, confirmation of message receipt by one client instance may also cause another client instance to never receive an expected message at all, as the server could mistakenly believe that the client has already received the data it is expecting."
     },
+    {
+        term: "Web Sockets", prompt: ""
+    }
 ]
 
 
