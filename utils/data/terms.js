@@ -8,7 +8,7 @@
  */
 
 
-const { network, artificialIntelligence, algebra, calculousOne } = require("./classFall22");
+const { network, artificialIntelligence, algebra, calculousOne } = require("./fall23");
 
 const designPatterns = [
     { term: "solid", prompt: "What are the SOLID principles? Mention at least 3", example: "     S - Single-responsiblity Principle     O - Open-closed Principle     L - Liskov Substitution Principle     I - Interface Segregation Principle     D - Dependency Inversion Principle " },
@@ -363,6 +363,13 @@ const system_design = [
     {
         term: "Proxies", prompt: "How could you use Proxies in Maid CLI (or other current project?)",
         description: "Proxies are used to cache requests and responses to serve the clients if multiple requests are made for the same web page or file; they protect you from hackers or any snooper who may want to track your online activity. Proxies are also used to limit access to resources; for example, in places like colleges, hospitals, etc., you cannot use their wifi to access certain websites."
+    },
+    {
+        term: "Data Partitioning", prompt: "Advantages of partitioning Horizontally vs Vertically?", attachment: "./img/2023-02-07-10-29-38.png",
+        description: "partitioning horizontally means dividing a large table into multiple tables (by rows), also known as sharding. Whereas vertical partitioning is dividing a table based on columns, for example, a school record of students can be divided into a table storing students' names, I.D.s, etc., and different table may store their addresses.\n\
+        if you divide a table into very small chunks, it leads to complex join operations.\n\
+        If you added a record using a hash function depending on the number of partitions, and later when you add or remove a partition, all of the data needs to be redistributed with the updated hash function.",
+
     }
 
 ]
