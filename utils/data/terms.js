@@ -161,6 +161,21 @@ const coderTerms = [
         (g) System Under Test\
         ",
         prompt: "Explain any of the following"
+    },
+    {
+        term: "Interpreted vs Compiled", prompt: "Summarize Adv/Disadvantages using compiled vs Interpreted?",
+        description: "\
+        Interpreted: \n\
+        Steps      Creation of the program.     It doesn’t require the linking of files or generation of machine code.     It executes the source statements line by line during the execution. \n\
+        They are fairly easy to use and execute, even for a beginner. Only computers with the corresponding Interpreter can run the interpreted programs. It doesn’t save the machine language at all. The interpreted codes run comparatively slower. It works on the basis of the Interpretation method. It doesn’t generate an output program. Meaning, it evaluates the source program every time during individual execution. Execution of the program is one of the steps of the Interpretation process. So, you can perform it line by line.\n\
+        They work the best in web environments- where the load time is very crucial. Compiling takes a relatively long time, even with small codes that may not run multiple times due to the exhaustive analysis. Interpretations are better in such cases.\n\n\
+        Compiler \n\
+        Steps:      Creation of the program.     The Compiler analyses all the language statements and throws an error when it finds something incorrect.     If there’s zero error, the compiler converts the source code to machine one.     It links various code files into a runnable program (exe).     It runs the program. \n\
+        The code execution time is comparatively less because the program code already gets translated into machine code. One can’t change a program without getting back to the source code.  	It stores the machine language on the disk in the form of machine code. The compiled codes run comparatively faster. It works on the basis of the language-translation linking-loading model. \n\
+        You cannot port the Compiler because it stays bound to the specific target machine. The compilation model is very common in programming languages like C and C++.\
+        ",
+        example: "Java can be considered both a compiled and an interpreted language because its source code is first compiled into a binary byte-code. This byte-code runs on the Java Virtual Machine (JVM), which is usually a software-based interpreter.\n\
+        Java is a statically typed and compiled language, and Python is a dynamically typed and interpreted language. This single difference makes Java faster at runtime and easier to debug, but Python is easier to use and easier to read."
     }
 ]
 
