@@ -7,7 +7,7 @@
  * 2 Strategy > Term:, Or at least bundle a collection of terms, to make it worth more.
  */
 
-
+const { react_terms } = require('./react_terms');
 const { network, artificialIntelligence, algebra, calculousOne } = require("./fall23");
 
 const designPatterns = [
@@ -450,6 +450,7 @@ termJson.push(...system_design);
 termJson.push(...algebra);
 termJson.push(...calculousOne);
 termJson.push(...network)
+termJson.push(...react_terms);
 // termJson.push(...test);
 
 module.exports = { termJson };
