@@ -280,6 +280,12 @@ const unit_testing = [
         description: "Interfaces with a single implementation are not abstractions and don’t provide loose coupling any more than the concrete classes that implement those inter- faces. Trying to anticipate future implementations for such interfaces violates the YAGNI (you aren’t gonna need it) principl\n\
         A feature creep is avoided. No bloatware is created, i.e. software with functions that are hardly used or not used at all. Functions that are not implemented do not have to be tested, documented and supported. Thus there is no (unnecessary) effort.",
         example: "The only legit reason would be to enable mocking."
+    },
+    {
+        term: "Spy", promp: "Whats the difference between Mocks and Spies?",
+        description: "Spy: Spies are used for creating partial or half mock objects. Like mock, spies are also used in large test suites., \n When using spy objects, the default behavior of the methods (when not stubbed) is the real method behavior\n\n\
+        Mock: Mocks are used to create fully mock or dummy objects. It is mainly used in large test suites.\n\
+        When using mock objects, the default behavior of methods (when not stubbed) is do nothing (performs nothing.) "
     }
 
 
