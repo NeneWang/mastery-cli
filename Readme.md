@@ -29,10 +29,27 @@ CLI Assistnat tool to keep you in track.
 
 ## Features
 
+### Study
+
+- [ ] Ability To Generate Cloze (derivants of the concepts models)
+- [ ] Ability to Generate a terms through an collection of XLSX (Derivant of Concept Models)
+- [ ] Ability to Have a Cloze generator
+- [ ] Ability to create a grouper (inserts tags such as category or type to the collection of jsons it represents)
+- [ ] A Skill tree type strucutre which is useful for prioritizing and creating dependency for deck of cards and for books as well in general
+  - [ ] The deck of cards would inherit from an Class type
+  - [ ] I am thinking about a composite structure, where those who are not in the tree take random priority, and those who have more dependencies goes foirst
+- [ ] Ability to Sync (At least one way up (and have subscribers to the decks)) 
+- [ ] Ability to create
+
+
+### Productivity
+
+
 - [ ] Clone from Personal TDD Tasks
 - [ ] Clone Make-files examples or have them there
 - [ ] Create Skelethon Donwloader using templating (cpp testunits, ) 
 
+### Life Quality
 
 
 - [ ] Stream Music [node streaming]
@@ -47,6 +64,23 @@ CLI Assistnat tool to keep you in track.
 - [ ] Run python scripts [run pythons]
   - [ ] Image Downloader from array
   - [ ] CSV Data Reader
+
+### Long Term
+
+- [ ] Serve as an organization extension for studying
+- [ ] Serve as a guiding AI template
+- [ ] Serve as something u can inherit and fork and develop through inheritance.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
