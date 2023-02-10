@@ -38,7 +38,8 @@ CLI Assistnat tool to keep you in track.
 - [ ] A Skill tree type strucutre which is useful for prioritizing and creating dependency for deck of cards and for books as well in general
   - [ ] The deck of cards would inherit from an Class type
   - [ ] I am thinking about a composite structure, where those who are not in the tree take random priority, and those who have more dependencies goes first
-  - [ ] Implement the system so that the cards with gigher priority are selected first, or the tree sees the agroupations and checks if everything (pre cached) caclculates which deck to select
+  - [ ] Implement the system so that the cards with gigher priority are selected first, or the tree sees the agroupations and checks if everything (pre cached) caclculates which deck to select.
+  - [ ] This would actually be a smart way to make faster queries once I have way too many knowledge objects.
 - [ ] Ability to Sync (At least one way up (and have subscribers to the decks)) 
 - [ ] Ability to create
 

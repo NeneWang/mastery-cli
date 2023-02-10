@@ -1,0 +1,12 @@
+feature_id," Importance"," Cost",Description,Dependency
+js_algorithms,10,8,Compiles and tests logic problems,
+local_progress,10,5,"Stores at least on a local database the progress, the work done is saved, which are done as well",
+min_js_algo," 9",4,"Similar, but just code Completion on larger templates",js_algorithms
+regex_practice," 8",5,Compileable regex Exercises,
+sql_practice," 8",5,Should be compileable from their local,
+lang_features_nc," 8",5," NC: Non compiling, it checks for expected code, user can say if its right or not. This could be JAVA, Frameworks like pandas, etc",
+package_management,6,10,"Users should be able to install other practices, people should be able to upload their own practice sets as well",aspnet_backend
+angular_report,6,8,"Makes a report of the progress and work on a Angular Front end, settings can be also done there. This can be opened offline",
+sync_progress," 5",6,"Uploads user report, and able to sync down progress","local_progress, sync_progress"
+css_practice,4,8,"Barebones application, small css challanges with local hosted html for it",
+social_account,2,10,"Ability to create an account e.g. have tags,and addconnections",angular_report

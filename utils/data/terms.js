@@ -9,6 +9,7 @@
 
 const { react_terms } = require('./react_terms');
 const { network, artificialIntelligence, algebra, calculousOne } = require("./fall23");
+const {  pragmatic_programmer } = require('./ethics.js')
 
 const designPatterns = [
     { term: "solid", prompt: "What are the SOLID principles? Mention at least 3", example: "     S - Single-responsiblity Principle     O - Open-closed Principle     L - Liskov Substitution Principle     I - Interface Segregation Principle     D - Dependency Inversion Principle " },
@@ -439,6 +440,10 @@ const system_design = [
     {
         term: "Server-Sent Events", prompt: "Whats the difference between this and Web Sockets?",
         description: "In this protocol, once a connection is established between a client and a server, the server can send frequent data any time using the connection, but the client will need another protocol to send any data to the server. This is useful in scenarios where a server needs to send data continually once a client creates a connection.",
+    },
+    {
+        term: "Aggregation", prompt: "How is it symbolized? What does it mean? Make an example when you would be using this",
+        example: "" 
     }
 ]
 
@@ -460,5 +465,6 @@ termJson.push(...calculousOne);
 termJson.push(...network)
 termJson.push(...react_terms);
 // termJson.push(...test);
+termJson.push(...pragmatic_programmer);
 
 module.exports = { termJson };
