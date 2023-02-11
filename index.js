@@ -18,7 +18,8 @@ const demos = require('./utils/demo');
 
 const axios = require('axios');
 const chalk = require('chalk');
-const chart = require('@wangnene2/chart')
+const chart = require('@wangnene2/chart');
+const { terms } = require('./utils/constants');
 
 const cli_meow = cli[0]
 const cmInfo = cli[1]
@@ -36,7 +37,7 @@ const { Demo, EDemo } = demos;
 
 (async () => {
 	const maid = new Maid();
-	const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled);
+	const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled, constants.termsEnabled);
 
 
 	const options = Object.keys(cmInfo.commands);
@@ -45,7 +46,7 @@ const { Demo, EDemo } = demos;
 
 	maid.clearOnTalk = true;
 
-	if (input.includes(cmInfo.commands.help.code)) {
+	if (input.includes(cmInfo.commands.chart.code)) {
 		// Demo for showing charts
 		const demo = new Demo;
 		demo.chartDemo(EDemo.BAR);
@@ -75,13 +76,22 @@ const { Demo, EDemo } = demos;
 		maid.say("Auto updating sir!")
 		utils.autorelease()
 	}
-	else if (input.includes(cmInfo.commands.math.code)){
+	else if (input.includes(cmInfo.commands.math.code)) {
+		mQuizer.ask_math_question();
+	}
+	else if (input.includes(cmInfo.commands.quiz.code)) {
 		mQuizer.ask_question();
-	}else if(input.includes(cmInfo.commands.clean.code)){
+	}
+	else if (input.includes(cmInfo.commands.term.code)) {
+		mQuizer.ask_term_question();
+	}
+
+	else if (input.includes(cmInfo.commands.clean.code)) {
 		maid.askToClean();
 	}
-	else{
-
+	else {
+		cli_meow.showHelp(0);
+		maid.askToClean();
 	}
 
 })();

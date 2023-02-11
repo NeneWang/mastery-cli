@@ -17,6 +17,10 @@ const parser = new Parser();
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 
+const { Quizzer } = require(
+	"./Quizzer"
+);
+
 // https://www.npmjs.com/package/chalk
 
 class DayWeather {
@@ -188,7 +192,6 @@ class Maid {
 		statPerformance = formatObjectFeatures(statPerformance)
 		console.log(label, statPerformance);
 	}
-
 
 
 
@@ -401,222 +404,6 @@ class Maid {
 
 
 
-class MathQuizer {
-
-	constructor(qmathformulas, qmathenabled) {
-		this.enabledqmathformulas = qmathenabled.map(formula_name => { qmathformulas[formula_name].formula_name = formula_name; return qmathformulas[formula_name] });
-	}
-
-	/**
-	 * Picks a random question from the enabled list
-	 * OUT: 
-	 * - {form, replace}
-	 */
-	pick_question = async () => {
-		let potential_questions = this.enabledqmathformulas
-		try {
-
-			const problem_names = potential_questions.map(x => x.formula_name)
-			// const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
-			const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, problem_names);
-			const response_data = res.data;
-
-			// console.log("response_data", response_data);
-			// let potential_questions = potential_questions.filter(formula_name)
-
-			// Filter where they have those.
-			// console.log("Response Potentail and response", potential_questions, response_data)
-			potential_questions = potential_questions.filter(question => response_data.indexOf(question.formula_name) !== -1)
-			// console.log("Response filtered", potential_questions)
-			return get_random(potential_questions);
-
-		} catch (e) {
-			// Such as no internet connection
-			// console.warn(e)
-		}
-
-		return get_random(potential_questions);
-	};
-
-
-	/**
-	 * PopulateVariables using naming e.g. d_1 => digit
-	 * @param {List[str]} replace : List of Strings
-	 * @Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
-	 */
-	populateVariables(replace) {
-
-		const variables = {}
-		const variable_regex = /(\w+)_(\d)/;
-		// console.log('replace', replace);
-		for (const var_name of replace) {
-			// console.log('var_name', var_name);
-			const variabledetected = var_name.match(variable_regex);
-			variables[var_name] = this.getRandomFromType(variabledetected[1]);
-		}
-
-		// console.log("populated variables", variables);
-		return variables;
-	}
-
-	getRandomFromType(type) {
-		const ETypes = {};
-		let ATLEAST = 2;
-		// console.log("getRandom from type called", constants.getRandomInt(100), "using type:", type, type=="d");
-		if (type == "d") {
-			return constants.getRandomInt(100 - ATLEAST) + ATLEAST;
-		} else if (type == "sd") {
-			return constants.getRandomInt(20 - ATLEAST) + ATLEAST;
-		}
-		else if (type == "md") {
-			return constants.getRandomInt(50 - ATLEAST) + ATLEAST;
-		}
-		else if (type == "ld") {
-			ATLEAST = 100;
-			return constants.getRandomInt(1000 - ATLEAST) + ATLEAST;
-		}
-	}
-
-
-	/**
-	 * Compiles chosen form using form and replace
-	 * IN:
-	 * {form, replace}
-	 * OUT:
-	 * - {  question_prompt (with replace replaced with numbers) , expectedAnswer}
-	 */
-	compile_question(question) {
-		// console.log("Compile question received", question)
-		const form = question?.form;
-		const replace = question?.replace;
-		const calculates = question?.calculates;
-		const human_form = question.human ? question.human : "";
-
-
-		const variables = this.populateVariables(replace);
-		var parser = new Parser();
-		const humanQuestion = this.getHumanQuestion(form, variables, calculates, human_form);
-		parser.evaluate(form, variables);
-
-
-		// console.log("question.form", question.form);
-		return { "question_prompt": humanQuestion, "expectedAnswer": variables.y, "form:": question.form };
-	};
-
-	replaceStringVariables(formString, variables) {
-		for (const variablename of Object.keys(variables)) {
-			formString = formString.replace(variablename, variables[variablename]);
-		}
-		return formString;
-	}
-
-	getHumanQuestion(form, variables, solveFor, human_form = "") {
-		let question_message = ""
-		if (human_form != "") {
-			question_message = this.replaceStringVariables(human_form, variables);
-
-
-		} else {
-
-			const question = this.replaceStringVariables(form, variables);
-			const variablesToSolveFor = solveFor.join(" ");
-			question_message = `solve for ${variablesToSolveFor}, using ${question}`;
-		}
-
-		return question_message;
-
-	}
-
-	/**
-	 * Asks question and waits for response, allows repetition.
-	 */
-	async ask_question() {
-		const question_form = await this.pick_question();
-		try {
-			const ans_constraint = question_form.ans_constraint;
-			let question_prompt = {};
-			if (ans_constraint == undefined) {
-				question_prompt = this.compile_question(question_form);
-				// console.log("ask question question_prompt", question_prompt);
-			} else {
-				question_prompt = this.compile_valid_question(question_form, ans_constraint);
-				// console.log("ask question else", question_prompt);
-			}
-
-			const quiz_allow_reattempts = 3;
-			let answerIsCorrect = false;
-
-			for (let i = 0; i < quiz_allow_reattempts; i++) {
-				// console.log(question_prompt.humanQuestion);
-
-				const question = new Input({
-					name: 'ServiceOption' + i,
-					message: `${question_prompt.question_prompt} attempt: ${i}`,
-				})
-
-				const res = await question.run()
-
-				if (res == question_prompt.expectedAnswer) {
-					answerIsCorrect = true;
-					const _ = await increasePerformance("math_ss");
-					// console.log("Success at:", question_prompt)
-					console.log("correct!");
-					break;
-				}
-
-			}
-			const _ = await updateConcept(question_form.formula_name, answerIsCorrect);
-
-			console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt, ", \n Formula:", question_prompt.form);
-
-			return answerIsCorrect;
-		} catch (err) {
-			// console.warn(err, "With question: ", question_form);
-			return false;
-		}
-		return false;
-
-
-	};
-
-	/**
-	 * If constraints avaialable, continue compiling the questions until it is appropriate with that contraints
-	 * @param: constraint: str
-	 * e.g: Gets '-.2' -> Negative Only
-	 * .2 -> with two decimals
-	 * +.0 -> Positive Integer 
-	 */
-	compile_valid_question(question_form, constraint) {
-		// Basically loops until a a result fullfillls the specified constraint.
-
-		const format_reg = /(\W?).(\d)/;
-		const format_parsed = constraint.match(format_reg);
-		const decimals_allowed = format_parsed[2];
-		let foundProper = false;
-		let questionPrompt = {};
-		while (!foundProper) {
-			questionPrompt = this.compile_question(question_form);
-			const expectedAnswer = questionPrompt.expectedAnswer;
-			const decimalCounts = countDecimals(expectedAnswer);
-
-			// console.log(`${expectedAnswer} count is ${decimalCounts}`);
-			if (decimals_allowed == 9) {
-				foundProper = true;
-			} else if (decimals_allowed >= decimalCounts) {
-				foundProper = true;
-
-			} else {
-				;
-				// console.log(`${expectedAnswer} is not proper, retrying...`);
-			}
-		}
-		questionPrompt.form = question_form.form;
-		return questionPrompt;
-
-
-	}
-
-}
 
 /**
  * Based on the speciffied feature it returns the corresponsive barcharts
@@ -663,16 +450,19 @@ getArrayLastXDays = (days = 7) => {
 
 
 increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
-	const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}/${increaseBY}?increase_score=true`)
-	if (debug) console.log(res.data);
+	try {
+		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}/${increaseBY}?increase_score=true`)
+	} catch {
+		if (debug) console.log(res.data);
+	}
 }
 
-updateConcept = async (problem_name, success=true, debug = false) => {
+updateConcept = async (problem_name, success = true, debug = false) => {
 	try {
 		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}`)
 		if (debug) console.log(res.data)
 	}
-	catch(err){
+	catch (err) {
 		console.warn(err);
 	}
 }
@@ -825,5 +615,5 @@ const autorelease = () => {
 
 module.exports = {
 	getTalk, commitpush, autorelease,
-	Maid, getToday, MathQuizer
+	Maid, getToday, MathQuizer: Quizzer
 };
