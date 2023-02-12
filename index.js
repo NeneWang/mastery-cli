@@ -19,7 +19,7 @@ const demos = require('./utils/demo');
 const axios = require('axios');
 const chalk = require('chalk');
 const chart = require('@wangnene2/chart');
-const { terms } = require('./utils/constants');
+const { terms, getAbsoluteUri } = require('./utils/constants');
 
 const cli_meow = cli[0]
 const cmInfo = cli[1]
@@ -34,12 +34,15 @@ const { MAID_NAME } = constants;
 const { bar, scatter, bg, fg } = chart;
 const { Demo, EDemo } = demos;
 
+// console.log("file:///C:/github/testing/maid-cli/img/unicorn.png");
+
 
 (async () => {
 	const maid = new Maid();
 	const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled, constants.termsEnabled);
 
 
+	// console.log(getAbsoluteUri("./img/unicorn.png"))
 	const options = Object.keys(cmInfo.commands);
 	input.includes(options[0]) && cli_meow.showHelp(0);
 	debug && log(flags);
@@ -61,8 +64,10 @@ const { Demo, EDemo } = demos;
 
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
-		utils.commitpush();
+		await utils.commitpush();
+		maid.populateMissingReport();
 		const _ = await mQuizer.ask_question();
+		maid.provideMissingReport();
 		maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {

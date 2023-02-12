@@ -38,10 +38,10 @@
   "resolved" "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz"
   "version" "2.4.1"
 
-"@wangnene2/chart@^1.0.13":
-  "integrity" "sha512-68AkEOooVBa+urT8QyW/fNWhREIQK0hqjNwLHu4BckwrjP0dJDOE3FxICZst45miaCKapjSGAR40h0dQ83Bhhg=="
-  "resolved" "https://registry.npmjs.org/@wangnene2/chart/-/chart-1.0.13.tgz"
-  "version" "1.0.13"
+"@wangnene2/chart@^1.0.14":
+  "integrity" "sha512-MpjXRRmebH1KYrhx9XDrC/PiTlSCPDfRfhjYbFBuQuzGem3oEPv4+UW7bOm14JF2On1VrVi0O/ujcfB6KO61lA=="
+  "resolved" "https://registry.npmjs.org/@wangnene2/chart/-/chart-1.0.14.tgz"
+  "version" "1.0.14"
 
 "accepts@~1.3.8":
   "integrity" "sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw=="
@@ -390,6 +390,11 @@
   "integrity" "sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg=="
   "resolved" "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz"
   "version" "1.0.5"
+
+"esm@^3.2.25":
+  "integrity" "sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA=="
+  "resolved" "https://registry.npmjs.org/esm/-/esm-3.2.25.tgz"
+  "version" "3.2.25"
 
 "etag@~1.8.1":
   "integrity" "sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg=="

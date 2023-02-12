@@ -20,6 +20,7 @@ const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_ran
 const { Quizzer } = require(
 	"./Quizzer"
 );
+const { debug } = require('node:console');
 
 // https://www.npmjs.com/package/chalk
 
@@ -102,6 +103,7 @@ class Maid {
 		this.name = name;
 		this.headerColor = headerColor;
 		this.clearOnTalk = clearOnTalk;
+		this.missing_features_today = []; //To be populated when required.
 	}
 
 	getMaidHeader = () => {
@@ -144,6 +146,33 @@ class Maid {
 		// console.log('Weather\n')
 		weatherReport();
 	}
+
+	/**
+	 * Prints the missing objectives
+	 * !important: To prepopulate the msising report first!!
+	 */
+	provideMissingReport = () => {
+		if (this.missingFeatReport.length <= 0){
+			return;
+		}
+		const missingFormatedAsStr = this.missingFeatReport.join(", ")
+		console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
+	}
+
+	/**
+	 *  precalculated asynchronous at the start, since usually the missing Feat report is to be shown at the end of the math thing.
+	 *  */
+	populateMissingReport = async() =>{
+		
+		try{
+			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
+			this.missingFeatReport = res.data;
+		}
+		catch(err){
+			;
+		}
+	}
+
 
 	performanceReport = async () => {
 		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/report/${CONSTANTS.ACCOUNT_ID}`, {
@@ -555,8 +584,9 @@ let ECommitCategory = {
 	FEAT: new CommitCategoryType('feat', [':tada:', ':santa:', ':gift:']),
 	FIX: new CommitCategoryType('fix', [':hammer:', ':shipit:', ':ambulance:']),
 	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'], feature_name = "Refactoring"),
-	ARCHITECTURE: new CommitCategoryType('arc', [':triangular_ruler:', ":japanese_castle:", ":factory:"]),
-	ALGO: new CommitCategoryType('algo', [':herb:', ":crown:", ":japanese_goblin:"])
+	ACADEMY: new CommitCategoryType('acad', [':triangular_ruler:', ":japanese_castle:", ":factory:"]),
+	ALGO: new CommitCategoryType('algo', [':herb:', ":crown:", ":japanese_goblin:"]),
+	PROJECT: new CommitCategoryType('pro', [":crown:"])
 }
 
 const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {

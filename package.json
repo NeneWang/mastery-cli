@@ -1,11 +1,7 @@
 {
 	"name": "maid-cli",
 	"description": "Assistant to keep you on track and productive",
-<<<<<<< HEAD
-	"version": "0.6.19",
-=======
-	"version": "0.6.20",
->>>>>>> f0b8cdc88a16ac171f37ce28240fee5f514947a6
+	"version": "0.6.24",
 	"license": "UNLICENSED",
 	"bin": {
 		"maid-cli": "index.js",
@@ -29,7 +25,7 @@
 		"test": "node test.js"
 	},
 	"dependencies": {
-		"@wangnene2/chart": "^1.0.13",
+		"@wangnene2/chart": "^1.0.14",
 		"axios": "^1.2.1",
 		"chalk": "^4.1.2",
 		"cli-alerts": "^1.2.2",
@@ -40,6 +36,7 @@
 		"clipboardy": "^3.0.0",
 		"copy-paste": "^1.3.0",
 		"enquirer": "^2.3.6",
+		"esm": "^3.2.25",
 		"execa": "^6.1.0",
 		"expr-eval": "^2.0.2",
 		"express": "^4.18.2",

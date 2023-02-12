@@ -1,6 +1,8 @@
 const { qmathformulas } = require('./data/math_formulas');
 const { termJson } = require('./data/terms');
 
+const path = require("path");
+const url = require('url');
 
 /**
  * 
@@ -195,8 +197,8 @@ let APIDICT = {
     CHUCK: 'http://api.chucknorris.io/jokes/random',
     WEATHER: 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/New%20york?unitGroup=metric&include=days%2Cevents&key=WR8T3G2K9PYXY26YF6VCRV7YN&contentType=json',
     LOCAL_MAID: 'http://127.0.0.1:8000',
-    DEPLOYED_MAID: 'http://127.0.0.1:8000',
-    // DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
+    // DEPLOYED_MAID: 'http://127.0.0.1:8000',
+    DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
     CURRENCY_EXCHANGE: 'https://api.apilayer.com/exchangerates_data',
     CURRENCY_EXCHANGE_KEY: '3zPc7CzmznmueYsu3SttUWIE2QZ3ODYd',
 
@@ -208,9 +210,24 @@ const CONSTANTS = {
     ACCOUNT_ID: 1,
     CUTEBLUE: '#9ccfe7', // Cornflower
     CUTEPINK: '#f5a9cb', // Lavander Pink
+    PUNCHPINK: '#F25278',
     CUTEYELLOW: '#ffffc2', // Very Pale Yello
     CUTEPURPLE: '#977fd7', // Medium Purple
 }
+
+
+/**
+ * Gets clickeable path that could be printed on the console and clicked.
+ * @param {str} fileimage : String containing the relative position of the image from the project root e.g. ./img/unicorn.png
+ * @returns {str} Formatted file:///C:/github/testing/maid-cli/img/unicorn.png
+ */
+const getAbsoluteUri = (fileimage = './img/unicorn.png') => {
+    const absolutePath = path.resolve(path.join(__dirname, './data/' ,fileimage)); // Note the '../' because it is inside of constants
+    const fileUrl = url.pathToFileURL(absolutePath);
+    return (fileUrl.toString());
+}
+
+
 
 
 
@@ -255,11 +272,12 @@ const getRandomBool = (chances = 0.5) => {
 
 class Term {
 
-    constructor(term, example = "", description = "", prompt = "Use the term", references = "", category = "") {
+    constructor(term, example = "", description = "", prompt = "Use the term", references = "", category = "", attachment="") {
         this.term = term;
         this.example = example;
         this.description = description;
         this.references = references;
+        this.attachment = attachment;
         this.category = category;
         this.prompt = prompt;
         this.slug = this.slugify(this.term);
@@ -276,7 +294,7 @@ class Term {
         return {
             term: this.term, example: this.example, description: this.description, references: this.references,
             category: this.category, prompt: this.prompt,
-            formula_name: this.slug
+            formula_name: this.slug, attachment: this.attachment
         };
     }
 
@@ -300,7 +318,7 @@ class TermStorage {
 
 
 function populateTerms(termJson) {
-    return termJson.map(obj => new Term(obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", obj?.references ?? "", obj?.category ?? ""));
+    return termJson.map(obj => new Term(obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", obj?.references ?? "", obj?.category ?? "", obj?.attachment));
 }
 
 const terms = populateTerms(termJson);
@@ -332,7 +350,7 @@ const countDecimals = (value) => {
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
     appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures,
-    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool
+    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool, getAbsoluteUri
 };
 
 

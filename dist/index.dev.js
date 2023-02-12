@@ -27,7 +27,8 @@ var chalk = require('chalk');
 var chart = require('@wangnene2/chart');
 
 var _require = require('./utils/constants'),
-    terms = _require.terms;
+    terms = _require.terms,
+    getAbsoluteUri = _require.getAbsoluteUri;
 
 var cli_meow = cli[0];
 var cmInfo = cli[1];
@@ -45,7 +46,7 @@ var bar = chart.bar,
     bg = chart.bg,
     fg = chart.fg;
 var Demo = demos.Demo,
-    EDemo = demos.EDemo;
+    EDemo = demos.EDemo; // console.log("file:///C:/github/testing/maid-cli/img/unicorn.png");
 
 (function _callee() {
   var maid, mQuizer, options, demo, message, _;
@@ -55,7 +56,8 @@ var Demo = demos.Demo,
       switch (_context.prev = _context.next) {
         case 0:
           maid = new Maid();
-          mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled, constants.termsEnabled);
+          mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled, constants.termsEnabled); // console.log(getAbsoluteUri("./img/unicorn.png"))
+
           options = Object.keys(cmInfo.commands);
           input.includes(options[0]) && cli_meow.showHelp(0);
           debug && log(flags);
@@ -69,7 +71,7 @@ var Demo = demos.Demo,
           // Demo for showing charts
           demo = new Demo();
           demo.chartDemo(EDemo.BAR);
-          _context.next = 31;
+          _context.next = 34;
           break;
 
         case 11:
@@ -79,7 +81,7 @@ var Demo = demos.Demo,
           }
 
           maid.dayReport();
-          _context.next = 31;
+          _context.next = 34;
           break;
 
         case 15:
@@ -94,26 +96,31 @@ var Demo = demos.Demo,
         case 18:
           message = _context.sent;
           maid.say(message, true);
-          _context.next = 31;
+          _context.next = 34;
           break;
 
         case 22:
           if (!input.includes(cmInfo.commands.coa.code)) {
-            _context.next = 30;
+            _context.next = 33;
             break;
           }
 
-          utils.commitpush();
-          _context.next = 26;
+          _context.next = 25;
+          return regeneratorRuntime.awrap(utils.commitpush());
+
+        case 25:
+          maid.populateMissingReport();
+          _context.next = 28;
           return regeneratorRuntime.awrap(mQuizer.ask_question());
 
-        case 26:
+        case 28:
           _ = _context.sent;
+          maid.provideMissingReport();
           maid.askToClean();
-          _context.next = 31;
+          _context.next = 34;
           break;
 
-        case 30:
+        case 33:
           if (input.includes(cmInfo.commands.services.code)) {
             // Gets all services, keeps asking for things here, which service to get
             maid.services();
@@ -135,7 +142,7 @@ var Demo = demos.Demo,
             maid.askToClean();
           }
 
-        case 31:
+        case 34:
         case "end":
           return _context.stop();
       }
