@@ -1,3 +1,10 @@
+/**
+ * A good Roadmap:
+ * https://roadmap.sh/devops
+ * The advantage of devops is that tit is usually definition based, so I should be able to go throught the list and get as much of these definitions based problems.
+ */
+
+
 const aws_glossary = [
     {
         term: 'access key rotation',
@@ -87,7 +94,13 @@ const aws_services = [
         1) Why do I keep receiving HTTP 429 status code responses when using the6. Lambda Invoke API? [ The request concurrency limit has been exceeded]\
         2) Event-driven compute and architectural patterns have evolved to abstract away1. the runtime from the developer so that they can focus on writing business value into their code. Such a pattern is called what? [Functions as a Service]\
         3) When creating a Lambda function, there are a number of configurable options Which of the following is NOT a directly configurable option []\
-        "
+        ",
+        example: "\
+        3) When creating a Lambda function, you can configure various options such as memory allocation, runtime, and execution timeout. However, the number of CPU cores is not a directly configurable option. Instead, the number of CPU cores is determined by the memory allocation you choose for your function. AWS Lambda automatically allocates an equal number of CPU shares proportional to the amount of memory you have configured for your function. So, when you increase the memory allocation for your function, the number of CPU cores allocated to the function will also increase."
+    },
+    {
+        term: "XMPP", prompt: "What does it translates to? Use it on an example?",
+
     }
 ]
 

@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * The idea is to have a terms questions generator
  * Features:
@@ -6,18 +8,13 @@
  *  Receive from an csv with an Term, Definition, Example columns.
  * This should be useful for generating question prompts for languages, it saves everything as a constant and exports it in the module.
  */
+var dfd = require("danfojs-node");
 
-const dfd = require("danfojs-node")
-const EXAMPLE_FILE = "./terms/german.csv"
-
-
+var EXAMPLE_FILE = "./terms/german.csv";
 dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
-  .then(df => {
-  
-   df.head().print()
-
-  }).catch(err=>{
-     console.log(err);
-  })
-
-module.exports = {}
+.then(function (df) {
+  df.head().print();
+})["catch"](function (err) {
+  console.log(err);
+});
+module.exports = {};
