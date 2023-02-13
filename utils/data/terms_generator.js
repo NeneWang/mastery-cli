@@ -8,7 +8,7 @@
  */
 
 
-const {Term, Terminology, TermStorage} = require('../structures');
+const { Term, Terminology, TermStorage } = require('../structures');
 const dfd = require("danfojs-node")
 const EXAMPLE_FILE = "./terms/german.csv"
 const COL_DEFINITION = "definition"
@@ -23,13 +23,19 @@ dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
         //    const column = df.get();
         df.column(COL_TERM).print();
 
+        // console.log();
+        for (let i = 0; i < df.shape[0]; i++) {
 
+            console.log(df.iloc({ rows: [i] })[COL_DEFINITION].$data[0]);
+        }
+
+        console.log(df.shape)
         console.log(df[COL_TERM].$data)
-        
+
         /**
          *  [ 'Handschuh', 'mich', 'dich', 'sich' ]
          */
-        
+
         console.log(df.$data)
         /**
          * [

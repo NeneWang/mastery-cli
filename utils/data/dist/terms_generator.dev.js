@@ -22,7 +22,15 @@ dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
 .then(function (df) {
   df.head().print(); //    const column = df.get();
 
-  df.column(COL_TERM).print();
+  df.column(COL_TERM).print(); // console.log();
+
+  for (var i = 0; i < df.shape[0]; i++) {
+    console.log(df.iloc({
+      rows: [i]
+    })[COL_DEFINITION].$data[0]);
+  }
+
+  console.log(df.shape);
   console.log(df[COL_TERM].$data);
   /**
    *  [ 'Handschuh', 'mich', 'dich', 'sich' ]
