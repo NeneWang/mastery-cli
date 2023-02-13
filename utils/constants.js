@@ -20,6 +20,20 @@ const MAID_EMOJIS = ["genie_woman", "elf_woman", "construction_worker_woman", "z
     "woman_health_worker"];
 
 
+/**
+ * Memory of the people I want to be thinking on. 
+ */
+const PEOPLE_MEMORY = [
+    {
+        name: "Fede Liu"
+    },
+    {
+        name: "Camila S"
+    },
+    {
+        name: "Nancy W"
+    }
+]
 
 
 let APIDICT = {
