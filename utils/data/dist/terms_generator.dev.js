@@ -8,6 +8,11 @@
  *  Receive from an csv with an Term, Definition, Example columns.
  * This should be useful for generating question prompts for languages, it saves everything as a constant and exports it in the module.
  */
+var _require = require('../structures'),
+    Term = _require.Term,
+    Terminology = _require.Terminology,
+    TermStorage = _require.TermStorage;
+
 var dfd = require("danfojs-node");
 
 var EXAMPLE_FILE = "./terms/german.csv";
@@ -19,11 +24,11 @@ dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
 
   df.column(COL_TERM).print();
   console.log(df[COL_TERM].$data);
-  console.log(df.$data);
   /**
    *  [ 'Handschuh', 'mich', 'dich', 'sich' ]
    */
 
+  console.log(df.$data);
   /**
    * [
       [ 'Handschuh', ' Hand + Schuh ' ],

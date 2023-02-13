@@ -7,10 +7,13 @@
  * This should be useful for generating question prompts for languages, it saves everything as a constant and exports it in the module.
  */
 
+
+const {Term, Terminology, TermStorage} = require('../structures');
 const dfd = require("danfojs-node")
 const EXAMPLE_FILE = "./terms/german.csv"
 const COL_DEFINITION = "definition"
 const COL_TERM = "term"
+
 
 dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
     .then(df => {
@@ -19,13 +22,15 @@ dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
 
         //    const column = df.get();
         df.column(COL_TERM).print();
+
+
         console.log(df[COL_TERM].$data)
-        console.log(df.$data)
         
         /**
          *  [ 'Handschuh', 'mich', 'dich', 'sich' ]
          */
         
+        console.log(df.$data)
         /**
          * [
             [ 'Handschuh', ' Hand + Schuh ' ],

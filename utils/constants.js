@@ -1,5 +1,6 @@
 const { qmathformulas } = require('./data/math_formulas');
 const { termJson } = require('./data/terms');
+const {Term, Terminology, TermStorage} = require('./structures');
 
 const path = require("path");
 const url = require('url');
@@ -268,52 +269,9 @@ const getRandomBool = (chances = 0.5) => {
 
 // const ANS_CONTSTRAING =
 
+
 // dtypes allowed
 
-class Term {
-
-    constructor(term, example = "", description = "", prompt = "Use the term", references = "", category = "", attachment="") {
-        this.term = term;
-        this.example = example;
-        this.description = description;
-        this.references = references;
-        this.attachment = attachment;
-        this.category = category;
-        this.prompt = prompt;
-        this.slug = this.slugify(this.term);
-    }
-
-    /**
-     *  Slugify the term 
-     */
-    slugify = (term) => {
-        return term.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')
-    }
-
-    get asJson() {
-        return {
-            term: this.term, example: this.example, description: this.description, references: this.references,
-            category: this.category, prompt: this.prompt,
-            formula_name: this.slug, attachment: this.attachment
-        };
-    }
-
-};
-
-class TermStorage {
-    constructor(terms = []) {
-        this.terms = terms;
-    }
-
-    get jsonTerms() {
-        const res = [];
-        for (const term of this.terms) {
-            res.push(term.asJson)
-        }
-        return res;
-    }
-
-};
 
 
 
