@@ -9,15 +9,34 @@
 
 const dfd = require("danfojs-node")
 const EXAMPLE_FILE = "./terms/german.csv"
-
+const COL_DEFINITION = "definition"
+const COL_TERM = "term"
 
 dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
-  .then(df => {
-  
-   df.head().print()
+    .then(df => {
 
-  }).catch(err=>{
-     console.log(err);
-  })
+        df.head().print()
+
+        //    const column = df.get();
+        df.column(COL_TERM).print();
+        console.log(df[COL_TERM].$data)
+        console.log(df.$data)
+        
+        /**
+         *  [ 'Handschuh', 'mich', 'dich', 'sich' ]
+         */
+        
+        /**
+         * [
+            [ 'Handschuh', ' Hand + Schuh ' ],
+            [ 'mich', ' mysel' ],
+            [ 'dich', ' yourself' ],
+            [ 'sich', 'Oneself' ]
+            ]
+         */
+
+    }).catch(err => {
+        console.log(err);
+    })
 
 module.exports = {}

@@ -11,9 +11,27 @@
 var dfd = require("danfojs-node");
 
 var EXAMPLE_FILE = "./terms/german.csv";
+var COL_DEFINITION = "definition";
+var COL_TERM = "term";
 dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
 .then(function (df) {
-  df.head().print();
+  df.head().print(); //    const column = df.get();
+
+  df.column(COL_TERM).print();
+  console.log(df[COL_TERM].$data);
+  console.log(df.$data);
+  /**
+   *  [ 'Handschuh', 'mich', 'dich', 'sich' ]
+   */
+
+  /**
+   * [
+      [ 'Handschuh', ' Hand + Schuh ' ],
+      [ 'mich', ' mysel' ],
+      [ 'dich', ' yourself' ],
+      [ 'sich', 'Oneself' ]
+      ]
+   */
 })["catch"](function (err) {
   console.log(err);
 });
