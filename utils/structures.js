@@ -42,6 +42,18 @@ class TermStorage {
         this.terms = terms;
     }
 
+    /**
+     * 
+     * @param {Term} term Pushes this term into the terms of the storage
+     */
+    push(term){
+        this.terms.push(term);
+    }
+
+    /**
+     * 
+     * @returns {string} Gets the terminologies as a Json string
+     */
     get jsonTerms() {
         const res = [];
         for (const term of this.terms) {

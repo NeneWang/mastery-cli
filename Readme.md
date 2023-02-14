@@ -58,7 +58,7 @@ CLI Assistnat tool to keep you in track.
   - [ ] U should map it so it is not understanble the source aside of the extension
 - [ ] Image into Ascii
   - [ ] As a tool
-  - [ ] As an automatic pattern ideal for terms images where no image is available. (Or you just want to preview the attechment on the console.)
+  - [ ] As an automatic pattern ideal for terms images where no image is available. (Or you just want to preview the attechment on the console. You should also set it up so that it prints that onto the computer.)
 - [ ] Pomodoro Timers: [notifications]
   - [ ] Report the progress results of 1 year ago, 1 month ago + 1 week ago + 1 day ago.
 - [ ] Pull out excels and tell you about the daily tasks you didnt finish

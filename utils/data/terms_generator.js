@@ -20,7 +20,13 @@ dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
 
         
         const terminologiesDict = dfd.toJSON(df);
+        const termStorage = new TermStorage()
         console.log(terminologiesDict)
+        for (const row of terminologiesDict){
+            const term = new Terminology(row?.term ?? "",row?.description ??"", row?.example ?? "")
+            termStorage.push(term)
+        }
+        console.log(termStorage.jsonTerms);
 
     }).catch(err => {
         console.log(err);
