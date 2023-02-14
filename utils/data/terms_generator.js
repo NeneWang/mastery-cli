@@ -18,33 +18,9 @@ const COL_TERM = "term"
 dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
     .then(df => {
 
-        df.head().print()
-
-        //    const column = df.get();
-        df.column(COL_TERM).print();
-
-        // console.log();
-        for (let i = 0; i < df.shape[0]; i++) {
-
-            console.log(df.iloc({ rows: [i] })[COL_DEFINITION].$data[0]);
-        }
-
-        console.log(df.shape)
-        console.log(df[COL_TERM].$data)
-
-        /**
-         *  [ 'Handschuh', 'mich', 'dich', 'sich' ]
-         */
-
-        console.log(df.$data)
-        /**
-         * [
-            [ 'Handschuh', ' Hand + Schuh ' ],
-            [ 'mich', ' mysel' ],
-            [ 'dich', ' yourself' ],
-            [ 'sich', 'Oneself' ]
-            ]
-         */
+        
+        const terminologiesDict = dfd.toJSON(df);
+        console.log(terminologiesDict)
 
     }).catch(err => {
         console.log(err);
