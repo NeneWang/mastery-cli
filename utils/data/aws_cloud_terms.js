@@ -110,6 +110,12 @@ const aws_services = [
         term: "Database selection", prompt: "Pick 1+ of the following databases and tell me why (in what situation) would you use it?",
         attachment: "./img/2023-02-14-11-47-17.png",
         description: "You have: 1) Aurora RDS, 2) Aurora RDS Serverless, 3) Postgres, 4) ElasticSearch, 5) Elasticache, 6) DynamoDB, 7) MongoDB"
+    },
+    {
+        term: "Cloud Formation Cloud", prompt: "What happens when you delete a stack?\n\
+         What happens when you update a stack",
+         description: "Stack Actions Creaate Change set for current Stack -> Upload File, calculate and then makes the changes\n\
+         Deleting the stack will also delete the resources created."
     }
 ]
 
