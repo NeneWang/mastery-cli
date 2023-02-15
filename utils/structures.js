@@ -37,11 +37,32 @@ class Terminology extends Term {
 }
 
 
+/**
+ * Follows Composition Pattern, it should be able to store other Term Storages, turn them on and off
+ */
 class TermStorage {
-    constructor(terms = []) {
+    
+    /**
+     * Initialization, by default TermStorage is acitve.
+     * @param {List[JsonText]} terms Terms to be added to this deck
+     * @param {string} deck_name The deckname, optional if is the parent deckname
+     * @param {List[TermStorage]} decks The decks required for the Storages
+     */
+    constructor(terms = [], deck_name="", decks=[]) {
         this.terms = terms;
+        this.deck_name = deck_name;
+        this.is_active = true;
+        this.decks = decks;
     }
 
+    /**
+     * 
+     * @param {TermStorage} deck the deck to append to the storage, by default is active usually
+     */
+    addDeck(deck){
+        this.decks.insert(deck);
+    }
+    
     /**
      * 
      * @param {Term} term Pushes this term into the terms of the storage
@@ -51,16 +72,38 @@ class TermStorage {
     }
 
     /**
-     * 
+     * Appends all decks that are active + its current cards.
      * @returns {string} Gets the terminologies as a Json string
      */
     get jsonTerms() {
         const res = [];
+        // Add own cards
         for (const term of this.terms) {
             res.push(term.asJson)
         }
+
+        //Add cards of the decks that are active
+        for(const deck of this.decks){
+            if(deck.is_active){
+                res.push(deck.jsonTerms());
+            }
+        }
+
         return res;
     }
+
+    /**
+     * 
+     * @param is_active_settings {deck_name,is_active} settings Takes in the settings in key:true/false format to turn on or off of the decks inside.
+     */
+    changeIsActiveSettingsFromDecks(is_active_settings)
+    {
+        for (const deck_name of Object.keys(is_active_settings)){
+            this.decks[deck_name].is_active = is_active_settings[deck_name];
+        }
+    }
+
+
 
 };
 

@@ -16,13 +16,19 @@ const COL_TERM = "term"
 
 class TermGenerator{
     /**
-     * 
+     * It should be an interface to inherit also the Terms Definition Bundler Algorithm as well as the other one.
      * @param {List[string]} csv_files A list of csv files to extract the information from.
      */
     constructor(csv_files = []){
         this.csv_files = csv_files;
     }
 
+    /**
+     * Virtually creates the terms based on them, and agroupates them into a list of items
+     */
+    computeTerms(){
+
+    }
     
 
 
