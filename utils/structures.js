@@ -1,4 +1,6 @@
-
+/**
+ * Terms, standard accepted for the Quizzler
+ */
 class Term {
 
     constructor(term, example = "", description = "", prompt = "Use the term", references = "", category = "", attachment="") {
@@ -60,11 +62,11 @@ class TermStorage {
      * @param {TermStorage} deck the deck to append to the storage, by default is active usually
      */
     addDeck(deck){
-        this.decks.insert(deck);
+        this.decks.push(deck);
     }
     
     /**
-     * 
+     * Follows the design of array.push, easier to memorize
      * @param {Term} term Pushes this term into the terms of the storage
      */
     push(term){

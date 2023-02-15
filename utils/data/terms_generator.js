@@ -17,17 +17,49 @@ const COL_TERM = "term"
 class TermGenerator{
     /**
      * It should be an interface to inherit also the Terms Definition Bundler Algorithm as well as the other one.
-     * @param {List[string]} csv_files A list of csv files to extract the information from.
+     * @param {List[jsonObject]} filesData A list of csv files to extract the information from.
+     * Strucutre of jsonObject:\n\n\
+     * {filename: "Filename or filepath", title: "Title of the deck"}
      */
-    constructor(csv_files = []){
-        this.csv_files = csv_files;
+    constructor(filesData = []){
+        this.filesData = filesData;
     }
 
     /**
+     * To be automatically called at construction, when Strings are added as well
      * Virtually creates the terms based on them, and agroupates them into a list of items
      */
-    computeTerms(){
+    fetchTerms(){
+        for (const fileData of this.filesData){
+            const termStorage = new TermStorage([], fileData.title)
+            this.fetchTerm(fileData.filenmae, termStorage)
+        }
 
+    }
+
+    /**
+     * 
+     * @param {string} filename Name of the file to read
+     * @param {TermStorage} termStorage Storage is a reference object to modify
+     */
+    fetchTerm(filename, termStorage){
+
+        dfd.readCSV(filename) //assumes file is in CWD
+        .then(df => {
+
+            
+            const terminologiesDict = dfd.toJSON(df);
+            
+            console.log(terminologiesDict)
+            for (const row of terminologiesDict){
+                const term = new Terminology(row?.term ?? "",row?.description ??"", row?.example ?? "")
+                termStorage.push(term)
+            }
+            console.log(termStorage.jsonTerms);
+
+        }).catch(err => {
+            console.log(err);
+        })
     }
     
 
@@ -35,21 +67,5 @@ class TermGenerator{
 }
 
 
-dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
-    .then(df => {
-
-        
-        const terminologiesDict = dfd.toJSON(df);
-        const termStorage = new TermStorage()
-        console.log(terminologiesDict)
-        for (const row of terminologiesDict){
-            const term = new Terminology(row?.term ?? "",row?.description ??"", row?.example ?? "")
-            termStorage.push(term)
-        }
-        console.log(termStorage.jsonTerms);
-
-    }).catch(err => {
-        console.log(err);
-    })
 
 module.exports = {}
