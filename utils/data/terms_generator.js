@@ -14,6 +14,20 @@ const EXAMPLE_FILE = "./terms/german.csv"
 const COL_DEFINITION = "definition"
 const COL_TERM = "term"
 
+class TermGenerator{
+    /**
+     * 
+     * @param {List[string]} csv_files A list of csv files to extract the information from.
+     */
+    constructor(csv_files = []){
+        this.csv_files = csv_files;
+    }
+
+    
+
+
+}
+
 
 dfd.readCSV(EXAMPLE_FILE) //assumes file is in CWD
     .then(df => {
