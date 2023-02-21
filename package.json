@@ -22,7 +22,8 @@
 	],
 	"scripts": {
 		"format": "prettier --write \"./**/*.{js,json}\"",
-		"test": "node test.js"
+		"tests": "mocha tests/*"
+			
 	},
 	"dependencies": {
 		"@wangnene2/chart": "^1.0.14",
@@ -46,6 +47,7 @@
 		"play-sound": "^1.1.5"
 	},
 	"devDependencies": {
+		"mocha": "^10.2.0",
 		"prettier": "^2.8.0"
 	}
 }

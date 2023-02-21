@@ -62,13 +62,27 @@ const CONSTANTS = {
 
 /**
  * Gets clickeable path that could be printed on the console and clicked.
- * @param {str} fileimage : String containing the relative position of the image from the project root e.g. ./img/unicorn.png
+ * @param {str} fileimage : String containing the relative position of the image from utils directory
  * @returns {str} Formatted file:///C:/github/testing/maid-cli/img/unicorn.png
  */
-const getAbsoluteUri = (fileimage = './img/unicorn.png') => {
+const getAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/') => {
+    // Note it should take from the root.
     const absolutePath = path.resolve(path.join(__dirname, './data/', fileimage)); // Note the '../' because it is inside of constants
     const fileUrl = url.pathToFileURL(absolutePath);
     return (fileUrl.toString());
+}
+
+
+/**
+ * Gets directory path
+ * @param {str} fileimage : String containing the relative position of the image from utils directory
+ * @returns {str} Formatted file:///C:/github/testing/maid-cli/img/unicorn.png
+ */
+const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/') => {
+    // Note it should take from the root.
+    const absolutePath = path.resolve(path.join(__dirname, './data/', fileimage)); // Note the '../' because it is inside of constants
+    // const fileUrl = url.pathToFileURL(absolutePath);
+    return (absolutePath.toString());
 }
 
 
@@ -149,7 +163,7 @@ const countDecimals = (value) => {
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
     appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures,
-    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool, getAbsoluteUri
+    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool, getAbsoluteUri, getDirAbsoluteUri
 };
 
 
