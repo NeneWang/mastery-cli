@@ -117,6 +117,12 @@ const algebra = [
     
         example: "{x = -6, x = -1/2}, You detect by the b^2 - 4 *ac if positive there are two unequal... "
         
+    },
+    {
+        term: "Inequalities with Absolute",
+        prompt: "Write Expersion for x in |3-x| < 6",
+        // description: "",
+        example: "{x>3, x<9} (1) x < 3: 3-x < 6 x>3 3+x > -6 (2) Then solve"
     }
 
 

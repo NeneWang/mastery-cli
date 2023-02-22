@@ -44,7 +44,8 @@
 		"express": "^4.18.2",
 		"joke": "^0.0.1-1",
 		"meow": "^9.0.0",
-		"play-sound": "^1.1.5"
+		"play-sound": "^1.1.5",
+		"terminal-image": "^2.0.0"
 	},
 	"devDependencies": {
 		"mocha": "^10.2.0",
