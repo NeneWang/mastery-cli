@@ -253,6 +253,7 @@ class Quizzer {
 
             return true
         } catch (err) {
+            console.log("term_selected", term_selected)
             console.warn(err)
         }
     }

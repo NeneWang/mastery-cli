@@ -122,35 +122,6 @@ const getRandomBool = (chances = 0.5) => {
     return random_boolean = Math.random() < chances;
 }
 
-// const ANS_CONTSTRAING =
-
-
-
-
-
-
-function populateTerms(termJson) {
-    return termJson.map(obj => new Term(obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", obj?.references ?? "", obj?.category ?? "", obj?.attachment));
-}
-
-const terms = populateTerms(termJson);
-
-
-const termStorage = new TermStorage(terms);
-const termsEnabled = termStorage.jsonTerms
-
-const getQmathEnabled = (listOfProblemSets, debugLast = false, lasts = 0) => {
-    let qmathEnabled = []
-    for (problemSet of listOfProblemSets) {
-        qmathEnabled = qmathEnabled.concat(problemSet)
-    }
-
-    // For debugging purposes
-    if (lasts > 0) return qmathEnabled.slice(-lasts)
-    if (debugLast) return [qmathEnabled.at(qmathEnabled.length - 1)]
-    return qmathenabled;
-}
-
 
 
 const countDecimals = (value) => {
@@ -158,6 +129,8 @@ const countDecimals = (value) => {
         return value?.toString().split(".")[1].length ?? 0;
     return 0;
 }
+
+const termsEnabled = termJson;
 
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,

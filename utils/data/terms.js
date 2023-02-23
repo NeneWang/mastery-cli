@@ -9,7 +9,8 @@
 
 const { react_terms } = require('./react_terms');
 const { network, artificialIntelligence, algebra, calculousOne } = require("./fall23");
-const {  pragmatic_programmer } = require('./ethics.js')
+const {  pragmatic_programmer } = require('./ethics.js');
+const { TermStorage } = require('../structures');
 
 const designPatterns = [
     { term: "solid", prompt: "What are the SOLID principles? Mention at least 3", example: "     S - Single-responsiblity Principle     O - Open-closed Principle     L - Liskov Substitution Principle     I - Interface Segregation Principle     D - Dependency Inversion Principle " },
@@ -46,7 +47,7 @@ const designPatterns = [
         prompt: "How could you implement this to any of the current projects? What are the advantages? Hypothetical case?", attachment: "./img/2023-01-25-15-31-30.png"
     },
     {
-        term: "Factory Pattern", attachment: "./img/img/2023-01-26-10-39-16.png.png", example: "The advantage of the PointFactory over the Builder pattern is that it provides a simple way to create objects without exposing the internal complexity of the object creation process. This can make the code more readable and maintainable, as the client code only needs to call the factory method and does not need to know the details of how the object is created. Additionally, the PointFactory can also provide additional functionality, such as caching or validation, that can make the object creation process more efficient.",
+        term: "Factory Pattern", attachment: "./img/2023-01-26-10-39-16.png", example: "The advantage of the PointFactory over the Builder pattern is that it provides a simple way to create objects without exposing the internal complexity of the object creation process. This can make the code more readable and maintainable, as the client code only needs to call the factory method and does not need to know the details of how the object is created. Additionally, the PointFactory can also provide additional functionality, such as caching or validation, that can make the object creation process more efficient.",
         prompt: "Whats the advantage over Builder Pattern? How can you use it on future/imaginative project?", description: "The Factory Method pattern is a design pattern used to create objects. It defines an interface for creating an object, but allows subclasses to alter the type of objects that will be created. \n \
         \n \
         The Factory Method pattern consists of three parts:\n \
@@ -451,20 +452,26 @@ const system_design = [
 
 let termJson = [];; // Variable to be returned with the total of the terms to be used
 
-termJson.push(...designPatterns);
-termJson.push(...cloud);
-termJson.push(...dataStructures);
-termJson.push(...artificialIntelligence);
-termJson.push(...cloud);
-termJson.push(...dataStructures);
-termJson.push(...coderTerms);
-termJson.push(...unit_testing);
-termJson.push(...system_design);
-termJson.push(...algebra);
-termJson.push(...calculousOne);
-termJson.push(...network)
-termJson.push(...react_terms);
-// termJson.push(...test);
-termJson.push(...pragmatic_programmer);
+let decks = new TermStorage([], "Academic Terms");
+decks.addDeck(new TermStorage(designPatterns, "design patterns", {is_active: true}));
+decks.addDeck(new TermStorage(cloud, "cloud", {is_active: true}));
+decks.addDeck(new TermStorage(dataStructures, "data structures", {is_active: false}));
+decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", {is_active: false}));
+decks.addDeck(new TermStorage(cloud, "cloud", {is_active: false}));
+decks.addDeck(new TermStorage(dataStructures, "data structures", {is_active: false}));
+decks.addDeck(new TermStorage(coderTerms, "coder terms", {is_active: false}));
+decks.addDeck(new TermStorage(unit_testing, "unit testing", {is_active: false}));
+decks.addDeck(new TermStorage(system_design, "system design", {is_active: false}));
+decks.addDeck(new TermStorage(algebra, "algebra", {is_active: false}));
+decks.addDeck(new TermStorage(calculousOne, "calculus one", {is_active: false}));
+decks.addDeck(new TermStorage(network, "network", {is_active: false}));
+decks.addDeck(new TermStorage(react_terms, "react terms", {is_active: false}));
+// decks.addDeck(new TermStorage(test, "test", {is_active: false}));
+decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", {is_active: false}));
+
+
+
+termJson.push(...decks.listTerms);
+// console.log("list terms", termJson)
 
 module.exports = { termJson };
