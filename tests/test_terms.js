@@ -14,11 +14,12 @@ describe("Testing Terms Generator", () => {
         const res = await termGenerator.fetchTerms();
 
 
-
-        const termsDeck = termGenerator.mapTermsStorage["mock-v1"];
-        console.log(termsDeck);
+        // console.log("res", res);
+        // const termsDeck = termGenerator.mapTermsStorage["mock-v1"];
+        console.log(termGenerator.termStorageAsJsonList);
         // assert(termsDeck.decks.length > 2);
         // termsDeck.explain();
+        // console.log(termsDeck)
 
     })
 })

@@ -26,7 +26,7 @@ var _require2 = require('./frameworks'),
     react_terms = _require2.react_terms;
 
 decks.addDeck(new TermStorage(react_terms, "react terms", {
-  is_active: true
+  is_active: false
 }));
 
 var _require3 = require("./fall23"),
@@ -36,58 +36,55 @@ var _require3 = require("./fall23"),
     calculousOne = _require3.calculousOne;
 
 decks.addDeck(new TermStorage(network, "network", {
-  is_active: true
+  is_active: false
 }));
 decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", {
-  is_active: true
-}));
-decks.addDeck(new TermStorage(algebra, "algebra", {
-  is_active: true
-}));
-decks.addDeck(new TermStorage(calculousOne, "calculus one", {
-  is_active: true
-}));
+  is_active: false
+})); // decks.addDeck(new TermStorage(algebra, "algebra", { is_active: false }));
+// decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: false }));
+// const { pragmatic_programmer } = require('./ethics.js');
+// decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", { is_active: false }));
+// const { designPatterns, dsa, system_design } = require('./dsa');
+// decks.addDeck(new TermStorage(designPatterns, "design patterns", { is_active: false }));
+// decks.addDeck(new TermStorage(dsa))
+// decks.addDeck(new TermStorage(system_design, "system design", { is_active: false }));
+// const { aws_services, aws_glossary, coderTerms, unit_testing } = require('./programmer_experience');
+// decks.addDeck(new TermStorage(aws_glossary, "aws glossary", { is_active: false }));
+// decks.addDeck(new TermStorage(aws_services, "aws services", { is_active: false }));
+// decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: false }));
+// decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: false }));
+// decks.addDeck(new TermStorage(test, "test", {is_active: false}));
 
-var _require4 = require('./ethics.js'),
-    pragmatic_programmer = _require4.pragmatic_programmer;
+termJson.push.apply(termJson, _toConsumableArray(decks.listTerms)); // Term generators
 
-decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", {
-  is_active: true
-}));
+(function _callee() {
+  var _require4, TermGenerator, filesData, termGenerator, _;
 
-var _require5 = require('./dsa'),
-    designPatterns = _require5.designPatterns,
-    dsa = _require5.dsa,
-    system_design = _require5.system_design;
+  return regeneratorRuntime.async(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _require4 = require('./terms_generator'), TermGenerator = _require4.TermGenerator;
+          filesData = [{
+            title: "mock-v1",
+            filename: "terms/mock.csv"
+          }];
+          termGenerator = new TermGenerator(filesData);
+          _context.next = 5;
+          return regeneratorRuntime.awrap(termGenerator.fetchTerms());
 
-decks.addDeck(new TermStorage(designPatterns, "design patterns", {
-  is_active: true
-}));
-decks.addDeck(new TermStorage(dsa));
-decks.addDeck(new TermStorage(system_design, "system design", {
-  is_active: true
-}));
+        case 5:
+          _ = _context.sent;
+          termJson.push.apply(termJson, _toConsumableArray(termGenerator.termStorageAsJsonList));
 
-var _require6 = require('./programmer_experience'),
-    aws_services = _require6.aws_services,
-    aws_glossary = _require6.aws_glossary,
-    coderTerms = _require6.coderTerms,
-    unit_testing = _require6.unit_testing;
+        case 7:
+        case "end":
+          return _context.stop();
+      }
+    }
+  });
+})(); // // console.log("list terms", termJson)
 
-decks.addDeck(new TermStorage(aws_glossary, "aws glossary", {
-  is_active: true
-}));
-decks.addDeck(new TermStorage(aws_services, "aws services", {
-  is_active: true
-}));
-decks.addDeck(new TermStorage(coderTerms, "coder terms", {
-  is_active: true
-}));
-decks.addDeck(new TermStorage(unit_testing, "unit testing", {
-  is_active: true
-})); // decks.addDeck(new TermStorage(test, "test", {is_active: false}));
-
-termJson.push.apply(termJson, _toConsumableArray(decks.listTerms)); // console.log("list terms", termJson)
 
 module.exports = {
   termJson: termJson

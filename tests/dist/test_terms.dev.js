@@ -11,7 +11,7 @@ var _require2 = require("../utils/structures"),
 
 describe("Testing Terms Generator", function () {
   it("Test if it is able to read and populate the terms json ", function _callee() {
-    var filesData, termGenerator, res, termsDeck;
+    var filesData, termGenerator, res;
     return regeneratorRuntime.async(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -26,11 +26,13 @@ describe("Testing Terms Generator", function () {
 
           case 4:
             res = _context.sent;
-            termsDeck = termGenerator.mapTermsStorage["mock-v1"];
-            console.log(termsDeck); // assert(termsDeck.decks.length > 2);
+            // console.log("res", res);
+            // const termsDeck = termGenerator.mapTermsStorage["mock-v1"];
+            console.log(termGenerator.termStorageAsJsonList); // assert(termsDeck.decks.length > 2);
             // termsDeck.explain();
+            // console.log(termsDeck)
 
-          case 7:
+          case 6:
           case "end":
             return _context.stop();
         }
