@@ -53,7 +53,6 @@ describe("Testing Terms using Then", () => {
 });
 
 
-
 describe("Get all terms at once", () => {
     it("Populating the terms on load time?", async () => {
         const terms = await populateTerms();
