@@ -12,29 +12,59 @@ var _require2 = require("../utils/structures"),
 var _require3 = require("../utils/data/terms"),
     populateTerms = _require3.populateTerms;
 
+function createTermGenerator() {
+  var filesData = [{
+    title: "mock-v1",
+    filename: "terms/mock.csv"
+  }];
+  return new TermGenerator(filesData);
+}
+
 describe("Testing Terms Generator", function () {
   it("Test if it is able to read and populate the terms json ", function _callee() {
-    var filesData, termGenerator, res;
+    var termGenerator, res;
     return regeneratorRuntime.async(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            filesData = [{
-              title: "mock-v1",
-              filename: "terms/mock.csv"
-            }];
-            termGenerator = new TermGenerator(filesData);
-            _context.next = 4;
+            termGenerator = createTermGenerator();
+            _context.next = 3;
             return regeneratorRuntime.awrap(termGenerator.fetchTerms());
 
-          case 4:
+          case 3:
             res = _context.sent;
             // console.log(termGenerator.termStorageAsJsonList);
             assert(termGenerator.termStorageAsJsonList.length > 2);
 
-          case 6:
+          case 5:
           case "end":
             return _context.stop();
+        }
+      }
+    });
+  });
+  it("Test that the rows are properly populated ", function _callee2() {
+    var termGenerator, res;
+    return regeneratorRuntime.async(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            termGenerator = createTermGenerator();
+            _context2.next = 3;
+            return regeneratorRuntime.awrap(termGenerator.fetchTerms());
+
+          case 3:
+            res = _context2.sent;
+            first_sample_term = termGenerator.termStorageAsJsonList[0];
+            console.log("first_sample_term", first_sample_term);
+            assert(first_sample_term.term != "");
+            assert(first_sample_term.prompt != "");
+            assert(first_sample_term.description != ""); // console.log(termGenerator.termStorageAsJsonList);
+            // assert(termGenerator.termStorageAsJsonList.length > 2);
+
+          case 9:
+          case "end":
+            return _context2.stop();
         }
       }
     });
@@ -42,11 +72,7 @@ describe("Testing Terms Generator", function () {
 });
 describe("Testing Terms using Then", function () {
   it("Test if it is able to read and populate the terms json Using then pattern", function () {
-    var filesData = [{
-      title: "mock-v1",
-      filename: "terms/mock.csv"
-    }];
-    var termGenerator = new TermGenerator(filesData);
+    var termGenerator = createTermGenerator();
     termGenerator.fetchTerms().then(function () {
       // console.log(termGenerator.termStorageAsJsonList);
       assert(termGenerator.termStorageAsJsonList.length > 2);
@@ -56,23 +82,23 @@ describe("Testing Terms using Then", function () {
   });
 });
 describe("Get all terms at once", function () {
-  it("Populating the terms on load time?", function _callee2() {
+  it("Populating the terms on load time?", function _callee3() {
     var terms;
-    return regeneratorRuntime.async(function _callee2$(_context2) {
+    return regeneratorRuntime.async(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            _context2.next = 2;
+            _context3.next = 2;
             return regeneratorRuntime.awrap(populateTerms());
 
           case 2:
-            terms = _context2.sent;
+            terms = _context3.sent;
             // console.log("async terms:", terms)
             assert(terms.length > 2);
 
           case 4:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
     });

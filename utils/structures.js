@@ -37,8 +37,16 @@ class Term {
 
 
 class Terminology extends Term {
-    constructor(term, description = "", example = "", auto_imags = false){
-        super(term, example, description, "Use this on an example")
+    /**
+     * 
+     * @param {string} term Terminology or title
+     * @param {String} description Description  which should appear or the definition
+     * @param {Optional Arguments} param2 {example: If there is an example, auto_image: bool: If to autoamtically fetch an image from the web.}
+     */
+    constructor(term, description = "", {example = "", autom_image = false} = {}){
+        super(term, example, description, "Use this on an example");
+
+
     }
 }
 
