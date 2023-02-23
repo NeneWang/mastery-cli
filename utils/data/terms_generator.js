@@ -39,7 +39,7 @@ class TermGenerator{
             let termStorage = new TermStorage([], fileData.title);
             termStorage = await this.fetchTerm(fileData.filename, termStorage); // Should populate the TermStorage with the specific file inside of it.
             this.mapTermsStorage[fileData.title] = termStorage; //Populate so that it can be retrieved later on.
-            console.log("termStorage", termStorage)
+            // console.log("termStorage", termStorage)
         }
 
     }
