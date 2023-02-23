@@ -30,7 +30,7 @@ function populateTerms() {
           decks = new TermStorage([], "Academic Terms");
           _require2 = require('./frameworks'), react_terms = _require2.react_terms;
           decks.addDeck(new TermStorage(react_terms, "react terms", {
-            is_active: true
+            is_active: false
           }));
           _require3 = require("./fall23"), network = _require3.network, artificialIntelligence = _require3.artificialIntelligence, algebra = _require3.algebra, calculousOne = _require3.calculousOne;
           decks.addDeck(new TermStorage(network, "network", {

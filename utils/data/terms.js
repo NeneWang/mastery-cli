@@ -23,7 +23,7 @@ async function populateTerms() {
     let decks = new TermStorage([], "Academic Terms");
 
     const { react_terms } = require('./frameworks');
-    decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: true }));
+    decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: false }));
 
 
     const { network, artificialIntelligence, algebra, calculousOne } = require("./fall23");
