@@ -5,7 +5,7 @@ const { isAxiosError } = require("axios");
  */
 class Term {
 
-    constructor(term, example = "", description = "", prompt = "Use the term", references = "", category = "", attachment="", priority = 5) {
+    constructor(term, example = "", description = "", prompt = "Use the term",  {priority = 5, tags = [], category = "", references = "", attachment=""} = {}) {
         this.term = term;
         this.example = example;
         this.description = description;
@@ -103,11 +103,26 @@ class TermStorage {
      * @returns {List<Term>} Returns as a List of Terms
      */
     get listTerms(){
-        return this.jsonTerms.map(
+        const termsList = [];
+        termsList.push(...this.terms.map(
             obj => new Term(
-                obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", obj?.references ?? "", obj?.category ?? "", obj?.attachment
-                )
-        );
+                obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", 
+                {
+                    references: obj?.references ?? "", category: this.deck_name ?? "", attachment: obj?.attachment,
+                    priority: this.priority
+                }
+            )
+        ));
+
+
+        for (const deck of this.decks){
+            if(deck.is_active){
+                termsList.push(...deck.listTerms);
+            }
+        }
+        
+        // Do the same recursive for each of the internal res 
+        return termsList
     }
 
     /**
