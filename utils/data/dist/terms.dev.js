@@ -18,7 +18,7 @@ var _require = require('../structures'),
     TermStorage = _require.TermStorage;
 
 function populateTerms() {
-  var _terms;
+  var _terms, _terms2;
 
   var decks, _require2, react_terms, _require3, network, artificialIntelligence, algebra, calculousOne, filesData, _require4, TermGenerator, termGenerator, _;
 
@@ -66,9 +66,12 @@ function populateTerms() {
 
         case 13:
           _ = _context.sent;
+
+          (_terms2 = terms).push.apply(_terms2, _toConsumableArray(termGenerator.termStorageAsJsonList));
+
           return _context.abrupt("return", terms);
 
-        case 15:
+        case 16:
         case "end":
           return _context.stop();
       }

@@ -67,7 +67,7 @@ async function populateTerms() {
     const { TermGenerator } = require('./terms_generator');
     const termGenerator = new TermGenerator(filesData);
     const _ = await termGenerator.fetchTerms();
-    // terms.push(...termGenerator.termStorageAsJsonList);
+    terms.push(...termGenerator.termStorageAsJsonList);
 
     return terms;
 }
