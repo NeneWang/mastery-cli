@@ -9,6 +9,7 @@
 
 
 const { Term, Terminology, TermStorage } = require('../structures');
+const {getDirAbsoluteUri} = require('../constants');
 const dfd = require("danfojs-node")
 const EXAMPLE_FILE = "./terms/german.csv"
 const COL_DEFINITION = "definition"
@@ -23,16 +24,19 @@ class TermGenerator{
      */
     constructor(filesData = []){
         this.filesData = filesData;
+        this.mapTermsStorage = {};
     }
 
     /**
      * To be automatically called at construction, when Strings are added as well
      * Virtually creates the terms based on them, and agroupates them into a list of items
      */
-    fetchTerms(){
+    async fetchTerms (){
         for (const fileData of this.filesData){
-            const termStorage = new TermStorage([], fileData.title)
-            this.fetchTerm(fileData.filenmae, termStorage)
+            let termStorage = new TermStorage([], fileData.title);
+            termStorage = await this.fetchTerm(fileData.filename, termStorage); // Should populate the TermStorage with the specific file inside of it.
+            this.mapTermsStorage[fileData.title] = termStorage; //Populate so that it can be retrieved later on.
+            console.log(termStorage)
         }
 
     }
@@ -42,20 +46,24 @@ class TermGenerator{
      * @param {string} filename Name of the file to read
      * @param {TermStorage} termStorage Storage is a reference object to modify
      */
-    fetchTerm(filename, termStorage){
-
-        dfd.readCSV(filename) //assumes file is in CWD
+    async fetchTerm (filename="terms/german.csv", termStorage=[])  {
+        const absoluteFilePath = getDirAbsoluteUri(filename);
+        console.log("Getting from: ", absoluteFilePath)
+        dfd.readCSV(absoluteFilePath) //assumes file is in CWD
         .then(df => {
 
             
             const terminologiesDict = dfd.toJSON(df);
             
-            console.log(terminologiesDict)
+            // console.log(terminologiesDict);
             for (const row of terminologiesDict){
-                const term = new Terminology(row?.term ?? "",row?.description ??"", row?.example ?? "")
-                termStorage.push(term)
+                // console.log(row);
+                const term = new Terminology(row?.term ?? "",row?.description ??"", row?.example ?? "");
+                termStorage.push(term);
             }
             console.log(termStorage.jsonTerms);
+            // console.log(termStorage);
+            // return termStorage;
 
         }).catch(err => {
             console.log(err);
@@ -68,4 +76,4 @@ class TermGenerator{
 
 
 
-module.exports = {}
+module.exports = {TermGenerator}

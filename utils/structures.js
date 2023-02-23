@@ -105,6 +105,15 @@ class TermStorage {
         }
     }
 
+    /**
+     * Simply explains the insides as well as the name of the deck
+     */
+    explain(){
+        console.log("termGenerator content:");
+        console.log(`From deck: ${this.deck_name} contains decks: ${this.decks.length}`);
+        console.log(this.jsonTerms);
+    }
+
 
 
 };

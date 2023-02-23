@@ -7,6 +7,6 @@ var constants = require('./utils/constants');
 
 var getMaidHeader = utils.getMaidHeader,
     getTalk = utils.getTalk; // 
+// message()
 
-message();
 console.log("".concat(getMaidHeader(), " ").concat(chalk(message)));
