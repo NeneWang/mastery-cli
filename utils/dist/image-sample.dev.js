@@ -6,29 +6,59 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+/**
+ * Simple example for Image Showing.
+ */
+// (async () => {
+//     const fs = await import('fs').then((mod) => mod.promises);
+//     const { default: terminalImage } = await import('terminal-image');
+//     const data = await fs.readFile('unicorn.jpg');
+//     const image = await terminalImage.buffer(data);
+//     console.log(image);
+//   })();
+
+/**
+ * Gif example
+ */
 (function _callee() {
-  var terminalImage;
+  var fs, _ref, terminalImage, data, image;
+
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
           return regeneratorRuntime.awrap(Promise.resolve().then(function () {
-            return _interopRequireWildcard(require('terminal-image'));
+            return _interopRequireWildcard(require('fs'));
+          }).then(function (mod) {
+            return mod.promises;
           }));
 
         case 2:
-          terminalImage = _context.sent;
-          _context.t0 = console;
-          _context.next = 6;
-          return regeneratorRuntime.awrap(terminalImage.file('unicorn.jpg'));
+          fs = _context.sent;
+          _context.next = 5;
+          return regeneratorRuntime.awrap(Promise.resolve().then(function () {
+            return _interopRequireWildcard(require('terminal-image'));
+          }));
 
-        case 6:
-          _context.t1 = _context.sent;
+        case 5:
+          _ref = _context.sent;
+          terminalImage = _ref["default"];
+          _context.next = 9;
+          return regeneratorRuntime.awrap(fs.readFile('gif-sample.gif', {
+            maximumFrameRate: 2
+          }));
 
-          _context.t0.log.call(_context.t0, _context.t1);
+        case 9:
+          data = _context.sent;
+          _context.next = 12;
+          return regeneratorRuntime.awrap(terminalImage.gifBuffer(data));
 
-        case 8:
+        case 12:
+          image = _context.sent;
+          console.log(image); // image.render();
+
+        case 14:
         case "end":
           return _context.stop();
       }
