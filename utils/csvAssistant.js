@@ -96,22 +96,23 @@ class CSVAssistant {
 
         return listOfSolvedRows;
     }
-
     saveListToCSV(jsonList, filename) {
-        
         const absoluteFilePath = getDirAbsoluteUri(filename);
+        console.log("Saves to csv here: ", absoluteFilePath);
         const df = new dfd.DataFrame(jsonList);
-        df.to_csv(filename, { index: false });
-    }
+        dfd.toCSV(df, { filePath: absoluteFilePath, sep: ";"});
+      }
+      
 
     async populateAndSave(filename = "priorities/task_skills.csv", {saveAs = ""}) {
-        const listSolvedRows = this.populateCoefficients(filename);
+        const listSolvedRows = await this.populateCoefficients(filename);
+        // console.log("Attampting to save:", listSolvedRows);
         
-        const filepath_target = filename;
+        let filepath_target = filename;
         if(saveAs != ""){
             filepath_target  = saveAs;
         }
-
+        console.log("? here?")
         this.saveListToCSV(listSolvedRows, filepath_target);
 
     }

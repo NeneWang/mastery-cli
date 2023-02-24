@@ -18,7 +18,7 @@ describe("Testing Terms Generator", () => {
     it("Test integration test, if can be saved into the csv target filepath", async () => {
         // You still have to manually check for this.
         const csvAssistant = new CSVAssistant();
-        csvAssistant.populateAndSave();
+        const _ = await csvAssistant.populateAndSave("priorities/task_skills.csv", {saveAs: "priorities/task_skills_coefficient.csv"});
         
     })
 

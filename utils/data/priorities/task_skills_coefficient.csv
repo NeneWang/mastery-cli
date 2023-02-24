@@ -1,0 +1,29 @@
+feature_id;utility;difficulty;status;description;link;mission_comments;Criteria;coefficient
+Algorithms;10;10;;Here I am talking beyond CS Basics. This is highly requested as it improves the career paths;;;Finishing all algoexperts algoes;0
+mobile frameworks;8;7;;I am talking mainly Flutter, Swift, Kotlin. Which should have longer support. ;;The focus shouldn't be that much language specifics, but into the infrastructure of it. The different Libraries management, best practices when connecting stuff together;Ecommerce, Chatting Application (with notifications), Subscription Application in Each (with login and user informaiton handling);1
+Desktop Frameworks;8;6;;It can for the CLI as well (for logic), a Electron system should be okay;;;File Editing Software. Package Management Software, UI Reporting Software -> (Mirror app + spotify);2
+Front end Knowledge;8;5;;Just filling up the gaps of knowledges, understanding behind the certain concepts;https://roadmap.sh/frontend;;Flashing each concept;3
+Finance Terms + Accounting Obligations;8;4;;;;;;4
+Business Law + Terms;8;5;;Specially in the us/new york;;;;3
+Mobile Design Patterns;9;5;;Following using Flutter not a bad idea;https://roadmap.sh/flutter;;;4
+Software Design Patterns;9;6;;;;;;3
+Game Design Patterns;9;7;;;;;;2
+Game Dev;8;7;;Unity (Desktop, crossconsole), Phase.io (for the web) and I am also thinking about Flutter Game Kit for simple supoprt;;Doesn't make sense to design for others, it can get heavy. Game dev usually improves your overall logic, networking, design patterns and best practices while scoring poor in careerwise (in a fun way);Mutliplayer Collab Shter for Desktop (Isekai), Phaser Isekai Sim,  Light + VR Language Learning Game + mobile thousand journeys game;1
+software architect;10;6;;;https://roadmap.sh/software-architect;;;4
+Software Design  & Architecture;10;7;;Clean code, Architectural Principles;https://roadmap.sh/software-design-architecture;;Flashing everyconcept on the roadmap;3
+Design System;10;5;;;https://roadmap.sh/design-system;;Flashing everyconcept on the roadmap;5
+System Design;9;6;;Things you would need to understand in order to develop large scale systems;https://roadmap.sh/system-design;While someother big topics might step into each other..;;3
+QA Engineering;8;7;;Not about running the tests itself but the planning, reporting of these tests;https://roadmap.sh/qa;;Flashing everyconcept on the roadmap;1
+Computer Science;10;6;;This is more about the filling the gaps of your barebones schooling:;https://roadmap.sh/computer-science;;Flashing everyconcept on the roadmap;4
+Backend Developer;9;6;;Filling up the gaps of your backend deving;https://roadmap.sh/backend;;Flashing everyconcept on the roadmap;3
+GraphQL;5;4;;Here is also filling the gaps into GraphQL Understanding;https://roadmap.sh/graphql;;Flashing everyconcept on the roadmap;1
+PostgresQL DBA;7;6;;Concepts for the idea of Database Landscape and troubleshooting;https://roadmap.sh/postgresql-dba;;Flashing everyconcept on the roadmap;1
+Spring Boot Dev;5;6;;Spring Boot Backend Understandings;https://roadmap.sh/spring-boot;;Flashing everyconcept on the roadmap;-1
+Data Science Math;9;9;;While limited to the academic findings of statistics;;;;0
+Machine Learning;9;7;;Understanding each machine learnings strength and weaknesses;Passing the Machine Learning Interview;;Flashing All public concepts, have at least run 10 in each example;2
+Deep Learning;9;8;;I am talking here about Deep Learning Concepts;Passing the Deep learning Interview;;Flashing All public concepts, have at least run 10 in each example;1
+Salesforce API;8;5;;Inherently better for business in general, integrated into 10% us transactions;;;;3
+Wordpress/Woocommerce API, dev;7;5;;Inherently better from the personalization and tax perspective than the others;;;;2
+UX/UI Design;8;4;;Easy to learn, high returns if mastered. This woudlnt go that much into the graphic part but understanding already designed components. As well as improving the experience, color theory and design would be following some certain psycology standards.;;;Readings and classification and flashing the investigation of them;4
+Marketing Analytics;9;6;;We are talking whats inside of the most research focused areas. Like Automated behavioural ingestion and automation for a add pipeline. I am thinkign about a data pipeline. This is mostly looking up White papers about marketing and researching ways to automate it.;;But what I am thinking is that this is more of a knowing how to devlelop and tracks application. As well as understanding.;Designing Marketing auto Add and recommendations system. Designing a big Data Ingestion source.;3
+Business Frameworks;;;;This is understanding different business models from stories as well ass business management architecture as well as processes., such as hiring, managing, productivity management. Hiring and basic economics;;;Reading 30 Business Stategic, pinpointing Books and classify all the study cases into ;0

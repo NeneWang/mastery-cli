@@ -10,4 +10,3 @@
     const image = await terminalImage.buffer(Buffer.from(buffer));
     console.log(image);
   })();
-  

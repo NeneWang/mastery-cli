@@ -29,16 +29,23 @@ describe("Testing Terms Generator", function () {
     });
   });
   it("Test integration test, if can be saved into the csv target filepath", function _callee2() {
-    var csvAssistant;
+    var csvAssistant, _;
+
     return regeneratorRuntime.async(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             // You still have to manually check for this.
             csvAssistant = new CSVAssistant();
-            csvAssistant.populateAndSave();
+            _context2.next = 3;
+            return regeneratorRuntime.awrap(csvAssistant.populateAndSave("priorities/task_skills.csv", {
+              saveAs: "priorities/task_skills_coefficient.csv"
+            }));
 
-          case 2:
+          case 3:
+            _ = _context2.sent;
+
+          case 4:
           case "end":
             return _context2.stop();
         }
