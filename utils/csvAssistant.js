@@ -141,12 +141,13 @@ class CSVAssistant {
      * @param {bool, string} param1 runPopulation, saveAs
      * @returns 
      */
-    async populate_priorities(filename = "priorities/task_skills.csv", { runPopulation = true, saveAs = "", filterTop = 5 }) {
-        file_to_search_priorities;
-        const listSolvedRows = this.populateAndSave(filename, { saveA: saveAs });
+    async getTopPriorities(filename = "priorities/task_skills.csv", { runPopulation = true, saveAs = "", filterTop = 5 }) {
+        
+        const listSolvedRows = await this.populateAndSave(filename, { saveA: saveAs })
+        // console.log(listSolvedRows);
         const sortedSolvedRows = this.sortObjectsByCoefficient(listSolvedRows);
         
-        return sortedSolvedRows.slice(0, 5);
+        return sortedSolvedRows.slice(0, filterTop);
 
     }
 

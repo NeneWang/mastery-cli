@@ -52,7 +52,7 @@ describe("Testing Terms Generator", function () {
       }
     });
   });
-  it("Runs coefficients, saves it and sreturns top 3", function _callee3() {
+  it("Runs coefficients, saves it and returns top 3", function _callee3() {
     var csvAssistant, top3InPriority;
     return regeneratorRuntime.async(function _callee3$(_context3) {
       while (1) {
@@ -61,7 +61,7 @@ describe("Testing Terms Generator", function () {
             // You still have to manually check for this.
             csvAssistant = new CSVAssistant();
             _context3.next = 3;
-            return regeneratorRuntime.awrap(csvAssistant.populatePriorities("priorities/task_skills.csv", {
+            return regeneratorRuntime.awrap(csvAssistant.getTopPriorities("priorities/task_skills.csv", {
               saveAs: "priorities/task_skills_coefficient.csv",
               filterTop: 3
             }));
@@ -69,8 +69,9 @@ describe("Testing Terms Generator", function () {
           case 3:
             top3InPriority = _context3.sent;
             console.log(top3InPriority);
+            assert(top3InPriority.length == 3);
 
-          case 5:
+          case 6:
           case "end":
             return _context3.stop();
         }
