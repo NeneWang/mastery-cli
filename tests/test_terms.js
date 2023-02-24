@@ -33,6 +33,7 @@ describe("Testing Terms Generator", () => {
         assert(first_sample_term.term != "");
         assert(first_sample_term.prompt != "");
         assert(first_sample_term.description != "");
+        assert(first_sample_term.category == "mock-v1"); //Inherits from the root folder/
         // console.log(termGenerator.termStorageAsJsonList);
         // assert(termGenerator.termStorageAsJsonList.length > 2);
 

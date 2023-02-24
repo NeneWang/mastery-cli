@@ -10,14 +10,16 @@ var _require = require('../utils/structures'),
 
 describe("Quizzler Terminology Tests", function () {
   function setupQuizer() {
+    // TDODO
     var terms = [{
       term: "Sample Term",
       prompt: "Do X",
+      category: "category",
       description: "some Descirpiton",
       attachment: "./img/2023-02-07-10-29-38.png"
     }];
     var decks = new TermStorage(terms, "Academic Terms");
-    var mQuizer = new utils.MathQuizer([], [], decks.listTerms);
+    var mQuizer = new utils.FlashQuizzer([], [], decks.listTerms);
     ;
     return mQuizer;
   }

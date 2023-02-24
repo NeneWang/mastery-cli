@@ -16,8 +16,8 @@ const { bar, scatter, bg, fg, annotation } = chart;
 const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
-const { MAID_NAME,getAbsoluteUri , getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
-
+const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
+const {show_image} = require('./utils_functions')
 // const DEBUG = true
 const DEBUG = false
 
@@ -69,7 +69,7 @@ class Quizzer {
         let potential_questions = this.enabledqmathformulas;
         potential_questions = await this.getYoungest(potential_questions);
         // if (DEBUG) console.log("potential_questions", potential_questions);
-        return  await get_random(potential_questions);
+        return await get_random(potential_questions);
     }
 
     pick_term_question = async () => {
@@ -144,8 +144,8 @@ class Quizzer {
     compile_question(question) {
         // if (DEBUG) console.log("Compile question received", question)
         const form = question?.form;
-        const replace = question?.replace??[];
-        const calculates = question?.calculates??'y';
+        const replace = question?.replace ?? [];
+        const calculates = question?.calculates ?? 'y';
         const human_form = question?.human;
 
         // if (DEBUG) console.log("question", question)
@@ -218,11 +218,14 @@ class Quizzer {
                 }
              */
             console.log(chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `));
-            
-            if(term_selected?.attachment??false){
-                console.log(`attachment: ${getAbsoluteUri(term_selected?.attachment)}`);
+
+            if (term_selected?.attachment ?? false) {
+                let image_file = getAbsoluteUri(term_selected?.attachment);
+                console.log(`attachment: ${image_file}`);
+                // Also print the attachment image if possible
+                const _ = await show_image(term_selected?.attachment);
             }
-            
+
             console.log(`${term_selected.description}\n`)
             const question = new Input({
                 name: 'Term Question',
@@ -230,7 +233,7 @@ class Quizzer {
             });
 
             const user_res = await question.run();
-            if(user_res === "no" || user_res === ""){
+            if (user_res === "no" || user_res === "") {
                 this.printExample(term_selected) //You want to print the example as if it didn't know the answer for the next time.
                 return false;
             }
@@ -239,9 +242,9 @@ class Quizzer {
             // TODO Increase the value of the concept
             const ISANSWERCORRECT = true
             const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
-            
+
             // Print the correct example term if exists
-           this.printExample(term_selected)
+            this.printExample(term_selected)
 
             /**
              * date: submission answer
@@ -249,7 +252,7 @@ class Quizzer {
              * ....
              */
             await this.printPreviousTerms(term_selected.formula_name)
-            
+
 
             return true
         } catch (err) {
@@ -262,8 +265,8 @@ class Quizzer {
      * Prints the example of the term_selected (if available)
      * @param {TermStructure} term_selected: Term selected from the 
      */
-    printExample = async(term_selected) => {
-        if(term_selected?.example??false){
+    printExample = async (term_selected) => {
+        if (term_selected?.example ?? false) {
             console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')} ${term_selected.example}`);
         }
     }
@@ -347,7 +350,7 @@ class Quizzer {
                 question_prompt = this.compile_valid_question(question_form, ans_constraint);
                 if (DEBUG) console.log("ask question else", question_prompt);
             }
-            
+
 
             const quiz_allow_reattempts = 3;
             let answerIsCorrect = false;

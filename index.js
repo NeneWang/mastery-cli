@@ -44,7 +44,7 @@ const { Demo, EDemo } = demos;
 
 	const terms = await populateTerms();
 	console.log(terms);
-	const mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled, terms);
+	const mQuizer = new utils.FlashQuizzer(constants.qmathformulas, constants.qmathenabled, terms);
 
 
 	// console.log(getAbsoluteUri("./img/unicorn.png"))

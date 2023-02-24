@@ -9,16 +9,16 @@ const { TermStorage } = require('../utils/structures');
 describe("Quizzler Terminology Tests", () => {
 
     function setupQuizer() {
-
+        // TDODO
         const terms = [
             {
-                term: "Sample Term", prompt: "Do X",
+                term: "Sample Term", prompt: "Do X", category: "category",
                 description: "some Descirpiton", attachment: "./img/2023-02-07-10-29-38.png"
             }
         ]
 
         let decks = new TermStorage(terms, "Academic Terms");
-        const mQuizer = new utils.MathQuizer([], [], decks.listTerms);;
+        const mQuizer = new utils.FlashQuizzer([], [], decks.listTerms);;
         return mQuizer
 
     }

@@ -645,5 +645,5 @@ const autorelease = () => {
 
 module.exports = {
 	getTalk, commitpush, autorelease,
-	Maid, getToday, MathQuizer: Quizzer
+	Maid, getToday, FlashQuizzer: Quizzer
 };

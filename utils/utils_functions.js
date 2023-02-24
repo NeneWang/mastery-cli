@@ -16,7 +16,7 @@ const getAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/
 /**
  * Gets directory path
  * @param {str} fileimage : String containing the relative position of the image from utils directory
- * @returns {str} Formatted file:///C:/github/testing/maid-cli/img/unicorn.png
+ * @returns {str} Formatted C:/github/testing/maid-cli/img/unicorn.png
  */
 const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/') => {
     // Note it should take from the root.
@@ -25,6 +25,24 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './da
     // const fileUrl = url.pathToFileURL(absolutePath);
     return (absolutePath.toString());
 };
+
+async function show_image(image_file) {
+    // let ima
+    try{
+        
+    let image_file_dir = getDirAbsoluteUri(image_file);
+    const fs = await import('fs').then((mod) => mod.promises);
+    const { default: terminalImage } = await import('terminal-image');
+    // console.log("reading from path: " + image_file_dir)node
+    const data = await fs.readFile(image_file_dir);
+    const image = await terminalImage.buffer(data);
+    console.log(image);
+    }
+    catch (err){
+        console.log("Error while attempting to fetch image", err);
+    }
+};
+
 // https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}
 const getRandomMaidEmoji = () => {
     return `:${get_random(MAID_EMOJIS)}:`;
@@ -58,5 +76,7 @@ const countDecimals = (value) => {
 };
 
 
-module.exports = {getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt, 
-getRandomBool, countDecimals};
+module.exports = {
+    getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
+    getRandomBool, countDecimals, show_image
+};

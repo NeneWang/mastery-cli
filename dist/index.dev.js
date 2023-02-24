@@ -65,7 +65,7 @@ var Demo = demos.Demo,
         case 3:
           terms = _context.sent;
           console.log(terms);
-          mQuizer = new utils.MathQuizer(constants.qmathformulas, constants.qmathenabled, terms); // console.log(getAbsoluteUri("./img/unicorn.png"))
+          mQuizer = new utils.FlashQuizzer(constants.qmathformulas, constants.qmathenabled, terms); // console.log(getAbsoluteUri("./img/unicorn.png"))
 
           options = Object.keys(cmInfo.commands);
           input.includes(options[0]) && cli_meow.showHelp(0);

@@ -59,10 +59,12 @@ describe("Testing Terms Generator", function () {
             console.log("first_sample_term", first_sample_term);
             assert(first_sample_term.term != "");
             assert(first_sample_term.prompt != "");
-            assert(first_sample_term.description != ""); // console.log(termGenerator.termStorageAsJsonList);
+            assert(first_sample_term.description != "");
+            assert(first_sample_term.category == "mock-v1"); //Inherits from the root folder/
+            // console.log(termGenerator.termStorageAsJsonList);
             // assert(termGenerator.termStorageAsJsonList.length > 2);
 
-          case 9:
+          case 10:
           case "end":
             return _context2.stop();
         }
