@@ -1,7 +1,7 @@
 {
 	"name": "maid-cli",
 	"description": "Assistant to keep you on track and productive",
-	"version": "0.6.24",
+	"version": "0.6.25",
 	"license": "UNLICENSED",
 	"bin": {
 		"maid-cli": "index.js",
@@ -23,7 +23,6 @@
 	"scripts": {
 		"format": "prettier --write \"./**/*.{js,json}\"",
 		"tests": "mocha tests/*"
-			
 	},
 	"dependencies": {
 		"@wangnene2/chart": "^1.0.14",
