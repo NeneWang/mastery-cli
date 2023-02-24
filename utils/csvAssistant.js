@@ -64,8 +64,8 @@ class SmartRow {
 
 class CSVAssistant {
 
-    constructor() {
-
+    constructor({completedStatuses = ["done", "completed", "finished"]} = {}) {
+        this.completedStatuses =  completedStatuses//Will be avoided by default when taking the goals to do in priority
     }
 
 
@@ -141,12 +141,13 @@ class CSVAssistant {
      * @param {bool, string} param1 runPopulation, saveAs
      * @returns 
      */
-    async getTopPriorities(filename = "priorities/task_skills.csv", { runPopulation = true, saveAs = "", filterTop = 5 }) {
+    async getTopPriorities(filename = "priorities/task_skills.csv", { runPopulation = true, saveAs = "", filterTop = 5, whereStatusIsNotDone = true }) {
         
         const listSolvedRows = await this.populateAndSave(filename, { saveA: saveAs })
         // console.log(listSolvedRows);
-        const sortedSolvedRows = this.sortObjectsByCoefficient(listSolvedRows);
+        let sortedSolvedRows = this.sortObjectsByCoefficient(listSolvedRows);
         
+        sortedSolvedRows = sortedSolvedRows.filter((row) => !this.completedStatuses.includes((row?.status??"").toLowerCase()))
         return sortedSolvedRows.slice(0, filterTop);
 
     }
