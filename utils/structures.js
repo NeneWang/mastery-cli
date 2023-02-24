@@ -26,7 +26,7 @@ class Term {
     }
 
     pushCategory = (subcategory) => {
-        this.category += this.category == "" ? subcategory : ` ${subcategory}`;
+        this.category += this.category == "" ? subcategory : ` > ${subcategory}`;
     }
 
     get asJson() {
