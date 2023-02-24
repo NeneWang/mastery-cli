@@ -20,7 +20,7 @@ var _require = require('../structures'),
 function populateTerms() {
   var _terms, _terms2;
 
-  var decks, _require2, react_terms, _require3, network, artificialIntelligence, algebra, calculousOne, filesData, _require4, TermGenerator, termGenerator, _;
+  var decks, _require2, react_terms, _require3, network, artificialIntelligence, algebra, calculousOne, _require4, pragmatic_programmer, _require5, designPatterns, dsa, system_design, _require6, aws_services, aws_glossary, coderTerms, unit_testing, filesData, _require7, TermGenerator, termGenerator, _;
 
   return regeneratorRuntime.async(function populateTerms$(_context) {
     while (1) {
@@ -30,7 +30,7 @@ function populateTerms() {
           decks = new TermStorage([], "Academic Terms");
           _require2 = require('./frameworks'), react_terms = _require2.react_terms;
           decks.addDeck(new TermStorage(react_terms, "react terms", {
-            is_active: false
+            is_active: true
           }));
           _require3 = require("./fall23"), network = _require3.network, artificialIntelligence = _require3.artificialIntelligence, algebra = _require3.algebra, calculousOne = _require3.calculousOne;
           decks.addDeck(new TermStorage(network, "network", {
@@ -38,20 +38,38 @@ function populateTerms() {
           }));
           decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", {
             is_active: false
-          })); // decks.addDeck(new TermStorage(algebra, "algebra", { is_active: false }));
-          // decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: false }));
-          // const { pragmatic_programmer } = require('./ethics.js');
-          // decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", { is_active: false }));
-          // const { designPatterns, dsa, system_design } = require('./dsa');
-          // decks.addDeck(new TermStorage(designPatterns, "design patterns", { is_active: false }));
-          // decks.addDeck(new TermStorage(dsa))
-          // decks.addDeck(new TermStorage(system_design, "system design", { is_active: false }));
-          // const { aws_services, aws_glossary, coderTerms, unit_testing } = require('./programmer_experience');
-          // decks.addDeck(new TermStorage(aws_glossary, "aws glossary", { is_active: false }));
-          // decks.addDeck(new TermStorage(aws_services, "aws services", { is_active: false }));
-          // decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: false }));
-          // decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: false }));
-          // decks.addDeck(new TermStorage(test, "test", {is_active: false}));
+          }));
+          decks.addDeck(new TermStorage(algebra, "algebra", {
+            is_active: false
+          }));
+          decks.addDeck(new TermStorage(calculousOne, "calculus one", {
+            is_active: false
+          }));
+          _require4 = require('./ethics.js'), pragmatic_programmer = _require4.pragmatic_programmer;
+          decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", {
+            is_active: false
+          }));
+          _require5 = require('./dsa'), designPatterns = _require5.designPatterns, dsa = _require5.dsa, system_design = _require5.system_design;
+          decks.addDeck(new TermStorage(designPatterns, "design patterns", {
+            is_active: false
+          }));
+          decks.addDeck(new TermStorage(dsa));
+          decks.addDeck(new TermStorage(system_design, "system design", {
+            is_active: false
+          }));
+          _require6 = require('./programmer_experience'), aws_services = _require6.aws_services, aws_glossary = _require6.aws_glossary, coderTerms = _require6.coderTerms, unit_testing = _require6.unit_testing;
+          decks.addDeck(new TermStorage(aws_glossary, "aws glossary", {
+            is_active: false
+          }));
+          decks.addDeck(new TermStorage(aws_services, "aws services", {
+            is_active: false
+          }));
+          decks.addDeck(new TermStorage(coderTerms, "coder terms", {
+            is_active: false
+          }));
+          decks.addDeck(new TermStorage(unit_testing, "unit testing", {
+            is_active: false
+          })); // decks.addDeck(new TermStorage(test, "test", {is_active: false}));
 
           (_terms = terms).push.apply(_terms, _toConsumableArray(decks.listTerms));
 
@@ -59,19 +77,19 @@ function populateTerms() {
             title: "mock-v1",
             filename: "terms/mock.csv"
           }];
-          _require4 = require('./terms_generator'), TermGenerator = _require4.TermGenerator;
+          _require7 = require('./terms_generator'), TermGenerator = _require7.TermGenerator;
           termGenerator = new TermGenerator(filesData);
-          _context.next = 13;
+          _context.next = 26;
           return regeneratorRuntime.awrap(termGenerator.fetchTerms());
 
-        case 13:
+        case 26:
           _ = _context.sent;
 
           (_terms2 = terms).push.apply(_terms2, _toConsumableArray(termGenerator.termStorageAsJsonList));
 
           return _context.abrupt("return", terms);
 
-        case 16:
+        case 29:
         case "end":
           return _context.stop();
       }
