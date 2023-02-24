@@ -43,7 +43,7 @@ const { Demo, EDemo } = demos;
 
 
 	const terms = await populateTerms();
-	console.log(terms);
+	// console.log(terms);
 	const mQuizer = new utils.FlashQuizzer(constants.qmathformulas, constants.qmathenabled, terms);
 
 
