@@ -18,7 +18,9 @@ describe("Quizzler Terminology Tests", () => {
         ]
 
         let decks = new TermStorage(terms, "Academic Terms");
-        const mQuizer = new utils.FlashQuizzer([], [], decks.listTerms);;
+        let rootDeck = new TermStorage([], "Master Deck");
+        rootDeck.addDeck(decks);
+        const mQuizer = new utils.FlashQuizzer([], [], rootDeck.listTerms);;
         return mQuizer
 
     }

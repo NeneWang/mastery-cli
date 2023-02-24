@@ -19,7 +19,9 @@ describe("Quizzler Terminology Tests", function () {
       attachment: "./img/2023-02-07-10-29-38.png"
     }];
     var decks = new TermStorage(terms, "Academic Terms");
-    var mQuizer = new utils.FlashQuizzer([], [], decks.listTerms);
+    var rootDeck = new TermStorage([], "Master Deck");
+    rootDeck.addDeck(decks);
+    var mQuizer = new utils.FlashQuizzer([], [], rootDeck.listTerms);
     ;
     return mQuizer;
   }
