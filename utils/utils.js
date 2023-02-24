@@ -16,6 +16,7 @@ const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
+const { getMaidDirectory } = require('./utils_functions');
 
 const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
@@ -114,6 +115,10 @@ class Maid {
 
 		if (clearOnTalk) init(true);
 		console.log(`${this.getMaidHeader()} ${chalk(message)}`);
+	}
+
+	tellCurrentDirectory = () => {
+		this.say(getMaidDirectory);
 	}
 
 	/**

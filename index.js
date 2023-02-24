@@ -20,7 +20,7 @@ const axios = require('axios');
 const chalk = require('chalk');
 const chart = require('@wangnene2/chart');
 const { terms, getAbsoluteUri } = require('./utils/constants');
-const { populateTerms }= require ("./utils/data/terms");
+const { populateTerms } = require("./utils/data/terms");
 
 const cli_meow = cli[0]
 const cmInfo = cli[1]
@@ -60,6 +60,10 @@ const { Demo, EDemo } = demos;
 		demo.chartDemo(EDemo.BAR);
 
 	}
+	else if (input.includes(cmInfo.commands.code.code)) {
+		maid.tellCurrentDirectory();
+	}
+
 	else if (input.includes(cmInfo.commands.report.code)) {
 		maid.dayReport();
 	}

@@ -26,6 +26,15 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './da
     return (absolutePath.toString());
 };
 
+
+const getMaidDirectory = () => {
+    // Note it should take from the root.
+    const absolutePath = path.resolve(path.join(__dirname, '../../', fileimage)); // Note the '../' because it is inside of constants
+
+    // const fileUrl = url.pathToFileURL(absolutePath);
+    return (absolutePath.toString());
+};
+
 async function show_image(image_file, { is_url = false } = {}) {
     // let ima
     let image_file_dir = is_url ? image_file : getDirAbsoluteUri(image_file);
@@ -89,5 +98,5 @@ const countDecimals = (value) => {
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
-    getRandomBool, countDecimals, show_image
+    getRandomBool, countDecimals, show_image, getMaidDirectory
 };
