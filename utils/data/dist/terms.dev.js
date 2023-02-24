@@ -34,10 +34,10 @@ function populateTerms() {
           }));
           _require3 = require("./fall23"), network = _require3.network, artificialIntelligence = _require3.artificialIntelligence, algebra = _require3.algebra, calculousOne = _require3.calculousOne;
           decks.addDeck(new TermStorage(network, "network", {
-            is_active: false
+            is_active: true
           }));
           decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", {
-            is_active: false
+            is_active: true
           }));
           decks.addDeck(new TermStorage(algebra, "algebra", {
             is_active: false

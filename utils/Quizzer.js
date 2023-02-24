@@ -17,7 +17,7 @@ const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
-const {show_image} = require('./utils_functions')
+const { show_image } = require('./utils_functions')
 // const DEBUG = true
 const DEBUG = false
 
@@ -223,7 +223,7 @@ class Quizzer {
                 let image_file = getAbsoluteUri(term_selected?.attachment);
                 console.log(`attachment: ${image_file}`);
                 // Also print the attachment image if possible
-                const _ = await show_image(term_selected?.attachment);
+                const _ = await show_image(term_selected?.attachment, { is_url: term_selected.attachment_is_url });
             }
 
             console.log(`${term_selected.description}\n`)

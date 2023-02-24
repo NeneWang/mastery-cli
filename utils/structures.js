@@ -6,6 +6,10 @@ const { isAxiosError } = require("axios");
 class Term {
 
     constructor(term, example = "", description = "", prompt = "Use the term", { priority = 5, tags = [], category = "", references = "", attachment = "" } = {}) {
+        /**
+         * REMEMBER: To add the new item into asJson!!
+         */
+
         this.term = term;
         this.example = example;
         this.description = description;
@@ -16,6 +20,7 @@ class Term {
         this.priority = priority;
         this.slug = this.slugify(this.term);
         this.formula_name = this.slug;
+        this.attachment_is_url = this.isOnlineResource(attachment);
     }
 
     /**
@@ -25,6 +30,11 @@ class Term {
         return term.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')
     }
 
+    isOnlineResource = (url) => {
+        return /^https?:\/\//i.test(url);
+    }
+
+
     pushCategory = (subcategory) => {
         this.category += this.category == "" ? subcategory : ` > ${subcategory}`;
     }
@@ -33,7 +43,8 @@ class Term {
         return {
             term: this.term, example: this.example, description: this.description, references: this.references,
             category: this.category, prompt: this.prompt,
-            formula_name: this.slug, attachment: this.attachment
+            formula_name: this.slug, attachment: this.attachment,
+            attachment_is_url: this.attachment_is_url
         };
     }
 

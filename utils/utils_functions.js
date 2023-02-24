@@ -26,20 +26,31 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './da
     return (absolutePath.toString());
 };
 
-async function show_image(image_file) {
+async function show_image(image_file, { is_url = false } = {}) {
     // let ima
-    try{
-        
-    let image_file_dir = getDirAbsoluteUri(image_file);
-    const fs = await import('fs').then((mod) => mod.promises);
-    const { default: terminalImage } = await import('terminal-image');
-    // console.log("reading from path: " + image_file_dir)node
-    const data = await fs.readFile(image_file_dir);
-    const image = await terminalImage.buffer(data);
-    console.log(image);
+    let image_file_dir = is_url ? image_file : getDirAbsoluteUri(image_file);
+    try {
+        if (is_url) {
+
+            const { default: terminalImage } = await import('terminal-image');
+            const fetch = require('node-fetch');
+            const response = await fetch(image_file_dir);
+            const buffer = await response.arrayBuffer();
+            const image = await terminalImage.buffer(Buffer.from(buffer));
+            console.log(image);
+        } else {
+
+            //If it is not url, finds the absolute path of the local file
+            const fs = await import('fs').then((mod) => mod.promises);
+            const { default: terminalImage } = await import('terminal-image');
+            // console.log("reading from path: " + image_file_dir)node
+            const data = await fs.readFile(image_file_dir);
+            const image = await terminalImage.buffer(data);
+            console.log(image);
+        }
     }
-    catch (err){
-        console.log("Error while attempting to fetch image", err);
+    catch (err) {
+        console.log("Error while attempting to fetch image", err, image_file_dir);
     }
 };
 

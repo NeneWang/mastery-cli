@@ -27,8 +27,8 @@ async function populateTerms() {
 
 
     const { network, artificialIntelligence, algebra, calculousOne } = require("./fall23");
-    decks.addDeck(new TermStorage(network, "network", { is_active: false }));
-    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: false }));
+    decks.addDeck(new TermStorage(network, "network", { is_active: true }));
+    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: true }));
     decks.addDeck(new TermStorage(algebra, "algebra", { is_active: false }));
     decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: false }));
 

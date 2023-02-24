@@ -26,11 +26,29 @@ describe("Quizzler Terminology Tests", function () {
     return mQuizer;
   }
 
+  function setupDigitalImageQuizer() {
+    // TDODO
+    var terms = [{
+      term: "Sample Term",
+      prompt: "Do X",
+      category: "category",
+      description: "some Descirpiton",
+      attachment: "https://wngnelson.com/assets/img_src/oct/images/4804295.jpg"
+    }];
+    var decks = new TermStorage(terms, "Academic Terms");
+    var rootDeck = new TermStorage([], "Master Deck");
+    rootDeck.addDeck(decks);
+    var mQuizer = new utils.FlashQuizzer([], [], rootDeck.listTerms);
+    ;
+    console.log("rootDeck", rootDeck.listTerms);
+    return mQuizer;
+  }
+
   it("Check that images are added properly", function () {
     /**
      * There is no actual way other than running a test with an image example
      */
-    var mQuizer = setupQuizer();
+    var mQuizer = setupDigitalImageQuizer();
     mQuizer.ask_term_question();
   });
 });
