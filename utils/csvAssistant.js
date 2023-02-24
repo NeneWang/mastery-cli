@@ -66,8 +66,10 @@ class CSVAssistant {
 
     constructor() {
 
-
     }
+
+
+
     /**
      * 
      * @param {String} filename Populates the coefficients with the right data.
@@ -96,24 +98,55 @@ class CSVAssistant {
 
         return listOfSolvedRows;
     }
+
+
     saveListToCSV(jsonList, filename) {
         const absoluteFilePath = getDirAbsoluteUri(filename);
         console.log("Saves to csv here: ", absoluteFilePath);
         const df = new dfd.DataFrame(jsonList);
-        dfd.toCSV(df, { filePath: absoluteFilePath, sep: ";"});
-      }
-      
+        dfd.toCSV(df, { filePath: absoluteFilePath, sep: ";" });
+    }
 
-    async populateAndSave(filename = "priorities/task_skills.csv", {saveAs = ""}) {
+
+    /**
+     * 
+     * @param {string} filename filepath where to populate
+     * @param {string} param1 Where to save as
+     * @returns 
+     */
+    async populateAndSave(filename = "priorities/task_skills.csv", { saveAs = "" }) {
         const listSolvedRows = await this.populateCoefficients(filename);
         // console.log("Attampting to save:", listSolvedRows);
-        
+
         let filepath_target = filename;
-        if(saveAs != ""){
-            filepath_target  = saveAs;
+        if (saveAs != "") {
+            filepath_target = saveAs;
         }
         console.log("? here?")
         this.saveListToCSV(listSolvedRows, filepath_target);
+        return listSolvedRows
+
+    }
+
+
+    sortObjectsByCoefficient(objectList) {
+        objectList.sort((a, b) => b.coefficient - a.coefficient);
+        return objectList;
+      }
+      
+
+    /**
+     * 
+     * @param {String} filename Filename of the tasks
+     * @param {bool, string} param1 runPopulation, saveAs
+     * @returns 
+     */
+    async populate_priorities(filename = "priorities/task_skills.csv", { runPopulation = true, saveAs = "", filterTop = 5 }) {
+        file_to_search_priorities;
+        const listSolvedRows = this.populateAndSave(filename, { saveA: saveAs });
+        const sortedSolvedRows = this.sortObjectsByCoefficient(listSolvedRows);
+        
+        return sortedSolvedRows.slice(0, 5);
 
     }
 

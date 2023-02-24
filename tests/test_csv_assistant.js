@@ -22,4 +22,13 @@ describe("Testing Terms Generator", () => {
         
     })
 
+    it("Runs coefficients, saves it and sreturns top 3", async () => {
+        // You still have to manually check for this.
+        const csvAssistant = new CSVAssistant();
+        const top3InPriority = await csvAssistant.populatePriorities("priorities/task_skills.csv",
+         {saveAs: "priorities/task_skills_coefficient.csv", filterTop: 3});
+        console.log(top3InPriority);
+        
+    })
+
 })
