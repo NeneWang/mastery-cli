@@ -118,7 +118,9 @@ class Maid {
 	}
 
 	tellCurrentDirectory = () => {
-		this.say(getMaidDirectory);
+		const projectDirectory = getMaidDirectory();
+		this.say(projectDirectory);
+		clipboard.copy(projectDirectory);
 	}
 
 	/**
