@@ -51,7 +51,7 @@ class TermGenerator{
      */
     async  fetchTerm(filename = "terms/german.csv", termStorage = []) {
         const absoluteFilePath = getDirAbsoluteUri(filename);
-        console.log("Getting from: ", absoluteFilePath);
+        // console.log("Getting from: ", absoluteFilePath);
       
         try {
           const df = await dfd.readCSV(absoluteFilePath); // assumes file is in CWD
