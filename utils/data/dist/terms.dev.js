@@ -40,35 +40,35 @@ function populateTerms() {
             is_active: true
           }));
           decks.addDeck(new TermStorage(algebra, "algebra", {
-            is_active: false
+            is_active: true
           }));
           decks.addDeck(new TermStorage(calculousOne, "calculus one", {
-            is_active: false
+            is_active: true
           }));
           _require4 = require('./ethics.js'), pragmatic_programmer = _require4.pragmatic_programmer;
           decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", {
-            is_active: false
+            is_active: true
           }));
           _require5 = require('./dsa'), designPatterns = _require5.designPatterns, dsa = _require5.dsa, system_design = _require5.system_design;
           decks.addDeck(new TermStorage(designPatterns, "design patterns", {
-            is_active: false
+            is_active: true
           }));
           decks.addDeck(new TermStorage(dsa));
           decks.addDeck(new TermStorage(system_design, "system design", {
-            is_active: false
+            is_active: true
           }));
           _require6 = require('./programmer_experience'), aws_services = _require6.aws_services, aws_glossary = _require6.aws_glossary, coderTerms = _require6.coderTerms, unit_testing = _require6.unit_testing;
           decks.addDeck(new TermStorage(aws_glossary, "aws glossary", {
-            is_active: false
+            is_active: true
           }));
           decks.addDeck(new TermStorage(aws_services, "aws services", {
-            is_active: false
+            is_active: true
           }));
           decks.addDeck(new TermStorage(coderTerms, "coder terms", {
-            is_active: false
+            is_active: true
           }));
           decks.addDeck(new TermStorage(unit_testing, "unit testing", {
-            is_active: false
+            is_active: true
           })); // decks.addDeck(new TermStorage(test, "test", {is_active: false}));
 
           (_terms = terms).push.apply(_terms, _toConsumableArray(decks.listTerms));
