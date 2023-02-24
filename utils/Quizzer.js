@@ -217,7 +217,7 @@ class Quizzer {
                     formula_name: 'singleton-pattern'
                 }
              */
-            console.log(chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `));
+            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `)}|${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` ${term_selected.category} `)}`);
 
             if (term_selected?.attachment ?? false) {
                 let image_file = getAbsoluteUri(term_selected?.attachment);

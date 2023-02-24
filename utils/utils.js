@@ -17,7 +17,7 @@ const parser = new Parser();
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 
-const { Quizzer } = require(
+const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
 );
 const { debug } = require('node:console');
@@ -645,5 +645,5 @@ const autorelease = () => {
 
 module.exports = {
 	getTalk, commitpush, autorelease,
-	Maid, getToday, FlashQuizzer: Quizzer
+	Maid, getToday, FlashQuizzer
 };
