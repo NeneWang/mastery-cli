@@ -7,7 +7,7 @@ const dfd = require("danfojs-node");
 
 
 const { getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
-    getRandomBool, countDecimals } = require('./utils_functions');
+    getRandomBool, countDecimals, getFilesInDirectory } = require('./utils_functions');
 
 class SmartRow {
 
@@ -64,8 +64,8 @@ class SmartRow {
 
 class CSVAssistant {
 
-    constructor({completedStatuses = ["done", "completed", "finished"]} = {}) {
-        this.completedStatuses =  completedStatuses//Will be avoided by default when taking the goals to do in priority
+    constructor({ completedStatuses = ["done", "completed", "finished"] } = {}) {
+        this.completedStatuses = completedStatuses//Will be avoided by default when taking the goals to do in priority
     }
 
 
@@ -132,8 +132,8 @@ class CSVAssistant {
     sortObjectsByCoefficient(objectList) {
         objectList.sort((a, b) => b.coefficient - a.coefficient);
         return objectList;
-      }
-      
+    }
+
 
     /**
      * 
@@ -142,13 +142,19 @@ class CSVAssistant {
      * @returns 
      */
     async getTopPriorities(filename = "priorities/task_skills.csv", { runPopulation = true, saveAs = "", filterTop = 5, whereStatusIsNotDone = true }) {
-        
+
         const listSolvedRows = await this.populateAndSave(filename, { saveA: saveAs })
         // console.log(listSolvedRows);
         let sortedSolvedRows = this.sortObjectsByCoefficient(listSolvedRows);
-        
-        sortedSolvedRows = sortedSolvedRows.filter((row) => !this.completedStatuses.includes((row?.status??"").toLowerCase()))
+
+        sortedSolvedRows = sortedSolvedRows.filter((row) => !this.completedStatuses.includes((row?.status ?? "").toLowerCase()))
         return sortedSolvedRows.slice(0, filterTop);
+
+    }
+
+    getFilesInPriorities() {
+        // #TODO
+        return getFilesInDirectory();
 
     }
 

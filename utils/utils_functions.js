@@ -1,5 +1,6 @@
 const path = require("path");
 const url = require('url');
+const fs = require('fs');
 const { get_random, MAID_EMOJIS } = require("./constants");
 
 /**
@@ -26,10 +27,23 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './da
     return (absolutePath.toString());
 };
 
+const getFilesInDirectory = () => {
+    const directoryPath = './data/priorities';
+
+    const absolutePath = path.resolve(path.join(__dirname, directoryPath));
+    fs.readdir(absolutePath, (err, files) => {
+        if (err) {
+            console.log('Error getting directory information:', err);
+        } else {
+            return files;
+        }
+    });
+}
+
 
 const getMaidDirectory = () => {
     // Note it should take from the root.
-    const absolutePath = path.resolve(path.join(__dirname, '../')); 
+    const absolutePath = path.resolve(path.join(__dirname, '../'));
     return (absolutePath.toString());
 };
 
@@ -96,5 +110,5 @@ const countDecimals = (value) => {
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
-    getRandomBool, countDecimals, show_image, getMaidDirectory
+    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory
 };
