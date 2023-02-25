@@ -84,9 +84,27 @@ const network = [
     {
         term: "chmod", prompt: "What command for changing permssion | of a group? | How to give permission to everything ot the owner?",
         description: "– chmod changes permissions – chown changes ownership and group # chown -R user.group /home/user – umask ● Set shell parameters to control default permissions ● umask 027 gives everything to owner, forbids writes to group, and gives nothing to other users ● Usually set in /etc/profile or /etc/csh.login"
-    }
-
-
+    },
+    {
+        term: "disk components", prompt: "What are the disk components? What is RAID or Host Bus Adapter or Drive Controller?",
+        description: "Spinning Disk (magnetic) SSD (solid state disk) Drive Controller Host Bus Adapter RAID",
+        example: " RAID employs the techniques of disk mirroring or disk striping. Mirroring will copy identical data onto more than one drive. Striping partitions help spread data over multiple disk drives. CAREFUL IS NOT BACKUP BECAUSE ERROR GETS MIRROWED\n\
+        A host bus adapter (HBA) is a circuit board or integrated circuit adapter that connects a host system, such as a server, to a storage or network device.\n\
+        A device that connects an unenclosed hard drive to the computer via USB. Drive adapters are generally used to clone the contents of an existing drive to a new drive."
+    },
+    {
+        term: "Storage Needs", prompt: "How to check your storage needs, what to check for?",
+        example: "Check with your departments to see what they need and current usage. See storage use trends and growth needs."
+    },
+    {
+        term: 'NAS', example: "You can have multiple network interfaces on different networks to help increase the system in case of a network outage.",
+        description: "A NAS system is a storage device connected to a network that allows storage and retrieval of data from a centralized location for authorized network users and heterogeneous clients. NAS systems are flexible and scale-out, meaning that as you need additional storage, you can add on to what you have. NAS is like having a private cloud in the office. It’s faster, less expensive and provides all the benefits of a public cloud on site, giving you complete control. "
+    },
+    {
+        term: "Monitoring", example: "Various different aspects of the system, to detect a possible problem before it happens, or to fix a problem after it has happened before people complain. Disk Failures Running out of disk space System Running Networking Issues For printers (out of paper or paper jam) System Temperature Other Outages",
+        prompt: "What to be monitoring on a system when u are a sys admin??"
+    },
+    
 ]
 
 const artificialIntelligence = [
