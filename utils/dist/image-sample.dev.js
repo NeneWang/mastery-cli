@@ -9,17 +9,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 /**
  * Simple example for Image Showing.
  */
-// (async () => {
-//     const fs = await import('fs').then((mod) => mod.promises);
-//     const { default: terminalImage } = await import('terminal-image');
-//     const data = await fs.readFile('unicorn.jpg');
-//     const image = await terminalImage.buffer(data);
-//     console.log(image);
-//   })();
-
-/**
- * Gif example
- */
 (function _callee() {
   var fs, _ref, terminalImage, data, image;
 
@@ -45,18 +34,16 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
           _ref = _context.sent;
           terminalImage = _ref["default"];
           _context.next = 9;
-          return regeneratorRuntime.awrap(fs.readFile('gif-sample.gif', {
-            maximumFrameRate: 2
-          }));
+          return regeneratorRuntime.awrap(fs.readFile('unicorn.jpg'));
 
         case 9:
           data = _context.sent;
           _context.next = 12;
-          return regeneratorRuntime.awrap(terminalImage.gifBuffer(data));
+          return regeneratorRuntime.awrap(terminalImage.buffer(data));
 
         case 12:
           image = _context.sent;
-          console.log(image); // image.render();
+          console.log(image);
 
         case 14:
         case "end":
@@ -65,3 +52,15 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
     }
   });
 })();
+/**
+ * Gif example
+ */
+// (async () => {
+//   const fs = await import('fs').then((mod) => mod.promises);
+//   const { default: terminalImage } = await import('terminal-image');
+//   // const data = await fs.readFile('gif-sample-low.gif', { maximumFrameRate: 1 });
+//   const data = await fs.readFile('gif-sample.gif', { maximumFrameRate: 2 });
+//   const image = await terminalImage.gifBuffer(data);
+//   console.log(image);
+//   // image.render();
+// })();
