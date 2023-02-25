@@ -54,6 +54,36 @@ const network = [
         description: "Network booting is generally applied in a diskless environment using routers and centrally managed computers, also known as thin clients. \n\
         Centralized computing environments provide reduced maintenance costs, enhanced security and enhanced control over the system's workstations. \n\
         PXE code is generally delivered with computer machines on a ROM chip or a boot disk to enable remote boot and configuration. The process makes use of network protocols such as User Datagram Protocol (UDP), Trivial File Transfer Protocol (TFTP), Internet Protocol (IP) and Dynamic Host Configuration Protocol (DHCP)." 
+    },
+    {
+        term: "mke2fs", description: "A set of inode storage cells – each holds info about one file ● A set of scattered “superblocks” – holds global filesystem info (multiple copies for reliability) – size and location of inode tables, block map and usage, etc. ● A map of the disk blocks in the filesystem (used and free) ● The set of data blocks",
+        prompt: "Whatis it used and why ?"
+    },
+    {
+        term: "Mounting a filesystem", prompt: "What to consider when mounting a filesystem?",
+        description: "Filesystem must be mounted before use ● Must be made part of root filesystem\n\
+        Can be mounted on (top of) any directory # mount /dev/sda1 /usr/local # df /usr/local – Use /mnt for temporary mounts – Want to set up automatic mounting"
+    },
+    {
+        term: "fsck", prompt: "How does the FSCK handle failure and not written blocks?",
+        description: "During power failure, superblock, inodes, and data blocks may not get written to disk – fsck can fix minor damage (ext3/4 systems quickly) ● unreferenced inodes ● inexplicably large link counts ● unused data blocks not recorded in block maps ● data blocks listed as free that are also used in a file ● incorrect summary info in superblock – More complex damage will make fsck ask human ● Places unfixable files in lost+found directory ● You should re-run fsck until no errors are found"
+    },
+    {
+        term: "The Filesystem", prompt: "Explain what  types of files are defined by linux",
+        description: "● Linux defines seven types of files [-] - Regular files [d] - Directories [c] - Character device files [b] - Block device files [s] - Local domain sockets [p] - Named pipes (FIFO) [l] - Symbolic links ● ls -ld shows the filetype of a file" 
+    },
+    {
+        term: "Sockets & Pipes", prompt: "Whats the difference between local domain sockets and named pipes?",
+        description: "Local domain sockets ● Sockets provide connections between processes ● Local/UNIX domain sockets are only accessible through the filesystem ● Only used by processes involved in connection ● Created with socket, deleted by rm or unlink ● Used by X Windows, syslog, and printing system\n\n\
+        Named pipes ● FIFO files that allow communication between processes on same host ● Created with mknod and deleted with rm"
+    },
+    {
+        term: "Symbolic Links", prompt: "Give yourself owner execute", 
+        description: "Nine permission bits – User:owner read, write, execute ● 400, 200, 100 – Group read, write, execute ● 40, 20, 10 – Other:world read, write execute ● 4,2,1 ● Ability to delete or rename is controlled by permissions on directory"
+    },
+    {
+        term: "chmod", prompt: "What command for changing permssion | of a group? | How to give permission to everything ot the owner?",
+        description: "– chmod changes permissions – chown changes ownership and group # chown -R user.group /home/user – umask ● Set shell parameters to control default permissions ● umask 027 gives everything to owner, forbids writes to group, and gives nothing to other users ● Usually set in /etc/profile or /etc/csh.login"
     }
 
 

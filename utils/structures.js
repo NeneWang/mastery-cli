@@ -1,9 +1,11 @@
+const { isAxiosError } = require("axios");
+
 /**
  * Terms, standard accepted for the Quizzler
  */
 class Term {
 
-    constructor(term, example = "", description = "", prompt = "Use the term", references = "", category = "", attachment="") {
+    constructor(term, example = "", description = "", prompt = "Use the term",  {priority = 5, tags = [], category = "", references = "", attachment=""} = {}) {
         this.term = term;
         this.example = example;
         this.description = description;
@@ -11,7 +13,9 @@ class Term {
         this.attachment = attachment;
         this.category = category;
         this.prompt = prompt;
+        this.priority = priority;
         this.slug = this.slugify(this.term);
+        this.formula_name = this.slug;
     }
 
     /**
@@ -33,8 +37,16 @@ class Term {
 
 
 class Terminology extends Term {
-    constructor(term, description = "", example = "", auto_imags = false){
-        super(term, example, description, "Use this on an example")
+    /**
+     * 
+     * @param {string} term Terminology or title
+     * @param {String} description Description  which should appear or the definition
+     * @param {Optional Arguments} param2 {example: If there is an example, auto_image: bool: If to autoamtically fetch an image from the web.}
+     */
+    constructor(term, description = "", {example = "", autom_image = false} = {}){
+        super(term, example, description, "Use this on an example");
+
+
     }
 }
 
@@ -50,11 +62,12 @@ class TermStorage {
      * @param {string} deck_name The deckname, optional if is the parent deckname
      * @param {List[TermStorage]} decks The decks required for the Storages
      */
-    constructor(terms = [], deck_name="", decks=[]) {
+    constructor(terms = [], deck_name="",{ decks=[], is_active=true} = {}) {
         this.terms = terms;
         this.deck_name = deck_name;
-        this.is_active = true;
+        this.is_active = is_active;
         this.decks = decks;
+        this.priority = 5; //By default
     }
 
     /**
@@ -75,23 +88,49 @@ class TermStorage {
 
     /**
      * Appends all decks that are active + its current cards.
-     * @returns {string} Gets the terminologies as a Json string
+     * @returns {List<Json>} Gets the terminologies as a List<Json>
      */
     get jsonTerms() {
         const res = [];
         // Add own cards
         for (const term of this.terms) {
-            res.push(term.asJson)
+            res.push(term)
         }
 
         //Add cards of the decks that are active
         for(const deck of this.decks){
             if(deck.is_active){
-                res.push(deck.jsonTerms());
+                res.push(...deck.jsonTerms);
             }
         }
 
         return res;
+    }
+
+    /**
+     * @returns {List<Term>} Returns as a List of Terms
+     */
+    get listTerms(){
+        const termsList = [];
+        termsList.push(...this.terms.map(
+            obj => new Term(
+                obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", 
+                {
+                    references: obj?.references ?? "", category: this.deck_name ?? "", attachment: obj?.attachment,
+                    priority: this.priority
+                }
+            )
+        ));
+
+
+        for (const deck of this.decks){
+            if(deck.is_active){
+                termsList.push(...deck.listTerms);
+            }
+        }
+        
+        // Do the same recursive for each of the internal res 
+        return termsList
     }
 
     /**

@@ -9,7 +9,10 @@
 
 
 const { Term, Terminology, TermStorage } = require('../structures');
-const {getDirAbsoluteUri} = require('../constants');
+
+const {getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt, 
+    getRandomBool, countDecimals} = require('../utils_functions');
+
 const dfd = require("danfojs-node")
 const EXAMPLE_FILE = "./terms/german.csv"
 const COL_DEFINITION = "definition"
@@ -36,7 +39,7 @@ class TermGenerator{
             let termStorage = new TermStorage([], fileData.title);
             termStorage = await this.fetchTerm(fileData.filename, termStorage); // Should populate the TermStorage with the specific file inside of it.
             this.mapTermsStorage[fileData.title] = termStorage; //Populate so that it can be retrieved later on.
-            console.log(termStorage)
+            // console.log("termStorage", termStorage)
         }
 
     }
@@ -46,28 +49,36 @@ class TermGenerator{
      * @param {string} filename Name of the file to read
      * @param {TermStorage} termStorage Storage is a reference object to modify
      */
-    async fetchTerm (filename="terms/german.csv", termStorage=[])  {
+    async  fetchTerm(filename = "terms/german.csv", termStorage = []) {
         const absoluteFilePath = getDirAbsoluteUri(filename);
-        console.log("Getting from: ", absoluteFilePath)
-        dfd.readCSV(absoluteFilePath) //assumes file is in CWD
-        .then(df => {
+        console.log("Getting from: ", absoluteFilePath);
+      
+        try {
+          const df = await dfd.readCSV(absoluteFilePath); // assumes file is in CWD
+          const terminologiesDict = dfd.toJSON(df);
+      
+          for (const row of terminologiesDict) {
+            const term = new Terminology(row?.term ?? "", row?.description ?? "", row?.example ?? "");
+            termStorage.push(term);
+          }
+      
+          return termStorage;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      
 
-            
-            const terminologiesDict = dfd.toJSON(df);
-            
-            // console.log(terminologiesDict);
-            for (const row of terminologiesDict){
-                // console.log(row);
-                const term = new Terminology(row?.term ?? "",row?.description ??"", row?.example ?? "");
-                termStorage.push(term);
-            }
-            console.log(termStorage.jsonTerms);
+    /**
+     * Retursn List<TermStorage>
+     */
+    get termStorageAsJsonList(){
+        const res = [];
+        for(const termStorage of Object.values(this.mapTermsStorage)){
             // console.log(termStorage);
-            // return termStorage;
-
-        }).catch(err => {
-            console.log(err);
-        })
+            res.push(...termStorage?.listTerms);
+        }
+        return res;
     }
     
 
