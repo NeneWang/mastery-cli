@@ -103,6 +103,9 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.clean.code)) {
 		maid.askToClean();
 	}
+	else if(input.includes(cmInfo.commands.prio.code)){
+		maid.tellPriorities();
+	}
 	else {
 		cli_meow.showHelp(0);
 		maid.askToClean();

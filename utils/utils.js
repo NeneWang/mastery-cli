@@ -138,13 +138,17 @@ class Maid {
 
 		let fileSelected = await multiselectPriorityFiles.run();
 		const POPULATEONTEMPORAL = false;
-		const TEMPORAL_PATH = "priorities/temp.csv"
-		const SELECTEDFILE_PATH = "priorities/"+fileSelected
+		const TEMPORAL_PATH = "priorities/temp.csv";
+		const SELECTEDFILE_PATH = "priorities/"+fileSelected;
+		const TOP_X_PRIORITIES = 3;
 		// Print the priorities (also populate it on a temp file.)
 		const topPriorities = await csvAssistant.getTopPriorities(SELECTEDFILE_PATH, 
 		{
-			saveAs: POPULATEONTEMPORAL? TEMPORAL_PATH: SELECTEDFILE_PATH, filterTop: 5
+			saveAs: POPULATEONTEMPORAL? TEMPORAL_PATH: SELECTEDFILE_PATH, filterTop: TOP_X_PRIORITIES
 		});
+
+		console.log(`Top ${TOP_X_PRIORITIES} priorities for `, chalk.hex(CONSTANTS.CUTEBLUE).inverse(fileSelected));
+		console.log(topPriorities);
 
 	}
 

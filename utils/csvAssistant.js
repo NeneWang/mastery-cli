@@ -12,8 +12,8 @@ const { getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, for
 class SmartRow {
 
     constructor(row = {}) {
-        this.positiveColumns = ["utility", "benefits", "marketing", "ux"] // How they are normally named as
-        this.negativeColumns = ["difficulty",]
+        this.positiveColumns = ["utility", "benefits", "marketing", "ux", "importance"] // How they are normally named as
+        this.negativeColumns = ["difficulty", "cost"]
         this.coefficient = this.calculateCoefficient(row);
         this.row = row;
         this.row.coefficient = this.coefficient;
@@ -120,7 +120,6 @@ class CSVAssistant {
         if (saveAs != "") {
             filepath_target = saveAs;
         }
-        console.log("? here?")
         this.saveListToCSV(listSolvedRows, filepath_target);
         return listSolvedRows
 

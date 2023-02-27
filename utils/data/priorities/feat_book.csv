@@ -1,11 +1,11 @@
-feature_id," Importance"," Cost",Dependency,Mission Comments,Description
-bookmark_offline_flutter,"10","8",,,User should even be able to store any books they write and store it on their local_database. This feature seves also as making the flutter application base
-book_match,,,,,There should be an offline pattern matching algorithm for searching books
-account_sync,"8",,,,Ability to sync ones books recommendations
-shared_booklist,"6","3",,,"Creates booklists of what you want to read, others should be able to save that booklist and copy them"
-book_status,"9","3",,,"The ability to write down if a book has been read, the priority level, the time took to read, is being read"
-chrome_extension,,,,,"The ability of having this just as a chrome navigator extension so that is easier to navigate, and have it there"
-recommendation_system,"9","8",chrome_extension,,"Ability to store relevant books links. e.g. local path to the pdf, or hosted version of the pdf (in the chrome browser)"
-android_widget,"5","10",bookmark_offline_flutter,,"A widget where it reminds you which book you are reading and what to read next. It could be put on your background, or even on the top of your notification bar if you want to be aggresive"
-,,,,,
-,,,,,
+feature_id;importance;cost;Dependency;Mission Comments;Description;coefficient
+bookmark_offline_flutter;10;8;;;User should even be able to store any books they write and store it on their local_database. This feature seves also as making the flutter application base;2
+book_match;;;;;There should be an offline pattern matching algorithm for searching books;0
+account_sync;8;;;;Ability to sync ones books recommendations;8
+shared_booklist;6;3;;;Creates booklists of what you want to read, others should be able to save that booklist and copy them;3
+book_status;9;3;;;The ability to write down if a book has been read, the priority level, the time took to read, is being read;6
+chrome_extension;;;;;The ability of having this just as a chrome navigator extension so that is easier to navigate, and have it there;0
+recommendation_system;9;8;chrome_extension;;Ability to store relevant books links. e.g. local path to the pdf, or hosted version of the pdf (in the chrome browser);1
+android_widget;5;10;bookmark_offline_flutter;;A widget where it reminds you which book you are reading and what to read next. It could be put on your background, or even on the top of your notification bar if you want to be aggresive;-5
+;;;;;;0
+;;;;;;0

@@ -156,6 +156,8 @@ var Demo = demos.Demo,
             mQuizer.ask_term_question();
           } else if (input.includes(cmInfo.commands.clean.code)) {
             maid.askToClean();
+          } else if (input.includes(cmInfo.commands.prio.code)) {
+            maid.tellPriorities();
           } else {
             cli_meow.showHelp(0);
             maid.askToClean();
