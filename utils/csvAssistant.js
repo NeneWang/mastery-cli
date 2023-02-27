@@ -12,7 +12,7 @@ const { getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, for
 class SmartRow {
 
     constructor(row = {}) {
-        this.positiveColumns = ["utility", "benefits", "marketing", "ux", "importance"] // How they are normally named as
+        this.positiveColumns = ["utility", "benefits", "marketing", "ux", "importance", "priority"] // How they are normally named as
         this.negativeColumns = ["difficulty", "cost"]
         this.coefficient = this.calculateCoefficient(row);
         this.row = row;
