@@ -152,9 +152,9 @@ class CSVAssistant {
 
     }
 
-    getFilesInPriorities() {
+    async getFilesInPriorities () {
         // #TODO
-        return getFilesInDirectory();
+        return await getFilesInDirectory();
 
     }
 

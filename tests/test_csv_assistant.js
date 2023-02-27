@@ -46,10 +46,11 @@ describe("Testing CSV Assistant", () => {
 
     })
 
-    it("Get priority files", () => {
+    it("Get priority files", async () => {
 
         const csvAssistant = new CSVAssistant();
-        console.log(csvAssistant.getFilesInPriorities());
+        console.log("CSV Files found:");
+        console.log(await csvAssistant.getFilesInPriorities());
     })
 
 })

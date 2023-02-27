@@ -27,18 +27,22 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './da
     return (absolutePath.toString());
 };
 
-const getFilesInDirectory = () => {
-    const directoryPath = './data/priorities';
-
+const getFilesInDirectory = (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
-    fs.readdir(absolutePath, (err, files) => {
-        if (err) {
-            console.log('Error getting directory information:', err);
-        } else {
-            return files;
-        }
+
+    console.log("Fetching from: ", absolutePath);
+
+    return new Promise((resolve, reject) => {
+        fs.readdir(absolutePath, (err, files) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(files);
+            }
+        });
     });
 }
+
 
 
 const getMaidDirectory = () => {
