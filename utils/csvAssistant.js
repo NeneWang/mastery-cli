@@ -69,7 +69,6 @@ class CSVAssistant {
     }
 
 
-
     /**
      * 
      * @param {String} filename Populates the coefficients with the right data.
@@ -98,7 +97,6 @@ class CSVAssistant {
 
         return listOfSolvedRows;
     }
-
 
     saveListToCSV(jsonList, filename) {
         const absoluteFilePath = getDirAbsoluteUri(filename);
@@ -133,7 +131,6 @@ class CSVAssistant {
         objectList.sort((a, b) => b.coefficient - a.coefficient);
         return objectList;
     }
-
 
     /**
      * 

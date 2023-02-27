@@ -7,6 +7,7 @@ const clipboard = require('copy-paste')
 const chart = require('@wangnene2/chart')
 const { exec, spawn } = require('node:child_process');
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquirer');
+const { CSVAssistant } = require('./csvAssistant');
 
 const init = require('../utils/init');
 const constants = require('./constants');
@@ -123,6 +124,30 @@ class Maid {
 		clipboard.copy(projectDirectory);
 	}
 
+	tellPriorities = async () => {
+		const csvAssistant = new CSVAssistant();
+		this.say('Prioritize a Page');
+		const priotizableFiles = await csvAssistant.getFilesInPriorities();
+
+		
+		const multiselectPriorityFiles = new AutoComplete({
+			name: 'chooseFile',
+			message: 'Choose file to show priority',
+			choices: priotizableFiles
+		});
+
+		let fileSelected = await multiselectPriorityFiles.run();
+		const POPULATEONTEMPORAL = false;
+		const TEMPORAL_PATH = "priorities/temp.csv"
+		const SELECTEDFILE_PATH = "priorities/"+fileSelected
+		// Print the priorities (also populate it on a temp file.)
+		const topPriorities = await csvAssistant.getTopPriorities(SELECTEDFILE_PATH, 
+		{
+			saveAs: POPULATEONTEMPORAL? TEMPORAL_PATH: SELECTEDFILE_PATH, filterTop: 5
+		});
+
+	}
+
 	/**
 	 * Cleans the terminal
 	 */
@@ -159,7 +184,7 @@ class Maid {
 	 * !important: To prepopulate the msising report first!!
 	 */
 	provideMissingReport = () => {
-		if (this.missingFeatReport.length <= 0){
+		if (this.missingFeatReport.length <= 0) {
 			return;
 		}
 		const missingFormatedAsStr = this.missingFeatReport.join(", ")
@@ -169,13 +194,13 @@ class Maid {
 	/**
 	 *  precalculated asynchronous at the start, since usually the missing Feat report is to be shown at the end of the math thing.
 	 *  */
-	populateMissingReport = async() =>{
-		
-		try{
+	populateMissingReport = async () => {
+
+		try {
 			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
 			this.missingFeatReport = res.data;
 		}
-		catch(err){
+		catch (err) {
 			;
 		}
 	}
