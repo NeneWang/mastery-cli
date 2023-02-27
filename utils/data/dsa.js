@@ -182,6 +182,11 @@ const system_design = [
         term: "system design", prompt: "How would you design an Photo App?",
         description: "",
         example: "(1) Do you have a real life example? Whats the audience?"
+    },
+    {
+        term: "garbage collection", prompt: "What is this | in which language are they found?",
+        description: "is a dynamic technique for memory management and heap allocation that examines and identifies dead memory blocks before reallocating storage for reuse. Garbage collection's primary goal is to reduce memory leaks.",
+        prompt: "Garbage collection (GC) is a memory recovery feature built into programming languages such as C# and Java."
     }
 ]
 
