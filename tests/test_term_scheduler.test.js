@@ -1,6 +1,7 @@
 const { TermScheduler, TermCardsOfflineStrategy } = require('../utils/termScheduler');
 const { StorableQueue } = require('../utils/StorableQueue');
 const assert = require('assert');
+const { termsEnabled } = require('../utils/constants');
 
 
 
@@ -60,24 +61,48 @@ describe("Testing Behaviour", () => {
 
   beforeEach(() => {
 
-    this.termScheduler = new TermScheduler({ cards });
+    termScheduler = new TermScheduler({ cards });
   });
+
+  afterEach(()=>{
+    termScheduler.cleanCards();
+    termScheduler.saveCards();
+  })
+
   it('should add the first card to the working set when starting', () => {
-    assert(this.termScheduler.working_set.length!=0);
-    assert.deepEqual(this.termScheduler.getCard(), cards[0]);
+    assert(termScheduler.working_set.length != 0);
+    assert.deepEqual(termScheduler.getCard(), cards[0]);
   });
+
+
   it('should add the next card to the working set after a card is correctly answered', () => {
 
     const firstCard = termScheduler.working_set.peek();
     termScheduler.solveCard(true);
     const secondCard = termScheduler.working_set.peek();
-    console.log(termScheduler.working_set);
-    assert(firstCard == secondCard);
+    assert.notStrictEqual(firstCard, secondCard); //Shouldnt be equal
 
   });
 
+  it('should move a card to the learning queue when it is incorrectly answered', () => {
+    const firstCard = termScheduler.working_set.peek();
+    termScheduler.solveCard(false);
+    const secondCard = termScheduler.working_set.peek(); //Take the alst one.
+    assert.notStrictEqual(firstCard, secondCard);
+    assert.strictEqual(termScheduler.learned_queue.length, 0);
+    assert.strictEqual(termScheduler.working_set.lastElement, firstCard);
+  });
 
-
+  it('Removes all cards when all correctly answered, cant learn the last card if basically the card is not left', () => {
+    const cardsCount = cards.length; //Plus some extra interactions
+    for (let i = 0; i < cardsCount+2; i++) {
+      termScheduler.solveCard(true);
+    }
+    assert.strictEqual(termScheduler.learning_queue.length, 0);
+    assert.strictEqual(termScheduler.working_set.length, 0);
+    assert.strictEqual(termScheduler.learned_queue.length, cardsCount);
+    // Shouldnt be able to solve this card if there is more.
+  });
 
 
 

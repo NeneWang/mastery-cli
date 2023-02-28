@@ -1,7 +1,5 @@
 "use strict";
 
-var _this = void 0;
-
 var _require = require('../utils/termScheduler'),
     TermScheduler = _require.TermScheduler,
     TermCardsOfflineStrategy = _require.TermCardsOfflineStrategy;
@@ -10,6 +8,9 @@ var _require2 = require('../utils/StorableQueue'),
     StorableQueue = _require2.StorableQueue;
 
 var assert = require('assert');
+
+var _require3 = require('../utils/constants'),
+    termsEnabled = _require3.termsEnabled;
 
 describe('TermScheduler getCard', function () {
   it('should return false when the working set is empty', function () {
@@ -87,19 +88,42 @@ describe("Testing Behaviour", function () {
     definition: 'definition10'
   }];
   beforeEach(function () {
-    _this.termScheduler = new TermScheduler({
+    termScheduler = new TermScheduler({
       cards: cards
     });
   });
+  afterEach(function () {
+    termScheduler.cleanCards();
+    termScheduler.saveCards();
+  });
   it('should add the first card to the working set when starting', function () {
-    assert(_this.termScheduler.working_set.length != 0);
-    assert.deepEqual(_this.termScheduler.getCard(), cards[0]);
+    assert(termScheduler.working_set.length != 0);
+    assert.deepEqual(termScheduler.getCard(), cards[0]);
   });
   it('should add the next card to the working set after a card is correctly answered', function () {
     var firstCard = termScheduler.working_set.peek();
     termScheduler.solveCard(true);
     var secondCard = termScheduler.working_set.peek();
-    console.log(termScheduler.working_set);
-    assert(firstCard == secondCard);
+    assert.notStrictEqual(firstCard, secondCard); //Shouldnt be equal
+  });
+  it('should move a card to the learning queue when it is incorrectly answered', function () {
+    var firstCard = termScheduler.working_set.peek();
+    termScheduler.solveCard(false);
+    var secondCard = termScheduler.working_set.peek(); //Take the alst one.
+
+    assert.notStrictEqual(firstCard, secondCard);
+    assert.strictEqual(termScheduler.learned_queue.length, 0);
+    assert.strictEqual(termScheduler.working_set.lastElement, firstCard);
+  });
+  it('Removes all cards when all correctly answered, cant learn the last card if basically the card is not left', function () {
+    var cardsCount = cards.length; //Plus some extra interactions
+
+    for (var i = 0; i < cardsCount + 2; i++) {
+      termScheduler.solveCard(true);
+    }
+
+    assert.strictEqual(termScheduler.learning_queue.length, 0);
+    assert.strictEqual(termScheduler.working_set.length, 0);
+    assert.strictEqual(termScheduler.learned_queue.length, cardsCount); // Shouldnt be able to solve this card if there is more.
   });
 });

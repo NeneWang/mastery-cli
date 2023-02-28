@@ -1,7 +1,7 @@
 
 const { StorableQueue } = require('./StorableQueue');
 
-
+const DEBUG = false
 
 class TermScheduler {
 
@@ -19,16 +19,20 @@ class TermScheduler {
         this.populateWorkingSet();
     };
 
-    populateWorkingSet(){
-        while(this.working_set.length < this.working_set_length || this.learning_queue > 0){
-            const card = this.learning_queue.enqueue();
+    populateWorkingSet() {
+        while (this.working_set.length < this.working_set_length && !this.learning_queue.isEmpty) {
+
+            const card = this.learning_queue.dequeue();
+            if (DEBUG) console.log("Learning_queue length", this.learning_queue.length);
             this.working_set.enqueue(card);
+            if (DEBUG) console.log("Populating Working Set with card", card, "count: ", this.working_set.length);
         }
     }
 
     getCard() {
+        if (DEBUG) console.log("length: ", this.working_set.length);
         // If non left (then return false)
-        if (this.working_set.length <= 0) {
+        if (this.working_set.isEmpty) {
             return false;
         }
 
@@ -55,14 +59,16 @@ class TermScheduler {
      * returns {integer} count of cards left to be studied.
      */
     solveCard(wasCorrect) {
-        if (wasCorrect) {
+
+        if (DEBUG) console.log("Learning_queue length", this.learning_queue.length);
+        if (wasCorrect && !this.working_set.isEmpty) {
             // Then unqueue from learning queue into the last of the working_set and dequee the first one into nonethingness.
 
-
+            
             const learnedCard = this.working_set.dequeue();
             this.learned_queue.enqueue(learnedCard);
 
-            if (!this.learned_queue.isEmpty) {
+            if (!this.learning_queue.isEmpty) {
                 const newCard = this.learning_queue.dequeue();
                 this.working_set.enqueue(newCard);
             }
@@ -71,8 +77,8 @@ class TermScheduler {
         } else {
             // Then move the first ot the last
 
-            const cardToRePractice = this.learning_queue.dequeue();
-            this.learned_queue.enqueue(cardToRePractice);
+            const cardToRePractice = this.working_set.dequeue();
+            this.working_set.enqueue(cardToRePractice);
 
         }
         this.saveCards();
@@ -81,6 +87,12 @@ class TermScheduler {
 
 
     };
+
+    cleanCards(){
+        this.learned_queue.cleanQueue();
+        this.learning_queue.cleanQueue();
+        this.working_set.cleanQueue();
+    }
 
     saveCards() {
         this.learned_queue.save();
@@ -91,7 +103,7 @@ class TermScheduler {
     setLearningCards(cards) {
         for (const card of cards) {
             this.learning_queue.enqueue(card);
-            console.log("Enqueueing, ", card);
+            if (DEBUG) console.log("Enqueueing, ", card);
         }
     }
 

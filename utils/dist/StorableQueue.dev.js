@@ -139,6 +139,11 @@ function () {
       return this.elements[this.head];
     }
   }, {
+    key: "lastElement",
+    get: function get() {
+      return this.elements[this.tail - 1];
+    }
+  }, {
     key: "length",
     get: function get() {
       return this.tail - this.head;

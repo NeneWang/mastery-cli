@@ -62,6 +62,10 @@ class StorableQueue {
     peek() {
         return this.elements[this.head];
     }
+
+    get lastElement(){
+        return this.elements[this.tail-1];
+    }
     get length() {
         return this.tail - this.head;
     }

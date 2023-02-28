@@ -21,6 +21,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var _require = require('./StorableQueue'),
     StorableQueue = _require.StorableQueue;
 
+var DEBUG = false;
+
 var TermScheduler =
 /*#__PURE__*/
 function () {
@@ -53,16 +55,19 @@ function () {
   _createClass(TermScheduler, [{
     key: "populateWorkingSet",
     value: function populateWorkingSet() {
-      while (this.working_set.length < this.working_set_length || this.learning_queue > 0) {
-        var card = this.learning_queue.enqueue();
+      while (this.working_set.length < this.working_set_length && !this.learning_queue.isEmpty) {
+        var card = this.learning_queue.dequeue();
+        if (DEBUG) console.log("Learning_queue length", this.learning_queue.length);
         this.working_set.enqueue(card);
+        if (DEBUG) console.log("Populating Working Set with card", card, "count: ", this.working_set.length);
       }
     }
   }, {
     key: "getCard",
     value: function getCard() {
-      // If non left (then return false)
-      if (this.working_set.length <= 0) {
+      if (DEBUG) console.log("length: ", this.working_set.length); // If non left (then return false)
+
+      if (this.working_set.isEmpty) {
         return false;
       }
 
@@ -92,23 +97,32 @@ function () {
   }, {
     key: "solveCard",
     value: function solveCard(wasCorrect) {
-      if (wasCorrect) {
+      if (DEBUG) console.log("Learning_queue length", this.learning_queue.length);
+
+      if (wasCorrect && !this.working_set.isEmpty) {
         // Then unqueue from learning queue into the last of the working_set and dequee the first one into nonethingness.
         var learnedCard = this.working_set.dequeue();
         this.learned_queue.enqueue(learnedCard);
 
-        if (!this.learned_queue.isEmpty) {
+        if (!this.learning_queue.isEmpty) {
           var newCard = this.learning_queue.dequeue();
           this.working_set.enqueue(newCard);
         }
       } else {
         // Then move the first ot the last
-        var cardToRePractice = this.learning_queue.dequeue();
-        this.learned_queue.enqueue(cardToRePractice);
+        var cardToRePractice = this.working_set.dequeue();
+        this.working_set.enqueue(cardToRePractice);
       }
 
       this.saveCards();
       return this.getCardsToLearn();
+    }
+  }, {
+    key: "cleanCards",
+    value: function cleanCards() {
+      this.learned_queue.cleanQueue();
+      this.learning_queue.cleanQueue();
+      this.working_set.cleanQueue();
     }
   }, {
     key: "saveCards",
@@ -128,7 +142,7 @@ function () {
         for (var _iterator = cards[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var card = _step.value;
           this.learning_queue.enqueue(card);
-          console.log("Enqueueing, ", card);
+          if (DEBUG) console.log("Enqueueing, ", card);
         }
       } catch (err) {
         _didIteratorError = true;
