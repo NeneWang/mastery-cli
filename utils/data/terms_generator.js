@@ -62,7 +62,7 @@ class TermGenerator {
 
       for (const row of terminologiesDict) {
         
-        const term = new Terminology(row?.term ?? "", row?.description ?? "", { prompt: this.default_prompt, example: row?.example ?? "" });
+        const term = new Terminology(row?.term ?? "", row?.description ?? "", { prompt: this.default_prompt, example: row?.example ?? "", attachment: row?.attachment??"" });
         termStorage.push(term);
       }
 

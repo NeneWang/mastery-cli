@@ -74,7 +74,7 @@ async function populateTerms() {
         }
     ];
     
-    const strategyGenerator = new TermGenerator(strategyFilesData);
+    const strategyGenerator = new TermGenerator(strategyFilesData, {default_prompt: "How could you use this?"});
     const __ = await strategyGenerator.fetchTerms();
     terms.push(...strategyGenerator.termStorageAsJsonList);
 

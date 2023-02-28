@@ -92,7 +92,9 @@ function populateTerms() {
             filename: "terms/strat_cloud_patterns.csv",
             title: "Cloud-pattern"
           }];
-          strategyGenerator = new TermGenerator(strategyFilesData);
+          strategyGenerator = new TermGenerator(strategyFilesData, {
+            default_prompt: "How could you use this?"
+          });
           _context.next = 32;
           return regeneratorRuntime.awrap(strategyGenerator.fetchTerms());
 

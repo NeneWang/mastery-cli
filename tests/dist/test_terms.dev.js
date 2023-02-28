@@ -60,12 +60,13 @@ describe("Testing Terms Generator", function () {
             assert(first_sample_term.term != "");
             assert(first_sample_term.prompt != "");
             assert(first_sample_term.description != "");
+            assert(first_sample_term.attachment != "");
             assert(first_sample_term.example == "Some example");
             assert(first_sample_term.category == "mock-v1"); //Inherits from the root folder/
             // console.log(termGenerator.termStorageAsJsonList);
             // assert(termGenerator.termStorageAsJsonList.length > 2);
 
-          case 11:
+          case 12:
           case "end":
             return _context2.stop();
         }
@@ -93,12 +94,7 @@ describe("Testing Terms Generator", function () {
             _ = _context3.sent;
             first_sample_term = termGenerator.termStorageAsJsonList[0];
             console.log("alterated prompt:", first_sample_term);
-            assert(first_sample_term.prompt == "Some Prompt Here"); // assert(first_sample_term.term != "");
-            // assert(first_sample_term.prompt != "");
-            // assert(first_sample_term.description != "");
-            // assert(first_sample_term.category == "mock-v1"); //Inherits from the root folder/
-            // console.log(termGenerator.termStorageAsJsonList);
-            // assert(termGenerator.termStorageAsJsonList.length > 2);
+            assert(first_sample_term.prompt == "Some Prompt Here");
 
           case 8:
           case "end":
