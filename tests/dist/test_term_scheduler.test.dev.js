@@ -106,13 +106,15 @@ describe("Testing Behaviour", function () {
     var secondCard = termScheduler.working_set.peek();
     assert.notStrictEqual(firstCard, secondCard); //Shouldnt be equal
   });
-  it('should move a card to the learning queue when it is incorrectly answered', function () {
+  it('When incorrectly answered, it should be put on the end of the last queue.', function () {
     var firstCard = termScheduler.working_set.peek();
+    var toLearn = termScheduler.getCardsToLearn();
     termScheduler.solveCard(false);
     var secondCard = termScheduler.working_set.peek(); //Take the alst one.
 
     assert.notStrictEqual(firstCard, secondCard);
     assert.strictEqual(termScheduler.learned_queue.length, 0);
+    assert.strictEqual(termScheduler.getCardsToLearn(), toLearn);
     assert.strictEqual(termScheduler.working_set.lastElement, firstCard);
   });
   it('Removes all cards when all correctly answered, cant learn the last card if basically the card is not left', function () {

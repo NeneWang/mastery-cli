@@ -84,12 +84,14 @@ describe("Testing Behaviour", () => {
 
   });
 
-  it('should move a card to the learning queue when it is incorrectly answered', () => {
+  it('When incorrectly answered, it should be put on the end of the last queue.', () => {
     const firstCard = termScheduler.working_set.peek();
+    const toLearn = termScheduler.getCardsToLearn();
     termScheduler.solveCard(false);
     const secondCard = termScheduler.working_set.peek(); //Take the alst one.
     assert.notStrictEqual(firstCard, secondCard);
     assert.strictEqual(termScheduler.learned_queue.length, 0);
+    assert.strictEqual(termScheduler.getCardsToLearn(), toLearn);
     assert.strictEqual(termScheduler.working_set.lastElement, firstCard);
   });
 

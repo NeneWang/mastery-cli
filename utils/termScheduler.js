@@ -73,13 +73,11 @@ class TermScheduler {
                 this.working_set.enqueue(newCard);
             }
 
-
         } else {
             // Then move the first ot the last
 
             const cardToRePractice = this.working_set.dequeue();
             this.working_set.enqueue(cardToRePractice);
-
         }
         this.saveCards();
 
