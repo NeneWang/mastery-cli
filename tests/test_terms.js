@@ -38,6 +38,25 @@ describe("Testing Terms Generator", () => {
         // assert(termGenerator.termStorageAsJsonList.length > 2);
 
     })
+
+    it("Default Prompt Alteration ", async () => {
+        const filesData = [{ title: "mock-v1", filename: "terms/mock.csv" }];
+
+        const termGenerator = new TermGenerator(filesData, {default_prompt: "Some Prompt Here"})
+        const _ = await termGenerator.fetchTerms();
+
+        first_sample_term = termGenerator.termStorageAsJsonList[0];
+        console.log("alterated prompt:", first_sample_term);
+        assert(first_sample_term.prompt == "Some Prompt Here");
+
+        // assert(first_sample_term.term != "");
+        // assert(first_sample_term.prompt != "");
+        // assert(first_sample_term.description != "");
+        // assert(first_sample_term.category == "mock-v1"); //Inherits from the root folder/
+        // console.log(termGenerator.termStorageAsJsonList);
+        // assert(termGenerator.termStorageAsJsonList.length > 2);
+
+    })
 })
 
 describe("Testing Terms using Then", () => {

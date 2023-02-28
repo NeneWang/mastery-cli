@@ -1,11 +1,11 @@
 feature_id;priority;difficulty;status;dependency;overall_score;mission_comments;description;coefficient
-Amazon Web Services in Action;10;6;;;4;;Seems to be a more approacheble However it seems to be containing the advanced topics such as scability and fault toerance items;-6
-Relational Database Design and Implementation;8;5;;;3;;;-5
-Designing data-intensive applications;9;6;;;3;;;-6
-Test Driven Development By Example ;8;6;;;2;;;-6
-unit-testing-principle-patterns-practices;8;7;Done;;1;;;-7
-Learn AWS Serverless Computing;8;8;Halted;;0;I believe the terms are still too advanced for me to understand. Sine thigns seems to go to deep into the terms, while I was hoping something more clear headed, however is still a probably good read as long as I skip some matherless items;;-8
+Amazon Web Services in Action;10;6;;;4;;Seems to be a more approacheble However it seems to be containing the advanced topics such as scability and fault toerance items;4
+Relational Database Design and Implementation;8;5;;;3;;;3
+Designing data-intensive applications;9;6;;;3;;;3
+Test Driven Development By Example ;8;6;;;2;;;2
+unit-testing-principle-patterns-practices;8;7;Done;;1;;;1
+Learn AWS Serverless Computing;8;8;Halted;;0;I believe the terms are still too advanced for me to understand. Sine thigns seems to go to deep into the terms, while I was hoping something more clear headed, however is still a probably good read as long as I skip some matherless items;;0
 Domain Driven Design;;;;;;;;0
 AWS System Administration;;;;;;;;0
-Principles of Web API Design;8;6;;;;;;-6
+Principles of Web API Design;8;6;;;;;;2
 ;;;;;;;;0
