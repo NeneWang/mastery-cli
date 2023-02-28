@@ -18,9 +18,9 @@ var _require = require('../structures'),
     TermStorage = _require.TermStorage;
 
 function populateTerms() {
-  var _terms, _terms2;
+  var _terms, _terms2, _terms3;
 
-  var decks, _require2, react_terms, _require3, network, artificialIntelligence, algebra, calculousOne, _require4, pragmatic_programmer, _require5, designPatterns, dsa, system_design, _require6, aws_services, aws_glossary, coderTerms, unit_testing, filesData, _require7, TermGenerator, termGenerator, _;
+  var decks, _require2, react_terms, _require3, network, artificialIntelligence, algebra, calculousOne, _require4, pragmatic_programmer, _require5, designPatterns, dsa, system_design, _require6, aws_services, aws_glossary, coderTerms, unit_testing, filesData, _require7, TermGenerator, termGenerator, _, strategyFilesData, strategyGenerator, __;
 
   return regeneratorRuntime.async(function populateTerms$(_context) {
     while (1) {
@@ -71,7 +71,8 @@ function populateTerms() {
             is_active: true
           })); // decks.addDeck(new TermStorage(test, "test", {is_active: false}));
 
-          (_terms = terms).push.apply(_terms, _toConsumableArray(decks.listTerms));
+          (_terms = terms).push.apply(_terms, _toConsumableArray(decks.listTerms)); // Generic Term Generators
+
 
           filesData = [{
             title: "mock-v1",
@@ -87,9 +88,22 @@ function populateTerms() {
 
           (_terms2 = terms).push.apply(_terms2, _toConsumableArray(termGenerator.termStorageAsJsonList));
 
+          strategyFilesData = [{
+            filename: "terms/strat_cloud_patterns.csv",
+            title: "Cloud-pattern"
+          }];
+          strategyGenerator = new TermGenerator(strategyFilesData);
+          _context.next = 32;
+          return regeneratorRuntime.awrap(strategyGenerator.fetchTerms());
+
+        case 32:
+          __ = _context.sent;
+
+          (_terms3 = terms).push.apply(_terms3, _toConsumableArray(strategyGenerator.termStorageAsJsonList));
+
           return _context.abrupt("return", terms);
 
-        case 29:
+        case 35:
         case "end":
           return _context.stop();
       }

@@ -48,13 +48,15 @@ async function populateTerms() {
     decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: true }));
     decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: true }));
 
+    
+
 
 
     // decks.addDeck(new TermStorage(test, "test", {is_active: false}));
 
     terms.push(...decks.listTerms);
 
-
+    // Generic Term Generators
     const filesData = [{
         title: "mock-v1",
         filename: "terms/mock.csv"
@@ -63,6 +65,18 @@ async function populateTerms() {
     const termGenerator = new TermGenerator(filesData);
     const _ = await termGenerator.fetchTerms();
     terms.push(...termGenerator.termStorageAsJsonList);
+
+
+    const strategyFilesData = [
+        {
+            filename: "terms/strat_cloud_patterns.csv",
+            title: "Cloud-pattern"
+        }
+    ];
+    
+    const strategyGenerator = new TermGenerator(strategyFilesData);
+    const __ = await strategyGenerator.fetchTerms();
+    terms.push(...strategyGenerator.termStorageAsJsonList);
 
     return terms;
 }
