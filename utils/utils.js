@@ -129,7 +129,7 @@ class Maid {
 		this.say('Prioritize a Page');
 		const priotizableFiles = await csvAssistant.getFilesInPriorities();
 
-		
+
 		const multiselectPriorityFiles = new AutoComplete({
 			name: 'chooseFile',
 			message: 'Choose file to show priority',
@@ -139,13 +139,13 @@ class Maid {
 		let fileSelected = await multiselectPriorityFiles.run();
 		const POPULATEONTEMPORAL = false;
 		const TEMPORAL_PATH = "priorities/temp.csv";
-		const SELECTEDFILE_PATH = "priorities/"+fileSelected;
+		const SELECTEDFILE_PATH = "priorities/" + fileSelected;
 		const TOP_X_PRIORITIES = 3;
 		// Print the priorities (also populate it on a temp file.)
-		const topPriorities = await csvAssistant.getTopPriorities(SELECTEDFILE_PATH, 
-		{
-			saveAs: POPULATEONTEMPORAL? TEMPORAL_PATH: SELECTEDFILE_PATH, filterTop: TOP_X_PRIORITIES
-		});
+		const topPriorities = await csvAssistant.getTopPriorities(SELECTEDFILE_PATH,
+			{
+				saveAs: POPULATEONTEMPORAL ? TEMPORAL_PATH : SELECTEDFILE_PATH, filterTop: TOP_X_PRIORITIES
+			});
 
 		console.log(`Top ${TOP_X_PRIORITIES} priorities for `, chalk.hex(CONSTANTS.CUTEBLUE).inverse(fileSelected));
 		console.log(topPriorities);
@@ -181,14 +181,20 @@ class Maid {
 		this.say(`Weather Report: ${todaydate}`, false)
 		// console.log('Weather\n')
 		weatherReport();
+		this.provideMissingReport();
 	}
 
 	/**
 	 * Prints the missing objectives
 	 * !important: To prepopulate the msising report first!!
 	 */
-	provideMissingReport = () => {
-		if (this.missingFeatReport.length <= 0) {
+	provideMissingReport = async () => {
+		if(!this.missingFeatReport){
+			const _ = await this.populateMissingReport();
+		}
+
+		if (this.missingFeatReport?.length??0 <= 0) {
+			console.log("Missing Reports Missing: received: ", this.missingFeatReport)
 			return;
 		}
 		const missingFormatedAsStr = this.missingFeatReport.join(", ")
@@ -205,7 +211,7 @@ class Maid {
 			this.missingFeatReport = res.data;
 		}
 		catch (err) {
-			;
+			console.log(err);
 		}
 	}
 
