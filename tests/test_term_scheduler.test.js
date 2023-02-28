@@ -100,9 +100,9 @@ describe("Testing Behaviour", () => {
     for (let i = 0; i < cardsCount+2; i++) {
       termScheduler.solveCard(true);
     }
-    assert.strictEqual(termScheduler.learning_queue.length, 0);
-    assert.strictEqual(termScheduler.working_set.length, 0);
-    assert.strictEqual(termScheduler.learned_queue.length, cardsCount);
+    assert.strictEqual(termScheduler.learning_queue.length, 0); // No cards to have
+    assert.strictEqual(termScheduler.working_set.length, 0); // No cards to have
+    assert.strictEqual(termScheduler.learned_queue.length, cardsCount); // Should contain all cards
     // Shouldnt be able to solve this card if there is more.
   });
 
