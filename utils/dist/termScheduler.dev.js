@@ -47,9 +47,18 @@ function () {
     });
     this.cardsRefreshStrategy = cardsRefreshStrategy;
     this.setLearningCards(cards);
+    this.populateWorkingSet();
   }
 
   _createClass(TermScheduler, [{
+    key: "populateWorkingSet",
+    value: function populateWorkingSet() {
+      while (this.working_set.length < this.working_set_length || this.learning_queue > 0) {
+        var card = this.learning_queue.enqueue();
+        this.working_set.enqueue(card);
+      }
+    }
+  }, {
     key: "getCard",
     value: function getCard() {
       // If non left (then return false)
@@ -119,6 +128,7 @@ function () {
         for (var _iterator = cards[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var card = _step.value;
           this.learning_queue.enqueue(card);
+          console.log("Enqueueing, ", card);
         }
       } catch (err) {
         _didIteratorError = true;

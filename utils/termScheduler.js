@@ -5,9 +5,9 @@ const { StorableQueue } = require('./StorableQueue');
 
 class TermScheduler {
 
-    constructor({ cards=[], working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy() } = {}) {
-        
-        
+    constructor({ cards = [], working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy() } = {}) {
+
+
         this.working_set_length = working_set_length;
         this.working_set = new StorableQueue({ name: "working_set" });
         this.learning_queue = new StorableQueue({ name: "learning_queue" });
@@ -16,13 +16,22 @@ class TermScheduler {
 
 
         this.setLearningCards(cards);
+        this.populateWorkingSet();
     };
+
+    populateWorkingSet(){
+        while(this.working_set.length < this.working_set_length || this.learning_queue > 0){
+            const card = this.learning_queue.enqueue();
+            this.working_set.enqueue(card);
+        }
+    }
 
     getCard() {
         // If non left (then return false)
         if (this.working_set.length <= 0) {
             return false;
         }
+
 
         return this.working_set.peek();
     };
@@ -79,9 +88,10 @@ class TermScheduler {
         this.working_set.save();
     }
 
-    setLearningCards(cards){
-        for (const card of cards){
+    setLearningCards(cards) {
+        for (const card of cards) {
             this.learning_queue.enqueue(card);
+            console.log("Enqueueing, ", card);
         }
     }
 
@@ -107,8 +117,8 @@ class TermCardsRefreshStrategy {
     }
 }
 
-class TermCardsOfflineStrategy extends TermCardsRefreshStrategy{
-    getLearningQueue(){
+class TermCardsOfflineStrategy extends TermCardsRefreshStrategy {
+    getLearningQueue() {
         return {};
     }
 }
