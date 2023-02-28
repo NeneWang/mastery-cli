@@ -59,6 +59,7 @@ class Terminology extends Term {
      * @param {Optional Arguments} param2 {example: If there is an example, auto_image: bool: If to autoamtically fetch an image from the web.}
      */
     constructor(term, description = "", { example = "", autom_image = false, prompt="Use this on an example" } = {}) {
+        console.log("Crteating terminology with prompt: ", prompt);
         super(term, example, description, prompt);
 
 

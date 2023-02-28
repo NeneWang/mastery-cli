@@ -29,6 +29,7 @@ class TermGenerator {
     this.filesData = filesData;
     this.mapTermsStorage = {};
     this.default_prompt = default_prompt;
+    console.log("Defautl prompt: ", default_prompt);
 
   }
 
@@ -60,7 +61,8 @@ class TermGenerator {
       const terminologiesDict = dfd.toJSON(df);
 
       for (const row of terminologiesDict) {
-        const term = new Terminology(row?.term ?? "", row?.description ?? "", row?.example ?? "", { prompt: this.default_prompt });
+        console.log("Craeting with deafult prompt:", this.default_prompt);
+        const term = new Terminology(row?.term ?? "", row?.description ?? "", { prompt: this.default_prompt, example: row?.example ?? "" });
         termStorage.push(term);
       }
 
