@@ -41,6 +41,13 @@ class StorableQueue {
 
     }
 
+    has(element) {
+        if (Object.values(this.elements).includes(element)) {
+            return true;
+        }
+        return false
+    }
+
 
     enqueue(element) {
         this.elements[this.tail] = element;

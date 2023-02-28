@@ -111,6 +111,15 @@ function () {
       this.tail = 0;
     }
   }, {
+    key: "has",
+    value: function has(element) {
+      if (Object.values(this.elements).includes(element)) {
+        return true;
+      }
+
+      return false;
+    }
+  }, {
     key: "enqueue",
     value: function enqueue(element) {
       this.elements[this.tail] = element;
