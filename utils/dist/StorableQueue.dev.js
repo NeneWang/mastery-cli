@@ -51,9 +51,13 @@ function () {
 
             case 8:
               this.elements = _context.sent;
-              this.tail = this.elements.length;
+              _context.next = 11;
+              return regeneratorRuntime.awrap(db.getData('/tail'));
 
-            case 10:
+            case 11:
+              this.tail = _context.sent;
+
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -88,6 +92,17 @@ function () {
           }
         }
       }, null, this);
+    }
+  }, {
+    key: "cleanQueue",
+    value: function cleanQueue() {
+      // for (let key in this.elements) {
+      //     delete this.elements[key];
+      // }
+      delete this.elements;
+      this.elements = {};
+      this.head = 0;
+      this.tail = 0;
     }
   }, {
     key: "enqueue",

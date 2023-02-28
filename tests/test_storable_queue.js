@@ -5,11 +5,14 @@ describe('Queue', () => {
     beforeEach(async () => {
         // Create a new instance of the Queue class and load the data from the database
         this.queue = new StorableQueue({ name: 'test-queue' });
-        const _ = await this.queue.load();
+        await this.queue.cleanQueue();
+
     });
 
     afterEach(async () => {
         // Save the state of the queue to the database and delete the instance
+        // this.queue.cleanQueue();
+        // await this.queue.save();
         delete this.queue;
     });
 
@@ -44,4 +47,21 @@ describe('Queue', () => {
         this.queue.enqueue('a');
         assert.strictEqual(this.queue.isEmpty, false);
     });
+
+    it("saving queues", async () => {
+        this.queue.enqueue('a');
+        this.queue.enqueue('b');
+        const _ = await this.queue.save();
+        this.queue.cleanQueue(); //Despite deleting the queues, loading it should be clean
+
+        assert.strictEqual(this.queue.length, 0);
+
+        await this.queue.load();
+        console.log(this.queue);
+        assert.strictEqual(this.queue.length, 2);
+        assert.strictEqual(this.queue.peek(), 'a');
+
+
+    })
+
 });

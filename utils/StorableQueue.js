@@ -13,7 +13,7 @@ class StorableQueue {
 
         var db = new JsonDB(new Config(this.name, true, false, '/'));
         this.elements = await db.getData('/elements');
-        this.tail = this.elements?.length??0;
+        this.tail = await db.getData('/tail');
     }
 
     async save() {
@@ -23,6 +23,18 @@ class StorableQueue {
         var db = new JsonDB(new Config(this.name, true, false, '/'));
         db.push('/elements', this.elements);
         db.push('/tail', this.tail);
+
+    }
+
+    cleanQueue() {
+
+        // for (let key in this.elements) {
+        //     delete this.elements[key];
+        // }
+        delete this.elements;
+        this.elements = {}
+        this.head = 0;
+        this.tail = 0;
 
     }
 

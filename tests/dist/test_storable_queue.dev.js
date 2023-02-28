@@ -9,8 +9,6 @@ var _require = require('../utils/StorableQueue'),
 
 describe('Queue', function () {
   beforeEach(function _callee() {
-    var _;
-
     return regeneratorRuntime.async(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -20,12 +18,9 @@ describe('Queue', function () {
               name: 'test-queue'
             });
             _context.next = 3;
-            return regeneratorRuntime.awrap(_this.queue.load());
+            return regeneratorRuntime.awrap(_this.queue.cleanQueue());
 
           case 3:
-            _ = _context.sent;
-
-          case 4:
           case "end":
             return _context.stop();
         }
@@ -38,6 +33,8 @@ describe('Queue', function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             // Save the state of the queue to the database and delete the instance
+            // this.queue.cleanQueue();
+            // await this.queue.save();
             delete _this.queue;
 
           case 1:
@@ -80,5 +77,41 @@ describe('Queue', function () {
     _this.queue.enqueue('a');
 
     assert.strictEqual(_this.queue.isEmpty, false);
+  });
+  it("saving queues", function _callee3() {
+    var _;
+
+    return regeneratorRuntime.async(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _this.queue.enqueue('a');
+
+            _this.queue.enqueue('b');
+
+            _context3.next = 4;
+            return regeneratorRuntime.awrap(_this.queue.save());
+
+          case 4:
+            _ = _context3.sent;
+
+            _this.queue.cleanQueue(); //Despite deleting the queues, loading it should be clean
+
+
+            assert.strictEqual(_this.queue.length, 0);
+            _context3.next = 9;
+            return regeneratorRuntime.awrap(_this.queue.load());
+
+          case 9:
+            console.log(_this.queue);
+            assert.strictEqual(_this.queue.length, 2);
+            assert.strictEqual(_this.queue.peek(), 'a');
+
+          case 12:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    });
   });
 });
