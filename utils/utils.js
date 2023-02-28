@@ -180,7 +180,7 @@ class Maid {
 		await this.performanceReport();
 		this.say(`Weather Report: ${todaydate}`, false)
 		// console.log('Weather\n')
-		weatherReport();
+		const _ = await weatherReport();
 		this.provideMissingReport();
 	}
 
@@ -192,8 +192,8 @@ class Maid {
 		if(!this.missingFeatReport){
 			const _ = await this.populateMissingReport();
 		}
-		console.log("Missing Feats: ", this.missingFeatReport?.length??123);
-		if (this.missingFeatReport?.length??0 <= 0) {
+		// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
+		if (this.missingFeatReport.length <= 0) {
 			console.log("Missing Reports Missing: received: ", this.missingFeatReport)
 			return;
 		}
