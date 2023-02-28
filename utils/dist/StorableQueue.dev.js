@@ -17,7 +17,9 @@ var StorableQueue =
 function () {
   function StorableQueue(_ref) {
     var _ref$name = _ref.name,
-        name = _ref$name === void 0 ? "" : _ref$name;
+        name = _ref$name === void 0 ? "" : _ref$name,
+        _ref$load = _ref.load,
+        load = _ref$load === void 0 ? true : _ref$load;
 
     _classCallCheck(this, StorableQueue);
 
@@ -25,6 +27,10 @@ function () {
     this.head = 0;
     this.tail = 0;
     this.name = name;
+
+    if (load) {
+      this.load();
+    }
   }
 
   _createClass(StorableQueue, [{

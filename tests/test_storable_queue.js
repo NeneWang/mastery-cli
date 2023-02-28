@@ -5,7 +5,7 @@ describe('Queue', () => {
     beforeEach(async () => {
         // Create a new instance of the Queue class and load the data from the database
         this.queue = new StorableQueue({ name: 'test-queue' });
-        await this.queue.cleanQueue();
+        this.queue.cleanQueue();
 
     });
 

@@ -17,10 +17,10 @@ describe('Queue', function () {
             _this.queue = new StorableQueue({
               name: 'test-queue'
             });
-            _context.next = 3;
-            return regeneratorRuntime.awrap(_this.queue.cleanQueue());
 
-          case 3:
+            _this.queue.cleanQueue();
+
+          case 2:
           case "end":
             return _context.stop();
         }

@@ -1,10 +1,13 @@
 
 class StorableQueue {
-    constructor({ name = "" }) {
+    constructor({ name = "", load = true }) {
         this.elements = {};
         this.head = 0;
         this.tail = 0;
         this.name = name
+        if (load) {
+            this.load();
+        }
     }
 
     async load() {
