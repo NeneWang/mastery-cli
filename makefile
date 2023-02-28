@@ -10,6 +10,10 @@ save:
 	git commit -m "Progress :writing_hand:"
 	git push origin HEAD
 
+
+tests:
+	jest tests
+
 new:
 	npm version patch -m "${m}"
 	npm publish

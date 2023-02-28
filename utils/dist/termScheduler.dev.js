@@ -18,7 +18,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var _require = require('StorableQueue'),
+var _require = require('./StorableQueue'),
     StorableQueue = _require.StorableQueue;
 
 var TermScheduler =
@@ -26,6 +26,8 @@ var TermScheduler =
 function () {
   function TermScheduler() {
     var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$cards = _ref.cards,
+        cards = _ref$cards === void 0 ? [] : _ref$cards,
         _ref$working_set_leng = _ref.working_set_length,
         working_set_length = _ref$working_set_leng === void 0 ? 5 : _ref$working_set_leng,
         _ref$cardsRefreshStra = _ref.cardsRefreshStrategy,
@@ -44,6 +46,7 @@ function () {
       name: "learned_queue"
     });
     this.cardsRefreshStrategy = cardsRefreshStrategy;
+    this.setLearningCards(cards);
   }
 
   _createClass(TermScheduler, [{
@@ -106,6 +109,33 @@ function () {
       this.working_set.save();
     }
   }, {
+    key: "setLearningCards",
+    value: function setLearningCards(cards) {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = cards[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var card = _step.value;
+          this.learning_queue.enqueue(card);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+    }
+  }, {
     key: "refreshCards",
     value: function refreshCards() {
       // Refresh the the cards on the learning queue by those who hadnt be learnt yet. (and are neither on the working set)
@@ -158,24 +188,8 @@ function (_TermCardsRefreshStra) {
   }]);
 
   return TermCardsOfflineStrategy;
-}(TermCardsRefreshStrategy());
+}(TermCardsRefreshStrategy);
 
-var TermSchedulerAsync =
-/*#__PURE__*/
-function (_TermScheduler) {
-  _inherits(TermSchedulerAsync, _TermScheduler);
-
-  function TermSchedulerAsync() {
-    _classCallCheck(this, TermSchedulerAsync);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(TermSchedulerAsync).apply(this, arguments));
-  }
-
-  return TermSchedulerAsync;
-}(TermScheduler);
-
-;
 module.exports = {
-  TermScheduler: TermScheduler,
-  TermSchedulerAsync: TermSchedulerAsync
+  TermScheduler: TermScheduler
 };

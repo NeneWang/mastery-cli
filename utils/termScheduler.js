@@ -1,16 +1,21 @@
 
-const { StorableQueue } = require('StorableQueue');
+const { StorableQueue } = require('./StorableQueue');
 
 
 
 class TermScheduler {
 
-    constructor({ working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy() } = {}) {
+    constructor({ cards=[], working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy() } = {}) {
+        
+        
         this.working_set_length = working_set_length;
         this.working_set = new StorableQueue({ name: "working_set" });
         this.learning_queue = new StorableQueue({ name: "learning_queue" });
         this.learned_queue = new StorableQueue({ name: "learned_queue" });
         this.cardsRefreshStrategy = cardsRefreshStrategy;
+
+
+        this.setLearningCards(cards);
     };
 
     getCard() {
@@ -74,6 +79,12 @@ class TermScheduler {
         this.working_set.save();
     }
 
+    setLearningCards(cards){
+        for (const card of cards){
+            this.learning_queue.enqueue(card);
+        }
+    }
+
 
     refreshCards() {
         // Refresh the the cards on the learning queue by those who hadnt be learnt yet. (and are neither on the working set)
@@ -96,7 +107,7 @@ class TermCardsRefreshStrategy {
     }
 }
 
-class TermCardsOfflineStrategy extends TermCardsRefreshStrategy(){
+class TermCardsOfflineStrategy extends TermCardsRefreshStrategy{
     getLearningQueue(){
         return {};
     }
@@ -104,16 +115,7 @@ class TermCardsOfflineStrategy extends TermCardsRefreshStrategy(){
 
 
 
-
-class TermSchedulerAsync extends TermScheduler {
-    // This works for saving load times by checking with the cloud what to work on.
-    // Instead of storing the cards here on the queue, you can have a glossary stating the id and the card. (Each time this compiles, updating things in it's totallity.)
-
-
-
-};
-
-module.exports = { TermScheduler, TermSchedulerAsync };
+module.exports = { TermScheduler };
 
 
 
