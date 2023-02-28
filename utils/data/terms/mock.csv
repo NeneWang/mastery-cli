@@ -1,5 +1,5 @@
-term,description
-Handschuh, Hand + Schuh 
-mich, mysel
-dich, yourself
-sich,Oneself
+term;description;example;
+Handschuh; Hand + Schuh ;Some example
+mich; mysel;Some example
+dich; yourself;Some example
+sich;Oneself;Some example

@@ -60,11 +60,12 @@ describe("Testing Terms Generator", function () {
             assert(first_sample_term.term != "");
             assert(first_sample_term.prompt != "");
             assert(first_sample_term.description != "");
+            assert(first_sample_term.example == "Some example");
             assert(first_sample_term.category == "mock-v1"); //Inherits from the root folder/
             // console.log(termGenerator.termStorageAsJsonList);
             // assert(termGenerator.termStorageAsJsonList.length > 2);
 
-          case 10:
+          case 11:
           case "end":
             return _context2.stop();
         }
