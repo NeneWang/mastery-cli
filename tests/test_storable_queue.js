@@ -61,7 +61,9 @@ describe('Queue', () => {
         assert.strictEqual(this.queue.length, 2);
         assert.strictEqual(this.queue.peek(), 'a');
 
+    });
 
-    })
+
+    
 
 });

@@ -244,6 +244,7 @@ class Maid {
 		// const { performances, username, days } = await res.data;
 	}
 
+
 	printUserPerformanceDataSummary(userPerformanceData) {
 		// Print this month
 		// This week average

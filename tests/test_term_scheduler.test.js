@@ -7,8 +7,6 @@ const { termsEnabled } = require('../utils/constants');
 
 describe('TermScheduler getCard', () => {
 
-
-
   it('should return false when the working set is empty', () => {
     const termScheduler = new TermScheduler();
     const card = termScheduler.getCard();

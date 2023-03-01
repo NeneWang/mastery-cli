@@ -195,14 +195,35 @@ class Quizzer {
         if (askMath) {
             await this.ask_math_question()
         } else {
-            await this.ask_term_question()
+            await this.pick_and_ask_term_question()
         }
     };
 
-    async ask_term_question() {
+    // Returns the term deck name (key), in which is stored the term's deck.
+    async pick_terms_deck(){
+        return ""
+    }
+
+    
+	study_session = async () => {
+		//Pick a term deck
+
+        //Populates with the right terms deck using the queue
+
+
+        //While Loop asking based on the queue
+	}
+
+    async pick_and_ask_term_question() {
         // Fetches a random term form with the youngest one, unless there is no internet
 
         const term_selected = await this.pick_term_question();
+        console.log("term_selected", term_selected);
+        await this.ask_term_question(term_selected);
+
+    }
+
+    async ask_term_question(term_selected) {
         try {
             // Start running the question_attempt
             /**
@@ -260,6 +281,7 @@ class Quizzer {
             console.warn(err)
         }
     }
+
 
     /**
      * Prints the example of the term_selected (if available)

@@ -122,11 +122,6 @@ const getRandomBool = (chances = 0.5) => {
     return random_boolean = Math.random() < chances;
 }
 
-// const ANS_CONTSTRAING =
-
-
-
-
 
 
 function populateTerms(termJson) {

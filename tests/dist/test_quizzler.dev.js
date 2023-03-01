@@ -49,6 +49,6 @@ describe("Quizzler Terminology Tests", function () {
      * There is no actual way other than running a test with an image example
      */
     var mQuizer = setupDigitalImageQuizer();
-    mQuizer.ask_term_question();
+    mQuizer.pick_and_ask_term_question();
   });
 });

@@ -49,7 +49,7 @@ describe("Quizzler Terminology Tests", () => {
          * There is no actual way other than running a test with an image example
          */
         const mQuizer = setupDigitalImageQuizer();
-        mQuizer.ask_term_question();
+        mQuizer.pick_and_ask_term_question();
 
     });
 });
