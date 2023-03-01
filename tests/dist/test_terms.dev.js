@@ -60,13 +60,45 @@ describe("Testing Terms Generator", function () {
             assert(first_sample_term.term != "");
             assert(first_sample_term.prompt != "");
             assert(first_sample_term.description != "");
+            assert(first_sample_term.attachment != "");
+            assert(first_sample_term.example == "Some example");
             assert(first_sample_term.category == "mock-v1"); //Inherits from the root folder/
             // console.log(termGenerator.termStorageAsJsonList);
             // assert(termGenerator.termStorageAsJsonList.length > 2);
 
-          case 10:
+          case 12:
           case "end":
             return _context2.stop();
+        }
+      }
+    });
+  });
+  it("Default Prompt Alteration ", function _callee3() {
+    var filesData, termGenerator, _;
+
+    return regeneratorRuntime.async(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            filesData = [{
+              title: "mock-v1",
+              filename: "terms/mock.csv"
+            }];
+            termGenerator = new TermGenerator(filesData, {
+              default_prompt: "Some Prompt Here"
+            });
+            _context3.next = 4;
+            return regeneratorRuntime.awrap(termGenerator.fetchTerms());
+
+          case 4:
+            _ = _context3.sent;
+            first_sample_term = termGenerator.termStorageAsJsonList[0];
+            console.log("alterated prompt:", first_sample_term);
+            assert(first_sample_term.prompt == "Some Prompt Here");
+
+          case 8:
+          case "end":
+            return _context3.stop();
         }
       }
     });
@@ -84,23 +116,23 @@ describe("Testing Terms using Then", function () {
   });
 });
 describe("Get all terms at once", function () {
-  it("Populating the terms on load time?", function _callee3() {
+  it("Populating the terms on load time?", function _callee4() {
     var terms;
-    return regeneratorRuntime.async(function _callee3$(_context3) {
+    return regeneratorRuntime.async(function _callee4$(_context4) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context4.prev = _context4.next) {
           case 0:
-            _context3.next = 2;
+            _context4.next = 2;
             return regeneratorRuntime.awrap(populateTerms());
 
           case 2:
-            terms = _context3.sent;
+            terms = _context4.sent;
             // console.log("async terms:", terms)
             assert(terms.length > 2);
 
           case 4:
           case "end":
-            return _context3.stop();
+            return _context4.stop();
         }
       }
     });

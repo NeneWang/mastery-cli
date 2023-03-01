@@ -23,7 +23,7 @@ describe("Testing Terms Generator", () => {
         // console.log(termGenerator.termStorageAsJsonList);
         assert(termGenerator.termStorageAsJsonList.length > 2);
 
-    })
+    });
     it("Test that the rows are properly populated ", async () => {
         const termGenerator = createTermGenerator()
         const res = await termGenerator.fetchTerms();
@@ -33,11 +33,26 @@ describe("Testing Terms Generator", () => {
         assert(first_sample_term.term != "");
         assert(first_sample_term.prompt != "");
         assert(first_sample_term.description != "");
+        assert(first_sample_term.attachment != "");
+        assert(first_sample_term.example == "Some example");
         assert(first_sample_term.category == "mock-v1"); //Inherits from the root folder/
         // console.log(termGenerator.termStorageAsJsonList);
         // assert(termGenerator.termStorageAsJsonList.length > 2);
 
-    })
+    });
+
+    it("Default Prompt Alteration ", async () => {
+        const filesData = [{ title: "mock-v1", filename: "terms/mock.csv" }];
+
+        const termGenerator = new TermGenerator(filesData, {default_prompt: "Some Prompt Here"})
+        const _ = await termGenerator.fetchTerms();
+
+        first_sample_term = termGenerator.termStorageAsJsonList[0];
+        console.log("alterated prompt:", first_sample_term);
+        assert(first_sample_term.prompt == "Some Prompt Here");
+
+    });
+
 })
 
 describe("Testing Terms using Then", () => {

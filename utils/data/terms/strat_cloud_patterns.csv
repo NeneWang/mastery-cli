@@ -1,0 +1,6 @@
+term;description
+Ambassador;Create helper services that send network requests on behalf of a consumer service or application.
+Anti-Corruption Layer;" Implement a façade or adapter layer between a modern application and a legacy system."
+Asynchronous Request-Reply;Decouple backend processing from a frontend host, where backend processing needs to be asynchronous, but the frontend still needs a clear response.
+;
+;
