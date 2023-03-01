@@ -78,7 +78,7 @@ async function populateTerms() {
     decks.addDecks(strategyGenerator.termStorageList());
 
     
-    terms.push(...decks.listTerms);
+    terms.push(...decks.listTerms());
     return terms;
 }
 

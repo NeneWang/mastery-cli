@@ -140,35 +140,6 @@ class TermStorage {
         return res;
     }
 
-    /**
-     * @returns {List<Term>} Returns as a List of Terms
-     */
-    get listTerms() {
-        const termsList = [];
-        termsList.push(...this.terms.map(
-            obj => {
-                const newterm = new Term(
-                    obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "",
-                    {
-                        references: obj?.references ?? "", attachment: obj?.attachment,
-                        priority: this.priority
-                    }
-                )
-                newterm.pushCategory(this.deck_name ?? "");
-                return newterm;
-            }
-        ));
-
-
-        for (const deck of this.decks) {
-            if (deck.is_active) {
-                termsList.push(...deck.listTerms);
-            }
-        }
-
-        // Do the same recursive for each of the internal res 
-        return termsList
-    }
 
     /**
      * 
@@ -195,7 +166,7 @@ class TermStorage {
         for (const deck of this.decks) {
             //Regardless of it is active or not.
             if ( (get_only.length == 0 && deck.is_active ) ||  get_only.includes(deck.deck_name)) {
-                termsList.push(...deck.listTerms);
+                termsList.push(...deck.listTerms());
             }
         }
 
