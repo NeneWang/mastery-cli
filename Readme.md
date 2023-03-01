@@ -31,6 +31,8 @@ CLI Assistnat tool to keep you in track.
 
 ### Study
 
+- [ ] Daily Survey
+- [ ] Chrome Extension as in gym telling you or you can loggon which session are you working on today (math, ai, etc...)
 - [ ] Ability To Generate Cloze (derivants of the concepts models)
 - [ ] Ability to Generate a terms through an collection of XLSX (Derivant of Concept Models)
 - [ ] Ability to Have a Cloze generator
