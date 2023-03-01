@@ -74,7 +74,7 @@ class TermGenerator {
 
 
   /**
-   * Retursn List<TermStorage>
+   * Retursn List<json>
    */
   get termStorageAsJsonList() {
     const res = [];
@@ -84,6 +84,20 @@ class TermGenerator {
     }
     return res;
   }
+
+  /**
+   * Retursn List<TermStorage>
+   */
+  termStorageList(){
+    const res = [];
+    for (const termStorage of Object.values(this.mapTermsStorage)) {
+      // console.log(termStorage);
+      res.push(termStorage);
+    }
+    // console.log("fetching", ...res)
+    return res;
+  }
+  
 
 
 

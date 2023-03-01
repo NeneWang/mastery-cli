@@ -218,7 +218,7 @@ class Quizzer {
         // Fetches a random term form with the youngest one, unless there is no internet
 
         const term_selected = await this.pick_term_question();
-        console.log("term_selected", term_selected);
+        if (DEBUG) console.log("term_selected", term_selected);
         await this.ask_term_question(term_selected);
 
     }

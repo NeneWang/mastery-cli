@@ -94,6 +94,23 @@ class TermStorage {
         this.decks.push(deck);
     }
 
+    addDecks(decks) {
+        for (const deck of decks) {
+            // console.log("Adding deck: ", deck);
+            this.addDeck(deck);
+        }
+    }
+
+
+    get deck_titles(){
+        const deck_names = [this.deck_name];
+        for(const deck of this.decks){
+            
+            deck_names.push(...deck.deck_titles);
+        }
+        return deck_names;
+    }
+
     /**
      * Follows the design of array.push, easier to memorize
      * @param {Term} term Pushes this term into the terms of the storage
@@ -145,6 +162,39 @@ class TermStorage {
 
         for (const deck of this.decks) {
             if (deck.is_active) {
+                termsList.push(...deck.listTerms);
+            }
+        }
+
+        // Do the same recursive for each of the internal res 
+        return termsList
+    }
+
+    /**
+     * 
+     * @param {get_only} get only certain decks (with x categories.) 
+     * @returns 
+     */
+    listTerms({ get_only = [] } = {}) {
+        const termsList = [];
+        termsList.push(...this.terms.map(
+            obj => {
+                const newterm = new Term(
+                    obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "",
+                    {
+                        references: obj?.references ?? "", attachment: obj?.attachment,
+                        priority: this.priority
+                    }
+                )
+                newterm.pushCategory(this.deck_name ?? "");
+                return newterm;
+            }
+        ));
+
+
+        for (const deck of this.decks) {
+            //Regardless of it is active or not.
+            if ( (get_only.length == 0 && deck.is_active ) ||  get_only.includes(deck.deck_name)) {
                 termsList.push(...deck.listTerms);
             }
         }

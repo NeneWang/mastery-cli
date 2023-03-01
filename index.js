@@ -97,7 +97,7 @@ const { Demo, EDemo } = demos;
 		mQuizer.ask_question();
 	}
 	else if (input.includes(cmInfo.commands.term.code)) {
-		mQuizer.ask_term_question();
+		mQuizer.pick_and_ask_term_question();
 	}
 
 	else if (input.includes(cmInfo.commands.clean.code)) {

@@ -18,7 +18,7 @@ var _require = require('../structures'),
     TermStorage = _require.TermStorage;
 
 function populateTerms() {
-  var _terms, _terms2, _terms3;
+  var _terms;
 
   var decks, _require2, react_terms, _require3, network, artificialIntelligence, algebra, calculousOne, _require4, pragmatic_programmer, _require5, designPatterns, dsa, system_design, _require6, aws_services, aws_glossary, coderTerms, unit_testing, filesData, _require7, TermGenerator, termGenerator, _, strategyFilesData, strategyGenerator, __;
 
@@ -83,9 +83,7 @@ function populateTerms() {
 
         case 25:
           _ = _context.sent;
-
-          (_terms = terms).push.apply(_terms, _toConsumableArray(termGenerator.termStorageAsJsonList));
-
+          decks.addDecks(termGenerator.termStorageList());
           strategyFilesData = [{
             filename: "terms/strat_cloud_patterns.csv",
             title: "Cloud-pattern"
@@ -98,10 +96,9 @@ function populateTerms() {
 
         case 31:
           __ = _context.sent;
+          decks.addDecks(strategyGenerator.termStorageList());
 
-          (_terms2 = terms).push.apply(_terms2, _toConsumableArray(strategyGenerator.termStorageAsJsonList));
-
-          (_terms3 = terms).push.apply(_terms3, _toConsumableArray(decks.listTerms));
+          (_terms = terms).push.apply(_terms, _toConsumableArray(decks.listTerms));
 
           return _context.abrupt("return", terms);
 

@@ -63,7 +63,7 @@ async function populateTerms() {
     const { TermGenerator } = require('./terms_generator');
     const termGenerator = new TermGenerator(filesData);
     const _ = await termGenerator.fetchTerms();
-    terms.push(...termGenerator.termStorageAsJsonList);
+    decks.addDecks(termGenerator.termStorageList());
 
 
     const strategyFilesData = [
@@ -75,7 +75,7 @@ async function populateTerms() {
     
     const strategyGenerator = new TermGenerator(strategyFilesData, {default_prompt: "How could you use this?"});
     const __ = await strategyGenerator.fetchTerms();
-    terms.push(...strategyGenerator.termStorageAsJsonList);
+    decks.addDecks(strategyGenerator.termStorageList());
 
     
     terms.push(...decks.listTerms);
