@@ -2,57 +2,41 @@ const { getDirAbsoluteUri } = require('./utils_functions');
 
 class StorableQueue {
     constructor({ name = "" } = {}) {
-        this.elements = {};
-        this.head = 0;
-        this.tail = 0;
-        this.name = name
-        this.absolute_uri = (getDirAbsoluteUri(`temp/${this.name}`))
+        this.elements = [];
+        this.name = name;
+        this.absolute_uri = getDirAbsoluteUri(`temp/${this.name}`);
     }
 
-    /**
-     * 
-     * @returns {bool} Returns upon success
-     */
     async load() {
         try {
             const { JsonDB, Config } = await import('node-json-db');
 
-            var db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
+            const db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
             this.elements = await db.getData('/elements');
-            this.tail = await db.getData('/tail');
-            console.log(`Loaded ${this.length} from  ${this.name} | ${this.absolute_uri}`);
-            return true
+            console.log(`Loaded ${this.length} from ${this.name} | ${this.absolute_uri}`);
+            return true;
         } catch {
-            return false
+            return false;
         }
     }
 
     async save() {
         const { JsonDB, Config } = await import('node-json-db');
 
-        var db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
+        const db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
         db.push('/elements', this.elements);
-        db.push('/tail', this.tail);
     }
 
     cleanQueue() {
-        delete this.elements;
-        this.elements = {}
-        this.head = 0;
-        this.tail = 0;
+        this.elements = [];
     }
 
     has(element) {
-        if (Object.values(this.elements).includes(element)) {
-            return true;
-        }
-        return false
+        return this.elements.includes(element);
     }
 
     enqueue(element) {
-        const length = Object.keys(this.elements).length;
-        this.elements[length] = element;
-        this.tail = length + 1;
+        this.elements.push(element);
     }
 
     enqueueMultiple(elements) {
@@ -62,22 +46,21 @@ class StorableQueue {
     }
 
     dequeue() {
-        const item = this.elements[this.head];
-        delete this.elements[this.head];
-        this.head++;
+        const item = this.elements.shift();
+        this.head = 0;
         return item;
     }
 
     peek() {
-        return this.elements[this.head];
+        return this.elements[0];
     }
 
     get lastElement() {
-        return this.elements[this.tail - 1];
+        return this.elements[this.length - 1];
     }
 
     get length() {
-        return Object.keys(this.elements).length;
+        return this.elements.length;
     }
 
     get isEmpty() {

@@ -25,17 +25,10 @@ function () {
 
     _classCallCheck(this, StorableQueue);
 
-    this.elements = {};
-    this.head = 0;
-    this.tail = 0;
+    this.elements = [];
     this.name = name;
     this.absolute_uri = getDirAbsoluteUri("temp/".concat(this.name));
   }
-  /**
-   * 
-   * @returns {bool} Returns upon success
-   */
-
 
   _createClass(StorableQueue, [{
     key: "load",
@@ -62,25 +55,20 @@ function () {
 
             case 9:
               this.elements = _context.sent;
-              _context.next = 12;
-              return regeneratorRuntime.awrap(db.getData('/tail'));
-
-            case 12:
-              this.tail = _context.sent;
-              console.log("Loaded ".concat(this.length, " from  ").concat(this.name, " | ").concat(this.absolute_uri));
+              console.log("Loaded ".concat(this.length, " from ").concat(this.name, " | ").concat(this.absolute_uri));
               return _context.abrupt("return", true);
 
-            case 17:
-              _context.prev = 17;
+            case 14:
+              _context.prev = 14;
               _context.t0 = _context["catch"](0);
               return _context.abrupt("return", false);
 
-            case 20:
+            case 17:
             case "end":
               return _context.stop();
           }
         }
-      }, null, this, [[0, 17]]);
+      }, null, this, [[0, 14]]);
     }
   }, {
     key: "save",
@@ -102,9 +90,8 @@ function () {
               Config = _ref3.Config;
               db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
               db.push('/elements', this.elements);
-              db.push('/tail', this.tail);
 
-            case 8:
+            case 7:
             case "end":
               return _context2.stop();
           }
@@ -114,26 +101,17 @@ function () {
   }, {
     key: "cleanQueue",
     value: function cleanQueue() {
-      delete this.elements;
-      this.elements = {};
-      this.head = 0;
-      this.tail = 0;
+      this.elements = [];
     }
   }, {
     key: "has",
     value: function has(element) {
-      if (Object.values(this.elements).includes(element)) {
-        return true;
-      }
-
-      return false;
+      return this.elements.includes(element);
     }
   }, {
     key: "enqueue",
     value: function enqueue(element) {
-      var length = Object.keys(this.elements).length;
-      this.elements[length] = element;
-      this.tail = length + 1;
+      this.elements.push(element);
     }
   }, {
     key: "enqueueMultiple",
@@ -165,25 +143,24 @@ function () {
   }, {
     key: "dequeue",
     value: function dequeue() {
-      var item = this.elements[this.head];
-      delete this.elements[this.head];
-      this.head++;
+      var item = this.elements.shift();
+      this.head = 0;
       return item;
     }
   }, {
     key: "peek",
     value: function peek() {
-      return this.elements[this.head];
+      return this.elements[0];
     }
   }, {
     key: "lastElement",
     get: function get() {
-      return this.elements[this.tail - 1];
+      return this.elements[this.length - 1];
     }
   }, {
     key: "length",
     get: function get() {
-      return Object.keys(this.elements).length;
+      return this.elements.length;
     }
   }, {
     key: "isEmpty",
