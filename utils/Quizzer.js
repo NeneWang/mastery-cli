@@ -260,7 +260,7 @@ class Quizzer {
 
         const exitMethod = () => {
             exit = true;
-            return false;
+            return true; //So it escapes the loop in case of perpetual until one is right
         }
 
         while (!studyScheduler.is_completed && !exit) {
@@ -374,8 +374,9 @@ class Quizzer {
 
             return ISANSWERCORRECT
         } catch (err) {
-            console.log("term_selected", term_selected)
-            console.warn(err)
+            if (DEBUG) console.log("Failed at: ask_term_question\n\
+            term_selected", term_selected)
+            if (DEBUG) console.log(err)
             return false; // if in a session, this will skip the card because this is improperly made.
         }
     }
