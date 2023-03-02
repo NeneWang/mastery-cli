@@ -63,7 +63,7 @@ describe("TermStorage tests", () => {
             assert.deepStrictEqual(deck1.deck_titles, ["Deck 1", "Deck 2", "Deck 3", "Deck 4", "Deck 5"]);
             assert.deepStrictEqual(deck2.deck_titles, ["Deck 2"]);
             assert.deepStrictEqual(deck4.deck_titles, ["Deck 4"]);
-        });
+    });
     });
 }
 );

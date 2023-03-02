@@ -21,9 +21,7 @@ function () {
   function StorableQueue() {
     var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$name = _ref.name,
-        name = _ref$name === void 0 ? "" : _ref$name,
-        _ref$load = _ref.load,
-        load = _ref$load === void 0 ? true : _ref$load;
+        name = _ref$name === void 0 ? "" : _ref$name;
 
     _classCallCheck(this, StorableQueue);
 
@@ -32,10 +30,6 @@ function () {
     this.tail = 0;
     this.name = name;
     this.absolute_uri = getDirAbsoluteUri("temp/".concat(this.name));
-
-    if (load) {
-      this.load();
-    }
   }
   /**
    * 
@@ -73,19 +67,20 @@ function () {
 
             case 12:
               this.tail = _context.sent;
+              console.log("Loaded ".concat(this.length, " from  ").concat(this.name, " | ").concat(this.absolute_uri));
               return _context.abrupt("return", true);
 
-            case 16:
-              _context.prev = 16;
+            case 17:
+              _context.prev = 17;
               _context.t0 = _context["catch"](0);
               return _context.abrupt("return", false);
 
-            case 19:
+            case 20:
             case "end":
               return _context.stop();
           }
         }
-      }, null, this, [[0, 16]]);
+      }, null, this, [[0, 17]]);
     }
   }, {
     key: "save",
@@ -119,9 +114,6 @@ function () {
   }, {
     key: "cleanQueue",
     value: function cleanQueue() {
-      // for (let key in this.elements) {
-      //     delete this.elements[key];
-      // }
       delete this.elements;
       this.elements = {};
       this.head = 0;
@@ -139,8 +131,9 @@ function () {
   }, {
     key: "enqueue",
     value: function enqueue(element) {
-      this.elements[this.tail] = element;
-      this.tail++;
+      var length = Object.keys(this.elements).length;
+      this.elements[length] = element;
+      this.tail = length + 1;
     }
   }, {
     key: "enqueueMultiple",
@@ -190,7 +183,7 @@ function () {
   }, {
     key: "length",
     get: function get() {
-      return this.tail - this.head;
+      return Object.keys(this.elements).length;
     }
   }, {
     key: "isEmpty",

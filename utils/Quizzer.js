@@ -254,7 +254,9 @@ class Quizzer {
         const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
 
         const studyScheduler = new TermScheduler({ cards: selected_terms, cards_category: deck_selected });
-
+        
+        await studyScheduler.setLearningCards(selected_terms); // Populate the right cards.
+        // console.log(studyScheduler.learning_queue);
         let exit = false;
 
 
@@ -266,10 +268,31 @@ class Quizzer {
         while (!studyScheduler.is_completed && !exit) {
             // Continue asking questions.
 
+            const showProgress = (cardsLeft, cardsCompleted, learning, working) => {
+                console.log(`Cards left: ${cardsLeft} || Cards completed: ${cardsCompleted} || learning ${learning} || workingset: ${working}`);
+            }
+            showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt(), studyScheduler.learning_queue.length, studyScheduler.working_set.length);
             const card_to_ask = studyScheduler.getCard();
-            const answered_correctly = await this.ask_term_question(card_to_ask, { exitMethod: exitMethod });
-            studyScheduler.solveCard(answered_correctly);
+            console.log("got card");
+            showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt(), studyScheduler.learning_queue.length, studyScheduler.working_set.length);
 
+            // Somewhere here the duplication error occurs.
+            
+            const answered_correctly = await this.ask_term_question(card_to_ask, { exitMethod: exitMethod });
+
+            // To here
+
+
+
+            // console.log(answered_correctly);
+            // console.log("Answered");
+            // showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt());
+            
+            studyScheduler.solveCard(answered_correctly);
+            await studyScheduler.saveCards();
+
+            // console.log("solveCard");
+            // showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt());
 
 
         }
@@ -341,21 +364,29 @@ class Quizzer {
                 this.printExample(term_selected) //You want to print the example as if it didn't know the answer for the next time.
                 return false;
             }
-            this.postCommentFromTerm(term_selected, user_res, true);
-            const _ = await increasePerformance("terms");
+
+            try {
+
+                this.postCommentFromTerm(term_selected, user_res, true);
+                const _ = await increasePerformance("terms");
+
+                this.printExample(term_selected)
+    
+                /**
+                 * date: submission answer
+                 * date: submission answer
+                 * ....
+                 */
+                await this.printPreviousTerms(term_selected.formula_name)
+            } catch {
+                // Do nothing, doesnt matter offline.
+            }
+
+
             // TODO Increase the value of the concept
             let ISANSWERCORRECT = true
             // Print the correct example term if exists
 
-
-            this.printExample(term_selected)
-
-            /**
-             * date: submission answer
-             * date: submission answer
-             * ....
-             */
-            await this.printPreviousTerms(term_selected.formula_name)
 
 
             // if ask_if_correct is true then ask if it is corerect and update after showing examples
@@ -374,9 +405,8 @@ class Quizzer {
 
             return ISANSWERCORRECT
         } catch (err) {
-            if (DEBUG) console.log("Failed at: ask_term_question\n\
-            term_selected", term_selected)
-            if (DEBUG) console.log(err)
+            if (true) console.log("Failed at: ask_term_question |  term_selected", term_selected)
+            if (true) console.log(err)
             return false; // if in a session, this will skip the card because this is improperly made.
         }
     }

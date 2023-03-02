@@ -1,16 +1,12 @@
 const { getDirAbsoluteUri } = require('./utils_functions');
 
-
 class StorableQueue {
-    constructor({ name = "", load = true } = {}) {
+    constructor({ name = "" } = {}) {
         this.elements = {};
         this.head = 0;
         this.tail = 0;
         this.name = name
         this.absolute_uri = (getDirAbsoluteUri(`temp/${this.name}`))
-        if (load) {
-            this.load();
-        }
     }
 
     /**
@@ -24,6 +20,7 @@ class StorableQueue {
             var db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
             this.elements = await db.getData('/elements');
             this.tail = await db.getData('/tail');
+            console.log(`Loaded ${this.length} from  ${this.name} | ${this.absolute_uri}`);
             return true
         } catch {
             return false
@@ -31,25 +28,18 @@ class StorableQueue {
     }
 
     async save() {
-
         const { JsonDB, Config } = await import('node-json-db');
 
         var db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
         db.push('/elements', this.elements);
         db.push('/tail', this.tail);
-
     }
 
     cleanQueue() {
-
-        // for (let key in this.elements) {
-        //     delete this.elements[key];
-        // }
         delete this.elements;
         this.elements = {}
         this.head = 0;
         this.tail = 0;
-
     }
 
     has(element) {
@@ -59,10 +49,10 @@ class StorableQueue {
         return false
     }
 
-
     enqueue(element) {
-        this.elements[this.tail] = element;
-        this.tail++;
+        const length = Object.keys(this.elements).length;
+        this.elements[length] = element;
+        this.tail = length + 1;
     }
 
     enqueueMultiple(elements) {
@@ -77,6 +67,7 @@ class StorableQueue {
         this.head++;
         return item;
     }
+
     peek() {
         return this.elements[this.head];
     }
@@ -84,14 +75,14 @@ class StorableQueue {
     get lastElement() {
         return this.elements[this.tail - 1];
     }
+
     get length() {
-        return this.tail - this.head;
+        return Object.keys(this.elements).length;
     }
+
     get isEmpty() {
         return this.length === 0;
     }
 }
 
-
 module.exports = { StorableQueue };
-

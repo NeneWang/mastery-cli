@@ -5,20 +5,30 @@ const DEBUG = false
 
 class TermScheduler {
 
-    constructor({ cards = [], working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy(), cards_category="" } = {}) {
+    constructor({ working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy(), cards_category = "" } = {}) {
 
 
         this.working_set_length = working_set_length;
-        const naming_post = cards_category==""?cards_category: "_"+cards_category;
-        this.working_set = new StorableQueue({ name: "working_set"+naming_post });
-        this.learning_queue = new StorableQueue({ name: "learning_queue"+naming_post });
-        this.learned_queue = new StorableQueue({ name: "learned_queue"+naming_post });
+        const naming_post = cards_category == "" ? cards_category : "_" + cards_category;
+        // Set loading as false for now. Too may bugs.
+        this.working_set = new StorableQueue({ name: "working_set" + naming_post });
+        this.learning_queue = new StorableQueue({ name: "learning_queue" + naming_post });
+        this.learned_queue = new StorableQueue({ name: "learned_queue" + naming_post });
         this.cardsRefreshStrategy = cardsRefreshStrategy;
 
 
-        this.setLearningCards(cards);
-        this.populateWorkingSet();
+
+        // this.setLearningCards(cards);
     };
+
+
+    async loadQueues() {
+        // Another problem has to do with updating terms. instead of adding them
+        await this.working_set.load()
+        await this.learning_queue.load()
+        await this.learned_queue.load()
+        return
+    }
 
     populateWorkingSet() {
         while (this.working_set.length < this.working_set_length && !this.learning_queue.isEmpty) {
@@ -41,6 +51,12 @@ class TermScheduler {
         return this.working_set.peek();
     };
 
+    /**
+     * Returns the cocards on the entire managmenet
+     */
+    get cardsCount() {
+        return this.learning_queue.length + this.learned_queue.length + this.working_set.length;
+    }
 
     /**
      * Returns the amount of cards left to learn.
@@ -51,10 +67,11 @@ class TermScheduler {
     }
 
     getCardsLearnt() {
+        // console.log(this.learned_queue.elements)
         return this.learned_queue.length;
     }
 
-    get is_completed(){
+    get is_completed() {
         return this.getCardsToLearn() == 0;
     }
 
@@ -69,18 +86,20 @@ class TermScheduler {
         if (wasCorrect && !this.working_set.isEmpty) {
             // Then unqueue from learning queue into the last of the working_set and dequee the first one into nonethingness.
 
-            
+
             const learnedCard = this.working_set.dequeue();
             this.learned_queue.enqueue(learnedCard);
 
             if (!this.learning_queue.isEmpty) {
+                console.log("Adding queue into the card after putting one from working to learnd")
                 const newCard = this.learning_queue.dequeue();
+                
                 this.working_set.enqueue(newCard);
             }
 
         } else {
             // Then move the first ot the last
-
+            console.log("Just reordering.")
             const cardToRePractice = this.working_set.dequeue();
             this.working_set.enqueue(cardToRePractice);
         }
@@ -91,7 +110,7 @@ class TermScheduler {
 
     };
 
-    cleanCards(){
+    cleanCards() {
         this.learned_queue.cleanQueue();
         this.learning_queue.cleanQueue();
         this.working_set.cleanQueue();
@@ -103,11 +122,48 @@ class TermScheduler {
         this.working_set.save();
     }
 
-    setLearningCards(cards) {
-        for (const card of cards) {
-            this.learning_queue.enqueue(card);
-            if (DEBUG) console.log("Enqueueing, ", card);
+    async setLearningCards(cards, { cleanIfDifferent = true, onlyAddIfNotThere = true, loadCardsFirst = true } = {}) {
+
+        await this.loadQueues(); // Load first then compare if to add a card into the queue or not.
+
+        //Add new cards
+        if (cleanIfDifferent) {
+            // Only populate if the amount of cards already loaded are less than the new cards that are found on the masterDeck
+            // TODO ON the future you could load only if the sorted terms are a different hash. Add the cards that are not there
+            if (this.cardsCount != cards.length) {
+                // Clean all cards
+                // Start from zero if the cards changed
+                console.log(`Difference in length ${this.cardsCount} ${cards.length}`);
+                this.cleanCards();
+
+                for (const card of cards) {
+                    if (onlyAddIfNotThere && this.cardInScheduler(card)) {
+                        // Skip if we want to only add the cards that are not in any of our scheduler's queues
+
+                        continue;
+                    }
+
+                    this.learning_queue.enqueue(card);
+                    if (DEBUG) console.log("Enqueueing, ", card);
+                }
+
+                this.populateWorkingSet(); // Otherwise it doens't require any populating from he working set.
+            }
+
         }
+
+    }
+
+    /**
+     * Checks if specific card is in any of the working, learning, learnt queues. Used for adding only if not in the queues
+     * @param {json} card 
+     * @returns {Boolean} if is there or not
+     */
+    cardInScheduler(card) {
+        if (this.learning_queue.has(card) || this.working_set.has(card) || this.learned_queue.has(card)) {
+            return true;
+        }
+        return false;
     }
 
 
