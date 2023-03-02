@@ -21,6 +21,7 @@ const chalk = require('chalk');
 const chart = require('@wangnene2/chart');
 const { terms, getAbsoluteUri } = require('./utils/constants');
 const { populateMasterDeck: populateMasterDeck } = require("./utils/data/terms");
+const { Quizzer } = require('./utils/Quizzer');
 
 const cli_meow = cli[0]
 const cmInfo = cli[1]
@@ -44,12 +45,10 @@ const { Demo, EDemo } = demos;
 	/**This is quite the expensive operation, ideally you put this on the end. */
 	const masterDeck = await populateMasterDeck();
 
-	
+
 	// console.log(terms);
 	const mQuizer = new utils.FlashQuizzer(constants.qmathformulas, constants.qmathenabled, masterDeck);
 
-	// Testing if the terms categories can be displayed:
-	console.log(masterDeck.deck_titles);
 
 	// console.log(getAbsoluteUri("./img/unicorn.png"))
 	const options = Object.keys(cmInfo.commands);
@@ -107,8 +106,11 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.clean.code)) {
 		maid.askToClean();
 	}
-	else if(input.includes(cmInfo.commands.prio.code)){
+	else if (input.includes(cmInfo.commands.prio.code)) {
 		maid.tellPriorities();
+	}
+	else if (input.includes(cmInfo.commands.ses.code)) {
+		mQuizer.study_session(masterDeck);
 	}
 	else {
 		cli_meow.showHelp(0);

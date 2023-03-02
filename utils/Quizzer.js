@@ -7,7 +7,7 @@ const clipboard = require('copy-paste')
 
 const chart = require('@wangnene2/chart')
 const { exec, spawn } = require('node:child_process');
-const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquirer');
+const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = require('enquirer');
 
 const init = require('./init');
 const constants = require('./constants');
@@ -18,7 +18,8 @@ const parser = new Parser();
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 const { show_image } = require('./utils_functions');
-const { StorableQueue } = require('./StorableQueue');
+const { TermScheduler } = require('./termScheduler');
+const { slice } = require('./cli');
 // const DEBUG = true
 const DEBUG = false
 
@@ -211,10 +212,10 @@ class Quizzer {
     }
 
 
-    study_session = async () => {
+    study_session = async (masterDeck) => {
         //Pick a term deck Suppose is given
 
-        id_deck = "Cloud-pattern";
+        // const id_deck = "Cloud-pattern";
 
 
         //Populates with the right terms deck using the queue
@@ -222,15 +223,44 @@ class Quizzer {
         // Can you enqueue multiples?
         // Create a queue and store them all there. Try loading then if there is nothing to be loaded, just open it.
 
-        const storableQueues = new StorableQueue({ load: false, name: "study-session" + id_deck });
-
-        // const previous_session_exists = storableQueues.load();
 
         // TODO Preserving the sessions
         // If True ask if to continue previous session.
         // If want new session
 
         // For now just load a new one everytime.
+        const titles = masterDeck.deck_titles;
+
+        const ms_deck = new AutoComplete({
+            name: 'StudyOption',
+            message: 'Choose deck to study',
+            choices: titles
+        });
+
+        let deck_selected = await ms_deck.run();
+        const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
+
+        const studyScheduler = new TermScheduler({ cards: selected_terms });
+
+        let exit = false;
+
+
+        const exitMethod = () => {
+            exit = true;
+            return false;
+        }
+
+        while (!studyScheduler.is_completed && !exit) {
+            // Continue asking questions.
+
+            const card_to_ask = studyScheduler.getCard();
+            const answered_correctly = await this.ask_term_question(card_to_ask, { exitMethod: exitMethod });
+            studyScheduler.solveCard(answered_correctly);
+
+
+
+        }
+
 
 
 
@@ -251,7 +281,7 @@ class Quizzer {
 
     }
 
-    async ask_term_question(term_selected) {
+    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { } } = {}) {
         try {
             // Start running the question_attempt
             /**
@@ -282,6 +312,13 @@ class Quizzer {
             });
 
             const user_res = await question.run();
+
+            // Check for escape methods
+
+            if (user_res === "!" || user_res === "exit") {
+                return exitMethod();
+            }
+
             if (user_res === "no" || user_res === "") {
                 this.printExample(term_selected) //You want to print the example as if it didn't know the answer for the next time.
                 return false;
@@ -289,10 +326,10 @@ class Quizzer {
             this.postCommentFromTerm(term_selected, user_res, true);
             const _ = await increasePerformance("terms");
             // TODO Increase the value of the concept
-            const ISANSWERCORRECT = true
-            const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
-
+            let ISANSWERCORRECT = true
             // Print the correct example term if exists
+
+
             this.printExample(term_selected)
 
             /**
@@ -303,10 +340,24 @@ class Quizzer {
             await this.printPreviousTerms(term_selected.formula_name)
 
 
-            return true
+            // if ask_if_correct is true then ask if it is corerect and update after showing examples
+
+            if (ask_if_correct) {
+                console.log("Is your response acceptable?");
+                const is_correct = new Confirm("Is the response correct?");
+                const response = await is_correct.run();
+                ISANSWERCORRECT = response;
+            }
+
+
+            const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
+
+
+            return ISANSWERCORRECT
         } catch (err) {
             console.log("term_selected", term_selected)
             console.warn(err)
+            return false; // if in a session, this will skip the card because this is improperly made.
         }
     }
 

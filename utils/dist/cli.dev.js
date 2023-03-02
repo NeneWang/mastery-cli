@@ -62,7 +62,8 @@ var CommandsInformation = function CommandsInformation() {
     quiz: new Command("quizzes either a term or math prommpt", 'quiz'),
     clean: new Command("Prompts if to clean the terminal", "clean"),
     code: new Command("Outputs the directory and copies it to clipboard of the maid cli root files", "code"),
-    prio: new Command("Outputs the priorities", "prio")
+    prio: new Command("Outputs the priorities", "prio"),
+    ses: new Command("Study session", 'ses')
   };
 };
 

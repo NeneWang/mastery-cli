@@ -53,6 +53,10 @@ class TermScheduler {
         return this.learned_queue.length;
     }
 
+    get is_completed(){
+        return this.getCardsToLearn() == 0;
+    }
+
     /**
      * 
      * @param {bool} wasCorrect If the solution was correct or not

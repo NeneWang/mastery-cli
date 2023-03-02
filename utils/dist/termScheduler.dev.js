@@ -88,14 +88,14 @@ function () {
     value: function getCardsLearnt() {
       return this.learned_queue.length;
     }
+  }, {
+    key: "solveCard",
+
     /**
      * 
      * @param {bool} wasCorrect If the solution was correct or not
      * returns {integer} count of cards left to be studied.
      */
-
-  }, {
-    key: "solveCard",
     value: function solveCard(wasCorrect) {
       if (DEBUG) console.log("Learning_queue length", this.learning_queue.length);
 
@@ -168,6 +168,11 @@ function () {
       this.learning_queue.cleanQueue(); // TODO Add all the cards in that are available. Perhpas differentStrategies could be offered, such as loading from Online or from the local.
 
       this.learning_queue.elements = this.cardsRefreshStrategy.getLearningQueue();
+    }
+  }, {
+    key: "is_completed",
+    get: function get() {
+      return this.getCardsToLearn() == 0;
     }
   }]);
 

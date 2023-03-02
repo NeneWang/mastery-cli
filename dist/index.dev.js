@@ -33,6 +33,9 @@ var _require = require('./utils/constants'),
 var _require2 = require("./utils/data/terms"),
     populateMasterDeck = _require2.populateMasterDeck;
 
+var _require3 = require('./utils/Quizzer'),
+    Quizzer = _require3.Quizzer;
+
 var cli_meow = cli[0];
 var cmInfo = cli[1];
 var flags = cli_meow.flags;
@@ -67,9 +70,7 @@ var Demo = demos.Demo,
         case 3:
           masterDeck = _context.sent;
           // console.log(terms);
-          mQuizer = new utils.FlashQuizzer(constants.qmathformulas, constants.qmathenabled, masterDeck); // Testing if the terms categories can be displayed:
-
-          console.log(masterDeck.deck_titles); // console.log(getAbsoluteUri("./img/unicorn.png"))
+          mQuizer = new utils.FlashQuizzer(constants.qmathformulas, constants.qmathenabled, masterDeck); // console.log(getAbsoluteUri("./img/unicorn.png"))
 
           options = Object.keys(cmInfo.commands);
           input.includes(options[0]) && cli_meow.showHelp(0);
@@ -77,73 +78,73 @@ var Demo = demos.Demo,
           maid.clearOnTalk = true;
 
           if (!input.includes(cmInfo.commands.chart.code)) {
-            _context.next = 15;
+            _context.next = 14;
             break;
           }
 
           // Demo for showing charts
           demo = new Demo();
           demo.chartDemo(EDemo.BAR);
-          _context.next = 42;
+          _context.next = 41;
           break;
 
-        case 15:
+        case 14:
           if (!input.includes(cmInfo.commands.code.code)) {
-            _context.next = 19;
+            _context.next = 18;
             break;
           }
 
           maid.tellCurrentDirectory();
-          _context.next = 42;
+          _context.next = 41;
           break;
 
-        case 19:
+        case 18:
           if (!input.includes(cmInfo.commands.report.code)) {
-            _context.next = 23;
+            _context.next = 22;
             break;
           }
 
           maid.dayReport();
-          _context.next = 42;
+          _context.next = 41;
           break;
 
-        case 23:
+        case 22:
           if (!input.includes(cmInfo.commands.talk.code)) {
-            _context.next = 30;
+            _context.next = 29;
             break;
           }
 
-          _context.next = 26;
+          _context.next = 25;
           return regeneratorRuntime.awrap(getTalk(flags));
 
-        case 26:
+        case 25:
           message = _context.sent;
           maid.say(message, true);
-          _context.next = 42;
+          _context.next = 41;
           break;
 
-        case 30:
+        case 29:
           if (!input.includes(cmInfo.commands.coa.code)) {
-            _context.next = 41;
+            _context.next = 40;
             break;
           }
 
-          _context.next = 33;
+          _context.next = 32;
           return regeneratorRuntime.awrap(utils.commitpush());
 
-        case 33:
+        case 32:
           maid.populateMissingReport();
-          _context.next = 36;
+          _context.next = 35;
           return regeneratorRuntime.awrap(mQuizer.ask_question());
 
-        case 36:
+        case 35:
           _ = _context.sent;
           maid.provideMissingReport();
           maid.askToClean();
-          _context.next = 42;
+          _context.next = 41;
           break;
 
-        case 41:
+        case 40:
           if (input.includes(cmInfo.commands.services.code)) {
             // Gets all services, keeps asking for things here, which service to get
             maid.services();
@@ -162,12 +163,14 @@ var Demo = demos.Demo,
             maid.askToClean();
           } else if (input.includes(cmInfo.commands.prio.code)) {
             maid.tellPriorities();
+          } else if (input.includes(cmInfo.commands.ses.code)) {
+            mQuizer.study_session(masterDeck);
           } else {
             cli_meow.showHelp(0);
             maid.askToClean();
           }
 
-        case 42:
+        case 41:
         case "end":
           return _context.stop();
       }
