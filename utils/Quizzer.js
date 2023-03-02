@@ -296,6 +296,21 @@ class Quizzer {
                     formula_name: 'singleton-pattern'
                 }
              */
+
+            //If both the term and the description are "" or have no length or are null then assume is a bad term.
+            const isInvalidData   = (data) => {
+                if (!data?.length??0) return true;
+                if (data == undefined || data ==null) return true;
+                if (data === "") return true;
+
+                return false;
+            }
+
+            if(isInvalidData(term_selected.term) && isInvalidData(term_selected.description)){
+                // Bad data for term testing
+                throw("isInvalidData: term_selected:", term_selected);
+            }
+
             console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `)}|${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` ${term_selected.category} `)}`);
 
             if (term_selected?.attachment ?? false) {
