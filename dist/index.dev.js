@@ -133,9 +133,10 @@ var Demo = demos.Demo,
           return regeneratorRuntime.awrap(utils.commitpush());
 
         case 32:
-          maid.populateMissingReport();
+          maid.populateMissingReport(); // as until the response is right?
+
           _context.next = 35;
-          return regeneratorRuntime.awrap(mQuizer.ask_question());
+          return regeneratorRuntime.awrap(mQuizer.askQuestion());
 
         case 35:
           _ = _context.sent;
@@ -156,7 +157,7 @@ var Demo = demos.Demo,
           } else if (input.includes(cmInfo.commands.math.code)) {
             mQuizer.ask_math_question();
           } else if (input.includes(cmInfo.commands.quiz.code)) {
-            mQuizer.ask_question();
+            mQuizer.askQuestion();
           } else if (input.includes(cmInfo.commands.term.code)) {
             mQuizer.pick_and_ask_term_question();
           } else if (input.includes(cmInfo.commands.clean.code)) {

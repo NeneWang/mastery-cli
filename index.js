@@ -78,7 +78,9 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.coa.code)) {
 		await utils.commitpush();
 		maid.populateMissingReport();
-		const _ = await mQuizer.ask_question();
+		// as until the response is right?
+
+		const _ = await mQuizer.askQuestion();
 		maid.provideMissingReport();
 		maid.askToClean();
 	}
@@ -97,7 +99,7 @@ const { Demo, EDemo } = demos;
 		mQuizer.ask_math_question();
 	}
 	else if (input.includes(cmInfo.commands.quiz.code)) {
-		mQuizer.ask_question();
+		mQuizer.askQuestion();
 	}
 	else if (input.includes(cmInfo.commands.term.code)) {
 		mQuizer.pick_and_ask_term_question();

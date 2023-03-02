@@ -194,16 +194,29 @@ class Quizzer {
     /**
      * Asks question and waits for response, allows repetition.
      */
-    async ask_question() {
+    async askQuestion({ ask_until_one_is_correct = true } = {}) {
         // Replace with Chance
         // if (DEBUG) console.log("Asking terms", this.terms)
         // const askMath = true;
-        const askMath = constants.getRandomBool();
-        if (askMath) {
-            await this.ask_math_question()
-        } else {
-            await this.pick_and_ask_term_question()
+        const askQuestionRandom = async () => {
+            const askMath = constants.getRandomBool(); // If to whether ask for a math or terminology question
+            if (askMath) {
+                return await this.ask_math_question()
+            } else {
+                return await this.pick_and_ask_term_question()
+            }
+        };
+        let answerIsCorrect = false;
+        if (ask_until_one_is_correct)
+            while (!answerIsCorrect) {
+                answerIsCorrect = await askQuestionRandom();
+            }
+        else {
+            const _ = askQuestionRandom();
         }
+        return true
+
+
     };
 
     // Returns the term deck name (key), in which is stored the term's deck.
@@ -267,7 +280,7 @@ class Quizzer {
 
         const term_selected = await this.pick_term_question();
         if (DEBUG) console.log("term_selected", term_selected);
-        await this.ask_term_question(term_selected);
+        return await this.ask_term_question(term_selected);
 
     }
 
@@ -288,17 +301,17 @@ class Quizzer {
              */
 
             //If both the term and the description are "" or have no length or are null then assume is a bad term.
-            const isInvalidData   = (data) => {
-                if (!data?.length??0) return true;
-                if (data == undefined || data ==null) return true;
+            const isInvalidData = (data) => {
+                if (!data?.length ?? 0) return true;
+                if (data == undefined || data == null) return true;
                 if (data === "") return true;
 
                 return false;
             }
 
-            if(isInvalidData(term_selected.term) && isInvalidData(term_selected.description)){
+            if (isInvalidData(term_selected.term) && isInvalidData(term_selected.description)) {
                 // Bad data for term testing
-                throw("isInvalidData: term_selected:", term_selected);
+                throw ("isInvalidData: term_selected:", term_selected);
             }
 
             console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `)}|${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` ${term_selected.category} `)}`);
@@ -351,6 +364,7 @@ class Quizzer {
                 console.log("Is your response acceptable?");
                 const is_correct = new Confirm("Is the response correct?");
                 const response = await is_correct.run();
+                console.log("asnwered with ", response);
                 ISANSWERCORRECT = response;
             }
 
