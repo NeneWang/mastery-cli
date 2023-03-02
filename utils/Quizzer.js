@@ -262,7 +262,7 @@ class Quizzer {
 
         const exitMethod = () => {
             exit = true;
-            return true; //So it escapes the loop in case of perpetual until one is right
+            return false; //So it escapes the loop in case of perpetual until one is right
         }
 
         while (!studyScheduler.is_completed && !exit) {
@@ -271,10 +271,10 @@ class Quizzer {
             const showProgress = (cardsLeft, cardsCompleted, learning, working) => {
                 console.log(`Cards left: ${cardsLeft} || Cards completed: ${cardsCompleted} || learning ${learning} || workingset: ${working}`);
             }
-            showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt(), studyScheduler.learning_queue.length, studyScheduler.working_set.length);
+            if (DEBUG) showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt(), studyScheduler.learning_queue.length, studyScheduler.working_set.length);
             const card_to_ask = studyScheduler.getCard();
-            console.log("got card");
-            showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt(), studyScheduler.learning_queue.length, studyScheduler.working_set.length);
+            
+            
 
             // Somewhere here the duplication error occurs.
             

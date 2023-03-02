@@ -99,7 +99,6 @@ class TermScheduler {
 
         } else {
             // Then move the first ot the last
-            console.log("Just reordering.")
             const cardToRePractice = this.working_set.dequeue();
             this.working_set.enqueue(cardToRePractice);
         }
