@@ -14,8 +14,11 @@ const { TermStorage } = require('../structures');
 
 
 
-
-async function populateTerms() {
+/**
+ * 
+ * @returns Master Deck containing all the cards
+ */
+async function populateMasterDeck() {
     terms = []
 
 
@@ -78,10 +81,10 @@ async function populateTerms() {
     decks.addDecks(strategyGenerator.termStorageList());
 
     
-    terms.push(...decks.listTerms());
-    return terms;
+    
+    return decks;
 }
 
 const termJson = [];
 
-module.exports = { termJson, populateTerms };
+module.exports = { termJson, populateMasterDeck };

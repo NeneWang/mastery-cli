@@ -17,14 +17,20 @@ const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
-const { show_image } = require('./utils_functions')
+const { show_image } = require('./utils_functions');
+const { StorableQueue } = require('./StorableQueue');
 // const DEBUG = true
 const DEBUG = false
 
 class Quizzer {
 
-    constructor(qmathformulas, qmathenabled, terms = [], alsoAskTerms = true) {
+    constructor(qmathformulas, qmathenabled, masterDeck, alsoAskTerms = true) {
+
         // TODO: Implement TermStorage Support from the getgo.
+
+        const terms = []
+        terms.push(...masterDeck.listTerms());
+        this.masterDeck = masterDeck;
         this.terms = terms;
         // this.enabledqmathformulas = qmathenabled.map(formula_name => { qmathformulas[formula_name].formula_name = formula_name; return qmathformulas[formula_name] });
         // this.enabledqmathformulas = qmathenabled.map(form => form.formula_name);
@@ -200,19 +206,41 @@ class Quizzer {
     };
 
     // Returns the term deck name (key), in which is stored the term's deck.
-    async pick_terms_deck(){
+    async pick_terms_deck() {
         return ""
     }
 
-    
-	study_session = async () => {
-		//Pick a term deck
+
+    study_session = async () => {
+        //Pick a term deck Suppose is given
+
+        id_deck = "Cloud-pattern";
+
 
         //Populates with the right terms deck using the queue
 
+        // Can you enqueue multiples?
+        // Create a queue and store them all there. Try loading then if there is nothing to be loaded, just open it.
+
+        const storableQueues = new StorableQueue({ load: false, name: "study-session" + id_deck });
+
+        // const previous_session_exists = storableQueues.load();
+
+        // TODO Preserving the sessions
+        // If True ask if to continue previous session.
+        // If want new session
+
+        // For now just load a new one everytime.
+
+
+
+
 
         //While Loop asking based on the queue
-	}
+
+
+
+    }
 
     async pick_and_ask_term_question() {
         // Fetches a random term form with the youngest one, unless there is no internet

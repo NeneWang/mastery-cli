@@ -2,7 +2,7 @@
 const { TermGenerator } = require("../utils/data/terms_generator");
 const assert = require('assert');
 const { TermStorage } = require("../utils/structures");
-const { populateTerms } = require("../utils/data/terms");
+const { populateMasterDeck: populateTerms } = require("../utils/data/terms");
 
 
 

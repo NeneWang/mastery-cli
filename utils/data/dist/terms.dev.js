@@ -1,13 +1,5 @@
 "use strict";
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 /**
  * <RULES>
  * 
@@ -16,13 +8,16 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
  */
 var _require = require('../structures'),
     TermStorage = _require.TermStorage;
+/**
+ * 
+ * @returns Master Deck containing all the cards
+ */
 
-function populateTerms() {
-  var _terms;
 
+function populateMasterDeck() {
   var decks, _require2, react_terms, _require3, network, artificialIntelligence, algebra, calculousOne, _require4, pragmatic_programmer, _require5, designPatterns, dsa, system_design, _require6, aws_services, aws_glossary, coderTerms, unit_testing, filesData, _require7, TermGenerator, termGenerator, _, strategyFilesData, strategyGenerator, __;
 
-  return regeneratorRuntime.async(function populateTerms$(_context) {
+  return regeneratorRuntime.async(function populateMasterDeck$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -97,12 +92,9 @@ function populateTerms() {
         case 31:
           __ = _context.sent;
           decks.addDecks(strategyGenerator.termStorageList());
+          return _context.abrupt("return", decks);
 
-          (_terms = terms).push.apply(_terms, _toConsumableArray(decks.listTerms));
-
-          return _context.abrupt("return", terms);
-
-        case 35:
+        case 34:
         case "end":
           return _context.stop();
       }
@@ -113,5 +105,5 @@ function populateTerms() {
 var termJson = [];
 module.exports = {
   termJson: termJson,
-  populateTerms: populateTerms
+  populateMasterDeck: populateMasterDeck
 };

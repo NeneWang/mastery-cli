@@ -1,6 +1,6 @@
 
 class StorableQueue {
-    constructor({ name = "", load = true }) {
+    constructor({ name = "", load = true } = {}) {
         this.elements = {};
         this.head = 0;
         this.tail = 0;
@@ -10,13 +10,21 @@ class StorableQueue {
         }
     }
 
+    /**
+     * 
+     * @returns {bool} Returns upon success
+     */
     async load() {
+        try {
+            const { JsonDB, Config } = await import('node-json-db');
 
-        const { JsonDB, Config } = await import('node-json-db');
-
-        var db = new JsonDB(new Config(this.name, true, false, '/'));
-        this.elements = await db.getData('/elements');
-        this.tail = await db.getData('/tail');
+            var db = new JsonDB(new Config(this.name, true, false, '/'));
+            this.elements = await db.getData('/elements');
+            this.tail = await db.getData('/tail');
+            return true
+        } catch {
+            return false
+        }
     }
 
     async save() {
@@ -53,6 +61,13 @@ class StorableQueue {
         this.elements[this.tail] = element;
         this.tail++;
     }
+
+    enqueueMultiple(elements) {
+        for (const element of elements) {
+            this.enqueue(element);
+        }
+    }
+
     dequeue() {
         const item = this.elements[this.head];
         delete this.elements[this.head];
@@ -63,8 +78,8 @@ class StorableQueue {
         return this.elements[this.head];
     }
 
-    get lastElement(){
-        return this.elements[this.tail-1];
+    get lastElement() {
+        return this.elements[this.tail - 1];
     }
     get length() {
         return this.tail - this.head;

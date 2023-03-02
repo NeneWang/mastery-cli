@@ -15,8 +15,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var StorableQueue =
 /*#__PURE__*/
 function () {
-  function StorableQueue(_ref) {
-    var _ref$name = _ref.name,
+  function StorableQueue() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$name = _ref.name,
         name = _ref$name === void 0 ? "" : _ref$name,
         _ref$load = _ref.load,
         load = _ref$load === void 0 ? true : _ref$load;
@@ -32,6 +33,11 @@ function () {
       this.load();
     }
   }
+  /**
+   * 
+   * @returns {bool} Returns upon success
+   */
+
 
   _createClass(StorableQueue, [{
     key: "load",
@@ -42,33 +48,40 @@ function () {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _context.prev = 0;
+              _context.next = 3;
               return regeneratorRuntime.awrap(Promise.resolve().then(function () {
                 return _interopRequireWildcard(require('node-json-db'));
               }));
 
-            case 2:
+            case 3:
               _ref2 = _context.sent;
               JsonDB = _ref2.JsonDB;
               Config = _ref2.Config;
               db = new JsonDB(new Config(this.name, true, false, '/'));
-              _context.next = 8;
+              _context.next = 9;
               return regeneratorRuntime.awrap(db.getData('/elements'));
 
-            case 8:
+            case 9:
               this.elements = _context.sent;
-              _context.next = 11;
+              _context.next = 12;
               return regeneratorRuntime.awrap(db.getData('/tail'));
 
-            case 11:
-              this.tail = _context.sent;
-
             case 12:
+              this.tail = _context.sent;
+              return _context.abrupt("return", true);
+
+            case 16:
+              _context.prev = 16;
+              _context.t0 = _context["catch"](0);
+              return _context.abrupt("return", false);
+
+            case 19:
             case "end":
               return _context.stop();
           }
         }
-      }, null, this);
+      }, null, this, [[0, 16]]);
     }
   }, {
     key: "save",
@@ -124,6 +137,33 @@ function () {
     value: function enqueue(element) {
       this.elements[this.tail] = element;
       this.tail++;
+    }
+  }, {
+    key: "enqueueMultiple",
+    value: function enqueueMultiple(elements) {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var element = _step.value;
+          this.enqueue(element);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
     }
   }, {
     key: "dequeue",

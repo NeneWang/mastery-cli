@@ -20,7 +20,7 @@ const axios = require('axios');
 const chalk = require('chalk');
 const chart = require('@wangnene2/chart');
 const { terms, getAbsoluteUri } = require('./utils/constants');
-const { populateTerms } = require("./utils/data/terms");
+const { populateMasterDeck: populateMasterDeck } = require("./utils/data/terms");
 
 const cli_meow = cli[0]
 const cmInfo = cli[1]
@@ -41,11 +41,15 @@ const { Demo, EDemo } = demos;
 (async () => {
 	const maid = new Maid();
 
+	/**This is quite the expensive operation, ideally you put this on the end. */
+	const masterDeck = await populateMasterDeck();
 
-	const terms = await populateTerms();
+	
 	// console.log(terms);
-	const mQuizer = new utils.FlashQuizzer(constants.qmathformulas, constants.qmathenabled, terms);
+	const mQuizer = new utils.FlashQuizzer(constants.qmathformulas, constants.qmathenabled, masterDeck);
 
+	// Testing if the terms categories can be displayed:
+	console.log(masterDeck.deck_titles);
 
 	// console.log(getAbsoluteUri("./img/unicorn.png"))
 	const options = Object.keys(cmInfo.commands);
