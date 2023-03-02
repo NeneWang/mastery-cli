@@ -1,3 +1,5 @@
+const { getDirAbsoluteUri } = require('./utils_functions');
+
 
 class StorableQueue {
     constructor({ name = "", load = true } = {}) {
@@ -5,6 +7,7 @@ class StorableQueue {
         this.head = 0;
         this.tail = 0;
         this.name = name
+        this.absolute_uri = (getDirAbsoluteUri(`temp/${this.name}`))
         if (load) {
             this.load();
         }
@@ -18,7 +21,7 @@ class StorableQueue {
         try {
             const { JsonDB, Config } = await import('node-json-db');
 
-            var db = new JsonDB(new Config(this.name, true, false, '/'));
+            var db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
             this.elements = await db.getData('/elements');
             this.tail = await db.getData('/tail');
             return true
@@ -31,7 +34,7 @@ class StorableQueue {
 
         const { JsonDB, Config } = await import('node-json-db');
 
-        var db = new JsonDB(new Config(this.name, true, false, '/'));
+        var db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
         db.push('/elements', this.elements);
         db.push('/tail', this.tail);
 

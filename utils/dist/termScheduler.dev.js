@@ -33,19 +33,22 @@ function () {
         _ref$working_set_leng = _ref.working_set_length,
         working_set_length = _ref$working_set_leng === void 0 ? 5 : _ref$working_set_leng,
         _ref$cardsRefreshStra = _ref.cardsRefreshStrategy,
-        cardsRefreshStrategy = _ref$cardsRefreshStra === void 0 ? new TermCardsOfflineStrategy() : _ref$cardsRefreshStra;
+        cardsRefreshStrategy = _ref$cardsRefreshStra === void 0 ? new TermCardsOfflineStrategy() : _ref$cardsRefreshStra,
+        _ref$cards_category = _ref.cards_category,
+        cards_category = _ref$cards_category === void 0 ? "" : _ref$cards_category;
 
     _classCallCheck(this, TermScheduler);
 
     this.working_set_length = working_set_length;
+    var naming_post = cards_category == "" ? cards_category : "_" + cards_category;
     this.working_set = new StorableQueue({
-      name: "working_set"
+      name: "working_set" + naming_post
     });
     this.learning_queue = new StorableQueue({
-      name: "learning_queue"
+      name: "learning_queue" + naming_post
     });
     this.learned_queue = new StorableQueue({
-      name: "learned_queue"
+      name: "learned_queue" + naming_post
     });
     this.cardsRefreshStrategy = cardsRefreshStrategy;
     this.setLearningCards(cards);

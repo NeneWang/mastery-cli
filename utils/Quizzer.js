@@ -253,7 +253,7 @@ class Quizzer {
         let deck_selected = await ms_deck.run();
         const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
 
-        const studyScheduler = new TermScheduler({ cards: selected_terms });
+        const studyScheduler = new TermScheduler({ cards: selected_terms, cards_category: deck_selected });
 
         let exit = false;
 

@@ -5,13 +5,14 @@ const DEBUG = false
 
 class TermScheduler {
 
-    constructor({ cards = [], working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy() } = {}) {
+    constructor({ cards = [], working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy(), cards_category="" } = {}) {
 
 
         this.working_set_length = working_set_length;
-        this.working_set = new StorableQueue({ name: "working_set" });
-        this.learning_queue = new StorableQueue({ name: "learning_queue" });
-        this.learned_queue = new StorableQueue({ name: "learned_queue" });
+        const naming_post = cards_category==""?cards_category: "_"+cards_category;
+        this.working_set = new StorableQueue({ name: "working_set"+naming_post });
+        this.learning_queue = new StorableQueue({ name: "learning_queue"+naming_post });
+        this.learned_queue = new StorableQueue({ name: "learned_queue"+naming_post });
         this.cardsRefreshStrategy = cardsRefreshStrategy;
 
 

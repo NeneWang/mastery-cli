@@ -12,6 +12,9 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+var _require = require('./utils_functions'),
+    getDirAbsoluteUri = _require.getDirAbsoluteUri;
+
 var StorableQueue =
 /*#__PURE__*/
 function () {
@@ -28,6 +31,7 @@ function () {
     this.head = 0;
     this.tail = 0;
     this.name = name;
+    this.absolute_uri = getDirAbsoluteUri("temp/".concat(this.name));
 
     if (load) {
       this.load();
@@ -58,7 +62,7 @@ function () {
               _ref2 = _context.sent;
               JsonDB = _ref2.JsonDB;
               Config = _ref2.Config;
-              db = new JsonDB(new Config(this.name, true, false, '/'));
+              db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
               _context.next = 9;
               return regeneratorRuntime.awrap(db.getData('/elements'));
 
@@ -101,7 +105,7 @@ function () {
               _ref3 = _context2.sent;
               JsonDB = _ref3.JsonDB;
               Config = _ref3.Config;
-              db = new JsonDB(new Config(this.name, true, false, '/'));
+              db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
               db.push('/elements', this.elements);
               db.push('/tail', this.tail);
 
