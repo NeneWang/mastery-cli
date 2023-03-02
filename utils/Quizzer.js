@@ -260,16 +260,6 @@ class Quizzer {
 
 
         }
-
-
-
-
-
-
-        //While Loop asking based on the queue
-
-
-
     }
 
     async pick_and_ask_term_question() {
