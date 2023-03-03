@@ -1,7 +1,6 @@
 const path = require("path");
 const url = require('url');
 const fs = require('fs');
-const { get_random, MAID_EMOJIS } = require("./constants");
 
 /**
  * Gets clickeable path that could be printed on the console and clicked.
@@ -19,9 +18,9 @@ const getAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/
  * @param {str} fileimage : String containing the relative position of the image from utils directory
  * @returns {str} Formatted C:/github/testing/maid-cli/img/unicorn.png
  */
-const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/') => {
+const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './') => {
     // Note it should take from the root.
-    const absolutePath = path.resolve(path.join(__dirname, './data/', fileimage)); // Note the '../' because it is inside of constants
+    const absolutePath = path.resolve(path.join(__dirname, subdirectory, fileimage)); // Note the '../' because it is inside of constants
 
     // const fileUrl = url.pathToFileURL(absolutePath);
     return (absolutePath.toString());
@@ -79,10 +78,6 @@ async function show_image(image_file, { is_url = false } = {}) {
     }
 };
 
-// https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}
-const getRandomMaidEmoji = () => {
-    return `:${get_random(MAID_EMOJIS)}:`;
-};
 const appendQuotes = (message) => {
     return `"${message}"`;
 };
@@ -113,6 +108,6 @@ const countDecimals = (value) => {
 
 
 module.exports = {
-    getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
+    getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory
 };

@@ -1,10 +1,10 @@
 const fs = require('fs');
-const {getDirAbsoluteUri} = require('functions');
+const { getDirAbsoluteUri } = require('./functions');
 
 class ProblemsManager {
     constructor() {
         this.problems = {};
-        this.temp_file_path = getDirAbsoluteUri("./temp.js");
+        this.temp_file_path = './temp.js';
     }
 
     addProblem(problem) {
@@ -25,21 +25,26 @@ class ProblemsManager {
         this.copyFile(problem.file_path);
     }
 
-    runProblem(problem) {   
-        const temporal_file_problem = require(this.temp_file_path);
-        temporal_file_problem.solve();  
+    runProblem(problem_metadata) {
+        console.log("Getting temp_file_path from ", this.temp_file_path);
+        const { Problem } = require(this.temp_file_path);
+        const problem = new Problem();
+        problem.solve();
     }
 
 
     copyFile(problem_file_path) {
-        fs.readFile(problem_file_path, 'utf8', function (err, data) {
-            if(err) {
+        const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
+        const absolute_temp_file_path = getDirAbsoluteUri(this.temp_file_path, "./");
+        console.log("Opening file: " + absolute_problem_file_path);
+        fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
+            if (err) {
                 return console.log(err);
             }
 
-            fs.writeFile(this.temp_file_path, data, 'utf8', function (err) {
-                if(err) return console.log(err);
-                
+            fs.writeFile(absolute_temp_file_path, data, 'utf8', function (err) {
+                if (err) return console.log(err);
+
             });
         });
     }

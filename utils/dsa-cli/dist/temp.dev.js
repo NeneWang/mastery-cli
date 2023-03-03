@@ -16,8 +16,7 @@ function () {
   _createClass(Problem, [{
     key: "solve",
     value: function solve() {
-      console.log("Solving " + this.name);
-      return 42;
+      console.log("Helxlo World!");
     }
   }]);
 
