@@ -63,14 +63,16 @@ class ProblemsManager {
      * @param {ProblemMetadata} problemMetadata The information of the problem. 
      * @returns {boolean}
      */
-    runProblem(problemMetadata) {
+    async runProblem(problemMetadata) {
         if (DEBUG) console.log("Getting temp_file_path from ", this.temp_problem_filepath);
         const { Problem } = require(this.temp_problem_filepath);
+
+        if (DEBUG) console.log("metadata", problemMetadata.asJson);
+
         // const { ProblemTests } = require(this.temp_test_filepath);
         const ProblemTestsObject = this.selectTest(problemMetadata);
         // debug problemTestObject instance
         if (true) console.log("ProblemTestsObject instance: ", ProblemTestsObject);
-        if (DEBUG) console.log("metadata", problemMetadata.asJson);
         const problemTests = new ProblemTestsObject(Problem);
         const is_correct = problemTests.runTests(); // debug is_correct
         return is_correct;
@@ -98,10 +100,10 @@ class ProblemsManager {
     }
 
 
-    async openTemporalProblemFile({editor_instruction = "start"} = {}) {
+    openTemporalProblemFile({ editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
-        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
+        exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`exec error: ${error}`);
                 return;
@@ -114,4 +116,4 @@ class ProblemsManager {
 
 }
 
-module.exports = { ProblemsManager };
+module.exports = ProblemsManager;

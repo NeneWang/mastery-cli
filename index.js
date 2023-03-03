@@ -22,6 +22,7 @@ const chart = require('@wangnene2/chart');
 const { terms, getAbsoluteUri } = require('./utils/constants');
 const { populateMasterDeck: populateMasterDeck } = require("./utils/data/terms");
 const { Quizzer } = require('./utils/Quizzer');
+const DSATrainer = require('./utils/dsa-cli/dsa-trainer');
 
 const cli_meow = cli[0]
 const cmInfo = cli[1]
@@ -36,6 +37,7 @@ const { MAID_NAME } = constants;
 const { bar, scatter, bg, fg } = chart;
 const { Demo, EDemo } = demos;
 
+
 // console.log("file:///C:/github/testing/maid-cli/img/unicorn.png");
 
 
@@ -44,7 +46,7 @@ const { Demo, EDemo } = demos;
 
 	/**This is quite the expensive operation, ideally you put this on the end. */
 	const masterDeck = await populateMasterDeck();
-
+	const dsaTrainer = new DSATrainer();
 
 	// console.log(terms);
 	const mQuizer = new utils.FlashQuizzer(constants.qmathformulas, constants.qmathenabled, masterDeck);
@@ -113,6 +115,9 @@ const { Demo, EDemo } = demos;
 	}
 	else if (input.includes(cmInfo.commands.ses.code)) {
 		mQuizer.study_session(masterDeck);
+	}
+	else if (input.includes(cmInfo.commands.dsa.code)) {
+		dsaTrainer.openRandomProblem();
 	}
 	else {
 		cli_meow.showHelp(0);

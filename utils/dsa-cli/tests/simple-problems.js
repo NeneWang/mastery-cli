@@ -68,7 +68,7 @@ class SimpleSubtraction extends ProblemTests {
 const TEST_DICTIONARY = {
     "simple-sum": SimpleSum,
     "simple-division": SimpleDivision,
-    "simple-division": SimpleSubtraction
+    "simple-substraction": SimpleSubtraction
 }
 
 module.exports = TEST_DICTIONARY;

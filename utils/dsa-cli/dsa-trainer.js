@@ -1,6 +1,6 @@
-const { SettingsManager } = require('./settings-manager');
-const { ProblemsManager } = require('./problems-manager');
-const { Constants } = require('./constants');
+const SettingsManager = require('./settings-manager');
+const ProblemsManager = require('./problems-manager');
+const Constants = require('./constants');
 const { Toggle } = require('enquirer');
 
 /**
@@ -37,7 +37,9 @@ class DSATrainer {
      */
     async solveProblem(problem, { tryUntilSolved = true } = {}) {
         this.problems_manager.populateTemplate(problem);
-        const prompt = new Toggle({
+        
+        
+        const prompt_reattempt = new Toggle({
             name: 'stop',
             message: 'Do you want to stop trying to solve this problem?',
             enabled: 'Yes',
@@ -49,16 +51,20 @@ class DSATrainer {
         // Try to solve the problem once
         did_pass_all_tests = await this.openAndTest(problem);
         //  If the user wants to try until solved, and the problem is not solved, keep trying until solved
-        while (did_pass_all_tests && tryUntilSolved) {
+
+        console.log("Did pass all tests: ", did_pass_all_tests);
+
+        while (!did_pass_all_tests && tryUntilSolved) {
 
             // Prompt if user wants to stop attempting to solve the problem
-            const continue_attempting = await prompt.run();
+            const continue_attempting = await prompt_reattempt.run(problem);
             if (!continue_attempting) {
                 return Constants.ProblemStatus.aborted;
             }
 
             // Try again if failed.
-            did_pass_all_tests = await this.openAndTest(problem);
+            did_pass_all_tests = await this.openAndTest();
+            console.log("Did pass all tests: ", did_pass_all_tests);
 
         }
 
@@ -68,11 +74,28 @@ class DSATrainer {
 
     }
 
-    async openAndTest(problems_manager, problem) {
+    async openAndTest(problem) {
+        console.log(
+            "Opening problem: ", problem.slug,
+        )
+        const editor_isntruction = this.user_settings.common_editors[this.user_settings.editor];
+        this.problems_manager.openTemporalProblemFile({editor_instruction: editor_isntruction});
+        const prompt_run_tests = new Toggle({
+            name: 'run_tests',
+            message: 'Do you want to run the tests?',
+            enabled: 'Yes',
+            disabled: 'No'
+        })
 
-        await this.problems_manager.openTemporalProblemFile();
-        const result = this.problems_manager.runProblem(problem);
-        return result;
+        const run_test = await prompt_run_tests.run();
+        if (!run_test) {
+            return false;
+        }
+        else{
+            const did_pass_all_tests = await this.problems_manager.runProblem(problem);
+            return did_pass_all_tests;
+        }
+
     }
 
 
