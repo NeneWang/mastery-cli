@@ -18,7 +18,8 @@ function () {
     _classCallCheck(this, ProblemsManager);
 
     this.problems = {};
-    this.temp_file_path = './temp.js';
+    this.temp_problem_filepath = './temp_problem.js';
+    this.temp_test_filepath = './temp_tests.js';
   }
 
   _createClass(ProblemsManager, [{
@@ -38,6 +39,11 @@ function () {
       var randomKey = keys[Math.floor(Math.random() * keys.length)];
       return this.problems[randomKey];
     }
+    /**
+     * Populates the template with the code inside of problem.file_path
+     * @param {dict<problem>} problem The problem to populate the template with
+     */
+
   }, {
     key: "populateTemplate",
     value: function populateTemplate(problem) {
@@ -45,20 +51,23 @@ function () {
     }
   }, {
     key: "runProblem",
-    value: function runProblem(problem_metadata) {
-      console.log("Getting temp_file_path from ", this.temp_file_path);
+    value: function runProblem() {
+      console.log("Getting temp_file_path from ", this.temp_problem_filepath);
 
-      var _require2 = require(this.temp_file_path),
+      var _require2 = require(this.temp_problem_filepath),
           Problem = _require2.Problem;
 
-      var problem = new Problem();
-      problem.solve();
+      var _require3 = require(this.temp_test_filepath),
+          ProblemTests = _require3.ProblemTests;
+
+      var problemTests = new ProblemTests(Problem);
+      problemTests.runTests();
     }
   }, {
     key: "copyFile",
     value: function copyFile(problem_file_path) {
       var absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
-      var absolute_temp_file_path = getDirAbsoluteUri(this.temp_file_path, "./");
+      var absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
       console.log("Opening file: " + absolute_problem_file_path);
       fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
         if (err) {

@@ -4,7 +4,8 @@ const { getDirAbsoluteUri } = require('./functions');
 class ProblemsManager {
     constructor() {
         this.problems = {};
-        this.temp_file_path = './temp.js';
+        this.temp_problem_filepath = './temp_problem.js';
+        this.temp_test_filepath = './temp_tests.js';
     }
 
     addProblem(problem) {
@@ -21,21 +22,27 @@ class ProblemsManager {
         return this.problems[randomKey];
     }
 
+    /**
+     * Populates the template with the code inside of problem.file_path
+     * @param {dict<problem>} problem The problem to populate the template with
+     */
     populateTemplate(problem) {
         this.copyFile(problem.file_path);
     }
 
-    runProblem(problem_metadata) {
-        console.log("Getting temp_file_path from ", this.temp_file_path);
-        const { Problem } = require(this.temp_file_path);
-        const problem = new Problem();
-        problem.solve();
+    runProblem() {
+        console.log("Getting temp_file_path from ", this.temp_problem_filepath);
+        const { Problem } = require(this.temp_problem_filepath);
+        const { ProblemTests } = require(this.temp_test_filepath);
+
+        const problemTests = new ProblemTests(Problem);
+        problemTests.runTests();
     }
 
 
     copyFile(problem_file_path) {
         const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
-        const absolute_temp_file_path = getDirAbsoluteUri(this.temp_file_path, "./");
+        const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
         console.log("Opening file: " + absolute_problem_file_path);
         fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
             if (err) {
