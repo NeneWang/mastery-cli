@@ -8,7 +8,7 @@ const DEBUG = false;
 class ProblemsManager {
     constructor() {
         this.problems = {};
-        this.temp_problem_filepath = './temp_problem.js';
+        this.temp_problem_filepath = './temp/temp_problem.js';
         this.temp_test_filepath = './temp_tests.js';
     }
 

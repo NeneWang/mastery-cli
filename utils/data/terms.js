@@ -53,8 +53,6 @@ async function populateMasterDeck() {
 
     
 
-
-
     // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
 
 
