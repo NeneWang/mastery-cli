@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { getDirAbsoluteUri } = require('./functions');
+const { TEST_DICTIONARY } = require('./tests');
 
 class ProblemsManager {
     constructor() {
@@ -30,12 +31,21 @@ class ProblemsManager {
         this.copyFile(problem.file_path);
     }
 
-    runProblem() {
+    /**
+     * Returns the right depending on the problem_metadata
+     * @param {dict<ProblemMetadata>} problem_metadata 
+     * @returns {ProblemTests}
+     */
+    selectTest(problem_metadata) {
+        return TEST_DICTIONARY[problem_metadata.test_slug];
+    }
+
+    runProblem(problemMetadata) {
         console.log("Getting temp_file_path from ", this.temp_problem_filepath);
         const { Problem } = require(this.temp_problem_filepath);
-        const { ProblemTests } = require(this.temp_test_filepath);
+        // const { ProblemTests } = require(this.temp_test_filepath);
+        const problemTests = this.selectTest(problemMetadata.test_slug);
 
-        const problemTests = new ProblemTests(Problem);
         problemTests.runTests();
     }
 

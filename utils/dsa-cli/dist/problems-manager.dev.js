@@ -11,6 +11,9 @@ var fs = require('fs');
 var _require = require('./functions'),
     getDirAbsoluteUri = _require.getDirAbsoluteUri;
 
+var _require2 = require('./tests'),
+    TEST_DICTIONARY = _require2.TEST_DICTIONARY;
+
 var ProblemsManager =
 /*#__PURE__*/
 function () {
@@ -49,18 +52,27 @@ function () {
     value: function populateTemplate(problem) {
       this.copyFile(problem.file_path);
     }
+    /**
+     * Returns the right depending on the problem_metadata
+     * @param {dict<ProblemMetadata>} problem_metadata 
+     * @returns {ProblemTests}
+     */
+
+  }, {
+    key: "selectTest",
+    value: function selectTest(problem_metadata) {
+      return TEST_DICTIONARY[problem_metadata.test_slug];
+    }
   }, {
     key: "runProblem",
-    value: function runProblem() {
+    value: function runProblem(problemMetadata) {
       console.log("Getting temp_file_path from ", this.temp_problem_filepath);
 
-      var _require2 = require(this.temp_problem_filepath),
-          Problem = _require2.Problem;
+      var _require3 = require(this.temp_problem_filepath),
+          Problem = _require3.Problem; // const { ProblemTests } = require(this.temp_test_filepath);
 
-      var _require3 = require(this.temp_test_filepath),
-          ProblemTests = _require3.ProblemTests;
 
-      var problemTests = new ProblemTests(Problem);
+      var problemTests = this.selectTest(problemMetadata.test_slug);
       problemTests.runTests();
     }
   }, {

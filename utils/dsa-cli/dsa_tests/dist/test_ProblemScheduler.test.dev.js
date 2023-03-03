@@ -7,12 +7,16 @@ var fs = require('fs');
 var _require = require('../problems-manager'),
     ProblemsManager = _require.ProblemsManager;
 
+var _require2 = require('../problem-metadata'),
+    ProblemMetadata = _require2.ProblemMetadata;
+
 describe('ProblemsManager', function () {
   // Define a mock problem with a file path
   var mockProblem = {
-    slug: 'mock-problem',
+    slug: 'hello-world',
     file_path: 'hello-world.js'
-  }; // Create a new ProblemsManager instance for each test
+  };
+  var HelloWorldProblem = new ProblemMetadata(mockProblem); // Create a new ProblemsManager instance for each test
 
   var manager;
   beforeEach(function () {
@@ -41,8 +45,9 @@ describe('ProblemsManager', function () {
   describe('#runProblem()', function () {
     it('should execute the solve() method in the temporary file', function () {
       // FIX The following line is not working
-      manager.populateTemplate(mockProblem);
-      var result = manager.runProblem(mockProblem);
+      // const problem_metadata = HelloWorldProblem.asJson;
+      manager.populateTemplate(HelloWorldProblem);
+      var result = manager.runProblem(HelloWorldProblem);
       console.log(result);
     });
   });

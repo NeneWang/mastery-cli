@@ -2,13 +2,18 @@ const assert = require('assert');
 const fs = require('fs');
 
 const { ProblemsManager } = require('../problems-manager');
+const { ProblemMetadata } = require('../problem-metadata');
+
 
 describe('ProblemsManager', function () {
     // Define a mock problem with a file path
     const mockProblem = {
-        slug: 'mock-problem',
+        slug: 'hello-world',
         file_path: 'hello-world.js',
     };
+
+    const HelloWorldProblem = new ProblemMetadata(mockProblem);
+
 
     // Create a new ProblemsManager instance for each test
     let manager;
@@ -38,9 +43,10 @@ describe('ProblemsManager', function () {
     describe('#runProblem()', function () {
         it('should execute the solve() method in the temporary file', function () {
             // FIX The following line is not working
-            manager.populateTemplate(mockProblem);
-            
-            const result = manager.runProblem(mockProblem);
+            // const problem_metadata = HelloWorldProblem.asJson;
+            manager.populateTemplate(HelloWorldProblem);
+
+            const result = manager.runProblem(HelloWorldProblem);
             console.log(result);
         });
     });
