@@ -2,6 +2,7 @@ const fs = require('fs');
 const { getDirAbsoluteUri } = require('./functions');
 const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
+const { exec } = require('node:child_process')
 
 const DEBUG = false;
 
@@ -57,6 +58,11 @@ class ProblemsManager {
         return TEST_DICTIONARY[problem_metadata.test_slug];
     }
 
+    /**
+     * Runs the tests for the problem and returns if all tests are passed.
+     * @param {ProblemMetadata} problemMetadata The information of the problem. 
+     * @returns {boolean}
+     */
     runProblem(problemMetadata) {
         if (DEBUG) console.log("Getting temp_file_path from ", this.temp_problem_filepath);
         const { Problem } = require(this.temp_problem_filepath);
@@ -66,14 +72,17 @@ class ProblemsManager {
         if (true) console.log("ProblemTestsObject instance: ", ProblemTestsObject);
         if (DEBUG) console.log("metadata", problemMetadata.asJson);
         const problemTests = new ProblemTestsObject(Problem);
-        problemTests.runTests();
+        const is_correct = problemTests.runTests(); // debug is_correct
+        return is_correct;
+
+
     }
 
 
     copyFile(problem_file_path) {
         const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
         const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
-        
+
 
         console.log("Opening file: " + absolute_problem_file_path);
         fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
@@ -86,6 +95,20 @@ class ProblemsManager {
 
             });
         });
+    }
+
+
+    async openTemporalProblemFile({editor_instruction = "start"} = {}) {
+        const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
+
+        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+            }
+            console.log(`Continue running`);
+        });
+
     }
 
 
