@@ -20,6 +20,16 @@ class ProblemsManager {
         this.problems[problemMetadata.slug] = problemMetadata;
     }
 
+
+    /**
+     * Populates the problems manager with the problems from the TEST_DICTIONARY.
+     */
+    autoPopulateUsingTestDictionary() {
+        for (let problem of Object.keys(TEST_DICTIONARY)) {
+            this.addProblem(new ProblemMetadata(problem));
+        }
+    }
+
     /**
      * Returns a random problem from the problems manager.
      * @returns {Problem} A random problem from the problems manager
@@ -53,7 +63,7 @@ class ProblemsManager {
         // const { ProblemTests } = require(this.temp_test_filepath);
         const ProblemTestsObject = this.selectTest(problemMetadata);
         // debug problemTestObject instance
-        if (DEBUG) console.log("ProblemTestsObject instance: ", ProblemTestsObject);
+        if (true) console.log("ProblemTestsObject instance: ", ProblemTestsObject);
         if (DEBUG) console.log("metadata", problemMetadata.asJson);
         const problemTests = new ProblemTestsObject(Problem);
         problemTests.runTests();

@@ -7,47 +7,59 @@ const { ProblemMetadata } = require('../structures');
 
 describe('ProblemsManager', function () {
     // Define a mock problem with a file path
-    const mockProblem = {
+    var mockProblem = {
         slug: 'hello-world',
-        file_path: 'hello-world.js',
+        file_path: 'hello-world.js'
     };
+    var HelloWorldProblem = new ProblemMetadata("hello-world"); // Create a new ProblemsManager instance for each test
 
-    const HelloWorldProblem = new ProblemMetadata("hello-world");
-
-
-    // Create a new ProblemsManager instance for each test
-    let manager;
+    var manager;
     beforeEach(function () {
         manager = new ProblemsManager();
     });
 
+    it('should return a random problem from the problems manager', function () {
+        // Create some mock problems
+        var problem1 = {
+            slug: 'problem1'
+        };
+        var problem2 = {
+            slug: 'problem2'
+        };
+        var problem3 = {
+            slug: 'problem3'
+        }; // Add the problems to the manager
 
-    describe('#getRandomProblem()', function () {
-        it('should return a random problem from the problems manager', function () {
-            // Create some mock problems
-            const problem1 = { slug: 'problem1' };
-            const problem2 = { slug: 'problem2' };
-            const problem3 = { slug: 'problem3' };
-
-            // Add the problems to the manager
-            manager.addProblem(problem1);
-            manager.addProblem(problem2);
-            manager.addProblem(problem3);
-
-            const problems = [manager.getRandomProblem(), manager.getRandomProblem(), manager.getRandomProblem()];
-            console.log(problems)
-        });
+        manager.addProblem(problem1);
+        manager.addProblem(problem2);
+        manager.addProblem(problem3);
+        var problems = [manager.getRandomProblem(), manager.getRandomProblem(), manager.getRandomProblem()];
+        console.log(problems);
     });
 
 
-    describe('#runProblem()', function () {
-        it('should execute the solve() method in the temporary file', function () {
-            // FIX The following line is not working
-            // const problem_metadata = HelloWorldProblem.asJson;
-            manager.populateTemplate(HelloWorldProblem);
 
-            const result = manager.runProblem(HelloWorldProblem);
-            console.log(result);
-        });
+    it('Tests if the autoPopulateUsingTestDictionary works ', function () {
+        manager.autoPopulateUsingTestDictionary();
+        var problems = [manager.getRandomProblem(), manager.getRandomProblem(), manager.getRandomProblem()];
+        // console.log("problems", problems);
+        assert(problems.length === 3);
+        //   Test if there is variation
+        let didTestChange = false;
+        for (var i = 0; i < problems.length; i++) {
+            if (problems[i].slug !== problems[i + 1].slug) {
+                didTestChange = true;
+                break;
+            }
+        }
+        assert(didTestChange == true);
+
+    });
+    it('should execute the solve() method in the temporary file', function () {
+        // FIX The following line is not working
+        // const problem_metadata = HelloWorldProblem.asJson;
+        manager.populateTemplate(HelloWorldProblem);
+        var result = manager.runProblem(HelloWorldProblem);
+        console.log(result);
     });
 });

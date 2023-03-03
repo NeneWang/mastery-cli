@@ -41,6 +41,18 @@ function () {
       this.problems[problemMetadata.slug] = problemMetadata;
     }
     /**
+     * Populates the problems manager with the problems from the TEST_DICTIONARY.
+     */
+
+  }, {
+    key: "autoPopulateUsingTestDictionary",
+    value: function autoPopulateUsingTestDictionary() {
+      for (var _i = 0, _Object$keys = Object.keys(TEST_DICTIONARY); _i < _Object$keys.length; _i++) {
+        var problem = _Object$keys[_i];
+        this.addProblem(new ProblemMetadata(problem));
+      }
+    }
+    /**
      * Returns a random problem from the problems manager.
      * @returns {Problem} A random problem from the problems manager
      */
@@ -84,7 +96,7 @@ function () {
 
       var ProblemTestsObject = this.selectTest(problemMetadata); // debug problemTestObject instance
 
-      if (DEBUG) console.log("ProblemTestsObject instance: ", ProblemTestsObject);
+      if (true) console.log("ProblemTestsObject instance: ", ProblemTestsObject);
       if (DEBUG) console.log("metadata", problemMetadata.asJson);
       var problemTests = new ProblemTestsObject(Problem);
       problemTests.runTests();

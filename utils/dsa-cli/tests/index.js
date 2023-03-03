@@ -1,28 +1,18 @@
-const assert = require('assert');
-const ProblemTests = require('./problem-test');
+// Imports TEST_DICTIONARY from helloworld.js and simple-problems.js and mergesthem into one dictionary<string, ProblemTests> object
+
+let TEST_DICTIONARY = {}
+const problem_tests_filenames = [
+    'helloworld', 'simple-problems'
+]
 
 
-class HelloWorldTest extends ProblemTests {
-    constructor(Problem) {
-        super(Problem);
-        this.tests.push(() => this.helloWorldTest());
-        
-    }
-    
-    helloWorldTest() {
-        this.current_test_name = "helloWorldTest"
-        const problemToTest = new this.Problem();
-        problemToTest.solve();// Should print "Hello World!"
-
-        assert(true);
-
-
-    }
-}
-
-const TEST_DICTIONARY = {
-    "hello-world": HelloWorldTest
+// Autopopulation of tests assuming that the tests had beend defined
+for (let problem of problem_tests_filenames) {
+    TEST_DICTIONARY = { ...TEST_DICTIONARY, ...require(`./${problem}`) }
 }
 
 
+
+
+// console.log("TEST_DICTIONARY", TEST_DICTIONARY);
 module.exports = { TEST_DICTIONARY };
