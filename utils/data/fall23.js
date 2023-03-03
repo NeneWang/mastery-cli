@@ -175,10 +175,6 @@ const algebra = [
         example: "{x>3, x<9} (1) x < 3: 3-x < 6 x>3 3+x > -6 (2) Then solve"
     },
     {
-        term: "(x-4)(x-1)", prompt: "When is it going to be positive or negative?",
-        example: "x < 0 = > - | x > 0 => + | x == 0 => 0", attachment: "./img/2023-02-27-18-54-11.png"
-    },
-    {
         term: "Summation", prompt: "What is the sum rule, the difference rule, the constant rule and the constant value rule",   
     },
     {
