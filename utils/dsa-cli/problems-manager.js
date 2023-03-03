@@ -9,7 +9,7 @@ const DEBUG = false;
 class ProblemsManager {
     constructor() {
         this.problems = {};
-        this.temp_problem_filepath = './temp/temp_problem.js';
+        this.temp_problem_filepath = './user_files/temp_problem.js';
         this.temp_test_filepath = './temp_tests.js';
     }
 
@@ -80,7 +80,10 @@ class ProblemsManager {
 
     }
 
-
+    /**
+     * Copies the file from problem_file_path to the temp_problem_filepath.
+     * @param {str} problem_file_path The path to the file to copy
+     */
     copyFile(problem_file_path) {
         const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
         const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
@@ -100,6 +103,10 @@ class ProblemsManager {
     }
 
 
+    /**
+     * Opens the temporal problem file in the editor (Can be customized which to use).
+     * @param {str} editor_instruction The instruction to open the file in the editor. Default is "start".
+     */
     openTemporalProblemFile({ editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 

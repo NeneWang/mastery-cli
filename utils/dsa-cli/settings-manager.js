@@ -4,7 +4,7 @@ class SettingsManager {
     // Updates the json editor and allows edition of the settings.json file
 
     constructor() {
-        this.settings_path = "./temp/temp_settings.json";
+        this.settings_path = "./user_files/temp_settings.json";
         this.settings_path = getDirAbsoluteUri(this.settings_path);
         this._settings = require(this.settings_path);
     }
