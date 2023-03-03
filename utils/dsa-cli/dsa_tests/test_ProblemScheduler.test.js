@@ -2,7 +2,7 @@ const assert = require('assert');
 const fs = require('fs');
 
 const { ProblemsManager } = require('../problems-manager');
-const { ProblemMetadata } = require('../problem-metadata');
+const { ProblemMetadata } = require('../structures');
 
 
 describe('ProblemsManager', function () {
@@ -12,7 +12,7 @@ describe('ProblemsManager', function () {
         file_path: 'hello-world.js',
     };
 
-    const HelloWorldProblem = new ProblemMetadata(mockProblem);
+    const HelloWorldProblem = new ProblemMetadata("hello-world");
 
 
     // Create a new ProblemsManager instance for each test

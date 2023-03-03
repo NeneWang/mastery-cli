@@ -2,7 +2,7 @@
 class ProblemMetadata {
     constructor(slug, { name = "", description = "", difficulty = "EASY", tags = [] } = {}) {
         this.slug = slug;
-        this.file_path = `.${slug}.js`;
+        this.file_path = `${slug}.js`;
         this.test_slug = slug;
         this.name = name;
         this.description = description;

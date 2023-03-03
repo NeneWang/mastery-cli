@@ -1,6 +1,9 @@
 const fs = require('fs');
 const { getDirAbsoluteUri } = require('./functions');
 const { TEST_DICTIONARY } = require('./tests');
+const { ProblemMetadata } = require('./structures');
+
+const DEBUG = false;
 
 class ProblemsManager {
     constructor() {
@@ -9,8 +12,12 @@ class ProblemsManager {
         this.temp_test_filepath = './temp_tests.js';
     }
 
-    addProblem(problem) {
-        this.problems[problem.slug] = problem;
+    /**
+     * Adds problem into the dictionary of problems.
+     * @param {ProblemMetadata} problemMetadata Object containing the information aboutthe problem.
+     */
+    addProblem(problemMetadata) {
+        this.problems[problemMetadata.slug] = problemMetadata;
     }
 
     /**
@@ -41,11 +48,14 @@ class ProblemsManager {
     }
 
     runProblem(problemMetadata) {
-        console.log("Getting temp_file_path from ", this.temp_problem_filepath);
+        if (DEBUG) console.log("Getting temp_file_path from ", this.temp_problem_filepath);
         const { Problem } = require(this.temp_problem_filepath);
         // const { ProblemTests } = require(this.temp_test_filepath);
-        const problemTests = this.selectTest(problemMetadata.test_slug);
-
+        const ProblemTestsObject = this.selectTest(problemMetadata);
+        // debug problemTestObject instance
+        if (DEBUG) console.log("ProblemTestsObject instance: ", ProblemTestsObject);
+        if (DEBUG) console.log("metadata", problemMetadata.asJson);
+        const problemTests = new ProblemTestsObject(Problem);
         problemTests.runTests();
     }
 
@@ -53,6 +63,8 @@ class ProblemsManager {
     copyFile(problem_file_path) {
         const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
         const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
+        
+
         console.log("Opening file: " + absolute_problem_file_path);
         fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
             if (err) {

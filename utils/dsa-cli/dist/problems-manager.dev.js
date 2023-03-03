@@ -14,6 +14,11 @@ var _require = require('./functions'),
 var _require2 = require('./tests'),
     TEST_DICTIONARY = _require2.TEST_DICTIONARY;
 
+var _require3 = require('./structures'),
+    ProblemMetadata = _require3.ProblemMetadata;
+
+var DEBUG = false;
+
 var ProblemsManager =
 /*#__PURE__*/
 function () {
@@ -24,11 +29,16 @@ function () {
     this.temp_problem_filepath = './temp_problem.js';
     this.temp_test_filepath = './temp_tests.js';
   }
+  /**
+   * Adds problem into the dictionary of problems.
+   * @param {ProblemMetadata} problemMetadata Object containing the information aboutthe problem.
+   */
+
 
   _createClass(ProblemsManager, [{
     key: "addProblem",
-    value: function addProblem(problem) {
-      this.problems[problem.slug] = problem;
+    value: function addProblem(problemMetadata) {
+      this.problems[problemMetadata.slug] = problemMetadata;
     }
     /**
      * Returns a random problem from the problems manager.
@@ -66,13 +76,17 @@ function () {
   }, {
     key: "runProblem",
     value: function runProblem(problemMetadata) {
-      console.log("Getting temp_file_path from ", this.temp_problem_filepath);
+      if (DEBUG) console.log("Getting temp_file_path from ", this.temp_problem_filepath);
 
-      var _require3 = require(this.temp_problem_filepath),
-          Problem = _require3.Problem; // const { ProblemTests } = require(this.temp_test_filepath);
+      var _require4 = require(this.temp_problem_filepath),
+          Problem = _require4.Problem; // const { ProblemTests } = require(this.temp_test_filepath);
 
 
-      var problemTests = this.selectTest(problemMetadata.test_slug);
+      var ProblemTestsObject = this.selectTest(problemMetadata); // debug problemTestObject instance
+
+      if (DEBUG) console.log("ProblemTestsObject instance: ", ProblemTestsObject);
+      if (DEBUG) console.log("metadata", problemMetadata.asJson);
+      var problemTests = new ProblemTestsObject(Problem);
       problemTests.runTests();
     }
   }, {

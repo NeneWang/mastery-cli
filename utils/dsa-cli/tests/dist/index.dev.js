@@ -18,6 +18,13 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+var assert = require('assert');
+
+var _require = require('console'),
+    count = _require.count;
+
+var chalk = require('chalk');
+
 var ProblemTests =
 /*#__PURE__*/
 function () {
@@ -26,14 +33,48 @@ function () {
 
     this.Problem = Problem;
     this.tests = [];
+    this.current_test_name = "";
   }
 
   _createClass(ProblemTests, [{
     key: "runTests",
     value: function runTests() {
-      this.tests.forEach(function (test) {
-        test();
-      });
+      var count_of_tests = this.tests.length;
+
+      for (var test_number = 1; test_number <= count_of_tests; test_number++) {
+        var test = this.tests[test_number - 1];
+        this.individualTestReport({
+          test_number: test_number,
+          count_of_tests: count_of_tests
+        });
+
+        try {
+          test();
+          this.printCurrentTestSuccess();
+        } catch (error) {
+          this.printCurrentTestFailed();
+          console.log(error);
+        }
+      }
+    }
+  }, {
+    key: "printCurrentTestSuccess",
+    value: function printCurrentTestSuccess() {
+      console.log(chalk.green("Test ".concat(this.current_test_name, " passed")));
+    }
+  }, {
+    key: "printCurrentTestFailed",
+    value: function printCurrentTestFailed() {
+      console.log(chalk.red("Test ".concat(this.current_test_name, " failed")));
+    }
+  }, {
+    key: "individualTestReport",
+    value: function individualTestReport() {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          test_number = _ref.test_number,
+          count_of_tests = _ref.count_of_tests;
+
+      console.log("Test ".concat(test_number, "/").concat(count_of_tests, ": ").concat(this.current_test_name));
     }
   }]);
 
@@ -62,9 +103,11 @@ function (_ProblemTests) {
   _createClass(HelloWorldTest, [{
     key: "helloWorldTest",
     value: function helloWorldTest() {
-      console.log("running Hello world test");
+      this.current_test_name = "helloWorldTest";
       var problemToTest = new this.Problem();
       problemToTest.solve(); // Should print "Hello World!"
+
+      assert(true);
     }
   }]);
 

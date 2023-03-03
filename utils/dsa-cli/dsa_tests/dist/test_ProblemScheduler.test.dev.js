@@ -7,7 +7,7 @@ var fs = require('fs');
 var _require = require('../problems-manager'),
     ProblemsManager = _require.ProblemsManager;
 
-var _require2 = require('../problem-metadata'),
+var _require2 = require('../structures'),
     ProblemMetadata = _require2.ProblemMetadata;
 
 describe('ProblemsManager', function () {
@@ -16,7 +16,7 @@ describe('ProblemsManager', function () {
     slug: 'hello-world',
     file_path: 'hello-world.js'
   };
-  var HelloWorldProblem = new ProblemMetadata(mockProblem); // Create a new ProblemsManager instance for each test
+  var HelloWorldProblem = new ProblemMetadata("hello-world"); // Create a new ProblemsManager instance for each test
 
   var manager;
   beforeEach(function () {

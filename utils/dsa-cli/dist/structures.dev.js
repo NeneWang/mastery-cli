@@ -23,7 +23,7 @@ function () {
     _classCallCheck(this, ProblemMetadata);
 
     this.slug = slug;
-    this.file_path = ".".concat(slug, ".js");
+    this.file_path = "".concat(slug, ".js");
     this.test_slug = slug;
     this.name = name;
     this.description = description;
