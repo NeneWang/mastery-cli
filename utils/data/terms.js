@@ -26,36 +26,36 @@ async function populateMasterDeck() {
     let decks = new TermStorage([], "Academic Terms");
 
     const { react_terms } = require('./frameworks');
-    decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: false }));
+    decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: true }));
 
 
     const { network, artificialIntelligence, algebra, calculousOne } = require("./fall23");
-    decks.addDeck(new TermStorage(network, "network", { is_active: false }));
-    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: false }));
-    decks.addDeck(new TermStorage(algebra, "algebra", { is_active: false }));
-    decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: false }));
+    decks.addDeck(new TermStorage(network, "network", { is_active: true }));
+    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: true }));
+    decks.addDeck(new TermStorage(algebra, "algebra", { is_active: true }));
+    decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: true }));
 
 
 
     const { pragmatic_programmer } = require('./ethics.js');
-    decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", { is_active: false }));
+    decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", { is_active: true }));
 
     const { designPatterns, dsa, system_design } = require('./dsa');
-    decks.addDeck(new TermStorage(designPatterns, "design patterns", { is_active: false }));
+    decks.addDeck(new TermStorage(designPatterns, "design patterns", { is_active: true }));
     decks.addDeck(new TermStorage(dsa))
-    decks.addDeck(new TermStorage(system_design, "system design", { is_active: false }));
+    decks.addDeck(new TermStorage(system_design, "system design", { is_active: true }));
 
     const { aws_services, aws_glossary, coderTerms, unit_testing } = require('./programmer_experience');
-    decks.addDeck(new TermStorage(aws_glossary, "aws glossary", { is_active: false }));
-    decks.addDeck(new TermStorage(aws_services, "aws services", { is_active: false }));
-    decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: false }));
-    decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: false }));
+    decks.addDeck(new TermStorage(aws_glossary, "aws glossary", { is_active: true }));
+    decks.addDeck(new TermStorage(aws_services, "aws services", { is_active: true }));
+    decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: true }));
+    decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: true }));
 
     
 
 
 
-    // decks.addDeck(new TermStorage(test, "test", {is_active: false}));
+    // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
 
 
     // Generic Term Generators
