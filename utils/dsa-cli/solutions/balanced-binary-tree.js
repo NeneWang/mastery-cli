@@ -1,4 +1,4 @@
-class Problem {
+class BalanceBinaryTree {
 
     isBalanced = function (root) {
 
@@ -55,4 +55,4 @@ class Problem {
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: BalanceBinaryTree };
