@@ -1,6 +1,6 @@
 class Problem {
-    solve() {
-        console.log("Hello World!");
+    solve(a, b) {
+        return a-b;
     }
 }
 
