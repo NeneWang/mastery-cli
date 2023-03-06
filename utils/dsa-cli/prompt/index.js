@@ -1,60 +1,97 @@
 const { getFilesInDirectory, getDirAbsoluteUri } = require('../functions');
 const md2json = require('markdown-to-json');
-let promptsData = {};
+const fs = require('fs');
 
 const DEBUG = false;
+const PROMPT_FILE = 'prompt.json';
 
-let options = {
+const options = {
     minify: false,
     width: DEBUG ? 0 : 9000000,
     outfile: null,
 };
 
 
-(async () => {
+/**
+ * Creates a compiled json file from all the markdown files in the prompt directory
+ */
+const createCompiledJson = () => {
+    let parsed_prompt_dict = {};
 
-    let files = await getFilesInDirectory('./prompt/');
+    getFilesInDirectory('./prompt/')
+        .then((files) => {
+            const absolutePathForFiles = files.map((file) => {
+                return getDirAbsoluteUri(file, './prompt/');
+            });
+            if (DEBUG) console.log("absolutePathForFiles: ", absolutePathForFiles);
+            const promptsData = md2json.parse(absolutePathForFiles, options);
+            if (DEBUG) console.log(promptsData);
+            parsed_prompt_dict = JSON.parse(promptsData);
+            // console.log("promptsData: ", parsed_prompt_dict);
+            // Save as a json
+            const json = JSON.stringify(parsed_prompt_dict);
+            const prompt_file_path = getDirAbsoluteUri(PROMPT_FILE, './prompt/');
+            fs.writeFile(prompt_file_path, json, (err) => {
+                if (err) throw err;
+                console.log('The file has been saved!');
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};
 
-    const absolutepath_for_files = files.map((file) => {
+
+const getLatestModified = async () => {
+    const files = await getFilesInDirectory('./prompt/');
+    let latestModified = null;
+    let latestFile = null;
+
+    const absolutePathForFiles = files.map((file) => {
         return getDirAbsoluteUri(file, './prompt/');
     });
-
-    if (DEBUG) console.log("absolutepath_for_files: ", absolutepath_for_files);
-
-    promptsData = md2json.parse(absolutepath_for_files, options);
-    if (DEBUG) console.log(files);
-    promptsData = JSON.parse(promptsData);
-    if (DEBUG) console.log(promptsData);
-
-    /**
-     * 
-    {
-        'hello-world': {
-            title: 'Hello World',
-            description: 'A simple hello world example',
-            tags: ['sample'],
-            preview: 'This is …',
-            basename: 'hello-world'
-        },
-        'simpe-substraction': {
-            title: 'Simple Substraction',
-            description: 'A simple substraction example',
-            tags: [ 'sample', 'math' ],
-            preview: 'This is …',
-            basename: 'simpe-substraction'
-        },
-        'simple-division': {
-            title: 'Simple Division',
-            description: 'A simple division example',
-            tags: [ 'sample', 'math' ],
-            preview: 'This is …',
-            basename: 'simple-division'
+    for (const file of absolutePathForFiles) {
+        const stats = await fs.promises.stat(file);
+        if (!latestModified || stats.mtime > latestModified) {
+            latestModified = stats.mtime;
+            latestFile = file;
         }
     }
-     */
+
+    return latestFile;
+};
+
+/**
+ * Checks if prompt.json exists, if not, creates it, then returns the parsed json
+ * @returns {Object} parsed_prompt_dict
+ */
+const getPromptDict = async () => {
+    // check if prompt.json exists
+    const prompt_file_path = getDirAbsoluteUri(PROMPT_FILE, './prompt/');
+    if (!fs.existsSync(prompt_file_path)) {
+        createCompiledJson();
+    }
+
+    // If exists, check if it's the latest modified file, if not, update the prompt.json
+    const latestModified = await getLatestModified();
+    if (latestModified !== prompt_file_path) {
+        console.log("latestModified: ", latestModified);
+        createCompiledJson();
+    }
+
+    const parsed_prompt_dict = require(prompt_file_path);
+    return parsed_prompt_dict;
+};
 
 
-    // Return the Marked options for it as a dictionary contiing all their dataset.
-})();
+(async () => {
+    const sample = await getPromptDict();
+    if(DEBUG) console.log("sample: ", sample);
+}
+)();
 
-module.exports = promptsData;
+module.exports = { getPromptDict, createCompiledJson };
+
+
+// const parsed_prompt_dict = require(PROMPT_FILE);
+// module.exports = parsed_prompt_dict;

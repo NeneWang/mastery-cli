@@ -1,6 +1,6 @@
 const SettingsManager = require('./settings-manager');
 const ProblemsManager = require('./problems-manager');
-const prompt_dict = require('./prompt'); // Imports the raw body prompts as well s categories as a dictionary
+const { getPromptDict } = require('./prompt');
 
 const Constants = require('./constants');
 const { renderPromptDescription } = require('./functions');
@@ -79,8 +79,12 @@ class DSATrainer {
             "Opening problem: ", problem.slug,
         );
         // Print the problem markdown.
-        const promble_prompt = prompt_dict[problem.slug];
-        renderPromptDescription(promble_prompt);
+        console.log("Raw Prompt", parsed_prompt_dict);
+        // console.log("Keys from prompt_dict", Object.keys(prompt_dict));
+
+        const promblem_prompt = parsed_prompt_dict[problem.slug];
+        console.log("promblem_prompt", promblem_prompt, "Searching using key: ", problem.slug, "when keys availables are:", Object.keys(parsed_prompt_dict));
+        renderPromptDescription(promblem_prompt);
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
         this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });

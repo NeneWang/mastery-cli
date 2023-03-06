@@ -112,6 +112,7 @@ const countDecimals = (value) => {
 
 const renderPromptDescription = (prompt) => {
     const Constants =  require("./constants");
+    const chalk = require("chalk");
     marked.setOptions({
         renderer: new TerminalRenderer()
     });

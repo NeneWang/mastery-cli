@@ -2,7 +2,7 @@ const fs = require('fs');
 const { getDirAbsoluteUri } = require('./functions');
 const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
-const { exec } = require('node:child_process')
+const { exec } = require('node:child_process');
 
 const DEBUG = false;
 
