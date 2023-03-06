@@ -17,7 +17,7 @@ const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
-const { show_image } = require('./utils_functions');
+const { show_image, user_requests_exit, user_requests_skip } = require('./utils_functions');
 const { TermScheduler } = require('./termScheduler');
 const { slice } = require('./cli');
 // const DEBUG = true
@@ -194,13 +194,13 @@ class Quizzer {
     /**
      * Asks question and waits for response, allows repetition.
      */
-    async askQuestion({ ask_until_one_is_correct = true,  } = {}) {
+    async askQuestion({ ask_until_one_is_correct = true, } = {}) {
         // Replace with Chance
         // if (DEBUG) console.log("Asking terms", this.terms)
         // const askMath = true;
         let exit = false;
         const exitMethod = () => {
-            if(DEBUG) console.log("Exit method requested") ;
+            if (DEBUG) console.log("Exit method requested");
             exit = true;
             return false;
         };
@@ -217,7 +217,7 @@ class Quizzer {
         let answerIsCorrect = false;
         if (ask_until_one_is_correct)
             while (!answerIsCorrect && !exit) {
-                if(DEBUG) console.log("Answer is correct", answerIsCorrect, "exit", exit);
+                if (DEBUG) console.log("Answer is correct", answerIsCorrect, "exit", exit);
                 answerIsCorrect = await askQuestionRandom({ exitMethod: exitMethod });
             }
         else {
@@ -364,12 +364,12 @@ class Quizzer {
             const user_res = await question.run();
 
             // Check for escape methods
-
-            if (user_res === "!" || user_res === "exit") {
-                return exitMethod();
+            if (user_requests_exit(user_res)) {
+                exitMethod();
+                return false;
             }
 
-            if (user_res === "no" || user_res === "") {
+            if (user_requests_skip(user_res)) {
                 this.printExample(term_selected) //You want to print the example as if it didn't know the answer for the next time.
                 return false;
             }
@@ -526,7 +526,7 @@ class Quizzer {
                 const res = await question.run()
 
                 // Escape if user wants to exit
-                if (res == "exit" || res == "quit" || res == "q" || res == "!") {
+                if (user_requests_exit(res)) {
                     exitMethod();
                     return false;
                 }

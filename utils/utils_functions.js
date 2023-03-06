@@ -112,8 +112,27 @@ const countDecimals = (value) => {
 };
 
 
+/**
+ * Returns whether the user wants to exit.
+ * @param {str} res : User input
+ * @returns {boolean} : True if user wants to exit, false otherwise
+ */
+const user_requests_exit = (res) => {
+    return (res == "exit" || res == "quit" || res == "q" || res == "!")
+}
+
+/**
+ * Returns whether the user wants to skip the problem.
+ * @param {boolean} res : User input
+ * @returns {boolean} : True if user wants to skip, false otherwise
+ */
+const user_requests_skip = (res) => {
+    return (res == "skip" || res == "s" || res == "next" || res == "n" || res == "no" || res == "")
+}
+
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
-    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory
+    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, user_requests_exit,
+    user_requests_skip
 };
