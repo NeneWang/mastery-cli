@@ -6,7 +6,6 @@ class SimpleSum extends ProblemTests {
     constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
-
     }
 
     test_1() {

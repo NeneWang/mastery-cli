@@ -1,9 +1,8 @@
-class Problem {
+class Substraction {
     solve(a, b) {
-	if(!b) return undefined;
-        return a/b;
+        return a-b;
     }
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: Substraction };

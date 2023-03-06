@@ -3,6 +3,7 @@ class Division {
         return 1;
     }
 
+    //Dont edit this.
     solve = divide;
 }
 
