@@ -13,12 +13,17 @@ const DEBUG = false;
  */
 class DSATrainer {
 
-    constructor() {
+    /**
+     * Creates a new DSATrainer object
+     * @param {List[str]} skip_problems A list of problems to skip (problems slug names)
+     */
+    constructor({ skip_problems = ["hello-world", "simple-sum"] } = {}) {
         this.settings_manager = new SettingsManager();
-        this.problems_manager = new ProblemsManager();
+        this.problems_manager = new ProblemsManager({ skip_problems: skip_problems });
 
         this.problems_manager.autoPopulateUsingTestDictionary();
         this.user_settings = this.settings_manager.settings;
+        this.skip_problems = skip_problems;
 
     }
 
@@ -28,8 +33,10 @@ class DSATrainer {
      */
     async openRandomProblem() {
         const problem = this.problems_manager.getRandomProblem();
-        const problem_status = this.solveProblem(problem);
-        return problem_status;
+        const problem_status = await this.solveProblem(problem);
+        // TODO Make appropriate adjustement with the status
+
+        return problem_status == Constants.ProblemStatus.solved;
 
     }
 
@@ -104,8 +111,15 @@ class DSATrainer {
             return false;
         }
         else {
-            const did_pass_all_tests = await this.problems_manager.runProblem(problem);
-            return did_pass_all_tests;
+            try {
+                // Sometimes errors can occur.
+                const did_pass_all_tests = await this.problems_manager.runProblem(problem);
+                return did_pass_all_tests;
+            }
+            catch (e) {
+                console.log("Error running tests: ", e);
+                return false;
+            }
         }
 
     }

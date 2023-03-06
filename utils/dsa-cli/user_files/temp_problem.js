@@ -1,6 +1,7 @@
 class Problem {
     solve(a, b) {
-        return a-b;
+	if(!b) return undefined;
+        return a/b;
     }
 }
 

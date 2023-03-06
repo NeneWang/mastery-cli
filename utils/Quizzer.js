@@ -307,7 +307,7 @@ class Quizzer {
         }
     }
 
-    async pick_and_ask_term_question({ exitMethod = () => { } } = {}) {
+    async pick_and_ask_term_question({ exitMethod = () => {} } = {}) {
         // Fetches a random term form with the youngest one, unless there is no internet
 
         const term_selected = await this.pick_term_question();

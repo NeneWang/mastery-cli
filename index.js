@@ -11,6 +11,7 @@ const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
 const utils = require('./utils/utils');
+const { increasePerformance } = require('./utils/utils');
 const constants = require('./utils/constants');
 const demos = require('./utils/demo');
 
@@ -22,7 +23,9 @@ const chart = require('@wangnene2/chart');
 const { terms, getAbsoluteUri } = require('./utils/constants');
 const { populateMasterDeck: populateMasterDeck } = require("./utils/data/terms");
 const { Quizzer } = require('./utils/Quizzer');
+const { QuizzerWithDSA } = require('./utils/QuizzerWithDSA');
 const DSATrainer = require('./utils/dsa-cli/dsa-trainer');
+const { util } = require('prettier');
 
 const cli_meow = cli[0]
 const cmInfo = cli[1]
@@ -46,10 +49,12 @@ const { Demo, EDemo } = demos;
 
 	/**This is quite the expensive operation, ideally you put this on the end. */
 	const masterDeck = await populateMasterDeck();
-	const dsaTrainer = new DSATrainer();
+	const dsaTrainer = new DSATrainer({
+		skip_problems: ["hello-world", "simple-sum"]
+	});
 
 	// console.log(terms);
-	const mQuizer = new utils.FlashQuizzer(constants.qmathformulas, constants.qmathenabled, masterDeck);
+	const mQuizer = new Quizzer(constants.qmathformulas, constants.qmathenabled, masterDeck);
 
 
 	// console.log(getAbsoluteUri("./img/unicorn.png"))
@@ -117,7 +122,12 @@ const { Demo, EDemo } = demos;
 		mQuizer.study_session(masterDeck);
 	}
 	else if (input.includes(cmInfo.commands.dsa.code)) {
-		dsaTrainer.openRandomProblem();
+		const dsa_is_correct = await dsaTrainer.openRandomProblem();
+		if (dsa_is_correct) {
+			await increasePerformance("algo");
+			maid.say("Good job, you got it right! Increasing your social credit score!");
+		}
+
 	}
 	else {
 		cli_meow.showHelp(0);

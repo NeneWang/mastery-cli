@@ -7,8 +7,9 @@ const { exec } = require('node:child_process');
 const DEBUG = false;
 
 class ProblemsManager {
-    constructor() {
+    constructor({skip_problems = []} = {}) {
         this.problems = {};
+        this.skip_problems = skip_problems;
         this.temp_problem_filepath = './user_files/temp_problem.js';
         this.temp_test_filepath = './temp_tests.js';
     }
@@ -36,8 +37,12 @@ class ProblemsManager {
      * @returns {Problem} A random problem from the problems manager
      */
     getRandomProblem() {
-        const keys = Object.keys(this.problems);
+        let keys = Object.keys(this.problems);
+        // Filter the porblems that are in the skip_problems list
+        keys = keys.filter((key) => !this.skip_problems.includes(key));
+        
         const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        
         return this.problems[randomKey];
     }
 
