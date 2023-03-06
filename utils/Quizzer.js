@@ -343,7 +343,7 @@ class Quizzer {
                 let image_file = getAbsoluteUri(term_selected?.attachment);
                 console.log(`attachment: ${image_file}`);
                 // Also print the attachment image if possible
-                const _ = await show_image(term_selected?.attachment, { is_url: term_selected.attachment_is_url });
+                const _ = show_image(term_selected?.attachment, { is_url: term_selected.attachment_is_url });
             }
 
             console.log(`${term_selected.description}\n`)

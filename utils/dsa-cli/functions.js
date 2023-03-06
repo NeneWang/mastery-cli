@@ -1,6 +1,8 @@
 const path = require("path");
 const url = require('url');
 const fs = require('fs');
+const { marked } = require('marked');
+const TerminalRenderer = require('marked-terminal');
 
 /**
  * Gets clickeable path that could be printed on the console and clicked.
@@ -26,7 +28,7 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './')
     return (absolutePath.toString());
 };
 
-const getFilesInDirectory = (directoryPath = './data/priorities') => {
+const getFilesInDirectory = async (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
 
     console.log("Fetching from: ", absolutePath);
@@ -104,6 +106,14 @@ const countDecimals = (value) => {
     if (Math.floor(value) !== value)
         return value?.toString().split(".")[1].length ?? 0;
     return 0;
+};
+
+
+const renderPromptDescription = (prompt) => {
+    marked.setOptions({
+        renderer: new TerminalRenderer()
+    });
+    console.log(marked(prompt?.["description"] ?? ""));
 };
 
 
