@@ -117,8 +117,9 @@ const renderPromptDescription = (prompt) => {
         renderer: new TerminalRenderer()
     });
     // Print title in Blue
-    console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE)(prompt?.["title"] ?? "")}`)
+    console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(prompt?.["title"] ?? "")}`)
     console.log(marked(prompt?.["description"] ?? ""));
+    console.log(marked(prompt?.["preview"] ?? ""));
 };
 
 

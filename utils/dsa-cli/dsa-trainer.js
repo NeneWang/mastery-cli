@@ -6,6 +6,8 @@ const Constants = require('./constants');
 const { renderPromptDescription } = require('./functions');
 const { Toggle } = require('enquirer');
 
+const DEBUG = false;
+
 /**
  * @class DSATrainer - Responsible of presenting problems, and interacting with problems managers, settings, and others charts and user data visualization
  */
@@ -44,9 +46,10 @@ class DSATrainer {
 
         const prompt_reattempt = new Toggle({
             name: 'stop',
-            message: 'Do you want to stop trying to solve this problem?',
+            message: 'Re-attempt?',
             enabled: 'Yes',
-            disabled: 'No'
+            disabled: 'No',
+            initial: true
         });
 
         let did_pass_all_tests = false
@@ -66,7 +69,7 @@ class DSATrainer {
             }
 
             // Try again if failed.
-            did_pass_all_tests = await this.openAndTest();
+            did_pass_all_tests = await this.openAndTest(problem);
             console.log("Did pass all tests: ", did_pass_all_tests);
 
         }
@@ -79,11 +82,11 @@ class DSATrainer {
             "Opening problem: ", problem.slug,
         );
         // Print the problem markdown.
-        console.log("Raw Prompt", parsed_prompt_dict);
+
         // console.log("Keys from prompt_dict", Object.keys(prompt_dict));
 
-        const promblem_prompt = parsed_prompt_dict[problem.slug];
-        console.log("promblem_prompt", promblem_prompt, "Searching using key: ", problem.slug, "when keys availables are:", Object.keys(parsed_prompt_dict));
+        const promblem_prompt = await getPromptDict(problem.slug);
+        if (true) console.log("Problem prompt selected: ", promblem_prompt);
         renderPromptDescription(promblem_prompt);
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
@@ -92,7 +95,8 @@ class DSATrainer {
             name: 'run_tests',
             message: 'Do you want to run the tests?',
             enabled: 'Yes',
-            disabled: 'No'
+            disabled: 'No',
+            initial: true
         });
 
         const run_test = await prompt_run_tests.run();

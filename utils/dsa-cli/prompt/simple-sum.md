@@ -1,8 +1,8 @@
-```
+---
 title: Simple Sum
-description: A simple sum example
+description: A simple sum example!
 tags: [sample, math]
-```
+---
 
 
 This is  a simple sum example.
