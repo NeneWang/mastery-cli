@@ -1,8 +1,8 @@
-class Problem {
+class Substraction {
     solve(a, b) {
         return 1;
     }
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: Substraction };

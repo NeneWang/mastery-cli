@@ -1,8 +1,10 @@
-class Problem {
-    solve(a, b) {
+class Division {
+    divide(a, b) {
         return 1;
     }
+
+    solve = divide;
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: Division };
