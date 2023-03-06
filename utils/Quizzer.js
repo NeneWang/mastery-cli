@@ -402,7 +402,7 @@ class Quizzer {
 
             if (ask_if_correct) {
                 console.log("Is your response acceptable?");
-                const is_correct = new Confirm("Is the response correct?");
+                const is_correct = new Confirm("Is the response correct?", {initial: true});
                 const response = await is_correct.run();
                 console.log("asnwered with ", response);
                 ISANSWERCORRECT = response;
