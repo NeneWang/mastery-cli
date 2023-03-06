@@ -1,6 +1,9 @@
 const SettingsManager = require('./settings-manager');
 const ProblemsManager = require('./problems-manager');
+const prompt_dict = require('./prompt'); // Imports the raw body prompts as well s categories as a dictionary
+
 const Constants = require('./constants');
+const { renderPromptDescription } = require('./functions');
 const { Toggle } = require('enquirer');
 
 /**
@@ -37,8 +40,8 @@ class DSATrainer {
      */
     async solveProblem(problem, { tryUntilSolved = true } = {}) {
         this.problems_manager.populateTemplate(problem);
-        
-        
+
+
         const prompt_reattempt = new Toggle({
             name: 'stop',
             message: 'Do you want to stop trying to solve this problem?',
@@ -69,9 +72,6 @@ class DSATrainer {
         }
 
         return Constants.ProblemStatus.solved;
-
-
-
     }
 
     async openAndTest(problem) {
@@ -79,9 +79,11 @@ class DSATrainer {
             "Opening problem: ", problem.slug,
         );
         // Print the problem markdown.
+        const promble_prompt = prompt_dict[problem.slug];
+        renderPromptDescription(promble_prompt);
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
-        this.problems_manager.openTemporalProblemFile({editor_instruction: editor_instruction});
+        this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
         const prompt_run_tests = new Toggle({
             name: 'run_tests',
             message: 'Do you want to run the tests?',
@@ -93,7 +95,7 @@ class DSATrainer {
         if (!run_test) {
             return false;
         }
-        else{
+        else {
             const did_pass_all_tests = await this.problems_manager.runProblem(problem);
             return did_pass_all_tests;
         }

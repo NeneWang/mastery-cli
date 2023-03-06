@@ -3,6 +3,7 @@ const url = require('url');
 const fs = require('fs');
 const { marked } = require('marked');
 const TerminalRenderer = require('marked-terminal');
+const Constants = require("./constants");
 
 /**
  * Gets clickeable path that could be printed on the console and clicked.
@@ -110,14 +111,17 @@ const countDecimals = (value) => {
 
 
 const renderPromptDescription = (prompt) => {
+    const Constants =  require("./constants");
     marked.setOptions({
         renderer: new TerminalRenderer()
     });
+    // Print title in Blue
+    console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE)(prompt?.["title"] ?? "")}`)
     console.log(marked(prompt?.["description"] ?? ""));
 };
 
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
-    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory
+    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, renderPromptDescription
 };

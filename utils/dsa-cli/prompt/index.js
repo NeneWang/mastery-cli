@@ -35,6 +35,20 @@ let options = {
             tags: ['sample'],
             preview: 'This is …',
             basename: 'hello-world'
+        },
+        'simpe-substraction': {
+            title: 'Simple Substraction',
+            description: 'A simple substraction example',
+            tags: [ 'sample', 'math' ],
+            preview: 'This is …',
+            basename: 'simpe-substraction'
+        },
+        'simple-division': {
+            title: 'Simple Division',
+            description: 'A simple division example',
+            tags: [ 'sample', 'math' ],
+            preview: 'This is …',
+            basename: 'simple-division'
         }
     }
      */
