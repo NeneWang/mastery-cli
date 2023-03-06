@@ -77,15 +77,17 @@ class DSATrainer {
     async openAndTest(problem) {
         console.log(
             "Opening problem: ", problem.slug,
-        )
-        const editor_isntruction = this.user_settings.common_editors[this.user_settings.editor];
-        this.problems_manager.openTemporalProblemFile({editor_instruction: editor_isntruction});
+        );
+        // Print the problem markdown.
+
+        const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
+        this.problems_manager.openTemporalProblemFile({editor_instruction: editor_instruction});
         const prompt_run_tests = new Toggle({
             name: 'run_tests',
             message: 'Do you want to run the tests?',
             enabled: 'Yes',
             disabled: 'No'
-        })
+        });
 
         const run_test = await prompt_run_tests.run();
         if (!run_test) {

@@ -193,7 +193,7 @@ class Maid {
 			const _ = await this.populateMissingReport();
 		}
 		// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
-		if (this.missingFeatReport.length <= 0) {
+		if (this.missingFeatReport?.length??0 <= 0) {
 			console.log("Missing Reports Missing: received: ", this.missingFeatReport)
 			return;
 		}
