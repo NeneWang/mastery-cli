@@ -194,22 +194,31 @@ class Quizzer {
     /**
      * Asks question and waits for response, allows repetition.
      */
-    async askQuestion({ ask_until_one_is_correct = true } = {}) {
+    async askQuestion({ ask_until_one_is_correct = true,  } = {}) {
         // Replace with Chance
         // if (DEBUG) console.log("Asking terms", this.terms)
         // const askMath = true;
-        const askQuestionRandom = async () => {
+        let exit = false;
+        const exitMethod = () => {
+            if(DEBUG) console.log("Exit method requested") ;
+            exit = true;
+            return false;
+        };
+
+
+        const askQuestionRandom = async ({ exitMethod = () => { } } = {}) => {
             const askMath = constants.getRandomBool(); // If to whether ask for a math or terminology question
             if (askMath) {
-                return await this.ask_math_question()
+                return await this.ask_math_question({ exitMethod: exitMethod })
             } else {
-                return await this.pick_and_ask_term_question()
+                return await this.pick_and_ask_term_question({ exitMethod: exitMethod })
             }
         };
         let answerIsCorrect = false;
         if (ask_until_one_is_correct)
-            while (!answerIsCorrect) {
-                answerIsCorrect = await askQuestionRandom();
+            while (!answerIsCorrect && !exit) {
+                if(DEBUG) console.log("Answer is correct", answerIsCorrect, "exit", exit);
+                answerIsCorrect = await askQuestionRandom({ exitMethod: exitMethod });
             }
         else {
             const _ = askQuestionRandom();
@@ -254,7 +263,7 @@ class Quizzer {
         const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
 
         const studyScheduler = new TermScheduler({ cards: selected_terms, cards_category: deck_selected });
-        
+
         await studyScheduler.setLearningCards(selected_terms); // Populate the right cards.
         // console.log(studyScheduler.learning_queue);
         let exit = false;
@@ -273,11 +282,11 @@ class Quizzer {
             }
             if (DEBUG) showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt(), studyScheduler.learning_queue.length, studyScheduler.working_set.length);
             const card_to_ask = studyScheduler.getCard();
-            
-            
+
+
 
             // Somewhere here the duplication error occurs.
-            
+
             const answered_correctly = await this.ask_term_question(card_to_ask, { exitMethod: exitMethod });
 
             // To here
@@ -287,7 +296,7 @@ class Quizzer {
             // console.log(answered_correctly);
             // console.log("Answered");
             // showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt());
-            
+
             studyScheduler.solveCard(answered_correctly);
             await studyScheduler.saveCards();
 
@@ -298,12 +307,12 @@ class Quizzer {
         }
     }
 
-    async pick_and_ask_term_question() {
+    async pick_and_ask_term_question({ exitMethod = () => { } } = {}) {
         // Fetches a random term form with the youngest one, unless there is no internet
 
         const term_selected = await this.pick_term_question();
         if (DEBUG) console.log("term_selected", term_selected);
-        return await this.ask_term_question(term_selected);
+        return await this.ask_term_question(term_selected, { exitMethod: exitMethod });
 
     }
 
@@ -343,7 +352,7 @@ class Quizzer {
                 let image_file = getAbsoluteUri(term_selected?.attachment);
                 console.log(`attachment: ${image_file}`);
                 // Also print the attachment image if possible
-                const _ = show_image(term_selected?.attachment, { is_url: term_selected.attachment_is_url });
+                const _ = await show_image(term_selected?.attachment, { is_url: term_selected.attachment_is_url });
             }
 
             console.log(`${term_selected.description}\n`)
@@ -371,7 +380,7 @@ class Quizzer {
                 const _ = await increasePerformance("terms");
 
                 this.printExample(term_selected)
-    
+
                 /**
                  * date: submission answer
                  * date: submission answer
@@ -485,7 +494,7 @@ class Quizzer {
 
     }
 
-    async ask_math_question() {
+    async ask_math_question({ exitMethod = () => { } }) {
 
         const question_form = await this.pick_math_question();
         try {
@@ -515,6 +524,12 @@ class Quizzer {
                 })
 
                 const res = await question.run()
+
+                // Escape if user wants to exit
+                if (res == "exit" || res == "quit" || res == "q" || res == "!") {
+                    exitMethod();
+                    return false;
+                }
 
                 if (res == question_prompt.expectedAnswer) {
                     answerIsCorrect = true;
