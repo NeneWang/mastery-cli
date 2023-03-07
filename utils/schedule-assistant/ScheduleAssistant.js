@@ -10,8 +10,10 @@ class ScheduleAssistant {
 
         // Loads the schedule-settings.json
         this.scheduleSettings = require('./data/schedule-settings.json');
-        this.report = new StorableReport();
-        this.report = this.checkIfNewReportRequired();
+        this.reportAnswers = new StorableReport();
+        this.updateReportAnswer();
+        this.reportPrompt = this.createReportPrompt();
+
     }
 
     /**
@@ -57,25 +59,58 @@ class ScheduleAssistant {
 
     }
 
-    promptGenerator(report) {
-        // Generates the prompts for the report based on the report object.
+    runReport(reportPrompt) {
 
+        const getFieldFromType = (reportPromptGroup, type) => {
+            // Returns the field from the type.
+            return Object.values(reportPromptGroup).filter(field => field?.TYPE??"" === type);
+        }
+
+        // Displays reports, also populates the report from it's previous answers.
+
+        // Go for each group. Then filter by CHECKBOX, then BLOCK then NUMBER then TEXT
+        // Also check if the field had been asnwered before (stored in the report and complete accordingly)
+        for(const group_key in reportPrompt) {
+            // Go for each field in the group.
+            console.log("running using group: ", group_key);
+
+            // RUN for CHEBOXES first.
+            const checkboxFields = getFieldFromType(reportPrompt[group_key], "CHECKBOX")
+            console.log("checkboxFields", checkboxFields);
+
+            // RUN for BLOCKS second.
+            const blockFields = getFieldFromType(reportPrompt[group_key], "BLOCK");
+            console.log("blockFields", blockFields);
+
+            // RUN for NUMBER third.
+            const numberFields = getFieldFromType(reportPrompt[group_key], "NUMBER");
+            console.log("numberFields", numberFields);
+
+
+        }
+
+        // based on the answers populate the reportAnswers.
+
+        // Once iterated, store the report answers
+        this.reportAnswers
 
     }
 
-    checkIfNewReportRequired() {
+    updateReportAnswer() {
         // Checks if the report is from yesterday, if so, uploads it and creates a new one.
-        if (this.report.getDate() !== new Date().getDay()) {
+        if (this.reportAnswers.getDate() !== new Date().getDay()) {
             this.uploadReport();
+            // Creates new reportPrompt
+            // Creates new report answers
+            this.reportAnswers.cleanReport();
             
         }
-        return this.createReportPrompt()
 
     }
 
     async uploadReport() {
         // Uploads the report to the server
-        console.log("Uploading report...", this.report);
+        console.log("Uploading report...", this.reportAnswers);
     }
 
 

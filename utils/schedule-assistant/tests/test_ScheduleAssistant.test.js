@@ -20,8 +20,18 @@ describe("ScheduleAssistant", () => {
 
         const scheduleAssistant = new ScheduleAssistant();
         const reportCreated = scheduleAssistant.createReportPrompt({ weekday: "Monday" });
-        console.log("reportCreated", reportCreated);
+        console.log("reportCreated", JSON.stringify(reportCreated));
         // console.log("reportCreated length", reportCreated?.fields?.length);
+
+    });
+
+    it("Tests if report generated is runnable", () => {
+        const scheduleAssistant = new ScheduleAssistant();
+        const reportCreated = scheduleAssistant.createReportPrompt({ weekday: "Monday" });
+        // console.log("reportCreated", reportCreated);
+        scheduleAssistant.runReport(reportCreated);
+
+        
 
     });
 

@@ -1,5 +1,5 @@
 const { JsonDB, Config } = require("node-json-db");
-
+const Functions = require("./functions");
 
 const DEBUG = false;
 
@@ -7,12 +7,19 @@ const DEBUG = false;
 class StorableReport {
     constructor() {
         this.db = new JsonDB(new Config("report", true, false, "/"));
-        // this.report = this.getReport();
+        this.getReport().then(reportData => {
+            this.report = reportData;
+        });
     }
 
     getDate() {
         // console.log("this.report", this.report);
         return this.report?.date;
+    }
+
+    cleanReport() {
+        this.report = {};
+        this.report.date = new Functions().getCurrentDate();
     }
 
     async getReport() {

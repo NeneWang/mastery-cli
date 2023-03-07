@@ -10,6 +10,15 @@ describe("StorableReport", function () {
             console.log("date", date);
             assert(typeof date === "string");
         });
+
+        it("Clean report popualtes an empty date", async function(){
+            const storableReport = new StorableReport();
+            storableReport.cleanReport();
+            const date = storableReport.getDate();
+            console.log("date should be today", date);
+            console.log("report should only contain the date", storableReport.report);
+        })
+
     });
 
     describe("#setReport(report)", function () {
@@ -20,7 +29,7 @@ describe("StorableReport", function () {
             assert.deepEqual(report.report, newReport);
         });
 
-        
+
         it("should update the report data with the provided report", async function  () {
             const report = new StorableReport();
             const newReport = { date: "2022-01-01", value: 10 };
