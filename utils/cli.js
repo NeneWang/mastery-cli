@@ -60,6 +60,7 @@ class CommandsInformation {
 			code: new Command("Outputs the directory and copies it to clipboard of the maid cli root files", "code"),
 			prio: new Command("Outputs the priorities", "prio"),
 			ses: new Command("Study session", 'ses'),
+			dsa: new Command("Random Data structures and algorithms", 'dsa'),
 
 		};
 	}

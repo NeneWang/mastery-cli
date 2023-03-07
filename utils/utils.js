@@ -164,7 +164,7 @@ class Maid {
 		this.say("Would you like me to clean up the terminal?", false)
 
 		// const response = question('clean', 'y/n', { type: 'confirm' });
-		const cleanPrompt = new Confirm("Clean");
+		const cleanPrompt = new Confirm("Clean", { initial: true });
 		const response = await cleanPrompt.run();
 		console.log(response)
 		if (response) {
@@ -189,11 +189,11 @@ class Maid {
 	 * !important: To prepopulate the msising report first!!
 	 */
 	provideMissingReport = async () => {
-		if(!this.missingFeatReport){
+		if (!this.missingFeatReport) {
 			const _ = await this.populateMissingReport();
 		}
 		// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
-		if (this.missingFeatReport.length <= 0) {
+		if (this.missingFeatReport?.length ?? 0 <= 0) {
 			console.log("Missing Reports Missing: received: ", this.missingFeatReport)
 			return;
 		}
@@ -688,5 +688,5 @@ const autorelease = () => {
 
 module.exports = {
 	getTalk, commitpush, autorelease,
-	Maid, getToday, FlashQuizzer
+	Maid, getToday, FlashQuizzer, increasePerformance
 };

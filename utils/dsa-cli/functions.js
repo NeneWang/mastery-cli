@@ -1,7 +1,9 @@
 const path = require("path");
 const url = require('url');
 const fs = require('fs');
-const { get_random, MAID_EMOJIS } = require("./constants");
+const { marked } = require('marked');
+const TerminalRenderer = require('marked-terminal');
+const Constants = require("./constants");
 
 /**
  * Gets clickeable path that could be printed on the console and clicked.
@@ -19,15 +21,15 @@ const getAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/
  * @param {str} fileimage : String containing the relative position of the image from utils directory
  * @returns {str} Formatted C:/github/testing/maid-cli/img/unicorn.png
  */
-const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/') => {
+const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './') => {
     // Note it should take from the root.
-    const absolutePath = path.resolve(path.join(__dirname, './data/', fileimage)); // Note the '../' because it is inside of constants
+    const absolutePath = path.resolve(path.join(__dirname, subdirectory, fileimage)); // Note the '../' because it is inside of constants
 
     // const fileUrl = url.pathToFileURL(absolutePath);
     return (absolutePath.toString());
 };
 
-const getFilesInDirectory = (directoryPath = './data/priorities') => {
+const getFilesInDirectory = async (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
 
     console.log("Fetching from: ", absolutePath);
@@ -79,10 +81,6 @@ async function show_image(image_file, { is_url = false } = {}) {
     }
 };
 
-// https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}
-const getRandomMaidEmoji = () => {
-    return `:${get_random(MAID_EMOJIS)}:`;
-};
 const appendQuotes = (message) => {
     return `"${message}"`;
 };
@@ -112,27 +110,20 @@ const countDecimals = (value) => {
 };
 
 
-/**
- * Returns whether the user wants to exit.
- * @param {str} res : User input
- * @returns {boolean} : True if user wants to exit, false otherwise
- */
-const user_requests_exit = (res) => {
-    return (res == "exit" || res == "quit" || res == "q" || res == "!")
-}
-
-/**
- * Returns whether the user wants to skip the problem.
- * @param {boolean} res : User input
- * @returns {boolean} : True if user wants to skip, false otherwise
- */
-const user_requests_skip = (res) => {
-    return (res == "skip" || res == "s" || res == "next" || res == "n" || res == "no" || res == "")
-}
+const renderPromptDescription = (prompt) => {
+    const Constants =  require("./constants");
+    const chalk = require("chalk");
+    marked.setOptions({
+        renderer: new TerminalRenderer()
+    });
+    // Print title in Blue
+    console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(prompt?.["title"] ?? "")}`)
+    console.log(marked(prompt?.["description"] ?? ""));
+    console.log(marked(prompt?.["preview"] ?? ""));
+};
 
 
 module.exports = {
-    getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
-    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, user_requests_exit,
-    user_requests_skip
+    getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
+    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, renderPromptDescription
 };
