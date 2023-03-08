@@ -1,11 +1,12 @@
 const { qmathformulas } = require('./data/math_formulas');
 const { termJson } = require('./data/terms');
 const {Term, Terminology, TermStorage} = require('./structures');
-const { CURRENCY_SIMBOLS } = require('./data/currency')
+const { CURRENCY_SIMBOLS } = require('./data/currency.js');
 
 const path = require("path");
 const url = require('url');
 
+// console.log("CURRENCY_SIMBOLS", CURRENCY_SIMBOLS);
 /**
  * 
  * @param {List: any} list A lit of any object

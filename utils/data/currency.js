@@ -1,5 +1,5 @@
 
-const CURRENCY_SIMBOLS = {
+let CURRENCY_SIMBOLS = {
     "AED": "United Arab Emirates Dirham",
     "AFN": "Afghan Afghani",
     "ALL": "Albanian Lek",
@@ -171,5 +171,5 @@ const CURRENCY_SIMBOLS = {
     "ZMW": "Zambian Kwacha",
     "ZWL": "Zimbabwean Dollar"
 }
-
-module.export = { CURRENCY_SIMBOLS};
+// console.log("CURRENCY_SIMBOLS", CURRENCY_SIMBOLS);
+module.exports = { CURRENCY_SIMBOLS };
