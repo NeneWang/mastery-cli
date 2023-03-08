@@ -70,6 +70,63 @@ class LenghtOfLongestSubString extends ProblemTests {
     }
 }
 
+class MaxProfit extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "[7,1,5,3,6,4] => 5"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve([7,1,5,3,6,4]) == 5);
+    }
+
+    test_2(){
+        this.current_test_name = "[7,6,4,3,1] => 0"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve([7,6,4,3,1]) == 0);
+    }
+
+    test_3(){
+        this.current_test_name = "[2,4,1] => 2"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve([2,4,1]) == 2);
+    }
+
+}
+
+class MaxSlidingWindow extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "[1,3,-1,-3,5,3,6,7], 3 => [3,3,5,5,6,7]"
+        const problemToTest = new this.Problem();
+        assert.deepEqual(problemToTest.solve([1,3,-1,-3,5,3,6,7], 3), [3,3,5,5,6,7]);
+    }
+
+    test_2(){
+        this.current_test_name = "[1], 1 => [1]"
+        const problemToTest = new this.Problem();
+        assert.deepEqual(problemToTest.solve([1], 1), [1]);
+    }
+
+    test_3(){
+        this.current_test_name = "[1,-1], 1 => [1,-1]"
+        const problemToTest = new this.Problem();
+        assert.deepEqual(problemToTest.solve([1,-1], 1), [1,-1]);
+    }
+
+
+}
+
 
 
 
@@ -79,6 +136,8 @@ const TEST_DICTIONARY = {
     "character-replacement": CharacterReplacement,
     "daily-temperatures": DailyTemperatures,
     "length-of-longest-substring": LenghtOfLongestSubString,
+    "max-profit": MaxProfit,
+    "max-sliding-window": MaxSlidingWindow
 
 }
 
