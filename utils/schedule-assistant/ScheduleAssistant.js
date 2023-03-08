@@ -61,7 +61,7 @@ class ScheduleAssistant {
 
     async createRunablePrompts(reportPrompt) {
 
-        const getFieldFromType = (reportPromptGroup, type) => {
+        const getFieldFromType = (reportPromptGroup, typeExpected) => {
             // Add the key into the properties of themselves.
             const modReportPromptGroup = Object.keys(reportPromptGroup).map(key => {
 
@@ -76,10 +76,77 @@ class ScheduleAssistant {
 
                 return fields;
             });
-
+            console.log("Filtering using", modReportPromptGroup, typeExpected)
             // Returns the field from the type.
-            const filtered = modReportPromptGroup.filter(field => field?.TYPE ?? "" === type);
+            const filtered = modReportPromptGroup.filter(field => field?.['TYPE'] === typeExpected);
+
+            console.log("Filtered result", filtered)
             return filtered;
+        }
+
+        /**
+         * Creates the checkboxes prompts for the report.
+         * @param {Object(Type, description, links, key)>} reportPromptGroup Object containing the fields of the specific group.
+         * @param {string} group_key  e.g. "COMMON", "system", "achievements"
+         * @returns {List<Prompt>} Checkboxes Enquire Prompt created.
+         */
+        const createCheckboxPrompts = (reportPromptGroup, group_key) => {
+            const checkboxFields = getFieldFromType(reportPromptGroup, "CHECKBOX");
+
+            if (checkboxFields?.length ?? 0 > 0) {
+                const checkBoxes = new Scale({
+                    name: 'checkboxes',
+                    message: `${group_key}`,
+                    scale: [
+                        { name: 0, message: 'False', value: false },
+                        { name: 1, message: 'True', value: true },
+                    ],
+                    choices: Object.values(checkboxFields).map((field) => {
+                        return {
+                            name: field?.key,
+                            message: field?.key,
+                            initial: this.reportAnswers.getAnswerFor(field?.key) ?? 0,
+                            hint: field?.DESCRIPTION ?? "",
+                        };
+                    }),
+                });
+                return checkBoxes;
+            }
+            return null;
+        };
+
+        const createBlockPrompts = (reportPromptGroup, group_key) => {
+            const blockFields = getFieldFromType(reportPromptGroup, "BLOCKS");
+            if (blockFields?.length ?? 0 > 0) {
+                const blocks = new Scale({
+                    name: 'blocks',
+                    message: `${group_key}`,
+                    scale: [
+                        { name: 0, message: '0', value: 0 },
+                        { name: 1, message: '1', value: 1 },
+                        { name: 2, message: '2', value: 2 },
+                        { name: 3, message: '3', value: 3 },
+                        { name: 4, message: '4', value: 4 },
+                        { name: 5, message: '5', value: 5 },
+                    ],
+                    choices: Object.values(blockFields).map((field) => {
+                        return {
+                            name: field?.key,
+                            message: field?.key,
+                            initial: this.reportAnswers.getAnswerFor(field?.key) ?? 0,
+                            hint: field?.DESCRIPTION ?? "",
+                        };
+                    }),
+                });
+                return blocks;
+            }
+            return null;
+        }
+
+        const createNumberPrompts = (reportPromptGroup, group_key) => {
+            const numberFields = getFieldFromType(reportPromptGroup, "NUMBER");
+            if (numberFields?.length ?? 0 > 0) {
+            }
         }
 
         // Displays reports, also populates the report from it's previous answers.
@@ -89,42 +156,18 @@ class ScheduleAssistant {
         const prompts = [];
         await this.reportAnswers.getReport()
         for (const group_key in reportPrompt) {
-            // Go for each field in the group.
-            // console.log("running using group: ", group_key);
+            const checkboxPrompts = createCheckboxPrompts(reportPrompt[group_key], group_key);
 
-            // RUN for CHEBOXES first.
-            const checkboxFields = getFieldFromType(reportPrompt[group_key], "CHECKBOX")
-            // console.log("checkboxFields", checkboxFields);
-            // console.log("checkbox values", Object.values(checkboxFields));
-            if (checkboxFields?.length ?? 0 > 0) {
-                const checkBoxes = new Scale({
-                    name: 'checkboxes',
-                    message: `${group_key}`,
-                    scale: [
-                        { name: 0, message: 'False', value: false },
-                        { name: 1, message: 'True', value: true },
-                    ],
-                    choices: Object.values(checkboxFields).map(field => {
-                        return {
-                            name: field?.key,
-                            message: field?.key,
-                            initial: this.reportAnswers.getAnswerFor(field?.key) ?? 0,
-                            hint: field?.DESCRIPTION ?? ""
-                        }
-                    })
-                });
-                prompts.push(checkBoxes);
-
-
+            if (checkboxPrompts) {
+                prompts.push(checkboxPrompts);
             }
 
-
             // RUN for BLOCKS second.
-            const blockFields = getFieldFromType(reportPrompt[group_key], "BLOCK");
+            // const blockFields = getFieldFromType(reportPrompt[group_key], "BLOCKS");
             // console.log("blockFields", blockFields);
 
             // RUN for NUMBER third.
-            const numberFields = getFieldFromType(reportPrompt[group_key], "NUMBER");
+            // const numberFields = getFieldFromType(reportPrompt[group_key], "NUMBER");
             // console.log("numberFields", numberFields);
 
 
