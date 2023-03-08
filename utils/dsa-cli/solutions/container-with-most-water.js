@@ -1,5 +1,5 @@
 class ContainerWithMostWater {
-    maxArea(heights) {
+    maxArea(height) {
 
 
 

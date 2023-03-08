@@ -18,12 +18,12 @@ class ThreeNumberSum extends ProblemTests {
     test_1() {
         this.current_test_name = "[0,1,1] => []"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([0, 1, 1]) == []);
+        assert.deepEqual(problemToTest.solve([0, 1, 1]), []);
     }
     test_2() {
         this.current_test_name = "[-1,0,1,2,-1,-4]"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([-1, 0, 1, 2, -1, -4]) == [[-1, -1, 2], [-1, 0, 1]]);
+        assert.deepEqual(problemToTest.solve([-1, 0, 1, 2, -1, -4]), [[-1, -1, 2], [-1, 0, 1]]);
     }
 }
 
