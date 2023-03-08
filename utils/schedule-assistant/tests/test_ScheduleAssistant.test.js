@@ -25,14 +25,14 @@ describe("ScheduleAssistant", () => {
 
     });
 
-    it("Tests if report generated is runnable", () => {
+    it("Tests if report generated is runnable", async () => {
         const scheduleAssistant = new ScheduleAssistant();
         const reportCreated = scheduleAssistant.createReportPrompt({ weekday: "Monday" });
         // console.log("reportCreated", reportCreated);
-        scheduleAssistant.runReport(reportCreated);
-
-        
-
+        // done();
+        await scheduleAssistant.createRunablePrompts(reportCreated);
     });
+
+    
 
 });

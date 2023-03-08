@@ -17,6 +17,18 @@ class StorableReport {
         return this.report?.date;
     }
 
+    addAnswers(answers) {
+        // A dict will be passsed in you want to merge this with the input.
+        const thisanswers = this.report ?? {};
+        this.report = { ...thisanswers,  ...answers, };
+        this.saveReport();
+    }
+
+    getAnswerFor(key){
+        console.log("this.report", key, this.report[key]);
+        return this.report[key];
+    }
+
     cleanReport() {
         this.report = {};
         this.report.date = new Functions().getCurrentDate();
