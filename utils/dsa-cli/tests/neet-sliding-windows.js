@@ -98,6 +98,37 @@ class MaxProfit extends ProblemTests{
 
 }
 
+
+class MinWindow extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+    
+    test_1(){
+        this.current_test_name = "ADOBECODEBANC, ABC => BANC"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve("ADOBECODEBANC", "ABC") == "BANC");
+    }
+
+    test_2(){
+        this.current_test_name = "a, a => a"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve("a", "a") == "a");
+    }
+
+    test_3(){
+        this.current_test_name = "a, aa => ''"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve("a", "aa") == "");
+    }
+
+}
+
+
+
 class MaxSlidingWindow extends ProblemTests{
     constructor(Problem){
         super(Problem);
@@ -133,10 +164,12 @@ class MaxSlidingWindow extends ProblemTests{
 
 
 const TEST_DICTIONARY = {
-    "character-replacement": CharacterReplacement,
-    "daily-temperatures": DailyTemperatures,
-    "length-of-longest-substring": LenghtOfLongestSubString,
     "max-profit": MaxProfit,
+    "length-of-longest-substring": LenghtOfLongestSubString,
+    "character-replacement": CharacterReplacement, //Longest repeating char
+
+    "daily-temperatures": DailyTemperatures,
+    "min-window": MinWindow,
     "max-sliding-window": MaxSlidingWindow
 
 }

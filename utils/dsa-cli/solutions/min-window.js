@@ -1,5 +1,5 @@
 class MinWindow {
-    solve() {
+    solve(s, t) {
 
         const getFrequencyMap = (str, frequencyMap = new Map()) => {
             for (const char of str) {
