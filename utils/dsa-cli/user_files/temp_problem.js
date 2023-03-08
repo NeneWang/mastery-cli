@@ -1,8 +1,11 @@
-class Substraction {
-    solve(a, b) {
-        return a-b;
+class Problem {
+    threeSum(array, targetSum) {
+        
+        return [];
     }
+
+    solve = this.threeSum;
 }
 
 
-module.exports = { Problem: Substraction };
+module.exports = { Problem };

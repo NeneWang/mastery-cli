@@ -4,7 +4,7 @@ class Division {
     }
 
     //Dont edit this.
-    solve = divide;
+    solve = this.divide;
 }
 
 
