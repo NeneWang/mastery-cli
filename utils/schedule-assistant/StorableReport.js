@@ -17,14 +17,25 @@ class StorableReport {
         return this.report?.date;
     }
 
-    addAnswers(answers) {
-        // A dict will be passsed in you want to merge this with the input.
-        const thisanswers = this.report ?? {};
-        this.report = { ...thisanswers,  ...answers, };
+    fixCheckAnswers(listOfChekBoxesKeys) {
+        // Change the answer of those keys that are in listOfChekBoxesKeys wheres are otehr than 1 or 0 to 0
+        for (const key of listOfChekBoxesKeys) {
+            const answer = this.getAnswerFor(key);
+            if (answer !== 1 && answer !== 0) {
+                this.report[key] = 0;
+            }
+        }
         this.saveReport();
     }
 
-    getAnswerFor(key){
+    addAnswers(answers) {
+        // A dict will be passsed in you want to merge this with the input.
+        const thisanswers = this.report ?? {};
+        this.report = { ...thisanswers, ...answers, };
+        this.saveReport();
+    }
+
+    getAnswerFor(key) {
         console.log("this.report", key, this.report[key]);
         return this.report[key];
     }
