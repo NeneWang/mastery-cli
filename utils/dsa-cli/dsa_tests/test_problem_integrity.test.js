@@ -27,9 +27,19 @@ describe('Problem integrity', function () {
             assert(didPassAllTests);
         }
 
+    });
 
+    it("Test that all problems have printable prompts", async function () {
+        const problemManager = new ProblemsManager();
+        problemManager.autoPopulateUsingTestDictionary();
+        // TODO Complete this
 
+    });
 
+    it("Test that all problems have basic prompts", async function () {
+        const problemManager = new ProblemsManager();
+        problemManager.autoPopulateUsingTestDictionary();
+        // TODO Complete this
 
     });
 
