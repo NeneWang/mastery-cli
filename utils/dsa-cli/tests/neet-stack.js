@@ -22,7 +22,7 @@ class CarFleet extends ProblemTests {
 }
 
 
-class LargestRectangleArea extends ProblemTests{
+class LargestRectangleArea extends ProblemTests {
     constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
@@ -32,16 +32,16 @@ class LargestRectangleArea extends ProblemTests{
     test_1() {
         this.current_test_name = "[2,1,5,6,2,3] => 10"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([2,1,5,6,2,3]) == 10);
+        assert(problemToTest.solve([2, 1, 5, 6, 2, 3]) == 10);
     }
     test_2() {
         this.current_test_name = "[2,4] => 4"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([2,4]) == 4);
+        assert(problemToTest.solve([2, 4]) == 4);
     }
 }
 
-class MinStack extends ProblemTests{
+class MinStack extends ProblemTests {
     constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
@@ -62,10 +62,114 @@ class MinStack extends ProblemTests{
     }
 }
 
+
+class ValidParentheses extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+    }
+
+    test_1() {
+        this.current_test_name = "()[]{} => true"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve("()[]{}") == true);
+    }
+
+    test_2() {
+        this.current_test_name = "(] => false"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve("(]") == false);
+    }
+
+    test_3() {
+        this.current_test_name = "([)] => false"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve("([)]") == false);
+    }
+
+    test_4() {
+        this.current_test_name = "{[]} => true"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve("{[]}") == true);
+    }
+}
+
+class DailyTemperatures extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        this.current_test_name = "[73, 74, 75, 71, 69, 72, 76, 73] => [1, 1, 4, 2, 1, 1, 0, 0]"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve([73, 74, 75, 71, 69, 72, 76, 73]).toString() == [1, 1, 4, 2, 1, 1, 0, 0].toString());
+    }
+
+    test_2() {
+        this.current_test_name = "[30, 40, 50, 60] => [1, 1, 1, 0]"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve([30, 40, 50, 60]).toString() == [1, 1, 1, 0].toString());
+    }
+}
+
+
+class GenerateParentesis extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        this.current_test_name = "3 => [\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve(3).toString() == ["((()))", "(()())", "(())()", "()(())", "()()()"].toString());
+    }
+
+    test_2(){
+        this.current_test_name = "1 => [\"()\"]"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve(1).toString() == ["()"].toString());
+    }
+}
+
+class EvalRPN extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "[\"2\", \"1\", \"+\", \"3\", \"*\"] => 9"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve(["2", "1", "+", "3", "*"]) == 9);
+    }
+
+    test_2(){
+        this.current_test_name = "[\"4\", \"13\", \"5\", \"/\", \"+\"] => 6"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve(["4", "13", "5", "/", "+"]) == 6);
+    }
+}
+
+
+
+
+
 const TEST_DICTIONARY = {
+    'valid-parentheses': ValidParentheses,
+    'min-stack': MinStack,
+    'evaluate-polish-reverse-notation': EvalRPN,
+    'generate-parenthesis': GenerateParentesis,
+    'daily-temperatures': DailyTemperatures,
     'car-fleet': CarFleet,
     'largest-rectangle-area': LargestRectangleArea,
-    'min-stack': MinStack,
 }
 
 module.exports = TEST_DICTIONARY;
