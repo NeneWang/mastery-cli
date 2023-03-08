@@ -2,7 +2,7 @@
 
 let TEST_DICTIONARY = {}
 const problem_tests_filenames = [
-    'helloworld', 'simple-problems', 'neet-array', 'neet-sliding-windows'
+    'helloworld', 'simple-problems', 'neet-array', 'neet-sliding-windows', 'neet-stack'
 ]
 
 
