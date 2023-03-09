@@ -1,9 +1,9 @@
-class Problem {
-	solve() {
+class FindMin {
+	solve(nums) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Problem };
+module.exports = { Problem: FindMin };

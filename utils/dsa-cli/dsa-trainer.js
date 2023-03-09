@@ -53,8 +53,10 @@ class DSATrainer {
      * @param {boolean} tryUntilSolved If true, the problem will be reprompted until it is solved. If false, the problem will be solved once.
      * @returns {ProblemStatus} The status of the problem
      */
-    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true } = {}) {
-        this.problems_manager.populateTemplate(problem);
+    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, populate_problem = true } = {}) {
+        if (populate_problem) {
+            this.problems_manager.populateTemplate(problem);
+        }
 
 
         const prompt_reattempt = new Toggle({
@@ -85,9 +87,9 @@ class DSATrainer {
             did_pass_all_tests = await this.openAndTest(problem);
             console.log("Did pass all tests: ", did_pass_all_tests);
             // Save that the user solved the problem.
-            
+
         }
-        
+
         if (did_pass_all_tests) {
             this.problemReport.increaseAnswerFor(problem.slug);
             console.log("score increased", this.problemReport.getAnswerFor(problem.slug));
@@ -136,15 +138,15 @@ class DSATrainer {
 
     }
 
-    setCurrentProblem(problem_slug){
+    setCurrentProblem(problem_slug) {
         this.problemReport.setAnswerFor("current_problem", problem_slug);
     }
 
-    getCurrentProblem(){
+    getCurrentProblem() {
         return this.problemReport.getAnswerFor("current_problem");
     }
 
-    cleanCurrentProblem(){
+    cleanCurrentProblem() {
         this.problemReport.setAnswerFor("current_problem", 0);
     }
 
@@ -189,8 +191,11 @@ class DSATrainer {
 
         const formattedProblems = createFormattedProblemMap(this.problems_manager.problemSlugs, { show_progress: show_progress, show_tags: show_tags });
         const current_problem_prompt = "Continue last problem";
+
+
+        // So by default the first on on the list will be selected
         const choices = [];
-        if(this.getCurrentProblem() != 0){
+        if (this.getCurrentProblem() != 0) {
             choices.push(current_problem_prompt)
         }
         choices.push(...Object.keys(formattedProblems));
@@ -204,10 +209,10 @@ class DSATrainer {
 
 
         const problem_selected = await prompt.run();
-        
-        
+
+
         const getProblem = (choice_selected) => {
-            if(choice_selected == current_problem_prompt){
+            if (choice_selected == current_problem_prompt) {
                 return this.problems_manager.getProblem(this.getCurrentProblem());
             }
             const problem_slug = formattedProblems[problem_selected];
@@ -216,12 +221,12 @@ class DSATrainer {
             return problem;
 
         }
-        
-        // return await this.openAndTest(problem);
-        
-        const problem = getProblem(problem_selected);
 
-        const problem_status = await this.solveProblem(problem);
+        // return await this.openAndTest(problem);
+
+        const problem = getProblem(problem_selected);
+        const is_new_problem = problem_selected != current_problem_prompt;
+        const problem_status = await this.solveProblem(problem, { populate_problem: is_new_problem });
         // TODO Make appropriate adjustement with the status
 
         return problem_status == Constants.ProblemStatus.solved;

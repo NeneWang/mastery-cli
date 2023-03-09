@@ -127,7 +127,8 @@ const { Demo, EDemo } = demos;
 
 		if (dsa_is_correct) {
 			await increasePerformance("algo");
-			maid.say("Good job, you got it right! Increasing your social credit score!");
+			console.log("dsa solved correctly");
+			
 		}
 
 	}
