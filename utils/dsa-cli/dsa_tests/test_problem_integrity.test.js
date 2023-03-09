@@ -42,6 +42,7 @@ describe('Problem integrity', function () {
 
             const promblem_prompt = await getPromptDict(problemMetadata.slug);
             // console.log(promblem_prompt);
+            assert(promblem_prompt!=null || promblem_prompt!=undefined);
             const success_at_print = renderPromptDescription(promblem_prompt);
             assert(success_at_print);
         }
