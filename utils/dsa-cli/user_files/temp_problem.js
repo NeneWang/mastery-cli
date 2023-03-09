@@ -1,11 +1,13 @@
-class Problem {
-    threeSum(array, targetSum) {
-        
-        return [];
-    }
+class MedianSortedArrays {
+	solve(nums1, nums2) {
+		// Your code here
 
-    solve = this.threeSum;
+	}
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: MedianSortedArrays };angleArea };nWater;
+}
+
+
+module.exports = { Problem: TrappingRainWater };

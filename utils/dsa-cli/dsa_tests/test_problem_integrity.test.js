@@ -52,7 +52,14 @@ describe('Problem integrity', function () {
     it("Test that all problems have basic prompts", async function () {
         const problemManager = new ProblemsManager();
         problemManager.autoPopulateUsingTestDictionary();
-        // TODO Complete this
+        // if this test files, make sure you can run func_create_empty_base_codes to populate with a basic template of them all.
+
+        
+        const allProblemsMetadata = problemManager.problems;
+        for (let problemMetadata of Object.values(allProblemsMetadata)) {
+            // console.log(problemMetadata);
+            assert(problemManager.copyFile(problemMetadata.file_path) == true)
+        }
 
     });
 
