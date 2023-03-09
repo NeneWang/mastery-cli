@@ -49,7 +49,7 @@ class MedianSortedArrays {
     };
 
     solve(nums1, nums2) {
-        this.findMedianSortedArrays(nums1, nums2);
+        return this.findMedianSortedArrays(nums1, nums2);
     }
 }
 

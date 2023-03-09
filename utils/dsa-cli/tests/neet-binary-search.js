@@ -258,6 +258,49 @@ class KokoEatingBananas extends ProblemTests {
         assert(new this.Problem().solve([30, 11, 23, 4, 20], 6) == 23);
     }
 
+}
+
+
+class MedianSortedArrays extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+    }
+
+    test_1() {
+        this.current_test_name = "[1,3], [2]"
+        assert(new this.Problem().solve([1, 3], [2]) == 2.0);
+    }
+
+    test_2() {
+        this.current_test_name = "[1,2], [3,4]"
+        assert(new this.Problem().solve([1, 2], [3, 4]) == 2.5);
+    }
+
+    test_3() {
+        this.current_test_name = "[0,0], [0,0]"
+        assert(new this.Problem().solve([0, 0], [0, 0]) == 0.0);
+    }
+
+    test_4() {
+        this.current_test_name = "[], [1]"
+        assert(new this.Problem().solve([], [1]) == 1.0);
+    }
+
+    test_5() {
+        this.current_test_name = "[2], []"
+        assert(new this.Problem().solve([2], []) == 2.0);
+    }
+
+    test_6() {
+        this.current_test_name = "[1,2], [3,4,5]"
+        assert(new this.Problem().solve([1, 2], [3, 4, 5]) == 3.0);
+    }
 
 }
 
@@ -267,6 +310,7 @@ const TEST_DICTIONARY = {
     'find-min': FindMin,
     'key-based-value-store': KeyBasedValueStore,
     'koko-eating-bananas': KokoEatingBananas,
+    'median-sorted-arrays': MedianSortedArrays,
 
 }
 
