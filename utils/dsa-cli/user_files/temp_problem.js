@@ -1,9 +1,9 @@
-class LargestRectangleArea {
-	solve(heights, maxArea = 0) {
+class Problem {
+	solve() {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: LargestRectangleArea };
+module.exports = { Problem: Problem };
