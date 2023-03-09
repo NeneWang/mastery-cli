@@ -111,7 +111,7 @@ class DSATrainer {
         renderPromptDescription(promblem_prompt);
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
-        this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
+        const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
 
         let question_state_flag = true;
         const choices = {
@@ -126,12 +126,14 @@ class DSATrainer {
                 }
                 catch (e) {
                     console.log("Error running tests: ", e);
+                    return false;
                 }
             },
             "Hint": async () => {
                 // TO Complete
                 console.log("Hint: ", "Use the problem of friendship");
-            }            ,
+                return false;
+            },
 
             'Exit': async () => {
                 question_state_flag = false;
@@ -150,8 +152,9 @@ class DSATrainer {
         while (question_state_flag) {
             const choice_selected = await prommpt_problem_menu.run();
             res = await choices[choice_selected](); //Run the selected choice.
-
+            console.log("Asking if to continue the menu", question_state_flag);
         }
+        console.log("Asking if to continue the menu @ the end", question_state_flag);
         return res;
     }
 

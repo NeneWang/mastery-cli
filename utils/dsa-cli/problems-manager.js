@@ -134,10 +134,10 @@ class ProblemsManager {
      * Opens the temporal problem file in the editor (Can be customized which to use).
      * @param {str} editor_instruction The instruction to open the file in the editor. Default is "start".
      */
-    openTemporalProblemFile({ editor_instruction = "start" } = {}) {
+    async openTemporalProblemFile({ editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
-        exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
+        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`exec error: ${error}`);
                 return;
