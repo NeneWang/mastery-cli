@@ -124,9 +124,14 @@ class TermStorage {
      * @returns {List<Json>} Gets the terminologies as a List<Json>
      */
     get jsonTerms() {
+        const safeguard_bad_terms = true;
         const res = [];
         // Add own cards
         for (const term of this.terms) {
+            if (safeguard_bad_terms && (term.term == "" || tern.description == "")) {
+                continue;
+            }
+
             res.push(term)
         }
 
