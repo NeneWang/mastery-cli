@@ -132,6 +132,13 @@ const renderPromptDescription = (prompt) => {
 
 
 function writeUnresolvedClass(sourceFilePath, targetFilePath, { avoidOverwrite = true } = {}) {
+    
+    // Check if the target file exists
+    if (avoidOverwrite && fs.existsSync(targetFilePath)) {
+        console.error(`Target file ${targetFilePath} already exists. Aborting write.`);
+        return;
+    }
+    
     // Read the content of the source file
     const content = fs.readFileSync(sourceFilePath, 'utf8');
 
@@ -146,11 +153,6 @@ function writeUnresolvedClass(sourceFilePath, targetFilePath, { avoidOverwrite =
     // Write the unresolved version of the class to the target file
     const unresolvedContent = `class ${className} {${solveMethodHeader}\t// Your code here\n\n\t\}\n}\n\n\nmodule.exports = { Problem: ${className} };`;
 
-    // Check if the target file exists
-    if (avoidOverwrite && fs.existsSync(targetFilePath)) {
-        console.error(`Target file ${targetFilePath} already exists. Aborting write.`);
-        return;
-    }
 
     fs.writeFileSync(targetFilePath, unresolvedContent, 'utf8');
 }

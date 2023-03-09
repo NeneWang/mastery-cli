@@ -7,6 +7,41 @@ const assert = require('assert');
 
 
 describe('Problem integrity', function () {
+
+    it("Test that all problems have printable prompts", async function () {
+        const problemManager = new ProblemsManager();
+        problemManager.autoPopulateUsingTestDictionary();
+
+        const { getPromptDict } = require('../prompt');
+        const { renderPromptDescription } = require('../functions');
+
+        const allProblemsMetadata = problemManager.problems;
+        for (let problemMetadata of Object.values(allProblemsMetadata)) {
+
+            const promblem_prompt = await getPromptDict(problemMetadata.slug);
+            // console.log(promblem_prompt);
+            assert(promblem_prompt != null || promblem_prompt != undefined);
+            const success_at_print = renderPromptDescription(promblem_prompt);
+            assert(success_at_print);
+        }
+
+    });
+
+    it("Test that all problems have basic prompts", async function () {
+        const problemManager = new ProblemsManager();
+        problemManager.autoPopulateUsingTestDictionary();
+        // if this test fails, make sure you can run func_create_empty_base_codes to populate with a basic template of them all.
+        // Or just run it here just in case everytime this test is run:
+        const { createEmptyBaseCodes } = require('./func_create_empty_base_codes');
+        createEmptyBaseCodes();
+
+        const allProblemsMetadata = problemManager.problems;
+        for (let problemMetadata of Object.values(allProblemsMetadata)) {
+            // console.log(problemMetadata);
+            assert(problemManager.copyFile(problemMetadata.file_path) == true)
+        }
+
+    });
     // Run and test test available
     it('Should run and test the problem', async function () {
         const problemManager = new ProblemsManager();
@@ -30,38 +65,6 @@ describe('Problem integrity', function () {
 
     });
 
-    it("Test that all problems have printable prompts", async function () {
-        const problemManager = new ProblemsManager();
-        problemManager.autoPopulateUsingTestDictionary();
-
-        const { getPromptDict } = require('../prompt');
-        const { renderPromptDescription } = require('../functions');
-
-        const allProblemsMetadata = problemManager.problems;
-        for (let problemMetadata of Object.values(allProblemsMetadata)) {
-
-            const promblem_prompt = await getPromptDict(problemMetadata.slug);
-            // console.log(promblem_prompt);
-            assert(promblem_prompt!=null || promblem_prompt!=undefined);
-            const success_at_print = renderPromptDescription(promblem_prompt);
-            assert(success_at_print);
-        }
-
-    });
-
-    it("Test that all problems have basic prompts", async function () {
-        const problemManager = new ProblemsManager();
-        problemManager.autoPopulateUsingTestDictionary();
-        // if this test files, make sure you can run func_create_empty_base_codes to populate with a basic template of them all.
-
-        
-        const allProblemsMetadata = problemManager.problems;
-        for (let problemMetadata of Object.values(allProblemsMetadata)) {
-            // console.log(problemMetadata);
-            assert(problemManager.copyFile(problemMetadata.file_path) == true)
-        }
-
-    });
 
 });
 
