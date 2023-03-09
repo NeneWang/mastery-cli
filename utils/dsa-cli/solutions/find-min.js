@@ -26,7 +26,7 @@ class FindMin {
     }
 
     solve(nums) {
-        this.findMin(nums);
+        return this.findMin(nums);
     }
 }
 

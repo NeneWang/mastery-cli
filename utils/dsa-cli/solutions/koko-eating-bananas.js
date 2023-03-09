@@ -1,6 +1,14 @@
 class KokoEatingBananas {
 
     minEatingSpeed(piles, h) {
+
+        const getHourSpent = (mid, piles, hourSpent = 0) => {
+            for (const pile of piles) {
+                hourSpent += Math.ceil(pile / mid);
+            }
+
+            return hourSpent;
+        };
         let [left, right] = [1, Math.max(...piles)];
 
         while (left < right) {
@@ -16,14 +24,6 @@ class KokoEatingBananas {
 
         return right;
 
-
-        const getHourSpent = (mid, piles, hourSpent = 0) => {
-            for (const pile of piles) {
-                hourSpent += Math.ceil(pile / mid);
-            }
-
-            return hourSpent;
-        };
     };
 
     solve(piles, h) {

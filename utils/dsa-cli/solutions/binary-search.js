@@ -20,7 +20,8 @@ class BinarySearch {
     }
 
     solve(nums, target) {
-        return (nums, target);
+        // console.log(this.search(nums, target))
+        return this.search(nums, target);
     }
 }
 
