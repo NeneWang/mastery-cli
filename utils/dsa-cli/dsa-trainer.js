@@ -112,30 +112,47 @@ class DSATrainer {
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
         this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
-        const prompt_run_tests = new Toggle({
-            name: 'run_tests',
-            message: 'Do you want to run the tests?',
-            enabled: 'Yes',
-            disabled: 'No',
-            initial: true
+
+        let question_state_flag = true;
+        const choices = {
+            'Run Tests': async () => {
+                try {
+                    // Sometimes errors can occur.
+                    const did_pass_all_tests = await this.problems_manager.runProblem(problem);
+                    if (did_pass_all_tests) {
+                        question_state_flag = false; // Exit the menu
+                    }
+                    return did_pass_all_tests;
+                }
+                catch (e) {
+                    console.log("Error running tests: ", e);
+                }
+            },
+            "Hint": async () => {
+                // TO Complete
+                console.log("Hint: ", "Use the problem of friendship");
+            }            ,
+
+            'Exit': async () => {
+                question_state_flag = false;
+                return false
+            }
+
+        }
+
+
+        const prommpt_problem_menu = new AutoComplete({
+            name: 'problem_menu',
+            message: 'What do you want to do?',
+            choices: Object.keys(choices),
         });
+        let res = false;
+        while (question_state_flag) {
+            const choice_selected = await prommpt_problem_menu.run();
+            res = await choices[choice_selected](); //Run the selected choice.
 
-        const run_test = await prompt_run_tests.run();
-        if (!run_test) {
-            return false;
         }
-        else {
-            try {
-                // Sometimes errors can occur.
-                const did_pass_all_tests = await this.problems_manager.runProblem(problem);
-                return did_pass_all_tests;
-            }
-            catch (e) {
-                console.log("Error running tests: ", e);
-                return false;
-            }
-        }
-
+        return res;
     }
 
     setCurrentProblem(problem_slug) {
