@@ -111,15 +111,23 @@ const countDecimals = (value) => {
 
 
 const renderPromptDescription = (prompt) => {
-    const Constants =  require("./constants");
-    const chalk = require("chalk");
-    marked.setOptions({
-        renderer: new TerminalRenderer()
-    });
-    // Print title in Blue
-    console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(prompt?.["title"] ?? "")}`)
-    console.log(marked(prompt?.["description"] ?? ""));
-    console.log(marked(prompt?.["preview"] ?? ""));
+    try {
+
+        const Constants = require("./constants");
+        const chalk = require("chalk");
+        marked.setOptions({
+            renderer: new TerminalRenderer()
+        });
+        // Print title in Blue
+        console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(prompt?.["title"] ?? "")}`)
+        console.log(marked(prompt?.["description"] ?? ""));
+        console.log(marked(prompt?.["preview"] ?? ""));
+        return true;
+    }
+    catch(err) {
+        console.log("Error while attempting to render prompt description", err);
+        return false;
+    }
 };
 
 

@@ -378,11 +378,8 @@ class SearchRotatedArray extends ProblemTests{
         this.current_test_name = "[1,3], 1"
         assert(new this.Problem().solve([1, 3], 1) == 0);
     }
-
-    
+   
 }
-
-
 
 
 

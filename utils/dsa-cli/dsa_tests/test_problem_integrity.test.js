@@ -5,6 +5,7 @@
 const ProblemsManager = require('../problems-manager');
 const assert = require('assert');
 
+
 describe('Problem integrity', function () {
     // Run and test test available
     it('Should run and test the problem', async function () {
@@ -32,7 +33,18 @@ describe('Problem integrity', function () {
     it("Test that all problems have printable prompts", async function () {
         const problemManager = new ProblemsManager();
         problemManager.autoPopulateUsingTestDictionary();
-        // TODO Complete this
+
+        const { getPromptDict } = require('../prompt');
+        const { renderPromptDescription } = require('../functions');
+
+        const allProblemsMetadata = problemManager.problems;
+        for (let problemMetadata of Object.values(allProblemsMetadata)) {
+
+            const promblem_prompt = await getPromptDict(problemMetadata.slug);
+            // console.log(promblem_prompt);
+            const success_at_print = renderPromptDescription(promblem_prompt);
+            assert(success_at_print);
+        }
 
     });
 
