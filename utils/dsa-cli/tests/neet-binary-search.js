@@ -304,6 +304,47 @@ class MedianSortedArrays extends ProblemTests {
 
 }
 
+class SearchMatrix extends ProblemTests{
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+    }
+
+    test_1() {
+        this.current_test_name = "[[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3"
+        assert(new this.Problem().solve([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 3) == true);
+    }
+
+    test_2() {
+        this.current_test_name = "[[1,3,5,7],[10,11,16,20],[23,30,34,60]], 13"
+        assert(new this.Problem().solve([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 13) == false);
+    }
+
+    test_3() {
+        this.current_test_name = "[[1,3,5,7],[10,11,16,20],[23,30,34,60]], 60"
+        assert(new this.Problem().solve([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 60) == true);
+    }
+
+    test_4() {
+        this.current_test_name = "[[1,3,5,7],[10,11,16,20],[23,30,34,60]], 1"
+        assert(new this.Problem().solve([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 1) == true);
+    }
+
+    test_5() {
+        this.current_test_name = "[[1,3,5,7],[10,11,16,20],[23,30,34,60]], 0"
+        assert(new this.Problem().solve([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 0) == false);
+    }
+
+
+}
+
+
+
 
 const TEST_DICTIONARY = {
     'binary-search': BinarySearch,
@@ -311,6 +352,7 @@ const TEST_DICTIONARY = {
     'key-based-value-store': KeyBasedValueStore,
     'koko-eating-bananas': KokoEatingBananas,
     'median-sorted-arrays': MedianSortedArrays,
+    'search-matrix': SearchMatrix,
 
 }
 

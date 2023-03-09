@@ -78,7 +78,7 @@ class SearchMatrix {
     };
 
     solve(search, target) {
-        this.searchMatrix(search, target);
+        return this.searchMatrix(search, target);
     }
 }
 
