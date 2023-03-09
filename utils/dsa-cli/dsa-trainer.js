@@ -4,7 +4,7 @@ const { getPromptDict } = require('./prompt');
 
 const Constants = require('./constants');
 const { renderPromptDescription } = require('./functions');
-const { Toggle } = require('enquirer');
+const { Toggle, AutoComplete } = require('enquirer');
 
 const DEBUG = false;
 
@@ -122,6 +122,21 @@ class DSATrainer {
             }
         }
 
+    }
+
+    async showMenuOfProblems({allow_continue_last = true} = {}){
+        const prompt = new AutoComplete({
+            name: 'problem',
+            message: 'Select a problem',
+            choices: this.problems_manager.problemSlugs
+        });
+        const problem_slug = await prompt.run();
+        const problem = this.problems_manager.getProblem(problem_slug);
+        // return await this.openAndTest(problem);
+        const problem_status = await this.solveProblem(problem);
+        // TODO Make appropriate adjustement with the status
+
+        return problem_status == Constants.ProblemStatus.solved;
     }
 
 

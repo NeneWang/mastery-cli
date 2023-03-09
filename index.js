@@ -122,7 +122,9 @@ const { Demo, EDemo } = demos;
 		mQuizer.study_session(masterDeck);
 	}
 	else if (input.includes(cmInfo.commands.dsa.code)) {
-		const dsa_is_correct = await dsaTrainer.openRandomProblem();
+		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
+		const dsa_is_correct = await dsaTrainer.showMenuOfProblems();
+
 		if (dsa_is_correct) {
 			await increasePerformance("algo");
 			maid.say("Good job, you got it right! Increasing your social credit score!");

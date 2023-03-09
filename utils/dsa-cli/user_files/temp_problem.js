@@ -1,13 +1,9 @@
-class SearchRotatedArray {
-	solve(nums, target) {
+class LargestRectangleArea {
+	solve(heights, maxArea = 0) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: SearchRotatedArray };angleArea };nWater;
-}
-
-
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: LargestRectangleArea };

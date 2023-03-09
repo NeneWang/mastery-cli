@@ -14,6 +14,15 @@ class ProblemsManager {
         this.temp_test_filepath = './temp_tests.js';
     }
 
+
+    get problemSlugs(){
+        return Object.keys(this.problems);
+    }
+
+    getProblem(problemSlug){
+        return this.problems[problemSlug];
+    }
+
     /**
      * Adds problem into the dictionary of problems.
      * @param {ProblemMetadata} problemMetadata Object containing the information aboutthe problem.
@@ -95,7 +104,7 @@ class ProblemsManager {
             const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
             const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
-
+            
             // console.log("Opening file: " + absolute_problem_file_path, "from source,", problem_file_path);
             fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
                 if (err) {
