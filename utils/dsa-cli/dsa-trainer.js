@@ -131,6 +131,8 @@ class DSATrainer {
             },
             "Hint": async () => {
                 // TO Complete
+                question_state_flag = true;
+                console.log("hint after state flag", question_state_flag);
                 console.log("Hint: ", "Use the problem of friendship");
                 return false;
             },
