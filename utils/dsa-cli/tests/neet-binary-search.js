@@ -343,6 +343,46 @@ class SearchMatrix extends ProblemTests{
 
 }
 
+class SearchRotatedArray extends ProblemTests{
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+    }
+
+    test_1() {
+        this.current_test_name = "[4,5,6,7,0,1,2], 0"
+        assert(new this.Problem().solve([4, 5, 6, 7, 0, 1, 2], 0) == 4);
+    }
+
+    test_2() {
+        this.current_test_name = "[4,5,6,7,0,1,2], 3"
+        assert(new this.Problem().solve([4, 5, 6, 7, 0, 1, 2], 3) == -1);
+    }
+
+    test_3() {
+        this.current_test_name = "[1], 0"
+        assert(new this.Problem().solve([1], 0) == -1);
+    }
+
+    test_4() {
+        this.current_test_name = "[1,3], 3"
+        assert(new this.Problem().solve([1, 3], 3) == 1);
+    }
+
+    test_5() {
+        this.current_test_name = "[1,3], 1"
+        assert(new this.Problem().solve([1, 3], 1) == 0);
+    }
+
+    
+}
+
+
 
 
 
@@ -353,6 +393,7 @@ const TEST_DICTIONARY = {
     'koko-eating-bananas': KokoEatingBananas,
     'median-sorted-arrays': MedianSortedArrays,
     'search-matrix': SearchMatrix,
+    'search-rotated-array': SearchRotatedArray,
 
 }
 

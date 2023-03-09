@@ -40,7 +40,7 @@ class SearchRotatedArray {
     }
 
     solve(nums, target) {
-        search(nums, target);
+        return this.search(nums, target);
     }
 }
 
