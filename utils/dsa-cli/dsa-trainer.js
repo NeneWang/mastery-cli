@@ -70,7 +70,7 @@ class DSATrainer {
         let did_pass_all_tests = false
 
         // Try to solve the problem once
-        did_pass_all_tests = await this.openAndTest(problem);
+        did_pass_all_tests = this.openAndTest(problem);
         //  If the user wants to try until solved, and the problem is not solved, keep trying until solved
 
         console.log("Did pass all tests: ", did_pass_all_tests);
@@ -152,9 +152,10 @@ class DSATrainer {
         });
         let res = false;
         while (question_state_flag) {
+            console.log("Asking if to continue the menu start", question_state_flag);
             const choice_selected = await prommpt_problem_menu.run();
             res = await choices[choice_selected](); //Run the selected choice.
-            console.log("Asking if to continue the menu", question_state_flag);
+            console.log("Asking if to continue the menu", res, question_state_flag);
         }
         console.log("Asking if to continue the menu @ the end", question_state_flag);
         return res;
