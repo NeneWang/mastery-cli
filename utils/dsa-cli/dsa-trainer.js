@@ -58,45 +58,42 @@ class DSATrainer {
             this.problems_manager.populateTemplate(problem);
         }
 
-
-        const prompt_reattempt = new Toggle({
-            name: 'stop',
-            message: 'Re-attempt?',
-            enabled: 'Yes',
-            disabled: 'No',
-            initial: true
-        });
-
         let did_pass_all_tests = false
 
         // Try to solve the problem once
-        did_pass_all_tests = await this.openAndTest(problem);
-        //  If the user wants to try until solved, and the problem is not solved, keep trying until solved
-
-        console.log("Did pass all tests: ", did_pass_all_tests);
+        let status = await this.openAndTest(problem);
 
         while (!did_pass_all_tests && try_until_solved) {
 
-            // Prompt if user wants to stop attempting to solve the problem
-            const continue_attempting = await prompt_reattempt.run(problem);
-            if (!continue_attempting) {
+            if (status == Constants.ProblemStatus.aborted) {
                 return Constants.ProblemStatus.aborted;
             }
 
-            // Try again if failed.
-            did_pass_all_tests = await this.openAndTest(problem);
-            console.log("Did pass all tests: ", did_pass_all_tests);
-            // Save that the user solved the problem.
+            else if (status == Constants.ProblemStatus.solved) {
+                this.problemReport.increaseAnswerFor(problem.slug);
+                console.log("Times the problem was solved.", this.problemReport.getAnswerFor(problem.slug));
+                this.cleanCurrentProblem();
+                did_pass_all_tests = true;
+                return Constants.ProblemStatus.solved;
+            }
 
-        }
+            else if (status == Constants.ProblemStatus.unsolved) {
+                continue; // Try again
+            }
 
-        if (did_pass_all_tests) {
-            this.problemReport.increaseAnswerFor(problem.slug);
-            console.log("score increased", this.problemReport.getAnswerFor(problem.slug));
-            this.cleanCurrentProblem();
+            status = await this.openAndTest(problem);
+            
         }
-        return Constants.ProblemStatus.solved;
     }
+    async openProblem(problem) {
+        const promblem_prompt = await getPromptDict(problem.slug);
+        if (true) console.log("Problem prompt selected: ", promblem_prompt);
+        renderPromptDescription(promblem_prompt);
+
+        const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
+        const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
+    }
+
 
     async openAndTest(problem) {
         console.log(
@@ -106,23 +103,20 @@ class DSATrainer {
 
         // console.log("Keys from prompt_dict", Object.keys(prompt_dict));
 
-        const promblem_prompt = await getPromptDict(problem.slug);
-        if (true) console.log("Problem prompt selected: ", promblem_prompt);
-        renderPromptDescription(promblem_prompt);
-
-        const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
-        const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
+        await this.openProblem(problem);
 
         let question_state_flag = true;
+        let did_pass_all_tests_before = false;
         const choices = {
             'Run Tests': async () => {
                 try {
                     // Sometimes errors can occur.
                     const did_pass_all_tests = await this.problems_manager.runProblem(problem);
                     if (did_pass_all_tests) {
-                        question_state_flag = false; // Exit the menu
+                        did_pass_all_tests_before = true;
+
                     }
-                    return did_pass_all_tests;
+                    return Constants.ProblemStatus.unsolved;
                 }
                 catch (e) {
                     console.log("Error running tests: ", e);
@@ -134,28 +128,55 @@ class DSATrainer {
                 question_state_flag = true;
                 console.log("hint after state flag", question_state_flag);
                 console.log("Hint: ", "Use the problem of friendship");
-                return false;
+
+            },
+            "Modify": async () => {
+                question_state_flag = true;
+                await this.openProblem(problem);
             },
 
             'Exit': async () => {
                 question_state_flag = false;
-                return false
+                return Constants.ProblemStatus.aborted;
             }
 
         }
 
 
-        let res = false;
+        let res = Constants.ProblemStatus.unsolved;
         while (question_state_flag) {
 
+            const selectable_choices_prompt = {};
+            // Remove Submit, if test never passed before
+            if (did_pass_all_tests_before) {
+
+                Object.assign(selectable_choices_prompt, {
+                    'Submit': async () => {
+                        if (!did_pass_all_tests_before) {
+                            console.log("You must pass all tests before submitting!");
+                            // return false;
+
+                        } else {
+                            console.log("Submission running", Constants.ProblemStatus.solved);
+                            question_state_flag = false;
+                            return Constants.ProblemStatus.solved;
+
+                        }
+                    }
+                })
+            }
+
+            Object.assign(selectable_choices_prompt, choices)
             // New prompt has to 
+            let selectable_choices = Object.keys(selectable_choices_prompt);
+
             const prommpt_problem_menu = new AutoComplete({
                 name: 'problem_menu',
                 message: 'What do you want to do?',
-                choices: Object.keys(choices),
+                choices: selectable_choices,
             });
             const choice_selected = await prommpt_problem_menu.run();
-            res = await choices[choice_selected](); //Run the selected choice.
+            res = await selectable_choices_prompt[choice_selected](); //Run the selected choice.
         }
         return res;
     }

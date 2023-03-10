@@ -1,6 +1,6 @@
 const { JsonDB, Config } = require("node-json-db");
 const { getCurrentDate, getDirAbsoluteUri } = require("./functions");
-
+const path = require('path');
 const DEBUG = false;
 
 
@@ -12,7 +12,9 @@ class StorableReport {
         console.log("Filename being used", this.filename);
         this.autosave = autosave;
 
-        this.db = new JsonDB(new Config(filename, true, false, "/"));
+        const fullPath = path.join(__dirname, 'data', 'db.json'); // assuming the file should be stored in a "data" subdirectory
+
+        this.db = new JsonDB(new Config(fullPath, true, false, "/"));
         this.getReport().then(reportData => {
             console.log("ReportData", reportData);
             this.report = reportData;

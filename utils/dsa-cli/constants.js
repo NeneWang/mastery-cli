@@ -3,11 +3,9 @@
 const Constants = {
 
     ProblemStatus: {
-        constructor() {
-            this.solved = "solved";
-            this.unsolved = "unsolved";
-            this.aborted = "aborted";
-        }
+        solved: "solved",
+        unsolved: "unsolved",
+        aborted: "aborted",
     },
     CONSTANTS: {
         ACCOUNT_ID: 1,

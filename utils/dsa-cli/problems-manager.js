@@ -79,6 +79,7 @@ class ProblemsManager {
      */
     async runProblem(problemMetadata) {
         if (DEBUG) console.log("Getting temp_file_path from ", this.temp_problem_filepath);
+        delete require.cache[require.resolve(this.temp_problem_filepath)] // delete the cache of the file
         const { Problem } = require(this.temp_problem_filepath);
 
         if (DEBUG) console.log("metadata", problemMetadata.asJson);
