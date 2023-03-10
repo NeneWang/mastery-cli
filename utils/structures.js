@@ -11,12 +11,13 @@ class Term {
          */
 
         this.auto_newline = auto_newline;
-
+        
         this.term = term;
-        this.example = example;
         this.description = description;
-
+        this.example = example;
+        
         if(this.auto_newline){
+            this.example = this.description.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
             this.description = this.description.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
         }
 

@@ -71,7 +71,11 @@ async function populateMasterDeck() {
         {
             filename: "terms/strat_cloud_patterns.csv",
             title: "Cloud-pattern"
-        }
+        },
+        {
+            filename: "terms/artificial-intelligence.csv",
+            title: "artificial-intelligence-strategy"
+        },
     ];
     
     const strategyGenerator = new TermGenerator(strategyFilesData, {default_prompt: "How could you use this?"});
