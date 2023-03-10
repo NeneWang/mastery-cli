@@ -232,7 +232,6 @@ class DSATrainer {
                 }
 
                 if (show_tags) {
-                    // TODO
                     const tags = this.problems_manager.getTagsForProblem(problemSlug);
                     if (tags.length > 0) {
                         new_name += " (" + tags.join(", ") + ")";

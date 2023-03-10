@@ -43,7 +43,7 @@ class ProblemsManager {
     /**
      * Populates the problems manager with the problems from the TEST_DICTIONARY.
      */
-    async autoPopulateUsingTestDictionary() {
+    async autoPopulateUsingTestDictionary({skip_non_markdown = false} = {}) {
 
         const classifyDifficulty = (tags) => {
             if (tags == undefined || tags == null || tags?.length <= 0) return "unknown";
@@ -57,7 +57,12 @@ class ProblemsManager {
         for (let problem of Object.keys(TEST_DICTIONARY)) {
             // console.log("Searching if", problem);
             const promblem_prompt = promblem_prompts[problem];
-            if (promblem_prompt == undefined || promblem_prompt == null) continue;
+            if (promblem_prompt == undefined || promblem_prompt == null){
+                if(skip_non_markdown) continue;
+
+                this.addProblem(new ProblemMetadata(problem));
+                continue;
+            };
             // console.log("promblem_prompt", promblem_prompt)
             this.addProblem(new ProblemMetadata(problem, {
                 tags: promblem_prompt.tags, difficulty: classifyDifficulty(promblem_prompt.tags),

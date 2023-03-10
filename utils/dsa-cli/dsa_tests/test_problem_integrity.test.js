@@ -6,11 +6,18 @@ const ProblemsManager = require('../problems-manager');
 const assert = require('assert');
 
 
+const to_test = {
+    'printable': true,
+    'basic': true,
+    'runnable': true,
+}
+
 describe('Problem integrity', function () {
 
     it("Test that all problems have printable prompts", async function () {
+        if(!to_test.printable) return this.skip();
         const problemManager = new ProblemsManager();
-        problemManager.autoPopulateUsingTestDictionary();
+        await problemManager.autoPopulateUsingTestDictionary();
 
         const { getPromptDict } = require('../prompt');
         const { renderPromptDescription } = require('../functions');
@@ -28,8 +35,9 @@ describe('Problem integrity', function () {
     });
 
     it("Test that all problems have basic prompts", async function () {
+        if(!to_test.basic) return this.skip();
         const problemManager = new ProblemsManager();
-        problemManager.autoPopulateUsingTestDictionary();
+        await problemManager.autoPopulateUsingTestDictionary();
         // if this test fails, make sure you can run func_create_empty_base_codes to populate with a basic template of them all.
         // Or just run it here just in case everytime this test is run:
         const { createEmptyBaseCodes } = require('./func_create_empty_base_codes');
@@ -43,9 +51,10 @@ describe('Problem integrity', function () {
 
     });
     // Run and test test available
-    it('Should run and test the problem', async function () {
+    it('Should run and test the problem', async function () {   
+        if(!to_test.runnable) return this.skip();
         const problemManager = new ProblemsManager();
-        problemManager.autoPopulateUsingTestDictionary();
+        await problemManager.autoPopulateUsingTestDictionary();
 
         const allProblemsMetadata = problemManager.problems;
         for (let problemMetadata of Object.values(allProblemsMetadata)) {
