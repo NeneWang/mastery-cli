@@ -24,7 +24,7 @@ class DSATrainer {
         this.settings_manager = new SettingsManager();
         this.problems_manager = new ProblemsManager({ skip_problems: skip_problems });
 
-        this.problems_manager.autoPopulateUsingTestDictionary();
+        this.loaded_problem_manager = this.problems_manager.autoPopulateUsingTestDictionary();
         this.user_settings = this.settings_manager.settings;
         this.skip_problems = skip_problems;
 
@@ -224,12 +224,20 @@ class DSATrainer {
 
                 if (show_tags) {
                     // TODO
+                    const tags = this.problems_manager.getTagsForProblem(problemSlug);
+                    if (tags.length > 0) {
+                        new_name += " (" + tags.join(", ") + ")";
+                    }
                 }
                 formattedProblems[new_name] = problemSlug;
             }
 
             return formattedProblems; //Map of problem slug to formatted problem
         }
+
+        // console.log("Loading problems...", this.loaded_problem_manager);
+        await this.loaded_problem_manager;
+        
 
 
         const formattedProblems = createFormattedProblemMap(this.problems_manager.problemSlugs, { show_progress: show_progress, show_tags: show_tags });

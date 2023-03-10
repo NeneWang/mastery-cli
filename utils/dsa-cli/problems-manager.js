@@ -3,6 +3,7 @@ const { getDirAbsoluteUri } = require('./functions');
 const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
 const { exec } = require('node:child_process');
+const { getPromptDict } = require('./prompt');
 
 const DEBUG = false;
 
@@ -15,12 +16,18 @@ class ProblemsManager {
     }
 
 
-    get problemSlugs(){
+    get problemSlugs() {
         return Object.keys(this.problems);
     }
 
-    getProblem(problemSlug){
+    getProblem(problemSlug) {
         return this.problems[problemSlug];
+    }
+
+
+    getTagsForProblem(problemSlug) {
+        console.log("getting from ", this.problems[problemSlug])
+        return this.problems[problemSlug].tags;
     }
 
     /**
@@ -35,10 +42,29 @@ class ProblemsManager {
     /**
      * Populates the problems manager with the problems from the TEST_DICTIONARY.
      */
-    autoPopulateUsingTestDictionary() {
-        for (let problem of Object.keys(TEST_DICTIONARY)) {
-            this.addProblem(new ProblemMetadata(problem));
+    async autoPopulateUsingTestDictionary() {
+
+        const classifyDifficulty = (tags) => {
+            if (tags == undefined || tags == null || tags?.length <= 0) return "unknown";
+            if (tags.includes("easy")) return "easy";
+            if (tags.includes("medium")) return "medium";
+            if (tags.includes("hard")) return "hard";
         }
+
+        const promblem_prompts = await getPromptDict(); //Gets all because no slug was passed in.
+        // console.log("promblem_prompts", promblem_prompts)
+        for (let problem of Object.keys(TEST_DICTIONARY)) {
+            // console.log("Searching if", problem);
+            const promblem_prompt = promblem_prompts[problem];
+            if (promblem_prompt == undefined || promblem_prompt == null) continue;
+            // console.log("promblem_prompt", promblem_prompt)
+            this.addProblem(new ProblemMetadata(problem, {
+                tags: promblem_prompt.tags, difficulty: classifyDifficulty(promblem_prompt.tags),
+                name: promblem_prompt.title, description: promblem_prompt.description
+            }));
+            
+        }
+        // console.log("this.problems", this.problems)
     }
 
     /**
@@ -101,11 +127,11 @@ class ProblemsManager {
      */
     copyFile(problem_file_path) {
         try {
-            
+
             const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
             const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
-            
+
             // console.log("Opening file: " + absolute_problem_file_path, "from source,", problem_file_path);
             fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
                 if (err) {
@@ -146,6 +172,36 @@ class ProblemsManager {
             console.log(`Continue running`);
         });
 
+    }
+
+
+    /**
+    * 
+    * @param {list[str]} problemsSlugs List of slugs
+    * OPTIONAL
+    * @param {int} max_stars Maximum number of stars to show
+    * @returns 
+    */
+    createFormattedProblemMap = (problemsSlugs, { show_progress = true, max_stars = 5, show_tags = true }) => {
+        const formattedProblems = {};
+        for (const problemSlug of problemsSlugs) {
+            let new_name = problemSlug
+            if (show_progress) {
+                // Get the number of times the problem has been answered or the max number of stars, whichever is smallest
+                const times_answered = Math.min(this.problemReport.getAnswerFor(problemSlug), max_stars);
+                // console.log("Times answered: ", times_answered, "type", typeof times_answered)
+                const stars = times_answered > 0 ? "*".repeat(times_answered) : "";
+
+                new_name += stars;
+            }
+
+            if (show_tags) {
+                // TODO
+            }
+            formattedProblems[new_name] = problemSlug;
+        }
+
+        return formattedProblems; //Map of problem slug to formatted problem
     }
 
 
