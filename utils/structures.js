@@ -5,14 +5,21 @@ const { isAxiosError } = require("axios");
  */
 class Term {
 
-    constructor(term, example = "", description = "", prompt = "Use the term", { priority = 5, tags = [], category = "", references = "", attachment = "" } = {}) {
+    constructor(term, example = "", description = "", prompt = "Use the term", { priority = 5, tags = [], category = "", references = "", attachment = "", auto_newline=true } = {}) {
         /**
          * REMEMBER: To add the new item into asJson!!
          */
 
+        this.auto_newline = auto_newline;
+
         this.term = term;
         this.example = example;
         this.description = description;
+
+        if(this.auto_newline){
+            this.description = this.description.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
+        }
+
         this.references = references;
         this.attachment = attachment;
         this.category = category;

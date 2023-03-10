@@ -68,6 +68,21 @@ describe("Testing Terms Generator", () => {
 
     });
 
+    
+    it("New Line interpretation", async () => {
+        // Shoudl replace "  " with "\n automatically on description"
+        const filesData = [{ title: "mock-v1", filename: "terms/mock.csv" }];
+
+        const termGenerator = new TermGenerator(filesData, {default_prompt: "Some Prompt Here"})
+        const _ = await termGenerator.fetchTerms();
+
+        first_sample_term = termGenerator.termStorageAsJsonList[4];
+        console.log("New Line interpretation prompt:", first_sample_term);
+        
+        // assert(first_sample_term.prompt == "this is a custom prompt");
+
+    });
+
 })
 
 describe("Testing Terms using Then", () => {

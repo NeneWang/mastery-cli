@@ -1,5 +1,5 @@
-term;description;example;prompt
-;;;
+term;example;prompt;description
+search-problem;;;"    A search problem consists of:          A State Space. Set of all possible states where you can be.         A Start State. The state from where the search begins.         A Goal Test. A function that looks at the current state returns whether or not it is the goal state.     The Solution to a search problem is a sequence of actions, called the plan that transforms the start state to the goal state.     This plan is achieved through search algorithms."
 ;;;
 ;;;
 ;;;
