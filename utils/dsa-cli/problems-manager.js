@@ -12,6 +12,7 @@ class ProblemsManager {
         this.problems = {};
         this.skip_problems = skip_problems;
         this.temp_problem_filepath = './user_files/temp_problem.js';
+        this.solution_filepath = './solutions/'
         this.temp_test_filepath = './temp_tests.js';
     }
 
@@ -62,7 +63,7 @@ class ProblemsManager {
                 tags: promblem_prompt.tags, difficulty: classifyDifficulty(promblem_prompt.tags),
                 name: promblem_prompt.title, description: promblem_prompt.description
             }));
-            
+
         }
         // console.log("this.problems", this.problems)
     }
@@ -173,6 +174,20 @@ class ProblemsManager {
         });
 
     }
+
+    async openSolutionFile(problem_slug, { editor_instruction = "start" } = {}) {
+        const absolute_temp_file_path = getDirAbsoluteUri(this.solution_filepath + problem_slug + '.js', "./");
+
+        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+            }
+            console.log(`Continue running`);
+        });
+
+    }
+
 
 
     /**

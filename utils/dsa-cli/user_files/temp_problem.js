@@ -1,9 +1,8 @@
-class IsValidParenthesis {
-	solve(s, stack = []) {
-	// Your code here
-
-	}
+class Substraction {
+    solve(a, b) {
+        return a-b;
+    }
 }
 
 
-module.exports = { Problem: IsValidParenthesis };
+module.exports = { Problem: Substraction };

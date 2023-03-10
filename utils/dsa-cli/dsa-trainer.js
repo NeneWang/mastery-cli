@@ -82,16 +82,19 @@ class DSATrainer {
             }
 
             status = await this.openAndTest(problem);
-            
+
         }
     }
-    async openProblem(problem) {
+    async openProblem(problem, { open_solution = false } = {}) {
         const promblem_prompt = await getPromptDict(problem.slug);
         if (true) console.log("Problem prompt selected: ", promblem_prompt);
         renderPromptDescription(promblem_prompt);
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
-        const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
+        if (!open_solution) { const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction }); }
+        else if(open_solution){
+            const _ = await this.problems_manager.openSolutionFile(problem.slug, { editor_instruction: editor_instruction });
+        }
     }
 
 
@@ -133,6 +136,12 @@ class DSATrainer {
             "Modify": async () => {
                 question_state_flag = true;
                 await this.openProblem(problem);
+            },
+            "Show solution": async () => {
+                question_state_flag = true;
+                this.openProblem(problem, { open_solution: true });
+
+                // return Constants.ProblemStatus.unsolved;
             },
 
             'Exit': async () => {
@@ -217,7 +226,7 @@ class DSATrainer {
                     // Get the number of times the problem has been answered or the max number of stars, whichever is smallest
                     const times_answered = Math.min(this.problemReport.getAnswerFor(problemSlug), max_stars);
                     // console.log("Times answered: ", times_answered, "type", typeof times_answered)
-                    const stars = times_answered > 0 ? "*".repeat(times_answered) : "";
+                    const stars = times_answered > 0 ? "*".repeat(times_answered) : " [!] ";
 
                     new_name += stars;
                 }
@@ -237,7 +246,7 @@ class DSATrainer {
 
         // console.log("Loading problems...", this.loaded_problem_manager);
         await this.loaded_problem_manager;
-        
+
 
 
         const formattedProblems = createFormattedProblemMap(this.problems_manager.problemSlugs, { show_progress: show_progress, show_tags: show_tags });
