@@ -61,8 +61,11 @@ class TermGenerator {
       const terminologiesDict = dfd.toJSON(df);
 
       for (const row of terminologiesDict) {
-        
-        const term = new Terminology(row?.term ?? "", row?.description ?? "", { prompt: this.default_prompt, example: row?.example ?? "", attachment: row?.attachment??"" });
+        const optional_prompt = (row?.prompt != undefined && row?.prompt!="")?row.prompt: this.default_prompt;
+        // console.log("Prompt received", row?.prompt, optional_prompt )
+        const term = new Terminology(row?.term ?? "", row?.description ?? "", { 
+          prompt: optional_prompt,
+          example: row?.example ?? "", attachment: row?.attachment??"" });
         termStorage.push(term);
       }
 
@@ -80,7 +83,7 @@ class TermGenerator {
     const res = [];
     for (const termStorage of Object.values(this.mapTermsStorage)) {
       // console.log(termStorage);
-      res.push(...termStorage?.listTerms);
+      res.push(...termStorage?.listTerms());
     }
     return res;
   }

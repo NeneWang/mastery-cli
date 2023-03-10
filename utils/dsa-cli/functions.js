@@ -5,6 +5,8 @@ const { marked } = require('marked');
 const TerminalRenderer = require('marked-terminal');
 const Constants = require("./constants");
 
+const DEBUG = false;
+
 /**
  * Gets clickeable path that could be printed on the console and clicked.
  * @param {str} fileimage : String containing the relative position of the image from utils directory
@@ -32,7 +34,7 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './')
 const getFilesInDirectory = async (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
 
-    console.log("Fetching from: ", absolutePath);
+    if(DEBUG) console.log("Fetching from: ", absolutePath);
 
     return new Promise((resolve, reject) => {
         fs.readdir(absolutePath, (err, files) => {

@@ -1,5 +1,5 @@
-term;description;example;attachment
-sich;Oneself;Some example;https://support.content.office.net/en-us/media/046a19de-0421-1b38-9499-4bf45ccae676.png
-Handschuh;" Hand + Schuh ";Some example;./img/2023-02-28-10-54-06.png
-mich;" mysel";Some example;./img/2023-02-28-10-54-06.png
-dich;" yourself";Some example;./img/2023-02-28-10-54-06.png
+term;description;example;attachment;prompt
+sich;Oneself;Some example;https://support.content.office.net/en-us/media/046a19de-0421-1b38-9499-4bf45ccae676.png;this is a custom prompt
+Handschuh;" Hand + Schuh ";Some example;./img/2023-02-28-10-54-06.png;
+mich;" mysel";Some example;./img/2023-02-28-10-54-06.png;
+dich;" yourself";Some example;./img/2023-02-28-10-54-06.png;

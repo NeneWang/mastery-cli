@@ -47,9 +47,24 @@ describe("Testing Terms Generator", () => {
         const termGenerator = new TermGenerator(filesData, {default_prompt: "Some Prompt Here"})
         const _ = await termGenerator.fetchTerms();
 
+        first_sample_term = termGenerator.termStorageAsJsonList[1];
+        console.log("alterated prompt:", first_sample_term);
+        
+        assert(first_sample_term.prompt == "Some Prompt Here");
+
+    });
+
+    
+    it("Explicit Prompt ", async () => {
+        const filesData = [{ title: "mock-v1", filename: "terms/mock.csv" }];
+
+        const termGenerator = new TermGenerator(filesData, {default_prompt: "Some Prompt Here"})
+        const _ = await termGenerator.fetchTerms();
+
         first_sample_term = termGenerator.termStorageAsJsonList[0];
         console.log("alterated prompt:", first_sample_term);
-        assert(first_sample_term.prompt == "Some Prompt Here");
+        
+        assert(first_sample_term.prompt == "this is a custom prompt");
 
     });
 

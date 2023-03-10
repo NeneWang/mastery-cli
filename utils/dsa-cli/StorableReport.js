@@ -9,7 +9,7 @@ class StorableReport {
 
         // If setted as this, get the absolute path from it.
         this.filename = absolute_path ? getDirAbsoluteUri(filename, "./") : filename;
-        console.log("Filename being used", this.filename);
+        if(DEBUG) console.log("Filename being used", this.filename);
         this.autosave = autosave;
 
         const fullPath = path.join(__dirname, 'data', 'db.json'); // assuming the file should be stored in a "data" subdirectory

@@ -2,6 +2,7 @@ const path = require("path");
 const url = require('url');
 const fs = require('fs');
 const { get_random, MAID_EMOJIS } = require("./constants");
+const DEBUG = false;
 
 /**
  * Gets clickeable path that could be printed on the console and clicked.
@@ -30,7 +31,7 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './da
 const getFilesInDirectory = (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
 
-    console.log("Fetching from: ", absolutePath);
+    if(DEBUG) console.log("Fetching from: ", absolutePath);
 
     return new Promise((resolve, reject) => {
         fs.readdir(absolutePath, (err, files) => {
