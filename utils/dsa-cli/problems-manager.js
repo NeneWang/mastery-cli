@@ -7,11 +7,20 @@ const { exec } = require('node:child_process');
 const DEBUG = false;
 
 class ProblemsManager {
-    constructor({skip_problems = []} = {}) {
+    constructor({ skip_problems = [] } = {}) {
         this.problems = {};
         this.skip_problems = skip_problems;
         this.temp_problem_filepath = './user_files/temp_problem.js';
         this.temp_test_filepath = './temp_tests.js';
+    }
+
+
+    get problemSlugs(){
+        return Object.keys(this.problems);
+    }
+
+    getProblem(problemSlug){
+        return this.problems[problemSlug];
     }
 
     /**
@@ -40,9 +49,9 @@ class ProblemsManager {
         let keys = Object.keys(this.problems);
         // Filter the porblems that are in the skip_problems list
         keys = keys.filter((key) => !this.skip_problems.includes(key));
-        
+
         const randomKey = keys[Math.floor(Math.random() * keys.length)];
-        
+
         return this.problems[randomKey];
     }
 
@@ -90,21 +99,34 @@ class ProblemsManager {
      * @param {str} problem_file_path The path to the file to copy
      */
     copyFile(problem_file_path) {
-        const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
-        const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
+        try {
+            
+            const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
+            const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
+            
+            // console.log("Opening file: " + absolute_problem_file_path, "from source,", problem_file_path);
+            fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
+                if (err) {
 
-        console.log("Opening file: " + absolute_problem_file_path);
-        fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
-            if (err) {
-                return console.log(err);
-            }
+                    console.log(err)
+                    return false
+                }
 
-            fs.writeFile(absolute_temp_file_path, data, 'utf8', function (err) {
-                if (err) return console.log(err);
+                fs.writeFile(absolute_temp_file_path, data, 'utf8', function (err) {
+                    if (err) {
+                        console.log(err)
+                        return false
+                    };
 
+                });
             });
-        });
+            return true;
+        } catch (err) {
+            console.error(err);
+            return false;
+
+        }
     }
 
 
@@ -112,10 +134,10 @@ class ProblemsManager {
      * Opens the temporal problem file in the editor (Can be customized which to use).
      * @param {str} editor_instruction The instruction to open the file in the editor. Default is "start".
      */
-    openTemporalProblemFile({ editor_instruction = "start" } = {}) {
+    async openTemporalProblemFile({ editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
-        exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
+        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`exec error: ${error}`);
                 return;

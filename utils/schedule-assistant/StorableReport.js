@@ -5,8 +5,11 @@ const DEBUG = false;
 
 
 class StorableReport {
-    constructor() {
-        this.db = new JsonDB(new Config("report", true, false, "/"));
+    constructor({ filename = "report", autosave = true } = {}) {
+        this.filename = filename;
+        this.autosave = autosave;
+
+        this.db = new JsonDB(new Config(filename, true, false, "/"));
         this.getReport().then(reportData => {
             this.report = reportData;
         });
@@ -15,6 +18,20 @@ class StorableReport {
     getDate() {
         // console.log("this.report", this.report);
         return this.report?.date;
+    }
+
+    increaseAnswerFor(key) {
+        if (!this.report?.[key]) {
+            this.report[key] = 0;
+        }
+        this.report?.[key]++;
+    }
+
+    decreaseAnswerFor(key) {
+        if (!this.report?.[key]) {
+            this.report[key] = 0;
+        }
+        this.report?.[key]--;
     }
 
     fixCheckAnswers(listOfChekBoxesKeys) {
@@ -35,9 +52,9 @@ class StorableReport {
         this.saveReport();
     }
 
-    getAnswerFor(key) {
+    getAnswerFor(key, {defaultvalue = 0} = {}) {
         console.log("this.report", key, this.report[key]);
-        return this.report[key];
+        return this.report?.[key]??defaultvalue;
     }
 
     cleanReport() {

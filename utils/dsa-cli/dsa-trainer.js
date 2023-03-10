@@ -1,10 +1,13 @@
 const SettingsManager = require('./settings-manager');
 const ProblemsManager = require('./problems-manager');
+const StorableReport = require('./StorableReport');
+
+
 const { getPromptDict } = require('./prompt');
 
 const Constants = require('./constants');
 const { renderPromptDescription } = require('./functions');
-const { Toggle } = require('enquirer');
+const { Toggle, AutoComplete } = require('enquirer');
 
 const DEBUG = false;
 
@@ -25,6 +28,9 @@ class DSATrainer {
         this.user_settings = this.settings_manager.settings;
         this.skip_problems = skip_problems;
 
+        this.problemReport = new StorableReport({ filename: 'problem_report' });
+
+
     }
 
     /**
@@ -42,13 +48,15 @@ class DSATrainer {
 
 
     /**
-     * Solves the problem status
+     * Wraps into continue solving until the problem is solved method
      * @param {ProblemMetaData} problem Information of the problem to solve
      * @param {boolean} tryUntilSolved If true, the problem will be reprompted until it is solved. If false, the problem will be solved once.
      * @returns {ProblemStatus} The status of the problem
      */
-    async solveProblem(problem, { tryUntilSolved = true } = {}) {
-        this.problems_manager.populateTemplate(problem);
+    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, populate_problem = true } = {}) {
+        if (populate_problem) {
+            this.problems_manager.populateTemplate(problem);
+        }
 
 
         const prompt_reattempt = new Toggle({
@@ -67,7 +75,7 @@ class DSATrainer {
 
         console.log("Did pass all tests: ", did_pass_all_tests);
 
-        while (!did_pass_all_tests && tryUntilSolved) {
+        while (!did_pass_all_tests && try_until_solved) {
 
             // Prompt if user wants to stop attempting to solve the problem
             const continue_attempting = await prompt_reattempt.run(problem);
@@ -78,9 +86,15 @@ class DSATrainer {
             // Try again if failed.
             did_pass_all_tests = await this.openAndTest(problem);
             console.log("Did pass all tests: ", did_pass_all_tests);
+            // Save that the user solved the problem.
 
         }
 
+        if (did_pass_all_tests) {
+            this.problemReport.increaseAnswerFor(problem.slug);
+            console.log("score increased", this.problemReport.getAnswerFor(problem.slug));
+            this.cleanCurrentProblem();
+        }
         return Constants.ProblemStatus.solved;
     }
 
@@ -97,31 +111,147 @@ class DSATrainer {
         renderPromptDescription(promblem_prompt);
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
-        this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
-        const prompt_run_tests = new Toggle({
-            name: 'run_tests',
-            message: 'Do you want to run the tests?',
-            enabled: 'Yes',
-            disabled: 'No',
-            initial: true
+        const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
+
+        let question_state_flag = true;
+        const choices = {
+            'Run Tests': async () => {
+                try {
+                    // Sometimes errors can occur.
+                    const did_pass_all_tests = await this.problems_manager.runProblem(problem);
+                    if (did_pass_all_tests) {
+                        question_state_flag = false; // Exit the menu
+                    }
+                    return did_pass_all_tests;
+                }
+                catch (e) {
+                    console.log("Error running tests: ", e);
+                    return false;
+                }
+            },
+            "Hint": async () => {
+                // TO Complete
+                question_state_flag = true;
+                console.log("hint after state flag", question_state_flag);
+                console.log("Hint: ", "Use the problem of friendship");
+                return false;
+            },
+
+            'Exit': async () => {
+                question_state_flag = false;
+                return false
+            }
+
+        }
+
+
+        const prommpt_problem_menu = new AutoComplete({
+            name: 'problem_menu',
+            message: 'What do you want to do?',
+            choices: Object.keys(choices),
+        });
+        let res = false;
+        while (question_state_flag) {
+            const choice_selected = await prommpt_problem_menu.run();
+            res = await choices[choice_selected](); //Run the selected choice.
+            console.log("Asking if to continue the menu", question_state_flag);
+        }
+        console.log("Asking if to continue the menu @ the end", question_state_flag);
+        return res;
+    }
+
+    setCurrentProblem(problem_slug) {
+        this.problemReport.setAnswerFor("current_problem", problem_slug);
+    }
+
+    getCurrentProblem() {
+        return this.problemReport.getAnswerFor("current_problem");
+    }
+
+    cleanCurrentProblem() {
+        this.problemReport.setAnswerFor("current_problem", 0);
+    }
+
+
+    /**
+     * Renders a menu of problems, and allows the user to select a problem to solve
+     * @param {boolean} allow_continue_last If true, the user will be allowed to continue the last problem solved. If false, the user will be forced to select a new problem.
+     * @param {boolean} showProgress If true, the user will be shown the progress of the problems solved as ** attached to the problem. If false, the user will not be shown the progress.
+     * @returns 
+     */
+    async showMenuOfProblems({ allow_continue_last = true, show_progress = true, show_tags = true } = {}) {
+        const _ = await this.problemReport.getReport();
+        /**
+         * 
+         * @param {list[str]} problemsSlugs List of slugs
+         * OPTIONAL
+         * @param {int} max_stars Maximum number of stars to show
+         * @returns 
+         */
+        const createFormattedProblemMap = (problemsSlugs, { show_progress = true, max_stars = 5, show_tags = true }) => {
+            const formattedProblems = {};
+            for (const problemSlug of problemsSlugs) {
+                let new_name = problemSlug
+                if (show_progress) {
+                    // Get the number of times the problem has been answered or the max number of stars, whichever is smallest
+                    const times_answered = Math.min(this.problemReport.getAnswerFor(problemSlug), max_stars);
+                    // console.log("Times answered: ", times_answered, "type", typeof times_answered)
+                    const stars = times_answered > 0 ? "*".repeat(times_answered) : "";
+
+                    new_name += stars;
+                }
+
+                if (show_tags) {
+                    // TODO
+                }
+                formattedProblems[new_name] = problemSlug;
+            }
+
+            return formattedProblems; //Map of problem slug to formatted problem
+        }
+
+
+        const formattedProblems = createFormattedProblemMap(this.problems_manager.problemSlugs, { show_progress: show_progress, show_tags: show_tags });
+        const current_problem_prompt = "Continue last problem";
+
+
+        // So by default the first on on the list will be selected
+        const choices = [];
+        if (this.getCurrentProblem() != 0) {
+            choices.push(current_problem_prompt)
+        }
+        choices.push(...Object.keys(formattedProblems));
+
+        const prompt = new AutoComplete({
+            name: 'problem',
+            message: 'Select a problem',
+            choices: choices,
+            initial: current_problem_prompt in formattedProblems ? current_problem_prompt : 0
         });
 
-        const run_test = await prompt_run_tests.run();
-        if (!run_test) {
-            return false;
-        }
-        else {
-            try {
-                // Sometimes errors can occur.
-                const did_pass_all_tests = await this.problems_manager.runProblem(problem);
-                return did_pass_all_tests;
+
+        const problem_selected = await prompt.run();
+
+
+        const getProblem = (choice_selected) => {
+            if (choice_selected == current_problem_prompt) {
+                return this.problems_manager.getProblem(this.getCurrentProblem());
             }
-            catch (e) {
-                console.log("Error running tests: ", e);
-                return false;
-            }
+            const problem_slug = formattedProblems[problem_selected];
+            const problem = this.problems_manager.getProblem(problem_slug);
+            this.setCurrentProblem(problem_slug);
+            return problem;
+
         }
 
+        // return await this.openAndTest(problem);
+
+        const problem = getProblem(problem_selected);
+        const is_new_problem = problem_selected != current_problem_prompt;
+        const problem_status = await this.solveProblem(problem, { populate_problem: is_new_problem });
+        // TODO Make appropriate adjustement with the status
+
+        return problem_status == Constants.ProblemStatus.solved;
     }
 
 

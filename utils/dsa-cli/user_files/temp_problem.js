@@ -1,11 +1,9 @@
 class Problem {
-    threeSum(array, targetSum) {
-        
-        return [];
-    }
+	solve() {
+	// Your code here
 
-    solve = this.threeSum;
+	}
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: Problem };
