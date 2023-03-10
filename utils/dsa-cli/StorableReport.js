@@ -1,12 +1,15 @@
 const { JsonDB, Config } = require("node-json-db");
-const Functions = require("./functions");
+const { getCurrentDate, getDirAbsoluteUri } = require("./functions");
 
 const DEBUG = false;
 
 
 class StorableReport {
-    constructor({ filename = "report", autosave = true } = {}) {
-        this.filename = filename;
+    constructor({ filename = "report", autosave = true, absolute_path = true } = {}) {
+
+        // If setted as this, get the absolute path from it.
+        this.filename = absolute_path ? getDirAbsoluteUri(filename, "./") : filename;
+        console.log("Filename being used", this.filename);
         this.autosave = autosave;
 
         this.db = new JsonDB(new Config(filename, true, false, "/"));
@@ -80,7 +83,7 @@ class StorableReport {
 
     cleanReport() {
         this.report = {};
-        this.report.date = new Functions().getCurrentDate();
+        this.report.date = getCurrentDate();
     }
 
     async getReport() {
