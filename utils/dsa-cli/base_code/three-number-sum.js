@@ -1,10 +1,10 @@
 class Problem {
-    threeSum(array, targetSum) {
+    threeSum(array) {
         
         return [];
     }
 
-    solve = threeSum;
+    solve = this.threeSum;
 }
 
 

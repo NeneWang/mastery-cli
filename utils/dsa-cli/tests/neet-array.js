@@ -16,14 +16,14 @@ class ThreeNumberSum extends ProblemTests {
     }
 
     test_1() {
-        this.current_test_name = "[1,8,6,2,5,4,8,3,7] => 49"
+        this.current_test_name = "[0,1,1] => []"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([1, 8, 6, 2, 5, 4, 8, 3, 7]) == 49);
+        assert.deepEqual(problemToTest.solve([0, 1, 1]), []);
     }
     test_2() {
-        this.current_test_name = "[1, 1]"
+        this.current_test_name = "[-1,0,1,2,-1,-4]"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([1, 1]) == 1);
+        assert.deepEqual(problemToTest.solve([-1, 0, 1, 2, -1, -4]), [[-1, -1, 2], [-1, 0, 1]]);
     }
 }
 
@@ -59,12 +59,12 @@ class TrappingRainWater extends ProblemTests {
     test_1() {
         this.current_test_name = "[0,1,0,2,1,0,1,3,2,1,2,1] => 6"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([0,1,0,2,1,0,1,3,2,1,2,1]) == 6);
+        assert(problemToTest.solve([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]) == 6);
     }
     test_2() {
         this.current_test_name = "[4,2,0,3,2,5]"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([4,2,0,3,2,5]) == 9);
+        assert(problemToTest.solve([4, 2, 0, 3, 2, 5]) == 9);
     }
 }
 

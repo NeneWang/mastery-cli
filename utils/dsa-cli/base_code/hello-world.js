@@ -1,8 +1,9 @@
 class Problem {
-    solve() {
-        console.log("Hello World!");
-    }
+	solve() {
+	// Your code here
+
+	}
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: Problem };

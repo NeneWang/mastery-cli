@@ -50,6 +50,7 @@
 		"meow": "^9.0.0",
 		"node-json-db": "^2.1.4",
 		"play-sound": "^1.1.5",
+		"sql.js": "^1.8.0",
 		"terminal-image": "^2.0.0"
 	},
 	"devDependencies": {

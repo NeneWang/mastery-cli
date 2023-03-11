@@ -1,4 +1,9 @@
 
+const {getDirAbsoluteUri} = require('./functions');
+
+const SOLUTION_DIR = 'solutions'
+
+
 class ProblemMetadata {
     constructor(slug, { name = "", description = "", difficulty = "EASY", tags = [] } = {}) {
         this.slug = slug;
@@ -8,6 +13,7 @@ class ProblemMetadata {
         this.description = description;
         this.difficulty = difficulty;
         this.tags = tags;
+        this.absolute_solution_path = getDirAbsoluteUri(`./${SOLUTION_DIR}/${slug}.js`);
     }
 
     get asJson() {

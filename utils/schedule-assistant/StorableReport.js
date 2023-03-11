@@ -5,8 +5,11 @@ const DEBUG = false;
 
 
 class StorableReport {
-    constructor() {
-        this.db = new JsonDB(new Config("report", true, false, "/"));
+    constructor({ filename = "report", autosave = true } = {}) {
+        this.filename = filename;
+        this.autosave = autosave;
+
+        this.db = new JsonDB(new Config(filename, true, false, "/"));
         this.getReport().then(reportData => {
             this.report = reportData;
         });
@@ -17,16 +20,41 @@ class StorableReport {
         return this.report?.date;
     }
 
-    addAnswers(answers) {
-        // A dict will be passsed in you want to merge this with the input.
-        const thisanswers = this.report ?? {};
-        this.report = { ...thisanswers,  ...answers, };
+    increaseAnswerFor(key) {
+        if (!this.report?.[key]) {
+            this.report[key] = 0;
+        }
+        this.report?.[key]++;
+    }
+
+    decreaseAnswerFor(key) {
+        if (!this.report?.[key]) {
+            this.report[key] = 0;
+        }
+        this.report?.[key]--;
+    }
+
+    fixCheckAnswers(listOfChekBoxesKeys) {
+        // Change the answer of those keys that are in listOfChekBoxesKeys wheres are otehr than 1 or 0 to 0
+        for (const key of listOfChekBoxesKeys) {
+            const answer = this.getAnswerFor(key);
+            if (answer !== 1 && answer !== 0) {
+                this.report[key] = 0;
+            }
+        }
         this.saveReport();
     }
 
-    getAnswerFor(key){
+    addAnswers(answers) {
+        // A dict will be passsed in you want to merge this with the input.
+        const thisanswers = this.report ?? {};
+        this.report = { ...thisanswers, ...answers, };
+        this.saveReport();
+    }
+
+    getAnswerFor(key, {defaultvalue = 0} = {}) {
         console.log("this.report", key, this.report[key]);
-        return this.report[key];
+        return this.report?.[key]??defaultvalue;
     }
 
     cleanReport() {

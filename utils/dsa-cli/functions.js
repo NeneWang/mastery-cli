@@ -111,19 +111,55 @@ const countDecimals = (value) => {
 
 
 const renderPromptDescription = (prompt) => {
-    const Constants =  require("./constants");
-    const chalk = require("chalk");
-    marked.setOptions({
-        renderer: new TerminalRenderer()
-    });
-    // Print title in Blue
-    console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(prompt?.["title"] ?? "")}`)
-    console.log(marked(prompt?.["description"] ?? ""));
-    console.log(marked(prompt?.["preview"] ?? ""));
+    try {
+
+        const Constants = require("./constants");
+        const chalk = require("chalk");
+        marked.setOptions({
+            renderer: new TerminalRenderer()
+        });
+        // Print title in Blue
+        console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(prompt?.["title"] ?? "")}`)
+        console.log(marked(prompt?.["description"] ?? ""));
+        console.log(marked(prompt?.["preview"] ?? ""));
+        return true;
+    }
+    catch (err) {
+        console.log("Error while attempting to render prompt description", err);
+        return false;
+    }
 };
+
+
+function writeUnresolvedClass(sourceFilePath, targetFilePath, { avoidOverwrite = true } = {}) {
+    
+    // Check if the target file exists
+    if (avoidOverwrite && fs.existsSync(targetFilePath)) {
+        console.error(`Target file ${targetFilePath} already exists. Aborting write.`);
+        return;
+    }
+    
+    // Read the content of the source file
+    const content = fs.readFileSync(sourceFilePath, 'utf8');
+
+    // Find the class name
+    const className = content.match(/class (\w+)/)[1];
+
+    // Find the solve method
+    const solveMethod = content.match(/solve\([\s\S]*?\n/m);
+    console.log("solveMethod", solveMethod)
+    const solveMethodHeader = solveMethod ? `\n\t${solveMethod[0]}` : '';
+
+    // Write the unresolved version of the class to the target file
+    const unresolvedContent = `class ${className} {${solveMethodHeader}\t// Your code here\n\n\t\}\n}\n\n\nmodule.exports = { Problem: ${className} };`;
+
+
+    fs.writeFileSync(targetFilePath, unresolvedContent, 'utf8');
+}
 
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
-    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, renderPromptDescription
+    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, renderPromptDescription,
+    writeUnresolvedClass
 };

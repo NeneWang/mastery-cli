@@ -5050,6 +5050,11 @@
   "resolved" "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz"
   "version" "1.0.3"
 
+"sql.js@^1.8.0":
+  "integrity" "sha512-3HD8pSkZL+5YvYUI8nlvNILs61ALqq34xgmF+BHpqxe68yZIJ1H+sIVIODvni25+CcxHUxDyrTJUL0lE/m7afw=="
+  "resolved" "https://registry.npmjs.org/sql.js/-/sql.js-1.8.0.tgz"
+  "version" "1.8.0"
+
 "ssf@~0.11.2":
   "integrity" "sha512-+idbmIXoYET47hH+d7dfm2epdOMUDjqcB4648sTZ+t2JwoyBFL/insLfB/racrDmsKB3diwsDA696pZMieAC5g=="
   "resolved" "https://registry.npmjs.org/ssf/-/ssf-0.11.2.tgz"
