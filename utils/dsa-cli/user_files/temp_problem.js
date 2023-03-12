@@ -1,13 +1,8 @@
-class SearchRotatedArray {
-	solve(nums, target) {
-	// Your code here
+class MaxProfit {
 
-	}
+    solve(prices) {
+    }
 }
 
 
-module.exports = { Problem: SearchRotatedArray };angleArea };m };er;
-}
-
-
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: MaxProfit };
