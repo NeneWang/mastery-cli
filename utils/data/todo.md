@@ -38,6 +38,13 @@ Here (4) large assistant wise projects that I am interested in making:
 
 
 
+### About Inheriting My Father's Business
+
+Things that I believe I should focus on learning
+- Social Skills
+- Having a background of starting businesses from zero (Own app development)
+- Ability to quickly prototype and test ideas with Software
+- Massive distribution of marketinr and research. 
 
 
 
