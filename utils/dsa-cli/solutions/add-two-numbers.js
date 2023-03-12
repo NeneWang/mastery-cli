@@ -1,13 +1,14 @@
-class Problem {
+class AddTwoNumbers {
+
 
     /**
-     * https://leetcode.com/problems/add-two-numbers/
-     * Time O(MAX(N, M)) | Space O(MAX(N, M))
-     * @param {ListNode} l1
-     * @param {ListNode} l2
-     * @return {ListNode}
+     * https://leetcode.com/problems/copy-list-with-random-pointer/
+     * Time O(N) | Space O(1)
+     * @param {Node} head
+     * @return {Node}
      */
     solve(l1, l2) {
+
 
         const add = (l1, l2, tail, sentinel, carry = 0) => {
             const isBaseCase = !(l1 || l2 || carry);
@@ -31,7 +32,6 @@ class Problem {
 
             return sentinel.next;
         }
-
 
         let sentinel = tail = new ListNode();
 
@@ -62,9 +62,10 @@ class Problem {
         }
 
         return sentinel.next;
-    };
+    }
+
 
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: AddTwoNumbers };

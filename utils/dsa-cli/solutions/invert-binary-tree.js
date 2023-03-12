@@ -1,6 +1,10 @@
-class InvertTree {
 
 
+class Problem {
+
+    solve(root) {
+        return this.invertTree(root);
+    }
 
     /**
      * https://leetcode.com/problems/invert-binary-tree/
@@ -8,7 +12,8 @@ class InvertTree {
      * @param {TreeNode} root
      * @return {TreeNode}
      */
-    solve(root) {
+    invertTree(root) {
+        
         const dfs = (root) => {
             const left = invertTree(root.left);
             const right = invertTree(root.right);
@@ -19,12 +24,12 @@ class InvertTree {
             return root;
         }
 
+
         const isBaseCase = root === null;
         if (isBaseCase) return root;
 
         return dfs(root);
     }
-
 
 
     /**
@@ -33,7 +38,8 @@ class InvertTree {
      * @param {TreeNode} root
      * @return {TreeNode}
      */
-    invertTree(root,) {
+    invertTree_1 = (root,) => {
+
         const bfs = (queue) => {
             while (queue.length) {
                 for (let i = (queue.length - 1); 0 <= i; i--) {
@@ -57,11 +63,7 @@ class InvertTree {
 
         return root;
     }
-
-
-
-
 }
 
 
-module.exports = { Problem: InvertTree };
+module.exports = { Problem };

@@ -45,7 +45,7 @@ class ReverseKGroup {
         }
 
         return sentinel.next;
-    };
+    }
 }
 
 

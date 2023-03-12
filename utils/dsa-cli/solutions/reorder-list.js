@@ -44,7 +44,7 @@ class ReorderList {
         const reveredFromMid = reverse(mid);/* Time O(N) */
 
         reorder(head, reveredFromMid);      /* Time O(N) */
-    };
+    }
 }
 
 

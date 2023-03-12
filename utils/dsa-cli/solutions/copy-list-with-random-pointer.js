@@ -1,5 +1,4 @@
-class Problem {
-
+class CopyListWithRandomPointer {
 
     /**
      * https://leetcode.com/problems/copy-list-with-random-pointer/
@@ -7,7 +6,7 @@ class Problem {
      * @param {Node} head
      * @return {Node}
      */
-    solve(head, map = new Map()) {
+    copyRandomList(head, map = new Map()) {
         if (!head) return null;
         if (map.has(head)) return map.get(head);
 
@@ -21,14 +20,13 @@ class Problem {
     }
 
 
-
     /**
      * https://leetcode.com/problems/copy-list-with-random-pointer/
      * Time O(N) | Space O(1)
      * @param {Node} head
      * @return {Node}
      */
-    copyRandomList = function (head) {
+    copyRandomList_o_1 = function (head) {
 
         const cloneNode = (curr) => {
             while (curr) {          /* Time O(N) */
@@ -69,7 +67,12 @@ class Problem {
 
         return connectNode(head);/* Time O(N) */
     };
+
+    solve(head, map = new Map()) {
+        return this.copyRandomList(head, map);
+    }
+
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: CopyListWithRandomPointer };

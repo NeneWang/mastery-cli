@@ -1,15 +1,8 @@
 class Problem {
 
+    isBalanced = function (root) {
 
-    /**
-     * https://leetcode.com/problems/balanced-binary-tree/
-     * TIme O(N) | Space O(H)
-     * @param {TreeNode} root
-     * @return {boolean}
-     */
-    solve(root) {
-
-        alanced = (root) => {
+        const isChildBalanced = (root) => {
             const left = isBalanced(root.left);
             const right = isBalanced(root.right);
 
@@ -50,41 +43,15 @@ class Problem {
     }
 
 
-
     /**
      * https://leetcode.com/problems/balanced-binary-tree/
      * TIme O(N) | Space O(H)
      * @param {TreeNode} root
      * @return {boolean}
      */
-    isBalanced(root) {
-
-
-        var isRootBalanced = (root) => {
-            const isBaseCase = root === null
-            if (isBaseCase) return [-1, true];
-
-            return dfs(root)
-        }
-
-        var dfs = (root) => {
-            const [left, isLeftBalanced] = isRootBalanced(root.left);
-            const [right, isRightBalanced] = isRootBalanced(root.right);
-            const [height, difference] = [Math.max(left, right), Math.abs(left - right)];
-
-            const isAcceptableHeight = difference <= 1;
-            const _isBalanced = isLeftBalanced && isRightBalanced;
-
-            const _isRootBalanced = _isBalanced && isAcceptableHeight;
-
-            return [(height + 1), _isRootBalanced];
-        }
-
-        
-        const [_height, _isBalanced] = isRootBalanced(root);
-
-        return _isBalanced;
-    };
+    solve(root) {
+        return this.isBalanced(root);
+    }
 }
 
 

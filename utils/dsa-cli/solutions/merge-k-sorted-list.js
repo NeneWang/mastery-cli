@@ -1,15 +1,15 @@
-class MergeKSortedList {
 
 
-    /**
-     * https://leetcode.com/problems/merge-k-sorted-lists/
-     * Time O(N) | Space O(N)
-     * @param {ListNode[]} lists
-     * @return {ListNode}
-     */
+/**
+ * https://leetcode.com/problems/merge-k-sorted-lists/
+ * Time O(N) | Space O(N)
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+class MergeKSortedLists {
     solve(lists) {
 
-        const mergeTwoLists = function (list1, list2) {
+        var mergeTwoLists = function (list1, list2) {
             let sentinel = tail = new ListNode(0);
 
             while (list1 && list2) {
@@ -29,7 +29,6 @@ class MergeKSortedList {
 
             return sentinel.next;
         };
-
 
         let previous = null;
 
@@ -79,12 +78,11 @@ class MergeKSortedList {
 
             return sentinel.next;
         }
-        const minHeap = getMinHeap(lists);
 
+        const minHeap = getMinHeap(lists);
         return mergeLists(minHeap)
     };
-
 }
 
 
-module.exports = { Problem: MergeKSortedList };
+module.exports = { Problem: MergeKSortedLists };

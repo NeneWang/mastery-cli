@@ -1,14 +1,7 @@
-class LowestCommonAncestor {
+class LowestCommonAncestorOfBinarySearchTree {
 
-    /**
-     * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
-     * Time O(N) | Space O(H)
-     * @param {TreeNode} root
-     * @param {TreeNode} p
-     * @param {TreeNode} q
-     * @return {TreeNode}
-     */
-    solve(root, p, q) {
+
+    lowestCommonAncestor = function (root, p, q) {
         const isGreater = (p.val < root.val) && (q.val < root.val);
         if (isGreater) return lowestCommonAncestor(root.left, p, q);
 
@@ -27,7 +20,7 @@ class LowestCommonAncestor {
      * @param {TreeNode} q
      * @return {TreeNode}
      */
-    lowestCommonAncestor = function (root, p, q) {
+    lowestCommonAncestorLessSpace = function (root, p, q) {
         while (root !== null) {
             const isGreater = (root.val < p.val) && (root.val < q.val)
             if (isGreater) {
@@ -47,7 +40,10 @@ class LowestCommonAncestor {
         return root;
     };
 
+    solve(root, p, q) {
+        return this.lowestCommonAncestor(root, p, q);
+    }
 }
 
 
-module.exports = { Problem: LowestCommonAncestor };
+module.exports = { Problem: LowestCommonAncestorOfBinarySearchTree };

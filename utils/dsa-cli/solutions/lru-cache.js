@@ -1,5 +1,13 @@
+/** 
+ * https://leetcode.com/problems/lru-cache/
+ * Time O(1) | Space O(N)
+ * Your LRUCache object will be instantiated and called as such:
+ * var obj = new LRUCache(capacity)
+ * var param_1 = obj.get(key)
+ * obj.put(key,value)
+ */
 class LRUCache {
-    constructor(capacity) {
+    onstructor(capacity) {
         this.capacity = capacity;
         this.map = new Map();
 

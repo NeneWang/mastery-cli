@@ -1,4 +1,5 @@
-class BuildTree {
+class Problem {
+
 
     /**
      * https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
@@ -7,7 +8,7 @@ class BuildTree {
      * @param {number[]} inorder
      * @return {TreeNode}
      */
-    solve(preorder, inorder) {
+    buildTree = function (preorder, inorder) {
 
         var dfs = (preorder, inorder) => {
             const { leftInorder, mid, rightInorder } = getPointers(preorder, inorder);
@@ -28,6 +29,7 @@ class BuildTree {
             return { leftInorder, mid, rightInorder };
         }
 
+
         const isBaseCase = !preorder.length || !inorder.length;
         if (isBaseCase) return null;
 
@@ -35,39 +37,10 @@ class BuildTree {
     }
 
 
-
-    /**
-     * https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
-     * Time O(N) | Space(H)
-     * @param {number[]} preorder
-     * @param {number[]} inorder
-     * @return {TreeNode}
-     */
-    buildTree = function (preorder, inorder, max = -Infinity, indices = { preorder: 0, inorder: 0 }) {
-
-
-        var dfs = (preorder, inorder, max, indices) => {
-            const val = preorder[indices.preorder++]
-            const root = new TreeNode(val);
-
-            root.left = buildTree(preorder, inorder, root.val, indices);
-            root.right = buildTree(preorder, inorder, max, indices);
-
-            return root;
-        }
-        const isBaseCase = preorder.length <= indices.inorder;
-        if (isBaseCase) return null;
-
-        const isAtEnd = inorder[indices.inorder] === max;
-        if (isAtEnd) {
-            indices.inorder++;
-            return null;
-        }
-
-        return dfs(preorder, inorder, max, indices);
+    solve(preoreder, inorder) {
+        return this.buildTree(preoreder, inorder);
     }
-
 }
 
 
-module.exports = { Problem: BuildTree };
+module.exports = { Problem };

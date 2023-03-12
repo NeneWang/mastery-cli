@@ -1,4 +1,6 @@
-class BinaryTreeMaximumPathSum {
+class Problem {
+
+
 
     /**
      * https://leetcode.com/problems/binary-tree-maximum-path-sum/
@@ -6,7 +8,7 @@ class BinaryTreeMaximumPathSum {
      * @param {TreeNode} root
      * @return {number}
      */
-    solv(root, maxValue = [-Infinity]) {
+    maxPathSum = function (root, maxValue = [-Infinity]) {
 
 
         const pathSum = (root, maxValue) => {
@@ -25,13 +27,14 @@ class BinaryTreeMaximumPathSum {
 
             return Math.max(left, right) + node.val;
         }
-
-        
         pathSum(root, maxValue);
 
         return maxValue[0];
     };
+    solve(root) {
+        return this.maxPathSum(root);
+    }
 }
 
 
-module.exports = { Problem: BinaryTreeMaximumPathSum };
+module.exports = { Problem };

@@ -1,6 +1,5 @@
 class DiameterOfBinaryTree {
 
-
     /**
      * https://leetcode.com/problems/diameter-of-binary-tree/
      * TIme O(N) | Space O(H)
@@ -33,6 +32,7 @@ class DiameterOfBinaryTree {
         diameterOfTree(root, max);
         return max[0];
     };
+
 }
 
 

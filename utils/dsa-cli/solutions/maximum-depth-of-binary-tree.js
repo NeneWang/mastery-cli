@@ -1,5 +1,4 @@
-class MaximumDepthBinaryTree {
-
+class MaximumDepthOfBinaryTree {
 
     /**
      * https://leetcode.com/problems/maximum-depth-of-binary-tree/
@@ -8,6 +7,30 @@ class MaximumDepthBinaryTree {
      * @return {number}
      */
     solve(root) {
+
+        const dfs = (root) => {
+            const left = maxDepth(root.left);
+            const right = maxDepth(root.right);
+
+            const height = Math.max(left, right);
+
+            return height + 1;
+        }
+        const isBaseCase = root === null;
+        if (isBaseCase) return 0;
+
+        return dfs(root);
+    };
+
+
+
+    /**
+     * https://leetcode.com/problems/maximum-depth-of-binary-tree/
+     * TIme O(N) | Space O(N)
+     * @param {TreeNode} root
+     * @return {number}
+     */
+    maxDepth(root) {
 
 
         const bfs = (queue, height = 0) => {
@@ -25,35 +48,14 @@ class MaximumDepthBinaryTree {
             return height;
         }
 
+
         const isBaseCase = root === null;
         if (isBaseCase) return 0;
 
         return bfs([[root, 0]]);
     }
 
-    /**
-     * https://leetcode.com/problems/maximum-depth-of-binary-tree/
-     * TIme O(N) | Space O(N)
-     * @param {TreeNode} root
-     * @return {number}
-     */
-    maxDepth = function (root) {
-
-
-        const dfs = (root) => {
-            const left = maxDepth(root.left);
-            const right = maxDepth(root.right);
-
-            const height = Math.max(left, right);
-
-            return height + 1;
-        }
-        const isBaseCase = root === null;
-        if (isBaseCase) return 0;
-
-        return dfs(root);
-    };
 }
 
 
-module.exports = { Problem: MaximumDepthBinaryTree };
+module.exports = { Problem: MaximumDepthOfBinaryTree };
