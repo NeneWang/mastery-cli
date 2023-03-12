@@ -1,6 +1,4 @@
-class Problem {
-
-
+class BinaryTreeMaximumPathSum {
 
     /**
      * https://leetcode.com/problems/binary-tree-maximum-path-sum/
@@ -37,4 +35,4 @@ class Problem {
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: BinaryTreeMaximumPathSum };

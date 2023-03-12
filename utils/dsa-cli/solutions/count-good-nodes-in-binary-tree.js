@@ -1,4 +1,4 @@
-class Problem {
+class CountGoodNodesInBinaryTree {
 
 
     /**
@@ -38,4 +38,4 @@ class Problem {
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: CountGoodNodesInBinaryTree };
