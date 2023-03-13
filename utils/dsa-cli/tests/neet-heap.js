@@ -76,9 +76,9 @@ class DesignTwitter extends ProblemTests {
     }
 }
 
-class FindMedianFromDataStream extends ProblemTests{
+class FindMedianFromDataStream extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
 
         super(Problem);
         this.tests.push(() => this.test_1());
@@ -86,11 +86,11 @@ class FindMedianFromDataStream extends ProblemTests{
     }
 
 
-    test_1(){
+    test_1() {
         const medianFinder = new this.Problem();
         this.current_test_name = '[1, 2, 3, 4, 5] | [1, 1.5, 2, 2.5, 3]';
         medianFinder.addNum(1);
-        
+
         // assert(medianFinder.findMedian() == 1);
         medianFinder.addNum(2);
         console.log(medianFinder.findMedian());
@@ -107,11 +107,38 @@ class FindMedianFromDataStream extends ProblemTests{
 
 }
 
+class KClosest extends ProblemTests {
+
+    constructor(Problem) {
+
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+
+    }
+
+    test_1() {
+        const kClosest = new this.Problem();
+        this.current_test_name = '[[1,3],[-2,2]] | 1 | [[-2,2]]';
+        assert.deepEqual(kClosest.solve([[1, 3], [-2, 2]], 1), [[-2, 2]]);
+    }
+
+    test_2() {
+        const kClosest = new this.Problem();
+        this.current_test_name = '[[3,3],[5,-1],[-2,4]] | 2 | [[3,3],[-2,4]]';
+        assert.deepEqual(kClosest.solve([[3, 3], [5, -1], [-2, 4]], 2), [[3, 3], [-2, 4]]);
+    }
+
+}
+
+
+
 
 
 const TEST_DICTIONARY = {
     'design-twitter': DesignTwitter,
     'find-median-from-data-stream': FindMedianFromDataStream,
+    'k-closest': KClosest,
 }
 
 module.exports = TEST_DICTIONARY;
