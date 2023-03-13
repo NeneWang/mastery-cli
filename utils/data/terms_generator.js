@@ -63,6 +63,16 @@ class TermGenerator {
       for (const row of terminologiesDict) {
         const optional_prompt = (row?.prompt != undefined && row?.prompt!="")?row.prompt: this.default_prompt;
         // console.log("Prompt received", row?.prompt, optional_prompt )
+
+        // Dont create if doesnt have term or description
+        if (row?.term == undefined  || row?.description == undefined) {
+          continue;
+        }
+
+        if(row?.term == "" || row?.description == ""){
+          continue;
+        }
+
         const term = new Terminology(row?.term ?? "", row?.description ?? "", { 
           prompt: optional_prompt,
           example: row?.example ?? "", attachment: row?.attachment??"" });

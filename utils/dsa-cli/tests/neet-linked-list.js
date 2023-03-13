@@ -147,7 +147,7 @@ class LRUCache extends ProblemTests {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
-        // this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_3());
     }
 
     test_1() {
@@ -183,10 +183,10 @@ class LRUCache extends ProblemTests {
 
     }
 
-    
+
     test_3() {
         this.current_test_name = "[[2,1],[2,2],get[2],[1,1],[4,1],get[2]] => [2,1]"
-        const problemToTest = new this.Problem(3);
+        const problemToTest = new this.Problem(2);
         problemToTest.put(2, 1);
         problemToTest.put(2, 2);
         assert(problemToTest.get(2) == 2);
@@ -201,6 +201,57 @@ class LRUCache extends ProblemTests {
 }
 
 
+class MergeKSortedList extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        this.current_test_name = "[[1,4,5],[1,3,4],[2,6]] => [1,1,2,3,4,4,5,6]"
+        const problemToTest = new this.Problem();
+        const list1 = arrayToListNode([1, 4, 5]);
+        const list2 = arrayToListNode([1, 3, 4]);
+        const list3 = arrayToListNode([2, 6]);
+        const lists = [list1, list2, list3];
+        const result = problemToTest.solve(lists);
+        assert(result.val == 1);
+        assert(result.next.val == 1);
+        assert(result.next.next.val == 2);
+        assert(result.next.next.next.val == 3);
+        assert(result.next.next.next.next.val == 4);
+        assert(result.next.next.next.next.next.val == 4);
+        assert(result.next.next.next.next.next.next.val == 5);
+        assert(result.next.next.next.next.next.next.next.val == 6);
+    }
+
+
+    test_2() {
+        this.current_test_name = "[]"
+        const problemToTest = new this.Problem();
+        const lists = [];
+        const result = problemToTest.solve(lists);
+        // console.log("test_2 result", result);
+        assert(result == null);
+
+    }
+
+    test_3() {
+        this.current_test_name = "[[]]"
+        const problemToTest = new this.Problem();
+        const lists = [[]];
+        const result = problemToTest.solve(lists);
+        console.log("test_2 result", result);
+        assert.deepEqual(result, []);
+    }
+
+
+}
+
+
 
 const PROBLEM_DICT = {
     'add-two-numbers': AddTwoNumbers,
@@ -208,6 +259,7 @@ const PROBLEM_DICT = {
     'find-the-duplicate-number': FindTHeDuplicateNumber,
     'linked-list-cycle': LinkedListCycle,
     'lru-cache': LRUCache,
+    'merge-k-sorted-list': MergeKSortedList,
 }
 
 

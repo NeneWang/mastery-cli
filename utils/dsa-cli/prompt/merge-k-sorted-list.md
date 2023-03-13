@@ -31,8 +31,7 @@ merging them into one sorted list:
 ### Example 2
 
 ```bash
-Input: lists = []
-Output: []
+
 ```
 
 ### Example 3

@@ -6,10 +6,21 @@
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
+
+class ListNode {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+
+
 class MergeKSortedLists {
     solve(lists) {
 
         var mergeTwoLists = function (list1, list2) {
+            let tail;
             let sentinel = tail = new ListNode(0);
 
             while (list1 && list2) {

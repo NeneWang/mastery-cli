@@ -6,8 +6,4 @@ class SearchMatrix {
 }
 
 
-module.exports = { Problem: SearchMatrix };argestRectangleArea };m };er;
-}
-
-
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: SearchMatrix };edArray };angleArea };m };
