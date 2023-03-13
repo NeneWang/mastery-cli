@@ -1,5 +1,17 @@
+
+
+
+
 class SameTree {
 
+
+    dfs = (p, q) => {
+        const left = this.isSameTree(p.left, q.left);
+        const right = this.isSameTree(p.right, q.right);
+    
+        return left && right;
+    }
+    
     /**
      * https://leetcode.com/problems/same-tree/
      * TIme O(N) | Space O(H)
@@ -17,18 +29,11 @@ class SameTree {
         const isSame = p.val === q.val;
         if (!isSame) return false;
 
-        return dfs(p, q);
+        return this.dfs(p, q);
     };
 
-    dfs = (p, q) => {
-        const left = isSameTree(p.left, q.left);
-        const right = isSameTree(p.right, q.right);
-
-        return left && right;
-    }
-
     solve(p, q) {
-        return isSameTree(p, q);
+        return this.isSameTree(p, q);
     }
 }
 

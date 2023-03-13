@@ -326,6 +326,93 @@ class KthSmallestElementInABst extends ProblemTests {
 }
 
 
+class MaximumDepthOfBinaryTree extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+
+        this.current_test_name = "[3,9,20,null,null,15,7] => 3"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([3, 9, 20, null, null, 15, 7]);
+        assert(problemToTest.solve(tree) == 3);
+
+    }
+
+    test_2() {
+
+        this.current_test_name = "[1,null,2] => 2"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([1, null, 2]);
+        assert(problemToTest.solve(tree) == 2);
+
+    }
+
+    test_3() {
+
+        this.current_test_name = "[] => 0"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([]);
+        assert(problemToTest.solve(tree) == 0);
+
+    }
+
+}
+
+
+class SameTree extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+
+        this.current_test_name = "[1,2,3], [1,2,3] => true"
+        const problemToTest = new this.Problem();
+        const tree1 = arrayToBinaryTree([1, 2, 3]);
+        const tree2 = arrayToBinaryTree([1, 2, 3]);
+        assert(problemToTest.solve(tree1, tree2) == true);
+
+
+    }
+
+    test_2() {
+
+        this.current_test_name = "[1,2], [1,null,2] => false"
+        const problemToTest = new this.Problem();
+        const tree1 = arrayToBinaryTree([1, 2]);
+        const tree2 = arrayToBinaryTree([1, null, 2]);
+        assert(problemToTest.solve(tree1, tree2) == false);
+
+
+    }
+
+    test_3() {
+
+        this.current_test_name = "[1,2,1], [1,1,2] => false"
+        const problemToTest = new this.Problem();
+        const tree1 = arrayToBinaryTree([1, 2, 1]);
+        const tree2 = arrayToBinaryTree([1, 1, 2]);
+        assert(problemToTest.solve(tree1, tree2) == false);
+
+    }
+
+}
+
+
+
+
+
+
 
 
 
@@ -343,6 +430,8 @@ const TEST_DICTIONARY = {
     'diameter-of-binary-tree': DiameterOfBinaryTree,
     'invert-binary-tree': InvertBinaryTree,
     'kth-smallest-element-in-a-bst': KthSmallestElementInABst,
+    'maximum-depth-of-binary-tree': MaximumDepthOfBinaryTree,
+    'same-tree': SameTree,
 
 }
 

@@ -9,8 +9,8 @@ class MaximumDepthOfBinaryTree {
     solve(root) {
 
         const dfs = (root) => {
-            const left = maxDepth(root.left);
-            const right = maxDepth(root.right);
+            const left = this.maxDepth(root.left);
+            const right = this.maxDepth(root.right);
 
             const height = Math.max(left, right);
 
