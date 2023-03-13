@@ -408,6 +408,57 @@ class SameTree extends ProblemTests {
 
 }
 
+class SerializeAndDeserializeBinaryTree extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+
+        this.current_test_name = "[1,2,3,null,null,4,5] => [1,2,3,null,null,4,5]"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([1, 2, 3, null, null, 4, 5]);
+        const arr_response = binaryTreeToArray(problemToTest.solve(tree));
+        assert.deepEqual(arr_response, [1, 2, 3, null, null, 4, 5]);
+
+    }
+
+
+    test_2() {
+
+        this.current_test_name = "[1,2,3,null,null,4,5] => [1,2,3,null,null,4,5]"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([1, 2, 3, null, null, 4, 5]);
+        const arr_response = binaryTreeToArray(problemToTest.solve(tree));
+        assert.deepEqual(arr_response, [1, 2, 3, null, null, 4, 5]);
+
+
+    }
+
+    
+    
+    test_3() {
+        // Making sure there is no foul play
+
+        this.current_test_name = " (check by calling deserialized, serialized) [1,2,3,null,null,4,5] => [1,2,3,null,null,4,5]"
+        
+        const problemToTest = new this.Problem();
+        
+        const tree = arrayToBinaryTree([1, 2, 3, null, null, 4, 5]);
+        const serialized = problemToTest.serialize(tree);
+        const deserialized = problemToTest.deserialize(serialized);
+        const arr_response = binaryTreeToArray(deserialized);
+
+        assert.deepEqual(arr_response, [1, 2, 3, null, null, 4, 5]);
+        assert.notDeepEqual(binaryTreeToArray(serialized), binaryTreeToArray(deserialized));
+
+    }
+
+}
+
 
 
 
@@ -432,6 +483,7 @@ const TEST_DICTIONARY = {
     'kth-smallest-element-in-a-bst': KthSmallestElementInABst,
     'maximum-depth-of-binary-tree': MaximumDepthOfBinaryTree,
     'same-tree': SameTree,
+    'serialize-and-deserialize-binary-tree': SerializeAndDeserializeBinaryTree,
 
 }
 
