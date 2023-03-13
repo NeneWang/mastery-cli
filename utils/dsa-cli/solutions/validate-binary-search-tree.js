@@ -1,4 +1,4 @@
-class Problem {
+class ValidateBinarySearchTree {
 
 
     /**
@@ -32,4 +32,4 @@ class Problem {
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: ValidateBinarySearchTree };

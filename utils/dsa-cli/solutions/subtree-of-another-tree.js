@@ -1,4 +1,4 @@
-class Problem {
+class SubstreeOfAnotherTree {
 
     /**
      * https://leetcode.com/problems/subtree-of-another-tree/
@@ -42,4 +42,4 @@ class Problem {
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: SubstreeOfAnotherTree };
