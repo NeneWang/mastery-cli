@@ -3,8 +3,8 @@ class BalanceBinaryTree {
     isBalanced = function (root) {
 
         const isChildBalanced = (root) => {
-            const left = isBalanced(root.left);
-            const right = isBalanced(root.right);
+            const left = this.isBalanced(root.left);
+            const right = this.isBalanced(root.right);
 
             return left && right
         }

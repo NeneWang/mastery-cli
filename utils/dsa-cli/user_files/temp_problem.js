@@ -1,7 +1,13 @@
-class TimeMap {	// Your code here
+class SearchRotatedArray {
+	solve(nums, target) {
+	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: TimeMap };exports = { Problem: KokoEatingBananas };ays };angleArea };m };
+module.exports = { Problem: SearchRotatedArray };angleArea };nWater;
+}
+
+
+module.exports = { Problem: TrappingRainWater };

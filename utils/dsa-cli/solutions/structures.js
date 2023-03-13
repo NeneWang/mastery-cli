@@ -6,5 +6,26 @@ class LinkedList {
   }
 
 
+  
+const bfs = (queue, levels = []) => {
+  while (queue.length) {
+      const level = [];
 
-  module.exports = {LinkedList}
+      for (let i = (queue.length - 1); 0 <= i; i--) {
+          const node = queue.shift();
+
+          if (node.left) queue.push(node.left);
+          if (node.right) queue.push(node.right);
+
+          level.push(node.val);
+      }
+
+      levels.push(level.slice());
+  }
+
+  return levels;
+}
+
+
+
+  module.exports = {LinkedList, bfs}
