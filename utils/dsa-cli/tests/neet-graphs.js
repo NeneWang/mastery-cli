@@ -303,11 +303,6 @@ class wordLadder extends ProblemTests {
 
 
 
-
-
-
-
-
 const TEST_DICTIONARY = {
     'clone-graph': CloneGraph,
     'course-schedule': CourseSchedule,
