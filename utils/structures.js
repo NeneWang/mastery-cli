@@ -5,18 +5,18 @@ const { isAxiosError } = require("axios");
  */
 class Term {
 
-    constructor(term, example = "", description = "", prompt = "Use the term", { priority = 5, tags = [], category = "", references = "", attachment = "", auto_newline=true } = {}) {
+    constructor(term, example = "", description = "", prompt = "Use the term", { priority = 5, tags = [], category = "", references = "", attachment = "", auto_newline = true } = {}) {
         /**
          * REMEMBER: To add the new item into asJson!!
          */
 
         this.auto_newline = auto_newline;
-        
+
         this.term = term;
         this.description = description;
         this.example = example;
-        
-        if(this.auto_newline){
+
+        if (this.auto_newline) {
             this.example = this.description.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
             this.description = this.description.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
         }
@@ -110,10 +110,10 @@ class TermStorage {
     }
 
 
-    get deck_titles(){
+    get deck_titles() {
         const deck_names = [this.deck_name];
-        for(const deck of this.decks){
-            
+        for (const deck of this.decks) {
+
             deck_names.push(...deck.deck_titles);
         }
         return deck_names;
@@ -124,6 +124,16 @@ class TermStorage {
      * @param {Term} term Pushes this term into the terms of the storage
      */
     push(term) {
+        // Check if term at least has a term and description
+        if (term?.term == null || term?.description == null) {
+
+            return;
+        }
+        if (term.term == "" || term.description == "") {
+            return;
+        }
+
+
         this.terms.push(term);
     }
 
@@ -178,7 +188,7 @@ class TermStorage {
 
         for (const deck of this.decks) {
             //Regardless of it is active or not.
-            if ( (get_only.length == 0 && deck.is_active ) ||  get_only.includes(deck.deck_name)) {
+            if ((get_only.length == 0 && deck.is_active) || get_only.includes(deck.deck_name)) {
                 termsList.push(...deck.listTerms());
             }
         }
