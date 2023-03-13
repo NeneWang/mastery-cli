@@ -1,6 +1,13 @@
+class ListNode {
+    constructor(val = 0, next = null) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
 class MergeTwoSortedList {
 
-    
+
     /**
      * https://leetcode.com/problems/remove-from-nth/
      * Time O(N) | Space O(N)

@@ -1,4 +1,11 @@
-class Problem {
+class ListNode {
+    constructor(val = 0, next = null) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+class MergeTwoSorted {
 
 
     /**
@@ -8,7 +15,8 @@ class Problem {
      * @param {ListNode} list2
      * @return {ListNode}
      */
-    solve(list1, list2) {
+    mergeTwoLists(list1, list2) {
+
         const isBaseCase1 = list1 === null;
         if (isBaseCase1) return list2;
 
@@ -17,17 +25,21 @@ class Problem {
 
         const isL2Greater = list1.val <= list2.val;
         if (isL2Greater) {
-            list1.next = mergeTwoLists(list1.next, list2);/* Time O(N + M) | Space O(N + M) */
+            list1.next = this.mergeTwoLists(list1.next, list2);/* Time O(N + M) | Space O(N + M) */
 
             return list1;
         }
 
         const isL2Less = list2.val <= list1.val;
         if (isL2Less) {
-            list2.next = mergeTwoLists(list1, list2.next);/* Time O(N + M) | Space O(N + M) */
+            list2.next = this.mergeTwoLists(list1, list2.next);/* Time O(N + M) | Space O(N + M) */
 
             return list2;
         }
+    }
+
+    solve(list1, list2) {
+        return this.mergeTwoLists(list1, list2);
     }
 
 
@@ -40,6 +52,7 @@ class Problem {
      * @return {ListNode}
      */
     mergeTwoLists = function (list1, list2) {
+        let tail;
         let sentinel = tail = new ListNode();
 
         while (list1 && list2) {/* Time O(N + M) */
@@ -66,4 +79,4 @@ class Problem {
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: MergeTwoSorted };

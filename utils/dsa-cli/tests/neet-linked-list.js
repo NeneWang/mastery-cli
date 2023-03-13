@@ -252,6 +252,88 @@ class MergeKSortedList extends ProblemTests {
 }
 
 
+class MergeTwoSortedList extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        this.current_test_name = "[1,2,4],[1,3,4] => [1,1,2,3,4,4]"
+        const problemToTest = new this.Problem();
+        const list1 = arrayToListNode([1, 2, 4]);
+        const list2 = arrayToListNode([1, 3, 4]);
+        const result = problemToTest.solve(list1, list2);
+        assert(result.val == 1);
+        assert(result.next.val == 1);
+        assert(result.next.next.val == 2);
+        assert(result.next.next.next.val == 3);
+        assert(result.next.next.next.next.val == 4);
+        assert(result.next.next.next.next.next.val == 4);
+    }
+
+    test_2() {
+        this.current_test_name = "[]"
+        const problemToTest = new this.Problem();
+        const list1 = arrayToListNode([]);
+        const list2 = arrayToListNode([]);
+        const result = problemToTest.solve(list1, list2);
+        assert(result == null);
+    }
+
+    test_3() {
+        this.current_test_name = "[1],[2] => [1,2]"
+        const problemToTest = new this.Problem();
+        const list1 = arrayToListNode([1]);
+        const list2 = arrayToListNode([2]);
+        const result = problemToTest.solve(list1, list2);
+        assert(result.val == 1);
+        assert(result.next.val == 2);
+    }
+
+}
+
+
+class RemoveFromNthNode extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        this.current_test_name = "[1,2,3,4,5], 2 => [1,2,3,5]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1, 2, 3, 4, 5]);
+        const result = problemToTest.solve(list, 2);
+        assert(result.val == 1);
+        assert(result.next.val == 2);
+        assert(result.next.next.val == 3);
+        assert(result.next.next.next.val == 5);
+    }
+
+    test_2() {
+        this.current_test_name = "[1], 1 => []"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1]);
+        const result = problemToTest.solve(list, 1);
+        assert(result == null);
+    }
+
+    test_3() {
+        this.current_test_name = "[1,2], 1 => [1]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1, 2]);
+        const result = problemToTest.solve(list, 1);
+        assert(result.val == 1);
+    }
+
+}
+
+
 
 const PROBLEM_DICT = {
     'add-two-numbers': AddTwoNumbers,
@@ -260,6 +342,8 @@ const PROBLEM_DICT = {
     'linked-list-cycle': LinkedListCycle,
     'lru-cache': LRUCache,
     'merge-k-sorted-list': MergeKSortedList,
+    'merge-two-sorted-list': MergeTwoSortedList,
+    'remove-from-nth': RemoveFromNthNode,
 }
 
 
