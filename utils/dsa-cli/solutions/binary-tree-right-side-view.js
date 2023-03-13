@@ -34,7 +34,7 @@ class BinaryTreeRightSideView {
 
 
     solve(root) {
-        this.rightSideView(root);
+        return this.rightSideView(root);
     }
 }
 

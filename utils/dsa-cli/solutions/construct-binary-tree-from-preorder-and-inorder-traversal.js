@@ -1,4 +1,12 @@
-class Problem {
+class TreeNode{
+    constructor(val, left = null, right = null){
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class ConstructBinaryFromPreorderAndInorder {
 
 
     /**
@@ -8,17 +16,20 @@ class Problem {
      * @param {number[]} inorder
      * @return {TreeNode}
      */
-    buildTree = function (preorder, inorder) {
+    buildTree(preorder, inorder) {
+        if (preorder?.length === 1 && inorder?.length === 1) {
+            return new TreeNode(preorder[0]);
+        }
 
-        var dfs = (preorder, inorder) => {
+        const dfs = (preorder, inorder) => {
             const { leftInorder, mid, rightInorder } = getPointers(preorder, inorder);
             const root = new TreeNode(inorder[mid]);
 
-            root.left = buildTree(preorder, leftInorder);
-            root.right = buildTree(preorder, rightInorder);
+            root.left = this.buildTree(preorder, leftInorder);
+            root.right = this.buildTree(preorder, rightInorder);
 
             return root;
-        }
+        };
 
         const getPointers = (preorder, inorder) => {
             const next = preorder.shift();
@@ -27,20 +38,21 @@ class Problem {
             const rightInorder = inorder.slice(mid + 1);
 
             return { leftInorder, mid, rightInorder };
+        };
+
+        if(preorder == null || inorder == null) return null;
+
+        if (preorder?.length === 0 || inorder?.length === 0) {
+            return null;
         }
-
-
-        const isBaseCase = !preorder.length || !inorder.length;
-        if (isBaseCase) return null;
 
         return dfs(preorder, inorder);
     }
 
-
-    solve(preoreder, inorder) {
+solve(preoreder, inorder) {
         return this.buildTree(preoreder, inorder);
     }
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: ConstructBinaryFromPreorderAndInorder };

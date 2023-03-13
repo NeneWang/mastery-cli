@@ -90,6 +90,9 @@ Things that I believe I should focus on learning
 - A test environment where I am in continuous practice?
 - I should be glad that at least with Maid, I can sustain my growth.(Continuous Practice.)
 - How can I automate this process of study? Or how can I take ever so more into my learning process? Or at least how can I refine how to speedup my learning process?
+- Is there a way to use AI to continually create trainning sets for myself?
+- And focus my work into creating ai related programs, while I just learn how to build better ai?
+- Is my job to build pipelines?
 
 
 
