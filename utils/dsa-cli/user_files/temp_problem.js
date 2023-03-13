@@ -1,8 +1,9 @@
-class MaxProfit {
+class SearchMatrix {
+	solve(search, target) {
+	// Your code here
 
-    solve(prices) {
-    }
+	}
 }
 
 
-module.exports = { Problem: MaxProfit };
+module.exports = { Problem: SearchMatrix };dArrays };angleArea };{ Problem: Division };
