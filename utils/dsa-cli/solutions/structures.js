@@ -195,6 +195,34 @@ class MinPriorityQueue {
 
 }
 
+class Queue{
+    
+  constructor(){
+      this.queue = []
+  }
+
+  enqueue(element){
+      this.queue.push(element)
+  }
+
+  dequeue(){
+      return this.queue.shift()
+  }
+
+  front(){
+      return this.queue[0]
+  }
+
+  size(){
+      return this.queue.length
+  }
+
+  isEmpty(){
+      return this.size() === 0
+  }
+
+}
 
 
-module.exports = { LinkedList, bfs, MaxPriorityQueue, MinPriorityQueue }
+
+module.exports = { LinkedList, bfs, MaxPriorityQueue, MinPriorityQueue, Queue }

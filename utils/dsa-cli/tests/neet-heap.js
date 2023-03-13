@@ -156,7 +156,53 @@ class KthLargestElementInAnArray extends ProblemTests{
 }
 
 
+class LastStoneWeight extends ProblemTests {
 
+    constructor(Problem) {
+
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+
+    }
+
+    test_1() {
+        const lastStoneWeight = new this.Problem();
+        this.current_test_name = '[2,7,4,1,8,1] | 1';
+        assert.equal(lastStoneWeight.solve([2, 7, 4, 1, 8, 1]), 1);
+    }
+
+    test_2() {
+        const lastStoneWeight = new this.Problem();
+        this.current_test_name = '[2,2] | 0';
+        assert.equal(lastStoneWeight.solve([2, 2]), 0);
+    }
+
+}
+
+class TaskScheduler extends ProblemTests {
+
+    constructor(Problem) {
+
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+
+    }
+
+    test_1() {
+        const taskScheduler = new this.Problem();
+        this.current_test_name = '["A","A","A","B","B","B"] | 2 | 8';
+        assert.equal(taskScheduler.solve(["A", "A", "A", "B", "B", "B"], 2), 8);
+    }
+
+    test_2() {
+        const taskScheduler = new this.Problem();
+        this.current_test_name = '["A","A","A","B","B","B"] | 0 | 6';
+        assert.equal(taskScheduler.solve(["A", "A", "A", "B", "B", "B"], 0), 6);
+    }
+
+}
 
 
 
@@ -165,6 +211,9 @@ const TEST_DICTIONARY = {
     'find-median-from-data-stream': FindMedianFromDataStream,
     'k-closest': KClosest,
     'kth-largest-element-in-an-array': KthLargestElementInAnArray,
+    'last-stone-weight': LastStoneWeight,
+    // 'task-scheduler': TaskScheduler //I don't even understand the problem,
+    
 }
 
 module.exports = TEST_DICTIONARY;

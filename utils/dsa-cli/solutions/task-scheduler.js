@@ -1,3 +1,201 @@
+
+class MaxPriorityQueue {
+
+    constructor() {
+        this.heap = []
+    }
+
+    enqueue(element) {
+        this.heap.push(element)
+        this.bubbleUp()
+    }
+
+    bubbleUp() {
+        let index = this.heap.length - 1
+        while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2)
+            if (this.heap[parentIndex] >= this.heap[index]) break
+            this.swap(parentIndex, index)
+            index = parentIndex
+        }
+    }
+
+    swap(index1, index2) {
+        const temp = this.heap[index1]
+        this.heap[index1] = this.heap[index2]
+        this.heap[index2] = temp
+    }
+
+    dequeue() {
+        const max = this.heap[0]
+        const end = this.heap.pop()
+        if (this.heap.length > 0) {
+            this.heap[0] = end
+            this.sinkDown()
+        }
+        return max
+    }
+
+    sinkDown() {
+        let index = 0
+        const length = this.heap.length
+        const element = this.heap[0]
+        while (true) {
+            const leftChildIndex = 2 * index + 1
+            const rightChildIndex = 2 * index + 2
+            let leftChild, rightChild
+            let swap = null
+
+            if (leftChildIndex < length) {
+                leftChild = this.heap[leftChildIndex]
+                if (leftChild > element) {
+                    swap = leftChildIndex
+                }
+            }
+
+            if (rightChildIndex < length) {
+                rightChild = this.heap[rightChildIndex]
+                if (
+                    (swap === null && rightChild > element) ||
+                    (swap !== null && rightChild > leftChild)
+                ) {
+                    swap = rightChildIndex
+                }
+            }
+
+            if (swap === null) break
+            this.swap(index, swap)
+            index = swap
+        }
+    }
+
+    front() {
+        return this.heap[0]
+    }
+
+    size() {
+        return this.heap.length
+    }
+
+    isEmpty() {
+        return this.size() === 0
+    }
+
+}
+
+class MinPriorityQueue {
+
+    constructor() {
+        this.heap = []
+    }
+
+    enqueue(element) {
+        this.heap.push(element)
+        this.bubbleUp()
+    }
+
+    bubbleUp() {
+        let index = this.heap.length - 1
+        while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2)
+            if (this.heap[parentIndex] <= this.heap[index]) break
+            this.swap(parentIndex, index)
+            index = parentIndex
+        }
+    }
+
+    swap(index1, index2) {
+        const temp = this.heap[index1]
+        this.heap[index1] = this.heap[index2]
+        this.heap[index2] = temp
+    }
+
+    dequeue() {
+        const min = this.heap[0]
+        const end = this.heap.pop()
+        if (this.heap.length > 0) {
+            this.heap[0] = end
+            this.sinkDown()
+        }
+        return min
+    }
+
+    sinkDown() {
+        let index = 0
+        const length = this.heap.length
+        const element = this.heap[0]
+        while (true) {
+            const leftChildIndex = 2 * index + 1
+            const rightChildIndex = 2 * index + 2
+            let leftChild, rightChild
+            let swap = null
+
+            if (leftChildIndex < length) {
+                leftChild = this.heap[leftChildIndex]
+                if (leftChild < element) {
+                    swap = leftChildIndex
+                }
+            }
+
+            if (rightChildIndex < length) {
+                rightChild = this.heap[rightChildIndex]
+                if (
+                    (swap === null && rightChild < element) ||
+                    (swap !== null && rightChild < leftChild)
+                ) {
+                    swap = rightChildIndex
+                }
+            }
+
+            if (swap === null) break
+            this.swap(index, swap)
+            index = swap
+        }
+    }
+
+    front() {
+        return this.heap[0]
+    }
+
+    size() {
+        return this.heap.length
+    }
+
+    isEmpty() {
+        return this.size() === 0
+    }
+
+}
+
+class Queue{
+    
+        constructor(){
+            this.queue = []
+        }
+    
+        enqueue(element){
+            this.queue.push(element)
+        }
+    
+        dequeue(){
+            return this.queue.shift()
+        }
+    
+        front(){
+            return this.queue[0]
+        }
+    
+        size(){
+            return this.queue.length
+        }
+    
+        isEmpty(){
+            return this.size() === 0
+        }
+    
+}
+
+
 class TaskScheduler {
 
     /**
@@ -71,48 +269,6 @@ class TaskScheduler {
         return this.leastInterval(tasks, n);
     }
 
-    /**
-     * https://leetcode.com/problems/task-scheduler/
-     * Time O(N) | Space O(1)
-     * @param {character[]} tasks
-     * @param {number} n
-     * @return {number}
-     */
-    leastInterval_o_1 = function (tasks, n) {
-
-        var getFrequencyMap = (tasks, frequencyMap = new Array(26).fill(0)) => {
-            for (const task of tasks) {
-                const index = task.charCodeAt(0) - 'A'.charCodeAt(0);
-
-                frequencyMap[index]++;
-            }
-
-            return frequencyMap;
-        }
-
-        const getMaxFrequency = (frequencyMap, maxFrequency = 0) => {
-            for (const frequency of frequencyMap) {
-                maxFrequency = Math.max(maxFrequency, frequency);
-            }
-
-            return maxFrequency;
-        }
-
-        const getMostFrequentTask = (frequencyMap, maxFrequency, mostFrequentTask = 0) => {
-            for (const frequency of frequencyMap) {
-                const isSame = frequency === maxFrequency;
-                if (isSame) mostFrequentTask++;
-            }
-
-            return mostFrequentTask;
-        }
-        const frequencyMap = getFrequencyMap(tasks);
-        const maxFrequency = getMaxFrequency(frequencyMap);
-        const mostFrequentTask = getMostFrequentTask(frequencyMap, maxFrequency);
-        const interval = ((maxFrequency - 1) * (n + 1)) + mostFrequentTask;
-
-        return Math.max(tasks.length, interval);
-    }
 
 }
 

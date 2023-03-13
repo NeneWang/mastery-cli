@@ -1,12 +1,12 @@
-class KokoEatingBananas {
-	solve(piles, h) {
-	// Your code here
+class MedianSortedArrays {
+	solve(nums1, nums2) {
+		// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: KokoEatingBananas };ray };angleArea };m };er;
+module.exports = { Problem: MedianSortedArrays };angleArea };nWater;
 }
 
 
