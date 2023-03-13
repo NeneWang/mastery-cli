@@ -1,12 +1,12 @@
-class SearchMatrix {
-	solve(search, target) {
+class KokoEatingBananas {
+	solve(piles, h) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: SearchMatrix };dArrays };angleArea };nWater;
+module.exports = { Problem: KokoEatingBananas };ray };angleArea };m };er;
 }
 
 

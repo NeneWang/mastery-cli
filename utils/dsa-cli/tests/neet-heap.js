@@ -132,6 +132,31 @@ class KClosest extends ProblemTests {
 }
 
 
+class KthLargestElementInAnArray extends ProblemTests{
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+
+    }
+
+    test_1(){
+        const kthLargest = new this.Problem();
+        this.current_test_name = '[3,2,1,5,6,4] | 2 | 5';
+        assert.equal(kthLargest.solve([3,2,1,5,6,4], 2), 5);
+    }
+
+    test_2(){
+        const kthLargest = new this.Problem();
+        this.current_test_name = '[3,2,3,1,2,4,5,5,6] | 4 | 4';
+        assert.equal(kthLargest.solve([3,2,3,1,2,4,5,5,6], 4), 4);
+    }
+
+}
+
+
+
 
 
 
@@ -139,6 +164,7 @@ const TEST_DICTIONARY = {
     'design-twitter': DesignTwitter,
     'find-median-from-data-stream': FindMedianFromDataStream,
     'k-closest': KClosest,
+    'kth-largest-element-in-an-array': KthLargestElementInAnArray,
 }
 
 module.exports = TEST_DICTIONARY;
