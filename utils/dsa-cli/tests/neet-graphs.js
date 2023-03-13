@@ -163,47 +163,47 @@ class PacificAtlanticWaterFlow extends ProblemTests {
 
 class RedundantConnection extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const redundantConnection = new this.Problem();
         this.current_test_name = '[[1,2], [1,3], [2,3]] | [2,3]';
-        assert.deepEqual(redundantConnection.solve([[1,2], [1,3], [2,3]]), [2,3]);
+        assert.deepEqual(redundantConnection.solve([[1, 2], [1, 3], [2, 3]]), [2, 3]);
     }
 
-    test_2(){
+    test_2() {
         const redundantConnection = new this.Problem();
         this.current_test_name = '[[1,2], [2,3], [3,4], [1,4], [1,5]] | [1,4]';
-        assert.deepEqual(redundantConnection.solve([[1,2], [2,3], [3,4], [1,4], [1,5]]), [1,4]);
+        assert.deepEqual(redundantConnection.solve([[1, 2], [2, 3], [3, 4], [1, 4], [1, 5]]), [1, 4]);
     }
 
 }
 
 
-class RottingOranges extends ProblemTests{
-    constructor(Problem){
+class RottingOranges extends ProblemTests {
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const rottingOranges = new this.Problem();
         this.current_test_name = '[[2,1,1],[1,1,0],[0,1,1]] | 4';
-        assert.deepEqual(rottingOranges.solve([[2,1,1],[1,1,0],[0,1,1]]), 4);
+        assert.deepEqual(rottingOranges.solve([[2, 1, 1], [1, 1, 0], [0, 1, 1]]), 4);
 
     }
 
 
-    test_2(){
+    test_2() {
 
         const rottingOranges = new this.Problem();
         this.current_test_name = '[[2,1,1],[0,1,1],[1,0,1]] | -1';
-        assert.deepEqual(rottingOranges.solve([[2,1,1],[0,1,1],[1,0,1]]), -1);
+        assert.deepEqual(rottingOranges.solve([[2, 1, 1], [0, 1, 1], [1, 0, 1]]), -1);
     }
 
 }
@@ -211,14 +211,14 @@ class RottingOranges extends ProblemTests{
 const X = 'X';
 const O = 'O';
 
-class SurroundedRegions extends ProblemTests{
-    constructor(Problem){
+class SurroundedRegions extends ProblemTests {
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
-    
-    test_1(){
+
+    test_1() {
         const surroundedRegions = new this.Problem();
         this.current_test_name = '[[X, X, X, X], [X, O, O, X], [X, X, O, X], [X, O, X, X]] | [[X, X, X, X], [X, X, X, X], [X, X, X, X], [X, O, X, X]]';
         const board = [[X, X, X, X], [X, O, O, X], [X, X, O, X], [X, O, X, X]];
@@ -230,7 +230,7 @@ class SurroundedRegions extends ProblemTests{
     }
 
 
-    test_2(){
+    test_2() {
 
         const surroundedRegions = new this.Problem();
         this.current_test_name = '[[X]]';
@@ -241,10 +241,66 @@ class SurroundedRegions extends ProblemTests{
         assert.deepEqual(board, [[X]]);
     }
 
+}
 
 
+class WallsAndGates extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+
+        const wallsAndGates = new this.Problem();
+        this.current_test_name = '[[2147483647,-1,0,2147483647],[2147483647,2147483647,2147483647,-1],[2147483647,-1,2147483647,-1],[0,-1,2147483647,2147483647]] | [[3,-1,0,1],[2,2,1,-1],[1,-1,2,-1],[0,-1,3,4]]';
+        const board = [[2147483647, -1, 0, 2147483647], [2147483647, 2147483647, 2147483647, -1], [2147483647, -1, 2147483647, -1], [0, -1, 2147483647, 2147483647]];
+
+        this.tests.push(() => this.test_2());
+        wallsAndGates.solve(board);
+        assert.deepEqual(board, [[3, -1, 0, 1], [2, 2, 1, -1], [1, -1, 2, -1], [0, -1, 3, 4]]);
+
+
+    }
 
 }
+
+class wordLadder extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+
+        const wordLadder = new this.Problem();
+        this.current_test_name = 'beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"] | 5';
+        const beginWord = "hit";
+        const endWord = "cog";
+        const wordList = ["hot", "dot", "dog", "lot", "log", "cog"];
+
+        this.tests.push(() => this.test_2());
+        assert(wordLadder.solve(beginWord, endWord, wordList) == 5);
+    }
+
+    test_2() {
+
+        const wordLadder = new this.Problem();
+        this.current_test_name = 'beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log"] | 0';
+        const beginWord = "hit";
+        const endWord = "cog";
+        const wordList = ["hot", "dot", "dog", "lot", "log"];
+
+        this.tests.push(() => this.test_2());
+        assert(wordLadder.solve(beginWord, endWord, wordList) == 0);
+    }
+
+}
+
 
 
 
@@ -261,6 +317,8 @@ const TEST_DICTIONARY = {
     'redundant-connection': RedundantConnection,
     'rotting-oranges': RottingOranges,
     'surrounded-regions': SurroundedRegions,
+    'walls-and-gates': WallsAndGates,
+    'word-ladder': wordLadder,
 }
 
 

@@ -1,3 +1,33 @@
+
+
+class Queue {
+
+    constructor(init) {
+        this.queue = init || []
+    }
+
+    enqueue(element) {
+        this.queue.push(element)
+    }
+
+    dequeue() {
+        return this.queue.shift()
+    }
+
+    front() {
+        return this.queue[0]
+    }
+
+    size() {
+        return this.queue.length
+    }
+
+    isEmpty() {
+        return this.size() === 0
+    }
+
+}
+
 class WordLadder {
 
 
@@ -11,10 +41,11 @@ class WordLadder {
      */
     ladderLength = function (beginWord, endWord, wordList) {
 
-        bfs = (queue, wordSet, seen, endWord) => {
+        const bfs = (queue, wordSet, seen, endWord) => {
             while (!queue.isEmpty()) {
                 for (let i = (queue.size() - 1); 0 <= i; i--) {
                     const [word, depth] = queue.dequeue();
+                    // console.log("looping on the queue", word, depth, endWord);
 
                     const isTarget = word === endWord
                     if (isTarget) return depth
@@ -39,8 +70,6 @@ class WordLadder {
             }
         }
 
-
-
         const getNeighbor = (word, index, char) => {
             const neighbor = word.split('');
 
@@ -50,8 +79,12 @@ class WordLadder {
         }
 
         const [queue, wordSet, seen] = [new Queue([[beginWord, 1]]), new Set(wordList), new Set([beginWord])];
+        // console.log('queue', queue);
+        // console.log('wordSet', wordSet);
+        // console.log('seen', seen);
 
-        return bfs(queue, wordSet, seen, endWord);/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
+
+        return bfs(queue, wordSet, seen, endWord); /* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
     };
 
 

@@ -1,9 +1,13 @@
-class Queue {
-	solve(grid) {
+class WordLadder {
+	solve(beingWord, endWord, wordList) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Queue };em };: ReduntantConnection };Schedule };;ea };m };
+module.exports = { Problem: WordLadder };ule };;ea };m };er;
+}
+
+
+module.exports = { Problem: TrappingRainWater };
