@@ -1,8 +1,6 @@
 ---
 title: Subsets II
 description: Given an integer array nums that may contain duplicates, return all possible subsets (the power set).
-
-The solution set must not contain duplicate subsets. Return the solution in any order.
 tags: [medium, backtracking]
 link: https://leetcode.com/problems/subsets-ii/
 images: []
