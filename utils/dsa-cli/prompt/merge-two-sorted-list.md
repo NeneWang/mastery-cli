@@ -1,7 +1,7 @@
 ---
 title: Merge Two Sorted Lists
 description: You are given the heads of two sorted linked lists list1 and list2. Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
-tags: [easy, linked-list]
+tags: [ neetcode, easy, linked-list]
 link: https://leetcode.com/problems/merge-two-sorted-lists/
 images: [https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg]
 ---

@@ -1,7 +1,7 @@
 ---
 title: LRU Cache
 description: Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
-tags: [medium, linked-list]
+tags: [ neetcode, medium, linked-list]
 link: https://leetcode.com/problems/lru-cache/
 ---
 

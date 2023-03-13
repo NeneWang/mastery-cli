@@ -1,7 +1,7 @@
 ---
 title: Construct Binary Tree from Preorder and Inorder Traversal
 description: Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree. 
-tags: [medium, binary-tree]
+tags: [ neetcode, medium, binary-tree]
 link: https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 images: [ https://assets.leetcode.com/uploads/2021/02/19/tree.jpg ]
 ---

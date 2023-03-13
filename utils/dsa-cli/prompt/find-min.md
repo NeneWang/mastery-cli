@@ -1,7 +1,7 @@
 ---
 title: Find Minimum in Rotated Sorted Array
 description: Given the sorted rotated array nums of unique elements, return the minimum element of this array.
-tags: [medium, binary-search]
+tags: [ neetcode, medium, binary-search]
 link: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 ---
 

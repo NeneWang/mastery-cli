@@ -1,7 +1,7 @@
 ---
 title: Combination Sum
 description: The test cases are generated such that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
-tags: [medium, backtracking]
+tags: [ neetcode, medium, backtracking]
 link: https://leetcode.com/problems/combination-sum/
 images: []
 ---

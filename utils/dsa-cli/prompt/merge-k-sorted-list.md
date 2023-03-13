@@ -1,7 +1,7 @@
 ---
 title: Merge k Sorted Lists
 description: You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
-tags: [hard, linked-list]
+tags: [ neetcode, hard, linked-list]
 link: https://leetcode.com/problems/merge-k-sorted-lists/
 ---
 

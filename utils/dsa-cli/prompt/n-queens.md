@@ -1,7 +1,7 @@
 ---
 title: N-Queens
 description: The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.
-tags: [hard, backtracking]
+tags: [ neetcode, hard, backtracking]
 link: https://leetcode.com/problems/n-queens/
 images: []
 ---

@@ -1,7 +1,7 @@
 ---
 title: Last Stone Weight
 description: You are given an array of integers stones where stones[i] is the weight of the ith stone.
-tags: [easy, heap]
+tags: [ neetcode, easy, heap]
 link: https://leetcode.com/problems/last-stone-weight/
 images: []
 ---

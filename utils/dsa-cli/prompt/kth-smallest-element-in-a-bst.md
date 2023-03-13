@@ -1,7 +1,7 @@
 ---
 title: Kth Smallest Element in a BST
 description: Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.
-tags: [medium, binary-tree]
+tags: [ neetcode, medium, binary-tree]
 link: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 images: [ https://assets.leetcode.com/uploads/2021/01/28/kthtree1.jpg, https://assets.leetcode.com/uploads/2021/01/28/kthtree2.jpg ]
 ---

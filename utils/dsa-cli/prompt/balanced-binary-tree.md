@@ -1,7 +1,7 @@
 ---
 title: Balanced Binary Tree
 description: Given a binary tree, determine if it is height-balanced.
-tags: [easy, binary-tree]
+tags: [ neetcode, easy, binary-tree]
 link: https://leetcode.com/problems/balanced-binary-tree/
 images: [https://assets.leetcode.com/uploads/2020/10/06/balance_2.jpg]
 ---

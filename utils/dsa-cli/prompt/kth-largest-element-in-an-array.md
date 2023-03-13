@@ -1,7 +1,7 @@
 ---
 title: kth largest elements in a stream
 description: Given an integer array nums and an integer k, return the kth largest element in the array.
-tags: [medium, heap]
+tags: [ neetcode, medium, heap]
 link: https://leetcode.com/problems/kth-largest-element-in-an-array/
 images: []
 ---

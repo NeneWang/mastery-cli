@@ -1,7 +1,7 @@
 ---
 title: k closest points to origin
 description: Given an array of points where points[i] = [xi, yi] represents a point on the X-Y plane and an integer k, return the k closest points to the origin (0, 0).
-tags: [medium, heap]
+tags: [ neetcode, medium, heap]
 link: https://leetcode.com/problems/k-closest-points-to-origin/
 images: [https://assets.leetcode.com/uploads/2021/03/03/closestplane1.jpg]
 ---

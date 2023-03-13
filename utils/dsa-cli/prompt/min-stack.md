@@ -1,7 +1,7 @@
 ---
 title: Min Stack
 description: Min Stack
-tags: [medium, stack]
+tags: [ neetcode, medium, stack]
 link: https://leetcode.com/problems/min-stack/
 ---
 

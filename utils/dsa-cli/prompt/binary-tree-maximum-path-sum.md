@@ -1,7 +1,7 @@
 ---
 title: Binary Tree Maximum Path Sum
 description: Given the root of a binary tree, return the maximum path sum of any non-empty path.
-tags: [hard, binary-tree]
+tags: [ neetcode, hard, binary-tree]
 link: https://leetcode.com/problems/binary-tree-maximum-path-sum/
 images: [ https://assets.leetcode.com/uploads/2020/10/13/exx1.jpg, https://assets.leetcode.com/uploads/2020/10/13/exx2.jpg ]
 ---

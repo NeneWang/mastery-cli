@@ -1,7 +1,7 @@
 ---
 title: Design Twitter
 description: https://leetcode.com/problems/design-twitter/
-tags: [medium, heap]
+tags: [ neetcode, medium, heap]
 link: https://leetcode.com/problems/design-twitter/
 images: []
 ---

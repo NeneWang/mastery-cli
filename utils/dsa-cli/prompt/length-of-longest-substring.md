@@ -1,7 +1,7 @@
 ---
 title: Length of Longest Substring
 description: Given a string s, find the length of the longest substring without repeating characters.
-tags: [medium, sliding-window]
+tags: [ neetcode, medium, sliding-window]
 ---
 
 ### Description

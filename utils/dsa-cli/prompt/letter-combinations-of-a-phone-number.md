@@ -1,7 +1,7 @@
 ---
 title: Letter Combinations of a Phone Number
 description: Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
-tags: [hard, backtracking]
+tags: [ neetcode, hard, backtracking]
 link: https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 images: []
 ---

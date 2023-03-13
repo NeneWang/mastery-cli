@@ -1,7 +1,7 @@
 ---
 title: Median of Two Sorted Arrays
 description: Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
-tags: [hard, binary-search, array]
+tags: [ neetcode, hard, binary-search, array]
 link: https://leetcode.com/problems/median-of-two-sorted-arrays/
 ---
 

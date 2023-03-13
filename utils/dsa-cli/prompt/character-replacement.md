@@ -1,7 +1,7 @@
 ---
 title: Character Replacement
 description:  Longest Repeating Character Replacement
-tags: [medium, sliding-window]
+tags: [ neetcode, medium, sliding-window]
 ---
 
 ### Description

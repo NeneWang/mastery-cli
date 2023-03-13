@@ -1,7 +1,7 @@
 ---
 title: Max Profit
 description: Best time to Buy and Sell Stock
-tags: [easy, sliding-window]
+tags: [ neetcode, easy, sliding-window]
 ---
 
 ### Description

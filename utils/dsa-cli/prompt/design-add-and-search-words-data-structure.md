@@ -1,7 +1,7 @@
 ---
 title: Design Add and Search Words Data Structure
 description: Design a data structure that supports adding new words and finding if a string matches any previously added string.
-tags: [medium, trie]
+tags: [ neetcode, medium, trie]
 link: https://leetcode.com/problems/design-add-and-search-words-data-structure/
 images: []
 ---

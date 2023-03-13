@@ -1,7 +1,7 @@
 ---
 title: Invert Binary Tree
 description: Given the `root` of a binary tree, invert the tree, and return its root.
-tags: [easy, binary-tree]
+tags: [ neetcode, easy, binary-tree]
 link: https://leetcode.com/problems/invert-binary-tree/
 images: [https://assets.leetcode.com/uploads/2021/03/14/invert1-tree.jpg, https://assets.leetcode.com/uploads/2021/03/14/invert2-tree.jpg]
 ---

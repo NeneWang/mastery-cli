@@ -1,7 +1,7 @@
 ---
 title: Walls and Gates
 description:  Fill each empty room with the distance to its nearest gate. If it is impossible to reach a gate, it should be filled with INF.
-tags: [medium, graphs]
+tags: [ neetcode, medium, graphs]
 link: https://tenderleo.gitbooks.io/leetcode-solutions-/content/GoogleMedium/286.html
 images: []
 ---

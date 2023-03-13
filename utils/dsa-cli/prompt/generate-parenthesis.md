@@ -1,7 +1,7 @@
 ---
 title: Generate Parentheses
 description: Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
-tags: [medium, stack, backtracking]
+tags: [ neetcode, medium, stack, backtracking]
 link: 
 ---
 

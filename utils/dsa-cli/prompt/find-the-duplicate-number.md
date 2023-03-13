@@ -1,7 +1,7 @@
 ---
 title: Find the Duplicate Number
 description: Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
-tags: [medium, linked-list]
+tags: [ neetcode, medium, linked-list]
 link: https://leetcode.com/problems/find-the-duplicate-number/
 ---
 

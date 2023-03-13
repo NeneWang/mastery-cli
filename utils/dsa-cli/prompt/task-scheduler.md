@@ -1,7 +1,7 @@
 ---
 title: Task Scheduler
 description: Return the least number of units of times that the CPU will take to finish all the given tasks.
-tags: [medium, heap]
+tags: [ neetcode, medium, heap]
 link: https://leetcode.com/problems/task-scheduler/
 images: []
 ---
