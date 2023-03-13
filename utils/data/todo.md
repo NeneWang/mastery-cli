@@ -82,6 +82,14 @@ Things that I believe I should focus on learning
 - Massive distribution of marketinr and research. 
 
 
+### How can I exponentially become better in CS/business?
+
+- I can think that there are at least 40+ years to this career.
+- How can I improve in such a stacky way so that I can have an exponential unfair advantage on my end?
+- Is there a way I can create, or accumulate creations in such a way?
+- A test environment where I am in continuous practice?
+- I should be glad that at least with Maid, I can sustain my growth.(Continuous Practice.)
+- How can I automate this process of study? Or how can I take ever so more into my learning process? Or at least how can I refine how to speedup my learning process?
 
 
 
