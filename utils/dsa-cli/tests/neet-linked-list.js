@@ -334,6 +334,91 @@ class RemoveFromNthNode extends ProblemTests {
 }
 
 
+class ReorderList extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        this.current_test_name = "[1,2,3,4] => [1,4,2,3]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1, 2, 3, 4]);
+        problemToTest.solve(list);
+        assert(list.val == 1);
+        assert(list.next.val == 4);
+        assert(list.next.next.val == 2);
+        assert(list.next.next.next.val == 3);
+    }
+
+    test_2() {
+        this.current_test_name = "[1,2,3,4,5] => [1,5,2,4,3]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1, 2, 3, 4, 5]);
+        problemToTest.solve(list);
+        assert(list.val == 1);
+        assert(list.next.val == 5);
+        assert(list.next.next.val == 2);
+        assert(list.next.next.next.val == 4);
+        assert(list.next.next.next.next.val == 3);
+    }
+
+}
+
+
+class ReverseLinkedList extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+    }
+
+    test_1() {
+        this.current_test_name = "[1,2,3,4,5] => [5,4,3,2,1]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1, 2, 3, 4, 5]);
+        const result = problemToTest.solve(list);
+        assert(result.val == 5);
+        assert(result.next.val == 4);
+        assert(result.next.next.val == 3);
+        assert(result.next.next.next.val == 2);
+        assert(result.next.next.next.next.val == 1);
+    }
+
+    test_2() {
+        this.current_test_name = "[1,2] => [2,1]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1, 2]);
+        const result = problemToTest.solve(list);
+        assert(result.val == 2);
+        assert(result.next.val == 1);
+    }
+
+    test_3() {
+        this.current_test_name = "[1] => [1]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1]);
+        const result = problemToTest.solve(list);
+        assert(result.val == 1);
+    }
+
+    
+    test_4() {
+        this.current_test_name = "[] => []"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([]);
+        const result = problemToTest.solve(list);
+        assert(result == null);
+    }
+
+
+}
+
+
 
 const PROBLEM_DICT = {
     'add-two-numbers': AddTwoNumbers,
@@ -344,6 +429,8 @@ const PROBLEM_DICT = {
     'merge-k-sorted-list': MergeKSortedList,
     'merge-two-sorted-list': MergeTwoSortedList,
     'remove-from-nth': RemoveFromNthNode,
+    'reorder-list': ReorderList,
+    'reverse-linked-list': ReverseLinkedList,
 }
 
 

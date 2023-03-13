@@ -1,5 +1,9 @@
 class ReverseList {
 
+    solve(head) {
+        return this.reverseList(head);
+    }
+
     /**
      * https://leetcode.com/problems/reverse-linked-list/
      * Time O(N) | Space O(N)
@@ -8,7 +12,7 @@ class ReverseList {
      */
     reverseList(head) {
         const dfs = (curr) => {
-            const prev = reverseList(curr.next);/* Time O(N) | Space O(N) */
+            const prev = this.reverseList(curr.next);/* Time O(N) | Space O(N) */
 
             curr.next.next = curr;
             curr.next = null;
