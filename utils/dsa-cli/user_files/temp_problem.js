@@ -1,12 +1,12 @@
-class LenghtOfLongestSubString {
-	solve(s) {
+class GenerateParentesis {
+	solve(n) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: LenghtOfLongestSubString };ngleArea };nWater;
+module.exports = { Problem: GenerateParentesis };tedArray };angleArea };nWater;
 }
 
 
