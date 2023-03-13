@@ -1,12 +1,12 @@
-class GenerateParentesis {
-	solve(n) {
+class SearchMatrix {
+	solve(search, target) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: GenerateParentesis };tedArray };angleArea };nWater;
+module.exports = { Problem: SearchMatrix };s };ays };angleArea };nWater;
 }
 
 

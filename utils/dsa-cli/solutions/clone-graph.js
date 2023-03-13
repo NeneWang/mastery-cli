@@ -1,3 +1,16 @@
+class Node{
+    constructor(val){
+        this.val = val;
+        this.neighbors = [];
+    }
+
+    push(neighbor){
+        this.neighbors.push(neighbor);
+    }
+
+}
+
+
 class CloneGraph {
 
 
@@ -16,7 +29,7 @@ class CloneGraph {
             seen.set(node, clone);                               /*               | Space O(N) */
 
             for (const neighbor of node.neighbors) {
-                const cloneNeighbor = cloneGraph(neighbor, seen);/* Time O(V + E) | Space O(H) */
+                const cloneNeighbor = this.cloneGraph(neighbor, seen);/* Time O(V + E) | Space O(H) */
 
                 clone.neighbors.push(cloneNeighbor);             /*               | Space O(V + E) */
             }

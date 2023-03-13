@@ -223,6 +223,18 @@ class Queue{
 
 }
 
+class Node{
+  constructor(val){
+      this.val = val;
+      this.neighbors = [];
+  }
+
+  push(neighbor){
+      this.neighbors.push(neighbor);
+  }
+
+}
 
 
-module.exports = { LinkedList, bfs, MaxPriorityQueue, MinPriorityQueue, Queue }
+
+module.exports = { LinkedList, bfs, MaxPriorityQueue, MinPriorityQueue, Queue, Node }
