@@ -6,7 +6,7 @@ class SearchRotatedArray {
 }
 
 
-module.exports = { Problem: SearchRotatedArray };;ngleArea };nWater;
+module.exports = { Problem: SearchRotatedArray };angleArea };nWater;
 }
 
 

@@ -74,16 +74,44 @@ class DesignTwitter extends ProblemTests {
         twitter.unfollow(1, 2);
         assert.deepEqual(twitter.getNewsFeed(1), []);
     }
+}
+
+class FindMedianFromDataStream extends ProblemTests{
+
+    constructor(Problem){
+
+        super(Problem);
+        this.tests.push(() => this.test_1());
+
+    }
 
 
+    test_1(){
+        const medianFinder = new this.Problem();
+        this.current_test_name = '[1, 2, 3, 4, 5] | [1, 1.5, 2, 2.5, 3]';
+        medianFinder.addNum(1);
+        
+        // assert(medianFinder.findMedian() == 1);
+        medianFinder.addNum(2);
+        console.log(medianFinder.findMedian());
+        assert(medianFinder.findMedian() == 1.5);
+        medianFinder.addNum(3);
+        assert(medianFinder.findMedian() == 2);
+        medianFinder.addNum(4);
+        assert(medianFinder.findMedian() == 2.5);
+        medianFinder.addNum(5);
+        assert(medianFinder.findMedian() == 3);
+    }
 
 
 
 }
 
 
+
 const TEST_DICTIONARY = {
-    'design-twitter': DesignTwitter
+    'design-twitter': DesignTwitter,
+    'find-median-from-data-stream': FindMedianFromDataStream,
 }
 
 module.exports = TEST_DICTIONARY;
