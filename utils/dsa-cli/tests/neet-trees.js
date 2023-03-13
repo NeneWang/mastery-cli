@@ -32,31 +32,31 @@ function arrayToBinaryTree(arr) {
 
 function binaryTreeToArray(root) {
     if (!root) {
-      return [];
+        return [];
     }
-    
+
     const queue = [root];
     const result = [];
-    
+
     while (queue.length > 0) {
-      const node = queue.shift();
-      
-      if (node) {
-        result.push(node.val);
-        queue.push(node.left);
-        queue.push(node.right);
-      } else {
-        result.push(null);
-      }
+        const node = queue.shift();
+
+        if (node) {
+            result.push(node.val);
+            queue.push(node.left);
+            queue.push(node.right);
+        } else {
+            result.push(null);
+        }
     }
-    
+
     // Remove trailing null values from the result
     while (result.length > 0 && result[result.length - 1] === null) {
-      result.pop();
+        result.pop();
     }
-    
+
     return result;
-  }
+}
 
 
 class BalancedBinaryTree extends ProblemTests {
@@ -165,13 +165,13 @@ class ContructBinaryTreeFromPreorderAndInOrderTraversal extends ProblemTests {
         this.current_test_name = " preorder = [3,9,20,15,7], inorder= [9,3,15,20,7], => [3,9,20,null,null,15,7]"
         const problemToTest = new this.Problem();
         const tree = problemToTest.solve([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]);
-        const result_tree_as_arr = binaryTreeToArray(tree); 
+        const result_tree_as_arr = binaryTreeToArray(tree);
         assert.deepEqual(result_tree_as_arr, [3, 9, 20, null, null, 15, 7]);
-        
+
     }
 
-    
-    test_2(){
+
+    test_2() {
 
         this.current_test_name = " preorder = [1,2,3], inorder= [2,1,3], => [1,2,3]"
         const problemToTest = new this.Problem();
@@ -179,13 +179,67 @@ class ContructBinaryTreeFromPreorderAndInOrderTraversal extends ProblemTests {
 
         const result_tree_as_arr = binaryTreeToArray(tree);
         assert.deepEqual(result_tree_as_arr, [1, 2, 3]);
-        
 
     }
+}
 
+class CountGoodNodesInBinaryTree extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
 
+    test_1() {
+        this.current_test_name = "[3,1,4,3,null,1,5] => 4"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([3, 1, 4, 3, null, 1, 5]);
+        assert(problemToTest.solve(tree) == 4);
+    }
+
+    test_2() {
+        this.current_test_name = "[3,3,null,4,2] => 3"
+
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([3, 3, null, 4, 2]);
+        assert(problemToTest.solve(tree) == 3);
+    }
+
+    test_3() {
+        this.current_test_name = "[1] => 1"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([1]);
+        assert(problemToTest.solve(tree) == 1);
+    }
 
 }
+
+class DiameterOfBinaryTree extends ProblemTests{
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "[1,2,3,4,5] => 3"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([1,2,3,4,5]);
+        assert(problemToTest.solve(tree) == 3);
+    }
+
+    test_2(){
+        this.current_test_name = "[1,2] => 1"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([1,2]);
+        assert(problemToTest.solve(tree) == 1);
+    }
+
+}
+
+
 
 
 
@@ -200,6 +254,8 @@ const TEST_DICTIONARY = {
     'binary-tree-maximum-path-sum': BinaryTreeMaximumPathSum,
     'binary-tree-right-side-view': BinaryTreeRightSideView,
     'construct-binary-tree-from-preorder-and-inorder-traversal': ContructBinaryTreeFromPreorderAndInOrderTraversal,
+    'count-good-nodes-in-binary-tree': CountGoodNodesInBinaryTree,
+    'diameter-of-binary-tree': DiameterOfBinaryTree,
 
 }
 

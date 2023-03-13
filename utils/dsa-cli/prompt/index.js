@@ -82,12 +82,29 @@ const getPromptDict = async (prompt_slug = "") => {
 
     // If exists, check if it's the latest modified file, if not, update the prompt.json
     const latestModified = await getLatestModified();
+
+    let parsed_prompt_dict;
     if (latestModified !== prompt_file_path) {
         console.log("latestModified: ", latestModified);
         createCompiledJson();
     }
+    try {
+        parsed_prompt_dict = require(prompt_file_path);
+    }
+    catch (e) {
+        // Delete the prompt.json file and try again
+        fs.unlinkSync(prompt_file_path);
+        // If it fails this time exit and print
+        try{
+            parsed_prompt_dict = require(prompt_file_path);
+        
+        }
+        catch (e) {
+            console.error("Error: ", e);
+            process.exit(1);
+        }
+    }
 
-    const parsed_prompt_dict = require(prompt_file_path);
 
     if (prompt_slug === "") {
         return parsed_prompt_dict;
@@ -100,7 +117,7 @@ const getPromptDict = async (prompt_slug = "") => {
 
 (async () => {
     const sample = await getPromptDict();
-    if(DEBUG) console.log("sample: ", sample);
+    if (DEBUG) console.log("sample: ", sample);
 }
 )();
 

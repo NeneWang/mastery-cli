@@ -6,4 +6,4 @@ class SearchMatrix {
 }
 
 
-module.exports = { Problem: SearchMatrix };s };ray };angleArea };
+module.exports = { Problem: SearchMatrix };edArray };;ngleArea };m };oblem: Division };
