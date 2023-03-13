@@ -1,12 +1,12 @@
-class MedianSortedArrays {
-	solve(nums1, nums2) {
-		// Your code here
+class LenghtOfLongestSubString {
+	solve(s) {
+	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: MedianSortedArrays };angleArea };nWater;
+module.exports = { Problem: LenghtOfLongestSubString };ngleArea };nWater;
 }
 
 

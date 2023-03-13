@@ -10,7 +10,7 @@ class LetterCombinations {
 
         const backTrack = (digits, char, combination, combinations) => {
             combination.push(char)
-            letterCombinations(digits.slice(1), combination, combinations)
+            this.letterCombinations(digits.slice(1), combination, combinations)
             combination.pop()
         }
 

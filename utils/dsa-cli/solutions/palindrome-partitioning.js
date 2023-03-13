@@ -1,4 +1,4 @@
-class Problem {
+class PalindromePartitioning {
 
 
     /**
@@ -49,4 +49,4 @@ class Problem {
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: PalindromePartitioning };

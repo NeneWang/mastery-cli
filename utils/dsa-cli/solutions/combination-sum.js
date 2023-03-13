@@ -15,7 +15,7 @@ class CombinationSum {
         if (isTarget) return combinations.push(combination.slice());
 
         for (let i = index; i < candidates.length; i++) {
-            backTrack(candidates, target, i, combination, combinations);
+            this.backTrack(candidates, target, i, combination, combinations);
         }
 
         return combinations;
@@ -23,7 +23,7 @@ class CombinationSum {
 
     backTrack = (candidates, target, i, combination, combinations) => {
         combination.push(candidates[i]);
-        combinationSum(candidates, (target - candidates[i]), i, combination, combinations);
+        this.combinationSum(candidates, (target - candidates[i]), i, combination, combinations);
         combination.pop();
     }
 
