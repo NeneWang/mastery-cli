@@ -1,3 +1,20 @@
+class Node {
+    constructor(val = 0, next = null) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+
+const convertToArray = (list) => {
+    const arr = [];
+    while (list) {
+        arr.push(list.val);
+        list = list.next;
+    }
+    return arr;
+};
+
 class CopyListWithRandomPointer {
 
     /**
@@ -13,8 +30,8 @@ class CopyListWithRandomPointer {
         const clone = new Node(head.val);
 
         map.set(head, clone);                           /*           | Space O(N) */
-        clone.next = copyRandomList(head.next, map);    /* Time O(N) | Space O(N) */
-        clone.random = copyRandomList(head.random, map);/* Time O(N) | Space O(N) */
+        clone.next = this.copyRandomList(head.next, map);    /* Time O(N) | Space O(N) */
+        clone.random = this.copyRandomList(head.random, map);/* Time O(N) | Space O(N) */
 
         return clone;
     }
@@ -69,7 +86,8 @@ class CopyListWithRandomPointer {
     };
 
     solve(head, map = new Map()) {
-        return this.copyRandomList(head, map);
+        const result = this.copyRandomList(head, map);
+        return convertToArray(result);
     }
 
 }

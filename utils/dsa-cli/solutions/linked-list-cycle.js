@@ -1,20 +1,18 @@
+
+
+// class ListNode {
+//     constructor(val = 0, next = null) {
+//         this.val = val;
+//         this.next = next;
+//     }
+// }
+
+
+
 class LinkedListCycle {
 
-    /**
-     * https://leetcode.com/problems/linked-list-cycle/
-     * Time O(N) | Space O(N)
-     * @param {ListNode} head
-     * @return {boolean}
-     */
-    solve(head, seen = new Set()) {
-        while (head) {/* Time O(N) */
-            if (seen.has(head)) return true;
-
-            seen.add(head);/* Space O(N) */
-            head = head.next;
-        }
-
-        return false;
+    solve(head) {
+        return this.hasCycle(head);
     }
 
 
