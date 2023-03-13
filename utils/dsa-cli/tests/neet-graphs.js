@@ -158,10 +158,96 @@ class PacificAtlanticWaterFlow extends ProblemTests {
         assert.deepEqual(
             pacificAtlanticWaterFlow.solve([[1]]), [[0, 0]]
         )
+    }
+}
 
+class RedundantConnection extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const redundantConnection = new this.Problem();
+        this.current_test_name = '[[1,2], [1,3], [2,3]] | [2,3]';
+        assert.deepEqual(redundantConnection.solve([[1,2], [1,3], [2,3]]), [2,3]);
+    }
+
+    test_2(){
+        const redundantConnection = new this.Problem();
+        this.current_test_name = '[[1,2], [2,3], [3,4], [1,4], [1,5]] | [1,4]';
+        assert.deepEqual(redundantConnection.solve([[1,2], [2,3], [3,4], [1,4], [1,5]]), [1,4]);
     }
 
 }
+
+
+class RottingOranges extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const rottingOranges = new this.Problem();
+        this.current_test_name = '[[2,1,1],[1,1,0],[0,1,1]] | 4';
+        assert.deepEqual(rottingOranges.solve([[2,1,1],[1,1,0],[0,1,1]]), 4);
+
+    }
+
+
+    test_2(){
+
+        const rottingOranges = new this.Problem();
+        this.current_test_name = '[[2,1,1],[0,1,1],[1,0,1]] | -1';
+        assert.deepEqual(rottingOranges.solve([[2,1,1],[0,1,1],[1,0,1]]), -1);
+    }
+
+}
+
+const X = 'X';
+const O = 'O';
+
+class SurroundedRegions extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+    
+    test_1(){
+        const surroundedRegions = new this.Problem();
+        this.current_test_name = '[[X, X, X, X], [X, O, O, X], [X, X, O, X], [X, O, X, X]] | [[X, X, X, X], [X, X, X, X], [X, X, X, X], [X, O, X, X]]';
+        const board = [[X, X, X, X], [X, O, O, X], [X, X, O, X], [X, O, X, X]];
+
+        this.tests.push(() => this.test_2());
+        surroundedRegions.solve(board);
+        assert.deepEqual(board, [[X, X, X, X], [X, X, X, X], [X, X, X, X], [X, O, X, X]]);
+
+    }
+
+
+    test_2(){
+
+        const surroundedRegions = new this.Problem();
+        this.current_test_name = '[[X]]';
+        const board = [[X]];
+
+        this.tests.push(() => this.test_2());
+        surroundedRegions.solve(board);
+        assert.deepEqual(board, [[X]]);
+    }
+
+
+
+
+}
+
+
+
 
 
 
@@ -172,6 +258,9 @@ const TEST_DICTIONARY = {
     'max-area-of-island': MaxAreaOfIsland,
     'number-of-islands': NumberOfIslands,
     'pacific-atlantic-water-flow': PacificAtlanticWaterFlow,
+    'redundant-connection': RedundantConnection,
+    'rotting-oranges': RottingOranges,
+    'surrounded-regions': SurroundedRegions,
 }
 
 

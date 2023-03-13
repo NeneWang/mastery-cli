@@ -222,4 +222,34 @@ class TermStorage {
 
 };
 
-module.exports = { Term, Terminology, TermStorage };
+
+class Queue {
+
+    constructor() {
+        this.queue = []
+    }
+
+    enqueue(element) {
+        this.queue.push(element)
+    }
+
+    dequeue() {
+        return this.queue.shift()
+    }
+
+    front() {
+        return this.queue[0]
+    }
+
+    size() {
+        return this.queue.length
+    }
+
+    isEmpty() {
+        return this.size() === 0
+    }
+
+}
+
+
+module.exports = { Term, Terminology, TermStorage, Queue };

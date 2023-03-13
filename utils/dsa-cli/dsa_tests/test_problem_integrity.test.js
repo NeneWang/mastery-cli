@@ -41,7 +41,7 @@ describe('Problem integrity', function () {
         // if this test fails, make sure you can run func_create_empty_base_codes to populate with a basic template of them all.
         // Or just run it here just in case everytime this test is run:
         const { createEmptyBaseCodes } = require('./func_create_empty_base_codes');
-        createEmptyBaseCodes();
+        await createEmptyBaseCodes();
 
         const allProblemsMetadata = problemManager.problems;
         for (let problemMetadata of Object.values(allProblemsMetadata)) {

@@ -1,13 +1,9 @@
-class SearchMatrix {
-	solve(search, target) {
+class Queue {
+	solve(grid) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: SearchMatrix };dArrays };angleArea };m };er;
-}
-
-
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: Queue };em };: ReduntantConnection };Schedule };;ea };m };

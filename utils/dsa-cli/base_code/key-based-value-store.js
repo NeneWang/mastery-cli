@@ -1,6 +1,5 @@
 class TimeMap {	// Your code here
 
-	}
 }
 
 
