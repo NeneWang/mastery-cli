@@ -7,7 +7,7 @@
  * obj.put(key,value)
  */
 class LRUCache {
-    onstructor(capacity) {
+    constructor(capacity) {
         this.capacity = capacity;
         this.map = new Map();
 

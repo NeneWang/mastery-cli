@@ -1,12 +1,12 @@
-class SearchRotatedArray {
-	solve(nums, target) {
+class SearchMatrix {
+	solve(search, target) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: SearchRotatedArray };angleArea };nWater;
+module.exports = { Problem: SearchMatrix };argestRectangleArea };m };er;
 }
 
 

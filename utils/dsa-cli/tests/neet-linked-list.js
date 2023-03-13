@@ -104,6 +104,8 @@ const arrayToListNode = (array) => {
 
     return head;
 };
+
+
 class LinkedListCycle extends ProblemTests {
     constructor(Problem) {
         super(Problem);
@@ -140,12 +142,72 @@ class LinkedListCycle extends ProblemTests {
 }
 
 
+class LRUCache extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        this.current_test_name = "[[1,1],[2,2],get[1],[3,3],[2],[4,4],get[1],get[3],get[4]] => [1,-1,3,-1,4]"
+        const problemToTest = new this.Problem(2);
+        problemToTest.put(1, 1);
+        problemToTest.put(2, 2);
+        assert(problemToTest.get(1) == 1);
+        problemToTest.put(3, 3);
+        console.log("Attempting to get 2", problemToTest.get(2));
+        assert(problemToTest.get(2) == -1);
+        problemToTest.put(4, 4);
+        assert(problemToTest.get(1) == -1);
+        assert(problemToTest.get(3) == 3);
+        assert(problemToTest.get(4) == 4);
+
+    }
+
+    test_2() {
+        this.current_test_name = "Test the limits of lru 3"
+        const problemToTest = new this.Problem(3);
+        problemToTest.put(1, 1);
+        problemToTest.put(2, 2);
+        problemToTest.put(3, 3);
+        problemToTest.put(4, 4);
+        assert(problemToTest.get(4) == 4);
+        assert(problemToTest.get(1) == -1);
+
+
+        problemToTest.put(1, 2);
+        assert(problemToTest.get(1) == 2);
+        assert(problemToTest.get(2) == -1);
+
+    }
+
+    
+    test_3() {
+        this.current_test_name = "[[2,1],[2,2],get[2],[1,1],[4,1],get[2]] => [2,1]"
+        const problemToTest = new this.Problem(3);
+        problemToTest.put(2, 1);
+        problemToTest.put(2, 2);
+        assert(problemToTest.get(2) == 2);
+        problemToTest.put(1, 1);
+        problemToTest.put(4, 1);
+        assert(problemToTest.get(2) == -1);
+        problemToTest.put(5, 5);
+        assert(problemToTest.get(5) == 5);
+
+    }
+
+}
+
+
 
 const PROBLEM_DICT = {
     'add-two-numbers': AddTwoNumbers,
     // 'copy-list-with-random-pointer': CopyListWithRandomPointer, // Too hard to test.
     'find-the-duplicate-number': FindTHeDuplicateNumber,
     'linked-list-cycle': LinkedListCycle,
+    'lru-cache': LRUCache,
 }
 
 
