@@ -6,7 +6,7 @@ class SearchMatrix {
 }
 
 
-module.exports = { Problem: SearchMatrix };s };ays };angleArea };nWater;
+module.exports = { Problem: SearchMatrix };edArray };angleArea };m };er;
 }
 
 
