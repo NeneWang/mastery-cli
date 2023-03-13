@@ -215,7 +215,7 @@ class CountGoodNodesInBinaryTree extends ProblemTests {
 
 }
 
-class DiameterOfBinaryTree extends ProblemTests{
+class DiameterOfBinaryTree extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
@@ -223,22 +223,107 @@ class DiameterOfBinaryTree extends ProblemTests{
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         this.current_test_name = "[1,2,3,4,5] => 3"
         const problemToTest = new this.Problem();
-        const tree = arrayToBinaryTree([1,2,3,4,5]);
+        const tree = arrayToBinaryTree([1, 2, 3, 4, 5]);
         assert(problemToTest.solve(tree) == 3);
     }
 
-    test_2(){
+    test_2() {
         this.current_test_name = "[1,2] => 1"
         const problemToTest = new this.Problem();
-        const tree = arrayToBinaryTree([1,2]);
+        const tree = arrayToBinaryTree([1, 2]);
         assert(problemToTest.solve(tree) == 1);
     }
 
 }
 
+
+
+class InvertBinaryTree extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        this.current_test_name = "[4,2,7,1,3,6,9] => [4,7,2,9,6,3,1]"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([4, 2, 7, 1, 3, 6, 9]);
+        const result_tree = problemToTest.solve(tree);
+        const result_tree_as_arr = binaryTreeToArray(result_tree);
+        assert.deepEqual(result_tree_as_arr, [4, 7, 2, 9, 6, 3, 1]);
+
+    }
+
+    test_2() {
+
+        this.current_test_name = "[2,1,3] => [2,3,1]"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([2, 1, 3]);
+        const result_tree = problemToTest.solve(tree);
+        const result_tree_as_arr = binaryTreeToArray(result_tree);
+        assert.deepEqual(result_tree_as_arr, [2, 3, 1]);
+
+    }
+
+    test_3() {
+
+        this.current_test_name = "[] => []"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([]);
+        const result_tree = problemToTest.solve(tree);
+        const result_tree_as_arr = binaryTreeToArray(result_tree);
+        assert.deepEqual(result_tree_as_arr, []);
+
+
+    }
+
+}
+
+
+class KthSmallestElementInABst extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+
+        this.current_test_name = "[3,1,4,null,2], k = 1 => 1"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([3, 1, 4, null, 2]);
+        assert(problemToTest.solve(tree, 1) == 1);
+
+
+    }
+
+    test_2() {
+
+        this.current_test_name = "[5,3,6,2,4,null,null,1], k = 3 => 3"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([5, 3, 6, 2, 4, null, null, 1]);
+        assert(problemToTest.solve(tree, 3) == 3);
+
+    }
+
+    test_3() {
+
+        this.current_test_name = "[5,3,6,2,4,null,null,1], k = 3 => 3"
+        const problemToTest = new this.Problem();
+        const tree = arrayToBinaryTree([5, 3, 6, 2, 4, null, null, 1]);
+        assert(problemToTest.solve(tree, 3) == 3);
+
+    }
+
+}
 
 
 
@@ -256,6 +341,8 @@ const TEST_DICTIONARY = {
     'construct-binary-tree-from-preorder-and-inorder-traversal': ContructBinaryTreeFromPreorderAndInOrderTraversal,
     'count-good-nodes-in-binary-tree': CountGoodNodesInBinaryTree,
     'diameter-of-binary-tree': DiameterOfBinaryTree,
+    'invert-binary-tree': InvertBinaryTree,
+    'kth-smallest-element-in-a-bst': KthSmallestElementInABst,
 
 }
 

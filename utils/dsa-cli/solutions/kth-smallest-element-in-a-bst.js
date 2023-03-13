@@ -10,11 +10,11 @@ class Problem {
     kthSmallest = function (root, k, inOrder = []) {
 
         const dfs = (root, k, inOrder) => {
-            if (root.left) kthSmallest(root.left, k, inOrder);
+            if (root.left) this.kthSmallest(root.left, k, inOrder);
 
             inOrder.push(root.val);
 
-            if (root.right) kthSmallest(root.right, k, inOrder);
+            if (root.right) this.kthSmallest(root.right, k, inOrder);
 
             return inOrder[(k - 1)];
         }

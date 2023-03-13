@@ -1,6 +1,6 @@
 
 
-class Problem {
+class InvertTree {
 
     solve(root) {
         return this.invertTree(root);
@@ -15,8 +15,8 @@ class Problem {
     invertTree(root) {
         
         const dfs = (root) => {
-            const left = invertTree(root.left);
-            const right = invertTree(root.right);
+            const left = this.invertTree(root.left);
+            const right = this.invertTree(root.right);
 
             root.left = right;
             root.right = left;
@@ -66,4 +66,4 @@ class Problem {
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: InvertTree };
