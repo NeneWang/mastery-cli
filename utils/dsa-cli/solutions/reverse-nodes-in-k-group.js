@@ -1,3 +1,11 @@
+
+class ListNode {
+    constructor(val = 0, next = null) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
 class ReverseKGroup {
 
 
@@ -30,7 +38,7 @@ class ReverseKGroup {
                 curr = next;
             }
         }
-
+        let tail;
         const sentinel = tail = new ListNode(0, head);
 
         while (true) {

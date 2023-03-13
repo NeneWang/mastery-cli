@@ -414,6 +414,52 @@ class ReverseLinkedList extends ProblemTests {
         const result = problemToTest.solve(list);
         assert(result == null);
     }
+}
+
+class ReverseNodesInKGroup extends ProblemTests{
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        this.current_test_name = "[1,2,3,4,5], k=2 => [2,1,4,3,5]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1, 2, 3, 4, 5]);
+        const result = problemToTest.solve(list, 2);
+        assert(result.val == 2);
+        assert(result.next.val == 1);
+        assert(result.next.next.val == 4);
+        assert(result.next.next.next.val == 3);
+        assert(result.next.next.next.next.val == 5);
+    }
+
+    test_2() {
+        this.current_test_name = "[1,2,3,4,5], k=3 => [3,2,1,4,5]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1, 2, 3, 4, 5]);
+        const result = problemToTest.solve(list, 3);
+        assert(result.val == 3);
+        assert(result.next.val == 2);
+        assert(result.next.next.val == 1);
+        assert(result.next.next.next.val == 4);
+        assert(result.next.next.next.next.val == 5);
+    }
+
+    test_3(){
+        this.current_test_name = "[1,2,3,4,5], k=1 => [1,2,3,4,5]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1, 2, 3, 4, 5]);
+        const result = problemToTest.solve(list, 1);
+        assert(result.val == 1);
+        assert(result.next.val == 2);
+        assert(result.next.next.val == 3);
+        assert(result.next.next.next.val == 4);
+        assert(result.next.next.next.next.val == 5);
+    }
 
 
 }
@@ -431,6 +477,7 @@ const PROBLEM_DICT = {
     'remove-from-nth': RemoveFromNthNode,
     'reorder-list': ReorderList,
     'reverse-linked-list': ReverseLinkedList,
+    'reverse-nodes-in-k-group': ReverseNodesInKGroup,
 }
 
 

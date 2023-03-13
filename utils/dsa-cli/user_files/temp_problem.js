@@ -1,13 +1,7 @@
-class MedianSortedArrays {
-	solve(nums1, nums2) {
-		// Your code here
+class TimeMap {	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: MedianSortedArrays };angleArea };nWater;
-}
-
-
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: TimeMap };exports = { Problem: KokoEatingBananas };ays };angleArea };m };
