@@ -9,10 +9,10 @@ class Problem {
     isSubtree = function (root, subRoot) {
         if (!root) return false
 
-        if (isSame(root, subRoot)) return true
+        if (this.isSame(root, subRoot)) return true
 
-        const hasLeftTree = isSubtree(root.left, subRoot)
-        const hasRightTree = isSubtree(root.right, subRoot)
+        const hasLeftTree = this.isSubtree(root.left, subRoot)
+        const hasRightTree = this.isSubtree(root.right, subRoot)
 
         return hasLeftTree || hasRightTree
     };
@@ -24,8 +24,8 @@ class Problem {
         const isMismatch = root.val !== subRoot.val
         if (isMismatch) return false
 
-        const isLeftSame = isSame(root.left, subRoot.left)
-        const isRightSame = isSame(root.right, subRoot.right)
+        const isLeftSame = this.isSame(root.left, subRoot.left)
+        const isRightSame = this.isSame(root.right, subRoot.right)
 
         return isLeftSame && isRightSame
     }

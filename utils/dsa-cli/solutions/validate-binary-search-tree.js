@@ -10,8 +10,8 @@ class Problem {
     isValidBST = function (root, min = -Infinity, max = Infinity) {
 
         const dfs = (root, min, max) => {
-            const left = isValidBST(root.left, min, root.val);
-            const right = isValidBST(root.right, root.val, max);
+            const left = this.isValidBST(root.left, min, root.val);
+            const right = this.isValidBST(root.right, root.val, max);
 
             return left && right;
         }

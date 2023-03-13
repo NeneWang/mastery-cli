@@ -1,9 +1,13 @@
-class SearchRotatedArray {
-	solve(nums, target) {
-	// Your code here
+class MedianSortedArrays {
+	solve(nums1, nums2) {
+		// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: SearchRotatedArray };angleArea };m };oblem: Division };
+module.exports = { Problem: MedianSortedArrays };angleArea };nWater;
+}
+
+
+module.exports = { Problem: TrappingRainWater };
