@@ -35,7 +35,7 @@ class NQueens {
             posDiagSet.delete(row + col);
             negDiagSet.delete(row - col);
             board[row][col] = ".";
-        }
+    }
         const board = new Array(n).fill().map(() => new Array(n).fill('.'));
 
         return dfs(board, n, colSet, posDiagSet, negDiagSet);

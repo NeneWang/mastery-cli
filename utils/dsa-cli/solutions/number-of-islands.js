@@ -37,8 +37,8 @@ class NumberOfIslands {
 
         return connectedComponents
     };
-    solve() {
-        console.log("Hello World!");
+    solve(grid) {
+        return this.numIslands(grid)
     }
 }
 
