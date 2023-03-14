@@ -1,13 +1,9 @@
-class WordLadder {
-	solve(beingWord, endWord, wordList) {
+class IsValidParenthesis {
+	solve(s, stack = []) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: WordLadder };ule };;ea };m };er;
-}
-
-
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: IsValidParenthesis };

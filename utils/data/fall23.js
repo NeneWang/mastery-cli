@@ -106,6 +106,15 @@ const network = [
         term: "Monitoring", example: "Various different aspects of the system, to detect a possible problem before it happens, or to fix a problem after it has happened before people complain. Disk Failures Running out of disk space System Running Networking Issues For printers (out of paper or paper jam) System Temperature Other Outages",
         prompt: "What to be monitoring on a system when u are a sys admin??"
     },
+    {
+        term: "sudo usermod", prompt: "The command \"sudo usermod -aG sudo theo\" will",
+        description: "Add theo to the sudo group",
+        example: "Adds the user theo to the sudo group, making it a secondary group for him."
+    },
+    {
+        term: "membership permission on-creation", prompt: "When a user creates a new file or folder, which group membership is used to create the group permissions?",
+        example: "The Primary group of the user is used to create assign the file to a group"
+    },
     
 ]
 
