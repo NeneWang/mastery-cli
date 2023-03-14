@@ -1,4 +1,4 @@
-class Problem {
+class InsertInterval {
 
     /**
      * https://leetcode.com/problems/insert-interval/
@@ -55,4 +55,4 @@ class Problem {
     }
 
 }
-module.exports = { Problem };
+module.exports = { Problem: InsertInterval };
