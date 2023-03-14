@@ -115,6 +115,24 @@ const network = [
         term: "membership permission on-creation", prompt: "When a user creates a new file or folder, which group membership is used to create the group permissions?",
         example: "The Primary group of the user is used to create assign the file to a group"
     },
+    {
+        term: "mv-command", prompt: "The command mv file1 file2 will",
+        example: "Rename file1 to file2 and move file1 to file2"
+    },
+    {
+        term: "chmod 755", prompt: "The command chmod 755 file1 will",
+        example: "Change the permissions of file1 to rwxr-xr-x. Which is: Owner: Read, Write, Execute Group: Read, Execute Other: Read, Execute"
+    },
+    {
+        term: "chmod o-x", prompt: "The command chmod o-x file1 will",
+        example: "Remove the execute permission for the other group"
+    },
+    {
+        term: "soft-link", prompt: "ln -s file1 file2 will",
+        example: "Create a soft link from file1 to file2. Deleting, changing the name of the original file, will break the link. \n\
+        You can confirm it with ls -l file1"
+    }
+
     
 ]
 
