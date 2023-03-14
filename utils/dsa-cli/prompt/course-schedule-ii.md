@@ -1,7 +1,7 @@
 ---
 title: Course Schedule II
 description: Return the ordering of courses you should take to finish all courses. If there are many valid answers, return any of them. If it is impossible to finish all courses, return an empty array.
-tags: [medium, graph, topological-sort]
+tags: [ neetcode, medium, graph, topological-sort]
 link: https://leetcode.com/problems/course-schedule-ii/
 images: []
 ---

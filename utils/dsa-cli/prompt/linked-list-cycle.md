@@ -1,7 +1,7 @@
 ---
 title: Linked List Cycle
 description: Given head, the head of a linked list, determine if the linked list has a cycle in it.
-tags: [medium, linked-list]
+tags: [ neetcode, medium, linked-list]
 link: https://leetcode.com/problems/linked-list-cycle/
 ---
 

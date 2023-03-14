@@ -1,7 +1,7 @@
 ---
 title: koko-eating-bananas
 description: Return the minimum integer k such that she can eat all the bananas within h hours.
-tags: [medium, binary-search]
+tags: [ neetcode, medium, binary-search]
 link: https://leetcode.com/problems/koko-eating-bananas/
 ---
 

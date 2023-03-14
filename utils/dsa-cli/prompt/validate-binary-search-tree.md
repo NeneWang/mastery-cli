@@ -1,7 +1,7 @@
 ---
 title: Validate Binary Search Tree
 description: Given the root of a binary tree, determine if it is a valid binary search tree (BST).
-tags: [medium, binary-tree]
+tags: [ neetcode, medium, binary-tree]
 link: https://leetcode.com/problems/validate-binary-search-tree/
 images: [ https://assets.leetcode.com/uploads/2020/12/01/tree1.jpg, https://assets.leetcode.com/uploads/2020/12/01/tree2.jpg]
 ---

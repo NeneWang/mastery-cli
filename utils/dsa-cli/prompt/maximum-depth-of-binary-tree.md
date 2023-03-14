@@ -1,7 +1,7 @@
 ---
 title: Maximum Depth of Binary Tree
 description: A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
-tags: [easy, binary-tree]
+tags: [ neetcode, easy, binary-tree]
 link: https://leetcode.com/problems/maximum-depth-of-binary-tree/
 images: [https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg]
 ---

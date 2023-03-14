@@ -1,7 +1,7 @@
 ---
 title: Reverse Linked List
 description: Given the head of a singly linked list, reverse the list, and return the reversed list.
-tags: [easy, linked-list]
+tags: [ neetcode, easy, linked-list]
 link: https://leetcode.com/problems/reverse-linked-list/
 images: [https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg, https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg]
 ---

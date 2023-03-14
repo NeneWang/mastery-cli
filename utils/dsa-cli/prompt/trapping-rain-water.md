@@ -1,7 +1,7 @@
 ---
 title: Trapping Rain Water
 description: A trapping rain water example
-tags: [hard, two-pointers]
+tags: [ neetcode, hard, two-pointers]
 ---
 
 Given `n` non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.

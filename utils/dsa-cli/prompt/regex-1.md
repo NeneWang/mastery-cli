@@ -1,7 +1,7 @@
 ---
 title: "Regex 1"
 description: create a markdown that returns all 'hackerrank' matches
-tags: [easy, regex]
+tags: [ neetcode, easy, regex]
 link: "https://www.hackerrank.com/challenges/regex-1/problem"
 ---
 

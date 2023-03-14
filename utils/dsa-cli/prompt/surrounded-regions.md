@@ -1,7 +1,7 @@
 ---
 title: Surrounded Regions
 description: Given an m x n matrix board containing 'X' and 'O', capture all regions that are 4-directionally surrounded by 'X'.
-tags: [medium, graphs]
+tags: [ neetcode, medium, graphs]
 link: https://leetcode.com/problems/surrounded-regions/
 images: [https://assets.leetcode.com/uploads/2021/02/19/xogrid.jpg]
 ---

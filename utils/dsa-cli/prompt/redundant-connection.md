@@ -1,7 +1,7 @@
 ---
 title: Redundant Connection
 description: In this problem, a tree is an undirected graph that is connected and has no cycles.
-tags: [medium, graphs]
+tags: [ neetcode, medium, graphs]
 link: https://leetcode.com/problems/redundant-connection/
 images: [https://assets.leetcode.com/uploads/2021/05/02/reduntant1-1-graph.jpg, https://assets.leetcode.com/uploads/2021/05/02/reduntant1-2-graph.jpg]
 ---

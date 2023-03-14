@@ -1,7 +1,7 @@
 ---
 title: Search a 2D Matrix
 description: You are given an m x n integer matrix matrix with the following two properties
-tags: [medium, binary-search]
+tags: [ neetcode, medium, binary-search]
 link: https://leetcode.com/problems/search-a-2d-matrix/
 ---
 

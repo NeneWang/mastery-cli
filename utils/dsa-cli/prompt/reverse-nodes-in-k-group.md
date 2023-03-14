@@ -1,7 +1,7 @@
 ---
 title: Reverse Nodes in k-Group
 description: Given the head of a linked list, reverse the nodes of the list k at a time, and return the modified list.
-tags: [hard, linked-list]
+tags: [ neetcode, hard, linked-list]
 link: https://leetcode.com/problems/reverse-nodes-in-k-group/
 ---
 

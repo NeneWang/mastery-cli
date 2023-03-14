@@ -1,7 +1,7 @@
 ---
 title: Permutations
 description: Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
-tags: [medium, backtracking]
+tags: [ neetcode, medium, backtracking]
 link: https://leetcode.com/problems/permutations/
 images: []
 ---

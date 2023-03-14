@@ -1,7 +1,7 @@
 ---
 title: Word Ladder
 description: Given two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, or 0 if no such sequence exists.
-tags: [hard, graphs]
+tags: [ neetcode, hard, graphs]
 link: https://leetcode.com/problems/word-ladder/
 images: []
 ---

@@ -1,7 +1,7 @@
 ---
 title: Count Good Nodes in Binary Tree
 description: Given a binary tree root, a node X in the tree is named good if in the path from root to X there are no nodes with a value greater than X.
-tags: [medium, binary-tree]
+tags: [ neetcode, medium, binary-tree]
 link: https://leetcode.com/problems/count-good-nodes-in-binary-tree/
 images: [ https://assets.leetcode.com/uploads/2020/04/02/test_sample_1.png, https://assets.leetcode.com/uploads/2020/04/02/test_sample_2.png]
 ---

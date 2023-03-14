@@ -1,7 +1,7 @@
 ---
 title: Largest Rectangle in Histogram
 description: Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
-tags: [medium, stack]
+tags: [ neetcode, medium, stack]
 link: https://leetcode.com/problems/largest-rectangle-in-histogram/
 ---
 

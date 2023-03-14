@@ -1,7 +1,7 @@
 ---
 title: Car Fleet
 description: There are n cars going to the same destination along a one-lane road. The destination is target miles away.
-tags: [medium, stack]
+tags: [ neetcode, medium, stack]
 link: https://leetcode.com/problems/car-fleet/
 images: []
 ---

@@ -1,7 +1,7 @@
 ---
 title: Redundant Connection
 description: find the number of connected components in an undirected graph.
-tags: [medium, graphs]
+tags: [ neetcode, medium, graphs]
 link: https://cheonhyangzhang.gitbooks.io/leetcode-solutions/content/323-number-of-connected-components-in-an-undirected-graph.html
 images: []
 ---

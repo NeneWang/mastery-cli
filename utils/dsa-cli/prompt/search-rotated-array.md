@@ -1,7 +1,7 @@
 ---
 title: Search in Rotated Sorted Array
 description: Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
-tags: [medium, binary-search]
+tags: [ neetcode, medium, binary-search]
 link: https://leetcode.com/problems/search-in-rotated-sorted-array/
 ---
 

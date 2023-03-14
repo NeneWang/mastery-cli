@@ -1,7 +1,7 @@
 ---
 title: Subtree of Another Tree
 description: A subtree of a binary tree tree is a tree that consists of a node in tree and all of this node's descendants. The tree tree could also be considered as a subtree of itself.
-tags: [easy, binary-tree]
+tags: [ neetcode, easy, binary-tree]
 link: https://leetcode.com/problems/subtree-of-another-tree/
 images: [ https://assets.leetcode.com/uploads/2021/02/18/tree1.jpg, https://assets.leetcode.com/uploads/2021/02/18/tree2.jpg]
 ---

@@ -1,7 +1,7 @@
 ---
 title: Same Tree
 description: Given the roots of two binary trees p and q, write a function to check if they are the same or not.
-tags: [easy, binary-tree]
+tags: [ neetcode, easy, binary-tree]
 link: https://leetcode.com/problems/same-tree/
 images: [ https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg, https://assets.leetcode.com/uploads/2020/12/20/ex2.jpg, https://assets.leetcode.com/uploads/2020/12/20/ex3.jpg]
 ---

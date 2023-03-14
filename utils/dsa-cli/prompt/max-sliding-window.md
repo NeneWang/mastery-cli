@@ -1,7 +1,7 @@
 ---
 title: Max Sliding Window
 description: Sliding Window Maximum
-tags: [hard, sliding-window]
+tags: [ neetcode, hard, sliding-window]
 link: https://leetcode.com/problems/sliding-window-maximum/
 ---
 

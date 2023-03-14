@@ -1,7 +1,7 @@
 ---
 title: Remove Nth Node From End of List
 description: Given the head of a linked list, remove the nth node from the end of the list and return its head.
-tags: [medium, linked-list]
+tags: [ neetcode, medium, linked-list]
 link: https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 ---
 
