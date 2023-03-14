@@ -178,7 +178,12 @@ const algebra = [
         term: "Summation", prompt: "What is the sum rule, the difference rule, the constant rule and the constant value rule",   
     },
     {
-        term: ""
+        term: "domain range", prompt: "What is the domain of sqrt(x+3)/(x-3). ",
+        description: "Use the teacher's notation",
+        example: "D = [-3; +inf[ \\ {3}"
+    },
+    {
+        
     }
 
 
