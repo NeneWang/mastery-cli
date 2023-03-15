@@ -32,7 +32,11 @@ Here (4) large assistant wise projects that I am interested in making:
   - L Interests
   - Social Situation Practice.
   - Take notes on Gym workouts.
-  - Journals.
+  - Allow a pc combination, as the sdk should be accesed by both the flutter mobile app, as well as the terminal cli and also the Web app (If eventually one is developed)
+  - Journals 
+    - Registering one life Philosophy regarding a certain topic
+  - Faith Journal and 
+  - Building eventually a community of "Building your own faith group," where ideas are exchanged in respect to something else. Where they tell themselves how to design their life values, and we are there to assist them with tools and patterns.
 
 
 <!-- I am considering using Rust to create a Debian tool + Java Backend. -->
@@ -111,7 +115,6 @@ Things that I believe I should focus on learning
 - Sometimes the problem is looking at "What is inside, or what's in the world that relates to this symbol?"
   - Is about finding cues about where to research and quickly spin up the world to figure out the answers for where to focus the research.
 - In conclusion you could say that problem solving is obsessing over a problems details and matching the pattern to the external world.
-- 
 
 
 From Escape the Room to Business and life. These are the steps in Escape Room
@@ -169,6 +172,15 @@ Therefore a method to improve in this area is:
 
 Proposition 1.1: The world is a game, and the game is to be the best version of yourself.
 - Or a short reminder everytime u open ur phone, or a reminder everytime u open ur computer.
+- Prompt the user to journal his relation to this faith on the daily. And prompt how close to the faith fundamentaal truth is. Or if it derives from something else.
+- Research how religions keep people faithful with a religion? How can I use this to keep myself faithful to this doctrine?
+- It would be nice if I could find some days to just research and research about different philosophies and see what works, or what questions do they attempt to answer, as well as to see how this can help you make you believe in the doctrine with more reason.
+- So on the daily as a prompt I can remark things other religions think about certain topic, and how your faith responds to that fundamental question. 
+- Perphaps this can be computed using the research of how sudoku's work. by writting down what paths can't be taken and thus deduce the answer.
+
+
+
+
 
 
 

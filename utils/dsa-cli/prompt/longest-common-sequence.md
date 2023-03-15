@@ -1,7 +1,7 @@
 ---
 title: Longest Common Sequence
 description: Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0.
-tags: [medium, dp]
+tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/longest-increasing-subsequence/
 images: []
 ---

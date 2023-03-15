@@ -1,7 +1,7 @@
 ---
 title: Detect Squares
 description: An axis-aligned square is a square whose edges are all the same length and are either parallel or perpendicular to the x-axis and y-axis.
-tags: [medium, dp]
+tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/detect-squares/
 images: [https://assets.leetcode.com/uploads/2021/09/01/image.png]
 ---

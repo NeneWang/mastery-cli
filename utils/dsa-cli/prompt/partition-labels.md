@@ -1,7 +1,7 @@
 ---
 title: Partition of Labels
 description: You are given a string s. We want to partition the string into as many parts as possible so that each letter appears in at most one part.
-tags: [medium, dp]
+tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/partition-labels/
 images: []
 ---

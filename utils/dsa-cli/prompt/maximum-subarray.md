@@ -1,7 +1,7 @@
 ---
 title: Maximum Subarray
 description: Given an integer array nums, find the subarray with the largest sum, and return its sum.
-tags: [medium, dp]
+tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/maximum-subarray/
 images: []
 ---

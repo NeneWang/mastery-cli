@@ -1,7 +1,7 @@
 ---
 title: House Robber II
 description: Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
-tags: [medium, dp]
+tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/house-robber-ii/
 images: []
 ---

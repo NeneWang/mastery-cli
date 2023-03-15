@@ -330,14 +330,107 @@ class MinCostClimbingStairs extends ProblemTests {
         assert.equal(minCostClimbingStairs.solve([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]), 6);
     }
 
-    test_3(){
+    test_3() {
         const minCostClimbingStairs = new this.Problem();
         this.current_test_name = '[0,0,0,0] | 0';
         assert.equal(minCostClimbingStairs.solve([0, 0, 0, 0]), 0);
     }
-    
+
 
 }
+
+class PalindromicSubstring extends ProblemTests {
+
+    constructor(problem) {
+
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+
+        const palindromicSubstring = new this.Problem();
+        this.current_test_name = '"abc" | 3';
+        assert.equal(palindromicSubstring.solve('abc'), 3);
+
+    }
+
+    test_2() {
+
+        const palindromicSubstring = new this.Problem();
+        this.current_test_name = '"aaa" | 6';
+        assert.equal(palindromicSubstring.solve('aaa'), 6);
+
+    }
+}
+
+
+class PartitionEqualSubsetSum extends ProblemTests {
+
+    constructor(problem) {
+
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+
+    test_1() {
+
+        const partitionEqualSubsetSum = new this.Problem();
+        this.current_test_name = '[1,5,11,5] | true';
+        assert.equal(partitionEqualSubsetSum.solve([1, 5, 11, 5]), true);
+
+    }
+
+
+    test_2() {
+
+        const partitionEqualSubsetSum = new this.Problem();
+        this.current_test_name = '[1,2,3,5] | false';
+        assert.equal(partitionEqualSubsetSum.solve([1, 2, 3, 5]), false);
+
+    }
+}
+
+
+class WordBreak extends ProblemTests {
+
+    constructor(problem) {
+
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+
+        const wordBreak = new this.Problem();
+        this.current_test_name = '"leetcode", ["leet", "code"] | true';
+        assert.equal(wordBreak.solve('leetcode', ['leet', 'code']), true);
+
+    }
+
+    test_2() {
+
+        const wordBreak = new this.Problem();
+        this.current_test_name = '"applepenapple", ["apple", "pen"] | true';
+        assert.equal(wordBreak.solve('applepenapple', ['apple', 'pen']), true);
+
+    }
+
+    test_3(){
+            
+            const wordBreak = new this.Problem();
+            this.current_test_name = '"catsandog", ["cats", "dog", "sand", "and", "cat"] | false';
+            assert.equal(wordBreak.solve('catsandog', ['cats', 'dog', 'sand', 'and', 'cat']), false);
+    }
+
+}
+
+
 
 
 
@@ -354,6 +447,9 @@ const TEST_DICTIONARY = {
     'maximum-product-subarray': MaximumProductSubArray,
     'maximum-subarray': MaximumSubarray,
     'min-cost-climbing-stairs': MinCostClimbingStairs,
+    'palindromic-substrings': PalindromicSubstring,
+    'partition-equal-subset-sum': PartitionEqualSubsetSum,
+    'word-break': WordBreak,
 }
 
 module.exports = TEST_DICTIONARY;

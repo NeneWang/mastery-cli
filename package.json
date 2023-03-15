@@ -1,6 +1,6 @@
 {
 	"name": "maid-cli",
-	"description": "Life is a game, and the game is to be the best version of yourself",
+	"description": "Let maid help you build your final project - your life",
 	"version": "0.6.30",
 	"license": "UNLICENSED",
 	"bin": {

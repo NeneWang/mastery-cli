@@ -1,7 +1,7 @@
 ---
 title: Maximum Product Subarray
 description: Given an integer array nums, find a subarray that has the largest product, and return the product.
-tags: [medium, dp]
+tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/maximum-product-subarray/
 images: []
 ---

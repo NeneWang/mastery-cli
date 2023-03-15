@@ -1,7 +1,7 @@
 ---
 title: Longest Palindromic Substring
 description: Given a string s, return the longest palindromic substring in s.
-tags: [medium, dp]
+tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/longest-palindromic-substring/
 images: []
 ---

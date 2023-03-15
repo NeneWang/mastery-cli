@@ -1,7 +1,7 @@
 ---
 title: Decode Ways
 description: Given a string s containing only digits, return the number of ways to decode it.
-tags: [medium, dp]
+tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/decode-ways/
 images: []
 ---

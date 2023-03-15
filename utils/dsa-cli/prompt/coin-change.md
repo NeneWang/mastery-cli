@@ -1,7 +1,7 @@
 ---
 title: Coin Change
 description: You may assume that you have an infinite number of each kind of coin.
-tags: [medium, dp]
+tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/coin-change/
 images: []
 ---
