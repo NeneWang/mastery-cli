@@ -114,6 +114,201 @@ class DetectSquares extends ProblemTests {
 }
 
 
+class HouseRobber extends ProblemTests {
+
+    constructor(problem) {
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        const houseRobber = new this.Problem();
+        this.current_test_name = '[1,2,3,1] | 4';
+        assert.equal(houseRobber.solve([1, 2, 3, 1]), 4);
+    }
+
+    test_2() {
+        const houseRobber = new this.Problem();
+        this.current_test_name = '[2,7,9,3,1] | 12';
+        assert.equal(houseRobber.solve([2, 7, 9, 3, 1]), 12);
+    }
+
+}
+
+
+class HouseRobberII extends ProblemTests {
+
+    constructor(problem) {
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        const houseRobberII = new this.Problem();
+        this.current_test_name = '[2,3,2] | 3';
+        assert.equal(houseRobberII.solve([2, 3, 2]), 3);
+    }
+
+    test_2() {
+        const houseRobberII = new this.Problem();
+        this.current_test_name = '[1,2,3,1] | 4';
+        assert.equal(houseRobberII.solve([1, 2, 3, 1]), 4);
+    }
+
+    test_3() {
+        const houseRobberII = new this.Problem();
+        this.current_test_name = '[1, 2, 3, 1, 2, 3] | 6';
+        assert.equal(houseRobberII.solve([1, 2, 3, 1, 2, 3]), 6);
+    }
+
+}
+
+class JumpGame extends ProblemTests {
+
+    constructor(problem) {
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+
+    test_1() {
+        const jumpGame = new this.Problem();
+        this.current_test_name = '[2,3,1,1,4] | true';
+        assert.equal(jumpGame.solve([2, 3, 1, 1, 4]), true);
+    }
+
+    test_2() {
+        const jumpGame = new this.Problem();
+        this.current_test_name = '[3,2,1,0,4] | false';
+        assert.equal(jumpGame.solve([3, 2, 1, 0, 4]), false);
+    }
+
+    test_3() {
+        const jumpGame = new this.Problem();
+        this.current_test_name = '[2,0] | true';
+        assert.equal(jumpGame.solve([2, 0]), true);
+    }
+
+
+}
+
+
+class LongestCommonSequence extends ProblemTests {
+
+    constructor(problem) {
+
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+
+        const longestCommonSequence = new this.Problem();
+        this.current_test_name = '"abcde", "ace" | 3';
+        assert.equal(longestCommonSequence.solve('abcde', 'ace'), 3);
+
+    }
+
+    test_2() {
+
+        const longestCommonSequence = new this.Problem();
+        this.current_test_name = '"abc", "abc" | 3';
+        assert.equal(longestCommonSequence.solve('abc', 'abc'), 3);
+
+    }
+
+    test_3() {
+
+        const longestCommonSequence = new this.Problem();
+        this.current_test_name = '"abc", "def" | 0';
+        assert.equal(longestCommonSequence.solve('abc', 'def'), 0);
+
+    }
+
+}
+
+
+class MaximumProductSubArray extends ProblemTests {
+
+    constructor(problem) {
+
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+
+        const maximumProductSubArray = new this.Problem();
+        this.current_test_name = '[2,3,-2,4] | 6';
+        assert.equal(maximumProductSubArray.solve([2, 3, -2, 4]), 6);
+
+    }
+
+    test_2() {
+
+        const maximumProductSubArray = new this.Problem();
+        this.current_test_name = '[-2,0,-1] | 0';
+        assert.equal(maximumProductSubArray.solve([-2, 0, -1]), 0);
+
+    }
+
+    test_3() {
+
+        const maximumProductSubArray = new this.Problem();
+        this.current_test_name = '[-2,3,-4] | 24';
+        assert.equal(maximumProductSubArray.solve([-2, 3, -4]), 24);
+
+    }
+
+}
+
+class MaximumSubarray extends ProblemTests {
+
+    constructor(problem) {
+
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+
+        const maximumSubarray = new this.Problem();
+        this.current_test_name = '[-2,1,-3,4,-1,2,1,-5,4] | 6';
+        assert.equal(maximumSubarray.solve([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6);
+
+    }
+
+    test_2() {
+
+        const maximumSubarray = new this.Problem();
+        this.current_test_name = '[1] | 1';
+        assert.equal(maximumSubarray.solve([1]), 1);
+
+    }
+
+    test_3() {
+
+        const maximumSubarray = new this.Problem();
+        this.current_test_name = '[5,4,-1,7,8] | 23';
+        assert.equal(maximumSubarray.solve([5, 4, -1, 7, 8]), 23);
+    }
+
+}
+
+
+
 
 
 const TEST_DICTIONARY = {
@@ -121,6 +316,12 @@ const TEST_DICTIONARY = {
     'coin-change': CoinChange,
     'decode-ways': DecodeWays,
     'detect-squares': DetectSquares,
+    'house-robber': HouseRobber,
+    'house-robber-ii': HouseRobberII,
+    'jump-game': JumpGame,
+    'longest-common-sequence': LongestCommonSequence,
+    'maximum-product-subarray': MaximumProductSubArray,
+    'maximum-subarray': MaximumSubarray,
 }
 
 module.exports = TEST_DICTIONARY;
