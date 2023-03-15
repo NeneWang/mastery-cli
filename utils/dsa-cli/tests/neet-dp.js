@@ -307,6 +307,39 @@ class MaximumSubarray extends ProblemTests {
 
 }
 
+class MinCostClimbingStairs extends ProblemTests {
+
+    constructor(problem) {
+
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+
+        const minCostClimbingStairs = new this.Problem();
+        this.current_test_name = '[10,15,20] | 15';
+        assert.equal(minCostClimbingStairs.solve([10, 15, 20]), 15);
+
+    }
+
+
+    test_2() {
+        const minCostClimbingStairs = new this.Problem();
+        this.current_test_name = '[1,100,1,1,1,100,1,1,100,1] | 6';
+        assert.equal(minCostClimbingStairs.solve([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]), 6);
+    }
+
+    test_3(){
+        const minCostClimbingStairs = new this.Problem();
+        this.current_test_name = '[0,0,0,0] | 0';
+        assert.equal(minCostClimbingStairs.solve([0, 0, 0, 0]), 0);
+    }
+    
+
+}
 
 
 
@@ -322,6 +355,7 @@ const TEST_DICTIONARY = {
     'longest-common-sequence': LongestCommonSequence,
     'maximum-product-subarray': MaximumProductSubArray,
     'maximum-subarray': MaximumSubarray,
+    'min-cost-climbing-stairs': MinCostClimbingStairs,
 }
 
 module.exports = TEST_DICTIONARY;
