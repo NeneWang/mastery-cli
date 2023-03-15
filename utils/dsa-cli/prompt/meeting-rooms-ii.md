@@ -1,7 +1,7 @@
 ---
 title: Meeting Rooms II
 description: Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],…] (si < ei), find the minimum number of conference rooms required.
-tags: [neetcode, medium, intervals]
+tags: [neetcode, medium, greedy]
 link: https://cheonhyangzhang.gitbooks.io/leetcode-solutions/content/253-meeting-rooms-ii---medium.html
 images: []
 ---

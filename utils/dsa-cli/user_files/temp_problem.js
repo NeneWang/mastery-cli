@@ -1,9 +1,13 @@
-class Problem {
-	solve(s, wordDict) {
+class MeetingRooms {
+	solve(intervals) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Problem };
+module.exports = { Problem: MeetingRooms };tring };setSum };equence };nWater;
+}
+
+
+module.exports = { Problem: TrappingRainWater };

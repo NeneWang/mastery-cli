@@ -226,12 +226,10 @@ class SurroundedRegions extends ProblemTests {
         this.tests.push(() => this.test_2());
         surroundedRegions.solve(board);
         assert.deepEqual(board, [[X, X, X, X], [X, X, X, X], [X, X, X, X], [X, O, X, X]]);
-
     }
 
 
     test_2() {
-
         const surroundedRegions = new this.Problem();
         this.current_test_name = '[[X]]';
         const board = [[X]];
@@ -249,7 +247,6 @@ class WallsAndGates extends ProblemTests {
     constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
     }
 
     test_1() {
