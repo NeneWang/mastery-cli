@@ -1,7 +1,7 @@
 ---
 title: Jump Game II
 description: You are given a 0-indexed array of integers nums of length n. You are initially positioned at nums[0].
-tags: [medium, dp, neetcode]
+tags: [medium, dp, interval, neetcode]
 link: https://leetcode.com/problems/jump-game-ii/
 images: []
 ---

@@ -1,4 +1,4 @@
-class MeetingRooms {
+class NonOverlappingIntervals {
 	solve(intervals) {
 	// Your code here
 
@@ -6,8 +6,4 @@ class MeetingRooms {
 }
 
 
-module.exports = { Problem: MeetingRooms };tring };setSum };equence };nWater;
-}
-
-
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: NonOverlappingIntervals };ce };m };oblem: Division };.exports = { Problem: TrappingRainWater };

@@ -2,37 +2,33 @@
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
 
-class MeetingRooms extends ProblemTests{
 
-    constructor(Problem){
+
+class GasStation extends ProblemTests {
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
-        const meetingRooms = new this.Problem();
-        this.current_test_name = '[[0,30],[5,10],[15,20]] | false';
-        assert.deepEqual(meetingRooms.solve([[0,30],[5,10],[15,20]]), false);
+    test_1() {
+        this.current_test_name = "([1,2,3,4,5], [3, 4, 5, 1, 2]) => 3"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve([1, 2, 3, 4, 5], [3, 4, 5, 1, 2]) == 3);
     }
-
-    test_2(){
-
-        const meetingRooms = new this.Problem();
-        this.current_test_name = '[[7,10],[2,4]] | true';
-        assert.deepEqual(meetingRooms.solve([[7,10],[2,4]]), true);
+    test_2() {
+        this.current_test_name = "([2,3,4], [3,4,3]) => -1"
+        const problemToTest = new this.Problem();
+        assert(problemToTest.solve([2, 3, 4], [3, 4, 3]) == -1);
     }
-
 }
 
 const TEST_DICTIONARY = {
-    'meeting-rooms': MeetingRooms,
-
+    "gas-station": GasStation,
 }
 
-module.exports = TEST_DICTIONARY;
 
-
+module.export = TEST_DICTIONARY;
 
 
 
