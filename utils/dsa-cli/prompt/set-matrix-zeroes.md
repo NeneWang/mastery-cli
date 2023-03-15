@@ -1,7 +1,7 @@
 ---
 title: Set Matrix Zeroes
 description: Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
-tags: [neetcode, medium, math, geometry]
+tags: [neetcode, medium, math, neetcode, geometry]
 link: https://leetcode.com/problems/set-matrix-zeroes/
 images: []
 ---

@@ -60,7 +60,7 @@ Here (4) large assistant wise projects that I am interested in making:
 
 ## My Philosophy on CS
 
-Because the mastery of CS is the mastery of all. Mastery of intelligence, math and strategy is the mastery of all. I love learning, I want to master all kinds of skills during my lifetime, however, unfortunaly I am aware of my limitations, and I know that I just dont have enough time to be a master of all. However with AI and CS, I can become a master of all. Master the world of abstract to master the world of in person.
+Because the mastery of CS is the mastery of all. Mastery of intelligence, math, neetcode and strategy is the mastery of all. I love learning, I want to master all kinds of skills during my lifetime, however, unfortunaly I am aware of my limitations, and I know that I just dont have enough time to be a master of all. However with AI and CS, I can become a master of all. Master the world of abstract to master the world of in person.
 
 Which means
 - What I should focus on is on learning strategies, ai, getting deep into the abstract.

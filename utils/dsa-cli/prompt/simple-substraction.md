@@ -1,7 +1,7 @@
 ---
 title: Simple Substraction
 description: A simple substraction example
-tags: [ neetcode, sample, math]
+tags: [ neetcode, sample, math, neetcode]
 ---
 
 This is  a simple substraction example.!

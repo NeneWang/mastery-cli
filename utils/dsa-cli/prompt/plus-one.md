@@ -1,7 +1,7 @@
 ---
 title: Plus One
 description: Increment the large integer by one and return the resulting array of digits.
-tags: [easy, math]
+tags: [easy, math, neetcode]
 link: https://leetcode.com/problems/plus-one/
 images: []
 ---

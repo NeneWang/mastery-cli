@@ -1,7 +1,7 @@
 ---
 title: Single Number
 description: Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
-tags: [easy, math]
+tags: [easy, math, neetcode]
 link: https://leetcode.com/problems/single-number/
 images: []
 ---

@@ -1,7 +1,7 @@
 ---
 title: Pow(x, n)
 description: Implement pow(x, n), which calculates x raised to the power n (i.e., xn).
-tags: [medium, math]
+tags: [medium, math, neetcode]
 link: https://leetcode.com/problems/powx-n/
 images: []
 ---

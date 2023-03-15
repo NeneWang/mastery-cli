@@ -1,7 +1,7 @@
 ---
 title: Three Number Sum
 description: A three number sum example
-tags: [ neetcode, arrays, math]
+tags: [ neetcode, arrays, math, neetcode]
 ---
 
 ## Three Number Sum
