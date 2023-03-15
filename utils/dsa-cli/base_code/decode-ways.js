@@ -6,4 +6,4 @@ class DecodeWays {
 }
 
 
-module.exports = { Problem: DecodeWays };};
+module.exports = { Problem: DecodeWays };

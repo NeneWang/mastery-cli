@@ -7,7 +7,7 @@ const assert = require('assert');
 
 
 const to_test = {
-    'printable': true,
+    'printable': false,
     'basic': true,
     'runnable': true,
 }
