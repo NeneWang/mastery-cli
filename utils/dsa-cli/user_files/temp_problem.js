@@ -1,9 +1,13 @@
-class NonOverlappingIntervals {
-	solve(intervals) {
+class MergeTriplets {
+	solve(triplets, target) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: NonOverlappingIntervals };ce };m };oblem: Division };.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: MergeTriplets };gIntervals };ce };nWater;
+}
+
+
+module.exports = { Problem: TrappingRainWater };
