@@ -318,11 +318,9 @@ class MinCostClimbingStairs extends ProblemTests {
     }
 
     test_1() {
-
         const minCostClimbingStairs = new this.Problem();
         this.current_test_name = '[10,15,20] | 15';
         assert.equal(minCostClimbingStairs.solve([10, 15, 20]), 15);
-
     }
 
 
