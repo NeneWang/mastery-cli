@@ -2,7 +2,7 @@
 
 /**
  * maid-cli
- * Assistant to keep you on track and productive
+ * Life is a game, and the game is to be the best version of yourself
  *
  * @author Nelson <github.com/neneWang>
  */
