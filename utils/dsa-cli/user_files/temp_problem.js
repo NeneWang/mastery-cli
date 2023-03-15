@@ -1,13 +1,9 @@
-class GasStation {
-	solve(gas, cost) {
+class PlusOne {
+	solve(digits) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: GasStation };;Strings };};s };m };ls };ce };m };er;
-}
-
-
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: PlusOne }; ReduntantConnection };tSum };ls };ce };{ Problem: Division };
