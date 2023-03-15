@@ -1,9 +1,13 @@
-class PlusOne {
-	solve(digits) {
+class SetMatrixZeroes {
+	solve(matrix) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: PlusOne }; ReduntantConnection };tSum };ls };ce };{ Problem: Division };
+module.exports = { Problem: SetMatrixZeroes };s };};gIntervals };ce };m };er;
+}
+
+
+module.exports = { Problem: TrappingRainWater };
