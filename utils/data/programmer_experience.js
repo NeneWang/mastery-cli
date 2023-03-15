@@ -114,7 +114,7 @@ const aws_services = [
     {
         term: "Cloud Formation Cloud", prompt: "What happens when you delete a stack?\n\
          What happens when you update a stack",
-         description: "Stack Actions Creaate Change set for current Stack -> Upload File, calculate and then makes the changes\n\
+        description: "Stack Actions Creaate Change set for current Stack -> Upload File, calculate and then makes the changes\n\
          Deleting the stack will also delete the resources created."
     },
     {
@@ -167,7 +167,7 @@ const coderTerms = [
         example: "Java can be considered both a compiled and an interpreted language because its source code is first compiled into a binary byte-code. This byte-code runs on the Java Virtual Machine (JVM), which is usually a software-based interpreter.\n\
         Java is a statically typed and compiled language, and Python is a dynamically typed and interpreted language. This single difference makes Java faster at runtime and easier to debug, but Python is easier to use and easier to read."
     },
-    
+
     { term: "Concurrent Computing", example: "yes", description: "In concurrent computing, multiple calculations are made within overlapping time frames. It takes advantage of the concept that multiple threads or processes can make progress on a task without waiting for others to complete. This general approach to writing and executing computer programs is called concurrency.  Concurrent computing is different than synchronous (sequential) computing, where calculations are made one after the other, with each waiting for the previous to complete. It's not the same as parallel computing, where calculations are made simultaneously on separate processors.  The three main types of concurrent computing are threading, asynchrony, and preemptive multitasking. Each method has its own special precautions which must be taken to prevent race conditions, where multiple threads or processes access the same shared data in memory in improper order.", prompt: "Whats the difference between different concurrent computing types?" },
 ]
 
@@ -288,6 +288,6 @@ const unit_testing = [
 
 
 
-module.exports = { aws_glossary, aws_services, coderTerms, unit_testing};
+module.exports = { aws_glossary, aws_services, coderTerms, unit_testing };
 
 
