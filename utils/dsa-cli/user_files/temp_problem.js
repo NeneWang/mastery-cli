@@ -1,12 +1,12 @@
-class MergeTriplets {
-	solve(triplets, target) {
+class GasStation {
+	solve(gas, cost) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: MergeTriplets };gIntervals };ce };nWater;
+module.exports = { Problem: GasStation };;Strings };};s };m };ls };ce };m };er;
 }
 
 
