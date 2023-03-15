@@ -15,7 +15,7 @@ Therefore the projects I love to make are those who automate or fascilitate proc
 
 Here (4) large assistant wise projects that I am interested in making:
 
-- Maid Assitant 👩‍⚖️ (Fastapi + Node)
+- Maid 👩‍⚖️ (Fastapi + Node)
   - Trains you on the desktop
   - Better algorithms, better social, better knowledge and memory
   - Practice on the daily and be sharpened for your career.
@@ -25,7 +25,7 @@ Here (4) large assistant wise projects that I am interested in making:
 
 <!-- Strategy +  -->
 
-- Idol Assitant 🧑‍🎤 (Asp.net + Flutter)
+- Priest 🧑‍🎤 (Asp.net + Flutter)
   - Finance management
   - Social Memory
   - Birthday Reminders
@@ -36,14 +36,14 @@ Here (4) large assistant wise projects that I am interested in making:
 
 
 <!-- I am considering using Rust to create a Debian tool + Java Backend. -->
-- Researcher Assitant 🧑‍🏫 (Whatever works for Ubuntu Servers + Python for data science)
+- Valkyre 🧑‍🏫 (Whatever works for Ubuntu Servers + Python for data science)
   - Helps you improve researching the market situations, automatically crrwals the web for you.
     - Algorithms to understand downturns of economy
     - Gathers informations about real estate
     - Stocks, and other usual reports to help you make better decisions.
 
 
-- Gaming Assitant -> Help me compete in grinding and competition like games.
+- Knight -> Help me compete in grinding and competition like games.
   - A collection of game assitants.
   - This could be a way to win games, and support friends to win games
   - [FPS Object recognition](https://github.com/petercunha/Pine/blob/master/demo/YOLO%20Research%20Paper.pdf)
@@ -94,6 +94,12 @@ Things that I believe I should focus on learning
 - And focus my work into creating ai related programs, while I just learn how to build better ai?
 - Is my job to build pipelines?
 
+
+### Why this is a Break or Make Decade
+
+- So, I was expecting I could take some time to improve myself, to isolate myself and become a master of Statistics and Algorithms.
+- Playing the games and mastering games such as Factorio, Strategy Games, and other strategic games.
+- Also build AI intelligence to support me in career and gaems (knight)
 
 
 
