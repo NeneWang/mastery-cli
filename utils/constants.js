@@ -120,6 +120,7 @@ const getRandomInt = (max) => {
  * @returns Random Bool 
  */
 const getRandomBool = (chances = 0.5) => {
+    // 0.01 means 1% chance of being true
     return random_boolean = Math.random() < chances;
 }
 
