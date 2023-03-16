@@ -314,8 +314,84 @@ const network = [
         example: "#!/bin/bash\n\necho 'Hello, world!' | tee -a output.txt",
         description: "The `tee` command allows you to write the output of a command to both the console and a file. The `-a` option tells `tee` to append to the file instead of overwriting it. In this example, we use `echo` to output a message, and then pipe it to `tee -a output.txt` to save it to a file named 'output.txt' and display it on the console."
     },
-
-
+    {
+        term: "cat - Display file contents",
+        prompt: "Create a file named 'test.txt' that contains the following text:\n\n`Hello, world!`\n\nUse the `cat` command to display the contents of the file on the console.",
+        example: "cat test.txt",
+        description: "The `cat` command is used to display the contents of a file on the console. In this example, we create a file named 'test.txt' with the message 'Hello, world!', and then use `cat test.txt` to display the contents of the file on the console."
+    },
+    {
+        term: "less - View file contents page-by-page",
+        prompt: "Create a file named 'test.txt' that contains the following text:\n\n`Line 1\nLine 2\nLine 3\nLine 4\nLine 5`\n\nUse the `less` command to view the contents of the file page-by-page.",
+        example: "less test.txt",
+        description: "The `less` command is used to view the contents of a file page-by-page. This is useful for files that are too long to display on the console at once. In this example, we create a file named 'test.txt' with several lines of text, and then use `less test.txt` to view the contents of the file page-by-page."
+    },
+    {
+        term: "man - View manual page",
+        prompt: "Use the `man` command to view the manual page for the `ls` command.",
+        example: "man ls",
+        description: "The `man` command is used to view the manual page for a command or other topic. This provides detailed information on how to use the command, including all of its available options and arguments. In this example, we use `man ls` to view the manual page for the `ls` command."
+    },
+    {
+        term: "cp - Copy files",
+        prompt: "Create a file named 'test.txt' that contains the following text:\n\n`Hello, world!`\n\nUse the `cp` command to create a copy of the file named 'test_copy.txt'.",
+        example: "cp test.txt test_copy.txt",
+        description: "The `cp` command is used to copy files. In this example, we create a file named 'test.txt' with the message 'Hello, world!', and then use `cp test.txt test_copy.txt` to create a copy of the file named 'test_copy.txt'."
+    },
+    {
+        term: "rm - Remove files",
+        prompt: "Create a file named 'test.txt' that contains the following text:\n\n`Hello, world!`\n\nUse the `rm` command to delete the file.",
+        example: "rm test.txt",
+        description: "The `rm` command is used to delete files. In this example, we create a file named 'test.txt' with the message 'Hello, world!', and then use `rm test.txt` to delete the file."
+    },
+    {
+        term: "rmdir - Remove an empty directory",
+        prompt: "Remove the empty directory named 'testdir' that was created in the previous example.",
+        example: "rmdir testdir",
+        description: "The `rmdir` command is used to remove an empty directory. In this example, we assume that there is already an empty directory named 'testdir' (which was created in the previous example), and then use `rmdir testdir` to remove the directory."
+    },
+    {
+        term: "mv - Move or rename files",
+        prompt: "Rename the file named 'oldname.txt' to 'newname.txt'.",
+        example: "mv oldname.txt newname.txt",
+        description: "The `mv` command is used to move or rename files. In this example, we assume that there is already a file named 'oldname.txt', and then use `mv oldname.txt newname.txt` to rename the file to 'newname.txt'."
+    },
+    {
+        term: "chmod - Change file permissions",
+        prompt: "Change the permissions of a file named 'myfile.txt' to allow the owner to read, write, and execute the file, but only allow other users to read the file.",
+        example: "chmod 744 myfile.txt",
+        description: "The `chmod` command is used to change the permissions of a file. In this example, we use `chmod 744 myfile.txt` to allow the owner to read, write, and execute the file (represented by the digits '7', '4', and '4'), and to allow other users to read the file only (represented by the digits '4', '4', and '4')."
+    },
+    {
+        term: "ps - List running processes",
+        prompt: "List all running processes on the system.",
+        example: "ps -e",
+        description: "The `ps` command is used to list the running processes on the system. By default, it only lists the processes that are running in the current shell. In this example, we use the `-e` option to list all running processes on the system."
+    },
+    {
+        term: "top - Display system resource usage",
+        prompt: "Display the top processes consuming CPU resources.",
+        example: "top",
+        description: "The `top` command is used to display the system resource usage. By default, it displays the processes consuming the most CPU resources. In this example, we use `top` to display the top processes consuming CPU resources."
+    },
+    {
+        term: "du - Show disk usage",
+        prompt: "Show the disk usage of the current working directory.",
+        example: "du",
+        description: "The `du` command is used to show the disk usage of a file or directory. By default, it shows the disk usage of the current working directory. In this example, we use `du` to show the disk usage of the current working directory."
+    },
+    {
+        term: "df - Show disk free space",
+        prompt: "Show the free space on all mounted filesystems.",
+        example: "df -h",
+        description: "The `df` command is used to show the free space on all mounted filesystems. In this example, we use the `-h` option to display the free space in a human-readable format."
+    },
+    {
+        term: "tar - Compress or extract files",
+        prompt: "Create a compressed archive of a directory named 'mydir' and save it to a file named 'myarchive.tar.gz'.",
+        example: "tar -czf myarchive.tar.gz mydir",
+        description: "The `tar` command is used to create or extract compressed archives. In this example, we use `tar -czf myarchive.tar.gz mydir` to create a compressed archive of the directory 'mydir' and save it to a file named 'myarchive.tar.gz'. The `-c` option is used to create a new archive, the `-z` option is used to compress the archive using gzip, and the `-f` option is used to specify the output file name."
+    }
 
 ]
 
