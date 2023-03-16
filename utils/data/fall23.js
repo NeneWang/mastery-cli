@@ -152,6 +152,144 @@ const network = [
         term: "wget",
         prompt: "Download a file named file.zip from the web server https://example.com/downloads/file.zip and save it to a directory named downloads in your home directory.",
         example: "wget https://example.com/downloads/file.zip -P ~/downloads"
+    }, {
+        term: "Bash scripting",
+        prompt: "Write a script that takes two integer arguments and prints the sum of the two numbers. If no arguments are provided, print an error message.",
+        description: "if [ $# -ne 2 ]; then\n  echo 'Usage: script_name num1 num2'\n  exit 1\nfi\n\n\
+        \necho \"The sum of $num1 and $num2 is: $sum\"",
+        example: "if [ $# -ne 2 ]; then\n  echo 'Usage: script_name num1 num2'\n  exit 1\nfi\n\nnum1=$1\nnum2=$2\nsum=$((num1 + num2))\necho \"The sum of $num1 and $num2 is: $sum\""
+    },
+    {
+        term: "Bash scripting",
+        prompt: "Write a script that takes a file name as an argument and checks if the file exists. If it does, print a message saying the file exists. If it doesn't, print a message saying the file doesn't exist.",
+        example: "if [ $# -ne 1 ]; then\n  echo 'Usage: script_name filename'\n  exit 1\nfi\n\nfilename=$1\nif [ -e \"$filename\" ]; then\n  echo 'The file exists.'\nelse\n  echo 'The file does not exist.'\nfi",
+        description: "if [ $# -ne 1 ]; then\n  echo 'Usage: script_name filename'\n  exit 1\nfi\n\n"
+    },
+    {
+        term: "Bash scripting ",
+        prompt: "Write a script that takes a file name as an argument and deletes the file if it exists. If it doesn't exist, print a message saying the file doesn't exist.",
+        example: "if [ $# -ne 1 ]; then\n  echo 'Usage: script_name filename'\n  exit 1\nfi\n\nfilename=$1\nif [ -e \"$filename\" ]; then\n  rm \"$filename\"\n  echo 'File deleted.'\nelse\n  echo 'The file does not exist.'\nfi",
+        description: "if [ $# -ne 1 ]; then\n  echo 'Usage: script_name filename'\n  exit 1\nfi\n\nfilename=$1\nif [ -e \"$filename\" ]; then\n\nelse\n  echo 'The file does not exist.'\nfi"
+    },
+    {
+        term: "Bash scripting append_text_to_file",
+        prompt: "Write a function that takes two arguments, a file name and a string of text, and appends the string of text to the end of the file. Call the function with the arguments 'file.txt' and 'Hello, world!'.",
+        example: "append_text_to_file() {\n  filename=$1\ntext=$2\necho \"$text\" >> \"$filename\"\necho 'Text appended to file.'\n}\n\nappend_text_to_file 'file.txt' 'Hello, world!'",
+        description: "\nappend_text_to_file 'file.txt' 'Hello, world!'"
+    },
+    {
+        term: "Bash scripting count_file_stats",
+        prompt: "Write a function that takes a file name as an argument and outputs the number of lines, words, and characters in the file. Call the function with the argument 'file.txt'.",
+        example: "count_file_stats() {\n  filename=$1\nlines=$(wc -l < \"$filename\")\nwords=$(wc -w < \"$filename\")\ncharacters=$(wc -c < \"$filename\")\necho \"Lines: $lines\"\necho \"Words: $words\"\necho \"Characters: $characters\"\n}\n\ncount_file_stats 'file.txt'"
+    },
+    {
+        term: "grep search",
+        prompt: "Search for the word 'example' in a file named file.txt.",
+        example: "grep 'example' file.txt",
+        description: 'Print lines containing a pattern: grep [pattern] [file]\n' +
+            'Print line numbers of matches: grep -n [pattern] [file]\n' +
+            'Print number of matches: grep -c [pattern] [file]\n' +
+            'Search recursively: grep -r [pattern] [directory]\n' +
+            'Case-insensitive search: grep -i [pattern] [file]\n' +
+            'Invert the match: grep -v [pattern] [file]\n' +
+            'Match whole words only: grep -w [pattern] [file]\n'
+    },
+    {
+        term: "grep line number",
+        prompt: "Search for the word 'example' in a file named file.txt and print the line number where the word appears.",
+        example: "grep -n 'example' file.txt",
+        description: 'Print lines containing a pattern: grep [pattern] [file]\n' +
+            'Print line numbers of matches: grep -n [pattern] [file]\n' +
+            'Print number of matches: grep -c [pattern] [file]\n' +
+            'Search recursively: grep -r [pattern] [directory]\n' +
+            'Case-insensitive search: grep -i [pattern] [file]\n' +
+            'Invert the match: grep -v [pattern] [file]\n' +
+            'Match whole words only: grep -w [pattern] [file]\n'
+
+    },
+    {
+        term: "grep count",
+        prompt: "Search for the word 'example' in a file named file.txt and print the number of times the word appears.",
+        example: "grep -c 'example' file.txt",
+        description: 'Print lines containing a pattern: grep [pattern] [file]\n' +
+            'Print line numbers of matches: grep -n [pattern] [file]\n' +
+            'Print number of matches: grep -c [pattern] [file]\n' +
+            'Search recursively: grep -r [pattern] [directory]\n' +
+            'Case-insensitive search: grep -i [pattern] [file]\n' +
+            'Invert the match: grep -v [pattern] [file]\n' +
+            'Match whole words only: grep -w [pattern] [file]\n'
+
+    },
+    {
+        term: "grep file extension",
+        prompt: "Search for the word 'example' in all files in the current directory that have the .txt file extension.",
+        example: "grep 'example' *.txt",
+        description: 'Print lines containing a pattern: grep [pattern] [file]\n' +
+            'Print line numbers of matches: grep -n [pattern] [file]\n' +
+            'Print number of matches: grep -c [pattern] [file]\n' +
+            'Search recursively: grep -r [pattern] [directory]\n' +
+            'Case-insensitive search: grep -i [pattern] [file]\n' +
+            'Invert the match: grep -v [pattern] [file]\n' +
+            'Match whole words only: grep -w [pattern] [file]\n'
+
+    },
+    {
+        term: "grep recursive",
+        prompt: "Search for the word 'example' in all files in the current directory and its subdirectories.",
+        example: "grep -r 'example' .",
+        description: 'Print lines containing a pattern: grep [pattern] [file]\n' +
+            'Print line numbers of matches: grep -n [pattern] [file]\n' +
+            'Print number of matches: grep -c [pattern] [file]\n' +
+            'Search recursively: grep -r [pattern] [directory]\n' +
+            'Case-insensitive search: grep -i [pattern] [file]\n' +
+            'Invert the match: grep -v [pattern] [file]\n' +
+            'Match whole words only: grep -w [pattern] [file]\n'
+
+    },
+    {
+        term: "grep case insensitive",
+        prompt: "Search for the word 'example' in all files in the current directory and its subdirectories, ignoring case.",
+        example: "grep -ri 'example' .",
+        description: 'Print lines containing a pattern: grep [pattern] [file]\n' +
+            'Print line numbers of matches: grep -n [pattern] [file]\n' +
+            'Print number of matches: grep -c [pattern] [file]\n' +
+            'Search recursively: grep -r [pattern] [directory]\n' +
+            'Case-insensitive search: grep -i [pattern] [file]\n' +
+            'Invert the match: grep -v [pattern] [file]\n' +
+            'Match whole words only: grep -w [pattern] [file]\n'
+
+    },
+    {
+        term: "Piping - ls and grep",
+        prompt: "List all files in the current directory that contain the word 'example'.",
+        description: "Use ls to get all files",
+        example: "ls | grep 'example'"
+    },
+    {
+        term: "Piping - ps and grep",
+        prompt: "Find all processes that contain the word 'chrome' in their name.",
+        description: "Use ps to get all processes and grep to filter the results\n aux is an option to ps that shows all processes",
+        example: "ps aux | grep 'chrome'"
+    },
+    {
+        term: "Piping - find and xargs",
+        prompt: "Find all files in the current directory and its subdirectories that have the '.jpg' extension and delete them.",
+        description: "Use find to get all files and xargs to execute a command for each result\n -name is an option to find that filters by file name",
+        example: "find . -name '*.jpg' | xargs rm"
+    },
+    {
+        term: "Piping - sort and uniq",
+        prompt: "Count the number of occurrences of each line in a file named 'data.txt'.",
+        description: "Use sort to sort the lines and uniq to count the occurrences\n -c is an option to uniq that counts the occurrences",
+        example: "sort data.txt | uniq -c"
+    },
+    {
+        term: "Piping - wc",
+        prompt: "Count the number of lines in a file named 'example.txt'.",
+        example: "cat example.txt | wc -l",
+        description: "The `wc` command can be used to count the number of lines, words, and characters in a file or stream.\n\
+         By default, `wc` counts all three of these statistics, but you can use the `-l` option to count only the number of lines.\n\n\
+         In this example, we use the `cat` command to output the contents of the file 'example.txt', which is then piped to `wc -l` to count the number of lines."
     }
 
 
