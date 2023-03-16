@@ -207,7 +207,7 @@ class Quizzer {
 
 
         const askQuestionRandom = async ({ exitMethod = () => { } } = {}) => {
-            const askMath = constants.getRandomBool(0.01); // If to whether ask for a math or terminology question
+            const askMath = constants.getRandomBool(0.1); // If to whether ask for a math or terminology question
             // const askMath = false; //Too easy for now.
             if (askMath) {
                 return await this.ask_math_question({ exitMethod: exitMethod })
