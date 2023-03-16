@@ -505,7 +505,100 @@ const network = [
         prompt: "What is the full path to the resolv.conf file?",
         description: "The resolv.conf file contains information about the DNS servers that are used by the system to resolve domain names to IP addresses. It is typically located in the /etc directory.",
         example: "echo /etc/resolv.conf"
-    }
+    },
+    {
+        term: "List all repositories",
+        prompt: "What command is used to list all repositories on an Ubuntu system?",
+        description: "The 'sudo cat /etc/apt/sources.list' command can be used to list all repositories on an Ubuntu system.",
+        example: "sudo cat /etc/apt/sources.list"
+    },
+    {
+        term: "Update repositories",
+        prompt: "What command is used to update the repositories on an Ubuntu system?",
+        description: "The 'sudo apt-get update' command can be used to update the repositories on an Ubuntu system.",
+        example: "sudo apt-get update"
+    },
+    {
+        term: "Upgrade packages",
+        prompt: "What command is used to upgrade the packages on an Ubuntu system?",
+        description: "The 'sudo apt-get upgrade' command can be used to upgrade the packages on an Ubuntu system.",
+        example: "sudo apt-get upgrade"
+    },
+    {
+        term: "Dist-upgrade packages",
+        prompt: "What command is used to upgrade the packages, including any dependencies, on an Ubuntu system?",
+        description: "The 'sudo apt-get dist-upgrade' command can be used to upgrade the packages, including any dependencies, on an Ubuntu system.",
+        example: "sudo apt-get dist-upgrade"
+    },
+    {
+        term: "Remove unused packages",
+        prompt: "What command is used to remove unused packages on an Ubuntu system?",
+        description: "The 'sudo apt-get autoremove' command can be used to remove unused packages on an Ubuntu system.",
+        example: "sudo apt-get autoremove"
+    },
+    {
+        term: "Remove unused packages and their dependencies",
+        prompt: "What command is used to remove unused packages and their dependencies on an Ubuntu system?",
+        description: "The 'sudo apt-get autoclean' command can be used to remove unused packages and their dependencies on an Ubuntu system.",
+        example: "sudo apt-get autoclean"
+    },
+    {
+        term: "Remove unused packages, dependencies, and cached files",
+        prompt: "What command is used to remove unused packages, their dependencies, and cached files on an Ubuntu system?",
+        description: "The 'sudo apt-get clean' command can be used to remove unused packages, their dependencies, and cached files on an Ubuntu system.",
+        example: "sudo apt-get clean"
+    },
+    {
+        term: "Check for broken dependencies",
+        prompt: "What command is used to check for broken dependencies on an Ubuntu system?",
+        description: "The 'sudo apt-get check' command can be used to check for broken dependencies on an Ubuntu system.",
+        example: "sudo apt-get check"
+    },
+    {
+        term: "Remove a package",
+        prompt: "What command is used to remove a package named 'nginx'?",
+        description: "The 'sudo apt-get remove' command can be used to remove packages on an Ubuntu system.",
+        example: "sudo apt-get remove nginx"
+    },
+    {
+        term: "Remove a package and its configuration files",
+        prompt: "What command is used to remove a package named 'mysql-server' and its configuration files?",
+        description: "The 'sudo apt-get purge' command can be used to remove packages and their configuration files on an Ubuntu system.",
+        example: "sudo apt-get purge mysql-server"
+    },
+    {
+        term: "Install a package without confirmation",
+        prompt: "What command is used to install a package named 'python3' without asking for confirmation?",
+        description: "The 'sudo apt-get install -y' command can be used to install packages without asking for confirmation on an Ubuntu system.",
+        example: "sudo apt-get install -y python3"
+    },
+    {
+        term: "Install a package and its dependencies without confirmation",
+        prompt: "What command is used to install a package named 'apache2' and its dependencies without asking for confirmation?",
+        description: "The 'sudo apt-get install -f' command can be used to install packages and their dependencies without asking for confirmation on an Ubuntu system.",
+        example: "sudo apt-get install -f apache2"
+    },
+    {
+        term: "Ubuntu Release Upgrade",
+        prompt: "What are the best practices to follow when performing a release upgrade on an Ubuntu system?\n\
+        What would you do if your boss asked you to perform a release upgrade on a production system?",
+        example: "Backup your data: Always backup your important data before performing a release upgrade. This will ensure that you can recover your data if anything goes wrong during the upgrade process.\n\nPlan the upgrade: Before performing the upgrade, review the release notes and upgrade instructions for the specific release you're upgrading to. This will help you understand the changes that will be made to the system and prepare for any potential issues.\n\nTest the upgrade: If possible, test the release upgrade in a non-production environment before upgrading your production system. This will allow you to identify and resolve any issues before performing the upgrade on your production system.\n\nUpdate packages: Before performing the release upgrade, make sure all currently installed packages are up-to-date by running sudo apt-get update && sudo apt-get upgrade.\n\nClean up the system: Remove any unnecessary packages and files from the system to ensure a clean upgrade. You can use the sudo apt-get autoremove and sudo apt-get autoclean commands to clean up the system.\n\nMonitor the upgrade: During the upgrade process, monitor the system for any issues or errors. You can use the tail -f /var/log/syslog command to monitor the system log file in real-time.\n\nVerify the upgrade: After the upgrade is complete, verify that the system is functioning correctly and all necessary packages and configurations are in place.",
+        description: "The best practices to follow when performing a release upgrade on an Ubuntu system are to backup your data, plan the upgrade, test the upgrade, update packages, clean up the system, monitor the upgrade, and verify the upgrade."
+    },
+    {
+        term: "Ubuntu Release Upgrade",
+        prompt: "Perform a release upgrade from Ubuntu 18.04 LTS to Ubuntu 20.04 LTS using the command `sudo do-release-upgrade`.",
+        example: "sudo do-release-upgrade",
+        description: "To perform a release upgrade from Ubuntu 18.04 LTS to Ubuntu 20.04 LTS using the `do-release-upgrade` command, follow these steps:\n\n1. Open a terminal and run the command `sudo do-release-upgrade`\n2. Follow the prompts to confirm the upgrade and provide any necessary input.\n3. Wait for the upgrade process to complete.\n4. After the upgrade is complete, reboot the system to apply the changes."
+    },
+    {
+        term: "Ubuntu Release Distribution Upgrade",
+        prompt: "How to upgrade, the current distribution packages?, What is the difference between `sudo do-release-upgrade` and `sudo apt-get dist-upgrade`?",
+        example: "sudo apt-get dist-upgrade",
+        description: "The `do-release-upgrade` command is specifically designed to upgrade an Ubuntu system to a new release, whereas `apt-get dist-upgrade` is used to upgrade the current distribution's packages to their latest versions. While `apt-get dist-upgrade` can be used to upgrade to a newer version of Ubuntu, it does not handle some aspects of the upgrade process, such as modifying the system's sources.list file to point to the new release's repositories, which is handled by `do-release-upgrade`."
+    },
+
+
 
 ]
 

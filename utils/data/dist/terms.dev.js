@@ -27,7 +27,7 @@ function populateMasterDeck() {
           decks.addDeck(new TermStorage(react_terms, "react terms", {
             is_active: true
           }));
-          _require3 = require("./fall-senior"), network = _require3.network, artificialIntelligence = _require3.artificialIntelligence, algebra = _require3.algebra, calculousOne = _require3.calculousOne;
+          _require3 = require("./spring-senior"), network = _require3.network, artificialIntelligence = _require3.artificialIntelligence, algebra = _require3.algebra, calculousOne = _require3.calculousOne;
           decks.addDeck(new TermStorage(network, "network", {
             is_active: true
           }));
