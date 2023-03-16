@@ -597,9 +597,114 @@ const network = [
         example: "sudo apt-get dist-upgrade",
         description: "The `do-release-upgrade` command is specifically designed to upgrade an Ubuntu system to a new release, whereas `apt-get dist-upgrade` is used to upgrade the current distribution's packages to their latest versions. While `apt-get dist-upgrade` can be used to upgrade to a newer version of Ubuntu, it does not handle some aspects of the upgrade process, such as modifying the system's sources.list file to point to the new release's repositories, which is handled by `do-release-upgrade`."
     },
+    // Searching for software
+    {
+        term: "apt-cache search",
+        prompt: "Using `apt-cache search`, find a package that provides the `grep` command.",
+        example: "apt-cache search grep",
+        description: "The `apt-cache search` command searches for packages in the package cache that match the given search term. In this example, we're searching for packages that provide the `grep` command."
+    },
+    {
+        term: "apt-file search",
+        prompt: "Using `apt-file search`, find the package that provides the `ls` command.",
+        example: "apt-file search /bin/ls",
+        description: "The `apt-file search` command searches for packages that provide the specified file. In this example, we're searching for the package that provides the `/bin/ls` file, which contains the `ls` command."
+    },
+    {
+        term: "dpkg -S",
+        prompt: "Using `dpkg -S`, find the package that provides the `ssh` command.",
+        example: "dpkg -S /usr/bin/ssh",
+        description: "The `dpkg -S` command searches for the package that provides the specified file. In this example, we're searching for the package that provides the `/usr/bin/ssh` file, which contains the `ssh` command.\n\
+        The dpkg -S command searches for files installed on the local system from installed packages, it does not search on the internet."
+    },
+    {
+        term: "aptitude search",
+        prompt: "Using `aptitude search`, find all packages that start with the letters \"python3-\" and end with \"-dev\".",
+        example: "aptitude search '^python3-.*-dev$'",
+        description: "The `aptitude search` command searches for packages that match a specified pattern. In this example, we're searching for packages that start with \"python3-\" and end with \"-dev\". The `^` and `$` characters are regular expression anchors that match the beginning and end of the package name, respectively.\n\
+        aptitude is a package manager for Debian-based Linux systems like Ubuntu that searches and installs packages from online repositories, similar to apt. However, it also has a powerful search function that can be used to find packages locally or remotely. By default, aptitude searches for packages available in the configured repositories, but it can also search for packages that are installed locally."
+    },
+    // VIM
+    {
+        term: "Vim word navigation - next word",
+        prompt: "Move to the next word in Vim.",
+        example: "Press 'w' to move to the next word.",
+        description: "In Vim, 'w' moves the cursor to the beginning of the next word. Use this command to quickly move through a file or to navigate to the next word."
+    },
+    {
+        term: "Vim word navigation- previous word",
+        prompt: "Move to the end of the word in Vim.",
+        example: "Press 'e' to move to the end of the word.",
+        description: "In Vim, 'e' moves the cursor to the end of the current word and traverses to the next word. Use this command to quickly move through a file or to navigate to the end of a word."
+    },
+    {
+        term: "Vim word navigation - beginning of word",
+        prompt: "Move to the beginning of the word in Vim.",
+        example: "Press 'b' to move to the beginning of the word.",
+        description: "In Vim, 'b' moves the cursor to the beginning of the current word and traverses to the previous word. Use this command to quickly move through a file or to navigate to the beginning of a word."
+    },
+    {
+        term: "Vim line navigation - beginning of line",
+        prompt: "Move to the beginning of the line in Vim.",
+        example: "Press '0' to move to the beginning of the line.",
+        description: "In Vim, '0' moves the cursor to the beginning of the line. Use this command to quickly move to the beginning of a line."
+    },
+    {
+        term: "Vim line navigation - end of line",
+        prompt: "Move to the end of the line in Vim.",
+        example: "Press '$' to move to the end of the line.",
+        description: "In Vim, '$' moves the cursor to the end of the line. Use this command to quickly move to the end of a line."
+    },
+    {
+        term: "Vim file navigation - end of file",
+        prompt: "Move to the end of the file in Vim.",
+        example: "Press 'G' to move to the end of the file.",
+        description: "In Vim, 'G' moves the cursor to the end of the file. Use this command to quickly move to the end of a file."
+    },
+    {
+        term: "Vim file navigation - beginning of file",
+        prompt: "Move to the beginning of the file in Vim.",
+        example: "Press 'gg' to move to the beginning of the file.",
+        description: "In Vim, 'gg' moves the cursor to the beginning of the file. Use this command to quickly move to the beginning of a file."
+    },
 
+    {
+        term: "Vim line deletion - end of line",
+        prompt: "Delete from the cursor to the end of the line in Vim.",
+        example: "Press 'd$' to delete to the end of the line.",
+        description: "In Vim, 'd$' deletes from the current cursor position to the end of the line. Use this command to quickly delete text to the end of a line."
+    },
+    {
+        term: "Vim line deletion - current line",
+        prompt: "Delete the current line in Vim.",
+        example: "Press 'dd' to delete the current line.",
+        description: "In Vim, 'dd' deletes the current line. Use this command to quickly delete the entire current line."
+    },
+    {
+        term: "Vim word deletion - current word",
+        prompt: "Delete the current word in Vim.",
+        example: "Press 'dw' to delete the current word.",
+        description: "In Vim, 'dw' deletes the current word."
+    },
+    {
+        term: "Vim Search",
+        prompt: "How do you search for a word in Vim?",
+        example: "Type '?' followed by the word you want to search for.",
+        description: "In Vim, you can search for a word using the '?' command followed by the word you want to search for. Vim will highlight the first occurrence of the word and you can navigate to the next occurrence using the 'n' command."
+    },
+    {
+        term: "Vim Replace",
+        prompt: "How do you replace all occurrences of a word with another word in Vim?",
+        example: "Type '%gc/word/anotherword/gc'.",
+        description: "In Vim, you can replace all occurrences of a word with another word using the '%gc/word/anotherword/gc' command. This will replace all occurrences of 'word' with 'anotherword', and confirm each replacement before making the change."
+    },
 
-
+    {
+        term: "Vim replace",
+        prompt: "Replace all occurrences of 'old' with 'new' in the current line in Vim.",
+        example: ":s/old/new/g",
+        description: "In Vim, ':s/old/new/g' is used to replace all occurrences of 'old' with 'new' in the current line. This command only affects the current line."
+    },
 ]
 
 const artificialIntelligence = [
@@ -675,6 +780,7 @@ const algebra = [
         description: "Use the teacher's notation",
         example: "D = [-3; +inf[ \\ {3}"
     },
+
 
 
 
