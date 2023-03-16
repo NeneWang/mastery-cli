@@ -29,7 +29,7 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: true }));
 
 
-    const { network, artificialIntelligence, algebra, calculousOne } = require("./fall23");
+    const { network, artificialIntelligence, algebra, calculousOne } = require("./fall-senior");
     decks.addDeck(new TermStorage(network, "network", { is_active: true }));
     decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: true }));
     decks.addDeck(new TermStorage(algebra, "algebra", { is_active: false }));

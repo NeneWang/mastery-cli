@@ -296,7 +296,25 @@ const network = [
         description: "The `wc` command can be used to count the number of lines, words, and characters in a file or stream.\n\
          By default, `wc` counts all three of these statistics, but you can use the `-l` option to count only the number of lines.\n\n\
          In this example, we use the `cat` command to output the contents of the file 'example.txt', which is then piped to `wc -l` to count the number of lines."
-    }
+    },
+    {
+        term: "Shbang - Bash script",
+        prompt: "Create a Bash script named 'hello.sh' that prints the message 'Hello, World!' to the console when executed.",
+        example: "#!/bin/bash\n\necho 'Hello, World!'",
+        description: "The shebang `#!/bin/bash` is used to specify that the script should be executed using the Bash shell. The `echo` command is used to print the message 'Hello, World!' to the console. Save the script as a file named 'hello.sh' and make it executable with the command `chmod +x hello.sh`. You can then run the script by typing `./hello.sh` in the terminal."
+    },
+    {
+        term: "Starting ssh Server",
+        prompt: "Start the ssh server on your machine. How do you check status? How do you get your inet address?",
+        example: "sudo service ssh start\nCheck status using: sudo service ssh status\nGet inet address using: ip addr | grep inet",
+    },
+    {
+        term: "Tee - Append output to file",
+        prompt: "Create a script named 'test.sh' that contains the following code:\n\n`#!/bin/bash`\n\n`echo 'Hello, world!' | tee -a output.txt`\n\nRun the script to append the output of the 'echo' command to a file named 'output.txt'.",
+        example: "#!/bin/bash\n\necho 'Hello, world!' | tee -a output.txt",
+        description: "The `tee` command allows you to write the output of a command to both the console and a file. The `-a` option tells `tee` to append to the file instead of overwriting it. In this example, we use `echo` to output a message, and then pipe it to `tee -a output.txt` to save it to a file named 'output.txt' and display it on the console."
+    },
+
 
 
 ]
