@@ -391,6 +391,120 @@ const network = [
         prompt: "Create a compressed archive of a directory named 'mydir' and save it to a file named 'myarchive.tar.gz'.",
         example: "tar -czf myarchive.tar.gz mydir",
         description: "The `tar` command is used to create or extract compressed archives. In this example, we use `tar -czf myarchive.tar.gz mydir` to create a compressed archive of the directory 'mydir' and save it to a file named 'myarchive.tar.gz'. The `-c` option is used to create a new archive, the `-z` option is used to compress the archive using gzip, and the `-f` option is used to specify the output file name."
+    },
+    {
+        term: "Grep - Invert match",
+        prompt: "Search for all lines that do not contain the word 'example' in a file named 'file.txt'.",
+        example: "grep -v 'example' file.txt",
+        description: "This command searches for all lines in the file 'file.txt' that do not contain the word 'example'."
+    }, {
+        term: "Grep - Search for lines starting with a pattern",
+        prompt: "Find all lines in a file named 'file.txt' that start with the word 'example'.",
+        example: "grep '^example' file.txt",
+        description: "This command searches for all lines in the file 'file.txt' that start with the word 'example'. The caret (^) symbol is used to match the start of a line."
+    },
+    {
+        term: "Grep - Search for lines ending with a pattern",
+        prompt: "Find all lines in a file named 'file.txt' that end with the word 'example'.",
+        example: "grep 'example$' file.txt",
+        description: "This command searches for all lines in the file 'file.txt' that end with the word 'example'. The dollar sign ($) symbol is used to match the end of a line."
+    },
+    {
+        term: "Grep - Search for lines between patterns",
+        prompt: "Find all lines in a file named 'file.txt' that are between the patterns 'start' and 'end'.",
+        example: "grep -E 'start.*end' file.txt",
+        description: "This command searches for all lines in the file 'file.txt' that are between the patterns 'start' and 'end'. The -E option is used to enable extended regular expressions."
+    },
+    {
+        term: "Grep - Search for lines that match any of several patterns",
+        prompt: "Find all lines in a file named 'file.txt' that contain either the word 'example1' or 'example2'.",
+        example: "grep -e 'example1' -e 'example2' file.txt",
+        description: "This command searches for all lines in the file 'file.txt' that contain either the word 'example1' or 'example2'. The -e option is used to specify multiple patterns."
+    },
+    {
+        term: "Grep - Search for lines that match a specific pattern",
+        prompt: "Find all lines in a file named 'file.txt' that match the regular expression pattern '[0-9]+'.",
+        example: "grep -E '[0-9]+' file.txt",
+        description: "This command searches for all lines in the file 'file.txt' that contain one or more digits. The -E option is used to enable extended regular expressions."
+    },
+    {
+        term: "Find the path to the home directory",
+        prompt: "What is the full path to the home directory of the current user?",
+        description: "The home directory contains a user's personal files and settings. It is located within the /home directory and named after the user.",
+        example: "echo $HOME"
+    },
+    {
+        term: "Find the path to the current working directory",
+        prompt: "What is the full path to the current working directory?",
+        description: "The current working directory is the directory that the user is currently located in. It can be found using the 'pwd' command.",
+        example: "pwd"
+    },
+    {
+        term: "Find the path to the root directory",
+        prompt: "What is the full path to the root directory?",
+        description: "The root directory is the top-level directory in the filesystem hierarchy. It is represented by a single forward slash (/).",
+        example: "echo /"
+    },
+    {
+        term: "Find the path to the system logs directory",
+        prompt: "What is the full path to the system logs directory?",
+        description: "The system logs directory contains log files that record system events and errors. It is typically located in the /var/log directory.",
+        example: "echo /var/log"
+    },
+    {
+        term: "Find the path to the Apache configuration file",
+        prompt: "What is the full path to the Apache configuration file?",
+        description: "The Apache web server configuration file is used to specify settings for the server, such as which ports to listen on, which files to serve, and how to handle requests. It is typically located in the /etc/apache2 directory.",
+        example: "echo /etc/apache2/apache2.conf"
+    }
+    ,
+    {
+        term: "Find the path to the passwd file",
+        prompt: "What is the full path to the passwd file?",
+        description: "The passwd file contains information about user accounts on the system, including usernames, user IDs, home directories, and login shells. It is typically located in the /etc directory.",
+        example: "echo /etc/passwd"
+    },
+    {
+        term: "Find the path to the group file",
+        prompt: "What is the full path to the group file?",
+        description: "The group file contains information about user groups on the system, including group names, group IDs, and the users who belong to each group. It is typically located in the /etc directory.",
+        example: "echo /etc/group"
+    },
+    {
+        term: "Find the path to the shadow file",
+        prompt: "What is the full path to the shadow file?",
+        description: "The shadow file contains encrypted password information for user accounts on the system. It is typically located in the /etc directory.",
+        example: "echo /etc/shadow"
+    },
+    {
+        term: "Find the path to the fstab file",
+        prompt: "What is the full path to the fstab file?",
+        description: "The fstab file contains information about file systems that are mounted at boot time, including their device names, mount points, and file system types. It is typically located in the /etc directory.",
+        example: "echo /etc/fstab"
+    },
+    {
+        term: "Find the path to the hosts file",
+        prompt: "What is the full path to the hosts file?",
+        description: "The hosts file contains mappings of hostnames to IP addresses, allowing the system to resolve domain names to IP addresses. It is typically located in the /etc directory.",
+        example: "echo /etc/hosts"
+    },
+    {
+        term: "Find the path to the hostname file",
+        prompt: "What is the full path to the hostname file?",
+        description: "The hostname file contains the hostname of the system. It is typically located in the /etc directory.",
+        example: "echo /etc/hostname"
+    },
+    {
+        term: "Find the path to the sudoers file",
+        prompt: "What is the full path to the sudoers file?",
+        description: "The sudoers file contains configuration information for the 'sudo' command, allowing users to execute commands with superuser privileges. It is typically located in the /etc directory.",
+        example: "echo /etc/sudoers"
+    },
+    {
+        term: "Find the path to the resolv.conf file",
+        prompt: "What is the full path to the resolv.conf file?",
+        description: "The resolv.conf file contains information about the DNS servers that are used by the system to resolve domain names to IP addresses. It is typically located in the /etc directory.",
+        example: "echo /etc/resolv.conf"
     }
 
 ]
@@ -468,9 +582,8 @@ const algebra = [
         description: "Use the teacher's notation",
         example: "D = [-3; +inf[ \\ {3}"
     },
-    {
 
-    }
+
 
 
 ];
