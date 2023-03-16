@@ -270,6 +270,13 @@ class Quizzer {
         let exit = false;
 
 
+        /**
+         * Method called when a problem is unmounted, to be used to print the amount of cards left.
+         */
+        const printCardsLeft = (cardsLeft, cardsLearnt) => {
+            console.log(`\nCards left: ${cardsLeft} || Cards completed: ${cardsLearnt}\n`);
+        }
+
         const exitMethod = () => {
             exit = true;
             return false; //So it escapes the loop in case of perpetual until one is right
@@ -289,17 +296,18 @@ class Quizzer {
             // Somewhere here the duplication error occurs.
 
             const answered_correctly = await this.ask_term_question(card_to_ask, { exitMethod: exitMethod });
-
             // To here
-
-
-
+            
+            
+            
             // console.log(answered_correctly);
             // console.log("Answered");
             // showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt());
-
+            
             studyScheduler.solveCard(answered_correctly);
             await studyScheduler.saveCards();
+
+            printCardsLeft(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt());
 
             // console.log("solveCard");
             // showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt());

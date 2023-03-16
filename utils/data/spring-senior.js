@@ -632,12 +632,6 @@ const network = [
         description: "In Vim, 'w' moves the cursor to the beginning of the next word. Use this command to quickly move through a file or to navigate to the next word."
     },
     {
-        term: "Vim word navigation- previous word",
-        prompt: "Move to the end of the word in Vim.",
-        example: "Press 'e' to move to the end of the word.",
-        description: "In Vim, 'e' moves the cursor to the end of the current word and traverses to the next word. Use this command to quickly move through a file or to navigate to the end of a word."
-    },
-    {
         term: "Vim word navigation - beginning of word",
         prompt: "Move to the beginning of the word in Vim.",
         example: "Press 'b' to move to the beginning of the word.",
@@ -698,12 +692,17 @@ const network = [
         example: "Type '%gc/word/anotherword/gc'.",
         description: "In Vim, you can replace all occurrences of a word with another word using the '%gc/word/anotherword/gc' command. This will replace all occurrences of 'word' with 'anotherword', and confirm each replacement before making the change."
     },
-
     {
         term: "Vim replace",
         prompt: "Replace all occurrences of 'old' with 'new' in the current line in Vim.",
         example: ":s/old/new/g",
         description: "In Vim, ':s/old/new/g' is used to replace all occurrences of 'old' with 'new' in the current line. This command only affects the current line."
+    },
+    {
+        term: "Vim word navigation- previous word",
+        prompt: "Move to the end of the word in Vim.",
+        example: "Press 'e' to move to the end of the word.",
+        description: "In Vim, 'e' moves the cursor to the end of the current word and traverses to the next word. Use this command to quickly move through a file or to navigate to the end of a word."
     },
 ]
 

@@ -121,10 +121,26 @@ class TermScheduler {
         this.working_set.save();
     }
 
-    async setLearningCards(cards, { cleanIfDifferent = true, onlyAddIfNotThere = true, loadCardsFirst = true } = {}) {
 
+    /**
+     * 
+     * @param {List<Card>} cards 
+     * @param {bool} cleanIfDifferent If the cards are different from the ones already loaded, then clean the queues and load the new ones. Otherwise just add the new ones.
+     * @param {bool} onlyAddIfNotThere If true, then only add the cards that are not in any of the queues. Otherwise add all the cards.
+     * @param {bool} loadLastCardsFirst If true, then load the last cards first. Otherwise load the first cards first.
+     * @returns {Promise} Promise that resolves when the cards are loaded.
+     */
+    async setLearningCards(cards, { cleanIfDifferent = true, onlyAddIfNotThere = true, loadLastCardsFirst = true, ask_if_to_use_old_queue = false } = {}) {
+
+
+        if (loadLastCardsFirst) {
+            // Reverse the cards:list order
+            cards = cards.reverse();
+        }
+        
         await this.loadQueues(); // Load first then compare if to add a card into the queue or not.
 
+        
         //Add new cards
         if (cleanIfDifferent) {
             // Only populate if the amount of cards already loaded are less than the new cards that are found on the masterDeck

@@ -17,4 +17,5 @@
     "quiz_allow_reattempts": 3,
     "strict_commit": false,
     "features_ignore": ["features", "boba_tea_drank"], //Fetures to ignore on the report.
+    "monday_ses": [""]
 }
