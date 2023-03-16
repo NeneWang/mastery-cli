@@ -51,7 +51,17 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: true }));
     decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: true }));
 
-    
+
+    // Includes UX, system Design
+    const { system_design_project } = require('./design');
+    decks.addDeck(new TermStorage(system_design_project, "system design", { is_active: true }));
+
+
+    // Includes Marketing, Accounting.
+    const { accounting } = require('./business_terms');
+    decks.addDeck(new TermStorage(accounting, "accounting", { is_active: true }));
+
+
 
     // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
 
@@ -77,13 +87,13 @@ async function populateMasterDeck() {
             title: "artificial-intelligence-strategy"
         },
     ];
-    
-    const strategyGenerator = new TermGenerator(strategyFilesData, {default_prompt: "How could you use this?"});
+
+    const strategyGenerator = new TermGenerator(strategyFilesData, { default_prompt: "How could you use this?" });
     const __ = await strategyGenerator.fetchTerms();
     decks.addDecks(strategyGenerator.termStorageList());
 
-    
-    
+
+
     return decks;
 }
 
