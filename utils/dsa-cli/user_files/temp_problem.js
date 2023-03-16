@@ -6,7 +6,7 @@ class SetMatrixZeroes {
 }
 
 
-module.exports = { Problem: SetMatrixZeroes };s };};gIntervals };ce };m };er;
+module.exports = { Problem: SetMatrixZeroes };ets };gIntervals };ce };m };er;
 }
 
 

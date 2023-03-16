@@ -140,6 +140,53 @@ class SetMatrixZeroes extends ProblemTests {
 
 }
 
+class SpiralMatrix extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        this.current_test_name = "([[1,2,3],[4,5,6],[7,8,9]]) => [1,2,3,6,9,8,7,4,5]"
+        const problemToTest = new this.Problem();
+        assert.deepEqual(problemToTest.solve([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), [1, 2, 3, 6, 9, 8, 7, 4, 5]);
+    }
+
+    test_2() {
+        this.current_test_name = "([[1,2,3,4],[5,6,7,8],[9,10,11,12]]) => [1,2,3,4,8,12,11,10,9,5,6,7]"
+        const problemToTest = new this.Problem();
+        assert.deepEqual(problemToTest.solve([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]), [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]);
+    }
+}
+
+class ThreeNumberSum extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        this.current_test_name = "([12, 3, 1, 2, -6, 5, -8, 6], 0) => [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]"
+        const problemToTest = new this.Problem();
+        assert.deepEqual(problemToTest.solve([12, 3, 1, 2, -6, 5, -8, 6], 0), [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]);
+    }
+
+    test_2() {
+        this.current_test_name = "([8, 10, -2, 49, 14], 57) => [[-2, 10, 49]]"
+        const problemToTest = new this.Problem();
+        const matrix = [8, 10, -2, 49, 14]
+        problemToTest.solve(matrix, 57);
+        assert.deepEqual(matrixF, [[-2, 10, 49]]);
+    }
+
+}
+
+
+
 
 const TEST_DICTIONARY = {
     'multiply-strings': MultiplyStrings,
@@ -147,6 +194,9 @@ const TEST_DICTIONARY = {
     'powx-n': PowX,
     'rotate-image': RotateImage,
     'set-matrix-zeroes': SetMatrixZeroes,
+    'spiral-matrix': SpiralMatrix,
+    'three-number-sum': ThreeNumberSum
+
 }
 
 module.exports = TEST_DICTIONARY;
