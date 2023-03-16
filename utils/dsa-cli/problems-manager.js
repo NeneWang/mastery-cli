@@ -4,6 +4,7 @@ const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
 const { exec } = require('node:child_process');
 const { getPromptDict } = require('./prompt');
+const Constants = require('./constants');
 
 const DEBUG = false;
 
@@ -21,8 +22,25 @@ class ProblemsManager {
         return Object.keys(this.problems);
     }
 
+
     getProblem(problemSlug) {
         return this.problems[problemSlug];
+    }
+
+    /**
+     * 
+     * @returns {ProblemMetadata[]} Array of all the problems in the manager.
+     */
+    getProblems() {
+        return Object.values(this.problems);
+    }
+
+    getProblemsByCategory(category) {
+        return Object.values(this.problems).filter(problem => problem.category == category);
+    }
+
+    getProblemKeysByCategory(category) {
+        return Object.keys(this.problems).filter(problem => this.problems[problem].category == category);
     }
 
 
@@ -43,13 +61,13 @@ class ProblemsManager {
     /**
      * Populates the problems manager with the problems from the TEST_DICTIONARY.
      */
-    async autoPopulateUsingTestDictionary({skip_non_markdown = false} = {}) {
+    async autoPopulateUsingTestDictionary({ skip_non_markdown = false } = {}) {
 
         const classifyDifficulty = (tags) => {
             if (tags == undefined || tags == null || tags?.length <= 0) return "unknown";
-            if (tags.includes("easy")) return "easy";
-            if (tags.includes("medium")) return "medium";
-            if (tags.includes("hard")) return "hard";
+            if (tags.includes("easy")) return Constants.difficulty.easy;
+            if (tags.includes("medium")) return Constants.difficulty.medium;
+            if (tags.includes("hard")) return Constants.difficulty.hard;
         }
 
         const promblem_prompts = await getPromptDict(); //Gets all because no slug was passed in.
@@ -57,13 +75,15 @@ class ProblemsManager {
         for (let problem of Object.keys(TEST_DICTIONARY)) {
             // console.log("Searching if", problem);
             const promblem_prompt = promblem_prompts[problem];
-            if (promblem_prompt == undefined || promblem_prompt == null){
-                if(skip_non_markdown) continue;
+            if (promblem_prompt == undefined || promblem_prompt == null) {
+                if (skip_non_markdown) continue;
 
                 this.addProblem(new ProblemMetadata(problem));
                 continue;
             };
             // console.log("promblem_prompt", promblem_prompt)
+
+
             this.addProblem(new ProblemMetadata(problem, {
                 tags: promblem_prompt.tags, difficulty: classifyDifficulty(promblem_prompt.tags),
                 name: promblem_prompt.title, description: promblem_prompt.description
@@ -195,34 +215,6 @@ class ProblemsManager {
 
 
 
-    /**
-    * 
-    * @param {list[str]} problemsSlugs List of slugs
-    * OPTIONAL
-    * @param {int} max_stars Maximum number of stars to show
-    * @returns 
-    */
-    createFormattedProblemMap = (problemsSlugs, { show_progress = true, max_stars = 5, show_tags = true }) => {
-        const formattedProblems = {};
-        for (const problemSlug of problemsSlugs) {
-            let new_name = problemSlug
-            if (show_progress) {
-                // Get the number of times the problem has been answered or the max number of stars, whichever is smallest
-                const times_answered = Math.min(this.problemReport.getAnswerFor(problemSlug), max_stars);
-                // console.log("Times answered: ", times_answered, "type", typeof times_answered)
-                const stars = times_answered > 0 ? "*".repeat(times_answered) : "";
-
-                new_name += stars;
-            }
-
-            if (show_tags) {
-                // TODO
-            }
-            formattedProblems[new_name] = problemSlug;
-        }
-
-        return formattedProblems; //Map of problem slug to formatted problem
-    }
 
 
 }

@@ -7,6 +7,11 @@ const Constants = {
         unsolved: "unsolved",
         aborted: "aborted",
     },
+    difficulty: {
+        easy: "easy",
+        medium: "medium",
+        hard: "hard",
+    },
     CONSTANTS: {
         ACCOUNT_ID: 1,
         CUTEBLUE: '#9ccfe7', // Cornflower

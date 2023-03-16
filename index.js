@@ -111,7 +111,6 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.term.code)) {
 		mQuizer.pick_and_ask_term_question();
 	}
-
 	else if (input.includes(cmInfo.commands.clean.code)) {
 		maid.askToClean();
 	}

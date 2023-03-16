@@ -79,8 +79,17 @@ class StorableReport {
 
 
     getAnswerFor(key, { defaultvalue = 0 } = {}) {
-        // console.log("this.report", key, this.report[key]);
         return this.report?.[key] ?? defaultvalue;
+    }
+
+
+    /**
+     * 
+     * @param {string} key The key to check if it is completed
+     * @returns {boolean} True if the key is completed, false otherwise
+     */
+    isProblemCompleted(key) {
+        return getAnswerFor(key) >= 1;
     }
 
     cleanReport() {

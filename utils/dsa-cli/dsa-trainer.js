@@ -29,8 +29,104 @@ class DSATrainer {
         this.skip_problems = skip_problems;
 
         this.problemReport = new StorableReport({ filename: 'problem_report' });
+        this.order_categories = ['neet-array', 'neet-sliding-windows', 'neet-stack', 'neet-binary-search', 'regex',
+            'neet-linked-list', 'neet-trees', 'neet-tries', 'neet-heap', 'neet-backtracking', 'neet-graphs', 'neet-dp',
+            'neet-intervals', 'neet-greedy', 'neet-math', 'neet-bits'] // sorted by priority.
 
 
+        this.first_non_completed_category_non_completed_problems = this.getFirstNonCompletedCategoryNonCompletedProblems();
+        this.first_non_only_hard_left_category_non_hard_problems = this.getFirstNonOnlyHardLeftCategoryNonHardProblems();
+        this.completed_problems_sorted_by_times_completed = this.getCompeltedProblemsSortedByTimesCompleted();
+    }
+
+    /**
+     * Populates the recommendation queues
+     * @returns {void}
+     * Call this when problmeManager had been populated
+     */
+    populateRecommendationQueues() {
+        this.first_non_completed_category_non_completed_problems = this.getFirstNonCompletedCategoryNonCompletedProblems();
+        this.first_non_only_hard_left_category_non_hard_problems = this.getFirstNonOnlyHardLeftCategoryNonHardProblems();
+        this.completed_problems_sorted_by_times_completed = this.getCompeltedProblemsSortedByTimesCompleted();
+    }
+
+
+    /**
+     * Gets the list of recommended problems to solve
+     * @param {int} non_completed The number of non completed problems to get
+     * @param {int} non_hard The number of non hard problems to get
+     * @param {int} completed_practice The number of completed problems to get
+     * @param {bool} refresh_recommendation_queues Whether to refresh the recommendation queues or not
+     * 
+     * @returns {List[ProblemMetaData]} A list of recommended problems
+     */
+    getRecommendedProblems({ non_completed = 2, non_hard = 1, completed_practice = 2, refresh_recommendation_queues = true } = {}) {
+        const recommended_problems = [];
+
+        if (refresh_recommendation_queues) {
+            this.populateRecommendationQueues();
+        }
+
+        // Gets the first two problems from first_non_completed_category_non_completed_problems
+        recommended_problems.push(this.first_non_completed_category_non_completed_problems.problems.slice(0, non_completed));
+
+
+        // Add 1 problem from first_non_only_hard_left_category_non_hard_problems
+        recommended_problems.push(this.first_non_only_hard_left_category_non_hard_problems.problems.slice(0, non_hard));
+
+        // Add 2 problem from completed_problems_sorted_by_times_completed
+        recommended_problems.push(this.completed_problems_sorted_by_times_completed.problems.slice(0, completed_practice));
+
+        return recommended_problems;
+
+    }
+
+
+    /**
+     * Gets a list of problems that are not completed yet 
+     * !note that the the this wont work if problem_manager is not loaded
+     * @returns {List[ProblemMetaData]} A list of problems that are not completed yet
+     */
+    getFirstNonCompletedCategoryNonCompletedProblems() {
+        for (let category of this.order_categories) {
+            const problems = this.problems_manager.getProblemsByCategory(category);
+            const non_completed_problems = problems.filter(problem => !this.problemReport.isProblemCompleted(problem.slug));
+            if (non_completed_problems.length > 0) {
+                return non_completed_problems;
+            }
+            // Otherwise skip to the next category
+        }
+        return [];
+    }
+
+    getFirstNonOnlyHardLeftCategoryNonHardProblems() {
+        for (let category of this.order_categories) {
+
+            const problems = this.problems_manager.getProblemsByCategory(category);
+
+            // Get the non hard problems
+            const non_hard_problems = problems.filter(problem => problem.difficulty != Constants.difficulty.hard);
+
+            // Also check that the non hard problems are not completed
+            const non_completed_non_hard_problems = non_hard_problems.filter(problem => !this.problemReport.isProblemCompleted(problem.slug));
+
+            // If there are non completed non hard problems, return them
+            if (non_completed_non_hard_problems.length > 0) {
+                return non_completed_non_hard_problems;
+            }
+            // Otherwise skip to the next category
+        }
+        return [];
+    }
+
+    /**
+     * 
+     * @returns {List[ProblemMetaData]} A list of problems that are not completed yet, sorted by the number of times they have been completed
+     */
+    getCompeltedProblemsSortedByTimesCompleted() {
+        const completed_problems = this.problems_manager.getProblems().filter(problem => this.problemReport.isProblemCompleted(problem.slug));
+        const sorted_problems = completed_problems.sort((a, b) => this.problemReport.getAnswerFor(b.slug) - this.problemReport.getAnswerFor(a.slug));
+        return sorted_problems;
     }
 
     /**
@@ -92,7 +188,7 @@ class DSATrainer {
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
         if (!open_solution) { const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction }); }
-        else if(open_solution){
+        else if (open_solution) {
             const _ = await this.problems_manager.openSolutionFile(problem.slug, { editor_instruction: editor_instruction });
         }
     }
@@ -204,16 +300,27 @@ class DSATrainer {
 
 
     /**
+     * Renders a menu of recommended problems, and allows the user to select a problem to solve
+     */
+    async showRecommendedProblems(){
+
+        
+    }
+
+    /**
      * Renders a menu of problems, and allows the user to select a problem to solve
      * @param {boolean} allow_continue_last If true, the user will be allowed to continue the last problem solved. If false, the user will be forced to select a new problem.
      * @param {boolean} showProgress If true, the user will be shown the progress of the problems solved as ** attached to the problem. If false, the user will not be shown the progress.
+     * @param {list[str]} show_specific_problems List of slugs of problems to show. If empty, all problems will be shown.
      * @returns 
      */
-    async showMenuOfProblems({ allow_continue_last = true, show_progress = true, show_tags = true } = {}) {
+    async showMenuOfProblems({ allow_continue_last = true, show_progress = true, show_tags = true, show_specific_problems = [] } = {}) {
         const _ = await this.problemReport.getReport();
         /**
          * 
          * @param {list[str]} problemsSlugs List of slugs
+         * @param {boolean} show_progress If true, the user will be shown the progress of the problems solved as ** attached to the problem. If false, the user will not be shown the progress.
+         * @param {boolean} show_tags If true, the user will be shown the tags of the problems solved as ** attached to the problem. If false, the user will not be shown the tags.
          * OPTIONAL
          * @param {int} max_stars Maximum number of stars to show
          * @returns 
@@ -246,9 +353,9 @@ class DSATrainer {
         // console.log("Loading problems...", this.loaded_problem_manager);
         await this.loaded_problem_manager;
 
-
-
-        const formattedProblems = createFormattedProblemMap(this.problems_manager.problemSlugs, { show_progress: show_progress, show_tags: show_tags });
+        // Show specific problems, or show all problems
+        const problems_to_show_slugs = show_specific_problems.length > 0 ? show_specific_problems : this.problems_manager.problemSlugs;
+        const formattedProblems = createFormattedProblemMap(problems_to_show_slugs, { show_progress: show_progress, show_tags: show_tags });
         const current_problem_prompt = "Continue last problem";
 
 
