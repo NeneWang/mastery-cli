@@ -1,0 +1,1 @@
+"${food:-Cake}"  #= or "Cake"
