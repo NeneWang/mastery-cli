@@ -167,6 +167,7 @@ class ThreeNumberSum extends ProblemTests {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3())
     }
 
     test_1() {
@@ -176,11 +177,17 @@ class ThreeNumberSum extends ProblemTests {
     }
 
     test_2() {
-        this.current_test_name = "([8, 10, -2, 49, 14], 57) => [[-2, 10, 49]]"
+
+        this.current_test_name = "([8, 10, -2, 49, 14], 57) => []"
         const problemToTest = new this.Problem();
-        const matrix = [8, 10, -2, 49, 14]
-        problemToTest.solve(matrix, 57);
-        assert.deepEqual(matrixF, [[-2, 10, 49]]);
+        assert.deepEqual(problemToTest.solve([8, 10, -2, 49, 14], 57), []);
+    }
+
+    test_3() {
+
+        this.current_test_name = "([12, 3, 1, 2, -6, 5, 0, -8, -1], 0) => [[-8, 3, 5], [-6, 1, 5], [-1, 0, 1]]"
+        const problemToTest = new this.Problem();
+        assert.deepEqual(problemToTest.solve([12, 3, 1, 2, -6, 5, 0, -8, -1], 0), [[-8, 3, 5], [-6, 1, 5], [-1, 0, 1]]);
     }
 
 }

@@ -4,7 +4,7 @@ let TEST_DICTIONARY = {}
 const problem_tests_filenames = [
     'helloworld', 'simple-problems', 'neet-array', 'neet-sliding-windows', 'neet-stack', 'neet-binary-search', 'regex',
     'neet-linked-list', 'neet-trees', 'neet-tries', 'neet-heap', 'neet-backtracking', 'neet-graphs', 'neet-dp',
-    'neet-intervals', 'neet-greedy', 'neet-math'
+    'neet-intervals', 'neet-greedy', 'neet-math', 'neet-bits'
 ]
 
 

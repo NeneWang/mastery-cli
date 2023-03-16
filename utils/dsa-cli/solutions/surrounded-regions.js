@@ -1,4 +1,4 @@
-class Problem {
+class SurroundedRegions {
     /**
      * https://leetcode.com/problems/surrounded-regions/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
@@ -63,4 +63,4 @@ class Problem {
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: SurroundedRegions };

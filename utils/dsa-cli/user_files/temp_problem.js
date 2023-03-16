@@ -1,13 +1,9 @@
-class SetMatrixZeroes {
-	solve(matrix) {
+class MaxProductSubArray {
+	solve(nums) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: SetMatrixZeroes };ets };gIntervals };ce };m };er;
-}
-
-
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: MaxProductSubArray };ts };tervals };ce };
