@@ -17,7 +17,7 @@ const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
-const { show_image, user_requests_exit, user_requests_skip } = require('./utils_functions');
+const { show_image, user_requests_exit, user_requests_skip, user_requests_calc } = require('./utils_functions');
 const { TermScheduler } = require('./termScheduler');
 const { slice } = require('./cli');
 // const DEBUG = true
