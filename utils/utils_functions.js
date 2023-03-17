@@ -128,7 +128,7 @@ const user_requests_exit = (res) => {
  * @returns {boolean} : True if user wants to calculate, false otherwise
  */
 const user_requests_calc = (res) => {
-    return (res == "calc" || res == "calculate" || res == "c" || res == "cal")
+    return (res == "calc")
 }
 
 /**

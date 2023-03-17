@@ -507,7 +507,10 @@ class Quizzer {
 
     }
 
-    async ask_math_question({ exitMethod = () => { } }) {
+    async ask_math_question({ exitMethod = null }) {
+        if (exitMethod == null) {
+            exitMethod = () => { };
+        }
 
         const question_form = await this.pick_math_question();
         try {
