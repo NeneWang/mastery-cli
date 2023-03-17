@@ -1,13 +1,9 @@
-class MissingNumber {
-	solve(nums) {
-	// Your code here
+class MaxProfit {
 
-	}
+    solve(prices) {
+	    //Solve your problem here
+    }
 }
 
 
-module.exports = { Problem: MissingNumber };oes };s };}; };tervals };ce };m };er;
-}
-
-
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: MaxProfit };

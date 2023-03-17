@@ -212,7 +212,7 @@ class DSATrainer {
             const _ = await this.problems_manager.openBaseCodeFile(problem.slug, { editor_instruction: editor_instruction });
         }
         if (open_markdown) {
-            const _ = await this.problems_manager.openMarkdownFile(problem.slug, { editor_instruction: editor_instruction });
+            const _ = await this.problems_manager.openPromptMarkdownFile(problem.slug, { editor_instruction: editor_instruction });
         }
     }
 
@@ -281,7 +281,7 @@ class DSATrainer {
                 // Open the problem's base
 
                 question_state_flag = true;
-                this.openProblem(problem, { open_problem_temporal: false, open_basecode: true });
+                this.openProblem(problem, { open_problem_temporal: false, open_markdown: true });
             }
         }
 

@@ -40,7 +40,7 @@ class ProblemsManager {
     getProblemsByCategory(category) {
 
         const fiteredProblemsByCategory = Object.values(this.problems).filter(problem => problem.tags.includes(category))
-        
+
         return fiteredProblemsByCategory;
     }
 
@@ -50,8 +50,8 @@ class ProblemsManager {
 
 
     getTagsForProblem(problemSlug) {
-        
-        return this.problems[problemSlug]?.tags??[];
+
+        return this.problems[problemSlug]?.tags ?? [];
     }
 
     /**
@@ -218,7 +218,7 @@ class ProblemsManager {
 
     }
 
-    
+
 
     async openBaseCodeFile(problem_slug, { editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.base_code_filepath + problem_slug + '.js', "./");
@@ -233,10 +233,32 @@ class ProblemsManager {
 
     }
 
-    
+
 
     async openPromptMarkdownFile(problem_slug, { editor_instruction = "start" } = {}) {
-        const absolute_temp_file_path = getDirAbsoluteUri(this.markdown_filepath + problem_slug + '.md', "./");
+        const problem_metadata = this.problems[problem_slug];
+        const tags = problem_metadata.tags;
+
+        // Identify the correct category by filtering the Constant.PROBLEM_CATEGORIES by the tags
+        const categoriesObjects = Object.values(Constants.PROBLEM_CATEGORIES);
+        const categories = categoriesObjects.map(category => category.slug).find(key =>
+            Constants.CATEGORY_DICTIONARY[key].some(entry =>
+                tags.includes(entry)
+            )
+        ) ?? [];
+
+        const category_detected = categories.length > 0 ? categories[0] : "";
+
+        if (category_detected === "") {
+            throw ("No category detected, Doesnt open any", "categories", categories);
+        }
+
+        const category_slug = categoriesObjects.filter(category => category.slug === category_detected)[0].test_problem_slug;
+
+        const absolute_temp_file_path = getDirAbsoluteUri(this.tests_filepath
+            + category_slug + '.js', "./"
+        );
+        console.log("absolute_temp_file_path", absolute_temp_file_path);
 
         await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
             if (error) {
@@ -246,6 +268,28 @@ class ProblemsManager {
             console.log(`Continue running`);
         });
 
+    }
+
+    /**
+     * 
+     * @param {string} problem_slug The slug of the problem to open the tests case file for
+     * @param {string} editor_instruction The instruction to open the file in the editor. Default is "start"
+     * 
+     */
+    async openTestsCaseFile(problem_slug, { editor_instruction = "start" } = {}) {
+
+
+        // Find the test_case_name
+
+        const absolute_temp_file_path = getDirAbsoluteUri(this.markdown_filepath + problem_slug + '.md', "./");
+
+        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+            }
+            console.log(`Continue running`);
+        });
     }
 
 
