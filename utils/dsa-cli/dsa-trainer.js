@@ -29,14 +29,12 @@ class DSATrainer {
         this.skip_problems = skip_problems;
 
         this.problemReport = new StorableReport({ filename: 'problem_report' });
-        this.order_categories = ['neet-array', 'neet-sliding-windows', 'neet-stack', 'neet-binary-search', 
-            'neet-linked-list', 'neet-trees', 'neet-tries', 'neet-heap', 'neet-backtracking', 'neet-graphs', 'neet-dp',
-            'neet-intervals', 'neet-greedy', 'neet-math', 'neet-bits'] // sorted by priority.
+        this.order_categories = Object.values(Constants.PROBLEM_CATEGORIES).map(category => category.slug);
 
 
         this.first_non_completed_category_non_completed_problems = this.getFirstNonCompletedCategoryNonCompletedProblems();
         this.first_non_only_hard_left_category_non_hard_problems = this.getFirstNonOnlyHardLeftCategoryNonHardProblems();
-        this.completed_problems_sorted_by_times_completed = this.getCompeltedProblemsSortedByTimesCompleted();
+        this.completed_problems_sorted_by_times_completed = this.getCompletedProblemsSortedByTimesCompleted();
     }
 
     /**
@@ -47,7 +45,7 @@ class DSATrainer {
     populateRecommendationQueues() {
         this.first_non_completed_category_non_completed_problems = this.getFirstNonCompletedCategoryNonCompletedProblems();
         this.first_non_only_hard_left_category_non_hard_problems = this.getFirstNonOnlyHardLeftCategoryNonHardProblems();
-        this.completed_problems_sorted_by_times_completed = this.getCompeltedProblemsSortedByTimesCompleted();
+        this.completed_problems_sorted_by_times_completed = this.getCompletedProblemsSortedByTimesCompleted();
     }
 
 
@@ -140,9 +138,9 @@ class DSATrainer {
      * 
      * @returns {List[ProblemMetaData]} A list of problems that are not completed yet, sorted by the number of times they have been completed
      */
-    getCompeltedProblemsSortedByTimesCompleted() {
+    getCompletedProblemsSortedByTimesCompleted() {
         const completed_problems = this.problems_manager.getProblems().filter(problem => this.problemReport.isProblemCompleted(problem.slug));
-        const sorted_problems = completed_problems.sort((a, b) => this.problemReport.getAnswerFor(b.slug) - this.problemReport.getAnswerFor(a.slug));
+        const sorted_problems = completed_problems.sort((a, b) => this.problemReport.getAnswerFor(a.slug) - this.problemReport.getAnswerFor(b.slug));
         return sorted_problems;
     }
 

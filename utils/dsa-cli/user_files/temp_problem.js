@@ -1,8 +1,8 @@
-class Problem {
-    solve(a, b) {
-        return 1;
+class MaxProfit {
+
+    solve(prices) {
     }
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: MaxProfit };

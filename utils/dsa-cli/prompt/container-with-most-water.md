@@ -1,7 +1,7 @@
 ---
 title: Container With Most Water
 description: A container with most water example
-tags: [ neetcode, two-pointers, medium]
+tags: [ neetcode, array, medium]
 images: [https://s3-lc-upload.s3.amazonaws.com/uploads/2018/07/17/question_11.jpg]
 ---
 
