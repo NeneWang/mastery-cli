@@ -1,4 +1,4 @@
-class Problem {
+class KthSmallestElementInABST {
 
     /**
      * https://leetcode.com/problems/kth-smallest-element-in-a-bst/
@@ -30,4 +30,4 @@ class Problem {
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: KthSmallestElementInABST };

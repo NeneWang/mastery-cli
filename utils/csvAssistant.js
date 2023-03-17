@@ -93,8 +93,6 @@ class CSVAssistant {
             console.log(err);
         }
 
-        //   TODO Once I verify that the code is correct I can also make the array into a dictionary
-
         return listOfSolvedRows;
     }
 
@@ -149,7 +147,6 @@ class CSVAssistant {
     }
 
     async getFilesInPriorities () {
-        // #TODO
         return await getFilesInDirectory();
 
     }

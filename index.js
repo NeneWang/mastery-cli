@@ -80,7 +80,6 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.talk.code)) {
 		let message = await getTalk(flags);
 		maid.say(message, true);
-
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
 		await utils.commitpush();
@@ -122,15 +121,16 @@ const { Demo, EDemo } = demos;
 	}
 	else if (input.includes(cmInfo.commands.dsa.code)) {
 		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
-		const dsa_is_correct = await dsaTrainer.showMenuOfProblems();
+		// const dsa_is_correct = await dsaTrainer.showMenuOfProblems();
+		console.log("Showing menu of dsa...")
+		const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
 
 		if (dsa_is_correct) {
 			await increasePerformance("algo");
-			console.log("dsa solved correctly");
-			
+			console.log("dsa solved correctly");		
 		}
-
 	}
+	// else if (input.includes(cmInfo.commands.dsa.code)) {
 	else {
 		cli_meow.showHelp(0);
 		maid.askToClean();

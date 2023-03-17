@@ -46,6 +46,8 @@ Here (4) large assistant wise projects that I am interested in making:
     - Gathers informations about real estate
     - Stocks, and other usual reports to help you make better decisions.
 
+I wanted to originally build this on Rust, but my guess is that I could have some type of manager that interacts with Python Script (Individual around the place. You can think of it as the wings of the Valkyre.)
+
 
 - Knight -> Help me compete in grinding and competition like games.
   - A collection of game assitants.

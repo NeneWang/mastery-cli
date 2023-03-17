@@ -36,17 +36,20 @@ class ProblemsManager {
     }
 
     getProblemsByCategory(category) {
-        return Object.values(this.problems).filter(problem => problem.category == category);
+
+        const fiteredProblemsByCategory = Object.values(this.problems).filter(problem => problem.tags.includes(category))
+        
+        return fiteredProblemsByCategory;
     }
 
     getProblemKeysByCategory(category) {
-        return Object.keys(this.problems).filter(problem => this.problems[problem].category == category);
+        return Object.keys(this.problems).filter(problem => this.problems[problem].tags.includes(category));
     }
 
 
     getTagsForProblem(problemSlug) {
-        console.log("getting from ", this.problems[problemSlug])
-        return this.problems[problemSlug].tags;
+        
+        return this.problems[problemSlug]?.tags??[];
     }
 
     /**

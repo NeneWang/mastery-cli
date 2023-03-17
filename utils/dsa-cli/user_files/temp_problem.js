@@ -1,9 +1,8 @@
-class MaxProductSubArray {
-	solve(nums) {
-	// Your code here
-
-	}
+class Problem {
+    solve(a, b) {
+        return 1;
+    }
 }
 
 
-module.exports = { Problem: MaxProductSubArray };ts };tervals };ce };
+module.exports = { Problem };

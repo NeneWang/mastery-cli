@@ -29,7 +29,7 @@ class DSATrainer {
         this.skip_problems = skip_problems;
 
         this.problemReport = new StorableReport({ filename: 'problem_report' });
-        this.order_categories = ['neet-array', 'neet-sliding-windows', 'neet-stack', 'neet-binary-search', 'regex',
+        this.order_categories = ['neet-array', 'neet-sliding-windows', 'neet-stack', 'neet-binary-search', 
             'neet-linked-list', 'neet-trees', 'neet-tries', 'neet-heap', 'neet-backtracking', 'neet-graphs', 'neet-dp',
             'neet-intervals', 'neet-greedy', 'neet-math', 'neet-bits'] // sorted by priority.
 
@@ -60,22 +60,26 @@ class DSATrainer {
      * 
      * @returns {List[ProblemMetaData]} A list of recommended problems
      */
-    getRecommendedProblems({ non_completed = 2, non_hard = 1, completed_practice = 2, refresh_recommendation_queues = true } = {}) {
+    async getRecommendedProblems({ non_completed = 2, non_hard = 1, completed_practice = 2, refresh_recommendation_queues = true } = {}) {
         const recommended_problems = [];
+
+        // Load the problems_manager problems
+        // await this.problems_manager.loadProblems();
+        await this.loaded_problem_manager;
 
         if (refresh_recommendation_queues) {
             this.populateRecommendationQueues();
         }
 
         // Gets the first two problems from first_non_completed_category_non_completed_problems
-        recommended_problems.push(this.first_non_completed_category_non_completed_problems.problems.slice(0, non_completed));
+        recommended_problems.push(...this.first_non_completed_category_non_completed_problems.slice(0, non_completed));
 
 
         // Add 1 problem from first_non_only_hard_left_category_non_hard_problems
-        recommended_problems.push(this.first_non_only_hard_left_category_non_hard_problems.problems.slice(0, non_hard));
+        recommended_problems.push(...this.first_non_only_hard_left_category_non_hard_problems.slice(0, non_hard));
 
         // Add 2 problem from completed_problems_sorted_by_times_completed
-        recommended_problems.push(this.completed_problems_sorted_by_times_completed.problems.slice(0, completed_practice));
+        recommended_problems.push(...this.completed_problems_sorted_by_times_completed.slice(0, completed_practice));
 
         return recommended_problems;
 
@@ -88,9 +92,15 @@ class DSATrainer {
      * @returns {List[ProblemMetaData]} A list of problems that are not completed yet
      */
     getFirstNonCompletedCategoryNonCompletedProblems() {
-        for (let category of this.order_categories) {
+
+
+        for (let i = 0; i < this.order_categories.length; i++) {
+
+            const category = this.order_categories[i];
             const problems = this.problems_manager.getProblemsByCategory(category);
+
             const non_completed_problems = problems.filter(problem => !this.problemReport.isProblemCompleted(problem.slug));
+
             if (non_completed_problems.length > 0) {
                 return non_completed_problems;
             }
@@ -99,10 +109,17 @@ class DSATrainer {
         return [];
     }
 
+
+    /**
+     * 
+     * @returns {List[ProblemMetaData]} A list of problems that are not completed yet, and are not hard
+     */
     getFirstNonOnlyHardLeftCategoryNonHardProblems() {
         for (let category of this.order_categories) {
 
             const problems = this.problems_manager.getProblemsByCategory(category);
+
+
 
             // Get the non hard problems
             const non_hard_problems = problems.filter(problem => problem.difficulty != Constants.difficulty.hard);
@@ -136,7 +153,6 @@ class DSATrainer {
     async openRandomProblem() {
         const problem = this.problems_manager.getRandomProblem();
         const problem_status = await this.solveProblem(problem);
-        // TODO Make appropriate adjustement with the status
 
         return problem_status == Constants.ProblemStatus.solved;
 
@@ -302,9 +318,14 @@ class DSATrainer {
     /**
      * Renders a menu of recommended problems, and allows the user to select a problem to solve
      */
-    async showRecommendedProblems(){
+    async showRecommendedProblems() {
 
-        
+        const recommended_problems = await this.getRecommendedProblems();
+        const problem_slugs = recommended_problems.map(problem => problem.slug);
+        console.log("Recommended problems: ", problem_slugs);
+
+        await this.showMenuOfProblems({ allow_continue_last: true, show_progress: true, show_tags: true, show_specific_problems: problem_slugs });
+
     }
 
     /**
@@ -393,7 +414,7 @@ class DSATrainer {
         const problem = getProblem(problem_selected);
         const is_new_problem = problem_selected != current_problem_prompt;
         const problem_status = await this.solveProblem(problem, { populate_problem: is_new_problem });
-        // TODO Make appropriate adjustement with the status
+
 
         return problem_status == Constants.ProblemStatus.solved;
     }

@@ -6,7 +6,6 @@
  * Design and Analysis of Algorithms
  * https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/video_galleries/lecture-videos/
  */
-// TODO: Add all the problems and then define them. 
 const dsa = [
     {
         term: "Heap", prompt: "Re explain one of the advantages of using Heaps",
@@ -177,7 +176,6 @@ const system_design = [
         term: "Aggregation", prompt: "How is it symbolized? What does it mean? Make an example when you would be using this",
         example: "" 
     },
-    // TODO   
     {
         term: "system design", prompt: "How would you design an Photo App?",
         description: "",

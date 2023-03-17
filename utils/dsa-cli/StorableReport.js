@@ -89,7 +89,9 @@ class StorableReport {
      * @returns {boolean} True if the key is completed, false otherwise
      */
     isProblemCompleted(key) {
-        return getAnswerFor(key) >= 1;
+        // TODO: Delete this
+        console.log("this.getAnswerFor(key)", this.getAnswerFor(key), "key", key);
+        return this.getAnswerFor(key) >= 1;
     }
 
     cleanReport() {

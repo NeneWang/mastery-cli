@@ -27,8 +27,6 @@ class Quizzer {
 
     constructor(qmathformulas, qmathenabled, masterDeck, alsoAskTerms = true) {
 
-        // TODO: Implement TermStorage Support from the getgo.
-
         const terms = []
         terms.push(...masterDeck.listTerms());
         this.masterDeck = masterDeck;
@@ -247,7 +245,6 @@ class Quizzer {
         // Create a queue and store them all there. Try loading then if there is nothing to be loaded, just open it.
 
 
-        // TODO Preserving the sessions
         // If True ask if to continue previous session.
         // If want new session
 
@@ -401,7 +398,6 @@ class Quizzer {
             }
 
 
-            // TODO Increase the value of the concept
             let ISANSWERCORRECT = true
             // Print the correct example term if exists
 
