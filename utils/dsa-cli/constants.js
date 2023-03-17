@@ -1,6 +1,7 @@
 // Enumerator indicating the status of the problem e.g. solved, unsolved, aborted.
 
 const Constants = {
+    DEV_MODE: true,
 
     ProblemStatus: {
         solved: "solved",

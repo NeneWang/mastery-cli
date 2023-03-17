@@ -195,15 +195,24 @@ class DSATrainer {
 
         }
     }
-    async openProblem(problem, { open_solution = false } = {}) {
+    async openProblem(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false } = {}) {
         const promblem_prompt = await getPromptDict(problem.slug);
         if (true) console.log("Problem prompt selected: ", promblem_prompt);
         renderPromptDescription(promblem_prompt);
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
-        if (!open_solution) { const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction }); }
-        else if (open_solution) {
+        if (open_problem_temporal) {
+            const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
+        }
+
+        if (open_solution) {
             const _ = await this.problems_manager.openSolutionFile(problem.slug, { editor_instruction: editor_instruction });
+        }
+        if (open_basecode) {
+            const _ = await this.problems_manager.openBaseCodeFile(problem.slug, { editor_instruction: editor_instruction });
+        }
+        if (open_markdown) {
+            const _ = await this.problems_manager.openMarkdownFile(problem.slug, { editor_instruction: editor_instruction });
         }
     }
 
@@ -245,11 +254,11 @@ class DSATrainer {
             },
             "Modify": async () => {
                 question_state_flag = true;
-                await this.openProblem(problem);
+                await this.openProblem(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
             },
             "Show solution": async () => {
                 question_state_flag = true;
-                this.openProblem(problem, { open_solution: true });
+                this.openProblem(problem, { open_problem_temporal: false, open_solution: true });
 
                 // return Constants.ProblemStatus.unsolved;
             },
@@ -261,6 +270,22 @@ class DSATrainer {
 
         }
 
+        const choices_dev_mode = {
+            "Edit BaseJS": async () => {
+                // Open the problem's base
+
+                question_state_flag = true;
+                this.openProblem(problem, { open_problem_temporal: false, open_basecode: true });
+            },
+            "Edit Markdown prompt": async () => {
+                // Open the problem's base
+
+                question_state_flag = true;
+                this.openProblem(problem, { open_problem_temporal: false, open_basecode: true });
+            }
+        }
+
+        if (Constants.DEV_MODE) Object.assign(choices, choices_dev_mode); // Add dev mode choices
 
         let res = Constants.ProblemStatus.unsolved;
         while (question_state_flag) {

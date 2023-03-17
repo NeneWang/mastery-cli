@@ -14,6 +14,8 @@ class ProblemsManager {
         this.skip_problems = skip_problems;
         this.temp_problem_filepath = './user_files/temp_problem.js';
         this.solution_filepath = './solutions/'
+        this.markdown_filepath = './prompt/'
+        this.base_code_filepath = './base_code/'
         this.temp_test_filepath = './temp_tests.js';
     }
 
@@ -205,6 +207,36 @@ class ProblemsManager {
 
     async openSolutionFile(problem_slug, { editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.solution_filepath + problem_slug + '.js', "./");
+
+        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+            }
+            console.log(`Continue running`);
+        });
+
+    }
+
+    
+
+    async openBaseCodeFile(problem_slug, { editor_instruction = "start" } = {}) {
+        const absolute_temp_file_path = getDirAbsoluteUri(this.base_code_filepath + problem_slug + '.js', "./");
+
+        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+            }
+            console.log(`Continue running`);
+        });
+
+    }
+
+    
+
+    async openPromptMarkdownFile(problem_slug, { editor_instruction = "start" } = {}) {
+        const absolute_temp_file_path = getDirAbsoluteUri(this.markdown_filepath + problem_slug + '.md', "./");
 
         await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
             if (error) {

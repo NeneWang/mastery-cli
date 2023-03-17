@@ -8,6 +8,8 @@ mjAPI.config({
 mjAPI.start();
 
 var yourMath = 'E = mc^2';
+yourMath = '\log_b x = y'
+yourMath = `\frac{y_2 - y_1}{x_2 - x_1}`
 
 mjAPI.typeset({
   math: yourMath,
