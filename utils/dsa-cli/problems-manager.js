@@ -16,7 +16,7 @@ class ProblemsManager {
         this.solution_filepath = './solutions/'
         this.markdown_filepath = './prompt/'
         this.base_code_filepath = './base_code/'
-        this.temp_test_filepath = './temp_tests.js';
+        this.tests_filepath = './tests/';
     }
 
 
@@ -238,25 +238,29 @@ class ProblemsManager {
     async openPromptMarkdownFile(problem_slug, { editor_instruction = "start" } = {}) {
         const problem_metadata = this.problems[problem_slug];
         const tags = problem_metadata.tags;
-
+        
         // Identify the correct category by filtering the Constant.PROBLEM_CATEGORIES by the tags
         const categoriesObjects = Object.values(Constants.PROBLEM_CATEGORIES);
-        const categories = categoriesObjects.map(category => category.slug).find(key =>
-            Constants.CATEGORY_DICTIONARY[key].some(entry =>
-                tags.includes(entry)
-            )
+        const categories_slugs = categoriesObjects.map(category => category.slug); //Names of the testfiles
+
+        const categories = categories_slugs.filter(test_file_name =>
+            tags.includes(test_file_name)
         ) ?? [];
 
-        const category_detected = categories.length > 0 ? categories[0] : "";
+        console.log("categories", categories, "tags", tags, "categoriesObjects", categoriesObjects,
 
-        if (category_detected === "") {
+        );
+
+        const category_slug_detected = categories.length > 0 ? categories[0] : "";
+
+        if (category_slug_detected === "") {
             throw ("No category detected, Doesnt open any", "categories", categories);
         }
 
-        const category_slug = categoriesObjects.filter(category => category.slug === category_detected)[0].test_problem_slug;
-
+        const category_testslug = categoriesObjects.filter(category => category.slug === category_slug_detected)[0].test_problem_slug;
+        console.log("Category testslug", category_testslug);
         const absolute_temp_file_path = getDirAbsoluteUri(this.tests_filepath
-            + category_slug + '.js', "./"
+            + category_testslug + '.js', "./"
         );
         console.log("absolute_temp_file_path", absolute_temp_file_path);
 
@@ -276,6 +280,8 @@ class ProblemsManager {
      * @param {string} editor_instruction The instruction to open the file in the editor. Default is "start"
      * 
      */
+
+    // TODO Replace with openPromptMarkdownFile
     async openTestsCaseFile(problem_slug, { editor_instruction = "start" } = {}) {
 
 
