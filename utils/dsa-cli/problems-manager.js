@@ -13,9 +13,9 @@ class ProblemsManager {
         this.problems = {};
         this.skip_problems = skip_problems;
         this.temp_problem_filepath = './user_files/temp_problem.js';
-        this.solution_filepath = './solutions/'
-        this.markdown_filepath = './prompt/'
-        this.base_code_filepath = './base_code/'
+        this.solution_filepath = './solutions/';
+        this.markdown_filepath = './prompt/';
+        this.base_code_filepath = './base_code/';
         this.tests_filepath = './tests/';
     }
 
@@ -235,7 +235,7 @@ class ProblemsManager {
 
 
 
-    async openPromptMarkdownFile(problem_slug, { editor_instruction = "start" } = {}) {
+    async openTestCaseFile(problem_slug, { editor_instruction = "start" } = {}) {
         const problem_metadata = this.problems[problem_slug];
         const tags = problem_metadata.tags;
         
@@ -247,9 +247,6 @@ class ProblemsManager {
             tags.includes(test_file_name)
         ) ?? [];
 
-        console.log("categories", categories, "tags", tags, "categoriesObjects", categoriesObjects,
-
-        );
 
         const category_slug_detected = categories.length > 0 ? categories[0] : "";
 
@@ -281,8 +278,7 @@ class ProblemsManager {
      * 
      */
 
-    // TODO Replace with openPromptMarkdownFile
-    async openTestsCaseFile(problem_slug, { editor_instruction = "start" } = {}) {
+    async openPromptMarkdownFile(problem_slug, { editor_instruction = "start" } = {}) {
 
 
         // Find the test_case_name

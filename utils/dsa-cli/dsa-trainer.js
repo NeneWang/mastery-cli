@@ -195,7 +195,7 @@ class DSATrainer {
 
         }
     }
-    async openProblem(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false } = {}) {
+    async openProblem(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
         const promblem_prompt = await getPromptDict(problem.slug);
         if (true) console.log("Problem prompt selected: ", promblem_prompt);
         renderPromptDescription(promblem_prompt);
@@ -214,6 +214,11 @@ class DSATrainer {
         if (open_markdown) {
             const _ = await this.problems_manager.openPromptMarkdownFile(problem.slug, { editor_instruction: editor_instruction });
         }
+
+        if (open_test_cases){
+            const _ = await this.problems_manager.openTestCaseFile(problem.slug, { editor_instruction: editor_instruction })
+        }
+
     }
 
 
@@ -282,6 +287,10 @@ class DSATrainer {
 
                 question_state_flag = true;
                 this.openProblem(problem, { open_problem_temporal: false, open_markdown: true });
+            },
+            "Open test cases": async () => {
+                question_state_flag = true;
+                this.openProblem(problem, { open_problem_temporal: false, open_test_cases: true });
             }
         }
 
