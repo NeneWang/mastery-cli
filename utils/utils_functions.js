@@ -31,7 +31,7 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './da
 const getFilesInDirectory = (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
 
-    if(DEBUG) console.log("Fetching from: ", absolutePath);
+    if (DEBUG) console.log("Fetching from: ", absolutePath);
 
     return new Promise((resolve, reject) => {
         fs.readdir(absolutePath, (err, files) => {
@@ -123,6 +123,15 @@ const user_requests_exit = (res) => {
 }
 
 /**
+ * Returns whether the user wants to open a calculator node. (for now a js node would work.)
+ * @param {str} res : User input
+ * @returns {boolean} : True if user wants to calculate, false otherwise
+ */
+const user_requests_calc = (res) => {
+    return (res == "calc" || res == "calculate" || res == "c" || res == "cal")
+}
+
+/**
  * Returns whether the user wants to skip the problem.
  * @param {boolean} res : User input
  * @returns {boolean} : True if user wants to skip, false otherwise
@@ -135,5 +144,5 @@ const user_requests_skip = (res) => {
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, user_requests_exit,
-    user_requests_skip
+    user_requests_skip, user_requests_calc
 };

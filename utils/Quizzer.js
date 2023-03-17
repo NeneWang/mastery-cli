@@ -294,13 +294,13 @@ class Quizzer {
 
             const answered_correctly = await this.ask_term_question(card_to_ask, { exitMethod: exitMethod });
             // To here
-            
-            
-            
+
+
+
             // console.log(answered_correctly);
             // console.log("Answered");
             // showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt());
-            
+
             studyScheduler.solveCard(answered_correctly);
             await studyScheduler.saveCards();
 
@@ -313,7 +313,7 @@ class Quizzer {
         }
     }
 
-    async pick_and_ask_term_question({ exitMethod = () => {} } = {}) {
+    async pick_and_ask_term_question({ exitMethod = () => { } } = {}) {
         // Fetches a random term form with the youngest one, unless there is no internet
 
         const term_selected = await this.pick_term_question();
@@ -370,6 +370,14 @@ class Quizzer {
             const user_res = await question.run();
 
             // Check for escape methods
+
+            if (user_requests_calc(user_res)) {
+                const { exec } = require('child_process');
+                exec(`start node`);
+                // Make the user lose one point for using the calculator.
+                return false;
+            }
+
             if (user_requests_exit(user_res)) {
                 exitMethod();
                 return false;
@@ -407,7 +415,7 @@ class Quizzer {
 
             if (ask_if_correct) {
                 console.log("Is your response acceptable?");
-                const is_correct = new Confirm("Is the response correct?", {initial: true});
+                const is_correct = new Confirm("Is the response correct?", { initial: true });
                 const response = await is_correct.run();
                 console.log("asnwered with ", response);
                 ISANSWERCORRECT = response;
@@ -533,6 +541,14 @@ class Quizzer {
                 // Escape if user wants to exit
                 if (user_requests_exit(res)) {
                     exitMethod();
+                    return false;
+                }
+
+
+                if (user_requests_calc(user_res)) {
+                    const { exec } = require('child_process');
+                    exec(`start node`);
+                    // Make the user lose one point for using the calculator.
                     return false;
                 }
 
