@@ -782,11 +782,7 @@ const artificialIntelligence = [
         prompt: "What are model-based agents in AI?, provide an example.",
         example: "An example of a model-based agent is a self-driving car that uses a map of the environment to plan the best route to a destination.",
         description: "Model-based agents are a type of AI agent that maintain an internal model of the environment and use it to make decisions. They can handle more complex environments than simple reflex agents and can adapt to changing situations more easily. However, model-based agents can be more computationally intensive and may require more resources than simple reflex agents."
-    },
-
-
-
-
+    }
 ];
 
 
