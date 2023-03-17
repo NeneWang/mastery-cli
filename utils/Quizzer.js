@@ -507,10 +507,8 @@ class Quizzer {
 
     }
 
-    async ask_math_question({ exitMethod = null }) {
-        if (exitMethod == null) {
-            exitMethod = () => { };
-        }
+    async ask_math_question({ exitMethod = () => {} } = {}) {
+        
 
         const question_form = await this.pick_math_question();
         try {
@@ -548,7 +546,7 @@ class Quizzer {
                 }
 
 
-                if (user_requests_calc(user_res)) {
+                if (user_requests_calc(res)) {
                     const { exec } = require('child_process');
                     exec(`start node`);
                     // Make the user lose one point for using the calculator.
