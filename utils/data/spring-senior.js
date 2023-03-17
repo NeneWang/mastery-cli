@@ -707,12 +707,85 @@ const network = [
 ]
 
 const artificialIntelligence = [
-    { term: "Backpropagation Neural Network", description: "A backpropagation neural network is a way to train neural networks. It involves providing a neural network with a set of input values for which the correct output value is known beforehand. The network processes the input and produces an output value, which is compared to the correct value. If the result is incorrect, gradual changes are propagated backward through the network, and the calculation is made again. This process repeats until the desired output is calculated by the network.", prompt: "Design one using that model" },
+    {
+        term: "Backpropagation Neural Network",
+        description: "A backpropagation neural network is an approach to train neural networks using a supervised learning algorithm. It involves providing the neural network with input-output pairs where the correct output is already known. The network processes the input, generates an output, and compares it to the correct value. If the output is incorrect, adjustments are made to the network's weights and biases through a process called backpropagation. This process is iteratively repeated until the network can produce the desired output.",
+        prompt: "Design an application using a backpropagation neural network"
+    },
     {
         term: "AI Definitions",
-        prompt: "Define in your own words (at least 1): (a) intelligence, (b) artificial intelligence, (c) agent, (d) rationality, (e) logical reasoning.",
-        description: "Dictionary definitions of intelligence talk about “the capacity to acquire and apply knowledge” or “the faculty of thought and reason” or “the ability to comprehend and profit from experience.” These are all reasonable answers, but if we want something quantifiable we would use something like “the ability to apply knowledge in order to perform better in an environment.” b. We define artificial intelligence as the study and construction of agent programs that perform well in a given environment, for a given agent architecture. c. We define an agent as an entity that takes action in response to percepts from an environment. d. We define rationality as the property of a system which does the “right thing” given what it knows. See Section 2.2 for a more complete discussion. Both describe perfect rationality, however; see Section 27.3. e. We define logical reasoning as the a process of deriving new sentences from old, such that the new sentences are necessarily true if the old ones are true. (Notice that does not refer to any specific syntax oor formal language, but it does require a well-defined notion of truth.)",
+        prompt: "Define in your own words at least one of the following: (a) intelligence, (b) artificial intelligence, (c) agent, (d) rationality, (e) logical reasoning.",
+        description: "a. Intelligence refers to the ability of a system or organism to acquire, apply, and adapt knowledge and skills in order to perform well in various environments. b. Artificial intelligence is the field of study that focuses on creating and implementing computer systems capable of performing tasks that typically require human intelligence. c. An agent is an entity that perceives its environment, processes the information, and responds with appropriate actions. d. Rationality is the quality of a system that makes optimal decisions based on its knowledge and available information. e. Logical reasoning is the process of drawing conclusions from premises or facts, ensuring that the resulting conclusions are valid and consistent with the initial information."
     },
+    {
+        term: "Rule-based agents",
+        prompt: "What are rule-based agents in AI? Provide an example.",
+        example: "An example of a rule-based agent is a medical diagnosis system that offers recommendations based on a set of rules derived from medical expertise and patient input.",
+        description: "Rule-based agents are AI systems that make decisions according to a predetermined set of rules. These rules, often designed by domain experts, guide the agent's decision-making process in a specific context."
+    },
+    {
+        term: "Utility-based agents",
+        prompt: "What are utility-based agents in AI?",
+        example: "An example of a utility-based agent is a financial investment algorithm that selects stocks based on maximizing expected returns and minimizing risks.",
+        description: "Utility-based agents are AI systems that make decisions by considering the utility or value of each possible outcome. The agent selects the action that maximizes its expected utility, aiming for the most favorable result."
+    },
+    {
+        term: "Learning agents",
+        prompt: "What are learning agents in AI?",
+        example: "An example of a learning agent is an e-commerce recommendation system that adapts its suggestions based on a user's browsing history and purchase patterns.",
+        description: "Learning agents are AI systems that improve their performance over time by learning from experience. These agents employ machine learning algorithms to analyze data, identify patterns, and make better decisions in the future."
+    },
+    {
+        term: "Reflex agents",
+        prompt: "What are reflex agents in AI? Provide an example.",
+        example: "An example of a reflex agent is a light-sensitive switch that turns on the lights when the ambient light level falls below a predefined threshold.",
+        description: "Reflex agents are AI systems that make decisions solely based on their current percepts or sensory input, without considering past experiences or future outcomes."
+    },
+    {
+        term: "Goal-based agents",
+        prompt: "What are goal-based agents in AI?, provide an example.",
+        example: "An example of a goal-based agent is a personal assistant that helps a user achieve specific goals, such as booking a flight or scheduling a meeting.",
+        description: "Goal-based agents are AI systems that have a specific goal they are trying to achieve. They use their percept history to make decisions that will help them achieve their goal."
+    },
+    {
+        term: "Multi-agent systems",
+        prompt: "What are multi-agent systems in AI?, provide an example.",
+        example: "An example of a multi-agent system is a swarm of drones that work together to survey a large area.",
+        description: "Multi-agent systems are AI systems in which multiple agents work together to achieve a common goal. They can be used in a wide range of applications, from robotics to video games."
+    },
+    {
+        term: "Intelligent virtual agents",
+        prompt: "What are intelligent virtual agents in AI?, provide an example.",
+        example: "An example of an intelligent virtual agent is a chatbot that can answer customer questions and provide support.",
+        description: "Intelligent virtual agents are AI systems that interact with humans in a virtual environment. They can be used for a variety of applications, including customer service, education, and entertainment."
+    },
+    {
+        term: "Cognitive architectures",
+        prompt: "What are cognitive architectures in AI?, provide an example.",
+        example: "An example of a cognitive architecture is ACT-R, a framework for modeling human cognition and decision-making.",
+        description: "Cognitive architectures are AI systems that attempt to model human cognition and reasoning. They are used to study how humans think and make decisions, and to develop more intelligent AI systems."
+    },
+    {
+        term: "Hierarchical agents",
+        prompt: "What are hierarchical agents in AI?, provide an example.",
+        example: "An example of a hierarchical agent is a robot that can perform multiple tasks by breaking them down into smaller subtasks and executing them in a hierarchical manner.",
+        description: "Hierarchical agents are AI systems that can perform complex tasks by breaking them down into smaller subtasks and executing them in a hierarchical manner. This allows the agent to handle large, complex problems by dividing them into smaller, more manageable parts."
+    },
+    {
+        term: "Simple reflex agents",
+        prompt: "What are simple reflex agents in AI?, provide an example.",
+        example: "An example of a simple reflex agent is a thermostat that turns on the heating or cooling system if the temperature goes above or below a certain threshold.",
+        description: "Simple reflex agents are a type of AI agent that operate using a set of predefined rules or heuristics based on the current state of the environment. They only react to the current state and do not take into account any history or future states. Simple reflex agents are often used in control systems and other applications where a set of rules can be easily defined."
+    },
+    {
+        term: "Model-based agents",
+        prompt: "What are model-based agents in AI?, provide an example.",
+        example: "An example of a model-based agent is a self-driving car that uses a map of the environment to plan the best route to a destination.",
+        description: "Model-based agents are a type of AI agent that maintain an internal model of the environment and use it to make decisions. They can handle more complex environments than simple reflex agents and can adapt to changing situations more easily. However, model-based agents can be more computationally intensive and may require more resources than simple reflex agents."
+    },
+
+
+
 
 ];
 
