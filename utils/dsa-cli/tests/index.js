@@ -7,14 +7,23 @@ const problem_tests_filenames = [
     'neet-intervals', 'neet-greedy', 'neet-math', 'neet-bits'
 ]
 
+let PROBLEM_COUNT_PER_CATEGORY_TEST_NAME = {}
+
 
 // Autopopulation of tests assuming that the tests had beend defined
-for (let problem of problem_tests_filenames) {
-    TEST_DICTIONARY = { ...TEST_DICTIONARY, ...require(`./${problem}`) }
+for (let problem_category_test_name of problem_tests_filenames) {
+    const tests_of_the_problem_category = require(`./${problem_category_test_name}`);
+
+    TEST_DICTIONARY = { ...TEST_DICTIONARY, ...tests_of_the_problem_category };
+
+    PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[problem_category_test_name] = Object.keys(tests_of_the_problem_category).length;
+
 }
 
 
 
 
+
+
 // console.log("TEST_DICTIONARY", TEST_DICTIONARY);
-module.exports = { TEST_DICTIONARY };
+module.exports = { TEST_DICTIONARY, PROBLEM_COUNT_PER_CATEGORY_TEST_NAME };

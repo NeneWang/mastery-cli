@@ -7,15 +7,17 @@ const assert = require('assert');
 
 
 const to_test = {
-    'printable': false,
-    'basic': true,
-    'runnable': true,
+    'printable': true,
+    'category': true,
+    'exact-category': true, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
+    'basic': false,
+    'runnable': false,
 }
 
 describe('Problem integrity', function () {
 
     it("Test that all problems have printable prompts", async function () {
-        if(!to_test.printable) return this.skip();
+        if (!to_test.printable) return this.skip();
         const problemManager = new ProblemsManager();
         await problemManager.autoPopulateUsingTestDictionary();
 
@@ -35,7 +37,7 @@ describe('Problem integrity', function () {
     });
 
     it("Test that all problems have basic prompts", async function () {
-        if(!to_test.basic) return this.skip();
+        if (!to_test.basic) return this.skip();
         const problemManager = new ProblemsManager();
         await problemManager.autoPopulateUsingTestDictionary();
         // if this test fails, make sure you can run func_create_empty_base_codes to populate with a basic template of them all.
@@ -51,8 +53,8 @@ describe('Problem integrity', function () {
 
     });
     // Run and test test available
-    it('Should run and test the problem', async function () {   
-        if(!to_test.runnable) return this.skip();
+    it('Should run and test the problem', async function () {
+        if (!to_test.runnable) return this.skip();
         const problemManager = new ProblemsManager();
         await problemManager.autoPopulateUsingTestDictionary();
 
@@ -73,6 +75,123 @@ describe('Problem integrity', function () {
         }
 
     });
+
+    it("Categories matches ", async function () {
+        if (!to_test.category) return this.skip();
+
+        const problemManager = new ProblemsManager();
+
+
+        // Populates the metdatas
+        await problemManager.autoPopulateUsingTestDictionary();
+        const allProblemsMetadata = problemManager.problems;
+
+        // Fetch the expected count using the tests index count of problems.
+        const { PROBLEM_COUNT_PER_CATEGORY_TEST_NAME } = require('../tests')
+
+        const problems_per_category_slug = {};
+
+        for (let problemMetadata of Object.values(allProblemsMetadata)) {
+
+            // Increase based on the tests for each category slug.
+            for (const category_tag of problemMetadata.tags) {
+                problems_per_category_slug[category_tag] = (problems_per_category_slug[category_tag] || 0) + 1;
+            }
+
+        }
+
+        // console.log("problems_per_category_slug", problems_per_category_slug);
+        /**
+         * problems_per_category_slug {
+            neetcode: 109,
+            sample: 4,
+            math: 9,
+            array: 4,
+            ...
+         */
+
+        // Loop over the categories from constatns
+        const Constants = require('../constants');
+
+        for (const category of Object.values(Constants.PROBLEM_CATEGORIES)) {
+            if (category.order == null || category.order == undefined) continue; // Skip the ones that are not ordered, or don't even have an order.
+            if (category?.order <= 0) continue; // Skip the ones that are not ordered, or don't even have an order.
+
+
+            const category_test_slug = category.test_problem_slug; // The slug in the tests (expected)
+            const category_slug_in_md = category.slug; // The slug in the metadata (markdown)
+
+            // console.log("category_test_slug", category_test_slug, "category_slug_in_md")
+            // console.log(PROBLEM_COUNT_PER_CATEGORY_TEST_NAME,
+            //     PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[category_test_slug])
+            // console.log(category_slug_in_md, PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[category_test_slug], problems_per_category_slug[category_slug_in_md]);
+
+            console.log("_______________________________________________________");
+            console.log("category_test_slug", category_test_slug, PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[category_test_slug])
+            console.log("category_slug_in_md", category_slug_in_md, problems_per_category_slug[category_slug_in_md])
+            assert(PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[category_test_slug] <= problems_per_category_slug[category_slug_in_md]);
+
+
+        }
+
+
+    });
+
+
+    it("Categories matches Exactly ", async function () {
+        if (!to_test.category) return this.skip();
+
+        const problemManager = new ProblemsManager();
+
+
+        // Populates the metdatas
+        await problemManager.autoPopulateUsingTestDictionary();
+        const allProblemsMetadata = problemManager.problems;
+
+        // Fetch the expected count using the tests index count of problems.
+        const { PROBLEM_COUNT_PER_CATEGORY_TEST_NAME } = require('../tests')
+
+        const problems_per_category_slug = {};
+
+        for (let problemMetadata of Object.values(allProblemsMetadata)) {
+
+            // Increase based on the tests for each category slug.
+            for (const category_tag of problemMetadata.tags) {
+                problems_per_category_slug[category_tag] = (problems_per_category_slug[category_tag] || 0) + 1;
+            }
+
+        }
+
+        // console.log("problems_per_category_slug", problems_per_category_slug);
+        /**
+         * problems_per_category_slug {
+            neetcode: 109,
+            sample: 4,
+            math: 9,
+            array: 4,
+            ...
+         */
+
+        // Loop over the categories from constatns
+        const Constants = require('../constants');
+
+        for (const category of Object.values(Constants.PROBLEM_CATEGORIES)) {
+            if (category.order == null || category.order == undefined) continue; // Skip the ones that are not ordered, or don't even have an order.
+            if (category?.order <= 0) continue; // Skip the ones that are not ordered, or don't even have an order.
+
+
+            const category_test_slug = category.test_problem_slug; // The slug in the tests (expected)
+            const category_slug_in_md = category.slug; // The slug in the metadata (markdown)
+
+            assert.equal(PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[category_test_slug], problems_per_category_slug[category_slug_in_md]);
+
+
+        }
+
+
+    })
+
+
 
 
 });

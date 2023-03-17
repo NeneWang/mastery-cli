@@ -1,7 +1,7 @@
 ---
 title: Insert Interval
 description: Insert newInterval into intervals such that intervals is still sorted in ascending order by starti and intervals still does not have any overlapping intervals (merge overlapping intervals if necessary).
-tags: [neetcode, medium, intervals]
+tags: [neetcode, medium, "intervals"]
 link: https://leetcode.com/problems/insert-interval/
 images: []
 ---

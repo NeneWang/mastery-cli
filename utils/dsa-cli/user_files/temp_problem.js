@@ -1,8 +1,13 @@
-class MaxProfit {
+class MissingNumber {
+	solve(nums) {
+	// Your code here
 
-    solve(prices) {
-    }
+	}
 }
 
 
-module.exports = { Problem: MaxProfit };
+module.exports = { Problem: MissingNumber };oes };s };}; };tervals };ce };m };er;
+}
+
+
+module.exports = { Problem: TrappingRainWater };
