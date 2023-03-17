@@ -121,11 +121,6 @@ describe('Problem integrity', function () {
             const category_test_slug = category.test_problem_slug; // The slug in the tests (expected)
             const category_slug_in_md = category.slug; // The slug in the metadata (markdown)
 
-            // console.log("category_test_slug", category_test_slug, "category_slug_in_md")
-            // console.log(PROBLEM_COUNT_PER_CATEGORY_TEST_NAME,
-            //     PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[category_test_slug])
-            // console.log(category_slug_in_md, PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[category_test_slug], problems_per_category_slug[category_slug_in_md]);
-
             console.log("_______________________________________________________");
             console.log("category_test_slug", category_test_slug, PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[category_test_slug])
             console.log("category_slug_in_md", category_slug_in_md, problems_per_category_slug[category_slug_in_md])
