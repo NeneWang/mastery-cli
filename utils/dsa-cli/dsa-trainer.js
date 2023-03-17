@@ -195,7 +195,18 @@ class DSATrainer {
 
         }
     }
-    async openProblem(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
+
+    /**
+     * 
+     * @param {ProblemMetaData} problem 
+     * @param {boolean} open_problem_temporal If true, the problem temporal file will be opened
+     * @param {boolean} open_solution If true, the solution file will be opened
+    *  @param {boolean} open_basecode If true, the basecode file will be opened
+    * @param {boolean} open_markdown If true, the markdown file will be opened
+    * @param {boolean} open_test_cases If true, the test cases file will be opened
+    * @returns {Promise} A promise that resolves when the problem is opened
+     */
+    async openProblemMetadataInTerminal(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
         const promblem_prompt = await getPromptDict(problem.slug);
         if (true) console.log("Problem prompt selected: ", promblem_prompt);
         renderPromptDescription(promblem_prompt);
@@ -215,13 +226,18 @@ class DSATrainer {
             const _ = await this.problems_manager.openPromptMarkdownFile(problem.slug, { editor_instruction: editor_instruction });
         }
 
-        if (open_test_cases){
+        if (open_test_cases) {
             const _ = await this.problems_manager.openTestCaseFile(problem.slug, { editor_instruction: editor_instruction })
         }
 
     }
 
 
+    /**
+     * Opens and tests prints a menu where user can choose to test, or other operations, returns once the user is finished with the problem or aborts
+     * @param {ProblemMetadata} problem The problem to open and test
+     * @returns {Constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
+     */
     async openAndTest(problem) {
         console.log(
             "Opening problem: ", problem.slug,
@@ -230,7 +246,7 @@ class DSATrainer {
 
         // console.log("Keys from prompt_dict", Object.keys(prompt_dict));
 
-        await this.openProblem(problem);
+        await this.openProblemMetadataInTerminal(problem);
 
         let question_state_flag = true;
         let did_pass_all_tests_before = false;
@@ -259,11 +275,11 @@ class DSATrainer {
             },
             "Modify": async () => {
                 question_state_flag = true;
-                await this.openProblem(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
+                await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
             },
             "Show solution": async () => {
                 question_state_flag = true;
-                this.openProblem(problem, { open_problem_temporal: false, open_solution: true });
+                this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_solution: true });
 
                 // return Constants.ProblemStatus.unsolved;
             },
@@ -280,17 +296,17 @@ class DSATrainer {
                 // Open the problem's base
 
                 question_state_flag = true;
-                this.openProblem(problem, { open_problem_temporal: false, open_basecode: true });
+                this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_basecode: true });
             },
             "Edit Markdown prompt": async () => {
                 // Open the problem's base
 
                 question_state_flag = true;
-                this.openProblem(problem, { open_problem_temporal: false, open_markdown: true });
+                this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_markdown: true });
             },
             "Open test cases": async () => {
                 question_state_flag = true;
-                this.openProblem(problem, { open_problem_temporal: false, open_test_cases: true });
+                this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_test_cases: true });
             }
         }
 
