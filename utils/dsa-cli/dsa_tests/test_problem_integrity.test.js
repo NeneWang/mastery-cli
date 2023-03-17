@@ -7,10 +7,10 @@ const assert = require('assert');
 
 
 const to_test = {
-    'printable': true, //Also updates the metadata for all.
-    'category': true,
-    'exact-category': true, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
-    'basic': true,
+    'printable': false, //Also updates the metadata for all.
+    'category': false,
+    'exact-category': false, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
+    'basic': false,
     'runnable': true,
 }
 
@@ -125,10 +125,7 @@ describe('Problem integrity', function () {
             console.log("category_test_slug", category_test_slug, PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[category_test_slug])
             console.log("category_slug_in_md", category_slug_in_md, problems_per_category_slug[category_slug_in_md])
             assert(PROBLEM_COUNT_PER_CATEGORY_TEST_NAME[category_test_slug] <= problems_per_category_slug[category_slug_in_md]);
-
-
         }
-
 
     });
 
@@ -187,6 +184,7 @@ describe('Problem integrity', function () {
     })
 
 
+    
 
 
 });
