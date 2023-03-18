@@ -571,7 +571,7 @@ const interview = [
         description: "This question is often asked to assess a candidate's ability to communicate instructions clearly and effectively.",
         example: "Sure, here's how to tie your shoes with your eyes closed: \n1. Take the two laces and cross them over each other, with one lace on top of the other. \n2. Take the lace that's on top and make a loop, pulling it over and under the other lace. \n3. Take the other lace and wrap it around the loop you just made, tucking it under and through the hole. \n4. Pull the loops tight and adjust as needed. That's it!"
     },
-    
+
     // Team-work.
     {
         term: "working-with-different-personality",
@@ -602,7 +602,117 @@ const interview = [
         prompt: "Tell me about a time you needed to get information from someone who wasn’t very responsive. What did you do?",
         description: "This question is often asked to assess a candidate's ability to communicate effectively and work through challenging situations.",
         example: "In a previous job, I needed to get some important information from a colleague who was not very responsive to emails and phone calls. Instead of continuing to send messages and hoping for a response, I decided to try a different approach. I arranged to meet the colleague in person and offered to buy them lunch. During the lunch, I explained why I needed the information and how it would benefit both of us. I also listened carefully to their concerns and addressed them as best I could. By the end of the lunch, we had established a stronger working relationship and the colleague was more responsive to my requests."
-    }
+    },
+    {
+        term: "under-pressure",
+        prompt: "Tell me about a time you were under a lot of pressure. What was going on, and how did you get through it?",
+        description: "The interviewer wants to know how I handle high-pressure situations, how I manage stress, and how I prioritize tasks when I have multiple deadlines to meet.",
+        example: "In my previous job, we had a project deadline that was quickly approaching, and the team was behind schedule. As the project manager, I was responsible for ensuring that we met the deadline. I organized a meeting with the team, we discussed the challenges, and I assigned specific tasks to each team member based on their strengths. I also set up a timeline and milestones to ensure we were on track. Additionally, I worked extra hours and provided extra support to the team members who needed it. We were able to meet the deadline, and the project was successful. Although it was a challenging time, I learned a lot about myself and my ability to work well under pressure."
+    },
+    {
+        term: "undergoing-change",
+        prompt: "Describe a time when your team or company was undergoing some change. How did that impact you, and how did you adapt?",
+        description: "The interviewer wants to know how I handle change, adapt to new situations, and deal with uncertainty.",
+        example: "At my previous job, our company was acquired by a larger organization, and there were a lot of changes happening. There were new policies, new management, and a shift in company culture. It was a challenging time for me because I had to adapt to new ways of doing things and navigate new relationships with colleagues. However, I remained positive and tried to see the changes as an opportunity to learn and grow. I made an effort to connect with my new colleagues, learn the new policies, and understand the new company culture. I also took on new projects and responsibilities to show my commitment to the company. Ultimately, I was able to adapt successfully to the changes, and it helped me to develop new skills and broaden my professional network."
+    },
+    {
+        term: "first-job",
+        prompt: "Tell me about the first job you’ve ever had. What did you do to learn the ropes?",
+        description: "The interviewer wants to know about my work history, my ability to learn quickly, and my work ethic.",
+        example: "My first job was working as a cashier at a local grocery store. It was a great learning experience for me because it was my first time working in a customer-facing role. I was eager to learn and did everything I could to learn the ropes. I asked a lot of questions, observed my coworkers, and studied the store policies and procedures. I also took the initiative to take on extra tasks, such as stocking shelves and cleaning the store, to show my work ethic and commitment to the job. By the end of my first month, I was comfortable with my role and had developed good relationships with my coworkers and customers."
+    },
+    {
+        term: "goal-setting",
+        prompt: "Tell me about a time you set a goal for yourself. How did you go about ensuring that you would meet your objective?",
+        description: "The interviewer wants to understand how I approach goal-setting and achieving objectives. They may be interested in my planning and organizational skills, as well as my ability to overcome obstacles and stay motivated.",
+        example: "One goal I set for myself was to improve my public speaking skills. I identified the areas that needed improvement, such as nervousness and lack of confidence, and developed a plan to address them. I practiced in front of friends and family, attended public speaking workshops, and volunteered to speak at events. I also received feedback from mentors and peers to track my progress and adjust my approach. Ultimately, I achieved my goal by breaking it down into manageable steps and staying committed to improving."
+    },
+    {
+        term: "managing-responsibilities",
+        prompt: "Give me an example of a time you managed numerous responsibilities. How did you handle that?",
+        description: "The interviewer wants to understand how I handle multiple tasks and responsibilities. They may be interested in my prioritization and time management skills, as well as my ability to handle stress and work under pressure.",
+        example: "In my previous role, I was responsible for managing a team, handling client communications, and delivering projects on time and within budget. To manage these responsibilities, I created a prioritization system where I ranked tasks by urgency and importance. I also delegated tasks to team members, empowering them to take ownership of their work and freeing up my time. Additionally, I set boundaries for myself, such as turning off email notifications during certain times of the day to ensure I could focus on important tasks. Through these methods, I was able to successfully manage my numerous responsibilities and deliver results."
+    },
+    {
+        term: "persuading-someone-to-see-things-your-way",
+        prompt: "Give me an example of a time when you were able to successfully persuade someone to see things your way at work.",
+        description: "The interviewer is interested in my ability to communicate effectively and influence others in a professional setting.",
+        example: "In my previous job, we were discussing a new project where I believed implementing a particular technology would be beneficial for the company. However, my manager was hesitant about it. I scheduled a meeting with my manager and presented a detailed analysis of the technology, including its benefits and potential drawbacks. I also provided case studies of similar projects that had used the same technology and achieved success. After the meeting, my manager was convinced of the benefits and we went ahead with the project using the technology. The project was successful and completed ahead of schedule. This experience taught me the importance of presenting a solid case with facts and data to persuade others to see things from your perspective."
+    },
+    {
+        term: "resolving-frustrated-client",
+        prompt: "Describe a time when you had to explain something fairly complex to a frustrated client. How did you handle this delicate situation?",
+        description: "The interviewer is interested in my ability to handle challenging situations and communicate technical information to non-technical clients.",
+        example: "In my previous job, a client was frustrated and confused about an issue they were facing with our software product. They were having difficulty understanding the technical details I was providing in response to their questions. I realized that I needed to simplify my explanations and break down the technical jargon for the client to better understand the issue. I asked the client specific questions to understand their perspective and concerns. I then explained the issue in simpler terms, using metaphors and analogies to help the client understand the technical concepts. By the end of the conversation, the client was satisfied and thanked me for my patience and clear explanation. This experience taught me the importance of active listening and effective communication, especially when dealing with frustrated clients."
+    },
+    {
+        term: "successful-presentation",
+        prompt: "Tell me about a successful presentation you gave and why you think it was a hit.",
+        description: "The interviewer is interested in my presentation skills and my ability to communicate effectively to a diverse audience.",
+        example: "In my previous job, I was tasked with presenting a new software feature to our clients at a conference. I prepared extensively for the presentation, rehearsing my delivery and ensuring that the slides were visually appealing and easy to understand. During the presentation, I engaged the audience by using anecdotes and humor to keep their attention. I also made sure to address any questions and concerns that arose during the presentation. Afterward, many of the attendees came up to me and complimented me on the presentation, saying that they found it engaging and informative. This experience taught me the importance of preparation, engaging the audience, and being responsive to their needs during the presentation."
+    },
+    {
+        term: "professional-accomplishment",
+        prompt: "Tell me about your proudest professional accomplishment.",
+        description: "The interviewer is interested in learning about a specific professional accomplishment that I'm proud of and the impact it had. They may also be looking to understand my motivations and what drives me in my work.",
+        example: "My proudest professional accomplishment was leading a team that developed a new software product from scratch. We worked tirelessly for months, conducting user research, designing the product, coding, and testing it. It was a complex project that required coordination and collaboration across multiple departments. After launch, the product was very successful, exceeding revenue targets and receiving positive feedback from users. I was proud of what we had accomplished and the impact our product had on the company and its customers. This experience taught me the importance of teamwork, determination, and attention to detail in achieving success."
+    },
+    {
+        term: "problem-solving-initiative",
+        prompt: "Describe a time when you saw some problem and took the initiative to correct it rather than waiting for someone else to do it.",
+        description: "The interviewer is interested in understanding my problem-solving skills, my ability to take initiative, and my proactivity in the workplace. They may also be looking to assess my level of responsibility and accountability.",
+        example: "In my previous job, I noticed that our team's communication had become very disorganized and inefficient. Important messages were getting lost, deadlines were being missed, and progress was stagnating. Rather than waiting for someone else to take action, I decided to take the initiative to address the problem. I started by creating a team communication plan, setting clear guidelines for how we would communicate and collaborate on projects. I also implemented a project management tool to help us track progress and deadlines. As a result of my efforts, our team's productivity increased, deadlines were met, and communication became more effective. This experience taught me the importance of being proactive and taking responsibility for solving problems."
+    },
+    {
+        term: "dissatisfied-in-work",
+        prompt: "Tell me about a time you were dissatisfied in your work. What could have been done to make it better?",
+        description: "The interviewer wants to know about a time when I was not happy in my job and what could have been done to improve the situation. This question is designed to understand my level of self-awareness and my ability to problem-solve and communicate effectively.",
+        example: "I was once in a position where I was dissatisfied with my workload. I felt like I was not being challenged enough and that my skills were being underutilized. I took the initiative to speak with my supervisor about my concerns and we worked together to create new responsibilities for me that better aligned with my skills and interests. This resulted in me feeling more satisfied and motivated in my job. The lesson I learned from this experience is that communication is key in addressing workplace dissatisfaction and that taking the initiative to problem-solve can lead to positive outcomes for both the employee and the company."
+    },
+    {
+        term: "creative-with-work",
+        prompt: "Give me an example of a time you were able to be creative with your work. What was exciting or difficult about it?",
+        description: "The interviewer wants to assess my ability to be creative and innovative in problem-solving and completing tasks. They also want to learn about how I approach challenges and what I find exciting or difficult in doing so.",
+        example: "In my previous role as a marketing specialist, I was tasked with creating a campaign to promote a new product launch. I wanted to do something unique and memorable, so I came up with the idea of creating a virtual reality experience that would allow customers to try out the product in a fun and immersive way. This was exciting because it was something that had never been done before by the company, but it was also difficult because it required a lot of coordination with different teams and a tight timeline. However, I was able to successfully execute the campaign, which led to increased sales and positive customer feedback."
+    },
+    {
+        term: "dissatisfied-in-work",
+        prompt: "Tell me about a time you were dissatisfied in your work. What could have been done to make it better?",
+        description: "The interviewer wants to learn about my ability to identify and address problems or challenges in the workplace, as well as my willingness to seek solutions and take action. They also want to see if I have the ability to offer constructive feedback to my employer.",
+        example: "There was a time in my previous job where I felt like my work was becoming stagnant and unchallenging. I spoke with my supervisor about my concerns and suggested taking on new projects or responsibilities that would allow me to grow and develop my skills. Unfortunately, due to the company's structure and workload, it wasn't possible to immediately assign me new tasks. However, my supervisor recognized my enthusiasm and willingness to take on new challenges, and worked with me to identify areas where I could add value and provided me with additional training opportunities. This helped me to regain my sense of purpose and motivation in the job."
+    },
+    {
+        term: "Create some follow up questions for Trainning and Professional Development",
+        prompt: "What training and professional development opportunities are available to employees at your company?",
+        description: "The interviewer wants to learn about the company's commitment to employee development and training. They also want to understand what opportunities are available to employees and how they can take advantage of them.",
+        example: "11. How will I be trained? 12. What training programs are available to your employees? 13. Are there opportunities for advancement or professional development ? 14. Would I be able to represent the company at industry conferences? 15. Where is the last person who held this job moving on to? 16. Where have successful employees previously in this position progressed to?"
+    },
+    {
+        term: "performance-question",
+        prompt: "Ask questions to understand how to set urself to success",
+        description: "Make sure you're setting yourself up for success by learning up front the goals of the position and how your work will be evaluated.",
+        example: "17. What are the most important things you’d like to see someone accomplish in the first 30, 60, and 90 days on the job? 18. What are the performance expectations of this position over the first 12 months? 19. What is the performance review process like here? How often would I be formally reviewed? 20. What metrics or goals will my performance be evaluated against?"
+    },
+    {
+        term: "interviewer",
+        prompt: "Asking questions about the interviewer",
+        description: "Asking questions of the interviewer shows that you're interested in him or her as a person—and that's a great way to build rapport.",
+        example: "21. How long have you been with the company? 22. Has your role changed since you've been here? 23. What did you do before this? 24. Why did you come to this company? 25. What’s your favorite part about working here?"
+    },
+    {
+        term: "company",
+        prompt: "Asking questions about the company",
+        description: "Because you're not just working for one boss or one department, you're working for the company as a whole.",
+        example: "26. I've read about the company's founding, but can you tell me more about ___? 27. Where do you see this company in the next few years? 28. What can you tell me about your new products or plans for growth? 29. What are the current goals that the company is focused on, and how does this team work to support hitting those goals? 30. What gets you most excited about the company's future?"
+    },
+    {
+        term: "team",
+        prompt: "Asking questions about the team",
+        description: "The people you work with day in and day out can really make or break your work life. Ask some questions to uncover whether it's the right team for you.",
+        example: "31. Can you tell me about the team I’ll be working with? 32. Who will I work with most closely? 33. Who will I report to directly? 34. Can you tell me about my direct reports? What are their strengths and the team's biggest challenges? 35. Do you expect to hire more people in this department in the next six months? 36. Which other departments work most closely with this one? 37. What are the common career paths in this department?"
+    },
+    
+
 
 ]
 
