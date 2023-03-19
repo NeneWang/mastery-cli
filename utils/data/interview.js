@@ -419,6 +419,189 @@ const interview = [
         prompt: "What is your biggest regret and why?",
         description: "The interviewer is likely interested in understanding my ability to reflect on past experiences and learn from mistakes.",
         example: "My biggest regret is not pursuing a certain opportunity earlier in my career. I had the chance to work on a project that would have been a stretch for me, but I was hesitant to take it on due to my lack of experience in that area. Looking back, I realize that I missed out on a valuable learning opportunity and a chance to grow professionally. However, I learned from this experience and now make a point to take on new challenges and stretch myself outside of my comfort zone."
+    },
+    {
+        term: "qualities-of-a-good-leader",
+        prompt: "What are the qualities of a good leader? A bad leader?",
+        description: "The interviewer is likely interested in understanding my perspective on leadership and what I believe are important qualities for success in a leadership role.",
+        example: "In my opinion, a good leader is someone who is able to inspire and motivate their team, while also providing clear direction and support. They should be able to communicate effectively, delegate tasks appropriately, and be willing to listen to feedback and ideas from their team members. On the other hand, a bad leader is someone who is overly controlling or micromanaging, lacks empathy or understanding of their team members' needs, and is unable to provide effective guidance or support."
+    },
+    {
+        term: "leader-feared-or-liked",
+        prompt: "Do you think a leader should be feared or liked?",
+        description: "The interviewer is likely interested in understanding my perspective on leadership style and what I believe is effective for motivating and inspiring a team.",
+        example: "I believe that a leader should strive to be respected rather than feared or liked. Respect comes from demonstrating integrity, setting a positive example, and being open and honest with team members. It is important for a leader to hold themselves and their team members accountable, while also providing support and guidance to help everyone succeed."
+    },
+    {
+        term: "taking-no-for-an-answer",
+        prompt: "How do you feel about taking no for an answer?",
+        description: "The interviewer is likely interested in understanding my ability to handle rejection or obstacles and how I approach problem-solving.",
+        example: "While it can be difficult to hear 'no', I believe that it is an important part of the problem-solving process. It is important to listen to feedback and understand the reasons behind a decision, and to use that information to adjust your approach or come up with new solutions. Being able to handle rejection or obstacles with grace and resilience is an important skill for success in any role."
+    },
+    {
+        term: "working-for-someone-who-knows-less",
+        prompt: "How would you feel about working for someone who knows less than you?",
+        description: "The interviewer is likely interested in understanding my willingness to learn from others and how I approach situations where I may have more knowledge or experience than my supervisor.",
+        example: "I would feel comfortable working for someone who knows less than me, as long as they are open to feedback and willing to learn. I believe that everyone has something to teach and something to learn, and that a team is strongest when everyone is able to share their unique perspectives and skills. It is important to approach these situations with humility and a willingness to collaborate and share knowledge."
+    },
+    {
+        term: "interviewer-rating",
+        prompt: "How do you think I rate as an interviewer?",
+        description: "The interviewer is likely interested in understanding my ability to provide constructive feedback and my professionalism in potentially difficult or awkward situations.",
+        example: "I think you are doing a great job as an interviewer. You have been asking thoughtful and relevant questions, and have created a comfortable and welcoming environment for this interview. I appreciate your professionalism and your dedication to finding the best fit for this position."
+    },
+    {
+        term: "one-thing-you-wouldnt-want-me-to-know",
+        prompt: "Tell me one thing about yourself you wouldn't want me to know.",
+        description: "The interviewer is likely asking this question to see how I handle a potentially uncomfortable or embarrassing situation and to gauge my level of honesty and transparency.",
+        example: "While there is nothing about myself that I wouldn't want you to know in the context of this interview, there are certain personal details that I prefer to keep private. I believe that everyone has a right to their privacy and boundaries, and that it is important to respect those boundaries in a professional setting."
+    },
+    {
+        term: "good-vs-exceptional",
+        prompt: "Tell me the difference between good and exceptional.",
+        description: "The interviewer is likely interested in understanding my ability to recognize and strive for excellence, and to differentiate between average performance and exceptional performance.",
+        example: "In my opinion, the difference between good and exceptional is the level of dedication, attention to detail, and commitment to excellence. While good performance meets the minimum requirements and expectations, exceptional performance goes above and beyond those expectations and sets a new standard for excellence. Exceptional performance is characterized by creativity, innovation, and a willingness to take risks and challenge the status quo."
+    },
+    {
+        term: "kind-of-car-you-drive",
+        prompt: "What kind of car do you drive?",
+        description: "The interviewer may be asking this question to build rapport or to gauge my interests and hobbies outside of work.",
+        example: "I drive a [insert make and model of car]. While I am interested in cars and enjoy learning about different models and features, I don't consider myself an expert or a 'car person'. For me, a car is primarily a functional tool for getting from point A to point B, but I do appreciate a comfortable and reliable vehicle."
+    },
+    {
+        term: "ideal-location",
+        prompt: "There's no right or wrong answer, but if you could be anywhere in the world right now, where would you be?",
+        description: "The interviewer may be asking this question to understand my personal preferences and interests, as well as to see how well I can think on my feet.",
+        example: "If I could be anywhere in the world right now, I would love to be hiking in the mountains of Banff National Park in Canada. I find the natural beauty and peacefulness of the mountains to be very rejuvenating and inspiring, and I enjoy the physical challenge and sense of accomplishment that comes with a good hike."
+    },
+    {
+        term: "last-book-read",
+        prompt: "What's the last book you read?",
+        description: "The interviewer may be asking this question to understand my reading habits and interests, as well as to see how well-rounded I am as a candidate.",
+        example: "The last book I read was 'The Immortal Life of Henrietta Lacks' by Rebecca Skloot. It's a fascinating and thought-provoking exploration of the ethics and social implications of scientific research, and it raises important questions about race, class, and power in our society."
+    },
+    {
+        term: "magazine-subscriptions",
+        prompt: "What magazines do you subscribe to?",
+        description: "The interviewer may be asking this question to understand my interests and hobbies outside of work, as well as to see how well-rounded I am as a candidate.",
+        example: "I currently subscribe to 'National Geographic' and 'The New Yorker'. I love the stunning photography and fascinating articles in 'National Geographic', and I appreciate the in-depth reporting and thoughtful commentary in 'The New Yorker'. I also enjoy reading a variety of other publications, both online and in print, to stay informed and engaged with current events and cultural trends."
+    },
+    {
+        term: "best-movie-last-year",
+        prompt: "What's the best movie you've seen in the last year?",
+        description: "The interviewer may be asking this question to understand my interests and hobbies outside of work, as well as to see how well-rounded I am as a candidate.",
+        example: "The best movie I've seen in the last year is 'Parasite' by Bong Joon-ho. It's a brilliantly crafted film that combines social commentary, suspense, and dark humor in a way that is both entertaining and thought-provoking. The performances are outstanding, and the cinematography and production design are top-notch. I highly recommend it to anyone who enjoys intelligent and engaging cinema."
+    },
+    {
+        term: "lottery-winnings",
+        prompt: "What would you do if you won the lottery?",
+        description: "The interviewer may be asking this question to understand my personal goals and priorities, as well as to see how well I can think creatively and strategically.",
+        example: "If I won the lottery, the first thing I would do is pay off any outstanding debts and set aside some savings for the future. Then, I would donate a portion of the winnings to a charitable cause or causes that I feel passionate about. Finally, I would use some of the winnings to travel and explore new cultures and experiences, while also investing in my personal and professional development."
+    },
+    {
+        term: "heroes",
+        prompt: "Who are your heroes?",
+        description: "The interviewer may be asking this question to understand my values and beliefs, as well as to see how I draw inspiration and motivation from others.",
+        example: "I have several heroes, both real and fictional, who have influenced and inspired me throughout my life. One of my heroes is [insert name of person or character], who [insert reason why they are a hero to me]. Their [insert specific qualities or actions that I admire] are qualities that I strive to emulate in my own life and work."
+    },
+    {
+        term: "fun-activities",
+        prompt: "What do you like to do for fun?",
+        description: "The interviewer may be asking this question to understand my interests and hobbies outside of work, as well as to see how well-rounded I am as a candidate.",
+        example: "For fun, I enjoy [insert activity or hobby], which allows me to [insert reason why I enjoy this activity or hobby]. I also like to [insert another activity or hobby], which helps me [insert another reason why I enjoy this activity or hobby]. In general, I enjoy spending time outdoors, trying new foods and restaurants, and spending time with family and friends."
+    },
+    {
+        term: "spare-time",
+        prompt: "What do you do in your spare time?",
+        description: "The interviewer may be asking this question to understand my interests and hobbies outside of work, as well as to see how well-rounded I am as a candidate.",
+        example: "In my spare time, I enjoy [insert activity or hobby], which allows me to [insert reason why I enjoy this activity or hobby]. I also like to [insert another activity or hobby], which helps me [insert another reason why I enjoy this activity or hobby]. I also try to stay physically active by [insert another activity or hobby], which helps me maintain a healthy and balanced lifestyle. Additionally, I like to [insert another activity or hobby], which helps me [insert another reason why I enjoy this activity or hobby]."
+    },
+    {
+        term: "clock-hands-overlap",
+        prompt: "How many times do a clock's hands overlap in a day?",
+        description: "This is a classic interview puzzle question that tests a candidate's critical thinking and problem-solving skills.",
+        example: "The clock's hands overlap 22 times in a day. To calculate this, we can use the formula [(11 * hours) - (60 * minutes)] / 2, where 'hours' is the current hour in 24-hour format and 'minutes' is the current minute. We divide by 2 because the clock's hands overlap twice per hour (once when they meet and once when they separate). Therefore, over 24 hours, the hands overlap 22 times."
+    },
+    {
+        term: "weigh-plane-without-scales",
+        prompt: "How would you weigh a plane without scales?",
+        description: "This is another interview puzzle question that tests a candidate's critical thinking and problem-solving skills, as well as their creativity and resourcefulness.",
+        example: "One way to weigh a plane without scales is to use a large balloon filled with helium. We can attach the balloon to the bottom of the plane and measure the amount of helium needed to lift the plane off the ground. Since we know the weight of the helium needed to lift a certain volume of air, we can calculate the weight of the plane based on the volume of air displaced by the balloon. Another way to weigh a plane is to use a hydraulic jack and a pressure gauge. We can lift the plane off the ground using the jack and measure the pressure exerted by the plane's weight on the jack using the pressure gauge. From there, we can calculate the weight of the plane based on the pressure reading."
+    },
+    {
+        term: "10-uses-of-pencil",
+        prompt: "Tell me 10 ways to use a pencil other than writing.",
+        description: "This question tests a candidate's creativity and ability to think outside the box, as well as their communication skills and ability to articulate their ideas clearly.",
+        example: "Sure, here are 10 ways to use a pencil other than writing:\n1. Use it to hold up your hair in a bun or ponytail.\n2. Use it to prop open a window or door.\n3. Use it to stir a drink or mix paint.\n4. Use it as a makeshift screwdriver or pry bar.\n5. Use it to tap on a wall or door to check for hollow spots or studs.\n6. Use it as a conductor for a small electrical circuit.\n7. Use it as a skewer for grilling or roasting small items.\n8. Use it to create a stencil for a design or pattern.\n9. Use it as a level to check for straight lines or angles.\n10. Use it as a microphone to amplify your voice during a presentation or speech."
+    },
+    {
+        term: "sell-me-this-pencil",
+        prompt: "Sell me this pencil.",
+        description: "This is a classic interview question that tests a candidate's sales skills, as well as their ability to think on their feet and improvise.",
+        example: "Where am I? What kind of shap am I situated at? Is there any upcoming event in this scenario? Am I allowed to use customer segmentation? How about advertisement? Is there any competition? Is there a school exam near this location?\n\
+        Do I have to ideate a scalable solution and reduce the resources expenditure?"
+    },
+    {
+        term: "animal-you-want-to-be",
+        prompt: "If you were an animal, which one would you want to be?",
+        description: "This question is often asked to assess a candidate's creativity and imagination, as well as their ability to think on their feet.",
+        example: "If I were an animal, I would want to be an eagle. Eagles are majestic creatures that have the ability to soar high above the clouds and see the world from a unique perspective. They are also known for their keen eyesight and hunting prowess, which would give me a sense of power and control over my surroundings."
+    },
+    {
+        term: "fuzz-on-tennis-ball",
+        prompt: "Why is there fuzz on a tennis ball?",
+        description: "This question is often asked to assess a candidate's knowledge of random trivia and their ability to think critically.",
+        example: "The fuzz on a tennis ball is there to help the ball grip the court surface and create more spin and control for the player. The fuzz also helps to slow down the ball slightly, making it easier to return and keep rallies going."
+    },
+    {
+        term: "superhero-power",
+        prompt: "If you could choose one superhero power, what would it be and why?",
+        description: "This question is often asked to assess a candidate's creativity and imagination, as well as their ability to think critically and problem-solve.",
+        example: "If I could choose one superhero power, I would choose the power of teleportation. Being able to instantly transport myself from one place to another would save me so much time and make traveling much easier. It would also give me the ability to escape dangerous or uncomfortable situations quickly and efficiently."
+    },
+    {
+        term: "get-rid-of-a-state",
+        prompt: "If you could get rid of any one of the US states, which one would you get rid of and why?",
+        description: "This question is often asked to assess a candidate's sense of humor and ability to think on their feet. It is important to approach this question with tact and diplomacy.",
+        example: "As much as I love all of the US states, but if I were to want to watch the world burn, if I had to get rid of one, it would probably be Florida, perphaps I would just want to watch the world burn with the by releasing all the florida man's with their alligators to the world."
+    },
+    {
+        term: "tie-shoes-with-eyes-closed",
+        prompt: "With your eyes closed, tell me step-by-step how to tie my shoes.",
+        description: "This question is often asked to assess a candidate's ability to communicate instructions clearly and effectively.",
+        example: "Sure, here's how to tie your shoes with your eyes closed: \n1. Take the two laces and cross them over each other, with one lace on top of the other. \n2. Take the lace that's on top and make a loop, pulling it over and under the other lace. \n3. Take the other lace and wrap it around the loop you just made, tucking it under and through the hole. \n4. Pull the loops tight and adjust as needed. That's it!"
+    },
+    
+    // Team-work.
+    {
+        term: "working-with-different-personality",
+        prompt: "Talk about a time when you had to work closely with someone whose personality was very different from yours.",
+        description: "This question is often asked to assess a candidate's ability to work with diverse personalities and collaborate effectively with others.",
+        example: "I had to work closely with a colleague whose personality was very different from mine on a project last year. While I tend to be more reserved and analytical, my colleague was very outgoing and liked to take risks. At first, it was challenging to find common ground and communicate effectively, but we quickly realized that our different perspectives could actually be an asset to the project. We learned to appreciate each other's strengths and weaknesses, and we found ways to balance each other out. By the end of the project, we had developed a strong working relationship and delivered a successful outcome."
+    },
+    {
+        term: "conflict-on-a-team",
+        prompt: "Give me an example of a time you faced a conflict while working on a team. How did you handle that?",
+        description: "This question is often asked to assess a candidate's ability to navigate difficult situations and resolve conflicts in a professional manner.",
+        example: "While working on a team project, I faced a conflict with one of my team members who was not contributing as much as the rest of the team. I approached the situation by first trying to understand the underlying issues and reasons for the lack of contribution. I discovered that the team member was struggling with personal issues that were affecting their work. I then offered to help and provided resources and support to address those issues. This approach helped to resolve the conflict and improve the team member's contribution to the project. It also strengthened our team dynamic and improved communication among team members."
+    },
+    {
+        term: "struggled-to-build-relationship",
+        prompt: "Describe a time when you struggled to build a relationship with someone important. How did you eventually overcome that?",
+        description: "This question is often asked to assess a candidate's ability to build and maintain relationships with key stakeholders.",
+        example: "Early in my career, I struggled to build a relationship with a key client who was hesitant to trust me and my team. I made an effort to understand their concerns and needs, and I worked closely with them to identify solutions that would meet their goals. I also made sure to communicate regularly and clearly with the client, providing updates on our progress and addressing any concerns as soon as they arose. Over time, the client began to see the value of our work and the trust between us grew stronger."
+    },
+    {
+        term: "handling-situation-differently",
+        prompt: "We all make mistakes we wish we could take back. Tell me about a time you wish you’d handled a situation differently with a colleague.",
+        description: "This question is often asked to assess a candidate's ability to reflect on past experiences and learn from mistakes.",
+        example: "There was a situation where I had a disagreement with a colleague over a project we were working on. In hindsight, I wish I had taken a step back and tried to understand their perspective more fully before reacting emotionally. I realized that I could have approached the situation in a more constructive way, by asking questions and seeking to understand their reasoning. Since then, I have made a conscious effort to approach conflicts in a more collaborative manner, and to always try to understand others' viewpoints before jumping to conclusions."
+    },
+    {
+        term: "getting-information-from-non-responsive-person",
+        prompt: "Tell me about a time you needed to get information from someone who wasn’t very responsive. What did you do?",
+        description: "This question is often asked to assess a candidate's ability to communicate effectively and work through challenging situations.",
+        example: "In a previous job, I needed to get some important information from a colleague who was not very responsive to emails and phone calls. Instead of continuing to send messages and hoping for a response, I decided to try a different approach. I arranged to meet the colleague in person and offered to buy them lunch. During the lunch, I explained why I needed the information and how it would benefit both of us. I also listened carefully to their concerns and addressed them as best I could. By the end of the lunch, we had established a stronger working relationship and the colleague was more responsive to my requests."
     }
 
 ]
