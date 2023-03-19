@@ -365,8 +365,61 @@ const interview = [
         prompt: "What is your personal mission statement?",
         description: "The interviewer is likely interested in understanding my values and how they align with the company's mission and values.",
         example: "My personal mission statement is to use my skills, knowledge, and creativity to make a positive impact on society and to inspire others to do the same. I believe that by staying true to my values of integrity, collaboration, and excellence, I can achieve my mission and help create a better world. Additionally, I strive to embrace diversity and inclusion, to respect different perspectives and cultures, and to work towards creating a more equitable and just society for all."
+    },
+    {
+        term: "positive-things-boss",
+        prompt: "What are three positive things your last boss would say about you?",
+        description: "The interviewer is likely interested in understanding my professional strengths and how they align with the company's requirements.",
+        example: "My last boss would likely say that I am a hard-working, detail-oriented, and collaborative team player. I am always willing to go the extra mile to ensure that tasks are completed on time and to a high standard, and I have a keen eye for detail that helps me catch errors and inconsistencies. Additionally, I enjoy working with others and am skilled at building positive relationships with colleagues, clients, and stakeholders."
+    },
+    {
+        term: "negative-thing-boss",
+        prompt: "What negative thing would your last boss say about you?",
+        description: "The interviewer is likely interested in understanding my areas for improvement and how I handle feedback.",
+        example: "While I believe that I have a good working relationship with my previous bosses, I am aware that there may be areas where I can improve. If my last boss were to mention a negative aspect, it might be that I can be overly perfectionistic at times, which can lead to delays or missed deadlines. However, I am aware of this tendency and work hard to balance attention to detail with timely and efficient work."
+    },
+    {
+        term: "positive-traits-friends",
+        prompt: "What three character traits would your friends use to describe you?",
+        description: "The interviewer is likely interested in understanding my personal qualities and how they align with the company's culture and values.",
+        example: "My friends would likely describe me as empathetic, dependable, and creative. I value emotional intelligence and try to understand the perspectives and feelings of others, which allows me to build strong relationships with colleagues and clients. Additionally, I am reliable and follow through on commitments, which makes me a trustworthy and valued member of any team. Finally, I enjoy using my creativity to solve problems and come up with innovative solutions."
+    },
+    {
+        term: "positive-traits-dont-have",
+        prompt: "What are three positive character traits you don't have?",
+        description: "The interviewer is likely interested in understanding my self-awareness and ability to identify areas for growth and development.",
+        example: "While I believe that I have many positive character traits, there are also areas where I can improve. For example, I sometimes struggle with public speaking and could benefit from developing stronger communication and presentation skills. Additionally, I admire people who are highly organized and detail-oriented, as I believe these traits can be valuable in many professional settings. Finally, I aspire to be more resilient and adaptable in the face of change and uncertainty."
+    },
+    {
+        term: "traits-look-for",
+        prompt: "If you were interviewing someone for this position, what traits would you look for?",
+        description: "The interviewer is likely interested in understanding my priorities and values as a hiring manager.",
+        example: "As a hiring manager, I would look for candidates who are passionate, driven, and collaborative. I believe that passion is essential for success in any field, and I look for candidates who are excited about the work and have a clear vision for how they can contribute to the team. Additionally, I value candidates who are motivated and take ownership of their work, as well as those who are skilled at working with others and building positive relationships. Finally, I look for candidates who are curious, adaptable, and open to learning and growth."
+    },
+    {
+        term: "five-words-character",
+        prompt: "List five words that describe your character.",
+        description: "The interviewer is likely interested in understanding my personal qualities and how they align with the company's culture and values.",
+        example: "Five words that describe my character are reliable, empathetic, detail-oriented, collaborative, and adaptable. I value honesty, dependability, and emotional intelligence, and I believe that attention to detail, strong teamwork, and flexibility are essential for success in any role."
+    },
+    {
+        term: "impactful-person-career",
+        prompt: "Who has impacted you most in your career and how?",
+        description: "The interviewer is likely interested in understanding the people and experiences that have influenced my professional development.",
+        example: "One person who has impacted me greatly in my career is my first manager at my first job out of college. She took the time to teach me the fundamentals of the industry and helped me develop key skills in areas such as project management, client communication, and problem-solving. Additionally, she provided me with valuable mentorship and guidance, and always challenged me to strive for excellence in my work."
+    },
+    {
+        term: "greatest-fear",
+        prompt: "What is your greatest fear?",
+        description: "The interviewer is likely interested in understanding my personal motivators and potential areas of concern that may impact my performance.",
+        example: "My greatest fear is not being able to live up to the expectations that I set for myself. I am very ambitious and always strive to do my best, but I worry that I may fall short in some way or disappoint others. To address this fear, I focus on setting realistic goals and developing a strong support network of colleagues, mentors, and friends who can provide guidance and encouragement along the way."
+    },
+    {
+        term: "biggest-regret",
+        prompt: "What is your biggest regret and why?",
+        description: "The interviewer is likely interested in understanding my ability to reflect on past experiences and learn from mistakes.",
+        example: "My biggest regret is not pursuing a certain opportunity earlier in my career. I had the chance to work on a project that would have been a stretch for me, but I was hesitant to take it on due to my lack of experience in that area. Looking back, I realize that I missed out on a valuable learning opportunity and a chance to grow professionally. However, I learned from this experience and now make a point to take on new challenges and stretch myself outside of my comfort zone."
     }
-
 
 ]
 
