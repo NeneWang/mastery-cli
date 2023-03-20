@@ -10,7 +10,6 @@ const aws_glossary = [
         term: 'access key rotation',
         description: 'A method to increase security by changing the AWS access key ID. You can use this method to retire an old key at your discretion.',
         prompt: 'Define it | Use it on a sentence'
-
     }
 ];
 
@@ -121,6 +120,19 @@ const aws_services = [
         term: "SHA-1 vs SHA-256", prompt: "Whats the difference? And when to use one vs the other?",
         description: "SHA-1 and SHA-256 are both cryptographic hash functions that are widely used for securing data. However, SHA-1 is an older algorithm and has known vulnerabilities, while SHA-256 is a more modern algorithm that is considered to be more secure.  Here are some of the key pros and cons of each algorithm:  SHA-1:  Pros:      SHA-1 is a widely supported and well-established hash function.     It is faster than SHA-256.     It has a smaller output size (160 bits), which can be useful in certain contexts.  Cons:      SHA-1 is no longer considered to be secure for cryptographic purposes, due to known vulnerabilities.     It is vulnerable to collision attacks, which means that it is possible for an attacker to create two different inputs that hash to the same value.     It is no longer recommended for use by major security organizations, such as NIST and the NSA.  SHA-256:  Pros:      SHA-256 is a more modern hash function and is considered to be more secure than SHA-1.     It is resistant to collision attacks and other forms of cryptographic attacks.     It has a larger output size (256 bits), which makes it more difficult to brute force.  Cons:      SHA-256 is slower than SHA-1.     It has a larger output size, which can be less efficient in certain contexts.     It may not be compatible with older software and systems that only support SHA-1.  Overall, while SHA-1 may have some advantages in terms of speed and output size, its known vulnerabilities make it unsuitable for modern cryptographic applications. SHA-256, on the other hand, is a more secure algorithm and is the recommended choice for most applications.",
         prompt: "When to use SHA-1:      Compatibility: If you are working with older software or systems that only support SHA-1, then it may be more convenient to use SHA-1.     Performance: If you are working with large datasets and need to process data quickly, then SHA-1 may be a better choice since it is faster than SHA-256.     Output size: If you need a smaller output size for your hash function, then SHA-1's 160-bit output may be more convenient.  When to use SHA-256:      Security: If security is your primary concern, then SHA-256 is the more secure choice. It is resistant to collision attacks and other forms of cryptographic attacks, and is recommended by major security organizations such as NIST and the NSA.     Brute force resistance: If you need a hash function that is resistant to brute force attacks, then SHA-256's larger output size makes it more difficult to crack than SHA-1.     Future-proofing: Since SHA-1 is no longer considered to be secure, using SHA-256 ensures that your system will remain secure and up-to-date with current cryptographic standards.  In general, if security is your primary concern, then SHA-256 is the better choice. However, if compatibility or performance is more important for your specific use case, then SHA-1 may be more convenient. Nelson Wang how much faster sha1 is in percentage  The speed difference between SHA-1 and SHA-256 can depend on a variety of factors, such as the hardware used, the size of the input data, and the specific implementation of the hash function. In general, SHA-1 is faster than SHA-256, but the difference in speed may not be significant for small datasets.  In terms of specific numbers, it is difficult to give an exact percentage for the speed difference between SHA-1 and SHA-256, as it can vary depending on the specific use case. However, some benchmarks have shown that SHA-1 can be up to 20-30% faster than SHA-256 for small to medium-sized datasets. For larger datasets, the speed difference may become less noticeable, as the time required to hash the data can become dominated by other factors such as I/O and memory access.  It is important to note, however, that while SHA-1 may be faster than SHA-256, its known vulnerabilities make it unsuitable for modern cryptographic applications. For most applications, the improved security provided by SHA-256 is worth the small speed penalty. "
+    },
+    {
+        term: "installing-latest-pip", prompt: "How do you install the latest pyspark that starts with 2.4?",
+        description: "*",
+        answer: "pip install pyspark==2.4.*"
+    },
+    {
+        term: "sys argv",
+        prompt: "Use sys.argv to print the first argument passed to the script.",
+        answer: "import sys\n\
+        \n\
+        print(sys.argv[0]) # prints app.py,The filename\n\
+        print(sys.argv[1]) # prints the first argument"
     }
 ]
 
@@ -167,8 +179,59 @@ const coderTerms = [
         example: "Java can be considered both a compiled and an interpreted language because its source code is first compiled into a binary byte-code. This byte-code runs on the Java Virtual Machine (JVM), which is usually a software-based interpreter.\n\
         Java is a statically typed and compiled language, and Python is a dynamically typed and interpreted language. This single difference makes Java faster at runtime and easier to debug, but Python is easier to use and easier to read."
     },
+    { term: "Concurrent Computing", example: "yes", description: "In concurrent computing, multiple calculations are made within overlapping time frames. It takes advantage of the concept that multiple threads or processes can make progress on a task without waiting for others to complete. This general approach to writing and executing computer programs is called concurrency.  Concurrent computing is different than synchronous (sequential) computing, where calculations are made one after the other, with each waiting for the previous to complete. It's not the same as parallel computing, where calculations are made simultaneously on separate processors.  The three main types of concurrent computing are threading, asynchrony, and preemptive multitasking. Each method has its own special precautions which must be taken to prevent race conditions, where multiple threads or processes access the same shared data in memory in improper order.", prompt: "Whats the difference between different concurrent computing types?" }, ,
+    {
+        term: "Create Dynamic Frame from Catalog", prompt: "Create a dynamic frame from a catalog in Glue using table database being p_db, and table name is customers and then print it",
+        example: "dyf = glueContext.create_dynamic_frame.from_catalog(database='p_db', table_name='customers')\n\
+        dyf.printSchema()",
+        description: "glue_Context is the , create_dynamic_frame: Creates a dynamic frame from, from_catalog: Creates a dynamic frame from a catalog table, from_options: Creates a dynamic frame from a data source using the specified options, from_jdbc_conf: Creates a dynamic frame from a JDBC connection using the specified options, from_jdbc_ddl_conf: Creates a dynamic frame from a JDBC connection using the specified options, from_jdbc_options: Creates a dynamic frame from a JDBC connection using the specified opti\n\
+        printSchema: Prints the schema of the dynamic frame."
+    },
 
-    { term: "Concurrent Computing", example: "yes", description: "In concurrent computing, multiple calculations are made within overlapping time frames. It takes advantage of the concept that multiple threads or processes can make progress on a task without waiting for others to complete. This general approach to writing and executing computer programs is called concurrency.  Concurrent computing is different than synchronous (sequential) computing, where calculations are made one after the other, with each waiting for the previous to complete. It's not the same as parallel computing, where calculations are made simultaneously on separate processors.  The three main types of concurrent computing are threading, asynchrony, and preemptive multitasking. Each method has its own special precautions which must be taken to prevent race conditions, where multiple threads or processes access the same shared data in memory in improper order.", prompt: "Whats the difference between different concurrent computing types?" },
+    // Pyspark basic commands.
+    {
+        term: "Pyspark | convert-display-df",
+        prompt: "Convert a dynamic frame to a data frame and then display it",
+        example: "df = dyf.toDF()\ndisplay(df)",
+        description: "toDF: Converts a dynamic frame to a data frame, display: Displays the content of a data frame"
+    },
+    {
+        term: "Pyspark | select_fields_and_show",
+        prompt: "Select the fields first_name, email from the dynamic frame dyf and then show the first 5 rows",
+        example: "dyf.select_fields(['first_name', 'email']).show(5)",
+        description: "select_fields: Selects the specified fields from the dynamic frame, show: Displays the content of a data frame"
+    },
+    {
+        term: "Pyspark | renaming-columns",
+        prompt: "Rename the columns first_name to first and last_name to last",
+        example: "dyf = dyf.rename_field('first_name', 'first')\ndyf = dyf.rename_field('last_name', 'last')",
+        description: "rename_field: Renames a field in the dynamic frame"
+    },
+    {
+        term: "Pyspark | drop_columns",
+        prompt: "Drop the columns first and last from dyf",
+        example: "dyf = dyf.drop_fields(['first', 'last'])",
+        description: "drop_fields: Drops the specified fields from the dynamic frame"
+    },
+    {
+        term: "Pyspark | apply mapping",
+        prompt: "Apply the mapping to the dynamic frame dyf where you convert fullname into name, both as string types",
+        example: "mapping = [('fullname', 'string', 'name', 'string')]\n\
+        dyf = dyf.apply_mapping(mapping)",
+        description: "apply_mapping: Applies a mapping to the dynamic frame"
+    },
+    {
+        term: "Pyspark | filter",
+        prompt: "Filter the dynamic frame dyf where the name is equal to John",
+        example: "dyf = dyf.filter(lambda x: x['name'] == 'John')",
+        description: "filter: Filters the dynamic frame"
+    },
+    {
+        term: "Pyspark | join",
+        prompt: "Join the dynamic frame dyf with the dynamic frame dyf2 on the key name",
+        example: "dyf = dyf.join(dyf2, keys=['name'])",
+        description: "join: Joins the dynamic frame with another dynamic frame"
+    }
 ]
 
 

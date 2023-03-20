@@ -528,9 +528,55 @@ class hillClimbingSearch extends ProblemTests {
         const goal = nodes.AK;
 
         const problem = new this.Problem
-        const results = problem.solve(graph, start, goal);
-        console.log(`Count Searches: ${results.count_searches}`)
+        try {
+            const results = problem.solve(graph, start, goal);
+            console.log(`Count Searches: ${results.count_searches}`)
+        } catch (error) {
+            console.log(error);
+        }
     }
+}
+
+
+class DijkstraSearch extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+
+    }
+
+    test_1() {
+
+        const { graph, nodes } = new GraphBuilders().create_graph_5();
+        const start = nodes.A;
+        const goal = nodes.G;
+
+        const problem = new this.Problem
+
+        const results = problem.solve(graph, start, goal);
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+
+    }
+
+    test_3() {
+
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        const start = nodes.A;
+        const goal = nodes.AK;
+
+        const problem = new this.Problem
+        try {
+            const results = problem.solve(graph, start, goal);
+            // console.log(`Count Searches: ${results.count_searches}`)
+            console.log("Results");
+            console.log(results);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
 
 
@@ -539,7 +585,8 @@ const TEST_DICTIONARY = {
     'depth-first-search': DepthFirstSearch,
     'greedy-search': GreedySearch,
     'breadth-first-search': breadthFirstSearch,
-    'hill-climbing-search': hillClimbingSearch
+    'hill-climbing-search': hillClimbingSearch,
+    'dijkstra-search': DijkstraSearch,
 }
 
 module.exports = TEST_DICTIONARY;

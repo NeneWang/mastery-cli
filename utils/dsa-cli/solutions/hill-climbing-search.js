@@ -36,78 +36,7 @@ function heuristic(a, b) {
 }
 
 
-/**
- * 
- * @param {Graph} graph a graph of nodes
- * @param {Node} start start node
- * @param {Node} goal end goal node
- * @returns {Dict} path, cost, count_searches, formatted_path, exploration_path, queue_snapshot
- */
-function aStarSearch(graph, start, goal) {
-    const frontier = new PriorityQueue();
-    frontier.enqueue(start, 0);
-    let count_searches = 0;
-    let exploration_path = [];
-    let queue_snapshot = [];
 
-
-    // For backtracking purposes
-    const cameFrom = new Map();
-    cameFrom.set(start, null);
-    const costSoFar = new Map();
-    costSoFar.set(start, 0);
-
-    while (!frontier.isEmpty()) {
-        const current = frontier.dequeue();
-
-        // explore(current);
-
-        if (DEBUG) console.log("\n\nExploring", current.id);
-        count_searches += 1;
-        exploration_path.push(current);
-        queue_snapshot.push(frontier.getSnapshot());
-
-
-        if (current === goal) {
-            if (DEBUG) console.log("Goal found!");
-            break;
-        }
-
-        const neighbors = graph.neighbors(current);
-        if (neighbors?.length === 0) {
-            continue;
-        }
-        try {
-
-            neighbors.forEach(next => {
-                const newCost = costSoFar.get(current) + graph.cost(current, next);
-                if (!costSoFar.has(next) || newCost < costSoFar.get(next)) {
-                    costSoFar.set(next, newCost);
-
-                    // console.log("newCost", newCost, "heuristic", heuristic(goal, next));
-                    const priority = newCost + heuristic(goal, next); // A* heuristic
-
-                    if (DEBUG) console.log(`Enqueuing`, next, ` with priority`, priority);
-                    frontier.enqueue(next, priority);
-
-                    cameFrom.set(next, current); // Remember where we came from
-                }
-            });
-        }
-        catch (e) {
-            // console.log(e);
-        }
-    }
-
-    return {
-        path: reconstructPath(cameFrom, start, goal),
-        cost: costSoFar.get(goal),
-        count_searches: count_searches,
-        formatted_path: reconstructPath(cameFrom, start, goal).map(node => node.id).join(' -> '),
-        exploration_path: exploration_path,
-        queue_snapshot: queue_snapshot,
-    };
-}
 
 /**
  * Reconstructs the path from the cameFrom map<Node, Node> by shifting backwards from the goal node to the start node
@@ -208,19 +137,19 @@ class HillClimbingSearch {
         let current = start;
         let count_searches = 0;
         let exploration_path = [];
-    
+
         const cameFrom = new Map();
         cameFrom.set(start, null);
-    
+
         while (current !== goal) {
             count_searches += 1;
             exploration_path.push(current);
-    
+
             const neighbors = graph.neighbors(current);
             if (neighbors?.length === 0) {
                 break;
             }
-    
+
             let bestNext = null;
             let bestHeuristic = Infinity;
             console.log("neighbors", neighbors)
@@ -233,15 +162,15 @@ class HillClimbingSearch {
                     }
                 }
             });
-    
+
             if (!bestNext || bestHeuristic >= heuristic(goal, current)) {
-                break;
+                throw new Error('The algorithm got stuck and could not find a solution.');
             }
-    
+
             cameFrom.set(bestNext, current);
             current = bestNext;
         }
-    
+
         return {
             path: reconstructPath(cameFrom, start, goal),
             cost: null,
@@ -250,7 +179,7 @@ class HillClimbingSearch {
             exploration_path: exploration_path,
         };
     }
-    
+
 
 
     solve(graph, start, goal) {

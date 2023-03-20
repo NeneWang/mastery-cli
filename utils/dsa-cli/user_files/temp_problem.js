@@ -1,8 +1,9 @@
-class ContainerWithMostWater {
-    solve(heights) {
-       adasd
+class MaxProfit {
+
+    solve(prices) {
+	    //Solve your problem here
     }
 }
 
 
-module.exports = { Problem: ContainerWithMostWater };
+module.exports = { Problem: MaxProfit };
