@@ -212,21 +212,64 @@ class GraphBuilders {
     // Creates a long ass graph
     create_long_ass_graph() {
 
-    //              A
-    //            /   \
-    //           B     C
-    //          / \   / \
-    //         D   E F   G
-    //        / \ /  \  / \
-    //       H  I J  K L  M
-    //          / \ | / \ | \
-    //         N   O P   Q   R
-    //          \ /  |  / \  |
-    //          AB  AE AF  AI
-    //              / \ | / \
-    //             AD  AG AH AJ
-    //                  |  |
-    //                 AK  AK
+
+        // These are the coordinates, but the connectiosn are incorrect, you better use this:
+        // https://csacademy.com/app/graph_editor/
+        /**
+        A B
+        A C
+        B D
+        B E
+        C F
+        C G
+        D H
+        D I
+        E J
+        E K
+        F L
+        F M
+        G N
+        G O
+        H P
+        H Q
+        I R
+        I S
+        J T
+        J U
+        K V
+        K W
+        L X
+        L Y
+        M Z
+        M AA
+        N AB
+        N AC
+        O AD
+        O AE
+        P AF
+        P AG
+        Q AH
+        Q AI
+        R AJ
+        R AK
+         */
+        // 
+        // 
+        //              A
+        //            /   \
+        //           B     C
+        //          / \   / \
+        //         D   E F   G
+        //        / \ /  \  / \
+        //       H  I J  K L  M
+        //          / \ | / \ | \
+        //         N   O P   Q   R
+        //          \ /  |  / \  |
+        //          AB  AE AF  AI
+        //              / \ | / \
+        //             AD  AG AH AJ
+        //                  |  |
+        //                 AK  AK
 
 
 
@@ -409,9 +452,57 @@ class DepthFirstSearch extends ProblemTests {
 
 }
 
+class GreedySearch extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        // this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+
+    }
+
+
+    test_3() {
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        const start = nodes.A;
+        const goal = nodes.AK;
+
+        const problem = new this.Problem
+        const results = problem.solve(graph, start, goal);
+        console.log(results)
+        // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+    }
+
+}
+
+class breadthFirstSearch extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        // this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+
+    }
+
+    test_3() {
+
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        const start = nodes.A;
+        const goal = nodes.AK;
+
+        const problem = new this.Problem
+        const results = problem.solve(graph, start, goal);
+        console.log(results)
+    }
+}
+
+
 const TEST_DICTIONARY = {
     'a-star-search': AStarSearch,
-    'depth-first-search': DepthFirstSearch
+    'depth-first-search': DepthFirstSearch,
+    'greedy-search': GreedySearch,
+    'breadth-first-search': breadthFirstSearch
 }
 
 module.exports = TEST_DICTIONARY;
