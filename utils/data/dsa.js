@@ -289,9 +289,6 @@ const designPatterns = [
     { 
         term: "Proxy Pattern", description: "A class that functions as an interface to a particular resource. That resource may be remote, expensive to construct, or may require logging or some other functionality.", prompt: "Name an example in how you could use this pattern on", example: "Creating a protection proxy: For protecting business logic", 
     },
-    {
-
-    }
 
 ];
 

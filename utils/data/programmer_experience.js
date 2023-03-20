@@ -231,6 +231,78 @@ const coderTerms = [
         prompt: "Join the dynamic frame dyf with the dynamic frame dyf2 on the key name",
         example: "dyf = dyf.join(dyf2, keys=['name'])",
         description: "join: Joins the dynamic frame with another dynamic frame"
+    },
+    {
+        term: "Pyspark | write dynamic frame",
+        prompt: "Write the dynamic frame dyf to a table in the database p_db with the table name customers",
+        example: "glueContext.write_dynamic_frame.from_options(frame = dyf, connection_type = \"s3\", connection_options = {\"path\": \"s3://pyspark-dyf/\"}, format = \"parquet\", transformation_ctx = \"datasink4\")",
+        description: "write_dynamic_frame: Writes a dynamic frame to a data source using the specified options"
+    },
+    {
+        term: "Pyspark | write dynamic frame to Spark Dataframe",
+        prompt: "Write the dynamic frame dyf to a Spark Dataframe",
+        example: "df = dyf.toDF()",
+        description: "toDF: Converts a dynamic frame to a data frame"
+    },
+    {
+        term: "Pyspark | Selct columns in Spark Dataframe",
+        prompt: "Select the columns first_name and last_name from the Spark Dataframe df",
+        example: "df = df.select('first_name', 'last_name')",
+        description: "select: Selects a set of column expressions"
+    },
+    {
+        term: "Pyspark | Columns in a Spark Dataframe",
+        prompt: "Show the columns in the Spark Dataframe df",
+        example: "df.columns",
+        description: "columns: Returns all column names as a list"
+    },
+    {
+        term: "Pyspark | Add a column to a Spark Dataframe",
+        prompt: "Add a column called full_name to the Spark Dataframe df",
+        example: "df = df.withColumn('full_name', concat(df.first_name, lit(' '), df.last_name))",
+        description: "withColumn: Returns a new DataFrame by adding a column or replacing the existing column that has the same name"
+    },
+    {
+        term: "Pyspark | Drop a column from a Spark Dataframe",
+        prompt: "Drop the column full_name from the Spark Dataframe df",
+        example: "df = df.drop('full_name')",
+        description: "drop: Returns a new DataFrame omitting the specified column"
+    },
+    {
+        term: "Pyspark | Rename a column in a Spark Dataframe",
+        prompt: "Rename the column full_name to fullname in the Spark Dataframe df",
+        example: "df = df.withColumnRenamed('full_name', 'fullname')",
+        description: "withColumnRenamed: Returns a new DataFrame by renaming an existing column"
+    },
+    {
+        term: "Pyspark | Groupby in a Spark Dataframe",
+        prompt: "Group the Spark Dataframe df by the column first_name and show the count",
+        example: "df.groupBy('first_name').count().show()",
+        description: "groupBy: Groups the DataFrame using the specified columns, so we can run aggregation on them"
+    },
+    {
+        term: "Pyspark | Filter in a Spark Dataframe",
+        prompt: "Filter the Spark Dataframe df where the first_name is equal to John",
+        example: "df.filter(df.first_name == 'John').show()",
+        description: "filter: Filters rows using the given condition"
+    },
+    {
+        term: "Pyspark | Sort in a Spark Dataframe",
+        prompt: "Sort the Spark Dataframe df by the column first_name",
+        example: "df.sort('first_name').show()",
+        description: "sort: Returns a new DataFrame sorted by the specified column(s)"
+    },
+    {
+        term: "Pyspark | Join in a Spark Dataframe",
+        prompt: "Join the Spark Dataframe df with the Spark Dataframe df2 on the column first_name",
+        example: "df.join(df2, df.first_name == df2.first_name).show()",
+        description: "join: Joins with another DataFrame, using the given join expression"
+    },
+    {
+        term: "Pyspark | Sum",
+        prompt: "Sum the column amount in the Spark Dataframe df",
+        example: "df.select(sum('amount')).show()",
+        description: "sum: Aggregate function: returns the sum of all values in the expression"
     }
 ]
 
@@ -342,10 +414,7 @@ const unit_testing = [
         description: "Spy: Spies are used for creating partial or half mock objects. Like mock, spies are also used in large test suites., \n When using spy objects, the default behavior of the methods (when not stubbed) is the real method behavior\n\n\
         Mock: Mocks are used to create fully mock or dummy objects. It is mainly used in large test suites.\n\
         When using mock objects, the default behavior of methods (when not stubbed) is do nothing (performs nothing.) "
-    }
-
-
-
+    },
 
 ]
 
