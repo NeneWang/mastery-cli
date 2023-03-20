@@ -501,9 +501,23 @@ class breadthFirstSearch extends ProblemTests {
 class hillClimbingSearch extends ProblemTests {
     constructor(Problem) {
         super(Problem);
-        // this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_1());
         // this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
+
+    }
+
+
+    test_1() {
+
+        const { graph, nodes } = new GraphBuilders().create_graph_5();
+        const start = nodes.A;
+        const goal = nodes.G;
+
+        const problem = new this.Problem
+
+        const results = problem.solve(graph, start, goal);
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
 
     }
 

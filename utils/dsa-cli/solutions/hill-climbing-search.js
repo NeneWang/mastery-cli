@@ -208,22 +208,22 @@ class HillClimbingSearch {
         let current = start;
         let count_searches = 0;
         let exploration_path = [];
-
+    
         const cameFrom = new Map();
         cameFrom.set(start, null);
-
+    
         while (current !== goal) {
             count_searches += 1;
             exploration_path.push(current);
-
+    
             const neighbors = graph.neighbors(current);
             if (neighbors?.length === 0) {
                 break;
             }
-
+    
             let bestNext = null;
             let bestHeuristic = Infinity;
-
+            console.log("neighbors", neighbors)
             neighbors.forEach(next => {
                 if (!cameFrom.has(next)) {
                     const nextHeuristic = heuristic(goal, next);
@@ -233,17 +233,15 @@ class HillClimbingSearch {
                     }
                 }
             });
-
+    
             if (!bestNext || bestHeuristic >= heuristic(goal, current)) {
                 break;
             }
-
+    
             cameFrom.set(bestNext, current);
             current = bestNext;
         }
-
-
-
+    
         return {
             path: reconstructPath(cameFrom, start, goal),
             cost: null,
@@ -251,8 +249,8 @@ class HillClimbingSearch {
             formatted_path: reconstructPath(cameFrom, start, goal).map(node => node.id).join(' -> '),
             exploration_path: exploration_path,
         };
-
     }
+    
 
 
     solve(graph, start, goal) {
