@@ -411,7 +411,7 @@ class AStarSearch extends ProblemTests {
 
         const problem = new this.Problem
         const results = problem.solve(graph, start, goal);
-        console.log(results)
+        console.log(`Count Searches: ${results.count_searches}`)
         // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
     }
 
@@ -446,7 +446,7 @@ class DepthFirstSearch extends ProblemTests {
 
         const problem = new this.Problem
         const results = problem.solve(graph, start, goal);
-        console.log(results)
+        console.log(`Count Searches: ${results.count_searches}`)
         // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
     }
 
@@ -470,7 +470,7 @@ class GreedySearch extends ProblemTests {
 
         const problem = new this.Problem
         const results = problem.solve(graph, start, goal);
-        console.log(results)
+        console.log(`Count Searches: ${results.count_searches}`)
         // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
     }
 
@@ -493,7 +493,29 @@ class breadthFirstSearch extends ProblemTests {
 
         const problem = new this.Problem
         const results = problem.solve(graph, start, goal);
-        console.log(results)
+        console.log(`Count Searches: ${results.count_searches}`)
+    }
+}
+
+
+class hillClimbingSearch extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        // this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+
+    }
+
+    test_3() {
+
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        const start = nodes.A;
+        const goal = nodes.AK;
+
+        const problem = new this.Problem
+        const results = problem.solve(graph, start, goal);
+        console.log(`Count Searches: ${results.count_searches}`)
     }
 }
 
@@ -502,7 +524,8 @@ const TEST_DICTIONARY = {
     'a-star-search': AStarSearch,
     'depth-first-search': DepthFirstSearch,
     'greedy-search': GreedySearch,
-    'breadth-first-search': breadthFirstSearch
+    'breadth-first-search': breadthFirstSearch,
+    'hill-climbing-search': hillClimbingSearch
 }
 
 module.exports = TEST_DICTIONARY;
