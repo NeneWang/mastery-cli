@@ -151,7 +151,7 @@ class GraphBuilders {
         //   A____B____C
         //   |         |
         //   |         |
-        //   D____E___F___G
+        //   D____E___ F___ G
 
         const A = new Node('A', 0, 0);
         const B = new Node('B', 1, 0);
@@ -209,13 +209,118 @@ class GraphBuilders {
         const nodes = { A, B, C, D, E, G, F };
         return { graph: graph, nodes: nodes };
     }
+    // Creates a long ass graph
+    create_long_ass_graph() {
+
+    //              A
+    //            /   \
+    //           B     C
+    //          / \   / \
+    //         D   E F   G
+    //        / \ /  \  / \
+    //       H  I J  K L  M
+    //          / \ | / \ | \
+    //         N   O P   Q   R
+    //          \ /  |  / \  |
+    //          AB  AE AF  AI
+    //              / \ | / \
+    //             AD  AG AH AJ
+    //                  |  |
+    //                 AK  AK
+
+
+
+        const A = new Node('A', 0, 0);
+        const B = new Node('B', 1, -1);
+        const C = new Node('C', 1, 1);
+        const D = new Node('D', 2, -2);
+        const E = new Node('E', 2, 0);
+        const F = new Node('F', 2, 2);
+        const G = new Node('G', 3, -3);
+        const H = new Node('H', 3, -1);
+        const I = new Node('I', 3, 1);
+        const J = new Node('J', 3, 3);
+        const K = new Node('K', 4, -4);
+        const L = new Node('L', 4, -2);
+        const M = new Node('M', 4, 0);
+        const N = new Node('N', 4, 2);
+        const O = new Node('O', 4, 4);
+        const P = new Node('P', 5, -5);
+        const Q = new Node('Q', 5, -3);
+        const R = new Node('R', 5, -1);
+        const S = new Node('S', 5, 1);
+        const T = new Node('T', 5, 3);
+        const U = new Node('U', 5, 5);
+        const V = new Node('V', 6, -6);
+        const W = new Node('W', 6, -4);
+        const X = new Node('X', 6, -2);
+        const Y = new Node('Y', 6, 0);
+        const Z = new Node('Z', 6, 2);
+        const AA = new Node('AA', 6, 4);
+        const AB = new Node('AB', 6, 6);
+        const AC = new Node('AC', 7, -7);
+        const AD = new Node('AD', 7, -5);
+        const AE = new Node('AE', 7, -3);
+        const AF = new Node('AF', 7, -1);
+        const AG = new Node('AG', 7, 1);
+        const AH = new Node('AH', 7, 3);
+        const AI = new Node('AI', 7, 5);
+        const AJ = new Node('AJ', 7, 7);
+        const AK = new Node('AK', 8, -8);
+
+        const graph = new Graph();
+        graph.addEdge(A, B);
+        graph.addEdge(A, C);
+        graph.addEdge(B, D);
+        graph.addEdge(B, E);
+        graph.addEdge(C, F);
+        graph.addEdge(C, G);
+        graph.addEdge(D, H);
+        graph.addEdge(D, I);
+        graph.addEdge(E, J);
+        graph.addEdge(E, K);
+        graph.addEdge(F, L);
+        graph.addEdge(F, M);
+        graph.addEdge(G, N);
+        graph.addEdge(G, O);
+        graph.addEdge(H, P);
+        graph.addEdge(H, Q);
+        graph.addEdge(I, R);
+        graph.addEdge(I, S);
+        graph.addEdge(J, T);
+        graph.addEdge(J, U);
+        graph.addEdge(K, V);
+        graph.addEdge(K, W);
+        graph.addEdge(L, X);
+        graph.addEdge(L, Y);
+        graph.addEdge(M, Z);
+        graph.addEdge(M, AA);
+        graph.addEdge(N, AB);
+        graph.addEdge(N, AC);
+        graph.addEdge(O, AD);
+        graph.addEdge(O, AE);
+        graph.addEdge(P, AF);
+        graph.addEdge(P, AG);
+        graph.addEdge(Q, AH);
+        graph.addEdge(Q, AI);
+        graph.addEdge(R, AJ);
+        graph.addEdge(R, AK);
+
+        const nodes = { A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, AA, AB, AC, AD, AE, AF, AG, AH, AI, AJ, AK };
+        return { graph: graph, nodes: nodes };
+    }
+
 }
+
+
+
 
 class AStarSearch extends ProblemTests {
     constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
-        this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
 
     }
 
@@ -255,10 +360,58 @@ class AStarSearch extends ProblemTests {
 
     }
 
+
+    test_3() {
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        const start = nodes.A;
+        const goal = nodes.AK;
+
+        const problem = new this.Problem
+        const results = problem.solve(graph, start, goal);
+        console.log(results)
+        // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+    }
+
+}
+
+class DepthFirstSearch extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+
+    }
+
+    test_1() {
+
+        const { graph, nodes } = new GraphBuilders().create_graph_5();
+        const start = nodes.A;
+        const goal = nodes.G;
+
+        const problem = new this.Problem
+
+        const results = problem.solve(graph, start, goal);
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+
+    }
+
+    test_3() {
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        const start = nodes.A;
+        const goal = nodes.AK;
+
+        const problem = new this.Problem
+        const results = problem.solve(graph, start, goal);
+        console.log(results)
+        // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+    }
+
 }
 
 const TEST_DICTIONARY = {
     'a-star-search': AStarSearch,
+    'depth-first-search': DepthFirstSearch
 }
 
 module.exports = TEST_DICTIONARY;

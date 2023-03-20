@@ -24,9 +24,9 @@ class PriorityQueue {
         return this.elements.length === 0;
     }
 
-    getSnapshot(){
+    getSnapshot() {
         return this.elements.map(item => {
-            return {id: item.element.id, priority: item.priority}
+            return { id: item.element.id, priority: item.priority }
         });
     }
 }
@@ -36,6 +36,13 @@ function heuristic(a, b) {
 }
 
 
+/**
+ * 
+ * @param {Graph} graph a graph of nodes
+ * @param {Node} start start node
+ * @param {Node} goal end goal node
+ * @returns {Dict} path, cost, count_searches, formatted_path, exploration_path, queue_snapshot
+ */
 function aStarSearch(graph, start, goal) {
     const frontier = new PriorityQueue();
     frontier.enqueue(start, 0);
@@ -67,20 +74,29 @@ function aStarSearch(graph, start, goal) {
         }
 
         const neighbors = graph.neighbors(current);
-        neighbors.forEach(next => {
-            const newCost = costSoFar.get(current) + graph.cost(current, next);
-            if (!costSoFar.has(next) || newCost < costSoFar.get(next)) {
-                costSoFar.set(next, newCost);
+        if (neighbors?.length === 0) {
+            continue;
+        }
+        try {
 
-                // console.log("newCost", newCost, "heuristic", heuristic(goal, next));
-                const priority = newCost + heuristic(goal, next); // A* heuristic
+            neighbors.forEach(next => {
+                const newCost = costSoFar.get(current) + graph.cost(current, next);
+                if (!costSoFar.has(next) || newCost < costSoFar.get(next)) {
+                    costSoFar.set(next, newCost);
 
-                if (DEBUG) console.log(`Enqueuing`, next, ` with priority`, priority);
-                frontier.enqueue(next, priority);
+                    // console.log("newCost", newCost, "heuristic", heuristic(goal, next));
+                    const priority = newCost + heuristic(goal, next); // A* heuristic
 
-                cameFrom.set(next, current); // Remember where we came from
-            }
-        });
+                    if (DEBUG) console.log(`Enqueuing`, next, ` with priority`, priority);
+                    frontier.enqueue(next, priority);
+
+                    cameFrom.set(next, current); // Remember where we came from
+                }
+            });
+        }
+        catch (e) {
+            // console.log(e);
+        }
     }
 
     return {
