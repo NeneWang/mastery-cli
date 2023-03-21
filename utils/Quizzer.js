@@ -46,8 +46,9 @@ class Quizzer {
     getYoungest = async (potential_questions) => {
 
         try {
-
-            const problem_names = potential_questions.map(x => x.formula_name)
+            // Filter only if they have formula_name property
+            let problem_names = potential_questions.filter(x => x.formula_name !== undefined )
+            problem_names = potential_questions.map(x => x.formula_name)
             // const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
             if (DEBUG) console.log("problem_names", problem_names)
             const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, problem_names);
