@@ -47,8 +47,8 @@ class Quizzer {
 
         try {
             // Filter only if they have formula_name property
-            let problem_names = potential_questions.filter(x => x?.formula_name != undefined )
-            problem_names = problem_names.map(x => x.formula_name)
+            potential_questions = potential_questions.filter(x => x?.formula_name != undefined )
+            const problem_names = potential_questions.map(x => x.formula_name)
             // Filter only if they have formula_name property again?
             // problem_names = potential_questions.filter(x => x.formula_name)
 
