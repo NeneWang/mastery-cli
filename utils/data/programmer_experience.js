@@ -303,6 +303,9 @@ const coderTerms = [
         prompt: "Sum the column amount in the Spark Dataframe df",
         example: "df.select(sum('amount')).show()",
         description: "sum: Aggregate function: returns the sum of all values in the expression"
+    },
+    {
+        
     }
 ]
 

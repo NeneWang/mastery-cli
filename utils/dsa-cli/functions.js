@@ -34,7 +34,7 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './')
 const getFilesInDirectory = async (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
 
-    if(DEBUG) console.log("Fetching from: ", absolutePath);
+    if (DEBUG) console.log("Fetching from: ", absolutePath);
 
     return new Promise((resolve, reject) => {
         fs.readdir(absolutePath, (err, files) => {
@@ -134,13 +134,13 @@ const renderPromptDescription = (prompt) => {
 
 
 function writeUnresolvedClass(sourceFilePath, targetFilePath, { avoidOverwrite = true } = {}) {
-    
+
     // Check if the target file exists
     if (avoidOverwrite && fs.existsSync(targetFilePath)) {
         console.error(`Target file ${targetFilePath} already exists. Aborting write.`);
         return;
     }
-    
+
     // Read the content of the source file
     const content = fs.readFileSync(sourceFilePath, 'utf8');
 
@@ -171,9 +171,41 @@ function getCurrentDate() {
 
 }
 
+const openEditorWithCommand = async (instruction) => {
+    await exec(`${instruction}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`Continue running`);
+    });
+}
+
+const openEditorPlatformAgnostic = async (editor_instruction, absolute_temp_file_path) => {
+
+
+    const os = require('os');
+
+    if (os.platform() === 'win32') {
+
+        console.log('Windows');
+        await openEditorWithCommand(`start ${editor_instruction} ${absolute_temp_file_path}`);
+
+    } else if (os.platform() === 'linux') {
+        console.log('Linux');
+        await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
+    } else if (os.platform() === 'darwin') {
+        console.log('macOS');
+        await openEditorWithCommand(`open -a ${editor_instruction} ${absolute_temp_file_path}`);
+    } else {
+        console.log('Unknown operating system');
+        await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
+    }
+}
+
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, renderPromptDescription,
-    writeUnresolvedClass, getCurrentDate
+    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic
 };

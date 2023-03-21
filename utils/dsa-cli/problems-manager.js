@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { getDirAbsoluteUri } = require('./functions');
+const { getDirAbsoluteUri, openEditorPlatformAgnostic } = require('./functions');
 const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
 const { exec } = require('node:child_process');
@@ -192,29 +192,17 @@ class ProblemsManager {
      * Opens the temporal problem file in the editor (Can be customized which to use).
      * @param {str} editor_instruction The instruction to open the file in the editor. Default is "start".
      */
-    async openTemporalProblemFile({ editor_instruction = "start" } = {}) {
+    async openTemporalProblemFile({ editor_instruction = "" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
-        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
-            if (error) {
-                console.error(`exec error: ${error}`);
-                return;
-            }
-            console.log(`Continue running`);
-        });
+        await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
 
     }
 
     async openSolutionFile(problem_slug, { editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.solution_filepath + problem_slug + '.js', "./");
 
-        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
-            if (error) {
-                console.error(`exec error: ${error}`);
-                return;
-            }
-            console.log(`Continue running`);
-        });
+        await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
 
     }
 
@@ -223,13 +211,7 @@ class ProblemsManager {
     async openBaseCodeFile(problem_slug, { editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.base_code_filepath + problem_slug + '.js', "./");
 
-        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
-            if (error) {
-                console.error(`exec error: ${error}`);
-                return;
-            }
-            console.log(`Continue running`);
-        });
+        await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
 
     }
 
@@ -261,13 +243,7 @@ class ProblemsManager {
         );
         console.log("absolute_temp_file_path", absolute_temp_file_path);
 
-        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
-            if (error) {
-                console.error(`exec error: ${error}`);
-                return;
-            }
-            console.log(`Continue running`);
-        });
+        await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
 
     }
 
@@ -285,13 +261,7 @@ class ProblemsManager {
 
         const absolute_temp_file_path = getDirAbsoluteUri(this.markdown_filepath + problem_slug + '.md', "./");
 
-        await exec(`${editor_instruction} ${absolute_temp_file_path}`, (error, stdout, stderr) => {
-            if (error) {
-                console.error(`exec error: ${error}`);
-                return;
-            }
-            console.log(`Continue running`);
-        });
+        await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
     }
 
 
