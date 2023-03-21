@@ -4,6 +4,19 @@
  * 
  */
 
+const sample_otutput_top = "top - 16:12:09 up  1:28,  2 users,  load average: 0.04, 0.01, 0.00\n\
+Tasks: 165 total,\t1 running,\t164 sleeping,\t0 stopped,\t0 zombie\n\n\
+%Cpu(s):\t0.0 us,\t0.0 sy,\t0.0 ni,\t99.9 id,\t0.0 wa,\t0.0 hi,\t0.1 si,\t0.0 st\n\
+MiB Mem :\t1974.4 total,\t924.8 free,\t246.5 used,\t803.1 buff/cache\n\
+MiB Swap:\t2048.0 total,\t2048.0 free,\t0.0 used.\t1539.2 avail Mem\n\n\
+PID USER\t\tPR\tNI\tVIRT\tRES\tSHR\tS\t%CPU\t%MEM\tTIME+ COMMAND\n\
+2737 root\t\t20\t0\t400060\t22288\t11008\tS\t0.3\t1.1\t0:04.54 fail2ban-server\n\
+5496 kali-win\t20\t0\t10484\t4044\t3436\tR\t0.3\t0.2\t0:00.28 top\n\
+1 root\t\t20\t0\t167664\t13396\t8520\tS\t0.0\t0.7\t0:11.33 systemd\n\
+2 root\t\t20\t0\t0\t0\t0\tS\t0.0\t0.0\t0:00.21 kthreadd\n\
+3 root\t\t0\t-20\t0\t0\t0\tI\t0.0\t0.0\t0:00.00 rcu_gp";
+
+
 const network = [
     {
         term: "Application - presentation - session", prompt: "Descripbe an example of an app in one of the first 3 sessions:", description: "Layer 7 - Application The Application Layer in the OSI model is the layer that is the “closest to the end user”. It receives information directly from users and displays incoming data to the user. Oddly enough, applications themselves do not reside at the application layer. Instead the layer facilitates communication through lower layers in order to establish connections with applications at the other end. Web browsers (Google Chrome, Firefox, Safari, etc.) TelNet, and FTP, are examples of communications  that rely  on Layer 7. \n\
@@ -736,8 +749,115 @@ const network = [
         example: "Run 'sudo fail2ban-client set sshd banip IPADDRESS' in the terminal.",
         description: "To ban a specific IP address using Fail2ban, you can run the command 'sudo fail2ban-client set sshd banip IPADDRESS' in the terminal. Replace 'IPADDRESS' with the IP address that you want to ban. This will add the IP address to the Fail2ban blacklist for the sshd jail, preventing further access from that IP address."
     },
-    
-    
+    // UFW commands
+    {
+        term: "UFW deny incoming",
+        prompt: "How do you deny all incoming connections using UFW?",
+        example: "Run 'sudo ufw default deny incoming' in the terminal.",
+        description: "To deny all incoming connections using UFW, you can run the command 'sudo ufw default deny incoming' in the terminal. This will set the default policy to deny incoming connections."
+    },
+    {
+        term: "UFW allow outgoing",
+        prompt: "How do you allow all outgoing connections using UFW?",
+        example: "Run 'sudo ufw default allow outgoing' in the terminal.",
+        description: "To allow all outgoing connections using UFW, you can run the command 'sudo ufw default allow outgoing' in the terminal. This will set the default policy to allow outgoing connections."
+    },
+    {
+        term: "UFW allow ssh",
+        prompt: "How do you allow SSH connections using UFW?",
+        example: "Run 'sudo ufw allow ssh' in the terminal.",
+        description: "To allow SSH connections using UFW, you can run the command 'sudo ufw allow ssh' in the terminal. This will add a rule to allow incoming SSH connections on port 22."
+    },
+    {
+        term: "UFW enable",
+        prompt: "How do you enable UFW?",
+        example: "Run 'sudo ufw enable' in the terminal.",
+        description: "To enable UFW, you can run the command 'sudo ufw enable' in the terminal. This will activate the firewall and enable the rules that have been configured."
+    },
+    {
+        term: "UFW list rules",
+        prompt: "How do you list the rules that have been configured in UFW?",
+        example: "Run 'sudo ufw -L' in the terminal.",
+        description: "To list the rules that have been configured in UFW, you can run the command 'sudo ufw -L' in the terminal. This will display a list of the rules that have been added to the firewall, including the default policies and any custom rules that have been added."
+    },
+    {
+        term: "UFW allow HTTP",
+        prompt: "How do you allow HTTP connections using UFW?",
+        example: "Run 'sudo ufw allow http' in the terminal.",
+        description: "To allow HTTP connections using UFW, you can run the command 'sudo ufw allow http' in the terminal. This will add a rule to allow incoming HTTP connections on port 80."
+    },
+    {
+        term: "UFW allow HTTPS",
+        prompt: "How do you allow HTTPS connections using UFW?",
+        example: "Run 'sudo ufw allow https' in the terminal.",
+        description: "To allow HTTPS connections using UFW, you can run the command 'sudo ufw allow https' in the terminal. This will add a rule to allow incoming HTTPS connections on port 443."
+    },
+    {
+        term: "UFW status verbose",
+        prompt: "How do you display the current status of UFW in verbose mode?",
+        example: "Run 'sudo ufw status verbose' in the terminal.",
+        description: "To display the current status of UFW in verbose mode, you can run the command 'sudo ufw status verbose' in the terminal. This will show the current status of the firewall, including the list of rules that have been configured and the current default policies."
+    },
+    {
+        term: "UFW list rules",
+        prompt: "How do you list the rules that have been configured in UFW?",
+        example: "Run 'sudo ufw status verbose' in the terminal.",
+        description: "To list the rules that have been configured in UFW, you can run the command 'sudo ufw status verbose' in the terminal. This will display a list of the rules that have been added to the firewall, including the default policies and any custom rules that have been added."
+    },
+    {
+        term: "UFW delete rule",
+        prompt: "How do you delete a specific rule in UFW? e..g rule Number 2 appear as\n\
+         [ 2] Apache                     ALLOW IN    Anywhere \n\n\
+         And you want to delete Apache",
+        example: "Run 'sudo ufw delete RULENUMBER' in the terminal. e.g.",
+        description: "To delete a specific rule in UFW, you can run the command 'sudo ufw delete RULENUMBER' in the terminal. Replace 'RULENUMBER' with the number of the rule that you want to delete, as listed in the output of the 'sudo ufw status verbose' command. This will remove the selected rule from the firewall configuration."
+    },
+    {
+        term: "Process Status Symbols",
+        prompt: "What does the 'D' status symbol mean in the `ps aux` command output?",
+        example: "The 'D' status symbol in `ps aux` output means that the process is blocked waiting for I/O to complete.",
+        description: "In the `ps aux` command output, the 'D' status symbol indicates that the process is blocked and waiting for I/O to complete. This is also known as disk sleep. The other common status symbols in `ps aux` output include 'S' for sleep, 'R' for running, and 'T' for stopped.\n\
+        S: Sleep. The process is sleeping and waiting for some event to occur.     R: Running. The process is currently running or executing.     D: Disk sleep. The process is blocked waiting for I/O to complete.     T: Stopped. The process has been stopped, usually by receiving a signal.     Z: Zombie. The process has completed execution but is still listed in the process table because its parent process hasn't yet read its exit status.     I: Idle. The process is idle or is running with a low priority.     <: High-priority. The process is running with a high priority.     N: Low-priority. The process is running with a low priority.     s: Session leader. The process is a session leader.     l: Multithreaded. The process is multithreaded (using CLONE_THREAD, like NPTL pthreads do).     +: Foreground. The process is running in the foreground process group of its controlling terminal."
+    },
+    {
+        term: "cpu-usage-stat-us",
+        prompt: "What does the 'us' CPU usage statistic represent?",
+        example: "The 'us' CPU usage statistic represents the percentage of time that the CPU is being used in user space.",
+        description: "In CPU usage statistics, the 'us' value represents the percentage of time that the CPU is being used in user space, or in other words, the amount of time that processes are spending in user mode. This value is often displayed as part of the output of commands like `top` or `vmstat`." + sample_otutput_top
+    },
+    {
+        term: "cpu-usage-stat-us-sy",
+        prompt: "What does the 'sy' CPU usage statistic represent?",
+        example: "The 'sy' CPU usage statistic represents the percentage of time that the CPU is being used in system space.",
+        description: "In CPU usage statistics, the 'sy' value represents the percentage of time that the CPU is being used in system space, or in other words, the amount of time that the kernel is spending in kernel mode. This value is often displayed as part of the output of commands like `top` or `vmstat`." + sample_otutput_top
+    },
+    {
+        term: "cpu-usage-stat-us-sy",
+        prompt: "What does the 'ni' CPU usage statistic represent?",
+        example: "The 'ni' CPU usage statistic represents the percentage of time that the CPU is being used by processes with a low priority (nice value).",
+        description: "In CPU usage statistics, the 'ni' value represents the percentage of time that the CPU is being used by processes with a low priority (nice value). This value is often displayed as part of the output of commands like `top` or `vmstat`." + sample_otutput_top
+    },
+    {
+        term: "cpu-usage-stat-us-id",
+        prompt: "What does the 'id' CPU usage statistic represent?",
+        example: "The 'id' CPU usage statistic represents the percentage of time that the CPU is idle.",
+        description: "In CPU usage statistics, the 'id' value represents the percentage of time that the CPU is idle, or in other words, the amount of time that there are no processes running on the CPU. This value is often displayed as part of the output of commands like `top` or `vmstat`." + sample_otutput_top
+    },
+    {
+        term: "cpu-usage-stat-us-hi",
+        prompt: "What does the 'hi' CPU usage statistic represent?",
+        example: "The 'hi' CPU usage statistic represents the percentage of time that the CPU is interrupted by hardware.",
+        description: "In CPU usage statistics, the 'hi' value represents the percentage of time that the CPU is interrupted by hardware, or in other words, the amount of time that the CPU spends handling hardware interrupts. This value is often displayed as part of the output of commands like `top` or `vmstat`." + sample_otutput_top
+    },
+    {
+        term: "cpu-usage-stat-us-si",
+        prompt: "What does the 'si' CPU usage statistic represent?",
+        example: "The 'si' CPU usage statistic represents the percentage of time that the CPU is interrupted by software.",
+        description: "In CPU usage statistics, the 'si' value represents the percentage of time that the CPU is interrupted by software, or in other words, the amount of time that the CPU spends handling software interrupts. This value is often displayed as part of the output of commands like `top` or `vmstat`." + sample_otutput_top
+    },
+
+
+
 
 ]
 
