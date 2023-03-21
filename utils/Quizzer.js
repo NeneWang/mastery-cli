@@ -47,7 +47,7 @@ class Quizzer {
 
         try {
             // Filter only if they have formula_name property
-            let problem_names = potential_questions.filter(x => x?.formula_name !== undefined )
+            let problem_names = potential_questions.filter(x => x?.formula_name != undefined )
             problem_names = potential_questions.map(x => x.formula_name)
             // const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
             if (DEBUG) console.log("problem_names", problem_names)
