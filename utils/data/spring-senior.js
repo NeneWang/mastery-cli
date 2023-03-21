@@ -735,7 +735,8 @@ const network = [
         prompt: "How do you ban a specific IP address using Fail2ban?",
         example: "Run 'sudo fail2ban-client set sshd banip IPADDRESS' in the terminal.",
         description: "To ban a specific IP address using Fail2ban, you can run the command 'sudo fail2ban-client set sshd banip IPADDRESS' in the terminal. Replace 'IPADDRESS' with the IP address that you want to ban. This will add the IP address to the Fail2ban blacklist for the sshd jail, preventing further access from that IP address."
-    }
+    },
+    
     
 
 ]
