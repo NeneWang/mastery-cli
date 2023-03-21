@@ -4,6 +4,7 @@ const fs = require('fs');
 const { marked } = require('marked');
 const TerminalRenderer = require('marked-terminal');
 const Constants = require("./constants");
+const { exec } = require('child_process');
 
 const DEBUG = false;
 

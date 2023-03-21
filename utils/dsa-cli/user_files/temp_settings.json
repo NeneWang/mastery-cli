@@ -1,12 +1,12 @@
 {
     "common_editors": {
-        "nano": "start nano",
-        "vim": "start vim",
-        "nvim": "start nvim",
-        "emacs": "start emacs",
-        "sublime": "start sublime",
-        "atom": "start atom",
-        "code": "start code",
+        "nano": "nano",
+        "vim": "vim",
+        "nvim": "nvim",
+        "emacs": "emacs",
+        "sublime": "sublime",
+        "atom": "atom",
+        "code": "code",
         "default": "start"
     },
     "editor": "nvim"
