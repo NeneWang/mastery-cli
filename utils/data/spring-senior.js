@@ -704,6 +704,40 @@ const network = [
         example: "Press 'e' to move to the end of the word.",
         description: "In Vim, 'e' moves the cursor to the end of the current word and traverses to the next word. Use this command to quickly move through a file or to navigate to the end of a word."
     },
+
+    // Security
+    {
+        term: "Fail2ban start",
+        prompt: "How do you start Fail2ban?",
+        example: "Run 'sudo service fail2ban start' in the terminal.",
+        description: "To start Fail2ban, you can run the command 'sudo service fail2ban start' in the terminal. This will start the Fail2ban service on your system."
+    },
+    {
+        term: "Fail2ban status sshd",
+        prompt: "How do you check the status of Fail2ban for the sshd service?",
+        example: "Run 'sudo service fail2ban status sshd' in the terminal.",
+        description: "To check the status of Fail2ban for the sshd service, you can run the command 'sudo service fail2ban status sshd' in the terminal. This will display the current status of the sshd jail, including the number of failed attempts and the time of the last ban action."
+    },
+    {
+        term: "Fail2ban unban IP",
+        prompt: "How do you unban an IP address in Fail2ban?",
+        example: "Run 'sudo fail2ban-client set sshd unbanip IPADDRESS' in the terminal.",
+        description: "To unban an IP address in Fail2ban, you can run the command 'sudo fail2ban-client set sshd unbanip IPADDRESS' in the terminal. Replace 'IPADDRESS' with the IP address that you want to unban. This will remove the IP address from the Fail2ban blacklist for the sshd jail."
+    },
+    {
+        term: "Fail2ban list banned IPs",
+        prompt: "How do you list all the IPs that are currently banned by Fail2ban?",
+        example: "Run 'sudo fail2ban-client status' in the terminal.",
+        description: "To list all the IPs that are currently banned by Fail2ban, you can run the command 'sudo fail2ban-client status' in the terminal. This will display the status of all the jails, including the list of currently banned IPs for each jail."
+    },
+    {
+        term: "Fail2ban ban specific IP",
+        prompt: "How do you ban a specific IP address using Fail2ban?",
+        example: "Run 'sudo fail2ban-client set sshd banip IPADDRESS' in the terminal.",
+        description: "To ban a specific IP address using Fail2ban, you can run the command 'sudo fail2ban-client set sshd banip IPADDRESS' in the terminal. Replace 'IPADDRESS' with the IP address that you want to ban. This will add the IP address to the Fail2ban blacklist for the sshd jail, preventing further access from that IP address."
+    }
+    
+
 ]
 
 const artificialIntelligence = [

@@ -305,8 +305,65 @@ const coderTerms = [
         description: "sum: Aggregate function: returns the sum of all values in the expression"
     },
     {
-        
+        term: "Pyspark | Create a Spark Session",
+        prompt: "Create a Spark Session",
+        example: "from pyspark.sql import SparkSession",
+        description: "SparkSession is the entry point to programming Spark with the Dataset and DataFrame API"
+    },
+    // Useful Definitions for Kinesis.
+    {
+        term: "Data Record",
+        prompt: "What is a data record? Where can you find it?",
+        example: "A data record is a unit of data stored in a Kinesis data stream. Each data record consists of a sequence number, a partition key, and a data blob.\n\
+        You can find it in the Kinesis console, in the Data tab of the stream.",
+        description: "A data record is a unit of data stored in a Kinesis data stream. Each data record consists of a sequence number, a partition key, and a data blob."
+    },
+    {
+        term: "Shard",
+        prompt: "What is a shard? Where can you find it?",
+        example: "A shard is a uniquely identified group of data records in a Kinesis data stream. Each shard is composed of a hash key range and an associated sequence number range.\n\
+        You can find it in the Kinesis console, in the Data tab of the stream.",
+        description: "A shard is a uniquely identified group of data records in a Kinesis data stream. Each shard is composed of a hash key range and an associated sequence number range."
+    },
+    {
+        term: "Shard Iterator",
+        prompt: "What is a shard iterator? Where can you find it?",
+        example: "A shard iterator is a pointer to the data record in a shard from which to start reading data records sequentially. The position is specified by the sequence number of a data record in the shard.\n\
+        You can find it in the Kinesis console, in the Data tab of the stream.",
+        description: "A shard iterator is a pointer to the data record in a shard from which to start reading data records sequentially. The position is specified by the sequence number of a data record in the shard."
+    },
+    {
+        term: "A Partition Key",
+        prompt: "What is a partition key? Where can you find it?",
+        example: "A Partition key is used to group data by  shard within a stream. Kinesis Data Streams segregates the data records that belong to a data stream into multiple shards, using the partition key associated with each data record to determine which shard a given data record belongs to.\n\
+        You can find it in the Kinesis console, in the Data tab of the stream.",
+        description: "A Partition key is used to group data by  shard within a stream. Kinesis Data Streams segregates the data records that belong to a data stream into multiple shards, using the partition key associated with each data record to determine which shard a given data record belongs to."
+    },
+    {
+        term: "Sequence Number",
+        prompt: "What is a sequence number in the context of data records? Where can you find it?",
+        example: "A sequence number is a unique identifier assigned to each data record in a Kinesis data stream. The sequence number is assigned by Kinesis when a data record is added to a stream, and is used to ensure that data records are processed in the correct order.\n\
+        You can find it in the Kinesis console, in the Data tab of the stream.",
+        description: "A sequence number is a unique identifier assigned to each data record in a Kinesis data stream. The sequence number is assigned by Kinesis when a data record is added to a stream, and is used to ensure that data records are processed in the correct order."
+    },
+    {
+        term: "Producer",
+        prompt: "What is a producer in the context of Kinesis data streams? Where can you find it?",
+        example: "A producer is an application that writes data records to a Kinesis data stream. The producer can be any application or service that can make API calls to Amazon Kinesis.\n\
+        You can find it in the documentation for the Kinesis API, or in the AWS Management Console when configuring Kinesis data stream permissions.",
+        description: "A producer is an application that writes data records to a Kinesis data stream. The producer can be any application or service that can make API calls to Amazon Kinesis."
+    },
+    {
+        term: "Consumer",
+        prompt: "What is a consumer in the context of Kinesis data streams? Where can you find it?",
+        example: "A consumer is an application that reads data records from a Kinesis data stream. The consumer can be any application or service that can make API calls to Amazon Kinesis, and can process the data records in real time or in batches.\n\
+        You can find it in the documentation for the Kinesis API, or in the AWS Management Console when configuring Kinesis data stream permissions.",
+        description: "A consumer is an application that reads data records from a Kinesis data stream. The consumer can be any application or service that can make API calls to Amazon Kinesis, and can process the data records in real time or in batches."
     }
+
+
+
+
 ]
 
 
