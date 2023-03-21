@@ -855,7 +855,18 @@ const network = [
         example: "The 'si' CPU usage statistic represents the percentage of time that the CPU is interrupted by software.",
         description: "In CPU usage statistics, the 'si' value represents the percentage of time that the CPU is interrupted by software, or in other words, the amount of time that the CPU spends handling software interrupts. This value is often displayed as part of the output of commands like `top` or `vmstat`." + sample_otutput_top
     },
-
+    {
+        term: "Free Memory Display",
+        prompt: "How do you display the amount of free memory in the system?",
+        example: "Run 'free -h' in the terminal.",
+        description: "To display the amount of free memory in the system, you can run the command 'free -h' in the terminal. This will show the memory usage in human-readable format, with the amount of free, used, and available memory."
+    },
+    {
+        term: "Watch Command",
+        prompt: "How do you continuously display the amount of free memory in the system every second using the watch command?",
+        example: "Run 'watch -n 1 free -h' in the terminal.",
+        description: "To continuously display the amount of free memory in the system every second using the watch command, you can run the command 'watch -n 1 free -h' in the terminal. This will show the memory usage in human-readable format every second, and you can exit the command by pressing Ctrl + C."
+    }
 
 
 
