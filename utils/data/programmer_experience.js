@@ -561,7 +561,7 @@ const js_advanced = [
         description: "function marry(person1, person2){ console.log(arguments); console.log(Array.from(arguments)); return ${person1} is now married to ${person2}; }\n\nmarry('Tim', 'Tina');",
         example: "Arguments(2)['Tim', 'Tina', callee: ƒ, Symbol(Symbol.iterator): ƒ]\n\
         (2) [\"Tim\", \"Tina\"]\n\
-        Tim is now married to Tina" 
+        Tim is now married to Tina"
     },
     {
         term: "Function hoist function",
@@ -595,6 +595,26 @@ const js_advanced = [
         prompt: "What does this officially print?",
         description: "var person = {\n\tfirstName: \"John\",\n\tlastName : \"Doe\",\n\tid     : 5566,\n\tmyFunction : function() {\n\t\treturn this;\n\t}\n};\n\nconsole.log(person.myFunction());",
         example: "This is the object that the function is a property of\n In this case it will print: {firstName: \"John\", lastName : \"Doe\", id     : 5566, myFunction : function() { return this; }}"
+    },
+    {
+        term: "call",
+        description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
+        prompt: "Use Call to steal Wizard's healing and use it into archer'",
+        example: "wizard.heal.call(archer, 50, 60);"
+        
+    }, 
+    {
+        term: "apply",
+        description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
+        prompt: "Use apply to steal Wizard's healing and use it into archer'",
+        example: "wizard.heal.apply(archer, [20, 30]);"
+        
+    },
+    {
+        term: "bind",
+        description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
+        prompt: "Use  bind to steal Wizard's healing and use it into archer'",
+        example: "const healArcher = wizard.heal.bind(archer, 50, 60); \n healArcher();"
     }
 
 ]
