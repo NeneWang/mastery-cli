@@ -180,7 +180,7 @@ class DSATrainer {
 
             else if (status == Constants.ProblemStatus.solved) {
                 this.problemReport.increaseAnswerFor(problem.slug);
-                console.log("Times the problem was solved.", this.problemReport.getAnswerFor(problem.slug));
+                if (DEBUG) { console.log("Times the problem was solved.", this.problemReport.getAnswerFor(problem.slug)); }
                 this.cleanCurrentProblem();
                 did_pass_all_tests = true;
                 return Constants.ProblemStatus.solved;
@@ -370,7 +370,7 @@ class DSATrainer {
         const recommended_problems = await this.getRecommendedProblems();
         const problem_slugs = recommended_problems.map(problem => problem.slug);
 
-        await this.showMenuOfProblems({ allow_continue_last: true, show_progress: true, show_tags: true, show_specific_problems: problem_slugs });
+        return await this.showMenuOfProblems({ allow_continue_last: true, show_progress: true, show_tags: true, show_specific_problems: problem_slugs });
 
     }
 
@@ -461,7 +461,7 @@ class DSATrainer {
         const is_new_problem = problem_selected != current_problem_prompt;
         const problem_status = await this.solveProblem(problem, { populate_problem: is_new_problem });
 
-
+        // console.log("Problem status resolved with: ", problem_status, Constants.ProblemStatus.solved == problem_status);
         return problem_status == Constants.ProblemStatus.solved;
     }
 

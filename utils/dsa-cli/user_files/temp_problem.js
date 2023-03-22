@@ -1,22 +1,49 @@
+class ContainerWithMostWater {
+    maxArea(height) {
 
 
-class TrappingRainWater {
-    trappingRainWater(height) {
-		
-		const maxLeft = [];
-		const maxRight = [];
-		const minLeftRight = [];
-		
-		// Calculate the max left
-		
-		// Calculate the max Right
+	//Returns the heigths of the left and right given the arr of heights and 
+        const getHeights = (height, left, right) => [height[left], height[right]];
 
-        return 0;
+	//gets Area by passing in the heights arr, the left and right index
+        const getArea = (height, left, right) => {
+            const [leftHeight, rightHeight] = getHeights(height, left, right);
+            const _height = Math.min(leftHeight, rightHeight);
+            const width = right - left;
+
+            return _height * width;
+        };
+
+        
+	// Initial values
+        let [left, right, max] = [0, height.length - 1, 0];
+
+	// While the left is younger than the right one go and tr getting the heights and then calculate the area. 
+        while (left < right) {
+            const [leftHeight, rightHeight] = getHeights(height, left, right);
+            const area = getArea(height, left, right);
+
+            max = Math.max(max, area);
+		
+	// Update the boundaries if the left is smaller 
+            const isRightGreater = leftHeight <= rightHeight;
+            if (isRightGreater) left++;
+
+	//The same for the less, until it finds the perfect boundary	
+            const isRightLess = rightHeight < leftHeight;
+            if (isRightLess) right--;
+        }
+
+        return max;
     }
 
-    //Dont edit this.
-    solve = this.trappingRainWater;
+
+    solve(heights) {
+        return this.maxArea(heights);
+
+    }
 }
 
 
-module.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: ContainerWithMostWater };
+

@@ -127,14 +127,12 @@ const { Demo, EDemo } = demos;
 
 			if (dsa_is_correct) {
 				await increasePerformance("algo");
-				console.log("dsa solved correctly");
 			}
 		} else {
 			const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
 
 			if (dsa_is_correct) {
 				await increasePerformance("algo");
-				console.log("dsa solved correctly");
 			}
 		}
 

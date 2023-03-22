@@ -39,12 +39,12 @@ class ContainerWithMostWater extends ProblemTests {
     test_1() {
         this.current_test_name = "[1,8,6,2,5,4,8,3,7] => 49"
         const problemToTest = new this.Problem();
-        assert.equals(problemToTest.solve([1, 8, 6, 2, 5, 4, 8, 3, 7]), 49);
+        assert.equal(problemToTest.solve([1, 8, 6, 2, 5, 4, 8, 3, 7]), 49);
     }
     test_2() {
         this.current_test_name = "[1, 1]"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([1, 1]) == 1);
+        assert.equal(problemToTest.solve([1, 1]), 1);
     }
 }
 

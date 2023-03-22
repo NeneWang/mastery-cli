@@ -15,6 +15,8 @@ const getAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/
     const fileUrl = url.pathToFileURL(absolutePath);
     return (fileUrl.toString());
 };
+
+
 /**
  * Gets directory path
  * @param {str} fileimage : String containing the relative position of the image from utils directory
