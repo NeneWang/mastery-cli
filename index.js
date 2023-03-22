@@ -87,8 +87,8 @@ const { Demo, EDemo } = demos;
 		// as until the response is right?
 
 		const _ = await mQuizer.askQuestion();
-		maid.provideMissingReport({run_dsa: true});
-		maid.askToClean();
+		await maid.provideMissingReport({run_dsa: true});
+		await maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {
 		// Gets all services, keeps asking for things here, which service to get
