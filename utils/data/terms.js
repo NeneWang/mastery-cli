@@ -45,11 +45,12 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(dsa))
     decks.addDeck(new TermStorage(system_design, "system design", { is_active: true }));
 
-    const { aws_services, aws_glossary, coderTerms, unit_testing } = require('./programmer_experience');
+    const { aws_services, aws_glossary, coderTerms, unit_testing, js_advanced } = require('./programmer_experience');
     decks.addDeck(new TermStorage(aws_glossary, "aws glossary", { is_active: true }));
     decks.addDeck(new TermStorage(aws_services, "aws services", { is_active: true }));
     decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: true }));
     decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: true }));
+    decks.addDeck(new TermStorage(js_advanced, "js advanced", { is_active: true }));
 
 
     // Includes UX, system Design
@@ -60,6 +61,7 @@ async function populateMasterDeck() {
     // Includes Marketing, Accounting.
     const { accounting } = require('./business_terms');
     decks.addDeck(new TermStorage(accounting, "accounting", { is_active: true }));
+
 
 
 

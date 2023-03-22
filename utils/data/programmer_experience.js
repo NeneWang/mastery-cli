@@ -360,10 +360,6 @@ const coderTerms = [
         You can find it in the documentation for the Kinesis API, or in the AWS Management Console when configuring Kinesis data stream permissions.",
         description: "A consumer is an application that reads data records from a Kinesis data stream. The consumer can be any application or service that can make API calls to Amazon Kinesis, and can process the data records in real time or in batches."
     }
-
-
-
-
 ]
 
 
@@ -478,8 +474,63 @@ const unit_testing = [
 
 ]
 
+const js_advanced = [
+    {
+        term: "Difference JIT, Interpreter, Compiler",
+        prompt: "What is the difference between JIT, Interpreter, Compiler?",
+        example: "Definition: JIT is a type of compiler that compiles code at runtime, dynamically optimizing it for better performance. Interpreters are programs that read and execute code directly, without first converting it to machine code. Compilers are programs that translate source code into machine code ahead of time.  Compilation: JIT compilers compile code at runtime, as it is executed, and can dynamically optimize the code based on the runtime conditions. Interpreters execute code line-by-line as it is read, without compilation, which can make them slower than compiled code. Compilers translate source code into machine code ahead of time, resulting in faster code execution, but at the cost of longer startup times and reduced portability.  Memory usage: JIT compilers can use more memory than interpreters because they need to store the compiled code and any additional data structures used for optimization. Interpreters can use less memory than compilers because they don't need to store compiled machine code. Compiled code can use less memory than interpreted code because it doesn't need to store the original source code.  Performance: JIT compilation can provide significant performance benefits by dynamically optimizing code at runtime. Interpreted code can be slower than compiled code because it needs to be interpreted line-by-line at runtime. Compiled code is generally faster than interpreted code because it doesn't need to be interpreted at runtime, and can use more aggressive optimization techniques.  Portability: JIT compilation can enable code to be written in a high-level language and still run efficiently on different platforms. Interpreted code can be more portable than compiled code because it doesn't need to be compiled for a specific platform. Compiled code can be less portable than interpreted code because it needs to be compiled for a specific platform, which can limit its ability to run on different platforms without modification."
+    },
+    {
+        term: "inline caching",
+        prompt: "What is inline caching? and how can you create code so that it can be cached?",
+        example: "Inline caching happens when a method is re-called, then js engine will check if the object is the same as the previous one, if so, it will use the cached version of the method, if not, it will create a new cache for the new object. \n\ "
+    },
+    {
+        term: "Hoisting",
+        prompt: "What is hoisting? ",
+        example: "Hoisting is the process of moving all the declarations to the top of the scope before code execution.\n\
+        function example() {\n\
+            console.log(x); // undefined\n\
+            console.log(y); // ReferenceError: y is not defined\n\
+            \n\
+            var x = 1;\n\
+            let y = 2;\n\
+          }\n\
+          \n\
+          In this example, the var x = 1; declaration is hoisted to the top of the function scope, so console.log(x); outputs undefined. The let y = 2;\n\
+          declaration, however, is not hoisted, so console.log(y);\n\
+          throws a ReferenceError because y has not been declared yet."
+    },
+    {
+        term: "var and let",
+        prompt: "What is the difference between var and let?",
+        example: "The difference between var and let is in their scoping behavior. var declarations are function-scoped, meaning that the variable is only accessible within the function in which it was declared or in the global scope if it is not declared within a function. let, on the other hand, is block-scoped, meaning that the variable is only accessible within the block in which it was declared (including nested blocks) and is not accessible outside of that block.",
+        description: "function varScoping() {\tvar x = 1;\n\tif (true) {\t\tvar x = 2;\t\tconsole.log(x);\t}\n\tconsole.log(x);\n}\n\nfunction letScoping() {\tlet x = 1;\n\tif (true) {\t\tlet x = 2;\t\tconsole.log(x);\t}\n\tconsole.log(x);\n}\n\n\
+        unction varAndLetScoping() {\tvar x = 1;\n\tif (true) {\t\tlet x = 2;\t\tconsole.log(x);\t}\n\tconsole.log(x);\n}"
+    },
+    {
+        term: "Memory Leaks in JS",
+        prompt: "How do memory leaks occur in JavaScript?",
+        example: "Memory leaks in JavaScript occur when there is a build-up of unreferenced objects in memory. This can happen when objects are created but not properly released from memory, or when circular references between objects prevent the garbage collector from removing them."
+    },
+    {
+        term: "Garbage Collection in JS",
+        prompt: "How is garbage collection implemented in JavaScript?",
+        example: "Garbage collection in JavaScript is automatic and performed by the JavaScript engine. The engine periodically checks the memory heap to identify objects that are no longer referenced and can be safely removed. The garbage collector works by tracing the references between objects and removing any objects that are no longer reachable."
+    },
+    {
+        term: "Event Loop in JavaScript",
+        prompt: "What is the event loop in JavaScript?",
+        example: "The event loop in JavaScript is a mechanism that continuously checks the call stack and the callback queue. If the call stack is empty, the event loop takes the next function from the callback queue and adds it to the call stack, where it will be executed. This allows asynchronous functions to be executed in a non-blocking way, without freezing the main thread."
+    }
 
 
-module.exports = { aws_glossary, aws_services, coderTerms, unit_testing };
+
+
+]
+
+
+
+module.exports = { aws_glossary, aws_services, coderTerms, unit_testing, js_advanced };
 
 
