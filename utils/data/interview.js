@@ -724,9 +724,8 @@ const interview = [
         example: "48. Is there anything that concerns you about my background being a fit for this role? 49. What are the next steps in the interview process? 50. Is there anything else I can provide you with that would be helpful? 51. Can I answer any final questions for you?"
     }
 
-
-
 ]
 
 
 
+module.exports = {interview}
