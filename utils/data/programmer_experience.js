@@ -599,23 +599,30 @@ const js_advanced = [
     {
         term: "call",
         description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
-        prompt: "Use Call to steal Wizard's healing and use it into archer'",
+        prompt: "Use Call to steal Wizard's healing and use it into archer for 50 and 60'",
         example: "wizard.heal.call(archer, 50, 60);"
         
     }, 
     {
         term: "apply",
         description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
-        prompt: "Use apply to steal Wizard's healing and use it into archer'",
+        prompt: "Use apply to steal Wizard's healing and use it into archer for 20 and 30'",
         example: "wizard.heal.apply(archer, [20, 30]);"
         
     },
     {
         term: "bind",
         description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
-        prompt: "Use  bind to steal Wizard's healing and use it into archer'",
+        prompt: "Use  bind to steal Wizard's healing and use it into archer for 50 and 60'",
         example: "const healArcher = wizard.heal.bind(archer, 50, 60); \n healArcher();"
+    },
+    {
+        term: "context vs scope",
+        prompt: "What is the difference between context and scope? When you declare an variable of inside an object are you creating the context or the scope?",
+        example: "Context is the object that the function is a property of. Scope is the variable environment of the execution context, which consists of any local variables that were in-scope at the time the execution context was created.\n\n\
+        When you declare a variable inside an object, you are creating a new variable in the object's scope. This means that the variable is accessible within the object, but not outside of it. However, the context of the variable depends on how it is accessed. If you access the variable using the object's name, the context will be the object itself. If you access the variable using a reference to the object's method or a callback function, the context may be different."
     }
+
 
 ]
 
