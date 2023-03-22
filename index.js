@@ -87,7 +87,7 @@ const { Demo, EDemo } = demos;
 		// as until the response is right?
 
 		const _ = await mQuizer.askQuestion();
-		maid.provideMissingReport();
+		maid.provideMissingReport({run_dsa: true});
 		maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {

@@ -18,6 +18,7 @@ const parser = new Parser();
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 const { getMaidDirectory } = require('./utils_functions');
+const DSATrainer = require('./dsa-cli/dsa-trainer');
 
 const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
@@ -181,24 +182,55 @@ class Maid {
 		this.say(`Weather Report: ${todaydate}`, false)
 		// console.log('Weather\n')
 		const _ = await weatherReport();
-		this.provideMissingReport();
+		this.provideMissingReport({ run_dsa: true });
 	}
 
 	/**
 	 * Prints the missing objectives
 	 * !important: To prepopulate the msising report first!!
 	 */
-	provideMissingReport = async () => {
+	provideMissingReport = async ({ run_dsa = false } = {}) => {
 		if (!this.missingFeatReport) {
 			const _ = await this.populateMissingReport();
 		}
 		// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
-		if (this.missingFeatReport?.length ?? 0 <= 0) {
+		if (!this?.missingFeatReport || this.missingFeatReport?.length <= 0) {
 			console.log("Missing Reports Missing: received: ", this.missingFeatReport)
 			return;
 		}
 		const missingFormatedAsStr = this.missingFeatReport.join(", ")
 		console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
+		if (run_dsa) {
+			await this.requests_if_run_dsa_trainer(missingFormatedAsStr);
+		}
+	}
+
+	/**
+	 * if `algo` not included on the missing Feat Report: 
+	 * 	- ask to run `algo`
+	 * 	- if yes, run `algo`
+	 * 
+	 */
+	requests_if_run_dsa_trainer = async (missingFeatReport) => {
+		const algo = "algo";
+		const algo_missing = !missingFeatReport.includes(algo);
+		if (true) {
+			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
+			console.log("Daily DSA Missing run algorithms?")
+			const response = await dsaPrompt.run();
+			if (response) {
+
+
+				const dsaTrainer = new DSATrainer();
+
+				const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
+
+				if (dsa_is_correct) {
+					await increasePerformance("algo");
+				}
+			}
+		}
+		return;
 	}
 
 	/**
