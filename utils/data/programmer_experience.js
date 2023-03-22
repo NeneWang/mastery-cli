@@ -522,10 +522,80 @@ const js_advanced = [
         term: "Event Loop in JavaScript",
         prompt: "What is the event loop in JavaScript?",
         example: "The event loop in JavaScript is a mechanism that continuously checks the call stack and the callback queue. If the call stack is empty, the event loop takes the next function from the callback queue and adds it to the call stack, where it will be executed. This allows asynchronous functions to be executed in a non-blocking way, without freezing the main thread."
+    },
+    {
+        term: "parallelism-vs-concurrency",
+        prompt: "What is the difference between parallelism and concurrency?",
+        example: "Concurrency is about multiple tasks which start, run, and complete in overlapping time periods, in no specific order. Parallelism is about multiple tasks or subtasks of the same task that literally run at the same time on a hardware with multiple computing resources like multi-core processor."
+    },
+    {
+        term: "promise-vs-callback",
+        prompt: "What is the difference between a promise and a callback?",
+        example: "The main difference between a promise and a callback is that a callback is a function that is passed as an argument to another function, while a promise is an object that represents the eventual completion or failure of an asynchronous operation. Promises are more flexible than callbacks because they can be chained, which allows them to be used to handle asynchronous operations that depend on the result of a previous operation. Promises also provide a way to handle errors that occur in asynchronous operations, which is not possible with callbacks.\n\
+        The benefit of Callback:      You can run another function call after waiting for the outcome of a prior function call.     You can call the parent function from the child function and can also pass data from child to parent.\n\
+        A Promise has four states:       fulfilled: Action related to the promise succeeded     rejected: Action related to the promise failed     pending: Promise is still pending i.e. not fulfilled or rejected yet     settled: Promise has fulfilled or rejected\n\
+        Benefits of Promises:      Improves Code Readability     Better handling of asynchronous operations     Better flow of control definition in asynchronous logic     Better Error Handling"
+    },
+    {
+        term: "multithreadig-vs-multitasking",
+        prompt: "What is the difference between multithreading and multitasking?",
+        example: "Multitasking: Multitasking is when a CPU is provided to execute multiple tasks at a time. Multitasking involves often CPU switching between the tasks, so that users can collaborate with each program together. Unlike multithreading, In multitasking, the processes share separate memory and resources. As multitasking involves CPU switching between the tasks rapidly, So the little time is needed in order to switch from the one user to next. "
+    },
+    {
+        term: "hoisting methods",
+        prompt: "What will the following print?",
+        description: "sing();\nsing2();\nvar sing = function() { console.log(\"uhhhh la la la\"); }; function sing2() { console.log(\"ohhhh la la la\"); }",
+        example: "\nundefined\nohhhh la la la"
+    },
+    {
+        term: "Methods redefinitions",
+        prompt: "What will the following print?",
+        description: "a(); \n\nfunction a() {\n console.log('hi');\n}\n\na(); \n\nfunction b() {\n console.log('Bye!');\n}\n\na(); ",
+        example: "Bye!\n\
+        Bye!\n\
+        Bye!"
+    },
+    {
+        term: "function arguments",
+        prompt: "What will the following print?",
+        description: "function marry(person1, person2){ console.log(arguments); console.log(Array.from(arguments)); return ${person1} is now married to ${person2}; }\n\nmarry('Tim', 'Tina');",
+        example: "Arguments(2)['Tim', 'Tina', callee: ƒ, Symbol(Symbol.iterator): ƒ]\n\
+        (2) [\"Tim\", \"Tina\"]\n\
+        Tim is now married to Tina" 
+    },
+    {
+        term: "Function hoist function",
+        prompt: "What will the following print?",
+        description: "function one() { console.log('1', isValid); var isValid = true; two(); console.log('2', isValid); }\n\nfunction two() { console.log('3', isValid); var isValid; console.log('4', isValid); }\n\nfunction three(){ console.log('5', isValid); }\n\nvar isValid = false;\n\none();\nthree();",
+        example: "1 undefined \n3 undefined \n4 undefined \n2 true \n5 false"
+    },
+    {
+        term: "Weird global strategy",
+        prompt: "What will the following print?",
+        description: "function weird() {\n\theight = 50;\n\treturn height;\n}\n\nconsole.log(weird());\n\
+        console.log(height);",
+        example: "50, 50 => js is weird and it will create a global variable"
+    },
+    {
+        term: "Function enclosure",
+        prompt: "What will the following print?",
+        description: "var heyhey = function doodle() {\n // code here\n};\n\nheyhey();\n// doodle is not accessible outside its scope\n// this will result in a ReferenceError\ndoodle();",
+        example: "It will throw an error because doodle is not accessible outside its scope"
+    },
+    {
+        term: "IIFE",
+        prompt: "What is IIFE?, Why would you use it? What will this print?",
+        description: "(function() {\n var a = 'Hello';\n})();\n\nconsole.log(a);",
+        example: "Immediately Invoked Function Expression, \n\
+        is a module scope was implemented just above the function scope. This allowed variables to be shared, by exporting and importing, between the functions without having to go through the global scope.\n\
+        =>  Undefined, a would be encapsulated into the anonymous function."
+    },
+    {
+        term: "This",
+        prompt: "What does this officially print?",
+        description: "var person = {\n\tfirstName: \"John\",\n\tlastName : \"Doe\",\n\tid     : 5566,\n\tmyFunction : function() {\n\t\treturn this;\n\t}\n};\n\nconsole.log(person.myFunction());",
+        example: "This is the object that the function is a property of\n In this case it will print: {firstName: \"John\", lastName : \"Doe\", id     : 5566, myFunction : function() { return this; }}"
     }
-
-
-
 
 ]
 

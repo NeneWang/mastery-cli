@@ -64,7 +64,7 @@ async function populateMasterDeck() {
 
 
     const { interview } = require('./interview');
-    decks.addDeck(new TermStorage(interview, "interview", { is_active: true }));
+    decks.addDeck(new TermStorage(interview, "interview", { is_active: false }));
 
 
     // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
