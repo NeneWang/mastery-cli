@@ -214,7 +214,7 @@ class Maid {
 	requests_if_run_dsa_trainer = async (missingFeatReport) => {
 		const algo = "algo";
 		const algo_missing = !missingFeatReport.includes(algo);
-		if (true) {
+		if (algo_missing) {
 			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
 			console.log("Daily DSA Missing run algorithms?")
 			const response = await dsaPrompt.run();
