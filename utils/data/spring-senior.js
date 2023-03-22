@@ -1012,8 +1012,29 @@ const algebra = [
     {
         term: "domain range", prompt: "What is the domain of sqrt(x+3)/(x-3). ",
         description: "Use the teacher's notation",
-        example: "D = [-3; +inf[ \\ {3}"
+        example: "D = [-3; +inf[ \\ {3} || [-3; 3)U(3; +inf)"
     },
+    {
+        term: "newton-f(x)=3-2x",
+        prompt: "Find the Newton Quotient for f(x) = 3 - 2x",
+        example: "f'(x) = -2"
+    },
+    {
+        term: "newton-f(x)=x^2 + 1",
+        prompt: "Find the Newton Quotient for f(x) = x^2 + 1",
+        example: "f'(x) = 2x"
+    },
+    {
+        term: "newton-f(x)=1/(x+2)",
+        prompt: "Find the Newton Quotient for f(x) = 1/(x+2)",
+        example: "f'(x) = -1/(x+2)^2"
+    },
+    {
+        term: "constants k in f(tk)",
+        prompt: "For which constant k is F(tK) = t^(k) * F(K) for t >=0",
+        description: "F(K) = 10*K^(1/2)",
+        example: "k = 1/2"
+    }
 
 
 
