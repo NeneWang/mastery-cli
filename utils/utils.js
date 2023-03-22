@@ -201,7 +201,7 @@ class Maid {
 		const missingFormatedAsStr = this.missingFeatReport.join(", ")
 		console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
 		if (run_dsa) {
-			await this.requests_if_run_dsa_trainer(missingFormatedAsStr);
+			await this.requests_if_run_dsa_trainer(this.missingFeatReport);
 		}
 	}
 
