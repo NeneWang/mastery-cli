@@ -153,7 +153,6 @@ class DSATrainer {
         const problem_status = await this.solveProblem(problem);
 
         return problem_status == Constants.ProblemStatus.solved;
-
     }
 
 
@@ -370,7 +369,6 @@ class DSATrainer {
 
         const recommended_problems = await this.getRecommendedProblems();
         const problem_slugs = recommended_problems.map(problem => problem.slug);
-        console.log("Recommended problems: ", problem_slugs);
 
         await this.showMenuOfProblems({ allow_continue_last: true, show_progress: true, show_tags: true, show_specific_problems: problem_slugs });
 

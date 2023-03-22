@@ -121,14 +121,23 @@ const { Demo, EDemo } = demos;
 	}
 	else if (input.includes(cmInfo.commands.dsa.code)) {
 		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
-		// const dsa_is_correct = await dsaTrainer.showMenuOfProblems();
-		console.log("Showing menu of dsa...")
-		const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
+		if (flags.all) {
+			console.log("all")
+			const dsa_is_correct = await dsaTrainer.showMenuOfProblems();
 
-		if (dsa_is_correct) {
-			await increasePerformance("algo");
-			console.log("dsa solved correctly");		
+			if (dsa_is_correct) {
+				await increasePerformance("algo");
+				console.log("dsa solved correctly");
+			}
+		} else {
+			const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
+
+			if (dsa_is_correct) {
+				await increasePerformance("algo");
+				console.log("dsa solved correctly");
+			}
 		}
+
 	}
 	// else if (input.includes(cmInfo.commands.dsa.code)) {
 	else {

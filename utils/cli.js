@@ -29,6 +29,12 @@ const flags = {
 		default: 'chuck',
 		alias: 't',
 		desc: 'What kind of jokes do you want [chuck|nerdy] ?'
+	},
+	all: {
+		type: 'boolean',
+		default: false,
+		alias: 'a',
+		desc: 'Get all algorithms'
 	}
 };
 
