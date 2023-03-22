@@ -197,10 +197,10 @@ class DSATrainer {
 
     /**
      * 
-     * @param {ProblemMetaData} problem 
-     * @param {boolean} open_problem_temporal If true, the problem temporal file will be opened
-     * @param {boolean} open_solution If true, the solution file will be opened
-    *  @param {boolean} open_basecode If true, the basecode file will be opened
+    * @param {ProblemMetaData} problem 
+    * @param {boolean} open_problem_temporal If true, the problem temporal file will be opened
+    * @param {boolean} open_solution If true, the solution file will be opened
+    * @param {boolean} open_basecode If true, the basecode file will be opened
     * @param {boolean} open_markdown If true, the markdown file will be opened
     * @param {boolean} open_test_cases If true, the test cases file will be opened
     * @returns {Promise} A promise that resolves when the problem is opened
