@@ -684,7 +684,18 @@ const js_advanced = [
         ```\
         ",
         example: "let superClone = JSON.parse(JSON.stringify(obj));"
-    }
+    },
+    {
+        term: "static-vs-dynamic typed",
+        prompt: "Name example of  (1) static typed: are checked during the compile stage, so all types are known before run-time,\n\
+        (2) dynamic language: are checked on the fly, during the execution stage.\n\
+        (3) weakly typed: languages can make type coercions implicitly.\n\
+        (4) strongly typed: do not allow conversions between unrelated types.",
+        example: "1) Java, C, C++, C#\n\
+        2) Python, PHP, Ruby, Perl JavaScript\n\
+        3) JavaScript, PHP, C, C++\n\
+        4) Java, C#, Python"
+    },
 ]
 
 

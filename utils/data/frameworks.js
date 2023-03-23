@@ -15,7 +15,7 @@ const react_terms = [
         description: "Package managers are tools that allow you to manage dependencies in your project. npm and Yarn are two package managers commonly used in React applications. Both of them are clients for the same npm package registry."
     },
     {
-        term: "(a) Components, (b) Props (c) props.children  (d) State (e) Controlled Component", 
+        term: "(a) Components, (b) Props (c) props.children  (d) State (e) Controlled Component",
         prompt: "Describe (1+) the meaning on own words",
         description: "\n\
         (a) React components are small, reusable pieces of code that return a React element to be rendered to the page. The simplest version of React component is a plain JavaScript function that returns a React element\n\n\
@@ -25,9 +25,33 @@ const react_terms = [
         (e) An input form element whose value is controlled by React is called a controlled component. When a user enters data into a controlled component a change event handler is triggered and your code decides whether the input is valid (by re-rendering with the updated value). If you do not re-render then the form element will remain unchanged.\n\n\
         "
     },
-    
+
 
 
 ];
 
-module.exports = { react_terms };
+
+const apex = [
+    {
+        term: "len-substr-concatenate",
+        description: ":m given: \n\
+            `java String message = 'Hello, world!';`",
+        prompt: "get length, substring Hello, and replace `world` with `Apex`",
+        example: "int length = message.length();\n\
+        String sub = message.substring(0, 5);\n\
+        String newMessage = sub + 'Apex';\n\
+        System.debug(newMessage);"
+    },
+    {
+        term: "contains-trim-charAt",
+        description: ":m given: \n\
+            `java String message = '  Hello, world!  ';`",
+        prompt: "check if message contains `world`, trim the message (remove any leading and trailing white space), and get the first character",
+        example: "boolean contains = message.contains('world');\n\
+        String trim = message.trim();\n\
+        char first = trim.charAt(0);\n\
+        System.debug(first);"
+    }
+]
+
+module.exports = { react_terms, apex };

@@ -64,7 +64,7 @@ class SmartRow {
 
 class CSVAssistant {
 
-    constructor({ completedStatuses = ["done", "completed", "finished"] } = {}) {
+    constructor({ completedStatuses = ["done", "completed", "finished", "halted", "stopped", "aborted"] } = {}) {
         this.completedStatuses = completedStatuses//Will be avoided by default when taking the goals to do in priority
     }
 
