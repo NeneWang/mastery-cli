@@ -548,14 +548,6 @@ const js_advanced = [
         example: "\nundefined\nohhhh la la la"
     },
     {
-        term: "Methods redefinitions",
-        prompt: "What will the following print?",
-        description: "a(); \n\nfunction a() {\n console.log('hi');\n}\n\na(); \n\nfunction b() {\n console.log('Bye!');\n}\n\na(); ",
-        example: "Bye!\n\
-        Bye!\n\
-        Bye!"
-    },
-    {
         term: "Function hoist function",
         prompt: "What will the following print?",
         description: "function one() { console.log('1', isValid); var isValid = true; two(); console.log('2', isValid); }\n\nfunction two() { console.log('3', isValid); var isValid; console.log('4', isValid); }\n\nfunction three(){ console.log('5', isValid); }\n\nvar isValid = false;\n\none();\nthree();",
@@ -654,24 +646,31 @@ const js_advanced = [
         description: "const obj = { a: 1, b: 2, c: 3 };",
         example: "const clone = { ...obj }; | const clone = Object.assign({}, obj);"
     },
-    // TELL to chatgpt: function marry(person1, person2){ console.log(arguments); console.log(Array.from(arguments)); return ${person1} is now married to ${person2}; }\n\nmarry('Tim', 'Tina'); to :m\n\         ## Hey\n\n\         ```js\n\         function marry(person1, person2) {\n\             \tconsole.log(arguments);\n\             \tconsole.log(Array.from(arguments));\n\             \treturn `${person1} is now married to ${person2}`;\n\             \             marry('Tim', 'Tina');\           }\n\           ```
+    // TELL to chatgpt: Convert the following into a one line markdown format with :m at the start and surroudn it with "" e.g. function marry(person1, person2){ console.log(arguments); console.log(Array.from(arguments)); return ${person1} is now married to ${person2}; }\n\nmarry('Tim', 'Tina'); to ":m\n\ ```js\n\         function marry(person1, person2) {\n\  \tconsole.log(arguments);\n\  \tconsole.log(Array.from(arguments));\n\  \treturn `${person1} is now married to ${person2}`;\n\  \  marry('Tim', 'Tina');\}\n\```""
     {
         term: "function arguments - marry",
         prompt: "What will the following print?",
         description: ":m\n\
-        ## Hey\n\n\
         ```js\n\
         function marry(person1, person2) {\n\
-            \tconsole.log(arguments);\n\
-            \tconsole.log(Array.from(arguments));\n\
-            \treturn `${person1} is now married to ${person2}`;\n\
-            \
+        \t\tconsole.log(arguments);\n\
+        \t\tconsole.log(Array.from(arguments));\n\
+        \t\treturn `${person1} is now married to ${person2}`;\n\
+        \n\
             marry('Tim', 'Tina');\
-          }\n\
+            }\n\
           ```",
         example: "Arguments(2)['Tim', 'Tina', callee: ƒ, Symbol(Symbol.iterator): ƒ]\n\
         (2) [\"Tim\", \"Tina\"]\n\
         Tim is now married to Tina"
+    },
+    {
+        term: "Methods redefinitions",
+        prompt: "What will the following print?",
+        description: ":m```js\na();\n\nfunction a() {\n console.log('hi');\n}\n\na();\n\nfunction b() {\n console.log('Bye!');\n}\n\na();\n\n```",
+        example: "Bye!\n\
+        Bye!\n\
+        Bye!"
     },
 ]
 
