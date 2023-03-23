@@ -372,6 +372,7 @@ class Quizzer {
             if (default_description_is_markdown) {
                 // Check if the description starts with :m
                 if (term_selected.description.startsWith(":m")) {
+                    if(DEBUG) console.log("markdown detected")
                     // Remove the :m
                     term_selected.description = term_selected.description.substring(2);
 

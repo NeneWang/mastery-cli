@@ -556,14 +556,6 @@ const js_advanced = [
         Bye!"
     },
     {
-        term: "function arguments",
-        prompt: "What will the following print?",
-        description: "function marry(person1, person2){ console.log(arguments); console.log(Array.from(arguments)); return ${person1} is now married to ${person2}; }\n\nmarry('Tim', 'Tina');",
-        example: "Arguments(2)['Tim', 'Tina', callee: ƒ, Symbol(Symbol.iterator): ƒ]\n\
-        (2) [\"Tim\", \"Tina\"]\n\
-        Tim is now married to Tina"
-    },
-    {
         term: "Function hoist function",
         prompt: "What will the following print?",
         description: "function one() { console.log('1', isValid); var isValid = true; two(); console.log('2', isValid); }\n\nfunction two() { console.log('3', isValid); var isValid; console.log('4', isValid); }\n\nfunction three(){ console.log('5', isValid); }\n\nvar isValid = false;\n\none();\nthree();",
@@ -661,7 +653,23 @@ const js_advanced = [
         prompt: "How would you create a clone of an object? Name the clone, `clone`",
         description: "const obj = { a: 1, b: 2, c: 3 };",
         example: "const clone = { ...obj }; | const clone = Object.assign({}, obj);"
-    }
+    },
+    {
+        term: "function arguments",
+        prompt: "What will the following print?",
+        description: ":m```js\n\
+        function marry(person1, person2) {\n\
+            console.log(arguments);\n\
+            console.log(Array.from(arguments));\n\
+            return `${person1} is now married to ${person2}`;\n\
+            \
+            marry('Tim', 'Tina');\
+          }\n\
+          ```",
+        example: "Arguments(2)['Tim', 'Tina', callee: ƒ, Symbol(Symbol.iterator): ƒ]\n\
+        (2) [\"Tim\", \"Tina\"]\n\
+        Tim is now married to Tina"
+    },
 
 
 
