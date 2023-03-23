@@ -548,22 +548,6 @@ const js_advanced = [
         example: "\nundefined\nohhhh la la la"
     },
     {
-        term: "Methods redefinitions",
-        prompt: "What will the following print?",
-        description: "a(); \n\nfunction a() {\n console.log('hi');\n}\n\na(); \n\nfunction b() {\n console.log('Bye!');\n}\n\na(); ",
-        example: "Bye!\n\
-        Bye!\n\
-        Bye!"
-    },
-    {
-        term: "function arguments",
-        prompt: "What will the following print?",
-        description: "function marry(person1, person2){ console.log(arguments); console.log(Array.from(arguments)); return ${person1} is now married to ${person2}; }\n\nmarry('Tim', 'Tina');",
-        example: "Arguments(2)['Tim', 'Tina', callee: ƒ, Symbol(Symbol.iterator): ƒ]\n\
-        (2) [\"Tim\", \"Tina\"]\n\
-        Tim is now married to Tina"
-    },
-    {
         term: "Function hoist function",
         prompt: "What will the following print?",
         description: "function one() { console.log('1', isValid); var isValid = true; two(); console.log('2', isValid); }\n\nfunction two() { console.log('3', isValid); var isValid; console.log('4', isValid); }\n\nfunction three(){ console.log('5', isValid); }\n\nvar isValid = false;\n\none();\nthree();",
@@ -601,14 +585,14 @@ const js_advanced = [
         description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
         prompt: "Use Call to steal Wizard's healing and use it into archer for 50 and 60'",
         example: "wizard.heal.call(archer, 50, 60);"
-        
-    }, 
+
+    },
     {
         term: "apply",
         description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
         prompt: "Use apply to steal Wizard's healing and use it into archer for 20 and 30'",
         example: "wizard.heal.apply(archer, [20, 30]);"
-        
+
     },
     {
         term: "bind",
@@ -621,9 +605,97 @@ const js_advanced = [
         prompt: "What is the difference between context and scope? When you declare an variable of inside an object are you creating the context or the scope?",
         example: "Context is the object that the function is a property of. Scope is the variable environment of the execution context, which consists of any local variables that were in-scope at the time the execution context was created.\n\n\
         When you declare a variable inside an object, you are creating a new variable in the object's scope. This means that the variable is accessible within the object, but not outside of it. However, the context of the variable depends on how it is accessed. If you access the variable using the object's name, the context will be the object itself. If you access the variable using a reference to the object's method or a callback function, the context may be different."
-    }
-
-
+    },
+    {
+        term: "typeof",
+        prompt: "What will the following print?",
+        description: "typeof 5\ntypeof '5'\ntypeof true\ntypeof undefined\ntypeof null\ntypeof {}\ntypeof []\ntypeof function(){}",
+        example: "number\nstring\nboolean\nundefined\nobject\nobject\nfunction => However in reality is actually an object"
+    },
+    {
+        term: "weird functions behaviour on types",
+        prompt: "What will the following print?",
+        description: "function a() {}\na.hi = 'hi'\nconsole.log(a.hi)",
+        example: "hi ==> functions are objects"
+    },
+    {
+        term: "weird functions behaviour on types 2",
+        prompt: "What will the following print?",
+        description: "true.toString()\ntypeof Infinity",
+        example: "true\nnumber"
+    },
+    {
+        term: "Rename variables in Vim",
+        prompt: "How would you rename a variable in Vim?",
+        example: ":%s/old/new/g | cgn new_name + escape + . (for each)"
+    },
+    {
+        term: "Move lines in Vim",
+        prompt: "How would you move a line in Vim?",
+        example: ":m +1 (move down)\n:m -1 (move up)"
+    },
+    {
+        term: "Create clone of arr",
+        prompt: "How would you create a clone of an array? Name the clone, `clone`",
+        description: "const arr = [1, 2, 3];",
+        example: "const clone = [...arr]; | const clone = arr.slice(); | const clone = arr.concat();"
+    },
+    {
+        term: "Create clone of obj",
+        prompt: "How would you create a clone of an object? Name the clone, `clone`",
+        description: "const obj = { a: 1, b: 2, c: 3 };",
+        example: "const clone = { ...obj }; | const clone = Object.assign({}, obj);"
+    },
+    // TELL to chatgpt: Convert the following into a one line markdown format with :m at the start and surroudn it with "" e.g. function marry(person1, person2){ console.log(arguments); console.log(Array.from(arguments)); return ${person1} is now married to ${person2}; }\n\nmarry('Tim', 'Tina'); to ":m\n\ ```js\n\         function marry(person1, person2) {\n\  \tconsole.log(arguments);\n\  \tconsole.log(Array.from(arguments));\n\  \treturn `${person1} is now married to ${person2}`;\n\  \  marry('Tim', 'Tina');\}\n\```""
+    {
+        term: "function arguments - marry",
+        prompt: "What will the following print?",
+        description: ":m\n\
+        ```js\n\
+        function marry(person1, person2) {\n\
+        \t\tconsole.log(arguments);\n\
+        \t\tconsole.log(Array.from(arguments));\n\
+        \t\treturn `${person1} is now married to ${person2}`;\n\
+        \n\
+            marry('Tim', 'Tina');\
+            }\n\
+          ```",
+        example: "Arguments(2)['Tim', 'Tina', callee: ƒ, Symbol(Symbol.iterator): ƒ]\n\
+        (2) [\"Tim\", \"Tina\"]\n\
+        Tim is now married to Tina"
+    },
+    {
+        term: "Methods redefinitions",
+        prompt: "What will the following print?",
+        description: ":m```js\na();\n\nfunction a() {\n console.log('hi');\n}\n\na();\n\nfunction b() {\n console.log('Bye!');\n}\n\na();\n\n```",
+        example: "Bye!\n\
+        Bye!\n\
+        Bye!"
+    },
+    // CHATGPT: Convert into a single line with \n and \t when it should, assume is in a string:
+    {
+        term: "Deep Clonning",
+        prompt: "How would you deep clone an object?",
+        description: ":m\n\
+        This will create a shallow clone\n\
+        ```js\n\
+        let output = let obj = {a: 'a', b: 'b', c: {\n\tdeep: 'try and copy me'\n}};\nlet clone = Object.assign({}, obj);\nlet clone2 = {...obj}; // ES6\n\nobj.c.deep = 'hahaha';\nconsole.log(clone); // {a: 'a', b: 'b', c: {deep: 'hahaha'}}\nconsole.log(clone2); // {a: 'a', b: 'b', c: {deep: 'hahaha'}};\
+        console.log(output);\
+        ```\
+        ",
+        example: "let superClone = JSON.parse(JSON.stringify(obj));"
+    },
+    {
+        term: "static-vs-dynamic typed",
+        prompt: "Name example of  (1) static typed: are checked during the compile stage, so all types are known before run-time,\n\
+        (2) dynamic language: are checked on the fly, during the execution stage.\n\
+        (3) weakly typed: languages can make type coercions implicitly.\n\
+        (4) strongly typed: do not allow conversions between unrelated types.",
+        example: "1) Java, C, C++, C#\n\
+        2) Python, PHP, Ruby, Perl JavaScript\n\
+        3) JavaScript, PHP, C, C++\n\
+        4) Java, C#, Python"
+    },
 ]
 
 

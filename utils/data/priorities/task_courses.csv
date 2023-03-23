@@ -1,9 +1,8 @@
 feature_id;priority;difficulty;status;coefficient;mission_comments;description
 ubuntu-linux-fundamentals;11;3;DONE;8;I loved it, learnt a lot. This algorithm works;
 artificial-intelligence-ai;11;6;ABORTED;5;asThe probelm with this is that it doesnt match my work. I believe this could be unethical? => Althought it improves my skill into getting into Research papers and understanding of numbers.;
- But is clear that this is not what we are looking for, because what we have could be considered structured data.;https://www.edx.org/course/artificial-intelligence-ai;;;NaN;;
 salesforce-dev;9;5;;4;;
-js-advanced-concepts;10;6;DOING;4;;
+js-advanced-concepts;10;6;HALTED;4;;
 complete-flutter-dev;8;5;;3;;
 selenium-docker-jenkins;8;5;;3;;
 data-engineering-aws;9;6;;3;;

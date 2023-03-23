@@ -206,9 +206,27 @@ class DSATrainer {
     * @returns {Promise} A promise that resolves when the problem is opened
      */
     async openProblemMetadataInTerminal(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
-        const promblem_prompt = await getPromptDict(problem.slug);
-        if (true) console.log("Problem prompt selected: ", promblem_prompt);
-        renderPromptDescription(promblem_prompt);
+        
+
+
+        let problem_details = this.problems_manager.getProblem(problem.slug);
+        /**
+            slug: 'character-replacement',
+            file_path: 'character-replacement.js',  test_slug: 'character-replacement',
+            name: 'Character Replacement',
+            description: 'Longest Repeating Character Replacement',  
+            difficulty: 'medium',
+            tags: [ 'neetcode', 'medium', 'sliding-window' ],        
+            absolute_solution_path: 'C:\\github\\testing\\maid-cli\\utils\\dsa-cli\\solutions\\character-replacement.js'        
+            }
+        */
+
+        let promblem_prompt = await getPromptDict(problem.slug);;
+
+
+
+        if (DEBUG) console.log("Problem prompt selected: ", promblem_prompt);
+        renderPromptDescription(promblem_prompt, problem_details);
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
         if (open_problem_temporal) {

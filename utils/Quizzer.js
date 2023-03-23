@@ -17,7 +17,7 @@ const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
-const { show_image, user_requests_exit, user_requests_skip, user_requests_calc } = require('./utils_functions');
+const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked } = require('./utils_functions');
 const { TermScheduler } = require('./termScheduler');
 const { slice } = require('./cli');
 // const DEBUG = true
@@ -47,7 +47,7 @@ class Quizzer {
 
         try {
             // Filter only if they have formula_name property
-            potential_questions = potential_questions.filter(x => x?.formula_name != undefined )
+            potential_questions = potential_questions.filter(x => x?.formula_name != undefined)
             const problem_names = potential_questions.map(x => x.formula_name)
             // Filter only if they have formula_name property again?
             // problem_names = potential_questions.filter(x => x.formula_name)
@@ -327,7 +327,7 @@ class Quizzer {
 
     }
 
-    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { } } = {}) {
+    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { }}) {
         try {
             // Start running the question_attempt
             /**
@@ -366,7 +366,12 @@ class Quizzer {
                 const _ = await show_image(term_selected?.attachment, { is_url: term_selected.attachment_is_url });
             }
 
-            console.log(`${term_selected.description}\n`)
+
+
+            printMarked(term_selected?.description ?? "", { use_markdown: true });
+
+
+
             const question = new Input({
                 name: 'Term Question',
                 message: `${term_selected.prompt} (Ignore with "no")\n`,
@@ -436,6 +441,8 @@ class Quizzer {
             if (true) console.log(err)
             return false; // if in a session, this will skip the card because this is improperly made.
         }
+
+
     }
 
 
@@ -445,7 +452,8 @@ class Quizzer {
      */
     printExample = async (term_selected) => {
         if (term_selected?.example ?? false) {
-            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')} ${term_selected.example}`);
+            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')}`);
+            printMarked(term_selected?.example ?? "", { use_markdown: true });
         }
     }
 
@@ -554,7 +562,7 @@ class Quizzer {
                 if (user_requests_calc(res)) {
                     const { exec } = require('child_process');
                     exec(`start node`);
-                    i -= 1; 
+                    i -= 1;
                     continue;
                 }
 
