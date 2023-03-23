@@ -334,7 +334,7 @@ class Quizzer {
 
     }
 
-    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { }, default_description_is_markdown = true, default_example_is_markdown = true } = {}) {
+    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { }}) {
         try {
             // Start running the question_attempt
             /**
