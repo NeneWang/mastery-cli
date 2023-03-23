@@ -654,14 +654,17 @@ const js_advanced = [
         description: "const obj = { a: 1, b: 2, c: 3 };",
         example: "const clone = { ...obj }; | const clone = Object.assign({}, obj);"
     },
+    // TELL to chatgpt: function marry(person1, person2){ console.log(arguments); console.log(Array.from(arguments)); return ${person1} is now married to ${person2}; }\n\nmarry('Tim', 'Tina'); to :m\n\         ## Hey\n\n\         ```js\n\         function marry(person1, person2) {\n\             \tconsole.log(arguments);\n\             \tconsole.log(Array.from(arguments));\n\             \treturn `${person1} is now married to ${person2}`;\n\             \             marry('Tim', 'Tina');\           }\n\           ```
     {
-        term: "function arguments",
+        term: "function arguments - marry",
         prompt: "What will the following print?",
-        description: ":m```js\n\
+        description: ":m\n\
+        ## Hey\n\n\
+        ```js\n\
         function marry(person1, person2) {\n\
-            console.log(arguments);\n\
-            console.log(Array.from(arguments));\n\
-            return `${person1} is now married to ${person2}`;\n\
+            \tconsole.log(arguments);\n\
+            \tconsole.log(Array.from(arguments));\n\
+            \treturn `${person1} is now married to ${person2}`;\n\
             \
             marry('Tim', 'Tina');\
           }\n\
@@ -670,9 +673,6 @@ const js_advanced = [
         (2) [\"Tim\", \"Tina\"]\n\
         Tim is now married to Tina"
     },
-
-
-
 ]
 
 

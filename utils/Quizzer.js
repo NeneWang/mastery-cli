@@ -1,7 +1,14 @@
 const chalk = require('chalk');
 const axios = require('axios');
 const clipboard = require('copy-paste')
-const { marked } = require('marked');
+const { marked } = require('marked'); //Formats into html
+var TerminalRenderer = require('marked-terminal'); //Formats into terminal
+
+marked.setOptions(
+    {
+        renderer: new TerminalRenderer(),
+    }
+)
 // const {clipboard}
 // import clipboard from 'clipboardy';
 
@@ -365,24 +372,19 @@ class Quizzer {
                 // Also print the attachment image if possible
                 const _ = await show_image(term_selected?.attachment, { is_url: term_selected.attachment_is_url });
             }
-            // TODO implement with Marked
 
 
 
             if (default_description_is_markdown) {
                 // Check if the description starts with :m
                 if (term_selected.description.startsWith(":m")) {
+
                     if(DEBUG) console.log("markdown detected")
                     // Remove the :m
                     term_selected.description = term_selected.description.substring(2);
 
 
-                    marked.setOptions(
-                        {
-                            renderer: new marked.Renderer(),
-                        }
-                    )
-                    console.log(marked(term_selected.description) + "\n");
+                    console.log(marked(term_selected.description));
                 } else {
                     console.log(`${term_selected.description}\n`)
                 }
