@@ -672,6 +672,19 @@ const js_advanced = [
         Bye!\n\
         Bye!"
     },
+    // CHATGPT: Convert into a single line with \n and \t when it should, assume is in a string:
+    {
+        term: "Deep Clonning",
+        prompt: "How would you deep clone an object?",
+        description: ":m\n\
+        This will create a shallow clone\n\
+        ```js\n\
+        let output = let obj = {a: 'a', b: 'b', c: {\n\tdeep: 'try and copy me'\n}};\nlet clone = Object.assign({}, obj);\nlet clone2 = {...obj}; // ES6\n\nobj.c.deep = 'hahaha';\nconsole.log(clone); // {a: 'a', b: 'b', c: {deep: 'hahaha'}}\nconsole.log(clone2); // {a: 'a', b: 'b', c: {deep: 'hahaha'}};\
+        console.log(output);\
+        ```\
+        ",
+        example: "let superClone = JSON.parse(JSON.stringify(obj));"
+    }
 ]
 
 

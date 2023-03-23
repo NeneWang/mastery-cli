@@ -334,7 +334,7 @@ class Quizzer {
 
     }
 
-    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { }, default_description_is_markdown = true } = {}) {
+    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { }, default_description_is_markdown = true, default_example_is_markdown = true } = {}) {
         try {
             // Start running the question_attempt
             /**
@@ -375,23 +375,7 @@ class Quizzer {
 
 
 
-            if (default_description_is_markdown) {
-                // Check if the description starts with :m
-                if (term_selected.description.startsWith(":m")) {
-
-                    if(DEBUG) console.log("markdown detected")
-                    // Remove the :m
-                    term_selected.description = term_selected.description.substring(2);
-
-
-                    console.log(marked(term_selected.description));
-                } else {
-                    console.log(`${term_selected.description}\n`)
-                }
-            } else {
-
-                console.log(`${term_selected.description}\n`)
-            }
+            printMarked(term_selected?.description ?? "", { default_is_markdown: default_description_is_markdown });
 
 
 
@@ -464,6 +448,33 @@ class Quizzer {
             if (true) console.log(err)
             return false; // if in a session, this will skip the card because this is improperly made.
         }
+
+
+        /**
+         * 
+         * @param {string} content The String content that can be either markdown or not, determined by :m
+         * @param {*} param1 
+         */
+        function printMarked(content, { use_markdown = true, markdown_token = ":m" } = {}) {
+            if (use_markdown) {
+                // Check if the description starts with :m
+                if (content.startsWith(markdown_token)) {
+
+                    if (DEBUG)
+                        console.log("markdown detected");
+                    // Remove the :m
+                    content = content.substring(2);
+
+
+                    console.log(marked(content));
+                } else {
+                    console.log(`${content}\n`);
+                }
+            } else {
+
+                console.log(`${content}\n`);
+            }
+        }
     }
 
 
@@ -473,7 +484,8 @@ class Quizzer {
      */
     printExample = async (term_selected) => {
         if (term_selected?.example ?? false) {
-            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')} ${term_selected.example}`);
+            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')}`);
+            printMarked(term_selected?.example ?? "", { default_is_markdown: default_example_is_markdown });
         }
     }
 
