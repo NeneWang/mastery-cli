@@ -24,7 +24,7 @@ const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
-const { show_image, user_requests_exit, user_requests_skip, user_requests_calc } = require('./utils_functions');
+const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked } = require('./utils_functions');
 const { TermScheduler } = require('./termScheduler');
 const { slice } = require('./cli');
 // const DEBUG = true
@@ -451,9 +451,10 @@ class Quizzer {
 
 
         /**
-         * 
+         * Prints the content as markdown if it is markdown, otherwise it will just print the content
          * @param {string} content The String content that can be either markdown or not, determined by :m
-         * @param {*} param1 
+         * @param {boolean} use_markdown If true then it will use markdown, if false then it will just print the content
+         * @param {string} markdown_token The token that determines if the content is markdown or not
          */
         function printMarked(content, { use_markdown = true, markdown_token = ":m" } = {}) {
             if (use_markdown) {
