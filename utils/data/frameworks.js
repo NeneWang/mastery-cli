@@ -35,7 +35,9 @@ const apex = [
     {
         term: "len-substr-concatenate",
         description: ":m given: \n\
-            `java String message = 'Hello, world!';`",
+            ```java\n\
+             String message = 'Hello, world!';\n\
+             ```",
         prompt: "get length, substring Hello, and replace `world` with `Apex`",
         example: "int length = message.length();\n\
         String sub = message.substring(0, 5);\n\
@@ -45,7 +47,8 @@ const apex = [
     {
         term: "contains-trim-charAt",
         description: ":m given: \n\
-            `java String message = '  Hello, world!  ';`",
+            ```java\n\
+             String message = '  Hello, world!  ';```",
         prompt: "check if message contains `world`, trim the message (remove any leading and trailing white space), and get the first character",
         example: ":m ```java\n\
         boolean contains = message.contains('world');\n\

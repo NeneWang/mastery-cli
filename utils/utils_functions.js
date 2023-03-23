@@ -3,6 +3,15 @@ const url = require('url');
 const fs = require('fs');
 const { get_random, MAID_EMOJIS } = require("./constants");
 const DEBUG = false;
+const { marked } = require('marked'); //Formats into html
+var TerminalRenderer = require('marked-terminal'); //Formats into terminal
+
+marked.setOptions(
+    {
+        renderer: new TerminalRenderer(),
+    }
+)
+
 
 /**
  * Gets clickeable path that could be printed on the console and clicked.

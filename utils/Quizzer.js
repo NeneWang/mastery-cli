@@ -1,14 +1,7 @@
 const chalk = require('chalk');
 const axios = require('axios');
 const clipboard = require('copy-paste')
-const { marked } = require('marked'); //Formats into html
-var TerminalRenderer = require('marked-terminal'); //Formats into terminal
 
-marked.setOptions(
-    {
-        renderer: new TerminalRenderer(),
-    }
-)
 // const {clipboard}
 // import clipboard from 'clipboardy';
 
@@ -450,32 +443,6 @@ class Quizzer {
         }
 
 
-        /**
-         * Prints the content as markdown if it is markdown, otherwise it will just print the content
-         * @param {string} content The String content that can be either markdown or not, determined by :m
-         * @param {boolean} use_markdown If true then it will use markdown, if false then it will just print the content
-         * @param {string} markdown_token The token that determines if the content is markdown or not
-         */
-        function printMarked(content, { use_markdown = true, markdown_token = ":m" } = {}) {
-            if (use_markdown) {
-                // Check if the description starts with :m
-                if (content.startsWith(markdown_token)) {
-
-                    if (DEBUG)
-                        console.log("markdown detected");
-                    // Remove the :m
-                    content = content.substring(2);
-
-
-                    console.log(marked(content));
-                } else {
-                    console.log(`${content}\n`);
-                }
-            } else {
-
-                console.log(`${content}\n`);
-            }
-        }
     }
 
 
