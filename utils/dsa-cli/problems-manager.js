@@ -144,7 +144,7 @@ class ProblemsManager {
         // const { ProblemTests } = require(this.temp_test_filepath);
         const ProblemTestsObject = this.selectTest(problemMetadata);
         // debug problemTestObject instance
-        if (true) console.log("ProblemTestsObject instance: ", ProblemTestsObject);
+        if (DEBUG) console.log("ProblemTestsObject instance: ", ProblemTestsObject);
         const problemTests = new ProblemTestsObject(Problem);
         const is_correct = problemTests.runTests(); // debug is_correct
         return is_correct;

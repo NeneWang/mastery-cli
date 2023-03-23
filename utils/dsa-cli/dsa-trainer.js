@@ -225,7 +225,7 @@ class DSATrainer {
 
 
 
-        if (true) console.log("Problem prompt selected: ", promblem_prompt);
+        if (DEBUG) console.log("Problem prompt selected: ", promblem_prompt);
         renderPromptDescription(promblem_prompt, problem_details);
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
