@@ -649,6 +649,18 @@ const js_advanced = [
         term: "Move lines in Vim",
         prompt: "How would you move a line in Vim?",
         example: ":m +1 (move down)\n:m -1 (move up)"
+    },
+    {
+        term: "Create clone of arr",
+        prompt: "How would you create a clone of an array? Name the clone, `clone`",
+        description: "const arr = [1, 2, 3];",
+        example: "const clone = [...arr]; | const clone = arr.slice(); | const clone = arr.concat();"
+    },
+    {
+        term: "Create clone of obj",
+        prompt: "How would you create a clone of an object? Name the clone, `clone`",
+        description: "const obj = { a: 1, b: 2, c: 3 };",
+        example: "const clone = { ...obj }; | const clone = Object.assign({}, obj);"
     }
 
 

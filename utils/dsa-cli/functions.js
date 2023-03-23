@@ -113,7 +113,7 @@ const countDecimals = (value) => {
 };
 
 
-const renderPromptDescription = (prompt) => {
+const renderPromptDescription = (prompt, prompt_details) => {
     try {
 
         const Constants = require("./constants");
@@ -123,6 +123,24 @@ const renderPromptDescription = (prompt) => {
         });
         // Print title in Blue
         console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(prompt?.["title"] ?? "")}`)
+
+
+        // Colored Difficulty tag.
+        const prompt_difficulty = prompt_details?.["difficulty"] ?? "";
+        const color_based_on_difficulty = (difficulty) => {
+            if(difficulty === Constants.difficulty.easy) return Constants.CONSTANTS.CUTEGREEN;
+            if(difficulty === Constants.difficulty.medium) return Constants.CONSTANTS.CUTEYELLOW;
+            if(difficulty === Constants.difficulty.hard) return Constants.CONSTANTS.CUTEPINK;
+            return Constants.CONSTANTS.CUTEGREEN;
+        }
+        // Print tags but remove the difficulty from the tags array first
+        const tags = prompt_details?.["tags"] ?? [];
+        const tags_without_difficulty = tags.filter(tag => tag !== prompt_difficulty);
+        // console.log(tags_without_difficulty);
+
+
+        console.log(`${chalk.hex(color_based_on_difficulty(prompt_difficulty)).inverse(` ${prompt_difficulty} `)}`, tags_without_difficulty)
+
         console.log(marked(prompt?.["description"] ?? ""));
         console.log(marked(prompt?.["preview"] ?? ""));
         return true;

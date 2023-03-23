@@ -28,9 +28,10 @@ describe('Problem integrity', function () {
         for (let problemMetadata of Object.values(allProblemsMetadata)) {
 
             const promblem_prompt = await getPromptDict(problemMetadata.slug);
+            const problem_details = problemManager.getProblem(problemMetadata.slug);
             // console.log(promblem_prompt);
             assert(promblem_prompt != null || promblem_prompt != undefined);
-            const success_at_print = renderPromptDescription(promblem_prompt);
+            const success_at_print = renderPromptDescription(promblem_prompt, problem_details);
             assert(success_at_print);
         }
 
