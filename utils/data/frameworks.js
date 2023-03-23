@@ -47,10 +47,11 @@ const apex = [
         description: ":m given: \n\
             `java String message = '  Hello, world!  ';`",
         prompt: "check if message contains `world`, trim the message (remove any leading and trailing white space), and get the first character",
-        example: "boolean contains = message.contains('world');\n\
+        example: ":m ```java\n\
+        boolean contains = message.contains('world');\n\
         String trim = message.trim();\n\
         char first = trim.charAt(0);\n\
-        System.debug(first);"
+        System.debug(first);```"
     }
 ]
 
