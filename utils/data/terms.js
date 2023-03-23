@@ -69,8 +69,8 @@ async function populateMasterDeck() {
 
 
     const {designing_good_charts, sql} = require('./data-science');
-    decks.addDeck(new TermStorage(designing_good_charts, "designing good charts", { is_active: true }));
-    decks.addDeck(new TermStorage(sql, "sql", { is_active: true }));
+    decks.addDeck(new TermStorage(designing_good_charts, "designing good charts", { is_active: set_all }));
+    decks.addDeck(new TermStorage(sql, "sql", { is_active: set_all }));
 
 
     // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
