@@ -370,13 +370,21 @@ class Quizzer {
 
 
             if (default_description_is_markdown) {
+                // Check if the description starts with :m
+                if (term_selected.description.startsWith(":m")) {
+                    // Remove the :m
+                    term_selected.description = term_selected.description.substring(2);
 
-                marked.setOptions(
-                    {
-                        renderer: new marked.Renderer(),
-                    }
-                )
-                console.log(marked(term_selected.description) + "\n");
+
+                    marked.setOptions(
+                        {
+                            renderer: new marked.Renderer(),
+                        }
+                    )
+                    console.log(marked(term_selected.description) + "\n");
+                } else {
+                    console.log(`${term_selected.description}\n`)
+                }
             } else {
 
                 console.log(`${term_selected.description}\n`)
