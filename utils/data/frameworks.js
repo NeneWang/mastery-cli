@@ -55,7 +55,78 @@ const apex = [
         String trim = message.trim();\n\
         char first = trim.charAt(0);\n\
         System.debug(first);```"
+    },
+    // Datetime
+    {
+        term: "now-format-addDays",
+        description: ":m given: \n\
+            ```java\n\
+                Datetime now = Datetime.now();```",
+        prompt: "format the date to `yyyy-MM-dd`, and add 5 days to the date",
+        example: ":m ```java\n\
+        String format = now.format('yyyy-MM-dd');\n\
+        Datetime newDate = now.addDays(5);\n\
+        System.debug(newDate);```"
+
+    },
+    {
+        term: "timzone-difference-parse",
+        description: ":m given: \n\
+            ```java\n\
+                Datetime now = Datetime.now();\n\
+                Datetime dt1 = Datetime.newInstance(2019, 1, 1, 0, 0, 0);\n\
+                ```",
+        prompt: "get the millisecond difference between dt1 and now and parse the date to `yyyy-MM-dd`",
+        example: ":m ```java\n\
+        Integer difference = now - dt1;\n\
+        String parse = now.parse('yyyy-MM-dd');\n\
+        System.debug(parse);```"
+    },
+    // Collections
+    {
+        term: "list-initialize-size-add-remove-sort",
+        prompt: "initialize a list of size 5, add `Hello` to the list, remove `Hello` from the list, and sort the list",
+        example: ":m ```java\n\
+        List<String> list = new List<String>{'Hello', 'World', 'Apex'};\n\
+        list.add('Hello');\n\
+        list.remove('Hello');\n\
+        list.sort();\n\
+        System.debug(list);```"
+    },
+    {
+        term: "query-records-into-list",
+        description: "Givena a table Account with columns: id, name, email, phone, createddate, createdbyid, lastmodifieddate, lastmodifiedbyid",
+        prompt: "query all records (id, name) from the table and store them in a list",
+        example: ":m ```java\n\
+        List<Account> accounts = [SELECT Id, Name FROM Account];\n\
+        System.debug(accounts);```"
+
+    },
+    {
+        term: "set-methods",
+        prompt: "create an animals initizialization, get the size, add element, remove elemnt,  addAll, clone, retainAll(intersection), removeAll(difference)",
+        example: ":m\n\
+        ```js\n\
+        // Initialization\nSet<String> animals = new Set<String>{'dog', 'cat', 'bird'};\nSystem.debug(animals); // Output: (dog, cat, bird)\n\n// Size\nInteger size = animals.size();\nSystem.debug(size); // Output: 3\n\n// Add Elements\nanimals.add('fish');\nSystem.debug(animals); // Output: (dog, cat, bird, fish)\n\n// Remove Elements\nanimals.remove('bird');\nSystem.debug(animals); // Output: (dog, cat, fish)\n\n// Contains\nBoolean containsDog = animals.contains('dog');\nSystem.debug(containsDog); // Output: true\nBoolean containsBird = animals.contains('bird');\nSystem.debug(containsBird); // Output: false\n\n// Union\nSet<String> pets = new Set<String>{'dog', 'cat', 'hamster'};\nSet<String> allAnimals = animals.clone();\nallAnimals.addAll(pets);\nSystem.debug(allAnimals); // Output: (dog, cat, fish, hamster)\n\n// Intersection\nSet<String> commonAnimals = animals.clone();\ncommonAnimals.retainAll(pets);\nSystem.debug(commonAnimals); // Output: (dog, cat)\n\n// Difference\nSet<String> differentAnimals = animals.clone();\ndifferentAnimals.removeAll(pets);\nSystem.debug(differentAnimals);\
+        ```\
+        "
+    },
+    {
+        term: "set-vs-list",
+        prompt: "What is the difference between set and list in Apex?",
+        example: "    Elements:     A List can contain duplicate elements, while a Set cannot. Each element in a Set must be unique.      Order:     A List maintains the order in which elements were added, while a Set does not guarantee any specific order of its elements.      Lookup Time:     A Set provides faster lookup time compared to a List because it uses hashing algorithms to determine whether an element exists in the Set or not. On the other hand, a List has to traverse each element sequentially to find a specific element.      Performance:     Since Sets do not allow duplicates, they require extra processing to prevent duplicate elements from being added. As a result, adding elements to a Set can be slightly slower than adding elements to a List. However, Sets can be much faster than Lists when it comes to checking if an element is present or removing duplicates."
+    },
+    {
+        term: "map-methods",
+        example: ":m\n\
+        ```js\n\
+        // Initialization\nMap<String, Integer> ages = new Map<String, Integer>{'John' => 35, 'Mary' => 42, 'Bob' => 28};\nSystem.debug(ages); // Output: {Bob=28, John=35, Mary=42}\n\n// Size\nInteger size = ages.size();\nSystem.debug(size); // Output: 3\n\n// Put Elements\nages.put('Alice', 20);\nSystem.debug(ages); // Output: {Alice=20, Bob=28, John=35, Mary=42}\nages.put('Bob', 29);\nSystem.debug(ages); // Output: {Alice=20, Bob=29, John=35, Mary=42}\n\n// Remove Elements\nages.remove('Bob');\nSystem.debug(ages); // Output: {Alice=20, John=35, Mary=42}\n\n// Contains Key\nBoolean containsJohn = ages.containsKey('John');\nSystem.debug(containsJohn); // Output: true\nBoolean containsAlice = ages.containsKey('Alice');\nSystem.debug(containsAlice); // Output: true\nBoolean containsBob = ages.containsKey('Bob');\nSystem.debug(containsBob); // Output: false\n\n// Get Values\nList<Integer> allAges = new List<Integer>(ages.values());\nSystem.debug(allAges); // Output: (20, 35, 42)\
+        ```\
+        ",
+        prompt: "create a map of ages: {John: 35, Mary: 42, Bob: 28}, get the size, add element, remove elemnt,  addAll, clone, retainAll(intersection), removeAll(difference)"
     }
+
+    // Integers
 ]
 
 module.exports = { react_terms, apex };
