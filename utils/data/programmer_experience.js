@@ -601,14 +601,14 @@ const js_advanced = [
         description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
         prompt: "Use Call to steal Wizard's healing and use it into archer for 50 and 60'",
         example: "wizard.heal.call(archer, 50, 60);"
-        
-    }, 
+
+    },
     {
         term: "apply",
         description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
         prompt: "Use apply to steal Wizard's healing and use it into archer for 20 and 30'",
         example: "wizard.heal.apply(archer, [20, 30]);"
-        
+
     },
     {
         term: "bind",
@@ -641,7 +641,14 @@ const js_advanced = [
         example: "true\nnumber"
     },
     {
-        
+        term: "Rename variables in Vim",
+        prompt: "How would you rename a variable in Vim?",
+        example: ":%s/old/new/g | cgn new_name + escape + . (for each)"
+    },
+    {
+        term: "Move lines in Vim",
+        prompt: "How would you move a line in Vim?",
+        example: ":m +1 (move down)\n:m -1 (move up)"
     }
 
 
