@@ -110,6 +110,8 @@ const formatObjectFeatures = (userPerformanceData) => {
 const getRandomInt = (max) => {
     return Math.floor(Math.random() * max);
 };
+
+
 /**
  * @param: float ?= 0.05 #e.g. 0.5 The chances in favor of it being True
  * @returns Random Bool
@@ -117,6 +119,12 @@ const getRandomInt = (max) => {
 const getRandomBool = (chances = 0.5) => {
     return random_boolean = Math.random() < chances;
 };
+
+/**
+ * Counts the decimals.
+ * @param {number} value Number to count decimals
+ * @returns {number} Number of decimals
+ */
 const countDecimals = (value) => {
     if (Math.floor(value) !== value)
         return value?.toString().split(".")[1].length ?? 0;

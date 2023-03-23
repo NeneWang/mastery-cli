@@ -38,7 +38,7 @@ const apex = [
             ```java\n\
              String message = 'Hello, world!';\n\
              ```",
-        prompt: "get length, substring Hello, and replace `world` with `Apex`",
+        prompt: "get the length of the message, get the first 5 characters of the message, concatenate the message with `Apex`",
         example: "int length = message.length();\n\
         String sub = message.substring(0, 5);\n\
         String newMessage = sub + 'Apex';\n\
