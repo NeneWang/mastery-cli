@@ -135,9 +135,67 @@ const apex = [
         ```\
         ",
         prompt: "create a map of ages: {John: 35, Mary: 42, Bob: 28}, get the size, add element, remove elemnt,  addAll, clone, retainAll(intersection), removeAll(difference)"
+    },
+    {
+        term: "select-or",
+        prompt: "Get Accounts where Industry is Technology or Annual Revenue is greater than 1 million",
+        example: ":m\n\
+       ```js\n\
+       List<Account> accounts = [SELECT Name, Industry, AnnualRevenue FROM Account WHERE Industry = 'Technology' OR AnnualRevenue > 1000000];\nSystem.debug(accounts)\n\
+       ```\
+       ",
+    },
+    {
+        term: "select-in",
+        prompt: "Get Accounts where Industry is Technology or Finance",
+        example: ":m\n\
+        ```js\n\
+        List<Account> accounts = [SELECT Name, Industry, AnnualRevenue FROM Account WHERE Industry IN ('Technology', 'Finance')];\nSystem.debug(accounts);\n\
+        ```\
+        ",
+        description: "List<Account> accounts = [SELECT Name, Industry, AnnualRevenue FROM Account"
+    },
+    {
+        term: "select-like",
+        prompt: "Get Accounts where Industry starts with Tech",
+        example: ":m\n\
+        ```js\n\
+        List<Contact> contacts = [SELECT Name, Email FROM Contact WHERE Email LIKE '%gmail.com'];\nSystem.debug(contacts);\n\
+        ```\
+        ",
+        description: "List<Contact> contacts = [SELECT Name, Email FROM Contact "
+    },
+    {
+        term: "select-order",
+        prompt: "Get Accounts where Annual Revenue is greater than 1 million and order by Annual Revenue",
+        example: ":m\n\
+        ```js\n\
+        List<Account> accounts = [SELECT Name, Industry, AnnualRevenue FROM Account WHERE AnnualRevenue > 1000000 ORDER BY AnnualRevenue DESC];\nSystem.debug(accounts)\n\
+        ```\
+        ",
+        description: "List<Account> accounts = [SELECT Name, Industry, AnnualRevenue FROM "
+    },
+    {
+        term: "select-next-n-days",
+        prompt: "Get Opportunities where Close Date is in the next 7 days",
+        example: ":m\n\
+        ```js\n\
+        List<Account> accounts = [SELECT Name, CloseDate FROM Opportunity WHERE CloseDate = NEXT_N_DAYS:7];\
+        ```\
+        ",
+        description: "List<Account> accounts = [SELECT Name, CloseDate FROM Opportunity..."
+    },
+    {
+        term: "select-last-month",
+        prompt: "Get Accounts where Created Date is in the last month",
+        example: ":m\n\
+        ```js\n\
+        List<Account> accounts = [SELECT Name, CreatedDate FROM Account WHERE CreatedDate = LAST_MONTH]\
+        ```\
+        ",
+        description: "List<Account> accounts = [SELECT Name, CreatedDate FROM Account... "
     }
 
-    // Integers
 ]
 
 module.exports = { react_terms, apex };
