@@ -375,7 +375,7 @@ class Quizzer {
 
 
 
-            printMarked(term_selected?.description ?? "", { default_is_markdown: default_description_is_markdown });
+            printMarked(term_selected?.description ?? "", { use_markdown: true });
 
 
 
@@ -486,7 +486,7 @@ class Quizzer {
     printExample = async (term_selected) => {
         if (term_selected?.example ?? false) {
             console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')}`);
-            printMarked(term_selected?.example ?? "", { default_is_markdown: default_example_is_markdown });
+            printMarked(term_selected?.example ?? "", { use_markdown: true });
         }
     }
 
