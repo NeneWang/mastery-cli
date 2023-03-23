@@ -621,7 +621,29 @@ const js_advanced = [
         prompt: "What is the difference between context and scope? When you declare an variable of inside an object are you creating the context or the scope?",
         example: "Context is the object that the function is a property of. Scope is the variable environment of the execution context, which consists of any local variables that were in-scope at the time the execution context was created.\n\n\
         When you declare a variable inside an object, you are creating a new variable in the object's scope. This means that the variable is accessible within the object, but not outside of it. However, the context of the variable depends on how it is accessed. If you access the variable using the object's name, the context will be the object itself. If you access the variable using a reference to the object's method or a callback function, the context may be different."
+    },
+    {
+        term: "typeof",
+        prompt: "What will the following print?",
+        description: "typeof 5\ntypeof '5'\ntypeof true\ntypeof undefined\ntypeof null\ntypeof {}\ntypeof []\ntypeof function(){}",
+        example: "number\nstring\nboolean\nundefined\nobject\nobject\nfunction => However in reality is actually an object"
+    },
+    {
+        term: "weird functions behaviour on types",
+        prompt: "What will the following print?",
+        description: "function a() {}\na.hi = 'hi'\nconsole.log(a.hi)",
+        example: "hi ==> functions are objects"
+    },
+    {
+        term: "weird functions behaviour on types 2",
+        prompt: "What will the following print?",
+        description: "true.toString()\ntypeof Infinity",
+        example: "true\nnumber"
+    },
+    {
+        
     }
+
 
 
 ]
