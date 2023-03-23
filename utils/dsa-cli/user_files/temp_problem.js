@@ -1,8 +1,9 @@
-class Substraction {
-    solve(a, b) {
-        return 1;
-    }
+class CharacterReplacement {
+	solve(s, k) {
+	// Your code here
+
+	}
 }
 
 
-module.exports = { Problem: Substraction };
+module.exports = { Problem: CharacterReplacement };
