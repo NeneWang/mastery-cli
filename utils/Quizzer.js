@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const axios = require('axios');
 const clipboard = require('copy-paste')
-
+const { marked } = require('marked');
 // const {clipboard}
 // import clipboard from 'clipboardy';
 
@@ -47,7 +47,7 @@ class Quizzer {
 
         try {
             // Filter only if they have formula_name property
-            potential_questions = potential_questions.filter(x => x?.formula_name != undefined )
+            potential_questions = potential_questions.filter(x => x?.formula_name != undefined)
             const problem_names = potential_questions.map(x => x.formula_name)
             // Filter only if they have formula_name property again?
             // problem_names = potential_questions.filter(x => x.formula_name)
@@ -327,7 +327,7 @@ class Quizzer {
 
     }
 
-    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { } } = {}) {
+    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { }, default_description_is_markdown = true } = {}) {
         try {
             // Start running the question_attempt
             /**
@@ -365,8 +365,25 @@ class Quizzer {
                 // Also print the attachment image if possible
                 const _ = await show_image(term_selected?.attachment, { is_url: term_selected.attachment_is_url });
             }
+            // TODO implement with Marked
 
-            console.log(`${term_selected.description}\n`)
+
+
+            if (default_description_is_markdown) {
+
+                marked.setOptions(
+                    {
+                        renderer: new marked.Renderer(),
+                    }
+                )
+                console.log(marked(term_selected.description) + "\n");
+            } else {
+
+                console.log(`${term_selected.description}\n`)
+            }
+
+
+
             const question = new Input({
                 name: 'Term Question',
                 message: `${term_selected.prompt} (Ignore with "no")\n`,
@@ -554,7 +571,7 @@ class Quizzer {
                 if (user_requests_calc(res)) {
                     const { exec } = require('child_process');
                     exec(`start node`);
-                    i -= 1; 
+                    i -= 1;
                     continue;
                 }
 

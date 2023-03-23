@@ -206,7 +206,7 @@ class DSATrainer {
     * @returns {Promise} A promise that resolves when the problem is opened
      */
     async openProblemMetadataInTerminal(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
-        // TODO: Modify this.
+        
 
 
         let problem_details = this.problems_manager.getProblem(problem.slug);
