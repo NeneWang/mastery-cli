@@ -12,7 +12,7 @@
 
 const { TermStorage } = require('../structures');
 
-const set_all = false;
+const set_all = true;
 
 /**
  * 
