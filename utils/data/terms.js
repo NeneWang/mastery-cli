@@ -27,7 +27,7 @@ async function populateMasterDeck() {
 
     const { react_terms, apex } = require('./frameworks');
     decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: set_all }));
-    decks.addDeck(new TermStorage(apex, "apex", { is_active: true }));
+    decks.addDeck(new TermStorage(apex, "apex", { is_active: set_all }));
 
 
     const { network, artificialIntelligence, algebra, calculousOne } = require("./spring-senior");
