@@ -190,10 +190,16 @@ const apex = [
         prompt: "Get Accounts where Created Date is in the last month",
         example: ":m\n\
         ```js\n\
-        List<Account> accounts = [SELECT Name, CreatedDate FROM Account WHERE CreatedDate = LAST_MONTH]\
+        List<Account> accounts = [SELECT Name, CreatedDate FROM Account WHERE CreatedDate = LAST_MONTH];\
         ```\
         ",
         description: "List<Account> accounts = [SELECT Name, CreatedDate FROM Account... "
+    },
+    {
+        term: "buffer-vs-cache",
+        prompt: "What is the difference between Buffer and Cache? When would you use one over the other?",
+        description: "Buffer and cache are two concepts that are often used in computer science and can sometimes be confusing.  A buffer is a temporary storage area in memory or a file that is used to hold data temporarily while it is being moved from one place to another. Buffers are commonly used in computer networking, where data is transmitted in packets that are too large to be processed at once. The data is stored in a buffer and then transmitted in smaller packets. Buffers can also be used to store data that is being read from or written to a file or other input/output device.  A cache, on the other hand, is a type of memory that is used to store frequently accessed data so that it can be accessed more quickly. Caches are used in many different areas of computing, such as web browsers, operating systems, and databases. In a web browser, for example, the cache stores frequently accessed web pages and images so that they can be loaded more quickly the next time they are accessed. In an operating system, the cache may store recently used files or applications so that they can be accessed more quickly.  In summary, buffers are used to temporarily store data during a transfer or processing, while caches are used to store frequently accessed data to improve performance. Buffers are typically used for data that is being transferred, while caches are typically used for data that is being accessed repeatedly.",
+        example: "Buffer when building a instant message app, while you texting, Cache when you have a web and cahces some data."
     }
 
 ]
