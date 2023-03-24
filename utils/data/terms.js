@@ -67,9 +67,10 @@ async function populateMasterDeck() {
     const { interview } = require('./interview');
     decks.addDeck(new TermStorage(interview, "interview", { is_active: set_all }));
 
-    const { pytorch_machine_learning_course, machine_learning_pandas } = require('./ai_machine');
+    const { pytorch_machine_learning_course, machine_learning_pandas_visualization, machine_learning_scikit_learn } = require('./ai_machine');
     decks.addDeck(new TermStorage(pytorch_machine_learning_course, "pytorch machine learning course", { is_active: set_all }));
-    decks.addDeck(new TermStorage(machine_learning_pandas, "machine learning pandas", { is_active: true }));
+    decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas", { is_active: true }));
+    decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn", { is_active: set_all }));
 
     // decks.addDeck(new TermStorage(test, "test", {is_active: set_all}));
 

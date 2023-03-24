@@ -7,7 +7,7 @@ const pytorch_machine_learning_course = [
 ]
 
 
-const machine_learning_pandas = [
+const machine_learning_pandas_visualization = [
     {
         term: "count-duplicate-rows",
         prompt: "Print the number of duplicate rows in the DataFrame `df`.",
@@ -126,16 +126,107 @@ const machine_learning_pandas = [
         prompt: "Suppose we have a pandas DataFrame `df` that contains several columns, and we want to visualize the pairwise relationships between these columns using a scatter plot matrix. How can we create such a plot using the Seaborn library?",
         example: "We can use the `pairplot()` function from the Seaborn library to create a scatter plot matrix of the pairwise relationships between the columns in a DataFrame `df`. We can also specify a column to use for color-coding the points using the `hue` argument. For example:\n\n```\nimport seaborn as sns\n\nsns.pairplot(df, hue='survived')\n```",
         description: ":m When working with a pandas DataFrame, it can be useful to visualize the pairwise relationships between its columns using a scatter plot matrix. We can use the `pairplot()` function from the Seaborn library to create such a plot. This function takes a DataFrame `df` as its first argument, and can also take several optional arguments to customize the appearance of the plot, such as `hue` to color-code the points based on a categorical column. For example, to create a scatter plot matrix of the pairwise relationships between the columns in a DataFrame `df` using Seaborn, we can use the code:\n\n```\nimport seaborn as sns\n\nsns.pairplot(df, hue='survived')\n```"
-    } 
-    
-    
-    
-    
+    },
+    {
+        term: "histogram-plot-pandas",
+        attachment: "./img/2023-03-24-13-02-39.png",
+        prompt: "Suppose we have a pandas DataFrame `df` that contains one or more columns of numerical data, and we want to create histograms of this data. How can we create such histograms using the `hist()` method of the DataFrame?",
+        example: ":m We can use the `hist()` method of the DataFrame `df` to create histograms of its numerical columns. We can specify the number of bins using the `bins` argument, the size of the figure using the `figsize` argument, and the color of the bars using the `color` argument. For example:\n\n```\ndf.hist(bins=50, figsize=(21,13), color='maroon')\n```",
+        description: ":m When working with a pandas DataFrame that contains numerical data, it can be useful to create histograms of this data to visualize its distribution. We can use the `hist()` method of the DataFrame to create histograms of its numerical columns. This method takes several optional arguments to customize the appearance of the histogram, such as `bins` to specify the number of bins, `figsize` to specify the size of the figure, and `color` to specify the color of the bars. For example, to create histograms of the numerical columns in a DataFrame `df` with 50 bins, a figure size of 21x13 inches, and maroon-colored bars, we can use the code:\n\n```\ndf.hist(bins=50, figsize=(21,13), color='maroon')\n```"
+    },
+    {
+        term: "linear-relationship-seaborn",
+        attachemnt: "./img/2023-03-24-13-22-55.png",
+        prompt: "Suppose we have a pandas DataFrame `df` that contains a column 'quality', as well as several other columns that may be related to quality. How can we use Seaborn to visualize the pairwise relationships between quality and each of these other columns, and determine which features have a linear relationship with quality?",
+        example: ":m We can use the `relplot()` function from the Seaborn library to visualize the pairwise relationships between quality and each of the other columns in the DataFrame `df`. We can specify the feature to plot on the y-axis using the `y` argument, and quality on the x-axis using the `x` argument. We can also specify the `kind` argument as 'line' to create a line plot instead of a scatter plot. For example:\n\n```\nimport seaborn as sns\n\nall_features = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar',\n               'chlorides', 'free sulfur dioxide', 'total sulfur dioxide',\n                   'pH', 'sulphates', 'alcohol']\n\nfor feature in all_features:\n    sns.relplot(data=df, y=feature, x='quality', kind='line', height=5, aspect=1)\n```",
+        description: ":m When working with a pandas DataFrame that contains a column 'quality', as well as several other columns that may be related to quality, it can be useful to use Seaborn to visualize the pairwise relationships between quality and each of these other columns, and determine which features have a linear relationship with quality. We can use the `relplot()` function from the Seaborn library to do this. This function takes a DataFrame `df` as its first argument, and can also take several optional arguments to customize the appearance of the plot, such as `y` to specify the feature to plot on the y-axis, `x` to specify quality on the x-axis, and `kind` to specify the type of plot to create (e.g., 'line' for a line plot). For example, to visualize the pairwise relationships between quality and each of the columns in a list `all_features`, we can use the code:\n\n```\nimport seaborn as sns\n\nall_features = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar',\n               'chlorides', 'free sulfur dioxide', 'total sulfur dioxide',\n                   'pH', 'sulphates', 'alcohol']\n\nfor feature in all_features:\n    sns.relplot(data=df, y=feature, x='quality', kind='line', height=5, aspect=1)\n```"
+    },
+    {
+        term: "linear-regression-scikit-learn",
+        attachemnt: "./img/2023-03-24-13-27-11.png",
+        prompt: "Suppose we want to use scikit-learn to build and evaluate a linear regression model on some training and testing data. How can we initialize a linear regression model and fit it to the training data using scikit-learn?",
+        example: ":m We can use the `LinearRegression()` class from the scikit-learn library to initialize a linear regression model. We can then use the `fit()` method of this class to fit the model to the training data. For example:\n\n```\nfrom sklearn.linear_model import LinearRegression\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n```",
+        description: ":m When working with scikit-learn to build and evaluate a linear regression model on some training and testing data, we will need to initialize the model and fit it to the training data. We can use the `LinearRegression()` class from the scikit-learn library to initialize a linear regression model. This class takes several optional arguments to customize the model, such as `fit_intercept` to specify whether or not to fit an intercept term. Once we have initialized the model, we can use the `fit()` method of this class to fit the model to the training data. This method takes the training data as its arguments, and does all the fancy math behind the scenes. For example, to initialize a linear regression model and fit it to some training data `X_train` and `y_train`, we can use the code:\n\n```\nfrom sklearn.linear_model import LinearRegression\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n```"
+    },
+    {
+        term: "r-squared-score-scikit-learn",
+        prompt: "Suppose we have built a linear regression model using scikit-learn on some training and testing data, and we want to evaluate how well the model explains the variance of the data using the R-squared score. How can we calculate the R-squared score using scikit-learn?",
+        example: ":m We can use the `r2_score()` function from the scikit-learn `metrics` module to calculate the R-squared score of our linear regression model. We can pass in the true values `y_test` and the predicted values `y_pred` as its arguments. For example:\n\n```\nfrom sklearn import metrics\n\nr_squared = metrics.r2_score(y_test, y_pred)\nprint('R-Squared Score:', r_squared)\n```",
+        attachemnt: "./img/2023-03-24-13-31-50.png",
+        description: ":m When working with scikit-learn to build and evaluate a linear regression model on some training and testing data, we can use the R-squared score to evaluate how well the model explains the variance of the data. We can use the `r2_score()` function from the scikit-learn `metrics` module to calculate the R-squared score of our linear regression model. This function takes the true values `y_test` and the predicted values `y_pred` as its arguments, and returns the R-squared score. The R-squared score measures the strength of the relationship between the model and the dependent variable on a 0-100% scale, with higher values indicating a stronger relationship. For example, to calculate the R-squared score of a linear regression model with true values `y_test` and predicted values `y_pred`, we can use the code:\n\n```\nfrom sklearn import metrics\n\nr_squared = metrics.r2_score(y_test, y_pred)\nprint('R-Squared Score:', r_squared)\n```"
+    },
+    {
+        term: "mean-absolute-error-scikit-learn",
+        attachemnt: "./img/2023-03-24-13-32-00.png",
+        prompt: "Suppose we have built a linear regression model using scikit-learn on some training and testing data, and we want to evaluate the model's performance using the mean absolute error (MAE) score. How can we calculate the MAE score using scikit-learn?",
+        example: ":m We can use the `mean_absolute_error()` function from the scikit-learn `metrics` module to calculate the MAE score of our linear regression model. We can pass in the true values `y_test` and the predicted values `y_pred` as its arguments. For example:\n\n```\nfrom sklearn import metrics\n\nmae = metrics.mean_absolute_error(y_test, y_pred)\nprint('Mean Absolute Error:', mae)\n```",
+        description: ":m When working with scikit-learn to build and evaluate a linear regression model on some training and testing data, we can use the mean absolute error (MAE) score to evaluate the model's performance. We can use the `mean_absolute_error()` function from the scikit-learn `metrics` module to calculate the MAE score of our linear regression model. This function takes the true values `y_test` and the predicted values `y_pred` as its arguments, and returns the MAE score. The MAE score measures the average absolute difference between the predicted values and the true values, and is a measure of how well the model is able to predict the true values. For example, to calculate the MAE score of a linear regression model with true values `y_test` and predicted values `y_pred`, we can use the code:\n\n```\nfrom sklearn import metrics\n\nmae = metrics.mean_absolute_error(y_test, y_pred)\nprint('Mean Absolute Error:', mae)\n```"
+    },
+]
 
+const machine_learning_scikit_learn = [
+
+    {
+        term: "linear-regression-coefficient-scikit-learn",
+        attachemnt: "./img/2023-03-24-13-31-18.png",
+        prompt: "Suppose we have built a linear regression model using scikit-learn on some training and testing data, and we want to extract the coefficients of the model to see how each feature impacts the output. How can we extract the coefficients of a linear regression model using scikit-learn and display them in a data frame?",
+        example: ":m We can use the `coef_` attribute of the linear regression model object to extract the coefficients of the model. We can then create a data frame using the coefficients and the corresponding feature names, and display the data frame. For example:\n\n```\ncoefficient_values = model.coef_\n\n# Make a data frame out of the values and their column names\nfeatures = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', 'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density', 'pH', 'sulphates', 'alcohol']\ndf_coefficients = pd.DataFrame(coefficient_values, columns=features).T\n\n# Rename the column from 0 to coefficient\n\n# Display the data frame\ndf_coefficients.columns = ['coefficient']\ndf_coefficients\n```",
+        description: ":m When working with scikit-learn to build and evaluate a linear regression model on some training and testing data, we can extract the coefficients of the model to see how each feature impacts the output. We can use the `coef_` attribute of the linear regression model object to extract the coefficients of the model. This attribute returns an array of the coefficients, with each coefficient corresponding to a feature. We can then create a data frame using the coefficients and the corresponding feature names, and display the data frame. This data frame shows the impact of each feature on the output, with positive coefficients indicating a positive impact and negative coefficients indicating a negative impact. For example, to extract the coefficients of a linear regression model `model` and display them in a data frame, we can use the code:\n\n```\n# Get the coefficient values from the model\ncoefficient_values = model.coef_\n\n# Make a data frame out of the values and their column names\nfeatures = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', 'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density', 'pH', 'sulphates', 'alcohol']\ndf_coefficients = pd.DataFrame(coefficient_values, columns=features).T\n\n# Rename the column from 0 to coefficient\n\n# Display the data frame\ndf_coefficients.columns = ['coefficient']\ndf_coefficients\n```"
+    },
+    {
+        term: "linear-regression-interpretation-coefficient",
+        attachemnt: "./img/2023-03-24-13-33-52.png",
+        prompt: "Suppose we have a linear regression model that has been trained on some data, and we want to interpret the coefficients of the model. For example, we might want to know how much the output variable changes with a 1 unit increase in a particular input variable. How can we interpret the coefficients of a linear regression model?",
+        example: ":m The coefficients of a linear regression model represent the change in the output variable for a 1 unit increase in the corresponding input variable, all other things being equal. For example, if the coefficient for the `sulphates` feature is 1.45, this means that a 1 unit increase in `sulphates` leads to a 1.45 unit increase in the output variable (quality), all other things being equal. To visualize this relationship, we can use seaborn's `regplot()` function to plot the linear relationship and trendline of `sulphates` in relation to `quality`. For example:\n\n```\nimport seaborn as sns\n\nplt.figure(figsize=(8,5))\n# Use seaborn regplot to plot the linear relationship and trendline\nsns.regplot(x='quality', y='sulphates', data=df, x_jitter=0.4);\n```",
+        description: ":m When working with a linear regression model, we can interpret the coefficients of the model to understand how much the output variable changes with a 1 unit increase in a particular input variable. The coefficients of a linear regression model represent the change in the output variable for a 1 unit increase in the corresponding input variable, all other things being equal. For example, if the coefficient for the `sulphates` feature is 1.45, this means that a 1 unit increase in `sulphates` leads to a 1.45 unit increase in the output variable (quality), all other things being equal. To visualize this relationship, we can use seaborn's `regplot()` function to plot the linear relationship and trendline of `sulphates` in relation to `quality`. This plot shows how the `quality` of the wine changes as the `sulphates` level increases, and the slope of the trendline represents the coefficient of `sulphates` in the linear regression model. For example, to plot the relationship between `sulphates` and `quality` and interpret the coefficient, we can use the code:\n\n```\nimport seaborn as sns\n\nplt.figure(figsize=(8,5))\n# Use seaborn regplot to plot the linear relationship and trendline\nsns.regplot(x='quality', y='sulphates', data=df, x_jitter=0.4);\n```"
+    },
+    {
+        term: "pickle-save-model",
+        prompt: "Suppose we have trained a machine learning model on some data, and we want to save the model so that we can use it later without having to retrain it. How can we save a machine learning model using the pickle library?",
+        example: ":m We can save a machine learning model using the `pickle` library in Python. First, we need to give the model a name and choose a filename to save it as. For example, if we name our model `red_wine_model` and want to save it as a file called `red_wine_model.pkl`, we can use the following code:\n\n```\nimport pickle\n\n# Name your model\nfilename = 'red_wine_model.pkl'\n\n# Export and save your model using your filename\npickle.dump(red_wine_model, open(filename, 'wb'))\n```",
+        description: ":m When we have trained a machine learning model on some data, we can save the model so that we can use it later without having to retrain it. We can save a machine learning model using the `pickle` library in Python. First, we need to give the model a name and choose a filename to save it as. We can then use the `pickle.dump()` function to save the model to a file. For example, if we name our model `red_wine_model` and want to save it as a file called `red_wine_model.pkl`, we can use the code:\n\n```\nimport pickle\n\n# Name your model\nfilename = 'red_wine_model.pkl'\n\n# Export and save your model using your filename\npickle.dump(red_wine_model, open(filename, 'wb'))\n```"
+    },
+    {
+        term: "pickle-load-model",
+        prompt: "Suppose we have saved a machine learning model using the pickle library, and we want to load the model so that we can use it to make predictions. How can we load a machine learning model using the pickle library? | the models filename is: red_wine_model.pkl",
+        example: ":m ```python\n\
+        import pickle\n\
+        \n\
+        # Name your model\n\
+        filename = 'red_wine_model.pkl'\n\
+        \n\
+        # Load your model using your filename\n\
+        loaded_model = pickle.load(open(filename, 'rb'))\n\
+        \n\
+        # Make predictions using your loaded model\n\
+        loaded_model.predict(X_test)\n\
+        ",
+        description: ":m ```python\n\
+        import pickle\n\
+        \n\
+        ...\n\
+        # Make predictions using your loaded model\n\
+        loaded_model.predict(X_test)\n\
+        "
+    },
+    {
+        term: "decision-tree-classifier-evaluation-metrics",
+        prompt: "Suppose we have trained a decision tree classifier on some data, and we want to evaluate the performance of the model. What evaluation metrics can we use, and how do we calculate them?",
+        example: "When we have trained a decision tree classifier on some data, we can evaluate the performance of the model using various evaluation metrics. Some common metrics include:\n\n- Accuracy Score: measures the proportion of correct predictions over the total number of predictions. For example, if our model correctly predicts 90 out of 100 samples, the accuracy score is 0.9. To calculate the accuracy score, we can use the code:\n\n```\naccuracy = accuracy_score(y_true=y_test, y_pred=y_pred)\nprint('Accuracy Score:', accuracy)\n```\n\n- Precision Score: measures the proportion of true positive predictions over the total number of positive predictions. For example, if our model correctly predicts 90 out of 100 positive samples, the precision score is 0.9. To calculate the precision score, we can use the code:\n\n```\nprecision = precision_score(y_true=y_test, y_pred=y_pred)\nprint('Precision Score:', precision)\n```\n\n- Recall Score: measures the proportion of true positive predictions over the total number of actual positive samples. For example, if there are 100 positive samples in the test set, and our model correctly predicts 90 of them, the recall score is 0.9. To calculate the recall score, we can use the code:\n\n```\nrecall = recall_score(y_true=y_test, y_pred=y_pred)\nprint('Recall Score:', recall)\n```\n\n- F1 Score: a weighted harmonic mean of the precision and recall scores. The F1 score is a good metric to use when we want to balance precision and recall. To calculate the F1 score, we can use the code:\n\n```\nf1 = f1_score(y_true=y_test, y_pred=y_pred)\nprint('F1 Score:', f1)\n```\n\n- AUC Score: measures the area under the receiver operating characteristic (ROC) curve. The ROC curve plots the true positive rate against the false positive rate for different classification thresholds. The AUC score is a measure of how well the model can distinguish between positive and negative samples. To calculate the AUC score, we can use the code:\n\n```\ny_pred_proba = model.predict_proba(X_test)[:,1]\nauc = roc_auc_score(y_true=y_test, y_score=y_pred_proba)\nprint('AUC Score:', auc)\n```",
+        description: "When we have trained a decision tree classifier on some data, we can evaluate the performance of the model using various evaluation metrics. Some common metrics include:\n\n- Accuracy Score: measures the proportion of correct predictions over the total number of predictions. To calculate the accuracy score, we can use the `accuracy_score()` function from scikit-learn.\n\n- Precision Score: measures the proportion of true positive predictions over the total number of positive predictions. To calculate the precision score, we can use the `precision_score()` function from scikit-learn.\n\n- Recall Score: measures the proportion of true positive predictions over the total number of actual positive samples. To calculate the recall score, we can use the `recall_score()` function from scikit-learn.\n\n- F1 Score: a weighted harmonic mean of the precision and recall scores. The F1 score is a good metric to use when we want"
+    },
+    {
+        term: "decision-tree-visualization",
+        attachemnt: "./img/2023-03-24-13-46-20.png",
+        prompt: "Suppose we have trained a decision tree classifier on some data, and we want to visualize the tree. How can we create a visualization of the decision tree?",
+        example: "To create a visualization of a decision tree in Python, we can use the `export_graphviz()` function from the `sklearn.tree` module, along with the `graphviz` library. First, we import the necessary modules:\n\n```\nfrom sklearn.tree import export_graphviz\nimport graphviz\n```\n\nThen, we call the `export_graphviz()` function to generate a representation of the decision tree in the DOT format:\n\n```\ndot_data = export_graphviz(\n    model,\n    out_file=None,\n    feature_names=selected_features,\n    class_names=['died', 'survived'],\n    filled=True,\n    rounded=True,\n    special_characters=True\n)\n``` \n\nWe can then use the `Source()` function from the `graphviz` library to create a visualization of the decision tree:\n\n```\ngraph = graphviz.Source(dot_data)\ngraph\n```",
+        description: "To create a visualization of a decision tree in Python, we can use the `export_graphviz()` function from the `sklearn.tree` module, along with the `graphviz` library. First, we import the necessary modules:\n\n```\nfrom sklearn.tree import export_graphviz\nimport graphviz\n```\n\nThen, we call the `export_graphviz()` function to generate a representation of the decision tree in the DOT format. This representation includes information about the splits at each node, the number of samples at each node, and the class distribution at each node. We can customize the appearance of the tree by passing various arguments to the `export_graphviz()` function, such as the names of the features and classes, and whether to fill the nodes with color or not. Once we have generated the DOT representation of the decision tree, we can use the `Source()` function from the `graphviz` library to create a visualization of the tree. This visualization will show the splits and decision nodes of the tree, along with the number of samples and the class distribution at each node."
+    }
+    
 
 ]
 
 
-module.exports = { pytorch_machine_learning_course, machine_learning_pandas }
+module.exports = { pytorch_machine_learning_course, machine_learning_pandas_visualization, machine_learning_scikit_learn }
 
 
