@@ -182,7 +182,47 @@ Proposition 1.1: The world is a game, and the game is to be the best version of 
 
 
 
-### 
+###  Gaming and the world of business (Strategy)
+
+I think gaems shoudl also  be added to the list of things to learn. As I develop strategies and pipelines to become better in games, I can also get that influence to learn how to run things on the real world. Similar, anything that is an exercise, be it a homework or a game, can be used to train your mind to be better at solving problems.
+
+- The important area of the games and so forth is to be able to pull them out of their envirment and to be generalized, and to accept that trainning could be done.
+
+- Is important not to become obsessed to the game to the point that you can't see the bigger picture. 
+  
+
+- 5D Chess
+- Something that I started with was immediatelly watching videos
+- Soemthing that helped was also doing the game with a partner
+- Also playing the introduction puzzles really helped on the game (PLaying the game => puzzles -> game ai again)
+- Reading the manual and accepting not understanding is also part of the game
+- Documentation of the puzzles was also important As well as a mental practice to make sure that the idea is on your head..
+- Also the development of heuristics to understand cues as to when to use each piece through practice and trial
+- As well as looking how other people did things.
+
+
+For example this pipeline generalized for math can be seen as:
+
+- Raw attempt to solve the problem (keep it short)
+- Go to class (Watch the tutorial and read over the theorics, it is okay to proceed withouth fully understanding)
+- Run the exercises
+- Document the exercises
+- Study the exercises and reread the documentation
+- Implmenet them in the game (or in the real world)
+
+My guess is that is the obsession the with excercises that get you a better approach
+
+
+How could you generalize this learning process?
+
+What improvements on these process can be done?
+
+- Having the quick access to the practice enviornment is important 
+- Storign this imformation as digital notes is important as it is easier to document and analize.
+- 
+
+
+
 
 
 
