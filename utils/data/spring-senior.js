@@ -1019,7 +1019,46 @@ const artificialIntelligence_2 = [
         example: "Breadth-first search and depth-first search are examples of uninformed search algorithms.\n\
         Solving a maze, finding the shortest path between two points, are examples of uninformed search algorithms."
     },
-    
+    // https://www.geeksforgeeks.org/introduction-hill-climbing-artificial-intelligence/?ref=lbp
+    {
+        term: "breadth-first-search",
+        prompt: "What is breadth-first search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "Breadth-first search (BFS) is an uninformed search algorithm that explores nodes in a tree or graph level by level. It starts at the root node and expands all neighboring nodes before moving on to the next level of neighbors. BFS is complete and optimal for problems with uniform path costs.\n\
+        time complexity: O(b^d) where b is the branching factor and d is the depth of the goal node.\n\
+        space complexity: O(b^d) where b is the branching factor and d is the depth of the goal node.",
+        example: "Breadth-first search can be used on its own or as a component of other algorithms, such as Iterative Deepening Depth-First Search.\n\
+        Finding the shortest path in an unweighted graph, social network analysis, web crawlers, and spreading information in a network are examples of real-world applications of breadth-first search."
+    },
+    {
+        term: "astarsearch",
+        prompt: "What is A* search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "A* search is an informed search algorithm that uses a heuristic function to guide the search towards the goal. It combines the advantages of Dijkstra's Algorithm (considering the cost from the start node) and Greedy Best-First Search (using a heuristic function to estimate the remaining cost to the goal). A* search is complete and optimal when used with an admissible and consistent heuristic.\n\
+        time complexity: O(b^d)* where b is the branching factor and d is the depth of the goal node. (Given an admissible heuristic)\n\
+        space complexity: O(b^d)* where b is the branching factor and d is the depth of the goal node. (Given an admissible heuristic) ",
+        example: "A* search is often used on its own or as a component of other algorithms, such as IDA* (Iterative Deepening A*).\n\
+        Pathfinding in maps (e.g., GPS navigation), route planning, puzzle-solving (e.g., 8-puzzle, Rubik's Cube), and game AI (e.g., Chess, Go) are examples of real-world applications of A* search."
+    },
+    {
+        term: "depth-first-search",
+        prompt: "What is depth-first search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "Depth-first search (DFS) is an uninformed search algorithm that explores nodes in a tree or graph by visiting a node and recursively exploring its children before backtracking. DFS goes as deep as possible before backtracking, making it memory efficient but not always optimal or complete.",
+        example: "Depth-first search can be used on its own or as a component of other algorithms, such as Iterative Deepening Depth-First Search (IDDFS).\n\
+        Solving mazes, generating spanning trees for graphs, analyzing network connectivity, and searching for solutions in state - space problems are examples of real- world applications of depth - first search."
+    },
+    {
+        term: "greedy-best-first-search",
+        prompt: "What is greedy best-first search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "Greedy best-first search is an informed search algorithm that uses a heuristic function to guide the search towards the goal. It selects the node with the lowest estimated cost to the goal as the next node to explore. Greedy best-first search is not guaranteed to be complete or optimal but can be faster than other search algorithms in certain cases.",
+        example: "Greedy best-first search can be used on its own or as a component of other algorithms, such as A* search.\n\
+    Pathfinding in maps with simple heuristics, approximate solutions for NP - hard problems(e.g., Traveling Salesman Problem), and solving puzzles with suboptimal solutions are examples of real - world applications of greedy best - first search."
+    },
+    {
+        term: "beam-search",
+        prompt: "What is beam search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "Beam search is an informed search algorithm that uses a heuristic function to guide the search towards the goal. It maintains a fixed-size 'beam' of the most promising nodes at each level of the search tree. Beam search explores only the best nodes, making it memory efficient but not always optimal or complete.",
+        example: "Beam search can be used on its own or as a component of other algorithms.\n\
+        Natural language processing(e.g., speech recognition, machine translation), solving large - scale optimization problems, and real - time decision making in resource - constrained environments are examples of real - world applications of beam search."
+    }
 ]
 
 

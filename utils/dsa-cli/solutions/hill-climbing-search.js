@@ -3,33 +3,6 @@
 const DEBUG = false;
 
 
-/**
- * Priority queue: designed to support an element and a priority, dequeues based on priority
- */
-class PriorityQueue {
-    constructor() {
-        this.elements = [];
-    }
-
-    enqueue(element, priority) {
-        this.elements.push({ element, priority });
-        this.elements.sort((a, b) => a.priority - b.priority); // sort by priority in ascending order
-    }
-
-    dequeue() {
-        return this.elements.shift().element;
-    }
-
-    isEmpty() {
-        return this.elements.length === 0;
-    }
-
-    getSnapshot() {
-        return this.elements.map(item => {
-            return { id: item.element.id, priority: item.priority }
-        });
-    }
-}
 
 function heuristic(a, b) {
     return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
@@ -103,28 +76,7 @@ class Graph {
 }
 
 
-// Regular queue implementation.
-class Queue {
-    constructor() {
-        this.elements = [];
-    }
-
-    enqueue(element) {
-        this.elements.push(element);
-    }
-
-    dequeue() {
-        return this.elements.shift();
-    }
-
-    isEmpty() {
-        return this.elements.length === 0;
-    }
-}
-
-
 class HillClimbingSearch {
-
 
     /**
      * 

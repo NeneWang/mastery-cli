@@ -1,16 +1,19 @@
 ---
-title: Hill Climbing Search
+title: beam search
 description: AI Search Problem
 tags: [ medium, search, ai]
 ---
 
 ### Description
 
-Greedy Search is a graph search algorithm that is often used in pathfinding and graph traversal, which is the process of visiting (checking and/or updating) each vertex in a graph.
+Introduction :
+A heuristic technique is a set of criteria for determining which of multiple options will be the most effective in achieving a particular goal. This strategy increases the efficiency of a search process by surrendering claims of systematic and completeness of the best.
+We can hope to achieve a good solution to difficult problems (such as the traveling salesman problem) in less than exponent time if we use appropriate heuristics. 
 
 
 ### Example 1
 
+Sample Graph
 
 Given: 
 
@@ -50,7 +53,7 @@ Given:
         return { graph: graph, nodes: nodes };
 ```
 
-Should be able to find it it using depth First Search.
+Should be able to find it it using Beam Search.
 
 
 
