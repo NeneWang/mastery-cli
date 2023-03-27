@@ -13,7 +13,7 @@
 const { TermStorage } = require('../structures');
 
 const set_all = false;
-const study_cisc = true;
+const study_cisc = true; // Studying for Class Targetted.
 
 /**
  * 

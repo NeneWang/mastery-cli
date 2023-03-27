@@ -1,3 +1,20 @@
+/**
+Test [30, 40, 50, 60] => [1, 1, 1, 0]
+days          | temperatures     | stack
+[ 0, 0, 0, 0 ] [ 30, 40, 50, 60 ] []
+[ 0, 0, 0, 0 ] [ 30, 40, 50, 60 ] [ 0 ]
+[ 1, 0, 0, 0 ] [ 30, 40, 50, 60 ] [ 1 ]
+[ 1, 1, 0, 0 ] [ 30, 40, 50, 60 ] [ 2 ]
+
+
+(If I write the console.log at the end of the while loop)  You can see how the stack gets popped and then the difference of days is calculated (compares the index of the last cold day with the current time.)
+[ 0, 0, 0, 0 ] [ 30, 40, 50, 60 ] []
+[ 1, 0, 0, 0 ] [ 30, 40, 50, 60 ] []
+[ 1, 1, 0, 0 ] [ 30, 40, 50, 60 ] []
+[ 1, 1, 1, 0 ] [ 30, 40, 50, 60 ] []
+
+ */
+
 class DailyTemperatures {
 
 
@@ -9,18 +26,25 @@ class DailyTemperatures {
      */
     solve(temperatures, stack = []) {
 
-
+		
         const canShrink = (stack, temperatures, day) => {
+			// Previous day as the output of the stack
             const previousDay = stack[stack.length - 1];
+			// Then get and compare with the temperature of the previous and current termperature to compute if it is warmer
             const [prevTemperature, currTemperature] = [temperatures[previousDay], temperatures[day]];
             const isWarmer = prevTemperature < currTemperature;
-
+				
+			// If the stack is less than 0 means that there is not to compare (last one cannot shrink)
             return stack.length && isWarmer;
         }
 
-        const days = Array(temperatures.length).fill(0);
+		// Create the array of things to print
+        const days = Array(temperatures.length).fill(0); // [0, 0, 0, 0]
 
+		// For each day 
         for (let day = 0; day < temperatures.length; day++) {/* Time O(N + N) */
+
+			// While it can shrink which means that the current day is hotter than the previous one, then continue popping the previous cold day until it finds the one with the last one that is cold. days to wait being the difference between day and previous date.
             while (canShrink(stack, temperatures, day)) {    /* Time O(N + N) */
                 const prevColdDay = stack.pop();
                 const daysToWait = (day - prevColdDay);
@@ -28,7 +52,7 @@ class DailyTemperatures {
                 days[prevColdDay] = daysToWait;              /* Ignore Space O(N) */
             }
 
-            stack.push(day);                                 /* Space O(N) */
+            stack.push(day); // Push into the stack the last temperature checked                                 /* Space O(N) */
         }
 
         return days;
