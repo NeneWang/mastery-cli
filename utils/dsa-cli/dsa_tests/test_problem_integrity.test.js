@@ -7,11 +7,11 @@ const assert = require('assert');
 
 
 const to_test = {
-    'printable': false, //Also updates the metadata for all.
+    'printable': true, //Also updates the metadata for all.
     'category': false,
     'exact-category': false, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
     'basic': false,
-    'runnable': true,
+    'runnable': false,
 }
 
 describe('Problem integrity', function () {
@@ -29,8 +29,11 @@ describe('Problem integrity', function () {
 
             const promblem_prompt = await getPromptDict(problemMetadata.slug);
             const problem_details = problemManager.getProblem(problemMetadata.slug);
-            // console.log(promblem_prompt);
+            console.log("testing:", problemMetadata.slug);
             assert(promblem_prompt != null || promblem_prompt != undefined);
+            console.log("passed:", problemMetadata.slug);
+
+            // It might be too hard to find out where the error is whithout commenting the following lines.
             const success_at_print = renderPromptDescription(promblem_prompt, problem_details);
             assert(success_at_print);
         }

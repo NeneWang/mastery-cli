@@ -1,7 +1,7 @@
 ---
 title: Number of 1 Bits
-description: Write a function that takes the binary representation of an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
-tags: [easy, bit-manipulation]
+description: Write a function that takes the binary representation of an unsigned integer and returns the number of 
+tags: [easy, bit-manipulation, neetcode]
 link: https://leetcode.com/problems/number-of-1-bits/
 images: []
 ---

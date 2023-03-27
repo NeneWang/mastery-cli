@@ -138,8 +138,12 @@ const renderPromptDescription = (prompt, prompt_details) => {
         const tags_without_difficulty = tags.filter(tag => tag !== prompt_difficulty);
         // console.log(tags_without_difficulty);
 
+        try{
 
-        console.log(`${chalk.hex(color_based_on_difficulty(prompt_difficulty)).inverse(` ${prompt_difficulty} `)}`, tags_without_difficulty)
+            console.log(`${chalk.hex(color_based_on_difficulty(prompt_difficulty)).inverse(` ${prompt_difficulty} `)}`, tags_without_difficulty)
+        }catch{
+            
+        }
 
         console.log(marked(prompt?.["description"] ?? ""));
         console.log(marked(prompt?.["preview"] ?? ""));

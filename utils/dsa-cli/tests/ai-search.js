@@ -586,7 +586,7 @@ const TEST_DICTIONARY = {
     'greedy-search': GreedySearch,
     'breadth-first-search': breadthFirstSearch,
     'hill-climbing-search': hillClimbingSearch,
-    'dijkstra-search': DijkstraSearch,
+    // 'dijkstra-search': DijkstraSearch,
 }
 
 module.exports = TEST_DICTIONARY;

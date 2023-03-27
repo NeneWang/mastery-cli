@@ -29,6 +29,7 @@ class DailyTemperatures extends ProblemTests {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
+		this.tests.push(() => this.test_3());
     }
     test_1(){
         this.current_test_name = "[73, 74, 75, 71, 69, 72, 76, 73] => [1, 1, 4, 2, 1, 1, 0, 0]"
@@ -41,7 +42,8 @@ class DailyTemperatures extends ProblemTests {
         const problemToTest = new this.Problem();
         assert.deepEqual(problemToTest.solve([30, 40, 50, 60]), [1, 1, 1, 0]);
     }
-	 test_3(){
+
+	test_3(){
         this.current_test_name = "[30, 40, 50, 45, 60] => [1, 1, 2, 1, 0]"
         const problemToTest = new this.Problem();
         assert.deepEqual(problemToTest.solve([30, 40, 50, 45, 60]), [1, 1,2, 1, 0]);
