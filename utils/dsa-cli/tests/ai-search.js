@@ -396,7 +396,10 @@ class AStarSearch extends ProblemTests {
         const problem = new this.Problem
 
         const results = problem.solve(graph, start, goal);
+
         console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+
+
         assert.equal(results.path.length, 3);
         assert.equal(results.path[0], start);
         assert.equal(results.path[2], goal);
@@ -411,7 +414,8 @@ class AStarSearch extends ProblemTests {
 
         const problem = new this.Problem
         const results = problem.solve(graph, start, goal);
-        console.log(`Count Searches: ${results.count_searches}`)
+        console.log(`Count Searches for AStarSearch: ${results.count_searches}`)
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
         // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
     }
 
@@ -435,6 +439,8 @@ class DepthFirstSearch extends ProblemTests {
         const problem = new this.Problem
 
         const results = problem.solve(graph, start, goal);
+        console.log(" Time taken"
+        )
         console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
 
     }
@@ -446,8 +452,8 @@ class DepthFirstSearch extends ProblemTests {
 
         const problem = new this.Problem
         const results = problem.solve(graph, start, goal);
-        console.log(`Count Searches: ${results.count_searches}`)
-        // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+        console.log(`Count Searches in Long Graph: ${results.count_searches}`)
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
     }
 
 }
@@ -470,7 +476,8 @@ class GreedySearch extends ProblemTests {
 
         const problem = new this.Problem
         const results = problem.solve(graph, start, goal);
-        console.log(`Count Searches: ${results.count_searches}`)
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+        console.log(`Count Searches for GreedySearch: ${results.count_searches}`)
         // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
     }
 
@@ -493,7 +500,8 @@ class breadthFirstSearch extends ProblemTests {
 
         const problem = new this.Problem
         const results = problem.solve(graph, start, goal);
-        console.log(`Count Searches: ${results.count_searches}`)
+        console.log(`Count Searches for Breath First Search: ${results.count_searches}`)
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
     }
 }
 

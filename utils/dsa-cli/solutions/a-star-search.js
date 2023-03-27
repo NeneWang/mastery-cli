@@ -31,6 +31,55 @@ class PriorityQueue {
     }
 }
 
+
+
+class Node {
+    constructor(id, x, y) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Graph {
+    constructor() {
+        this.edges = {};
+    }
+
+    addEdge(node, neighbor) {
+        if (!this.edges[node.id]) {
+            this.edges[node.id] = [];
+        }
+        this.edges[node.id].push(neighbor);
+    }
+
+    neighbors(node) {
+        return this.edges[node.id];
+    }
+
+    cost(nodeA, nodeB) {
+        return 1; // Assuming uniform cost for this example
+    }
+
+    dfs(currentNode, visitedNodes = new Set()) {
+        visitedNodes.add(currentNode);
+
+        if (!this.edges[currentNode.id]) {
+            if (DEBUG) console.log("No neighbors (leaf node)");
+            // console.log("Path", visitedNodes);
+            printPath(visitedNodes)
+            return;
+        } // No neighbors (leaf node)
+
+        this.neighbors(currentNode).forEach(neighbor => {
+            if (!visitedNodes.has(neighbor)) {
+                this.dfs(neighbor, new Set(visitedNodes));
+            }
+        });
+    }
+}
+
+
 function heuristic(a, b) {
     return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 }
@@ -124,53 +173,6 @@ function reconstructPath(cameFrom, start, goal) {
         path.unshift(current);
     }
     return path;
-}
-
-
-class Node {
-    constructor(id, x, y) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-    }
-}
-
-class Graph {
-    constructor() {
-        this.edges = {};
-    }
-
-    addEdge(node, neighbor) {
-        if (!this.edges[node.id]) {
-            this.edges[node.id] = [];
-        }
-        this.edges[node.id].push(neighbor);
-    }
-
-    neighbors(node) {
-        return this.edges[node.id];
-    }
-
-    cost(nodeA, nodeB) {
-        return 1; // Assuming uniform cost for this example
-    }
-
-    dfs(currentNode, visitedNodes = new Set()) {
-        visitedNodes.add(currentNode);
-
-        if (!this.edges[currentNode.id]) {
-            if (DEBUG) console.log("No neighbors (leaf node)");
-            // console.log("Path", visitedNodes);
-            printPath(visitedNodes)
-            return;
-        } // No neighbors (leaf node)
-
-        this.neighbors(currentNode).forEach(neighbor => {
-            if (!visitedNodes.has(neighbor)) {
-                this.dfs(neighbor, new Set(visitedNodes));
-            }
-        });
-    }
 }
 
 
