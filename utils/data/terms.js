@@ -12,7 +12,8 @@
 
 const { TermStorage } = require('../structures');
 
-const set_all = true;
+const set_all = false;
+const study_cisc = true;
 
 /**
  * 
@@ -31,12 +32,12 @@ async function populateMasterDeck() {
 
 
     const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne } = require("./spring-senior");
-    decks.addDeck(new TermStorage(network, "network", { is_active: set_all }));
-    decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: set_all }));
-    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: set_all }));
-    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: set_all }));
-    decks.addDeck(new TermStorage(algebra, "algebra", { is_active: set_all }));
-    decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: set_all }));
+    decks.addDeck(new TermStorage(network, "network", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(algebra, "algebra", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: study_cisc }));
 
 
 
