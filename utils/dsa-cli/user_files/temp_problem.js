@@ -1,9 +1,11 @@
-class CharacterReplacement {
-	solve(s, k) {
-	// Your code here
+class Problem {
+    threeSum(array) {
+        
+        return [];
+    }
 
-	}
+    solve = this.threeSum;
 }
 
 
-module.exports = { Problem: CharacterReplacement };
+module.exports = { Problem };

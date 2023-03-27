@@ -30,9 +30,11 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(apex, "apex", { is_active: true }));
 
 
-    const { network, artificialIntelligence, algebra, calculousOne } = require("./spring-senior");
+    const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne } = require("./spring-senior");
     decks.addDeck(new TermStorage(network, "network", { is_active: set_all }));
+    decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: set_all }));
     decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: set_all }));
+    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: set_all }));
     decks.addDeck(new TermStorage(algebra, "algebra", { is_active: set_all }));
     decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: set_all }));
 
