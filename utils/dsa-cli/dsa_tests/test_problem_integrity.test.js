@@ -8,10 +8,10 @@ const assert = require('assert');
 
 const to_test = {
     'printable': true, //Also updates the metadata for all.
-    'category': false,
-    'exact-category': false, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
-    'basic': false,
-    'runnable': false,
+    'category': true,
+    'exact-category': true, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
+    'basic': true,
+    'runnable': true,
 }
 
 describe('Problem integrity', function () {

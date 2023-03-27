@@ -6,4 +6,8 @@ class PriorityQueue {
 }
 
 
-module.exports = { Problem: PriorityQueue };rstSearchAGraph };};oblem: Division };.exports = { Problem: TrappingRainWater };
+module.exports = { Problem: PriorityQueue };rstSearchAGraph };};er;
+}
+
+
+module.exports = { Problem: TrappingRainWater };
