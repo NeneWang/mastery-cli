@@ -658,7 +658,7 @@ const TEST_DICTIONARY = {
     'breadth-first-search': breadthFirstSearch,
     'hill-climbing-search': hillClimbingSearch,
     'beam-search': BeamSearch,
-    // 'dijkstra-search': DijkstraSearch,
+    'dijkstra-search': DijkstraSearch,
 }
 
 module.exports = TEST_DICTIONARY;
