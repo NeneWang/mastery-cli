@@ -102,6 +102,14 @@ function reconstructPath(cameFrom, start, goal) {
 
 function aStarSearch(graph, start, goal){
 
+    return {
+        // path: reconstructPath(cameFrom, start, goal),
+        // cost: costSoFar.get(goal),
+        // count_searches: count_searches,
+        // formatted_path: reconstructPath(cameFrom, start, goal).map(node => node.id).join(' -> '),
+        // exploration_path: exploration_path,
+        // queue_snapshot: queue_snapshot,
+    };
 }
 
 
