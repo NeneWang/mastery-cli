@@ -1,7 +1,7 @@
 {
 	"name": "maid-cli",
 	"description": "Let maid help you build your final project - your life",
-	"version": "0.6.32",
+	"version": "0.6.33",
 	"license": "UNLICENSED",
 	"bin": {
 		"maid-cli": "index.js",
