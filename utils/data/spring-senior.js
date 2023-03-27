@@ -867,8 +867,10 @@ const network = [
         example: "Run 'watch -n 1 free -h' in the terminal.",
         description: "To continuously display the amount of free memory in the system every second using the watch command, you can run the command 'watch -n 1 free -h' in the terminal. This will show the memory usage in human-readable format every second, and you can exit the command by pressing Ctrl + C."
     }
+]
 
-
+// I got the study set way too long... This is a specific focus for the midterm
+const network_midterm = [
 
 ]
 
@@ -883,6 +885,53 @@ const artificialIntelligence = [
         prompt: "Define in your own words at least one of the following: (a) intelligence, (b) artificial intelligence, (c) agent, (d) rationality, (e) logical reasoning.",
         description: "a. Intelligence refers to the ability of a system or organism to acquire, apply, and adapt knowledge and skills in order to perform well in various environments. b. Artificial intelligence is the field of study that focuses on creating and implementing computer systems capable of performing tasks that typically require human intelligence. c. An agent is an entity that perceives its environment, processes the information, and responds with appropriate actions. d. Rationality is the quality of a system that makes optimal decisions based on its knowledge and available information. e. Logical reasoning is the process of drawing conclusions from premises or facts, ensuring that the resulting conclusions are valid and consistent with the initial information."
     },
+    {
+        term: "Evan-analogy-Program",
+        prompt: "What is the Evan's ANALOGY Program?",
+        description: "The Evan's ANALOGY Program (EAP) is a computer-based test designed to measure verbal reasoning ability through analogy questions. The test is often used for admissions purposes by universities, graduate programs, and certain professions, such as law and medicine.",
+        example: "The Evan's ANALOGY Program (EAP) is a computer-based test designed to measure verbal reasoning ability through analogy questions. The test is often used for admissions purposes by universities, graduate programs, and certain professions, such as law and medicine."
+    },
+    {
+        term: "evans-analogy-program-extension",
+        prompt: "Suppose we extend Evans’s ANALOGY program so that it can score 200 on a standard IQ test. Would we then have a program more intelligent than a human? Explain.",
+        example: "The program would not be more intelligent than a human at present, as its proficiency in standard IQ tests only indicates its ability to perform well in these evaluations. These tests do not encompass the other aspects of human intelligence, such as the capacity to formulate strategy, retain information, or reach conclusions through introspection and reflection."
+    },
+    {
+        term: "science-ai-engineering",
+        prompt: "Is AI a science, or is it engineering? Or neither or both? Expain.",
+        example: "A science can be defined as the systematic acquisition of empirical knowledge through the application of the scientific method. Engineering, on the other hand, involves the practical utilization of scientific knowledge to address societal issues. Artificial Intelligence can be seen as a science in that it involves the systematic study and understanding of AI systems with the aim of advancing the knowledge domain. At the same time, it can also be viewed as an engineering discipline as it leverages this knowledge base to develop practical applications and solutions."
+    },
+    {
+        term: "rationality-ai",
+        attachment: "./img/2023-03-26-20-47-01.png",
+        prompt: "2.1 Let us examine the rationality of various vacuum-cleaner agent functions. a. Show that the simple vacuum-cleaner agent function described in Figure 2.3 is indeed rational under the assumptions",
+        description: "Asumptions: The performance measure awards one point for each clean square at each time step, over a “lifetime” of 1000 time steps. • The “geography” of the environment is known a priori (Figure 2.2) but the dirt distribution and the initial location of the agent are not. Clean squares stay clean and sucking cleans the current square. The Left and Right actions move the agent left and right except when this would take the agent outside the environment, in which case the agent remains where it is. • The only available actions are Left, Right, and Suck. • The agent correctly perceives its location and whether that location contains dir",
+        example: "Rational according to ( section 1.1, Russell & Norvig, 2010), is the measure against an ideal performance measure. The system is rational if it does the correct approach given Assignment #2 2 what it knows about the environment (Section 1.1, Russell & Norvig, 2010)\n\
+        It can be seen that the agent is indeed doing the right thing, given the perception sequence it has of the environment. b. Describe a rational agent function for the case in which each movement costs one point. Does the corresponding agent program require internal state? If the amount of unclean pieces is known or the environment does not get dirty in the future, the rational agent could stop moving once it knows that the environment is clean, based on the number of pieces collected or after visiting all squares. This would require the agent to use memory to keep track of which areas have been cleaned or to keep count of the number of pieces collected."
+    },
+    {
+        term: "rational-agent",
+        prompt: "2.2 What is a rational agent? What is a rational agent function? What is a rational performance measure? What is a rational environment?",
+        description: "A rational agent is an agent that does the right thing, given what it knows about the environment. A rational agent function is a function that maps a perception sequence to an action. A rational performance measure is a measure that awards the agent points for doing the right thing. A rational environment is an environment that is such that the agent can do the right thing, given what it knows about the environment.",
+        example: " A rational agent is an agent that does the right thing, given what it knows about the environment.\n\
+        A rational agent function is a function that maps a perception sequence to an action. A rational performance measure is a measure that awards the agent points for doing the right thing. A rational environment is an environment that is such that the agent can do the right thing, given what it knows about the environment."
+    },
+    {
+        term: "rational-agent-costs-one",
+        prompt: "Describe a rational agent function for the case in which each movement costs one point. Does the corresponding agent program require internal state?",
+        example: "If the amount of unclean pieces is known or the environment does not get dirty in the future, the rational agent could stop moving once it knows that the environment is clean, based on the number of pieces collected or after visiting all squares. This would require the agent to use memory to keep track of which areas have been cleaned or to keep count of the number of pieces collected."
+    },
+    {
+        term: "rational-agent-clean-squares-dirty",
+        prompt: "Discuss possible agent designs for the cases in which clean squares can become dirty and the geography of the environment is unknown. Does it make sense for the agent to learn from its experience in these cases? If so, what should it learn? If not, why not?",
+        example: "If this is the case, an agent could learn to predict where dirt is more likely to accumulate on the geography based on past experiences. For example, certain areas may be more likely to become dirty during holidays or at specific times of day, such as morning rush hours. An agent could learn from past experiences and identify patterns or correlations to predict future unclean areas."
+    },
+];
+
+
+// Things that I research by my own
+const artificialIntelligence_2 = [
+
     {
         term: "Rule-based agents",
         prompt: "What are rule-based agents in AI? Provide an example.",
@@ -949,7 +998,7 @@ const artificialIntelligence = [
         example: "An example of a model-based agent is a self-driving car that uses a map of the environment to plan the best route to a destination.",
         description: "Model-based agents are a type of AI agent that maintain an internal model of the environment and use it to make decisions. They can handle more complex environments than simple reflex agents and can adapt to changing situations more easily. However, model-based agents can be more computationally intensive and may require more resources than simple reflex agents."
     }
-];
+]
 
 
 // From Math for Business
@@ -1047,4 +1096,4 @@ const calculousOne = [
 
 ];
 
-module.exports = { network, artificialIntelligence, algebra, calculousOne };
+module.exports = { network, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne, network_midterm };

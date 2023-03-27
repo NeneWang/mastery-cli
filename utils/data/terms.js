@@ -30,9 +30,11 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(apex, "apex", { is_active: set_all }));
 
 
-    const { network, artificialIntelligence, algebra, calculousOne } = require("./spring-senior");
+    const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne } = require("./spring-senior");
     decks.addDeck(new TermStorage(network, "network", { is_active: set_all }));
+    decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: set_all }));
     decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: set_all }));
+    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: set_all }));
     decks.addDeck(new TermStorage(algebra, "algebra", { is_active: set_all }));
     decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: set_all }));
 
@@ -72,7 +74,12 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas", { is_active: true }));
     decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn", { is_active: set_all }));
 
-    // decks.addDeck(new TermStorage(test, "test", {is_active: set_all}));
+    const {designing_good_charts, sql} = require('./data-science');
+    decks.addDeck(new TermStorage(designing_good_charts, "designing good charts", { is_active: set_all }));
+    decks.addDeck(new TermStorage(sql, "sql", { is_active: set_all }));
+
+
+    // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
 
 
     // Generic Term Generators

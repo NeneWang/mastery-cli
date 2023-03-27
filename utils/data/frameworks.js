@@ -157,7 +157,7 @@ const apex = [
     },
     {
         term: "select-like",
-        prompt: "Get Accounts where Industry starts with Tech",
+        prompt: "Get Accounts where email ends with gmail.com",
         example: ":m\n\
         ```js\n\
         List<Contact> contacts = [SELECT Name, Email FROM Contact WHERE Email LIKE '%gmail.com'];\nSystem.debug(contacts);\n\
