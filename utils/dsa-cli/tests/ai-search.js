@@ -353,6 +353,7 @@ class GraphBuilders {
         return { graph: graph, nodes: nodes };
     }
 
+
 }
 
 
@@ -462,9 +463,23 @@ class GreedySearch extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
-        // this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_1());
         // this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
+
+    }
+
+
+    test_1() {
+
+        const { graph, nodes } = new GraphBuilders().create_graph_5();
+        const start = nodes.A;
+        const goal = nodes.G;
+
+        const problem = new this.Problem
+
+        const results = problem.solve(graph, start, goal);
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
 
     }
 
@@ -486,9 +501,23 @@ class GreedySearch extends ProblemTests {
 class breadthFirstSearch extends ProblemTests {
     constructor(Problem) {
         super(Problem);
-        // this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_1());
         // this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
+
+    }
+
+
+    test_1() {
+
+        const { graph, nodes } = new GraphBuilders().create_graph_5();
+        const start = nodes.A;
+        const goal = nodes.G;
+
+        const problem = new this.Problem
+
+        const results = problem.solve(graph, start, goal);
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
 
     }
 
@@ -593,7 +622,7 @@ class BeamSearch extends ProblemTests {
     constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
         this.tests.push(() => this.test_4());
 
@@ -608,6 +637,20 @@ class BeamSearch extends ProblemTests {
         const problem = new this.Problem
 
         const results = problem.solve(graph, start, goal);
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+
+    }
+
+    
+    test_2() {
+
+        const { graph, nodes } = new GraphBuilders().create_graph_5();
+        const start = nodes.A;
+        const goal = nodes.G;
+
+        const problem = new this.Problem
+
+        const results = problem.solve(graph, start, goal, 1);
         console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
 
     }
@@ -629,7 +672,7 @@ class BeamSearch extends ProblemTests {
         }
     }
 
-    
+
     test_4() {
 
         const { graph, nodes } = new GraphBuilders().create_long_ass_graph();

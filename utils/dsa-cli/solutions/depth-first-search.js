@@ -47,7 +47,7 @@ function depthFirstSearch(graph, start, goal) {
 
     return {
         path: reconstructPath(cameFrom, start, goal),
-        cost: null, // There is no cost associated with DFS traversal, you can compute it if needed
+        cost: reconstructPathCost(cameFrom, start, goal), // There is no cost associated with DFS traversal, you can compute it if needed
         count_searches: count_searches,
         formatted_path: reconstructPath(cameFrom, start, goal).map(node => node.id).join(' -> '),
         exploration_path: exploration_path,
@@ -71,6 +71,28 @@ function reconstructPath(cameFrom, start, goal) {
         path.unshift(current);
     }
     return path;
+}
+
+
+/**
+ * Reconstructs the path from the cameFrom map<Node, Node> by shifting backwards from the goal node to the start node
+ * @param {Map<Node, Node>} cameFrom
+ * @param {Node} start
+ * @param {Node} goal
+ * @returns {number} Cost of the path taken
+ */
+function reconstructPathCost(cameFrom, start, goal) {
+    let current = goal;
+    const path = [current];
+    let cost = 0;
+    while (current !== start) {
+        current = cameFrom.get(current);
+        path.unshift(current);
+        // get the cost from the previous and the current (We are assuming uniform cost here.)
+        cost += 1;
+    }
+
+    return cost;
 }
 
 
