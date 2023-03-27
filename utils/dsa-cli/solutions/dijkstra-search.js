@@ -67,7 +67,7 @@ class Graph {
 class DijkstraSearch {
     dijkstraSearch(graph, start, goal) {
         const frontier = new PriorityQueue();
-        frontier.enqueue(start, 0);
+        frontier.enqueue(start, 0); //Starts searching from the start node
         let count_searches = 0;
         let exploration_path = [];
         let queue_snapshot = [];
