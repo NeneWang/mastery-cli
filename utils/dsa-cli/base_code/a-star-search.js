@@ -102,6 +102,8 @@ function reconstructPath(cameFrom, start, goal) {
 
 function aStarSearch(graph, start, goal){
 
+	// Create the AStar Search
+
     return {
         // path: reconstructPath(cameFrom, start, goal),
         // cost: costSoFar.get(goal),
@@ -126,4 +128,4 @@ class AStarSearch {
 
 
 
-module.exports = { Problem: PriorityQueue };
+module.exports = { Problem: AStarSearch };

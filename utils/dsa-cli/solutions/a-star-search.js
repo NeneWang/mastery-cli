@@ -129,12 +129,13 @@ function aStarSearch(graph, start, goal) {
         try {
 
             neighbors.forEach(next => {
-                const newCost = costSoFar.get(current) + graph.cost(current, next);
-                if (!costSoFar.has(next) || newCost < costSoFar.get(next)) {
-                    costSoFar.set(next, newCost);
+                const g_cost = costSoFar.get(current) + graph.cost(current, next);
+                if (!costSoFar.has(next) || g_cost < costSoFar.get(next)) {
+                    costSoFar.set(next, g_cost);
 
                     // console.log("newCost", newCost, "heuristic", heuristic(goal, next));
-                    const priority = newCost + heuristic(goal, next); // A* heuristic
+                    // The difference between greedy-first-search and a-star-search is that a-star-search ranks heuristic to the goal as well as the cost in total to get to the node (g_cost)
+                    const priority = g_cost + heuristic(goal, next); // A* heuristic
 
                     if (DEBUG) console.log(`Enqueuing`, next, ` with priority`, priority);
                     frontier.enqueue(next, priority);

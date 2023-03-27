@@ -931,7 +931,7 @@ const artificialIntelligence = [
 
 // Things that I research by my own
 const artificialIntelligence_2 = [
-
+    // Agents
     {
         term: "Rule-based agents",
         prompt: "What are rule-based agents in AI? Provide an example.",
@@ -997,7 +997,29 @@ const artificialIntelligence_2 = [
         prompt: "What are model-based agents in AI?, provide an example.",
         example: "An example of a model-based agent is a self-driving car that uses a map of the environment to plan the best route to a destination.",
         description: "Model-based agents are a type of AI agent that maintain an internal model of the environment and use it to make decisions. They can handle more complex environments than simple reflex agents and can adapt to changing situations more easily. However, model-based agents can be more computationally intensive and may require more resources than simple reflex agents."
-    }
+    },
+    // Lets get into specific searches.
+    {
+        term: "admissible-heuristic",
+        prompt: "What is admissible heuristic in AI? And what algorithms use it?",
+        description: "An admissible heuristic is a heuristic function used in heuristic search algorithms that never overestimates the cost of reaching the goal. In other words, an admissible heuristic is a function that always provides an estimate that is less than or equal to the actual cost of reaching the goal.",
+        example: "A* search, Greedy best-first search, and Hill climbing are examples of algorithms that use admissible heuristics."
+    },
+    {
+        term: "informed-search",
+        prompt: "What is informed search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "Informed search is a type of search algorithm that uses a heuristic function to guide the search towards the goal. Informed search algorithms are more efficient than uninformed search algorithms because they can eliminate many of the nodes that would otherwise be explored.",
+        example: "A* search, Greedy best-first search, and Hill climbing are examples of informed search algorithms.\n\
+        GPS Navigation, Chess, Solving a Rubik's Cube, and Solving a Sudoku Puzzle are examples of real-world applications of informed search algorithms."
+    },
+    {
+        term: "uninformed-search",
+        prompt: "What is uninformed search in AI? And what algorithms use it?",
+        description: "Uninformed search is a type of search algorithm that does not use any additional information to guide the search. Uninformed search algorithms are less efficient than informed search algorithms because they must explore all possible nodes in the search space.",
+        example: "Breadth-first search and depth-first search are examples of uninformed search algorithms.\n\
+        Solving a maze, finding the shortest path between two points, are examples of uninformed search algorithms."
+    },
+    
 ]
 
 
