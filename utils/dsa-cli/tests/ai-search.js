@@ -327,6 +327,7 @@ class GraphBuilders {
         graph.addEdge(R, AK);
 
         const nodes = { A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, AA, AB, AC, AD, AE, AF, AG, AH, AI, AJ, AK };
+        // console.log("Created graph with nodes: ", nodes, "graph", graph);
         return { graph: graph, nodes: nodes };
     }
 
@@ -391,14 +392,14 @@ class BasicSearchProblems extends ProblemTests {
         this.tests.push(() => this.try_test(this.test_1));
         this.tests.push(() => this.try_test(this.test_2));
         this.tests.push(() => this.try_test(this.test_3));
-        
+
     }
 
-    try_test(method){
-        try{
+    try_test(method) {
+        try {
             method.bind(this)();
         }
-        catch(e){
+        catch (e) {
             console.log(e);
         }
     }
@@ -442,8 +443,8 @@ class BasicSearchProblems extends ProblemTests {
         const queue_snapshot = results?.queue_snapshot
 
 
-        console.log(`Count Searches: ${results.count_searches}`)
-        console.log({...results, queue_snapshot: queue_snapshot?.map(nodes => nodes?.map(node => node?.id))});
+        console.log(`Count Searches: ${results?.count_searches}`)
+        console.log({ ...results, queue_snapshot: queue_snapshot?.map(nodes => nodes?.map(node => node?.id)) });
     }
 
     test_3() {
@@ -473,7 +474,7 @@ class BasicSearchProblems extends ProblemTests {
         console.log("______________________________________________");
         console.log(`Results from t_graph_1, ${this.algorithm_name}`);
         console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-        console.log(` t_graph_1 ${this.algorithm_name}: ${results.count_searches}`)
+        console.log(` t_graph_1 ${this.algorithm_name}: ${results?.count_searches}`)
 
     }
 
@@ -511,23 +512,76 @@ class breadthFirstSearch extends BasicSearchProblems {
 
 }
 
-class hillClimbingSearch  extends BasicSearchProblems {
+class hillClimbingSearch extends BasicSearchProblems {
     constructor(Problem) {
         super(Problem, "Hill Climbing Search");
     }
 }
 
 
-class DijkstraSearch  extends BasicSearchProblems {
+class DijkstraSearch extends BasicSearchProblems {
     constructor(Problem) {
         super(Problem, "Dijikstra Search");
     }
 }
 
 
-class BeamSearch  extends BasicSearchProblems {
+class BeamSearch extends BasicSearchProblems {
     constructor(Problem) {
         super(Problem, "Beam Search");
+        this.tests.push(() => this.try_test(this.test_b1));
+        this.tests.push(() => this.try_test(this.test_b2));
+        this.tests.push(() => this.try_test(this.test_b3));
+    }
+
+    test_b1() {
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        const start = nodes.A;
+        const goal = nodes.G;
+        const beam_width = 10;
+
+        this.test_beam(beam_width, graph, start, goal, "create_long_ass_graph", { enable_snapshot: true });
+
+    }
+
+
+    test_b2() {
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        const start = nodes.A;
+        const goal = nodes.G;
+        const beam_width = 5;
+
+        this.test_beam(beam_width, graph, start, goal, "create_long_ass_graph", { enable_snapshot: true });
+
+    }
+
+
+    test_b3() {
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        // console.log("graph", graph)
+        const start = nodes.A;
+        const goal = nodes.G;
+        const beam_width = 3;
+
+        this.test_beam(beam_width, graph, start, goal, "create_long_ass_graph", { enable_snapshot: true });
+
+    }
+
+    test_beam(beam_width, graph, start, goal, graph_name, { enable_snapshot = false } = {}) {
+        console.log("\n\n______________________________________________\n");
+        console.log("Results from " + graph_name, this.algorithm_name, "beam_width", beam_width, "\n")
+
+        const problem = new this.Problem
+        const results = problem.solve(graph, start, goal, beam_width);
+        const queue_snapshot = results?.queue_snapshot
+
+        if (enable_snapshot) {
+            console.log(`Count Searches: ${results.count_searches}`)
+            console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+        } else {
+            console.log(`Count Searches: ${results.count_searches}`)
+            console.log({ ...results, queue_snapshot: queue_snapshot?.map(nodes => nodes?.map(node => node?.id)) });
+        }
 
     }
 
@@ -543,6 +597,7 @@ const TEST_DICTIONARY = {
     'hill-climbing-search': hillClimbingSearch,
     'beam-search': BeamSearch,
     'dijkstra-search': DijkstraSearch,
+    'beam-search': BeamSearch,
 }
 
 module.exports = TEST_DICTIONARY;
