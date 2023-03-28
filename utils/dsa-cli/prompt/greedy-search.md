@@ -155,3 +155,66 @@ Test 2/2:
 
 
 
+```bash
+nodes {
+  A: Node { id: 'A', x: 0, y: 1 },
+  B: Node { id: 'B', x: 2, y: 1 },
+  C: Node { id: 'C', x: 2, y: -1 },
+  D: Node { id: 'D', x: 0, y: 0 },
+  E: Node { id: 'E', x: 1, y: -5 },
+  F: Node { id: 'F', x: 1, y: -2 },
+  G: Node { id: 'G', x: 3, y: -2 },
+  H: Node { id: 'H', x: 3, y: 0 }
+} start Node { id: 'A', x: 0, y: 1 } goal Node { id: 'F', x: 1, y: -2 }
+{
+  path: [
+    Node { id: 'A', x: 0, y: 1 },
+    Node { id: 'D', x: 0, y: 0, heuristic: 3 },
+    Node { id: 'E', x: 1, y: -5, heuristic: 3 },
+    Node { id: 'F', x: 1, y: -2, heuristic: 0 }
+  ],
+  cost: null,
+  count_searches: 6,
+  formatted_path: 'A -> D -> E -> F',
+  exploration_path: [
+    Node { id: 'A', x: 0, y: 1 },
+    Node { id: 'C', x: 2, y: -1, heuristic: 2 },
+    Node { id: 'G', x: 3, y: -2, heuristic: 2 },
+    Node { id: 'D', x: 0, y: 0, heuristic: 3 },
+    Node { id: 'E', x: 1, y: -5, heuristic: 3 },
+    Node { id: 'F', x: 1, y: -2, heuristic: 0 }
+  ],
+  queue_snapshot: [
+    [ { id: 'A', priority: 0 } ],
+    [
+      { id: 'C', priority: 2 },
+      { id: 'D', priority: 3 },
+      { id: 'B', priority: 4 }
+    ],
+    [
+      { id: 'G', priority: 2 },
+      { id: 'D', priority: 3 },
+      { id: 'B', priority: 4 },
+      { id: 'H', priority: 4 }
+    ],
+    [
+      { id: 'D', priority: 3 },
+      { id: 'B', priority: 4 },
+      { id: 'H', priority: 4 }
+    ],
+    [
+      { id: 'E', priority: 3 },
+      { id: 'B', priority: 4 },
+      { id: 'H', priority: 4 }
+    ],
+    [
+      { id: 'F', priority: 0 },
+      { id: 'B', priority: 4 },
+      { id: 'H', priority: 4 }
+    ]
+  ]
+
+  ```
+
+
+

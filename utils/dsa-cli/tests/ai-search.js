@@ -194,6 +194,8 @@ class GraphBuilders {
         const G = new Node('G', 0, 0);
         const F = new Node('F', 1, 0);
 
+        const nodes = { A, B, C, D, E, G, F };
+
         const graph = new Graph();
         graph.addEdge(A, B);
         graph.addEdge(A, D);
@@ -206,9 +208,10 @@ class GraphBuilders {
         graph.addEdge(E, G);
         graph.addEdge(G, G);
 
-        const nodes = { A, B, C, D, E, G, F };
         return { graph: graph, nodes: nodes };
     }
+
+
     // Creates a long ass graph
     create_long_ass_graph() {
 
@@ -380,7 +383,7 @@ class GraphBuilders {
         const G = new Node('G', 3, -2);
         const H = new Node('H', 3, 0);
 
-        const nodes = [A, B, C, D, E, F, G, H];
+        const nodes = {A, B, C, D, E, F, G, H};
 
 
         const graph = new Graph();
@@ -553,6 +556,7 @@ class GreedySearch extends ProblemTests {
         const { graph, nodes } = new GraphBuilders().create_t_graph_1();
         const start = nodes.A;
         const goal = nodes.F;
+        console.log(nodes, "start", start, "goal", goal)
 
         const problem = new this.Problem
         const results = problem.solve(graph, start, goal);

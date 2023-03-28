@@ -26,7 +26,7 @@ class PriorityQueue {
 
     getSnapshot() {
         return this.elements.map(item => {
-            return { id: item.id, priority: item.priority }
+            return { id: item.element.id, priority: item.priority }
         });
     }
 }
