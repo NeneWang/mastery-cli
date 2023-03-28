@@ -2,6 +2,7 @@
 
 let MAX = 1000;
 let MIN = -1000;
+
 function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta) {
     // Terminating condition. i.e
     // leaf node is reached
@@ -16,8 +17,8 @@ function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta) {
         for (let i = 0; i < 2; i++) {
             let val = minimax(depth + 1, nodeIndex * 2 + i,
                 false, values, alpha, beta);
-            best = Math.max(best, val);
-            alpha = Math.max(alpha, best);
+            best = Math.max(best, val); //If the value is larger than the current best, replace it
+            alpha = Math.max(alpha, best); //Check if to chenge the alpha value. I guess this is the security against calling down, that doesnt get replaced
 
             // Alpha Beta Pruning
             if (beta <= alpha) {
