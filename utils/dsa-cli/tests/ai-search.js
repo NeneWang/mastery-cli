@@ -573,6 +573,7 @@ class breadthFirstSearch extends ProblemTests {
         this.tests.push(() => this.test_1());
         // this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
 
     }
 
@@ -600,6 +601,19 @@ class breadthFirstSearch extends ProblemTests {
         const results = problem.solve(graph, start, goal);
         console.log(`Count Searches for Breath First Search: ${results.count_searches}`)
         console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+    }
+    
+    test_4() {
+        const { graph, nodes } = new GraphBuilders().create_t_graph_1();
+        const start = nodes.A;
+        const goal = nodes.F;
+        console.log(nodes, "start", start, "goal", goal)
+
+        const problem = new this.Problem
+        const results = problem.solve(graph, start, goal);
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+        console.log(` t_graph_1 breadthFirstSearch: ${results.count_searches}`)
+        // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
     }
 }
 
