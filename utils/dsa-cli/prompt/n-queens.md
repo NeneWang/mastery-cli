@@ -32,6 +32,13 @@ Input: n = 1
 Output: [["Q"]]
 ```
 
+### Example 3
+
+```bash
+Input: n = 6
+Output: 
+```
+
 ### Constraints:
 
 - `1 <= n <= 9`
