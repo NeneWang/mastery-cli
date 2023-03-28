@@ -196,3 +196,163 @@ Results from t_graph_1, Beam Search
 ```
 
 
+### Suprisingly for create_long_ass_graph 
+
+- It shouldnt be able to find the response with k = 2
+- It should be able to find the response with k = 5
+
+
+
+```js width: 3
+______________________________________________
+
+Results from create_long_ass_graph Beam Search beam_width 3
+
+exploring current level: A
+exploring current level: B, C
+exploring current level: G, D, E
+exploring current level: K, H, N
+exploring current level: AC, V, W
+error, neighbor is undefined
+error, neighbor is undefined
+error, neighbor is undefined
+```
+
+But once we increase the beam:
+
+You can also see how the level size increases.
+
+```js width: 5
+Results from create_long_ass_graph Beam Search beam_width 5
+
+exploring current level: A
+exploring current level: B, C
+exploring current level: G, D, E, F
+exploring current level: K, L, H, M, N
+exploring current level: AC, V, W, P, X
+error, neighbor is undefined
+error, neighbor is undefined
+error, neighbor is undefined
+error, neighbor is undefined
+exploring current level: AF, AG
+```
+
+
+
+```js width: 10
+______________________________________________
+
+Results from create_long_ass_graph Beam Search beam_width 10 
+
+exploring current level: A
+exploring current level: B, C
+exploring current level: G, D, E, F
+exploring current level: K, L, H, M, N, I, O, J
+exploring current level: AC, V, AD, W, P, AE, X, Q, Y, R
+error, neighbor is undefined
+error, neighbor is undefined
+error, neighbor is undefined
+error, neighbor is undefined
+error, neighbor is undefined
+error, neighbor is undefined
+error, neighbor is undefined
+exploring current level: AK, AF, AG, AH, AI, AJ
+Count Searches: 26
+{
+  path: [
+    Node { id: 'A', x: 0, y: 0, heuristic: 16 },
+    Node { id: 'B', x: 1, y: -1, heuristic: 14 },
+    Node { id: 'D', x: 2, y: -2, heuristic: 12 },
+    Node { id: 'I', x: 3, y: 1, heuristic: 14 },
+    Node { id: 'R', x: 5, y: -1, heuristic: 10 },
+    Node { id: 'AK', x: 8, y: -8, heuristic: 0 }
+  ],
+  cost: 26,
+  count_searches: 26, // Total nodes is around 36. So it is still better than that.
+  formatted_path: 'A -> B -> D -> I -> R -> AK',
+  exploration_path: [
+    Node { id: 'A', x: 0, y: 0, heuristic: 16 },
+    Node { id: 'B', x: 1, y: -1, heuristic: 14 },
+    Node { id: 'C', x: 1, y: 1, heuristic: 16 },
+    Node { id: 'G', x: 3, y: -3, heuristic: 10 },
+    Node { id: 'D', x: 2, y: -2, heuristic: 12 },
+    Node { id: 'E', x: 2, y: 0, heuristic: 14 },
+    Node { id: 'F', x: 2, y: 2, heuristic: 16 },
+    Node { id: 'K', x: 4, y: -4, heuristic: 8 },
+    Node { id: 'L', x: 4, y: -2, heuristic: 10 },
+    Node { id: 'H', x: 3, y: -1, heuristic: 12 },
+    Node { id: 'M', x: 4, y: 0, heuristic: 12 },
+    Node { id: 'N', x: 4, y: 2, heuristic: 14 },
+    Node { id: 'I', x: 3, y: 1, heuristic: 14 },
+    Node { id: 'O', x: 4, y: 4, heuristic: 16 },
+    Node { id: 'J', x: 3, y: 3, heuristic: 16 },
+    Node { id: 'AC', x: 7, y: -7, heuristic: 2 },
+    Node { id: 'V', x: 6, y: -6, heuristic: 4 },
+    Node { id: 'AD', x: 7, y: -5, heuristic: 4 },
+    Node { id: 'W', x: 6, y: -4, heuristic: 6 },
+    Node { id: 'P', x: 5, y: -5, heuristic: 6 },
+    Node { id: 'AE', x: 7, y: -3, heuristic: 6 },
+    Node { id: 'X', x: 6, y: -2, heuristic: 8 },
+    Node { id: 'Q', x: 5, y: -3, heuristic: 8 },
+    Node { id: 'Y', x: 6, y: 0, heuristic: 10 },
+    Node { id: 'R', x: 5, y: -1, heuristic: 10 },
+    Node { id: 'AK', x: 8, y: -8, heuristic: 0 }
+  ],
+  queue_snapshot: [
+    [ { '0': Node { id: 'A', x: 0, y: 0, heuristic: 16 } } ],
+    [
+      {
+        '0': Node { id: 'B', x: 1, y: -1, heuristic: 14 },
+        '1': Node { id: 'C', x: 1, y: 1, heuristic: 16 }
+      }
+    ],
+    [
+      {
+        '0': Node { id: 'G', x: 3, y: -3, heuristic: 10 },
+        '1': Node { id: 'D', x: 2, y: -2, heuristic: 12 },
+        '2': Node { id: 'E', x: 2, y: 0, heuristic: 14 },
+        '3': Node { id: 'F', x: 2, y: 2, heuristic: 16 }
+      }
+    ],
+    [
+      {
+        '0': Node { id: 'K', x: 4, y: -4, heuristic: 8 },
+        '1': Node { id: 'L', x: 4, y: -2, heuristic: 10 },
+        '2': Node { id: 'H', x: 3, y: -1, heuristic: 12 },
+        '3': Node { id: 'M', x: 4, y: 0, heuristic: 12 },
+        '4': Node { id: 'N', x: 4, y: 2, heuristic: 14 },
+        '5': Node { id: 'I', x: 3, y: 1, heuristic: 14 },
+        '6': Node { id: 'O', x: 4, y: 4, heuristic: 16 },
+        '7': Node { id: 'J', x: 3, y: 3, heuristic: 16 }
+      }
+    ],
+    [
+      {
+        '0': Node { id: 'AC', x: 7, y: -7, heuristic: 2 },
+        '1': Node { id: 'V', x: 6, y: -6, heuristic: 4 },
+        '2': Node { id: 'AD', x: 7, y: -5, heuristic: 4 },
+        '3': Node { id: 'W', x: 6, y: -4, heuristic: 6 },
+        '4': Node { id: 'P', x: 5, y: -5, heuristic: 6 },
+        '5': Node { id: 'AE', x: 7, y: -3, heuristic: 6 },
+        '6': Node { id: 'X', x: 6, y: -2, heuristic: 8 },
+        '7': Node { id: 'Q', x: 5, y: -3, heuristic: 8 },
+        '8': Node { id: 'Y', x: 6, y: 0, heuristic: 10 },
+        '9': Node { id: 'R', x: 5, y: -1, heuristic: 10 }
+      }
+    ],
+    [
+      {
+        '0': Node { id: 'AK', x: 8, y: -8, heuristic: 0 },
+        '1': Node { id: 'AF', x: 7, y: -1 },
+        '2': Node { id: 'AG', x: 7, y: 1 },
+        '3': Node { id: 'AH', x: 7, y: 3 },
+        '4': Node { id: 'AI', x: 7, y: 5 },
+        '5': Node { id: 'AJ', x: 7, y: 7 }
+      }
+    ]
+  ]
+}
+```
+
+
+

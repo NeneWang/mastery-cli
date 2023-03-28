@@ -583,12 +583,13 @@ class BeamSearch extends BasicSearchProblems {
         this.tests.push(() => this.try_test(this.test_b1));
         this.tests.push(() => this.try_test(this.test_b2));
         this.tests.push(() => this.try_test(this.test_b3));
+        this.tests.push(() => this.try_test(this.test_b4));
     }
 
     test_b1() {
         const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
         const start = nodes.A;
-        const goal = nodes.G;
+        const goal = nodes.AK;
         const beam_width = 10;
 
         this.test_beam(beam_width, graph, start, goal, "create_long_ass_graph", { enable_snapshot: true });
@@ -599,7 +600,7 @@ class BeamSearch extends BasicSearchProblems {
     test_b2() {
         const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
         const start = nodes.A;
-        const goal = nodes.G;
+        const goal = nodes.AK;
         const beam_width = 5;
 
         this.test_beam(beam_width, graph, start, goal, "create_long_ass_graph", { enable_snapshot: true });
@@ -611,8 +612,20 @@ class BeamSearch extends BasicSearchProblems {
         const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
         // console.log("graph", graph)
         const start = nodes.A;
-        const goal = nodes.G;
+        const goal = nodes.AK;
         const beam_width = 3;
+
+        this.test_beam(beam_width, graph, start, goal, "create_long_ass_graph", { enable_snapshot: true });
+
+    }
+
+    
+    test_b4() {
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        // console.log("graph", graph)
+        const start = nodes.A;
+        const goal = nodes.AK;
+        const beam_width = 9;
 
         this.test_beam(beam_width, graph, start, goal, "create_long_ass_graph", { enable_snapshot: true });
 
