@@ -141,12 +141,13 @@ function beamSearch(graph, start, goal, beamWidth) {
         }
 
         nextLevel.sort((a, b) => heuristic(a, goal) - heuristic(b, goal));
-        const topNodes = nextLevel.slice(0, beamWidth);
-
+        const topNodes = nextLevel.slice(0, beamWidth); // After sorting them by heuristic, take the top N nodes pushes them on the came From
+        
         topNodes.forEach(node => {
             cameFrom.set(node, levelCameFrom.get(node));
         });
-
+        
+        // Also enqueues that onto the topNodes.
         if (topNodes.length > 0) {
             frontier.enqueue(topNodes);
         }

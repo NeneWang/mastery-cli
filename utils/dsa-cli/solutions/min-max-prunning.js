@@ -1,4 +1,7 @@
 
+
+let MAX = 1000;
+let MIN = -1000;
 function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta) {
     // Terminating condition. i.e
     // leaf node is reached
@@ -17,8 +20,9 @@ function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta) {
             alpha = Math.max(alpha, best);
 
             // Alpha Beta Pruning
-            if (beta <= alpha)
-                break;
+            if (beta <= alpha) {
+                console.log(`My children alpha ${alpha} is larger than my beta (top value) ${beta} | I dont need to explore more | Returning Alpha (${alpha})`)
+            }
         }
         return best;
     }
@@ -35,8 +39,10 @@ function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta) {
             beta = Math.min(beta, best);
 
             // Alpha Beta Pruning
-            if (beta <= alpha)
+            if (beta <= alpha) {
+                console.log(`My children beta ${beta} are smaller than my alpha (top value) ${alpha} | I dont need to explore more | Returning Beta (${beta})`)
                 break;
+            }
         }
         return best;
     }
@@ -49,8 +55,6 @@ function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta) {
 
 class MinMax {
     solve(values) {
-        let MAX = 1000;
-        let MIN = -1000;
         return minimax(0, 0, true, values, MIN, MAX);
     }
 }

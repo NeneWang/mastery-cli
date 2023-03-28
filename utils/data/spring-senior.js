@@ -1068,6 +1068,7 @@ const artificialIntelligence_2 = [
         term: "adversarial-min-max-logic",
         prompt: "What are the min and max logic in adversarial search with Prunging?",
         example: "Maximizer: \n\
+        philosophy: if my children are greater than the top value then I don't need to explore\n\
         Initializes with Alpha = -Inf\n\
         for each child of the current node\n\
         Alpha = max(Alpha, MinValue(child, Alpha, Beta))\n\
@@ -1076,6 +1077,7 @@ const artificialIntelligence_2 = [
         return Alpha\n\
         \n\n\n\
         Minimizer: \n\
+        philosophy: if my children are less than the top value then I don't need to explore\n\
         Initializes with Beta = Inf\n\
         for each child of the current node\n\
         Beta = min(Beta, MaxValue(child, Alpha, Beta))\n\

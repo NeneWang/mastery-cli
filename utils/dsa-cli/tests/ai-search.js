@@ -588,6 +588,27 @@ class BeamSearch extends BasicSearchProblems {
 }
 
 
+class MinMaxPrunning extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+    }
+
+
+
+    test_1() {
+
+        let values = [3, 5, 6, 9, 1, 2, 0, -1];
+        const problem = new this.Problem
+        let result = problem.solve(values);
+        console.log("______________________________________________");
+        console.log("MinMaxPrunning", result);
+
+    }
+
+}
+
+
 
 const TEST_DICTIONARY = {
     'a-star-search': AStarSearch,
@@ -598,6 +619,7 @@ const TEST_DICTIONARY = {
     'beam-search': BeamSearch,
     'dijkstra-search': DijkstraSearch,
     'beam-search': BeamSearch,
+    'min-max-prunning': MinMaxPrunning,
 }
 
 module.exports = TEST_DICTIONARY;
