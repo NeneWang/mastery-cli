@@ -26,7 +26,7 @@ class PriorityQueue {
 
     getSnapshot() {
         return this.elements.map(item => {
-            return { id: item.element.id, priority: item.priority }
+            return { id: item.id, priority: item.priority }
         });
     }
 }
@@ -60,6 +60,7 @@ class Node {
         this.id = id;
         this.x = x;
         this.y = y;
+        this.heuristic = 0;
     }
 }
 
@@ -123,11 +124,11 @@ class GreedyBestFirstSearch {
         cameFrom.set(start, null);
 
         while (!frontier.isEmpty()) {
+            queue_snapshot.push(frontier.getSnapshot());
             const current = frontier.dequeue();
 
             count_searches += 1;
             exploration_path.push(current);
-            queue_snapshot.push(frontier.getSnapshot());
 
             if (current === goal) {
                 break;
@@ -143,6 +144,7 @@ class GreedyBestFirstSearch {
                 neighbors.forEach(next => {
                     if (!cameFrom.has(next)) {
                         const priority = heuristic(goal, next); // Greedy Best-First heuristic
+                        next.heuristic = priority;
                         frontier.enqueue(next, priority);
                         cameFrom.set(next, current);
                     }

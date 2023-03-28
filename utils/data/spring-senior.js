@@ -1058,6 +1058,11 @@ const artificialIntelligence_2 = [
         description: "Beam search is an informed search algorithm that uses a heuristic function to guide the search towards the goal. It maintains a fixed-size 'beam' of the most promising nodes at each level of the search tree. Beam search explores only the best nodes, making it memory efficient but not always optimal or complete.",
         example: "Beam search can be used on its own or as a component of other algorithms.\n\
         Natural language processing(e.g., speech recognition, machine translation), solving large - scale optimization problems, and real - time decision making in resource - constrained environments are examples of real - world applications of beam search."
+    },
+    {
+        term: "hill-climbing",
+        prompt: "What is hill climbing in AI? And  what is the difference between hill climbing and greedy best-first search?",
+        description: "",
     }
 ]
 
@@ -1157,7 +1162,7 @@ const algebra = [
         description: "log_10 (1000) = 3",
         attachment: "./img/2023-03-27-19-56-32.png",
         prompt: "What is the value of log_b^n (a^m)",
-        example: "n/n log_b(a)"
+        example: "n/m log_b(a)"
     },
     {
         term: "what is e?",
