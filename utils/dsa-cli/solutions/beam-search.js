@@ -20,6 +20,13 @@ class Queue {
     isEmpty() {
         return this.elements.length === 0;
     }
+
+
+    getSnapshot() {
+        return this.elements.map(item => {
+            return { ...item }
+        });
+    }
 }
 
 
@@ -88,17 +95,21 @@ function beamSearch(graph, start, goal, beamWidth) {
     frontier.enqueue([start]);
     let count_searches = 0;
     let exploration_path = [];
+    let queue_snapshot = [];
 
     const cameFrom = new Map();
     cameFrom.set(start, null);
 
     while (!frontier.isEmpty()) {
+        queue_snapshot.push(frontier.getSnapshot());
         const currentLevel = frontier.dequeue();
         const nextLevel = [];
         let levelCameFrom = new Map();
 
         for (const current of currentLevel) {
             count_searches += 1;
+
+            current.priority = heuristic(current, goal);
             exploration_path.push(current);
 
             if (current === goal) {
@@ -108,6 +119,7 @@ function beamSearch(graph, start, goal, beamWidth) {
                     count_searches: count_searches,
                     formatted_path: reconstructPath(cameFrom, start, goal).map(node => node.id).join(' -> '),
                     exploration_path: exploration_path,
+                    queue_snapshot: queue_snapshot
                 };
             }
 

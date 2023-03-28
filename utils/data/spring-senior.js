@@ -1079,7 +1079,7 @@ const artificialIntelligence_2 = [
         Initializes with Beta = Inf\n\
         for each child of the current node\n\
         Beta = min(Beta, MaxValue(child, Alpha, Beta))\n\
-        if Alpha >= Beta\n\
+        if Alpha >= Beta | Prunes if Alpha returned is  \n\
         ---- return Beta (Prune)\n\
         return Beta"
     }
