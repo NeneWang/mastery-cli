@@ -1206,6 +1206,17 @@ const algebra = [
         prompt: "What is the difference between adding to f(x) vs f(x+b)",
         description: "f(x) +b vs f(x+b) if f(x) = 2x => f(2) + 1 => 5 vs f(2+1) => 6",
         example: "When adding to f(x) you are adding to the domain making the function to go up or down, when adding to f(x+b) you are adding to the range making the graph go right or left"
+    },
+    {
+        term: "average cost given AvC(q) and Afe(q)",
+        prompt: "What is the average Total cost given AvC(q) and Afe(q) that are two functions?",
+        example: "atc(q) = avc(q) + afe(q)"
+    },
+    {
+        term: "distance between two points",
+        prompt: "What is the distance between two points (x1,y1) and (x2,y2)",
+        example: "sqrt((x2-x1)^2 + (y2-y1)^2)",
+        description: "distance of (1, 3) and (4, 5) = sqrt((4-1)^2 + (5-3)^2) = sqrt(9+4) = sqrt(13)"
     }
 
 
