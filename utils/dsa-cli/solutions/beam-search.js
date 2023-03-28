@@ -106,10 +106,11 @@ function beamSearch(graph, start, goal, beamWidth) {
         const nextLevel = [];
         let levelCameFrom = new Map();
 
+        console.log("exploring current level:", currentLevel.map(node => node.id).join(", "))
         for (const current of currentLevel) {
             count_searches += 1;
 
-            current.priority = heuristic(current, goal);
+            current.heuristic = heuristic(current, goal);
             exploration_path.push(current);
 
             if (current === goal) {
@@ -123,6 +124,8 @@ function beamSearch(graph, start, goal, beamWidth) {
                 };
             }
 
+
+            // If not found them on the neighbor yet then, add them to the next level queue if they are not already from where they came.
             const neighbors = graph.neighbors(current);
             if (neighbors?.length === 0) {
                 continue;
@@ -131,6 +134,10 @@ function beamSearch(graph, start, goal, beamWidth) {
 
                 for (const neighbor of neighbors) {
                     if (!cameFrom.has(neighbor)) {
+                        // Also make sure that the neighbor is not already in the nextLevel
+                        if (nextLevel.find(node => node.id === neighbor.id)) {
+                            continue;
+                        }
                         nextLevel.push(neighbor);
                         levelCameFrom.set(neighbor, current);
                     }
@@ -140,14 +147,19 @@ function beamSearch(graph, start, goal, beamWidth) {
             }
         }
 
+
+        // Sort and cut the next level of the beam width
+
         nextLevel.sort((a, b) => heuristic(a, goal) - heuristic(b, goal));
         const topNodes = nextLevel.slice(0, beamWidth); // After sorting them by heuristic, take the top N nodes pushes them on the came From
         
+
+        // Add them on the history queue so that it doesnt get added again on the next loop.
         topNodes.forEach(node => {
             cameFrom.set(node, levelCameFrom.get(node));
         });
         
-        // Also enqueues that onto the topNodes.
+        // Enquues this for exploration next, but I suspect that it doesnt need that?
         if (topNodes.length > 0) {
             frontier.enqueue(topNodes);
         }
