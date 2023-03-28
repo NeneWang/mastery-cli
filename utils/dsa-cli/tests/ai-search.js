@@ -11,6 +11,8 @@ class Node {
     }
 }
 
+
+// Should be bidirectional.
 class Graph {
     constructor() {
         this.edges = {};
@@ -48,6 +50,55 @@ class Graph {
         });
     }
 }
+
+class BidirectionalGraph {
+    constructor() {
+        this.edges = {};
+    }
+
+    addEdge(node, neighbor) {
+
+        // Create a new entry for the node if it doesn't exist
+        if (!this.edges[node.id]) {
+            this.edges[node.id] = [];
+        }
+
+        this.edges[node.id].push(neighbor);
+        // Add the node to the neighbor's list of neighbors
+        if (!this.edges[neighbor.id]) {
+            this.edges[neighbor.id] = [];
+        }
+        this.edges[neighbor.id].push(node);
+
+    }
+
+    neighbors(node) {
+        
+        return this.edges[node.id];
+    }
+
+    cost(nodeA, nodeB) {
+        return 1; // Assuming uniform cost for this example
+    }
+
+    dfs(currentNode, visitedNodes = new Set()) {
+        visitedNodes.add(currentNode);
+
+        if (!this.edges[currentNode.id]) {
+            console.log("No neighbors (leaf node)");
+            // console.log("Path", visitedNodes);
+            printPath(visitedNodes)
+            return;
+        } // No neighbors (leaf node)
+
+        this.neighbors(currentNode).forEach(neighbor => {
+            if (!visitedNodes.has(neighbor)) {
+                this.dfs(neighbor, new Set(visitedNodes));
+            }
+        });
+    }
+}
+
 
 class GraphBuilders {
     create_graph_1() {
@@ -354,14 +405,14 @@ class GraphBuilders {
         const C = new Node('C', 2, -1);
         const D = new Node('D', 0, 0);
         const E = new Node('E', 1, -5);
-        const F = new Node('F', 1, -2);
+        const F = new Node('F', 1, -6);
         const G = new Node('G', 3, -2);
         const H = new Node('H', 3, 0);
 
         const nodes = { A, B, C, D, E, F, G, H };
 
 
-        const graph = new Graph();
+        const graph = new BidirectionalGraph();
         graph.addEdge(A, B);
         graph.addEdge(A, D);
         graph.addEdge(A, C);
