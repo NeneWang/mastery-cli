@@ -592,6 +592,7 @@ class MinMaxPrunning extends ProblemTests {
     constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
     }
 
 
@@ -602,8 +603,19 @@ class MinMaxPrunning extends ProblemTests {
         const problem = new this.Problem
         let result = problem.solve(values);
         console.log("______________________________________________");
-        console.log("MinMaxPrunning", result);
+        console.log("MinMaxPrunnin with:", values, result);
+        assert.equal(result, 5);
+    }
 
+
+    test_2() {
+
+        let values = [4, 8, 9, 3, 2, -2, 2, -1];
+        const problem = new this.Problem
+        let result = problem.solve(values);
+        console.log("______________________________________________");
+        console.log("MinMaxPrunning with:", values, result);
+        assert.equal(result, 8);
     }
 
 }
