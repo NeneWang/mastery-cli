@@ -426,12 +426,15 @@ class BasicSearchProblems extends ProblemTests {
         const start = nodes.A;
         const goal = nodes.AK;
 
-        console.log("______________________________________________");
-        console.log(`Results from create_long_ass_graph, ${this.algorithm_name}`);
+        console.log("\n\n______________________________________________\n");
+        console.log(`Results from create_long_ass_graph, ${this.algorithm_name}\n`);
         const problem = new this.Problem
         const results = problem.solve(graph, start, goal);
+        const queue_snapshot = results?.queue_snapshot
+
+
         console.log(`Count Searches: ${results.count_searches}`)
-        console.log(results);
+        console.log({...results, queue_snapshot: queue_snapshot?.map(nodes => nodes?.map(node => node?.id))});
     }
 
     test_3() {
