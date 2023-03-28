@@ -1041,7 +1041,7 @@ const artificialIntelligence_2 = [
     {
         term: "depth-first-search",
         prompt: "What is depth-first search in AI? And what algorithms use it? When in the real world you can use it?",
-        description: "Depth-first search (DFS) is an uninformed search algorithm that explores nodes in a tree or graph by visiting a node and recursively exploring its children before backtracking. DFS goes as deep as possible before backtracking, making it memory efficient but not always optimal or complete.",
+        description: "Depth-first search (DFS) is an uninformed search algorithm that explores nodes in a tree or graph by visiting a node and recursively exploring its children before backtracking. DFS goes as deep as possible before backtracking (Which menas it doesn't stop even after finding the goal), making it memory efficient but not always optimal or complete.",
         example: "Depth-first search can be used on its own or as a component of other algorithms, such as Iterative Deepening Depth-First Search (IDDFS).\n\
         Solving mazes, generating spanning trees for graphs, analyzing network connectivity, and searching for solutions in state - space problems are examples of real- world applications of depth - first search."
     },
