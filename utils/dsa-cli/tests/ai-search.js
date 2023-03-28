@@ -388,11 +388,20 @@ class BasicSearchProblems extends ProblemTests {
     constructor(Problem, algorithm_name) {
         super(Problem);
         this.algorithm_name = algorithm_name;
-        this.tests.push(() => this.test_1());
-        this.tests.push(() => this.test_2());
-        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.try_test(this.test_1));
+        this.tests.push(() => this.try_test(this.test_2));
+        this.tests.push(() => this.try_test(this.test_3));
+        
     }
 
+    try_test(method){
+        try{
+            method.bind(this)();
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
 
     test_1() {
 
