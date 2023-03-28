@@ -1063,6 +1063,25 @@ const artificialIntelligence_2 = [
         term: "hill-climbing",
         prompt: "What is hill climbing in AI? And  what is the difference between hill climbing and greedy best-first search?",
         description: "",
+    },
+    {
+        term: "adversarial-min-max-logic",
+        prompt: "What are the min and max logic in adversarial search with Prunging?",
+        example: "Maximizer: \n\
+        Initializes with Alpha = -Inf\n\
+        for each child of the current node\n\
+        Alpha = max(Alpha, MinValue(child, Alpha, Beta))\n\
+        if Alpha >= Beta\n\
+        ---- return Alpha\n\
+        return Alpha\n\
+        \n\n\n\
+        Minimizer: \n\
+        Initializes with Beta = Inf\n\
+        for each child of the current node\n\
+        Beta = min(Beta, MaxValue(child, Alpha, Beta))\n\
+        if Alpha >= Beta\n\
+        ---- return Beta (Prune)\n\
+        return Beta"
     }
 ]
 

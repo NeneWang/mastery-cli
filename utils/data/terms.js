@@ -49,12 +49,13 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(dsa))
     decks.addDeck(new TermStorage(system_design, "system design", { is_active: set_all }));
 
-    const { aws_services, aws_glossary, coderTerms, unit_testing, js_advanced } = require('./programmer_experience');
+    const { aws_services, aws_glossary, coderTerms, unit_testing, js_advanced, best_practices } = require('./programmer_experience');
     decks.addDeck(new TermStorage(aws_glossary, "aws glossary", { is_active: set_all }));
     decks.addDeck(new TermStorage(aws_services, "aws services", { is_active: set_all }));
     decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: set_all }));
     decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: set_all }));
     decks.addDeck(new TermStorage(js_advanced, "js advanced", { is_active: set_all }));
+    decks.addDeck(new TermStorage(best_practices, "best practices", { is_active: set_all }));
 
 
     // Includes UX, system Design
