@@ -91,9 +91,9 @@ class GraphBuilders {
         //     A
         //     / \
         //    B   C
-        //   /     \
-        //  D       E
-        //   \     /
+        //   /  X  \
+        //  D  /__ E
+        //   \|    /
         //    F___G
 
         const A = new Node('A', 0, 0);
@@ -108,49 +108,22 @@ class GraphBuilders {
         graph.addEdge(A, B);
         graph.addEdge(A, C);
         graph.addEdge(B, D);
+        graph.addEdge(B, E);
         graph.addEdge(C, E);
+        graph.addEdge(C, F);
         graph.addEdge(D, F);
+        graph.addEdge(D, E);
         graph.addEdge(E, G);
         graph.addEdge(F, G);
 
         return { graph, nodes: { A, B, C, D, E, F, G } };
 
     }
-
-    create_graph_3() {
-
-
-        //   A____B
-        //   |    |
-        //   |    |
-        //   C____D
-        //   |    |
-        //   |    |
-        //   E____F
-
-        const A = new Node('A', 0, 2);
-        const B = new Node('B', 2, 2);
-        const C = new Node('C', 0, 1);
-        const D = new Node('D', 2, 1);
-        const E = new Node('E', 0, 0);
-        const F = new Node('F', 2, 0);
-
-        const graph = new Graph();
-        graph.addEdge(A, B);
-        graph.addEdge(A, C);
-        graph.addEdge
-        graph.addEdge(B, D);
-        graph.addEdge(C, E);
-        graph.addEdge(D, F);
-        graph.addEdge(E, F);
-        return { graph, nodes: { A, B, C, D, E, F } };
-    }
-
     create_graph_4() {
 
         //   A____B____C
-        //   |         |
-        //   |         |
+        //   |\   ___/ |
+        //   |  x      |
         //   D____E___ F___ G
 
         const A = new Node('A', 0, 0);
@@ -163,9 +136,10 @@ class GraphBuilders {
 
         const graph = new Graph();
         graph.addEdge(A, B);
+        graph.addEdge(A, E);
+        graph.addEdge(A, D);
         graph.addEdge(B, C);
         graph.addEdge(C, D);
-        graph.addEdge(B, E);
         graph.addEdge(C, F);
         graph.addEdge(F, G);
         graph.addEdge(E, G);
@@ -356,9 +330,10 @@ class GraphBuilders {
         return { graph: graph, nodes: nodes };
     }
 
+
+    // Interesting and complex graph to traverse around.
     create_t_graph_1() {
-        /**
-         *       
+        /**  
         A----B
        |  \ | \
        D   \|  H
@@ -370,7 +345,6 @@ class GraphBuilders {
            E
            |
            F
-
          */
 
 
@@ -410,313 +384,35 @@ class GraphBuilders {
 }
 
 
-
-
-class AStarSearch extends ProblemTests {
-    constructor(Problem) {
+class BasicSearchProblems extends ProblemTests {
+    constructor(Problem, algorithm_name) {
         super(Problem);
-        this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
-        this.tests.push(() => this.test_3());
-
-    }
-
-
-
-    test_1() {
-
-        const { graph, nodes } = new GraphBuilders().create_graph_5();
-        const start = nodes.A;
-        const goal = nodes.G;
-
-        const problem = new this.Problem
-
-        const results = problem.solve(graph, start, goal);
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-        assert.equal(results.path.length, 3);
-        assert.equal(results.path[0], start);
-        assert.equal(results.path[2], goal);
-
-
-    }
-
-
-    test_2() {
-
-        const { graph, nodes } = new GraphBuilders().create_graph_5();
-        const start = nodes.A;
-        const goal = nodes.F;
-
-        const problem = new this.Problem
-
-        const results = problem.solve(graph, start, goal);
-
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-
-
-        assert.equal(results.path.length, 3);
-        assert.equal(results.path[0], start);
-        assert.equal(results.path[2], goal);
-
-    }
-
-
-    test_3() {
-        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
-        const start = nodes.A;
-        const goal = nodes.AK;
-
-        const problem = new this.Problem
-        const results = problem.solve(graph, start, goal);
-        console.log(`Count Searches for AStarSearch: ${results.count_searches}`)
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-        // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-    }
-
-}
-
-class DepthFirstSearch extends ProblemTests {
-    constructor(Problem) {
-        super(Problem);
-        this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
-        this.tests.push(() => this.test_3());
-
-    }
-
-    test_1() {
-
-        const { graph, nodes } = new GraphBuilders().create_graph_5();
-        const start = nodes.A;
-        const goal = nodes.G;
-
-        const problem = new this.Problem
-
-        const results = problem.solve(graph, start, goal);
-        console.log(" Time taken"
-        )
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-
-    }
-
-    test_3() {
-        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
-        const start = nodes.A;
-        const goal = nodes.AK;
-
-        const problem = new this.Problem
-        const results = problem.solve(graph, start, goal);
-        console.log(`Count Searches in Long Graph: ${results.count_searches}`)
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-    }
-
-}
-
-class GreedySearch extends ProblemTests {
-
-    constructor(Problem) {
-        super(Problem);
-        this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
-        this.tests.push(() => this.test_3());
-        this.tests.push(() => this.test_4());
-
-    }
-
-
-    test_1() {
-
-        const { graph, nodes } = new GraphBuilders().create_graph_5();
-        const start = nodes.A;
-        const goal = nodes.G;
-
-        const problem = new this.Problem
-
-        const results = problem.solve(graph, start, goal);
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-
-    }
-
-
-    test_3() {
-        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
-        const start = nodes.A;
-        const goal = nodes.AK;
-
-        const problem = new this.Problem
-        const results = problem.solve(graph, start, goal);
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-        console.log(`Count Searches for GreedySearch: ${results.count_searches}`)
-        // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-    }
-
-
-
-    test_4() {
-        const { graph, nodes } = new GraphBuilders().create_t_graph_1();
-        const start = nodes.A;
-        const goal = nodes.F;
-        console.log(nodes, "start", start, "goal", goal)
-
-        const problem = new this.Problem
-        const results = problem.solve(graph, start, goal);
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-        console.log(`Count Searches for GreedySearch: ${results.count_searches}`)
-        // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-    }
-
-}
-
-class breadthFirstSearch extends ProblemTests {
-    constructor(Problem) {
-        super(Problem);
-        this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
-        this.tests.push(() => this.test_3());
-        this.tests.push(() => this.test_4());
-
-    }
-
-
-    test_1() {
-
-        const { graph, nodes } = new GraphBuilders().create_graph_5();
-        const start = nodes.A;
-        const goal = nodes.G;
-
-        const problem = new this.Problem
-
-        const results = problem.solve(graph, start, goal);
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-
-    }
-
-    test_3() {
-
-        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
-        const start = nodes.A;
-        const goal = nodes.AK;
-
-        const problem = new this.Problem
-        const results = problem.solve(graph, start, goal);
-        console.log(`Count Searches for Breath First Search: ${results.count_searches}`)
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-    }
-
-    test_4() {
-        const { graph, nodes } = new GraphBuilders().create_t_graph_1();
-        const start = nodes.A;
-        const goal = nodes.F;
-        console.log(nodes, "start", start, "goal", goal)
-
-        const problem = new this.Problem
-        const results = problem.solve(graph, start, goal);
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-        console.log(` t_graph_1 breadthFirstSearch: ${results.count_searches}`)
-        // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-    }
-}
-
-class hillClimbingSearch extends ProblemTests {
-    constructor(Problem) {
-        super(Problem);
-        this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
-        this.tests.push(() => this.test_3());
-
-    }
-
-
-    test_1() {
-
-        const { graph, nodes } = new GraphBuilders().create_graph_5();
-        const start = nodes.A;
-        const goal = nodes.G;
-
-        const problem = new this.Problem
-
-        const results = problem.solve(graph, start, goal);
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-
-    }
-
-    test_3() {
-
-        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
-        const start = nodes.A;
-        const goal = nodes.AK;
-
-        const problem = new this.Problem
-        try {
-            const results = problem.solve(graph, start, goal);
-            console.log(`Count Searches Hill Climbing Search: ${results.count_searches}`)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
-
-
-class DijkstraSearch extends ProblemTests {
-    constructor(Problem) {
-        super(Problem);
-        this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
-        this.tests.push(() => this.test_3());
-
-    }
-
-    test_1() {
-
-        const { graph, nodes } = new GraphBuilders().create_graph_5();
-        const start = nodes.A;
-        const goal = nodes.G;
-
-        const problem = new this.Problem
-
-        const results = problem.solve(graph, start, goal);
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-
-    }
-
-    test_3() {
-
-        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
-        const start = nodes.A;
-        const goal = nodes.AK;
-
-        const problem = new this.Problem
-        try {
-            const results = problem.solve(graph, start, goal);
-            // console.log(`Count Searches: ${results.count_searches}`)
-            console.log("Results");
-            console.log(results);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-}
-
-
-
-
-class BeamSearch extends ProblemTests {
-    constructor(Problem) {
-        super(Problem);
+        this.algorithm_name = algorithm_name;
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
-        this.tests.push(() => this.test_4());
-
     }
 
+
     test_1() {
+
+        //   A____B____C
+        //   |   |   /
+        //   |   |  /
+        //   |   | /
+        //   D___E
+        //   |\  |
+        //   | \ |
+        //   |__\|
+        //   F    G
 
         const { graph, nodes } = new GraphBuilders().create_graph_5();
         const start = nodes.A;
         const goal = nodes.G;
 
+
+        console.log("______________________________________________");
+        console.log(`Results from create_graph_5, ${this.algorithm_name}`);
         const problem = new this.Problem
 
         const results = problem.solve(graph, start, goal);
@@ -724,53 +420,103 @@ class BeamSearch extends ProblemTests {
 
     }
 
-
     test_2() {
-
-        const { graph, nodes } = new GraphBuilders().create_graph_5();
+        // long_ass graph
+        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
         const start = nodes.A;
-        const goal = nodes.G;
+        const goal = nodes.AK;
 
+        console.log("______________________________________________");
+        console.log(`Results from create_long_ass_graph, ${this.algorithm_name}`);
         const problem = new this.Problem
-
-        const results = problem.solve(graph, start, goal, 1);
-        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
-
+        const results = problem.solve(graph, start, goal);
+        console.log(`Count Searches: ${results.count_searches}`)
+        console.log(results);
     }
 
     test_3() {
 
-        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
+        /**  
+                 A----B
+                |  \ | \
+                D   \|  H
+                |  \ | /|
+                |    C  |
+                 \    \ G
+                  \    /
+                   \  /
+                    E
+                    |
+                    F
+       */
+
+        const { graph, nodes } = new GraphBuilders().create_t_graph_1();
         const start = nodes.A;
-        const goal = nodes.AK;
+        const goal = nodes.F;
+        // console.log(nodes, "start", start, "goal", goal)
 
         const problem = new this.Problem
-        try {
-            const results = problem.solve(graph, start, goal);
-            // console.log(`Count Searches: ${results.count_searches}`)
-            console.log("Results");
-            console.log(results);
-        } catch (error) {
-            console.log(error);
-        }
+        const results = problem.solve(graph, start, goal);
+
+        console.log("______________________________________________");
+        console.log(`Results from t_graph_1, ${this.algorithm_name}`);
+        console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
+        console.log(` t_graph_1 ${this.algorithm_name}: ${results.count_searches}`)
+
     }
 
 
-    test_4() {
 
-        const { graph, nodes } = new GraphBuilders().create_long_ass_graph();
-        const start = nodes.A;
-        const goal = nodes.AK;
+}
 
-        const problem = new this.Problem
-        try {
-            const results = problem.solve(graph, start, goal, 10);
-            // console.log(`Count Searches: ${results.count_searches}`)
-            console.log("Results");
-            console.log(results);
-        } catch (error) {
-            console.log(error);
-        }
+class AStarSearch extends BasicSearchProblems {
+    constructor(Problem) {
+        super(Problem, "A* Search");
+
+    }
+
+}
+
+class DepthFirstSearch extends BasicSearchProblems {
+    constructor(Problem) {
+        super(Problem, "Depth First Search");
+    }
+
+}
+
+class GreedySearch extends BasicSearchProblems {
+    constructor(Problem) {
+        super(Problem, "Greedy Search");
+
+    }
+
+}
+
+class breadthFirstSearch extends BasicSearchProblems {
+    constructor(Problem) {
+        super(Problem, "Breadth First Search");
+    }
+
+}
+
+class hillClimbingSearch  extends BasicSearchProblems {
+    constructor(Problem) {
+        super(Problem, "Hill Climbing Search");
+    }
+}
+
+
+class DijkstraSearch  extends BasicSearchProblems {
+    constructor(Problem) {
+        super(Problem, "Dijikstra Search");
+    }
+}
+
+
+class BeamSearch  extends BasicSearchProblems {
+    constructor(Problem) {
+        super(Problem, "Beam Search");
+
     }
 
 }
