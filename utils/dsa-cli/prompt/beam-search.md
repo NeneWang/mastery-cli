@@ -64,7 +64,7 @@ Results from create_graph_5, Beam Search
 
 exploring current level: A
 exploring current level: D, B
-exploring current level: G, G, F
+exploring current level: G, F, E //Note how g goes first.
 {
   path: [
     Node { id: 'A', x: 0, y: 2, heuristic: 2 },
@@ -91,13 +91,12 @@ exploring current level: G, G, F
     [
       {
         '0': Node { id: 'G', x: 0, y: 0, heuristic: 0 },
-        '1': Node { id: 'G', x: 0, y: 0, heuristic: 0 },
-        '2': Node { id: 'F', x: 1, y: 0 }
+        '1': Node { id: 'F', x: 1, y: 0 },
+        '2': Node { id: 'E', x: 1, y: 1 }
       }
     ]
   ]
 }
-Test  ||  passed
 ```
 
 
