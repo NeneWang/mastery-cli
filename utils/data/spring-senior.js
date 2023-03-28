@@ -1144,7 +1144,70 @@ const algebra = [
         prompt: "For which constant k is F(tK) = t^(k) * F(K) for t >=0",
         description: "F(K) = 10*K^(1/2)",
         example: "k = 1/2"
+    },
+    {
+        term: "log_a (1) = 0",
+        description: "log_2 (8) = 3",
+        prompt: "What is the value of log_a (1) = 0",
+        example: "a = 1"
+
+    },
+    {
+        term: "log_b^n (a^m)",
+        description: "log_10 (1000) = 3",
+        attachment: "./img/2023-03-27-19-56-32.png",
+        prompt: "What is the value of log_b^n (a^m)",
+        example: "n/n log_b(a)"
+    },
+    {
+        term: "what is e?",
+        prompt: "What is e in values aprox? How could you think of it in terms of compound interest?",
+        description: "e is the base of the natural logarithm",
+        example: "e = 2.7.. e is the maximum compound over one time period with 100% interest"
+    },
+    {
+        term: "log_10 (100)",
+        prompt: "What is the value of log_10 (100)",
+        example: "2",
+        description: "log_10 (10000) = 4"
+    },
+    {
+        term: "reciprocal rule ln",
+        prompt: "ln(1/x) = ?",
+        example: "-ln(x)",
+        description: "The natural log of the reciprocal of x is the opposite of the ln of x"
+    },
+    {
+        term: "ln(e)/7",
+        prompt: "What is the value of ln(e)/7",
+        example: "1/7",
+        description: "ln(e) = 1"
+    },
+    {
+        term: "ln(e)",
+        prompt: "What is the value of ln(e)",
+        example: "1",
+        description: "e^1 = e"
+    },
+    {
+        term: "ln product rule",
+        prompt: "ln(x*y) = ?",
+        example: "ln(x) + ln(y)",
+        description: "log_5 (10) = log_5 (2) + log_5 (5)"
+    },
+    {
+        term: "ln quotient rule",
+        prompt: "ln(x/y) = ?",
+        example: "ln(x) - ln(y)",
+        description: "log_5 (2) = log_5 (10) - log_5 (5)"
+    },
+    {
+        term: "adding to f(x) vs f(x+b)",
+        prompt: "What is the difference between adding to f(x) vs f(x+b)",
+        description: "f(x) +b vs f(x+b) if f(x) = 2x => f(2) + 1 => 5 vs f(2+1) => 6",
+        example: "When adding to f(x) you are adding to the domain making the function to go up or down, when adding to f(x+b) you are adding to the range making the graph go right or left"
     }
+
 
 
 
