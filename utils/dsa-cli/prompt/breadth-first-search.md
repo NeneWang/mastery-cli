@@ -43,6 +43,7 @@ Given:
         graph.addEdge(D, G);
         graph.addEdge(D, F);
         graph.addEdge(D, E);
+        graph.addEdge(D,  G);
         graph.addEdge(E, G);
         graph.addEdge(G, G);
 

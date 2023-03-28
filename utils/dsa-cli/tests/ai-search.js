@@ -177,10 +177,10 @@ class GraphBuilders {
     create_graph_5() {
 
         //   A____B____C
-        //   |\   |   /
-        //   | \  |  /
-        //   |  \ | /
-        //   D___\E
+        //   |   |   /
+        //   |   |  /
+        //   |   | /
+        //   D___E
         //   |\  |
         //   | \ |
         //   |__\|
@@ -194,8 +194,6 @@ class GraphBuilders {
         const G = new Node('G', 0, 0);
         const F = new Node('F', 1, 0);
 
-        const nodes = { A, B, C, D, E, G, F };
-
         const graph = new Graph();
         graph.addEdge(A, B);
         graph.addEdge(A, D);
@@ -205,9 +203,11 @@ class GraphBuilders {
         graph.addEdge(D, G);
         graph.addEdge(D, F);
         graph.addEdge(D, E);
+        graph.addEdge(D, G);
         graph.addEdge(E, G);
         graph.addEdge(G, G);
 
+        const nodes = { A, B, C, D, E, G, F };
         return { graph: graph, nodes: nodes };
     }
 
@@ -383,7 +383,7 @@ class GraphBuilders {
         const G = new Node('G', 3, -2);
         const H = new Node('H', 3, 0);
 
-        const nodes = {A, B, C, D, E, F, G, H};
+        const nodes = { A, B, C, D, E, F, G, H };
 
 
         const graph = new Graph();
@@ -550,7 +550,7 @@ class GreedySearch extends ProblemTests {
         // console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
     }
 
-    
+
 
     test_4() {
         const { graph, nodes } = new GraphBuilders().create_t_graph_1();
@@ -602,7 +602,7 @@ class breadthFirstSearch extends ProblemTests {
         console.log(`Count Searches for Breath First Search: ${results.count_searches}`)
         console.log(util.inspect(results, { showHidden: false, depth: null, colors: true }));
     }
-    
+
     test_4() {
         const { graph, nodes } = new GraphBuilders().create_t_graph_1();
         const start = nodes.A;
