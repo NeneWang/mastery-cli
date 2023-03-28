@@ -4,6 +4,8 @@ let MAX = 1000;
 let MIN = -1000;
 let BRANCH_FACTOR = 2;
 
+let prunnings = [];
+
 function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta) {
     // Terminating condition. i.e
     // leaf node is reached
@@ -25,7 +27,10 @@ function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta) {
 
             // Alpha Beta Pruning
             if (beta <= alpha) {
-                if(i >= BRANCH_FACTOR - 1) console.log("The last of my children: ");
+                if (i >= BRANCH_FACTOR - 1) { console.log("The last of my children: ") }
+                else {
+                    prunnings.push(alpha);
+                };
                 console.log(`My children alpha ${alpha} is larger than my beta (top value) ${beta} | I dont need to explore more | Returning Best (${best})\n`)
             }
         }
@@ -45,7 +50,9 @@ function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta) {
 
             // Alpha Beta Pruning
             if (beta <= alpha) {
-                if(i >= BRANCH_FACTOR - 1) console.log("The last of my children: ");
+                if (i >= BRANCH_FACTOR - 1) { console.log("The last of my children: "); } else {
+                    prunnings.push(beta);
+                }
                 console.log(`My children beta ${beta} are smaller than my alpha (top value) ${alpha} | I dont need to explore more | Returning best (${best})\n`)
                 break;
             }
@@ -61,7 +68,11 @@ function minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta) {
 
 class MinMax {
     solve(values) {
-        return minimax(0, 0, true, values, MIN, MAX);
+        prunnings = [];
+        return {
+            minmax: minimax(0, 0, true, values, MIN, MAX),
+            prunnings: prunnings
+        };
     }
 }
 

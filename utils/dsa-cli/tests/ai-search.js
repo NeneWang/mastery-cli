@@ -604,7 +604,8 @@ class MinMaxPrunning extends ProblemTests {
         let result = problem.solve(values);
         console.log("______________________________________________");
         console.log("MinMaxPrunnin with:", values, result);
-        assert.equal(result, 5);
+        assert.equal(result.minmax, 5);
+        assert.deepEqual(result.prunnings, [6, 2]);
     }
 
 
@@ -615,7 +616,8 @@ class MinMaxPrunning extends ProblemTests {
         let result = problem.solve(values);
         console.log("______________________________________________");
         console.log("MinMaxPrunning with:", values, result);
-        assert.equal(result, 8);
+        assert.equal(result.minmax, 8);
+        assert.deepEqual(result.prunnings, [9, 2]);
     }
 
 }
