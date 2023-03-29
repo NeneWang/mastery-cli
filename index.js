@@ -68,6 +68,7 @@ const { Demo, EDemo } = demos;
 		// Demo for showing charts
 		const demo = new Demo;
 		demo.chartDemo(EDemo.BAR);
+		demo.heatmap();
 
 	}
 	else if (input.includes(cmInfo.commands.code.code)) {
