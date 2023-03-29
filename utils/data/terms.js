@@ -13,7 +13,7 @@
 const { TermStorage } = require('../structures');
 
 const set_all = false;
-const study_cisc = true; // Studying for Class Targetted.
+const study_cisc = false; // Studying for Class Targetted.
 
 /**
  * 
@@ -34,8 +34,8 @@ async function populateMasterDeck() {
     const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne } = require("./spring-senior");
     decks.addDeck(new TermStorage(network, "network", { is_active: study_cisc }));
     decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: study_cisc }));
-    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: study_cisc }));
-    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: true }));
+    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: true }));
     decks.addDeck(new TermStorage(algebra, "algebra", { is_active: study_cisc }));
     decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: study_cisc }));
 
@@ -49,12 +49,13 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(dsa))
     decks.addDeck(new TermStorage(system_design, "system design", { is_active: set_all }));
 
-    const { aws_services, aws_glossary, coderTerms, unit_testing, js_advanced } = require('./programmer_experience');
+    const { aws_services, aws_glossary, coderTerms, unit_testing, js_advanced, best_practices } = require('./programmer_experience');
     decks.addDeck(new TermStorage(aws_glossary, "aws glossary", { is_active: set_all }));
     decks.addDeck(new TermStorage(aws_services, "aws services", { is_active: set_all }));
     decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: set_all }));
     decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: set_all }));
     decks.addDeck(new TermStorage(js_advanced, "js advanced", { is_active: set_all }));
+    decks.addDeck(new TermStorage(best_practices, "best practices", { is_active: set_all }));
 
 
     // Includes UX, system Design
@@ -72,7 +73,7 @@ async function populateMasterDeck() {
 
     const { pytorch_machine_learning_course, machine_learning_pandas_visualization, machine_learning_scikit_learn } = require('./ai_machine');
     decks.addDeck(new TermStorage(pytorch_machine_learning_course, "pytorch machine learning course", { is_active: set_all }));
-    decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas", { is_active: true }));
+    decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas", { is_active: set_all }));
     decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn", { is_active: set_all }));
 
     const {designing_good_charts, sql} = require('./data-science');

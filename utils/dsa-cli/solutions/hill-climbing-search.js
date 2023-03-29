@@ -42,11 +42,21 @@ class Graph {
         this.edges = {};
     }
 
+
     addEdge(node, neighbor) {
+
+        // Create a new entry for the node if it doesn't exist
         if (!this.edges[node.id]) {
             this.edges[node.id] = [];
         }
+
         this.edges[node.id].push(neighbor);
+        // Add the node to the neighbor's list of neighbors
+        if (!this.edges[neighbor.id]) {
+            this.edges[neighbor.id] = [];
+        }
+        this.edges[neighbor.id].push(node);
+
     }
 
     neighbors(node) {
@@ -97,6 +107,7 @@ class HillClimbingSearch {
             count_searches += 1;
             exploration_path.push(current);
 
+            // console.log('neighbors', graph);
             const neighbors = graph.neighbors(current);
             if (neighbors?.length === 0) {
                 break;
@@ -104,7 +115,9 @@ class HillClimbingSearch {
 
             let bestNext = null;
             let bestHeuristic = Infinity;
-            console.log("neighbors", neighbors)
+
+            // For debugging reasons:
+            console.log("neighbors", neighbors.map(node => { return { ...node, 'heuristic (distance)': heuristic(goal, node) } }));
             neighbors.forEach(next => {
                 if (!cameFrom.has(next)) {
                     const nextHeuristic = heuristic(goal, next);
@@ -115,7 +128,9 @@ class HillClimbingSearch {
                 }
             });
 
-            if (!bestNext || bestHeuristic >= heuristic(goal, current)) {
+            console.log("bestNext selected: ", bestNext)
+
+            if (!bestNext || bestHeuristic > heuristic(goal, current)) {
                 throw new Error('The algorithm got stuck and could not find a solution.');
             }
 
@@ -125,7 +140,7 @@ class HillClimbingSearch {
 
         return {
             path: reconstructPath(cameFrom, start, goal),
-            cost: null,
+            cost: reconstructPath(cameFrom, start, goal).reduce((acc, node) => acc + graph.cost(node, cameFrom.get(node)), 0),
             count_searches: count_searches,
             formatted_path: reconstructPath(cameFrom, start, goal).map(node => node.id).join(' -> '),
             exploration_path: exploration_path,

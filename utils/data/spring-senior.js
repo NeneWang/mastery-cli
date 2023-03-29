@@ -1056,7 +1056,7 @@ const artificialIntelligence_2 = [
     {
         term: "depth-first-search",
         prompt: "What is depth-first search in AI? And what algorithms use it? When in the real world you can use it?",
-        description: "Depth-first search (DFS) is an uninformed search algorithm that explores nodes in a tree or graph by visiting a node and recursively exploring its children before backtracking. DFS goes as deep as possible before backtracking, making it memory efficient but not always optimal or complete.",
+        description: "Depth-first search (DFS) is an uninformed search algorithm that explores nodes in a tree or graph by visiting a node and recursively exploring its children before backtracking. DFS goes as deep as possible before backtracking (Which menas it doesn't stop even after finding the goal), making it memory efficient but not always optimal or complete.",
         example: "Depth-first search can be used on its own or as a component of other algorithms, such as Iterative Deepening Depth-First Search (IDDFS).\n\
         Solving mazes, generating spanning trees for graphs, analyzing network connectivity, and searching for solutions in state - space problems are examples of real- world applications of depth - first search."
     },
@@ -1073,6 +1073,32 @@ const artificialIntelligence_2 = [
         description: "Beam search is an informed search algorithm that uses a heuristic function to guide the search towards the goal. It maintains a fixed-size 'beam' of the most promising nodes at each level of the search tree. Beam search explores only the best nodes, making it memory efficient but not always optimal or complete.",
         example: "Beam search can be used on its own or as a component of other algorithms.\n\
         Natural language processing(e.g., speech recognition, machine translation), solving large - scale optimization problems, and real - time decision making in resource - constrained environments are examples of real - world applications of beam search."
+    },
+    {
+        term: "hill-climbing",
+        prompt: "What is hill climbing in AI? And  what is the difference between hill climbing and greedy best-first search?",
+        description: "",
+    },
+    {
+        term: "adversarial-min-max-logic",
+        prompt: "What are the min and max logic in adversarial search with Prunging?",
+        example: "Maximizer: \n\
+        philosophy: if my children are greater than the top value then I don't need to explore\n\
+        Initializes with Alpha = -Inf\n\
+        for each child of the current node\n\
+        Alpha = max(Alpha, MinValue(child, Alpha, Beta))\n\
+        if Alpha >= Beta\n\
+        ---- return Alpha\n\
+        return Alpha\n\
+        \n\n\n\
+        Minimizer: \n\
+        philosophy: if my children are less than the top value then I don't need to explore\n\
+        Initializes with Beta = Inf\n\
+        for each child of the current node\n\
+        Beta = min(Beta, MaxValue(child, Alpha, Beta))\n\
+        if Alpha >= Beta | Prunes if Alpha returned is  \n\
+        ---- return Beta (Prune)\n\
+        return Beta"
     }
 ]
 
@@ -1172,7 +1198,7 @@ const algebra = [
         description: "log_10 (1000) = 3",
         attachment: "./img/2023-03-27-19-56-32.png",
         prompt: "What is the value of log_b^n (a^m)",
-        example: "n/n log_b(a)"
+        example: "n/m log_b(a)"
     },
     {
         term: "what is e?",

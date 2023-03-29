@@ -698,8 +698,53 @@ const js_advanced = [
     },
 ]
 
+const best_practices = [
+    {
+        term: "db | naming ",
+        prompt: "Create a Database Name for a user, ID from team member table (FK)",
+        example: "first_name | user_name \n\
+    team_member_id",
+        description: "\n\
+    1) Use snake_case for table names\n\
+    2) Use singular nouns for table names\n\
+    3) use _id for foreign keys\n\
+    4) if u suspect that 2 tables will have the same column, you can add somehting to make it unique"
+    },
+    {
+        term: "db | reserved words",
+        prompt: "you want to name a column 'user' in a table, what would you name it?",
+        example: "user_ => user is a reserved word",
+        description: "Here some reserved words: CHECK DEFAULT DESC FALSE IN IS LIKE NOT NULL TRUE USER, USER_SESSION"
+    },
+    {
+        term: "js | naming vars",
+        prompt: "How would you name a variable for calculation result of the price?\n\
+        use nouns for variable names: " + `names should be nouns that describe the value being stored. For example, "customerName" or "orderTotal".`,
+        example: "priceResult",
+        description: `Use camelCase: In JavaScript, it's standard to use camelCase for naming variables, functions, and methods. The first letter of the first word should be lowercase, and the first letter of each subsequent word should be capitalized. For example, "myVariable" or "calculateTotalPrice".`
+    },
+    {
+        term: "js | naming functions",
+        prompt: "How would you name a function for calculation result of the price?",
+        example: "calculateTotalPrice",
+        description: `Use camelCase: In JavaScript, it's standard to use camelCase for naming variables, functions, and methods. The first letter of the first word should be lowercase, and the first letter of each subsequent word should be capitalized. For example, "myVariable" or "calculateTotalPrice\n\
+        Use verbs for function names: Function names should be verbs that describe the action being taken. For example, "calculatePrice" or "validateInput".`
+    },
+    {
+        term: "js | naming classes",
+        prompt: "How would you name a class for price calculator?",
+        example: "PriceCalculator",
+        description: `Use PascalCase: In JavaScript, it's standard to use PascalCase for naming classes. The first letter of each word should be capitalized. For example, "PriceCalculator".`
+    },
+    {
+        term: "python | naming variables",
+        prompt: "How would you name a variable for calculation result of the price?",
+        example: "price_result",
+        description: `Use snake_case: Unlike JavaScript, Python uses snake_case for naming variables, functions, and methods. In snake_case, each word is separated by an underscore. For example, "my_variable" or "calculate_total_price".`
+    }
+]
 
 
-module.exports = { aws_glossary, aws_services, coderTerms, unit_testing, js_advanced };
+module.exports = { aws_glossary, aws_services, coderTerms, unit_testing, js_advanced, best_practices };
 
 

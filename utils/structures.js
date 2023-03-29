@@ -17,7 +17,7 @@ class Term {
         this.example = example;
 
         if (this.auto_newline) {
-            this.example = this.example.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
+            this.example = this.description.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
             this.description = this.description.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
         }
 
@@ -125,11 +125,11 @@ class TermStorage {
      */
     push(term) {
         // Check if term at least has a term and description
-        if (term?.term == null || term?.description == null) {
+        if (term?.term == null) {
 
             return;
         }
-        if (term.term == "" || term.description == "") {
+        if (term.term == "" ) {
             return;
         }
 
@@ -146,9 +146,6 @@ class TermStorage {
         const res = [];
         // Add own cards
         for (const term of this.terms) {
-            if (safeguard_bad_terms && (term.term == "")) {
-                continue;
-            }
 
             res.push(term)
         }
@@ -184,8 +181,6 @@ class TermStorage {
                 return newterm;
             }
         ));
-
-        // console.log(termsList);
 
 
         for (const deck of this.decks) {
