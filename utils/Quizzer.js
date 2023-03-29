@@ -17,7 +17,7 @@ const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
-const { show_image, user_requests_exit, user_requests_skip } = require('./utils_functions');
+const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked } = require('./utils_functions');
 const { TermScheduler } = require('./termScheduler');
 const { slice } = require('./cli');
 // const DEBUG = true
@@ -26,8 +26,6 @@ const DEBUG = false
 class Quizzer {
 
     constructor(qmathformulas, qmathenabled, masterDeck, alsoAskTerms = true) {
-
-        // TODO: Implement TermStorage Support from the getgo.
 
         const terms = []
         terms.push(...masterDeck.listTerms());
@@ -48,8 +46,13 @@ class Quizzer {
     getYoungest = async (potential_questions) => {
 
         try {
-
+            // Filter only if they have formula_name property
+            potential_questions = potential_questions.filter(x => x?.formula_name != undefined)
             const problem_names = potential_questions.map(x => x.formula_name)
+            // Filter only if they have formula_name property again?
+            // problem_names = potential_questions.filter(x => x.formula_name)
+
+
             // const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
             if (DEBUG) console.log("problem_names", problem_names)
             const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, problem_names);
@@ -207,7 +210,8 @@ class Quizzer {
 
 
         const askQuestionRandom = async ({ exitMethod = () => { } } = {}) => {
-            const askMath = constants.getRandomBool(); // If to whether ask for a math or terminology question
+            const askMath = constants.getRandomBool(0.1); // If to whether ask for a math or terminology question
+            // const askMath = false; //Too easy for now.
             if (askMath) {
                 return await this.ask_math_question({ exitMethod: exitMethod })
             } else {
@@ -246,7 +250,6 @@ class Quizzer {
         // Create a queue and store them all there. Try loading then if there is nothing to be loaded, just open it.
 
 
-        // TODO Preserving the sessions
         // If True ask if to continue previous session.
         // If want new session
 
@@ -269,6 +272,13 @@ class Quizzer {
         let exit = false;
 
 
+        /**
+         * Method called when a problem is unmounted, to be used to print the amount of cards left.
+         */
+        const printCardsLeft = (cardsLeft, cardsLearnt) => {
+            console.log(`\nCards left: ${cardsLeft} || Cards completed: ${cardsLearnt}\n`);
+        }
+
         const exitMethod = () => {
             exit = true;
             return false; //So it escapes the loop in case of perpetual until one is right
@@ -288,7 +298,6 @@ class Quizzer {
             // Somewhere here the duplication error occurs.
 
             const answered_correctly = await this.ask_term_question(card_to_ask, { exitMethod: exitMethod });
-
             // To here
 
 
@@ -300,6 +309,8 @@ class Quizzer {
             studyScheduler.solveCard(answered_correctly);
             await studyScheduler.saveCards();
 
+            printCardsLeft(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt());
+
             // console.log("solveCard");
             // showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt());
 
@@ -307,7 +318,7 @@ class Quizzer {
         }
     }
 
-    async pick_and_ask_term_question({ exitMethod = () => {} } = {}) {
+    async pick_and_ask_term_question({ exitMethod = () => { } } = {}) {
         // Fetches a random term form with the youngest one, unless there is no internet
 
         const term_selected = await this.pick_term_question();
@@ -316,7 +327,7 @@ class Quizzer {
 
     }
 
-    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { } } = {}) {
+    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { }}) {
         try {
             // Start running the question_attempt
             /**
@@ -355,7 +366,12 @@ class Quizzer {
                 const _ = await show_image(term_selected?.attachment, { is_url: term_selected.attachment_is_url });
             }
 
-            console.log(`${term_selected.description}\n`)
+
+
+            printMarked(term_selected?.description ?? "", { use_markdown: true });
+
+
+
             const question = new Input({
                 name: 'Term Question',
                 message: `${term_selected.prompt} (Ignore with "no")\n`,
@@ -364,6 +380,14 @@ class Quizzer {
             const user_res = await question.run();
 
             // Check for escape methods
+
+            if (user_requests_calc(user_res)) {
+                const { exec } = require('child_process');
+                exec(`start node`);
+                // Make the user lose one point for using the calculator.
+                return false;
+            }
+
             if (user_requests_exit(user_res)) {
                 exitMethod();
                 return false;
@@ -392,7 +416,6 @@ class Quizzer {
             }
 
 
-            // TODO Increase the value of the concept
             let ISANSWERCORRECT = true
             // Print the correct example term if exists
 
@@ -402,7 +425,7 @@ class Quizzer {
 
             if (ask_if_correct) {
                 console.log("Is your response acceptable?");
-                const is_correct = new Confirm("Is the response correct?", {initial: true});
+                const is_correct = new Confirm("Is the response correct?", { initial: true });
                 const response = await is_correct.run();
                 console.log("asnwered with ", response);
                 ISANSWERCORRECT = response;
@@ -418,6 +441,8 @@ class Quizzer {
             if (true) console.log(err)
             return false; // if in a session, this will skip the card because this is improperly made.
         }
+
+
     }
 
 
@@ -427,7 +452,8 @@ class Quizzer {
      */
     printExample = async (term_selected) => {
         if (term_selected?.example ?? false) {
-            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')} ${term_selected.example}`);
+            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse('Correct Example: ')}`);
+            printMarked(term_selected?.example ?? "", { use_markdown: true });
         }
     }
 
@@ -494,7 +520,8 @@ class Quizzer {
 
     }
 
-    async ask_math_question({ exitMethod = () => { } }) {
+    async ask_math_question({ exitMethod = () => { } } = {}) {
+
 
         const question_form = await this.pick_math_question();
         try {
@@ -529,6 +556,14 @@ class Quizzer {
                 if (user_requests_exit(res)) {
                     exitMethod();
                     return false;
+                }
+
+
+                if (user_requests_calc(res)) {
+                    const { exec } = require('child_process');
+                    exec(`start node`);
+                    i -= 1;
+                    continue;
                 }
 
                 if (res == question_prompt.expectedAnswer) {

@@ -1,7 +1,7 @@
 ---
 title: Hello World
 description: A simple hello world example
-tags: [ neetcode, sample]
+tags: [ neetcode, sample, easy]
 ---
 
 This is  a simple hello world example.

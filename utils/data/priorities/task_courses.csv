@@ -1,20 +1,25 @@
-feature_id;priority;difficulty;status;dependency;overall_score;mission_comments;description;coefficient
-ubuntu-linux-fundamentals;9;3;DOING;;;;;6
-complete-flutter-dev;8;5;;;;;;3
-pytorch;7;5;;;;;;2
-salesforce-dev;9;5;;;;;;4
-selenium-docker-jenkins;8;5;;;;;;3
-data-engineering-aws;9;6;;;;;;3
-ultimate-aws-certified-developer;9;6;;;;;;3
-js-advanced-concepts;10;6;;;;;;4
-design-patterns-python;10;7;;;;;;3
-math-for-data-science;8;5;;;;;;3
-flutter-web;7;5;;;;;;2
-react-socket;8;5;;;;;;3
-react-pro;10;7;;;;;;3
-typescript-chrome-extension;8;6;;;;;;2
-excel-macros;6;3;;;;;;3
-unreal-engine-5-multiplayer;5;7;;;;;;-2
-generative-ai;8;7;;;;;;1
-;;;;;;;;0
-;;;;;;;;0
+feature_id;priority;difficulty;status;coefficient;mission_comments;description
+ubuntu-linux-fundamentals;11;3;DONE;8;I loved it, learnt a lot. This algorithm works;
+artificial-intelligence-ai;11;6;ABORTED;5;asThe probelm with this is that it doesnt match my work. I believe this could be unethical? => Althought it improves my skill into getting into Research papers and understanding of numbers.;
+salesforce-dev;9;5;;4;;
+js-advanced-concepts;10;6;HALTED;4;;
+complete-flutter-dev;8;5;;3;;
+selenium-docker-jenkins;8;5;;3;;
+data-engineering-aws;9;6;;3;;
+ultimate-aws-certified-developer;9;6;;3;;
+design-patterns-python;10;7;;3;;
+math-for-data-science;8;5;;3;;
+react-socket;8;5;;3;;
+excel-macros;6;3;;3;;
+pytorch;7;5;;2;;
+flutter-web;7;5;;2;;
+react-pro;9;5;;4;;
+typescript-chrome-extension;8;6;;2;;
+aws-cloudformation;10;6;;4;I dont think it will be that hard considering how small the course is.;
+generative-ai;8;7;;1;;
+unreal-engine-5-multiplayer;5;7;;-2;;
+;;;;0;;
+;;;;0;;
+;;;;0;;
+;;;;0;;
+;;;;0;;

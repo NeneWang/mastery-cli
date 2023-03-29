@@ -10,7 +10,6 @@ const aws_glossary = [
         term: 'access key rotation',
         description: 'A method to increase security by changing the AWS access key ID. You can use this method to retire an old key at your discretion.',
         prompt: 'Define it | Use it on a sentence'
-
     }
 ];
 
@@ -114,13 +113,26 @@ const aws_services = [
     {
         term: "Cloud Formation Cloud", prompt: "What happens when you delete a stack?\n\
          What happens when you update a stack",
-         description: "Stack Actions Creaate Change set for current Stack -> Upload File, calculate and then makes the changes\n\
+        description: "Stack Actions Creaate Change set for current Stack -> Upload File, calculate and then makes the changes\n\
          Deleting the stack will also delete the resources created."
     },
     {
         term: "SHA-1 vs SHA-256", prompt: "Whats the difference? And when to use one vs the other?",
         description: "SHA-1 and SHA-256 are both cryptographic hash functions that are widely used for securing data. However, SHA-1 is an older algorithm and has known vulnerabilities, while SHA-256 is a more modern algorithm that is considered to be more secure.  Here are some of the key pros and cons of each algorithm:  SHA-1:  Pros:      SHA-1 is a widely supported and well-established hash function.     It is faster than SHA-256.     It has a smaller output size (160 bits), which can be useful in certain contexts.  Cons:      SHA-1 is no longer considered to be secure for cryptographic purposes, due to known vulnerabilities.     It is vulnerable to collision attacks, which means that it is possible for an attacker to create two different inputs that hash to the same value.     It is no longer recommended for use by major security organizations, such as NIST and the NSA.  SHA-256:  Pros:      SHA-256 is a more modern hash function and is considered to be more secure than SHA-1.     It is resistant to collision attacks and other forms of cryptographic attacks.     It has a larger output size (256 bits), which makes it more difficult to brute force.  Cons:      SHA-256 is slower than SHA-1.     It has a larger output size, which can be less efficient in certain contexts.     It may not be compatible with older software and systems that only support SHA-1.  Overall, while SHA-1 may have some advantages in terms of speed and output size, its known vulnerabilities make it unsuitable for modern cryptographic applications. SHA-256, on the other hand, is a more secure algorithm and is the recommended choice for most applications.",
         prompt: "When to use SHA-1:      Compatibility: If you are working with older software or systems that only support SHA-1, then it may be more convenient to use SHA-1.     Performance: If you are working with large datasets and need to process data quickly, then SHA-1 may be a better choice since it is faster than SHA-256.     Output size: If you need a smaller output size for your hash function, then SHA-1's 160-bit output may be more convenient.  When to use SHA-256:      Security: If security is your primary concern, then SHA-256 is the more secure choice. It is resistant to collision attacks and other forms of cryptographic attacks, and is recommended by major security organizations such as NIST and the NSA.     Brute force resistance: If you need a hash function that is resistant to brute force attacks, then SHA-256's larger output size makes it more difficult to crack than SHA-1.     Future-proofing: Since SHA-1 is no longer considered to be secure, using SHA-256 ensures that your system will remain secure and up-to-date with current cryptographic standards.  In general, if security is your primary concern, then SHA-256 is the better choice. However, if compatibility or performance is more important for your specific use case, then SHA-1 may be more convenient. Nelson Wang how much faster sha1 is in percentage  The speed difference between SHA-1 and SHA-256 can depend on a variety of factors, such as the hardware used, the size of the input data, and the specific implementation of the hash function. In general, SHA-1 is faster than SHA-256, but the difference in speed may not be significant for small datasets.  In terms of specific numbers, it is difficult to give an exact percentage for the speed difference between SHA-1 and SHA-256, as it can vary depending on the specific use case. However, some benchmarks have shown that SHA-1 can be up to 20-30% faster than SHA-256 for small to medium-sized datasets. For larger datasets, the speed difference may become less noticeable, as the time required to hash the data can become dominated by other factors such as I/O and memory access.  It is important to note, however, that while SHA-1 may be faster than SHA-256, its known vulnerabilities make it unsuitable for modern cryptographic applications. For most applications, the improved security provided by SHA-256 is worth the small speed penalty. "
+    },
+    {
+        term: "installing-latest-pip", prompt: "How do you install the latest pyspark that starts with 2.4?",
+        description: "*",
+        answer: "pip install pyspark==2.4.*"
+    },
+    {
+        term: "sys argv",
+        prompt: "Use sys.argv to print the first argument passed to the script.",
+        answer: "import sys\n\
+        \n\
+        print(sys.argv[0]) # prints app.py,The filename\n\
+        print(sys.argv[1]) # prints the first argument"
     }
 ]
 
@@ -167,8 +179,187 @@ const coderTerms = [
         example: "Java can be considered both a compiled and an interpreted language because its source code is first compiled into a binary byte-code. This byte-code runs on the Java Virtual Machine (JVM), which is usually a software-based interpreter.\n\
         Java is a statically typed and compiled language, and Python is a dynamically typed and interpreted language. This single difference makes Java faster at runtime and easier to debug, but Python is easier to use and easier to read."
     },
-    
-    { term: "Concurrent Computing", example: "yes", description: "In concurrent computing, multiple calculations are made within overlapping time frames. It takes advantage of the concept that multiple threads or processes can make progress on a task without waiting for others to complete. This general approach to writing and executing computer programs is called concurrency.  Concurrent computing is different than synchronous (sequential) computing, where calculations are made one after the other, with each waiting for the previous to complete. It's not the same as parallel computing, where calculations are made simultaneously on separate processors.  The three main types of concurrent computing are threading, asynchrony, and preemptive multitasking. Each method has its own special precautions which must be taken to prevent race conditions, where multiple threads or processes access the same shared data in memory in improper order.", prompt: "Whats the difference between different concurrent computing types?" },
+    { term: "Concurrent Computing", example: "yes", description: "In concurrent computing, multiple calculations are made within overlapping time frames. It takes advantage of the concept that multiple threads or processes can make progress on a task without waiting for others to complete. This general approach to writing and executing computer programs is called concurrency.  Concurrent computing is different than synchronous (sequential) computing, where calculations are made one after the other, with each waiting for the previous to complete. It's not the same as parallel computing, where calculations are made simultaneously on separate processors.  The three main types of concurrent computing are threading, asynchrony, and preemptive multitasking. Each method has its own special precautions which must be taken to prevent race conditions, where multiple threads or processes access the same shared data in memory in improper order.", prompt: "Whats the difference between different concurrent computing types?" }, ,
+    {
+        term: "Create Dynamic Frame from Catalog", prompt: "Create a dynamic frame from a catalog in Glue using table database being p_db, and table name is customers and then print it",
+        example: "dyf = glueContext.create_dynamic_frame.from_catalog(database='p_db', table_name='customers')\n\
+        dyf.printSchema()",
+        description: "glue_Context is the , create_dynamic_frame: Creates a dynamic frame from, from_catalog: Creates a dynamic frame from a catalog table, from_options: Creates a dynamic frame from a data source using the specified options, from_jdbc_conf: Creates a dynamic frame from a JDBC connection using the specified options, from_jdbc_ddl_conf: Creates a dynamic frame from a JDBC connection using the specified options, from_jdbc_options: Creates a dynamic frame from a JDBC connection using the specified opti\n\
+        printSchema: Prints the schema of the dynamic frame."
+    },
+
+    // Pyspark basic commands.
+    {
+        term: "Pyspark | convert-display-df",
+        prompt: "Convert a dynamic frame to a data frame and then display it",
+        example: "df = dyf.toDF()\ndisplay(df)",
+        description: "toDF: Converts a dynamic frame to a data frame, display: Displays the content of a data frame"
+    },
+    {
+        term: "Pyspark | select_fields_and_show",
+        prompt: "Select the fields first_name, email from the dynamic frame dyf and then show the first 5 rows",
+        example: "dyf.select_fields(['first_name', 'email']).show(5)",
+        description: "select_fields: Selects the specified fields from the dynamic frame, show: Displays the content of a data frame"
+    },
+    {
+        term: "Pyspark | renaming-columns",
+        prompt: "Rename the columns first_name to first and last_name to last",
+        example: "dyf = dyf.rename_field('first_name', 'first')\ndyf = dyf.rename_field('last_name', 'last')",
+        description: "rename_field: Renames a field in the dynamic frame"
+    },
+    {
+        term: "Pyspark | drop_columns",
+        prompt: "Drop the columns first and last from dyf",
+        example: "dyf = dyf.drop_fields(['first', 'last'])",
+        description: "drop_fields: Drops the specified fields from the dynamic frame"
+    },
+    {
+        term: "Pyspark | apply mapping",
+        prompt: "Apply the mapping to the dynamic frame dyf where you convert fullname into name, both as string types",
+        example: "mapping = [('fullname', 'string', 'name', 'string')]\n\
+        dyf = dyf.apply_mapping(mapping)",
+        description: "apply_mapping: Applies a mapping to the dynamic frame"
+    },
+    {
+        term: "Pyspark | filter",
+        prompt: "Filter the dynamic frame dyf where the name is equal to John",
+        example: "dyf = dyf.filter(lambda x: x['name'] == 'John')",
+        description: "filter: Filters the dynamic frame"
+    },
+    {
+        term: "Pyspark | join",
+        prompt: "Join the dynamic frame dyf with the dynamic frame dyf2 on the key name",
+        example: "dyf = dyf.join(dyf2, keys=['name'])",
+        description: "join: Joins the dynamic frame with another dynamic frame"
+    },
+    {
+        term: "Pyspark | write dynamic frame",
+        prompt: "Write the dynamic frame dyf to a table in the database p_db with the table name customers",
+        example: "glueContext.write_dynamic_frame.from_options(frame = dyf, connection_type = \"s3\", connection_options = {\"path\": \"s3://pyspark-dyf/\"}, format = \"parquet\", transformation_ctx = \"datasink4\")",
+        description: "write_dynamic_frame: Writes a dynamic frame to a data source using the specified options"
+    },
+    {
+        term: "Pyspark | write dynamic frame to Spark Dataframe",
+        prompt: "Write the dynamic frame dyf to a Spark Dataframe",
+        example: "df = dyf.toDF()",
+        description: "toDF: Converts a dynamic frame to a data frame"
+    },
+    {
+        term: "Pyspark | Selct columns in Spark Dataframe",
+        prompt: "Select the columns first_name and last_name from the Spark Dataframe df",
+        example: "df = df.select('first_name', 'last_name')",
+        description: "select: Selects a set of column expressions"
+    },
+    {
+        term: "Pyspark | Columns in a Spark Dataframe",
+        prompt: "Show the columns in the Spark Dataframe df",
+        example: "df.columns",
+        description: "columns: Returns all column names as a list"
+    },
+    {
+        term: "Pyspark | Add a column to a Spark Dataframe",
+        prompt: "Add a column called full_name to the Spark Dataframe df",
+        example: "df = df.withColumn('full_name', concat(df.first_name, lit(' '), df.last_name))",
+        description: "withColumn: Returns a new DataFrame by adding a column or replacing the existing column that has the same name"
+    },
+    {
+        term: "Pyspark | Drop a column from a Spark Dataframe",
+        prompt: "Drop the column full_name from the Spark Dataframe df",
+        example: "df = df.drop('full_name')",
+        description: "drop: Returns a new DataFrame omitting the specified column"
+    },
+    {
+        term: "Pyspark | Rename a column in a Spark Dataframe",
+        prompt: "Rename the column full_name to fullname in the Spark Dataframe df",
+        example: "df = df.withColumnRenamed('full_name', 'fullname')",
+        description: "withColumnRenamed: Returns a new DataFrame by renaming an existing column"
+    },
+    {
+        term: "Pyspark | Groupby in a Spark Dataframe",
+        prompt: "Group the Spark Dataframe df by the column first_name and show the count",
+        example: "df.groupBy('first_name').count().show()",
+        description: "groupBy: Groups the DataFrame using the specified columns, so we can run aggregation on them"
+    },
+    {
+        term: "Pyspark | Filter in a Spark Dataframe",
+        prompt: "Filter the Spark Dataframe df where the first_name is equal to John",
+        example: "df.filter(df.first_name == 'John').show()",
+        description: "filter: Filters rows using the given condition"
+    },
+    {
+        term: "Pyspark | Sort in a Spark Dataframe",
+        prompt: "Sort the Spark Dataframe df by the column first_name",
+        example: "df.sort('first_name').show()",
+        description: "sort: Returns a new DataFrame sorted by the specified column(s)"
+    },
+    {
+        term: "Pyspark | Join in a Spark Dataframe",
+        prompt: "Join the Spark Dataframe df with the Spark Dataframe df2 on the column first_name",
+        example: "df.join(df2, df.first_name == df2.first_name).show()",
+        description: "join: Joins with another DataFrame, using the given join expression"
+    },
+    {
+        term: "Pyspark | Sum",
+        prompt: "Sum the column amount in the Spark Dataframe df",
+        example: "df.select(sum('amount')).show()",
+        description: "sum: Aggregate function: returns the sum of all values in the expression"
+    },
+    {
+        term: "Pyspark | Create a Spark Session",
+        prompt: "Create a Spark Session",
+        example: "from pyspark.sql import SparkSession",
+        description: "SparkSession is the entry point to programming Spark with the Dataset and DataFrame API"
+    },
+    // Useful Definitions for Kinesis.
+    {
+        term: "Data Record",
+        prompt: "What is a data record? Where can you find it?",
+        example: "A data record is a unit of data stored in a Kinesis data stream. Each data record consists of a sequence number, a partition key, and a data blob.\n\
+        You can find it in the Kinesis console, in the Data tab of the stream.",
+        description: "A data record is a unit of data stored in a Kinesis data stream. Each data record consists of a sequence number, a partition key, and a data blob."
+    },
+    {
+        term: "Shard",
+        prompt: "What is a shard? Where can you find it?",
+        example: "A shard is a uniquely identified group of data records in a Kinesis data stream. Each shard is composed of a hash key range and an associated sequence number range.\n\
+        You can find it in the Kinesis console, in the Data tab of the stream.",
+        description: "A shard is a uniquely identified group of data records in a Kinesis data stream. Each shard is composed of a hash key range and an associated sequence number range."
+    },
+    {
+        term: "Shard Iterator",
+        prompt: "What is a shard iterator? Where can you find it?",
+        example: "A shard iterator is a pointer to the data record in a shard from which to start reading data records sequentially. The position is specified by the sequence number of a data record in the shard.\n\
+        You can find it in the Kinesis console, in the Data tab of the stream.",
+        description: "A shard iterator is a pointer to the data record in a shard from which to start reading data records sequentially. The position is specified by the sequence number of a data record in the shard."
+    },
+    {
+        term: "A Partition Key",
+        prompt: "What is a partition key? Where can you find it?",
+        example: "A Partition key is used to group data by  shard within a stream. Kinesis Data Streams segregates the data records that belong to a data stream into multiple shards, using the partition key associated with each data record to determine which shard a given data record belongs to.\n\
+        You can find it in the Kinesis console, in the Data tab of the stream.",
+        description: "A Partition key is used to group data by  shard within a stream. Kinesis Data Streams segregates the data records that belong to a data stream into multiple shards, using the partition key associated with each data record to determine which shard a given data record belongs to."
+    },
+    {
+        term: "Sequence Number",
+        prompt: "What is a sequence number in the context of data records? Where can you find it?",
+        example: "A sequence number is a unique identifier assigned to each data record in a Kinesis data stream. The sequence number is assigned by Kinesis when a data record is added to a stream, and is used to ensure that data records are processed in the correct order.\n\
+        You can find it in the Kinesis console, in the Data tab of the stream.",
+        description: "A sequence number is a unique identifier assigned to each data record in a Kinesis data stream. The sequence number is assigned by Kinesis when a data record is added to a stream, and is used to ensure that data records are processed in the correct order."
+    },
+    {
+        term: "Producer",
+        prompt: "What is a producer in the context of Kinesis data streams? Where can you find it?",
+        example: "A producer is an application that writes data records to a Kinesis data stream. The producer can be any application or service that can make API calls to Amazon Kinesis.\n\
+        You can find it in the documentation for the Kinesis API, or in the AWS Management Console when configuring Kinesis data stream permissions.",
+        description: "A producer is an application that writes data records to a Kinesis data stream. The producer can be any application or service that can make API calls to Amazon Kinesis."
+    },
+    {
+        term: "Consumer",
+        prompt: "What is a consumer in the context of Kinesis data streams? Where can you find it?",
+        example: "A consumer is an application that reads data records from a Kinesis data stream. The consumer can be any application or service that can make API calls to Amazon Kinesis, and can process the data records in real time or in batches.\n\
+        You can find it in the documentation for the Kinesis API, or in the AWS Management Console when configuring Kinesis data stream permissions.",
+        description: "A consumer is an application that reads data records from a Kinesis data stream. The consumer can be any application or service that can make API calls to Amazon Kinesis, and can process the data records in real time or in batches."
+    }
 ]
 
 
@@ -279,15 +470,281 @@ const unit_testing = [
         description: "Spy: Spies are used for creating partial or half mock objects. Like mock, spies are also used in large test suites., \n When using spy objects, the default behavior of the methods (when not stubbed) is the real method behavior\n\n\
         Mock: Mocks are used to create fully mock or dummy objects. It is mainly used in large test suites.\n\
         When using mock objects, the default behavior of methods (when not stubbed) is do nothing (performs nothing.) "
-    }
-
-
-
+    },
 
 ]
 
+const js_advanced = [
+    {
+        term: "Difference JIT, Interpreter, Compiler",
+        prompt: "What is the difference between JIT, Interpreter, Compiler?",
+        example: "Definition: JIT is a type of compiler that compiles code at runtime, dynamically optimizing it for better performance. Interpreters are programs that read and execute code directly, without first converting it to machine code. Compilers are programs that translate source code into machine code ahead of time.  Compilation: JIT compilers compile code at runtime, as it is executed, and can dynamically optimize the code based on the runtime conditions. Interpreters execute code line-by-line as it is read, without compilation, which can make them slower than compiled code. Compilers translate source code into machine code ahead of time, resulting in faster code execution, but at the cost of longer startup times and reduced portability.  Memory usage: JIT compilers can use more memory than interpreters because they need to store the compiled code and any additional data structures used for optimization. Interpreters can use less memory than compilers because they don't need to store compiled machine code. Compiled code can use less memory than interpreted code because it doesn't need to store the original source code.  Performance: JIT compilation can provide significant performance benefits by dynamically optimizing code at runtime. Interpreted code can be slower than compiled code because it needs to be interpreted line-by-line at runtime. Compiled code is generally faster than interpreted code because it doesn't need to be interpreted at runtime, and can use more aggressive optimization techniques.  Portability: JIT compilation can enable code to be written in a high-level language and still run efficiently on different platforms. Interpreted code can be more portable than compiled code because it doesn't need to be compiled for a specific platform. Compiled code can be less portable than interpreted code because it needs to be compiled for a specific platform, which can limit its ability to run on different platforms without modification."
+    },
+    {
+        term: "inline caching",
+        prompt: "What is inline caching? and how can you create code so that it can be cached?",
+        example: "Inline caching happens when a method is re-called, then js engine will check if the object is the same as the previous one, if so, it will use the cached version of the method, if not, it will create a new cache for the new object. \n\ "
+    },
+    {
+        term: "Hoisting",
+        prompt: "What is hoisting? ",
+        example: "Hoisting is the process of moving all the declarations to the top of the scope before code execution.\n\
+        function example() {\n\
+            console.log(x); // undefined\n\
+            console.log(y); // ReferenceError: y is not defined\n\
+            \n\
+            var x = 1;\n\
+            let y = 2;\n\
+          }\n\
+          \n\
+          In this example, the var x = 1; declaration is hoisted to the top of the function scope, so console.log(x); outputs undefined. The let y = 2;\n\
+          declaration, however, is not hoisted, so console.log(y);\n\
+          throws a ReferenceError because y has not been declared yet."
+    },
+    {
+        term: "var and let",
+        prompt: "What is the difference between var and let?",
+        example: "The difference between var and let is in their scoping behavior. var declarations are function-scoped, meaning that the variable is only accessible within the function in which it was declared or in the global scope if it is not declared within a function. let, on the other hand, is block-scoped, meaning that the variable is only accessible within the block in which it was declared (including nested blocks) and is not accessible outside of that block.",
+        description: "function varScoping() {\tvar x = 1;\n\tif (true) {\t\tvar x = 2;\t\tconsole.log(x);\t}\n\tconsole.log(x);\n}\n\nfunction letScoping() {\tlet x = 1;\n\tif (true) {\t\tlet x = 2;\t\tconsole.log(x);\t}\n\tconsole.log(x);\n}\n\n\
+        unction varAndLetScoping() {\tvar x = 1;\n\tif (true) {\t\tlet x = 2;\t\tconsole.log(x);\t}\n\tconsole.log(x);\n}"
+    },
+    {
+        term: "Memory Leaks in JS",
+        prompt: "How do memory leaks occur in JavaScript?",
+        example: "Memory leaks in JavaScript occur when there is a build-up of unreferenced objects in memory. This can happen when objects are created but not properly released from memory, or when circular references between objects prevent the garbage collector from removing them."
+    },
+    {
+        term: "Garbage Collection in JS",
+        prompt: "How is garbage collection implemented in JavaScript?",
+        example: "Garbage collection in JavaScript is automatic and performed by the JavaScript engine. The engine periodically checks the memory heap to identify objects that are no longer referenced and can be safely removed. The garbage collector works by tracing the references between objects and removing any objects that are no longer reachable."
+    },
+    {
+        term: "Event Loop in JavaScript",
+        prompt: "What is the event loop in JavaScript?",
+        example: "The event loop in JavaScript is a mechanism that continuously checks the call stack and the callback queue. If the call stack is empty, the event loop takes the next function from the callback queue and adds it to the call stack, where it will be executed. This allows asynchronous functions to be executed in a non-blocking way, without freezing the main thread."
+    },
+    {
+        term: "parallelism-vs-concurrency",
+        prompt: "What is the difference between parallelism and concurrency?",
+        example: "Concurrency is about multiple tasks which start, run, and complete in overlapping time periods, in no specific order. Parallelism is about multiple tasks or subtasks of the same task that literally run at the same time on a hardware with multiple computing resources like multi-core processor."
+    },
+    {
+        term: "promise-vs-callback",
+        prompt: "What is the difference between a promise and a callback?",
+        example: "The main difference between a promise and a callback is that a callback is a function that is passed as an argument to another function, while a promise is an object that represents the eventual completion or failure of an asynchronous operation. Promises are more flexible than callbacks because they can be chained, which allows them to be used to handle asynchronous operations that depend on the result of a previous operation. Promises also provide a way to handle errors that occur in asynchronous operations, which is not possible with callbacks.\n\
+        The benefit of Callback:      You can run another function call after waiting for the outcome of a prior function call.     You can call the parent function from the child function and can also pass data from child to parent.\n\
+        A Promise has four states:       fulfilled: Action related to the promise succeeded     rejected: Action related to the promise failed     pending: Promise is still pending i.e. not fulfilled or rejected yet     settled: Promise has fulfilled or rejected\n\
+        Benefits of Promises:      Improves Code Readability     Better handling of asynchronous operations     Better flow of control definition in asynchronous logic     Better Error Handling"
+    },
+    {
+        term: "multithreadig-vs-multitasking",
+        prompt: "What is the difference between multithreading and multitasking?",
+        example: "Multitasking: Multitasking is when a CPU is provided to execute multiple tasks at a time. Multitasking involves often CPU switching between the tasks, so that users can collaborate with each program together. Unlike multithreading, In multitasking, the processes share separate memory and resources. As multitasking involves CPU switching between the tasks rapidly, So the little time is needed in order to switch from the one user to next. "
+    },
+    {
+        term: "hoisting methods",
+        prompt: "What will the following print?",
+        description: "sing();\nsing2();\nvar sing = function() { console.log(\"uhhhh la la la\"); }; function sing2() { console.log(\"ohhhh la la la\"); }",
+        example: "\nundefined\nohhhh la la la"
+    },
+    {
+        term: "Function hoist function",
+        prompt: "What will the following print?",
+        description: "function one() { console.log('1', isValid); var isValid = true; two(); console.log('2', isValid); }\n\nfunction two() { console.log('3', isValid); var isValid; console.log('4', isValid); }\n\nfunction three(){ console.log('5', isValid); }\n\nvar isValid = false;\n\none();\nthree();",
+        example: "1 undefined \n3 undefined \n4 undefined \n2 true \n5 false"
+    },
+    {
+        term: "Weird global strategy",
+        prompt: "What will the following print?",
+        description: "function weird() {\n\theight = 50;\n\treturn height;\n}\n\nconsole.log(weird());\n\
+        console.log(height);",
+        example: "50, 50 => js is weird and it will create a global variable"
+    },
+    {
+        term: "Function enclosure",
+        prompt: "What will the following print?",
+        description: "var heyhey = function doodle() {\n // code here\n};\n\nheyhey();\n// doodle is not accessible outside its scope\n// this will result in a ReferenceError\ndoodle();",
+        example: "It will throw an error because doodle is not accessible outside its scope"
+    },
+    {
+        term: "IIFE",
+        prompt: "What is IIFE?, Why would you use it? What will this print?",
+        description: "(function() {\n var a = 'Hello';\n})();\n\nconsole.log(a);",
+        example: "Immediately Invoked Function Expression, \n\
+        is a module scope was implemented just above the function scope. This allowed variables to be shared, by exporting and importing, between the functions without having to go through the global scope.\n\
+        =>  Undefined, a would be encapsulated into the anonymous function."
+    },
+    {
+        term: "This",
+        prompt: "What does this officially print?",
+        description: "var person = {\n\tfirstName: \"John\",\n\tlastName : \"Doe\",\n\tid     : 5566,\n\tmyFunction : function() {\n\t\treturn this;\n\t}\n};\n\nconsole.log(person.myFunction());",
+        example: "This is the object that the function is a property of\n In this case it will print: {firstName: \"John\", lastName : \"Doe\", id     : 5566, myFunction : function() { return this; }}"
+    },
+    {
+        term: "call",
+        description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
+        prompt: "Use Call to steal Wizard's healing and use it into archer for 50 and 60'",
+        example: "wizard.heal.call(archer, 50, 60);"
+
+    },
+    {
+        term: "apply",
+        description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
+        prompt: "Use apply to steal Wizard's healing and use it into archer for 20 and 30'",
+        example: "wizard.heal.apply(archer, [20, 30]);"
+
+    },
+    {
+        term: "bind",
+        description: "const wizard = {\n\tname: \"Merlin\",\n\thealth: 100,\n\theal(num1, num2) {\n\t\treturn (this.health += num1 + num2);\n\t}\n};\n\nconst archer = {\n\tname: \"Robin Hood\",\n\thealth: 30\n};",
+        prompt: "Use  bind to steal Wizard's healing and use it into archer for 50 and 60'",
+        example: "const healArcher = wizard.heal.bind(archer, 50, 60); \n healArcher();"
+    },
+    {
+        term: "context vs scope",
+        prompt: "What is the difference between context and scope? When you declare an variable of inside an object are you creating the context or the scope?",
+        example: "Context is the object that the function is a property of. Scope is the variable environment of the execution context, which consists of any local variables that were in-scope at the time the execution context was created.\n\n\
+        When you declare a variable inside an object, you are creating a new variable in the object's scope. This means that the variable is accessible within the object, but not outside of it. However, the context of the variable depends on how it is accessed. If you access the variable using the object's name, the context will be the object itself. If you access the variable using a reference to the object's method or a callback function, the context may be different."
+    },
+    {
+        term: "typeof",
+        prompt: "What will the following print?",
+        description: "typeof 5\ntypeof '5'\ntypeof true\ntypeof undefined\ntypeof null\ntypeof {}\ntypeof []\ntypeof function(){}",
+        example: "number\nstring\nboolean\nundefined\nobject\nobject\nfunction => However in reality is actually an object"
+    },
+    {
+        term: "weird functions behaviour on types",
+        prompt: "What will the following print?",
+        description: "function a() {}\na.hi = 'hi'\nconsole.log(a.hi)",
+        example: "hi ==> functions are objects"
+    },
+    {
+        term: "weird functions behaviour on types 2",
+        prompt: "What will the following print?",
+        description: "true.toString()\ntypeof Infinity",
+        example: "true\nnumber"
+    },
+    {
+        term: "Rename variables in Vim",
+        prompt: "How would you rename a variable in Vim?",
+        example: ":%s/old/new/g | cgn new_name + escape + . (for each)"
+    },
+    {
+        term: "Move lines in Vim",
+        prompt: "How would you move a line in Vim?",
+        example: ":m +1 (move down)\n:m -1 (move up)"
+    },
+    {
+        term: "Create clone of arr",
+        prompt: "How would you create a clone of an array? Name the clone, `clone`",
+        description: "const arr = [1, 2, 3];",
+        example: "const clone = [...arr]; | const clone = arr.slice(); | const clone = arr.concat();"
+    },
+    {
+        term: "Create clone of obj",
+        prompt: "How would you create a clone of an object? Name the clone, `clone`",
+        description: "const obj = { a: 1, b: 2, c: 3 };",
+        example: "const clone = { ...obj }; | const clone = Object.assign({}, obj);"
+    },
+    // TELL to chatgpt: Convert the following into a one line markdown format with :m at the start and surroudn it with "" e.g. function marry(person1, person2){ console.log(arguments); console.log(Array.from(arguments)); return ${person1} is now married to ${person2}; }\n\nmarry('Tim', 'Tina'); to ":m\n\ ```js\n\         function marry(person1, person2) {\n\  \tconsole.log(arguments);\n\  \tconsole.log(Array.from(arguments));\n\  \treturn `${person1} is now married to ${person2}`;\n\  \  marry('Tim', 'Tina');\}\n\```""
+    {
+        term: "function arguments - marry",
+        prompt: "What will the following print?",
+        description: ":m\n\
+        ```js\n\
+        function marry(person1, person2) {\n\
+        \t\tconsole.log(arguments);\n\
+        \t\tconsole.log(Array.from(arguments));\n\
+        \t\treturn `${person1} is now married to ${person2}`;\n\
+        \n\
+            marry('Tim', 'Tina');\
+            }\n\
+          ```",
+        example: "Arguments(2)['Tim', 'Tina', callee: ƒ, Symbol(Symbol.iterator): ƒ]\n\
+        (2) [\"Tim\", \"Tina\"]\n\
+        Tim is now married to Tina"
+    },
+    {
+        term: "Methods redefinitions",
+        prompt: "What will the following print?",
+        description: ":m```js\na();\n\nfunction a() {\n console.log('hi');\n}\n\na();\n\nfunction b() {\n console.log('Bye!');\n}\n\na();\n\n```",
+        example: "Bye!\n\
+        Bye!\n\
+        Bye!"
+    },
+    // CHATGPT: Convert into a single line with \n and \t when it should, assume is in a string:
+    {
+        term: "Deep Clonning",
+        prompt: "How would you deep clone an object?",
+        description: ":m\n\
+        This will create a shallow clone\n\
+        ```js\n\
+        let output = let obj = {a: 'a', b: 'b', c: {\n\tdeep: 'try and copy me'\n}};\nlet clone = Object.assign({}, obj);\nlet clone2 = {...obj}; // ES6\n\nobj.c.deep = 'hahaha';\nconsole.log(clone); // {a: 'a', b: 'b', c: {deep: 'hahaha'}}\nconsole.log(clone2); // {a: 'a', b: 'b', c: {deep: 'hahaha'}};\
+        console.log(output);\
+        ```\
+        ",
+        example: "let superClone = JSON.parse(JSON.stringify(obj));"
+    },
+    {
+        term: "static-vs-dynamic typed",
+        prompt: "Name example of  (1) static typed: are checked during the compile stage, so all types are known before run-time,\n\
+        (2) dynamic language: are checked on the fly, during the execution stage.\n\
+        (3) weakly typed: languages can make type coercions implicitly.\n\
+        (4) strongly typed: do not allow conversions between unrelated types.",
+        example: "1) Java, C, C++, C#\n\
+        2) Python, PHP, Ruby, Perl JavaScript\n\
+        3) JavaScript, PHP, C, C++\n\
+        4) Java, C#, Python"
+    },
+]
+
+const best_practices = [
+    {
+        term: "db | naming ",
+        prompt: "Create a Database Name for a user, ID from team member table (FK)",
+        example: "first_name | user_name \n\
+    team_member_id",
+        description: "\n\
+    1) Use snake_case for table names\n\
+    2) Use singular nouns for table names\n\
+    3) use _id for foreign keys\n\
+    4) if u suspect that 2 tables will have the same column, you can add somehting to make it unique"
+    },
+    {
+        term: "db | reserved words",
+        prompt: "you want to name a column 'user' in a table, what would you name it?",
+        example: "user_ => user is a reserved word",
+        description: "Here some reserved words: CHECK DEFAULT DESC FALSE IN IS LIKE NOT NULL TRUE USER, USER_SESSION"
+    },
+    {
+        term: "js | naming vars",
+        prompt: "How would you name a variable for calculation result of the price?\n\
+        use nouns for variable names: " + `names should be nouns that describe the value being stored. For example, "customerName" or "orderTotal".`,
+        example: "priceResult",
+        description: `Use camelCase: In JavaScript, it's standard to use camelCase for naming variables, functions, and methods. The first letter of the first word should be lowercase, and the first letter of each subsequent word should be capitalized. For example, "myVariable" or "calculateTotalPrice".`
+    },
+    {
+        term: "js | naming functions",
+        prompt: "How would you name a function for calculation result of the price?",
+        example: "calculateTotalPrice",
+        description: `Use camelCase: In JavaScript, it's standard to use camelCase for naming variables, functions, and methods. The first letter of the first word should be lowercase, and the first letter of each subsequent word should be capitalized. For example, "myVariable" or "calculateTotalPrice\n\
+        Use verbs for function names: Function names should be verbs that describe the action being taken. For example, "calculatePrice" or "validateInput".`
+    },
+    {
+        term: "js | naming classes",
+        prompt: "How would you name a class for price calculator?",
+        example: "PriceCalculator",
+        description: `Use PascalCase: In JavaScript, it's standard to use PascalCase for naming classes. The first letter of each word should be capitalized. For example, "PriceCalculator".`
+    },
+    {
+        term: "python | naming variables",
+        prompt: "How would you name a variable for calculation result of the price?",
+        example: "price_result",
+        description: `Use snake_case: Unlike JavaScript, Python uses snake_case for naming variables, functions, and methods. In snake_case, each word is separated by an underscore. For example, "my_variable" or "calculate_total_price".`
+    }
+]
 
 
-module.exports = { aws_glossary, aws_services, coderTerms, unit_testing};
+module.exports = { aws_glossary, aws_services, coderTerms, unit_testing, js_advanced, best_practices };
 
 

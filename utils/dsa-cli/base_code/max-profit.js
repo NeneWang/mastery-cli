@@ -1,6 +1,7 @@
 class MaxProfit {
 
     solve(prices) {
+	    //Solve your problem here
     }
 }
 

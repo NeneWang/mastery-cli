@@ -1,7 +1,7 @@
 ---
 title: Simple Division
 description: A simple division example
-tags: [ neetcode, sample, math]
+tags: [ neetcode, sample, neetcode]
 ---
 
 

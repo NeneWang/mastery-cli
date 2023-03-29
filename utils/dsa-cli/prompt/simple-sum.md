@@ -1,7 +1,7 @@
 ---
 title: Simple Sum
 description: A simple sum example!
-tags: [ neetcode, sample, math]
+tags: [ neetcode, sample, neetcode]
 ---
 
 

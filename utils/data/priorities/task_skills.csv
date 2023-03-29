@@ -11,7 +11,7 @@ Game Design Patterns;9;7;;;;;;2
 Game Dev;8;7;;Unity (Desktop, crossconsole), Phase.io (for the web) and I am also thinking about Flutter Game Kit for simple supoprt;;Doesn't make sense to design for others, it can get heavy. Game dev usually improves your overall logic, networking, design patterns and best practices while scoring poor in careerwise (in a fun way);Mutliplayer Collab Shter for Desktop (Isekai), Phaser Isekai Sim,  Light + VR Language Learning Game + mobile thousand journeys game;1
 software architect;10;6;;;https://roadmap.sh/software-architect;;;4
 Software Design  & Architecture;10;7;;Clean code, Architectural Principles;https://roadmap.sh/software-design-architecture;;Flashing everyconcept on the roadmap;3
-Design System;10;5;;;https://roadmap.sh/design-system;;Flashing everyconcept on the roadmap;5
+Design System;5;5;;I think is not as good, as it becomes too non-science too societal;https://roadmap.sh/design-system;;Flashing everyconcept on the roadmap;0
 System Design;9;6;;Things you would need to understand in order to develop large scale systems;https://roadmap.sh/system-design;While someother big topics might step into each other..;;3
 QA Engineering;8;7;;Not about running the tests itself but the planning, reporting of these tests;https://roadmap.sh/qa;;Flashing everyconcept on the roadmap;1
 Computer Science;10;6;;This is more about the filling the gaps of your barebones schooling:;https://roadmap.sh/computer-science;;Flashing everyconcept on the roadmap;4

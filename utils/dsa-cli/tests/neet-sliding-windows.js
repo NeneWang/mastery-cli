@@ -12,13 +12,13 @@ class CharacterReplacement extends ProblemTests {
     test_1() {
         this.current_test_name = "ABAB, 2 => 4"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve("ABAB", 2) == 4);
+        assert.equal(problemToTest.solve("ABAB", 2), 4);
     }
 
     test_2() {
         this.current_test_name = "AABABBA, 1 => 4"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve("AABABBA", 1) == 4);
+        assert.equal(problemToTest.solve("AABABBA", 1), 4);
     }
 
 }
@@ -29,6 +29,7 @@ class DailyTemperatures extends ProblemTests {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
+		this.tests.push(() => this.test_3());
     }
     test_1(){
         this.current_test_name = "[73, 74, 75, 71, 69, 72, 76, 73] => [1, 1, 4, 2, 1, 1, 0, 0]"
@@ -40,6 +41,12 @@ class DailyTemperatures extends ProblemTests {
         this.current_test_name = "[30, 40, 50, 60] => [1, 1, 1, 0]"
         const problemToTest = new this.Problem();
         assert.deepEqual(problemToTest.solve([30, 40, 50, 60]), [1, 1, 1, 0]);
+    }
+
+	test_3(){
+        this.current_test_name = "[30, 40, 50, 45, 60] => [1, 1, 2, 1, 0]"
+        const problemToTest = new this.Problem();
+        assert.deepEqual(problemToTest.solve([30, 40, 50, 45, 60]), [1, 1,2, 1, 0]);
     }
 }
 
@@ -54,19 +61,19 @@ class LenghtOfLongestSubString extends ProblemTests {
     test_1(){
         this.current_test_name = "abcabcbb => 3"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve("abcabcbb") == 3);
+        assert.equal(problemToTest.solve("abcabcbb"), 3);
     }
 
     test_2(){
         this.current_test_name = "bbbbb => 1"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve("bbbbb") == 1);
+        assert.equal(problemToTest.solve("bbbbb"), 1);
     }
 
     test_3(){
         this.current_test_name = "pwwkew => 3"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve("pwwkew") == 3);
+        assert.equal(problemToTest.solve("pwwkew"), 3);
     }
 }
 
@@ -81,19 +88,19 @@ class MaxProfit extends ProblemTests{
     test_1(){
         this.current_test_name = "[7,1,5,3,6,4] => 5"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([7,1,5,3,6,4]) == 5);
+        assert.equal(problemToTest.solve([7,1,5,3,6,4]), 5);
     }
 
     test_2(){
         this.current_test_name = "[7,6,4,3,1] => 0"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([7,6,4,3,1]) == 0);
+        assert.equal(problemToTest.solve([7,6,4,3,1]), 0);
     }
 
     test_3(){
         this.current_test_name = "[2,4,1] => 2"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([2,4,1]) == 2);
+        assert.equal(problemToTest.solve([2,4,1]), 2);
     }
 
 }
@@ -110,19 +117,19 @@ class MinWindow extends ProblemTests{
     test_1(){
         this.current_test_name = "ADOBECODEBANC, ABC => BANC"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve("ADOBECODEBANC", "ABC") == "BANC");
+        assert.equal(problemToTest.solve("ADOBECODEBANC", "ABC"), "BANC");
     }
 
     test_2(){
         this.current_test_name = "a, a => a"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve("a", "a") == "a");
+        assert.equal(problemToTest.solve("a", "a"), "a");
     }
 
     test_3(){
         this.current_test_name = "a, aa => ''"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve("a", "aa") == "");
+        assert.equal(problemToTest.solve("a", "aa"), "");
     }
 
 }

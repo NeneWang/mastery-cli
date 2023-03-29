@@ -9,8 +9,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * Design and Analysis of Algorithms
  * https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/video_galleries/lecture-videos/
  */
-// TODO: Add all the problems and then define them. 
-var dsa = [];
 var system = [{
   term: "system design",
   prompt: "How would you design an Photo App?",

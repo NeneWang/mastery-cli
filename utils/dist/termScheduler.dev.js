@@ -297,7 +297,7 @@ function () {
       // Refresh the the cards on the learning queue by those who hadnt be learnt yet. (and are neither on the working set)
       // For now you can just dummy populate them.
       this.learned_queue.cleanQueue();
-      this.learning_queue.cleanQueue(); // TODO Add all the cards in that are available. Perhpas differentStrategies could be offered, such as loading from Online or from the local.
+      
 
       this.learning_queue.elements = this.cardsRefreshStrategy.getLearningQueue();
     }

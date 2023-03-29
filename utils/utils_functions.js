@@ -3,6 +3,15 @@ const url = require('url');
 const fs = require('fs');
 const { get_random, MAID_EMOJIS } = require("./constants");
 const DEBUG = false;
+const { marked } = require('marked'); //Formats into html
+var TerminalRenderer = require('marked-terminal'); //Formats into terminal
+
+marked.setOptions(
+    {
+        renderer: new TerminalRenderer(),
+    }
+)
+
 
 /**
  * Gets clickeable path that could be printed on the console and clicked.
@@ -15,6 +24,8 @@ const getAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/
     const fileUrl = url.pathToFileURL(absolutePath);
     return (fileUrl.toString());
 };
+
+
 /**
  * Gets directory path
  * @param {str} fileimage : String containing the relative position of the image from utils directory
@@ -31,7 +42,7 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './da
 const getFilesInDirectory = (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
 
-    if(DEBUG) console.log("Fetching from: ", absolutePath);
+    if (DEBUG) console.log("Fetching from: ", absolutePath);
 
     return new Promise((resolve, reject) => {
         fs.readdir(absolutePath, (err, files) => {
@@ -99,6 +110,8 @@ const formatObjectFeatures = (userPerformanceData) => {
 const getRandomInt = (max) => {
     return Math.floor(Math.random() * max);
 };
+
+
 /**
  * @param: float ?= 0.05 #e.g. 0.5 The chances in favor of it being True
  * @returns Random Bool
@@ -106,6 +119,12 @@ const getRandomInt = (max) => {
 const getRandomBool = (chances = 0.5) => {
     return random_boolean = Math.random() < chances;
 };
+
+/**
+ * Counts the decimals.
+ * @param {number} value Number to count decimals
+ * @returns {number} Number of decimals
+ */
 const countDecimals = (value) => {
     if (Math.floor(value) !== value)
         return value?.toString().split(".")[1].length ?? 0;
@@ -123,6 +142,15 @@ const user_requests_exit = (res) => {
 }
 
 /**
+ * Returns whether the user wants to open a calculator node. (for now a js node would work.)
+ * @param {str} res : User input
+ * @returns {boolean} : True if user wants to calculate, false otherwise
+ */
+const user_requests_calc = (res) => {
+    return (res == "calc")
+}
+
+/**
  * Returns whether the user wants to skip the problem.
  * @param {boolean} res : User input
  * @returns {boolean} : True if user wants to skip, false otherwise
@@ -132,8 +160,37 @@ const user_requests_skip = (res) => {
 }
 
 
+
+/**
+ * Prints the content as markdown if it is markdown, otherwise it will just print the content
+ * @param {string} content The String content that can be either markdown or not, determined by :m
+ * @param {boolean} use_markdown If true then it will use markdown, if false then it will just print the content
+ * @param {string} markdown_token The token that determines if the content is markdown or not
+ */
+function printMarked(content, { use_markdown = true, markdown_token = ":m" } = {}) {
+    if (use_markdown) {
+        // Check if the description starts with :m
+        if (content.startsWith(markdown_token)) {
+
+            if (DEBUG)
+                console.log("markdown detected");
+            // Remove the :m
+            content = content.substring(2);
+
+
+            console.log(marked(content));
+        } else {
+            console.log(`${content}\n`);
+        }
+    } else {
+
+        console.log(`${content}\n`);
+    }
+}
+
+
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, user_requests_exit,
-    user_requests_skip
+    user_requests_skip, user_requests_calc, printMarked
 };

@@ -20,7 +20,7 @@ class JumpGame {
         return true
     }
 
-    solve(nums) {
+solve(nums) {
         return this.canJump(nums)
     }
 }

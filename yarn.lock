@@ -2733,11 +2733,6 @@
     "statuses" "2.0.1"
     "unpipe" "~1.0.0"
 
-"find-exec@1.0.2":
-  "integrity" "sha512-/cs763F5i7Nm/aG+hjBv2nJB/Bl2w0tnuZd5bbfcV+WYapn8T4ez3B87H6MgvsmdheDkitj/rHi557wvE+XylQ=="
-  "resolved" "https://registry.npmjs.org/find-exec/-/find-exec-1.0.2.tgz"
-  "version" "1.0.2"
-
 "find-up@^4.0.0", "find-up@^4.1.0":
   "integrity" "sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw=="
   "resolved" "https://registry.npmjs.org/find-up/-/find-up-4.1.0.tgz"
@@ -4565,13 +4560,6 @@
   "version" "4.2.0"
   dependencies:
     "find-up" "^4.0.0"
-
-"play-sound@^1.1.5":
-  "integrity" "sha512-gbdF1iLNyL5r9Ne9YwARGMkrvfR4EL9G1ZLtFPLkI2tQt0kkHw5CHM5E6Gl/lDuuk/Uj/O5Q29Bi08jMK4egbA=="
-  "resolved" "https://registry.npmjs.org/play-sound/-/play-sound-1.1.5.tgz"
-  "version" "1.1.5"
-  dependencies:
-    "find-exec" "1.0.2"
 
 "plist@^3.0.2":
   "integrity" "sha512-WiIVYyrp8TD4w8yCvyeIr+lkmrGRd5u0VbRnU+tP/aRLxP/YadJUYOMZJ/6hIa3oUyVCsycXvtNRgd5XBJIbiA=="

@@ -6,7 +6,6 @@
  * Design and Analysis of Algorithms
  * https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/video_galleries/lecture-videos/
  */
-// TODO: Add all the problems and then define them. 
 const dsa = [
     {
         term: "Heap", prompt: "Re explain one of the advantages of using Heaps",
@@ -175,9 +174,8 @@ const system_design = [
     },
     {
         term: "Aggregation", prompt: "How is it symbolized? What does it mean? Make an example when you would be using this",
-        example: "" 
+        example: ""
     },
-    // TODO   
     {
         term: "system design", prompt: "How would you design an Photo App?",
         description: "",
@@ -288,9 +286,11 @@ const designPatterns = [
         term: "Decorator Design Pattern", description: "The Decorator pattern is a way to add new behavior to an object without changing the object's class. Imagine you're a student and you want to decorate a plain notebook with stickers, pictures and drawings. The notebook is your object and the stickers, pictures and drawings are the new behavior you want to add. (The important thing is to make it work at runtime.)",
         prompt: "Provide an example of how could you use this Design Pattern?"
     },
-    { term: "Proxy Pattern", description: "A class that functions as an interface to a particular resource. That resource may be remote, expensive to construct, or may require logging or some other functionality.", prompt: "Name an example in how you could use this pattern on", example: "Creating a protection proxy: For protecting business logic", }
+    { 
+        term: "Proxy Pattern", description: "A class that functions as an interface to a particular resource. That resource may be remote, expensive to construct, or may require logging or some other functionality.", prompt: "Name an example in how you could use this pattern on", example: "Creating a protection proxy: For protecting business logic", 
+    },
 
 ];
 
 
-module.exports = {designPatterns, dsa, system_design};
+module.exports = { designPatterns, dsa, system_design };

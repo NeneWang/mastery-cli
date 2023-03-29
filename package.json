@@ -1,7 +1,7 @@
 {
 	"name": "maid-cli",
-	"description": "Assistant to keep you on track and productive",
-	"version": "0.6.30",
+	"description": "Let maid help you build your final project - your life",
+	"version": "0.6.33",
 	"license": "UNLICENSED",
 	"bin": {
 		"maid-cli": "index.js",
@@ -49,7 +49,6 @@
 		"marked-terminal": "^5.1.1",
 		"meow": "^9.0.0",
 		"node-json-db": "^2.1.4",
-		"play-sound": "^1.1.5",
 		"sql.js": "^1.8.0",
 		"terminal-image": "^2.0.0"
 	},

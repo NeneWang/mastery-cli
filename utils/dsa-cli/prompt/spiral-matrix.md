@@ -1,7 +1,7 @@
 ---
 title: Spiral Matrix
 description: Given an m x n matrix, return all elements of the matrix in spiral order.
-tags: [neetcode, medium, math, geometry]
+tags: [neetcode, medium, math, neetcode, geometry]
 link: https://leetcode.com/problems/spiral-matrix/
 images: []
 ---

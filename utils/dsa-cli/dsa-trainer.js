@@ -29,8 +29,119 @@ class DSATrainer {
         this.skip_problems = skip_problems;
 
         this.problemReport = new StorableReport({ filename: 'problem_report' });
+        this.order_categories = Object.values(Constants.PROBLEM_CATEGORIES).map(category => category.slug);
 
 
+        this.first_non_completed_category_non_completed_problems = this.getFirstNonCompletedCategoryNonCompletedProblems();
+        this.first_non_only_hard_left_category_non_hard_problems = this.getFirstNonOnlyHardLeftCategoryNonHardProblems();
+        this.completed_problems_sorted_by_times_completed = this.getCompletedProblemsSortedByTimesCompleted();
+    }
+
+    /**
+     * Populates the recommendation queues
+     * @returns {void}
+     * Call this when problmeManager had been populated
+     */
+    populateRecommendationQueues() {
+        this.first_non_completed_category_non_completed_problems = this.getFirstNonCompletedCategoryNonCompletedProblems();
+        this.first_non_only_hard_left_category_non_hard_problems = this.getFirstNonOnlyHardLeftCategoryNonHardProblems();
+        this.completed_problems_sorted_by_times_completed = this.getCompletedProblemsSortedByTimesCompleted();
+    }
+
+
+    /**
+     * Gets the list of recommended problems to solve
+     * @param {int} non_completed The number of non completed problems to get
+     * @param {int} non_hard The number of non hard problems to get
+     * @param {int} completed_practice The number of completed problems to get
+     * @param {bool} refresh_recommendation_queues Whether to refresh the recommendation queues or not
+     * 
+     * @returns {List[ProblemMetaData]} A list of recommended problems
+     */
+    async getRecommendedProblems({ non_completed = 2, non_hard = 1, completed_practice = 2, refresh_recommendation_queues = true } = {}) {
+        const recommended_problems = [];
+
+        // Load the problems_manager problems
+        // await this.problems_manager.loadProblems();
+        await this.loaded_problem_manager;
+
+        if (refresh_recommendation_queues) {
+            this.populateRecommendationQueues();
+        }
+
+        // Gets the first two problems from first_non_completed_category_non_completed_problems
+        recommended_problems.push(...this.first_non_completed_category_non_completed_problems.slice(0, non_completed));
+
+
+        // Add 1 problem from first_non_only_hard_left_category_non_hard_problems
+        recommended_problems.push(...this.first_non_only_hard_left_category_non_hard_problems.slice(0, non_hard));
+
+        // Add 2 problem from completed_problems_sorted_by_times_completed
+        recommended_problems.push(...this.completed_problems_sorted_by_times_completed.slice(0, completed_practice));
+
+        return recommended_problems;
+
+    }
+
+
+    /**
+     * Gets a list of problems that are not completed yet 
+     * !note that the the this wont work if problem_manager is not loaded
+     * @returns {List[ProblemMetaData]} A list of problems that are not completed yet
+     */
+    getFirstNonCompletedCategoryNonCompletedProblems() {
+
+
+        for (let i = 0; i < this.order_categories.length; i++) {
+
+            const category = this.order_categories[i];
+            const problems = this.problems_manager.getProblemsByCategory(category);
+
+            const non_completed_problems = problems.filter(problem => !this.problemReport.isProblemCompleted(problem.slug));
+
+            if (non_completed_problems.length > 0) {
+                return non_completed_problems;
+            }
+            // Otherwise skip to the next category
+        }
+        return [];
+    }
+
+
+    /**
+     * 
+     * @returns {List[ProblemMetaData]} A list of problems that are not completed yet, and are not hard
+     */
+    getFirstNonOnlyHardLeftCategoryNonHardProblems() {
+        for (let category of this.order_categories) {
+
+            const problems = this.problems_manager.getProblemsByCategory(category);
+
+
+
+            // Get the non hard problems
+            const non_hard_problems = problems.filter(problem => problem.difficulty != Constants.difficulty.hard);
+
+            // Also check that the non hard problems are not completed
+            const non_completed_non_hard_problems = non_hard_problems.filter(problem => !this.problemReport.isProblemCompleted(problem.slug));
+
+            // If there are non completed non hard problems, return them
+            if (non_completed_non_hard_problems.length > 0) {
+                return non_completed_non_hard_problems;
+            }
+            // Otherwise skip to the next category
+        }
+        return [];
+    }
+
+    /**
+     * 
+     * @returns {List[ProblemMetaData]} A list of problems that are not completed yet, sorted by the number of times they have been completed
+     */
+    getCompletedProblemsSortedByTimesCompleted() {
+        const completed_problems = this.problems_manager.getProblems().filter(problem => this.problemReport.isProblemCompleted(problem.slug));
+        const sorted_problems = completed_problems.sort((a, b) => this.problemReport.getAnswerFor(a.slug) - this.problemReport.getAnswerFor(b.slug));
+        return sorted_problems;
     }
 
     /**
@@ -40,10 +151,8 @@ class DSATrainer {
     async openRandomProblem() {
         const problem = this.problems_manager.getRandomProblem();
         const problem_status = await this.solveProblem(problem);
-        // TODO Make appropriate adjustement with the status
 
         return problem_status == Constants.ProblemStatus.solved;
-
     }
 
 
@@ -71,7 +180,7 @@ class DSATrainer {
 
             else if (status == Constants.ProblemStatus.solved) {
                 this.problemReport.increaseAnswerFor(problem.slug);
-                console.log("Times the problem was solved.", this.problemReport.getAnswerFor(problem.slug));
+                if (DEBUG) { console.log("Times the problem was solved.", this.problemReport.getAnswerFor(problem.slug)); }
                 this.cleanCurrentProblem();
                 did_pass_all_tests = true;
                 return Constants.ProblemStatus.solved;
@@ -85,19 +194,67 @@ class DSATrainer {
 
         }
     }
-    async openProblem(problem, { open_solution = false } = {}) {
-        const promblem_prompt = await getPromptDict(problem.slug);
-        if (true) console.log("Problem prompt selected: ", promblem_prompt);
-        renderPromptDescription(promblem_prompt);
+
+    /**
+     * 
+    * @param {ProblemMetaData} problem 
+    * @param {boolean} open_problem_temporal If true, the problem temporal file will be opened
+    * @param {boolean} open_solution If true, the solution file will be opened
+    * @param {boolean} open_basecode If true, the basecode file will be opened
+    * @param {boolean} open_markdown If true, the markdown file will be opened
+    * @param {boolean} open_test_cases If true, the test cases file will be opened
+    * @returns {Promise} A promise that resolves when the problem is opened
+     */
+    async openProblemMetadataInTerminal(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
+        
+
+
+        let problem_details = this.problems_manager.getProblem(problem.slug);
+        /**
+            slug: 'character-replacement',
+            file_path: 'character-replacement.js',  test_slug: 'character-replacement',
+            name: 'Character Replacement',
+            description: 'Longest Repeating Character Replacement',  
+            difficulty: 'medium',
+            tags: [ 'neetcode', 'medium', 'sliding-window' ],        
+            absolute_solution_path: 'C:\\github\\testing\\maid-cli\\utils\\dsa-cli\\solutions\\character-replacement.js'        
+            }
+        */
+
+        let promblem_prompt = await getPromptDict(problem.slug);;
+
+
+
+        if (DEBUG) console.log("Problem prompt selected: ", promblem_prompt);
+        renderPromptDescription(promblem_prompt, problem_details);
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
-        if (!open_solution) { const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction }); }
-        else if(open_solution){
+        if (open_problem_temporal) {
+            const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
+        }
+
+        if (open_solution) {
             const _ = await this.problems_manager.openSolutionFile(problem.slug, { editor_instruction: editor_instruction });
         }
+        if (open_basecode) {
+            const _ = await this.problems_manager.openBaseCodeFile(problem.slug, { editor_instruction: editor_instruction });
+        }
+        if (open_markdown) {
+            const _ = await this.problems_manager.openPromptMarkdownFile(problem.slug, { editor_instruction: editor_instruction });
+        }
+
+        if (open_test_cases) {
+            const _ = await this.problems_manager.openTestCaseFile(problem.slug, { editor_instruction: editor_instruction })
+        }
+
     }
 
 
+    /**
+     * Opens and tests prints a menu where user can choose to test, or other operations, returns once the user is finished with the problem or aborts
+     * @param {ProblemMetadata} problem The problem to open and test
+     * @returns {Constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
+     */
     async openAndTest(problem) {
         console.log(
             "Opening problem: ", problem.slug,
@@ -106,7 +263,7 @@ class DSATrainer {
 
         // console.log("Keys from prompt_dict", Object.keys(prompt_dict));
 
-        await this.openProblem(problem);
+        await this.openProblemMetadataInTerminal(problem);
 
         let question_state_flag = true;
         let did_pass_all_tests_before = false;
@@ -135,11 +292,11 @@ class DSATrainer {
             },
             "Modify": async () => {
                 question_state_flag = true;
-                await this.openProblem(problem);
+                await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
             },
             "Show solution": async () => {
                 question_state_flag = true;
-                this.openProblem(problem, { open_solution: true });
+                this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_solution: true });
 
                 // return Constants.ProblemStatus.unsolved;
             },
@@ -151,6 +308,26 @@ class DSATrainer {
 
         }
 
+        const choices_dev_mode = {
+            "Edit BaseJS": async () => {
+                // Open the problem's base
+
+                question_state_flag = true;
+                this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_basecode: true });
+            },
+            "Edit Markdown prompt": async () => {
+                // Open the problem's base
+
+                question_state_flag = true;
+                this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_markdown: true });
+            },
+            "Open test cases": async () => {
+                question_state_flag = true;
+                this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_test_cases: true });
+            }
+        }
+
+        if (Constants.DEV_MODE) Object.assign(choices, choices_dev_mode); // Add dev mode choices
 
         let res = Constants.ProblemStatus.unsolved;
         while (question_state_flag) {
@@ -204,16 +381,31 @@ class DSATrainer {
 
 
     /**
+     * Renders a menu of recommended problems, and allows the user to select a problem to solve
+     */
+    async showRecommendedProblems() {
+
+        const recommended_problems = await this.getRecommendedProblems();
+        const problem_slugs = recommended_problems.map(problem => problem.slug);
+
+        return await this.showMenuOfProblems({ allow_continue_last: true, show_progress: true, show_tags: true, show_specific_problems: problem_slugs });
+
+    }
+
+    /**
      * Renders a menu of problems, and allows the user to select a problem to solve
      * @param {boolean} allow_continue_last If true, the user will be allowed to continue the last problem solved. If false, the user will be forced to select a new problem.
      * @param {boolean} showProgress If true, the user will be shown the progress of the problems solved as ** attached to the problem. If false, the user will not be shown the progress.
+     * @param {list[str]} show_specific_problems List of slugs of problems to show. If empty, all problems will be shown.
      * @returns 
      */
-    async showMenuOfProblems({ allow_continue_last = true, show_progress = true, show_tags = true } = {}) {
+    async showMenuOfProblems({ allow_continue_last = true, show_progress = true, show_tags = true, show_specific_problems = [] } = {}) {
         const _ = await this.problemReport.getReport();
         /**
          * 
          * @param {list[str]} problemsSlugs List of slugs
+         * @param {boolean} show_progress If true, the user will be shown the progress of the problems solved as ** attached to the problem. If false, the user will not be shown the progress.
+         * @param {boolean} show_tags If true, the user will be shown the tags of the problems solved as ** attached to the problem. If false, the user will not be shown the tags.
          * OPTIONAL
          * @param {int} max_stars Maximum number of stars to show
          * @returns 
@@ -246,9 +438,9 @@ class DSATrainer {
         // console.log("Loading problems...", this.loaded_problem_manager);
         await this.loaded_problem_manager;
 
-
-
-        const formattedProblems = createFormattedProblemMap(this.problems_manager.problemSlugs, { show_progress: show_progress, show_tags: show_tags });
+        // Show specific problems, or show all problems
+        const problems_to_show_slugs = show_specific_problems.length > 0 ? show_specific_problems : this.problems_manager.problemSlugs;
+        const formattedProblems = createFormattedProblemMap(problems_to_show_slugs, { show_progress: show_progress, show_tags: show_tags });
         const current_problem_prompt = "Continue last problem";
 
 
@@ -286,8 +478,8 @@ class DSATrainer {
         const problem = getProblem(problem_selected);
         const is_new_problem = problem_selected != current_problem_prompt;
         const problem_status = await this.solveProblem(problem, { populate_problem: is_new_problem });
-        // TODO Make appropriate adjustement with the status
 
+        // console.log("Problem status resolved with: ", problem_status, Constants.ProblemStatus.solved == problem_status);
         return problem_status == Constants.ProblemStatus.solved;
     }
 

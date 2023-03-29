@@ -64,7 +64,7 @@ class SmartRow {
 
 class CSVAssistant {
 
-    constructor({ completedStatuses = ["done", "completed", "finished"] } = {}) {
+    constructor({ completedStatuses = ["done", "completed", "finished", "halted", "stopped", "aborted"] } = {}) {
         this.completedStatuses = completedStatuses//Will be avoided by default when taking the goals to do in priority
     }
 
@@ -92,8 +92,6 @@ class CSVAssistant {
         } catch (err) {
             console.log(err);
         }
-
-        //   TODO Once I verify that the code is correct I can also make the array into a dictionary
 
         return listOfSolvedRows;
     }
@@ -149,7 +147,6 @@ class CSVAssistant {
     }
 
     async getFilesInPriorities () {
-        // #TODO
         return await getFilesInDirectory();
 
     }

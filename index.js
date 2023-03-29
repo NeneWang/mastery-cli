@@ -2,7 +2,7 @@
 
 /**
  * maid-cli
- * Assistant to keep you on track and productive
+ * Life is a game, and the game is to be the best version of yourself
  *
  * @author Nelson <github.com/neneWang>
  */
@@ -80,7 +80,6 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.talk.code)) {
 		let message = await getTalk(flags);
 		maid.say(message, true);
-
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
 		await utils.commitpush();
@@ -88,8 +87,8 @@ const { Demo, EDemo } = demos;
 		// as until the response is right?
 
 		const _ = await mQuizer.askQuestion();
-		maid.provideMissingReport();
-		maid.askToClean();
+		await maid.provideMissingReport({run_dsa: true});
+		await maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {
 		// Gets all services, keeps asking for things here, which service to get
@@ -111,7 +110,6 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.term.code)) {
 		mQuizer.pick_and_ask_term_question();
 	}
-
 	else if (input.includes(cmInfo.commands.clean.code)) {
 		maid.askToClean();
 	}
@@ -123,15 +121,23 @@ const { Demo, EDemo } = demos;
 	}
 	else if (input.includes(cmInfo.commands.dsa.code)) {
 		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
-		const dsa_is_correct = await dsaTrainer.showMenuOfProblems();
+		if (flags.all) {
+			console.log("all")
+			const dsa_is_correct = await dsaTrainer.showMenuOfProblems();
 
-		if (dsa_is_correct) {
-			await increasePerformance("algo");
-			console.log("dsa solved correctly");
-			
+			if (dsa_is_correct) {
+				await increasePerformance("algo");
+			}
+		} else {
+			const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
+
+			if (dsa_is_correct) {
+				await increasePerformance("algo");
+			}
 		}
 
 	}
+	// else if (input.includes(cmInfo.commands.dsa.code)) {
 	else {
 		cli_meow.showHelp(0);
 		maid.askToClean();

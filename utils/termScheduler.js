@@ -93,7 +93,7 @@ class TermScheduler {
             if (!this.learning_queue.isEmpty) {
                 console.log("Adding queue into the card after putting one from working to learnd")
                 const newCard = this.learning_queue.dequeue();
-                
+
                 this.working_set.enqueue(newCard);
             }
 
@@ -121,14 +121,30 @@ class TermScheduler {
         this.working_set.save();
     }
 
-    async setLearningCards(cards, { cleanIfDifferent = true, onlyAddIfNotThere = true, loadCardsFirst = true } = {}) {
+
+    /**
+     * 
+     * @param {List<Card>} cards 
+     * @param {bool} cleanIfDifferent If the cards are different from the ones already loaded, then clean the queues and load the new ones. Otherwise just add the new ones.
+     * @param {bool} onlyAddIfNotThere If true, then only add the cards that are not in any of the queues. Otherwise add all the cards.
+     * @param {bool} loadLastCardsFirst If true, then load the last cards first. Otherwise load the first cards first.
+     * @returns {Promise} Promise that resolves when the cards are loaded.
+     */
+    async setLearningCards(cards, { cleanIfDifferent = true, onlyAddIfNotThere = true, loadLastCardsFirst = true, ask_if_to_use_old_queue = false } = {}) {
+
+
+        if (loadLastCardsFirst) {
+            // Reverse the cards:list order
+            cards = cards.reverse();
+        }
 
         await this.loadQueues(); // Load first then compare if to add a card into the queue or not.
+
 
         //Add new cards
         if (cleanIfDifferent) {
             // Only populate if the amount of cards already loaded are less than the new cards that are found on the masterDeck
-            // TODO ON the future you could load only if the sorted terms are a different hash. Add the cards that are not there
+
             if (this.cardsCount != cards.length) {
                 // Clean all cards
                 // Start from zero if the cards changed
@@ -176,7 +192,6 @@ class TermScheduler {
 
 
 
-        // TODO Add all the cards in that are available. Perhpas differentStrategies could be offered, such as loading from Online or from the local.
         this.learning_queue.elements = this.cardsRefreshStrategy.getLearningQueue();
     };
 };

@@ -1,9 +1,9 @@
-class IsValidParenthesis {
-	solve(s, stack = []) {
+class NQueens {
+	solve(n) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: IsValidParenthesis };
+module.exports = { Problem: NQueens };

@@ -1,9 +1,9 @@
 feature_id;utility;difficulty;status;description;dependency;link;mission_comments;coefficient
-dly_acad_10_terms;;;;Daily joining 10 terms.;;;;
-dly_project_feats;;;;Working Daily on a project;;;;
-dly_algo;;;;;;;;
-dly_terms;;;;Daily Feature of your job;;;;
-dly_feat;;;;Daily Feature for your personal projects;;;;
-dly_pro;;;;;;;;
-;;;;;;;;
-;;;;;;;;
+dly_acad_10_terms;;;;Daily joining 10 terms.;;;;0
+dly_project_feats;;;;Working Daily on a project;;;;0
+dly_algo;;;;;;;;0
+dly_terms;;;;Daily Feature of your job;;;;0
+dly_feat;;;;Daily Feature for your personal projects;;;;0
+dly_pro;;;;;;;;0
+;;;;;;;;0
+;;;;;;;;0

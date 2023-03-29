@@ -4,6 +4,7 @@ const fs = require('fs');
 const { marked } = require('marked');
 const TerminalRenderer = require('marked-terminal');
 const Constants = require("./constants");
+const { exec } = require('child_process');
 
 const DEBUG = false;
 
@@ -34,7 +35,7 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './')
 const getFilesInDirectory = async (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
 
-    if(DEBUG) console.log("Fetching from: ", absolutePath);
+    if (DEBUG) console.log("Fetching from: ", absolutePath);
 
     return new Promise((resolve, reject) => {
         fs.readdir(absolutePath, (err, files) => {
@@ -112,7 +113,7 @@ const countDecimals = (value) => {
 };
 
 
-const renderPromptDescription = (prompt) => {
+const renderPromptDescription = (prompt, prompt_details) => {
     try {
 
         const Constants = require("./constants");
@@ -122,6 +123,28 @@ const renderPromptDescription = (prompt) => {
         });
         // Print title in Blue
         console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(prompt?.["title"] ?? "")}`)
+
+
+        // Colored Difficulty tag.
+        const prompt_difficulty = prompt_details?.["difficulty"] ?? "";
+        const color_based_on_difficulty = (difficulty) => {
+            if(difficulty === Constants.difficulty.easy) return Constants.CONSTANTS.CUTEGREEN;
+            if(difficulty === Constants.difficulty.medium) return Constants.CONSTANTS.CUTEYELLOW;
+            if(difficulty === Constants.difficulty.hard) return Constants.CONSTANTS.CUTEPINK;
+            return Constants.CONSTANTS.CUTEGREEN;
+        }
+        // Print tags but remove the difficulty from the tags array first
+        const tags = prompt_details?.["tags"] ?? [];
+        const tags_without_difficulty = tags.filter(tag => tag !== prompt_difficulty);
+        // console.log(tags_without_difficulty);
+
+        try{
+
+            console.log(`${chalk.hex(color_based_on_difficulty(prompt_difficulty)).inverse(` ${prompt_difficulty} `)}`, tags_without_difficulty)
+        }catch{
+            
+        }
+
         console.log(marked(prompt?.["description"] ?? ""));
         console.log(marked(prompt?.["preview"] ?? ""));
         return true;
@@ -134,13 +157,13 @@ const renderPromptDescription = (prompt) => {
 
 
 function writeUnresolvedClass(sourceFilePath, targetFilePath, { avoidOverwrite = true } = {}) {
-    
+
     // Check if the target file exists
     if (avoidOverwrite && fs.existsSync(targetFilePath)) {
         console.error(`Target file ${targetFilePath} already exists. Aborting write.`);
         return;
     }
-    
+
     // Read the content of the source file
     const content = fs.readFileSync(sourceFilePath, 'utf8');
 
@@ -171,9 +194,41 @@ function getCurrentDate() {
 
 }
 
+const openEditorWithCommand = async (instruction) => {
+    await exec(`${instruction}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`Continue running`);
+    });
+}
+
+const openEditorPlatformAgnostic = async (editor_instruction, absolute_temp_file_path) => {
+
+
+    const os = require('os');
+
+    if (os.platform() === 'win32') {
+
+        console.log('Windows');
+        await openEditorWithCommand(`start ${editor_instruction} ${absolute_temp_file_path}`);
+
+    } else if (os.platform() === 'linux') {
+        console.log('Linux');
+        await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
+    } else if (os.platform() === 'darwin') {
+        console.log('macOS');
+        await openEditorWithCommand(`open -a ${editor_instruction} ${absolute_temp_file_path}`);
+    } else {
+        console.log('Unknown operating system');
+        await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
+    }
+}
+
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, renderPromptDescription,
-    writeUnresolvedClass, getCurrentDate
+    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic
 };

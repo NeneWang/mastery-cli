@@ -1,5 +1,4 @@
 
-
 /*
  * Time O(N) | Space O(N)
  * https://leetcode.com/problems/detect-squares
