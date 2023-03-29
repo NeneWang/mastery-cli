@@ -1,4 +1,4 @@
-{
+module.exports = Settings = {
     "username": "Nelson",
     "account_id": 1,
     "disable_maid_commit_cateogory": true,
@@ -28,10 +28,11 @@
         "woman_office_worker",
         "woman_health_worker"
     ],
-    "report_show": {
+    "report_settings": {
         "week_features": true,
-        "poerformance_summary": true,
-        "weather": true
+        "performance_summary": true,
+        "weather": false,
+        "missing_report": true
     }, //Order matters,    "quiz_enabled"
     "quiz_enable": [
         "math"
