@@ -65,11 +65,11 @@ class TermGenerator {
         // console.log("Prompt received", row?.prompt, optional_prompt )
 
         // Dont create if doesnt have term or description
-        if (row?.term == undefined  || row?.description == undefined) {
+        if (row?.term == undefined ) {
           continue;
         }
 
-        if(row?.term == "" || row?.description == ""){
+        if(row?.term == "" ){
           continue;
         }
 

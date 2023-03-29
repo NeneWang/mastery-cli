@@ -125,11 +125,11 @@ class TermStorage {
      */
     push(term) {
         // Check if term at least has a term and description
-        if (term?.term == null || term?.description == null) {
+        if (term?.term == null) {
 
             return;
         }
-        if (term.term == "" || term.description == "") {
+        if (term.term == "" ) {
             return;
         }
 
@@ -146,9 +146,6 @@ class TermStorage {
         const res = [];
         // Add own cards
         for (const term of this.terms) {
-            if (safeguard_bad_terms && (term.term == "" || tern.description == "")) {
-                continue;
-            }
 
             res.push(term)
         }
