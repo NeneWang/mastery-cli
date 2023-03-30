@@ -20,6 +20,8 @@ const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_ran
 const { getMaidDirectory } = require('./utils_functions');
 const DSATrainer = require('./dsa-cli/dsa-trainer');
 
+const Settings = require('./settings.js');
+
 const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
 );
@@ -177,12 +179,21 @@ class Maid {
 	dayReport = async () => {
 		const todaydate = getToday()
 
-		this.say(`Performance Report: ${todaydate}`, false)
-		await this.performanceReport();
-		this.say(`Weather Report: ${todaydate}`, false)
-		// console.log('Weather\n')
-		const _ = await weatherReport();
-		this.provideMissingReport({ run_dsa: true });
+		if (Settings?.report_settings?.performance_summary) {
+			this.say(`Performance Report: ${todaydate}`, false)
+			await this.performanceReport();
+
+		}
+
+		if (Settings?.report_settings?.whether) {
+			this.say(`Weather Report: ${todaydate}`, false)
+			// console.log('Weather\n')
+			const _ = await weatherReport();
+		}
+
+		if (Settings?.report_settings?.missing_report) {
+			this.provideMissingReport({ run_dsa: true });
+		}
 	}
 
 	/**

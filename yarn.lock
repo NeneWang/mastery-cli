@@ -1401,10 +1401,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@wangnene2/chart@^1.0.14":
-  "integrity" "sha512-MpjXRRmebH1KYrhx9XDrC/PiTlSCPDfRfhjYbFBuQuzGem3oEPv4+UW7bOm14JF2On1VrVi0O/ujcfB6KO61lA=="
-  "resolved" "https://registry.npmjs.org/@wangnene2/chart/-/chart-1.0.14.tgz"
-  "version" "1.0.14"
+"@wangnene2/chart@^1.0.15":
+  "integrity" "sha512-98tUXrbtdEdz87+EB2HXnbA7y15NF9rB0c7CAFCDrzj8tXou+Rwb2wAaNXID6tx8ZtXT+hUYpkhOMLH7fSzWvA=="
+  "resolved" "https://registry.npmjs.org/@wangnene2/chart/-/chart-1.0.15.tgz"
+  "version" "1.0.15"
 
 "@webgpu/types@0.1.16":
   "integrity" "sha512-9E61voMP4+Rze02jlTXud++Htpjyyk8vw5Hyw9FGRrmhHQg2GqbuOfwf5Klrb8vTxc2XWI3EfO7RUHMpxTj26A=="
