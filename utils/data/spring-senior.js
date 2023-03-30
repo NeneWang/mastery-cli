@@ -886,7 +886,7 @@ const network_midterm = [
     },
     // HERE there are more things to complete
     {
-        term: "machine-life-cycle | what-ismachine-life-cycle",
+        term: "machine-life-cycle | what-is-machine-life-cycle",
         prompt: "What is the machine life cycle? You had just been hired as a sys admin, provide example of how you would treat your first order of linux machines through the machine life cycel??",
         description: "    Planning and procurement: During this stage, sysadmins work with stakeholders to identify the organization's needs, set requirements, and evaluate potential solutions. This may involve researching and selecting hardware, software, and networking components, considering factors such as cost, performance, compatibility, and scalability.      Installation and configuration: Once the necessary components have been procured, sysadmins install and configure the hardware, operating system, software, and network settings. This includes setting up user accounts, access controls, and security measures, as well as integrating the system with existing infrastructure.      Deployment: After the system has been set up and tested, it is deployed into production. Sysadmins must ensure a smooth transition, which may involve training users, migrating data, and updating documentation.      Operation and maintenance: Once the system is in use, sysadmins are responsible for its ongoing operation and maintenance. This includes monitoring performance and resource utilization, applying patches and updates, and troubleshooting issues as they arise. Regular backups, security audits, and user support also fall under this stage.      Optimization and upgrades: Over time, sysadmins may need to optimize the system to improve performance, address changing requirements, or adapt to new technologies. This could involve hardware or software upgrades, changes to system configurations, or the implementation of new tools and processes.      Decommissioning and disposal: Eventually, a system may become obsolete or no longer meet the organization's needs. In this stage, sysadmins plan and execute the decommissioning process, which may involve migrating data and services to new systems, securely erasing sensitive data, and responsibly disposing of hardware.",
         example: ""
@@ -920,20 +920,24 @@ const network_midterm = [
     {
         term: "mirror-raid",
         prompt: "If you have a Mirror RAID system (RAID 0), do you need to keep a backup? Explain your answer",
-        description: ""
+        description: "Yes, you still need to keep a backup even if you have a Mirror RAID system (RAID 1) in place. While a Mirror RAID system can provide some level of redundancy by creating a duplicate copy of your data across two or more disks, it does not protect against all possible types of data loss. For example, a Mirror RAID system will not protect your data in the event of accidental deletion, data corruption, or malicious software such as viruses or ransomware. In such cases, the changes will be mirrored across all disks, meaning that the backup copies will also be corrupted or lost. Additionally, a Mirror RAID system does not protect against physical damage or theft of the entire system, which could result in the loss of all data."
     },
     {
         term: "solid-5ervice",
-        prompt: "You are asked to design a solid service for the customers of your company: • What would you do to keep the systems running through: o power failures o network outages o disk failures"
-
+        prompt: "You are asked to design a solid service for the customers of your company: • What would you do to keep the systems running through: o power failures o network outages o disk failures",
+        description: "Power Failures: a. Redundant Power Supplies: To ensure continuous uptime during a power outage, we can install redundant power supplies in our servers, which will switch to backup power sources (such as batteries or generators) in case of power failure. b. Uninterrupted Power Supply (UPS): We can also use Uninterrupted Power Supplies (UPS) for our servers, which will provide temporary power during an outage and allow time for our systems to shut down gracefully to avoid data loss or hardware damage. Network Outages: a. Redundant Network Connections: To minimize the impact of a network outage, we can establish redundant network connections that will automatically switch to a backup connection in case of failure. This can be done using technologies such as Network Load Balancing (NLB) or Link Aggregation Control Protocol (LACP). b. Failover Systems: We can also have failover systems in place, which can take over operations if the primary system becomes unavailable. This can be done using technologies such as load balancers or clustering. Disk Failures: a. Redundant Disk Drives: To protect against disk failures, we can use redundant disk drives in our servers, such as RAID configurations (e.g. RAID 1, RAID 5, or RAID 6). This will ensure that data is automatically mirrored or distributed across multiple disks, so that in case of a disk failure, the data can be recovered from the remaining disks. b. Regular Backup: We should also perform regular backups of critical data to an offsite location or cloud storage. This will ensure that even if all disk drives fail, the data can be recovered from the backups."
     },
     {
         term: "cloud-vs-server",
-        prompt: "Compare storing data “in the cloud” vs storing it on servers in your organization. What are some pros and cons to this? "
+        prompt: "Compare storing data “in the cloud” vs storing it on servers in your organization. What are some pros and cons to this? ",
+        description: "Storing Data in the Cloud:    Pros:   Accessibility: Data stored in the cloud can be accessed from anywhere with an internet connection, which allows for greater flexibility and remote work capabilities.   Scalability: Cloud providers typically offer a variety of storage options and can quickly and easily scale up or down as needed. Reliability: Cloud providers typically offer high levels of uptime and availability, as well as built-in redundancy and disaster recovery capabilities. Cost-effective: Using cloud storage can be more cost-effective than investing in and maintaining on-premise servers. Cons: Security: While cloud providers typically have robust security measures in place, there may be concerns around the security of sensitive data being stored outside of the organization's network. Dependence on third-party: Organizations using cloud storage may become dependent on the cloud provider's infrastructure and services, which could lead to vendor lock-in and loss of control over the infrastructure. Network connectivity: Storing data in the cloud requires a stable and fast internet connection, which could be an issue in some areas or for some organizations.\n\n\
+        Storing Data on Servers in Your Organization: Pros: Security: Data stored on-premise can be more secure as it is under the direct control of the organization and can be protected by the organization's own security measures. Control: Organizations have complete control over the infrastructure, including hardware, software, and security measures. Network Connectivity: The organization's network infrastructure can be optimized for performance and reliability, which could result in faster and more consistent access to data. Cons: Scalability: On-premise storage may be more difficult and time-consuming to scale up or down as needed. Cost: On-premise storage can be expensive, as it requires hardware, software, and maintenance costs. Disaster Recovery: Organizations must have their own disaster recovery plan in place to protect against data loss or disruption"
     },
     {
         term: "help-desk-incident",
-        prompt: "For a help desk, what is the proper way for handling an incident report? You can answer it by writing down what takes place during the 4 phases"
+        prompt: "For a help desk, what is the proper way for handling an incident report? You can answer it by writing down what takes place during the 4 phases\n\
+        You are handled a report, explain your next steps",
+        description: "Identification: A customer reports an incident to the help desk, either through a phone call, email, chat, or any other communication channel. The help desk agent will document the incident by collecting information such as the customer's name, contact information, and a description of the issue. The incident is then assigned a unique ticket number for tracking purposes. Triage: The help desk agent will evaluate the incident to determine its priority and severity level, based on pre-established criteria such as impact on business operations, number of users affected, and urgency of the issue. The agent may also perform initial troubleshooting steps to try to resolve the issue or escalate it to a higher level of support. Investigation: Once the incident has been triaged and assigned to the appropriate support team, a more detailed investigation takes place. The support team will gather more information about the incident, such as logs, error messages, or other relevant data to try to diagnose the root cause of the issue. The support team may also collaborate with other teams or vendors to investigate the issue further. Resolution: Once the root cause of the issue has been identified, the support team will work to develop a solution or workaround to resolve the incident. The solution or workaround will be tested and verified to ensure that it resolves the incident and does not cause any other issues. The support team will then communicate the resolution to the customer, and close the incident ticket."
     },
     {
         term: "company-15-computers",
@@ -957,25 +961,50 @@ const network_midterm = [
     },
     {
         term: "File Permission | Can Shirley ",
-        prompt: "Can Shirley read the manual.txt and why?",
+        prompt: "Which file above can shirly write and why?",
         description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
-        example: "  "
+        example: "shirley can write to project.txt because she is in the group student and the group has write permissions\n\
+        She cant read hw.txt\n\
+        she can read manual.txt because is open to everyone"
     },
     {
         term: "File Permission | Can larry read the hw.txt and why?",
         prompt: "Can larry read the hw.txt and why?",
         description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
+        example: "Larry can read/write hw.txt because he is the owner and he has read permissions"
     },
     {
         term: "File Permission | Can herbert write to project.txt and why?",
         prompt: "Can herbert write to project.txt and why?",
         description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
+        example: "Herbert cannot read project.txt because he is not in the group student"
     },
     {
         term: "File Permission | Can herbert read manual.txt and why?",
         prompt: "Can herbert read manual.txt and why?",
         description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
+        example: "Herbert can read manual.txt because it is open for read"
+    }, 
+    {
+        term: "LVM | LVM",
+        prompt: "What is LVM?",
+        description: "A physical volume is a storage device or partition that can be used as a building block for an LVM. A physical volume is typically a disk or disk partition that has been designated as a physical volume for use by the LVM."
     },
+    {
+        term: "LVM | Physicial Volume",
+        prompt: "What is a physical volume in LVM?",
+        description: "A volume group is a collection of physical volumes that have been combined to create a larger pool of storage space. The volume group allows for flexible allocation of storage space and helps to simplify storage management by abstracting away the underlying physical storage devices."
+    },
+    {
+        term: "LVM | Volume Group",
+        prompt: "What is a volume group in LVM?",
+        description: "A logical volume is a virtual volume that is created within a volume group. Logical volumes are used to provide logical partitions that can be assigned to file systems or used as virtual disks. Logical volumes can be resized or moved within the volume group, providing greater flexibility and ease of management."
+    },
+    {
+        term: "LVM | Logical Volume",
+        prompt: "What is a logical volume in LVM?",
+        description: "A file system is a method used to organize and store files on a disk or disk partition. File systems can be created on logical volumes, providing a means of storing and accessing files on the logical volume. Common file systems used in Linux include ext4, XFS, and Btrfs."
+    }
 ]
 
 const artificialIntelligence = [
@@ -1204,7 +1233,7 @@ const artificialIntelligence_2 = [
         ---- return Beta (Prune)\n\
         return Beta"
     },
-    
+
 ]
 
 
