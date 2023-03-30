@@ -926,6 +926,21 @@ const artificialIntelligence = [
         prompt: "Discuss possible agent designs for the cases in which clean squares can become dirty and the geography of the environment is unknown. Does it make sense for the agent to learn from its experience in these cases? If so, what should it learn? If not, why not?",
         example: "If this is the case, an agent could learn to predict where dirt is more likely to accumulate on the geography based on past experiences. For example, certain areas may be more likely to become dirty during holidays or at specific times of day, such as morning rush hours. An agent could learn from past experiences and identify patterns or correlations to predict future unclean areas."
     },
+    {
+        term: "solving-problems-by-search",
+        description: "Solving Problems By Searching \n\n\
+        • Reflex Agents, which base their actions on a direct mapping from states to actions, Cannot Operate well in environments for which this mapping would be too large to store and would take too long to learn. \n\
+        • Goal-based agents, on the other hand, consider future actions and the desirability of their outcomes \n\
+        • Problem-solving agents is one kind of goal-based agent \n\
+        • Problem-solving agents use atomic representations- that is states of the world are considered as wholes, with no internal structure visible to the problem solving algorithm. \n\
+        • First, begin with definitions of the problem and the solution. \n\
+        • Then describe several general purpose search algorithms to solve these problems \n\
+        • The task environment is one for which the solution is always a fixed sequence of actions.",
+        prompt: "Create a problem reoresentation for: On holiday in Romania; currently in Arad. Flight leaves tomorrow from Bucharest",
+        example: "Formulate goal: be in Bucharest \n\
+        • Formulate problem: states: various cities actions: drive between cities \n\
+        • Find solution: sequence of cities, e.g., Arad, Sibiu, Fagaras, Bucharest"
+    }
 ];
 
 
