@@ -871,7 +871,110 @@ const network = [
 
 // I got the study set way too long... This is a specific focus for the midterm
 const network_midterm = [
+    {
+        term: "responsabilities-admin",
+        prompt: "What are some of the responsibilities of the System Administrator?",
+        example: "It is important to keep documentation of the system so that it can be easily understood by others.",
+        description: "User management: Creating, modifying, and deleting user accounts and groups, assigning appropriate permissions and access rights, and managing authentication and authorization.      System installation and configuration: Installing, configuring, and maintaining operating systems, software applications, and hardware components.      Security management: Implementing and enforcing security policies, managing firewalls, applying security patches and updates, monitoring system logs for potential threats, and running regular security audits.      Backup and disaster recovery: Implementing and maintaining backup solutions, performing regular data backups, and developing and testing disaster recovery plans.      System monitoring and optimization: Monitoring system performance and resource usage, troubleshooting performance issues, and optimizing systems for maximum efficiency.      Network management: Configuring and maintaining network devices, monitoring network traffic, and managing connectivity and access to resources.      Server management: Ensuring server availability and performance, configuring and maintaining server software, and managing server hardware.      Technical support: Providing technical support and assistance to end-users, diagnosing and resolving hardware and software issues.      Documentation and reporting: Maintaining accurate and up-to-date documentation of system configurations, processes, and policies, and generating reports for management or compliance purposes.      Staying current with industry trends and technologies: Continuously learning about new technologies, tools, and best practices to ensure the most efficient and secure operation of the organization's systems."
+    },
+    {
+        term: "documentaiton-keep",
+        prompt: "Why is it important to keep documentation of the system? What would your daily morning to night routine be as a sys admin?",
+        description: "    Knowledge sharing: Comprehensive documentation enables other IT professionals, such as new hires or consultants, to understand the system quickly and perform their tasks efficiently. It prevents the loss of knowledge when team members leave the organization or change roles.      Troubleshooting and problem resolution: Well-documented systems make it easier to identify and resolve issues, as they provide a clear understanding of system configurations, dependencies, and processes. This can lead to faster problem resolution and reduced downtime.      Consistency and standardization: Documentation ensures that procedures and configurations are applied consistently across the organization, which helps maintain system stability and prevents configuration drift.      Compliance and auditing: Many industries have regulatory requirements that mandate organizations to maintain proper documentation of their systems for compliance purposes. Detailed documentation can help demonstrate compliance during audits and inspections.      Disaster recovery and business continuity: In the event of a disaster or system failure, accurate documentation can facilitate the recovery process and minimize downtime by providing information about backup procedures, system configurations, and recovery steps.      Change management: Documenting changes to the system helps track the system's evolution over time and ensures that any modifications are carried out systematically and with proper approvals. This can help prevent unauthorized changes and minimize the risk of introducing errors or conflicts.      Training and onboarding: Documentation serves as a valuable resource for training new team members and bringing them up to speed on the organization's systems and procedures.      Reducing human error: By providing clear and detailed instructions for routine tasks and procedures, documentation can help minimize the risk of human error and ensure that best practices are followed.",
+        example: "    Document from the start: Begin documenting as soon as you start working on a new system or project. This ensures that essential details are not missed and makes it easier to maintain the documentation as the system evolves.      Use a standard format: Adopt a consistent format and structure for your documentation, such as using templates, to make it easy to understand and navigate. This also helps maintain a professional appearance and promotes adherence to organizational standards.      Keep it clear and concise: Write documentation that is clear, concise, and easy to understand. Avoid jargon and technical terms when possible, and always provide explanations for any acronyms or abbreviations.      Organize and categorize: Organize your documentation logically, using categories, sections, and headings to make it easy for others to find relevant information. Create a table of contents and use hyperlinks for easy navigation.      Use visuals: Incorporate diagrams, flowcharts, and screenshots to illustrate concepts and processes more clearly. Visual aids can help make complex information more accessible and easier to understand.      Regular updates and version control: Update documentation regularly to reflect changes in the system, and use version control to track changes over time. This ensures that the documentation remains accurate and up-to-date, and makes it easier to roll back to a previous version if necessary.      Review and edit: Periodically review and edit your documentation for clarity, accuracy, and consistency. Encourage feedback from colleagues and end-users to ensure that the documentation remains relevant and useful.      Centralize documentation storage: Store all documentation in a centralized location, such as an internal wiki, shared drive, or a document management system. This makes it easy for team members to access and collaborate on the documentation, and ensures that everyone is working with the most current version.      Secure and back up: Protect sensitive documentation with appropriate access controls and encryption, and ensure that all documentation is backed up regularly to prevent data loss.      Promote a documentation culture: Encourage a culture of documentation within your team and organization, emphasizing its importance and value. Share best practices, provide training, and recognize the efforts of team members who contribute to maintaining high-quality documentation."
 
+    },
+    // HERE there are more things to complete
+    {
+        term: "machine-life-cycle | what-ismachine-life-cycle",
+        prompt: "What is the machine life cycle? You had just been hired as a sys admin, provide example of how you would treat your first order of linux machines through the machine life cycel??",
+        description: "    Planning and procurement: During this stage, sysadmins work with stakeholders to identify the organization's needs, set requirements, and evaluate potential solutions. This may involve researching and selecting hardware, software, and networking components, considering factors such as cost, performance, compatibility, and scalability.      Installation and configuration: Once the necessary components have been procured, sysadmins install and configure the hardware, operating system, software, and network settings. This includes setting up user accounts, access controls, and security measures, as well as integrating the system with existing infrastructure.      Deployment: After the system has been set up and tested, it is deployed into production. Sysadmins must ensure a smooth transition, which may involve training users, migrating data, and updating documentation.      Operation and maintenance: Once the system is in use, sysadmins are responsible for its ongoing operation and maintenance. This includes monitoring performance and resource utilization, applying patches and updates, and troubleshooting issues as they arise. Regular backups, security audits, and user support also fall under this stage.      Optimization and upgrades: Over time, sysadmins may need to optimize the system to improve performance, address changing requirements, or adapt to new technologies. This could involve hardware or software upgrades, changes to system configurations, or the implementation of new tools and processes.      Decommissioning and disposal: Eventually, a system may become obsolete or no longer meet the organization's needs. In this stage, sysadmins plan and execute the decommissioning process, which may involve migrating data and services to new systems, securely erasing sensitive data, and responsibly disposing of hardware.",
+        example: ""
+
+    },
+    {
+        term: "machine-life-cycle | How do you reduce entropy to a system?",
+        prompt: "How do you reduce entropy to a system? What would be your daily rutine as a sys admin to reduce entropy?",
+        description: "Establish and enforce configuration management: Implement a configuration management system (e.g., Ansible, Puppet, Chef) to automate and standardize the deployment, configuration, and maintenance of software and system settings. This helps ensure consistency across the infrastructure and reduces the likelihood of configuration drift.  Regular updates and patching: Keep your operating system, software packages, and applications up-to-date by applying patches and updates regularly. This not only helps maintain system stability and security but also prevents the accumulation of outdated or unused software components.  Use version control systems: Employ version control systems (e.g., Git, Subversion) to track changes in source code, configuration files, and documentation. This enables you to revert to a previous state if necessary, simplifying troubleshooting and reducing the impact of human errors.  Implement system monitoring: Set up monitoring solutions (e.g., Nagios, Zabbix) to keep track of system performance, resource usage, and potential issues. Regular monitoring helps you identify and resolve problems before they lead to increased entropy.  Adopt standard naming conventions: Use consistent and descriptive naming conventions for files, directories, and other system components. This makes it easier to locate and manage resources, reducing clutter and confusion.  Perform regular system audits: Conduct periodic audits of your system to identify and address inconsistencies, security vulnerabilities, and other issues that may contribute to entropy. This may involve reviewing logs, scanning for malware, or assessing system configurations.  Automate repetitive tasks: Use scripts or automation tools to perform repetitive or routine tasks, such as backups, log rotation, or software installations. Automation reduces the likelihood of human error and ensures that processes are executed consistently.  Maintain documentation: Keep thorough and up-to-date documentation of your system's configuration, processes, and policies. Documentation provides a reference point for maintaining consistency and helps ensure that best practices are followed.  Encourage a culture of consistency: Promote a culture of consistency within your team and organization by emphasizing the importance of adhering to standards, sharing best practices, and providing training as needed.  Clean up and declutter: Periodically remove unused or unnecessary files,",
+
+
+    },
+    {
+        term: "machine-life-cycle | Why would a machine retire? How do you detect a machine that needs to be retired?",
+        prompt: "Why would a machine retire?",
+        description: "    End of life: Every machine has a limited life span and usage capacity. Once a machine has reached the end of its useful life, it may need to be retired or replaced.      Obsolescence: As technology advances, newer and more advanced machines become available. This can make older machines obsolete and unsuitable for modern operations.      Maintenance costs: As machines age, they may require more frequent repairs and maintenance, which can become increasingly expensive. At a certain point, retiring the machine may be more cost-effective than continuing to repair and maintain it.      Energy efficiency: Older machines may be less energy-efficient than newer models, resulting in higher operating costs. Retiring the old machine and replacing it with a more energy-efficient model can save money over the long term.      Regulatory compliance: Some industries are subject to strict regulatory requirements related to equipment and machinery. If a machine no longer meets these requirements, it may need to be retired or upgraded.",
+        example: "    Age: Knowing the age of the machine is important. Most manufacturers provide an estimated lifespan for their machines. If a machine has reached or exceeded its estimated lifespan, it may be time to consider retirement.      Maintenance costs: Keep track of the cost of maintaining the machine over time. If the cost of repairs and maintenance becomes prohibitively expensive or more than the cost of purchasing a new machine, it may be time to retire it.      Performance: Track the machine's performance metrics, such as its speed, efficiency, and output. If these metrics begin to decline or become inconsistent, it may be time to retire the machine.      Energy consumption: Keep track of the machine's energy consumption. If it's significantly higher than newer models, this may be an indication that it's time to upgrade to a more energy-efficient machine.      Regulatory compliance: Be aware of any changes in regulatory requirements that may affect the machine's operation. If the machine is no longer compliant, it may need to be retired or upgraded.      Industry trends: Keep up with industry trends and advancements in technology. If newer, more advanced machines are becoming standard, it may be time to consider upgrading or retiring older equipment."
+    },
+    {
+        term: "machine-life-cycle | What would you do with the retired machine?",
+        prompt: "What would you do with the retired machine? | Can you build a business out of machines to be retired?",
+        description: "    Sell it: If the machine is still in good condition, it may have some residual value. You can try selling it to a third party, such as a used equipment dealer, to recover some of the cost of the machine.      Recycle it: If the machine is no longer usable, consider recycling it. Many components of machines, such as metals, plastics, and circuit boards, can be recycled.      Donate it: If the machine is still usable, consider donating it to a school or nonprofit organization that may have a need for it.      Repurpose it: Some retired machines can be repurposed for a different use, such as using an old server as a backup storage device.      Dispose of it: If the machine is in poor condition and cannot be repaired, it may need to be disposed of. This should be done in compliance with local regulations and best practices to ensure safe and environmentally responsible disposal.",
+        example: ""
+    },
+    {
+        term: "Brand-new-100",
+        prompt: "You are an administrator for a lab of 100 brand new computers all with a built in hard drive with no operating system installed, DVD, network card, the same hardware specs on the same network. You want to install CentOS on all the machines. • Give a specific way (with some details) how you would like to handle the install to make it as easy as possible for you",
+        description: "To install CentOS on all 100 computers, I would use a method called network boot or PXE (Preboot Execution Environment) boot. This method allows me to install the operating system on all the computers simultaneously over the network, rather than installing it manually on each computer.  Here are the steps I would take:      Set up a PXE boot server: I would set up a PXE boot server on the network, which will act as a central repository for the CentOS installation files.      Configure the server: I would configure the server to serve the CentOS installation files over the network using the TFTP (Trivial File Transfer Protocol) protocol.      Create a boot image: I would create a boot image that includes the CentOS installation files, which will be used to boot the computers over the network.      Configure the BIOS: I would configure the BIOS on all 100 computers to allow network booting as the primary boot option.      Boot the computers: I would then boot all 100 computers over the network using the boot image created in step 3.      Install CentOS: Once the computers are booted over the network, the CentOS installation process will start automatically. I would then follow the prompts to install CentOS on all the computers.      Configure the computers: Once the installation is complete, I would configure each computer with the necessary network settings and software applications.",
+
+    },
+    {
+        term: "mirror-raid",
+        prompt: "If you have a Mirror RAID system (RAID 0), do you need to keep a backup? Explain your answer",
+        description: ""
+    },
+    {
+        term: "solid-5ervice",
+        prompt: "You are asked to design a solid service for the customers of your company: • What would you do to keep the systems running through: o power failures o network outages o disk failures"
+
+    },
+    {
+        term: "cloud-vs-server",
+        prompt: "Compare storing data “in the cloud” vs storing it on servers in your organization. What are some pros and cons to this? "
+    },
+    {
+        term: "help-desk-incident",
+        prompt: "For a help desk, what is the proper way for handling an incident report? You can answer it by writing down what takes place during the 4 phases"
+    },
+    {
+        term: "company-15-computers",
+        prompt: "You work for a company that has 15 computers. Your boss’s computer, the boss’s 2 secretaries, you have 2 desktop computers in your office that you use, and 10 other employees have desktops in their offices (one of these employee’s is a good friend of yours). • You want to roll out some major upgrade to these computers. What strategy would you do, to make sure that the upgrade goes with minimal problems?"
+    },
+    {
+        term: "physicial-workstation-virtual-desktop",
+        prompt: "Compare a Physical Workstation to a Virtual Desktop Infrastructure • Cost • Maintenance • Storag"
+    },
+    {
+        term: "why-server-belong-in-a-data-center",
+        prompt: "Why do servers belong in a data center? Give specifics:"
+    },
+    {
+        term: "setuid | special executable",
+        prompt: "What is special about an executable file owned by root with the setuid bit on?"
+    },
+    {
+        term: "setuid | name a program",
+        prompt: "Can you name any program that we talked about in class that uses setuid? ",
+    },
+    {
+        term: "File Permission | Can Shirley write to and why?",
+        prompt: "Can Shirley write to and why?",
+        description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
+    },
+    {
+        term: "File Permission | Can larry read the hw.txt and why?",
+        prompt: "Can Shirley write to and why?",
+        description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
+    },
+    {
+        term: "File Permission | Can herbert write to project.txt and why?",
+        prompt: "Can herbert write to project.txt and why?",
+        description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
+    },
+    {
+        term: "File Permission | Can herbert read manual.txt and why?",
+        prompt: "Can herbert read manual.txt and why?",
+        description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
+    },
 ]
 
 const artificialIntelligence = [
