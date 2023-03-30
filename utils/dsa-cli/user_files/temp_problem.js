@@ -1,9 +1,9 @@
-class NQueens {
-	solve(n) {
+class MinWindow {
+	solve(s, t) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: NQueens };
+module.exports = { Problem: MinWindow };
