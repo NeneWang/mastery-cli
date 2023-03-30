@@ -956,13 +956,14 @@ const network_midterm = [
         prompt: "Can you name any program that we talked about in class that uses setuid? ",
     },
     {
-        term: "File Permission | Can Shirley write to and why?",
-        prompt: "Can Shirley write to and why?",
+        term: "File Permission | Can Shirley ",
+        prompt: "Can Shirley read the manual.txt and why?",
         description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
+        example: "  "
     },
     {
         term: "File Permission | Can larry read the hw.txt and why?",
-        prompt: "Can Shirley write to and why?",
+        prompt: "Can larry read the hw.txt and why?",
         description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
     },
     {
