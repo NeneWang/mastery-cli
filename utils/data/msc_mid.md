@@ -16,13 +16,18 @@ Or, have these musics always been global in one way or another?
 The assignment is a blog post and not an academic paper. Even though your tone should be for a general audience, remember to cite your sources. For this assignment, you are not allowed to use Wikipedia, as it is not a reliable source of information. Instead, use the library’s databases to complete your research. I will provide some useful links that can help you.
 
 --- 
-### Idea
+### Idea 
+
+Singing from the Heart: Passion and Heartbreaks (Frank Sinatra and Bachata)
 
 - About Bachata and contrast with Frank Sinatra
 - American Dreaam and the Dream of immigration to a worse case
 - Raise to the top vs raise to the bottom in the case of man
 - who were the bad guys in the state? in Bachata it seems to be the females while in thiswe are talking about the man.
 - Passion and Heartbreaks: The contrast Of Bachata and Frank Sinatra
+- Improving Sterotypes vs Creating the Stereotypes
+  - How stereotypes are built
+- Audience: The American audience vs the Male audience it was targetted towards
 
 You should answer questions such as, is this music still recorded commercially? 
 
@@ -31,12 +36,20 @@ You should answer questions such as, is this music still recorded commercially?
 Has this music changed from traditional music-making to a more globalized one?
 
 - Yes now there is new music about the case
+- Family friendly vs not seen propperly
+- About hope and hopelessness
 
 Do artists compromise their traditional way of making music to appeal to a global audience? 
+
+- Yes, at 
+
 
 
 
 Or, have these musics always been global in one way or another?
+
+
+Passion 
 
 
 ---

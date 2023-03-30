@@ -12,8 +12,10 @@
 
 const { TermStorage } = require('../structures');
 
-const set_all = false;
-const study_cisc = false; // Studying for Class Targetted.
+const layer_1 = true;
+const layer_2 = false;
+const layer_3 = false;
+const study_cisc = true; // Studying for Class Targetted.
 
 /**
  * 
@@ -27,8 +29,8 @@ async function populateMasterDeck() {
     let decks = new TermStorage([], "Academic Terms");
 
     const { react_terms, apex } = require('./frameworks');
-    decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: set_all }));
-    decks.addDeck(new TermStorage(apex, "apex", { is_active: set_all }));
+    decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(apex, "apex", { is_active: layer_1 }));
 
 
     const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne } = require("./spring-senior");
@@ -42,43 +44,43 @@ async function populateMasterDeck() {
 
 
     const { pragmatic_programmer } = require('./ethics.js');
-    decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", { is_active: set_all }));
+    decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", { is_active: layer_1 }));
 
     const { designPatterns, dsa, system_design } = require('./dsa');
-    decks.addDeck(new TermStorage(designPatterns, "design patterns", { is_active: set_all }));
+    decks.addDeck(new TermStorage(designPatterns, "design patterns", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(dsa))
-    decks.addDeck(new TermStorage(system_design, "system design", { is_active: set_all }));
+    decks.addDeck(new TermStorage(system_design, "system design", { is_active: layer_1 }));
 
     const { aws_services, aws_glossary, coderTerms, unit_testing, js_advanced, best_practices } = require('./programmer_experience');
-    decks.addDeck(new TermStorage(aws_glossary, "aws glossary", { is_active: set_all }));
-    decks.addDeck(new TermStorage(aws_services, "aws services", { is_active: set_all }));
-    decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: set_all }));
-    decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: set_all }));
-    decks.addDeck(new TermStorage(js_advanced, "js advanced", { is_active: set_all }));
-    decks.addDeck(new TermStorage(best_practices, "best practices", { is_active: set_all }));
+    decks.addDeck(new TermStorage(aws_glossary, "aws glossary", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(aws_services, "aws services", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(js_advanced, "js advanced", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(best_practices, "best practices", { is_active: layer_1 }));
 
 
     // Includes UX, system Design
     const { system_design_project } = require('./design');
-    decks.addDeck(new TermStorage(system_design_project, "system design", { is_active: set_all }));
+    decks.addDeck(new TermStorage(system_design_project, "system design", { is_active: layer_1 }));
 
 
     // Includes Marketing, Accounting.
     const { accounting } = require('./business_terms');
-    decks.addDeck(new TermStorage(accounting, "accounting", { is_active: set_all }));
+    decks.addDeck(new TermStorage(accounting, "accounting", { is_active: layer_2 }));
 
 
     const { interview } = require('./interview');
-    decks.addDeck(new TermStorage(interview, "interview", { is_active: set_all }));
+    decks.addDeck(new TermStorage(interview, "interview", { is_active: layer_3 }));
 
     const { pytorch_machine_learning_course, machine_learning_pandas_visualization, machine_learning_scikit_learn } = require('./ai_machine');
-    decks.addDeck(new TermStorage(pytorch_machine_learning_course, "pytorch machine learning course", { is_active: set_all }));
-    decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas", { is_active: set_all }));
-    decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn", { is_active: set_all }));
+    decks.addDeck(new TermStorage(pytorch_machine_learning_course, "pytorch machine learning course", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn", { is_active: layer_1 }));
 
     const {designing_good_charts, sql} = require('./data-science');
-    decks.addDeck(new TermStorage(designing_good_charts, "designing good charts", { is_active: set_all }));
-    decks.addDeck(new TermStorage(sql, "sql", { is_active: set_all }));
+    decks.addDeck(new TermStorage(designing_good_charts, "designing good charts", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(sql, "sql", { is_active: layer_1 }));
 
 
     // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
@@ -92,7 +94,7 @@ async function populateMasterDeck() {
     const { TermGenerator } = require('./terms_generator');
     const termGenerator = new TermGenerator(filesData);
     const _ = await termGenerator.fetchTerms();
-    decks.addDecks(termGenerator.termStorageList(), { is_active: set_all });
+    decks.addDecks(termGenerator.termStorageList(), { is_active: layer_1 });
 
 
     const strategyFilesData = [
@@ -108,7 +110,7 @@ async function populateMasterDeck() {
 
     const strategyGenerator = new TermGenerator(strategyFilesData, { default_prompt: "How could you use this?" });
     const __ = await strategyGenerator.fetchTerms();
-    decks.addDecks(strategyGenerator.termStorageList(), { is_active: set_all });
+    decks.addDecks(strategyGenerator.termStorageList(), { is_active: layer_1 });
 
 
 
