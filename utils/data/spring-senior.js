@@ -1084,7 +1084,8 @@ const artificialIntelligence_2 = [
         if Alpha >= Beta | Prunes if Alpha returned is  \n\
         ---- return Beta (Prune)\n\
         return Beta"
-    }
+    },
+    
 ]
 
 
