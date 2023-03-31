@@ -38,5 +38,48 @@ const business_law = [
 const business_management = [
 ]
 
-module.exports = { accounting, business_law, business_management }
+const business_terms = [
+    {
+        term: "Kryder's Law",
+        prompt: "What is Kryder's Law? Imagine a scenario where you would use it to make money.",
+        description: "This law states that the storage density of hard disk drives (HDDs) doubles roughly every 18 months, similar to Moore's Law for microchips",
+
+    },
+    {
+        term: "Nielsen's Law",
+        prompt: "What is Nielsen's Law? Imagine a scenario where you would use it to make money.",
+        description: "his law states that the available bandwidth for internet connections tends to increase at a rate of 50% per year.",
+
+    },
+    {
+        term: "Moore's Law",
+        prompt: "What is Moore's Law? Imagine a scenario where you would use it to make money.",
+        description: "Moore's Law has been a driving force behind the rapid development of technology over the past few decades, as it has allowed computer hardware to become smaller, faster, and more affordable. It has also led to the development of new technologies and applications that were once thought impossible."
+    },
+    // https://www.d.umn.edu/~tkwon/course/5315/HW/MultiprocessorLaws.pdf
+    {
+        term: "Adahl's Law",
+        prompt: "What is Adahl's Law? Imagine a scenario where you would use it to make money.",
+        description: "This law describes the theoretical limit of the speedup that can be achieved from parallel computing, stating that the maximum speedup is limited by the proportion of the program that cannot be parallelized.",
+    },
+    {
+        term: "Gustafson's Law",
+        prompt: "What is Gustafson's Law? Imagine a scenario where you would use it to make money.",
+        description: "This law proposes that instead of trying to speed up individual tasks through parallel computing, it is more beneficial to scale up the size of the problem to fit the available resources.\n\
+        Gustafson's Law is a principle in computer science that says that it's better to work on one big problem at a time rather than breaking it up into smaller pieces and trying to work on them all at once. This is because when you work on a big problem, you can use all the resources available to you, like multiple processors or computers, to solve the problem faster. But if you try to break the problem into smaller pieces, you might not be able to use all your resources efficiently and it might take longer to solve the problem."
+    },
+    {
+        term: "Parkinson's Law",
+        prompt: "What is Parkinson's Law? Imagine a scenario where you would use it to make money.",
+        description: "This law states that data expands to fill the storage available, meaning that as storage capacity increases, the amount of data stored tends to increase as well."
+    },
+    {
+        term: "Sun and Ni's Law",
+        description: "Sun and Ni's Law states that the performance of parallel algorithms is limited by the amount of sequential computation that must be performed. In other words, even in a parallel computing environment, there may be certain parts of an algorithm that cannot be parallelized and must be executed sequentially. This sequential part of the algorithm is known as the \"critical path.\" Sun and Ni's Law suggests that in order to optimize the performance of a parallel algorithm, it is important to reduce the amount of sequential computation and minimize the length of the critical path. This can be achieved through a variety of techniques, such as algorithmic redesign, data reorganization, and workload balancing. Overall, Sun and Ni's Law highlights the importance of careful algorithm design and optimization in order to fully realize the benefits of parallel computing. By minimizing the amount of sequential computation and optimizing the critical path, it is possible to achieve significant performance gains in parallel computing environments",
+        prompt: "What is Sun and Ni's Law? Imagine a scenario where you would use it to make money.",
+
+    }
+]
+
+module.exports = { accounting, business_law, business_management, business_terms }
 

@@ -866,7 +866,24 @@ const network = [
         prompt: "How do you continuously display the amount of free memory in the system every second using the watch command?",
         example: "Run 'watch -n 1 free -h' in the terminal.",
         description: "To continuously display the amount of free memory in the system every second using the watch command, you can run the command 'watch -n 1 free -h' in the terminal. This will show the memory usage in human-readable format every second, and you can exit the command by pressing Ctrl + C."
-    }
+    },
+    {
+        term: "recursive vs non recursive servers",
+        prompt: "What is the difference between a recursive and non-recursive DNS server?",
+        example: "Servers that allow recursive queries will do all the work \n\
+        – Nonrecursive servers will only return referrals or answers",
+        description: "Recursive servers will do all the work of resolving a query, including querying other DNS servers if necessary. Nonrecursive servers will only return referrals or answers. Recursive servers are often used by end users, while nonrecursive servers are often used by other DNS servers."
+    },
+    {
+        term: "authoritative cs caching-only servers",
+        prompt: "What is the difference between an authoritative and a caching-only DNS server? And how do they work?",
+        description: "Authoritative servers have the original data – Caching servers retain data previously seen for future use"
+    },
+    {
+        term: "bind client configuration",
+        prompt: "What is the Bind client configuration?",
+        description: "Bind, or the Berkeley Internet Name Domain, is a popular DNS server software that translates domain names into IP addresses. A Bind client is a computer or device that requests DNS information from a Bind server to resolve domain names to IP addresses. The Bind client configuration involves setting up the client to connect to the Bind server, specifying the Bind server's IP address or hostname, and configuring the client to use the Bind server as its primary DNS resolver.",
+    },
 ]
 
 // I got the study set way too long... This is a specific focus for the midterm
@@ -930,8 +947,8 @@ const network_midterm = [
     {
         term: "cloud-vs-server",
         prompt: "Compare storing data “in the cloud” vs storing it on servers in your organization. What are some pros and cons to this? ",
-        description: "Storing Data in the Cloud:    Pros:   Accessibility: Data stored in the cloud can be accessed from anywhere with an internet connection, which allows for greater flexibility and remote work capabilities.   Scalability: Cloud providers typically offer a variety of storage options and can quickly and easily scale up or down as needed. Reliability: Cloud providers typically offer high levels of uptime and availability, as well as built-in redundancy and disaster recovery capabilities. Cost-effective: Using cloud storage can be more cost-effective than investing in and maintaining on-premise servers. Cons: Security: While cloud providers typically have robust security measures in place, there may be concerns around the security of sensitive data being stored outside of the organization's network. Dependence on third-party: Organizations using cloud storage may become dependent on the cloud provider's infrastructure and services, which could lead to vendor lock-in and loss of control over the infrastructure. Network connectivity: Storing data in the cloud requires a stable and fast internet connection, which could be an issue in some areas or for some organizations.\n\n\
-        Storing Data on Servers in Your Organization: Pros: Security: Data stored on-premise can be more secure as it is under the direct control of the organization and can be protected by the organization's own security measures. Control: Organizations have complete control over the infrastructure, including hardware, software, and security measures. Network Connectivity: The organization's network infrastructure can be optimized for performance and reliability, which could result in faster and more consistent access to data. Cons: Scalability: On-premise storage may be more difficult and time-consuming to scale up or down as needed. Cost: On-premise storage can be expensive, as it requires hardware, software, and maintenance costs. Disaster Recovery: Organizations must have their own disaster recovery plan in place to protect against data loss or disruption"
+        description: "Storing Data in the Cloud:    Pros:   Accessibility: Data stored in the cloud can be accessed from anywhere with an internet connection, which allows for greater flexibility and remote work capabilities.   Scalability: Cloud providers typically offer a variety of storage options and can quickly and easily scale up or down as needed. Reliability: Cloud providers typically offer high levels of uptime and availability, as well as built-in redundancy and disaster recovery capabilities. Cost-effective: Using cloud storage can be more cost-effective than investing in and maintaining on-premise servers.       Cons: Security: While cloud providers typically have robust security measures in place, there may be concerns around the security of sensitive data being stored outside of the organization's network. Dependence on third-party: Organizations using cloud storage may become dependent on the cloud provider's infrastructure and services, which could lead to vendor lock-in and loss of control over the infrastructure. Network connectivity: Storing data in the cloud requires a stable and fast internet connection, which could be an issue in some areas or for some organizations.\n\n\n\
+        Storing Data on Servers in Your Organization: Pros: Security: Data stored on-premise can be more secure as it is under the direct control of the organization and can be protected by the organization's own security measures. Control: Organizations have complete control over the infrastructure, including hardware, software, and security measures. Network Connectivity: The organization's network infrastructure can be optimized for performance and reliability, which could result in faster and more consistent access to data.       Cons: Scalability: On-premise storage may be more difficult and time-consuming to scale up or down as needed. Cost: On-premise storage can be expensive, as it requires hardware, software, and maintenance costs. Disaster Recovery: Organizations must have their own disaster recovery plan in place to protect against data loss or disruption"
     },
     {
         term: "help-desk-incident",
