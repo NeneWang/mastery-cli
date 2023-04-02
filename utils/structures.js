@@ -17,7 +17,7 @@ class Term {
         this.example = example;
 
         if (this.auto_newline) {
-            this.example = this.description.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
+            this.example = this.example.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
             this.description = this.description.replace(/(\s{2,}|\n)(?=\S)/g, "\n");
         }
 

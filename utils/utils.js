@@ -272,7 +272,7 @@ class Maid {
 
 		const dayFeaturesToExtract = populateLastDaysFeaturesBarCharts()
 		try {
-			this.barChartFeatures(userPerformanceData, dayFeaturesToExtract, 2);
+			this.barChartFeatzures(userPerformanceData, dayFeaturesToExtract, 2);
 		}
 		catch {
 			console.warn("Error while attempting to plot features bar charts");
