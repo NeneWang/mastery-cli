@@ -1414,6 +1414,13 @@ const algebra = [
         prompt: "What is the distance between two points (x1,y1) and (x2,y2)",
         example: "sqrt((x2-x1)^2 + (y2-y1)^2)",
         description: "distance of (1, 3) and (4, 5) = sqrt((4-1)^2 + (5-3)^2) = sqrt(9+4) = sqrt(13)"
+    },
+    {
+        term: "strict and nonstrict increase",
+        prompt: "What is the difference between strict and nonstrict increase",
+        example: "Strict increase is when the function is always increasing, nonstrict increase is when the function is increasing but can be equal\n\
+        when is increasing it cannot be descrease, thus when the slope is 0 and increase and decrease rules applies then is non."
+
     }
 
 
