@@ -245,6 +245,7 @@ class Maid {
 		return;
 	}
 
+
 	/**
 	 *  precalculated asynchronous at the start, since usually the missing Feat report is to be shown at the end of the math thing.
 	 *  */
@@ -284,8 +285,8 @@ class Maid {
 		} catch {
 			console.warn("Wrror while attempting to print performance summary");
 		}
-		console.log('\n')
-		// const { performances, username, days } = await res.data;
+		console.log('\n');
+
 	}
 
 
