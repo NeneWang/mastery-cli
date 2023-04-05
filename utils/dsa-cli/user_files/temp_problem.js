@@ -1,93 +1,124 @@
 class MinWindow {
-    solve(s, t) {
+	solve(s, t) {
+	// Your code here
+		const getFrequencyMap = (str, frequencyMap = new Map()) => {
+			for (const letter of str){
+				frequencyMap.set(letter, (frequencyMap.get(letter) | 0)+1);
+			}	
+			return frequencyMap;
+		}
 
-		// Because the order of it doesn't matter
-        const getFrequencyMap = (str, frequencyMap = new Map()) => {
-            for (const char of str) {
-                frequencyMap.set(char, (frequencyMap.get(char) || 0) + 1);
-            }
+		// getTwoPointers 
+		const getTwoPointers = (str, sub, frequencyMap) => {
+			// First you want to initialize things
+			
+			let [start, end_l, right, left, matched] = [0, str.length + 1, 0, 0, 0];
 
-            return frequencyMap;
-        };
+			// Then create a right and left loop given the left index, or the while closing windows
+			const canSlide = () => matched === sub.length; //Althought it shouldnt be more, that would be quite the bug
 
-
-		// and returns the start and end indices of the minimum window in s that contains all the characters in t
-        const getWindowPointers = (s, t, frequencyMap) => {
-            let [left, right, matched, start, end] = [0, 0, 0, 0, s.length + 1];
-
-			// Since the right pointer goes increasing, when it reaches this then we see the 
-            while (right < s.length) {
-                matched = addRightFrequency(s, right, frequencyMap, matched);
-				console.log("Matchment given right frequency", matched, s, right, frequencyMap);
+			while(right < str.length){
 				
-				// Can slide being the case if matched is equals to the length. => if it cant slide then doesnt make sense because not even make sense
-                const canSlide = () => matched === t.length;
-				console.log("can it slide?", canSlide());
-                while (canSlide()) {
-                    const window = right - left + 1;
+				matched = addRightFrequency(str, right, frequencyMap, matched);
+				
+				let anti_loop = 0;
 
-                    const isSmaller = window < end;
-                    if (isSmaller) {
-                        [start, end] = [left, window];
-                    }
+			console.log('start', start, 'endl', end_l, 'right', right, 'left', left, 'matched', matched, 'canSlide', canSlide(), 'curr', str[right], 'matched', matched, 'sublength', sub.length-1, frequencyMap, 'seq', getSubstring(left, right-left, str));
 
-                    matched = subtractLeftFrequency(s, left, frequencyMap, matched);
-					console.log("Matched | after substracted frequency", matched, s, left, frequencyMap)
-                    left++;
-                }
+				while(canSlide() && anti_loop < 30){
+					anti_loop++;
 
-                right++;
-            }
+					//Update the start and end if the new windows_l is smaller than end_l
+					
+				console.log('left start', start, 'endl', end_l, 'right', right, 'left', left, 'matched', matched, 'canSlide', canSlide(), 'curr', str[right], 'matched', matched, 'sublength', sub.length-1, frequencyMap, 'seq', getSubstring(left, right-left, str));	
 
-            return { start, end };
-        };
+					const window_l = right - left+1;
 
-		// addRightFrequency is a function is a helper function used by getWindowPointers to add a character to the window and update the frequency map returning the matched frequency map..
-        const addRightFrequency = (s, right, frequencyMap, matched) => {
-            const char = s[right];
-
-            if (frequencyMap.has(char)) {
-                frequencyMap.set(char, frequencyMap.get(char) - 1);
-
-                const isInWindow = 0 <= frequencyMap.get(char);
-                if (isInWindow) matched++;
-            }
-
-            return matched;
-        };
-
-		// The subtractLeftFrequency function is a helper function used by getWindowPointers to remove a character from the window and update the frequency map.
-        const subtractLeftFrequency = (s, left, frequencyMap, matched) => {
-            const char = s[left];
-
-            if (frequencyMap.has(char)) {
-                const isOutOfWindow = frequencyMap.get(char) === 0;
-                if (isOutOfWindow) matched--;
-
-                frequencyMap.set(char, frequencyMap.get(char) + 1);
-            }
-
-            return matched;
-        };
-
-		//The getSubString function is a helper function used to return the substring of s that corresponds to the minimum window if the end is less than the length, otherwise it returns ''.
-        const getSubString = (s, start, end) =>
-            end <= s.length ? s.slice(start, start + end) : '';
+					if(window_l < end_l) {
+						start = left;
+						end_l = window_l;
+					}
 
 
 
-        const isMissingArgs = !s.length || !t.length;
-        if (isMissingArgs) return '';
 
-        const frequencyMap = getFrequencyMap(t);
-        const { start, end } = getWindowPointers(s, t, frequencyMap);
+					matched = substractLeftFrequency(str, left, frequencyMap, matched);
 
-        return getSubString(s, start, end);
-    }
+					left++;
+
+					// Get the left Frequency and 
+
+				}
+
+				right++;
+
+			}
+
+			return {start, end_l};
+
+		}
 
 
+		// addRightFrequencyractLeftFrequency(str,
+		
+		const addRightFrequency = (str, right, frequencyMap, matches) => {
+			const letter = str[right];
+			
+			// Add the right letter and update the frequncy Map by -1 and then increase the matches
+
+			if(frequencyMap.has(letter)){
+				
+				frequencyMap.set(letter, frequencyMap.get(letter) - 1);
+				const count_letter = frequencyMap.get(letter);
+				if(count_letter >= 0){
+					matches++;
+				}
+				
+			}
+			return matches
+
+		}
+
+
+		// substractLeftFrequency
+		const substractLeftFrequency = (str, left, frequencyMap, matches) => {
+			const letter = str[left];
+
+			if(frequencyMap.has(letter)){
+				const count_letter = frequencyMap.get(letter);
+
+				if(count_letter === 0){
+					matches--;
+				}
+
+				frequencyMap.set(letter, frequencyMap.get(letter) + 1);
+			}
+			return matches;
+		}
+
+
+		// getSubString
+		const getSubstring = (start, end_l, str) => {
+			if (end_l > str.length) return "";
+			return str.slice(start, end_l + start);
+
+		}
+			
+		const is_invalid = !s.length || !t.length;
+		if(is_invalid) return "";
+
+		const frequencyMap = getFrequencyMap(t);
+		console.log(frequencyMap);
+		const {start, end_l} = getTwoPointers(s, t, frequencyMap);
+		return getSubstring(start, end_l, s);
+
+		
+
+	}
 }
 
 
 module.exports = { Problem: MinWindow };
+
+
 

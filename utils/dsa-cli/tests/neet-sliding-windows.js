@@ -112,6 +112,9 @@ class MinWindow extends ProblemTests{
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+
     }
     
     test_1(){
@@ -131,6 +134,22 @@ class MinWindow extends ProblemTests{
         const problemToTest = new this.Problem();
         assert.equal(problemToTest.solve("a", "aa"), "");
     }
+
+	
+    test_4(){
+        this.current_test_name = "ADOBECODEBANCDSF, ABC => BANC"
+        const problemToTest = new this.Problem();
+        assert.equal(problemToTest.solve("AAADOBECODEBANCDSF", "ABC"), "BANC");
+    }
+
+    test_5(){
+        this.current_test_name = "ADOBECODEBANACDSF, AABC => BANAC"
+        const problemToTest = new this.Problem();
+        assert.equal(problemToTest.solve("AAADOBECODEBANACDSF", "AABC"), "BANAC");
+    }
+	
+
+
 
 }
 

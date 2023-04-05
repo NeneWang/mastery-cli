@@ -261,31 +261,44 @@ class Maid {
 	}
 
 
-	performanceReport = async () => {
+	performanceReport = async ({ version = "tables" } = {}) => {
+
 		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/report/${CONSTANTS.ACCOUNT_ID}`, {
 			headers: {
 				'Accept-Encoding': 'application/json'
 			}
 		});
-		const userPerformanceData = await res.data;
+
+		let userPerformanceData = await res.data;
+
+		for (const [key, value] of Object.entries(userPerformanceData.week_average_exclude_today)) {
+			userPerformanceData.week_average_exclude_today[key] = parseFloat(value.toFixed(2));
+		}
 		// console.log(responseData)
 
-		const dayFeaturesToExtract = populateLastDaysFeaturesBarCharts()
-		try {
-			this.barChartFeatzures(userPerformanceData, dayFeaturesToExtract, 2);
-		}
-		catch {
-			console.warn("Error while attempting to plot features bar charts");
-			try {
-				console.warn("Using day features: ", userPerformanceData)
-			} catch { }
-		}
-		try {
-			this.printUserPerformanceDataSummary(userPerformanceData);
-		} catch {
-			console.warn("Wrror while attempting to print performance summary");
-		}
-		console.log('\n');
+		// const dayFeaturesToExtract = populateLastDaysFeaturesBarCharts()
+
+		// const summary_data = {
+
+		// }
+		console.table(userPerformanceData);
+
+
+		// try {
+		// 	this.barChartFeatzures(userPerformanceData, dayFeaturesToExtract, 2);
+		// }
+		// catch {
+		// 	console.warn("Error while attempting to plot features bar charts");
+		// 	try {
+		// 		console.warn("Using day features: ", userPerformanceData)
+		// 	} catch { }
+		// }
+		// try {
+		// 	this.printUserPerformanceDataSummary(userPerformanceData);
+		// } catch {
+		// 	console.warn("Wrror while attempting to print performance summary");
+		// }
+		// console.log('\n');
 
 	}
 
