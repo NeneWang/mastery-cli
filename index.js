@@ -122,19 +122,24 @@ const { Demo, EDemo } = demos;
 	}
 	else if (input.includes(cmInfo.commands.dsa.code)) {
 		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
+
+		const updateAlgorithmPerformance = (problem_response) => {
+			console.log("updateAlgorithmPerformance: ", problem_response);
+
+			const dsa_is_correct = problem_response.status;
+			if (dsa_is_correct) {
+				increasePerformance("algo", problem_response.score_to_increase);
+
+			}
+		}	
+
 		if (flags.all) {
 			console.log("all")
-			const dsa_is_correct = await dsaTrainer.showMenuOfProblems();
-
-			if (dsa_is_correct) {
-				await increasePerformance("algo");
-			}
+			const problem_response = await dsaTrainer.showMenuOfProblems();
+			updateAlgorithmPerformance(problem_response);
 		} else {
-			const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
-
-			if (dsa_is_correct) {
-				await increasePerformance("algo");
-			}
+			const problem_response = await dsaTrainer.showRecommendedProblems();
+			updateAlgorithmPerformance(problem_response);
 		}
 
 	}

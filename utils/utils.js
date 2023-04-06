@@ -201,18 +201,23 @@ class Maid {
 	 * !important: To prepopulate the msising report first!!
 	 */
 	provideMissingReport = async ({ run_dsa = false } = {}) => {
-		if (!this.missingFeatReport) {
-			const _ = await this.populateMissingReport();
+		try{
+			if (!this.missingFeatReport) {
+				const _ = await this.populateMissingReport();
+			}
+			// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
+			if (!this?.missingFeatReport || this.missingFeatReport?.length <= 0) {
+				console.log("Missing Reports Missing: received: ", this.missingFeatReport)
+				return;
+			}
+			const missingFormatedAsStr = this.missingFeatReport.join(", ")
+			console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
+			if (run_dsa) {
+				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
+			}
 		}
-		// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
-		if (!this?.missingFeatReport || this.missingFeatReport?.length <= 0) {
-			console.log("Missing Reports Missing: received: ", this.missingFeatReport)
-			return;
-		}
-		const missingFormatedAsStr = this.missingFeatReport.join(", ")
-		console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
-		if (run_dsa) {
-			await this.requests_if_run_dsa_trainer(this.missingFeatReport);
+		catch(err){
+			// console.log("Error in provideMissingReport", err)
 		}
 	}
 
@@ -256,7 +261,10 @@ class Maid {
 			this.missingFeatReport = res.data;
 		}
 		catch (err) {
-			console.log(err);
+			if(Settings.show_http_errors){
+
+				console.log(err);
+			}
 		}
 	}
 
@@ -269,20 +277,99 @@ class Maid {
 			}
 		});
 
+		const feat_rules = {
+			commits: {
+				day: 3,
+			},
+			math_ss: {
+				day: 1,
+			},
+			algo_w: {
+				description: "Weighted algorithms\n\
+				easy: 1\n\
+				medium: 2\n\
+				hard: 4\n",
+				week: 7
+			},
+			terms: {
+				description: "Terminologies practiced",
+				week: 100
+			},
+			pro: {
+				description: "Professional Projects",
+				week: 3 * 5
+			},
+			feat: {
+				description: "Features for personal projects",
+				week: 1 * 5 + 2 * 3
+			},
+			acad: {
+				description: "Academic Projects / Assignments / notes added",
+				week: 1 * 5
+			}
+		}
+
 		let userPerformanceData = await res.data;
 
-		for (const [key, value] of Object.entries(userPerformanceData.week_average_exclude_today)) {
-			userPerformanceData.week_average_exclude_today[key] = parseFloat(value.toFixed(2));
+		function parseDecimalsColumns(userPerformanceData, columns = ["week_average", "week_average_exclude_today"]) {
+
+			for (const column of columns) {
+
+				for (const [key, value] of Object.entries(userPerformanceData?.[column])) {
+					userPerformanceData[column][key] = parseFloat(value.toFixed(2));
+				}
+			}
+			return userPerformanceData;
+
 		}
-		// console.log(responseData)
 
-		// const dayFeaturesToExtract = populateLastDaysFeaturesBarCharts()
+		userPerformanceData = parseDecimalsColumns(userPerformanceData, ["week_average", "week_average_exclude_today"]);
+		function createFeaturesMap(feat_rules) {
+			let feat_map = {};
+			for (const [key, value] of Object.entries(feat_rules)) {
+				feat_map[key] = 0;
+			}
+			return feat_map;
+		}
 
-		// const summary_data = {
+		function updateRequirements(features_accomplished_today, feat_rules, userPerformanceData) {
+			for (const [requirement_key, settings] of Object.entries(feat_rules)) {
+				// Check if it requires a 'day' required performance
+				if (settings.day) {
+					// Then search for the performance, and give the difference between the required and the actual performed
+					const day_requirement = settings.day;
+					const day_performance = userPerformanceData?.["today"]?.[requirement_key]??0;
+					const day_difference = day_requirement - day_performance;
+					features_accomplished_today[`d: ${requirement_key}`] = { miss: day_difference, type: "day", req: day_requirement };
 
-		// }
+
+				}
+
+				// Check if it requires a 'week' required performance
+				if (settings.week) {
+					// Then search for the performance, and give the difference between the required and the actual performed
+					const week_requirement = settings.week;
+					const week_performance = userPerformanceData?.['week_sum']?.[requirement_key]??0;
+					const week_difference = week_requirement - week_performance;
+					features_accomplished_today[`w: ${requirement_key}`] = { miss: week_difference, type: "week", req: week_requirement };
+				}
+			}
+		}
+
+		function visualsUpdateMap(features_accomplished_today) {
+			// Do visual 
+			// Consult for needed to accomplish today (as -number something or X as finished)
+		}
+
+		// Create the requirements per Day
+		// const feat_accomplished_until_today = createFeaturesMap(feat_rules);
+		const feat_accomplished_until_today = {};
+		updateRequirements(feat_accomplished_until_today, feat_rules, userPerformanceData);
+
+
+
 		console.table(userPerformanceData);
-
+		console.table(feat_accomplished_until_today);
 
 		// try {
 		// 	this.barChartFeatzures(userPerformanceData, dayFeaturesToExtract, 2);

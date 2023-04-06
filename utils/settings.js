@@ -45,5 +45,7 @@ module.exports = Settings = {
     ], //Fetures to ignore on the report.
     "monday_ses": [
         ""
-    ]
+    ],
+    "show_http_errors": false,
+    "dev_mode": false, //If true, it will print communication receips
 }

@@ -8,6 +8,8 @@ const { getPromptDict } = require('./prompt');
 const Constants = require('./constants');
 const { renderPromptDescription } = require('./functions');
 const { Toggle, AutoComplete } = require('enquirer');
+const { ProblemMetadata } = require('./structures');
+const { response } = require('express');
 
 const DEBUG = false;
 
@@ -150,11 +152,40 @@ class DSATrainer {
      */
     async openRandomProblem() {
         const problem = this.problems_manager.getRandomProblem();
-        const problem_status = await this.solveProblem(problem);
+        const problem_response = await this.solveProblem(problem);
 
-        return problem_status == Constants.ProblemStatus.solved;
+        problem_response.is_problem_solved = problem_response.problem_status == Constants.ProblemStatus.solved;
+        return problem_response;
     }
 
+
+    /**
+     * Updates the problem status, such as interfacing with the problem report and problem attempted (in the future this would create a report of things done.)
+     * @param {ProblemMetadata} problem the problem to solve
+     * @param {Response<this.openAndTest>} results 
+     * @param {Object} statusMetadata reference to object contianing information such as failed attempts, etc that is being updated internally
+     */
+    updateProblemStatus(problem, results, statusMetadata = {}) {
+
+        // Update internally the amounts of failed attempts
+        statusMetadata.failed_attempts = results.details.failed_attempts || 0;
+        console.log("Failed attempts", statusMetadata.failed_attempts);
+        this.setCurrentProblemAttempts(results.details.failed_attempts);
+
+        // Update the problem report
+        if (Settings.DEV_MODE) console.log("problem_details", results.problem_details);
+        statusMetadata.problem_details = results.problem_details;
+
+        // Score to increase given this problem
+        const scoreGivenDifficulty = {
+            [Constants.difficulty.easy]: 1,
+            [Constants.difficulty.medium]: 2,
+            [Constants.difficulty.hard]: 4
+        };
+
+        statusMetadata.score_to_increase = scoreGivenDifficulty[problem.difficulty] || 0;
+
+    }
 
     /**
      * Wraps into continue solving until the problem is solved method
@@ -168,14 +199,22 @@ class DSATrainer {
         }
 
         let did_pass_all_tests = false
+        const statusMetadata = {
+            failed_attempts: this.getCurrentProblemAttempts()
+        };
 
-        // Try to solve the problem once
-        let status = await this.openAndTest(problem);
+        // Try to solve the problem once.
+        let results = await this.openAndTest(problem, { failed_attempts: statusMetadata.failed_attempts });
+        let status = results.status;
+        this.updateProblemStatus(problem, results, statusMetadata);
+
+
 
         while (!did_pass_all_tests && try_until_solved) {
 
             if (status == Constants.ProblemStatus.aborted) {
-                return Constants.ProblemStatus.aborted;
+                statusMetadata.status = Constants.ProblemStatus.aborted;
+                return statusMetadata;
             }
 
             else if (status == Constants.ProblemStatus.solved) {
@@ -183,14 +222,17 @@ class DSATrainer {
                 if (DEBUG) { console.log("Times the problem was solved.", this.problemReport.getAnswerFor(problem.slug)); }
                 this.cleanCurrentProblem();
                 did_pass_all_tests = true;
-                return Constants.ProblemStatus.solved;
+                statusMetadata.status = Constants.ProblemStatus.solved;
+                return statusMetadata;
             }
 
             else if (status == Constants.ProblemStatus.unsolved) {
                 continue; // Try again
             }
 
-            status = await this.openAndTest(problem);
+            const results = await this.openAndTest(problem, { failed_attempts: statusMetadata.failed_attempts });
+            status = results.status;
+            this.updateProblemStatus(problem, results, statusMetadata);
 
         }
     }
@@ -206,7 +248,7 @@ class DSATrainer {
     * @returns {Promise} A promise that resolves when the problem is opened
      */
     async openProblemMetadataInTerminal(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
-        
+
 
 
         let problem_details = this.problems_manager.getProblem(problem.slug);
@@ -255,18 +297,19 @@ class DSATrainer {
      * @param {ProblemMetadata} problem The problem to open and test
      * @returns {Constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
      */
-    async openAndTest(problem) {
+    async openAndTest(problem, { failed_attempts = 0 } = {}) {
         console.log(
             "Opening problem: ", problem.slug,
         );
         // Print the problem markdown.
 
         // console.log("Keys from prompt_dict", Object.keys(prompt_dict));
-
+        let problem_details = this.problems_manager.getProblem(problem.slug);
         await this.openProblemMetadataInTerminal(problem);
 
         let question_state_flag = true;
         let did_pass_all_tests_before = false;
+
         const choices = {
             'Run Tests': async () => {
                 try {
@@ -275,8 +318,10 @@ class DSATrainer {
                     if (did_pass_all_tests) {
                         did_pass_all_tests_before = true;
 
+                    } else {
+                        failed_attempts += 1;
                     }
-                    return Constants.ProblemStatus.unsolved;
+                    return { status: Constants.ProblemStatus.unsolved, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
                 }
                 catch (e) {
                     console.log("Error running tests: ", e);
@@ -303,7 +348,7 @@ class DSATrainer {
 
             'Exit': async () => {
                 question_state_flag = false;
-                return Constants.ProblemStatus.aborted;
+                return { status: Constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
             }
 
         }
@@ -345,7 +390,7 @@ class DSATrainer {
                         } else {
                             console.log("Submission running", Constants.ProblemStatus.solved);
                             question_state_flag = false;
-                            return Constants.ProblemStatus.solved;
+                            return { status: Constants.ProblemStatus.solved, details: { failed_attempts: failed_attempts }, problem_details: problem_details };
 
                         }
                     }
@@ -375,8 +420,18 @@ class DSATrainer {
         return this.problemReport.getAnswerFor("current_problem");
     }
 
+    setCurrentProblemAttempts(attempts) {
+        this.problemReport.setAnswerFor("current_problem_attempts", attempts);
+    }
+
+    getCurrentProblemAttempts() {
+        return this.problemReport.getAnswerFor("current_problem_attempts");
+
+    }
+
     cleanCurrentProblem() {
         this.problemReport.setAnswerFor("current_problem", 0);
+        this.problemReport.setAnswerFor("current_problem_attempts", 0);
     }
 
 
@@ -401,6 +456,8 @@ class DSATrainer {
      */
     async showMenuOfProblems({ allow_continue_last = true, show_progress = true, show_tags = true, show_specific_problems = [] } = {}) {
         const _ = await this.problemReport.getReport();
+
+
         /**
          * 
          * @param {list[str]} problemsSlugs List of slugs
@@ -477,10 +534,12 @@ class DSATrainer {
 
         const problem = getProblem(problem_selected);
         const is_new_problem = problem_selected != current_problem_prompt;
-        const problem_status = await this.solveProblem(problem, { populate_problem: is_new_problem });
+        const problem_response = await this.solveProblem(problem, { populate_problem: is_new_problem });
+
 
         // console.log("Problem status resolved with: ", problem_status, Constants.ProblemStatus.solved == problem_status);
-        return problem_status == Constants.ProblemStatus.solved;
+        problem_response.is_problem_solved = problem_response.problem_status == Constants.ProblemStatus.solved;
+        return problem_response;
     }
 
 
