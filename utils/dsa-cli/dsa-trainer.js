@@ -250,7 +250,6 @@ class DSATrainer {
     async openProblemMetadataInTerminal(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
 
 
-
         let problem_details = this.problems_manager.getProblem(problem.slug);
         /**
             slug: 'character-replacement',
