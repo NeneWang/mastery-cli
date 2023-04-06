@@ -14,6 +14,7 @@ const utils = require('./utils/utils');
 const { increasePerformance } = require('./utils/utils');
 const constants = require('./utils/constants');
 const demos = require('./utils/demo');
+const Settings = require('./utils/settings');
 
 
 
@@ -124,11 +125,12 @@ const { Demo, EDemo } = demos;
 		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
 
 		const updateAlgorithmPerformance = (problem_response) => {
-			console.log("updateAlgorithmPerformance: ", problem_response);
+			if (Settings.dev_mode) console.log("updateAlgorithmPerformance: ", problem_response);
 
-			const dsa_is_correct = problem_response.status;
+			const dsa_is_correct = problem_response.is_problem_solved;
 			if (dsa_is_correct) {
-				increasePerformance("algo", problem_response.score_to_increase);
+				increasePerformance("algo_w", problem_response.score_to_increase);
+				increasePerformance("algo_w", 1);
 
 			}
 		}	
