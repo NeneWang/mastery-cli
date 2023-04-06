@@ -1,9 +1,9 @@
-class MaxSlidingWindow {
-	solve(nums, k) {
+class CharacterReplacement {
+	solve(s, k) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: MaxSlidingWindow };
+module.exports = { Problem: CharacterReplacement };
