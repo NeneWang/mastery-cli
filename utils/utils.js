@@ -783,7 +783,7 @@ let ECommitCategory = {
 		* @param {str} user_res: Response answered by the user on the terminal
 		* @param {bool} debug ?= False : If to whether to debug api responses, etc.
 	 */
-const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
+const postCommentFromTerm = async (term_selected, user_res, debug = true) => {
 	/**Expected Body Structure: for `https://jmmgskxdgn.us-east-1.awsapprunner.com/comment`
 	 * {
 		"account_id": 0,
@@ -792,6 +792,8 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 		"concept_slug": "string"
 		}
 	 */
+
+	console.log("Posting comment", term_selected, user_res)
 
 
 	try {
@@ -812,7 +814,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 
 	} catch (err) {
 
-		if (DEBUG) console.log("Probably no connection, comment has not been made")
+		if (debug) console.log("Probably no connection, comment has not been made")
 		if (debug) {
 			console.log(err)
 		}
@@ -820,7 +822,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 	}
 }
 
-const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, {log_special_categories = true} = {}) => {
+const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true } = {}) => {
 
 
 
@@ -830,7 +832,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, {log_speci
 		commitMessage = "Committed by Maid ";
 	}
 
-	
+
 	// If any category found then increase the score please.
 	commitCat = commitCategory(commitMessage);
 	// Log special categories
@@ -863,7 +865,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, {log_speci
  * @returns {Map<date:<date: comment>>}
  */
 const getComments = async (term, count = 5) => {
-	
+
 	const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
 		headers: {
 			'Accept-Encoding': 'application/json'
@@ -879,7 +881,8 @@ const logCommitIfSpecialCategory = async (commitMessage, category, { print_previ
 	console.log("Logging commit message in comments database?", category.code, special_categories, category.code in special_categories)
 	if (special_categories.includes(category.code)) {
 		// Log the commit message in the comments database
-		await postCommentFromTerm(category?.code ?? "log", commitMessage);
+
+		await postCommentFromTerm(category.code, commitMessage);
 		if (print_previous_commits) {
 			// Print previous commits
 			const res = await getComments(category?.code ?? "log");
@@ -918,7 +921,7 @@ const autorelease = () => {
 	}
 }
 
- module.exports = {
+module.exports = {
 	getTalk, commitpush, autorelease,
 	Maid, getToday, FlashQuizzer, increasePerformance,
 	commitCategory, logCommitIfSpecialCategory, postCommentFromTerm, getComments
