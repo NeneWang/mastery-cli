@@ -114,9 +114,10 @@ class Quizzer {
         // Create miniqueue
         const miniqueue = new MiniTermScheduler(potential_questions);
         while(miniqueue.cardsCount != 0) {
-            const card = miniqueue.pop();
+            const card = miniqueue.getCard();
             console.log("card", card);
             response = await this.ask_term_question(card);
+            miniqueue.solveCard(response);
         }
         
     }
