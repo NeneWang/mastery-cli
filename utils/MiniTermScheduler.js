@@ -1,7 +1,7 @@
 const { StorableQueue } = require("./StorableQueue.js");
 
 class MiniTermScheduler {
-    constructor(cards, { working_set_length = 3, rules = { increase_when_incorrect: true } }) {
+    constructor(cards, { working_set_length = 3, rules = { increase_when_incorrect: true } } = {}) {
         this.working_set_length = working_set_length;
         naming_post = "mini_term_scheduler";
         this.working_set = new StorableQueue({ name: "working_set" + naming_post });
