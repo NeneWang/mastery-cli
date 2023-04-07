@@ -110,6 +110,7 @@ class Quizzer {
         let potential_questions = this.terms;
         potential_questions = await this.getYoungest(potential_questions);
         console.log("potential_questions", potential_questions);
+        console.log("length", potential_questions.length);
     }
 
 
