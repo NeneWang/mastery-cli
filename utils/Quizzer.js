@@ -113,11 +113,15 @@ class Quizzer {
         console.log("length", potential_questions.length);
         let attempts = 0;
         // Create miniqueue
+        const total_cards = potential_questions.length;
         const miniqueue = new MiniTermScheduler(potential_questions);
         while(miniqueue.cardsCount != 0) {
+            // Print the statistics
+            console.log(`queue: ${miniqueue.cardsCount}/${total_cards}`);
             const card = miniqueue.getCard();
             console.log("card", card);
-            response = await this.ask_term_question(card);
+            const response = await this.ask_term_question(card);
+            console.log("response", response);
             miniqueue.solveCard(response);
             attempts +=1;
         }
