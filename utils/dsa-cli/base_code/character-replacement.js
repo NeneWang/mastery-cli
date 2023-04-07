@@ -1,6 +1,14 @@
 class CharacterReplacement {
 	solve(s, k) {
-	// Your code here
+		// addRightFrequency
+
+
+		// substractLeftFrequency
+
+
+		// getCode
+		
+		// Run the sliding windows problem
 
 	}
 }

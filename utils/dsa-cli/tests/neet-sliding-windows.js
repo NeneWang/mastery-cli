@@ -7,6 +7,10 @@ class CharacterReplacement extends ProblemTests {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
+		this.tests.push(() => this.test_3());
+		this.tests.push(() => this.test_4());
+		this.tests.push(() => this.test_5());
+		this.tests.push(() => this.test_6());
     }
 
     test_1() {
@@ -20,6 +24,30 @@ class CharacterReplacement extends ProblemTests {
         const problemToTest = new this.Problem();
         assert.equal(problemToTest.solve("AABABBA", 1), 4);
     }
+	test_3() {
+    this.current_test_name = "ABCDE, 0 => 1"
+    const problemToTest = new this.Problem();
+    assert.equal(problemToTest.solve("ABCDE", 0), 1);
+}
+
+test_4() {
+    this.current_test_name = "AABBBCCCDDDEEE, 3 => 6"
+    const problemToTest = new this.Problem();
+    assert.equal(problemToTest.solve("AABBBCCCDDDEEE", 3), 6);
+}
+
+test_5() {
+    this.current_test_name = "ABCD, 1 => 2"
+    const problemToTest = new this.Problem();
+    assert.equal(problemToTest.solve("ABCD", 1), 2);
+}
+
+test_6() {
+    this.current_test_name = "AAAAA, 2 => 5"
+    const problemToTest = new this.Problem();
+    assert.equal(problemToTest.solve("AAAAA", 2), 5);
+}
+
 
 }
 

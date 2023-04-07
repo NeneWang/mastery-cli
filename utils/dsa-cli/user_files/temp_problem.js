@@ -1,9 +1,24 @@
-class CharacterReplacement {
-	solve(s, k) {
+class MinWindow {
+	solve(s, t) {
 	// Your code here
+		const getFrequencyMap = (str, frequencyMap = new Map()) => {
+			
+		}
 
+		// getTwoPointers
+		
+		// addRightFrequency
+		
+		// substractLeftFrequency
+
+
+		// getSubString
+
+		// Your solution
 	}
 }
 
 
-module.exports = { Problem: CharacterReplacement };
+module.exports = { Problem: MinWindow };
+
+

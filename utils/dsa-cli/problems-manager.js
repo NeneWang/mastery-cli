@@ -91,7 +91,7 @@ class ProblemsManager {
 
             this.addProblem(new ProblemMetadata(problem, {
                 tags: promblem_prompt.tags, difficulty: classifyDifficulty(promblem_prompt.tags),
-                name: promblem_prompt.title, description: promblem_prompt.description
+                name: promblem_prompt.title, description: promblem_prompt.description, link: promblem_prompt.link
             }));
 
         }

@@ -1,4 +1,5 @@
 /**
+ * Time O(((N + 26) * N) * (M - N)) | Space O(1)
  * This code solves the same problem as before, which is finding the length of the longest substring containing the same letter that can be obtained after performing at most k operations on the input string s.
 
 The approach used in this code is to use a sliding window to keep track of the longest substring containing the same letter that can be obtained with at most k operations.
@@ -9,6 +10,9 @@ The code defines three functions to help with this approach:
     subtractLeftFrequency - subtracts the frequency of the character on the left of the window from the frequency map.
     getCode - converts a character to an index code by subtracting the ASCII code of 'A'.
 
+My guess is that this approach focuses on calculating everything (every posibility) by sliding and having a right and left update.
+
+Also something interesting is that the mappings, 
 
  s = "abcdeffggg", k = 2
 
@@ -62,7 +66,7 @@ class CharacterReplacement {
 			// Starting with the right Keep increasing the right boundaries frequencies until reaches max length
             const count = addRightFrequency(s, right, frequencyMap);
 			
-			// longest being either the current count of that letter, or the longest letter seen on the past.
+			// longest being either the current count of that letter, or the longest letter seen on the past. Longest being the count of word with the longest leter found
 			longest = Math.max(longest, count);
 
 			// Get the windoes length

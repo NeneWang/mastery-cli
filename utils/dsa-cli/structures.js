@@ -5,7 +5,7 @@ const SOLUTION_DIR = 'solutions'
 
 
 class ProblemMetadata {
-    constructor(slug, { name = "", description = "", difficulty = "EASY", tags = [] } = {}) {
+    constructor(slug, { name = "", description = "", difficulty = "EASY", tags = [], link = "" } = {}) {
         this.slug = slug;
         this.file_path = `${slug}.js`;
         this.test_slug = slug;
@@ -13,6 +13,7 @@ class ProblemMetadata {
         this.description = description;
         this.difficulty = difficulty;
         this.tags = tags;
+        this.link = link;
         this.absolute_solution_path = getDirAbsoluteUri(`./${SOLUTION_DIR}/${slug}.js`);
     }
 
@@ -24,7 +25,8 @@ class ProblemMetadata {
             name: this.name,
             description: this.description,
             difficulty: this.difficulty,
-            tags: this.tags
+            tags: this.tags,
+            link: this.link,
         }
     }
 }

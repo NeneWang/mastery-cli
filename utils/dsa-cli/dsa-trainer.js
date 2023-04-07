@@ -338,6 +338,13 @@ class DSATrainer {
                 question_state_flag = true;
                 await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
             },
+            "Copy Link": async () => {
+                question_state_flag = true;
+                // console.log(problem_details)
+                console.log("Copy Link: ", problem_details.link);
+
+            }
+            ,
             "Show solution": async () => {
                 question_state_flag = true;
                 this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_solution: true });
@@ -345,7 +352,7 @@ class DSATrainer {
                 // return Constants.ProblemStatus.unsolved;
             },
 
-            'Exit': async () => {
+            'Quit': async () => {
                 question_state_flag = false;
                 return { status: Constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
             }
