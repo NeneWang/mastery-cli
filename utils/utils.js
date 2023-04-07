@@ -801,8 +801,8 @@ const postCommentFromTerm = async (term_selected, user_res, debug = true) => {
 		const data = {
 			'account_id': CONSTANTS.ACCOUNT_ID ?? 1, //1
 			'body': user_res ?? "",
-			'title': term_selected.term ?? "title",
-			'concept_slug': term_selected.formula_name ?? "slug"
+			'title': term_selected ?? "title",
+			'concept_slug': term_selected ?? "slug"
 		}
 
 		axios({
