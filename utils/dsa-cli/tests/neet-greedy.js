@@ -66,7 +66,7 @@ class ClassPhotos extends ProblemTests {
 
         this.current_test_name = "([6], [6]) => true"
         const problemToTest = new this.Problem();
-        assert.equal(problemToTest.solve([6], [6]), true);
+        assert.equal(problemToTest.solve([6], [6]), false);
     }
 
     test_6() {

@@ -120,7 +120,6 @@ class NQueens extends ProblemTests {
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
-        this.tests.push(() => this.test_4());
 
     }
 
@@ -156,24 +155,6 @@ class NQueens extends ProblemTests {
         ]);
     }
 
-    test_4() {
-
-        const nQueens = new this.Problem();
-        this.current_test_name = "5 | [\
-                [ '.Q....', '...Q..', '.....Q', 'Q.....', '..Q...', '....Q.' ],\
-                [ '..Q...', '.....Q', '.Q....', '....Q.', 'Q.....', '...Q..' ],\
-                [ '...Q..', 'Q.....', '....Q.', '.Q....', '.....Q', '..Q...' ],\
-                [ '....Q.', '..Q...', 'Q.....', '.....Q', '...Q..', '.Q....' ]\
-              ]";
-
-        assert.deepEqual(nQueens.solve(5), [
-            ['.Q....', '...Q..', '.....Q', 'Q.....', '..Q...', '....Q.'],
-            ['..Q...', '.....Q', '.Q....', '....Q.', 'Q.....', '...Q..'],
-            ['...Q..', 'Q.....', '....Q.', '.Q....', '.....Q', '..Q...'],
-            ['....Q.', '..Q...', 'Q.....', '.....Q', '...Q..', '.Q....']
-        ]);
-
-    }
 
 }
 

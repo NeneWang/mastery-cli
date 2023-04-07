@@ -4,8 +4,15 @@ let TEST_DICTIONARY = {}
 const problem_tests_filenames = [
     'helloworld', 'simple-problems', 'neet-array', 'neet-sliding-windows', 'neet-stack', 'neet-binary-search', 'regex',
     'neet-linked-list', 'neet-trees', 'neet-tries', 'neet-heap', 'neet-backtracking', 'neet-graphs', 'neet-dp',
-    'neet-intervals', 'neet-greedy', 'neet-math', 'neet-bits', 'ai-search'
+    'neet-intervals', 'neet-greedy', 'neet-math', 'neet-bits', 'algo-hard'
 ]
+
+
+const algoexpert_categories = [
+    'algo-searching', 'algo-sorting', 'algo-hard', 'alg0o-very-hard'
+]
+
+// , 'ai-search'
 
 let PROBLEM_COUNT_PER_CATEGORY_TEST_NAME = {}
 

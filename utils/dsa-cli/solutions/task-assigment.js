@@ -1,5 +1,5 @@
 class TaskAssigment {
-    solve(k, tasks) {
+    solve(tasks, k) {
         return taskAssignment(k, tasks);
     }
 }
