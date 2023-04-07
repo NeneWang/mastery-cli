@@ -874,7 +874,7 @@ const getComments = async (term, count = 5) => {
 		}
 	}).then(res => console.log("res data", res.data)).catch(err => console.log(err));
 
-
+	return res
 	// return res.data;
 }
 
@@ -887,8 +887,8 @@ const logCommitIfSpecialCategory = async (commitMessage, category, { print_previ
 		await postCommentFromTerm(category.code, commitMessage);
 		if (print_previous_commits) {
 			// Print previous commits
-			const res = await getComments(category?.code ?? "log");
-			// console.log(res.data);
+			const res = getComments(category?.code ?? "log");
+			console.log("res received", res);
 		}
 	}
 
