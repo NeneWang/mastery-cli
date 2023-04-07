@@ -106,7 +106,7 @@ class Quizzer {
         return get_random(potential_questions);
     }
 
-    forceLearnMode = async () => {
+    forceLearnMode = async ({ debug = false } = {}) => {
         let potential_questions = this.terms;
         potential_questions = await this.getYoungest(potential_questions);
         console.log("potential_questions", potential_questions);
@@ -115,7 +115,7 @@ class Quizzer {
         // Create miniqueue
         const total_cards = potential_questions.length;
         const miniqueue = new MiniTermScheduler(potential_questions);
-        while(miniqueue.cardsCount != 0) {
+        while (miniqueue.cardsCount != 0) {
             // Print the statistics
             console.log(`queue: ${miniqueue.cardsCount}/${total_cards}`);
             const card = miniqueue.getCard();
@@ -123,11 +123,11 @@ class Quizzer {
             const response = await this.ask_term_question(card);
             console.log("response", response);
             miniqueue.solveCard(response);
-            attempts +=1;
+            attempts += 1;
         }
 
         return attempts;
-        
+
     }
 
 
@@ -235,14 +235,19 @@ class Quizzer {
         };
 
 
-        const askQuestionRandom = async ({ exitMethod = () => { } } = {}) => {
+        const askQuestionRandom = async ({ exitMethod = () => { }, force_mode = true } = {}) => {
             const askMath = constants.getRandomBool(0.1); // If to whether ask for a math or terminology question
             // const askMath = false; //Too easy for now.
             if (askMath) {
                 return await this.ask_math_question({ exitMethod: exitMethod })
             } else {
-                // return await this.pick_and_ask_term_question({ exitMethod: exitMethod })
-                return await this.forceLearnMode();
+                if (force_mode) {
+                    return await this.forceLearnMode();
+
+                } else {
+
+                    return await this.pick_and_ask_term_question({ exitMethod: exitMethod })
+                }
             }
         };
         let answerIsCorrect = false;
