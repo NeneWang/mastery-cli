@@ -180,7 +180,15 @@ class MinRewards extends ProblemTests {
     constructor(Problem) {
         super(Problem);
 
-        this.tests.push(this.test_1);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
 
     }
 
