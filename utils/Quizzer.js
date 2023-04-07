@@ -19,6 +19,8 @@ const parser = new Parser();
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked } = require('./utils_functions');
 const { TermScheduler } = require('./termScheduler');
+const { MiniTermScheduler } = require('./miniTermScheduler');
+
 const { slice } = require('./cli');
 // const DEBUG = true
 const DEBUG = false
@@ -102,6 +104,12 @@ class Quizzer {
         // if (DEBUG) console.log("Left with", potential_questions)
 
         return get_random(potential_questions);
+    }
+
+    forceLearnMode = async () => {
+        let potential_questions = this.terms;
+        potential_questions = await this.getYoungest(potential_questions);
+        console.log("potential_questions", potential_questions);
     }
 
 
@@ -215,7 +223,8 @@ class Quizzer {
             if (askMath) {
                 return await this.ask_math_question({ exitMethod: exitMethod })
             } else {
-                return await this.pick_and_ask_term_question({ exitMethod: exitMethod })
+                // return await this.pick_and_ask_term_question({ exitMethod: exitMethod })
+                this.forceLearnMode();
             }
         };
         let answerIsCorrect = false;
@@ -327,7 +336,7 @@ class Quizzer {
 
     }
 
-    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { }}) {
+    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { } }) {
         try {
             // Start running the question_attempt
             /**
