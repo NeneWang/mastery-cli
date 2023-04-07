@@ -878,12 +878,12 @@ const getComments = async (term, count = 5) => {
 
 const logCommitIfSpecialCategory = async (commitMessage, category, { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code] } = {}) => {
 	console.log("Logging commit message in comments database?", category.code, special_categories, category.code in special_categories)
-	if (category.code in special_categories) {
+	if (special_categories.includes(category.code)) {
 		// Log the commit message in the comments database
 		postCommentFromTerm(category?.code ?? "log", commitMessage);
 		if (print_previous_commits) {
 			// Print previous commits
-			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comments?concept_slug=${category?.code ?? "log"}`);
+			const res = await getComments(category?.code ?? "log");
 			console.log(res.data);
 		}
 	}
