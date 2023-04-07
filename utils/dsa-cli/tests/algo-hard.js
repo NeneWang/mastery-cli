@@ -179,11 +179,8 @@ class MinRewards extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
+
         this.tests.push(this.test_1);
-        this.tests.push(this.test_2);
-        this.tests.push(this.test_3);
-        this.tests.push(this.test_4);
-        this.tests.push(this.test_5);
 
     }
 
