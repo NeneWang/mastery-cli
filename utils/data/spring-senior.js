@@ -975,11 +975,15 @@ const network_midterm = [
     },
     {
         term: "setuid | special executable",
-        prompt: "What is special about an executable file owned by root with the setuid bit on?"
+        prompt: "What is special about an executable file owned by root with the setuid bit on?",
+        example: "An executable file owned by root with the setuid bit on has special privileges when executed by a user. Specifically, when a regular user executes such a file, the file runs with the privileges of the root user instead of the user who executed it. This means that the file can perform actions that are normally restricted to the root user, such as accessing and modifying system files and directories, managing user accounts, or installing software.\n\n\
+        It's worth noting that while the setuid bit allows an executable to run with the privileges of the file owner, it does not grant access to any additional resources beyond those that are already available to the user who executed the file. For example, if the user executing the file does not have permission to access a particular file or directory, the setuid bit will not override those permissions."
     },
     {
         term: "setuid | name a program",
         prompt: "Can you name any program that we talked about in class that uses setuid? ",
+        example: "passwd, sudo, ping, ping6, mount, umount, su, \n\n\
+        Some examples of programs that traditionally used setuid include passwd (for changing user passwords), su (for switching to another user's account), ping (for sending network packets), and mount (for mounting file systems)."
     },
     {
         term: "File Permission | Can Shirley ",

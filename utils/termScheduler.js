@@ -78,7 +78,7 @@ class TermScheduler {
     /**
      * 
      * @param {bool} wasCorrect If the solution was correct or not
-     * returns {integer} count of cards left to be studied.
+     * @returns {integer} count of cards left to be studied.
      */
     solveCard(wasCorrect) {
 
