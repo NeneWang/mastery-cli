@@ -879,6 +879,33 @@ const getComments = async (term, count = 5) => {
 }
 
 
+/** 
+ * Prints the comments in a nice format
+ * @param {Map<date:<date: comment>>} comments e.g. [
+  { '2023-04-07': 'feat: debug' },
+  { '2023-04-07': 'feat: special category' }
+]
+*/
+const printComments = (comments) => {
+
+
+	for (const row in comments) {
+		const obj = res.data[row]
+		console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
+	}
+}
+
+
+
+/**
+ * logs commit message in comments database if category is special
+ * @param {string} commitMessage message to commit
+ * @param {ECommitCategory} category category of the commit
+ * @param {bool} print_previous_commits ?= true : If to whether to print previous commits
+ * @param {ECommitCategory[]} special_categories ?= [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code] : Special categories to log
+ * @param {bool} debug ?= false : If to whether to debug api responses, etc.
+ * @returns {void}
+ */
 const logCommitIfSpecialCategory = async (commitMessage, category, { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
 	if (debug) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
 	if (special_categories.includes(category.code)) {
@@ -888,7 +915,8 @@ const logCommitIfSpecialCategory = async (commitMessage, category, { print_previ
 		if (print_previous_commits) {
 			// Print previous commits
 			const res = getComments(category?.code ?? "log");
-			console.log("res received", res);
+			// console.log("res received", res);
+			printComments(res);
 		}
 	}
 
