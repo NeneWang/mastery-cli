@@ -86,3 +86,70 @@ While Frank Sinatra's music is often enjoyed for listening or slow dancing, it i
 In contrast, Dominican Bachata is intrinsically linked to a specific dance style, also called bachata. The dance is characterized by close partner connection, sensual hip movements, and a basic four-step pattern that incorporates various turns and styling.
 
 In summary, Frank Sinatra and Dominican Bachata are two distinct musical styles, with Sinatra representing American popular music and jazz, while Dominican Bachata reflects the rich cultural heritage of the Dominican Republic. Both have had significant impacts on their respective cultures and continue to influence music and dance worldwide.
+
+
+### Prompt
+
+• 700-1000 w
+
+you will write a blog about two of the migrant communities we have  studied so far, using at least two of the articles we read in class to help you. You will narrate the
+story of how these immigrants came to the United States, under what circumstances, and what brought them here. You will then talk about some of their most significant music, providing links to YouTube videos and explaining why the songs you picked are relevant to know. Finally, you will conclude your work by placing the music of these communities within the realm of World Music today.
+
+ You should answer questions such as, is this music still recorded commercially? 
+
+Has this music changed from traditional music-making to a more globalized one?
+
+Do artists compromise their traditional way of making music to appeal to a global audience? 
+
+Or, have these musics always been global in one way or another?
+
+The assignment is a blog post and not an academic paper. Even though your tone should be for a general audience, remember to cite your sources. For this assignment, you are not allowed to use Wikipedia, as it is not a reliable source of information. Instead, use the library’s databases to complete your research. I will provide some useful links that can help you.
+
+--- 
+### Idea
+
+- About Bachata and contrast with Frank Sinatra
+- American Dreaam and the Dream of immigration to a worse case
+- Raise to the top vs raise to the bottom in the case of man
+- who were the bad guys in the state? in Bachata it seems to be the females while in thiswe are talking about the man.
+- Passion and Heartbreaks: The contrast Of Bachata and Frank Sinatra
+
+You should answer questions such as, is this music still recorded commercially? 
+
+- While there are greatest hits about him adn that kind of music it had fallen out of the mainstream and became a reliq of the past and almost nostalgia forever frozen and almost simbolic of the American Dream, of New York..
+
+Has this music changed from traditional music-making to a more globalized one?
+
+- Yes now there is new music about the case
+
+Do artists compromise their traditional way of making music to appeal to a global audience? 
+
+
+
+Or, have these musics always been global in one way or another?
+
+
+- Talk about how Sinatra images is the ideal of the amrerican dream
+- Similarity: Both of them are results of the migration "rapid urbanization...."
+- Stars as the individuals and talking about the society as a whole.
+- Talk about the discrimination as a whole: Indicate the "unfair murder"
+  - Talk about hostility towards Italian
+- Both starts at bars, surprisingly,
+- Both are about low jobs
+  - But the constrast is that Sinatra never gave up and kept trying "My theory was to learn by trial..."
+- Is about love, but the other is how attracts (Sinatra) While the other is about their hopelessness (sister example, American womanhood made such unbashed)
+
+
+- While Somastra case is more of the Mafia rather than talking about him ~ Since "the similarity between the Sinatra image and the iconograph.. "Women are objects... => "Women like the flash clothes"
+- One is the "loser", haiving trouble with finding woman, while sinatra is the womanizer. "Time described Sinastra's financial and romantic success"
+- "Dalliance" Fallen from grace... both of them 
+
+### Second Paper (Jeanne Funch)
+
+- "Darker, deeper with an edge of bitterness"
+- Lets talk about the darkness about the mastuline ego, about the "method" in which by breaking down the imeperfection they precisely become better closer to the public.
+
+- Sinatra is the elegant high class 
+- "The voice itself was a typical Italian light baritone 
+- Violence 1 comes the world war two escpaing
+- While the other comes from escaping the dictator
