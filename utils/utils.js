@@ -877,9 +877,9 @@ const getComments = async (term, count = 5) => {
 
 
 const logCommitIfSpecialCategory = async (commitMessage, category, { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY, ECommitCategory.ALGO, ECommitCategory.FEAT, ECommitCategory.PROJECT] } = {}) => {
+	console.log("Logging commit message in comments database?", category)
 	if (category in special_categories) {
 		// Log the commit message in the comments database
-		console.log("Logging commit message in comments database", category)
 		postCommentFromTerm(category?.code ?? "log", commitMessage);
 		if (print_previous_commits) {
 			// Print previous commits
