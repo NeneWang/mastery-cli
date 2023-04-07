@@ -57,6 +57,8 @@ const getFilesInDirectory = (directoryPath = './data/priorities') => {
 
 
 
+
+
 const getMaidDirectory = () => {
     // Note it should take from the root.
     const absolutePath = path.resolve(path.join(__dirname, '../'));

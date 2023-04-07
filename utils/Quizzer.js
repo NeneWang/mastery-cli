@@ -250,7 +250,7 @@ class Quizzer {
         // Create a queue and store them all there. Try loading then if there is nothing to be loaded, just open it.
 
 
-        // If True ask if to continue previous session.
+        // If True ask if to continue previous .
         // If want new session
 
         // For now just load a new one everytime.
@@ -514,9 +514,6 @@ class Quizzer {
                 console.log(err)
             }
         }
-
-
-
 
     }
 

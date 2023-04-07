@@ -201,7 +201,7 @@ class Maid {
 	 * !important: To prepopulate the msising report first!!
 	 */
 	provideMissingReport = async ({ run_dsa = false } = {}) => {
-		try{
+		try {
 			if (!this.missingFeatReport) {
 				const _ = await this.populateMissingReport();
 			}
@@ -216,7 +216,7 @@ class Maid {
 				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
 			}
 		}
-		catch(err){
+		catch (err) {
 			// console.log("Error in provideMissingReport", err)
 		}
 	}
@@ -261,7 +261,7 @@ class Maid {
 			this.missingFeatReport = res.data;
 		}
 		catch (err) {
-			if(Settings.show_http_errors){
+			if (Settings.show_http_errors) {
 
 				console.log(err);
 			}
@@ -338,7 +338,7 @@ class Maid {
 				if (settings.day) {
 					// Then search for the performance, and give the difference between the required and the actual performed
 					const day_requirement = settings.day;
-					const day_performance = userPerformanceData?.["today"]?.[requirement_key]??0;
+					const day_performance = userPerformanceData?.["today"]?.[requirement_key] ?? 0;
 					const day_difference = day_requirement - day_performance;
 					features_accomplished_today[`d: ${requirement_key}`] = { miss: day_difference, type: "day", req: day_requirement };
 
@@ -349,7 +349,7 @@ class Maid {
 				if (settings.week) {
 					// Then search for the performance, and give the difference between the required and the actual performed
 					const week_requirement = settings.week;
-					const week_performance = userPerformanceData?.['week_sum']?.[requirement_key]??0;
+					const week_performance = userPerformanceData?.['week_sum']?.[requirement_key] ?? 0;
 					const week_difference = week_requirement - week_performance;
 					features_accomplished_today[`w: ${requirement_key}`] = { miss: week_difference, type: "week", req: week_requirement };
 				}
@@ -777,7 +777,50 @@ let ECommitCategory = {
 	PROJECT: new CommitCategoryType('pro', [":crown:"])
 }
 
-const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
+/**
+	 * Based on a term and response written by the user it should post things in the comments based on that.
+		* @param {Term Structure} term_selected: The term which response was answered
+		* @param {str} user_res: Response answered by the user on the terminal
+		* @param {bool} debug ?= False : If to whether to debug api responses, etc.
+	 */
+const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
+	/**Expected Body Structure: for `https://jmmgskxdgn.us-east-1.awsapprunner.com/comment`
+	 * {
+		"account_id": 0,
+		"body": "string",
+		"title": "string",
+		"concept_slug": "string"
+		}
+	 */
+
+
+	try {
+
+		const data = {
+			'account_id': CONSTANTS.ACCOUNT_ID ?? 1, //1
+			'body': user_res ?? "",
+			'title': term_selected.term ?? "title",
+			'concept_slug': term_selected.formula_name ?? "slug"
+		}
+
+		axios({
+			method: 'post',
+			url: `${APIDICT.DEPLOYED_MAID}/comment`,
+			headers: {},
+			data: data
+		});
+
+	} catch (err) {
+
+		if (DEBUG) console.log("Probably no connection, comment has not been made")
+		if (debug) {
+			console.log(err)
+		}
+
+	}
+}
+
+const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, {log_special_categories = true} = {}) => {
 
 
 
@@ -787,8 +830,16 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
 		commitMessage = "Committed by Maid ";
 	}
 
+	
 	// If any category found then increase the score please.
 	commitCat = commitCategory(commitMessage);
+	// Log special categories
+
+	if (log_special_categories) {
+		logCommitIfSpecialCategory(commitMessage, commitCat);
+	}
+
+
 	let _ = await increasePerformance("commits");
 	if (commitCat?.code) {
 		_ = await increasePerformance(commitCat.code);
@@ -800,6 +851,43 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true) => {
 
 	exec(`git coa ${commitMessage} && git poh `);
 	console.log(`Pushed to origin with commit message: ${commitMessage} <3`);
+
+
+
+}
+
+/**
+ * 
+ * @param {string} term the term to search for comments
+ * @param {number} count the number of comments to retrieve
+ * @returns {Map<date:<date: comment>>}
+ */
+const getComments = async (term, count = 5) => {
+	
+	const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
+		headers: {
+			'Accept-Encoding': 'application/json'
+		}
+	});
+
+	console.log(res.data);
+
+	return res.data;
+}
+
+
+const logCommitIfSpecialCategory = async (commitMessage, category, { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY, ECommitCategory.ALGO, ECommitCategory.FEAT, ECommitCategory.PROJECT] } = {}) => {
+	if (category in special_categories) {
+		// Log the commit message in the comments database
+		console.log("Logging commit message in comments database", category)
+		postCommentFromTerm(category?.code ?? "log", commitMessage);
+		if (print_previous_commits) {
+			// Print previous commits
+			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comments?concept_slug=${category?.code ?? "log"}`);
+			console.log(res.data);
+		}
+	}
+
 }
 
 
@@ -831,7 +919,8 @@ const autorelease = () => {
 	}
 }
 
-module.exports = {
+ module.exports = {
 	getTalk, commitpush, autorelease,
-	Maid, getToday, FlashQuizzer, increasePerformance
+	Maid, getToday, FlashQuizzer, increasePerformance,
+	commitCategory, logCommitIfSpecialCategory, postCommentFromTerm, getComments
 };
