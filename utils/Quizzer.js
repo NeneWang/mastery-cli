@@ -350,7 +350,7 @@ class Quizzer {
 
     }
 
-    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { } }) {
+    async ask_term_question(term_selected, { ask_if_correct = true, exitMethod = () => { } } = {}) {
         try {
             // Start running the question_attempt
             /**
