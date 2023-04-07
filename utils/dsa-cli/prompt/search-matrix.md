@@ -3,6 +3,7 @@ title: Search a 2D Matrix
 description: You are given an m x n integer matrix matrix with the following two properties
 tags: [ neetcode, medium, binary-search]
 link: https://leetcode.com/problems/search-a-2d-matrix/
+images: [ https://assets.leetcode.com/uploads/2020/10/05/mat.jpg, https://assets.leetcode.com/uploads/2020/10/05/mat2.jpg ]
 ---
 
 ### Description

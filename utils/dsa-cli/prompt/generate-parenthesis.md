@@ -2,7 +2,7 @@
 title: Generate Parentheses
 description: Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 tags: [ neetcode, medium, stack, backtracking]
-link: 
+link: https://leetcode.com/problems/generate-parentheses/
 ---
 
 ### Description

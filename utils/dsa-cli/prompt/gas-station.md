@@ -2,7 +2,7 @@
 title: Gas Station
 description: There are n gas stations along a circular route, where the amount of gas at the ith station is gas[i].
 tags: [greedy, medium, neetcode]
-link: 
+link: https://leetcode.com/problems/gas-station/
 images: []
 ---
 

@@ -341,7 +341,7 @@ class DSATrainer {
             "Copy Link": async () => {
                 question_state_flag = true;
                 // console.log(problem_details)
-                console.log("Copy Link: ", problem_details.link);
+                console.log("Copy Link: ", problem_details?.link??"");
 
             }
             ,

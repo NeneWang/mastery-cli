@@ -2,6 +2,7 @@
 title: Max Profit
 description: Best time to Buy and Sell Stock
 tags: [ neetcode, easy, sliding-window]
+link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 ---
 
 ### Description

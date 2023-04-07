@@ -2,6 +2,7 @@
 title: "Three Number Sum"
 description: A nice problem
 tags: [ neetcode, array, neetcode]
+link: https://leetcode.com/problems/3sum/
 ---
 
 ### Three Number Sum

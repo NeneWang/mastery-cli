@@ -3,7 +3,7 @@ title: Word Search II
 description: Given an m x n board of characters and a list of strings words, return all words on the board.
 tags: [ neetcode, hard, trie]
 link: https://leetcode.com/problems/word-search-ii/
-images: []
+images: [ https://assets.leetcode.com/uploads/2020/11/07/search1.jpg, https://assets.leetcode.com/uploads/2020/11/07/search2.jpg]
 ---
 
 ### Description

@@ -2,6 +2,7 @@
 title: Length of Longest Substring
 description: Given a string s, find the length of the longest substring without repeating characters.
 tags: [ neetcode, medium, sliding-window]
+link: https://leetcode.com/problems/longest-substring-without-repeating-characters/
 ---
 
 ### Description

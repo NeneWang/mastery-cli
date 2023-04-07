@@ -2,7 +2,6 @@
 title: Min Max Prunning
 description: Create Adversarial Search Prunning Problem
 tags: [ai, medium, search]
-link: 
 images: []
 ---
 
