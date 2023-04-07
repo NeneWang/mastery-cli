@@ -111,6 +111,14 @@ class Quizzer {
         potential_questions = await this.getYoungest(potential_questions);
         console.log("potential_questions", potential_questions);
         console.log("length", potential_questions.length);
+        // Create miniqueue
+        const miniqueue = new MiniTermScheduler(potential_questions);
+        while(miniqueue.cardsCount != 0) {
+            const card = miniqueue.pop();
+            console.log("card", card);
+            response = await this.ask_term_question(card);
+        }
+        
     }
 
 
