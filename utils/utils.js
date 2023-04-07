@@ -868,11 +868,10 @@ const getComments = async (term, count = 5) => {
 		headers: {
 			'Accept-Encoding': 'application/json'
 		}
-	});
+	}).then(res => console.log("res data", res.data)).catch(err => console.log(err));
 
-	console.log(res.data);
 
-	return res.data;
+	// return res.data;
 }
 
 
@@ -880,11 +879,11 @@ const logCommitIfSpecialCategory = async (commitMessage, category, { print_previ
 	console.log("Logging commit message in comments database?", category.code, special_categories, category.code in special_categories)
 	if (special_categories.includes(category.code)) {
 		// Log the commit message in the comments database
-		postCommentFromTerm(category?.code ?? "log", commitMessage);
+		await postCommentFromTerm(category?.code ?? "log", commitMessage);
 		if (print_previous_commits) {
 			// Print previous commits
 			const res = await getComments(category?.code ?? "log");
-			console.log(res.data);
+			// console.log(res.data);
 		}
 	}
 
