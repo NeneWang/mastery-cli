@@ -783,7 +783,7 @@ let ECommitCategory = {
 		* @param {str} user_res: Response answered by the user on the terminal
 		* @param {bool} debug ?= False : If to whether to debug api responses, etc.
 	 */
-const postCommentFromTerm = async (term_selected, user_res, debug = true) => {
+const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 	/**Expected Body Structure: for `https://jmmgskxdgn.us-east-1.awsapprunner.com/comment`
 	 * {
 		"account_id": 0,
@@ -793,7 +793,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = true) => {
 		}
 	 */
 
-	console.log("Posting comment", term_selected, user_res)
+	if(debug) console.log("Posting comment", term_selected, user_res)
 
 
 	try {
@@ -812,7 +812,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = true) => {
 			data: data
 		});
 
-		console.log("Comment has been made", data);
+		if(debug) console.log("Comment has been made", data);
 		
 
 	} catch (err) {
