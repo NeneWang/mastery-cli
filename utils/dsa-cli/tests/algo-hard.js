@@ -175,8 +175,162 @@ class SubarraySort extends ProblemTests {
 }
 
 
+class MinRewards extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(this.test_1);
+        this.tests.push(this.test_2);
+        this.tests.push(this.test_3);
+        this.tests.push(this.test_4);
+        this.tests.push(this.test_5);
+
+    }
+
+    test_1() {
+        /**
+         * 25
+            View Outputs Side By Side
+            Input(s)
+            {
+            "scores": [8, 4, 2, 1, 3, 6, 7, 9, 5]
+            }
+         */
+
+        const minRewards = new this.Problem();
+        this.current_test_name = '[8, 4, 2, 1, 3, 6, 7, 9, 5] | 25';
+        assert.equal(minRewards.solve([8, 4, 2, 1, 3, 6, 7, 9, 5]), 25);
+    }
+
+    test_2() {
+        /**
+         * 1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "scores": [1]
+            }
+         */
+
+        const minRewards = new this.Problem();
+        this.current_test_name = '[1] | 1';
+        assert.equal(minRewards.solve([1]), 1);
+    }
+
+    test_3() {
+        /**
+         * 
+         * 3
+            View Outputs Side By Side
+            Input(s)
+            {
+            "scores": [5, 10]
+            }
+         */
+
+        const minRewards = new this.Problem();
+        this.current_test_name = '[5, 10] | 3';
+        assert.equal(minRewards.solve([5, 10]), 3);
+    }
+
+    test_4() {
+
+        /**
+         * 3
+            View Outputs Side By Side
+            Input(s)
+            {
+            "scores": [10, 5]
+            }
+         */
+
+        const minRewards = new this.Problem();
+        this.current_test_name = '[10, 5] | 3';
+        assert.equal(minRewards.solve([10, 5]), 3);
+    }
+
+    test_5() {
+        /**
+         * 8
+            View Outputs Side By Side
+            Input(s)
+            {
+            "scores": [4, 2, 1, 3]
+            }
+         */
+
+        const minRewards = new this.Problem();
+        this.current_test_name = '[4, 2, 1, 3] | 8';
+        assert.equal(minRewards.solve([4, 2, 1, 3]), 8);
+
+    }
+
+    test_6() {
+        /**
+         * 9
+            View Outputs Side By Side
+            Input(s)
+            {
+            "scores": [0, 4, 2, 1, 3]
+            }
+         */
+
+        const minRewards = new this.Problem();
+        this.current_test_name = '[0, 4, 2, 1, 3] | 9';
+        assert.equal(minRewards.solve([0, 4, 2, 1, 3]), 9);
+    }
+
+    test_7() {
+
+        /**
+         * 52
+            View Outputs Side By Side
+            Input(s)
+            {
+            "scores": [2, 20, 13, 12, 11, 8, 4, 3, 1, 5, 6, 7, 9, 0]
+            }
+         */
+
+        const minRewards = new this.Problem();
+        this.current_test_name = '[2, 20, 13, 12, 11, 8, 4, 3, 1, 5, 6, 7, 9, 0] | 52';
+        assert.equal(minRewards.solve([2, 20, 13, 12, 11, 8, 4, 3, 1, 5, 6, 7, 9, 0]), 52);
+    }
+
+    test_8() {
+        /**
+         * 15
+            View Outputs Side By Side
+            Input(s)
+            {
+            "scores": [2, 1, 4, 3, 6, 5, 8, 7, 10, 9]
+            }
+         */
+
+        const minRewards = new this.Problem();
+        this.current_test_name = '[2, 1, 4, 3, 6, 5, 8, 7, 10, 9] | 15';
+        assert.equal(minRewards.solve([2, 1, 4, 3, 6, 5, 8, 7, 10, 9]), 15);
+    }
+
+    test_9() {
+
+        /**
+         * 93
+            View Outputs Side By Side
+            Input(s)
+            {
+            "scores": [800, 400, 20, 10, 30, 61, 70, 90, 17, 21, 22, 13, 12, 11, 8, 4, 2, 1, 3, 6, 7, 9, 0, 68, 55, 67, 57, 60, 51, 661, 50, 65, 53]
+            }
+         */
+
+        const minRewards = new this.Problem();
+        this.current_test_name = '[800, 400, 20, 10, 30, 61, 70, 90, 17, 21, 22, 13, 12, 11, 8, 4, 2, 1, 3, 6, 7, 9, 0, 68, 55, 67, 57, 60, 51, 661, 50, 65, 53] | 93';
+        assert.equal(minRewards.solve([800, 400, 20, 10, 30, 61, 70, 90, 17, 21, 22, 13, 12, 11, 8, 4, 2, 1, 3, 6, 7, 9, 0, 68, 55, 67, 57, 60, 51, 661, 50, 65, 53]), 93);
+    }
+}
+
 const TEST_DICTIONARY = {
-    'subarray-sort': SubarraySort
+    'subarray-sort': SubarraySort,
+    'min-rewards': MinRewards,
 }
 
 module.exports = TEST_DICTIONARY;
