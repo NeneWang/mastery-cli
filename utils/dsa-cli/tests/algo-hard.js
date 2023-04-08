@@ -1253,12 +1253,643 @@ class validateThreeNodes extends ProblemTests {
 }
 
 
+class MaxPathPathSum extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+
+    }
+
+    test_1() {
+        /**
+         * 18
+        View Outputs Side By Side
+        Input(s)
+        {
+          "tree": {
+            "nodes": [
+              {"id": "1", "left": "2", "right": "3", "value": 1},
+              {"id": "3", "left": "6", "right": "7", "value": 3},
+              {"id": "7", "left": null, "right": null, "value": 7},
+              {"id": "6", "left": null, "right": null, "value": 6},
+              {"id": "2", "left": "4", "right": "5", "value": 2},
+              {"id": "5", "left": null, "right": null, "value": 5},
+              {"id": "4", "left": null, "right": null, "value": 4}
+            ],
+            "root": "1"
+          }
+        }
+         */
+
+        const maxPathSum = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(2);
+        tree.left.left = new BST(4);
+        tree.left.right = new BST(5);
+        tree.right = new BST(3);
+        tree.right.left = new BST(6);
+        tree.right.right = new BST(7);
+
+        this.current_test_name = '1 | 3 | 6 | 7 | 18';
+        assert.equal(maxPathSum.solve(tree), 18);
+
+    }
+
+    test_2() {
+
+        /**
+         * 6
+            View Outputs Side By Side
+            Input(s)
+            {
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "2", "right": "3", "value": 1},
+                {"id": "3", "left": null, "right": null, "value": 3},
+                {"id": "2", "left": null, "right": null, "value": 2}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const maxPathSum = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(2);
+        tree.right = new BST(3);
+
+        this.current_test_name = '1 | 2 | 3 | 6';
+        assert.equal(maxPathSum.solve(tree), 6);
+    }
+
+    test_3() {
+
+        /**
+         * 3
+            View Outputs Side By Side
+            Input(s)
+            {
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "2", "right": "-1", "value": 1},
+                {"id": "-1", "left": null, "right": null, "value": -1},
+                {"id": "2", "left": null, "right": null, "value": 2}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const maxPathSum = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(2);
+        tree.right = new BST(-1);
+
+        this.current_test_name = '1 | 2 | -1 | 3';
+        assert.equal(maxPathSum.solve(tree), 3);
+    }
+
+    test_4() {
+
+        /**
+         * 6
+            View Outputs Side By Side
+            Input(s)
+            {
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "-5", "right": "3", "value": 1},
+                {"id": "3", "left": null, "right": null, "value": 3},
+                {"id": "-5", "left": "6", "right": null, "value": -5},
+                {"id": "6", "left": null, "right": null, "value": 6}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const maxPathSum = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(-5);
+        tree.left.left = new BST(6);
+        tree.right = new BST(3);
+
+        this.current_test_name = '1 | -5 | 6 | 3 | 6';
+
+        assert.equal(maxPathSum.solve(tree), 6);
+    }
+
+    test_5() {
+        /**
+         * 
+         1
+       /   \
+    -10    -5
+    /  \    / \
+   30  45 -20 -21
+  / \  / \  / \
+ 5  1 3 -3 100  2
+
+         * 154
+        View Outputs Side By Side
+        Input(s)
+        {
+        "tree": {
+            "nodes": [
+            {"id": "1", "left": "-10", "right": "-5", "value": 1},
+            {"id": "-5", "left": "-20", "right": "-21", "value": -5},
+            {"id": "-21", "left": "100-2", "right": "1-3", "value": -21},
+            {"id": "1-3", "left": null, "right": null, "value": 1},
+            {"id": "100-2", "left": null, "right": null, "value": 100},
+            {"id": "-20", "left": "100", "right": "2", "value": -20},
+            {"id": "2", "left": null, "right": null, "value": 2},
+            {"id": "100", "left": null, "right": null, "value": 100},
+            {"id": "-10", "left": "30", "right": "45", "value": -10},
+            {"id": "45", "left": "3", "right": "-3", "value": 45},
+            {"id": "-3", "left": null, "right": null, "value": -3},
+            {"id": "3", "left": null, "right": null, "value": 3},
+            {"id": "30", "left": "5", "right": "1-2", "value": 30},
+            {"id": "1-2", "left": null, "right": null, "value": 1},
+            {"id": "5", "left": null, "right": null, "value": 5}
+            ],
+            "root": "1"
+        }
+        }
+         */
+
+        const maxPathSum = new this.Problem();
+        const tree = {
+            value: 1,
+            left: {
+                value: -10,
+                left: {
+                    value: 30,
+                    left: {
+                        value: 5,
+                        left: null,
+                        right: null,
+                    },
+                    right: {
+                        value: 1,
+                        left: null,
+                        right: null,
+                    },
+                },
+                right: {
+                    value: 45,
+                    left: {
+                        value: 3,
+                        left: null,
+                        right: null,
+                    },
+                    right: {
+                        value: -3,
+                        left: null,
+                        right: null,
+                    },
+                },
+            },
+            right: {
+                value: -5,
+                left: {
+                    value: -20,
+                    left: {
+                        value: 100,
+                        left: null,
+                        right: null,
+                    },
+                    right: {
+                        value: 2,
+                        left: null,
+                        right: null,
+                    },
+                },
+                right: {
+                    value: -21,
+                    left: {
+                        value: 100,
+                        left: null,
+                        right: null,
+                    },
+                    right: {
+                        value: 1,
+                        left: null,
+                        right: null,
+                    },
+                },
+            },
+        };
+
+
+        this.current_test_name = '1 | -10 | 30 | 5 | 1 | 45 | 3 | -3 | -5 | -20 | 100 | 2 | -21 | 100 | 1 | 154';
+
+        assert.equal(maxPathSum.solve(tree), 154);
+
+
+    }
+
+    test_6() {
+
+        /** 
+         * 201
+            View Outputs Side By Side
+            Input(s)
+            {
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "-10", "right": "-5", "value": 1},
+                {"id": "-5", "left": "-20", "right": "-21", "value": -5},
+                {"id": "-21", "left": "100-3", "right": "1-3", "value": -21},
+                {"id": "1-3", "left": null, "right": null, "value": 1},
+                {"id": "100-3", "left": null, "right": null, "value": 100},
+                {"id": "-20", "left": "100-2", "right": "2", "value": -20},
+                {"id": "2", "left": null, "right": null, "value": 2},
+                {"id": "100-2", "left": null, "right": null, "value": 100},
+                {"id": "-10", "left": "30", "right": "45", "value": -10},
+                {"id": "45", "left": "3", "right": "-3", "value": 45},
+                {"id": "-3", "left": null, "right": null, "value": -3},
+                {"id": "3", "left": null, "right": null, "value": 3},
+                {"id": "30", "left": "5", "right": "1-2", "value": 30},
+                {"id": "1-2", "left": null, "right": null, "value": 1},
+                {"id": "5", "left": "100", "right": null, "value": 5},
+                {"id": "100", "left": null, "right": null, "value": 100}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const maxPathSum = new this.Problem();
+        const tree = {
+            value: 1,
+            left: {
+                value: -10,
+                left: {
+                    value: 30,
+                    left: {
+                        value: 5,
+                        left: {
+                            value: 100,
+                            left: null,
+                            right: null,
+                        },
+                        right: null,
+                    },
+                    right: {
+                        value: 1,
+                        left: null,
+                        right: null,
+                    },
+                },
+                right: {
+                    value: 45,
+                    left: {
+                        value: 3,
+                        left: null,
+                        right: null,
+                    },
+                    right: {
+                        value: -3,
+                        left: null,
+                        right: null,
+                    },
+                },
+            },
+            right: {
+                value: -5,
+                left: {
+                    value: -20,
+                    left: {
+                        value: 100,
+                        left: null,
+                        right: null,
+                    },
+                    right: {
+                        value: 2,
+                        left: null,
+                        right: null,
+                    },
+                },
+                right: {
+                    value: -21,
+                    left: {
+                        value: 100,
+                        left: null,
+                        right: null,
+                    },
+                    right: {
+                        value: 1,
+                        left: null,
+                        right: null,
+                    },
+                },
+            },
+        };
+
+        this.current_test_name = '1 | -10 | 30 | 5 | 100 | 1 | 45 | 3 | -3 | -5 | -20 | 100 | 2 | -21 | 100 | 1 => 201';
+
+        assert.equal(maxPathSum.solve(tree), 201);
+    }
+
+    test_7() {
+
+        /**
+         * 
+        1
+       /   \
+    -10    -5
+    /  \    / \
+   30  75 -20 -21
+  / \  / \  / \
+ 5  1 3 -3 100  1
+  \
+ 100
+ 
+        203
+            View Outputs Side By Side
+            Input(s)
+            {
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "-10", "right": "-5", "value": 1},
+                {"id": "-5", "left": "-20", "right": "-21", "value": -5},
+                {"id": "-21", "left": "100-3", "right": "1-3", "value": -21},
+                {"id": "1-3", "left": null, "right": null, "value": 1},
+                {"id": "100-3", "left": null, "right": null, "value": 100},
+                {"id": "-20", "left": "100-2", "right": "2", "value": -20},
+                {"id": "2", "left": null, "right": null, "value": 2},
+                {"id": "100-2", "left": null, "right": null, "value": 100},
+                {"id": "-10", "left": "30", "right": "75", "value": -10},
+                {"id": "75", "left": "3", "right": "-3", "value": 75},
+                {"id": "-3", "left": null, "right": null, "value": -3},
+                {"id": "3", "left": null, "right": null, "value": 3},
+                {"id": "30", "left": "5", "right": "1-2", "value": 30},
+                {"id": "1-2", "left": null, "right": null, "value": 1},
+                {"id": "5", "left": "100", "right": null, "value": 5},
+                {"id": "100", "left": null, "right": null, "value": 100}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const maxPathSum = new this.Problem();
+        const tree = {
+            value: 1,
+            left: {
+                value: -10,
+                left: {
+                    value: 30,
+                    left: {
+                        value: 5,
+                        left: {
+                            value: 100,
+                            left: null,
+                            right: null,
+                        },
+                        right: null,
+                    },
+                    right: {
+                        value: 1,
+                        left: null,
+                        right: null,
+                    },
+                },
+                right: {
+                    value: 75,
+                    left: {
+                        value: 3,
+                        left: null,
+                        right: null,
+                    },
+                    right: {
+                        value: -3,
+                        left: null,
+                        right: null,
+                    },
+                },
+            },
+            right: {
+                value: -5,
+                left: {
+                    value: -20,
+                    left: {
+                        value: 100,
+                        left: null,
+                        right: null,
+                    },
+                    right: {
+                        value: 2,
+                        left: null,
+                        right: null,
+                    },
+                },
+                right: {
+                    value: -21,
+                    left: {
+                        value: 100,
+                        left: null,
+                        right: null,
+                    },
+                    right: {
+                        value: 1,
+                        left: null,
+                        right: null,
+                    },
+                },
+            },
+        };
+
+
+        this.current_test_name = '1 | -10 | 30 | 5 | 100 | 1 | 75 | 3 | -3 | -5 | -20 | 100 | 100 | 2 | -21 | 100 | 1 => 203';
+
+
+        assert.equal(maxPathSum.solve(tree), 203);
+
+
+    }
+
+    test_8() {
+        /**
+         * 228
+            View Outputs Side By Side
+            Input(s)
+            {
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "-150", "right": "-5", "value": 1},
+                {"id": "-5", "left": "-20", "right": "-21", "value": -5},
+                {"id": "-21", "left": "100-4", "right": "1-3", "value": -21},
+                {"id": "1-3", "left": null, "right": null, "value": 1},
+                {"id": "100-4", "left": null, "right": null, "value": 100},
+                {"id": "-20", "left": "100-3", "right": "2", "value": -20},
+                {"id": "2", "left": null, "right": null, "value": 2},
+                {"id": "100-3", "left": null, "right": null, "value": 100},
+                {"id": "-150", "left": "30", "right": "75", "value": -150},
+                {"id": "75", "left": "3", "right": "-3", "value": 75},
+                {"id": "-3", "left": null, "right": null, "value": -3},
+                {"id": "3", "left": "150", "right": "-8", "value": 3},
+                {"id": "-8", "left": null, "right": null, "value": -8},
+                {"id": "150", "left": null, "right": null, "value": 150},
+                {"id": "30", "left": "5", "right": "1-2", "value": 30},
+                {"id": "1-2", "left": "5-2", "right": "10", "value": 1},
+                {"id": "10", "left": null, "right": null, "value": 10},
+                {"id": "5-2", "left": null, "right": null, "value": 5},
+                {"id": "5", "left": "100", "right": "100-2", "value": 5},
+                {"id": "100-2", "left": null, "right": null, "value": 100},
+                {"id": "100", "left": null, "right": null, "value": 100}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const maxPathSum = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(-150);
+        tree.left.left = new BST(30);
+        tree.left.left.left = new BST(5);
+        tree.left.left.left.left = new BST(100);
+        tree.left.left.left.right = new BST(100);
+        tree.left.left.right = new BST(1);
+        tree.left.left.right.left = new BST(5);
+        tree.left.left.right.right = new BST(10);
+        tree.left.right = new BST(75);
+        tree.left.right.left = new BST(3);
+        tree.left.right.left.left = new BST(150);
+        tree.left.right.left.right = new BST(-8);
+        tree.left.right.right = new BST(-3);
+        tree.right = new BST(-5);
+        tree.right.left = new BST(-20);
+        tree.right.left.left = new BST(100);
+        tree.right.left.right = new BST(2);
+        tree.right.right = new BST(-21);
+        tree.right.right.left = new BST(100);
+        tree.right.right.right = new BST(1);
+
+        this.current_test_name = '1 | -150 | 30 | 5 | 100 | 100 | 1 | 5 | 10 | 75 | 3 | 150 | -8 | -3 | -5 | -20 | 100 | 2 | -21 | 100 | 1 => 228';
+
+        assert.equal(maxPathSum.solve(tree), 228);
+
+    }
+
+    test_9() {
+
+        /**
+         * 304
+            View Outputs Side By Side
+            Input(s)
+            {
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "-150", "right": "-5", "value": 1},
+                {"id": "-5", "left": "-20", "right": "-21", "value": -5},
+                {"id": "-21", "left": "100-4", "right": "1-3", "value": -21},
+                {"id": "1-3", "left": null, "right": null, "value": 1},
+                {"id": "100-4", "left": null, "right": null, "value": 100},
+                {"id": "-20", "left": "100-3", "right": "2", "value": -20},
+                {"id": "2", "left": null, "right": null, "value": 2},
+                {"id": "100-3", "left": null, "right": null, "value": 100},
+                {"id": "-150", "left": "30", "right": "75", "value": -150},
+                {"id": "75", "left": "3", "right": "-3", "value": 75},
+                {"id": "-3", "left": null, "right": null, "value": -3},
+                {"id": "3", "left": "150", "right": "151", "value": 3},
+                {"id": "151", "left": null, "right": null, "value": 151},
+                {"id": "150", "left": null, "right": null, "value": 150},
+                {"id": "30", "left": "5", "right": "1-2", "value": 30},
+                {"id": "1-2", "left": "5-2", "right": "10", "value": 1},
+                {"id": "10", "left": null, "right": null, "value": 10},
+                {"id": "5-2", "left": null, "right": null, "value": 5},
+                {"id": "5", "left": "100", "right": "100-2", "value": 5},
+                {"id": "100-2", "left": null, "right": null, "value": 100},
+                {"id": "100", "left": null, "right": null, "value": 100}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const maxPathSum = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(-150);
+        tree.left.left = new BST(30);
+        tree.left.left.left = new BST(5);
+        tree.left.left.left.left = new BST(100);
+        tree.left.left.left.right = new BST(100);
+        tree.left.left.right = new BST(1);
+        tree.left.left.right.left = new BST(5);
+        tree.left.left.right.right = new BST(10);
+        tree.left.right = new BST(75);
+        tree.left.right.left = new BST(3);
+        tree.left.right.left.left = new BST(150);
+        tree.left.right.left.right = new BST(151);
+        tree.left.right.right = new BST(-3);
+        tree.right = new BST(-5);
+        tree.right.left = new BST(-20);
+        tree.right.left.left = new BST(100);
+        tree.right.left.right = new BST(2);
+        tree.right.right = new BST(-21);
+        tree.right.right.left = new BST(100);
+        tree.right.right.right = new BST(1);
+
+        this.current_test_name = '1 | -150 | 30 | 5 | 100 | 100 | 1 | 5 | 10 | 75 | 3 | 150 | 151 | -3 | -5 | -20 | 100 | 2 | -21 | 100 | 1 => 304';
+
+        assert.equal(maxPathSum.solve(tree), 304);
+
+    }
+
+
+}
+
+function createTreeFromData(data) {
+    const nodes = new Map();
+    const rootId = data.tree.root;
+
+    // Create node objects for each entry in the data
+    data.tree.nodes.forEach(node => {
+        nodes.set(node.id, {
+            value: node.value,
+            left: null,
+            right: null
+        });
+    });
+
+    // Connect parent nodes to their children
+    data.tree.nodes.forEach(node => {
+        const currentNode = nodes.get(node.id);
+        currentNode.left = node.left ? nodes.get(node.left) : null;
+        currentNode.right = node.right ? nodes.get(node.right) : null;
+    });
+
+    // Return the root node
+    return nodes.get(rootId);
+}
+
+
+
 const TEST_DICTIONARY = {
     'subarray-sort': SubarraySort,
     'min-rewards': MinRewards,
     'zigzag-traverse': zigzagTraverse,
     'same-bsts': SameBsts,
-    'validate-three-nodes': validateThreeNodes
+    'validate-three-nodes': validateThreeNodes,
+    "max-path-sum": MaxPathPathSum
 }
 
 module.exports = TEST_DICTIONARY;
