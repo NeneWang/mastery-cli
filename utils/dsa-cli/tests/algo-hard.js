@@ -335,7 +335,7 @@ class MinRewards extends ProblemTests {
 
 
 class zigzagTraverse extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
@@ -398,14 +398,14 @@ class zigzagTraverse extends ProblemTests {
             ]
             }
          */
-    
+
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1, 2, 3, 4, 5]] | [1, 2, 3, 4, 5]';
         assert.deepEqual(zigzagTraverse.solve([[1, 2, 3, 4, 5]]), [1, 2, 3, 4, 5]);
 
     }
 
-    test_4(){
+    test_4() {
         /**
          * [1, 2, 3, 4, 5]
             View Outputs Side By Side
@@ -426,7 +426,7 @@ class zigzagTraverse extends ProblemTests {
         assert.deepEqual(zigzagTraverse.solve([[1], [2], [3], [4], [5]]), [1, 2, 3, 4, 5]);
     }
 
-    test_5(){
+    test_5() {
         /**
          * [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             View Outputs Side By Side
@@ -448,7 +448,7 @@ class zigzagTraverse extends ProblemTests {
 
     }
 
-    test_6(){
+    test_6() {
         /**
          * [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             View Outputs Side By Side
@@ -466,7 +466,7 @@ class zigzagTraverse extends ProblemTests {
         assert.deepEqual(zigzagTraverse.solve([[1, 3, 4, 7, 8], [2, 5, 6, 9, 10]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     }
 
-    test_7(){
+    test_7() {
         /**
          * [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
             View Outputs Side By Side
@@ -488,7 +488,7 @@ class zigzagTraverse extends ProblemTests {
 
     }
 
-    test_8(){
+    test_8() {
 
         /**
          * [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
@@ -511,7 +511,7 @@ class zigzagTraverse extends ProblemTests {
 
     }
 
-    test_9(){
+    test_9() {
         /**
          * [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
             View Outputs Side By Side
@@ -535,7 +535,7 @@ class zigzagTraverse extends ProblemTests {
     }
 
 
-    test_10(){
+    test_10() {
         /**
          * [1, 10, 21, -3, 11, 6, 7, 8, 112, 4, 15, 12, 113, 2, 15, 16, 17, 18, 19, 20, 6, -7, -1, 21, 22, 23, 24, 27, 226, -27, 0, -2, 88, 9, -3, 0, 12, 28, 299, 30, -28, 32, 0, -4, 0, -111, -226, 29, 32, -23, 66, -17, 31, 88]
             View Outputs Side By Side
@@ -558,18 +558,707 @@ class zigzagTraverse extends ProblemTests {
 
     }
 
+}
+
+class SameBsts extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+    }
+
+    test_1() {
+        const sameBsts = new this.Problem();
+        this.current_test_name = '[10,15,8,12,94,81,5,2,11] | [10,8,5,15,2,12,11,94,81] | true';
+        assert.equal(sameBsts.solve([10, 15, 8, 12, 94, 81, 5, 2, 11], [10, 8, 5, 15, 2, 12, 11, 94, 81]), true);
+    }
+
+    test_2() {
+        const sameBsts = new this.Problem();
+        this.current_test_name = '[10,15,8,12,94,81,5,2,11] | [10,8,5,15,2,12,11,94,81,100] | false';
+        assert.equal(sameBsts.solve([10, 15, 8, 12, 94, 81, 5, 2, 11], [10, 8, 5, 15, 2, 12, 11, 94, 81, 100]), false);
+    }
+
+    test_3() {
+        const sameBsts = new this.Problem();
+        this.current_test_name = '[10,15,8,12,94,81,5,2,11] | [10,8,5,15,2,12,11,94,81,100] | false';
+        assert.equal(sameBsts.solve([10, 15, 8, 12, 94, 81, 5, 2, 11], [10, 8, 5, 15, 2, 12, 11, 94, 81, 100]), false);
+    }
+
+    test_4() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "arrayOne": [1, 2, 3, 4, 5, 6, 7],
+            "arrayTwo": [1, 2, 3, 4, 5, 6, 7]
+            }
+         */
+
+        const sameBsts = new this.Problem();
+        this.current_test_name = '[1, 2, 3, 4, 5, 6, 7] | [1, 2, 3, 4, 5, 6, 7] | true';
+        assert.equal(sameBsts.solve([1, 2, 3, 4, 5, 6, 7], [1, 2, 3, 4, 5, 6, 7]), true);
+    }
+
+    test_5() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "arrayOne": [7, 6, 5, 4, 3, 2, 1],
+            "arrayTwo": [7, 6, 5, 4, 3, 2, 1]
+            }
+         */
+
+        const sameBsts = new this.Problem();
+        this.current_test_name = '[7, 6, 5, 4, 3, 2, 1] | [7, 6, 5, 4, 3, 2, 1] | true';
+        assert.equal(sameBsts.solve([7, 6, 5, 4, 3, 2, 1], [7, 6, 5, 4, 3, 2, 1]), true);
+
+    }
+
+    test_6() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "arrayOne": [10, 15, 8, 12, 94, 81, 5, 2],
+            "arrayTwo": [10, 8, 5, 15, 2, 12, 94, 81]
+            }
+         */
+
+        const sameBsts = new this.Problem();
+        this.current_test_name = '[10, 15, 8, 12, 94, 81, 5, 2] | [10, 8, 5, 15, 2, 12, 94, 81] | true';
+        assert.equal(sameBsts.solve([10, 15, 8, 12, 94, 81, 5, 2], [10, 8, 5, 15, 2, 12, 94, 81]), true);
+    }
+
+    test_7() {
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "arrayOne": [10, 15, 8, 12, 94, 81, 5, 2],
+            "arrayTwo": [11, 8, 5, 15, 2, 12, 94, 81]
+            }
+         */
+
+        const sameBsts = new this.Problem();
+        this.current_test_name = '[10, 15, 8, 12, 94, 81, 5, 2] | [11, 8, 5, 15, 2, 12, 94, 81] | false';
+        assert.equal(sameBsts.solve([10, 15, 8, 12, 94, 81, 5, 2], [11, 8, 5, 15, 2, 12, 94, 81]), false);
+    }
+
+    test_8() {
+        /**
+         * true
+        View Outputs Side By Side
+        Input(s)
+        {
+        "arrayOne": [10, 15, 8, 12, 94, 81, 5, 2, -1, 100, 45, 12, 8, -1, 8, 2, -34],
+        "arrayTwo": [10, 8, 5, 15, 2, 12, 94, 81, -1, -1, -34, 8, 2, 8, 12, 45, 100]
+        }
+        */
+
+        const sameBsts = new this.Problem();
+        this.current_test_name = '[10, 15, 8, 12, 94, 81, 5, 2, -1, 100, 45, 12, 8, -1, 8, 2, -34] | [10, 8, 5, 15, 2, 12, 94, 81, -1, -1, -34, 8, 2, 8, 12, 45, 100] | true';
+        assert.equal(sameBsts.solve([10, 15, 8, 12, 94, 81, 5, 2, -1, 100, 45, 12, 8, -1, 8, 2, -34], [10, 8, 5, 15, 2, 12, 94, 81, -1, -1, -34, 8, 2, 8, 12, 45, 100]), true);
+    }
+
+    test_9() {
+
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "arrayOne": [10, 15, 8, 12, 94, 81, 5, 2, -1, 101, 45, 12, 8, -1, 8, 2, -34],
+            "arrayTwo": [10, 8, 5, 15, 2, 12, 94, 81, -1, -1, -34, 8, 2, 8, 12, 45, 100]
+            }
+         */
+
+        const sameBsts = new this.Problem();
+        this.current_test_name = '[10, 15, 8, 12, 94, 81, 5, 2, -1, 101, 45, 12, 8, -1, 8, 2, -34] | [10, 8, 5, 15, 2, 12, 94, 81, -1, -1, -34, 8, 2, 8, 12, 45, 100] | false';
+        assert.equal(sameBsts.solve([10, 15, 8, 12, 94, 81, 5, 2, -1, 101, 45, 12, 8, -1, 8, 2, -34], [10, 8, 5, 15, 2, 12, 94, 81, -1, -1, -34, 8, 2, 8, 12, 45, 100]), false);
+    }
+
+    test_10() {
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "arrayOne": [5, 2, -1, 100, 45, 12, 8, -1, 8, 10, 15, 8, 12, 94, 81, 2, -34],
+            "arrayTwo": [5, 8, 10, 15, 2, 8, 12, 45, 100, 2, 12, 94, 81, -1, -1, -34, 8]
+            }
+         */
+
+        const sameBsts = new this.Problem();
+        this.current_test_name = '[5, 2, -1, 100, 45, 12, 8, -1, 8, 10, 15, 8, 12, 94, 81, 2, -34] | [5, 8, 10, 15, 2, 8, 12, 45, 100, 2, 12, 94, 81, -1, -1, -34, 8] | false';
+        assert.equal(sameBsts.solve([5, 2, -1, 100, 45, 12, 8, -1, 8, 10, 15, 8, 12, 94, 81, 2, -34], [5, 8, 10, 15, 2, 8, 12, 45, 100, 2, 12, 94, 81, -1, -1, -34, 8]), false);
+    }
+}
 
 
-
-
-
+class BST {
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
 
 }
+class validateThreeNodes extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+    }
+
+    test_1() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+                 "nodeOne": "5",
+                "nodeThree": "3",
+                "nodeTwo": "2",
+            "tree": {
+                "nodes": [
+                {"id": "0", "left": null, "right": null, "value": 0},
+                {"id": "1", "left": "0", "right": null, "value": 1},
+                {"id": "2", "left": "1", "right": "4", "value": 2},
+                {"id": "3", "left": null, "right": null, "value": 3},
+                {"id": "4", "left": "3", "right": null, "value": 4},
+                {"id": "5", "left": "2", "right": "7", "value": 5},
+                {"id": "6", "left": null, "right": null, "value": 6},
+                {"id": "7", "left": "6", "right": "8", "value": 7},
+                {"id": "8", "left": null, "right": null, "value": 8}
+                ],
+                "root": "5"
+            }
+            }
+         */
+
+        const validateThreeNodes = new this.Problem();
+
+        const tree = new BST(5);
+        tree.left = new BST(2);
+        tree.left.left = new BST(1);
+        tree.left.left.left = new BST(0);
+        tree.left.right = new BST(3);
+        tree.right = new BST(7);
+        tree.right.left = new BST(6);
+        tree.right.right = new BST(8);
+
+        // Nodes you mentioned in the comment
+        const nodeOne = tree; // Value: 5
+        const nodeTwo = tree.left; // Value: 2
+        const nodeThree = tree.left.right; // Value: 3
+        this.current_test_name = '5 | 3 | 2 | true';
+        assert.equal(validateThreeNodes.solve(nodeOne, nodeTwo, nodeThree), true);
+
+
+
+        // this.current_test_name = '5 | 3 | 2 | true';
+        // assert.equal(validateThreeNodes.solve(tree, 5, 3, 2), true);
+
+    }
+
+    test_2() {
+
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "nodeOne": "5",
+            "nodeThree": "1",
+            "nodeTwo": "8",
+            "tree": {
+                "nodes": [
+                {"id": "0", "left": null, "right": null, "value": 0},
+                {"id": "1", "left": "0", "right": null, "value": 1},
+                {"id": "2", "left": "1", "right": null, "value": 2},
+                {"id": "3", "left": "2", "right": "4", "value": 3},
+                {"id": "4", "left": null, "right": null, "value": 4},
+                {"id": "5", "left": "3", "right": "7", "value": 5},
+                {"id": "6", "left": null, "right": null, "value": 6},
+                {"id": "7", "left": "6", "right": "8", "value": 7},
+                {"id": "8", "left": null, "right": null, "value": 8}
+                ],
+                "root": "5"
+            }
+            }
+         */
+
+        const validateThreeNodes = new this.Problem();
+        const tree = new BST(5);
+        tree.left = new BST(3);
+        tree.left.left = new BST(2);
+        tree.left.left.left = new BST(1);
+        tree.left.left.left.left = new BST(0);
+        tree.left.right = new BST(4);
+        tree.right = new BST(7);
+        tree.right.left = new BST(6);
+        tree.right.right = new BST(8);
+
+        const nodeOne = tree;
+        const nodeTwo = tree.left.left.left;
+        const nodeThree = tree.left.left;
+
+        this.current_test_name = '5 | 1 | 8 | false';
+        assert.equal(validateThreeNodes.solve(nodeOne, nodeTwo, nodeThree), false);
+    }
+
+    test_3() {
+
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "nodeOne": "8",
+            "nodeThree": "2",
+            "nodeTwo": "5",
+            "tree": {
+                "nodes": [
+                {"id": "0", "left": null, "right": null, "value": 0},
+                {"id": "1", "left": "0", "right": null, "value": 1},
+                {"id": "2", "left": "1", "right": null, "value": 2},
+                {"id": "3", "left": "2", "right": "4", "value": 3},
+                {"id": "4", "left": null, "right": null, "value": 4},
+                {"id": "5", "left": "3", "right": "7", "value": 5},
+                {"id": "6", "left": null, "right": null, "value": 6},
+                {"id": "7", "left": "6", "right": "8", "value": 7},
+                {"id": "8", "left": null, "right": null, "value": 8}
+                ],
+                "root": "5"
+            }
+            }
+         */
+
+        const validateThreeNodes = new this.Problem();
+        const tree = new BST(5);
+        tree.left = new BST(3);
+        tree.left.left = new BST(2);
+        tree.left.left.left = new BST(1);
+        tree.left.left.left.left = new BST(0);
+        tree.left.right = new BST(4);
+        tree.right = new BST(7);
+        tree.right.left = new BST(6);
+        tree.right.right = new BST(8);
+
+        const nodeOne = tree.right.right;
+        const nodeTwo = tree.left;
+        const nodeThree = tree.left.left;
+
+        this.current_test_name = '8 | 2 | 5 | false';
+        assert.equal(validateThreeNodes.solve(nodeOne, nodeTwo, nodeThree), false);
+
+
+    }
+
+    test_4() {
+
+        const validateThreeNodes = new this.Problem();
+
+        /**
+         * 
+         *       
+      2
+       \
+        3
+         \
+          4
+           \
+            5
+             \
+              6
+               \
+                7
+                 \
+                  8
+                   \
+                    9
+         * true
+        View Outputs Side By Side
+        Input(s)
+        {
+          "nodeOne": "2",
+          "nodeThree": "8",
+          "nodeTwo": "5",
+          "tree": {
+            "nodes": [
+              {"id": "1", "left": null, "right": null, "value": 1},
+              {"id": "2", "left": "1", "right": "3", "value": 2},
+              {"id": "3", "left": null, "right": "4", "value": 3},
+              {"id": "4", "left": null, "right": "5", "value": 4},
+              {"id": "5", "left": null, "right": "6", "value": 5},
+              {"id": "6", "left": null, "right": "7", "value": 6},
+              {"id": "7", "left": null, "right": "8", "value": 7},
+              {"id": "8", "left": null, "right": "9", "value": 8},
+              {"id": "9", "left": null, "right": null, "value": 9}
+            ],
+            "root": "2"
+          }
+        }
+         */
+
+
+        const tree = new BST(2);
+        tree.right = new BST(3);
+        tree.right.right = new BST(4);
+        tree.right.right.right = new BST(5);
+        tree.right.right.right.right = new BST(6);
+        tree.right.right.right.right.right = new BST(7);
+        tree.right.right.right.right.right.right = new BST(8);
+        tree.right.right.right.right.right.right.right = new BST(9);
+
+        // Nodes you mentioned in the comment
+        const nodeOne = tree; // Value: 2
+        const nodeTwo = tree.right.right.right; // Value: 5
+        const nodeThree = tree.right.right.right.right.right.right; // Value: 8
+
+        this.current_test_name = '2 | 5 | 8 | true';
+        assert.equal(validateThreeNodes.solve(nodeOne, nodeTwo, nodeThree), true);
+
+    }
+
+    test_5() {
+        /**
+         6
+       / \
+      4   8
+     /   / \
+    3   7   9
+   /
+  1
+   \
+    2
+
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "nodeOne": "4",
+            "nodeThree": "2",
+            "nodeTwo": "1",
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": null, "right": "2", "value": 1},
+                {"id": "2", "left": null, "right": null, "value": 2},
+                {"id": "3", "left": "1", "right": null, "value": 3},
+                {"id": "4", "left": "3", "right": null, "value": 4},
+                {"id": "5", "left": null, "right": "5", "value": 5},
+                {"id": "6", "left": "4", "right": "8", "value": 6},
+                {"id": "7", "left": null, "right": null, "value": 7},
+                {"id": "8", "left": "7", "right": "9", "value": 8},
+                {"id": "9", "left": null, "right": null, "value": 9}
+                ],
+                "root": "6"
+            }
+            }
+         */
+
+        const validateThreeNodes = new this.Problem();
+        const tree = {
+            value: 6,
+            left: {
+                value: 4,
+                left: {
+                    value: 3,
+                    left: {
+                        value: 1,
+                        left: null,
+                        right: {
+                            value: 2,
+                            left: null,
+                            right: null,
+                        },
+                    },
+                    right: null,
+                },
+                right: null,
+            },
+            right: {
+                value: 8,
+                left: {
+                    value: 7,
+                    left: null,
+                    right: null,
+                },
+                right: {
+                    value: 9,
+                    left: null,
+                    right: null,
+                },
+            },
+        };
+
+        // Nodes you mentioned in the comment
+        const nodeOne = tree.left; // Value: 4
+        const nodeTwo = tree.left.left.left; // Value: 1
+        const nodeThree = tree.left.left.left.right; // Value: 2
+
+
+        this.current_test_name = '1 | 4 | 2 | true';
+        assert.equal(validateThreeNodes.solve(nodeOne, nodeTwo, nodeThree), true);
+    }
+
+    test_6() {
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "nodeOne": "1",
+            "nodeThree": "3",
+            "nodeTwo": "2",
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": null, "right": null, "value": 1},
+                {"id": "2", "left": "1", "right": "3", "value": 2},
+                {"id": "3", "left": null, "right": "4", "value": 3},
+                {"id": "4", "left": null, "right": null, "value": 4}
+                ],
+                "root": "2"
+            }
+            }
+         */
+
+        const validateThreeNodes = new this.Problem();
+
+        const tree = new BST(2);
+        tree.left = new BST(1);
+        tree.right = new BST(3);
+        tree.right.right = new BST(4);
+
+        const nodeOne = tree.left;
+        const nodeTwo = tree;
+        const nodeThree = tree.right;
+
+        this.current_test_name = '1 | 2 | 3 | false';
+        assert.equal(validateThreeNodes.solve(nodeOne, nodeTwo, nodeThree), false);
+    }
+
+    test_7() {
+
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "nodeOne": "2",
+            "nodeThree": "13",
+            "nodeTwo": "4",
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": null, "right": null, "value": 1},
+                {"id": "2", "left": "1", "right": null, "value": 2},
+                {"id": "3", "left": "2", "right": null, "value": 3},
+                {"id": "4", "left": "3", "right": "5", "value": 4},
+                {"id": "5", "left": null, "right": "7", "value": 5},
+                {"id": "6", "left": null, "right": null, "value": 6},
+                {"id": "7", "left": "6", "right": null, "value": 7},
+                {"id": "8", "left": "4", "right": "10", "value": 8},
+                {"id": "9", "left": null, "right": null, "value": 9},
+                {"id": "10", "left": "9", "right": "14", "value": 10},
+                {"id": "11", "left": null, "right": null, "value": 11},
+                {"id": "12", "left": "11", "right": "13", "value": 12},
+                {"id": "13", "left": null, "right": null, "value": 13},
+                {"id": "14", "left": "12", "right": null, "value": 14}
+                ],
+                "root": "8"
+            }
+            }
+         */
+
+        const validateThreeNodes = new this.Problem();
+
+        const tree = new BST(8);
+        tree.left = new BST(4);
+        tree.left.left = new BST(3);
+        tree.left.left.left = new BST(2);
+        tree.left.left.left.left = new BST(1);
+        tree.left.right = new BST(5);
+        tree.left.right.right = new BST(7);
+        tree.left.right.right.left = new BST(6);
+        tree.right = new BST(10);
+        tree.right.left = new BST(9);
+        tree.right.right = new BST(14);
+        tree.right.right.left = new BST(12);
+        tree.right.right.left.left = new BST(11);
+        tree.right.right.left.right = new BST(13);
+        tree.right.right.right = new BST(14);
+
+        const nodeOne = tree.left.left.left;
+        const nodeTwo = tree.left;
+        const nodeThree = tree.right.right.left.right;
+
+        this.current_test_name = '1 | 4 | 13 | false';
+        assert.equal(validateThreeNodes.solve(nodeOne, nodeTwo, nodeThree), false);
+
+
+    }
+
+    test_8() {
+
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "nodeOne": "8",
+            "nodeThree": "1",
+            "nodeTwo": "7",
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": null, "right": null, "value": 1},
+                {"id": "2", "left": "1", "right": null, "value": 2},
+                {"id": "3", "left": "2", "right": null, "value": 3},
+                {"id": "4", "left": "3", "right": null, "value": 4},
+                {"id": "5", "left": "4", "right": null, "value": 5},
+                {"id": "6", "left": "5", "right": null, "value": 6},
+                {"id": "7", "left": "6", "right": null, "value": 7},
+                {"id": "8", "left": "7", "right": "9", "value": 8},
+                {"id": "9", "left": null, "right": null, "value": 9}
+                ],
+                "root": "8"
+            }
+            }
+         */
+
+        const validateThreeNodes = new this.Problem();
+
+        const tree = new BST(8);
+        tree.left = new BST(7);
+        tree.left.left = new BST(6);
+        tree.left.left.left = new BST(5);
+        tree.left.left.left.left = new BST(4);
+        tree.left.left.left.left.left = new BST(3);
+        tree.left.left.left.left.left.left = new BST(2);
+        tree.left.left.left.left.left.left.left = new BST(1);
+        tree.right = new BST(9);
+
+        const nodeOne = tree.left.left.left.left.left.left.left;
+        const nodeTwo = tree.left.left.left.left.left.left;
+        const nodeThree = tree.left.left.left.left.left;
+
+        this.current_test_name = '1 | 7 | 6 | true';
+        assert.equal(validateThreeNodes.solve(nodeOne, nodeTwo, nodeThree), true);
+    }
+
+    test_9() {
+
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "nodeOne": "2",
+            "nodeThree": "3",
+            "nodeTwo": "1",
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": null, "right": null, "value": 1},
+                {"id": "2", "left": "1", "right": null, "value": 2},
+                {"id": "3", "left": "2", "right": null, "value": 3}
+                ],
+                "root": "3"
+                }
+            }
+         */
+
+        const validateThreeNodes = new this.Problem();
+
+        const tree = {
+            value: 3,
+            left: {
+                value: 2,
+                left: {
+                    value: 1,
+                    left: null,
+                    right: null,
+                },
+                right: null,
+            },
+            right: null,
+        };
+
+        // Nodes you mentioned in the comment
+        const nodeOne = tree.left; // Value: 2
+        const nodeTwo = tree.left.left; // Value: 1
+        const nodeThree = tree; // Value: 3
+
+        this.current_test_name = '1 | 2 | 3 | false';
+        assert.equal(validateThreeNodes.solve(nodeOne, nodeTwo, nodeThree), false);
+
+    }
+
+    test_10() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "nodeOne": "1",
+            "nodeThree": "3",
+            "nodeTwo": "2",
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": null, "right": null, "value": 1},
+                {"id": "2", "left": "1", "right": null, "value": 2},
+                {"id": "3", "left": "2", "right": null, "value": 3}
+                ],
+                "root": "3"
+            }
+            }
+         */
+
+        const validateThreeNodes = new this.Problem();
+
+        const tree = new BST(3);
+        tree.left = new BST(2);
+        tree.left.left = new BST(1);
+
+        const nodeOne = tree.left.left;
+        const nodeTwo = tree.left;
+        const nodeThree = tree;
+
+        this.current_test_name = '1 | 2 | 3 | true';
+        assert.equal(validateThreeNodes.solve(nodeOne, nodeTwo, nodeThree), true);
+    }
+
+}
+
 
 const TEST_DICTIONARY = {
     'subarray-sort': SubarraySort,
     'min-rewards': MinRewards,
     'zigzag-traverse': zigzagTraverse,
+    'same-bsts': SameBsts,
+    'validate-three-nodes': validateThreeNodes
 }
 
 module.exports = TEST_DICTIONARY;
