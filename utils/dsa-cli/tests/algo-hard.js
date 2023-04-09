@@ -1888,6 +1888,16 @@ class findNodesDistanceK extends ProblemTests {
         super(Problem);
 
         this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+
     }
 
     test_1() {
@@ -1926,7 +1936,7 @@ class findNodesDistanceK extends ProblemTests {
         tree.right.right.left = new BST(7);
         tree.right.right.right = new BST(8);
 
-        this.current_test_name = '2 | 4 | 5 | 3 | 6 | 7 | 8 | 3 => [7, 8, 2]';
+        this.current_test_name = '(1 | 2 | 4 | 5 | 3 | 6 | 7 | 8 | 2 | 2), 3, 2 => [7, 8, 2]';
         assert.deepEqual(findNodesDistanceK.solve(tree, 3, 2), [7, 8, 2]);
 
 
@@ -1961,14 +1971,333 @@ class findNodesDistanceK extends ProblemTests {
         tree.left.left.left = new BST(4);
         tree.left.left.left.left = new BST(5);
 
-        this.current_test_name = '5 | 4 | 3 | 2 => [5]';
+        this.current_test_name = '(5 | 4 | 3 | 2), 2, 3 => [5]';
         assert.deepEqual(findNodesDistanceK.solve(tree, 2, 3), [5]);
 
     }
 
+    test_3() {
+        /**
+         * [4]
+        View Outputs Side By Side
+        Input(s)
+        {
+        "k": 6,
+        "target": 8,
+        "tree": {
+            "nodes": [
+            {"id": "1", "left": "2", "right": "3", "value": 1},
+            {"id": "2", "left": "4", "right": null, "value": 2},
+            {"id": "3", "left": "5", "right": "6", "value": 3},
+            {"id": "4", "left": null, "right": null, "value": 4},
+            {"id": "5", "left": null, "right": null, "value": 5},
+            {"id": "6", "left": null, "right": "7", "value": 6},
+            {"id": "7", "left": null, "right": "8", "value": 7},
+            {"id": "8", "left": null, "right": null, "value": 8}
+            ],
+            "root": "1"
+        }
+        }
+        */
 
 
+        const findNodesDistanceK = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(2);
+        tree.left.left = new BST(4);
+        tree.right = new BST(3);
+        tree.right.left = new BST(5);
+        tree.right.right = new BST(6);
+        tree.right.right.right = new BST(7);
+        tree.right.right.right.right = new BST(8);
+
+        this.current_test_name = '(4 | 2 | 1 | 3 | 6 | 7 | 8), 6, 8 => [4]';
+        assert.deepEqual(findNodesDistanceK.solve(tree, 8, 6), [4]);
+
+    }
+
+    test_4() {
+
+        /**
+         * [5, 6, 1]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 1,
+            "target": 3,
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "2", "right": "3", "value": 1},
+                {"id": "2", "left": "4", "right": null, "value": 2},
+                {"id": "3", "left": "5", "right": "6", "value": 3},
+                {"id": "4", "left": null, "right": null, "value": 4},
+                {"id": "5", "left": null, "right": null, "value": 5},
+                {"id": "6", "left": null, "right": "7", "value": 6},
+                {"id": "7", "left": null, "right": "8", "value": 7},
+                {"id": "8", "left": null, "right": null, "value": 8}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const findNodesDistanceK = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(2);
+        tree.left.left = new BST(4);
+        tree.right = new BST(3);
+        tree.right.left = new BST(5);
+        tree.right.right = new BST(6);
+        tree.right.right.right = new BST(7);
+        tree.right.right.right.right = new BST(8);
+
+        this.current_test_name = '(4 | 2 | 1 | 3 | 6 | 7 | 8), 3, 1 => [5, 6, 1]';
+        assert.deepEqual(findNodesDistanceK.solve(tree, 3, 1), [5, 6, 1]);
+    }
+
+    test_5() {
+
+        /**
+         * [4, 5, 6, 7]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 2,
+            "target": 1,
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "2", "right": "3", "value": 1},
+                {"id": "2", "left": "4", "right": "5", "value": 2},
+                {"id": "3", "left": "6", "right": "7", "value": 3},
+                {"id": "4", "left": null, "right": null, "value": 4},
+                {"id": "5", "left": null, "right": null, "value": 5},
+                {"id": "6", "left": null, "right": null, "value": 6},
+                {"id": "7", "left": null, "right": null, "value": 7}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const findNodesDistanceK = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(2);
+        tree.left.left = new BST(4);
+        tree.left.right = new BST(5);
+        tree.right = new BST(3);
+        tree.right.left = new BST(6);
+        tree.right.right = new BST(7);
+
+        this.current_test_name = '(4 | 2 | 1 | 3 | 6 | 7), 1, 2 => [4, 5, 6, 7]';
+        assert.deepEqual(findNodesDistanceK.solve(tree, 1, 2), [4, 5, 6, 7]);
+
+    }
+
+    test_6() {
+
+        /**
+         * [9, 2]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 2,
+            "target": 8,
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "2", "right": "3", "value": 1},
+                {"id": "2", "left": "4", "right": "5", "value": 2},
+                {"id": "3", "left": "6", "right": "7", "value": 3},
+                {"id": "4", "left": "8", "right": "9", "value": 4},
+                {"id": "5", "left": null, "right": null, "value": 5},
+                {"id": "6", "left": null, "right": null, "value": 6},
+                {"id": "7", "left": null, "right": null, "value": 7},
+                {"id": "8", "left": null, "right": null, "value": 8},
+                {"id": "9", "left": null, "right": null, "value": 9}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const findNodesDistanceK = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(2);
+        tree.left.left = new BST(4);
+        tree.left.left.left = new BST(8);
+        tree.left.left.right = new BST(9);
+        tree.left.right = new BST(5);
+        tree.right = new BST(3);
+        tree.right.left = new BST(6);
+        tree.right.right = new BST(7);
+
+        this.current_test_name = '(8 | 4 | 2 | 1 | 3 | 6 | 7 | 9), 8, 2 => [9, 2]';
+        assert.deepEqual(findNodesDistanceK.solve(tree, 8, 2), [9, 2]);
+
+    }
+
+
+    test_7() {
+
+        /**
+         * [7, 8]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 6,
+            "target": 6,
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "2", "right": "3", "value": 1},
+                {"id": "2", "left": "4", "right": null, "value": 2},
+                {"id": "3", "left": null, "right": "5", "value": 3},
+                {"id": "4", "left": "6", "right": null, "value": 4},
+                {"id": "5", "left": "7", "right": "8", "value": 5},
+                {"id": "6", "left": null, "right": null, "value": 6},
+                {"id": "7", "left": null, "right": null, "value": 7},
+                {"id": "8", "left": null, "right": null, "value": 8}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const findNodesDistanceK = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(2);
+        tree.left.left = new BST(4);
+        tree.left.left.left = new BST(6);
+        tree.right = new BST(3);
+        tree.right.left = new BST(5);
+        tree.right.left.left = new BST(7);
+        tree.right.left.right = new BST(8);
+
+        this.current_test_name = '(6 | 4 | 2 | 1 | 3 | 5 | 7 | 8), 6, 6 => [7, 8]';
+        assert.deepEqual(findNodesDistanceK.solve(tree, 6, 6), [7, 8]);
+
+    }
+
+    test_8() {
+
+        /**
+         * []
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 1,
+            "target": 1,
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": null, "right": null, "value": 1}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const findNodesDistanceK = new this.Problem();
+
+        const tree = new BST(1);
+
+        this.current_test_name = '(1), 1, 1 => []';
+        assert.deepEqual(findNodesDistanceK.solve(tree, 1, 1), []);
+    }
+
+    test_9() {
+
+        /**
+         * []
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 17,
+            "target": 6,
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "2", "right": "3", "value": 1},
+                {"id": "2", "left": "4", "right": null, "value": 2},
+                {"id": "3", "left": null, "right": "5", "value": 3},
+                {"id": "4", "left": "6", "right": null, "value": 4},
+                {"id": "5", "left": "7", "right": "8", "value": 5},
+                {"id": "6", "left": null, "right": null, "value": 6},
+                {"id": "7", "left": null, "right": null, "value": 7},
+                {"id": "8", "left": null, "right": null, "value": 8}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const findNodesDistanceK = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(2);
+        tree.left.left = new BST(4);
+        tree.left.left.left = new BST(6);
+        tree.right = new BST(3);
+        tree.right.left = new BST(5);
+        tree.right.left.left = new BST(7);
+        tree.right.left.right = new BST(8);
+
+        this.current_test_name = '(6 | 4 | 2 | 1 | 3 | 5 | 7 | 8), 6, 17 => []';
+        assert.deepEqual(findNodesDistanceK.solve(tree, 6, 17), []);
+
+    }
+
+    test_10() {
+        /**
+         * [8, 9, 10, 11, 3]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 2,
+            "target": 2,
+            "tree": {
+                "nodes": [
+                {"id": "1", "left": "2", "right": "3", "value": 1},
+                {"id": "2", "left": "4", "right": "5", "value": 2},
+                {"id": "3", "left": "6", "right": "7", "value": 3},
+                {"id": "4", "left": "8", "right": "9", "value": 4},
+                {"id": "5", "left": "10", "right": "11", "value": 5},
+                {"id": "6", "left": "12", "right": "13", "value": 6},
+                {"id": "7", "left": null, "right": null, "value": 7},
+                {"id": "8", "left": null, "right": null, "value": 8},
+                {"id": "9", "left": null, "right": null, "value": 9},
+                {"id": "10", "left": null, "right": null, "value": 10},
+                {"id": "11", "left": null, "right": null, "value": 11},
+                {"id": "12", "left": null, "right": null, "value": 12},
+                {"id": "13", "left": null, "right": null, "value": 13}
+                ],
+                "root": "1"
+            }
+            }
+         */
+
+        const findNodesDistanceK = new this.Problem();
+
+        const tree = new BST(1);
+        tree.left = new BST(2);
+        tree.left.left = new BST(4);
+        tree.left.left.left = new BST(8);
+        tree.left.left.right = new BST(9);
+        tree.left.right = new BST(5);
+        tree.left.right.left = new BST(10);
+        tree.left.right.right = new BST(11);
+        tree.right = new BST(3);
+        tree.right.left = new BST(6);
+        tree.right.left.left = new BST(12);
+        tree.right.left.right = new BST(13);
+
+        this.current_test_name = '(8 | 9 | 10 | 11 | 4 | 2 | 1 | 3 | 6 | 12 | 13 | 5), 2, 2 => [8, 9, 10, 11, 3]';
+        assert.deepEqual(findNodesDistanceK.solve(tree, 2, 2), [8, 9, 10, 11, 3]);
+
+    }
 }
+
 
 
 const TEST_DICTIONARY = {
