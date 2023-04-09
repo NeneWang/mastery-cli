@@ -106,21 +106,32 @@ class Quizzer {
         return get_random(potential_questions);
     }
 
-    forceLearnMode = async ({ debug = false } = {}) => {
+    forceLearnMode = async ({ debug = false, exitMethod = () => {} } = {}) => {
         let potential_questions = this.terms;
         potential_questions = await this.getYoungest(potential_questions);
         console.log("potential_questions", potential_questions);
         console.log("length", potential_questions.length);
         let attempts = 0;
+
+        let exit_force_method = false;
         // Create miniqueue
         const total_cards = potential_questions.length;
         const miniqueue = new MiniTermScheduler(potential_questions);
-        while (miniqueue.cardsCount != 0) {
+        const wrappedExitMethod = () => {
+            exitMethod();
+            exit_force_method = true;
+        }
+
+        while (miniqueue.cardsCount != 0 && !exit_force_method) {
             // Print the statistics
             console.log(`queue: ${miniqueue.cardsCount}/${total_cards}`);
             const card = miniqueue.getCard();
-            console.log("card", card);
-            const response = await this.ask_term_question(card);
+            // console.log("card", card);
+            const response = await this.ask_term_question(card, { exitMethod: wrappedExitMethod });
+            if(response == true ){
+                // increase the terms
+            }
+
             console.log("response", response);
             miniqueue.solveCard(response);
             attempts += 1;
@@ -431,6 +442,8 @@ class Quizzer {
             }
 
             try {
+
+                console.log("Submitting answer...")
 
                 this.postCommentFromTerm(term_selected, user_res, true);
                 const _ = await increasePerformance("terms");

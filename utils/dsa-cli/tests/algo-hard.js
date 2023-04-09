@@ -2298,6 +2298,197 @@ class findNodesDistanceK extends ProblemTests {
     }
 }
 
+class maxSumIncreasingSubsequence extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+    }
+
+    test_1() {
+
+        /**
+         * [110, [10, 20, 30, 50]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [10, 70, 20, 30, 50, 11, 30]
+            }
+         */
+
+        const maxSumIncreasingSubsequence = new this.Problem();
+
+        this.current_test_name = '[10, 70, 20, 30, 50, 11, 30] => [110, [10, 20, 30, 50]]';
+        assert.deepEqual(maxSumIncreasingSubsequence.solve([10, 70, 20, 30, 50, 11, 30]), [110, [10, 20, 30, 50]]);
+
+    }
+
+    test_2() {
+        /**
+         * [1, [1]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [1]
+            }
+         */
+
+        const maxSumIncreasingSubsequence = new this.Problem();
+
+        this.current_test_name = '[1] => [1, [1]]';
+        assert.deepEqual(maxSumIncreasingSubsequence.solve([1]), [1, [1]]);
+    }
+
+    test_3() {
+
+        /**
+         * [-1, [-1]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [-1]
+            }
+         */
+
+        const maxSumIncreasingSubsequence = new this.Problem();
+
+        this.current_test_name = '[-1] => [-1, [-1]]';
+        assert.deepEqual(maxSumIncreasingSubsequence.solve([-1]), [-1, [-1]]);
+    }
+
+
+    test_4() {
+
+        /**
+         * [1, [1]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [-1, 1]
+            }
+
+         */
+
+        const maxSumIncreasingSubsequence = new this.Problem();
+
+        this.current_test_name = '[-1, 1] => [1, [1]]';
+        assert.deepEqual(maxSumIncreasingSubsequence.solve([-1, 1]), [1, [1]]);
+
+    }
+
+    test_5() {
+        /**
+         * [5, [5]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [5, 4, 3, 2, 1]
+            }
+         */
+
+        const maxSumIncreasingSubsequence = new this.Problem();
+
+        this.current_test_name = '[5, 4, 3, 2, 1] => [5, [5]]';
+        assert.deepEqual(maxSumIncreasingSubsequence.solve([5, 4, 3, 2, 1]), [5, [5]]);
+    }
+
+    test_6() {
+        /**
+         * [15, [1, 2, 3, 4, 5]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [1, 2, 3, 4, 5]
+            }
+         */
+
+        const maxSumIncreasingSubsequence = new this.Problem();
+
+        this.current_test_name = '[1, 2, 3, 4, 5] => [15, [1, 2, 3, 4, 5]]';
+        assert.deepEqual(maxSumIncreasingSubsequence.solve([1, 2, 3, 4, 5]), [15, [1, 2, 3, 4, 5]]);
+    }
+
+
+    test_7() {
+
+        /**
+         * [-1, [-1]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [-5, -4, -3, -2, -1]
+            }
+         */
+
+        const maxSumIncreasingSubsequence = new this.Problem();
+
+        this.current_test_name = '[-5, -4, -3, -2, -1] => [-1, [-1]]';
+        assert.deepEqual(maxSumIncreasingSubsequence.solve([-5, -4, -3, -2, -1]), [-1, [-1]]);
+    }
+
+    test_8() {
+
+        /**
+         * [35, [8, 12, 15]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [8, 12, 2, 3, 15, 5, 7]
+            }
+         */
+
+        const maxSumIncreasingSubsequence = new this.Problem();
+
+        this.current_test_name = '[8, 12, 2, 3, 15, 5, 7] => [35, [8, 12, 15]]';
+        assert.deepEqual(maxSumIncreasingSubsequence.solve([8, 12, 2, 3, 15, 5, 7]), [35, [8, 12, 15]]);
+    }
+
+    test_9() {
+        /**
+         * [164, [10, 11, 14, 23, 25, 31, 50]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [10, 15, 4, 5, 11, 14, 31, 25, 31, 23, 25, 31, 50]
+            }
+         */
+
+        const maxSumIncreasingSubsequence = new this.Problem();
+        this.current_test_name = '[10, 15, 4, 5, 11, 14, 31, 25, 31, 23, 25, 31, 50] => [164, [10, 11, 14, 23, 25, 31, 50]]';
+        assert.deepEqual(maxSumIncreasingSubsequence.solve([10, 15, 4, 5, 11, 14, 31, 25, 31, 23, 25, 31, 50]), [164, [10, 11, 14, 23, 25, 31, 50]]);
+
+    }
+
+    test_10() {
+        /**
+         * [45, [1, 2, 3, 4, 5, 6, 7, 8, 9]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [10, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            }
+         */
+
+        const maxSumIncreasingSubsequence = new this.Problem();
+        this.current_test_name = '[10, 1, 2, 3, 4, 5, 6, 7, 8, 9] => [45, [1, 2, 3, 4, 5, 6, 7, 8, 9]]';
+        assert.deepEqual(maxSumIncreasingSubsequence.solve([10, 1, 2, 3, 4, 5, 6, 7, 8, 9]), [45, [1, 2, 3, 4, 5, 6, 7, 8, 9]]);
+
+    }
+
+
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -2308,6 +2499,7 @@ const TEST_DICTIONARY = {
     'validate-three-nodes': validateThreeNodes,
     "max-path-sum": MaxPathPathSum,
     'find-nodes-distance-k': findNodesDistanceK,
+    'max-sum-increasing-subsequence': maxSumIncreasingSubsequence
 }
 
 module.exports = TEST_DICTIONARY;
