@@ -2486,10 +2486,204 @@ class maxSumIncreasingSubsequence extends ProblemTests {
     }
 
 
-
 }
 
+class LongestCommonSubsequence extends ProblemTests {
 
+    constructor(Problem) {
+        super(Problem);
+
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+
+    }
+
+    test_1() {
+        /**
+         * ["X", "Y", "Z", "W"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "str1": "ZXVVYZW",
+            "str2": "XKYKZPW"
+            }
+         */
+
+        const longestCommonSubsequence = new this.Problem();
+
+        this.current_test_name = '"ZXVVYZW", "XKYKZPW" => ["X", "Y", "Z", "W"]';
+        assert.deepEqual(longestCommonSubsequence.solve("ZXVVYZW", "XKYKZPW"), ["X", "Y", "Z", "W"]);
+
+    }
+
+    test_2() {
+        /**
+         * []
+            View Outputs Side By Side
+            Input(s)
+            {
+            "str1": "",
+            "str2": ""
+            }
+         */
+
+        const longestCommonSubsequence = new this.Problem();
+
+        this.current_test_name = '"", "" => []';
+        assert.deepEqual(longestCommonSubsequence.solve("", ""), []);
+    }
+
+    test_3() {
+        /**
+         * []
+            View Outputs Side By Side
+            Input(s)
+            {
+            "str1": "",
+            "str2": "ABCDEFG"
+            }
+         */
+
+        const longestCommonSubsequence = new this.Problem();
+
+        this.current_test_name = '"", "ABCDEFG" => []';
+        assert.deepEqual(longestCommonSubsequence.solve("", "ABCDEFG"), []);
+
+    }
+
+    test_4() {
+        /**
+         * []
+        View Outputs Side By Side
+        Input(s)
+        {
+          "str1": "ABCDEFG",
+          "str2": ""
+        }
+         */
+
+        const longestCommonSubsequence = new this.Problem();
+
+        this.current_test_name = '"ABCDEFG", "" => []';
+        assert.deepEqual(longestCommonSubsequence.solve("ABCDEFG", ""), []);
+    }
+
+
+    test_5() {
+        /**
+         * ["A", "B", "C", "D", "E", "F", "G"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "str1": "ABCDEFG",
+            "str2": "ABCDEFG"
+            }
+         */
+
+        const longestCommonSubsequence = new this.Problem();
+
+        this.current_test_name = '"ABCDEFG", "ABCDEFG" => ["A", "B", "C", "D", "E", "F", "G"]';
+        assert.deepEqual(longestCommonSubsequence.solve("ABCDEFG", "ABCDEFG"), ["A", "B", "C", "D", "E", "F", "G"]);
+
+    }
+
+    test_6() {
+        /**
+         * ["A", "E"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "str1": "ABCDEFG",
+            "str2": "APPLES"
+            }
+         */
+
+        const longestCommonSubsequence = new this.Problem();
+
+        this.current_test_name = '"ABCDEFG", "APPLES" => ["A", "E"]';
+        assert.deepEqual(longestCommonSubsequence.solve("ABCDEFG", "APPLES"), ["A", "E"]);
+    }
+
+    test_7() {
+
+        /**
+         * ["n", "t"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "str1": "clement",
+            "str2": "antoine"
+            }
+         */
+
+        const longestCommonSubsequence = new this.Problem();
+
+        this.current_test_name = '"clement", "antoine" => ["n", "t"]';
+        assert.deepEqual(longestCommonSubsequence.solve("clement", "antoine"), ["n", "t"]);
+
+    }
+
+
+    test_8() {
+        /**
+         * ["8", "4", "2"]
+        View Outputs Side By Side
+        Input(s)
+        {
+          "str1": "8111111111111111142",
+          "str2": "222222222822222222222222222222433333333332"
+        }
+         */
+
+
+        const longestCommonSubsequence = new this.Problem();
+
+        this.current_test_name = '"8111111111111111142", "222222222822222222222222222222433333333332" => ["8", "4", "2"]';
+        assert.deepEqual(longestCommonSubsequence.solve("8111111111111111142", "222222222822222222222222222222433333333332"), ["8", "4", "2"]);
+    }
+
+
+    test_9() {
+        /**
+         * ["C", "D", "E", "G", "H", "J", "K", "L", "W"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "str1": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+            "str2": "CCCDDEGDHAGKGLWAJWKJAWGKGWJAKLGGWAFWLFFWAGJWKAG"
+            }
+         */
+
+        const longestCommonSubsequence = new this.Problem();
+
+        this.current_test_name = '"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "CCCDDEGDHAGKGLWAJWKJAWGKGWJAKLGGWAFWLFFWAGJWKAG" => ["C", "D", "E", "G", "H", "J", "K", "L", "W"]';
+        assert.deepEqual(longestCommonSubsequence.solve("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "CCCDDEGDHAGKGLWAJWKJAWGKGWJAKLGGWAFWLFFWAGJWKAG"), ["C", "D", "E", "G", "H", "J", "K", "L", "W"]);
+    }
+
+    test_10() {
+        /**
+         * ["C", "D", "E", "G", "H", "J", "K", "L", "T", "U", "V"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "str1": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+            "str2": "CCCDDEGDHAGKGLWAJWKJAWGKGWJAKLGGWAFWLFFWAGJWKAGTUV"
+            }
+         */
+
+        const longestCommonSubsequence = new this.Problem();
+        assert.deepEqual(longestCommonSubsequence.solve("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "CCCDDEGDHAGKGLWAJWKJAWGKGWJAKLGGWAFWLFFWAGJWKAGTUV"), ["C", "D", "E", "G", "H", "J", "K", "L", "T", "U", "V"]);
+    }
+}
 
 const TEST_DICTIONARY = {
     'subarray-sort': SubarraySort,
@@ -2499,7 +2693,8 @@ const TEST_DICTIONARY = {
     'validate-three-nodes': validateThreeNodes,
     "max-path-sum": MaxPathPathSum,
     'find-nodes-distance-k': findNodesDistanceK,
-    'max-sum-increasing-subsequence': maxSumIncreasingSubsequence
+    'max-sum-increasing-subsequence': maxSumIncreasingSubsequence,
+    'longest-common-subsequence': LongestCommonSubsequence,
 }
 
 module.exports = TEST_DICTIONARY;
