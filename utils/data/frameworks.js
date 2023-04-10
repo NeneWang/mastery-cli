@@ -204,4 +204,68 @@ const apex = [
 
 ]
 
-module.exports = { react_terms, apex };
+const IDE_S = [
+    // Android Studio Shortcuts
+    {
+        term: "Android Studio | navigation keys | class search",
+        description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
+        prompt: "Find a class named `Mock` | How to navigate to a file? ",
+        example: "Ctrl+N Mock — Navigate to Class\n\n\
+        Ctrl + Shift + N — Navigate to a File\n"
+    },
+    {
+        term: "Android Studio | navigation keys | recent",
+        description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
+        prompt: "Go to the recent file score.dart",
+        example: "Ctrl+E score.dart — Recent Files"
+    },
+    {
+        term: "Android Studio | navigation keys | declaration",
+        description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
+        prompt: "Go to the declaration of a method, you are now hovering over response",
+        example: "Ctrl Left mouse or Ctrl+B — Jump to Declarations => This will take you to the declaration of the method"
+    },
+    {
+        term: "Android Studio | navigation keys | navigate to file",
+        description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
+        prompt: "Navigate to a file named score.dart",
+        example: "Ctrl+Shift+N score.dart — Navigate to a File => This will take you to the file, the difference with recent is that it will take longer to search"
+    },
+    
+    {
+        term: "Android Studio | navigation keys | find usage",
+        description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
+        prompt: "Find the usage of a method, you are now hovering over response",
+        example: "Ctrl+Alt+F7— Show Usage => This will show you all the places where the method is used"
+    },
+    {
+        term: "Android Studio | selection keys | select next occurence",
+        description: "     Ctrl + W — Extend selection (selects a word->line->method->Class )     Ctrl +Shift+ W — Decrease Selection     Alt + J — Select next occurrence     Ctrl + Alt + Shift + J — Select all occurrences     Alt + Shift + J — Unselect occurrence     Ctrl+Shift+V — Paste from recent buffers (from a History of Copied Contents) ",
+        prompt: "Select the next occurence of a word, you are now hovering over response How to all and how to unselect?",
+        example: "Alt + J — Select next occurrence => This will place a cursor on the same next word\n\n\
+        Ctrl + Alt + Shift + J — Select all occurrences => This will place a cursor on all the same words\n\n\
+        Alt + Shift + J — Unselect occurrence => This will remove the cursor on the same word\n\n"
+    },
+    {
+        term: "Android Studio | selection keys | Paste from recent clipboard",
+        description: "     Ctrl + W — Extend selection (selects a word->line->method->Class )     Ctrl +Shift+ W — Decrease Selection     Alt + J — Select next occurrence     Ctrl + Alt + Shift + J — Select all occurrences     Alt + Shift + J — Unselect occurrence     Ctrl+Shift+V — Paste from recent buffers (from a History of Copied Contents) ",
+        prompt: "Paste from recent clipboard",
+        example: "Ctrl+Shift+V — Paste from recent buffers (from a History of Copied Contents) => This will show you all the recent clipboard"
+    }
+];
+
+
+const flutter = [
+    {
+        term: "flutter | create",
+        description: "Create a new flutter project",
+        prompt: "Create a new flutter project",
+        example: "flutter create myapp"
+    },
+    
+
+
+];
+
+
+module.exports = { react_terms, apex, flutter, IDE_S };

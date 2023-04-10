@@ -28,9 +28,11 @@ async function populateMasterDeck() {
 
     let decks = new TermStorage([], "Academic Terms");
 
-    const { react_terms, apex } = require('./frameworks');
+    const { react_terms, apex, flutter, IDE_S } = require('./frameworks');
     decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(apex, "apex", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(flutter, "flutter", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(IDE_S, "IDEs", { is_active: layer_1 }));
 
 
     const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne } = require("./spring-senior");
@@ -78,7 +80,7 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn", { is_active: layer_1 }));
 
-    const {designing_good_charts, sql} = require('./data-science');
+    const { designing_good_charts, sql } = require('./data-science');
     decks.addDeck(new TermStorage(designing_good_charts, "designing good charts", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(sql, "sql", { is_active: layer_1 }));
 
