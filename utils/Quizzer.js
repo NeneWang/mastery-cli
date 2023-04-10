@@ -109,8 +109,8 @@ class Quizzer {
     forceLearnMode = async ({ debug = false, exitMethod = () => {} } = {}) => {
         let potential_questions = this.terms;
         potential_questions = await this.getYoungest(potential_questions);
-        console.log("potential_questions", potential_questions);
-        console.log("length", potential_questions.length);
+        if (debug) console.log("potential_questions", potential_questions);
+        if (debug) console.log("length", potential_questions.length);
         let attempts = 0;
 
         let exit_force_method = false;
