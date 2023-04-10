@@ -231,7 +231,7 @@ const IDE_S = [
         prompt: "Navigate to a file named score.dart",
         example: "Ctrl+Shift+N score.dart — Navigate to a File => This will take you to the file, the difference with recent is that it will take longer to search"
     },
-    
+
     {
         term: "Android Studio | navigation keys | find usage",
         description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
@@ -298,12 +298,96 @@ const IDE_S = [
 ];
 
 
-const flutter = [
+const flutter_dart = [
     {
         term: "flutter | create",
         description: "Create a new flutter project",
         prompt: "Create a new flutter project",
         example: "flutter create myapp"
+    },
+    {
+        term: "flutter | run",
+        description: "Run the flutter project",
+        prompt: "Run the flutter project",
+        example: "flutter run"
+    },
+    {
+        term: "flutter | string | interpolation",
+        description: "To put the value of an expression inside a string, use ${expression}. If the expression is an identifier, you can omit the {}.",
+        prompt: "What will the following print? \n\
+        (1) print('${3 + 2}');\n\
+        (2) print('${\"word\".toUpperCase()}');\n\
+        (3) print('$myObject');\n\
+        ",
+        example: "1. 5\n\
+        2. WORD\n\
+        3. The value of myObject.toString()"
+    },
+    {
+        term: "flutter | nullable variable",
+        description: "When creating a variable in Dart 2.12 or higher, you can add ? to the type to indicate that the variable can be null:     int? a = null; // Valid in null-safe Dart.  ",
+        prompt: "simplify that code:",
+        example: "int? a; // The initial value will be null"
+    },
+    {
+        term: "flutter | null-aware",
+        description: ":m Dart offers some handy operators for dealing with values that might be null. One is the ??= assignment operator, which assigns a value to a variable only if that variable is currently null:\n\n\
+        ```dart\n\
+        int? a; // = null\na ??= 3;\nprint(a); // <-- Prints 3.\na ??= 5;\nprint(a); // <-- Still prints 3.\n```\n\n",
+        prompt: "What will be the output of the following code?\n\
+        ```dart\n\
+        print(1 ?? 3);\nprint(null ?? 12);.\n```\n\n",
+        example: "1\n\
+        12"
+    },
+    {
+        term: "flutter | list, set, map | map",
+        description: "Dart’s type inference can assign types to these variables for you. In this case, the inferred types are List<String>, Set<String>, and Map<String, int>.\n\
+        Or you can specify the type yourself:  \n\
+        final aListOfInts = <int>[];    final aSetOfInts = <int>{};     final aMapOfIntToDouble = <int, double>{};\n\
+        \nSpecifying types is handy when you initialize a list with contents of a subtype, but still want the list to be List<BaseType>:  \n\n\
+        final aListOfBaseType = <BaseType>[SubType(), SubType()];  ",
+        prompt: "// Assign this a map of String to int so that aMapOfStringsToInts['myKey'] returns 12:\n\
+        final aMapOfStringsToInts = ",
+        example: "final aMapOfStringsToInts = <String, int>{'myKey': 12};"
+    },
+    {
+        term: "flutter | list, set, map assignation | List doubles",
+        description: "Dart’s type inference can assign types to these variables for you. In this case, the inferred types are List<String>, Set<String>, and Map<String, int>.\n\
+        Or you can specify the type yourself:  \n\
+        final aListOfInts = <int>[];    final aSetOfInts = <int>{};     final aMapOfIntToDouble = <int, double>{};\n\
+        \nSpecifying types is handy when you initialize a list with contents of a subtype, but still want the list to be List<BaseType>:  \n\n\
+        final aListOfBaseType = <BaseType>[SubType(), SubType()];  ",
+        prompt: "Assign this an empty List<double>:\n\
+        final anEmptyListOfDouble = ",
+        example: "final anEmptyListOfDouble = <double>[];"
+    },
+    {
+        term: "flutter | list, set, map assignation | double",
+        description: "Dart’s type inference can assign types to these variables for you. In this case, the inferred types are List<String>, Set<String>, and Map<String, int>.\n\
+        Or you can specify the type yourself:  \n\
+        final aListOfInts = <int>[];    final aSetOfInts = <int>{};     final aMapOfIntToDouble = <int, double>{};\n\
+        \nSpecifying types is handy when you initialize a list with contents of a subtype, but still want the list to be List<BaseType>:  \n\n\
+        final aListOfBaseType = <BaseType>[SubType(), SubType()];  ",
+        prompt: "// Assign this an empty Set<String>:\n\
+        final anEmptySetOfString = ",
+        example: "final anEmptyListOfDouble = <String>{};"
+    },
+    {
+        term: "flutter | cascade | null cascade",
+        description: ":m Here’s the same expression with a cascade:\n\
+        ```dart\n\
+        myObject..someMethod()\n\
+        ```\n\
+        Although it still invokes someMethod() on myObject, the result of the expression isn’t the return value—it’s a reference to myObject!  Using cascades, you can chain together operations that would otherwise require separate statements. For example, consider the following code, which uses the conditional member access operator (?.) to read properties of button if it isn’t null:\n\
+        ```dart\n\
+        var button = querySelector('#confirm');\nbutton?.text = 'Confirm';\nbutton?.classes.add('important');\nbutton?.onClick.listen((e) => window.alert('Confirmed!'));\nbutton?.scrollIntoView();\n\
+        ```\n\
+        ",
+        prompt: "Convert the latter example into a null shorting cascade (?..)",
+        example: "````dart\n\
+        querySelector('#confirm') ?..text = 'Confirm'..classes.add('important')..onClick.listen((e) => window.alert('Confirmed!'))..scrollIntoView();\n\
+        ```"
     },
     
 
@@ -311,4 +395,4 @@ const flutter = [
 ];
 
 
-module.exports = { react_terms, apex, flutter, IDE_S };
+module.exports = { react_terms, apex, flutter: flutter_dart, IDE_S };
