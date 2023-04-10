@@ -238,6 +238,7 @@ const IDE_S = [
         prompt: "Find the usage of a method, you are now hovering over response",
         example: "Ctrl+Alt+F7— Show Usage => This will show you all the places where the method is used"
     },
+    // Selection Keys
     {
         term: "Android Studio | selection keys | select next occurence",
         description: "     Ctrl + W — Extend selection (selects a word->line->method->Class )     Ctrl +Shift+ W — Decrease Selection     Alt + J — Select next occurrence     Ctrl + Alt + Shift + J — Select all occurrences     Alt + Shift + J — Unselect occurrence     Ctrl+Shift+V — Paste from recent buffers (from a History of Copied Contents) ",
@@ -251,6 +252,48 @@ const IDE_S = [
         description: "     Ctrl + W — Extend selection (selects a word->line->method->Class )     Ctrl +Shift+ W — Decrease Selection     Alt + J — Select next occurrence     Ctrl + Alt + Shift + J — Select all occurrences     Alt + Shift + J — Unselect occurrence     Ctrl+Shift+V — Paste from recent buffers (from a History of Copied Contents) ",
         prompt: "Paste from recent clipboard",
         example: "Ctrl+Shift+V — Paste from recent buffers (from a History of Copied Contents) => This will show you all the recent clipboard"
+    },
+    // Editing Keys
+    {
+        term: "Android Studio | Editing keys | duplicate line",
+        description: "     Ctrl+F6 — Refactor Code     Ctrl+D — Duplicate a Line/Selected part     Ctrl+Y — Delete a Line/Selected part     Ctrl+Q — Quick Documentation     Ctrl + Space — Code completion     Ctrl+Shift+Space — Smart code completion (by expected type removes unrelated suggestions)     Alt+Insert — Generate Code     Ctrl+J — Insert Live template     Ctrl + O — Override methods     Ctrl + I — Implement methods     Ctrl + Alt + T — Surround with…     Ctrl + / — Comment / uncomment with line comment     Ctrl + Shift + / — Comment / uncomment with block comment     Ctrl+Alt+L — Reformat code ",
+        prompt: "Duplicate a line",
+        example: "Ctrl+D — Duplicate a Line/Selected part => This will duplicate the line"
+    },
+    {
+        term: "Android Studio | Editing keys | delete line",
+        description: "     Ctrl+F6 — Refactor Code     Ctrl+D — Duplicate a Line/Selected part     Ctrl+Y — Delete a Line/Selected part     Ctrl+Q — Quick Documentation     Ctrl + Space — Code completion     Ctrl+Shift+Space — Smart code completion (by expected type removes unrelated suggestions)     Alt+Insert — Generate Code     Ctrl+J — Insert Live template     Ctrl + O — Override methods     Ctrl + I — Implement methods     Ctrl + Alt + T — Surround with…     Ctrl + / — Comment / uncomment with line comment     Ctrl + Shift + / — Comment / uncomment with block comment     Ctrl+Alt+L — Reformat code ",
+        prompt: "Delete a line",
+        example: "Ctrl+Y — Delete a Line/Selected part => This will delete the line"
+    },
+    {
+        term: "Android Studio | Editing keys | quick documentation",
+        description: "     Ctrl+F6 — Refactor Code     Ctrl+D — Duplicate a Line/Selected part     Ctrl+Y — Delete a Line/Selected part     Ctrl+Q — Quick Documentation     Ctrl + Space — Code completion     Ctrl+Shift+Space — Smart code completion (by expected type removes unrelated suggestions)     Alt+Insert — Generate Code     Ctrl+J — Insert Live template     Ctrl + O — Override methods     Ctrl + I — Implement methods     Ctrl + Alt + T — Surround with…     Ctrl + / — Comment / uncomment with line comment     Ctrl + Shift + / — Comment / uncomment with block comment     Ctrl+Alt+L — Reformat code ",
+        prompt: "Quick documentation",
+        example: "Ctrl+Q — Quick Documentation => This will show you the documentation of the method"
+    },
+    {
+        term: "Android Studio | Editing keys | code completion",
+        description: "     Ctrl+F6 — Refactor Code     Ctrl+D — Duplicate a Line/Selected part     Ctrl+Y — Delete a Line/Selected part     Ctrl+Q — Quick Documentation     Ctrl + Space — Code completion     Ctrl+Shift+Space — Smart code completion (by expected type removes unrelated suggestions)     Alt+Insert — Generate Code     Ctrl+J — Insert Live template     Ctrl + O — Override methods     Ctrl + I — Implement methods     Ctrl + Alt + T — Surround with…     Ctrl + / — Comment / uncomment with line comment     Ctrl + Shift + / — Comment / uncomment with block comment     Ctrl+Alt+L — Reformat code ",
+        prompt: "Code completion",
+        example: "Ctrl + Space — Code completion => This will show you the suggestions"
+    },
+    {
+        term: "Android Studio | Editing keys | Override and Implement Methods",
+        description: "     Ctrl+F6 — Refactor Code     Ctrl+D — Duplicate a Line/Selected part     Ctrl+Y — Delete a Line/Selected part     Ctrl+Q — Quick Documentation     Ctrl + Space — Code completion     Ctrl+Shift+Space — Smart code completion (by expected type removes unrelated suggestions)     Alt+Insert — Generate Code     Ctrl+J — Insert Live template     Ctrl + O — Override methods     Ctrl + I — Implement methods     Ctrl + Alt + T — Surround with…     Ctrl + / — Comment / uncomment with line comment     Ctrl + Shift + / — Comment / uncomment with block comment     Ctrl+Alt+L — Reformat code ",
+        prompt: "Override and Implement Methods",
+        example: "Ctrl + O — Override methods => This will show you the methods that you can override\n\n\
+        Ctrl + I — Implement methods => This will show you the methods that you can implement"
+    },
+    // Running and Debugging
+    {
+        term: "Android Studio | Running and Debugging | run",
+        description: "     Ctrl + F9 — Compile and Run Make a project     Ctrl + Shift + F9 — Compile selected file, package or module     Shift + F10 — Run     Shift + F9 — Debug     Ctrl + Shift + F10 — Run context configuration from editor \n\
+        F8 / F7 — Step over / into     Shift + F7 / Shift + F8 — Smart step into/Step out     Alt + F9 — Run to cursor     Alt + F8 — Evaluate expression     F9 — Resume program     Ctrl + F8 — Toggle breakpoint     Ctrl + Shift + F8 — View breakpoints ",
+        prompt: "Compile and Run Make a project, what is the difference between run and compile-run?",
+        example: "Ctrl + F9 — Compile and Run Make a project => This will compile and run the project\n\
+        Shift + F10 — Run => This will run the project\n\n\
+        The difference between the two is that the first one will compile the project and then run it, while the second one will just run the old project"
     }
 ];
 
