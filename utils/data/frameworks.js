@@ -312,7 +312,7 @@ const flutter_dart = [
         example: "flutter run"
     },
     {
-        term: "flutter | string | interpolation",
+        term: "dart | string | interpolation",
         description: "To put the value of an expression inside a string, use ${expression}. If the expression is an identifier, you can omit the {}.",
         prompt: "What will the following print? \n\
         (1) print('${3 + 2}');\n\
@@ -324,13 +324,13 @@ const flutter_dart = [
         3. The value of myObject.toString()"
     },
     {
-        term: "flutter | nullable variable",
+        term: "dart | nullable variable",
         description: "When creating a variable in Dart 2.12 or higher, you can add ? to the type to indicate that the variable can be null:     int? a = null; // Valid in null-safe Dart.  ",
         prompt: "simplify that code:",
         example: "int? a; // The initial value will be null"
     },
     {
-        term: "flutter | null-aware",
+        term: "dart | null-aware",
         description: ":m Dart offers some handy operators for dealing with values that might be null. One is the ??= assignment operator, which assigns a value to a variable only if that variable is currently null:\n\n\
         ```dart\n\
         int? a; // = null\na ??= 3;\nprint(a); // <-- Prints 3.\na ??= 5;\nprint(a); // <-- Still prints 3.\n```\n\n",
@@ -341,7 +341,7 @@ const flutter_dart = [
         12"
     },
     {
-        term: "flutter | list, set, map | map",
+        term: "dart | list, set, map | map",
         description: "Dart’s type inference can assign types to these variables for you. In this case, the inferred types are List<String>, Set<String>, and Map<String, int>.\n\
         Or you can specify the type yourself:  \n\
         final aListOfInts = <int>[];    final aSetOfInts = <int>{};     final aMapOfIntToDouble = <int, double>{};\n\
@@ -352,7 +352,7 @@ const flutter_dart = [
         example: "final aMapOfStringsToInts = <String, int>{'myKey': 12};"
     },
     {
-        term: "flutter | list, set, map assignation | List doubles",
+        term: "dart | list, set, map assignation | List doubles",
         description: "Dart’s type inference can assign types to these variables for you. In this case, the inferred types are List<String>, Set<String>, and Map<String, int>.\n\
         Or you can specify the type yourself:  \n\
         final aListOfInts = <int>[];    final aSetOfInts = <int>{};     final aMapOfIntToDouble = <int, double>{};\n\
@@ -363,7 +363,7 @@ const flutter_dart = [
         example: "final anEmptyListOfDouble = <double>[];"
     },
     {
-        term: "flutter | list, set, map assignation | double",
+        term: "dart | list, set, map assignation | double",
         description: "Dart’s type inference can assign types to these variables for you. In this case, the inferred types are List<String>, Set<String>, and Map<String, int>.\n\
         Or you can specify the type yourself:  \n\
         final aListOfInts = <int>[];    final aSetOfInts = <int>{};     final aMapOfIntToDouble = <int, double>{};\n\
@@ -374,7 +374,7 @@ const flutter_dart = [
         example: "final anEmptyListOfDouble = <String>{};"
     },
     {
-        term: "flutter | cascade | null cascade",
+        term: "dart | cascade | null cascade",
         description: ":m Here’s the same expression with a cascade:\n\
         ```dart\n\
         myObject..someMethod()\n\
@@ -385,10 +385,60 @@ const flutter_dart = [
         ```\n\
         ",
         prompt: "Convert the latter example into a null shorting cascade (?..)",
-        example: "````dart\n\
+        example: "```dart\n\
         querySelector('#confirm') ?..text = 'Confirm'..classes.add('important')..onClick.listen((e) => window.alert('Confirmed!'))..scrollIntoView();\n\
         ```"
     },
+    {
+        term: "dart | optional parameters | positional ",
+        prompt: "change the header of the following so that the second and third parameters are optional:\n\
+        int sumUp(int a, int b, int c)\n\n\
+        so that these works:\n\
+        int total = sumUpToFive(1, 2);\n\
+        int total_2 = sumUpToFive(1, 2, 3);\n",
+        example: "int sumUp(int a, [int? b, int? c])\n\
+        or: int sumUp(int a, [int b = 0, int c = 0])"
+    },
+    {
+        term: "dart | optional parameters | named",
+        prompt: "change the header of the following so that the third parameters is optional and is named:\n\
+        int sumUp(int a, int b, int c)\n\n\
+        so that these works:\n\
+        (Suppose that we want to assign: a => 1, b => 2, c => 3)\n\
+        int total = sumUpToFive(1, c:3, 2);\n",
+        example: "int sumUp(int a, int b, {int? c})"
+    },
+    {
+        term: "dart | exceptions | catching",
+        description: ":m\n\
+        ```dart\n\
+        class OutOfLlamasException implements Exception {\n String errorMessage() {\n return 'Out of Llamas!';\n }\n}\n\n\
+        throw OutOfLlamasException();\n\
+        throw Exception('Something bad happened.');\n\
+        throw 'Waaaaaaah!';\n\
+        ```",
+        prompt: "complete the missing snippet so that both exceptions and errors are caught:\n\
+        ```dart\n\
+        try {\n breedMoreLlamas();\n} on [#1] {\n // A specific exception\n buyMoreLlamas();\n} [#2] {\n // Anything else that is an exception\n print('Unknown exception: $e');\n} [#3] {\n // No specified type, handles all\n print('Something really unknown: $e');\n}\n\
+        ```",
+        example: "#1 OutOfLlamasException\n\
+        #2 on Exception catch (e)\n\
+        #3 catch (e)\n\
+        "
+    },
+    {
+        term: "dart | exceptions | rethrow",
+        description: ":m If you can’t completely handle the exception, use the rethrow keyword to propagate the exception:\n\
+        ```dart\n\
+        try {\n breedMoreLlamas();\n} catch (e) {\n print('I was just trying to breed llamas!');\n rethrow;\n}\n\
+        ```\n\
+        To execute code whether or not an exception is thrown, use finally:\n\
+        ```dart\n\
+        try {\n breedMoreLlamas();\n} catch (e) {\n // ... handle exception ...\n} finally {\n // Always clean up, even if an exception is thrown.\n cleanLlamaStalls();\n}\n\
+        ```",
+        prompt: "Whats the difference between finally and rethrow?",
+        example: "finally is always executed, rethrow is used to propagate the exception"
+    }
     
 
 

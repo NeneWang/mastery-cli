@@ -868,12 +868,12 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
  */
 const getComments = async (term, count = 5) => {
 
-	const res = [];
+	let res = [];
 	await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
 		headers: {
 			'Accept-Encoding': 'application/json'
 		}
-	}).then(results =>res = results.data).catch(err => console.log(err));
+	}).then(results => res = results.data).catch(err => console.log(err));
 
 	return res;
 	// return res.data;
