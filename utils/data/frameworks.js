@@ -417,7 +417,7 @@ const flutter_dart = [
         throw Exception('Something bad happened.');\n\
         throw 'Waaaaaaah!';\n\
         ```",
-        prompt: "complete the missing snippet so that both exceptions and errors are caught:\n\
+        prompt: ":m complete the missing snippet so that both exceptions and errors are caught:\n\
         ```dart\n\
         try {\n breedMoreLlamas();\n} on [#1] {\n // A specific exception\n buyMoreLlamas();\n} [#2] {\n // Anything else that is an exception\n print('Unknown exception: $e');\n} [#3] {\n // No specified type, handles all\n print('Something really unknown: $e');\n}\n\
         ```",
