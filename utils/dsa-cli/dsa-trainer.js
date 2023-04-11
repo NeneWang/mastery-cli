@@ -166,14 +166,14 @@ class DSATrainer {
      * @param {Object} statusMetadata reference to object contianing information such as failed attempts, etc that is being updated internally
      */
     updateProblemStatus(problem, results, statusMetadata = {}) {
-        
+
         // Update internally the amounts of failed attempts
         statusMetadata.failed_attempts = results.details.failed_attempts || 0;
         console.log("Failed attempts", statusMetadata.failed_attempts);
         this.setCurrentProblemAttempts(results.details.failed_attempts);
 
         // Update the problem report
-        if(Settings.dev_mode) console.log("problem_details", results.problem_details);
+        if (DEBUG) console.log("problem_details", results.problem_details);
         statusMetadata.problem_details = results.problem_details;
 
         // Score to increase given this problem
@@ -183,7 +183,11 @@ class DSATrainer {
             [Constants.difficulty.hard]: 4
         };
 
-        statusMetadata.score_to_increase = scoreGivenDifficulty[problem.difficulty] || 0;
+        // Lowercase
+        const difficulty_l = problem.difficulty.toLowerCase();
+        if (DEBUG) console.log("problem.difficulty being increased", problem.difficulty, difficulty_l, scoreGivenDifficulty[problem.difficulty], scoreGivenDifficulty)
+
+        statusMetadata.score_to_increase = scoreGivenDifficulty[difficulty_l] || 0;
 
     }
 
@@ -207,11 +211,11 @@ class DSATrainer {
         let results = await this.openAndTest(problem, { failed_attempts: statusMetadata.failed_attempts });
         let status = results.status;
         this.updateProblemStatus(problem, results, statusMetadata);
-        
+
 
 
         while (!did_pass_all_tests && try_until_solved) {
-            
+
             if (status == Constants.ProblemStatus.aborted) {
                 statusMetadata.status = Constants.ProblemStatus.aborted;
                 return statusMetadata;
@@ -341,7 +345,7 @@ class DSATrainer {
             "Copy Link": async () => {
                 question_state_flag = true;
                 // console.log(problem_details)
-                console.log("Copy Link: ", problem_details?.link??"");
+                console.log("Copy Link: ", problem_details?.link ?? "");
 
             }
             ,
@@ -541,10 +545,8 @@ class DSATrainer {
         const problem = getProblem(problem_selected);
         const is_new_problem = problem_selected != current_problem_prompt;
         const problem_response = await this.solveProblem(problem, { populate_problem: is_new_problem });
-        
 
-        // console.log("Problem status resolved with: ", problem_status, Constants.ProblemStatus.solved == problem_status);
-        problem_response.is_problem_solved = problem_response.problem_status == Constants.ProblemStatus.solved;
+        problem_response.is_problem_solved = problem_response.status == Constants.ProblemStatus.solved;
         return problem_response;
     }
 
