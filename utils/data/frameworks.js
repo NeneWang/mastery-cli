@@ -446,7 +446,7 @@ const flutter_dart = [
         class MyColor {\n int red;\n int green;\n int blue;\n\n MyColor(this.red, this.green, this.blue);\n}\n\nfinal color = MyColor(80, 80, 128);\n\
         ```",
         prompt: "Modify the constructor of My Class Color so that red, green and blue are optional and default to 0",
-        example: "final color = MyColor(red: 80, green: 80, blue: 80);"
+        example: "MyColor([this.red = 0, this.green = 0, this.blue = 0]);"
     },
     {
         term: "dart | this | constructor",
@@ -474,9 +474,99 @@ const flutter_dart = [
         ```",
         prompt: "Complete the factory constructor so that it returns a Square or a Circle depending on the typeName",
         example: "factory Shape.fromTypeName(String typeName)"
-    }
-    
-    
+    },
+    {
+        term: "flutter | stateful widget | set state",
+        description: ":m\n\
+        ```dart\n\
+        class BasePage extends StatefulWidget {\n State<StatefulWidget> createState() {\n return _BasePageState();\n }\n}\n\nclass _BasePageState extends State<BasePage> {\n int _value = 0;\n void _increment() {\n ## TODO\n }\n}\n\
+        ```",
+        prompt: "Complete the missing _increment method sot that _value is increased when the method is called",
+        example: "setState(() {\n _value++;\n });\n"
+    },
+    {
+        term: "flutter | stateful widget | inistate theory",
+        description: ":m\n\
+        ```dart\n\
+        @override\n\
+        void initState() {\n\
+        super.initState()\n\
+        // add here what to do, e.g. fetch data from remote\n\
+        }\n\
+        ```",
+        prompt: "What is the purpose of initState?",
+        example: "It is called when the widget is inserted in the widget tree"
+    },
+    {
+        term: "flutter | stateful widget | initstate",
+        description: ":m\n\
+        ```dart\n\
+        // add here what to do, e.g. fetch data from remote\n\
+        }\n\
+        ```",
+        prompt: "Write the three missing lines for creating an initstate override?",
+        example: "\n\
+        @override\n\
+        void initState() {\n\
+        super.initState()\n"
+    },
+    {
+        term: "Flutter | stateful | didUpdateWidget",
+        description: ":m\n\
+        ```dart\n\
+        @override\n\
+        void didUpdateWidget(covariant oldWidget) {\n\
+        ## MISSING\n\
+        // add here what to do, e.g. fetch data from remote\n\
+        }\n\
+        ```",
+        prompt: "Write the missing line for creating a didUpdateWidget override?",
+        example: "super.didUpdateWidget(oldWidget);\n"
+    },
+    {
+        term: "Flutter | stateful | Stateful Classes",
+        description: ":m\n\
+        class BasePage extends [##1] {\n [##2] createState() {\n return _BasePageState();\n }\n}\n\nclass _BasePageState extends [##3]{\n int _value = 0;\n void _increment() {\n setState(() {\n _value++;\n });\n }\n}\n\
+        ```",
+        prompt: "Complete the missing parts of the code so that BasePage is a stateful widget",
+        example: "1: StatefulWidget\n2: State<StatefulWidget>\n3: State<BasePage>"
+    },
+    {
+        term: "Widget | GestureDetector | properties",
+        attachment: "https://blog.codemagic.io/uploads/2022/10/gesturewidget-1.png#center",
+        description: ":m\n\
+        GestureDetector(\n [##1]: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n ## COMPLETE HERE\n ),\n child: const Text('My Button'),\n ),\n)\n\
+        ```",
+        prompt: "Complete the missing code, so  hat it creates the figure above, with edges paddings of 12 (all) and a circular border radius of 8",
+        example:  ":m\n\
+        padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0), \n\
+        ```dart\n\
+        GestureDetector(\n onTap: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0),\n ),\n child: const Text('My Button'),\n ),\n)\n\
+        ```",
+        
+    },
+    {
+        term: "Widget | GestureDetector | onTap",
+        attachment: "https://blog.codemagic.io/uploads/2022/10/gesturewidget-1.png#center",
+        description: ":m\n\
+        GestureDetector(\n onTap: () {\n ## COMPLETE HERE \n },\n child: Container(\n padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0),\n ),\n child: const Text('My Button'),\n ),\n)\n\
+        ```",
+        prompt: "Complete it so that it shows a snackbar with the text 'Tap' when the button is tapped",
+        example:  ":m\n\
+        const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n\n\
+        ```dart\n\
+        GestureDetector(\n onTap: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0),\n ),\n child: const Text('My Button'),\n ),\n)\n\
+        ```",
+        
+    },
+    // TODO Flutter Push
+    // {
+    //     term: "Flutter | Navigator | push",
+    //     prompt: "Make Navigator push ",
+
+    // }
+
+
 
 
 ];
