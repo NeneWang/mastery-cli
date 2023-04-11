@@ -578,11 +578,14 @@ const flutter_dart = [
         attachment: "https://blog.codemagic.io/dialogwidget_13619648723351944144_huebb6c3db760e71da697d69c329e419e5_0_1280x1800_fit_linear_3.png",
         description: ":m\n\
         ```js\n\
-        ## [0] _showMyDialog() async {\n return showDialog<void>(\n context: context,\n barrierDismissible: false, // user must tap button!\n builder: (BuildContext context) {\n return AlertDialog(\n title: const Text('Cheat Sheet'),\n ## [2] Complete \n ## [2][\n TextButton(\n child: const Text('Approve'),\n onPressed: () {\n Navigator.of(context).pop();\n },\n ),\n ],\n );\n },\n );\n}\n\
+        ## 1\n\
+         _showMyDialog() async {\n return showDialog<void>(\n context: context,\n barrierDismissible: false, // user must tap button!\n builder: (BuildContext context) {\n return AlertDialog(\n title: const Text('Cheat Sheet'),\n\
+        ## [1] \n\
+        (\n child: ListBody(\n children: const <Widget>[\n Text('This is a demo alert dialog.'),\n Text('Would you like to approve of this message?'),\n ],\n ),\n ),\n actions: <Widget>[\n TextButton(\n child: const Text('Approve'),\n onPressed: () {\n Navigator.of(context).pop();\n },\n ),\n ],\n );\n },\n );\n}\n\
         ```",
         prompt: "Complete the following so that it contains a list boyd of text (listBody) from an array of texts, in a scrollable manner",
         example: "[0]  Future<void> \n\
-        [1] content: SingleChildScrollView(\n child: ListBody(\n children: const <Widget>[\n Text('This is a demo alert dialog.'),\n Text('Would you like to approve of this message?'),\n ],\n ),\n )"
+        [1] content: SingleChildScrollView"
 
     },
     {
