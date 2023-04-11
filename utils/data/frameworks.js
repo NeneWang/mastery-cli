@@ -540,12 +540,12 @@ const flutter_dart = [
         GestureDetector(\n [##1]: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n ## COMPLETE HERE\n,\n child: const Text('My Button'),\n ),\n)\n\
         ```",
         prompt: "Complete the missing code, so  hat it creates the figure above, with edges paddings of 12 (all) and a circular border radius of 8",
-        example:  ":m\n\
+        example: ":m\n\
         padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0), \n\
         ```js\n\
         GestureDetector(\n onTap: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0),\n ),\n child: const Text('My Button'),\n ),\n)\n\
         ```",
-        
+
     },
     {
         term: "Widget | GestureDetector | onTap",
@@ -556,7 +556,7 @@ const flutter_dart = [
         ```",
         prompt: "Complete it so that it shows a snackbar with the text 'Tap' when the button is tapped\n\
         Color: lightblue",
-        example:  ":m\n\
+        example: ":m\n\
         const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n\n\
         ```js\n\
         GestureDetector(\n onTap: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0),\n ),\n child: const Text('My Button'),\n ),\n)\n\
@@ -567,9 +567,10 @@ const flutter_dart = [
         attachment: "https://blog.codemagic.io/dialogwidget_13619648723351944144_huebb6c3db760e71da697d69c329e419e5_0_1280x1800_fit_linear_3.png",
         description: ":m\n\
         ```js\n\
-        Future<void> _showMyDialog() async {\n return showDialog<void>(\n context: context,\n ## [0], // user must tap button!\n builder: (BuildContext context) {\n return ### [1](\n title: const Text('Cheat Sheet'),\n content: SingleChildScrollView(\n child: ListBody(\n children: const <Widget>[\n Text('This is a demo alert dialog.'),\n Text('Would you like to approve of this message?'),\n ],\n ),\n ),\n actions: <Widget>[\n TextButton(\n child: const Text('Approve'),\n onPressed: () {\n Navigator.of(context).pop();\n },\n ),\n ],\n );\n },\n );\n}\n\
+        Future<void> _showMyDialog() async {\n return showDialog<void>(\n context: context,\n ## [0], // user must tap button!\n builder: (BuildContext context) {\n return ### [1](\n title: const Text('Cheat Sheet'),\n content: SingleChildScrollView(\n child: ListBody(\n children: const <Widget>[\n Text('This is a demo alert dialog.'),\n Text('Would you like to approve of this message?'),\n ],\n ),\n ),\n actions: <Widget>[\n TextButton(\n child: const Text('Approve'),\n\
+        onPressed: () {\n\n },\n ),\n ],\n );\n },\n );\n}\n\
         ```",
-        prompt: "Complete the following so that it displays an aprove action button, and is not dismissible in any other way",        
+        prompt: "Complete the following so that it displays an aprove action button, and is not dismissible in any other way",
         example: "[0]: barrierDismissible: false, [1] AlertDialog   "
 
     },
@@ -619,6 +620,38 @@ const flutter_dart = [
         example: "[1] key: Key(items[index]),\n\
         [2] onDismissed: (DismissDirection direction) {setState(() {items.removeAt(index);});},\n\
         [3] child: ListTile(title: Text('Item ${items[index]}',),),"
+    },
+    {
+        term: "widget | InteractiveViewer | zoom",
+        description: ":m\n\
+        If you have a big picture that doesn’t fit on the screen, you can use the InteractiveViewer widget to enable it to fit on the screen by allowing the user to zoom in and out of the picture.\n\
+        ```js\n\
+        ##[1]\n\
+        (boundaryMargin: const EdgeInsets.all(20.0), child: Container(decoration: const BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: <Color>[Colors.blue, Colors.yellow], stops: <double>[0.0, 1.0],),),),),\n\
+        ```",
+        prompt: "Complete the following: to create a zoomable view of a gradient background",
+        example: "[1] InteractiveViewer"
+    },
+    {
+        term: "Flutter | Navigation | named and pop",
+        description: ":m\n\
+        ```js\n\
+        void main() {\n runApp(MaterialApp(\n initialRoute: '/',\n routes: {\n '/': ((context) => const FirstScreen()),\n\
+        ##[1]\n\
+        },\n\
+        ##[2]\n\
+        ,\n ));\n}\n\nclass MyApp extends StatelessWidget {\n const MyApp({Key? key}) : super(key: key);\n\n @override\n Widget build(BuildContext context) {\n return Scaffold(\n appBar: AppBar(\n title: const Text('Navigation'),\n ),\n body: const FirstScreen(),\n );\n }\n}\n\nclass FirstScreen extends StatelessWidget {\n const FirstScreen({Key? key}) : super(key: key);\n\n @override\n Widget build(BuildContext context) {\n return Center(\n child: ElevatedButton(\n child: const Text('Go to SecondScreen'),\n\
+        ## [3],\n\
+        ),\n );\n }\n}\n\n// can add this in a new file\n\nclass SecondScreen extends StatelessWidget {\n const SecondScreen({Key? key}) : super(key: key);\n\n @override\n Widget build(BuildContext context) {\n return ElevatedButton(\n child: const Text('Go back!'),\n onPressed: () => Navigator.pop(context),\n );\n }\n}\n\
+        ```",
+        prompt: "Complete the following: to create a navigation from one screen to another, and back\n\
+        [1] second screen route under '/second'\n\
+        [2] initialize home to MyApp()\n\
+        [3] add the onPressed method to the button to navigate to the second screen",
+        example: "[1] '/second': ((context) => const SecondScreen()),\n\
+        [2] home: const MyApp()\n\
+        [3] onPressed: () => Navigator.pushNamed(context, '/second'),"
+
     }
     // TODO Flutter Push
     // {
