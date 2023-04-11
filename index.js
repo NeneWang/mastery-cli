@@ -89,7 +89,7 @@ const { Demo, EDemo } = demos;
 		// as until the response is right?
 
 		const _ = await mQuizer.askQuestion();
-		await maid.provideMissingReport({run_dsa: true});
+		await maid.provideMissingReport({ run_dsa: true });
 		await maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {
@@ -125,15 +125,19 @@ const { Demo, EDemo } = demos;
 		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
 
 		const updateAlgorithmPerformance = (problem_response) => {
-			if (Settings.dev_mode) console.log("updateAlgorithmPerformance: ", problem_response);
+			if (Settings.dev_mode ) console.log("updateAlgorithmPerformance: ", problem_response);
 
 			const dsa_is_correct = problem_response.is_problem_solved;
 			if (dsa_is_correct) {
-				increasePerformance("algo_w", problem_response.score_to_increase);
-				increasePerformance("algo_w", 1);
+				(async () => {
+
+					const res = await increasePerformance("algo_w", problem_response.score_to_increase);
+					const res_2 = await increasePerformance("algo", 1);
+
+				})();
 
 			}
-		}	
+		}
 
 		if (flags.all) {
 			console.log("all")
