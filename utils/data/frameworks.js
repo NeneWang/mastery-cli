@@ -750,15 +750,38 @@ const flutter_dart = [
         description: "A widget that attempts to size the child to a specific aspect ratio. The widget first tries the largest width permitted by the layout constraints. If the resulting height is too large, it then tries the largest height permitted by the layout constraints. If the resulting width is too large, it uses the original width. If the resulting height is still too large, it takes whatever space is available.",
         prompt: "Wrap the following widget with an AspectRatio with aspectRatio: 16/9: Text('Aspect Ratio')",
         example: "const AspectRatio(aspectRatio: 16/9, child: Text('Aspect Ratio'),)"
+    },
+    {
+        term: "widget | Scaffold",
+        description: "Implements the basic Material Design visual layout structure.  This class provides APIs for showing drawers and bottom sheets.  To display a persistent bottom sheet, obtain the ScaffoldState for the current BuildContext via Scaffold.of and use the ScaffoldState.showBottomSheet function.",
+        prompt: "Wrap the following widget with a Scaffold: Text('Scaffold'), and create and appbar with title: 'sample'",
+        example: "Scaffold(appBar: AppBar(title: Text('sample'),), body: Text('Scaffold'),)"     
+    },
+    {
+        term: "Flutter | loaders",
+        description: ":m\n\
+        ```js\n\
+        class SomeWidget extends StatefulWidget {\n @override\n _SomeWidgetState createState() => _SomeWidgetState();\n}\nclass _SomeWidgetState extends State<SomeWidget> {\n late Future future;\n @override\n void initState() {\n\
+            ##[1]\n\
+            super.initState();\n }\n @override\n Widget build(BuildContext context) {\n\
+            return FutureBuilder(\n future: future,\n\
+            builder: (context, snapshot) {\n\
+            return ##[2] \n\
+            ? const Text('Loaded')\n : const CircularProgressIndicator();\n },\n );\n }\n}\n\
+        ```",
+        prompt: "Complete the following code to show a CircularProgressIndicator while the future is not done, and show 'Loaded' when the future is done",
+        example: "[1] future = Future.delayed(const Duration(seconds: 8));\n\
+        [2] snapshot.connectionState == ConnectionState.done"
+    },
+    // Buttons
+    {
+        term: "Flutter | button | TextButton",
+        description: "A Material Design text button. Text buttons are typically used for less-pronounced actions, including those located in dialogs and cards. Text buttons are also a good choice for inline actions, such as in rows of data.",
+        prompt: "Create a TextButton with onPressed: () => print('Pressed'), color of the text is white and child: Text('Text Button')",
+        example: "TextButton(onPressed: () => print('Pressed'), child: Text('Text Button'), style: TextButton.styleFrom(primary: Colors.white),)"
+
     }
-    // Scrollable Widgets
 
-    // TODO Flutter Push
-    // {
-    //     term: "Flutter | Navigator | push",
-    //     prompt: "Make Navigator push ",
-
-    // }
 
 
 
