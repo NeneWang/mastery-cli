@@ -332,10 +332,10 @@ const flutter_dart = [
     {
         term: "dart | null-aware",
         description: ":m Dart offers some handy operators for dealing with values that might be null. One is the ??= assignment operator, which assigns a value to a variable only if that variable is currently null:\n\n\
-        ```dart\n\
+        ```js\n\
         int? a; // = null\na ??= 3;\nprint(a); // <-- Prints 3.\na ??= 5;\nprint(a); // <-- Still prints 3.\n```\n\n",
         prompt: "What will be the output of the following code?\n\
-        ```dart\n\
+        ```js\n\
         print(1 ?? 3);\nprint(null ?? 12);.\n```\n\n",
         example: "1\n\
         12"
@@ -376,16 +376,16 @@ const flutter_dart = [
     {
         term: "dart | cascade | null cascade",
         description: ":m Here’s the same expression with a cascade:\n\
-        ```dart\n\
+        ```js\n\
         myObject..someMethod()\n\
         ```\n\
         Although it still invokes someMethod() on myObject, the result of the expression isn’t the return value—it’s a reference to myObject!  Using cascades, you can chain together operations that would otherwise require separate statements. For example, consider the following code, which uses the conditional member access operator (?.) to read properties of button if it isn’t null:\n\
-        ```dart\n\
+        ```js\n\
         var button = querySelector('#confirm');\nbutton?.text = 'Confirm';\nbutton?.classes.add('important');\nbutton?.onClick.listen((e) => window.alert('Confirmed!'));\nbutton?.scrollIntoView();\n\
         ```\n\
         ",
         prompt: "Convert the latter example into a null shorting cascade (?..)",
-        example: "```dart\n\
+        example: "```js\n\
         querySelector('#confirm') ?..text = 'Confirm'..classes.add('important')..onClick.listen((e) => window.alert('Confirmed!'))..scrollIntoView();\n\
         ```"
     },
@@ -411,14 +411,14 @@ const flutter_dart = [
     {
         term: "dart | exceptions | catching",
         description: ":m\n\
-        ```dart\n\
+        ```js\n\
         class OutOfLlamasException implements Exception {\n String errorMessage() {\n return 'Out of Llamas!';\n }\n}\n\n\
         throw OutOfLlamasException();\n\
         throw Exception('Something bad happened.');\n\
         throw 'Waaaaaaah!';\n\
         ```",
         prompt: ":m complete the missing snippet so that both exceptions and errors are caught:\n\
-        ```dart\n\
+        ```js\n\
         try {\n breedMoreLlamas();\n} on [#1] {\n // A specific exception\n buyMoreLlamas();\n} [#2] {\n // Anything else that is an exception\n print('Unknown exception: $e');\n} [#3] {\n // No specified type, handles all\n print('Something really unknown: $e');\n}\n\
         ```",
         example: "#1 OutOfLlamasException\n\
@@ -429,11 +429,11 @@ const flutter_dart = [
     {
         term: "dart | exceptions | rethrow",
         description: ":m If you can’t completely handle the exception, use the rethrow keyword to propagate the exception:\n\
-        ```dart\n\
+        ```js\n\
         try {\n breedMoreLlamas();\n} catch (e) {\n print('I was just trying to breed llamas!');\n rethrow;\n}\n\
         ```\n\
         To execute code whether or not an exception is thrown, use finally:\n\
-        ```dart\n\
+        ```js\n\
         try {\n breedMoreLlamas();\n} catch (e) {\n // ... handle exception ...\n} finally {\n // Always clean up, even if an exception is thrown.\n cleanLlamaStalls();\n}\n\
         ```",
         prompt: "Whats the difference between finally and rethrow?",
@@ -442,7 +442,7 @@ const flutter_dart = [
     {
         term: "dart | this | constructor",
         description: ":m\n\
-        ```dart\n\
+        ```js\n\
         class MyColor {\n int red;\n int green;\n int blue;\n\n MyColor(this.red, this.green, this.blue);\n}\n\nfinal color = MyColor(80, 80, 128);\n\
         ```",
         prompt: "Modify the constructor of My Class Color so that red, green and blue are optional and default to 0",
@@ -451,7 +451,7 @@ const flutter_dart = [
     {
         term: "dart | this | constructor",
         description: ":m\n\
-        ```dart\n\
+        ```js\n\
         class MyColor {\n int red;\n int green;\n int blue;\n\n MyColor(this.red, this.green, this.blue);\n}\n\nfinal color = MyColor(80, 80, 128);\n\
         ```",
         prompt: "Modify the constructor of My Class Color so that red, green and blue are named (mandatroy) properties",
@@ -460,7 +460,7 @@ const flutter_dart = [
     {
         term: "dart | named constructors",
         description: ":m\n\
-        ```dart\n\
+        ```js\n\
         class Point {\n double x, y;\n\n Point(this.x, this.y);\n\n Point.origin()\n : x = 0,\n y = 0;\n}\n\
         ```",
         prompt: "Used the named constructor to create a point at the origin",
@@ -469,7 +469,7 @@ const flutter_dart = [
     {
         term: "dart | factory constructors",
         description: ":m\n\
-        ```dart\n\
+        ```js\n\
         class Square extends Shape {}\nclass Circle extends Shape {}\nclass Shape {\n Shape();\n\n ## Complete HERE {\n if (typeName == 'square') return Square();\n if (typeName == 'circle') return Circle();\n\n throw ArgumentError('Unrecognized $typeName');\n }\n}\n\
         ```",
         prompt: "Complete the factory constructor so that it returns a Square or a Circle depending on the typeName",
@@ -478,7 +478,7 @@ const flutter_dart = [
     {
         term: "flutter | stateful widget | set state",
         description: ":m\n\
-        ```dart\n\
+        ```js\n\
         class BasePage extends StatefulWidget {\n State<StatefulWidget> createState() {\n return _BasePageState();\n }\n}\n\nclass _BasePageState extends State<BasePage> {\n int _value = 0;\n void _increment() {\n ## TODO\n }\n}\n\
         ```",
         prompt: "Complete the missing _increment method sot that _value is increased when the method is called",
@@ -487,7 +487,7 @@ const flutter_dart = [
     {
         term: "flutter | stateful widget | inistate theory",
         description: ":m\n\
-        ```dart\n\
+        ```js\n\
         @override\n\
         void initState() {\n\
         super.initState()\n\
@@ -500,7 +500,7 @@ const flutter_dart = [
     {
         term: "flutter | stateful widget | initstate",
         description: ":m\n\
-        ```dart\n\
+        ```js\n\
         // add here what to do, e.g. fetch data from remote\n\
         }\n\
         ```",
@@ -513,7 +513,7 @@ const flutter_dart = [
     {
         term: "Flutter | stateful | didUpdateWidget",
         description: ":m\n\
-        ```dart\n\
+        ```js\n\
         @override\n\
         void didUpdateWidget(covariant oldWidget) {\n\
         ## MISSING\n\
@@ -542,7 +542,7 @@ const flutter_dart = [
         prompt: "Complete the missing code, so  hat it creates the figure above, with edges paddings of 12 (all) and a circular border radius of 8",
         example:  ":m\n\
         padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0), \n\
-        ```dart\n\
+        ```js\n\
         GestureDetector(\n onTap: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0),\n ),\n child: const Text('My Button'),\n ),\n)\n\
         ```",
         
@@ -558,7 +558,7 @@ const flutter_dart = [
         Color: lightblue",
         example:  ":m\n\
         const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n\n\
-        ```dart\n\
+        ```js\n\
         GestureDetector(\n onTap: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0),\n ),\n child: const Text('My Button'),\n ),\n)\n\
         ```",
     },
