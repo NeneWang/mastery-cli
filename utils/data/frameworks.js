@@ -438,7 +438,44 @@ const flutter_dart = [
         ```",
         prompt: "Whats the difference between finally and rethrow?",
         example: "finally is always executed, rethrow is used to propagate the exception"
+    },
+    {
+        term: "dart | this | constructor",
+        description: ":m\n\
+        ```dart\n\
+        class MyColor {\n int red;\n int green;\n int blue;\n\n MyColor(this.red, this.green, this.blue);\n}\n\nfinal color = MyColor(80, 80, 128);\n\
+        ```",
+        prompt: "Modify the constructor of My Class Color so that red, green and blue are optional and default to 0",
+        example: "final color = MyColor(red: 80, green: 80, blue: 80);"
+    },
+    {
+        term: "dart | this | constructor",
+        description: ":m\n\
+        ```dart\n\
+        class MyColor {\n int red;\n int green;\n int blue;\n\n MyColor(this.red, this.green, this.blue);\n}\n\nfinal color = MyColor(80, 80, 128);\n\
+        ```",
+        prompt: "Modify the constructor of My Class Color so that red, green and blue are named (mandatroy) properties",
+        example: "MyColor({required this.red, required this.green, required this.blue});"
+    },
+    {
+        term: "dart | named constructors",
+        description: ":m\n\
+        ```dart\n\
+        class Point {\n double x, y;\n\n Point(this.x, this.y);\n\n Point.origin()\n : x = 0,\n y = 0;\n}\n\
+        ```",
+        prompt: "Used the named constructor to create a point at the origin",
+        example: "final origin = Point.origin();"
+    },
+    {
+        term: "dart | factory constructors",
+        description: ":m\n\
+        ```dart\n\
+        class Square extends Shape {}\nclass Circle extends Shape {}\nclass Shape {\n Shape();\n\n ## Complete HERE {\n if (typeName == 'square') return Square();\n if (typeName == 'circle') return Circle();\n\n throw ArgumentError('Unrecognized $typeName');\n }\n}\n\
+        ```",
+        prompt: "Complete the factory constructor so that it returns a Square or a Circle depending on the typeName",
+        example: "factory Shape.fromTypeName(String typeName)"
     }
+    
     
 
 
