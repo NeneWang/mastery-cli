@@ -570,7 +570,9 @@ const flutter_dart = [
         Future<void> _showMyDialog() async {\n return showDialog<void>(\n context: context,\n ## [0], // user must tap button!\n builder: (BuildContext context) {\n return ### [1](\n title: const Text('Cheat Sheet'),\n content: SingleChildScrollView(\n child: ListBody(\n children: const <Widget>[\n Text('This is a demo alert dialog.'),\n Text('Would you like to approve of this message?'),\n ],\n ),\n ),\n actions: <Widget>[\n TextButton(\n child: const Text('Approve'),\n\
         onPressed: () {\n\n },\n ),\n ],\n );\n },\n );\n}\n\
         ```",
-        prompt: "Complete the following so that it displays an aprove action button, and is not dismissible in any other way",
+        prompt: "Complete the following so that it displays an aprove action button, and is not dismissible in any other way\n\
+        [0]: Se it as undismissable by clicking away\n\
+        [1]: The class of the alert object",
         example: "[0]: barrierDismissible: false, [1] AlertDialog   "
 
     },
@@ -584,7 +586,9 @@ const flutter_dart = [
         ## [1] \n\
         (\n child: ListBody(\n children: const <Widget>[\n Text('This is a demo alert dialog.'),\n Text('Would you like to approve of this message?'),\n ],\n ),\n ),\n actions: <Widget>[\n TextButton(\n child: const Text('Approve'),\n onPressed: () {\n Navigator.of(context).pop();\n },\n ),\n ],\n );\n },\n );\n}\n\
         ```",
-        prompt: "Complete the following so that it contains a list boyd of text (listBody) from an array of texts, in a scrollable manner",
+        prompt: "Complete the following so that it contains a list boyd of text (listBody) from an array of texts, in a scrollable manner\n\
+        [0] the return type: should be a promise\n\
+        [1] the content: should be a scrollable list body",
         example: "[0]  Future<void> \n\
         [1] content: SingleChildScrollView"
 
@@ -600,7 +604,11 @@ const flutter_dart = [
              {return Dismissible(background: Container(color: Colors.green,), key: Key(items[index]), onDismissed: (DismissDirection direction) {setState(() {items.removeAt(index);});}, child: ListTile(title: Text('Item ${items[index]}',),),);},),\n\
         ```\n\
         ",
-        prompt: "Complete the following: to create a list view of dismissable items, with a green background when dismissed to the right, with a space of 16 between each item",
+        prompt: "Complete the following: to create a list view of dismissable items, with a green background when dismissed to the right, with a space of 16 between each item\n\
+        [1] the list view builder class\n\
+        [2] the number of items in the list\n\
+        [3] the padding between each item: 16 in vertical\n\
+        [4] the item builder asiignation with the respective parameters that will be passed down.",
         example: "[1] ListView.builder\n\
         [2] itemCount: items.length \n\
         [3] padding: const EdgeInsets.symmetric(vertical: 16),\n\
@@ -616,7 +624,10 @@ const flutter_dart = [
         ```\n\
         ",
         prompt: "Complete the following: to create a list view of dismissable items, with a green background when dismissed to the right\n\
-        Add the keys,\n on dismissing method hook, \nand the child tile to be rendered on.",
+        Add the keys,\n on dismissing method hook, \nand the child tile to be rendered on.\n\
+        [1] assigne the key\n\
+        [2] assigne the onDismissed method, capture the direction and remove the item from the list\n\
+        [3] assign the tile to the children with title as item {name}\n",
         example: "[1] key: Key(items[index]),\n\
         [2] onDismissed: (DismissDirection direction) {setState(() {items.removeAt(index);});},\n\
         [3] child: ListTile(title: Text('Item ${items[index]}',),),"
@@ -652,7 +663,96 @@ const flutter_dart = [
         [2] home: const MyApp()\n\
         [3] onPressed: () => Navigator.pushNamed(context, '/second'),"
 
+    },
+    {
+        term: "FLutter | KOptions | autocomplete",
+        description: ":m\n\
+        ```js\n\
+        const List<String> _kOptions = <String>['aardvark', 'bobcat', 'chameleon'];\n\
+        ## [1]\n\
+        (optionsBuilder: (TextEditingValue textEditingValue) {if (textEditingValue.text == '') {return const Iterable<String>.empty();}\nreturn _kOptions.where((String option) {return option.contains(textEditingValue.text.toLowerCase());});},onSelected: (String selection) {debugPrint('You just selected $selection');},);\n\
+        ```",
+        prompt: "Complete the following: to create an autocomplete widget with the following options: aardvark, bobcat, chameleon",
+        example: "[1] Autocomplete<String>"
+    },
+    {
+        term: "Flutter | Navigation | named and pop",
+        description: ":m\n\
+        ```js\n\
+        ## [1]\n\
+        (obscureText: true, decoration: InputDecoration(border: \n\
+            ## [2], \n\
+            labelText: 'Password',),),\n\
+        ```",
+        prompt: "Complete the following: to create a password field with a border and label\n\
+        [1] Input Class Name\n\
+        [2] border type",
+        example: "[1] TextField\n\
+        [2] OutlineInputBorder()"
+
+    },
+    // Alignment and Layout Fields
+    {
+        term: "Widget | Centering",
+        prompt: "Wrap and center: Text('Center me')",
+        example: "Center(child: Text('Center me'))"
+    },
+    {
+        term: "widget | expanded",
+        attachment: "./img/2023-04-11-13-04-49.png",
+        description: "Expanded(               child: Container(                 color: Colors.amber,                 width: 100,               ),             ),",
+        prompt: "Create a widget that expands vertically with width constraint of 100 and color amber",
+        example: "Expanded(child: Container(color: Colors.amber, width: 100,),)"
+    },
+    {
+        term: "widget | Align",
+        description: "Align this child in the following container:\n\
+        Center(child: Container(height: 120.0, width: 120.0, color: Colors.blue[50], child: ),)\n\n\
+        children: F",
+        example: "const Align(alignment: Alignment.topRight, child: F,)\n\n\
+        Center(child: Container(height: 120.0, width: 120.0, color: Colors.blue[50], child: const Align(alignment: Alignment.topRight, child: FlutterLogo(size: 60,),),),)"
+    },
+    {
+        term: "widget | column",
+        description: "The Column widget allows you to arrange a list of widgets vertically, similar to how the Row widget aligns them horizontally.\n\
+        ```js\n\
+        Column(children: [Text('Deliver features faster'), Text('Craft beautiful UIs'), Expanded(child: FittedBox(fit: BoxFit.contain, child: FlutterLogo(),),),],)\n\
+        ```",
+        prompt: "Create a column with the following children:",
+        example: "Column(children: <Widget>[...],)"        
+    },
+    {
+        term: "widget | SizedBox",
+        description: "If given a child, this widget forces it to have a specific width and/or height. These values will be ignored if this widget's parent does not permit them. For example, this happens if the parent is the screen (forces the child to be the same size as the parent), or another SizedBox (forces its child to have a specific width and/or height). This can be remedied by wrapping the child SizedBox in a widget that does permit it to be any size up to the size of the parent, such as Center or Align.",
+        prompt: "Wrap the following widget with a SizedBox with width 200 and height 300: Card(child: Text('Size me!')) [you can denote the card as ...]",
+        example: "const SizedBox(width: 200.0, height: 300.0, child: Card(child: Text('Size me!')),)"
+    },
+    {
+        term: "widget | Baseline",
+        description: "This widget shifts the child down such that the child's baseline (or the bottom of the child, if the child has no baseline) is baseline logical pixels below the top of this box, then sizes this box to contain the child.",
+        prompt: "Wrap the following widget with a Baseline with baselineType: TextBaseline.alphabetic and baseline: 80.0: Text('Baseline')",
+        example: "const Baseline(baseline: 80.0, baselineType: TextBaseline.alphabetic, child: Text('Baseline'),)"
+    },
+    {
+        term: "widget | LimitedBox",
+        description: "A box that limits its size only when it's unconstrained. If the maximum width or height is not null, this widget will try to be that size, within the limits of its own constraints. If either is null, this widget will size itself to match the child's size in that dimension.",
+        prompt: "Wrap the following widget with a LimitedBox with maxWidth: 150.0 and maxHeight: 150.0: Text('Limited Box')",
+        example: "const LimitedBox(maxWidth: 150.0, maxHeight: 150.0, child: Text('Limited Box'),)"
+    },
+    {
+        term: "widget | Padding",
+        description: "Use the Padding widget to provide space around its child. The padding widget adds space around its child using the abstract EdgeInsetsGeometry class.",
+        prompt: "Wrap the following widget with a Padding with padding: of all edges of 20: Text('Padding')",
+        example: "const Padding(padding: EdgeInsets.all(20.0), child: Text('Padding'),)"
+    },
+    {
+        term: "widget | AspectRatio",
+        description: "A widget that attempts to size the child to a specific aspect ratio. The widget first tries the largest width permitted by the layout constraints. If the resulting height is too large, it then tries the largest height permitted by the layout constraints. If the resulting width is too large, it uses the original width. If the resulting height is still too large, it takes whatever space is available.",
+        prompt: "Wrap the following widget with an AspectRatio with aspectRatio: 16/9: Text('Aspect Ratio')",
+        example: "const AspectRatio(aspectRatio: 16/9, child: Text('Aspect Ratio'),)"
     }
+    // Scrollable Widgets
+
     // TODO Flutter Push
     // {
     //     term: "Flutter | Navigator | push",
