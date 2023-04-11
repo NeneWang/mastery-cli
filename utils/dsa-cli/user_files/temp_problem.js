@@ -1,98 +1,110 @@
-/**
- * Time O(((N + 26) * N) * (M - N)) | Space O(1)
- * This code solves the same problem as before, which is finding the length of the longest substring containing the same letter that can be obtained after performing at most k operations on the input string s.
-
-The approach used in this code is to use a sliding window to keep track of the longest substring containing the same letter that can be obtained with at most k operations.
-
-The code defines three functions to help with this approach:
-
-    addRightFrequency - adds the frequency of the character on the right of the window to a frequency map.
-    subtractLeftFrequency - subtracts the frequency of the character on the left of the window from the frequency map.
-    getCode - converts a character to an index code by subtracting the ASCII code of 'A'.
-
-My guess is that this approach focuses on calculating everything (every posibility) by sliding and having a right and left update.
-
-Also something interesting is that the mappings, 
-
- s = "abcdeffggg", k = 2
-
-Left|R |W | Current|L |CanSlide|Max|Frequency Map
-
-0	0	1	a		1	true	1	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-0	1	2	ab		1	true	2	[1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-0	2	3	abc		1	true	3	[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-1	3	3	bcd		1	true	3	[1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-2	4	3	cde		1	true	3	[1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-3	5	3	def		1	true	3	[1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-4	6	2	fg		3	true	3	[1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0]
-5	7	3	fgg		3	true	3	[1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0]
-5	8	4	fggg	3	false	4	[1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1]
-
+/*
+ * Test 1/3:
+[
+  -8, -6, 1,  2,
+   3,  5, 6, 12
+]
+Testing 0 1 7
+Testing 0 2 7
+Testing 0 2 6
+Testing 0 3 6
+Testing 0 4 5
+Testing 1 2 7
+Testing 1 2 6
+Testing 1 2 5
+Testing 1 3 4
+Testing 2 3 7
+Testing 2 3 6
+Testing 2 3 5
+Testing 2 3 4
+Testing 3 4 7
+Testing 3 4 6
+Testing 3 4 5
+Testing 4 5 7
+Testing 4 5 6
+Testing 5 6 7
+Test ([12, 3, 1, 2, -6, 5, -8, 6], 0) => [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]] ||  passed
+Test 2/3: ([12, 3, 1, 2, -6, 5, -8, 6], 0) => [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]
+[ -2, 8, 10, 14, 49 ]
+Testing 0 1 4
+Testing 0 1 3
+Testing 0 1 2
+Testing 1 2 4
+Testing 1 2 3
+Testing 2 3 4
+Test ([8, 10, -2, 49, 14], 57) => [] ||  passed
+Test 3/3: ([8, 10, -2, 49, 14], 57) => []
+[
+  -8, -6, -1,  0, 1,
+   2,  3,  5, 12
+]
+Testing 0 1 8
+Testing 0 2 8
+Testing 0 2 7
+Testing 0 3 7
+Testing 0 4 7
+Testing 0 5 7
+Testing 0 6 7
+Testing 1 2 8
+Testing 1 2 7
+Testing 1 3 7
+Testing 1 4 7
+Testing 1 5 6
+Testing 2 3 8
+Testing 2 3 7
+Testing 2 3 6
+Testing 2 3 5
+Testing 2 3 4
+Testing 3 4 8
+Testing 3 4 7
+Testing 3 4 6
+Testing 3 4 5
+Testing 4 5 8
+Testing 4 5 7
+Testing 4 5 6
+Testing 5 6 8
+Testing 5 6 7
+Testing 6 7 8
+Test ([12, 3, 1, 2, -6, 5, 0, -8, -1], 0) => [[-8, 3, 5], [-6, 1, 5], [-1, 0, 1]] ||  passed
  */
 
-class CharacterReplacement {
-    solve(s, k) {
-		
-		// Add Right Frequency to the map. 
-        const addRightFrequency = (s, right, map) => {
-            // Gets the character on the right, and the index code there, 
-			const char = s[right];
-            const index = getCode(char);
-			// Increase that on the map of counts
-            map[index]++;
 
-            return map[index];
-        };
 
-		// Substract the frequency on the left
-        const subtractLeftFrequency = (s, left, map) => {
+class ThreeNumberSum {
+    threeSum(array) {
 
-            const char = s[left];
-            const index = getCode(char);
+        const res = [];
+        array.sort((a, b) => a - b)
 
-            map[index]--;
+        for (let i = 0; i < array.length; i++) {
+            const a = array[i];
+            if (a > 0) break;
+            if (i > 0 && a === array[i - 1]) continue;
 
-            return map[index];
-        };
-		
-		// Getting the encode by substracting the character with A characterCode
-        const getCode = (char) => char.charCodeAt(0) - 'A'.charCodeAt(0);
-
-		// Lets the left, right, longest to be all 0 at the start
-        let [left, right, longest, max] = new Array(4).fill(0);
-        const frequencyMap = new Array(26).fill(0);
-
-        while (right < s.length) {
-			// Starting with the right Keep increasing the right boundaries frequencies until reaches max length
-            const count = addRightFrequency(s, right, frequencyMap);
-			
-			// longest being either the current count of that letter, or the longest letter seen on the past. Longest being the count of word with the longest leter found
-			longest = Math.max(longest, count);
-
-			// Get the windoes length
-            let window = right - left + 1;
-            
-			// We can move the slider where `k` beign the amount of changes we can make, and windows - longest beng the longest letter seen (that we can ignore because it moves at the same time) and the distance of letters.
-			const canSlide = k < window - longest;
-            if (canSlide) {
-				// If we can slide then we need to update the frequency map of the current letters being seen.
-                subtractLeftFrequency(s, left, frequencyMap);
-                left++;
+            let l = i + 1;
+            let r = array.length - 1;
+            while (l < r) {
+                const threeSum = a + array[l] + array[r];
+                if (threeSum > 0) {
+                    r--;
+                } else if (threeSum < 0) {
+                    l++;
+                } else {
+                    res.push([a, array[l], array[r]]);
+                    l++;
+                    r--;
+                    while (array[l] === array[l - 1] && l < r) {
+                        l++;
+                    }
+                }
             }
-			
-			// Recalculate the windows size after sliding
-            window = right - left + 1;
-
-			//Max Length is the length of the longest substring containing the same letter that can be obtained after performing at most k operations.
-            max = Math.max(max, window);
-
-            right++;
         }
-
-        return max;
+        return res;
+    }
+    solve(array) {
+        return this.threeSum(array);
     }
 }
 
 
-
-module.exports = { Problem: CharacterReplacement };
+module.exports = { Problem: ThreeNumberSum };

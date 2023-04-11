@@ -204,4 +204,245 @@ const apex = [
 
 ]
 
-module.exports = { react_terms, apex };
+const IDE_S = [
+    // Android Studio Shortcuts
+    {
+        term: "Android Studio | navigation keys | class search",
+        description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
+        prompt: "Find a class named `Mock` | How to navigate to a file? ",
+        example: "Ctrl+N Mock — Navigate to Class\n\n\
+        Ctrl + Shift + N — Navigate to a File\n"
+    },
+    {
+        term: "Android Studio | navigation keys | recent",
+        description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
+        prompt: "Go to the recent file score.dart",
+        example: "Ctrl+E score.dart — Recent Files"
+    },
+    {
+        term: "Android Studio | navigation keys | declaration",
+        description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
+        prompt: "Go to the declaration of a method, you are now hovering over response",
+        example: "Ctrl Left mouse or Ctrl+B — Jump to Declarations => This will take you to the declaration of the method"
+    },
+    {
+        term: "Android Studio | navigation keys | navigate to file",
+        description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
+        prompt: "Navigate to a file named score.dart",
+        example: "Ctrl+Shift+N score.dart — Navigate to a File => This will take you to the file, the difference with recent is that it will take longer to search"
+    },
+
+    {
+        term: "Android Studio | navigation keys | find usage",
+        description: "     Ctrl+N — Navigate to Class     Ctrl+Shift+N — Navigate to a File     Ctrl+B — Jump to Declarations     Alt+ ↑ — Jump to the Previous Method     Alt+↓ — Jump to Next Method     Ctrl+G — Jump to Line     Ctrl+E — Recent Files     Ctrl+Shift+Backspace — Jump to Last Edited Location     Ctrl+B — Find Declarations     Ctrl+Left Mouse(or)Ctrl+Alt+F7— Show Usage     Alt + F7 / Ctrl + F7 — Find usages /Find usages in file     Ctrl+Shift+B — Find Implementations     F3 — Find Next     Shift+F3 — Find Previous ",
+        prompt: "Find the usage of a method, you are now hovering over response",
+        example: "Ctrl+Alt+F7— Show Usage => This will show you all the places where the method is used"
+    },
+    // Selection Keys
+    {
+        term: "Android Studio | selection keys | select next occurence",
+        description: "     Ctrl + W — Extend selection (selects a word->line->method->Class )     Ctrl +Shift+ W — Decrease Selection     Alt + J — Select next occurrence     Ctrl + Alt + Shift + J — Select all occurrences     Alt + Shift + J — Unselect occurrence     Ctrl+Shift+V — Paste from recent buffers (from a History of Copied Contents) ",
+        prompt: "Select the next occurence of a word, you are now hovering over response How to all and how to unselect?",
+        example: "Alt + J — Select next occurrence => This will place a cursor on the same next word\n\n\
+        Ctrl + Alt + Shift + J — Select all occurrences => This will place a cursor on all the same words\n\n\
+        Alt + Shift + J — Unselect occurrence => This will remove the cursor on the same word\n\n"
+    },
+    {
+        term: "Android Studio | selection keys | Paste from recent clipboard",
+        description: "     Ctrl + W — Extend selection (selects a word->line->method->Class )     Ctrl +Shift+ W — Decrease Selection     Alt + J — Select next occurrence     Ctrl + Alt + Shift + J — Select all occurrences     Alt + Shift + J — Unselect occurrence     Ctrl+Shift+V — Paste from recent buffers (from a History of Copied Contents) ",
+        prompt: "Paste from recent clipboard",
+        example: "Ctrl+Shift+V — Paste from recent buffers (from a History of Copied Contents) => This will show you all the recent clipboard"
+    },
+    // Editing Keys
+    {
+        term: "Android Studio | Editing keys | duplicate line",
+        description: "     Ctrl+F6 — Refactor Code     Ctrl+D — Duplicate a Line/Selected part     Ctrl+Y — Delete a Line/Selected part     Ctrl+Q — Quick Documentation     Ctrl + Space — Code completion     Ctrl+Shift+Space — Smart code completion (by expected type removes unrelated suggestions)     Alt+Insert — Generate Code     Ctrl+J — Insert Live template     Ctrl + O — Override methods     Ctrl + I — Implement methods     Ctrl + Alt + T — Surround with…     Ctrl + / — Comment / uncomment with line comment     Ctrl + Shift + / — Comment / uncomment with block comment     Ctrl+Alt+L — Reformat code ",
+        prompt: "Duplicate a line",
+        example: "Ctrl+D — Duplicate a Line/Selected part => This will duplicate the line"
+    },
+    {
+        term: "Android Studio | Editing keys | delete line",
+        description: "     Ctrl+F6 — Refactor Code     Ctrl+D — Duplicate a Line/Selected part     Ctrl+Y — Delete a Line/Selected part     Ctrl+Q — Quick Documentation     Ctrl + Space — Code completion     Ctrl+Shift+Space — Smart code completion (by expected type removes unrelated suggestions)     Alt+Insert — Generate Code     Ctrl+J — Insert Live template     Ctrl + O — Override methods     Ctrl + I — Implement methods     Ctrl + Alt + T — Surround with…     Ctrl + / — Comment / uncomment with line comment     Ctrl + Shift + / — Comment / uncomment with block comment     Ctrl+Alt+L — Reformat code ",
+        prompt: "Delete a line",
+        example: "Ctrl+Y — Delete a Line/Selected part => This will delete the line"
+    },
+    {
+        term: "Android Studio | Editing keys | quick documentation",
+        description: "     Ctrl+F6 — Refactor Code     Ctrl+D — Duplicate a Line/Selected part     Ctrl+Y — Delete a Line/Selected part     Ctrl+Q — Quick Documentation     Ctrl + Space — Code completion     Ctrl+Shift+Space — Smart code completion (by expected type removes unrelated suggestions)     Alt+Insert — Generate Code     Ctrl+J — Insert Live template     Ctrl + O — Override methods     Ctrl + I — Implement methods     Ctrl + Alt + T — Surround with…     Ctrl + / — Comment / uncomment with line comment     Ctrl + Shift + / — Comment / uncomment with block comment     Ctrl+Alt+L — Reformat code ",
+        prompt: "Quick documentation",
+        example: "Ctrl+Q — Quick Documentation => This will show you the documentation of the method"
+    },
+    {
+        term: "Android Studio | Editing keys | code completion",
+        description: "     Ctrl+F6 — Refactor Code     Ctrl+D — Duplicate a Line/Selected part     Ctrl+Y — Delete a Line/Selected part     Ctrl+Q — Quick Documentation     Ctrl + Space — Code completion     Ctrl+Shift+Space — Smart code completion (by expected type removes unrelated suggestions)     Alt+Insert — Generate Code     Ctrl+J — Insert Live template     Ctrl + O — Override methods     Ctrl + I — Implement methods     Ctrl + Alt + T — Surround with…     Ctrl + / — Comment / uncomment with line comment     Ctrl + Shift + / — Comment / uncomment with block comment     Ctrl+Alt+L — Reformat code ",
+        prompt: "Code completion",
+        example: "Ctrl + Space — Code completion => This will show you the suggestions"
+    },
+    {
+        term: "Android Studio | Editing keys | Override and Implement Methods",
+        description: "     Ctrl+F6 — Refactor Code     Ctrl+D — Duplicate a Line/Selected part     Ctrl+Y — Delete a Line/Selected part     Ctrl+Q — Quick Documentation     Ctrl + Space — Code completion     Ctrl+Shift+Space — Smart code completion (by expected type removes unrelated suggestions)     Alt+Insert — Generate Code     Ctrl+J — Insert Live template     Ctrl + O — Override methods     Ctrl + I — Implement methods     Ctrl + Alt + T — Surround with…     Ctrl + / — Comment / uncomment with line comment     Ctrl + Shift + / — Comment / uncomment with block comment     Ctrl+Alt+L — Reformat code ",
+        prompt: "Override and Implement Methods",
+        example: "Ctrl + O — Override methods => This will show you the methods that you can override\n\n\
+        Ctrl + I — Implement methods => This will show you the methods that you can implement"
+    },
+    // Running and Debugging
+    {
+        term: "Android Studio | Running and Debugging | run",
+        description: "     Ctrl + F9 — Compile and Run Make a project     Ctrl + Shift + F9 — Compile selected file, package or module     Shift + F10 — Run     Shift + F9 — Debug     Ctrl + Shift + F10 — Run context configuration from editor \n\
+        F8 / F7 — Step over / into     Shift + F7 / Shift + F8 — Smart step into/Step out     Alt + F9 — Run to cursor     Alt + F8 — Evaluate expression     F9 — Resume program     Ctrl + F8 — Toggle breakpoint     Ctrl + Shift + F8 — View breakpoints ",
+        prompt: "Compile and Run Make a project, what is the difference between run and compile-run?",
+        example: "Ctrl + F9 — Compile and Run Make a project => This will compile and run the project\n\
+        Shift + F10 — Run => This will run the project\n\n\
+        The difference between the two is that the first one will compile the project and then run it, while the second one will just run the old project"
+    }
+];
+
+
+const flutter_dart = [
+    {
+        term: "flutter | create",
+        description: "Create a new flutter project",
+        prompt: "Create a new flutter project",
+        example: "flutter create myapp"
+    },
+    {
+        term: "flutter | run",
+        description: "Run the flutter project",
+        prompt: "Run the flutter project",
+        example: "flutter run"
+    },
+    {
+        term: "dart | string | interpolation",
+        description: "To put the value of an expression inside a string, use ${expression}. If the expression is an identifier, you can omit the {}.",
+        prompt: "What will the following print? \n\
+        (1) print('${3 + 2}');\n\
+        (2) print('${\"word\".toUpperCase()}');\n\
+        (3) print('$myObject');\n\
+        ",
+        example: "1. 5\n\
+        2. WORD\n\
+        3. The value of myObject.toString()"
+    },
+    {
+        term: "dart | nullable variable",
+        description: "When creating a variable in Dart 2.12 or higher, you can add ? to the type to indicate that the variable can be null:     int? a = null; // Valid in null-safe Dart.  ",
+        prompt: "simplify that code:",
+        example: "int? a; // The initial value will be null"
+    },
+    {
+        term: "dart | null-aware",
+        description: ":m Dart offers some handy operators for dealing with values that might be null. One is the ??= assignment operator, which assigns a value to a variable only if that variable is currently null:\n\n\
+        ```dart\n\
+        int? a; // = null\na ??= 3;\nprint(a); // <-- Prints 3.\na ??= 5;\nprint(a); // <-- Still prints 3.\n```\n\n",
+        prompt: "What will be the output of the following code?\n\
+        ```dart\n\
+        print(1 ?? 3);\nprint(null ?? 12);.\n```\n\n",
+        example: "1\n\
+        12"
+    },
+    {
+        term: "dart | list, set, map | map",
+        description: "Dart’s type inference can assign types to these variables for you. In this case, the inferred types are List<String>, Set<String>, and Map<String, int>.\n\
+        Or you can specify the type yourself:  \n\
+        final aListOfInts = <int>[];    final aSetOfInts = <int>{};     final aMapOfIntToDouble = <int, double>{};\n\
+        \nSpecifying types is handy when you initialize a list with contents of a subtype, but still want the list to be List<BaseType>:  \n\n\
+        final aListOfBaseType = <BaseType>[SubType(), SubType()];  ",
+        prompt: "// Assign this a map of String to int so that aMapOfStringsToInts['myKey'] returns 12:\n\
+        final aMapOfStringsToInts = ",
+        example: "final aMapOfStringsToInts = <String, int>{'myKey': 12};"
+    },
+    {
+        term: "dart | list, set, map assignation | List doubles",
+        description: "Dart’s type inference can assign types to these variables for you. In this case, the inferred types are List<String>, Set<String>, and Map<String, int>.\n\
+        Or you can specify the type yourself:  \n\
+        final aListOfInts = <int>[];    final aSetOfInts = <int>{};     final aMapOfIntToDouble = <int, double>{};\n\
+        \nSpecifying types is handy when you initialize a list with contents of a subtype, but still want the list to be List<BaseType>:  \n\n\
+        final aListOfBaseType = <BaseType>[SubType(), SubType()];  ",
+        prompt: "Assign this an empty List<double>:\n\
+        final anEmptyListOfDouble = ",
+        example: "final anEmptyListOfDouble = <double>[];"
+    },
+    {
+        term: "dart | list, set, map assignation | double",
+        description: "Dart’s type inference can assign types to these variables for you. In this case, the inferred types are List<String>, Set<String>, and Map<String, int>.\n\
+        Or you can specify the type yourself:  \n\
+        final aListOfInts = <int>[];    final aSetOfInts = <int>{};     final aMapOfIntToDouble = <int, double>{};\n\
+        \nSpecifying types is handy when you initialize a list with contents of a subtype, but still want the list to be List<BaseType>:  \n\n\
+        final aListOfBaseType = <BaseType>[SubType(), SubType()];  ",
+        prompt: "// Assign this an empty Set<String>:\n\
+        final anEmptySetOfString = ",
+        example: "final anEmptyListOfDouble = <String>{};"
+    },
+    {
+        term: "dart | cascade | null cascade",
+        description: ":m Here’s the same expression with a cascade:\n\
+        ```dart\n\
+        myObject..someMethod()\n\
+        ```\n\
+        Although it still invokes someMethod() on myObject, the result of the expression isn’t the return value—it’s a reference to myObject!  Using cascades, you can chain together operations that would otherwise require separate statements. For example, consider the following code, which uses the conditional member access operator (?.) to read properties of button if it isn’t null:\n\
+        ```dart\n\
+        var button = querySelector('#confirm');\nbutton?.text = 'Confirm';\nbutton?.classes.add('important');\nbutton?.onClick.listen((e) => window.alert('Confirmed!'));\nbutton?.scrollIntoView();\n\
+        ```\n\
+        ",
+        prompt: "Convert the latter example into a null shorting cascade (?..)",
+        example: "```dart\n\
+        querySelector('#confirm') ?..text = 'Confirm'..classes.add('important')..onClick.listen((e) => window.alert('Confirmed!'))..scrollIntoView();\n\
+        ```"
+    },
+    {
+        term: "dart | optional parameters | positional ",
+        prompt: "change the header of the following so that the second and third parameters are optional:\n\
+        int sumUp(int a, int b, int c)\n\n\
+        so that these works:\n\
+        int total = sumUpToFive(1, 2);\n\
+        int total_2 = sumUpToFive(1, 2, 3);\n",
+        example: "int sumUp(int a, [int? b, int? c])\n\
+        or: int sumUp(int a, [int b = 0, int c = 0])"
+    },
+    {
+        term: "dart | optional parameters | named",
+        prompt: "change the header of the following so that the third parameters is optional and is named:\n\
+        int sumUp(int a, int b, int c)\n\n\
+        so that these works:\n\
+        (Suppose that we want to assign: a => 1, b => 2, c => 3)\n\
+        int total = sumUpToFive(1, c:3, 2);\n",
+        example: "int sumUp(int a, int b, {int? c})"
+    },
+    {
+        term: "dart | exceptions | catching",
+        description: ":m\n\
+        ```dart\n\
+        class OutOfLlamasException implements Exception {\n String errorMessage() {\n return 'Out of Llamas!';\n }\n}\n\n\
+        throw OutOfLlamasException();\n\
+        throw Exception('Something bad happened.');\n\
+        throw 'Waaaaaaah!';\n\
+        ```",
+        prompt: ":m complete the missing snippet so that both exceptions and errors are caught:\n\
+        ```dart\n\
+        try {\n breedMoreLlamas();\n} on [#1] {\n // A specific exception\n buyMoreLlamas();\n} [#2] {\n // Anything else that is an exception\n print('Unknown exception: $e');\n} [#3] {\n // No specified type, handles all\n print('Something really unknown: $e');\n}\n\
+        ```",
+        example: "#1 OutOfLlamasException\n\
+        #2 on Exception catch (e)\n\
+        #3 catch (e)\n\
+        "
+    },
+    {
+        term: "dart | exceptions | rethrow",
+        description: ":m If you can’t completely handle the exception, use the rethrow keyword to propagate the exception:\n\
+        ```dart\n\
+        try {\n breedMoreLlamas();\n} catch (e) {\n print('I was just trying to breed llamas!');\n rethrow;\n}\n\
+        ```\n\
+        To execute code whether or not an exception is thrown, use finally:\n\
+        ```dart\n\
+        try {\n breedMoreLlamas();\n} catch (e) {\n // ... handle exception ...\n} finally {\n // Always clean up, even if an exception is thrown.\n cleanLlamaStalls();\n}\n\
+        ```",
+        prompt: "Whats the difference between finally and rethrow?",
+        example: "finally is always executed, rethrow is used to propagate the exception"
+    }
+    
+
+
+];
+
+
+module.exports = { react_terms, apex, flutter: flutter_dart, IDE_S };

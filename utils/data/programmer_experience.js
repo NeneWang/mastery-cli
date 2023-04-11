@@ -641,7 +641,7 @@ const js_advanced = [
         term: "typeof",
         prompt: "What will the following print?",
         description: "typeof 5\ntypeof '5'\ntypeof true\ntypeof undefined\ntypeof null\ntypeof {}\ntypeof []\ntypeof function(){}",
-        example: "number\nstring\nboolean\nundefined\nobject\nobject\nfunction => However in reality is actually an object"
+        example: "number\nstring\nboolean\nundefined\nobject\nobject\nobject\nfunction => However in reality is actually an object"
     },
     {
         term: "weird functions behaviour on types",
