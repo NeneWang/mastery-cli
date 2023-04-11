@@ -526,6 +526,7 @@ const flutter_dart = [
     {
         term: "Flutter | stateful | Stateful Classes",
         description: ":m\n\
+        ```js\n\
         class BasePage extends [##1] {\n [##2] createState() {\n return _BasePageState();\n }\n}\n\nclass _BasePageState extends [##3]{\n int _value = 0;\n void _increment() {\n setState(() {\n _value++;\n });\n }\n}\n\
         ```",
         prompt: "Complete the missing parts of the code so that BasePage is a stateful widget",
@@ -535,7 +536,8 @@ const flutter_dart = [
         term: "Widget | GestureDetector | properties",
         attachment: "https://blog.codemagic.io/uploads/2022/10/gesturewidget-1.png#center",
         description: ":m\n\
-        GestureDetector(\n [##1]: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n ## COMPLETE HERE\n ),\n child: const Text('My Button'),\n ),\n)\n\
+        ```js\n\
+        GestureDetector(\n [##1]: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n ## COMPLETE HERE\n,\n child: const Text('My Button'),\n ),\n)\n\
         ```",
         prompt: "Complete the missing code, so  hat it creates the figure above, with edges paddings of 12 (all) and a circular border radius of 8",
         example:  ":m\n\
@@ -549,16 +551,72 @@ const flutter_dart = [
         term: "Widget | GestureDetector | onTap",
         attachment: "https://blog.codemagic.io/uploads/2022/10/gesturewidget-1.png#center",
         description: ":m\n\
+        ```js\n\
         GestureDetector(\n onTap: () {\n ## COMPLETE HERE \n },\n child: Container(\n padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0),\n ),\n child: const Text('My Button'),\n ),\n)\n\
         ```",
-        prompt: "Complete it so that it shows a snackbar with the text 'Tap' when the button is tapped",
+        prompt: "Complete it so that it shows a snackbar with the text 'Tap' when the button is tapped\n\
+        Color: lightblue",
         example:  ":m\n\
         const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n\n\
         ```dart\n\
         GestureDetector(\n onTap: () {\n const snackBar = SnackBar(content: Text('Tap'));\n ScaffoldMessenger.of(context).showSnackBar(snackBar);\n },\n child: Container(\n padding: const EdgeInsets.all(12.0),\n decoration: BoxDecoration(\n color: Colors.lightBlue,\n borderRadius: BorderRadius.circular(8.0),\n ),\n child: const Text('My Button'),\n ),\n)\n\
         ```",
-        
     },
+    {
+        term: "widget | Alert Dialog | alert ",
+        attachment: "https://blog.codemagic.io/dialogwidget_13619648723351944144_huebb6c3db760e71da697d69c329e419e5_0_1280x1800_fit_linear_3.png",
+        description: ":m\n\
+        ```js\n\
+        Future<void> _showMyDialog() async {\n return showDialog<void>(\n context: context,\n ## [0], // user must tap button!\n builder: (BuildContext context) {\n return ### [1](\n title: const Text('Cheat Sheet'),\n content: SingleChildScrollView(\n child: ListBody(\n children: const <Widget>[\n Text('This is a demo alert dialog.'),\n Text('Would you like to approve of this message?'),\n ],\n ),\n ),\n actions: <Widget>[\n TextButton(\n child: const Text('Approve'),\n onPressed: () {\n Navigator.of(context).pop();\n },\n ),\n ],\n );\n },\n );\n}\n\
+        ```",
+        prompt: "Complete the following so that it displays an aprove action button, and is not dismissible in any other way",        
+        example: "[0]: barrierDismissible: false, [1] AlertDialog   "
+
+    },
+    {
+        term: "widget | Alert Dialog | List Body",
+        attachment: "https://blog.codemagic.io/dialogwidget_13619648723351944144_huebb6c3db760e71da697d69c329e419e5_0_1280x1800_fit_linear_3.png",
+        description: ":m\n\
+        ```js\n\
+        ## [0] _showMyDialog() async {\n return showDialog<void>(\n context: context,\n barrierDismissible: false, // user must tap button!\n builder: (BuildContext context) {\n return AlertDialog(\n title: const Text('Cheat Sheet'),\n ## [2] Complete \n ## [2][\n TextButton(\n child: const Text('Approve'),\n onPressed: () {\n Navigator.of(context).pop();\n },\n ),\n ],\n );\n },\n );\n}\n\
+        ```",
+        prompt: "Complete the following so that it contains a list boyd of text (listBody) from an array of texts, in a scrollable manner",
+        example: "[0]  Future<void> \n\
+        [1] content: SingleChildScrollView(\n child: ListBody(\n children: const <Widget>[\n Text('This is a demo alert dialog.'),\n Text('Would you like to approve of this message?'),\n ],\n ),\n )"
+
+    },
+    {
+        term: "widget | Dismissable | list creation",
+        description: ":m\n\
+        ```\n\
+        List<String> items = <String>['banana', 'strawberry', 'apple', 'orange', 'cat', 'bobcat'];\n## [1] (\n\
+            ## [2], \n\
+            ## [3], \n\
+            ## [4] \n\
+             {return Dismissible(background: Container(color: Colors.green,), key: Key(items[index]), onDismissed: (DismissDirection direction) {setState(() {items.removeAt(index);});}, child: ListTile(title: Text('Item ${items[index]}',),),);},),\n\
+        ```\n\
+        ",
+        prompt: "Complete the following: to create a list view of dismissable items, with a green background when dismissed to the right, with a space of 16 between each item",
+        example: "[1] ListView.builder\n\
+        [2] itemCount: items.length \n\
+        [3] padding: const EdgeInsets.symmetric(vertical: 16),\n\
+        [4] itemBuilder: (BuildContext context, index) "
+    },
+    {
+        term: "widget | Dismissable | dismissable methods",
+        description: ":m\n\
+        ```\n\
+        List<String> items = <String>['banana', 'strawberry', 'apple', 'orange', 'cat', 'bobcat'];\nListView.builder(itemCount: items.length, padding: const EdgeInsets.symmetric(vertical: 16), itemBuilder: (BuildContext context, index) {return Dismissible(background: Container(color: Colors.green,), ## [1], \n\
+            ## [2] {setState(() {items.removeAt(index);});}, child: \n\
+            ## [3](title: Text('Item ${items[index]}',),),);},),\n\
+        ```\n\
+        ",
+        prompt: "Complete the following: to create a list view of dismissable items, with a green background when dismissed to the right\n\
+        Add the keys,\n on dismissing method hook, \nand the child tile to be rendered on.",
+        example: "[1] key: Key(items[index]),\n\
+        [2] onDismissed: (DismissDirection direction) {setState(() {items.removeAt(index);});},\n\
+        [3] child: ListTile(title: Text('Item ${items[index]}',),),"
+    }
     // TODO Flutter Push
     // {
     //     term: "Flutter | Navigator | push",
