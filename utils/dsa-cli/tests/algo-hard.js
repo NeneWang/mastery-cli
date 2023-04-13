@@ -2685,6 +2685,728 @@ class LongestCommonSubsequence extends ProblemTests {
     }
 }
 
+class ContinuousMedianHandler extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+
+
+    }
+
+    test_1() {
+        /**
+         * [
+            {
+                "arguments": [5],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [10],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 7.5
+            },
+            {
+                "arguments": [100],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 10
+            }
+            ]
+         */
+
+        const continuousMedianHandler = new this.Problem();
+
+        this.current_test_name = '[5, 10, 100] => [7.5, 10]';
+        continuousMedianHandler.insert(5);
+        continuousMedianHandler.insert(10);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 7.5);
+        continuousMedianHandler.insert(100);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 10);
+
+    }
+
+    test_2() {
+        /**
+         * [
+            {
+                "arguments": [5],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [10],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 7.5
+            },
+            {
+                "arguments": [100],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 10
+            }
+            ]
+         */
+
+        const continuousMedianHandler = new this.Problem();
+
+        this.current_test_name = '[5, 10, 100] => [7.5, 10]';
+        continuousMedianHandler.insert(5);
+        continuousMedianHandler.insert(10);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 7.5);
+        continuousMedianHandler.insert(100);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 10);
+
+    }
+
+    test_3() {
+
+        /**
+         * [
+            [
+            {
+                "arguments": [5],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [10],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [100],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 10
+            },
+            {
+                "arguments": [200],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 55
+            }
+            ]
+         */
+
+        const continuousMedianHandler = new this.Problem();
+
+        this.current_test_name = '[5, 10, 100, 200] => [10, 55]';
+        continuousMedianHandler.insert(5);
+        continuousMedianHandler.insert(10);
+        continuousMedianHandler.insert(100);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 10);
+        continuousMedianHandler.insert(200);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 55);
+
+    }
+
+    test_4() {
+        /**
+         * [
+            {
+                "arguments": [5],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [10],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [100],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [200],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [6],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 10
+            },
+            {
+                "arguments": [13],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 11.5
+            }
+            ]
+         */
+
+        const continuousMedianHandler = new this.Problem();
+
+        this.current_test_name = '[5, 10, 100, 200, 6, 13] => [10, 11.5]';
+        continuousMedianHandler.insert(5);
+        continuousMedianHandler.insert(10);
+        continuousMedianHandler.insert(100);
+        continuousMedianHandler.insert(200);
+        continuousMedianHandler.insert(6);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 10);
+        continuousMedianHandler.insert(13);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 11.5);
+
+    }
+
+    test_5() {
+        /**
+         * [
+            {
+                "arguments": [5],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [10],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [100],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [200],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [6],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [13],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [14],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 13
+            },
+            {
+                "arguments": [50],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 13.5
+            }
+            ]
+         */
+
+        const continuousMedianHandler = new this.Problem();
+
+        this.current_test_name = '[5, 10, 100, 200, 6, 13, 14, 50] => [13, 13.5]';
+        continuousMedianHandler.insert(5);
+        continuousMedianHandler.insert(10);
+        continuousMedianHandler.insert(100);
+        continuousMedianHandler.insert(200);
+        continuousMedianHandler.insert(6);
+        continuousMedianHandler.insert(13);
+        continuousMedianHandler.insert(14);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 13);
+        continuousMedianHandler.insert(50);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 13.5);
+
+    }
+
+    test_6() {
+        /**
+         * [
+             {
+                "arguments": [5],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [10],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [100],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [200],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [6],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [13],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [14],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [50],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [51],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 14
+            },
+            {
+                "arguments": [52],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [],
+                "method": "getMedian",
+                "output": 32
+            }
+            ]
+         */
+
+        const continuousMedianHandler = new this.Problem();
+
+        this.current_test_name = '[5, 10, 100, 200, 6, 13, 14, 50, 51, 52] => [14, 32]';
+        continuousMedianHandler.insert(5);
+        continuousMedianHandler.insert(10);
+        continuousMedianHandler.insert(100);
+        continuousMedianHandler.insert(200);
+        continuousMedianHandler.insert(6);
+        continuousMedianHandler.insert(13);
+        continuousMedianHandler.insert(14);
+        continuousMedianHandler.insert(50);
+        continuousMedianHandler.insert(51);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 14);
+        continuousMedianHandler.insert(52);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 32);
+
+
+    }
+
+    test_7() {
+        /**
+         * [
+                {
+                    "arguments": [5],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [10],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [100],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [200],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [6],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [13],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [14],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [50],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [51],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [52],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [1000],
+                    "method": "insert",
+                    "output": null
+                },
+                {
+                    "arguments": [],
+                    "method": "getMedian",
+                    "output": 50
+                },
+                {
+                    "arguments": [10000],
+                    "method": "insert",
+                    "output": null
+                },
+         */
+
+        const continuousMedianHandler = new this.Problem();
+
+        this.current_test_name = '[5, 10, 100, 200, 6, 13, 14, 50, 51, 52, 1000, 10000] => [50, 100]';
+        continuousMedianHandler.insert(5);
+        continuousMedianHandler.insert(10);
+        continuousMedianHandler.insert(100);
+        continuousMedianHandler.insert(200);
+        continuousMedianHandler.insert(6);
+        continuousMedianHandler.insert(13);
+        continuousMedianHandler.insert(14);
+        continuousMedianHandler.insert(50);
+        continuousMedianHandler.insert(51);
+        continuousMedianHandler.insert(52);
+        continuousMedianHandler.insert(1000);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 50);
+        continuousMedianHandler.insert(10000);
+        assert.deepEqual(continuousMedianHandler.getMedian(), 50.5);
+
+    }
+
+    test_8() {
+        /**
+         * [
+            {
+                "arguments": [5],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [10],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [100],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [200],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [6],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [13],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [14],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [50],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [51],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [52],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [1000],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [10000],
+                "method": "insert",
+                "output": null
+            },
+            {
+                "arguments": [10001],
+                "method": "insert",
+                "output": null
+            },
+         */
+
+        const continuousMedianHandler = new this.Problem();
+
+        this.current_test_name = '[5, 10, 100, 200, 6, 13, 14, 50, 51, 52, 1000, 10000, 10001] => [100, 100]';
+        continuousMedianHandler.insert(5);
+        continuousMedianHandler.insert(10);
+        continuousMedianHandler.insert(100);
+        continuousMedianHandler.insert(200);
+        continuousMedianHandler.insert(6);
+        continuousMedianHandler.insert(13);
+        continuousMedianHandler.insert(14);
+        continuousMedianHandler.insert(50);
+        continuousMedianHandler.insert(51);
+        continuousMedianHandler.insert(52);
+        continuousMedianHandler.insert(1000);
+        continuousMedianHandler.insert(10000);
+        continuousMedianHandler.insert(10001);
+    }
+}
+
+class MinNumberOfJumps extends ProblemTests {
+
+
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(()=>this.test_1());
+        this.tests.push(()=>this.test_2());
+        this.tests.push(()=>this.test_3());
+        this.tests.push(()=>this.test_4());
+        this.tests.push(()=>this.test_5());
+        this.tests.push(()=>this.test_6());
+        this.tests.push(()=>this.test_7());
+        this.tests.push(()=>this.test_8());
+        this.tests.push(()=>this.test_9());
+        this.tests.push(()=>this.test_10());
+
+    }
+
+    test_1() {
+
+
+        this.current_test_name = '[3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3] => 4';
+        const minNumberOfJumps = new this.Problem();
+        assert.deepEqual(minNumberOfJumps.solve([3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3]), 4);
+    }
+
+    test_2(){
+        /**
+         * 0
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [1]
+            }
+         */
+
+        this.current_test_name = '[1] => 0';
+        const minNumberOfJumps = new this.Problem();
+        assert.deepEqual(minNumberOfJumps.solve([1]), 0); 
+
+    }
+
+    test_3(){
+        /**
+         * 1
+        View Outputs Side By Side
+        Input(s)
+        {
+        "array": [1, 1]
+        }
+        */
+
+        this.current_test_name = '[1, 1] => 1';
+        const minNumberOfJumps = new this.Problem();
+        assert.deepEqual(minNumberOfJumps.solve([1, 1]), 1);
+
+    }
+
+    test_4(){
+        /**
+         * 1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [3, 1]
+            }
+         */
+
+        this.current_test_name = '[3, 1] => 1';
+        const minNumberOfJumps = new this.Problem();
+        assert.deepEqual(minNumberOfJumps.solve([3, 1]), 1);
+    }
+
+
+    test_5(){
+        /**
+         * 2
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [1, 1, 1]
+            }
+         */
+
+        this.current_test_name = '[1, 1, 1] => 2';
+        const minNumberOfJumps = new this.Problem();
+        assert.deepEqual(minNumberOfJumps.solve([1, 1, 1]), 2);
+    }
+
+    test_6(){
+        /**
+         * 1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [2, 1, 1]
+            }
+         */
+
+        this.current_test_name = '[2, 1, 1] => 1';
+        const minNumberOfJumps = new this.Problem();
+        assert.deepEqual(minNumberOfJumps.solve([2, 1, 1]), 1);
+    }
+
+    test_7(){
+        /**
+         * 2
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [2, 1, 2, 3, 1]
+            }
+         */
+
+        this.current_test_name = '[2, 1, 2, 3, 1] => 2';
+        const minNumberOfJumps = new this.Problem();
+        assert.deepEqual(minNumberOfJumps.solve([2, 1, 2, 3, 1]), 2);
+        
+    }
+
+    test_8(){
+        /**
+         * 3
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [2, 1, 2, 3, 1, 1, 1]
+            }
+         */
+
+        this.current_test_name = '[2, 1, 2, 3, 1, 1, 1] => 3';
+        const minNumberOfJumps = new this.Problem();
+        assert.deepEqual(minNumberOfJumps.solve([2, 1, 2, 3, 1, 1, 1]), 3);
+        
+    }
+
+
+    test_9(){
+        /**
+         * 4
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [2, 1, 2, 2, 1, 1, 1]
+            }
+         */
+
+        this.current_test_name = '[2, 1, 2, 2, 1, 1, 1] => 4';
+        const minNumberOfJumps = new this.Problem();
+        assert.deepEqual(minNumberOfJumps.solve([2, 1, 2, 2, 1, 1, 1]), 4);
+    }
+
+
+    test_10(){
+        /**
+         * 5
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3, 2, 6, 2, 1, 1, 1, 1]
+            }
+         */
+
+        this.current_test_name = '[3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3, 2, 6, 2, 1, 1, 1, 1] => 5';
+        const minNumberOfJumps = new this.Problem();
+        assert.deepEqual(minNumberOfJumps.solve([3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3, 2, 6, 2, 1, 1, 1, 1]), 5);
+    }
+
+
+}
+
+
+
+
+
 const TEST_DICTIONARY = {
     'subarray-sort': SubarraySort,
     'min-rewards': MinRewards,
@@ -2695,6 +3417,8 @@ const TEST_DICTIONARY = {
     'find-nodes-distance-k': findNodesDistanceK,
     'max-sum-increasing-subsequence': maxSumIncreasingSubsequence,
     'longest-common-subsequence': LongestCommonSubsequence,
+    'continuous-median': ContinuousMedianHandler,
+    'min-number-of-jumps': MinNumberOfJumps,
 }
 
 module.exports = TEST_DICTIONARY;
