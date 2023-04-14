@@ -3237,16 +3237,16 @@ class MinNumberOfJumps extends ProblemTests {
     constructor(Problem) {
         super(Problem);
 
-        this.tests.push(()=>this.test_1());
-        this.tests.push(()=>this.test_2());
-        this.tests.push(()=>this.test_3());
-        this.tests.push(()=>this.test_4());
-        this.tests.push(()=>this.test_5());
-        this.tests.push(()=>this.test_6());
-        this.tests.push(()=>this.test_7());
-        this.tests.push(()=>this.test_8());
-        this.tests.push(()=>this.test_9());
-        this.tests.push(()=>this.test_10());
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
 
     }
 
@@ -3258,7 +3258,7 @@ class MinNumberOfJumps extends ProblemTests {
         assert.deepEqual(minNumberOfJumps.solve([3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3]), 4);
     }
 
-    test_2(){
+    test_2() {
         /**
          * 0
             View Outputs Side By Side
@@ -3270,11 +3270,11 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[1] => 0';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([1]), 0); 
+        assert.deepEqual(minNumberOfJumps.solve([1]), 0);
 
     }
 
-    test_3(){
+    test_3() {
         /**
          * 1
         View Outputs Side By Side
@@ -3290,7 +3290,7 @@ class MinNumberOfJumps extends ProblemTests {
 
     }
 
-    test_4(){
+    test_4() {
         /**
          * 1
             View Outputs Side By Side
@@ -3306,7 +3306,7 @@ class MinNumberOfJumps extends ProblemTests {
     }
 
 
-    test_5(){
+    test_5() {
         /**
          * 2
             View Outputs Side By Side
@@ -3321,7 +3321,7 @@ class MinNumberOfJumps extends ProblemTests {
         assert.deepEqual(minNumberOfJumps.solve([1, 1, 1]), 2);
     }
 
-    test_6(){
+    test_6() {
         /**
          * 1
             View Outputs Side By Side
@@ -3336,7 +3336,7 @@ class MinNumberOfJumps extends ProblemTests {
         assert.deepEqual(minNumberOfJumps.solve([2, 1, 1]), 1);
     }
 
-    test_7(){
+    test_7() {
         /**
          * 2
             View Outputs Side By Side
@@ -3349,10 +3349,10 @@ class MinNumberOfJumps extends ProblemTests {
         this.current_test_name = '[2, 1, 2, 3, 1] => 2';
         const minNumberOfJumps = new this.Problem();
         assert.deepEqual(minNumberOfJumps.solve([2, 1, 2, 3, 1]), 2);
-        
+
     }
 
-    test_8(){
+    test_8() {
         /**
          * 3
             View Outputs Side By Side
@@ -3365,11 +3365,11 @@ class MinNumberOfJumps extends ProblemTests {
         this.current_test_name = '[2, 1, 2, 3, 1, 1, 1] => 3';
         const minNumberOfJumps = new this.Problem();
         assert.deepEqual(minNumberOfJumps.solve([2, 1, 2, 3, 1, 1, 1]), 3);
-        
+
     }
 
 
-    test_9(){
+    test_9() {
         /**
          * 4
             View Outputs Side By Side
@@ -3385,7 +3385,7 @@ class MinNumberOfJumps extends ProblemTests {
     }
 
 
-    test_10(){
+    test_10() {
         /**
          * 5
             View Outputs Side By Side
@@ -3403,7 +3403,91 @@ class MinNumberOfJumps extends ProblemTests {
 
 }
 
+class MultiStringSearch extends ProblemTests {
 
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+    }
+
+
+    test_1() {
+        /**
+         * [true, false, true, true, false, true, false]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "this is a big string",
+            "smallStrings": ["this", "yo", "is", "a", "bigger", "string", "kappa"]
+            }
+         */
+
+        this.current_test_name = '["this", "yo", "is", "a", "bigger", "string", "kappa"] => [true, false, true, true, false, true, false]';
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("this is a big string", ["this", "yo", "is", "a", "bigger", "string", "kappa"]), [true, false, true, true, false, true, false]);
+
+    }
+
+    test_2(){
+        /**
+         * [true, true, false, true, true, false]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "abcdefghijklmnopqrstuvwxyz",
+            "smallStrings": ["abc", "mnopqr", "wyz", "no", "e", "tuuv"]
+            }
+         */
+
+
+        this.current_test_name = '["abc", "mnopqr", "wyz", "no", "e", "tuuv"] => [true, true, false, true, true, false]';
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("abcdefghijklmnopqrstuvwxyz", ["abc", "mnopqr", "wyz", "no", "e", "tuuv"]), [true, true, false, true, true, false]);
+
+    }
+
+    test_3(){
+        /**
+         * [true, true, true, true, true, false, false]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "abcdefghijklmnopqrstuvwxyz",
+            "smallStrings": ["abcdefghijklmnopqrstuvwxyz", "abc", "j", "mnopqr", "pqrstuvwxyz", "xyzz", "defh"]
+            }
+         */
+
+        this.current_test_name = '["abcdefghijklmnopqrstuvwxyz", "abc", "j", "mnopqr", "pqrstuvwxyz", "xyzz", "defh"] => [true, true, true, true, true, false, false]';
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("abcdefghijklmnopqrstuvwxyz", ["abcdefghijklmnopqrstuvwxyz", "abc", "j", "mnopqr", "pqrstuvwxyz", "xyzz", "defh"]), [true, true, true, true, true, false, false]);
+    }
+
+
+    test_4(){
+        /**
+         * [false, true, true, true, false, false, false]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "hj!)!%Hj1jh8f1985n!)51",
+            "smallStrings": ["%Hj7", "8f198", "!)5", "!)!", "!!", "jh81", "j181hf"]
+            }
+         */
+
+        this.current_test_name = '["%Hj7", "8f198", "!)5", "!)!", "!!", "jh81", "j181hf"] => [false, true, true, true, false, false, false]';
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("hj!)!%Hj1jh8f1985n!)51", ["%Hj7", "8f198", "!)5", "!)!", "!!", "jh81", "j181hf"]), [false, true, true, true, false, false, false]);
+    }
+
+}
 
 
 
@@ -3419,6 +3503,7 @@ const TEST_DICTIONARY = {
     'longest-common-subsequence': LongestCommonSubsequence,
     'continuous-median': ContinuousMedianHandler,
     'min-number-of-jumps': MinNumberOfJumps,
+    'multi-string-search': MultiStringSearch,
 }
 
 module.exports = TEST_DICTIONARY;

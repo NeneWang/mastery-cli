@@ -1,6 +1,6 @@
-class Problem {
-  solve() {
-    console.log("Hello World!");
+class MultiStringSearch {
+  solve(bigString, smallStrings) {
+    return multiStringSearch(bigString, smallStrings);
   }
 }
 
@@ -53,6 +53,6 @@ class Trie {
 
 
 
-module.exports = { Problem };
+module.exports = { Problem: MultiStringSearch };
 
 
