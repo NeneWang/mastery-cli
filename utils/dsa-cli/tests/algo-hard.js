@@ -3806,15 +3806,15 @@ class DiskStacking extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
-        this.tests.push(()=>this.test_1());
-        this.tests.push(()=>this.test_2());
-        this.tests.push(()=>this.test_3());
-        this.tests.push(()=>this.test_4());
-        this.tests.push(()=>this.test_5());
-        this.tests.push(()=>this.test_6());
-        this.tests.push(()=>this.test_7());
-        this.tests.push(()=>this.test_8());
-        this.tests.push(()=>this.test_9());
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
     }
 
     test_1() {
@@ -3845,7 +3845,7 @@ class DiskStacking extends ProblemTests {
         assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 3, 1], [4, 4, 5]]), [[2, 1, 2], [3, 2, 3], [4, 4, 5]]);
     }
 
-    test_2(){
+    test_2() {
         /**
          * [
             [2, 1, 2]
@@ -3865,7 +3865,7 @@ class DiskStacking extends ProblemTests {
         assert.deepEqual(diskStacking.solve([[2, 1, 2]]), [[2, 1, 2]]);
     }
 
-    test_3(){
+    test_3() {
         /**
          * [
             [2, 1, 2],
@@ -3887,7 +3887,7 @@ class DiskStacking extends ProblemTests {
         assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3]]), [[2, 1, 2], [3, 2, 3]]);
     }
 
-    test_4(){
+    test_4() {
         /**
          * [
             [2, 2, 8]
@@ -3909,7 +3909,7 @@ class DiskStacking extends ProblemTests {
         assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8]]), [[2, 2, 8]]);
     }
 
-    test_5(){
+    test_5() {
         /**
          * [
             [2, 1, 2],
@@ -3932,7 +3932,7 @@ class DiskStacking extends ProblemTests {
         assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 3, 4]]), [[2, 1, 2], [3, 2, 3]]);
     }
 
-    test_6(){
+    test_6() {
         /**
          * [
             [2, 1, 2],
@@ -3959,7 +3959,7 @@ class DiskStacking extends ProblemTests {
         assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]]), [[2, 1, 2], [3, 2, 3], [4, 4, 5]]);
     }
 
-    test_7(){
+    test_7() {
         /**
          * [
             [2, 3, 4],
@@ -3985,7 +3985,7 @@ class DiskStacking extends ProblemTests {
         assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 5], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]]), [[2, 3, 4], [4, 4, 5]]);
     }
 
-    test_8(){
+    test_8() {
         /**
          * [
             [1, 1, 4],
@@ -4012,7 +4012,7 @@ class DiskStacking extends ProblemTests {
         assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 2, 1], [4, 4, 5], [1, 1, 4]]), [[1, 1, 4], [2, 2, 8]]);
     }
 
-    test_9(){
+    test_9() {
         /**
          * [
             [2, 2, 3],
@@ -4046,6 +4046,200 @@ class DiskStacking extends ProblemTests {
 
 }
 
+class NumbersInPi extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+
+    }
+
+    test_1() {
+        /**
+         * 2
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numbers": ["314159265358979323846", "26433", "8", "3279", "314159265", "35897932384626433832", "79"],
+            "pi": "3141592653589793238462643383279"
+            }
+         */
+
+        this.current_test_name = '"3141592653589793238462643383279", ["314159265358979323846", "26433", "8", "3279", "314159265", "35897932384626433832", "79"] => 2';
+        const numbersInPi = new this.Problem();
+
+        assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["314159265358979323846", "26433", "8", "3279", "314159265", "35897932384626433832", "79"]), 2);
+    }
+
+    test_2() {
+        /**
+         * 1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numbers": ["314159265358979323846264338327", "9"],
+            "pi": "3141592653589793238462643383279"
+            }
+         */
+
+        this.current_test_name = '"3141592653589793238462643383279" , ["314159265358979323846264338327", "9"]=> 1';
+        const numbersInPi = new this.Problem();
+
+        assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["314159265358979323846264338327", "9"]), 1);
+    }
+
+    test_3() {
+        /**
+         * 3
+        View Outputs Side By Side
+        Input(s)
+        {
+        "numbers": ["3", "314", "49", "9001", "15926535897", "14", "9323", "8462643383279", "4", "793"],
+        "pi": "3141592653589793238462643383279"
+        }
+         */
+
+        this.current_test_name = '"3141592653589793238462643383279", ["3", "314", "49", "9001", "15926535897", "14", "9323", "8462643383279", "4", "793"] => 3';
+        const numbersInPi = new this.Problem();
+
+        assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3", "314", "49", "9001", "15926535897", "14", "9323", "8462643383279", "4", "793"]), 3);
+    }
+
+    test_4(){
+        /**
+         * 0
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numbers": ["3141592653589793238462643383279"],
+            "pi": "3141592653589793238462643383279"
+            }
+         */
+
+        this.current_test_name = '"3141592653589793238462643383279", ["3141592653589793238462643383279"] => 0';
+        const numbersInPi = new this.Problem();
+
+        assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3141592653589793238462643383279"]), 0);
+    }
+
+    test_5(){
+        /**
+         * -1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numbers": ["3141", "1512", "159", "793", "12412451", "8462643383279"],
+            "pi": "3141592653589793238462643383279"
+            }
+         */
+
+        this.current_test_name = '"3141592653589793238462643383279", ["3141", "1512", "159", "793", "12412451", "8462643383279"] => -1';
+        const numbersInPi = new this.Problem();
+
+        assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3141", "1512", "159", "793", "12412451", "8462643383279"]), -1);
+    }
+
+    test_6(){
+        /**
+         * 2
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numbers": ["314159265358979323846", "327", "26433", "8", "3279", "9", "314159265", "35897932384626433832", "79"],
+            "pi": "3141592653589793238462643383279"
+            }
+         */
+
+        this.current_test_name = '"3141592653589793238462643383279", ["314159265358979323846", "327", "26433", "8", "3279", "9", "314159265", "35897932384626433832", "79"] => 2';
+        const numbersInPi = new this.Problem();
+
+        assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["314159265358979323846", "327", "26433", "8", "3279", "9", "314159265", "35897932384626433832", "79"]), 2);
+
+    }
+
+    test_7(){
+        /**
+         * 1
+        View Outputs Side By Side
+        Input(s)
+        {
+        "numbers": ["141592653589793238462643383279", "314159265358979323846", "327", "26433", "8", "3279", "9", "314159265", "35897932384626433832", "79", "3"],
+        "pi": "3141592653589793238462643383279"
+        }
+         */
+
+        this.current_test_name = '"3141592653589793238462643383279", ["141592653589793238462643383279", "314159265358979323846", "327", "26433", "8", "3279", "9", "314159265", "35897932384626433832", "79", "3"] => 1';
+        const numbersInPi = new this.Problem();
+
+        assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["141592653589793238462643383279", "314159265358979323846", "327", "26433", "8", "3279", "9", "314159265", "35897932384626433832", "79", "3"]), 1);
+    }
+
+    test_8(){
+        /**
+         * 13
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numbers": ["3", "1", "4", "592", "65", "55", "35", "8", "9793", "2384626", "83279"],
+            "pi": "3141592653589793238462643383279"
+            }
+         */
+
+        this.current_test_name = '"3141592653589793238462643383279", ["3", "1", "4", "592", "65", "55", "35", "8", "9793", "2384626", "83279"] => 13';
+        const numbersInPi = new this.Problem();
+
+        assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3", "1", "4", "592", "65", "55", "35", "8", "9793", "2384626", "83279"]), 13);
+    }
+
+    test_9(){
+        /**
+         * 12
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numbers": ["3", "1", "4", "592", "65", "55", "35", "8", "9793", "2384626", "383279"],
+            "pi": "3141592653589793238462643383279"
+            }
+         */
+
+        this.current_test_name = '"3141592653589793238462643383279", ["3", "1", "4", "592", "65", "55", "35", "8", "9793", "2384626", "383279"] => 12';
+        const numbersInPi = new this.Problem();
+
+        assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3", "1", "4", "592", "65", "55", "35", "8", "9793", "2384626", "383279"]), 12);
+    }
+
+    test_10(){
+        /**
+         * -1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numbers": ["3", "141", "592", "65", "55", "35", "8", "9793", "2384626", "383279"],
+            "pi": "3141592653589793238462643383279"
+            }
+         */
+
+        this.current_test_name = '"3141592653589793238462643383279", ["3", "141", "592", "65", "55", "35", "8", "9793", "2384626", "383279"] => -1';
+        const numbersInPi = new this.Problem();
+
+        assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3", "141", "592", "65", "55", "35", "8", "9793", "2384626", "383279"]), -1);
+    }
+
+
+    
+
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -4063,6 +4257,7 @@ const TEST_DICTIONARY = {
     'multi-string-search': MultiStringSearch,
     'knapsack-problem': KnacksackProblem,
     'disk-stacking': DiskStacking,
+    'numbers-in-pi': NumbersInPi,
 }
 
 module.exports = TEST_DICTIONARY;
