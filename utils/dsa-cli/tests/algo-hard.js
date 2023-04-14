@@ -3412,6 +3412,12 @@ class MultiStringSearch extends ProblemTests {
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
         this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
     }
 
 
@@ -3433,7 +3439,7 @@ class MultiStringSearch extends ProblemTests {
 
     }
 
-    test_2(){
+    test_2() {
         /**
          * [true, true, false, true, true, false]
             View Outputs Side By Side
@@ -3452,7 +3458,7 @@ class MultiStringSearch extends ProblemTests {
 
     }
 
-    test_3(){
+    test_3() {
         /**
          * [true, true, true, true, true, false, false]
             View Outputs Side By Side
@@ -3470,7 +3476,7 @@ class MultiStringSearch extends ProblemTests {
     }
 
 
-    test_4(){
+    test_4() {
         /**
          * [false, true, true, true, false, false, false]
             View Outputs Side By Side
@@ -3487,7 +3493,316 @@ class MultiStringSearch extends ProblemTests {
         assert.deepEqual(multiStringSearch.solve("hj!)!%Hj1jh8f1985n!)51", ["%Hj7", "8f198", "!)5", "!)!", "!!", "jh81", "j181hf"]), [false, true, true, true, false, false, false]);
     }
 
+    test_5() {
+        /**
+         * [true, true, false, true, true, false, false]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "Mary goes to the shopping center every week.",
+            "smallStrings": ["to", "Mary", "centers", "shop", "shopping", "string", "kappa"]
+            }
+         */
+
+        this.current_test_name = '["to", "Mary", "centers", "shop", "shopping", "string", "kappa"] => [true, true, false, true, true, false, false]';
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("Mary goes to the shopping center every week.", ["to", "Mary", "centers", "shop", "shopping", "string", "kappa"]), [true, true, false, true, true, false, false]);
+    }
+
+    test_6() {
+        /**
+         * [false, false, false, false, true, false, false]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "adcb akfkw afnmc fkadn vkaca jdaf dacb cdba cbda",
+            "smallStrings": ["abcd", "acbd", "adbc", "dabc", "cbda", "cabd", "cdab"]
+            }
+         */
+
+        this.current_test_name = '["abcd", "acbd", "adbc", "dabc", "cbda", "cabd", "cdab"] => [false, false, false, false, true, false, false]';
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("adcb akfkw afnmc fkadn vkaca jdaf dacb cdba cbda", ["abcd", "acbd", "adbc", "dabc", "cbda", "cabd", "cdab"]), [false, false, false, false, true, false, false]);
+
+    }
+
+
+    test_7() {
+        /**
+         * [true, false, false, false, true, true]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "test testing testings tests testers test-takers",
+            "smallStrings": ["tests", "testatk", "testiing", "trsatii", "test-taker", "test"]
+            }
+         */
+
+        this.current_test_name = '["tests", "testatk", "testiing", "trsatii", "test-taker", "test"] => [true, false, false, false, true, true]';
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("test testing testings tests testers test-takers", ["tests", "testatk", "testiing", "trsatii", "test-taker", "test"]), [true, false, false, false, true, true]);
+    }
+
+    test_8() {
+        /**
+         * [false, false, false, false, false, false, true]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "ndbajwhfawkjljkfaopwdlaawjk dawkj awjkawkfjhkawk ahjwkjad jadfljawd",
+            "smallStrings": ["abc", "akwbc", "awbc", "abafac", "ajjfbc", "abac", "jadfl"]
+            }
+         */
+
+        this.current_test_name = '["abc", "akwbc", "awbc", "abafac", "ajjfbc", "abac", "jadfl"] => [false, false, false, false, false, false, true]';
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("ndbajwhfawkjljkfaopwdlaawjk dawkj awjkawkfjhkawk ahjwkjad jadfljawd", ["abc", "akwbc", "awbc", "abafac", "ajjfbc", "abac", "jadfl"]), [false, false, false, false, false, false, true]);
+    }
+
+    test_9() {
+        /**
+         * [false, true, false, false, false, false, false, true, true]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "Is this particular test going to pass or is it going to fail? That is the question.",
+            "smallStrings": ["that", "the", "questions", "goes", "mountain", "passes", "passed", "going", "is"]
+            }
+         */
+
+        this.current_test_name = '["that", "the", "questions", "goes", "mountain", "passes", "passed", "going", "is"] => [false, true, false, false, false, false, false, true, true]';
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("Is this particular test going to pass or is it going to fail? That is the question.", ["that", "the", "questions", "goes", "mountain", "passes", "passed", "going", "is"]), [false, true, false, false, false, false, false, true, true]);
+
+    }
+
+    test_10() {
+        /**
+         * [false, false, false, false, false, false]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "Everything in this test should fail.",
+            "smallStrings": ["everything", "inn", "that", "testers", "shall", "failure"]
+            }
+         */
+
+        this.current_test_name = '["everything", "inn", "that", "testers", "shall", "failure"] => [false, false, false, false, false, false]';
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("Everything in this test should fail.", ["everything", "inn", "that", "testers", "shall", "failure"]), [false, false, false, false, false, false]);
+    }
+
 }
+
+
+class KnacksackProblem extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+    }
+
+    test_1() {
+        /**
+         * [10, [1, 3]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "capacity": 10,
+            "items": [
+                [1, 2],
+                [4, 3],
+                [5, 6],
+                [6, 7]
+            ]
+            }
+         */
+
+        this.current_test_name = '[10, [[1, 2], [4, 3], [5, 6], [6, 7]]] => [10, [1, 3]]';
+        const knapsackProblem = new this.Problem();
+
+        assert.deepEqual(knapsackProblem.solve(10, [[1, 2], [4, 3], [5, 6], [6, 7]]), [10, [1, 3]]);
+    }
+
+
+    test_2() {
+        /**
+         * [10, [0, 1, 2]]
+        View Outputs Side By Side
+        Input(s)
+        {
+        "capacity": 11,
+        "items": [
+            [1, 2],
+            [4, 3],
+            [5, 6],
+            [6, 9]
+        ]
+        }
+        */
+
+        this.current_test_name = '[11, [[1, 2], [4, 3], [5, 6], [6, 9]]] => [10, [0, 1, 2]]';
+        const knapsackProblem = new this.Problem();
+
+        assert.deepEqual(knapsackProblem.solve(11, [[1, 2], [4, 3], [5, 6], [6, 9]]), [10, [0, 1, 2]]);
+    }
+
+    test_3(){
+        /**
+         * [1500, [3, 12, 14]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "capacity": 200,
+            "items": [
+                [465, 100],
+                [400, 85],
+                [255, 55],
+                [350, 45],
+                [650, 130],
+                [1000, 190],
+                [455, 100],
+                [100, 25],
+                [1200, 190],
+                [320, 65],
+                [750, 100],
+                [50, 45],
+                [550, 65],
+                [100, 50],
+                [600, 70],
+                [240, 40]
+            ]
+            }
+         */
+
+        this.current_test_name = '[200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [240, 40]]] => [1500, [3, 12, 14]]';
+        const knapsackProblem = new this.Problem();
+
+        assert.deepEqual(knapsackProblem.solve(200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [240, 40]]), [1500, [3, 12, 14]]);
+
+    }
+
+    test_4(){
+        /**
+         * [1505, [7, 12, 14, 15]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "capacity": 200,
+            "items": [
+                [465, 100],
+                [400, 85],
+                [255, 55],
+                [350, 45],
+                [650, 130],
+                [1000, 190],
+                [455, 100],
+                [100, 25],
+                [1200, 190],
+                [320, 65],
+                [750, 100],
+                [50, 45],
+                [550, 65],
+                [100, 50],
+                [600, 70],
+                [255, 40]
+            ]
+            }
+         */
+
+        this.current_test_name = '[200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [255, 40]]] => [1505, [7, 12, 14, 15]]';
+        const knapsackProblem = new this.Problem();
+
+        assert.deepEqual(knapsackProblem.solve(200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [255, 40]]), [1505, [7, 12, 14, 15]]);
+    }
+
+    test_5(){
+        /**
+         * [101, [0, 2, 3]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "capacity": 100,
+            "items": [
+                [2, 1],
+                [70, 70],
+                [30, 30],
+                [69, 69],
+                [100, 100]
+            ]
+            }
+         */
+
+        this.current_test_name = '[100, [[2, 1], [70, 70], [30, 30], [69, 69], [100, 100]]] => [101, [0, 2, 3]]';
+        const knapsackProblem = new this.Problem();
+
+        assert.deepEqual(knapsackProblem.solve(100, [[2, 1], [70, 70], [30, 30], [69, 69], [100, 100]]), [101, [0, 2, 3]]);
+    }
+
+    test_6(){
+        /**
+         * [100, [1, 2]]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "capacity": 100,
+            "items": [
+                [1, 2],
+                [70, 70],
+                [30, 30],
+                [69, 69],
+                [99, 100]
+            ]
+            }
+         */
+
+        this.current_test_name = '[100, [[1, 2], [70, 70], [30, 30], [69, 69], [99, 100]]] => [100, [1, 2]]';
+        const knapsackProblem = new this.Problem();
+
+        assert.deepEqual(knapsackProblem.solve(100, [[1, 2], [70, 70], [30, 30], [69, 69], [99, 100]]), [100, [1, 2]]);
+
+    }
+
+    test_7(){
+        /**
+         * [0, []]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "capacity": 0,
+            "items": [
+                [1, 2],
+                [70, 70],
+                [30, 30],
+                [69, 69],
+                [100, 100]
+            ]
+            }
+         */
+
+        this.current_test_name = '[0, [[1, 2], [70, 70], [30, 30], [69, 69], [100, 100]]] => [0, []]';
+        const knapsackProblem = new this.Problem();
+
+        assert.deepEqual(knapsackProblem.solve(0, [[1, 2], [70, 70], [30, 30], [69, 69], [100, 100]]), [0, []]);
+    }
+
+
+
+}
+
+
 
 
 
@@ -3504,6 +3819,7 @@ const TEST_DICTIONARY = {
     'continuous-median': ContinuousMedianHandler,
     'min-number-of-jumps': MinNumberOfJumps,
     'multi-string-search': MultiStringSearch,
+    'knapsack-problem': KnacksackProblem,
 }
 
 module.exports = TEST_DICTIONARY;
