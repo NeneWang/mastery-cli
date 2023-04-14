@@ -3659,7 +3659,7 @@ class KnacksackProblem extends ProblemTests {
         assert.deepEqual(knapsackProblem.solve(11, [[1, 2], [4, 3], [5, 6], [6, 9]]), [10, [0, 1, 2]]);
     }
 
-    test_3(){
+    test_3() {
         /**
          * [1500, [3, 12, 14]]
             View Outputs Side By Side
@@ -3694,7 +3694,7 @@ class KnacksackProblem extends ProblemTests {
 
     }
 
-    test_4(){
+    test_4() {
         /**
          * [1505, [7, 12, 14, 15]]
             View Outputs Side By Side
@@ -3728,7 +3728,7 @@ class KnacksackProblem extends ProblemTests {
         assert.deepEqual(knapsackProblem.solve(200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [255, 40]]), [1505, [7, 12, 14, 15]]);
     }
 
-    test_5(){
+    test_5() {
         /**
          * [101, [0, 2, 3]]
             View Outputs Side By Side
@@ -3751,7 +3751,7 @@ class KnacksackProblem extends ProblemTests {
         assert.deepEqual(knapsackProblem.solve(100, [[2, 1], [70, 70], [30, 30], [69, 69], [100, 100]]), [101, [0, 2, 3]]);
     }
 
-    test_6(){
+    test_6() {
         /**
          * [100, [1, 2]]
             View Outputs Side By Side
@@ -3775,7 +3775,7 @@ class KnacksackProblem extends ProblemTests {
 
     }
 
-    test_7(){
+    test_7() {
         /**
          * [0, []]
             View Outputs Side By Side
@@ -3802,7 +3802,249 @@ class KnacksackProblem extends ProblemTests {
 
 }
 
+class DiskStacking extends ProblemTests {
 
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(()=>this.test_1());
+        this.tests.push(()=>this.test_2());
+        this.tests.push(()=>this.test_3());
+        this.tests.push(()=>this.test_4());
+        this.tests.push(()=>this.test_5());
+        this.tests.push(()=>this.test_6());
+        this.tests.push(()=>this.test_7());
+        this.tests.push(()=>this.test_8());
+        this.tests.push(()=>this.test_9());
+    }
+
+    test_1() {
+
+        /**
+         * [
+            [2, 1, 2],
+            [3, 2, 3],
+            [4, 4, 5]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "disks": [
+                [2, 1, 2],
+                [3, 2, 3],
+                [2, 2, 8],
+                [2, 3, 4],
+                [1, 3, 1],
+                [4, 4, 5]
+            ]
+            }
+         */
+
+        this.current_test_name = '[[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 3, 1], [4, 4, 5]] => [[2, 1, 2], [3, 2, 3], [4, 4, 5]]';
+        const diskStacking = new this.Problem();
+
+        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 3, 1], [4, 4, 5]]), [[2, 1, 2], [3, 2, 3], [4, 4, 5]]);
+    }
+
+    test_2(){
+        /**
+         * [
+            [2, 1, 2]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "disks": [
+                [2, 1, 2]
+            ]
+            }
+         */
+
+        this.current_test_name = '[[2, 1, 2]] => [[2, 1, 2]]';
+        const diskStacking = new this.Problem();
+
+        assert.deepEqual(diskStacking.solve([[2, 1, 2]]), [[2, 1, 2]]);
+    }
+
+    test_3(){
+        /**
+         * [
+            [2, 1, 2],
+            [3, 2, 3]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "disks": [
+                [2, 1, 2],
+                [3, 2, 3]
+            ]
+            }
+         */
+
+        this.current_test_name = '[[2, 1, 2], [3, 2, 3]] => [[2, 1, 2], [3, 2, 3]]';
+        const diskStacking = new this.Problem();
+
+        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3]]), [[2, 1, 2], [3, 2, 3]]);
+    }
+
+    test_4(){
+        /**
+         * [
+            [2, 2, 8]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "disks": [
+                [2, 1, 2],
+                [3, 2, 3],
+                [2, 2, 8]
+            ]
+            }
+         */
+
+        this.current_test_name = '[[2, 1, 2], [3, 2, 3], [2, 2, 8]] => [[2, 2, 8]]';
+        const diskStacking = new this.Problem();
+
+        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8]]), [[2, 2, 8]]);
+    }
+
+    test_5(){
+        /**
+         * [
+            [2, 1, 2],
+            [3, 2, 3]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "disks": [
+                [2, 1, 2],
+                [3, 2, 3],
+                [2, 3, 4]
+            ]
+            }
+         */
+
+        this.current_test_name = '[[2, 1, 2], [3, 2, 3], [2, 3, 4]] => [[2, 1, 2], [3, 2, 3]]';
+        const diskStacking = new this.Problem();
+
+        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 3, 4]]), [[2, 1, 2], [3, 2, 3]]);
+    }
+
+    test_6(){
+        /**
+         * [
+            [2, 1, 2],
+            [3, 2, 3],
+            [4, 4, 5]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "disks": [
+                [2, 1, 2],
+                [3, 2, 3],
+                [2, 2, 8],
+                [2, 3, 4],
+                [2, 2, 1],
+                [4, 4, 5]
+            ]
+            }
+         */
+
+        this.current_test_name = '[[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]] => [[2, 1, 2], [3, 2, 3], [4, 4, 5]]';
+        const diskStacking = new this.Problem();
+
+        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]]), [[2, 1, 2], [3, 2, 3], [4, 4, 5]]);
+    }
+
+    test_7(){
+        /**
+         * [
+            [2, 3, 4],
+            [4, 4, 5]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "disks": [
+                [2, 1, 2],
+                [3, 2, 5],
+                [2, 2, 8],
+                [2, 3, 4],
+                [2, 2, 1],
+                [4, 4, 5]
+            ]
+            }
+         */
+
+        this.current_test_name = '[[2, 1, 2], [3, 2, 5], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]] => [[2, 3, 4], [4, 4, 5]]';
+        const diskStacking = new this.Problem();
+
+        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 5], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]]), [[2, 3, 4], [4, 4, 5]]);
+    }
+
+    test_8(){
+        /**
+         * [
+            [1, 1, 4],
+            [2, 2, 8]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "disks": [
+                [2, 1, 2],
+                [3, 2, 3],
+                [2, 2, 8],
+                [2, 3, 4],
+                [1, 2, 1],
+                [4, 4, 5],
+                [1, 1, 4]
+            ]
+            }
+         */
+
+        this.current_test_name = '[[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 2, 1], [4, 4, 5], [1, 1, 4]] => [[1, 1, 4], [2, 2, 8]]';
+        const diskStacking = new this.Problem();
+
+        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 2, 1], [4, 4, 5], [1, 1, 4]]), [[1, 1, 4], [2, 2, 8]]);
+    }
+
+    test_9(){
+        /**
+         * [
+            [2, 2, 3],
+            [3, 3, 4],
+            [4, 4, 5],
+            [5, 5, 6]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "disks": [
+                [3, 3, 4],
+                [2, 1, 2],
+                [3, 2, 3],
+                [2, 2, 8],
+                [2, 3, 4],
+                [5, 5, 6],
+                [1, 2, 1],
+                [4, 4, 5],
+                [1, 1, 4],
+                [2, 2, 3]
+            ]
+            }
+         */
+
+        this.current_test_name = '[[3, 3, 4], [2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [5, 5, 6], [1, 2, 1], [4, 4, 5], [1, 1, 4], [2, 2, 3]] => [[2, 2, 3], [3, 3, 4], [4, 4, 5], [5, 5, 6]]';
+        const diskStacking = new this.Problem();
+
+        assert.deepEqual(diskStacking.solve([[3, 3, 4], [2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [5, 5, 6], [1, 2, 1], [4, 4, 5], [1, 1, 4], [2, 2, 3]]), [[2, 2, 3], [3, 3, 4], [4, 4, 5], [5, 5, 6]]);
+    }
+
+}
 
 
 
@@ -3820,6 +4062,7 @@ const TEST_DICTIONARY = {
     'min-number-of-jumps': MinNumberOfJumps,
     'multi-string-search': MultiStringSearch,
     'knapsack-problem': KnacksackProblem,
+    'disk-stacking': DiskStacking,
 }
 
 module.exports = TEST_DICTIONARY;
