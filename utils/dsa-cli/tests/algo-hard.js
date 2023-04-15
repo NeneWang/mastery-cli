@@ -4733,7 +4733,7 @@ class JuiceBottling extends ProblemTests {
 
     }
 
-    test_4(){
+    test_4() {
         /**
          * [1, 1, 1]
             View Outputs Side By Side
@@ -4748,8 +4748,8 @@ class JuiceBottling extends ProblemTests {
 
         assert.deepEqual(juiceBottling.solve([0, 2, 3, 4]), [1, 1, 1]);
     }
-    
-    test_5(){
+
+    test_5() {
         /**
          * [1, 2]
             View Outputs Side By Side
@@ -4765,7 +4765,7 @@ class JuiceBottling extends ProblemTests {
         assert.deepEqual(juiceBottling.solve([0, 2, 5, 6]), [1, 2]);
     }
 
-    test_6(){
+    test_6() {
         /**
          * [2, 2]
             View Outputs Side By Side
@@ -4782,7 +4782,7 @@ class JuiceBottling extends ProblemTests {
     }
 
 
-    test_7(){
+    test_7() {
         /**
          * [4]
             View Outputs Side By Side
@@ -4798,7 +4798,7 @@ class JuiceBottling extends ProblemTests {
         assert.deepEqual(juiceBottling.solve([0, 2, 5, 6, 11]), [4]);
     }
 
-    test_8(){
+    test_8() {
         /**
          * [1, 3]
             View Outputs Side By Side
@@ -4814,7 +4814,7 @@ class JuiceBottling extends ProblemTests {
         assert.deepEqual(juiceBottling.solve([0, 2, 5, 10, 11]), [1, 3]);
     }
 
-    test_9(){
+    test_9() {
         /**
          * [1, 1, 1, 1, 1, 1]
             View Outputs Side By Side
@@ -4830,7 +4830,7 @@ class JuiceBottling extends ProblemTests {
         assert.deepEqual(juiceBottling.solve([0, 5, 6, 7, 8, 9, 10]), [1, 1, 1, 1, 1, 1]);
     }
 
-    test_10(){
+    test_10() {
         /**
          * [2, 2]
             View Outputs Side By Side
@@ -4851,6 +4851,373 @@ class JuiceBottling extends ProblemTests {
 
 }
 
+class TopologicalSort extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+    }
+
+
+    test_1() {
+        /**
+         * {
+            "isValidTopologicalOrder": true,
+            "order": [4, 1, 3, 2]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "deps": [
+                [1, 2],
+                [1, 3],
+                [3, 2],
+                [4, 2],
+                [4, 3]
+            ],
+            "jobs": [1, 2, 3, 4]
+            }
+         */
+
+        this.current_test_name = '([1, 2, 3, 4], [[1, 2], [1, 3], [3, 2], [4, 2], [4, 3]]) => [4, 1, 3, 2]';
+        const topologicalSort = new this.Problem();
+        const solution = topologicalSort.solve([1, 2, 3, 4], [[1, 2], [1, 3], [3, 2], [4, 2], [4, 3]]);
+
+        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4], [[1, 2], [1, 3], [3, 2], [4, 2], [4, 3]]), [4, 1, 3, 2]);
+    }
+
+    test_2() {
+        /**
+         * {
+            "isValidTopologicalOrder": true,
+            "order": [8, 5, 7, 3, 1, 4, 6, 2]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "deps": [
+                [3, 1],
+                [8, 1],
+                [8, 7],
+                [5, 7],
+                [5, 2],
+                [1, 4],
+                [1, 6],
+                [1, 2],
+                [7, 6]
+            ],
+            "jobs": [1, 2, 3, 4, 5, 6, 7, 8]
+            }
+         */
+
+        this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [1, 6], [1, 2], [7, 6]]) => [8, 5, 7, 3, 1, 4, 6, 2]';
+        const topologicalSort = new this.Problem();
+
+        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [1, 6], [1, 2], [7, 6]]), [8, 5, 7, 3, 1, 4, 6, 2]);
+    }
+
+    test_3() {
+        /**
+         * {
+            "isValidTopologicalOrder": false,
+            "order": []
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "deps": [
+                [3, 1],
+                [8, 1],
+                [8, 7],
+                [5, 7],
+                [5, 2],
+                [1, 4],
+                [6, 7],
+                [1, 2],
+                [7, 6]
+            ],
+            "jobs": [1, 2, 3, 4, 5, 6, 7, 8]
+            }
+         */
+
+        this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [6, 7], [1, 2], [7, 6]]) => []';
+        const topologicalSort = new this.Problem();
+
+        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [6, 7], [1, 2], [7, 6]]), []);
+    }
+
+    test_4() {
+        /**
+         * {
+            "isValidTopologicalOrder": false,
+            "order": []
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "deps": [
+                [3, 1],
+                [8, 1],
+                [8, 7],
+                [5, 7],
+                [5, 2],
+                [1, 4],
+                [1, 6],
+                [1, 2],
+                [7, 6],
+                [4, 6],
+                [6, 2],
+                [2, 3]
+            ],
+            "jobs": [1, 2, 3, 4, 5, 6, 7, 8]
+            }
+         */
+
+        this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [1, 6], [1, 2], [7, 6], [4, 6], [6, 2], [2, 3]]) => []';
+        const topologicalSort = new this.Problem();
+
+        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [1, 6], [1, 2], [7, 6], [4, 6], [6, 2], [2, 3]]), []);
+    }
+
+
+    test_5() {
+        /**
+         * {
+            "isValidTopologicalOrder": false,
+            "order": []
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "deps": [
+                [1, 2],
+                [2, 3],
+                [3, 4],
+                [4, 5],
+                [5, 6],
+                [6, 7],
+                [7, 8],
+                [8, 1]
+            ],
+            "jobs": [1, 2, 3, 4, 5, 6, 7, 8]
+            }
+         */
+
+        this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 1]]) => []';
+        const topologicalSort = new this.Problem();
+
+        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 1]]), []);
+    }
+
+    test_6() {
+        /**
+         * {
+            "isValidTopologicalOrder": true,
+            "order": [9, 7, 8, 1, 2, 3, 4, 5, 6]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "deps": [
+                [1, 2],
+                [2, 3],
+                [3, 4],
+                [4, 5],
+                [5, 6],
+                [7, 6],
+                [7, 8],
+                [8, 1]
+            ],
+            "jobs": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            }
+         */
+
+        this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8, 9], [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [7, 6], [7, 8], [8, 1]]) => [9, 7, 8, 1, 2, 3, 4, 5, 6]';
+        const topologicalSort = new this.Problem();
+
+        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8, 9], [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [7, 6], [7, 8], [8, 1]]), [9, 7, 8, 1, 2, 3, 4, 5, 6]);
+    }
+
+    test_7() {
+        /**
+         * {
+            "isValidTopologicalOrder": true,
+            "order": [4, 3, 5, 6, 1, 2, 7, 8]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "deps": [
+                [1, 2],
+                [3, 5],
+                [4, 6],
+                [3, 6],
+                [1, 7],
+                [7, 8],
+                [1, 8],
+                [2, 8]
+            ],
+            "jobs": [1, 2, 3, 4, 5, 6, 7, 8]
+            }
+         */
+
+        this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [3, 5], [4, 6], [3, 6], [1, 7], [7, 8], [1, 8], [2, 8]]) => [4, 3, 5, 6, 1, 2, 7, 8]';
+        const topologicalSort = new this.Problem();
+
+        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [3, 5], [4, 6], [3, 6], [1, 7], [7, 8], [1, 8], [2, 8]]), [4, 3, 5, 6, 1, 2, 7, 8]);
+    }
+
+    test_8() {
+
+        /**
+         * {
+            "isValidTopologicalOrder": true,
+            "order": [1, 2, 3, 4, 5, 6, 7, 8]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "deps": [
+                [1, 2],
+                [1, 3],
+                [1, 4],
+                [1, 5],
+                [1, 6],
+                [1, 7],
+                [2, 8],
+                [3, 8],
+                [4, 8],
+                [5, 8],
+                [6, 8],
+                [7, 8]
+            ],
+            "jobs": [1, 2, 3, 4, 5, 6, 7, 8]
+            }
+         */
+
+        this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]) => [1, 2, 3, 4, 5, 6, 7, 8]';
+        const topologicalSort = new this.Problem();
+
+        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]), [1, 2, 3, 4, 5, 6, 7, 8]);
+    }
+
+    test_9() {
+        /**
+         * {
+            "isValidTopologicalOrder": true,
+            "order": [1, 7, 6, 2, 3, 10, 11, 12, 5, 4, 9, 8, 0]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "deps": [
+                [1, 2],
+                [1, 3],
+                [1, 4],
+                [1, 5],
+                [1, 6],
+                [1, 7],
+                [2, 8],
+                [3, 8],
+                [4, 8],
+                [5, 8],
+                [6, 8],
+                [7, 8],
+                [2, 3],
+                [2, 4],
+                [5, 4],
+                [7, 6],
+                [6, 2],
+                [6, 3],
+                [6, 5],
+                [5, 9],
+                [9, 8],
+                [8, 0],
+                [4, 0],
+                [5, 0],
+                [9, 0],
+                [2, 0],
+                [3, 9],
+                [3, 10],
+                [10, 11],
+                [11, 12],
+                [2, 12]
+            ],
+            "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            }
+         */
+
+        this.current_test_name = '([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [2, 12]]) => [1, 7, 6, 2, 3, 10, 11, 12, 5, 4, 9, 8, 0]';
+        const topologicalSort = new this.Problem();
+
+        assert.deepEqual(topologicalSort.solve([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [2, 12]]), [1, 7, 6, 2, 3, 10, 11, 12, 5, 4, 9, 8, 0]);
+    }
+
+
+    test_10(){
+        /**
+         * {
+            "isValidTopologicalOrder": false,
+            "order": []
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "deps": [
+                [1, 2],
+                [1, 3],
+                [1, 4],
+                [1, 5],
+                [1, 6],
+                [1, 7],
+                [2, 8],
+                [3, 8],
+                [4, 8],
+                [5, 8],
+                [6, 8],
+                [7, 8],
+                [2, 3],
+                [2, 4],
+                [5, 4],
+                [7, 6],
+                [6, 2],
+                [6, 3],
+                [6, 5],
+                [5, 9],
+                [9, 8],
+                [8, 0],
+                [4, 0],
+                [5, 0],
+                [9, 0],
+                [2, 0],
+                [3, 9],
+                [3, 10],
+                [10, 11],
+                [11, 12],
+                [12, 2]
+            ],
+            "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            }
+         */
+
+        this.current_test_name = '([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [12, 2]]) => []';
+        const topologicalSort = new this.Problem();
+
+        assert.deepEqual(topologicalSort.solve([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [12, 2]]), []);
+    }
+
+
+
+}
 
 
 
@@ -4876,6 +5243,7 @@ const TEST_DICTIONARY = {
     'maximum-sum-submatrix': MaximumSumSubmatrix,
     'maximize-expression': MaximizeExpression,
     'juice-bottling': JuiceBottling,
+    'topological-sort': TopologicalSort,
 }
 
 module.exports = TEST_DICTIONARY;
