@@ -1,6 +1,7 @@
 
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
+const maximizeExpression = require('../solutions/maximize-expression');
 
 
 class SubarraySort extends ProblemTests {
@@ -4114,7 +4115,7 @@ class NumbersInPi extends ProblemTests {
         assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3", "314", "49", "9001", "15926535897", "14", "9323", "8462643383279", "4", "793"]), 3);
     }
 
-    test_4(){
+    test_4() {
         /**
          * 0
             View Outputs Side By Side
@@ -4131,7 +4132,7 @@ class NumbersInPi extends ProblemTests {
         assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3141592653589793238462643383279"]), 0);
     }
 
-    test_5(){
+    test_5() {
         /**
          * -1
             View Outputs Side By Side
@@ -4148,7 +4149,7 @@ class NumbersInPi extends ProblemTests {
         assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3141", "1512", "159", "793", "12412451", "8462643383279"]), -1);
     }
 
-    test_6(){
+    test_6() {
         /**
          * 2
             View Outputs Side By Side
@@ -4166,7 +4167,7 @@ class NumbersInPi extends ProblemTests {
 
     }
 
-    test_7(){
+    test_7() {
         /**
          * 1
         View Outputs Side By Side
@@ -4183,7 +4184,7 @@ class NumbersInPi extends ProblemTests {
         assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["141592653589793238462643383279", "314159265358979323846", "327", "26433", "8", "3279", "9", "314159265", "35897932384626433832", "79", "3"]), 1);
     }
 
-    test_8(){
+    test_8() {
         /**
          * 13
             View Outputs Side By Side
@@ -4200,7 +4201,7 @@ class NumbersInPi extends ProblemTests {
         assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3", "1", "4", "592", "65", "55", "35", "8", "9793", "2384626", "83279"]), 13);
     }
 
-    test_9(){
+    test_9() {
         /**
          * 12
             View Outputs Side By Side
@@ -4217,7 +4218,7 @@ class NumbersInPi extends ProblemTests {
         assert.equal(numbersInPi.solve("3141592653589793238462643383279", ["3", "1", "4", "592", "65", "55", "35", "8", "9793", "2384626", "383279"]), 12);
     }
 
-    test_10(){
+    test_10() {
         /**
          * -1
             View Outputs Side By Side
@@ -4235,10 +4236,624 @@ class NumbersInPi extends ProblemTests {
     }
 
 
-    
+
 
 
 }
+
+class MaximumSumSubmatrix extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+
+    }
+
+    test_1() {
+        /**
+         * 18
+            View Outputs Side By Side
+            Input(s)
+            {
+            "matrix": [
+                [5, 3, -1, 5],
+                [-7, 3, 7, 4],
+                [12, 8, 0, 0],
+                [1, -8, -8, 2]
+            ],
+            "size": 2
+            }
+         */
+
+        this.current_test_name = '[[5, 3, -1, 5], [-7, 3, 7, 4], [12, 8, 0, 0], [1, -8, -8, 2]], 2 => 18';
+        const maximumSubSubmatrix = new this.Problem();
+
+        assert.equal(maximumSubSubmatrix.solve([[5, 3, -1, 5], [-7, 3, 7, 4], [12, 8, 0, 0], [1, -8, -8, 2]], 2), 18);
+    }
+
+    test_2() {
+        /**
+         * 28
+            View Outputs Side By Side
+            Input(s)
+            {
+            "matrix": [
+                [3, -4, 6, -5, 1],
+                [1, -2, 8, -4, -2],
+                [3, -8, 9, 3, 1],
+                [-7, 3, 4, 2, 7],
+                [-3, 7, -5, 7, -6]
+            ],
+            "size": 3
+            }
+         */
+
+        this.current_test_name = '[[3, -4, 6, -5, 1], [1, -2, 8, -4, -2], [3, -8, 9, 3, 1], [-7, 3, 4, 2, 7], [-3, 7, -5, 7, -6]], 3 => 28';
+        const maximumSubSubmatrix = new this.Problem();
+
+        assert.equal(maximumSubSubmatrix.solve([[3, -4, 6, -5, 1], [1, -2, 8, -4, -2], [3, -8, 9, 3, 1], [-7, 3, 4, 2, 7], [-3, 7, -5, 7, -6]], 3), 28);
+    }
+
+    test_3() {
+        /**
+         * 17
+            View Outputs Side By Side
+            Input(s)
+            {
+            "matrix": [
+                [2, 4],
+                [5, 6],
+                [-3, 2]
+            ],
+            "size": 2
+            }
+         */
+
+        this.current_test_name = '[[2, 4], [5, 6], [-3, 2]], 2 => 17';
+        const maximumSubSubmatrix = new this.Problem();
+
+        assert.equal(maximumSubSubmatrix.solve([[2, 4], [5, 6], [-3, 2]], 2), 17);
+    }
+
+    test_4() {
+        /**
+         * 38
+            View Outputs Side By Side
+            Input(s)
+            {
+            "matrix": [
+                [3, -4, 6, -5, 1],
+                [1, -2, 8, -4, -2],
+                [3, -8, 9, 3, 1],
+                [-7, 3, 4, 2, 7],
+                [-3, 7, -5, 7, -6],
+                [2, 4, 5, 2, 3]
+            ],
+            "size": 4
+            }
+         */
+
+        this.current_test_name = '[[3, -4, 6, -5, 1], [1, -2, 8, -4, -2], [3, -8, 9, 3, 1], [-7, 3, 4, 2, 7], [-3, 7, -5, 7, -6], [2, 4, 5, 2, 3]], 4 => 38';
+        const maximumSubSubmatrix = new this.Problem();
+
+        assert.equal(maximumSubSubmatrix.solve([[3, -4, 6, -5, 1], [1, -2, 8, -4, -2], [3, -8, 9, 3, 1], [-7, 3, 4, 2, 7], [-3, 7, -5, 7, -6], [2, 4, 5, 2, 3]], 4), 38);
+    }
+
+    test_5() {
+        /**
+         * 1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "matrix": [
+                [1]
+            ],
+            "size": 1
+            }
+         */
+
+        this.current_test_name = '[[1]], 1 => 1';
+        const maximumSubSubmatrix = new this.Problem();
+
+        assert.equal(maximumSubSubmatrix.solve([[1]], 1), 1);
+    }
+
+    test_6() {
+        /**
+         * 4
+            View Outputs Side By Side
+            Input(s)
+            {
+            "matrix": [
+                [1, 1],
+                [1, 1]
+            ],
+            "size": 2
+            }
+         */
+
+        this.current_test_name = '[[1, 1], [1, 1]], 2 => 4';
+        const maximumSubSubmatrix = new this.Problem();
+
+        assert.equal(maximumSubSubmatrix.solve([[1, 1], [1, 1]], 2), 4);
+    }
+
+    test_7() {
+        /**
+         * 6
+            View Outputs Side By Side
+            Input(s)
+            {
+            "matrix": [
+                [1, 1, 2, -1],
+                [1, 1, 2, -1]
+            ],
+            "size": 2
+            }
+         */
+
+        this.current_test_name = '[[1, 1, 2, -1], [1, 1, 2, -1]], 2 => 6';
+        const maximumSubSubmatrix = new this.Problem();
+
+        assert.equal(maximumSubSubmatrix.solve([[1, 1, 2, -1], [1, 1, 2, -1]], 2), 6);
+    }
+
+    test_8() {
+        /**
+         * 25
+            View Outputs Side By Side
+            Input(s)
+            {
+            "matrix": [
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            ],
+            "size": 5
+            }
+         */
+
+        this.current_test_name = '[[1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]], 5 => 25';
+        const maximumSubSubmatrix = new this.Problem();
+
+        assert.equal(maximumSubSubmatrix.solve([[1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]], 5), 25);
+
+
+    }
+
+    test_9() {
+        /**
+         * 45
+            View Outputs Side By Side
+            Input(s)
+            {
+            "matrix": [
+                [2, 1, 1, 1, 1, 4, -1, 1, 1, 5],
+                [1, -1, 1, 1, 1, 1, -1, 1, 4, 1],
+                [-50, 12, -1, 1, 5, 1, -1, 1, 1, 1],
+                [-52, 99, 1, -1, 1, 1, -1, 1, 1, 1],
+                [1, -10, -287, 9, -1, 1, -1, 1, 1, 1],
+                [1, 2, 1, 8, 1, -1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, -1, 1, 1, 1]
+            ],
+            "size": 6
+            }
+         */
+
+        this.current_test_name = '[[2, 1, 1, 1, 1, 4, -1, 1, 1, 5], [1, -1, 1, 1, 1, 1, -1, 1, 4, 1], [-50, 12, -1, 1, 5, 1, -1, 1, 1, 1], [-52, 99, 1, -1, 1, 1, -1, 1, 1, 1], [1, -10, -287, 9, -1, 1, -1, 1, 1, 1], [1, 2, 1, 8, 1, -1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, -1, 1, 1, 1]], 6 => 45';
+        const maximumSubSubmatrix = new this.Problem();
+
+        assert.equal(maximumSubSubmatrix.solve([[2, 1, 1, 1, 1, 4, -1, 1, 1, 5], [1, -1, 1, 1, 1, 1, -1, 1, 4, 1], [-50, 12, -1, 1, 5, 1, -1, 1, 1, 1], [-52, 99, 1, -1, 1, 1, -1, 1, 1, 1], [1, -10, -287, 9, -1, 1, -1, 1, 1, 1], [1, 2, 1, 8, 1, -1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, -1, 1, 1, 1]], 6), 45);
+    }
+
+    test_10() {
+        /**
+         * -12
+            View Outputs Side By Side
+            Input(s)
+            {
+            "matrix": [
+                [-1, -2, -3, -4, -5],
+                [-5, -4, -3, -2, -1],
+                [-1, -2, -3, -4, -5]
+            ],
+            "size": 2
+            }
+         */
+
+        this.current_test_name = '[[-1, -2, -3, -4, -5], [-5, -4, -3, -2, -1], [-1, -2, -3, -4, -5]], 2 => -12';
+        const maximumSubSubmatrix = new this.Problem();
+
+        assert.equal(maximumSubSubmatrix.solve([[-1, -2, -3, -4, -5], [-5, -4, -3, -2, -1], [-1, -2, -3, -4, -5]], 2), -12);
+    }
+
+}
+
+
+class MaximizeExpression extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+
+    }
+
+    test_1() {
+        /**
+         * 4
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [3, 6, 1, -3, 2, 7]
+            }
+         */
+
+        this.current_test_name = '[3, 6, 1, -3, 2, 7] => 4';
+        const maximizeExpression = new this.Problem();
+
+        assert.equal(maximizeExpression.solve([3, 6, 1, -3, 2, 7]), 4);
+
+    }
+
+    test_2() {
+        /**
+         * 3
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [3, 9, 10, 1, 30, 40]
+            }
+         */
+
+        this.current_test_name = '[3, 9, 10, 1, 30, 40] => 3';
+        const maximizeExpression = new this.Problem();
+
+        assert.equal(maximizeExpression.solve([3, 9, 10, 1, 30, 40]), 3);
+    }
+
+    test_3() {
+        /**
+         * 46
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [40, 30, 1, 10, 9, 3]
+            }
+         */
+
+        this.current_test_name = '[40, 30, 1, 10, 9, 3] => 46';
+        const maximizeExpression = new this.Problem();
+
+        assert.equal(maximizeExpression.solve([40, 30, 1, 10, 9, 3]), 46);
+    }
+
+    test_4() {
+        /**
+         * 6
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [-1, 2, -1, -2, -2, 1, -1]
+            }
+         */
+
+        this.current_test_name = '[-1, 2, -1, -2, -2, 1, -1] => 6';
+        const maximizeExpression = new this.Problem();
+
+        assert.equal(maximizeExpression.solve([-1, 2, -1, -2, -2, 1, -1]), 6);
+    }
+
+    test_5() {
+        /**
+         * 10
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [10, 5, 10, 5]
+            }
+         */
+
+        this.current_test_name = '[10, 5, 10, 5] => 10';
+        const maximizeExpression = new this.Problem();
+
+        assert.equal(maximizeExpression.solve([10, 5, 10, 5]), 10);
+    }
+
+    test_6() {
+        /**
+         * 1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [0, 0, 0, 0, 0, 0, 0, 1, 1, 0]
+            }
+         */
+
+        this.current_test_name = '[0, 0, 0, 0, 0, 0, 0, 1, 1, 0] => 1';
+        const maximizeExpression = new this.Problem();
+
+        assert.equal(maximizeExpression.solve([0, 0, 0, 0, 0, 0, 0, 1, 1, 0]), 1);
+    }
+
+    test_7() {
+        /**
+         * 209
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [34, 21, 22, 0, -98, -72, 100, 23]
+            }
+         */
+
+        this.current_test_name = '[34, 21, 22, 0, -98, -72, 100, 23] => 209';
+        const maximizeExpression = new this.Problem();
+
+        assert.equal(maximizeExpression.solve([34, 21, 22, 0, -98, -72, 100, 23]), 209);
+    }
+
+    test_8() {
+        /**
+         * 18
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [5, 2, 2, 1, -2, 2, -9, 0]
+            }
+         */
+
+        this.current_test_name = '[5, 2, 2, 1, -2, 2, -9, 0] => 18';
+        const maximizeExpression = new this.Problem();
+
+        assert.equal(maximizeExpression.solve([5, 2, 2, 1, -2, 2, -9, 0]), 18);
+    }
+
+    test_9() {
+        /**
+         * 0
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [1, 1, 1, 1]
+            }
+         */
+
+        this.current_test_name = '[1, 1, 1, 1] => 0';
+        const maximizeExpression = new this.Problem();
+
+        assert.equal(maximizeExpression.solve([1, 1, 1, 1]), 0);
+    }
+
+    test_10() {
+        /**
+         * 4
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [1, -1, 1, -1]
+            }
+         */
+
+        this.current_test_name = '[1, -1, 1, -1] => 4';
+        const maximizeExpression = new this.Problem();
+
+        assert.equal(maximizeExpression.solve([1, -1, 1, -1]), 4);
+    }
+
+}
+
+class JuiceBottling extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+
+    }
+
+    test_1() {
+        /**
+         * [1]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "prices": [0, 1]
+            }
+         */
+
+        this.current_test_name = '[0, 1] => [1]';
+        const juiceBottling = new this.Problem();
+
+        assert.deepEqual(juiceBottling.solve([0, 1]), [1]);
+    }
+
+    test_2() {
+
+        /**
+         * [2]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "prices": [0, 1, 3]
+            }
+         */
+
+        this.current_test_name = '[0, 1, 3] => [2]';
+        const juiceBottling = new this.Problem();
+
+        assert.deepEqual(juiceBottling.solve([0, 1, 3]), [2]);
+
+    }
+
+
+    test_3() {
+        /**
+         * [1, 1]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "prices": [0, 2, 3]
+            }
+         */
+
+        this.current_test_name = '[0, 2, 3] => [1, 1]';
+        const juiceBottling = new this.Problem();
+
+        assert.deepEqual(juiceBottling.solve([0, 2, 3]), [1, 1]);
+
+    }
+
+    test_4(){
+        /**
+         * [1, 1, 1]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "prices": [0, 2, 3, 4]
+            }
+         */
+
+        this.current_test_name = '[0, 2, 3, 4] => [1, 1, 1]';
+        const juiceBottling = new this.Problem();
+
+        assert.deepEqual(juiceBottling.solve([0, 2, 3, 4]), [1, 1, 1]);
+    }
+    
+    test_5(){
+        /**
+         * [1, 2]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "prices": [0, 2, 5, 6]
+            }
+         */
+
+        this.current_test_name = '[0, 2, 5, 6] => [1, 2]';
+        const juiceBottling = new this.Problem();
+
+        assert.deepEqual(juiceBottling.solve([0, 2, 5, 6]), [1, 2]);
+    }
+
+    test_6(){
+        /**
+         * [2, 2]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "prices": [0, 2, 5, 6, 7]
+            }
+         */
+
+        this.current_test_name = '[0, 2, 5, 6, 7] => [2, 2]';
+        const juiceBottling = new this.Problem();
+
+        assert.deepEqual(juiceBottling.solve([0, 2, 5, 6, 7]), [2, 2]);
+    }
+
+
+    test_7(){
+        /**
+         * [4]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "prices": [0, 2, 5, 6, 11]
+            }
+        */
+
+        this.current_test_name = '[0, 2, 5, 6, 11] => [4]';
+        const juiceBottling = new this.Problem();
+
+        assert.deepEqual(juiceBottling.solve([0, 2, 5, 6, 11]), [4]);
+    }
+
+    test_8(){
+        /**
+         * [1, 3]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "prices": [0, 2, 5, 10, 11]
+            }
+         */
+
+        this.current_test_name = '[0, 2, 5, 10, 11] => [1, 3]';
+        const juiceBottling = new this.Problem();
+
+        assert.deepEqual(juiceBottling.solve([0, 2, 5, 10, 11]), [1, 3]);
+    }
+
+    test_9(){
+        /**
+         * [1, 1, 1, 1, 1, 1]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "prices": [0, 5, 6, 7, 8, 9, 10]
+            }
+         */
+
+        this.current_test_name = '[0, 5, 6, 7, 8, 9, 10] => [1, 1, 1, 1, 1, 1]';
+        const juiceBottling = new this.Problem();
+
+        assert.deepEqual(juiceBottling.solve([0, 5, 6, 7, 8, 9, 10]), [1, 1, 1, 1, 1, 1]);
+    }
+
+    test_10(){
+        /**
+         * [2, 2]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "prices": [0, 2, 5, 4, 4]
+            }
+         */
+
+        this.current_test_name = '[0, 2, 5, 4, 4] => [2, 2]';
+        const juiceBottling = new this.Problem();
+
+        assert.deepEqual(juiceBottling.solve([0, 2, 5, 4, 4]), [2, 2]);
+    }
+
+
+
+
+}
+
+
+
+
 
 
 
@@ -4258,6 +4873,9 @@ const TEST_DICTIONARY = {
     'knapsack-problem': KnacksackProblem,
     'disk-stacking': DiskStacking,
     'numbers-in-pi': NumbersInPi,
+    'maximum-sum-submatrix': MaximumSumSubmatrix,
+    'maximize-expression': MaximizeExpression,
+    'juice-bottling': JuiceBottling,
 }
 
 module.exports = TEST_DICTIONARY;
