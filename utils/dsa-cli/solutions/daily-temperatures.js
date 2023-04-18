@@ -70,9 +70,10 @@ class DailyTemperatures {
     solve2(temperatures, hottest = 0) {
 
 
-
+		// Searches ahead how many days until it becomes hotter than the current temperature. starting from a certain date.
         const search = (temperatures, day, temperature, days, dayCount = 1) => {
             const isHotter = () => temperatures[day + dayCount] <= temperature;
+			// Note this optimization that adds the day count using previous calculations (made on the future dates) and then loops again to check if the dayCount + day is less than the temperature.
             while (isHotter()) dayCount += days[day + dayCount];          /* Time O(N + N) */
 
             days[day] = dayCount;                                         /* Ignore Space O(N) */
@@ -80,7 +81,7 @@ class DailyTemperatures {
 
         
         const days = new Array(temperatures.length).fill(0);
-
+		
         for (let day = (temperatures.length - 1); (0 <= day); day--) {/* Time O(N + N) */
             const temperature = temperatures[day];
 
