@@ -237,7 +237,59 @@ const apex = [
         example: "SELECT Name, Department, Title, (SELECT CaseNumber, Subject FROM Cases) FROM Contact",
         prompt: "Complete missing snippet to get CaseNumber, Subject of Cases related to the Contact like on the image"
     },
-
+    // Map examples
+    {
+        term: "map create map",
+        prompt: "Create a map with key as String and value as Integer where maps one to 1",
+        example: ":m\n\
+        ```java\n\
+        Map<String, Integer> map = new Map<String, Integer>{\
+            'one' => 1\n\
+        };\n\
+        ```\n",
+    },
+    {
+        term: "iterate map values",
+        prompt: "Iterate over map values and print them as `value: x`",
+        description: ":m\n\
+        ```java\n\
+        Map<String, Integer> map = new Map<String, Integer>{\
+            'one' => 1\n\
+        };\n\
+        ```\n",
+        example: ":m\n\
+        ```java\n\
+        for (Integer value : map.values()) {\n\
+            System.debug('value: '+value);\n\
+        }\n\
+        ```\n",
+    },
+    {
+        term: "List methods I ",
+        description: ":m\n\
+        ```java\n\
+        List<String> myList = new List<String>();\n## 1. Add Apple\nmyList.add('banana');\nmyList.add('cherry');\n\n## 2. Get the first fruit\nSystem.debug('Second fruit: ' + fruit);\n\nmyList.set(0, 'orange');\nSystem.debug('New first fruit: ' + myList.get(0));\n\nmyList.remove(2);\nSystem.debug('List after removing cherry: ' + myList);\n\n## 3. Check if we have bananas\n{\n System.debug('We have bananas!');\n}\n\nmyList.clear();\nSystem.debug('List is empty: ' + myList.isEmpty());```",
+        prompt: "Complete the ## 1. Add Apple, ## 2. Get the first fruit, ## 3. Check if we have bananas",
+        example: ":m\n\
+        ```java\n\
+        1. myList.add('apple');\n\
+        2. String fruit = myList.get(0);\n\
+        3. if (myList.contains('banana'))\n\
+        ```\n",
+    },
+    {
+        term: "List methods Part II",
+        description: ":m\n\
+        ```java\n\
+        List<String> myList = new List<String>();\nmyList.add('apple');\nmyList.add('banana');\nmyList.add('cherry');\n\nString fruit = myList.get(1);\nSystem.debug('Second fruit: ' + fruit);\n\n## 1. Change the first fruit to orange\nSystem.debug('New first fruit: ' + myList.get(0));\n\n## 2. Remove the cherry\nSystem.debug('List after removing cherry: ' + myList);\n\nif (myList.contains('banana')) {\n System.debug('We have bananas!');\n}\n\n## 3. Check if the list is empty\nSystem.debug('List is empty: ' + myList.isEmpty());\n```",
+        prompt: "Complete the ## 1. Change the first fruit to orange, ## 2. Remove the cherry, ## 3. Check if the list is empty",
+        example: ":m\n\
+        ```java\n\
+        myList.set(0, 'orange');\n\
+        myList.remove(2);\n\
+        myList.clear();\n\
+        ```\n",
+    },
 
 ]
 
@@ -756,7 +808,7 @@ const flutter_dart = [
         Column(children: [Text('Deliver features faster'), Text('Craft beautiful UIs'), Expanded(child: FittedBox(fit: BoxFit.contain, child: FlutterLogo(),),),],)\n\
         ```",
         prompt: "Create a column with the following children:",
-        example: "Column(children: <Widget>[...],)"        
+        example: "Column(children: <Widget>[...],)"
     },
     {
         term: "widget | SizedBox",
@@ -792,7 +844,7 @@ const flutter_dart = [
         term: "widget | Scaffold",
         description: "Implements the basic Material Design visual layout structure.  This class provides APIs for showing drawers and bottom sheets.  To display a persistent bottom sheet, obtain the ScaffoldState for the current BuildContext via Scaffold.of and use the ScaffoldState.showBottomSheet function.",
         prompt: "Wrap the following widget with a Scaffold: Text('Scaffold'), and create and appbar with title: 'sample'",
-        example: "Scaffold(appBar: AppBar(title: Text('sample'),), body: Text('Scaffold'),)"     
+        example: "Scaffold(appBar: AppBar(title: Text('sample'),), body: Text('Scaffold'),)"
     },
     {
         term: "Flutter | loaders",
