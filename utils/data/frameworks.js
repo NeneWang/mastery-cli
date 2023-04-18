@@ -769,7 +769,9 @@ const flutter_dart = [
             return ##[2] \n\
             ? const Text('Loaded')\n : const CircularProgressIndicator();\n },\n );\n }\n}\n\
         ```",
-        prompt: "Complete the following code to show a CircularProgressIndicator while the future is not done, and show 'Loaded' when the future is done",
+        prompt: "Complete the following code to show a CircularProgressIndicator while the future is not done, and show 'Loaded' when the future is done\n\
+        [1] create the artificial delay using future.\n\
+        [2] check if the future is done using using the snapshot state",
         example: "[1] future = Future.delayed(const Duration(seconds: 8));\n\
         [2] snapshot.connectionState == ConnectionState.done"
     },
