@@ -1,110 +1,97 @@
-/*
- * Test 1/3:
-[
-  -8, -6, 1,  2,
-   3,  5, 6, 12
-]
-Testing 0 1 7
-Testing 0 2 7
-Testing 0 2 6
-Testing 0 3 6
-Testing 0 4 5
-Testing 1 2 7
-Testing 1 2 6
-Testing 1 2 5
-Testing 1 3 4
-Testing 2 3 7
-Testing 2 3 6
-Testing 2 3 5
-Testing 2 3 4
-Testing 3 4 7
-Testing 3 4 6
-Testing 3 4 5
-Testing 4 5 7
-Testing 4 5 6
-Testing 5 6 7
-Test ([12, 3, 1, 2, -6, 5, -8, 6], 0) => [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]] ||  passed
-Test 2/3: ([12, 3, 1, 2, -6, 5, -8, 6], 0) => [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]
-[ -2, 8, 10, 14, 49 ]
-Testing 0 1 4
-Testing 0 1 3
-Testing 0 1 2
-Testing 1 2 4
-Testing 1 2 3
-Testing 2 3 4
-Test ([8, 10, -2, 49, 14], 57) => [] ||  passed
-Test 3/3: ([8, 10, -2, 49, 14], 57) => []
-[
-  -8, -6, -1,  0, 1,
-   2,  3,  5, 12
-]
-Testing 0 1 8
-Testing 0 2 8
-Testing 0 2 7
-Testing 0 3 7
-Testing 0 4 7
-Testing 0 5 7
-Testing 0 6 7
-Testing 1 2 8
-Testing 1 2 7
-Testing 1 3 7
-Testing 1 4 7
-Testing 1 5 6
-Testing 2 3 8
-Testing 2 3 7
-Testing 2 3 6
-Testing 2 3 5
-Testing 2 3 4
-Testing 3 4 8
-Testing 3 4 7
-Testing 3 4 6
-Testing 3 4 5
-Testing 4 5 8
-Testing 4 5 7
-Testing 4 5 6
-Testing 5 6 8
-Testing 5 6 7
-Testing 6 7 8
-Test ([12, 3, 1, 2, -6, 5, 0, -8, -1], 0) => [[-8, 3, 5], [-6, 1, 5], [-1, 0, 1]] ||  passed
+
+/** 
+ * https://leetcode.com/problems/min-stack
+ * Time O(1) | Space O(N)
+ * Your MinStack object will be instantiated and called as such:
+ * var obj = new MinStack()
+ * obj.push(x)
+ * obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.getMin()
  */
-
-
-
-class ThreeNumberSum {
-    threeSum(array) {
-
-        const res = [];
-        array.sort((a, b) => a - b)
-
-        for (let i = 0; i < array.length; i++) {
-            const a = array[i];
-            if (a > 0) break;
-            if (i > 0 && a === array[i - 1]) continue;
-
-            let l = i + 1;
-            let r = array.length - 1;
-            while (l < r) {
-                const threeSum = a + array[l] + array[r];
-                if (threeSum > 0) {
-                    r--;
-                } else if (threeSum < 0) {
-                    l++;
-                } else {
-                    res.push([a, array[l], array[r]]);
-                    l++;
-                    r--;
-                    while (array[l] === array[l - 1] && l < r) {
-                        l++;
-                    }
-                }
-            }
-        }
-        return res;
+class MinStack {
+    /**
+     * @constructor
+     */
+    constructor() {
+        this.stack = [];
+        this.minStack = [];
     }
-    solve(array) {
-        return this.threeSum(array);
+
+    /**
+     * @param {number} val
+     * @return {void}
+     */
+    push(val, { minStack } = this) {
+        this.stack.push(val);             /* Space O(N) */
+
+        const isMinEmpty = !minStack.length;
+        const hasNewMin = val <= this.top(minStack);
+        const canAddMin = isMinEmpty || hasNewMin;
+        if (canAddMin) minStack.push(val);/* Space O(N) */
+    }
+
+    /**
+     * @return {void}
+     */
+    pop({ stack, minStack } = this) {
+        const top = stack.pop();          /* Time O(1) */
+
+        const canPopMin = top === this.getMin();
+        if (canPopMin) minStack.pop();    /* Time O(1) */
+    }
+
+    /**
+     * @param {Array}
+     * @return {number}
+     */
+    top(stack = this.stack) {
+        return stack.length
+            ? stack[stack.length - 1]     /* Time O(1) */
+            : null;
+    }
+
+    /**
+     * @return {number}
+     */
+    getMin(minStack = this.minStack) {
+        return this.top(minStack);       /* Time O(1) */
     }
 }
 
 
-module.exports = { Problem: ThreeNumberSum };
+class MinStackConstantMemory {
+    constructor() {
+        this.head = null
+    }
+
+    push(val) {
+        this.head = (!this.head)   /* Space O(1) */
+            ? new Node(val, val, null)
+            : new Node(val, Math.min(val, this.head.min), this.head);
+    }
+
+    pop() {
+        this.head = this.head.next;/* Time O(1) */
+    }
+
+    top() {
+        return this.head.val;      /* Time O(1) */
+    }
+
+    getMin() {
+        return this.head.min;      /* Time O(1) */
+    }
+}
+
+
+class Node {
+    constructor(val, min, next) {
+        this.val = val;
+        this.min = min;
+        this.next = next;
+    }
+}
+
+
+module.exports = { Problem: MinStack };
