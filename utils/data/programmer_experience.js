@@ -390,6 +390,31 @@ const coderTerms = [
         example: "A consumer is an application that reads data records from a Kinesis data stream. The consumer can be any application or service that can make API calls to Amazon Kinesis, and can process the data records in real time or in batches.\n\
         You can find it in the documentation for the Kinesis API, or in the AWS Management Console when configuring Kinesis data stream permissions.",
         description: "A consumer is an application that reads data records from a Kinesis data stream. The consumer can be any application or service that can make API calls to Amazon Kinesis, and can process the data records in real time or in batches."
+    },
+    // Advantages of REST, Response Codes, and distinction of HTTPS methods
+    {
+        term: "graphql-advantage-vs-rest",
+        prompt: "Whats the advantage of GRAPHQL vs REST? and when would you use it?",
+        example: "Allows more flexibility for the front end, and can have now multiple front ends, and limitation of information we dont need as a response. No more thinking about endpoints, but now as a Schema\n\
+        You might want when you know that your front end will change."
+    },
+    {
+        term: "graphql-disadvantages-vs-rest",
+        prompt: "Whats the disadvantage of GRAPHQL vs REST? and when would you use it?",
+        example: "Security possible, since you dont want to return sensitive information. Also caching becomes more tricky.\n\
+        Front end also has to be more specific on what it needs.\n GraphQL is not json!"
+    },
+    {
+        term: "disadvantages-soap",
+        prompt: "Whats the disadvantage of SOAP vs REST?",
+        example: "XML is more verbose than REST, uses more bandwidth, XML can have actions or linked entities that can be nasty"
+    },
+    {
+        term: "grcp-characteristics",
+        prompt: "Whats are the characteristics of GRPC?",
+        example: "Implements remote procedure calls, allows your code to call servers via compiled function calls, can compile for different languages but work similarly.\n\
+        Used to exchange data in an uncrashable way but with high performance.\n\
+        Favored in internal systems, since the interface is complicated."
     }
 ]
 
