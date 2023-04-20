@@ -1030,7 +1030,48 @@ const network_midterm = [
         term: "LVM | Logical Volume",
         prompt: "What is a logical volume in LVM?",
         description: "A file system is a method used to organize and store files on a disk or disk partition. File systems can be created on logical volumes, providing a means of storing and accessing files on the logical volume. Common file systems used in Linux include ext4, XFS, and Btrfs."
-    }
+    },
+    {
+        term: "automation-potential-errors",
+        prompt: "How does automation of an install help prevent problems",
+        example: "Automation eliminate the potentials errors that comes out from installing it manually, it also allows faster installation as well as it lets users with little to no knowledge to be able to install successfully"
+
+    },
+    {
+        term: "server-desktop",
+        prompt: "What makes Server hardware different from Desktop hardware",
+        example: "erver hardware is designed to handle more specific and heavier tasks, allowing scalability such as the support of RAID configurations. While desktop hardware usually are designed for more user friendly design such as having a gui available and common home utiltites"
+    },
+    {
+        term: "machine-single-running-all",
+        prompt: "Why is it poor design to have a single machine running all the services your organization needs (even if this single system is powerful enough to handle it all)?",
+        example: "This is poor design because a single point of failure can occur. Resources contention and blocking can occur when multipe services compete for the same resources such as CPU memory and diskss Mantainance  on the services would downtime for the entire organization"
+    },
+    {
+        term: "good domain",
+        prompt: "Why is mail.yourcompany.com a good domain for your email server, rather than eagle.yourcompany.com?",
+        example: "The first one would be a good domain for the email server as it is intuitive and standard. Causes less confusion and it would be easy for a new technitian to understand the responsability of the domain."
+    },
+    {
+        term: "hostname-vs-IP",
+        prompt: "Why is it better to refer to a machine by a hostname on your local network than by its IP address? Think about if you move the services of a server to a new machine.",
+        example: "Using hostnames is better because it allows you to refer to the same machine regardless of IP changes, and also makes it easier to memorize the name of the machine. This is especially useful if you move the services of a server to a new machine, as you can simply update the hostname to point to the new machine, without having to worry about IP addresses."
+        },
+        {
+        term: "bootloader",
+        prompt: "What does a boot loader do?",
+        example: "A bootloader is responsible for loading the operating system into memory during the boot process. It is the first program that runs when a computer starts up and is responsible for initializing the hardware and loading the operating system kernel into memory."
+        },
+        {
+        term: "partition-isolation",
+        prompt: "Why is it a good idea to put some partitions on a separate drive from other files and programs?",
+        example: "Isolating data through partition separation can improve security by protecting information with distinct access permissions. It also allows for easier modularity and backup, as a single disk can be saved upon. Additionally, separating partitions can help with resource allocation, as different partitions can be optimized for different purposes (e.g. a partition for the OS and another for data storage)."
+        },
+        {
+        term: "passwd-permissions",
+        prompt: "The /etc/passwd file can be read by users, but only the superuser can write to it. However, users can run the passwd command, and the passwd command can edit the /etc/passwd file. How is this possible?",
+        example: "When a user runs the passwd command, it initiates a process that requires elevated access for it to modify the /etc/passwd file. Therefore, the passwd command calls another program (setuid) that does have the superuser permissions to modify the file. This allows users to change their password without having direct write access to the file, while still ensuring that only the superuser can modify the file itself."
+        }
 ]
 
 const artificialIntelligence = [
