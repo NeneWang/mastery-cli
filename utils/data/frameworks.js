@@ -200,7 +200,96 @@ const apex = [
         prompt: "What is the difference between Buffer and Cache? When would you use one over the other?",
         description: "Buffer and cache are two concepts that are often used in computer science and can sometimes be confusing.  A buffer is a temporary storage area in memory or a file that is used to hold data temporarily while it is being moved from one place to another. Buffers are commonly used in computer networking, where data is transmitted in packets that are too large to be processed at once. The data is stored in a buffer and then transmitted in smaller packets. Buffers can also be used to store data that is being read from or written to a file or other input/output device.  A cache, on the other hand, is a type of memory that is used to store frequently accessed data so that it can be accessed more quickly. Caches are used in many different areas of computing, such as web browsers, operating systems, and databases. In a web browser, for example, the cache stores frequently accessed web pages and images so that they can be loaded more quickly the next time they are accessed. In an operating system, the cache may store recently used files or applications so that they can be accessed more quickly.  In summary, buffers are used to temporarily store data during a transfer or processing, while caches are used to store frequently accessed data to improve performance. Buffers are typically used for data that is being transferred, while caches are typically used for data that is being accessed repeatedly.",
         example: "Buffer when building a instant message app, while you texting, Cache when you have a web and cahces some data."
-    }
+    },
+    {
+        term: "parent get child records",
+        attachment: "./img/2023-04-18-11-03-34.png",
+        description: ":m\n\
+        One of the limitations is that you can only get one level deep of records\n\
+        Note how you have to use plural form for the child column\n\
+        ```java\n\
+        SELECT Name, Phone, Website, [...] FROM Account\n\
+        ```\n",
+        prompt: "Complete missing snippet to get Name, Department, Email of Contacts related to the Account like on the image\n\
+        Account (1) [parent] ——> Contacts (n) [child]",
+        example: "SELECT Name, Phone, Website, (SELECT Name, Department, Email FROM Contacts) FROM Account"
+    },
+    {
+        term: "child get parent records",
+        attachment: "./img/2023-04-18-11-40-43.png",
+        description: ":m\n\
+        One of the limitations is that you can only get one level deep of records\n\
+        ```java\n\
+        SELECT Name, Phone, Department, [...] FROM Contact\n\
+        ```\n",
+        prompt: "Complete missing snippet to get Parents model: Account's Name and Website\n\
+        Account (1) [parent] ——> Contacts (n) [child]",
+        example: ":m `SELECT Name, Phone, Department, Account.Name, Account.Website FROM Contact`"
+
+    },
+    {
+        term: "Retrieve all Cases |CaseNumber, Subject| raised by the contact",
+        attachment: "./img/2023-04-18-12-00-25.png",
+        description: ":m\n\
+        ```java\n\
+        SELECT Name, Department, Title, [...] FROM Contact\n\
+        ```\n",
+        example: "SELECT Name, Department, Title, (SELECT CaseNumber, Subject FROM Cases) FROM Contact",
+        prompt: "Complete missing snippet to get CaseNumber, Subject of Cases related to the Contact like on the image"
+    },
+    // Map examples
+    {
+        term: "map create map",
+        prompt: "Create a map with key as String and value as Integer where maps one to 1",
+        example: ":m\n\
+        ```java\n\
+        Map<String, Integer> map = new Map<String, Integer>{\
+            'one' => 1\n\
+        };\n\
+        ```\n",
+    },
+    {
+        term: "iterate map values",
+        prompt: "Iterate over map values and print them as `value: x`",
+        description: ":m\n\
+        ```java\n\
+        Map<String, Integer> map = new Map<String, Integer>{\
+            'one' => 1\n\
+        };\n\
+        ```\n",
+        example: ":m\n\
+        ```java\n\
+        for (Integer value : map.values()) {\n\
+            System.debug('value: '+value);\n\
+        }\n\
+        ```\n",
+    },
+    {
+        term: "List methods I ",
+        description: ":m\n\
+        ```java\n\
+        List<String> myList = new List<String>();\n## 1. Add Apple\nmyList.add('banana');\nmyList.add('cherry');\n\n## 2. Get the first fruit\nSystem.debug('Second fruit: ' + fruit);\n\nmyList.set(0, 'orange');\nSystem.debug('New first fruit: ' + myList.get(0));\n\nmyList.remove(2);\nSystem.debug('List after removing cherry: ' + myList);\n\n## 3. Check if we have bananas\n{\n System.debug('We have bananas!');\n}\n\nmyList.clear();\nSystem.debug('List is empty: ' + myList.isEmpty());```",
+        prompt: "Complete the ## 1. Add Apple, ## 2. Get the first fruit, ## 3. Check if we have bananas",
+        example: ":m\n\
+        ```java\n\
+        1. myList.add('apple');\n\
+        2. String fruit = myList.get(0);\n\
+        3. if (myList.contains('banana'))\n\
+        ```\n",
+    },
+    {
+        term: "List methods Part II",
+        description: ":m\n\
+        ```java\n\
+        List<String> myList = new List<String>();\nmyList.add('apple');\nmyList.add('banana');\nmyList.add('cherry');\n\nString fruit = myList.get(1);\nSystem.debug('Second fruit: ' + fruit);\n\n## 1. Change the first fruit to orange\nSystem.debug('New first fruit: ' + myList.get(0));\n\n## 2. Remove the cherry\nSystem.debug('List after removing cherry: ' + myList);\n\nif (myList.contains('banana')) {\n System.debug('We have bananas!');\n}\n\n## 3. Check if the list is empty\nSystem.debug('List is empty: ' + myList.isEmpty());\n```",
+        prompt: "Complete the ## 1. Change the first fruit to orange, ## 2. Remove the cherry, ## 3. Check if the list is empty",
+        example: ":m\n\
+        ```java\n\
+        myList.set(0, 'orange');\n\
+        myList.remove(2);\n\
+        myList.clear();\n\
+        ```\n",
+    },
 
 ]
 
@@ -706,7 +795,7 @@ const flutter_dart = [
     },
     {
         term: "widget | Align",
-        description: "Align this child in the following container:\n\
+        description: "Align this child in the following container (at the top and Right):\n\
         Center(child: Container(height: 120.0, width: 120.0, color: Colors.blue[50], child: ),)\n\n\
         children: F",
         example: "const Align(alignment: Alignment.topRight, child: F,)\n\n\
@@ -719,7 +808,7 @@ const flutter_dart = [
         Column(children: [Text('Deliver features faster'), Text('Craft beautiful UIs'), Expanded(child: FittedBox(fit: BoxFit.contain, child: FlutterLogo(),),),],)\n\
         ```",
         prompt: "Create a column with the following children:",
-        example: "Column(children: <Widget>[...],)"        
+        example: "Column(children: <Widget>[...],)"
     },
     {
         term: "widget | SizedBox",
@@ -755,7 +844,7 @@ const flutter_dart = [
         term: "widget | Scaffold",
         description: "Implements the basic Material Design visual layout structure.  This class provides APIs for showing drawers and bottom sheets.  To display a persistent bottom sheet, obtain the ScaffoldState for the current BuildContext via Scaffold.of and use the ScaffoldState.showBottomSheet function.",
         prompt: "Wrap the following widget with a Scaffold: Text('Scaffold'), and create and appbar with title: 'sample'",
-        example: "Scaffold(appBar: AppBar(title: Text('sample'),), body: Text('Scaffold'),)"     
+        example: "Scaffold(appBar: AppBar(title: Text('sample'),), body: Text('Scaffold'),)"
     },
     {
         term: "Flutter | loaders",
@@ -769,7 +858,9 @@ const flutter_dart = [
             return ##[2] \n\
             ? const Text('Loaded')\n : const CircularProgressIndicator();\n },\n );\n }\n}\n\
         ```",
-        prompt: "Complete the following code to show a CircularProgressIndicator while the future is not done, and show 'Loaded' when the future is done",
+        prompt: "Complete the following code to show a CircularProgressIndicator while the future is not done, and show 'Loaded' when the future is done\n\
+        [1] create the artificial delay using future.\n\
+        [2] check if the future is done using using the snapshot state",
         example: "[1] future = Future.delayed(const Duration(seconds: 8));\n\
         [2] snapshot.connectionState == ConnectionState.done"
     },

@@ -11,6 +11,8 @@ You are given an array of integers nums, there is a sliding window of size k whi
 
 ### Example 1
 
+Note how the maximum at each movemnet is added to the results list
+
 ```bash
 Input: nums = [1,3,-1,-3,5,3,6,7], k = 3
 Output: [3,3,5,5,6,7]
