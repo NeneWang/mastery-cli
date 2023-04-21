@@ -5223,7 +5223,8 @@ class KruskalsAlgorithms extends ProblemTests{
 
     constructor(Problem){
         super(Problem);
-
+        this.tests.push(() => this.test_1);
+        this.tests.push(() => this.test_2);
     }
 
     test_1(){
@@ -5320,6 +5321,7 @@ const TEST_DICTIONARY = {
     'maximize-expression': MaximizeExpression,
     'juice-bottling': JuiceBottling,
     'topological-sort': TopologicalSort,
+    'kruskals-algorithms': KruskalsAlgorithms
 }
 
 module.exports = TEST_DICTIONARY;
