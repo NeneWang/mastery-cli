@@ -5219,6 +5219,82 @@ class TopologicalSort extends ProblemTests {
 
 }
 
+class KruskalsAlgorithms extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+
+    }
+
+    test_1(){
+        /**
+         * [
+            [
+                [1, 1]
+            ],
+            [
+                [0, 1]
+            ]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "edges": [
+                [
+                [1, 1]
+                ],
+                [
+                [0, 1]
+                ]
+            ]
+            }
+         */
+
+        this.current_test_name = '([[1, 1]], [[0, 1]]) => [[1, 1], [0, 1]]';
+        const kruskalsAlgorithms = new this.Problem();
+
+        assert.deepEqual(kruskalsAlgorithms.solve([[1, 1]], [[0, 1]]), [[1, 1], [0, 1]]);
+    }
+
+    test_2(){
+        /**
+         * [
+            [
+                [1, 1]
+            ],
+            [
+                [0, 1],
+                [2, 2]
+            ],
+            [
+                [1, 2]
+            ]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "edges": [
+                [
+                [1, 1]
+                ],
+                [
+                [0, 1],
+                [2, 2]
+                ],
+                [
+                [1, 2]
+                ]
+            ]
+            }
+         */
+
+        this.current_test_name = '([[1, 1]], [[0, 1], [2, 2]], [[1, 2]]) => [[1, 1], [0, 1], [2, 2]]';
+        const kruskalsAlgorithms = new this.Problem();
+
+        assert.deepEqual(kruskalsAlgorithms.solve([[1, 1]], [[0, 1], [2, 2]], [[1, 2]]), [[1, 1], [0, 1], [2, 2]]);
+    }
+}
+
 
 
 
