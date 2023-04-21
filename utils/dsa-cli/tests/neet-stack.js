@@ -45,7 +45,10 @@ class MinStack extends ProblemTests {
     constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
-    }
+		this.tests.push(() => this.test_2());
+		this.tests.push(() => this.test_3());
+			this.tests.push(() => this.test_4());	
+			this.tests.push(() => this.test_5());}
 
     test_1() {
         this.current_test_name = "[-2,0,-3] => -3, 0, -2"
@@ -60,6 +63,50 @@ class MinStack extends ProblemTests {
 
 
     }
+
+	test_2() {
+    this.current_test_name = "[1,2,3] => 1, 3, 1"
+    const minStack = new this.Problem();
+    minStack.push(1);
+    minStack.push(2);
+    minStack.push(3);
+    assert(minStack.getMin() == 1);
+    minStack.pop();
+    assert(minStack.top() == 2);
+    assert(minStack.getMin() == 1);
+};
+
+test_3() {
+    this.current_test_name = "[5,1,10,1] => 1, 10, 1"
+    const minStack = new this.Problem();
+    minStack.push(5);
+    minStack.push(1);
+    minStack.push(10);
+    minStack.push(1);
+    assert(minStack.getMin() == 1);
+    minStack.pop();
+    assert(minStack.top() == 10);
+    assert(minStack.getMin() == 1);
+};
+
+test_4() {
+    this.current_test_name = "[1] => 1, 1, 1"
+    const minStack = new this.Problem();
+    minStack.push(1);
+    assert(minStack.getMin() == 1);
+    assert(minStack.top() == 1);
+    minStack.pop();
+    assert(minStack.getMin() == null);
+    assert(minStack.top() == null);
+};
+
+test_5() {
+    this.current_test_name = "[] => null, null, null"
+    const minStack = new this.Problem();
+    assert(minStack.getMin() == null);
+    assert(minStack.top() == null);
+    assert(minStack.pop() == null);
+}
 }
 
 

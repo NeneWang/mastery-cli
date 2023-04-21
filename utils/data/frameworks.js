@@ -268,7 +268,7 @@ const apex = [
         term: "List methods I ",
         description: ":m\n\
         ```java\n\
-        List<String> myList = new List<String>();\n## 1. Add Apple\nmyList.add('banana');\nmyList.add('cherry');\n\n## 2. Get the first fruit\nSystem.debug('Second fruit: ' + fruit);\n\nmyList.set(0, 'orange');\nSystem.debug('New first fruit: ' + myList.get(0));\n\nmyList.remove(2);\nSystem.debug('List after removing cherry: ' + myList);\n\n## 3. Check if we have bananas\n{\n System.debug('We have bananas!');\n}\n\nmyList.clear();\nSystem.debug('List is empty: ' + myList.isEmpty());```",
+        List<String> myList = new List<String>();\n## 1. Add Apple\nmyList.add('banana');\nmyList.add('cherry');\n\n## 2. Get the first fruit\nSystem.debug('Second fruit: ' + fruit);\n\nmyList.set(0, 'orange');\nSystem.debug('New first fruit: ' + myList.get(0));\n\nmyList.remove(2);\nSystem.debug('List after removing cherry: ' + myList);\n\n## 3. Check if we have bananas\n{\n System.debug('We have bananas!');\n}\n\nmyList.clear();\nSystem.debug('List is empty: ' + myList.isEmpty());",
         prompt: "Complete the ## 1. Add Apple, ## 2. Get the first fruit, ## 3. Check if we have bananas",
         example: ":m\n\
         ```java\n\
@@ -281,7 +281,7 @@ const apex = [
         term: "List methods Part II",
         description: ":m\n\
         ```java\n\
-        List<String> myList = new List<String>();\nmyList.add('apple');\nmyList.add('banana');\nmyList.add('cherry');\n\nString fruit = myList.get(1);\nSystem.debug('Second fruit: ' + fruit);\n\n## 1. Change the first fruit to orange\nSystem.debug('New first fruit: ' + myList.get(0));\n\n## 2. Remove the cherry\nSystem.debug('List after removing cherry: ' + myList);\n\nif (myList.contains('banana')) {\n System.debug('We have bananas!');\n}\n\n## 3. Check if the list is empty\nSystem.debug('List is empty: ' + myList.isEmpty());\n```",
+        List<String> myList = new List<String>();\nmyList.add('apple');\nmyList.add('banana');\nmyList.add('cherry');\n\nString fruit = myList.get(1);\nSystem.debug('Second fruit: ' + fruit);\n\n## 1. Change the first fruit to orange\nSystem.debug('New first fruit: ' + myList.get(0));\n\n## 2. Remove the cherry\nSystem.debug('List after removing cherry: ' + myList);\n\nif (myList.contains('banana')) {\n System.debug('We have bananas!');\n}\n\n## 3. Check if the list is empty\nSystem.debug('List is empty: ' + myList.isEmpty());",
         prompt: "Complete the ## 1. Change the first fruit to orange, ## 2. Remove the cherry, ## 3. Check if the list is empty",
         example: ":m\n\
         ```java\n\
@@ -290,6 +290,57 @@ const apex = [
         myList.clear();\n\
         ```\n",
     },
+    {
+        term: "BIND queries I",
+        description: "String accountName = 'Acme Corporation';\n\
+        List<Account> matchingAccounts = Database.query('SELECT Id, Name, Industry FROM Account WHERE [COMPLETE]');",
+        prompt: "Complete the query to get all Accounts with name equals to `Acme Corporation` using the variable `accountName`",
+        example: ":m\n\
+        ```java\n\
+        String accountName = 'Acme Corporation';\n\
+        List<Account> matchingAccounts = Database.query('SELECT Id, Name, Industry FROM Account WHERE Name = :accountName');\n\
+        ```\n",
+    },
+    {
+        term: "BIND queries II | using Maps",
+        description: "Map<String, Object> acctBinds = new Map<String, Object>{'acctName' => 'Acme Corporation'};\n\
+        List<Account> accts =Database.queryWithBinds('SELECT Id FROM Account WHERE [...]');",
+        prompt: "Complete the query to get all Accounts with name equals to `Acme Corporation` using the map variable `acctBinds`",
+        example: ":m\n\
+        ```java\n\
+        List<Account> accts =      Database.queryWithBinds('SELECT Id FROM Account WHERE Name = :acctName',     acctBinds,      AccessLevel.USER_MODE);\n\
+        ```\n",
+
+    },
+    {
+        "term": "DML | insert-records",
+        "prompt": "Insert two new records into the Account object",
+        "example": ":m\n\\```js\nAccount newAccount1 = new Account(Name = 'Acme Corporation', Industry = 'Technology');\nAccount newAccount2 = new Account(Name = 'Globex Inc.', Industry = 'Finance');\ninsert newAccount1;\ninsert newAccount2;\n\\```\\",
+        "description": "Insert two new records into the Account object."
+    },
+    {
+        "term": "DML | update-records",
+        "prompt": "Update the Industry field of an existing Account record",
+        "example": ":m existingAccount.Industry = 'Manufacturing';\nupdate existingAccount;\n\n\
+        \n\\```js\nAccount existingAccount = [SELECT Id, Name, Industry FROM Account WHERE Name = 'Acme Corporation' LIMIT 1];\nexistingAccount.Industry = 'Manufacturing';\nupdate existingAccount;\n\\```\\",
+        "description": ":m\n\\```js\nAccount existingAccount = [SELECT Id, Name, Industry FROM Account WHERE Name = 'Acme Corporation' LIMIT 1];\n\
+        ## TODO\n\\```\
+        \nUpdate the Industry field of an existing Account record."
+    },
+    {
+        "term": "DML | delete-records",
+        "prompt": "Delete an existing Account record",
+        "example": ":m\n\\```js\nAccount accountToDelete = [SELECT Id FROM Account WHERE Name = 'Globex Inc.' LIMIT 1];\ndelete accountToDelete;\n\\```\\",
+        "description": "Delete an existing Account record."
+    },
+    {
+        "term": "insert-multiple-records",
+        "prompt": "Insert multiple new records into the Account object Insert Acme Corporation, Globex Inc., and Initech Corp. into the Account object",
+        "descrition": ":m\n\\```js\nList<Account> accountsToInsert = new List<Account>();\naccountsToInsert.add(new Account(Name = 'Acme Corporation', Industry = 'Technology'));\naccountsToInsert.add(new Account(Name = 'Globex Inc.', Industry = 'Finance'));\naccountsToInsert.add(new Account(Name = 'Initech Corp.', Industry = 'Manufacturing'));\ninsert accountsToInsert;\n\\```\\",
+        "example": ":m\n\\```js\nList<Account> accountsToInsert = new List<Account>();\n\
+        ## ADD THEM\n\
+        insert accountsToInsert;\n\\```\\",
+      },
 
 ]
 
