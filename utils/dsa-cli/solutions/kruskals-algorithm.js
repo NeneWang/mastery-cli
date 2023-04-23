@@ -1,9 +1,11 @@
 class KruskalsAlgorithms {
     solve(edges) {
+        const custom_edges = [[[1, 1]], [[0, 1], [2, 2]], [[1, 2]]];
+        // return kruskalsAlgorithm(custom_edges);
+        console.log("Edges received:", edges);
         return kruskalsAlgorithm(edges);
     }
 }
-
 function kruskalsAlgorithm(edges) {
     const edgeList = [];
     for (let sourceIndex = 0; sourceIndex < edges.length; sourceIndex++) {
@@ -57,7 +59,6 @@ function union(vertex1Root, vertex2Root, parents, ranks) {
         ranks[vertex1Root]++;
     }
 }
-
 
 
 module.exports = { Problem: KruskalsAlgorithms };

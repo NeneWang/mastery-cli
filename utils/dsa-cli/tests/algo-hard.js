@@ -3,6 +3,35 @@ const assert = require('assert');
 const ProblemTests = require('./problem-test');
 const maximizeExpression = require('../solutions/maximize-expression');
 
+function compareNestedLists(a, b) {
+    if (typeof a !== typeof b) {
+        return false;
+    }
+
+    if (Array.isArray(a)) {
+        if (a.length !== b.length) {
+            return false;
+        }
+
+        for (const x of a) {
+            let found = false;
+            for (const y of b) {
+                if (compareNestedLists(x, y)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    return a === b;
+}
+
 
 class SubarraySort extends ProblemTests {
 
@@ -26,7 +55,7 @@ class SubarraySort extends ProblemTests {
 
         const subarraySort = new this.Problem();
         this.current_test_name = '[1,2,4,7,10,11,7,12,6,7,16,18,19] | [3,9]';
-        assert.deepEqual(subarraySort.solve([1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]), [3, 9]);
+        assert.deepStrictEqual(subarraySort.solve([1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]), [3, 9]);
 
     }
 
@@ -43,7 +72,7 @@ class SubarraySort extends ProblemTests {
          */
         const subarraySort = new this.Problem();
         this.current_test_name = '[1,2,4,7,10,11,7,12,13,14,16,18,19] | [4, 6]';
-        assert.deepEqual(subarraySort.solve([1, 2, 4, 7, 10, 11, 7, 12, 13, 14, 16, 18, 19]), [4, 6]);
+        assert.deepStrictEqual(subarraySort.solve([1, 2, 4, 7, 10, 11, 7, 12, 13, 14, 16, 18, 19]), [4, 6]);
     }
 
     test_3() {
@@ -58,7 +87,7 @@ class SubarraySort extends ProblemTests {
 
         const subarraySort = new this.Problem();
         this.current_test_name = '[1, 2, 8, 4, 5] | [2, 4]';
-        assert.deepEqual(subarraySort.solve([1, 2, 8, 4, 5]), [2, 4]);
+        assert.deepStrictEqual(subarraySort.solve([1, 2, 8, 4, 5]), [2, 4]);
     }
 
     test_4() {
@@ -74,7 +103,7 @@ class SubarraySort extends ProblemTests {
 
         const subarraySort = new this.Problem();
         this.current_test_name = '[4, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 51, 7] | [0, 12]';
-        assert.deepEqual(subarraySort.solve([4, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 51, 7]), [0, 12]);
+        assert.deepStrictEqual(subarraySort.solve([4, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 51, 7]), [0, 12]);
     }
 
     test_5() {
@@ -90,7 +119,7 @@ class SubarraySort extends ProblemTests {
 
         const subarraySort = new this.Problem();
         this.current_test_name = '[4, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 11, 57] | [0, 11]';
-        assert.deepEqual(subarraySort.solve([4, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 11, 57]), [0, 11]);
+        assert.deepStrictEqual(subarraySort.solve([4, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 11, 57]), [0, 11]);
     }
 
     test_6() {
@@ -105,7 +134,7 @@ class SubarraySort extends ProblemTests {
 
         const subarraySort = new this.Problem();
         this.current_test_name = '[-41, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 11, 57] | [1, 11]';
-        assert.deepEqual(subarraySort.solve([-41, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 11, 57]), [1, 11]);
+        assert.deepStrictEqual(subarraySort.solve([-41, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 11, 57]), [1, 11]);
     }
 
     test_7() {
@@ -120,7 +149,7 @@ class SubarraySort extends ProblemTests {
 
         const subarraySort = new this.Problem();
         this.current_test_name = '[-41, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 51, 7] | [1, 12]';
-        assert.deepEqual(subarraySort.solve([-41, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 51, 7]), [1, 12]);
+        assert.deepStrictEqual(subarraySort.solve([-41, 8, 7, 12, 11, 9, -1, 3, 9, 16, -15, 51, 7]), [1, 12]);
     }
 
     test_8() {
@@ -136,7 +165,7 @@ class SubarraySort extends ProblemTests {
 
         const subarraySort = new this.Problem();
         this.current_test_name = '[1, 2, 3, 4, 5, 6, 8, 7, 9, 10, 11] | [6, 7]';
-        assert.deepEqual(subarraySort.solve([1, 2, 3, 4, 5, 6, 8, 7, 9, 10, 11]), [6, 7]);
+        assert.deepStrictEqual(subarraySort.solve([1, 2, 3, 4, 5, 6, 8, 7, 9, 10, 11]), [6, 7]);
     }
 
     test_9() {
@@ -152,7 +181,7 @@ class SubarraySort extends ProblemTests {
 
         const subarraySort = new this.Problem();
         this.current_test_name = '[1, 2, 3, 4, 5, 6, 18, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19] | [6, 16]';
-        assert.deepEqual(subarraySort.solve([1, 2, 3, 4, 5, 6, 18, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19]), [6, 16]);
+        assert.deepStrictEqual(subarraySort.solve([1, 2, 3, 4, 5, 6, 18, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19]), [6, 16]);
     }
 
 
@@ -169,7 +198,7 @@ class SubarraySort extends ProblemTests {
 
         const subarraySort = new this.Problem();
         this.current_test_name = '[1, 2, 3, 4, 5, 6, 18, 21, 22, 7, 14, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 4, 14, 11, 6, 33, 35, 41, 55] | [4, 24]';
-        assert.deepEqual(subarraySort.solve([1, 2, 3, 4, 5, 6, 18, 21, 22, 7, 14, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 4, 14, 11, 6, 33, 35, 41, 55]), [4, 24]);
+        assert.deepStrictEqual(subarraySort.solve([1, 2, 3, 4, 5, 6, 18, 21, 22, 7, 14, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 4, 14, 11, 6, 33, 35, 41, 55]), [4, 24]);
     }
 
 
@@ -367,7 +396,7 @@ class zigzagTraverse extends ProblemTests {
 
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1, 3, 4, 10], [2, 5, 9, 11], [6, 8, 12, 15], [7, 13, 14, 16]] | [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]';
-        assert.deepEqual(zigzagTraverse.solve([[1, 3, 4, 10], [2, 5, 9, 11], [6, 8, 12, 15], [7, 13, 14, 16]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+        assert.deepStrictEqual(zigzagTraverse.solve([[1, 3, 4, 10], [2, 5, 9, 11], [6, 8, 12, 15], [7, 13, 14, 16]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 
     }
 
@@ -385,7 +414,7 @@ class zigzagTraverse extends ProblemTests {
 
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1]] | [1]';
-        assert.deepEqual(zigzagTraverse.solve([[1]]), [1]);
+        assert.deepStrictEqual(zigzagTraverse.solve([[1]]), [1]);
     }
 
     test_3() {
@@ -402,7 +431,7 @@ class zigzagTraverse extends ProblemTests {
 
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1, 2, 3, 4, 5]] | [1, 2, 3, 4, 5]';
-        assert.deepEqual(zigzagTraverse.solve([[1, 2, 3, 4, 5]]), [1, 2, 3, 4, 5]);
+        assert.deepStrictEqual(zigzagTraverse.solve([[1, 2, 3, 4, 5]]), [1, 2, 3, 4, 5]);
 
     }
 
@@ -424,7 +453,7 @@ class zigzagTraverse extends ProblemTests {
 
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1], [2], [3], [4], [5]] | [1, 2, 3, 4, 5]';
-        assert.deepEqual(zigzagTraverse.solve([[1], [2], [3], [4], [5]]), [1, 2, 3, 4, 5]);
+        assert.deepStrictEqual(zigzagTraverse.solve([[1], [2], [3], [4], [5]]), [1, 2, 3, 4, 5]);
     }
 
     test_5() {
@@ -445,7 +474,7 @@ class zigzagTraverse extends ProblemTests {
 
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1, 3], [2, 4], [5, 7], [6, 8], [9, 10]] | [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]';
-        assert.deepEqual(zigzagTraverse.solve([[1, 3], [2, 4], [5, 7], [6, 8], [9, 10]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        assert.deepStrictEqual(zigzagTraverse.solve([[1, 3], [2, 4], [5, 7], [6, 8], [9, 10]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
     }
 
@@ -464,7 +493,7 @@ class zigzagTraverse extends ProblemTests {
 
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1, 3, 4, 7, 8], [2, 5, 6, 9, 10]] | [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]';
-        assert.deepEqual(zigzagTraverse.solve([[1, 3, 4, 7, 8], [2, 5, 6, 9, 10]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        assert.deepStrictEqual(zigzagTraverse.solve([[1, 3, 4, 7, 8], [2, 5, 6, 9, 10]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     }
 
     test_7() {
@@ -485,7 +514,7 @@ class zigzagTraverse extends ProblemTests {
 
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1, 3, 4, 10, 11], [2, 5, 9, 12, 19], [6, 8, 13, 18, 20], [7, 14, 17, 21, 24], [15, 16, 22, 23, 25]] | [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]';
-        assert.deepEqual(zigzagTraverse.solve([[1, 3, 4, 10, 11], [2, 5, 9, 12, 19], [6, 8, 13, 18, 20], [7, 14, 17, 21, 24], [15, 16, 22, 23, 25]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]);
+        assert.deepStrictEqual(zigzagTraverse.solve([[1, 3, 4, 10, 11], [2, 5, 9, 12, 19], [6, 8, 13, 18, 20], [7, 14, 17, 21, 24], [15, 16, 22, 23, 25]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]);
 
     }
 
@@ -508,7 +537,7 @@ class zigzagTraverse extends ProblemTests {
 
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1, 3, 4, 10, 11, 20], [2, 5, 9, 12, 19, 21], [6, 8, 13, 18, 22, 27], [7, 14, 17, 23, 26, 28], [15, 16, 24, 25, 29, 30]] | [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]';
-        assert.deepEqual(zigzagTraverse.solve([[1, 3, 4, 10, 11, 20], [2, 5, 9, 12, 19, 21], [6, 8, 13, 18, 22, 27], [7, 14, 17, 23, 26, 28], [15, 16, 24, 25, 29, 30]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]);
+        assert.deepStrictEqual(zigzagTraverse.solve([[1, 3, 4, 10, 11, 20], [2, 5, 9, 12, 19, 21], [6, 8, 13, 18, 22, 27], [7, 14, 17, 23, 26, 28], [15, 16, 24, 25, 29, 30]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]);
 
     }
 
@@ -531,7 +560,7 @@ class zigzagTraverse extends ProblemTests {
 
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1, 3, 4, 10, 11], [2, 5, 9, 12, 20], [6, 8, 13, 19, 21], [7, 14, 18, 22, 27], [15, 17, 23, 26, 28], [16, 24, 25, 29, 30]] | [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]';
-        assert.deepEqual(zigzagTraverse.solve([[1, 3, 4, 10, 11], [2, 5, 9, 12, 20], [6, 8, 13, 19, 21], [7, 14, 18, 22, 27], [15, 17, 23, 26, 28], [16, 24, 25, 29, 30]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]);
+        assert.deepStrictEqual(zigzagTraverse.solve([[1, 3, 4, 10, 11], [2, 5, 9, 12, 20], [6, 8, 13, 19, 21], [7, 14, 18, 22, 27], [15, 17, 23, 26, 28], [16, 24, 25, 29, 30]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]);
 
     }
 
@@ -555,7 +584,7 @@ class zigzagTraverse extends ProblemTests {
 
         const zigzagTraverse = new this.Problem();
         this.current_test_name = '[[1, 21, -3, 4, 15, 6, -7, 88, 9], [10, 11, 112, 12, 20, -1, -2, -3, -4], [6, 8, 113, 19, 21, 0, 0, 0, 0], [7, 2, 18, 22, -27, 12, 32, -111, 66], [15, 17, 23, 226, 28, -28, -226, -23, -17], [16, 24, 27, 299, 30, 29, 32, 31, 88]] | [1, 10, 21, -3, 11, 6, 7, 8, 112, 4, 15, 12, 113, 2, 15, 16, 17, 18, 19, 20, 6, -7, -1, 21, 22, 23, 24, 27, 226, -27, 0, -2, 88, 9, -3, 0, 12, 28, 299, 30, -28, 32, 0, -4, 0, -111, -226, 29, 32, -23, 66, -17, 31, 88]';
-        assert.deepEqual(zigzagTraverse.solve([[1, 21, -3, 4, 15, 6, -7, 88, 9], [10, 11, 112, 12, 20, -1, -2, -3, -4], [6, 8, 113, 19, 21, 0, 0, 0, 0], [7, 2, 18, 22, -27, 12, 32, -111, 66], [15, 17, 23, 226, 28, -28, -226, -23, -17], [16, 24, 27, 299, 30, 29, 32, 31, 88]]), [1, 10, 21, -3, 11, 6, 7, 8, 112, 4, 15, 12, 113, 2, 15, 16, 17, 18, 19, 20, 6, -7, -1, 21, 22, 23, 24, 27, 226, -27, 0, -2, 88, 9, -3, 0, 12, 28, 299, 30, -28, 32, 0, -4, 0, -111, -226, 29, 32, -23, 66, -17, 31, 88]);
+        assert.deepStrictEqual(zigzagTraverse.solve([[1, 21, -3, 4, 15, 6, -7, 88, 9], [10, 11, 112, 12, 20, -1, -2, -3, -4], [6, 8, 113, 19, 21, 0, 0, 0, 0], [7, 2, 18, 22, -27, 12, 32, -111, 66], [15, 17, 23, 226, 28, -28, -226, -23, -17], [16, 24, 27, 299, 30, 29, 32, 31, 88]]), [1, 10, 21, -3, 11, 6, 7, 8, 112, 4, 15, 12, 113, 2, 15, 16, 17, 18, 19, 20, 6, -7, -1, 21, 22, 23, 24, 27, 226, -27, 0, -2, 88, 9, -3, 0, 12, 28, 299, 30, -28, 32, 0, -4, 0, -111, -226, 29, 32, -23, 66, -17, 31, 88]);
 
     }
 
@@ -1938,7 +1967,7 @@ class findNodesDistanceK extends ProblemTests {
         tree.right.right.right = new BST(8);
 
         this.current_test_name = '(1 | 2 | 4 | 5 | 3 | 6 | 7 | 8 | 2 | 2), 3, 2 => [7, 8, 2]';
-        assert.deepEqual(findNodesDistanceK.solve(tree, 3, 2), [7, 8, 2]);
+        assert.deepStrictEqual(findNodesDistanceK.solve(tree, 3, 2), [7, 8, 2]);
 
 
     }
@@ -1973,7 +2002,7 @@ class findNodesDistanceK extends ProblemTests {
         tree.left.left.left.left = new BST(5);
 
         this.current_test_name = '(5 | 4 | 3 | 2), 2, 3 => [5]';
-        assert.deepEqual(findNodesDistanceK.solve(tree, 2, 3), [5]);
+        assert.deepStrictEqual(findNodesDistanceK.solve(tree, 2, 3), [5]);
 
     }
 
@@ -2014,7 +2043,7 @@ class findNodesDistanceK extends ProblemTests {
         tree.right.right.right.right = new BST(8);
 
         this.current_test_name = '(4 | 2 | 1 | 3 | 6 | 7 | 8), 6, 8 => [4]';
-        assert.deepEqual(findNodesDistanceK.solve(tree, 8, 6), [4]);
+        assert.deepStrictEqual(findNodesDistanceK.solve(tree, 8, 6), [4]);
 
     }
 
@@ -2055,7 +2084,7 @@ class findNodesDistanceK extends ProblemTests {
         tree.right.right.right.right = new BST(8);
 
         this.current_test_name = '(4 | 2 | 1 | 3 | 6 | 7 | 8), 3, 1 => [5, 6, 1]';
-        assert.deepEqual(findNodesDistanceK.solve(tree, 3, 1), [5, 6, 1]);
+        assert.deepStrictEqual(findNodesDistanceK.solve(tree, 3, 1), [5, 6, 1]);
     }
 
     test_5() {
@@ -2093,7 +2122,7 @@ class findNodesDistanceK extends ProblemTests {
         tree.right.right = new BST(7);
 
         this.current_test_name = '(4 | 2 | 1 | 3 | 6 | 7), 1, 2 => [4, 5, 6, 7]';
-        assert.deepEqual(findNodesDistanceK.solve(tree, 1, 2), [4, 5, 6, 7]);
+        assert.deepStrictEqual(findNodesDistanceK.solve(tree, 1, 2), [4, 5, 6, 7]);
 
     }
 
@@ -2136,7 +2165,7 @@ class findNodesDistanceK extends ProblemTests {
         tree.right.right = new BST(7);
 
         this.current_test_name = '(8 | 4 | 2 | 1 | 3 | 6 | 7 | 9), 8, 2 => [9, 2]';
-        assert.deepEqual(findNodesDistanceK.solve(tree, 8, 2), [9, 2]);
+        assert.deepStrictEqual(findNodesDistanceK.solve(tree, 8, 2), [9, 2]);
 
     }
 
@@ -2178,7 +2207,7 @@ class findNodesDistanceK extends ProblemTests {
         tree.right.left.right = new BST(8);
 
         this.current_test_name = '(6 | 4 | 2 | 1 | 3 | 5 | 7 | 8), 6, 6 => [7, 8]';
-        assert.deepEqual(findNodesDistanceK.solve(tree, 6, 6), [7, 8]);
+        assert.deepStrictEqual(findNodesDistanceK.solve(tree, 6, 6), [7, 8]);
 
     }
 
@@ -2205,7 +2234,7 @@ class findNodesDistanceK extends ProblemTests {
         const tree = new BST(1);
 
         this.current_test_name = '(1), 1, 1 => []';
-        assert.deepEqual(findNodesDistanceK.solve(tree, 1, 1), []);
+        assert.deepStrictEqual(findNodesDistanceK.solve(tree, 1, 1), []);
     }
 
     test_9() {
@@ -2245,7 +2274,7 @@ class findNodesDistanceK extends ProblemTests {
         tree.right.left.right = new BST(8);
 
         this.current_test_name = '(6 | 4 | 2 | 1 | 3 | 5 | 7 | 8), 6, 17 => []';
-        assert.deepEqual(findNodesDistanceK.solve(tree, 6, 17), []);
+        assert.deepStrictEqual(findNodesDistanceK.solve(tree, 6, 17), []);
 
     }
 
@@ -2294,7 +2323,7 @@ class findNodesDistanceK extends ProblemTests {
         tree.right.left.right = new BST(13);
 
         this.current_test_name = '(8 | 9 | 10 | 11 | 4 | 2 | 1 | 3 | 6 | 12 | 13 | 5), 2, 2 => [8, 9, 10, 11, 3]';
-        assert.deepEqual(findNodesDistanceK.solve(tree, 2, 2), [8, 9, 10, 11, 3]);
+        assert.deepStrictEqual(findNodesDistanceK.solve(tree, 2, 2), [8, 9, 10, 11, 3]);
 
     }
 }
@@ -2330,7 +2359,7 @@ class maxSumIncreasingSubsequence extends ProblemTests {
         const maxSumIncreasingSubsequence = new this.Problem();
 
         this.current_test_name = '[10, 70, 20, 30, 50, 11, 30] => [110, [10, 20, 30, 50]]';
-        assert.deepEqual(maxSumIncreasingSubsequence.solve([10, 70, 20, 30, 50, 11, 30]), [110, [10, 20, 30, 50]]);
+        assert.deepStrictEqual(maxSumIncreasingSubsequence.solve([10, 70, 20, 30, 50, 11, 30]), [110, [10, 20, 30, 50]]);
 
     }
 
@@ -2347,7 +2376,7 @@ class maxSumIncreasingSubsequence extends ProblemTests {
         const maxSumIncreasingSubsequence = new this.Problem();
 
         this.current_test_name = '[1] => [1, [1]]';
-        assert.deepEqual(maxSumIncreasingSubsequence.solve([1]), [1, [1]]);
+        assert.deepStrictEqual(maxSumIncreasingSubsequence.solve([1]), [1, [1]]);
     }
 
     test_3() {
@@ -2364,7 +2393,7 @@ class maxSumIncreasingSubsequence extends ProblemTests {
         const maxSumIncreasingSubsequence = new this.Problem();
 
         this.current_test_name = '[-1] => [-1, [-1]]';
-        assert.deepEqual(maxSumIncreasingSubsequence.solve([-1]), [-1, [-1]]);
+        assert.deepStrictEqual(maxSumIncreasingSubsequence.solve([-1]), [-1, [-1]]);
     }
 
 
@@ -2383,7 +2412,7 @@ class maxSumIncreasingSubsequence extends ProblemTests {
         const maxSumIncreasingSubsequence = new this.Problem();
 
         this.current_test_name = '[-1, 1] => [1, [1]]';
-        assert.deepEqual(maxSumIncreasingSubsequence.solve([-1, 1]), [1, [1]]);
+        assert.deepStrictEqual(maxSumIncreasingSubsequence.solve([-1, 1]), [1, [1]]);
 
     }
 
@@ -2400,7 +2429,7 @@ class maxSumIncreasingSubsequence extends ProblemTests {
         const maxSumIncreasingSubsequence = new this.Problem();
 
         this.current_test_name = '[5, 4, 3, 2, 1] => [5, [5]]';
-        assert.deepEqual(maxSumIncreasingSubsequence.solve([5, 4, 3, 2, 1]), [5, [5]]);
+        assert.deepStrictEqual(maxSumIncreasingSubsequence.solve([5, 4, 3, 2, 1]), [5, [5]]);
     }
 
     test_6() {
@@ -2416,7 +2445,7 @@ class maxSumIncreasingSubsequence extends ProblemTests {
         const maxSumIncreasingSubsequence = new this.Problem();
 
         this.current_test_name = '[1, 2, 3, 4, 5] => [15, [1, 2, 3, 4, 5]]';
-        assert.deepEqual(maxSumIncreasingSubsequence.solve([1, 2, 3, 4, 5]), [15, [1, 2, 3, 4, 5]]);
+        assert.deepStrictEqual(maxSumIncreasingSubsequence.solve([1, 2, 3, 4, 5]), [15, [1, 2, 3, 4, 5]]);
     }
 
 
@@ -2434,7 +2463,7 @@ class maxSumIncreasingSubsequence extends ProblemTests {
         const maxSumIncreasingSubsequence = new this.Problem();
 
         this.current_test_name = '[-5, -4, -3, -2, -1] => [-1, [-1]]';
-        assert.deepEqual(maxSumIncreasingSubsequence.solve([-5, -4, -3, -2, -1]), [-1, [-1]]);
+        assert.deepStrictEqual(maxSumIncreasingSubsequence.solve([-5, -4, -3, -2, -1]), [-1, [-1]]);
     }
 
     test_8() {
@@ -2451,7 +2480,7 @@ class maxSumIncreasingSubsequence extends ProblemTests {
         const maxSumIncreasingSubsequence = new this.Problem();
 
         this.current_test_name = '[8, 12, 2, 3, 15, 5, 7] => [35, [8, 12, 15]]';
-        assert.deepEqual(maxSumIncreasingSubsequence.solve([8, 12, 2, 3, 15, 5, 7]), [35, [8, 12, 15]]);
+        assert.deepStrictEqual(maxSumIncreasingSubsequence.solve([8, 12, 2, 3, 15, 5, 7]), [35, [8, 12, 15]]);
     }
 
     test_9() {
@@ -2466,7 +2495,7 @@ class maxSumIncreasingSubsequence extends ProblemTests {
 
         const maxSumIncreasingSubsequence = new this.Problem();
         this.current_test_name = '[10, 15, 4, 5, 11, 14, 31, 25, 31, 23, 25, 31, 50] => [164, [10, 11, 14, 23, 25, 31, 50]]';
-        assert.deepEqual(maxSumIncreasingSubsequence.solve([10, 15, 4, 5, 11, 14, 31, 25, 31, 23, 25, 31, 50]), [164, [10, 11, 14, 23, 25, 31, 50]]);
+        assert.deepStrictEqual(maxSumIncreasingSubsequence.solve([10, 15, 4, 5, 11, 14, 31, 25, 31, 23, 25, 31, 50]), [164, [10, 11, 14, 23, 25, 31, 50]]);
 
     }
 
@@ -2482,7 +2511,7 @@ class maxSumIncreasingSubsequence extends ProblemTests {
 
         const maxSumIncreasingSubsequence = new this.Problem();
         this.current_test_name = '[10, 1, 2, 3, 4, 5, 6, 7, 8, 9] => [45, [1, 2, 3, 4, 5, 6, 7, 8, 9]]';
-        assert.deepEqual(maxSumIncreasingSubsequence.solve([10, 1, 2, 3, 4, 5, 6, 7, 8, 9]), [45, [1, 2, 3, 4, 5, 6, 7, 8, 9]]);
+        assert.deepStrictEqual(maxSumIncreasingSubsequence.solve([10, 1, 2, 3, 4, 5, 6, 7, 8, 9]), [45, [1, 2, 3, 4, 5, 6, 7, 8, 9]]);
 
     }
 
@@ -2522,7 +2551,7 @@ class LongestCommonSubsequence extends ProblemTests {
         const longestCommonSubsequence = new this.Problem();
 
         this.current_test_name = '"ZXVVYZW", "XKYKZPW" => ["X", "Y", "Z", "W"]';
-        assert.deepEqual(longestCommonSubsequence.solve("ZXVVYZW", "XKYKZPW"), ["X", "Y", "Z", "W"]);
+        assert.deepStrictEqual(longestCommonSubsequence.solve("ZXVVYZW", "XKYKZPW"), ["X", "Y", "Z", "W"]);
 
     }
 
@@ -2540,7 +2569,7 @@ class LongestCommonSubsequence extends ProblemTests {
         const longestCommonSubsequence = new this.Problem();
 
         this.current_test_name = '"", "" => []';
-        assert.deepEqual(longestCommonSubsequence.solve("", ""), []);
+        assert.deepStrictEqual(longestCommonSubsequence.solve("", ""), []);
     }
 
     test_3() {
@@ -2557,7 +2586,7 @@ class LongestCommonSubsequence extends ProblemTests {
         const longestCommonSubsequence = new this.Problem();
 
         this.current_test_name = '"", "ABCDEFG" => []';
-        assert.deepEqual(longestCommonSubsequence.solve("", "ABCDEFG"), []);
+        assert.deepStrictEqual(longestCommonSubsequence.solve("", "ABCDEFG"), []);
 
     }
 
@@ -2575,7 +2604,7 @@ class LongestCommonSubsequence extends ProblemTests {
         const longestCommonSubsequence = new this.Problem();
 
         this.current_test_name = '"ABCDEFG", "" => []';
-        assert.deepEqual(longestCommonSubsequence.solve("ABCDEFG", ""), []);
+        assert.deepStrictEqual(longestCommonSubsequence.solve("ABCDEFG", ""), []);
     }
 
 
@@ -2593,7 +2622,7 @@ class LongestCommonSubsequence extends ProblemTests {
         const longestCommonSubsequence = new this.Problem();
 
         this.current_test_name = '"ABCDEFG", "ABCDEFG" => ["A", "B", "C", "D", "E", "F", "G"]';
-        assert.deepEqual(longestCommonSubsequence.solve("ABCDEFG", "ABCDEFG"), ["A", "B", "C", "D", "E", "F", "G"]);
+        assert.deepStrictEqual(longestCommonSubsequence.solve("ABCDEFG", "ABCDEFG"), ["A", "B", "C", "D", "E", "F", "G"]);
 
     }
 
@@ -2611,7 +2640,7 @@ class LongestCommonSubsequence extends ProblemTests {
         const longestCommonSubsequence = new this.Problem();
 
         this.current_test_name = '"ABCDEFG", "APPLES" => ["A", "E"]';
-        assert.deepEqual(longestCommonSubsequence.solve("ABCDEFG", "APPLES"), ["A", "E"]);
+        assert.deepStrictEqual(longestCommonSubsequence.solve("ABCDEFG", "APPLES"), ["A", "E"]);
     }
 
     test_7() {
@@ -2629,7 +2658,7 @@ class LongestCommonSubsequence extends ProblemTests {
         const longestCommonSubsequence = new this.Problem();
 
         this.current_test_name = '"clement", "antoine" => ["n", "t"]';
-        assert.deepEqual(longestCommonSubsequence.solve("clement", "antoine"), ["n", "t"]);
+        assert.deepStrictEqual(longestCommonSubsequence.solve("clement", "antoine"), ["n", "t"]);
 
     }
 
@@ -2649,7 +2678,7 @@ class LongestCommonSubsequence extends ProblemTests {
         const longestCommonSubsequence = new this.Problem();
 
         this.current_test_name = '"8111111111111111142", "222222222822222222222222222222433333333332" => ["8", "4", "2"]';
-        assert.deepEqual(longestCommonSubsequence.solve("8111111111111111142", "222222222822222222222222222222433333333332"), ["8", "4", "2"]);
+        assert.deepStrictEqual(longestCommonSubsequence.solve("8111111111111111142", "222222222822222222222222222222433333333332"), ["8", "4", "2"]);
     }
 
 
@@ -2667,7 +2696,7 @@ class LongestCommonSubsequence extends ProblemTests {
         const longestCommonSubsequence = new this.Problem();
 
         this.current_test_name = '"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "CCCDDEGDHAGKGLWAJWKJAWGKGWJAKLGGWAFWLFFWAGJWKAG" => ["C", "D", "E", "G", "H", "J", "K", "L", "W"]';
-        assert.deepEqual(longestCommonSubsequence.solve("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "CCCDDEGDHAGKGLWAJWKJAWGKGWJAKLGGWAFWLFFWAGJWKAG"), ["C", "D", "E", "G", "H", "J", "K", "L", "W"]);
+        assert.deepStrictEqual(longestCommonSubsequence.solve("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "CCCDDEGDHAGKGLWAJWKJAWGKGWJAKLGGWAFWLFFWAGJWKAG"), ["C", "D", "E", "G", "H", "J", "K", "L", "W"]);
     }
 
     test_10() {
@@ -2682,7 +2711,7 @@ class LongestCommonSubsequence extends ProblemTests {
          */
 
         const longestCommonSubsequence = new this.Problem();
-        assert.deepEqual(longestCommonSubsequence.solve("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "CCCDDEGDHAGKGLWAJWKJAWGKGWJAKLGGWAFWLFFWAGJWKAGTUV"), ["C", "D", "E", "G", "H", "J", "K", "L", "T", "U", "V"]);
+        assert.deepStrictEqual(longestCommonSubsequence.solve("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "CCCDDEGDHAGKGLWAJWKJAWGKGWJAKLGGWAFWLFFWAGJWKAGTUV"), ["C", "D", "E", "G", "H", "J", "K", "L", "T", "U", "V"]);
     }
 }
 
@@ -2738,9 +2767,9 @@ class ContinuousMedianHandler extends ProblemTests {
         this.current_test_name = '[5, 10, 100] => [7.5, 10]';
         continuousMedianHandler.insert(5);
         continuousMedianHandler.insert(10);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 7.5);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 7.5);
         continuousMedianHandler.insert(100);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 10);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 10);
 
     }
 
@@ -2780,9 +2809,9 @@ class ContinuousMedianHandler extends ProblemTests {
         this.current_test_name = '[5, 10, 100] => [7.5, 10]';
         continuousMedianHandler.insert(5);
         continuousMedianHandler.insert(10);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 7.5);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 7.5);
         continuousMedianHandler.insert(100);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 10);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 10);
 
     }
 
@@ -2830,9 +2859,9 @@ class ContinuousMedianHandler extends ProblemTests {
         continuousMedianHandler.insert(5);
         continuousMedianHandler.insert(10);
         continuousMedianHandler.insert(100);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 10);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 10);
         continuousMedianHandler.insert(200);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 55);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 55);
 
     }
 
@@ -2890,9 +2919,9 @@ class ContinuousMedianHandler extends ProblemTests {
         continuousMedianHandler.insert(100);
         continuousMedianHandler.insert(200);
         continuousMedianHandler.insert(6);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 10);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 10);
         continuousMedianHandler.insert(13);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 11.5);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 11.5);
 
     }
 
@@ -2962,9 +2991,9 @@ class ContinuousMedianHandler extends ProblemTests {
         continuousMedianHandler.insert(6);
         continuousMedianHandler.insert(13);
         continuousMedianHandler.insert(14);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 13);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 13);
         continuousMedianHandler.insert(50);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 13.5);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 13.5);
 
     }
 
@@ -3046,9 +3075,9 @@ class ContinuousMedianHandler extends ProblemTests {
         continuousMedianHandler.insert(14);
         continuousMedianHandler.insert(50);
         continuousMedianHandler.insert(51);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 14);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 14);
         continuousMedianHandler.insert(52);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 32);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 32);
 
 
     }
@@ -3137,9 +3166,9 @@ class ContinuousMedianHandler extends ProblemTests {
         continuousMedianHandler.insert(51);
         continuousMedianHandler.insert(52);
         continuousMedianHandler.insert(1000);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 50);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 50);
         continuousMedianHandler.insert(10000);
-        assert.deepEqual(continuousMedianHandler.getMedian(), 50.5);
+        assert.deepStrictEqual(continuousMedianHandler.getMedian(), 50.5);
 
     }
 
@@ -3256,7 +3285,7 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3] => 4';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3]), 4);
+        assert.deepStrictEqual(minNumberOfJumps.solve([3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3]), 4);
     }
 
     test_2() {
@@ -3271,7 +3300,7 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[1] => 0';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([1]), 0);
+        assert.deepStrictEqual(minNumberOfJumps.solve([1]), 0);
 
     }
 
@@ -3287,7 +3316,7 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[1, 1] => 1';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([1, 1]), 1);
+        assert.deepStrictEqual(minNumberOfJumps.solve([1, 1]), 1);
 
     }
 
@@ -3303,7 +3332,7 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[3, 1] => 1';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([3, 1]), 1);
+        assert.deepStrictEqual(minNumberOfJumps.solve([3, 1]), 1);
     }
 
 
@@ -3319,7 +3348,7 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[1, 1, 1] => 2';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([1, 1, 1]), 2);
+        assert.deepStrictEqual(minNumberOfJumps.solve([1, 1, 1]), 2);
     }
 
     test_6() {
@@ -3334,7 +3363,7 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[2, 1, 1] => 1';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([2, 1, 1]), 1);
+        assert.deepStrictEqual(minNumberOfJumps.solve([2, 1, 1]), 1);
     }
 
     test_7() {
@@ -3349,7 +3378,7 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[2, 1, 2, 3, 1] => 2';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([2, 1, 2, 3, 1]), 2);
+        assert.deepStrictEqual(minNumberOfJumps.solve([2, 1, 2, 3, 1]), 2);
 
     }
 
@@ -3365,7 +3394,7 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[2, 1, 2, 3, 1, 1, 1] => 3';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([2, 1, 2, 3, 1, 1, 1]), 3);
+        assert.deepStrictEqual(minNumberOfJumps.solve([2, 1, 2, 3, 1, 1, 1]), 3);
 
     }
 
@@ -3382,7 +3411,7 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[2, 1, 2, 2, 1, 1, 1] => 4';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([2, 1, 2, 2, 1, 1, 1]), 4);
+        assert.deepStrictEqual(minNumberOfJumps.solve([2, 1, 2, 2, 1, 1, 1]), 4);
     }
 
 
@@ -3398,7 +3427,7 @@ class MinNumberOfJumps extends ProblemTests {
 
         this.current_test_name = '[3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3, 2, 6, 2, 1, 1, 1, 1] => 5';
         const minNumberOfJumps = new this.Problem();
-        assert.deepEqual(minNumberOfJumps.solve([3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3, 2, 6, 2, 1, 1, 1, 1]), 5);
+        assert.deepStrictEqual(minNumberOfJumps.solve([3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3, 2, 6, 2, 1, 1, 1, 1]), 5);
     }
 
 
@@ -3436,7 +3465,7 @@ class MultiStringSearch extends ProblemTests {
         this.current_test_name = '["this", "yo", "is", "a", "bigger", "string", "kappa"] => [true, false, true, true, false, true, false]';
         const multiStringSearch = new this.Problem();
 
-        assert.deepEqual(multiStringSearch.solve("this is a big string", ["this", "yo", "is", "a", "bigger", "string", "kappa"]), [true, false, true, true, false, true, false]);
+        assert.deepStrictEqual(multiStringSearch.solve("this is a big string", ["this", "yo", "is", "a", "bigger", "string", "kappa"]), [true, false, true, true, false, true, false]);
 
     }
 
@@ -3455,7 +3484,7 @@ class MultiStringSearch extends ProblemTests {
         this.current_test_name = '["abc", "mnopqr", "wyz", "no", "e", "tuuv"] => [true, true, false, true, true, false]';
         const multiStringSearch = new this.Problem();
 
-        assert.deepEqual(multiStringSearch.solve("abcdefghijklmnopqrstuvwxyz", ["abc", "mnopqr", "wyz", "no", "e", "tuuv"]), [true, true, false, true, true, false]);
+        assert.deepStrictEqual(multiStringSearch.solve("abcdefghijklmnopqrstuvwxyz", ["abc", "mnopqr", "wyz", "no", "e", "tuuv"]), [true, true, false, true, true, false]);
 
     }
 
@@ -3473,7 +3502,7 @@ class MultiStringSearch extends ProblemTests {
         this.current_test_name = '["abcdefghijklmnopqrstuvwxyz", "abc", "j", "mnopqr", "pqrstuvwxyz", "xyzz", "defh"] => [true, true, true, true, true, false, false]';
         const multiStringSearch = new this.Problem();
 
-        assert.deepEqual(multiStringSearch.solve("abcdefghijklmnopqrstuvwxyz", ["abcdefghijklmnopqrstuvwxyz", "abc", "j", "mnopqr", "pqrstuvwxyz", "xyzz", "defh"]), [true, true, true, true, true, false, false]);
+        assert.deepStrictEqual(multiStringSearch.solve("abcdefghijklmnopqrstuvwxyz", ["abcdefghijklmnopqrstuvwxyz", "abc", "j", "mnopqr", "pqrstuvwxyz", "xyzz", "defh"]), [true, true, true, true, true, false, false]);
     }
 
 
@@ -3491,7 +3520,7 @@ class MultiStringSearch extends ProblemTests {
         this.current_test_name = '["%Hj7", "8f198", "!)5", "!)!", "!!", "jh81", "j181hf"] => [false, true, true, true, false, false, false]';
         const multiStringSearch = new this.Problem();
 
-        assert.deepEqual(multiStringSearch.solve("hj!)!%Hj1jh8f1985n!)51", ["%Hj7", "8f198", "!)5", "!)!", "!!", "jh81", "j181hf"]), [false, true, true, true, false, false, false]);
+        assert.deepStrictEqual(multiStringSearch.solve("hj!)!%Hj1jh8f1985n!)51", ["%Hj7", "8f198", "!)5", "!)!", "!!", "jh81", "j181hf"]), [false, true, true, true, false, false, false]);
     }
 
     test_5() {
@@ -3508,7 +3537,7 @@ class MultiStringSearch extends ProblemTests {
         this.current_test_name = '["to", "Mary", "centers", "shop", "shopping", "string", "kappa"] => [true, true, false, true, true, false, false]';
         const multiStringSearch = new this.Problem();
 
-        assert.deepEqual(multiStringSearch.solve("Mary goes to the shopping center every week.", ["to", "Mary", "centers", "shop", "shopping", "string", "kappa"]), [true, true, false, true, true, false, false]);
+        assert.deepStrictEqual(multiStringSearch.solve("Mary goes to the shopping center every week.", ["to", "Mary", "centers", "shop", "shopping", "string", "kappa"]), [true, true, false, true, true, false, false]);
     }
 
     test_6() {
@@ -3525,7 +3554,7 @@ class MultiStringSearch extends ProblemTests {
         this.current_test_name = '["abcd", "acbd", "adbc", "dabc", "cbda", "cabd", "cdab"] => [false, false, false, false, true, false, false]';
         const multiStringSearch = new this.Problem();
 
-        assert.deepEqual(multiStringSearch.solve("adcb akfkw afnmc fkadn vkaca jdaf dacb cdba cbda", ["abcd", "acbd", "adbc", "dabc", "cbda", "cabd", "cdab"]), [false, false, false, false, true, false, false]);
+        assert.deepStrictEqual(multiStringSearch.solve("adcb akfkw afnmc fkadn vkaca jdaf dacb cdba cbda", ["abcd", "acbd", "adbc", "dabc", "cbda", "cabd", "cdab"]), [false, false, false, false, true, false, false]);
 
     }
 
@@ -3544,7 +3573,7 @@ class MultiStringSearch extends ProblemTests {
         this.current_test_name = '["tests", "testatk", "testiing", "trsatii", "test-taker", "test"] => [true, false, false, false, true, true]';
         const multiStringSearch = new this.Problem();
 
-        assert.deepEqual(multiStringSearch.solve("test testing testings tests testers test-takers", ["tests", "testatk", "testiing", "trsatii", "test-taker", "test"]), [true, false, false, false, true, true]);
+        assert.deepStrictEqual(multiStringSearch.solve("test testing testings tests testers test-takers", ["tests", "testatk", "testiing", "trsatii", "test-taker", "test"]), [true, false, false, false, true, true]);
     }
 
     test_8() {
@@ -3561,7 +3590,7 @@ class MultiStringSearch extends ProblemTests {
         this.current_test_name = '["abc", "akwbc", "awbc", "abafac", "ajjfbc", "abac", "jadfl"] => [false, false, false, false, false, false, true]';
         const multiStringSearch = new this.Problem();
 
-        assert.deepEqual(multiStringSearch.solve("ndbajwhfawkjljkfaopwdlaawjk dawkj awjkawkfjhkawk ahjwkjad jadfljawd", ["abc", "akwbc", "awbc", "abafac", "ajjfbc", "abac", "jadfl"]), [false, false, false, false, false, false, true]);
+        assert.deepStrictEqual(multiStringSearch.solve("ndbajwhfawkjljkfaopwdlaawjk dawkj awjkawkfjhkawk ahjwkjad jadfljawd", ["abc", "akwbc", "awbc", "abafac", "ajjfbc", "abac", "jadfl"]), [false, false, false, false, false, false, true]);
     }
 
     test_9() {
@@ -3578,7 +3607,7 @@ class MultiStringSearch extends ProblemTests {
         this.current_test_name = '["that", "the", "questions", "goes", "mountain", "passes", "passed", "going", "is"] => [false, true, false, false, false, false, false, true, true]';
         const multiStringSearch = new this.Problem();
 
-        assert.deepEqual(multiStringSearch.solve("Is this particular test going to pass or is it going to fail? That is the question.", ["that", "the", "questions", "goes", "mountain", "passes", "passed", "going", "is"]), [false, true, false, false, false, false, false, true, true]);
+        assert.deepStrictEqual(multiStringSearch.solve("Is this particular test going to pass or is it going to fail? That is the question.", ["that", "the", "questions", "goes", "mountain", "passes", "passed", "going", "is"]), [false, true, false, false, false, false, false, true, true]);
 
     }
 
@@ -3596,7 +3625,7 @@ class MultiStringSearch extends ProblemTests {
         this.current_test_name = '["everything", "inn", "that", "testers", "shall", "failure"] => [false, false, false, false, false, false]';
         const multiStringSearch = new this.Problem();
 
-        assert.deepEqual(multiStringSearch.solve("Everything in this test should fail.", ["everything", "inn", "that", "testers", "shall", "failure"]), [false, false, false, false, false, false]);
+        assert.deepStrictEqual(multiStringSearch.solve("Everything in this test should fail.", ["everything", "inn", "that", "testers", "shall", "failure"]), [false, false, false, false, false, false]);
     }
 
 }
@@ -3634,7 +3663,7 @@ class KnacksackProblem extends ProblemTests {
         this.current_test_name = '[10, [[1, 2], [4, 3], [5, 6], [6, 7]]] => [10, [1, 3]]';
         const knapsackProblem = new this.Problem();
 
-        assert.deepEqual(knapsackProblem.solve(10, [[1, 2], [4, 3], [5, 6], [6, 7]]), [10, [1, 3]]);
+        assert.deepStrictEqual(knapsackProblem.solve(10, [[1, 2], [4, 3], [5, 6], [6, 7]]), [10, [1, 3]]);
     }
 
 
@@ -3657,7 +3686,7 @@ class KnacksackProblem extends ProblemTests {
         this.current_test_name = '[11, [[1, 2], [4, 3], [5, 6], [6, 9]]] => [10, [0, 1, 2]]';
         const knapsackProblem = new this.Problem();
 
-        assert.deepEqual(knapsackProblem.solve(11, [[1, 2], [4, 3], [5, 6], [6, 9]]), [10, [0, 1, 2]]);
+        assert.deepStrictEqual(knapsackProblem.solve(11, [[1, 2], [4, 3], [5, 6], [6, 9]]), [10, [0, 1, 2]]);
     }
 
     test_3() {
@@ -3691,7 +3720,7 @@ class KnacksackProblem extends ProblemTests {
         this.current_test_name = '[200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [240, 40]]] => [1500, [3, 12, 14]]';
         const knapsackProblem = new this.Problem();
 
-        assert.deepEqual(knapsackProblem.solve(200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [240, 40]]), [1500, [3, 12, 14]]);
+        assert.deepStrictEqual(knapsackProblem.solve(200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [240, 40]]), [1500, [3, 12, 14]]);
 
     }
 
@@ -3726,7 +3755,7 @@ class KnacksackProblem extends ProblemTests {
         this.current_test_name = '[200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [255, 40]]] => [1505, [7, 12, 14, 15]]';
         const knapsackProblem = new this.Problem();
 
-        assert.deepEqual(knapsackProblem.solve(200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [255, 40]]), [1505, [7, 12, 14, 15]]);
+        assert.deepStrictEqual(knapsackProblem.solve(200, [[465, 100], [400, 85], [255, 55], [350, 45], [650, 130], [1000, 190], [455, 100], [100, 25], [1200, 190], [320, 65], [750, 100], [50, 45], [550, 65], [100, 50], [600, 70], [255, 40]]), [1505, [7, 12, 14, 15]]);
     }
 
     test_5() {
@@ -3749,7 +3778,7 @@ class KnacksackProblem extends ProblemTests {
         this.current_test_name = '[100, [[2, 1], [70, 70], [30, 30], [69, 69], [100, 100]]] => [101, [0, 2, 3]]';
         const knapsackProblem = new this.Problem();
 
-        assert.deepEqual(knapsackProblem.solve(100, [[2, 1], [70, 70], [30, 30], [69, 69], [100, 100]]), [101, [0, 2, 3]]);
+        assert.deepStrictEqual(knapsackProblem.solve(100, [[2, 1], [70, 70], [30, 30], [69, 69], [100, 100]]), [101, [0, 2, 3]]);
     }
 
     test_6() {
@@ -3772,7 +3801,7 @@ class KnacksackProblem extends ProblemTests {
         this.current_test_name = '[100, [[1, 2], [70, 70], [30, 30], [69, 69], [99, 100]]] => [100, [1, 2]]';
         const knapsackProblem = new this.Problem();
 
-        assert.deepEqual(knapsackProblem.solve(100, [[1, 2], [70, 70], [30, 30], [69, 69], [99, 100]]), [100, [1, 2]]);
+        assert.deepStrictEqual(knapsackProblem.solve(100, [[1, 2], [70, 70], [30, 30], [69, 69], [99, 100]]), [100, [1, 2]]);
 
     }
 
@@ -3796,7 +3825,7 @@ class KnacksackProblem extends ProblemTests {
         this.current_test_name = '[0, [[1, 2], [70, 70], [30, 30], [69, 69], [100, 100]]] => [0, []]';
         const knapsackProblem = new this.Problem();
 
-        assert.deepEqual(knapsackProblem.solve(0, [[1, 2], [70, 70], [30, 30], [69, 69], [100, 100]]), [0, []]);
+        assert.deepStrictEqual(knapsackProblem.solve(0, [[1, 2], [70, 70], [30, 30], [69, 69], [100, 100]]), [0, []]);
     }
 
 
@@ -3843,7 +3872,7 @@ class DiskStacking extends ProblemTests {
         this.current_test_name = '[[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 3, 1], [4, 4, 5]] => [[2, 1, 2], [3, 2, 3], [4, 4, 5]]';
         const diskStacking = new this.Problem();
 
-        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 3, 1], [4, 4, 5]]), [[2, 1, 2], [3, 2, 3], [4, 4, 5]]);
+        assert.deepStrictEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 3, 1], [4, 4, 5]]), [[2, 1, 2], [3, 2, 3], [4, 4, 5]]);
     }
 
     test_2() {
@@ -3863,7 +3892,7 @@ class DiskStacking extends ProblemTests {
         this.current_test_name = '[[2, 1, 2]] => [[2, 1, 2]]';
         const diskStacking = new this.Problem();
 
-        assert.deepEqual(diskStacking.solve([[2, 1, 2]]), [[2, 1, 2]]);
+        assert.deepStrictEqual(diskStacking.solve([[2, 1, 2]]), [[2, 1, 2]]);
     }
 
     test_3() {
@@ -3885,7 +3914,7 @@ class DiskStacking extends ProblemTests {
         this.current_test_name = '[[2, 1, 2], [3, 2, 3]] => [[2, 1, 2], [3, 2, 3]]';
         const diskStacking = new this.Problem();
 
-        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3]]), [[2, 1, 2], [3, 2, 3]]);
+        assert.deepStrictEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3]]), [[2, 1, 2], [3, 2, 3]]);
     }
 
     test_4() {
@@ -3907,7 +3936,7 @@ class DiskStacking extends ProblemTests {
         this.current_test_name = '[[2, 1, 2], [3, 2, 3], [2, 2, 8]] => [[2, 2, 8]]';
         const diskStacking = new this.Problem();
 
-        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8]]), [[2, 2, 8]]);
+        assert.deepStrictEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8]]), [[2, 2, 8]]);
     }
 
     test_5() {
@@ -3930,7 +3959,7 @@ class DiskStacking extends ProblemTests {
         this.current_test_name = '[[2, 1, 2], [3, 2, 3], [2, 3, 4]] => [[2, 1, 2], [3, 2, 3]]';
         const diskStacking = new this.Problem();
 
-        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 3, 4]]), [[2, 1, 2], [3, 2, 3]]);
+        assert.deepStrictEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 3, 4]]), [[2, 1, 2], [3, 2, 3]]);
     }
 
     test_6() {
@@ -3957,7 +3986,7 @@ class DiskStacking extends ProblemTests {
         this.current_test_name = '[[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]] => [[2, 1, 2], [3, 2, 3], [4, 4, 5]]';
         const diskStacking = new this.Problem();
 
-        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]]), [[2, 1, 2], [3, 2, 3], [4, 4, 5]]);
+        assert.deepStrictEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]]), [[2, 1, 2], [3, 2, 3], [4, 4, 5]]);
     }
 
     test_7() {
@@ -3983,7 +4012,7 @@ class DiskStacking extends ProblemTests {
         this.current_test_name = '[[2, 1, 2], [3, 2, 5], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]] => [[2, 3, 4], [4, 4, 5]]';
         const diskStacking = new this.Problem();
 
-        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 5], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]]), [[2, 3, 4], [4, 4, 5]]);
+        assert.deepStrictEqual(diskStacking.solve([[2, 1, 2], [3, 2, 5], [2, 2, 8], [2, 3, 4], [2, 2, 1], [4, 4, 5]]), [[2, 3, 4], [4, 4, 5]]);
     }
 
     test_8() {
@@ -4010,7 +4039,7 @@ class DiskStacking extends ProblemTests {
         this.current_test_name = '[[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 2, 1], [4, 4, 5], [1, 1, 4]] => [[1, 1, 4], [2, 2, 8]]';
         const diskStacking = new this.Problem();
 
-        assert.deepEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 2, 1], [4, 4, 5], [1, 1, 4]]), [[1, 1, 4], [2, 2, 8]]);
+        assert.deepStrictEqual(diskStacking.solve([[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 2, 1], [4, 4, 5], [1, 1, 4]]), [[1, 1, 4], [2, 2, 8]]);
     }
 
     test_9() {
@@ -4042,7 +4071,7 @@ class DiskStacking extends ProblemTests {
         this.current_test_name = '[[3, 3, 4], [2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [5, 5, 6], [1, 2, 1], [4, 4, 5], [1, 1, 4], [2, 2, 3]] => [[2, 2, 3], [3, 3, 4], [4, 4, 5], [5, 5, 6]]';
         const diskStacking = new this.Problem();
 
-        assert.deepEqual(diskStacking.solve([[3, 3, 4], [2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [5, 5, 6], [1, 2, 1], [4, 4, 5], [1, 1, 4], [2, 2, 3]]), [[2, 2, 3], [3, 3, 4], [4, 4, 5], [5, 5, 6]]);
+        assert.deepStrictEqual(diskStacking.solve([[3, 3, 4], [2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [5, 5, 6], [1, 2, 1], [4, 4, 5], [1, 1, 4], [2, 2, 3]]), [[2, 2, 3], [3, 3, 4], [4, 4, 5], [5, 5, 6]]);
     }
 
 }
@@ -4694,7 +4723,7 @@ class JuiceBottling extends ProblemTests {
         this.current_test_name = '[0, 1] => [1]';
         const juiceBottling = new this.Problem();
 
-        assert.deepEqual(juiceBottling.solve([0, 1]), [1]);
+        assert.deepStrictEqual(juiceBottling.solve([0, 1]), [1]);
     }
 
     test_2() {
@@ -4711,7 +4740,7 @@ class JuiceBottling extends ProblemTests {
         this.current_test_name = '[0, 1, 3] => [2]';
         const juiceBottling = new this.Problem();
 
-        assert.deepEqual(juiceBottling.solve([0, 1, 3]), [2]);
+        assert.deepStrictEqual(juiceBottling.solve([0, 1, 3]), [2]);
 
     }
 
@@ -4729,7 +4758,7 @@ class JuiceBottling extends ProblemTests {
         this.current_test_name = '[0, 2, 3] => [1, 1]';
         const juiceBottling = new this.Problem();
 
-        assert.deepEqual(juiceBottling.solve([0, 2, 3]), [1, 1]);
+        assert.deepStrictEqual(juiceBottling.solve([0, 2, 3]), [1, 1]);
 
     }
 
@@ -4746,7 +4775,7 @@ class JuiceBottling extends ProblemTests {
         this.current_test_name = '[0, 2, 3, 4] => [1, 1, 1]';
         const juiceBottling = new this.Problem();
 
-        assert.deepEqual(juiceBottling.solve([0, 2, 3, 4]), [1, 1, 1]);
+        assert.deepStrictEqual(juiceBottling.solve([0, 2, 3, 4]), [1, 1, 1]);
     }
 
     test_5() {
@@ -4762,7 +4791,7 @@ class JuiceBottling extends ProblemTests {
         this.current_test_name = '[0, 2, 5, 6] => [1, 2]';
         const juiceBottling = new this.Problem();
 
-        assert.deepEqual(juiceBottling.solve([0, 2, 5, 6]), [1, 2]);
+        assert.deepStrictEqual(juiceBottling.solve([0, 2, 5, 6]), [1, 2]);
     }
 
     test_6() {
@@ -4778,7 +4807,7 @@ class JuiceBottling extends ProblemTests {
         this.current_test_name = '[0, 2, 5, 6, 7] => [2, 2]';
         const juiceBottling = new this.Problem();
 
-        assert.deepEqual(juiceBottling.solve([0, 2, 5, 6, 7]), [2, 2]);
+        assert.deepStrictEqual(juiceBottling.solve([0, 2, 5, 6, 7]), [2, 2]);
     }
 
 
@@ -4795,7 +4824,7 @@ class JuiceBottling extends ProblemTests {
         this.current_test_name = '[0, 2, 5, 6, 11] => [4]';
         const juiceBottling = new this.Problem();
 
-        assert.deepEqual(juiceBottling.solve([0, 2, 5, 6, 11]), [4]);
+        assert.deepStrictEqual(juiceBottling.solve([0, 2, 5, 6, 11]), [4]);
     }
 
     test_8() {
@@ -4811,7 +4840,7 @@ class JuiceBottling extends ProblemTests {
         this.current_test_name = '[0, 2, 5, 10, 11] => [1, 3]';
         const juiceBottling = new this.Problem();
 
-        assert.deepEqual(juiceBottling.solve([0, 2, 5, 10, 11]), [1, 3]);
+        assert.deepStrictEqual(juiceBottling.solve([0, 2, 5, 10, 11]), [1, 3]);
     }
 
     test_9() {
@@ -4827,7 +4856,7 @@ class JuiceBottling extends ProblemTests {
         this.current_test_name = '[0, 5, 6, 7, 8, 9, 10] => [1, 1, 1, 1, 1, 1]';
         const juiceBottling = new this.Problem();
 
-        assert.deepEqual(juiceBottling.solve([0, 5, 6, 7, 8, 9, 10]), [1, 1, 1, 1, 1, 1]);
+        assert.deepStrictEqual(juiceBottling.solve([0, 5, 6, 7, 8, 9, 10]), [1, 1, 1, 1, 1, 1]);
     }
 
     test_10() {
@@ -4843,7 +4872,7 @@ class JuiceBottling extends ProblemTests {
         this.current_test_name = '[0, 2, 5, 4, 4] => [2, 2]';
         const juiceBottling = new this.Problem();
 
-        assert.deepEqual(juiceBottling.solve([0, 2, 5, 4, 4]), [2, 2]);
+        assert.deepStrictEqual(juiceBottling.solve([0, 2, 5, 4, 4]), [2, 2]);
     }
 
 
@@ -4892,7 +4921,7 @@ class TopologicalSort extends ProblemTests {
         const topologicalSort = new this.Problem();
         const solution = topologicalSort.solve([1, 2, 3, 4], [[1, 2], [1, 3], [3, 2], [4, 2], [4, 3]]);
 
-        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4], [[1, 2], [1, 3], [3, 2], [4, 2], [4, 3]]), [4, 1, 3, 2]);
+        assert.deepStrictEqual(topologicalSort.solve([1, 2, 3, 4], [[1, 2], [1, 3], [3, 2], [4, 2], [4, 3]]), [4, 1, 3, 2]);
     }
 
     test_2() {
@@ -4922,7 +4951,7 @@ class TopologicalSort extends ProblemTests {
         this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [1, 6], [1, 2], [7, 6]]) => [8, 5, 7, 3, 1, 4, 6, 2]';
         const topologicalSort = new this.Problem();
 
-        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [1, 6], [1, 2], [7, 6]]), [8, 5, 7, 3, 1, 4, 6, 2]);
+        assert.deepStrictEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [1, 6], [1, 2], [7, 6]]), [8, 5, 7, 3, 1, 4, 6, 2]);
     }
 
     test_3() {
@@ -4952,7 +4981,7 @@ class TopologicalSort extends ProblemTests {
         this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [6, 7], [1, 2], [7, 6]]) => []';
         const topologicalSort = new this.Problem();
 
-        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [6, 7], [1, 2], [7, 6]]), []);
+        assert.deepStrictEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [6, 7], [1, 2], [7, 6]]), []);
     }
 
     test_4() {
@@ -4985,7 +5014,7 @@ class TopologicalSort extends ProblemTests {
         this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [1, 6], [1, 2], [7, 6], [4, 6], [6, 2], [2, 3]]) => []';
         const topologicalSort = new this.Problem();
 
-        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [1, 6], [1, 2], [7, 6], [4, 6], [6, 2], [2, 3]]), []);
+        assert.deepStrictEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[3, 1], [8, 1], [8, 7], [5, 7], [5, 2], [1, 4], [1, 6], [1, 2], [7, 6], [4, 6], [6, 2], [2, 3]]), []);
     }
 
 
@@ -5015,7 +5044,7 @@ class TopologicalSort extends ProblemTests {
         this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 1]]) => []';
         const topologicalSort = new this.Problem();
 
-        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 1]]), []);
+        assert.deepStrictEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 1]]), []);
     }
 
     test_6() {
@@ -5044,7 +5073,7 @@ class TopologicalSort extends ProblemTests {
         this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8, 9], [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [7, 6], [7, 8], [8, 1]]) => [9, 7, 8, 1, 2, 3, 4, 5, 6]';
         const topologicalSort = new this.Problem();
 
-        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8, 9], [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [7, 6], [7, 8], [8, 1]]), [9, 7, 8, 1, 2, 3, 4, 5, 6]);
+        assert.deepStrictEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8, 9], [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [7, 6], [7, 8], [8, 1]]), [9, 7, 8, 1, 2, 3, 4, 5, 6]);
     }
 
     test_7() {
@@ -5073,7 +5102,7 @@ class TopologicalSort extends ProblemTests {
         this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [3, 5], [4, 6], [3, 6], [1, 7], [7, 8], [1, 8], [2, 8]]) => [4, 3, 5, 6, 1, 2, 7, 8]';
         const topologicalSort = new this.Problem();
 
-        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [3, 5], [4, 6], [3, 6], [1, 7], [7, 8], [1, 8], [2, 8]]), [4, 3, 5, 6, 1, 2, 7, 8]);
+        assert.deepStrictEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [3, 5], [4, 6], [3, 6], [1, 7], [7, 8], [1, 8], [2, 8]]), [4, 3, 5, 6, 1, 2, 7, 8]);
     }
 
     test_8() {
@@ -5107,7 +5136,7 @@ class TopologicalSort extends ProblemTests {
         this.current_test_name = '([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]) => [1, 2, 3, 4, 5, 6, 7, 8]';
         const topologicalSort = new this.Problem();
 
-        assert.deepEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]), [1, 2, 3, 4, 5, 6, 7, 8]);
+        assert.deepStrictEqual(topologicalSort.solve([1, 2, 3, 4, 5, 6, 7, 8], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]), [1, 2, 3, 4, 5, 6, 7, 8]);
     }
 
     test_9() {
@@ -5159,11 +5188,11 @@ class TopologicalSort extends ProblemTests {
         this.current_test_name = '([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [2, 12]]) => [1, 7, 6, 2, 3, 10, 11, 12, 5, 4, 9, 8, 0]';
         const topologicalSort = new this.Problem();
 
-        assert.deepEqual(topologicalSort.solve([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [2, 12]]), [1, 7, 6, 2, 3, 10, 11, 12, 5, 4, 9, 8, 0]);
+        assert.deepStrictEqual(topologicalSort.solve([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [2, 12]]), [1, 7, 6, 2, 3, 10, 11, 12, 5, 4, 9, 8, 0]);
     }
 
 
-    test_10(){
+    test_10() {
         /**
          * {
             "isValidTopologicalOrder": false,
@@ -5212,22 +5241,31 @@ class TopologicalSort extends ProblemTests {
         this.current_test_name = '([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [12, 2]]) => []';
         const topologicalSort = new this.Problem();
 
-        assert.deepEqual(topologicalSort.solve([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [12, 2]]), []);
+        assert.deepStrictEqual(topologicalSort.solve([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [12, 2]]), []);
     }
 
 
 
 }
 
-class KruskalsAlgorithms extends ProblemTests{
+class KruskalsAlgorithm extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
-        this.tests.push(() => this.test_1);
-        this.tests.push(() => this.test_2);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        // this.tests.push(() => this.test_10());
     }
 
-    test_1(){
+    test_1() {
         /**
          * [
             [
@@ -5251,13 +5289,13 @@ class KruskalsAlgorithms extends ProblemTests{
             }
          */
 
-        this.current_test_name = '([[1, 1]], [[0, 1]]) => [[1, 1], [0, 1]]';
+        this.current_test_name = '([ [ [1, 1] ], [ [0, 1] ] ]) => [[1, 1], [0, 1]]';
         const kruskalsAlgorithms = new this.Problem();
 
-        assert.deepEqual(kruskalsAlgorithms.solve([[1, 1]], [[0, 1]]), [[1, 1], [0, 1]]);
+        assert.deepStrictEqual(kruskalsAlgorithms.solve([[[1, 1]], [[0, 1]]]), [[[1, 1]], [[0, 1]]]);
     }
 
-    test_2(){
+    test_2() {
         /**
          * [
             [
@@ -5289,11 +5327,548 @@ class KruskalsAlgorithms extends ProblemTests{
             }
          */
 
-        this.current_test_name = '([[1, 1]], [[0, 1], [2, 2]], [[1, 2]]) => [[1, 1], [0, 1], [2, 2]]';
+        this.current_test_name = '([ [ [1, 1] ], [ [0, 1], [2, 2] ], [ [1, 2] ] ]) => [[1, 1], [0, 1], [2, 2]]';
         const kruskalsAlgorithms = new this.Problem();
 
-        assert.deepEqual(kruskalsAlgorithms.solve([[1, 1]], [[0, 1], [2, 2]], [[1, 2]]), [[1, 1], [0, 1], [2, 2]]);
+        assert.deepStrictEqual(kruskalsAlgorithms.solve([[[1, 1]], [[0, 1], [2, 2]], [[1, 2]]]),
+            [
+                [
+                    [1, 1]
+                ],
+                [
+                    [0, 1],
+                    [2, 2]
+                ],
+                [
+                    [1, 2]
+                ]
+            ]);
+
     }
+
+    test_3() {
+        /**
+         * [
+            [
+                [1, 3],
+                [2, 5]
+            ],
+            [
+                [0, 3],
+                [3, 12]
+            ],
+            [
+                [0, 5]
+            ],
+            [
+                [1, 12]
+            ]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "edges": [
+                [
+                [1, 3],
+                [2, 5]
+                ],
+                [
+                [0, 3],
+                [2, 10],
+                [3, 12]
+                ],
+                [
+                [0, 5],
+                [1, 10]
+                ],
+                [
+                [1, 12]
+                ]
+            ]
+            }
+         */
+
+        this.current_test_name = '([[1, 3], [2, 5]], [[0, 3], [3, 12]], [[0, 5]], [[1, 12]]) => [[1, 3], [0, 3], [2, 5], [3, 12]]';
+        const kruskalsAlgorithms = new this.Problem();
+
+        assert.deepStrictEqual(kruskalsAlgorithms.solve([[[1, 3], [2, 5]], [[0, 3], [3, 12]], [[0, 5]], [[1, 12]]]),
+            [
+                [
+                    [1, 3],
+                    [2, 5]
+                ],
+                [
+                    [0, 3],
+                    [3, 12]
+                ],
+                [
+                    [0, 5]
+                ],
+                [
+                    [1, 12]
+                ]
+            ]);
+    }
+
+
+    test_4() {
+        /**
+         * [
+            [
+                [1, 3],
+                [2, 5]
+            ],
+            [
+                [0, 3],
+                [3, 12],
+                [4, 1]
+            ],
+            [
+                [0, 5]
+            ],
+            [
+                [1, 12]
+            ],
+            [
+                [1, 1]
+            ]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "edges": [
+                [
+                [1, 3],
+                [2, 5]
+                ],
+                [
+                [0, 3],
+                [2, 10],
+                [3, 12],
+                [4, 1]
+                ],
+                [
+                [0, 5],
+                [1, 10],
+                [4, 7]
+                ],
+                [
+                [1, 12]
+                ],
+                [
+                [1, 1],
+                [2, 7]
+                ]
+            ]
+            }
+         */
+
+        this.current_test_name = '([[1, 3], [2, 5]], [[0, 3], [3, 12], [4, 1]], [[0, 5]], [[1, 12]], [[1, 1]]) => [[1, 3], [0, 3], [4, 1], [2, 5], [3, 12]]';
+        const kruskalsAlgorithms = new this.Problem();
+
+        assert.deepEqual(kruskalsAlgorithms.solve([
+            [
+                [1, 3],
+                [2, 5]
+            ],
+            [
+                [0, 3],
+                [2, 10],
+                [3, 12],
+                [4, 1]
+            ],
+            [
+                [0, 5],
+                [1, 10],
+                [4, 7]
+            ],
+            [
+                [1, 12]
+            ],
+            [
+                [1, 1],
+                [2, 7]
+            ]
+        ]),
+            [[[1, 3], [2, 5]], [[4, 1], [0, 3], [3, 12]], [[0, 5]], [[1, 12]], [[1, 1]]]);
+    }
+
+
+
+    test_5() {
+        /**
+         * [
+            [
+                [1, 3],
+                [2, 5]
+            ],
+            [
+                [0, 3],
+                [4, 1]
+            ],
+            [
+                [0, 5]
+            ],
+            [
+                [4, 11]
+            ],
+            [
+                [1, 1],
+                [3, 11]
+            ]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "edges": [
+                [
+                [1, 3],
+                [2, 5]
+                ],
+                [
+                [0, 3],
+                [2, 10],
+                [3, 12],
+                [4, 1]
+                ],
+                [
+                [0, 5],
+                [1, 10],
+                [4, 7]
+                ],
+                [
+                [1, 12],
+                [4, 11]
+                ],
+                [
+                [1, 1],
+                [2, 7],
+                [3, 11]
+                ]
+            ]
+            }
+         */
+
+        this.current_test_name = '([[1, 3], [2, 5]], [[0, 3], [4, 1]], [[0, 5]], [[4, 11]], [[1, 1], [3, 11]]) => [[1, 3], [0, 3], [4, 1], [2, 5], [3, 11]]';
+        const kruskalsAlgorithms = new this.Problem();
+
+        compareNestedLists(kruskalsAlgorithms.solve([[
+            [1, 3],
+            [2, 5]
+        ],
+        [
+            [0, 3],
+            [2, 10],
+            [3, 12],
+            [4, 1]
+        ],
+        [
+            [0, 5],
+            [1, 10],
+            [4, 7]
+        ],
+        [
+            [1, 12],
+            [4, 11]
+        ],
+        [
+            [1, 1],
+            [2, 7],
+            [3, 11]
+        ]
+        ]),
+            [
+                [
+                    [1, 3],
+                    [2, 5]
+                ],
+                [
+                    [0, 3],
+                    [4, 1]
+                ],
+                [
+                    [0, 5]
+                ],
+                [
+                    [4, 11]
+                ],
+                [
+                    [1, 1],
+                    [3, 11]
+                ]
+            ]);
+
+        // assert.deepEqual(kruskalsAlgorithms.solve( [
+        //     [
+        //       [1, 3],
+        //       [2, 5]
+        //     ],
+        //     [
+        //       [0, 3],
+        //       [2, 10],
+        //       [3, 12],
+        //       [4, 1]
+        //     ],
+        //     [
+        //       [0, 5],
+        //       [1, 10],
+        //       [4, 7]
+        //     ],
+        //     [
+        //       [1, 12],
+        //       [4, 11]
+        //     ],
+        //     [
+        //       [1, 1],
+        //       [2, 7],
+        //       [3, 11]
+        //     ]
+        //   ]),
+        // [
+        //     [
+        //       [1, 3],
+        //       [2, 5]
+        //     ],
+        //     [
+        //       [0, 3],
+        //       [4, 1]
+        //     ],
+        //     [
+        //       [0, 5]
+        //     ],
+        //     [
+        //       [4, 11]
+        //     ],
+        //     [
+        //       [1, 1],
+        //       [3, 11]
+        //     ]
+        //   ]);
+    }
+
+    test_6() {
+
+
+        /**
+         * [
+            [
+                [1, 7]
+            ],
+            [
+                [0, 7],
+                [2, 6],
+                [4, 3]
+            ],
+            [
+                [1, 6]
+            ],
+            [
+                [4, 2]
+            ],
+            [
+                [1, 3],
+                [3, 2]
+            ]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "edges": [
+                [
+                [1, 7]
+                ],
+                [
+                [0, 7],
+                [2, 6],
+                [4, 3]
+                ],
+                [
+                [1, 6]
+                ],
+                [
+                [4, 2]
+                ],
+                [
+                [1, 3],
+                [3, 2]
+                ]
+            ]
+            }
+         */
+
+
+        this.current_test_name = '([[1, 7]], [[0, 7], [2, 6], [4, 3]], [[1, 6]], [[4, 2]], [[1, 3], [3, 2]]) => [[1, 7], [4, 2], [3, 2], [2, 6]]';
+        const kruskalsAlgorithms = new this.Problem();
+
+        assert.deepEqual(kruskalsAlgorithms.solve([[[1, 7]], [[0, 7], [2, 6], [4, 3]], [[1, 6]], [[4, 2]], [[1, 3], [3, 2]]]),
+            [[[1, 7]], [[4, 3], [2, 6], [0, 7]], [[1, 6]], [[4, 2]], [[3, 2], [1, 3]]]);
+
+    }
+
+    test_7() {
+        /**
+         * [
+            [
+                [1, 7]
+            ],
+            [
+                [0, 7],
+                [2, 6],
+                [4, 3]
+            ],
+            [
+                [1, 6]
+            ],
+            [
+                [4, 2]
+            ],
+            [
+                [1, 3],
+                [3, 2]
+            ]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "edges": [
+                [
+                [1, 7]
+                ],
+                [
+                [0, 7],
+                [2, 6],
+                [3, 20],
+                [4, 3]
+                ],
+                [
+                [1, 6],
+                [3, 14]
+                ],
+                [
+                [1, 20],
+                [2, 14],
+                [4, 2]
+                ],
+                [
+                [1, 3],
+                [3, 2]
+                ]
+            ]
+            }
+         */
+
+        this.current_test_name = '([[1, 7]], [[0, 7], [2, 6], [3, 20], [4, 3]], [[1, 6], [3, 14]], [[1, 20], [2, 14], [4, 2]], [[1, 3], [3, 2]]) => [[1, 7], [4, 3], [2, 6], [3, 14]]';
+        const kruskalsAlgorithms = new this.Problem();
+
+        assert.deepEqual(kruskalsAlgorithms.solve([[[1, 7]], [[0, 7], [2, 6], [3, 20], [4, 3]], [[1, 6], [3, 14]], [[1, 20], [2, 14], [4, 2]], [[1, 3], [3, 2]]]),
+            [[[1, 7]], [[4, 3], [2, 6], [0, 7]], [[1, 6]], [[4, 2]], [[3, 2], [1, 3]]]);
+    }
+
+    test_8() {
+        /**
+         * [
+            [
+                [2, 5]
+            ],
+            [
+                [2, 6],
+                [4, 3]
+            ],
+            [
+                [0, 5],
+                [1, 6]
+            ],
+            [
+                [4, 2]
+            ],
+            [
+                [1, 3],
+                [3, 2]
+            ]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "edges": [
+                [
+                [1, 7],
+                [2, 5]
+                ],
+                [
+                [0, 7],
+                [2, 6],
+                [3, 20],
+                [4, 3]
+                ],
+                [
+                [0, 5],
+                [1, 6],
+                [3, 14]
+                ],
+                [
+                [1, 20],
+                [2, 14],
+                [4, 2]
+                ],
+                [
+                [1, 3],
+                [3, 2]
+                ]
+            ]
+            }
+         */
+
+        this.current_test_name = '([[1, 7], [2, 5]], [[0, 7], [2, 6], [3, 20], [4, 3]], [[0, 5], [1, 6], [3, 14]], [[1, 20], [2, 14], [4, 2]], [[1, 3], [3, 2]]) => [[1, 7], [4, 3], [2, 5], [3, 14]]';
+        const kruskalsAlgorithms = new this.Problem();
+
+        assert.deepEqual(kruskalsAlgorithms.solve([[[1, 7], [2, 5]], [[0, 7], [2, 6], [3, 20], [4, 3]], [[0, 5], [1, 6], [3, 14]], [[1, 20], [2, 14], [4, 2]], [[1, 3], [3, 2]]]),
+            [[[2, 5]], [[4, 3], [2, 6]], [[0, 5], [1, 6]], [[4, 2]], [[3, 2], [1, 3]]]);
+    }
+
+    test_9() {
+        /**
+         * [
+            [
+                [1, 1]
+            ],
+            [
+                [0, 1]
+            ],
+            [
+                [3, 1]
+            ],
+            [
+                [2, 1]
+            ]
+            ]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "edges": [
+                [
+                [1, 1]
+                ],
+                [
+                [0, 1]
+                ],
+                [
+                [3, 1]
+                ],
+                [
+                [2, 1]
+                ]
+            ]
+            }
+         */
+
+        this.current_test_name = '([[1, 1]], [[0, 1]], [[3, 1]], [[2, 1]]) => [[1, 1], [0, 1], [3, 1], [2, 1]]';
+        const kruskalsAlgorithms = new this.Problem();
+
+        assert.deepEqual(kruskalsAlgorithms.solve([[[1, 1]], [[0, 1]], [[3, 1]], [[2, 1]]]),
+            [[[1, 1]], [[0, 1]], [[3, 1]], [[2, 1]]]);
+    }
+
+
 }
 
 
@@ -5320,7 +5895,7 @@ const TEST_DICTIONARY = {
     'maximize-expression': MaximizeExpression,
     'juice-bottling': JuiceBottling,
     'topological-sort': TopologicalSort,
-    'kruskals-algorithms': KruskalsAlgorithms
+    'kruskals-algorithm': KruskalsAlgorithm
 }
 
 module.exports = TEST_DICTIONARY;

@@ -86,7 +86,7 @@ class CharacterReplacement {
 			//Max Length is the length of the longest substring containing the same letter that can be obtained after performing at most k operations.
             max = Math.max(max, window);
 
-            rught++;
+            right++;
         }
 
         return max;
