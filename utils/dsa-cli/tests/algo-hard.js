@@ -5300,7 +5300,6 @@ class KruskalsAlgorithms extends ProblemTests{
 
 
 
-
 const TEST_DICTIONARY = {
     'subarray-sort': SubarraySort,
     'min-rewards': MinRewards,
