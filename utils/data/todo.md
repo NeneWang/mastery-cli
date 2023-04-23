@@ -71,6 +71,8 @@ Which means
 - From now on your approach into learning things are into how you could you build an AI/CS/Datastructure to master this skillset for me type of approach?
 - Mastery of CS is the mastery of all, and I want to master all, therefore I want to master CS.
 - Mastery of Physical Craftmanship  high plane.(Anything that can't be digitalized.)
+- To add into the 
+- Watching video lectures, are still useful and adding general knowledge to automatic learning is still useful as they help digesting the contents.
 
 
 
@@ -78,6 +80,18 @@ Which means
 2. Image Processing.
 3. Tree-Branch Search AI Strategies.
 4. Data Science and Math.
+
+
+### Classes
+
+- Accept that taking a exam, you might have dumb ass mistakes like just recently April 18-2023 I confused DFS with BFS for some shit reason so I got -10, when I could have 84 for the exam like fkkk.
+- How do I avoid this kind of mistakes?
+  - I was already making the DFS and BFS mistake already at the practices, why was that happening?
+  - Lack of Sleep?
+  - They were easy problems so I must have lowered my guard.
+  - Next time I should double check specially dumb mistakes.
+  - At least I learnt that some things do belong to Anki, (Exact midterms slides) and others do belong to long term maid sets (Basic understanding so far.)
+- I should accept that what is important is the test sets that I create for me to improve on the long run: Understanding of AI, and better study skills (Flashing cards and so forth)
 
 ## About Inheriting My Father's Business
 
@@ -113,6 +127,8 @@ Things that I believe I should focus on learning
 - I think problem solving at least with the ideas of cues is the generation of patterns.
 - Sequences can be time, space, or any measurable count.
 - Patterns is the prediction of an output over a sequence.
+- Visualization of algorithms does, is great for understanding the concepts => You should try to visualize them all.
+  - And then run in your head how it would work. => Your algorithmic hints could be your pictures. But is there a quick way to add that?
 - For this to work my biggest iddle is in the inbetween recollection of things. 
 - Sometimes the problem is looking at "What is inside, or what's in the world that relates to this symbol?"
   - Is about finding cues about where to research and quickly spin up the world to figure out the answers for where to focus the research.
@@ -222,6 +238,21 @@ What improvements on these process can be done?
 - 
 
 
+### What to do on my 6 month mental-break?
+
+Should I focus on career over passion projects? What is the advantage of each?
+
+- I study algorithms => Create graphs and charts. => Probably need to repurchase Algoexperts or at least record the hard problems.
+- I study and improve at math => Calculus, Data Science Math, Strong Understanding of Statistics, Number Theory
+- Get lean, get big, Learn how to massage, morning routine and strong diet.
+- Passion Project? => Get strong at Flutter - Take advantage of MacOS
+  - Book Project: Flutter
+  - Any project that her brother/syster might want me to do and stuff.
+- 
+
+
+Low Priorty:
+- Perphaps practice more car driving with mom's car? Low
 
 
 
