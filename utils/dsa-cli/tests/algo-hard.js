@@ -2,6 +2,7 @@
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
 const maximizeExpression = require('../solutions/maximize-expression');
+const { looselyDeepEqual } = require('../functions');
 
 function compareNestedLists(a, b) {
     if (typeof a !== typeof b) {
@@ -5872,6 +5873,146 @@ class KruskalsAlgorithm extends ProblemTests {
 }
 
 
+class BoggleBoard extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+
+    }
+
+    test_1() {
+        /**
+         * ["this", "is", "simple", "a", "boggle", "board", "NOTRE-PEATED"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "board": [
+                ["t", "h", "i", "s", "i", "s", "a"],
+                ["s", "i", "m", "p", "l", "e", "x"],
+                ["b", "x", "x", "x", "x", "e", "b"],
+                ["x", "o", "g", "g", "l", "x", "o"],
+                ["x", "x", "x", "D", "T", "r", "a"],
+                ["R", "E", "P", "E", "A", "d", "x"],
+                ["x", "x", "x", "x", "x", "x", "x"],
+                ["N", "O", "T", "R", "E", "-", "P"],
+                ["x", "x", "D", "E", "T", "A", "E"]
+            ],
+            "words": ["this", "is", "not", "a", "simple", "boggle", "board", "test", "REPEATED", "NOTRE-PEATED"]
+            }
+         */
+
+        this.current_test_name = '(["this", "is", "simple", "a", "boggle", "board", "NOTRE-PEATED"], [["t", "h", "i", "s", "i", "s", "a"], ["s", "i", "m", "p", "l", "e", "x"], ["b", "x", "x", "x", "x", "e", "b"], ["x", "o", "g", "g", "l", "x", "o"], ["x", "x", "x", "D", "T", "r", "a"], ["R", "E", "P", "E", "A", "d", "x"], ["x", "x", "x", "x", "x", "x", "x"], ["N", "O", "T", "R", "E", "-", "P"], ["x", "x", "D", "E", "T", "A", "E"]]) => ["this", "is", "a", "simple", "boggle", "board", "NOTRE-PEATED"]';
+        const boggleBoard = new this.Problem();
+
+        looselyDeepEqual(boggleBoard.solve([["t", "h", "i", "s", "i", "s", "a"], ["s", "i", "m", "p", "l", "e", "x"], ["b", "x", "x", "x", "x", "e", "b"], ["x", "o", "g", "g", "l", "x", "o"], ["x", "x", "x", "D", "T", "r", "a"], ["R", "E", "P", "E", "A", "d", "x"], ["x", "x", "x", "x", "x", "x", "x"], ["N", "O", "T", "R", "E", "-", "P"], ["x", "x", "D", "E", "T", "A", "E"]], ["this", "is", "simple", "a", "boggle", "board", "NOTRE-PEATED"]),
+            ["this", "is", "a", "simple", "boggle", "board", "NOTRE-PEATED"]);
+
+    }
+
+    test_2() {
+        /**
+         * ["yours", "help", "danger", "san", "at"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "board": [
+                ["y", "g", "f", "y", "e", "i"],
+                ["c", "o", "r", "p", "o", "u"],
+                ["j", "u", "z", "s", "e", "l"],
+                ["s", "y", "u", "r", "h", "p"],
+                ["e", "a", "e", "g", "n", "d"],
+                ["h", "e", "l", "s", "a", "t"]
+            ],
+            "words": ["san", "sana", "at", "vomit", "yours", "help", "end", "been", "bed", "danger", "calm", "ok", "chaos", "complete", "rear", "going", "storm", "face", "epual", "dangerous"]
+            }
+         */
+
+        this.current_test_name = '(["yours", "help", "danger", "san", "at"], [["y", "g", "f", "y", "e", "i"], ["c", "o", "r", "p", "o", "u"], ["j", "u", "z", "s", "e", "l"], ["s", "y", "u", "r", "h", "p"], ["e", "a", "e", "g", "n", "d"], ["h", "e", "l", "s", "a", "t"]]) => ["yours", "help", "danger", "san", "at"]';
+        const boggleBoard = new this.Problem();
+
+        looselyDeepEqual(boggleBoard.solve([["y", "g", "f", "y", "e", "i"], ["c", "o", "r", "p", "o", "u"], ["j", "u", "z", "s", "e", "l"], ["s", "y", "u", "r", "h", "p"], ["e", "a", "e", "g", "n", "d"], ["h", "e", "l", "s", "a", "t"]], ["yours", "help", "danger", "san", "at"]),
+            ["yours", "help", "danger", "san", "at"]);
+    }
+
+
+    test_3() {
+        /**
+         * ["agmsy", "agmsytojed", "agmsytojedinhcbfl"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "board": [
+                ["a", "b", "c", "d", "e"],
+                ["f", "g", "h", "i", "j"],
+                ["k", "l", "m", "n", "o"],
+                ["p", "q", "r", "s", "t"],
+                ["u", "v", "w", "x", "y"]
+            ],
+            "words": ["agmsy", "agmsytojed", "agmsytojedinhcbgl", "agmsytojedinhcbfl"]
+            }
+         */
+
+        this.current_test_name = "(['agmsy', 'agmsytojed', 'agmsytojedinhcbfl'], [['a', 'b', 'c', 'd', 'e'], ['f', 'g', 'h', 'i', 'j'], ['k', 'l', 'm', 'n', 'o'], ['p', 'q', 'r', 's', 't'], ['u', 'v', 'w', 'x', 'y']]) => ['agmsy', 'agmsytojed', 'agmsytojedinhcbfl']";
+        const boggleBoard = new this.Problem();
+
+        looselyDeepEqual(boggleBoard.solve([["a", "b", "c", "d", "e"], ["f", "g", "h", "i", "j"], ["k", "l", "m", "n", "o"], ["p", "q", "r", "s", "t"], ["u", "v", "w", "x", "y"]], ["agmsy", "agmsytojed", "agmsytojedinhcbgl", "agmsytojedinhcbfl"]),
+            ["agmsy", "agmsytojed", "agmsytojedinhcbfl"]);
+
+    }
+
+    test_4() {
+        /**
+         * ["adbc", "adcb", "acbd", "acdb", "abcd", "abdc"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "board": [
+                ["a", "b"],
+                ["c", "d"]
+            ],
+            "words": ["abcd", "abdc", "acbd", "acdb", "adbc", "adcb", "abca"]
+            }
+         */
+
+        this.current_test_name = "(['adbc', 'adcb', 'acbd', 'acdb', 'abcd', 'abdc'], [['a', 'b'], ['c', 'd']]) => ['adbc', 'adcb', 'acbd', 'acdb', 'abcd', 'abdc']";
+        const boggleBoard = new this.Problem();
+
+        looselyDeepEqual(boggleBoard.solve([["a", "b"], ["c", "d"]], ["abcd", "abdc", "acbd", "acdb", "adbc", "adcb", "abca"]),
+            ["adbc", "adcb", "acbd", "acdb", "abcd", "abdc"]);
+    }
+
+    test_5() {
+        /**
+         * ["frozen", "rope", "kappa", "before", "obligate", "rotten", "teleport"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "board": [
+                ["f", "t", "r", "o", "p", "i", "k", "b", "o"],
+                ["r", "w", "l", "p", "e", "u", "e", "a", "b"],
+                ["j", "o", "t", "s", "e", "l", "f", "l", "p"],
+                ["s", "z", "u", "t", "h", "u", "o", "p", "i"],
+                ["k", "a", "e", "g", "n", "d", "r", "g", "a"],
+                ["h", "n", "l", "s", "a", "t", "e", "t", "x"]
+            ],
+            "words": ["frozen", "rotten", "teleport", "city", "zutgatz", "kappa", "before", "rope", "obligate", "annoying"]
+            }
+         */
+
+        this.current_test_name = "(['frozen', 'rope', 'kappa', 'before', 'obligate', 'rotten', 'teleport'], [['f', 't', 'r', 'o', 'p', 'i', 'k', 'b', 'o'], ['r', 'w', 'l', 'p', 'e', 'u', 'e', 'a', 'b'], ['j', 'o', 't', 's', 'e', 'l', 'f', 'l', 'p'], ['s', 'z', 'u', 't', 'h', 'u', 'o', 'p', 'i'], ['k', 'a', 'e', 'g', 'n', 'd', 'r', 'g', 'a'], ['h', 'n', 'l', 's', 'a', 't', 'e', 't', 'x']]) => ['frozen', 'rope', 'kappa', 'before', 'obligate', 'rotten', 'teleport']";
+        const boggleBoard = new this.Problem();
+
+        looselyDeepEqual(boggleBoard.solve([["f", "t", "r", "o", "p", "i", "k", "b", "o"], ["r", "w", "l", "p", "e", "u", "e", "a", "b"], ["j", "o", "t", "s", "e", "l", "f", "l", "p"], ["s", "z", "u", "t", "h", "u", "o", "p", "i"], ["k", "a", "e", "g", "n", "d", "r", "g", "a"], ["h", "n", "l", "s", "a", "t", "e", "t", "x"]], ["frozen", "rotten", "teleport", "city", "zutgatz", "kappa", "before", "rope", "obligate", "annoying"]),
+            ["frozen", "rope", "kappa", "before", "obligate", "rotten", "teleport"]);
+
+    }
+
+}
+
 
 
 
@@ -5895,7 +6036,8 @@ const TEST_DICTIONARY = {
     'maximize-expression': MaximizeExpression,
     'juice-bottling': JuiceBottling,
     'topological-sort': TopologicalSort,
-    'kruskals-algorithm': KruskalsAlgorithm
+    'kruskals-algorithm': KruskalsAlgorithm,
+    'boggle-board': BoggleBoard,
 }
 
 module.exports = TEST_DICTIONARY;

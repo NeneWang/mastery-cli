@@ -49,6 +49,12 @@ const getFilesInDirectory = async (directoryPath = './data/priorities') => {
 }
 
 
+const looselyDeepEqual = (a, b, {DEBUG = true} = {}) => {
+    if (DEBUG) console.log("Your Output: ", a);
+    return JSON.stringify(a.sort()) === JSON.stringify(b.sort());
+  }
+  
+
 
 const getMaidDirectory = () => {
     // Note it should take from the root.
@@ -230,5 +236,5 @@ const openEditorPlatformAgnostic = async (editor_instruction, absolute_temp_file
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, renderPromptDescription,
-    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic
+    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic, looselyDeepEqual
 };
