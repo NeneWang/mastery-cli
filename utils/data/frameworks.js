@@ -340,7 +340,54 @@ const apex = [
         "example": ":m\n\\```js\nList<Account> accountsToInsert = new List<Account>();\n\
         ## ADD THEM\n\
         insert accountsToInsert;\n\\```\\",
-      },
+    },
+    // Annotations
+    {
+        "term": "Annotations - aura-enabled | TestVisible ",
+        "prompt": "What is and when would you use @AuraEnabled or @TestVisibible?",
+        "description": "AuraEnabled: \n\
+        This annotation is used to expose an Apex method as a Aura-enabled Apex method, which means it can be called from an Aura component.\
+        \n\
+        TestVisible: \n\
+        This annotation is used to make a private method or variable visible to test methods.\
+        \n\
+        ",
+    },
+    {
+        "term": "Annotations - deprecated | future ",
+        "prompt": "What is and when would you use @deprecated or @future?",
+        "description": "Deprecated: \n\
+        This annotation is used to indicate that the method is deprecated.\n\
+        Use: \
+        \n\
+        Future: \n\
+        This annotation is used to identify methods that are executed asynchronously. Methods with the future annotation must be static methods, and can only return a void type.\
+        \n\
+        ",
+    },
+    {
+        "term": "Annotations - invocableMethod | invocableVariable ",
+        "prompt": "What is and when would you use @invocableMethod or @invocableVariable?",
+        "description": "InvocableMethod: \n\
+        This annotation is used to identify methods that can be run as invocable actions. Invocable methods are called with the REST API and used to invoke a single Apex method.\
+        \n\
+        InvocableVariable: \n\
+        This annotation is used to identify variables that can be used as part of invocable actions.\n\
+        \n\
+        ",
+
+    },
+    {
+        "term": "Annotations - isTest | NamespaceAccessible() ",
+        "prompt": "What is and when would you use @isTest or @NamespaceAccessible?",
+        "description": "isTest: \n\
+        This annotation is used to define classes and individual methods that only contain code used for testing your application.\
+        \n\
+        NamespaceAccessible: \n\
+        This annotation is used to identify classes that are accessible to the namespace.\
+        \n\
+        ",        
+    },
 
 ]
 

@@ -856,8 +856,6 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	exec(`git coa ${commitMessage} && git poh `);
 	console.log(`Pushed to origin with commit message: ${commitMessage} <3`);
 
-
-
 }
 
 /**
