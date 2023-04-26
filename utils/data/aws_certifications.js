@@ -419,7 +419,7 @@ const aws_certification_associate_developer = [
         - `Spot Instances` - A Spot Instance is an unused EC2 instance that is available for less than the `On-Demand price`. Your Spot Instance runs whenever capacity is available and the maximum price per hour for your request exceeds the Spot price. \
         Any instance present with unused capacity will be allocated. Even though this is cost-effective, it does not fulfill the single-tenant `hardware requirement of the client` and hence is not the correct option.  \n\n\
         - `Dedicated Hosts` - An Amazon EC2 Dedicated Host is a physical server with EC2 instance capacity fully dedicated to your use. Dedicated Hosts allow you to use your existing software licenses on EC2 instances. \
-        With a Dedicated Host, you have visibility and control over how instances are placed on the server. This option is costlier than the Dedicated Instance and hence is `not the right choice` for the current requirement.  \n\n\
+        With a Dedicated Host, you have visibility and control over how instances are placed on the server. This option is `costlier` than the Dedicated Instance and hence is `not the right choice` for the current requirement.  \n\n\
         - `On-Demand Instances `- With On-Demand Instances, you pay for compute capacity by the second with no long-term commitments. \
         You have `full control` over its `lifecycle—you decide when to launch, stop, hibernate, start, reboot, or terminate it`. Hardware isolation is not possible and on-demand has one of the costliest instance charges and hence is \
         not the correct answer for current requirements."
@@ -435,10 +435,12 @@ const aws_certification_associate_developer = [
         To decouple your database instance from your environment, you can run a database instance in Amazon RDS and configure your application to connect to it on launch. \
         This enables you to connect `multiple environments` to a database, terminate an environment without affecting the database, and perform `seamless updates with blue-green deployments.` \
         To allow the Amazon EC2 instances in your environment to connect to an outside database, you can configure the environment's Auto Scaling group with an additional security group.  Using Elastic Beanstalk with",
-        attachment: ".u/img/2023-04-21-16-54-40.png",
+        attachment: "/img/2023-04-21-16-54-40.png",
     },
     {
-        prompt: "An organization has hosted its EC2 instances in two AZs. AZ1 has two instances and AZ2 has 8 instances. The Elastic Load Balancer managing the instances in the two AZs has cross-zone load balancing enabled in its configuration.  What percentage traffic will each of the instances in AZ1 receive?",
+        term: "",
+        prompt: "An organization has hosted its EC2 instances in two AZs. AZ1 has two instances and AZ2 has 8 instances. The Elastic Load Balancer managing the instances in the two AZs has cross-zone load balancing enabled in its configuration.\n\
+        What percentage traffic will each of the instances in AZ1 receive?",
         example: "A load balancer accepts incoming traffic from clients and routes requests to its registered targets (such as EC2 instances) in one or more Availability Zones.  The nodes for a load balancer distribute requests from clients to registered targets. When cross-zone load balancing is enabled, each load balancer node distributes traffic across the registered targets in all enabled Availability Zones. When cross-zone load balancing is disabled, each load balancer node distributes traffic only across the registered targets in its Availability Zone. With Application Load Balancers, cross-zone load balancing is always enabled.  10 - When cross-zone load balancing is enabled, each of the 10 targets receives 10% of the traffic. This is because each load balancer node can route its 50% of the client traffic to all 10 targets (present in both AZs).",
         attachment: "./img/2023-04-21-20-41-49.png",
         description: "INCORRECT: 25 - If cross-zone load balancing is disabled, each of the two targets in AZ1 will receive 25% of the traffic. Because the load balancer is only able to send to the targets registered in AZ1 (AZ2 instances are not accessible for load balancer on AZ1)  20 - Invalid option, given only as a distractor.  15 - Invalid option, given only as a distractor."
