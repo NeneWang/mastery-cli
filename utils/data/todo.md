@@ -258,7 +258,7 @@ Low Priorty:
 
 ## Negotiating
 
-Steven, I enjoy working here and I am willing to work for less and more hours. This summer I want to get married to my highschool sweatheart, she is living to Argentina so I will have to move to the country. I know that I dont have the vacation dates to make the papers, is it okay if I request the chance on working remotely for what I am estimating is 3 to 6 months? The time difference is of two, and since I wouldnt be travelling, I am happy to start working 2-3 hours more 1 hour earlier and finish working 2 hours later to match Danny's time. I will also be super communicative, and being reporting to Danny everyday to keep things on their momentum and going. Also as for pay I am also willing to take a lower pay if that helps.
+Steven, I enjoy working here and I am willing and happy to work for less pay and more hours. So, this summer I want to get married to my childhood sweatheart, she is living to Argentina so I will have to move to the country. I know that I dont have the vacation dates to make the papers, is it okay if I request the chance on working remotely for what I am estimating is 3 to 6 months? The time difference is of two, and since I wouldnt be travelling, I am happy to start working 2-3 hours more 1 hour earlier and finish working 2 hours later to match Danny's time. I will also be super communicative, and being reporting to Danny everyday to keep things on their momentum and going. Also as for pay I am also willing to take a lower pay if that helps.
 
 
 - Because I require to make the papers, and this is more like an moral sense, she is going to give me her all, the least I can do is stay with her until the papers are done right?

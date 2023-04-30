@@ -300,7 +300,9 @@ const aws_certification_associate_developer = [
         prompt: "You have chosen AWS Elastic Beanstalk to upload your application code and allow it to handle details such as provisioning resources and monitoring.  \n\
         When creating configuration files for AWS Elastic Beanstalk which naming convention should you follow?\n\
         for config | <mysettings> and ebexetensions",
-        example: ".ebextensions/<mysettings>.config : You can add AWS Elastic Beanstalk configuration files (.ebextensions) to your web application's source code to configure your environment and customize the AWS resources that it contains. Configuration files are YAML or JSON formatted documents with a .config file extension that you place in a folder named .ebextensions and deploy in your application source bundle.",
+        example: ".ebextensions/<mysettings>.config : You can add AWS Elastic Beanstalk configuration files (.ebextensions) to your web application's source code to\
+         configure your environment and customize the AWS resources that it contains. Configuration files are YAML or JSON formatted documents with a .config file \
+         extension that you place in a folder named .ebextensions and deploy in your application source bundle.",
         attachment: "./img/2023-04-21-15-56-45.png"
     },
     {
@@ -308,25 +310,33 @@ const aws_certification_associate_developer = [
         prompt: "You are a developer for a web application written in .NET which uses the AWS SDK. \n\
         You need to implement an authentication mechanism that returns a JWT (JSON Web Token).  \n\
         Which AWS service will help you with token handling and management?",
-        example: `Correct option:  "Cognito User Pools"  After successful authentication, Amazon Cognito returns user pool tokens to your app. \
-        You can use the tokens to grant your users access to your own server-side resources, or to the Amazon API Gateway.\
+        example: ':m Correct option:  `"Cognito User Pools"`  After successful authentication, Amazon Cognito returns user pool tokens to your app. \
+        You can use the tokens to grant your `users access to your own server-side resources`, or to the Amazon API Gateway.\
         Amazon Cognito user pools implement ID, access, and refresh tokens as defined by the OpenID Connect (OIDC) open standard.\
         The ID token is a JSON Web Token (JWT) that contains claims about the identity of the authenticated user such as name, email, and phone_number. \
-        You can use this identity information inside your application. The ID token can also be used to authenticate users against your resource servers or server applications.`,
+        You can use this identity information inside your application. The ID token can also be used to authenticate users against your resource servers or server applications.',
         attachment: "./img/2023-04-21-16-00-28.png",
-        description: `Incorrect options:  "API Gateway" - If you are processing tokens server-side and using other programming languages not supported in AWS it may be a good choice. Other than that, go with a service already providing the functionality.  "Cognito Identity Pools" - You can use Identity pools to grant your users access to other AWS services. With an identity pool, your users can obtain temporary AWS credentials to access AWS services, such as Amazon S3 and DynamoDB. Identity pools support anonymous guest users, as well as the specific identity providers that you can use to authenticate users for identity pools.  "Cognito Sync" - Amazon Cognito Sync is an AWS service and client library that enables cross-device syncing of application-related user data. You can use it to synchronize user profile data across mobile devices and the web without requiring your own backend.`
+        description: ':m Incorrect options:  \n\
+        `"API Gateway"` - If you are processing tokens server-side and `using other programming languages not supported in AWS` it may be a good choice. \
+        Other than that, go with a service already providing the functionality.  \n\n\
+        `"Cognito Identity Pools"` - You can use Identity pools to grant your users access to other AWS services. With an identity pool, \
+        your users can obtain temporary `AWS credentials to access AWS services, such as Amazon S3 and DynamoDB`. \
+        Identity pools support anonymous guest users, as well as the `specific identity providers` that you can use to authenticate users for identity pools.\n\n\
+        `"Cognito Sync"` - Amazon Cognito Sync is an AWS service and client library that enables `cross-device syncing of application-related` user data. \
+        You can use it to synchronize user profile data across mobile devices and the web without requiring your own backend.'
     },
     {
         term: "identity-pools-explain-foreach",
         prompt: "Whats the difference between User and Identity Pools? Explain the use cases for each.",
-        description: "User Pools are used to manage user authentication and authorization, and they provide features such as user sign-up, \
-        sign-in, and password recovery. \n\
-        User Pools are used to authenticate and authorize individual users, and they can be used to integrate with social identity providers like Facebook,\
+        description: ":m `User Pools` are used to `manage user authentication and authorization`, and they provide features such as user `sign-up`, \
+        `sign-in, and password recovery`. \n\
+        `User Pools` are used to authenticate and authorize individual users, and they can be used to integrate with `social identity providers like Facebook`,\
         Google, and Amazon, as well as enterprise identity providers using SAML 2.0.  \n\
-        Identity Pools, on the other hand, provide a way to authorize and authenticate access to AWS resources for groups of users, known as federated identities. \
-        Identity Pools allow users to authenticate with third-party identity providers, such as Facebook or Google, and obtain temporary AWS credentials that grant access to AWS resources. \n\n\
+        `Identity Pools`, on the other hand, provide a way to authorize and authenticate access to AWS resources for groups of users, known as `federated identities`. \
+        Identity Pools allow users to authenticate with `third-party identity providers, such as Facebook or Google`, and obtain `temporary AWS credentials` that grant access to AWS resources. \n\n\
         These credentials are managed by AWS Security Token Service (STS) and can be customized to restrict access to specific AWS resources or services.",
-        example: ":m You can use `User pool` for developing an app where `users can sign up`, while `Identity Pool` is for your applications to be able to `authenticate access` to other aws resources"
+        example: ":m You can use `User pool` for developing an app where `users can sign up`, while `Identity Pool` is for your applications to be able to \
+        `authenticate access` to other aws resources"
     },
     {
         term: "serverless-architecture-given-use-case",
@@ -350,10 +360,10 @@ const aws_certification_associate_developer = [
         description: `Mappings:\n RegionMap:\n us-east-1:\n HVM64: "ami-0ff8a91507f77f867"\n HVMG2: "ami-0a584ac55a7631c0c"\n us-west-1:\n HVM64: "ami-0bdb828fd58c52235"\n HVMG2: "ami-066ee5fd4a9ef77f1"\n eu-west-1:\n HVM64: "ami-047bb4163c506cd98"\n HVMG2: "ami-31c2f645"\n ap-southeast-1:\n HVM64: "ami-08569b978cc4dfa10"\n HVMG2: "ami-0be9df32ae9f92309"\n ap-northeast-1:\n HVM64: "ami-06cd52961ce9f0d85"\n HVMG2: "ami-053cdd503598e4a9d"\nResources:\n myEC2Instance:\n Type: "AWS::EC2::Instance"\n Properties:\n ImageId: !FindInMap\n - RegionMap\n - !Ref 'AWS::Region'\n - HVM64\n InstanceType: m1.small",`,
         example: "!FindInMap [ MapName, TopLevelKey, SecondLevelKey ] - The intrinsic function Fn::FindInMap returns the value corresponding to keys in a two-level map that is declared in the Mappings section. \n\
         YAML Syntax for the full function name: Fn::FindInMap: [ MapName, TopLevelKey, SecondLevelKey ]\n\
-        Short form of the above syntax is : !FindInMap [ MapName, TopLevelKey, SecondLevelKey ]  Where,  MapName - \n\
-        Is the logical name of a mapping declared in the Mappings section that contains the keys and values. TopLevelKey - \n\
-        The top-level key name. Its value is a list of key-value pairs. SecondLevelKey - \n\
-        The second-level key name, which is set to one of the keys from the list assigned to TopLevelKey."
+        Short form of the `above syntax` is : !FindInMap [ MapName, TopLevelKey, SecondLevelKey ]  Where,\n\n\
+        `MapName` - Is the `logical name` of a mapping declared in the Mappings section that contains the `keys and values`.\n\n\
+        `TopLevelKey`-  The top-level key name. Its value is a list of key-value pairs. \n\n\
+        `SecondLevelKey` - The second-level key name, which is set to one of the keys from the list assigned to `TopLevelKey`."
     },
     {
         term: "reduce-average-runtime-of-lambda-function",
@@ -366,7 +376,7 @@ const aws_certification_associate_developer = [
          At 1,769 MB, a function has the equivalent of one vCPU (one vCPU-second of credits per second).",
         attachment: "./img/2023-04-21-16-32-41.png",
         description: ":m Incorrect options:\n\n\
-        Deploy the function into multiple AWS Regions - `Deploying the Lambda function to multiple AWS Regions` does `not increase the compute capacity` or `CPU utilization capacity of Lambda`. So, this option is irrelevant.  \n\n\
+        Deploy the function into `multiple AWS Regions` - `Deploying the Lambda function to multiple AWS Regions` does `not increase the compute capacity` or `CPU utilization capacity of Lambda`. So, this option is irrelevant.  \n\n\
         `Deploy the function using Lambda layers` - A Lambda layer is a .zip file archive that can contain additional code or data. A layer can contain libraries, a custom runtime, data, or configuration files. \n\
         Layers promote code sharing and `separation of responsibilities` so that you can `iterate faster on writing business logic`. \
         Layers `do not increase the computational capacity of Lambda`.  Deploy the function with its `CPU allocation set to the maximum amount `- This statement is given as a distractor. CPU allocation is an invalid parameter. As discussed above, the CPU is allocated in proportion to the memory allocated to the function."
@@ -438,78 +448,203 @@ const aws_certification_associate_developer = [
         attachment: "/img/2023-04-21-16-54-40.png",
     },
     {
-        term: "",
+        term: "percentage-traffic-to-ec2-instances",
         prompt: "An organization has hosted its EC2 instances in two AZs. AZ1 has two instances and AZ2 has 8 instances. The Elastic Load Balancer managing the instances in the two AZs has cross-zone load balancing enabled in its configuration.\n\
         What percentage traffic will each of the instances in AZ1 receive?",
-        example: "A load balancer accepts incoming traffic from clients and routes requests to its registered targets (such as EC2 instances) in one or more Availability Zones.  The nodes for a load balancer distribute requests from clients to registered targets. When cross-zone load balancing is enabled, each load balancer node distributes traffic across the registered targets in all enabled Availability Zones. When cross-zone load balancing is disabled, each load balancer node distributes traffic only across the registered targets in its Availability Zone. With Application Load Balancers, cross-zone load balancing is always enabled.  10 - When cross-zone load balancing is enabled, each of the 10 targets receives 10% of the traffic. This is because each load balancer node can route its 50% of the client traffic to all 10 targets (present in both AZs).",
+        example: ":m A `load balancer` accepts incoming traffic from clients and routes requests to its registered targets (such as EC2 instances) in one or more Availability Zones.  \n\
+        The nodes for a load balancer distribute requests from clients to `registered targets`. When cross-zone load balancing is enabled, each load balancer node distributes traffic across the registered targets in all enabled Availability Zones.\n\
+        When `cross-zone load balancing is disabled`, each load balancer node distributes traffic only across the registered targets in its Availability Zone. With Application Load Balancers, cross-zone load balancing is always enabled.  10 - When cross-zone load balancing is enabled, each of the 10 targets receives 10% of the traffic. This is because each load balancer node can route its 50% of the client traffic to all 10 targets (present in both AZs).",
         attachment: "./img/2023-04-21-20-41-49.png",
         description: "INCORRECT: 25 - If cross-zone load balancing is disabled, each of the two targets in AZ1 will receive 25% of the traffic. Because the load balancer is only able to send to the targets registered in AZ1 (AZ2 instances are not accessible for load balancer on AZ1)  20 - Invalid option, given only as a distractor.  15 - Invalid option, given only as a distractor."
     },
     {
-        prompt: "ECS Fargate container tasks are usually spread across Availability Zones (AZs) and the underlying workloads need persistent cross-AZ shared access to the data volumes configured for the container tasks.  Which of the following solutions is the best choice for these workloads?",
-        example: "Amazon EFS volumes - EFS volumes provide a simple, scalable, and persistent file storage for use with your Amazon ECS tasks. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files. Your applications can have the storage they need, when they need it. Amazon EFS volumes are supported for tasks hosted on Fargate or Amazon EC2 instances.  You can use Amazon EFS file systems with Amazon ECS to export file system data across your fleet of container instances. That way, your tasks have access to the same persistent storage, no matter the instance on which they land. However, you must configure your container instance AMI to mount the Amazon EFS file system before the Docker daemon starts. Also, your task definitions must reference volume mounts on the container instance to use the file system.",
-        description: "INCORRECT: Docker volumes - A Docker-managed volume that is created under /var/lib/docker/volumes on the host Amazon EC2 instance. Docker volume drivers (also referred to as plugins) are used to integrate the volumes with external storage systems, such as Amazon EBS. The built-in local volume driver or a third-party volume driver can be used. Docker volumes are only supported when running tasks on Amazon EC2 instances.  Bind mounts - A file or directory on the host, such as an Amazon EC2 instance or AWS Fargate, is mounted into a container. Bind mount host volumes are supported for tasks hosted on Fargate or Amazon EC2 instances. Bind mounts provide temporary storage, and hence these are a wrong choice for this use case.  AWS Storage Gateway volumes - This is an incorrect choice, given only as a distractor.",
-
+        term: "persistent-cross-az-shared-access",
+        prompt: "ECS Fargate container tasks are usually spread across Availability Zones (AZs) and the underlying workloads need persistent cross-AZ shared access to the data volumes configured for the container tasks.\n\
+        Which of the following solutions is the best choice for these workloads?",
+        example: "`Amazon EFS volumes` - EFS volumes provide a `simple, scalable, and persistent file storage` for use with your Amazon ECS tasks. \
+        With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files. \
+        Your applications can have the storage they need, when they need it. Amazon EFS volumes are supported for tasks hosted on Fargate or Amazon EC2 instances.  \n\
+        You can use `Amazon EFS` file systems with Amazon ECS to export file system data across your fleet of container instances. \n\
+        That way, `your tasks have access to the same persistent storage`, no matter the instance on which they land. \
+        However, you must configure your container instance AMI to mount the Amazon EFS file system before the Docker daemon starts. \
+        Also, your task definitions must reference volume mounts on the `container instance` to use the `file system`.",
+        description: "INCORRECT: \n\
+        `Docker volumes` - A Docker-managed volume that is created under /var/lib/docker/volumes on the host Amazon EC2 instance. Docker volume drivers (also referred to as plugins) are used to integrate the volumes with external storage systems, such as Amazon EBS. \
+        The built-in local volume driver or a third-party volume driver can be used. Docker volumes are only supported when running tasks on Amazon EC2 instances.  \n\n\
+        `Bind mounts` - A file or directory on the host, such as an Amazon EC2 instance or AWS Fargate, is mounted into a container. \
+        Bind mount host volumes are supported for tasks hosted on Fargate or Amazon EC2 instances. Bind mounts provide temporary storage, and hence these are a wrong choice for this use case.\n\n\
+        `AWS Storage Gateway volumes` - This is an incorrect choice, given only as a distractor.",
     },
     {
-        prompt: "When running a Rolling deployment in Elastic Beanstalk environment, only two batches completed the deployment successfully, while rest of the batches failed to deploy the updated version. Following this, the development team terminated the instances from the failed deployment.  What will be the status of these failed instances post termination?\n\n\
-        Elastic Beanstalk will not replace the failed instances     Elastic Beanstalk will replace the failed instances with instances running the application version from the oldest successful deployment     Elastic Beanstalk will replace the failed instances with instances running the application version from the most recent successful deployment (Correct)     Elastic Beanstalk will replace the failed instances after the application version to be installed is manually chosen from AWS Console",
-        example: "Elastic Beanstalk will replace them with instances running the application version from the most recent successful deployment      When processing a batch, Elastic Beanstalk detaches all instances in the batch from the load balancer, deploys the new application version, and then reattaches the instances. If you enable connection draining, Elastic Beanstalk drains existing connections from the Amazon EC2 instances in each batch before beginning the deployment.  If a deployment fails after one or more batches completed successfully, the completed batches run the new version of your application while any pending batches continue to run the old version. You can identify the version running on the instances in your environment on the health page in the console. This page displays the deployment ID of the most recent deployment that was executed on each instance in your environment. If you terminate instances from the failed deployment, Elastic Beanstalk replaces them with instances running the application version from the most recent successful deployment.",
-        description: "Incorrect options:  Elastic Beanstalk will not replace the failed instances  Elastic Beanstalk will replace the failed instances with instances running the application version from the oldest successful deployment  Elastic Beanstalk will replace the failed instances after the application version to be installed is manually chosen from AWS Console"
+        term: "rolling-deployment-in-elastic-beanstalk-environment",
+        prompt: "When running a Rolling deployment in Elastic Beanstalk environment, only two batches completed the deployment successfully, while rest of the batches failed to deploy the updated version.\
+        Following this, the development team terminated the instances from the failed deployment.  \n\
+        What will be the status of these failed instances post termination?\n\n\
+        - Elastic Beanstalk will not replace the failed instances     \n\
+        - Elastic Beanstalk will replace the failed instances with instances running the application version from the oldest successful deployment     \n\
+        - Elastic Beanstalk will replace the failed instances with instances running the application version from the most recent successful deployment (Correct)     \n\
+        - Elastic Beanstalk will replace the failed instances after the application version to be installed is manually chosen from AWS Console",
+        example: ":m Elastic Beanstalk will replace them with `instances running the application version` from the most recent successful deployment      \n\
+        When processing a batch, Elastic Beanstalk detaches all instances in the batch from the load balancer, deploys `the new application version`, and then reattaches the instances. If you enable connection draining,\
+        Elastic Beanstalk drains existing connections from the Amazon EC2 instances in each batch before `beginning the deployment`.  \
+        If a deployment `fails after one or more batches completed successfully`, the completed batches run the `new version of your application` while any `pending batches continue to run the old version`.\
+        You can identify the version running on the instances in your environment on the health page in the console. This page displays the deployment `ID of the most recent deployment` that was executed on `each instance in your environment`. \
+        If you terminate instances from the failed deployment, Elastic Beanstalk replaces them with instances running the `application version` from the most recent successful deployment.",
+        description: "Incorrect options:\n\
+        - Elastic Beanstalk will not replace the failed instances  \n\n\
+        - Elastic Beanstalk will replace the failed instances with instances running the application version from the oldest successful deployment  \n\n\
+        - Elastic Beanstalk will replace the failed instances after the application version to be installed is manually chosen from AWS Console"
     },
     {
+        term: "best-kms-encryption-works",
         prompt: "Which of the following best describes how KMS Encryption works?\n\
-        KMS stores the CMK, and receives data from the clients, which it encrypts and sends back\n\
-        KMS receives CMK from the client at every encrypt call, and encrypts the data with that\n\
-        KMS sends the CMK to the client, which performs the encryption and then deletes the CMK\n\
-        KMS generates a new CMK for each Encrypt call and encrypts the data with it ",
-        example: "KMS stores the CMK, and receives data from the clients, which it encrypts and sends back   A customer master key (CMK) is a logical representation of a master key. The CMK includes metadata, such as the key ID, creation date, description, and key state. The CMK also contains the key material used to encrypt and decrypt data. You can generate CMKs in KMS, in an AWS CloudHSM cluster, or import them from your key management infrastructure.  AWS KMS supports symmetric and asymmetric CMKs. A symmetric CMK represents a 256-bit key that is used for encryption and decryption. An asymmetric CMK represents an RSA key pair that is used for encryption and decryption or signing and verification (but not both), or an elliptic curve (ECC) key pair that is used for signing and verification.  AWS KMS supports three types of CMKs: customer-managed CMKs, AWS managed CMKs, and AWS owned CMKs.",
-        description: "Incorrect options:  KMS receives CMK from the client at every encrypt call, and encrypts the data with that - You can import your own CMK (Customer Master Key) but it is done once and then you can encrypt/decrypt as needed.  KMS sends the CMK to the client, which performs the encryption and then deletes the CMK - KMS does not send CMK to the client, KMS itself encrypts, and then decrypts the data.  KMS generates a new CMK for each Encrypt call and encrypts the data with it - KMS does not generate a new key each time but you can have KMS rotate the keys for you. Best practices discourage extensive reuse of encryption keys so it is good practice to generate new keys.",
+        - KMS stores the CMK, and receives data from the clients, which it encrypts and sends back\n\
+        - KMS receives CMK from the client at every encrypt call, and encrypts the data with that\n\
+        - KMS sends the CMK to the client, which performs the encryption and then deletes the CMK\n\
+        - KMS generates a new CMK for each Encrypt call and encrypts the data with it ",
+        example: ":m `KMS stores the CMK`, and `receives data` from the clients, which it encrypts and sends back   \n\
+        A customer master key (CMK) is a logical representation of a master key. The CMK `includes metadata`, such as the key ID, creation date, description, and key state. The CMK also contains the `key material` used to `encrypt and decrypt data`. \n\
+        You can generate `CMKs in KMS`, in an `AWS CloudHSM cluster`, or import them from your key management infrastructure.  AWS KMS supports symmetric and asymmetric CMKs. A `symmetric CMK` represents a `256-bit` key that is used for encryption and decryption. \n\
+        An asymmetric CMK represents an `RSA key pair` that is used for encryption and decryption or signing and verification (but not both), or an `elliptic curve (ECC)` key pair that is used for `signing and verification`.  \n\
+        AWS KMS supports three types of CMKs: customer-managed CMKs, `AWS managed CMKs, and AWS owned CMKs`.",
+        description: "Incorrect options:  \n\
+        - KMS receives CMK from the client at every encrypt call, and encrypts the data with that \n\n\
+        - You can import your own CMK (Customer Master Key) but it is done once and then you can encrypt/decrypt as needed.  KMS sends the CMK to the client, which performs the encryption and then deletes the CMK \n\n\
+        - KMS does not send CMK to the client, KMS itself encrypts, and then decrypts the data.  KMS generates a new CMK for each Encrypt call and encrypts the data with it \n\n\
+        - KMS does not generate a new key each time but you can have `KMS rotate the keys` for you. Best practices discourage extensive reuse of `encryption keys so it is good practice` to generate new keys.",
         attachment: "./img/2023-04-21-20-50-11.png"
     },
     {
-        prompt: "A multi-national company has multiple business units with each unit having its own AWS account. The development team at the company would like to debug and trace data across accounts and visualize it in a centralized account.  As a Developer Associate, which of the following solutions would you suggest for the given use-case?\n\n\
-        VPC Flow Logs     CloudWatch Events     CloudTrail     X-Ray (Correct)",
-        example: "X-Ray  AWS X-Ray helps developers analyze and debug production, distributed applications, such as those built using a microservices architecture. With X-Ray, you can understand how your application and its underlying services are performing to identify and troubleshoot the root cause of performance issues and errors. X-Ray provides an end-to-end view of requests as they travel through your application, and shows a map of your application’s underlying components.  You can use X-Ray to collect data across AWS Accounts. The X-Ray agent can assume a role to publish data into an account different from the one in which it is running. This enables you to publish data from various components of your application into a central account.",
+        term: "debug-trace-data-across-accounts",
+        prompt: "A multi-national company has multiple business units with each unit having its own AWS account. \
+        The development team at the company would like to debug and trace data across accounts and visualize it in a centralized account.\n\n\
+        Suggest a way to debug and trace data across accounts\n\n\
+        - VPC Flow Logs     \n\
+        - CloudWatch Events    \n\
+        - CloudTrail     \n\
+        - X-Ray",
+        example: ":m `X-Ray`  AWS X-Ray helps developers analyze and debug production, distributed applications, such as those built using a microservices architecture. With X-Ray, \
+        you can understand how your application and its underlying services are performing to identify and troubleshoot the root cause of performance `issues and errors`. \
+        X-Ray provides an end-to-end view of requests as they travel through your application, and shows a map of your applications underlying components.  \
+        You can use X-Ray to collect data across AWS Accounts. The X-Ray agent can assume a role to publish data into `an account different from the one` in which it is running.\
+        This enables you to publish data from various components of your application into a `central account`.",
         attachment: "./img/2023-04-21-20-57-33.png",
-        descrription: "Incorrect options: VPC Flow Logs: VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. Flow log data is used to analyze network traces and helps with network security. Flow log data can be published to Amazon CloudWatch Logs or Amazon S3. You cannot use VPC Flow Logs to debug and trace data across accounts.  CloudWatch Events: Amazon CloudWatch Events delivers a near real-time stream of system events that describe changes in Amazon Web Services (AWS) resources. These help to trigger notifications based on changes happening in AWS services. You cannot use CloudWatch Events to debug and trace data across accounts.  CloudTrail: With CloudTrail, you can log, continuously monitor, and retain account activity related to actions across your AWS infrastructure. You can use AWS CloudTrail to answer questions such as - “Who made an API call to modify this resource?”. CloudTrail provides event history of your AWS account activity thereby enabling governance, compliance, operational auditing, and risk auditing of your AWS account. You cannot use CloudTrail to debug and trace data across accounts."
-
+        descrription: "Incorrect options: \n\
+        + `VPC Flow Logs`: VPC Flow Logs is a feature that enables you to `capture information` about the `IP traffic` going to and from network interfaces in your VPC. \
+        Flow log data is used to analyze network traces and helps with network security. \n\Flow log data can be published to Amazon CloudWatch Logs or Amazon S3. You cannot use VPC Flow Logs to debug and trace data across accounts.  \n\n\
+        + `CloudWatch Events`: Amazon CloudWatch Events delivers a near `real-time stream` of system events that describe `changes` in Amazon Web Services \
+        (AWS) resources. These help to trigger notifications based on changes happening in AWS services. You cannot use CloudWatch Events to debug and trace data across accounts.  \n\n\
+        + `CloudTrail`: With CloudTrail, you can log, continuously monitor, and retain account activity related to actions across your AWS infrastructure. You can use AWS CloudTrail to answer questions such as \
+        - “Who made an API call to modify this resource?”. CloudTrail provides `event history` of your AWS account activity thereby `enabling governance, compliance, operational auditing, and risk auditing` of your AWS account. \
+        You cannot use CloudTrail to debug and trace data across accounts."
     },
     {
-        prompt: "As a developer, you are working on creating an application using AWS Cloud Development Kit (CDK). Which of the following represents the correct order of steps to be followed for creating an app using AWS CDK?",
-        example: `Create the app from a template provided by AWS CDK -> Add code to the app to create resources within stacks -> Build the app (optional) -> Synthesize one or more stacks in the app -> Deploy stack(s) to your AWS account\n\n\
-        The standard AWS CDK development workflow is similar to the workflow you're already familiar as a developer. There are a few extra steps: Create the app from a template provided by AWS CDK - Each AWS CDK app should be in its own directory, with its own local module dependencies. Create a new directory for your app. Now initialize the app using the cdk init command, specifying the desired template ("app") and programming language. The cdk init command creates a number of files and folders inside the created home directory to help you organize the source code for your AWS CDK app. Add code to the app to create resources within stacks - Add custom code as is needed for your application. Build the app (optional) - In most programming environments, after making changes to your code, you'd build (compile) it. This isn't strictly necessary with the AWS CDK—the Toolkit does it for you so you can't forget. But you can still build manually whenever you want to catch syntax and type errors. Synthesize one or more stacks in the app to create an AWS CloudFormation template - Synthesize one or more stacks in the app to create an AWS CloudFormation template. The synthesis step catches logical errors in defining your AWS resources. If your app contains more than one stack, you'd need to specify which stack(s) to synthesize. Deploy one or more stacks to your AWS account - It is optional (though good practice) to synthesize before deploying. The AWS CDK synthesizes your stack before each deployment. If your code has security implications, you'll see a summary of these and need to confirm them before deployment proceeds. cdk deploy is used to deploy the stack using CloudFormation templates. This command displays progress information as your stack is deployed. When it's done, the command prompt reappears.`,
-        description: `The standard AWS CDK development workflow is similar to the workflow you're already familiar as a developer. There are a few extra steps: Create the app from a template provided by AWS CDK - Each AWS CDK app should be in its own directory, with its own local module dependencies. Create a new directory for your app. Now initialize the app using the cdk init command, specifying the desired template ("app") and programming language. The cdk init command creates a number of files and folders inside the created home directory to help you organize the source code for your AWS CDK app. Add code to the app to create resources within stacks - Add custom code as is needed for your application. Build the app (optional) - In most programming environments, after making changes to your code, you'd build (compile) it. This isn't strictly necessary with the AWS CDK—the Toolkit does it for you so you can't forget. But you can still build manually whenever you want to catch syntax and type errors. Synthesize one or more stacks in the app to create an AWS CloudFormation template - Synthesize one or more stacks in the app to create an AWS CloudFormation template. The synthesis step catches logical errors in defining your AWS resources. If your app contains more than one stack, you'd need to specify which stack(s) to synthesize. Deploy one or more stacks to your AWS account - It is optional (though good practice) to synthesize before deploying. The AWS CDK synthesizes your stack before each deployment. If your code has security implications, you'll see a summary of these and need to confirm them before deployment proceeds. cdk deploy is used to deploy the stack using CloudFormation templates. This command displays progress information as your stack is deployed. When it's done, the command prompt reappears.` + "Incorrect options: Create the app from a template provided by AWS CloudFormation -> Add code to the app to create resources within stacks -> Build the app (optional) -> Synthesize one or more stacks in the app -> Deploy stack(s) to your AWS account Create the app from a template provided by AWS CloudFormation -> Add code to the app to create resources within stacks -> Synthesize one or more stacks in the app -> Deploy stack(s) to your AWS account -> Build the app For both these options, you cannot use AWS CloudFormation to create the app. So these options are incorrect. Create the app from a template provided by AWS CDK -> Add code to the app to create resources within stacks -> Synthesize one or more stacks in the app -> Deploy stack(s) to your AWS account -> Build the app - You cannot have the build step after deployment. So this option is incorrect."
+        term: "cdk-steps-creating-app",
+        prompt: "As a developer, you are working on creating an application using AWS Cloud Development Kit (CDK).\n\
+        Which of the following represents the correct order of steps to be followed for creating an app using `AWS CDK`?",
+        example: ":m Create the app from a template provided by AWS CDK \n\
+        -> Add code to the app to create resources within stacks \n\
+        -> Build the app (optional) \n\
+        -> Synthesize one or more stacks in the app \n\
+        -> Deploy stack(s) to your AWS account\n\n\
+        \n\
+        The standard AWS CDK development workflow is similar to the workflow you're already familiar as a developer. There are a few extra steps: Create the app from a template provided by AWS CDK \
+        - Each AWS CDK app should be in its own directory, with its own local module dependencies. Create a new directory for your app. Now initialize the app using the cdk init command, specifying the desired template and programming language.\
+        The cdk init command creates a number of files and folders inside the created home directory to help you organize the source code for your AWS CDK app. Add code to the app to create resources within stacks \
+        - Add custom code as is needed for your application. Build the app (optional) - In most programming environments, after making changes to your code, you'd build (compile) it. \
+        This isn't strictly necessary with the AWS CDK—the Toolkit does it for you so you can't forget. But you can still build manually whenever you want to catch syntax and type errors. \
+        Synthesize one or more stacks in the app to create an AWS CloudFormation template - Synthesize one or more stacks in the app to create an AWS CloudFormation template. \
+        The synthesis step catches logical errors in defining your AWS resources. If your app contains more than one stack, you'd need to specify which stack(s) to synthesize. \n\
+        Deploy one or more stacks to your AWS account - It is optional (though good practice) to synthesize before deploying. The AWS CDK synthesizes your stack before each deployment. \
+        If your code has security implications, you'll see a summary of these and need to confirm them before deployment proceeds. cdk deploy is used to deploy the stack using CloudFormation templates. \
+        This command displays progress information as your stack is deployed. When it's done, the command prompt reappears.",
+        description: `The standard AWS CDK development workflow is similar to the workflow you're already familiar as a developer. \n\
+        There are a few extra steps: Create the app from a template provided by AWS CDK - Each AWS CDK app should be in its own directory, with its own local module dependencies. \n\
+        Create a new directory for your app. Now initialize the app using the cdk init command, specifying the desired template ("app") and programming language. \n\
+        The cdk init command creates a number of files and folders inside the created home directory to help you organize the source code for your AWS CDK app. \n\
+        Add code to the app to create resources within stacks - Add custom code as is needed for your application. Build the app (optional) - In most programming environments, \n\
+        after making changes to your code, you'd build (compile) it. This isn't strictly necessary with the AWS CDK—the Toolkit does it for you so you can't forget. \n\
+        But you can still build manually whenever you want to catch syntax and type errors. Synthesize one or more stacks in the app to create an AWS CloudFormation template - Synthesize one or more stacks in the app to create an AWS CloudFormation template. \n\
+        The synthesis step catches logical errors in defining your AWS resources. If your app contains more than one stack, you'd need to specify which stack(s) to synthesize. \n\
+        Deploy one or more stacks to your AWS account - It is optional (though good practice) to synthesize before deploying. The AWS CDK synthesizes your stack before each deployment.\n\
+         If your code has security implications, you'll see a summary of these and need to confirm them before deployment proceeds. cdk deploy is used to deploy the stack using CloudFormation templates. \n\
+         This command displays progress information as your stack is deployed. When it's done, the command prompt reappears.` +
+            "Incorrect options: Create the app from a template provided by AWS CloudFormation -> Add code to the app to create resources within stacks -> Build the app (optional) -> Synthesize one or more stacks in the app -> Deploy stack(s) to your AWS account Create the app from a template provided by AWS CloudFormation -> Add code to the app to create resources within stacks -> Synthesize one or more stacks in the app -> Deploy stack(s) to your AWS account -> Build the app For both these options, you cannot use AWS CloudFormation to create the app. So these options are incorrect. Create the app from a template provided by AWS CDK -> Add code to the app to create resources within stacks -> Synthesize one or more stacks in the app -> Deploy stack(s) to your AWS account -> Build the app - You cannot have the build step after deployment. So this option is incorrect."
     },
     {
-        prompt: "A company has built its technology stack on AWS serverless architecture for managing all its business functions. To expedite development for a new business requirement, the company is looking at using pre-built serverless applications. Which AWS service represents the easiest solution to address this use-case?\n\
-        AWS Serverless Application Repository (SAR) (Correct)\n\
+        term: "represent-easiest-solution-to-address-this-use-case",
+        prompt: "A company has built its technology stack on AWS serverless architecture for managing all its business functions. To expedite development for a new business requirement, the company is looking at using pre-built serverless applications. \n\
+        Which AWS service represents the easiest solution to address this use-case?\n\
+        AWS Serverless Application Repository (SAR)\n\
         AWS AppSync\n\
         AWS Service Catalog\n\
         AWS Marketplace",
-        example: "AWS Serverless Application Repository (SAR) (Correct)\n\AWS Serverless Application Repository (SAR) - The AWS Serverless Application Repository is a managed repository for serverless applications. It enables teams, organizations, and individual developers to store and share reusable applications, and easily assemble and deploy serverless architectures in powerful new ways. Using the Serverless Application Repository, you don't need to clone, build, package, or publish source code to AWS before deploying it. Instead, you can use pre-built applications from the Serverless Application Repository in your serverless architectures, helping you and your teams reduce duplicated work, ensure organizational best practices, and get to market faster. Integration with AWS Identity and Access Management (IAM) provides resource-level control of each application, enabling you to publicly share applications with everyone or privately share them with specific AWS accounts.",
+        example: ":m AWS Serverless Application Repository (SAR) - The AWS Serverless Application Repository is a managed repository for serverless applications. It enables teams, organizations, and individual developers to store and share reusable applications, \
+        and easily assemble and deploy serverless architectures in powerful new ways. Using the Serverless Application Repository, you don't need to clone, build, package, or publish source code to AWS before deploying it.\
+         Instead, you can use pre-built applications from the Serverless Application Repository in your serverless architectures, helping you and your teams reduce duplicated work, ensure organizational best practices, and get to market faster. \
+         Integration with AWS Identity and Access Management (IAM) provides resource-level control of each application, enabling you to publicly share applications with everyone or privately share them with specific AWS accounts.",
         attachment: "./img/2023-04-22-20-51-11.png",
-        description: "Incorrect options: AWS Marketplace - The AWS Marketplace enables qualified partners to market and sell their software to AWS Customers. AWS Marketplace is an online software store that helps customers find, buy, and immediately start using the software and services that run on AWS. AWS Marketplace is designed for Independent Software Vendors (ISVs), Value-Added Resellers (VARs), and Systems Integrators (SIs) who have software products they want to offer to customers in the cloud. AWS AppSync - AWS AppSync is a fully managed service that makes it easy to develop GraphQL APIs by handling the heavy lifting of securely connecting to data sources like AWS DynamoDB, Lambda, and more. Organizations choose to build APIs with GraphQL because it helps them develop applications faster, by giving front-end developers the ability to query multiple databases, microservices, and APIs with a single GraphQL endpoint. AWS Service Catalog - AWS Service Catalog allows organizations to create and manage catalogs of IT services that are approved for use on AWS. These IT services can include everything from virtual machine images, servers, software, and databases to complete multi-tier application architectures. AWS Service Catalog allows you to centrally manage deployed IT services and your applications, resources, and metadata. This helps you achieve consistent governance and meet your compliance requirements while enabling users to quickly deploy only the approved IT services they need."
+        description: ":m Incorrect options: \n\
+        + `AWS Marketplace` - The AWS Marketplace enables qualified partners to market and sell their software to AWS Customers. AWS Marketplace is an online software store that helps customers find, buy, and immediately start using the software and services that run on AWS.\n\n\
+        AWS `Marketplace is designed for Independent Software Vendors` (ISVs), Value-Added Resellers (VARs), and Systems Integrators (SIs) who have software products they want to offer to customers in the cloud. \n\n\
+        + `AWS AppSync` - AWS AppSync is a fully managed service that makes it easy to develop GraphQL APIs by handling the heavy lifting of securely connecting to data sources like AWS DynamoDB, Lambda, and more. Organizations choose to build APIs with GraphQL because it helps them develop applications faster, \
+        by giving front-end developers the ability to query multiple databases, microservices, and APIs with a single GraphQL endpoint.\n\n\
+        + `AWS Service Catalog`- AWS Service Catalog allows organizations to create and manage catalogs of IT services that are approved for use on AWS. These IT services can include everything from virtual machine images, servers, software, and databases to complete multi-tier application architectures. AWS Service Catalog allows you to centrally manage deployed IT services and your applications, resources, and metadata. This helps you achieve consistent governance and meet your compliance requirements while enabling users to quickly deploy only the approved IT services they need."
     },
     {
-        prompt: "A global e-commerce company wants to perform geographic load testing of its order processing API. The company must deploy resources to multiple AWS Regions to support the load testing of the API. How can the company address these requirements without additional application code?",
-        description: "AWS CloudFormation StackSets extends the capability of stacks by enabling you to create, update, or delete stacks across multiple accounts and AWS Regions with a single operation. Using an administrator account, you define and manage an AWS CloudFormation template, and use the template as the basis for provisioning stacks into selected target accounts across specified AWS Regions.",
-        example: "Set up an AWS CloudFormation template that defines the load test resources. Leverage the AWS CLI create-stack-set command to create a stack set in the desired Regions",
+        term: "address-these-requirements-without-additional-application-code",
+        prompt: "A global e-commerce company wants to perform geographic load testing of its order processing API. The company must deploy resources to multiple AWS Regions to support the load testing of the API.\n\
+        How can the company address these requirements without additional application code?",
+        description: ":m `AWS CloudFormation StackSets` extends the capability of stacks by enabling you to create, update, or delete stacks across multiple accounts and AWS Regions with a single operation. Using an administrator account, you define and manage an AWS CloudFormation template, \
+        and use the template as the basis for provisioning stacks into selected `target accounts across specified AWS Regions`.",
+        example: "Set up an AWS CloudFormation template that defines the load test resources. Leverage the `AWS CLI create-stack-set` command to create a stack set in the desired Regions",
         attachment: "./img/2023-04-23-02-21-11.png",
     },
     {
-        prompt: "To enable HTTPS connections for his web application deployed on the AWS Cloud, a developer is in the process of creating server certificate.  Which AWS entities can be used to deploy SSL/TLS server certificates? (Select two)",
-        example: "AWS Certificate Manager (ACM) (Correct)\n\AWS Identity and Access Management (IAM) (Correct)\n\
-        AWS Certificate Manager - AWS Certificate Manager (ACM) is the preferred tool to provision, manage, and deploy server certificates. With ACM you can request a certificate or deploy an existing ACM or external certificate to AWS resources. Certificates provided by ACM are free and automatically renew. In a supported Region, you can use ACM to manage server certificates from the console or programmatically.  IAM - IAM is used as a certificate manager only when you must support HTTPS connections in a Region that is not supported by ACM. IAM securely encrypts your private keys and stores the encrypted version in IAM SSL certificate storage. IAM supports deploying server certificates in all Regions, but you must obtain your certificate from an external provider for use with AWS. You cannot upload an ACM certificate to IAM. Additionally, you cannot manage your certificates from the IAM Console.",
-        description: "Incorrect options:  AWS Secrets Manager - AWS Secrets Manager helps you protect secrets needed to access your applications, services, and IT resources. The service enables you to easily rotate, manage, and retrieve database credentials, API keys, and other secrets throughout their lifecycle. Users and applications retrieve secrets with a call to Secrets Manager APIs, eliminating the need to hardcode sensitive information in plain text. It cannot be used to discover and protect your sensitive data in AWS.  AWS Systems Manager - AWS Systems Manager gives you visibility and control of your infrastructure on AWS. Systems Manager provides a unified user interface so you can view operational data from multiple AWS services and allows you to automate operational tasks such as running commands, managing patches, and configuring servers across AWS Cloud as well as on-premises infrastructure.  AWS CloudFormation - AWS CloudFormation allows you to use programming languages or a simple text file to model and provision, in an automated and secure manner, all the resources needed for your applications across all Regions and accounts. Think infrastructure as code; think CloudFormation. You cannot use CloudFormation for running commands or managing patches on servers."
+        term: "aws-entities-that-can-be-used-to-deploy-ssl-tls-server-certificates",
+        prompt: "To enable HTTPS connections for his web application deployed on the AWS Cloud, a developer is in the process of creating server certificate.  \n\
+        Which AWS entities can be used to deploy SSL/TLS server certificates? (Select two)\n\
+        - AWS Certificate Manager (ACM)\n\
+        - AWS Secrets Manager\n\
+        - AWS Identity and Access Management (IAM)\n\
+        - AWS Key Management Service (KMS)\n\
+        - AWS CloudFormation",
+        example: ":m AWS Certificate Manager (ACM) (Correct)\n\AWS Identity and Access Management (IAM) (Correct)\n\n\
+        - AWS Certificate Manager - AWS Certificate Manager (ACM) is the preferred tool to provision, manage, and deploy server certificates. With ACM you can request a certificate or deploy an existing ACM or external certificate to AWS resources. \
+        Certificates provided by ACM are free and automatically renew. In a supported Region, you can use ACM to manage server certificates from the console or programmatically.  \n\n\
+        - IAM - IAM is used as a certificate manager only when you must support HTTPS connections in a Region that is not supported by ACM.\
+        IAM securely encrypts your private keys and stores the encrypted version in IAM SSL certificate storage. IAM supports deploying server certificates in all Regions, but you must obtain your certificate from an external provider for use with AWS. \
+        You cannot upload an ACM certificate to IAM. Additionally, you cannot manage your certificates from the IAM Console.",
+        description: ":m Incorrect options:  \n\
+        `AWS Secrets Manager` - AWS Secrets Manager helps you protect secrets needed to access your applications, services, and IT resources. The service enables you to easily rotate, manage, and retrieve database credentials, API keys, and other secrets throughout their lifecycle.\
+             Users and applications retrieve secrets with a call to Secrets Manager APIs, eliminating the need to hardcode sensitive information in plain text. It cannot be used to discover and protect your sensitive data in AWS.  \n\n\
+        `AWS Systems Manager` - AWS Systems Manager gives you visibility and control of your infrastructure on AWS. Systems Manager provides a unified user interface so you can view operational data from multiple AWS services and allows you to automate operational tasks such as running commands, managing patches, and configuring servers across AWS Cloud as well as on-premises infrastructure.  \n\
+        `AWS CloudFormation` - AWS CloudFormation allows you to use programming languages or a simple text file to model and provision, in an automated and secure manner, all the resources needed for your applications across all Regions and accounts. Think infrastructure as code; `think CloudFormation`. You cannot use CloudFormation for running commands or managing patches on servers."
     },
     {
-        prompt: "A company wants to provide beta access to some developers on its development team for a new version of the company's Amazon API Gateway REST API, without causing any disturbance to the existing customers who are using the API via a frontend UI and Amazon Cognito authentication. The new version has new endpoints and backward-incompatible interface changes, and the company's development team is responsible for its maintenance. \n\
+        term: "beta-access-to-the-new-version-of-the-api-without-causing-any-disturbance-to-the-existing-customers",
+        prompt: "A company wants to provide beta access to some developers on its development team for a new version of the company's Amazon API Gateway REST API,\
+         without causing any disturbance to the existing customers who are using the API via a frontend UI and Amazon Cognito authentication. The new version has new endpoints\
+         and backward-incompatible interface changes, and the company's development team is responsible for its maintenance. \n\
          Design a way to provide beta access to the new version of the API without causing any disturbance to the existing customers.",
-        example: "Create a development stage on the API Gateway API and then have the developers point the endpoints to the development stage",
+        example: ":m Create a `development stage` on the API Gateway API and then have the `developers point the endpoints to the development stage`",
         attachment: "./img/2023-04-24-09-26-10.png",
-        description: "A stage is a logical reference to a lifecycle state of your API (for example, 'dev', 'prod', 'beta', 'v2'). API stages are identified by API ID and stage name. You use a stage to manage and optimize a particular deployment. For example, you can configure stage settings to enable caching, customize request throttling, configure logging, define stage variables, or attach a canary release for testing. After the initial deployment, you can add more stages and associate them with existing deployments. You can use the API Gateway console to create a new stage, or you can choose an existing stage while deploying an API. In general, you can add a new stage to an API deployment before redeploying the API.  For the given use case, you can configure a development stage for your API Gateway API and then integrate it with the new version of the backend functionality that has new endpoints and backward-incompatible interface changes. The customers can continue to use the existing API.\n\
-        \nIncorrect options:  Configure a canary release deployment on the API Gateway API and then have the developers point to the relevant deployment by referencing the stage variable in the endpoint - An API deployment is a point-in-time snapshot of your API Gateway API. To be available for clients to use, the deployment must be associated with one or more API stages. Canary release is a software development strategy in which a new version of an API (as well as other software) is deployed for testing purposes, and the base version remains deployed as a production release for normal operations on the same stage. In a canary release deployment, total API traffic is separated at random into a production release and a canary release with a pre-configured ratio. Typically, the canary release receives a small percentage of API traffic and the production release takes up the rest. The updated API features are only visible to API traffic through the canary. You can adjust the canary traffic percentage to optimize test coverage or performance. By keeping canary traffic small and the selection random, most users are not adversely affected at any time by potential bugs in the new version, and no single user is adversely affected all the time.  This option is incorrect for the given use case as some of the customers would also access the new version of the API.  Create new API keys on the API Gateway API and then have the developers point the endpoints by passing the new API keys - AN API key is an alphanumeric string that API Gateway uses to identify an app developer who uses your REST or WebSocket API. This option is a distractor as you cannot selectively provide access to the new version just based on API keys.  Create a new API Gateway API that points to the new API application code and then have the developers point the endpoints to the new API - This is an overkill for the given requirement as there is no need to create a completely new API just to provide some developers early access to the beta version."
+        description: ":m A stage is a `logical reference` to a lifecycle state of your API (for example, 'dev', 'prod', 'beta', 'v2'). \
+        `API stages` are identified by `API ID` and `stage name`. You use a stage to manage and optimize a particular deployment. \
+        For example, you can configure stage settings to enable `caching`, customize `request throttling`, `configure logging, define stage variables`, \
+        or attach a `canary release` for testing. After the initial deployment, you can add more stages and `associate` them with `existing deployments`. \
+        You can use the API Gateway console to create a new stage, or you can choose an existing stage while deploying an API. \
+        In general, you can add a new stage to an API deployment before `redeploying the API`.  For the given use case, you can configure a development stage for \
+        your API Gateway API and then integrate it with the new version of the backend functionality that has new endpoints and backward-incompatible interface changes.\
+         The customers can continue to use the existing API.\n\
+        \nIncorrect options:  \n\
+        Configure a `canary release deployment` on the API Gateway API and then have the developers point to the relevant deployment by referencing the stage variable in the\
+         endpoint - An API deployment is a point-in-time snapshot of your API Gateway API. To be available for clients to use, the deployment must be associated with \
+         `one or more API stages`. Canary release is a software development strategy in which a `new version of an API`(as well as other software) is deployed for testing \
+         purposes, and the `base version remains deployed as a production release for normal operations on the same stage`.\
+          In a `canary release deployment`, `total API traffic` is `separated at random into a production release` and a canary release with a pre-configured ratio. \
+          Typically, the canary release receives a small percentage of API traffic and the production release takes up the rest. \
+          The updated API features are only visible to API traffic through the canary. You can adjust the canary traffic percentage to optimize test coverage or performance. By keeping canary traffic small and the selection random, most users are not adversely affected at any time by potential bugs in the new version, and no single user is adversely affected all the time.  This option is incorrect for the given use case as some of the customers would also access the new version of the API.  Create new API keys on the API Gateway API and then have the developers point the endpoints by passing the new API keys - AN API key is an alphanumeric string that API Gateway uses to identify an app developer who uses your REST or WebSocket API. This option is a distractor as you cannot selectively provide access to the new version just based on API keys.  Create a new API Gateway API that points to the new API application code and then have the developers point the endpoints to the new API - This is an overkill for the given requirement as there is no need to create a completely new API just to provide some developers early access to the beta version."
     },
     {
         prompt: "The Technical Lead of your team has reviewed a CloudFormation YAML template written by a new recruit and specified that an invalid section has been added to the template.    Which of the following represents an invalid section of the CloudFormation template?  \n\
@@ -641,7 +776,7 @@ const aws_certification_associate_developer = [
         Decrease the frequency or size of your requests  \n\
         You can use PutRecords API call to write multiple data records into a Kinesis data stream in a single call. Each PutRecords request can support up to 500 records. Each record in the request can be as large as 1 MiB, up to a limit of 5 MiB for the entire request, including partition keys. Each shard can support writes up to 1,000 records per second, up to a maximum data write of 1 MiB per second.  The response Records array includes both successfully and unsuccessfully processed records. Kinesis Data Streams attempts to process all records in each PutRecords request. A single record failure does not stop the processing of subsequent records. As a result, PutRecords doesn't guarantee the ordering of records. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error and can be one of the following values: ProvisionedThroughputExceededException or InternalFailure. ProvisionedThroughputExceededException indicates that the request rate for the stream is too high, or the requested data is too large for the available throughput. Reduce the frequency or size of your requests.  To address the given use case, you can apply these best practices:  Reshard your stream to increase the number of shards in the stream.  Reduce the frequency or size of your requests.  Distribute read and write operations as evenly as possible across all of the shards in Data Streams.  Use an error retry and exponential backoff mechanism.",
         description: "Incorrect options:  Merge the shards to decrease the number of shards in the stream  Increase the frequency or size of your requests  These two options contradict the explanation provided above, so these options are incorrect.  Decrease the number of KCL consumers - This option has been added as a distractor. The number of KCL consumers is irrelevant for the given use case since the ProvisionedThroughputExceededException is due to the PutRecords API call being used by the producers."
-        
+
     },
     {
         prompt: "A developer is testing Amazon Simple Queue Service (SQS) queues in a development environment. The queue along with all its contents has to be deleted after testing.  \n\
@@ -690,10 +825,7 @@ const aws_certification_associate_developer = [
         `AWS::Region` - Returns a string representing the AWS Region in which the encompassing resource is being created, such as us-west-2.  \n\
         `AWS::StackName` - Returns the name of the stack as specified with the aws cloudformation create-stack command, such as "teststack".',
         example: `AWS::AccountId  Using CloudFormation, you can create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances), and AWS CloudFormation takes care of provisioning and configuring those resources for you.`
-    }
-
-
-
+    },
 
 ]
 

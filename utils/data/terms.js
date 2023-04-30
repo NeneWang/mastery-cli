@@ -89,7 +89,8 @@ async function populateMasterDeck() {
 
 
     // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
-
+    const { salesforce_experience } = require('./salesforce_certification');
+    decks.addDeck(new TermStorage(salesforce_experience, "salesforce experience", { is_active: layer_1 }));
 
     // Generic Term Generators
     const filesData = [{
