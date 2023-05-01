@@ -121,7 +121,6 @@ const countDecimals = (value) => {
 
 const renderPromptDescription = (prompt, prompt_details) => {
     try {
-
         const Constants = require("./constants");
         const chalk = require("chalk");
         marked.setOptions({

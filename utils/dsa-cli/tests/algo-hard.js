@@ -5881,6 +5881,11 @@ class BoggleBoard extends ProblemTests {
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
 
     }
 
@@ -6010,6 +6015,98 @@ class BoggleBoard extends ProblemTests {
             ["frozen", "rope", "kappa", "before", "obligate", "rotten", "teleport"]);
 
     }
+
+    test_6() {
+        /**
+         * ["complicated", "foobar", "zigzag", "twisted"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "board": [
+                ["c", "o", "m"],
+                ["r", "p", "l"],
+                ["c", "i", "t"],
+                ["o", "a", "e"],
+                ["f", "o", "d"],
+                ["z", "r", "b"],
+                ["g", "i", "a"],
+                ["o", "a", "g"],
+                ["f", "s", "z"],
+                ["t", "e", "i"],
+                ["t", "w", "d"]
+            ],
+            "words": ["commerce", "complicated", "twisted", "zigzag", "comma", "foobar", "baz", "there"]
+            }
+         */
+
+        this.current_test_name = "(['complicated', 'foobar', 'zigzag', 'twisted'], [['c', 'o', 'm'], ['r', 'p', 'l'], ['c', 'i', 't'], ['o', 'a', 'e'], ['f', 'o', 'd'], ['z', 'r', 'b'], ['g', 'i', 'a'], ['o', 'a', 'g'], ['f', 's', 'z'], ['t', 'e', 'i'], ['t', 'w', 'd']]) => ['complicated', 'foobar', 'zigzag', 'twisted']";
+        const boggleBoard = new this.Problem();
+
+        looselyDeepEqual(boggleBoard.solve([["c", "o", "m"], ["r", "p", "l"], ["c", "i", "t"], ["o", "a", "e"], ["f", "o", "d"], ["z", "r", "b"], ["g", "i", "a"], ["o", "a", "g"], ["f", "s", "z"], ["t", "e", "i"], ["t", "w", "d"]], ["commerce", "complicated", "twisted", "zigzag", "comma", "foobar", "baz", "there"]),
+            ["complicated", "foobar", "zigzag", "twisted"]);
+    }
+
+
+    test_7() {
+        /**
+         * ["cr", "oc", "ml", "iao", "zrb", "big", "fs", "twt"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "board": [
+                ["c", "o", "m"],
+                ["r", "p", "l"],
+                ["c", "i", "t"],
+                ["o", "a", "e"],
+                ["f", "o", "d"],
+                ["z", "r", "b"],
+                ["g", "i", "a"],
+                ["o", "a", "g"],
+                ["f", "s", "z"],
+                ["t", "e", "i"],
+                ["t", "w", "d"]
+            ],
+            "words": ["cr", "oc", "ml", "iao", "opo", "zrb", "big", "fs", "ogiagao", "dwd", "twt"]
+            }
+         */
+
+        this.current_test_name = "(['cr', 'oc', 'ml', 'iao', 'zrb', 'big', 'fs', 'twt'], [['c', 'o', 'm'], ['r', 'p', 'l'], ['c', 'i', 't'], ['o', 'a', 'e'], ['f', 'o', 'd'], ['z', 'r', 'b'], ['g', 'i', 'a'], ['o', 'a', 'g'], ['f', 's', 'z'], ['t', 'e', 'i'], ['t', 'w', 'd']]) => ['cr', 'oc', 'ml', 'iao', 'zrb', 'big', 'fs', 'twt']";
+        const boggleBoard = new this.Problem();
+
+        looselyDeepEqual(boggleBoard.solve([["c", "o", "m"], ["r", "p", "l"], ["c", "i", "t"], ["o", "a", "e"], ["f", "o", "d"], ["z", "r", "b"], ["g", "i", "a"], ["o", "a", "g"], ["f", "s", "z"], ["t", "e", "i"], ["t", "w", "d"]], ["cr", "oc", "ml", "iao", "opo", "zrb", "big", "fs", "ogiagao", "dwd", "twt"]),
+            ["cr", "oc", "ml", "iao", "zrb", "big", "fs", "twtx"]);
+    }
+
+    test_8() {
+        /**
+         * ["comlpriteacoofziraagsizefttw"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "board": [
+                ["c", "o", "m"],
+                ["r", "p", "l"],
+                ["c", "i", "t"],
+                ["o", "a", "e"],
+                ["f", "o", "d"],
+                ["z", "r", "b"],
+                ["g", "i", "a"],
+                ["o", "a", "g"],
+                ["f", "s", "z"],
+                ["t", "e", "i"],
+                ["t", "w", "d"]
+            ],
+            "words": ["comlpriteacoofziraagsizefttw", "comlpriteacoofzirabagsizefottw", "comlpriteacoofziraagsizefottw", "comlpriteacoofzirabagsizeftttw"]
+            }
+         */
+
+        this.current_test_name = "(['comlpriteacoofziraagsizefttw', 'comlpriteacoofzirabagsizefottw', 'comlpriteacoofziraagsizefottw', 'comlpriteacoofzirabagsizeftttw'], [['c', 'o', 'm'], ['r', 'p', 'l'], ['c', 'i', 't'], ['o', 'a', 'e'], ['f', 'o', 'd'], ['z', 'r', 'b'], ['g', 'i', 'a'], ['o', 'a', 'g'], ['f', 's', 'z'], ['t', 'e', 'i'], ['t', 'w', 'd']]) => ['comlpriteacoofziraagsizefttw', 'comlpriteacoofzirabagsizefottw', 'comlpriteacoofziraagsizefottw', 'comlpriteacoofzirabagsizeftttw']";
+        const boggleBoard = new this.Problem();
+
+        looselyDeepEqual(boggleBoard.solve([["c", "o", "m"], ["r", "p", "l"], ["c", "i", "t"], ["o", "a", "e"], ["f", "o", "d"], ["z", "r", "b"], ["g", "i", "a"], ["o", "a", "g"], ["f", "s", "z"], ["t", "e", "i"], ["t", "w", "d"]], ["comlpriteacoofziraagsizefttw", "comlpriteacoofzirabagsizefottw", "comlpriteacoofziraagsizefottw", "comlpriteacoofzirabagsizeftttw"]),
+            ["comlpriteacoofziraagsizefttw", "comlpriteacoofzirabagsizefottw", "comlpriteacoofziraagsizefottw", "comlpriteacoofzirabagsizeftttw"]);
+    }
+
 
 }
 
