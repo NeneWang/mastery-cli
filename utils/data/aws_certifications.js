@@ -6,10 +6,10 @@ const aws_certification_associate_developer = [
         term: "T2.micro",
     },
     {
+        term: "domain name system records",
         prompt: "An application is hosted by a 3rd party and exposed at yourapp.3rdparty.com. You would like to have your users access your application using www.mydomain.com, which you own and manage under Route 53.  What Route 53 record should you create?",
         example: "A CNAME record\n\n\
         A CNAME record maps DNS queries for the name of the current record, such as acme.example.com, to another domain (example.com or example.net) or subdomain (acme.example.com or zenith.example.org).  CNAME records can be used to map one domain name to another. Although you should keep in mind that the DNS protocol does not allow you to create a CNAME record for the top node of a DNS namespace, also known as the zone apex. For example, if you register the DNS name example.com, the zone apex is example.com. You cannot create a CNAME record for example.com, but you can create CNAME records for www.example.com, newproduct.example.com, and so on.",
-        term: "domain name system records",
         description: ":m\n\
         `A Record (Address Record)`:  An A record is a type of DNS (Domain Name System) record that maps a domain name to an IPv4 address. In other words, an A record is used to `translate a human-readable domain name` (such as www.example.com) into a `machine-readable IP address` (such as 192.0.2.1).  \n\n\
         `Alias Record (ANAME or ALIAS)`:  Alias records are DNS records that allow a DNS query for a domain name to be redirected to another domain name. \n\
@@ -18,12 +18,12 @@ const aws_certification_associate_developer = [
         `PTR (Pointer) Record`:  A PTR record is a type of DNS record that maps an `IP address to a domain name`. PTR records are used in reverse DNS (rDNS) lookups to determine the domain name associated with a given IP address. This is useful for `verifying the identity` of a server or for `troubleshooting network issues`."
     },
     {
+        term: "AWS blue  green deployment",
         prompt: "A developer has been asked to create an application that can be deployed across a fleet of EC2 instances. The configuration must allow for full control over the deployment steps using the blue-green deployment.  \n\
         Which service will help you achieve that?",
         example: ":m AWS CodeDeploy\n\n\
         AWS CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances, on-premises instances, or serverless Lambda functions. AWS CodeBuild is a fully managed continuous integration service that compiles source code, \
         runs tests, and produces software packages that are ready to deploy.  The blue/green deployment type uses the blue/green deployment model controlled by CodeDeploy. This deployment type enables you to verify a new deployment of service before sending production traffic to it.",
-        term: "AWS blue  green deployment",
         description: 'Blue-green deployment is a deployment strategy that involves creating two identical environments, one "blue" and one "green," where only one of the environments is live at a time.  In this deployment model, the current production environment, or "blue" environment, remains active and serving traffic while a new "green" environment is deployed with the latest code changes and tested to ensure it is functioning properly. Once the "green" environment has been verified and is ready to go live, traffic is routed to it `while the "blue" environment is taken down and updated with any necessary change`s.  The process can be repeated in the future, with the "blue" and "green" environments swapping roles. This deployment approach reduces the risk of downtime or errors during the deployment process by enabling the new version to be fully tested before it goes live, and allowing for quick rollbacks if issues arise.\
          It also provides `a way to achieve zero-downtime deployments`, as the switch from "blue" to "green" can be done seamlessly without impacting end-users.\n\n\
         `AWS CodeDeploy` is designed to complement other AWS deployment services like AWS CodePipeline, AWS CodeBuild, and AWS Elastic Beanstalk, and offers unique advantages in certain scenarios. \n\
@@ -33,13 +33,20 @@ const aws_certification_associate_developer = [
          Overall, AWS CodeDeploy offers advantages in scenarios where a higher degree of control and customization over the deployment process is required, and where more complex deployment scenarios are needed, such as when deploying to on-premises servers, Lambda functions, or other compute services that are not supported by AWS Elastic Beanstalk.'
     },
     {
-        prompt: "You are a developer working on AWS Lambda functions that are invoked via REST API's using Amazon API Gateway. Currently, when a GET request is invoked by the consumer, the entire data-set returned by the Lambda function is visible. Your team lead asked you to format the data response.  Which feature of the API Gateway can be used to solve this issue?",
+        term: "mapping reponses",
+        prompt: "You are a developer working on AWS Lambda functions that are invoked via REST API's using Amazon API Gateway. \
+        Currently, when a GET request is invoked by the consumer, the entire data-set returned by the Lambda function is visible.\
+        Your team lead asked you to format the data response.\n\
+        Which feature of the API Gateway can be used to solve this issue?",
         example: "Mapping Templates\n\n\
         Use API Gateway Mapping Templates - In API Gateway, an API's method request can take a payload in a different format from the corresponding integration request payload, as required in the backend. Similarly, vice versa is also possible. API Gateway lets you use mapping templates to map the payload from a method request to the corresponding integration request and from an integration response to the corresponding method response.",
-        term: "mapping reponses"
     },
     {
-        prompt: "A developer has an application that stores data in an Amazon S3 bucket. The application uses an HTTP API to store and retrieve objects. When the PutObject API operation adds objects to the S3 bucket the developer must encrypt these objects at rest by using server-side encryption with Amazon S3-managed keys (SSE-S3).  Which solution will guarantee that any upload request without the mandated encryption is not processed?",
+        term: "upload-operation-without-mandated-encryption",
+        prompt: "A developer has an application that stores data in an Amazon S3 bucket. The application uses an HTTP API to store and retrieve objects.\
+         When the PutObject API operation adds objects to the S3 bucket the developer must encrypt these objects at rest by using server-side encryption with \
+         Amazon S3-managed keys (SSE-S3).\n\n\
+         Which solution will guarantee that any upload request without the mandated encryption is not processed?",
         example: "Invoke the PutObject API operation and set the x-amz-server-side-encryption header as AES256. Use an S3 bucket policy to deny permission to upload an object unless the request has this header",
         description: ':m SSE-S3 server-side encryption protects data at rest. Amazon S3 encrypts each object with a unique key. As an additional safeguard, it encrypts the key itself with a key that it rotates regularly. Amazon S3 server-side encryption uses one of the strongest block ciphers available to encrypt your data, 256-bit Advanced Encryption Standard (AES-256).  You can use the following bucket policy to deny permissions to upload an object unless the request includes the x-amz-server-side-encryption header to request server-side encryption using SSE-S3:\n\n\
         ```json\n\
