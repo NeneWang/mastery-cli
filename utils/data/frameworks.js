@@ -978,7 +978,7 @@ const chrome_extensions = [
     {
         term: "manifest_reading",
         description: ':m \n\
-        ```json\n\
+        ```js\n\
         {"manifest_version": 3,\n"name": "Timer Extension",\n"version": "1.0.0",\n"description": "Hello Chrome World!",\n"icons": {"16": "icon.png","48": "icon.png","128": "icon.png"},\n"action": {"default_icon": {"16": "icon.png","48": "icon.png","128": "icon.png"},"default_title": "Timer Extension Action Title","default_popup": "popup.html"},\n"options_page": "options.html",\n"permissions": ["storage", "alarms", "notifications", "unlimitedStorage"],\n"background": {"service_worker": "background.js"}}\
         ```',
         attachment: "./img/2023-05-02-13-07-50.png",
@@ -989,7 +989,7 @@ const chrome_extensions = [
     {
         term: "manifest | add a background script",
         description: ':m \n\
-        ```json\n\
+        ```js\n\
         {"manifest_version": 3,\n"name": "Timer Extension",\n"version": "1.0.0",\n"description": "Hello Chrome World!",\n"icons": {"16": "icon.png","48": "icon.png","128": "icon.png"},\n"action": {"default_icon": {"16": "icon.png","48": "icon.png","128": "icon.png"},"default_title": "Timer Extension Action Title","default_popup": "popup.html"},\n"options_page": "options.html",\n"permissions": ["storage", "alarms", "notifications", "unlimitedStorage"],\n### TERM_TODO HERE\
         ```',
         attachment: "./img/2023-05-02-13-07-50.png",
@@ -1000,7 +1000,7 @@ const chrome_extensions = [
     {
         term: "manifest | add a an options page",
         description: ':m \n\
-        ```json\n\
+        ```js\n\
         {"manifest_version": 3,\n"name": "Timer Extension",\n"version": "1.0.0",\n"description": "Hello Chrome World!",\n"icons": {"16": "icon.png","48": "icon.png","128": "icon.png"},\
         \n"action": {"default_icon": {"16": "icon.png","48": "icon.png","128": "icon.png"},"default_title": "Timer Extension Action Title",\
         "default_popup": "popup.html"},\n### TERM_TODO HERE\
@@ -1013,7 +1013,7 @@ const chrome_extensions = [
     {
         term: "manifest | add a popup page",
         description: ':m \n\
-        ```json\n\
+        ```js\n\
         {"manifest_version": 3,\n"name": "Timer Extension",\n"version": "1.0.0",\n"description": "Hello Chrome World!",\
         \n"icons": {"16": "icon.png","48": "icon.png","128": "icon.png"},\n"action": {"default_icon": {"16": "icon.png","48": "icon.png","128": "icon.png"},\
         "default_title": "Timer Extension Action Title",\n\
@@ -1027,7 +1027,7 @@ const chrome_extensions = [
     {
         term: "manifest | add a permission",
         description: ':m \n\
-        ```json\n\
+        ```js\n\
         {"manifest_version": 3,\n"name": "Timer Extension",\n"version": "1.0.0",\n"description": "Hello Chrome World!",\
         \n"icons": {"16": "icon.png","48": "icon.png","128": "icon.png"},\n"action": {"default_icon": {"16": "icon.png","48": "icon.png","128": "icon.png"},\
         "default_title": "Timer Extension Action Title",\n\
