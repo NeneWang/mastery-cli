@@ -28,11 +28,13 @@ async function populateMasterDeck() {
 
     let decks = new TermStorage([], "Academic Terms");
 
-    const { react_terms, apex, flutter, IDE_S } = require('./frameworks');
+    const { react_terms, apex, flutter, IDE_S, chrome_extensions } = require('./frameworks');
     decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(apex, "apex", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(flutter, "flutter", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(IDE_S, "IDEs", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(chrome_extensions, "chrome extensions", { is_active: layer_1 }));
+    
 
 
     const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne } = require("./spring-senior");

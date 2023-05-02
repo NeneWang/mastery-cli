@@ -972,10 +972,61 @@ const flutter_dart = [
     }
 
 
-
-
-
 ];
 
+const chrome_extensions = [
+    {
+        term: "manifest_reading",
+        description: ':m \n\
+        ```json\n\
+        {"manifest_version": 3,\n"name": "Timer Extension",\n"version": "1.0.0",\n"description": "Hello Chrome World!",\n"icons": {"16": "icon.png","48": "icon.png","128": "icon.png"},\n"action": {"default_icon": {"16": "icon.png","48": "icon.png","128": "icon.png"},"default_title": "Timer Extension Action Title","default_popup": "popup.html"},\n"options_page": "options.html",\n"permissions": ["storage", "alarms", "notifications", "unlimitedStorage"],\n"background": {"service_worker": "background.js"}}\
+        ```',
+        attachment: "./img/2023-05-02-13-07-50.png",
+        prompt: "What is the name of the extension?, what will be the description?",
+        example: "Timer Extension\n\
+        Hello Chrome World!"
+    },
+    {
+        term: "add a background script",
+        description: ':m \n\
+        ```json\n\
+        {"manifest_version": 3,\n"name": "Timer Extension",\n"version": "1.0.0",\n"description": "Hello Chrome World!",\n"icons": {"16": "icon.png","48": "icon.png","128": "icon.png"},\n"action": {"default_icon": {"16": "icon.png","48": "icon.png","128": "icon.png"},"default_title": "Timer Extension Action Title","default_popup": "popup.html"},\n"options_page": "options.html",\n"permissions": ["storage", "alarms", "notifications", "unlimitedStorage"],\n###TODO\
+        ```',
+        attachment: "./img/2023-05-02-13-07-50.png",
+        prompt: "Add a background script (background.js)  to the manifest.json",
+        example: "background: {service_worker: background.js}"
+        
+    },
+    {
+        term: "add a an options page",
+        description: ':m \n\
+        ```json\n\
+        {"manifest_version": 3,\n"name": "Timer Extension",\n"version": "1.0.0",\n"description": "Hello Chrome World!",\n"icons": {"16": "icon.png","48": "icon.png","128": "icon.png"},\
+        \n"action": {"default_icon": {"16": "icon.png","48": "icon.png","128": "icon.png"},"default_title": "Timer Extension Action Title",\
+        "default_popup": "popup.html"},\n###TODO\
+        \n"permissions": ["storage", "alarms", "notifications", "unlimitedStorage"],\n"background": {"service_worker": "background.js"}}\
+        ```',
+        attachment: "./img/2023-05-02-13-07-50.png",
+        prompt: "Add an options page (options.html) to the manifest.json",
+        example: "options_page: options.html,"
+    },
+    {
+        term: "add a popup page",
+        description: ':m \n\
+        ```json\n\
+        {"manifest_version": 3,\n"name": "Timer Extension",\n"version": "1.0.0",\n"description": "Hello Chrome World!",\
+        \n"icons": {"16": "icon.png","48": "icon.png","128": "icon.png"},\n"action": {"default_icon": {"16": "icon.png","48": "icon.png","128": "icon.png"},\
+        "default_title": "Timer Extension Action Title",\n\
+        ###TODO    \
+        },\n"options_page": "options.html",\n"permissions": ["storage", "alarms", "notifications", "unlimitedStorage"],\n"background": {"service_worker": "background.js"}}\
+        ```',
+        attachment: "./img/2023-05-02-13-07-50.png",
+        prompt: "Add a popup page (popup.html) to the manifest.json",
+        example: "default_popup: popup.html"
 
-module.exports = { react_terms, apex, flutter: flutter_dart, IDE_S };
+    }
+]
+
+
+
+module.exports = { react_terms, apex, flutter: flutter_dart, IDE_S, chrome_extensions };
