@@ -1037,7 +1037,31 @@ const chrome_extensions = [
         ```',
         attachment: "./img/2023-05-02-13-07-50.png",
         prompt: "Add permissions: for storage and alarms to the manifest.json",
-        example: "permissions: [storage, alarms]"
+        example: 'permissions: ["storage", "alarms"],'
+    },
+    {
+        term: "storage | local vs sync",
+        description: ":m | | chrome.storage.local | chrome.storage.sync |\n| ----------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |\n| Storage Mechanism | Local on the user's machine | Synchronized across all devices |\n| Storage Limit | Approx. 5 MB | Approx. 100 KB in total, 8 KB per item |\n| Sync Behavior | N/A (local storage only) | Syncs automatically in the background when online, stores data locally when offline |\n| Use Case | Storing larger amounts of data that are specific to the user's machine | Storing smaller amounts of data that need to be synced across devices |\n| Performance | Faster read/write operations compared to chrome.storage.sync | Slower read/write operations due to network requests |",
+        prompt: "Describe when you would use chrome.storage.local vs chrome.storage.sync and why",
+        example: "I would use storage for communication between temporal process, while sync data mostly for records keeping such as settings, bookmarks"
+    },
+    {
+        term: "alarms | Chrome Alarms",
+        description: "Use the chrome.alarms API to schedule code to run periodically or at a specified time in the future.",
+        prompt: "Create an alarm that every 1 second",
+        example: "chrome.alarms.create({\n periodInMinutes: 1 / 60,\n});\n\nchrome.alarms.onAlarm.addListener((alarm) => {\n // Do stuff.\n})"
+    },
+    {
+        term: "notifications | Chrome Notifications",
+        description: "Use the chrome.notifications API to create rich notifications using templates and show these notifications to users in the system tray.",
+        prompt: "Create a notification with title: 'Hello World', message: 'This is a notification', iconUrl: 'icon.png'",
+        example: "this.registration.showNotification('Hello World', {\n body: 'This is a notification',\n icon: 'icon.png',\n});"
+    },
+    {
+        term: "storage | local | get",
+        description: "Gets one or more items from storage.",
+        prompt: "Get the value of the key 'name' and 'card' from local storage",
+        example: "chrome.storage.local.get(['name', 'card'], (result) => {\n console.log(result.key, result.card);\n});"
     }
 ]
 
