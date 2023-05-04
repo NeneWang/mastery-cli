@@ -386,7 +386,7 @@ const apex = [
         NamespaceAccessible: \n\
         This annotation is used to identify classes that are accessible to the namespace.\
         \n\
-        ",        
+        ",
     },
 
 ]
@@ -995,7 +995,7 @@ const chrome_extensions = [
         attachment: "./img/2023-05-02-13-07-50.png",
         prompt: "Add a background script (background.js)  to the manifest.json",
         example: "background: {service_worker: background.js}"
-        
+
     },
     {
         term: "manifest | add a an options page",
@@ -1062,6 +1062,55 @@ const chrome_extensions = [
         description: "Gets one or more items from storage.",
         prompt: "Get the value of the key 'name' and 'card' from local storage",
         example: "chrome.storage.local.get(['name', 'card'], (result) => {\n console.log(result.key, result.card);\n});"
+    },
+    {
+        term: "Add a listener to dom element",
+        prompt: "Add a listener to element with id 'start-timer-btn' that listens for a click event and runs the code (template) in the callback",
+        description: "Add a listener to element with id 'start-timer-btn' that listens for a click event and runs the code (template) in the callback",
+        example: "const startTimerBtn = document.getElementById('start-timer-btn')\nstartTimerBtn.addEventListener('click', () => {\n // Run code\n});"
+    },
+    {
+        term: "log the details on application being installed",
+        description: "Log the details on application being installed by using the requirements: contextMenus and background",
+        prompt: "Log the details on application being installed by using the requirements: contextMenus and background",
+        example: "chrome.runtime.onInstalled.addListener((details) => {\n console.log('previousVersion', details.previousVersion);\n});"
+    },
+    {
+        term: "context-menu-adding",
+        description: ":m Exercise: Fill create a context menu that activates in contexts `page` and `selection` and has the title `Read This Text` and the id `contextMenu2`\n\
+        chrome.runtime.onInstalled.addListener((details) => {\n chrome.storage.local.set({\n shows: [],\n });\n\n // TODO: Add the context menu here\n \n chrome.contextMenus.onClicked.addListener((event) => {\n if (event.menuItemId === 'contextMenu1') {\n // Do Stuff for the first context menu\n } else if (event.menuItemId === 'contextMenu2') {\n // Do Stuff for the Context menu 2\n }\n })\n})",
+        prompt: "Fill create a context menu that activates in contexts `page` and `selection` and has the title `Read This Text` and the id `contextMenu2`",
+        example: ":m ```js\n\
+        chrome.contextMenus.create({\n title: 'Search TV Show',\n id: 'contextMenu1',\n contexts: ['page', 'selection']\n});\n\
+        ````\n\
+        "
+    },
+    {
+        term: "content script | add a listener",
+        prompt: ":m Create a `content_script` that matches => `https://*.google.com/*` and runs the `contentScript.js` file",
+        description: ':m This is how you match all urls:\n\
+        content_scripts": [\n {\n "matches": ["<all_urls>"],\n "js": ["contentScript.js"]\n }\n]',
+        example: ':m\n\
+        ```js\n\
+        content_scripts": [\n {\n "matches": ["https://.google.com/"],\n "js": ["contentScript.js"]\n }\n]\n\
+        ```\
+        '
+    },
+    {
+        term: "content script | listener to message",
+        description: ":m Create a listener for the following code at `contentScript.js` that gets activated when the website is matched\n\
+        ```js\n\
+        const message = 'Hello from content script';\n\
+        chrome.runtime.sendMessage(message, (response) => {\n\
+             console.log('Received response from background script: ' + response); \n\
+        });\n\
+        ```",
+        prompt: "Create a listener for the code in your file that logs the message `background.js`",
+        example: ":m\n\
+        ```js\n\
+        chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {\n console.log('Received message from content script: ' + message);\n const response = 'Hello from background script';\n sendResponse(response);\n})\n\
+        ```\
+        "
     }
 ]
 

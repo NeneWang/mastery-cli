@@ -722,14 +722,6 @@ const js_advanced = [
         (2) [\"Tim\", \"Tina\"]\n\
         Tim is now married to Tina"
     },
-    {
-        term: "Methods redefinitions",
-        prompt: "What will the following print?",
-        description: ":m```js\na();\n\nfunction a() {\n console.log('hi');\n}\n\na();\n\nfunction b() {\n console.log('Bye!');\n}\n\na();\n\n```",
-        example: "Bye!\n\
-        Bye!\n\
-        Bye!"
-    },
     // CHATGPT: Convert into a single line with \n and \t when it should, assume is in a string:
     {
         term: "Deep Clonning",
@@ -754,6 +746,11 @@ const js_advanced = [
         3) JavaScript, PHP, C, C++\n\
         4) Java, C#, Python"
     },
+    {
+        term: "creating-quick-tests-mocha",
+        prompt: "How would you create a quick test in Mocha? Create a quick example using assert, describe and it",
+        example: "const assert = require('assert');\n\ndescribe('Problem integrity', function () {\n it('should return true', function () {\n console.log('Hello, welcome to analytics');\n assert.equal(true, true);\n });\n});"
+    }
 ]
 
 const best_practices = [
