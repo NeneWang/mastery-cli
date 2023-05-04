@@ -17,33 +17,40 @@ CLI Assistnat tool to keep you in track.
 - [x] Daily reports [database]
   - [x] What you wrote for your journal the same day 1 year ago. 1 month ago. 1 Week ago + 1 Day ago.
 - [x] Indicate Core Progress.
+- [x] Pullout algorithm questions and automatically test them. You should also test in a file that is being selected 
+  - [x] Markdown database.
+- [x] Create a heatmap like overtime using the allowed charts
+- [x] A Skill tree type strucutre which is useful for prioritizing and creating dependency for deck of cards and for books as well in general
+  - [x] The deck of cards would inherit from an Class type
+  - [x] I am thinking about a composite structure, where those who are not in the tree take random priority, and those who have more dependencies goes first
+  - [x] Implement the system so that the cards with gigher priority are selected first, or the tree sees the agroupations and checks if everything (pre cached) caclculates which deck to select.
+  - [x] This would actually be a smart way to make faster queries once I have way too many knowledge objects.
+- [x] Image into Ascii
+  - [x] As a tool
+  - [x] As an automatic pattern ideal for terms images where no image is available. (Or you just want to preview 
+- [x] Serve as an organization extension for studying
+
 
 ![](./img/2022-12-12-17-14-57.png)
 
 ## In Progress
 
 
-- [ ] Pullout algorithm questions and automatically test them. You should also test in a file that is being selected 
-  - [ ] Markdown database.
-- [ ] Create a heatmap like overtime using the allowed charts
+- [ ] Daily Survey
+- [ ] Support for multiple users (right now is just the base user)
+  - [ ] Support for Logging in
+  - [ ] Support for Syncing Settings
 
 ## Features
 
 ### Study
 
-- [ ] Daily Survey
-- [ ] Chrome Extension as in gym telling you or you can loggon which session are you working on today (math, ai, etc...)
 - [ ] Ability To Generate Cloze (derivants of the concepts models)
 - [ ] Ability to Generate a terms through an collection of XLSX (Derivant of Concept Models)
 - [ ] Ability to Have a Cloze generator
 - [ ] Ability to create a grouper (inserts tags such as category or type to the collection of jsons it represents)
-- [ ] A Skill tree type strucutre which is useful for prioritizing and creating dependency for deck of cards and for books as well in general
-  - [ ] The deck of cards would inherit from an Class type
-  - [ ] I am thinking about a composite structure, where those who are not in the tree take random priority, and those who have more dependencies goes first
-  - [ ] Implement the system so that the cards with gigher priority are selected first, or the tree sees the agroupations and checks if everything (pre cached) caclculates which deck to select.
-  - [ ] This would actually be a smart way to make faster queries once I have way too many knowledge objects.
 - [ ] Ability to Sync (At least one way up (and have subscribers to the decks)) 
-- [ ] Ability to create
+
 
 
 ### Productivity
@@ -55,12 +62,7 @@ CLI Assistnat tool to keep you in track.
 
 ### Life Quality
 
-
-- [ ] Stream Music [Just opening the source into the browser is good enough so far.]
-  - [ ] U should map it so it is not understanble the source aside of the extension
-- [ ] Image into Ascii
-  - [ ] As a tool
-  - [ ] As an automatic pattern ideal for terms images where no image is available. (Or you just want to preview the attechment on the console. You should also set it up so that it prints that onto the computer.)
+the attechment on the console. You should also set it up so that it prints that onto the computer.)
 - [ ] Pomodoro Timers: [notifications]
   - [ ] Report the progress results of 1 year ago, 1 month ago + 1 week ago + 1 day ago.
 - [ ] Pull out excels and tell you about the daily tasks you didnt finish
@@ -68,14 +70,9 @@ CLI Assistnat tool to keep you in track.
 - [ ] Display daily metrics, or write into the daily metrics for the day where it stores based on datetime and you cna update the json that is being submitted.
 - [ ] The idea is that when you introduce a topic, it should use pattern matching to find other with that topic at hand [csv]
 - [ ] It should be also be able to open specifics on a specific folder to help you open a file that you were reading such as a specific page on the site.
-- [ ] Daily Journal Fetures [datebase]
-- [ ] Run python scripts [run pythons]
-  - [ ] Image Downloader from array
-  - [ ] CSV Data Reader
 
 ### Long Term
 
-- [ ] Serve as an organization extension for studying
 - [ ] Serve as a guiding AI template
 - [ ] Serve as something u can inherit and fork and develop through inheritance.
 
