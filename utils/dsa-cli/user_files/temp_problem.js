@@ -1,98 +1,84 @@
-class MinWindow {
-	solve(s, t) {
-	// Your code here These are the frequnecy map for the letters we need only. Does that mean that we are tracking the amount of letters we have int he frequencyMap ? and update that count? Yeah, then we can count regarding how small they are using the right and left indexes of the windows.
-		const getFrequencyMap = (str, frequencyMap = new Map()) => {
-			// Populate the frequency map until it finds this out.
-			
-			for (const letter of str){
-				frequencyMap[letter] = letter in frequencyMap ? frequencyMap[letter] + 1: 1;
-			}
+class EvalRPN {
 
-			return frequencyMap;
-		}
+    /**
+     * https://leetcode.com/problems/evaluate-reverse-polish-notation
+     * Time O(N^2) | Space(1)
+     * @param {string[]} tokens
+     * @return {number}
+     */
+    solve(tokens, index = 0) {
 
-		// getTwoPointers by constantly updating the smalles windows found returns  [start, end] of the smallest
-		const getTwoPointers = (s, t, frequencyMap) => {
-			let [start, min_length, left, right, matched] = new Array(5).fill(0);
+        var OPERATORS = {
+            '+': (a, b) => a + b,
+            '-': (a, b) => a - b,
+            '*': (a, b) => a * b,
+            '/': (a, b) => Math.trunc(a / b),
+        };
 
-			while(right < s.length){
 
-				// Add to the right frequnecy
-				const current_letter = s[right];
-				matched = addRightFrequency(current_letter, frequencyMap, matched);
+        var performOperation = (tokens, index) => {
+            const [rightNum, leftNum] = [Number(tokens[index - 1]), Number(tokens[index - 2])]
+            const operation = OPERATORS[tokens[index]];
 
-				// Check if the match is correct
-				const can_slide = () => matched >= s.length;
+            return operation(leftNum, rightNum);
+        }
 
-				// While it can slide then slide the left windows until the matched are not right. (cannot slide) 
-				while(can_slide){
-					
-					//Check if this is the smallest sequence found
-					const sequence_length = right - left +1;
-					if(sequence_length < min_length){
-						// Update the min_sequence
-						[start, min_length] = [left, sequence_length];
-					}
+        while (1 < tokens.length) {/* Time O(N) */
+            const isOperation = () => tokens[index] in OPERATORS;
+            while (!isOperation()) index++;/* Time O(N) */
 
-					const left_letter = s[left];
+            const value = performOperation(tokens, index);
 
-					matched = substractLeftFrequency(left_letter, frequencyMap, matched);
-				}
+            tokens[index] = value;
+            tokens.splice((index - 2), 2);/* Time O(N) */
+            index--;
+        }
 
-				right++;
-			}
+        return tokens[0];
+    }
 
-		}
-		
-		// addRightFrequency
-		const addRightFrequency = (current_letter, frequencyMap, matched) => {
-			// So it will check if it is inside the frequncey map, and it will substract, if now the count is less than 0 then matched wont increase.
-			if (current_letter in frequencyMap){
-				frequencyMap[current_letter] -= 1;
-				if(frequencyMap[current_letter] >= 0){
-					matched++;
-				}
-				console.log("current_letter", current_letter, "frequnceyMap", frequnceyMap, "matched", matched);
-			}
 
-			return matched; 
-		}
-		
-		// substractLeftFrequency
-		const substractLeftFrequency = (current_letter, frequencyMap, matched) => {
-			if(current_letter in frequencyMap){
-				frequencyMap[current_letter] += 1;
-				if(frequencyMap[current_letter] > 0){
-					matched--;
-				}
-				console.log("current_letter", current_letter, "frequnceyMap", frequnceyMap, "matched", matched);
-			}
-			return matched;
-		}
+    /**
+     * https://leetcode.com/problems/evaluate-reverse-polish-notation
+     * Time O(N) | Space(N)
+     * @param {string[]} tokens
+     * @return {number}
+     */
+    solve2(tokens, stack = []) {
+        var OPERATORS = {
+            '+': (a, b) => a + b,
+            '-': (a, b) => a - b,
+            '*': (a, b) => a * b,
+            '/': (a, b) => Math.trunc(a / b),
+        };
 
-		// getSubString
-			
-		const getSubString = (left, length, s) => {
-			// Returns the proper substring based on the length and where it starts from
-			let returnRes = "";
-			if(left + length > s.length) return "";//An error?
-			for(let i = left; i<left+length; i++){
-				returnRes += s[i];
-			}
-			return returnRes;
-		}
 
-		// Your solution
-		const frequnceyMap = getFrequencyMap(t);
-		console.log("Frequency Map generated", frequnceyMap);
-		const [left, length] = getTwoPointers(s, t);
-		const substring = getSubString(left, length);
-		console.log("substrring parsed from left", left, "right", right, "sub", substring);
-		return substring;
-	}
+        var performOperation = (char, stack) => {
+            const [rightNum, leftNum] = [stack.pop(), stack.pop()];
+            const operation = OPERATORS[char];
+
+            return operation(leftNum, rightNum);
+        }
+
+        for (const char of tokens) {/* Time O(N) */
+            const isOperation = char in OPERATORS;
+            if (isOperation) {
+                const value = performOperation(char, stack);
+
+                stack.push(value);      /* Space O(N) */
+
+                continue;
+            }
+
+            stack.push(Number(char));   /* Space O(N) */
+        }
+
+        return stack.pop();
+    }
 }
 
 
-module.exports = { Problem: MinWindow };
 
 
+
+module.exports = { Problem: EvalRPN };
