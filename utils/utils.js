@@ -206,8 +206,9 @@ class Maid {
 				const _ = await this.populateMissingReport();
 			}
 			// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
-			if (!this?.missingFeatReport || this.missingFeatReport?.length <= 0) {
-				console.log("Missing Reports Missing: received: ", this.missingFeatReport)
+			const missingFeatReport = this.missingFeatReport;
+			if (missingFeatReport??false) {
+				console.log("Missing Reports Missing: received: ", missingFeatReport ?? "")
 				return;
 			}
 			const missingFormatedAsStr = this.missingFeatReport.join(", ")
@@ -793,7 +794,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 		}
 	 */
 
-	if(debug) console.log("Posting comment", term_selected, user_res)
+	if (debug) console.log("Posting comment", term_selected, user_res)
 
 
 	try {
@@ -812,8 +813,8 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 			data: data
 		});
 
-		if(debug) console.log("Comment has been made", data);
-		
+		if (debug) console.log("Comment has been made", data);
+
 
 	} catch (err) {
 		if (debug) console.log("Probably no connection, comment has not been made")
