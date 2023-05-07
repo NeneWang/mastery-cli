@@ -22,22 +22,6 @@ const MAID_EMOJIS = ["genie_woman", "elf_woman", "construction_worker_woman", "z
     "woman_health_worker"];
 
 
-/**
- * Memory of the people I want to be thinking on. 
- */
-const PEOPLE_MEMORY = [
-    {
-        name: "Fede Liu"
-    },
-    {
-        name: "Camila S"
-    },
-    {
-        name: "Nancy W"
-    }
-]
-
-
 let APIDICT = {
     CHUCK: 'http://api.chucknorris.io/jokes/random',
     WEATHER: 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/New%20york?unitGroup=metric&include=days%2Cevents&key=WR8T3G2K9PYXY26YF6VCRV7YN&contentType=json',
