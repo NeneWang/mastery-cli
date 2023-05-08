@@ -9,7 +9,6 @@
 const dsa = [
     {
         term: "Heap", prompt: "Re explain one of the advantages of using Heaps",
-
         description: "Heaps are a specialized tree-based data structure that are used for various purposes such as priority queues, sorting, graph algorithms, and memory management. Here are some advantages and disadvantages of using heaps:\
         \n\
         Advantages:\
@@ -28,7 +27,8 @@ const dsa = [
 
 const system_design = [
     {
-        term: "Load Balancing Algorithms", description: "Load balancing refers to efficiently distributing incoming network traffic across a group of backend servers, also known as a server farm or server pool.",
+        term: "Load Balancing Algorithms", 
+        description: "Load balancing refers to efficiently distributing incoming network traffic across a group of backend servers, also known as a server farm or server pool.",
         prompt: "When would it be useful to have Load balancing going on?"
     },
     {
