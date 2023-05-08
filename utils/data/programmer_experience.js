@@ -748,7 +748,8 @@ const js_advanced = [
     },
     {
         term: "creating-quick-tests-mocha",
-        prompt: "How would you create a quick test in Mocha? Create a quick example using assert, describe and it",
+        prompt: "How would you create a quick test in Mocha? Create a quick example using assert, describe and it\n\
+        Remember to improt it.",
         example: "const assert = require('assert');\n\ndescribe('Problem integrity', function () {\n it('should return true', function () {\n console.log('Hello, welcome to analytics');\n assert.equal(true, true);\n });\n});"
     }
 ]
@@ -797,6 +798,44 @@ const best_practices = [
         example: "price_result",
         description: `Use snake_case: Unlike JavaScript, Python uses snake_case for naming variables, functions, and methods. In snake_case, each word is separated by an underscore. For example, "my_variable" or "calculate_total_price".`
     }
+]
+
+
+// I will take the lessons from: https://learngitbranching.js.org/
+// And from this verynicely put together cheatsheet https://education.github.com/git-cheat-sheet-education.pdf
+const git = [
+    // Setup
+    {
+        term: "git | config",
+        prompt: "Setup the username and email for git",
+        example: "git config --global user.name \"John Doe\"\n\
+        git config --global user.email"
+    },
+    {
+        term: "Checking the difference between Stagging and Dif",
+        prompt: "What's the differece between Stagging and Diff",
+        example: "Stagging is the area where you add the files you want to commit, Diff is the area where you can see the changes you made to the files",
+        description: "Getting the difference and the stage:\n\
+        git diff \n\
+        git diff --staged"
+    },
+    {
+        term: "Switching branches",
+        description: "switch to another branch and check it out into your working directory",
+        prompt: "Swithc into branch hello-world",
+        example: "git checkout hello-world"
+    },
+    {
+        term: "Logging git history",
+        description: "git log is a command that shows the commit history for the currently active branch",
+        prompt: "Show the commit history for the currently active branch",
+        example: "git log"
+    }
+]
+
+
+const regex = [
+
 ]
 
 
