@@ -1010,7 +1010,7 @@ const network_midterm = [
         prompt: "Can herbert read manual.txt and why?",
         description: "larry:x:501:larry\nshirley:x:502:shirley\nherbert:x:503:herbert\nstudent:x:600:larry,shirley\n-rw------- 1 larry student 12 Aug 21 13:06 hw.txt\n-rw-rw---- 1 larry student 12 Aug 21 13:08 project.txt\n-rw-r--r-- 1 larry student 12 Aug 21 13:10 manual.txt",
         example: "Herbert can read manual.txt because it is open for read"
-    }, 
+    },
     {
         term: "LVM | LVM",
         prompt: "What is LVM?",
@@ -1056,22 +1056,22 @@ const network_midterm = [
         term: "hostname-vs-IP",
         prompt: "Why is it better to refer to a machine by a hostname on your local network than by its IP address? Think about if you move the services of a server to a new machine.",
         example: "Using hostnames is better because it allows you to refer to the same machine regardless of IP changes, and also makes it easier to memorize the name of the machine. This is especially useful if you move the services of a server to a new machine, as you can simply update the hostname to point to the new machine, without having to worry about IP addresses."
-        },
-        {
+    },
+    {
         term: "bootloader",
         prompt: "What does a boot loader do?",
         example: "A bootloader is responsible for loading the operating system into memory during the boot process. It is the first program that runs when a computer starts up and is responsible for initializing the hardware and loading the operating system kernel into memory."
-        },
-        {
+    },
+    {
         term: "partition-isolation",
         prompt: "Why is it a good idea to put some partitions on a separate drive from other files and programs?",
         example: "Isolating data through partition separation can improve security by protecting information with distinct access permissions. It also allows for easier modularity and backup, as a single disk can be saved upon. Additionally, separating partitions can help with resource allocation, as different partitions can be optimized for different purposes (e.g. a partition for the OS and another for data storage)."
-        },
-        {
+    },
+    {
         term: "passwd-permissions",
         prompt: "The /etc/passwd file can be read by users, but only the superuser can write to it. However, users can run the passwd command, and the passwd command can edit the /etc/passwd file. How is this possible?",
         example: "When a user runs the passwd command, it initiates a process that requires elevated access for it to modify the /etc/passwd file. Therefore, the passwd command calls another program (setuid) that does have the superuser permissions to modify the file. This allows users to change their password without having direct write access to the file, while still ensuring that only the superuser can modify the file itself."
-        }
+    }
 ]
 
 const artificialIntelligence = [
@@ -1300,6 +1300,79 @@ const artificialIntelligence_2 = [
         ---- return Beta (Prune)\n\
         return Beta"
     },
+    // Perceptron
+    {
+        term: "Perceptron | weights",
+        prompt: "What are weights on a perceptron? | How could you think of it in Business?",
+        example: "A set of values or a dataset for predicting the output value. They are also described as a dataset’s features and dataset. "
+
+    },
+    {
+        term: "Perceptron | bias",
+        prompt: "What is bias on a perceptron? | How could you think of it in Business?",
+        example: "The activation function is shifted towards the left or right using bias. You may understand it simply as the y-intercept in the line equation. "
+    },
+    {
+        term: "Perceptron | activation function",
+        prompt: "What is activation function on a perceptron? Any application in business?",
+        example: "It introduces non-linearity in the perceptron model.\n\
+        The activation function is a function that takes in the weighted sum of all of the inputs from the previous layer and then generates and passes an output value (typically nonlinear) to the next layer. \n\
+        application: "
+    },
+    {
+        term: "Perceptron | Summation Function",
+        prompt: "What is summation function on a perceptron? | How could you think of it in Business?",
+        example: "The summation function binds the weights and inputs together. It is a function to find their sum."
+    },
+    {
+        term: "Perceptron | activation functions",
+        prompt: "What is activation functions on a perceptron? | How could you think of it in Business?",
+        example: "It introduces non-linearity in the perceptron model."
+    },
+    {
+        term: "Perceptron | Gradoemt Descemt",
+        prompt: "What is Gradoemt Descemt on a perceptron? | How are they useful?",
+        example: "In a perceptron, a gradient refers to the direction and magnitude of the steepest increase or decrease in the output of the perceptron with respect to a small change in the weights of the perceptron. It is used in the process of adjusting the weights of the perceptron during the training phase, in order to minimize the error between the actual output of the perceptron and the desired output. More specifically, the gradient is calculated using the partial derivatives of the error function with respect to each weight of the perceptron. The gradient points in the direction of the steepest increase of the error function, so by moving the weights in the opposite direction of the gradient, the error can be minimized. The size of the step taken in the direction of the gradient is typically controlled by a learning rate parameter, which determines how quickly the weights are updated during the training process.",
+        description: ":m During the training process, we present the perceptron with an input example with values x1 = `0.3`, x2 = `0.7`, and the desired output of positive. The current output of the perceptron is calculated as follows:\n\n`output = activation_function(w1 * x1 + w2 * x2 + b)`\n\nLet's say that the activation function is a simple threshold function, such that if the weighted sum is greater than or equal to 0, the output is positive, otherwise it is negative.\n\nSo in this case, we have:\n\n`output = activation_function(0.5 * 0.3 + 0.2 * 0.7 + b)`\n\nLet's assume that the bias term b is also set to `0.2` for simplicity. Then we have:\n\n`output = activation_function(0.29)`\n\nLet's say that the actual output is negative, so there is an error of `-1`. We can then calculate the gradient of the error function with respect to the weights as follows:\n\ndE/dw1 = x1 * error = `0.3 * -1 = -0.3`\ndE/dw2 = x2 * error = `0.7 * -1 = -0.7`\nThe gradient points in the direction of the steepest decrease in the error function, so we want to update the weights in the opposite direction of the gradient. Let's assume that the learning rate is `0.1` for simplicity. Then we can update the weights as follows:\n\n`w1 = w1 - learning_rate * dE/dw1 = 0.5 - 0.1 * (-0.3) = 0.53`\n`w2 = w2 - learning_rate * dE/dw2 = 0.2 - 0.1 * (-0.7) = 0.27`"
+    },
+    {
+        term: "Unsurpervised | hebbian vs competitive",
+        prompt: "What is the difference between hebbian and competitive learning? | How are they useful?",
+        example: `Hebbian learning is a type of associative learning that strengthens the connections between neurons that fire simultaneously. This is based on the idea that when two neurons fire together, the connection between them is strengthened, which is often referred to as "cells that fire together, wire together." Hebbian learning can be useful for learning patterns in data, such as identifying common features in images or recognizing speech. On the other hand, competitive learning is a type of learning that involves neurons competing with each other to become active. In this type of learning, a group of neurons receive the same input, and the neuron with the highest activation becomes active while the others remain inactive. Competitive learning can be useful for clustering similar data together or finding the most salient features in a dataset.\n\n\
+        Hebbian learning is useful when the goal is to identify patterns in data, such as recognizing common features in images or identifying correlations between variables. Hebbian learning is often used in unsupervised learning tasks, where the network is not given explicit labels for the input data.\n\
+        \n\
+        Competitive learning, on the other hand, is useful when the goal is to cluster similar data together or to identify the most salient features in a dataset. Competitive learning can also be used for dimensionality reduction, where the goal is to reduce the number of input variables while retaining as much information as possible.`,
+    },
+    {
+        term: "Perceptron Model",
+        prompt: "What is a perceptron model? | How are they useful?",
+        example: ":m A perceptron is a type of artificial neuron that is used in artificial neural networks. \n\
+        It consists of a single neuron with a set of weights and a bias term.\n\
+        The perceptron takes in a set of inputs and produces a single output. The output of the perceptron is calculated as follows:\n\n\
+        `output = activation_function(w1 * x1 + w2 * x2 + ... + wn * xn + b)`\n\n\
+        where `w1, w2, ..., wn` are the weights, `x1, x2, ..., xn` are the inputs, b is the bias term, and the activation function is a function that takes \n\
+        in the weighted sum of all of the inputs from the previous layer and then generates and passes an output value (typically nonlinear) to the next layer. \n\
+        The perceptron is typically used in the first layer of a neural network, where it takes in the input data and passes the output to the next layer. \n\
+        The perceptron is often used in conjunction with other types of neurons, such as sigmoid neurons, which are used in the hidden layers of a neural network.",
+
+    },
+    {
+        term: "Backpropagation two phases",
+        prompt: "What are the two phases of backpropagation? | How are they useful?",
+        example: "The two phases of backpropagation are the forward pass and the backward pass. \n\
+        In the forward pass, the input is fed into the network and the output is calculated. In the backward pass, the error is calculated and the weights are updated. \n\n\
+        The forward pass is useful for calculating the output of the network, while the backward pass is useful for updating the weights of the network. \n\
+        The forward pass is also known as the feedforward pass, while the backward pass is also known as the backpropagation pass.",
+        description: "`Forward phase`- Activation functions propagate from the `input layer` to the output layer. All weighted inputs are `added to compute outputs` using the `sigmoid threshold`.\n\n\
+        `Backward phase`- The errors between the `observed actual` value and the `demanded nominal value in the output layer` are propagated backward. \n\
+        The weights and bias values are modified to achieve the requested value. The modification is done by apportioning the `weights` and `bias` to each unit according to its impact on the error."
+    },
+    {
+        term: "Perceptron | Perceptron function",
+        prompt: "What is a perceptron function? | How are they useful?",
+        example: "Perceptron function ”f(x)” is generated by multiplying the input ‘x’ with the learned weight coefficient ‘w’. The same can be expressed through the following mathematical equation:"
+
+    }
 
 ]
 
