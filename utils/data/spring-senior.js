@@ -1549,7 +1549,23 @@ const algebra = [
 ];
 
 const calculousOne = [
-
+    {
+        term: "multiplication functions",
+        prompt: "Find the product of f(x) = (1-x) and g(x) = x^2 using calculus.",
+        example: "To solve this problem, we can use the product rule of derivatives in calculus. The product rule states that if we have two functions, f(x) and g(x), their product h(x) = f(x)g(x) can be differentiated as:\n\
+        \n\
+        h'(x) = f'(x)g(x) + f(x)g'(x)\n\
+        \n\
+        In this case, our two functions are f(x) = (1-x) and g(x) = x^2. Therefore, their product h(x) = f(x)g(x) is:\n\
+        \n\
+        h(x) = f(x)g(x) = (1-x) * x^2\n\
+        \n\
+        Taking the derivative of h(x) with respect to x, we get:\n\
+        \n\
+        h'(x) = f'(x)g(x) + f(x)g'(x)\n\
+        = (-1) * x^2 + (1-x) * 2x (using the chain rule to differentiate f(x) and g(x))\n\
+        = x(2-3x)",
+    }
 
 ];
 
