@@ -839,6 +839,26 @@ const git = [
         example: "git branch -f main C6\n\
         git checkout HEAD~1\n\
         git branch -f bugFix HEAD~1"
+    },
+    {
+        term: "git | reset + revert",
+        attachment: "./img/2023-05-09-15-04-44.png",
+        prompt: "Write the commands to go from blue to red.",
+        description: `git reset reverses changes by moving a branch reference backwards in time to an older commit. In this sense you can think of it as "rewriting history;" git reset will move a branch backwards as if the commit had never been made in the first place.\n\n\
+        While resetting works great for local branches on your own machine, its method of "rewriting history" doesn't work for remote branches that others are using.`,
+        example: "git reset HEAD~1\n\
+        git checkout pushed\n\
+        git revert HEAD"
+    },
+    {
+        term: "git | cherry pick",
+        prompt: "Write the commands to go from blue to red.",
+        description: "It's a very straightforward way of saying that you would like to copy a series of commits below your current location (HEAD). I personally love cherry-pick because there is very little magic involved and it's easy to understand.",
+        attachment: "./img/2023-05-09-15-20-04.png",
+        example: "git cherry-pick C3 C4 C7"
+    }, 
+    {
+
     }
 ]
 
@@ -848,6 +868,6 @@ const regex = [
 ]
 
 
-module.exports = { aws_glossary, aws_services, coderTerms, unit_testing, js_advanced, best_practices };
+module.exports = { aws_glossary, aws_services, coderTerms, unit_testing, js_advanced, best_practices, git, regex };
 
 
