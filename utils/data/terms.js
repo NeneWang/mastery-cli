@@ -12,7 +12,7 @@
 
 const { TermStorage } = require('../structures');
 
-const layer_1 = true;
+const layer_1 = false;
 const layer_2 = false;
 const layer_3 = false;
 const study_cisc = true; // Studying for Class Targetted.
@@ -37,13 +37,14 @@ async function populateMasterDeck() {
     
 
 
-    const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne } = require("./spring-senior");
+    const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne, network_final } = require("./spring-senior");
     decks.addDeck(new TermStorage(network, "network", { is_active: study_cisc }));
     decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: study_cisc }));
-    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: true }));
-    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: true }));
+    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(algebra, "algebra", { is_active: study_cisc }));
     decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(network_final, "network final", { is_active: study_cisc }));
 
 
 
@@ -87,12 +88,12 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(sql, "sql", { is_active: layer_1 }));
 
     const {aws_certification_associate_developer} = require('./aws_certifications');
-    decks.addDeck(new TermStorage(aws_certification_associate_developer, "aws associate dev", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(aws_certification_associate_developer, "aws associate dev", { is_active: layer_2 }));
 
 
     // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
     const { salesforce_experience } = require('./salesforce_certification');
-    decks.addDeck(new TermStorage(salesforce_experience, "salesforce experience", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(salesforce_experience, "salesforce experience", { is_active: layer_2 }));
 
     // Generic Term Generators
     const filesData = [{

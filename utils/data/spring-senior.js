@@ -1650,4 +1650,4 @@ const calculousOne = [
 
 ];
 
-module.exports = { network, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne, network_midterm };
+module.exports = { network, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne, network_midterm, network_final };
