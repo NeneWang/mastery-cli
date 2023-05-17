@@ -1074,6 +1074,47 @@ const network_midterm = [
     }
 ]
 
+const network_final = [
+    {
+        term: "wireshark-protocol",
+        prompt: "What is wireshark used for?",
+        example: "Wireshark is a widely used network protocol analyzer or packet sniffer. It is an open-source software tool that allows users to capture and analyze network traffic in real-time. Wireshark can be used for various purposes, including:\n\
+        Network Troubleshooting: It helps in diagnosing and resolving network issues by capturing and examining packets to identify errors, latency problems, misconfigurations, or faulty network devices.\n\
+        Network Security: Wireshark can be used to analyze network traffic for security purposes, such as detecting and investigating suspicious activities, identifying network attacks (e.g., malware infections, intrusion attempts), and monitoring for unauthorized access or data breaches"
+    },
+    {
+        term: "switches-hubs",
+        prompt: "What is the difference between switches and hubs?",
+        example: "Switches and hubs are both networking devices used to connect multiple devices in a local area network (LAN), but they operate in different ways and have distinct features. Here are the key differences between switches and hubs:\n\
+        Method of Operation: Hub: A hub operates in a simple and passive manner. When a device sends data to the hub, it broadcasts that data to all other devices connected to the hub. All devices on the hub receive the data, regardless of whether they are the intended recipients. \n\
+        Switch: A switch, on the other hand, operates in a more intelligent and active manner. It examines the destination address of each incoming data packet and forwards it only to the specific device connected to the switch that should receive the data. It maintains a table (MAC address table) to track the network devices and their corresponding ports. Traffic Handling: Hub: Since a hub broadcasts data to all connected devices, \n\
+        it generates more network traffic. This traffic is called a collision domain, where collisions can occur when multiple devices transmit data simultaneously, resulting in reduced network efficiency. Switch: A switch isolates each connected device into its own collision domain. By selectively forwarding packets to the intended destination, it reduces unnecessary traffic and improves network performance. Switches also support full-duplex communication, allowing simultaneous data transmission in both directions."
+    },
+    {
+        term: "switches-router",
+        prompt: "What is the difference between switches and routers?",
+        example: "Switches operate at the Data Link Layer, connecting devices within a local network based on MAC addresses. Routers operate at the Network Layer, connecting different networks based on IP addresses, facilitating inter-network communication. Switches forward packets within a network segment, while routers route packets between networks. Switches focus on MAC addresses, while routers use IP addresses. Switches are used within LANs, while routers connect networks and provide additional services like routing protocols, NAT, firewalling, QoS, and VPN support."
+    },
+    {
+        term: "subnet-task",
+        prompt: "What is subnet mask?",
+        description: "he subnet mask is applied by performing a bitwise logical AND operation between the IP address and the subnet mask. This operation results in the network address, which identifies the specific subnet to which the IP address belongs. The subnet mask consists of a series of consecutive 1s followed by a series of consecutive 0s. The 1s indicate the network bits, while the 0s indicate the host bits. The number of leading 1s in the subnet mask determines the size of the network portion. For example, a common subnet mask is 255.255.255.0, which is written in decimal format. In binary, it is represented as 11111111.11111111.11111111.00000000. This subnet mask is associated with a Class C IP address and allows for 254 host addresses within a network. By applying subnet masks, network administrators can effectively partition a large network into smaller, more manageable subnets, helping with network organization, addressing, and routing. It enables efficient use of IP addresses and allows for better control and segmentation of network traffic.",
+        example: "The subnet mask splits the IP address into the host and network addresses, thereby defining which part of the IP address belongs to the device and which part belongs to the network."
+    },
+    {
+        term: "nfs-usage",
+        prompt: "What is NFS used for?",
+        description: "NFS stands for Network File System, and it is a distributed file system protocol. NFS allows a computer to access files and directories over a network as if they were located on the local storage of the computer. \n\
+        It enables remote file sharing and facilitates network-based file access and management. NFS is commonly used in networked environments,\n\
+        particularly in UNIX-like systems, to share files and resources among multiple computers or clients.\n\
+        Here are some key use cases and benefits of NFS:",
+        example: "The Network File System (NFS) is a mechanism for storing files on a network. It is a distributed file system that allows users to access files and directories located on remote computers and treat those files and directories as if they were local."
+    },
+    {
+
+    }
+]
+
 const artificialIntelligence = [
     {
         term: "Backpropagation Neural Network",
@@ -1371,10 +1412,50 @@ const artificialIntelligence_2 = [
         term: "Perceptron | Perceptron function",
         prompt: "What is a perceptron function? | How are they useful?",
         example: "Perceptron function ”f(x)” is generated by multiplying the input ‘x’ with the learned weight coefficient ‘w’. The same can be expressed through the following mathematical equation:"
-
+    },
+    {
+        term: "corresponding y values",
+        prompt: "Suppose you are given a list x, and a list of corresponding y values\n\
+        create a scatter plot of the (x,y) values. Then perform a 1d polynomial fit to the data. Plot the polynomial on top of the scatter plot.",
+        description: "# Suppose you are given a list x, and a list of corresponding y values\n\
+        x=[1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,18,19,21,22n\n\
+        y=[100,90,80,60,60,55,60,65,66, 67, 70,75,76,78,79,90,99,99,100]\n\
+        import numpy as np\n\
+        import matplotlib.pyplot as plt\n\
+        Use these lists to scatter plot the (x,y) values. Then perform a 1d poly",
+        example: "\n\
+        plt.scatter(x, y, color='black', label='scatter_data')\n\
+        \n\
+        # Then perform a 1d polynom\n\
+        deg = 3\n\
+        coeffs = np.polyfit(x, y, deg)\n\
+        polynom_1d = np.poly1d(coeffs)\n\
+        \n\
+        # Plot the polynomial\n\
+        \n\
+        # Range of the polynomial\n\
+        domain = np.linspace(min(x), max(x), 100)\n\
+        plt.plot(domain, polynom_1d(domain), color='red', label='1d_polynom')\n\
+        plt.legend()\n\
+        plt.xlabel('x')\n\
+        plt.ylabel('y')\n\
+        plt.show()"
+    },
+    {
+        term: "One layer perceptron",
+        prompt: "Whats the problem with one layer perceptron? Why there is a need for 3 layer problems?",
+        example: "The problem with one layer perceptron is that it can only solve linearly separable problems. \n\
+        It can only separate into one plane.\n\
+        "
+    },
+    {
+        term: "What are features?",
+        prompt: "What are features? | How are they useful?",
+        example: "They are the space "
     }
 
 ]
+
 
 
 // From Math for Business
@@ -1549,7 +1630,23 @@ const algebra = [
 ];
 
 const calculousOne = [
-
+    {
+        term: "multiplication functions",
+        prompt: "Find the product of f(x) = (1-x) and g(x) = x^2 using calculus.",
+        example: "To solve this problem, we can use the product rule of derivatives in calculus. The product rule states that if we have two functions, f(x) and g(x), their product h(x) = f(x)g(x) can be differentiated as:\n\
+        \n\
+        h'(x) = f'(x)g(x) + f(x)g'(x)\n\
+        \n\
+        In this case, our two functions are f(x) = (1-x) and g(x) = x^2. Therefore, their product h(x) = f(x)g(x) is:\n\
+        \n\
+        h(x) = f(x)g(x) = (1-x) * x^2\n\
+        \n\
+        Taking the derivative of h(x) with respect to x, we get:\n\
+        \n\
+        h'(x) = f'(x)g(x) + f(x)g'(x)\n\
+        = (-1) * x^2 + (1-x) * 2x (using the chain rule to differentiate f(x) and g(x))\n\
+        = x(2-3x)",
+    }
 
 ];
 
