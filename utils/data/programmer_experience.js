@@ -422,6 +422,30 @@ const coderTerms = [
     }
 ]
 
+const docker = [
+    {
+        term: "remove all including cached images",
+        prompt: "How to remove all docker images including cached ones?",
+        example: "docker system prune -a"
+    },
+    {
+        prompt: "docker run image with arguments AWS_ACCESS_KEY_ID as 'hello' and name as job-listener; imagename = imagename",
+        term: "docker run",
+        example: "docker run -e AWS_ACCESS_KEY_ID=hello --name job-listener -d imagename"
+    },
+    {
+        prompt: "run the terminal for the docker container with id: 1234",
+        term: "docker exec",
+        example: "docker exec -it 1234 /bin/bash"
+    },
+    {
+        prompt: "Pull and push the docker image to the docker hub with the name 'imagename'",
+        term: "docker pull and push",
+        example: "docker pull imagename\n\
+        docker push imagename"
+    }
+]
+
 
 
 const unit_testing = [

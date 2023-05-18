@@ -1109,9 +1109,6 @@ const network_final = [
         particularly in UNIX-like systems, to share files and resources among multiple computers or clients.\n\
         Here are some key use cases and benefits of NFS:",
         example: "The Network File System (NFS) is a mechanism for storing files on a network. It is a distributed file system that allows users to access files and directories located on remote computers and treat those files and directories as if they were local."
-    },
-    {
-
     }
 ]
 
@@ -1621,11 +1618,6 @@ const algebra = [
         when is increasing it cannot be descrease, thus when the slope is 0 and increase and decrease rules applies then is non."
 
     }
-
-
-
-
-
 
 ];
 
