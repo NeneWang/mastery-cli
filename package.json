@@ -13,8 +13,7 @@
 		"url": "https://github.com/NeneWang"
 	},
 	"keywords": [
-		"maid-cli",
-		"Nelson"
+		"maid-cli"
 	],
 	"files": [
 		"index.js",
@@ -41,7 +40,6 @@
 		"execa": "^6.1.0",
 		"expr-eval": "^2.0.2",
 		"express": "^4.18.2",
-		"joke": "^0.0.1-1",
 		"markdown-it": "^13.0.1",
 		"markdown-it-toc-done-right": "^4.2.0",
 		"markdown-to-json": "^0.5.4",
@@ -49,7 +47,6 @@
 		"marked-terminal": "^5.1.1",
 		"meow": "^9.0.0",
 		"node-json-db": "^2.1.4",
-		"sql.js": "^1.8.0",
 		"terminal-image": "^2.0.0"
 	},
 	"devDependencies": {

@@ -4,6 +4,8 @@
  * The advantage of devops is that tit is usually definition based, so I should be able to go throught the list and get as much of these definitions based problems.
  */
 
+const { example } = require("yargs");
+
 
 const aws_glossary = [
     {
@@ -858,12 +860,179 @@ const git = [
         example: "git cherry-pick C3 C4 C7"
     }, 
     {
-
+        term: "git | rebase",
+        prompt: "Rebase from 4 commits ago",
+        example: "git rebase -i HEAD~4",
+        description: "We can use interactive rebasing for this -- it's the best way to review a series of commits you're about to rebase."
+    },
+    {
+        term: "git | rebase from a branch",
+        attachment: "./img/2023-05-09-16-27-45.png",
+        prompt: "Complete from blue to red, start from rebase into branch C4",
+        example: "git rebase -i main C4\n\
+        git rebase bugFix main"
+    },
+    {
+        term: "git | juggling commits",
+        attachment: "./img/2023-05-09-16-53-29.png",
+        prompt: "Complete from blue to red, start from rebase into branch C4",
+        example: "git rebase -i HEAD~2\n\
+        git commit --ammend\n\
+        git rebase -i HEAD~2\n\
+        git rebase caption main"
+    },
+    {
+        term: "git | tags",
+        attachment: "./img/2023-05-10-10-25-57.png",
+        prompt: "Make the tags and movements to go from blue to red",
+        example: "git tag v0 C1\n\
+        git tag v1 C2\n\
+        checkout v1",
+        description: "If that's the case, you may be wondering if there's a way to permanently mark historical points in your project's history. For things like major releases and big merges, is there any way to mark these commits with something more permanent than a branch?"
+    },
+    {
+        term: "git | rebase efficient",
+        attachment: "./img/2023-05-10-10-56-09.png",
+        prompt: "Make the tcommand executions until you get to the red",
+        example: "git rebase main bugFix\n\
+        git rebase bugFix side\n\
+        git rebase side another\n\
+        git rebase another main",
+        description: "rebasing will pick all the commits that were not applied to the first argumented branch"
+    },
+    {
+        term: "git | branch on location",
+        prompt: "Create a branch on the C2 Location",
+        attachment: "./img/2023-05-10-11-23-18.png",
+        example: "git branch bugWork HEAD~^2^",
     }
 ]
 
 
 const regex = [
+    {
+        prompt: "Match the following:\n\
+        cat.\n\
+        896.\n\
+        ?=+.\n\
+        Skip: abc1",
+        example: "...\\.",
+        description: "The dot .Similarly, there is the concept of a wildcard, which is represented by the . (dot) metacharacter, and can match any single character (letter, digit, whitespace, everything).",
+        term: "Wildcard ."
+    },
+    {   
+        prompt: "Match the following:\n\
+        can\n\
+        man\n\
+        fan\n\
+        Skip: dan, ran, pan",
+        example: "[cmf]an",
+        description: "The character class [ ] matches only one out of several characters placed inside the square brackets.",
+        term: "Character class []"
+    },
+    {
+        prompt: "Match the following:\n\
+        hog\n\
+        dog\n\
+        Skip: bog",
+        example: "[^b]og",
+        description: "The negated character class [^ ] matches any character that is NOT inside the square brackets.",
+        term: "Negated character class [^ ]"
+    },
+    {
+        prompt: "Match the following:\n\
+        Ana\n\
+        Bob\n\
+        Cpc\n\
+        Skip: aax, bby, ccz",
+        example: "[A-Z]..",
+        description: "The range [A-Za-z0-9] matches any character between 'A' and 'Z', lower case letters between 'a' and 'z' and digits between '0' and '9'.",
+        term: "Range []"
+    },
+    {
+        prompt: "Match the following:\n\
+        wazzzzzup\n\
+        wazzzup\n\
+        skip: wazup",
+        example: "waz{3,5}up",
+        description: "The quantifier {m,n} where m is the minimum times and n is the maximum times.",
+        term: "Quantifier {m,n}"
+    },
+    {
+        prompt: "Match the following:\n\
+        aaaabcc\n\
+        aabbbbc\n\
+        acc\n\
+        skip: a",
+        example: "a+b*c+",
+        description: "The quantifier + where the character before it can appear once or more.",
+        term: "Quantifier +*"
+    },
+    {
+        prompt: "Match the following:\n\
+        1 file found?\n\
+        2 files found?\n\
+        24 files found?\n\
+        skip: No files found.",
+        example: "\\d+ files? found\\?",
+        description: "The quantifier + where the character before it can appear once or more.",
+        term: "Characters Optional"
+    },
+    {
+        prompt: "Match the following:\n\
+        1.   abc\n\
+        2.	abc\n\
+        3.           abc\n\
+        skip: 4.abc",
+        example: "\\d\\.\\s+abc",
+        description: "The quantifier + where the character before it can appear once or more.",
+        term: "Characters Optional | whitespace"
+    },
+    {
+        prompt: "Match the following:\n\
+        Mission: successful\n\
+        Last Mission: unsuccessful\n\
+        Next Mission: successful upon capture of target",
+        example: "^Mission: successful$",
+        description: `One way to tighten our patterns is to define a pattern that describes both the start and the end of the line using the special ^ (hat) and $ (dollar sign) metacharacters. In the example above, we can use the pattern ^success to match only a line that begins with the word "success", `,
+        term: "Start and End Matching"
+    },
+    {
+        prompt: "Match the filename of the following files:\n\
+        file_record_transcript.pdf\n\
+        file_07241999.pdf\n\
+        skip: testfile_fake.pdf.tmp",
+        example: "^(file.+)\\.pdf$",
+        description: "Regular expressions allow us to not just match text but also to extract information for further processing. This is done by defining groups of characters and capturing them using the special parentheses ( and ) metacharacters. Any subpattern inside a pair of parentheses will be captured as a group.",
+        term: "Capture Groups | Filenames"
+    },
+    {
+        prompt: "Math the Month with the Year and also the Year\n\
+        Jan 1987 => [Jan 1987, 1987]\n\
+        May 1969 => [May 1969, 1969]\n\
+        Aug 2011 => [Aug 2011, 2011]",
+        example: "(\\w+ (\\d+))",
+        description: " Generally, the results of the captured groups are in the order in which they are defined (in order by open parenthesis).",
+        term: "Capture Groups | Nested"
+    },
+    {
+        prompt: "Match the groups: \n\
+        1280x720 => [1280, 720]\n\
+        1920x1600 => [1920, 1600]\n\
+        1024x768 => [1024, 768]",
+        example: "(\\d+)x(\\d+)",
+        description: " Generally, the results of the captured groups are in the order in which they are defined (in order by open parenthesis).",
+        term: "Capture Groups | Multiple"
+    },
+    {
+        prompt: "Match the following:\n\
+        I love cats\n\
+        I love dogs\n\
+        skip: I love logs, I love cogs",
+        example: "I love (cats|dogs)",
+        description: "The alternation metacharacter | matches either the characters before or after it. We can use it inside a character class [ ] as well.",
+        term: "Alternation | regex"
+    }
 
 ]
 
