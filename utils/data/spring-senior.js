@@ -1551,6 +1551,347 @@ const network_final = [
 
 ]
 
+const artificialIntelligence = [
+    {
+        term: "Backpropagation Neural Network",
+        description: "A backpropagation neural network is an approach to train neural networks using a supervised learning algorithm. It involves providing the neural network with input-output pairs where the correct output is already known. The network processes the input, generates an output, and compares it to the correct value. If the output is incorrect, adjustments are made to the network's weights and biases through a process called backpropagation. This process is iteratively repeated until the network can produce the desired output.",
+        prompt: "Design an application using a backpropagation neural network"
+    },
+    {
+        term: "AI Definitions",
+        prompt: "Define in your own words at least one of the following: (a) intelligence, (b) artificial intelligence, (c) agent, (d) rationality, (e) logical reasoning.",
+        description: "a. Intelligence refers to the ability of a system or organism to acquire, apply, and adapt knowledge and skills in order to perform well in various environments. b. Artificial intelligence is the field of study that focuses on creating and implementing computer systems capable of performing tasks that typically require human intelligence. c. An agent is an entity that perceives its environment, processes the information, and responds with appropriate actions. d. Rationality is the quality of a system that makes optimal decisions based on its knowledge and available information. e. Logical reasoning is the process of drawing conclusions from premises or facts, ensuring that the resulting conclusions are valid and consistent with the initial information."
+    },
+    {
+        term: "Evan-analogy-Program",
+        prompt: "What is the Evan's ANALOGY Program?",
+        description: "The Evan's ANALOGY Program (EAP) is a computer-based test designed to measure verbal reasoning ability through analogy questions. The test is often used for admissions purposes by universities, graduate programs, and certain professions, such as law and medicine.",
+        example: "The Evan's ANALOGY Program (EAP) is a computer-based test designed to measure verbal reasoning ability through analogy questions. The test is often used for admissions purposes by universities, graduate programs, and certain professions, such as law and medicine."
+    },
+    {
+        term: "evans-analogy-program-extension",
+        prompt: "Suppose we extend Evans’s ANALOGY program so that it can score 200 on a standard IQ test. Would we then have a program more intelligent than a human? Explain.",
+        example: "The program would not be more intelligent than a human at present, as its proficiency in standard IQ tests only indicates its ability to perform well in these evaluations. These tests do not encompass the other aspects of human intelligence, such as the capacity to formulate strategy, retain information, or reach conclusions through introspection and reflection."
+    },
+    {
+        term: "science-ai-engineering",
+        prompt: "Is AI a science, or is it engineering? Or neither or both? Expain.",
+        example: "A science can be defined as the systematic acquisition of empirical knowledge through the application of the scientific method. Engineering, on the other hand, involves the practical utilization of scientific knowledge to address societal issues. Artificial Intelligence can be seen as a science in that it involves the systematic study and understanding of AI systems with the aim of advancing the knowledge domain. At the same time, it can also be viewed as an engineering discipline as it leverages this knowledge base to develop practical applications and solutions."
+    },
+    {
+        term: "rationality-ai",
+        attachment: "./img/2023-03-26-20-47-01.png",
+        prompt: "2.1 Let us examine the rationality of various vacuum-cleaner agent functions. a. Show that the simple vacuum-cleaner agent function described in Figure 2.3 is indeed rational under the assumptions",
+        description: "Asumptions: The performance measure awards one point for each clean square at each time step, over a “lifetime” of 1000 time steps. • The “geography” of the environment is known a priori (Figure 2.2) but the dirt distribution and the initial location of the agent are not. Clean squares stay clean and sucking cleans the current square. The Left and Right actions move the agent left and right except when this would take the agent outside the environment, in which case the agent remains where it is. • The only available actions are Left, Right, and Suck. • The agent correctly perceives its location and whether that location contains dir",
+        example: "Rational according to ( section 1.1, Russell & Norvig, 2010), is the measure against an ideal performance measure. The system is rational if it does the correct approach given Assignment #2 2 what it knows about the environment (Section 1.1, Russell & Norvig, 2010)\n\
+        It can be seen that the agent is indeed doing the right thing, given the perception sequence it has of the environment. b. Describe a rational agent function for the case in which each movement costs one point. Does the corresponding agent program require internal state? If the amount of unclean pieces is known or the environment does not get dirty in the future, the rational agent could stop moving once it knows that the environment is clean, based on the number of pieces collected or after visiting all squares. This would require the agent to use memory to keep track of which areas have been cleaned or to keep count of the number of pieces collected."
+    },
+    {
+        term: "rational-agent",
+        prompt: "2.2 What is a rational agent? What is a rational agent function? What is a rational performance measure? What is a rational environment?",
+        description: "A rational agent is an agent that does the right thing, given what it knows about the environment. A rational agent function is a function that maps a perception sequence to an action. A rational performance measure is a measure that awards the agent points for doing the right thing. A rational environment is an environment that is such that the agent can do the right thing, given what it knows about the environment.",
+        example: " A rational agent is an agent that does the right thing, given what it knows about the environment.\n\
+        A rational agent function is a function that maps a perception sequence to an action. A rational performance measure is a measure that awards the agent points for doing the right thing. A rational environment is an environment that is such that the agent can do the right thing, given what it knows about the environment."
+    },
+    {
+        term: "rational-agent-costs-one",
+        prompt: "Describe a rational agent function for the case in which each movement costs one point. Does the corresponding agent program require internal state?",
+        example: "If the amount of unclean pieces is known or the environment does not get dirty in the future, the rational agent could stop moving once it knows that the environment is clean, based on the number of pieces collected or after visiting all squares. This would require the agent to use memory to keep track of which areas have been cleaned or to keep count of the number of pieces collected."
+    },
+    {
+        term: "rational-agent-clean-squares-dirty",
+        prompt: "Discuss possible agent designs for the cases in which clean squares can become dirty and the geography of the environment is unknown. Does it make sense for the agent to learn from its experience in these cases? If so, what should it learn? If not, why not?",
+        example: "If this is the case, an agent could learn to predict where dirt is more likely to accumulate on the geography based on past experiences. For example, certain areas may be more likely to become dirty during holidays or at specific times of day, such as morning rush hours. An agent could learn from past experiences and identify patterns or correlations to predict future unclean areas."
+    },
+    {
+        term: "solving-problems-by-search",
+        description: "Solving Problems By Searching \n\n\
+        • Reflex Agents, which base their actions on a direct mapping from states to actions, Cannot Operate well in environments for which this mapping would be too large to store and would take too long to learn. \n\
+        • Goal-based agents, on the other hand, consider future actions and the desirability of their outcomes \n\
+        • Problem-solving agents is one kind of goal-based agent \n\
+        • Problem-solving agents use atomic representations- that is states of the world are considered as wholes, with no internal structure visible to the problem solving algorithm. \n\
+        • First, begin with definitions of the problem and the solution. \n\
+        • Then describe several general purpose search algorithms to solve these problems \n\
+        • The task environment is one for which the solution is always a fixed sequence of actions.",
+        prompt: "Create a problem reoresentation for: On holiday in Romania; currently in Arad. Flight leaves tomorrow from Bucharest",
+        example: "Formulate goal: be in Bucharest \n\
+        • Formulate problem: states: various cities actions: drive between cities \n\
+        • Find solution: sequence of cities, e.g., Arad, Sibiu, Fagaras, Bucharest"
+    }
+];
+
+
+// Things that I research by my own
+const artificialIntelligence_2 = [
+    // Agents
+    {
+        term: "Rule-based agents",
+        prompt: "What are rule-based agents in AI? Provide an example.",
+        example: "An example of a rule-based agent is a medical diagnosis system that offers recommendations based on a set of rules derived from medical expertise and patient input.",
+        description: "Rule-based agents are AI systems that make decisions according to a predetermined set of rules. These rules, often designed by domain experts, guide the agent's decision-making process in a specific context."
+    },
+    {
+        term: "Utility-based agents",
+        prompt: "What are utility-based agents in AI?",
+        example: "An example of a utility-based agent is a financial investment algorithm that selects stocks based on maximizing expected returns and minimizing risks.",
+        description: "Utility-based agents are AI systems that make decisions by considering the utility or value of each possible outcome. The agent selects the action that maximizes its expected utility, aiming for the most favorable result."
+    },
+    {
+        term: "Learning agents",
+        prompt: "What are learning agents in AI?",
+        example: "An example of a learning agent is an e-commerce recommendation system that adapts its suggestions based on a user's browsing history and purchase patterns.",
+        description: "Learning agents are AI systems that improve their performance over time by learning from experience. These agents employ machine learning algorithms to analyze data, identify patterns, and make better decisions in the future."
+    },
+    {
+        term: "Reflex agents",
+        prompt: "What are reflex agents in AI? Provide an example.",
+        example: "An example of a reflex agent is a light-sensitive switch that turns on the lights when the ambient light level falls below a predefined threshold.",
+        description: "Reflex agents are AI systems that make decisions solely based on their current percepts or sensory input, without considering past experiences or future outcomes."
+    },
+    {
+        term: "Goal-based agents",
+        prompt: "What are goal-based agents in AI?, provide an example.",
+        example: "An example of a goal-based agent is a personal assistant that helps a user achieve specific goals, such as booking a flight or scheduling a meeting.",
+        description: "Goal-based agents are AI systems that have a specific goal they are trying to achieve. They use their percept history to make decisions that will help them achieve their goal."
+    },
+    {
+        term: "Multi-agent systems",
+        prompt: "What are multi-agent systems in AI?, provide an example.",
+        example: "An example of a multi-agent system is a swarm of drones that work together to survey a large area.",
+        description: "Multi-agent systems are AI systems in which multiple agents work together to achieve a common goal. They can be used in a wide range of applications, from robotics to video games."
+    },
+    {
+        term: "Intelligent virtual agents",
+        prompt: "What are intelligent virtual agents in AI?, provide an example.",
+        example: "An example of an intelligent virtual agent is a chatbot that can answer customer questions and provide support.",
+        description: "Intelligent virtual agents are AI systems that interact with humans in a virtual environment. They can be used for a variety of applications, including customer service, education, and entertainment."
+    },
+    {
+        term: "Cognitive architectures",
+        prompt: "What are cognitive architectures in AI?, provide an example.",
+        example: "An example of a cognitive architecture is ACT-R, a framework for modeling human cognition and decision-making.",
+        description: "Cognitive architectures are AI systems that attempt to model human cognition and reasoning. They are used to study how humans think and make decisions, and to develop more intelligent AI systems."
+    },
+    {
+        term: "Hierarchical agents",
+        prompt: "What are hierarchical agents in AI?, provide an example.",
+        example: "An example of a hierarchical agent is a robot that can perform multiple tasks by breaking them down into smaller subtasks and executing them in a hierarchical manner.",
+        description: "Hierarchical agents are AI systems that can perform complex tasks by breaking them down into smaller subtasks and executing them in a hierarchical manner. This allows the agent to handle large, complex problems by dividing them into smaller, more manageable parts."
+    },
+    {
+        term: "Simple reflex agents",
+        prompt: "What are simple reflex agents in AI?, provide an example.",
+        example: "An example of a simple reflex agent is a thermostat that turns on the heating or cooling system if the temperature goes above or below a certain threshold.",
+        description: "Simple reflex agents are a type of AI agent that operate using a set of predefined rules or heuristics based on the current state of the environment. They only react to the current state and do not take into account any history or future states. Simple reflex agents are often used in control systems and other applications where a set of rules can be easily defined."
+    },
+    {
+        term: "Model-based agents",
+        prompt: "What are model-based agents in AI?, provide an example.",
+        example: "An example of a model-based agent is a self-driving car that uses a map of the environment to plan the best route to a destination.",
+        description: "Model-based agents are a type of AI agent that maintain an internal model of the environment and use it to make decisions. They can handle more complex environments than simple reflex agents and can adapt to changing situations more easily. However, model-based agents can be more computationally intensive and may require more resources than simple reflex agents."
+    },
+    // Lets get into specific searches.
+    {
+        term: "admissible-heuristic",
+        prompt: "What is admissible heuristic in AI? And what algorithms use it?",
+        description: "An admissible heuristic is a heuristic function used in heuristic search algorithms that never overestimates the cost of reaching the goal. In other words, an admissible heuristic is a function that always provides an estimate that is less than or equal to the actual cost of reaching the goal.",
+        example: "A* search, Greedy best-first search, and Hill climbing are examples of algorithms that use admissible heuristics."
+    },
+    {
+        term: "informed-search",
+        prompt: "What is informed search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "Informed search is a type of search algorithm that uses a heuristic function to guide the search towards the goal. Informed search algorithms are more efficient than uninformed search algorithms because they can eliminate many of the nodes that would otherwise be explored.",
+        example: "A* search, Greedy best-first search, and Hill climbing are examples of informed search algorithms.\n\
+        GPS Navigation, Chess, Solving a Rubik's Cube, and Solving a Sudoku Puzzle are examples of real-world applications of informed search algorithms."
+    },
+    {
+        term: "uninformed-search",
+        prompt: "What is uninformed search in AI? And what algorithms use it?",
+        description: "Uninformed search is a type of search algorithm that does not use any additional information to guide the search. Uninformed search algorithms are less efficient than informed search algorithms because they must explore all possible nodes in the search space.",
+        example: "Breadth-first search and depth-first search are examples of uninformed search algorithms.\n\
+        Solving a maze, finding the shortest path between two points, are examples of uninformed search algorithms."
+    },
+    // https://www.geeksforgeeks.org/introduction-hill-climbing-artificial-intelligence/?ref=lbp
+    {
+        term: "breadth-first-search",
+        prompt: "What is breadth-first search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "Breadth-first search (BFS) is an uninformed search algorithm that explores nodes in a tree or graph level by level. It starts at the root node and expands all neighboring nodes before moving on to the next level of neighbors. BFS is complete and optimal for problems with uniform path costs.\n\
+        time complexity: O(b^d) where b is the branching factor and d is the depth of the goal node.\n\
+        space complexity: O(b^d) where b is the branching factor and d is the depth of the goal node.",
+        example: "Breadth-first search can be used on its own or as a component of other algorithms, such as Iterative Deepening Depth-First Search.\n\
+        Finding the shortest path in an unweighted graph, social network analysis, web crawlers, and spreading information in a network are examples of real-world applications of breadth-first search."
+    },
+    {
+        term: "astarsearch",
+        prompt: "What is A* search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "A* search is an informed search algorithm that uses a heuristic function to guide the search towards the goal. It combines the advantages of Dijkstra's Algorithm (considering the cost from the start node) and Greedy Best-First Search (using a heuristic function to estimate the remaining cost to the goal). A* search is complete and optimal when used with an admissible and consistent heuristic.\n\
+        time complexity: O(b^d)* where b is the branching factor and d is the depth of the goal node. (Given an admissible heuristic)\n\
+        space complexity: O(b^d)* where b is the branching factor and d is the depth of the goal node. (Given an admissible heuristic) ",
+        example: "A* search is often used on its own or as a component of other algorithms, such as IDA* (Iterative Deepening A*).\n\
+        Pathfinding in maps (e.g., GPS navigation), route planning, puzzle-solving (e.g., 8-puzzle, Rubik's Cube), and game AI (e.g., Chess, Go) are examples of real-world applications of A* search."
+    },
+    {
+        term: "depth-first-search",
+        prompt: "What is depth-first search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "Depth-first search (DFS) is an uninformed search algorithm that explores nodes in a tree or graph by visiting a node and recursively exploring its children before backtracking. DFS goes as deep as possible before backtracking (Which menas it doesn't stop even after finding the goal), making it memory efficient but not always optimal or complete.",
+        example: "Depth-first search can be used on its own or as a component of other algorithms, such as Iterative Deepening Depth-First Search (IDDFS).\n\
+        Solving mazes, generating spanning trees for graphs, analyzing network connectivity, and searching for solutions in state - space problems are examples of real- world applications of depth - first search."
+    },
+    {
+        term: "greedy-best-first-search",
+        prompt: "What is greedy best-first search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "Greedy best-first search is an informed search algorithm that uses a heuristic function to guide the search towards the goal. It selects the node with the lowest estimated cost to the goal as the next node to explore. Greedy best-first search is not guaranteed to be complete or optimal but can be faster than other search algorithms in certain cases.",
+        example: "Greedy best-first search can be used on its own or as a component of other algorithms, such as A* search.\n\
+    Pathfinding in maps with simple heuristics, approximate solutions for NP - hard problems(e.g., Traveling Salesman Problem), and solving puzzles with suboptimal solutions are examples of real - world applications of greedy best - first search."
+    },
+    {
+        term: "beam-search",
+        prompt: "What is beam search in AI? And what algorithms use it? When in the real world you can use it?",
+        description: "Beam search is an informed search algorithm that uses a heuristic function to guide the search towards the goal. It maintains a fixed-size 'beam' of the most promising nodes at each level of the search tree. Beam search explores only the best nodes, making it memory efficient but not always optimal or complete.",
+        example: "Beam search can be used on its own or as a component of other algorithms.\n\
+        Natural language processing(e.g., speech recognition, machine translation), solving large - scale optimization problems, and real - time decision making in resource - constrained environments are examples of real - world applications of beam search."
+    },
+    {
+        term: "hill-climbing",
+        prompt: "What is hill climbing in AI? And  what is the difference between hill climbing and greedy best-first search?",
+        description: "",
+    },
+    {
+        term: "adversarial-min-max-logic",
+        prompt: "What are the min and max logic in adversarial search with Prunging?",
+        example: "Maximizer: \n\
+        philosophy: if my children are greater than the top value then I don't need to explore\n\
+        Initializes with Alpha = -Inf\n\
+        for each child of the current node\n\
+        Alpha = max(Alpha, MinValue(child, Alpha, Beta))\n\
+        if Alpha >= Beta\n\
+        ---- return Alpha\n\
+        return Alpha\n\
+        \n\n\n\
+        Minimizer: \n\
+        philosophy: if my children are less than the top value then I don't need to explore\n\
+        Initializes with Beta = Inf\n\
+        for each child of the current node\n\
+        Beta = min(Beta, MaxValue(child, Alpha, Beta))\n\
+        if Alpha >= Beta | Prunes if Alpha returned is  \n\
+        ---- return Beta (Prune)\n\
+        return Beta"
+    },
+    // Perceptron
+    {
+        term: "Perceptron | weights",
+        prompt: "What are weights on a perceptron? | How could you think of it in Business?",
+        example: "A set of values or a dataset for predicting the output value. They are also described as a dataset’s features and dataset. "
+
+    },
+    {
+        term: "Perceptron | bias",
+        prompt: "What is bias on a perceptron? | How could you think of it in Business?",
+        example: "The activation function is shifted towards the left or right using bias. You may understand it simply as the y-intercept in the line equation. "
+    },
+    {
+        term: "Perceptron | activation function",
+        prompt: "What is activation function on a perceptron? Any application in business?",
+        example: "It introduces non-linearity in the perceptron model.\n\
+        The activation function is a function that takes in the weighted sum of all of the inputs from the previous layer and then generates and passes an output value (typically nonlinear) to the next layer. \n\
+        application: "
+    },
+    {
+        term: "Perceptron | Summation Function",
+        prompt: "What is summation function on a perceptron? | How could you think of it in Business?",
+        example: "The summation function binds the weights and inputs together. It is a function to find their sum."
+    },
+    {
+        term: "Perceptron | activation functions",
+        prompt: "What is activation functions on a perceptron? | How could you think of it in Business?",
+        example: "It introduces non-linearity in the perceptron model."
+    },
+    {
+        term: "Perceptron | Gradoemt Descemt",
+        prompt: "What is Gradoemt Descemt on a perceptron? | How are they useful?",
+        example: "In a perceptron, a gradient refers to the direction and magnitude of the steepest increase or decrease in the output of the perceptron with respect to a small change in the weights of the perceptron. It is used in the process of adjusting the weights of the perceptron during the training phase, in order to minimize the error between the actual output of the perceptron and the desired output. More specifically, the gradient is calculated using the partial derivatives of the error function with respect to each weight of the perceptron. The gradient points in the direction of the steepest increase of the error function, so by moving the weights in the opposite direction of the gradient, the error can be minimized. The size of the step taken in the direction of the gradient is typically controlled by a learning rate parameter, which determines how quickly the weights are updated during the training process.",
+        description: ":m During the training process, we present the perceptron with an input example with values x1 = `0.3`, x2 = `0.7`, and the desired output of positive. The current output of the perceptron is calculated as follows:\n\n`output = activation_function(w1 * x1 + w2 * x2 + b)`\n\nLet's say that the activation function is a simple threshold function, such that if the weighted sum is greater than or equal to 0, the output is positive, otherwise it is negative.\n\nSo in this case, we have:\n\n`output = activation_function(0.5 * 0.3 + 0.2 * 0.7 + b)`\n\nLet's assume that the bias term b is also set to `0.2` for simplicity. Then we have:\n\n`output = activation_function(0.29)`\n\nLet's say that the actual output is negative, so there is an error of `-1`. We can then calculate the gradient of the error function with respect to the weights as follows:\n\ndE/dw1 = x1 * error = `0.3 * -1 = -0.3`\ndE/dw2 = x2 * error = `0.7 * -1 = -0.7`\nThe gradient points in the direction of the steepest decrease in the error function, so we want to update the weights in the opposite direction of the gradient. Let's assume that the learning rate is `0.1` for simplicity. Then we can update the weights as follows:\n\n`w1 = w1 - learning_rate * dE/dw1 = 0.5 - 0.1 * (-0.3) = 0.53`\n`w2 = w2 - learning_rate * dE/dw2 = 0.2 - 0.1 * (-0.7) = 0.27`"
+    },
+    {
+        term: "Unsurpervised | hebbian vs competitive",
+        prompt: "What is the difference between hebbian and competitive learning? | How are they useful?",
+        example: `Hebbian learning is a type of associative learning that strengthens the connections between neurons that fire simultaneously. This is based on the idea that when two neurons fire together, the connection between them is strengthened, which is often referred to as "cells that fire together, wire together." Hebbian learning can be useful for learning patterns in data, such as identifying common features in images or recognizing speech. On the other hand, competitive learning is a type of learning that involves neurons competing with each other to become active. In this type of learning, a group of neurons receive the same input, and the neuron with the highest activation becomes active while the others remain inactive. Competitive learning can be useful for clustering similar data together or finding the most salient features in a dataset.\n\n\
+        Hebbian learning is useful when the goal is to identify patterns in data, such as recognizing common features in images or identifying correlations between variables. Hebbian learning is often used in unsupervised learning tasks, where the network is not given explicit labels for the input data.\n\
+        \n\
+        Competitive learning, on the other hand, is useful when the goal is to cluster similar data together or to identify the most salient features in a dataset. Competitive learning can also be used for dimensionality reduction, where the goal is to reduce the number of input variables while retaining as much information as possible.`,
+    },
+    {
+        term: "Perceptron Model",
+        prompt: "What is a perceptron model? | How are they useful?",
+        example: ":m A perceptron is a type of artificial neuron that is used in artificial neural networks. \n\
+        It consists of a single neuron with a set of weights and a bias term.\n\
+        The perceptron takes in a set of inputs and produces a single output. The output of the perceptron is calculated as follows:\n\n\
+        `output = activation_function(w1 * x1 + w2 * x2 + ... + wn * xn + b)`\n\n\
+        where `w1, w2, ..., wn` are the weights, `x1, x2, ..., xn` are the inputs, b is the bias term, and the activation function is a function that takes \n\
+        in the weighted sum of all of the inputs from the previous layer and then generates and passes an output value (typically nonlinear) to the next layer. \n\
+        The perceptron is typically used in the first layer of a neural network, where it takes in the input data and passes the output to the next layer. \n\
+        The perceptron is often used in conjunction with other types of neurons, such as sigmoid neurons, which are used in the hidden layers of a neural network.",
+
+    },
+    {
+        term: "Backpropagation two phases",
+        prompt: "What are the two phases of backpropagation? | How are they useful?",
+        example: "The two phases of backpropagation are the forward pass and the backward pass. \n\
+        In the forward pass, the input is fed into the network and the output is calculated. In the backward pass, the error is calculated and the weights are updated. \n\n\
+        The forward pass is useful for calculating the output of the network, while the backward pass is useful for updating the weights of the network. \n\
+        The forward pass is also known as the feedforward pass, while the backward pass is also known as the backpropagation pass.",
+        description: "`Forward phase`- Activation functions propagate from the `input layer` to the output layer. All weighted inputs are `added to compute outputs` using the `sigmoid threshold`.\n\n\
+        `Backward phase`- The errors between the `observed actual` value and the `demanded nominal value in the output layer` are propagated backward. \n\
+        The weights and bias values are modified to achieve the requested value. The modification is done by apportioning the `weights` and `bias` to each unit according to its impact on the error."
+    },
+    {
+        term: "Perceptron | Perceptron function",
+        prompt: "What is a perceptron function? | How are they useful?",
+        example: "Perceptron function ”f(x)” is generated by multiplying the input ‘x’ with the learned weight coefficient ‘w’. The same can be expressed through the following mathematical equation:"
+    },
+    {
+        term: "corresponding y values",
+        prompt: "Suppose you are given a list x, and a list of corresponding y values\n\
+        create a scatter plot of the (x,y) values. Then perform a 1d polynomial fit to the data. Plot the polynomial on top of the scatter plot.",
+        description: "# Suppose you are given a list x, and a list of corresponding y values\n\
+        x=[1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,18,19,21,22n\n\
+        y=[100,90,80,60,60,55,60,65,66, 67, 70,75,76,78,79,90,99,99,100]\n\
+        import numpy as np\n\
+        import matplotlib.pyplot as plt\n\
+        Use these lists to scatter plot the (x,y) values. Then perform a 1d poly",
+        example: "\n\
+        plt.scatter(x, y, color='black', label='scatter_data')\n\
+        \n\
+        # Then perform a 1d polynom\n\
+        deg = 3\n\
+        coeffs = np.polyfit(x, y, deg)\n\
+        polynom_1d = np.poly1d(coeffs)\n\
+        \n\
+        # Plot the polynomial\n\
+        \n\
+        # Range of the polynomial\n\
+        domain = np.linspace(min(x), max(x), 100)\n\
+        plt.plot(domain, polynom_1d(domain), color='red', label='1d_polynom')\n\
+        plt.legend()\n\
+        plt.xlabel('x')\n\
+        plt.ylabel('y')\n\
+        plt.show()"
+    },
+    {
+        term: "One layer perceptron",
+        prompt: "Whats the problem with one layer perceptron? Why there is a need for 3 layer problems?",
+        example: "The problem with one layer perceptron is that it can only solve linearly separable problems. \n\
+        It can only separate into one plane.\n\
+        "
+    },
+    {
+        term: "What are features?",
+        prompt: "What are features? | How are they useful?",
+        example: "They are the space "
+    }
+
+]
+
 
 
 // From Math for Business
