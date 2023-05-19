@@ -41,9 +41,7 @@ class DayWeather {
 		this.hasSnow = this.isPrecipitation ? jsonDay.preciptype.includes(SNOW) : false;
 		this.hasRain = this.isPrecipitation ? jsonDay.preciptype.includes(RAIN) : false;
 		this.probability = jsonDay.precipprob ? jsonDay.precipprob : 0;
-		this.day = this.datetime.slice(-2)
-
-
+		this.day = this.datetime.slice(-2);
 	}
 }
 
@@ -853,8 +851,8 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 
 
 	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
-
-	exec(`git coa ${commitMessage} && git poh `);
+	exec('git add --all')
+	exec(`git commit ${commitMessage} && git push origin HEAD `);
 	console.log(`Pushed to origin with commit message: ${commitMessage} <3`);
 
 }

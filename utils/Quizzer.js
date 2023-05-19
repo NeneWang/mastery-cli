@@ -2,26 +2,20 @@ const chalk = require('chalk');
 const axios = require('axios');
 const clipboard = require('copy-paste')
 
-// const {clipboard}
-// import clipboard from 'clipboardy';
 
-const chart = require('@wangnene2/chart')
-const { exec, spawn } = require('node:child_process');
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = require('enquirer');
 
-const init = require('./init');
 const constants = require('./constants');
 
-const { bar, scatter, bg, fg, annotation } = chart;
 const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
-const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked } = require('./utils_functions');
+const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
+
 const { TermScheduler } = require('./termScheduler');
 const { MiniTermScheduler } = require('./miniTermScheduler');
 
-const { slice } = require('./cli');
 // const DEBUG = true
 const DEBUG = false
 
@@ -426,7 +420,7 @@ class Quizzer {
 
             if (user_requests_calc(user_res)) {
                 const { exec } = require('child_process');
-                exec(`start node`);
+                openEditorPlatformAgnostic('node')
                 // Make the user lose one point for using the calculator.
                 return false;
             }
@@ -608,7 +602,8 @@ class Quizzer {
 
                 if (user_requests_calc(res)) {
                     const { exec } = require('child_process');
-                    exec(`start node`);
+                    // exec(`start node`);
+                    openEditorPlatformAgnostic('node');
                     i -= 1;
                     continue;
                 }

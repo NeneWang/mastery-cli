@@ -32,6 +32,8 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './')
     return (absolutePath.toString());
 };
 
+
+
 const getFilesInDirectory = async (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
 
@@ -117,6 +119,7 @@ const countDecimals = (value) => {
         return value?.toString().split(".")[1].length ?? 0;
     return 0;
 };
+
 
 
 const renderPromptDescription = (prompt, prompt_details) => {
@@ -209,7 +212,12 @@ const openEditorWithCommand = async (instruction) => {
     });
 }
 
-const openEditorPlatformAgnostic = async (editor_instruction, absolute_temp_file_path) => {
+/**
+ * Opens the editor with the given instruction and the absolute path of the file
+ * @param {string} editor_instruction  e.g. code, vim, nano, etc.
+ * @param {string} absolute_temp_file_path e.g. /home/username/.../temp.js
+ */
+const openEditorPlatformAgnostic = async (editor_instruction, {absolute_temp_file_path = ""} = {}) => {
 
 
     const os = require('os');
@@ -230,6 +238,8 @@ const openEditorPlatformAgnostic = async (editor_instruction, absolute_temp_file
         await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
     }
 }
+
+
 
 
 module.exports = {

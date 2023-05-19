@@ -52,10 +52,13 @@ describe('Problem integrity', function () {
         const allProblemsMetadata = problemManager.problems;
         for (let problemMetadata of Object.values(allProblemsMetadata)) {
             // console.log(problemMetadata);
-            assert(problemManager.copyFile(problemMetadata.file_path) == true)
+            assert(problemManager.copyFileToTemp(problemMetadata.file_path) == true)
         }
-
     });
+
+
+
+
     // Run and test test available
     it('Should run and test the problem', async function () {
         if (!to_test.runnable) return this.skip();

@@ -17,10 +17,7 @@ async function createEmptyBaseCodes() {
 
         writeUnresolvedClass(`../solutions/${filename}`, `../base_code/${filename}`, { avoidOverwrite: true });
 
-
     }
-
-
 }
 
 // (async () => {

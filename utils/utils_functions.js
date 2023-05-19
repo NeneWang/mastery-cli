@@ -5,6 +5,8 @@ const { get_random, MAID_EMOJIS } = require("./constants");
 const DEBUG = false;
 const { marked } = require('marked'); //Formats into html
 var TerminalRenderer = require('marked-terminal'); //Formats into terminal
+const { exec } = require('child_process');
+
 
 marked.setOptions(
     {
@@ -191,8 +193,46 @@ function printMarked(content, { use_markdown = true, markdown_token = ":m" } = {
 }
 
 
+const openEditorWithCommand = async (instruction) => {
+    await exec(`${instruction}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`Continue running`);
+    });
+}
+
+
+/**
+ * Opens the editor with the given instruction and the absolute path of the file
+ * @param {string} editor_instruction  e.g. code, vim, nano, etc.
+ * @param {string} absolute_temp_file_path e.g. /home/username/.../temp.js
+ */
+const openEditorPlatformAgnostic = async (editor_instruction, {absolute_temp_file_path = ""} = {}) => {
+
+
+    const os = require('os');
+
+    if (os.platform() === 'win32') {
+
+        console.log('Windows');
+        await openEditorWithCommand(`start ${editor_instruction} ${absolute_temp_file_path}`);
+
+    } else if (os.platform() === 'linux') {
+        console.log('Linux');
+        await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
+    } else if (os.platform() === 'darwin') {
+        console.log('macOS');
+        await openEditorWithCommand(`open -a ${editor_instruction} ${absolute_temp_file_path}`);
+    } else {
+        console.log('Unknown operating system');
+        await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
+    }
+}
+
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, user_requests_exit,
-    user_requests_skip, user_requests_calc, printMarked
+    user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic
 };

@@ -5,6 +5,10 @@ const { ProblemMetadata } = require('./structures');
 const { exec } = require('node:child_process');
 const { getPromptDict } = require('./prompt');
 const Constants = require('./constants');
+const { cloze_problems_list } = require('./cloze');
+
+
+
 
 const DEBUG = false;
 
@@ -17,6 +21,7 @@ class ProblemsManager {
         this.markdown_filepath = './prompt/';
         this.base_code_filepath = './base_code/';
         this.tests_filepath = './tests/';
+        this.cloze_problem_base_filepath = './cloze/base_cloze/';
     }
 
 
@@ -27,6 +32,25 @@ class ProblemsManager {
 
     getProblem(problemSlug) {
         return this.problems[problemSlug];
+    }
+
+    doesProblemHasCloze(problemSlug) {
+        /**
+         * List format:
+         * [
+                {
+                    filepath: "simple-sum-c1.js",
+                    difficulty: 1, // 1 - 5 
+                    problem_slug: "simple-sum"
+                },
+            ]
+         */
+        return cloze_problems_list.some(cloze_problem => cloze_problem.problem_slug == problemSlug);
+    }
+
+    getProblemClozes(problemSlug) {
+
+        return cloze_problems_list.filter(cloze_problem => cloze_problem.problem_slug == problemSlug);
     }
 
     /**
@@ -117,7 +141,7 @@ class ProblemsManager {
      * @param {dict<problem>} problem The problem to populate the template with
      */
     populateTemplate(problem) {
-        this.copyFile(problem.file_path);
+        this.copyFileToTemp(problem.file_path);
     }
 
     /**
@@ -155,11 +179,12 @@ class ProblemsManager {
     /**
      * Copies the file from problem_file_path to the temp_problem_filepath.
      * @param {str} problem_file_path The path to the file to copy
+     * @param {str} temp_problem_filepath The path to the file to copy from e.g. base_code'
      */
-    copyFile(problem_file_path) {
+    copyFileToTemp(problem_file_path, { base = "./base_code/" } = {}) {
         try {
 
-            const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, "./base_code/");
+            const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, base);
             const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
 
@@ -220,7 +245,7 @@ class ProblemsManager {
     async openTestCaseFile(problem_slug, { editor_instruction = "start" } = {}) {
         const problem_metadata = this.problems[problem_slug];
         const tags = problem_metadata.tags;
-        
+
         // Identify the correct category by filtering the Constant.PROBLEM_CATEGORIES by the tags
         const categoriesObjects = Object.values(Constants.PROBLEM_CATEGORIES);
         const categories_slugs = categoriesObjects.map(category => category.slug); //Names of the testfiles
