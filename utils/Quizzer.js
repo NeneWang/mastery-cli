@@ -444,7 +444,7 @@ class Quizzer {
             try {
 
                 console.log("Submitting answer..., for sure...")
-                 if (constants.online) this.postCommentFromTerm(term_selected, user_res, true);
+                 if (constants.CONSTANTS.online) this.postCommentFromTerm(term_selected, user_res, true);
                 const _ = await increasePerformance("terms");
 
                 this.printExample(term_selected)
@@ -454,7 +454,7 @@ class Quizzer {
                  * date: submission answer
                  * ....
                  */
-                if (constants.online) await this.printPreviousTerms(term_selected.formula_name)
+                if (constants.CONSTANTS.online) await this.printPreviousTerms(term_selected.formula_name)
             } catch {
                 // Do nothing, doesnt matter offline.
             }
@@ -477,7 +477,7 @@ class Quizzer {
 
             try{
 
-                if (constants.online){
+                if (constants.CONSTANTS.online){
                     const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
                 } 
             }catch{
