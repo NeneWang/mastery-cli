@@ -851,8 +851,8 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 
 
 	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
-	exec('git add --all')
-	exec(`git commit ${commitMessage} && git push origin HEAD `);
+	
+	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
 	console.log(`Pushed to origin with commit message: ${commitMessage} <3`);
 
 }

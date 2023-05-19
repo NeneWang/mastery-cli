@@ -22,7 +22,6 @@ describe('Cloze Tests', function () {
     it("test that it can populate the problem set", async function () {
 
         const problemSlug = "simple-sum";
-
         const problemManager = new ProblemsManager();
         await problemManager.autoPopulateUsingTestDictionary();
 

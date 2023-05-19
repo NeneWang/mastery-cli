@@ -7,7 +7,6 @@
  * @author Nelson <github.com/neneWang>
  */
 
-const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
 const utils = require('./utils/utils');
@@ -17,16 +16,10 @@ const demos = require('./utils/demo');
 const Settings = require('./utils/settings');
 
 
-
-const axios = require('axios');
-const chalk = require('chalk');
 const chart = require('@wangnene2/chart');
-const { terms, getAbsoluteUri } = require('./utils/constants');
 const { populateMasterDeck: populateMasterDeck } = require("./utils/data/terms");
 const { Quizzer } = require('./utils/Quizzer');
-const { QuizzerWithDSA } = require('./utils/QuizzerWithDSA');
 const DSATrainer = require('./utils/dsa-cli/dsa-trainer');
-const { util } = require('prettier');
 
 const cli_meow = cli[0]
 const cmInfo = cli[1]
@@ -34,16 +27,10 @@ const flags = cli_meow.flags;
 const input = cli_meow.input;
 // const cmInfo = cli.options.cmInfo;
 
-const { clear, debug } = flags;
+const { debug } = flags;
 // const { cmInfo } = cli;
 const { getTalk, Maid } = utils;
-const { MAID_NAME } = constants;
-const { bar, scatter, bg, fg } = chart;
 const { Demo, EDemo } = demos;
-
-
-// console.log("file:///C:/github/testing/maid-cli/img/unicorn.png");
-
 
 (async () => {
 	const maid = new Maid();

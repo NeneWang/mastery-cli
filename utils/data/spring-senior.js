@@ -1549,7 +1549,8 @@ const network_final = [
     },
     {
         term: "extra",
-        prompt: "Typa a"
+        prompt: "Typa a",
+        example: ""
     }
 ]
 
