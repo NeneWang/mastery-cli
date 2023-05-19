@@ -16,6 +16,7 @@ const layer_1 = false;
 const layer_2 = false;
 const layer_3 = false;
 const study_cisc = true; // Studying for Class Targetted.
+const study_legacy = false;
 
 /**
  * 
@@ -38,13 +39,13 @@ async function populateMasterDeck() {
 
 
     const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne, network_final } = require("./spring-senior");
-    decks.addDeck(new TermStorage(network, "network", { is_active: study_cisc }));
-    decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(network, "network", { is_active: study_legacy }));
+    decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: study_legacy }));
     decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(algebra, "algebra", { is_active: study_cisc }));
     decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: study_cisc }));
-    decks.addDeck(new TermStorage(network_final, "network final", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(network_final, "network final", { is_active: study_legacy }));
 
 
 

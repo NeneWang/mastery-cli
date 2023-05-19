@@ -42,6 +42,7 @@ const CONSTANTS = {
     PUNCHPINK: '#F25278',
     CUTEYELLOW: '#ffffc2', // Very Pale Yello
     CUTEPURPLE: '#977fd7', // Medium Purple
+    online: true,
 }
 
 
