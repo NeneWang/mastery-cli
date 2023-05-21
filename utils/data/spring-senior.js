@@ -883,7 +883,7 @@ const network = [
         term: "bind client configuration",
         prompt: "What is the Bind client configuration?",
         description: "Bind, or the Berkeley Internet Name Domain, is a popular DNS server software that translates domain names into IP addresses. A Bind client is a computer or device that requests DNS information from a Bind server to resolve domain names to IP addresses. The Bind client configuration involves setting up the client to connect to the Bind server, specifying the Bind server's IP address or hostname, and configuring the client to use the Bind server as its primary DNS resolver.",
-    },
+    }
 ]
 
 // I got the study set way too long... This is a specific focus for the midterm
@@ -1890,9 +1890,153 @@ const artificialIntelligence_2 = [
     {
         term: "What are features?",
         prompt: "What are features? | How are they useful?",
-        example: "They are the space "
+        example: " It represents the multidimensional space where the input data and their corresponding features reside.\n\
+        For example, in an image classification task, the input space would represent all possible images, where each image is characterized by pixel values or other relevant features.\n\
+        is a transformed or encoded version of the input space. It represents a space where the input features are organized or mapped to facilitate analysis and learning. "
+    },
+    // Homework 6
+    {
+        term: "Own linear formula",
+        prompt: "Create your own linear formula by filling the follwoing",
+        description: ":m\
+        import numpy as np\n\
+        import matplotlib.pyplot as plt\n\
+        \n\
+        # Define the input (x) and output (y) data\n\
+        x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 21, 22]\n\
+        y = [100, 90, 80, 60, 60, 55, 60, 65, 66, 67, 70, 75, 76, 78, 79, 90, 99, 99, 100]\n\
+        \n\
+        # Calculate the means of x and y\n\
+        \n\
+        # Calculate the slope and y-intercept of the line\n\
+        \n\
+        # Create a line of 100 points between x=1 and x=22\n\
+        myline = np.linspace(1, 22, 100)\n\
+        \n\
+        # Evaluate the line at each point of the line\n\
+        mymodel = m*myline + b\n\
+        \n\
+        # Plot the original data and the line fit\n\
+        plt.scatter(x, y, color='blue', label='data')\n\
+        plt.plot(myline, mymodel, color='red', label='A simple linear fit')\n\
+        \n\
+        # Add a legend and labels to the plot\n\
+        plt.legend()\n\
+        plt.xlabel('x')\n\
+        plt.ylabel('y')\n\
+        \n\
+        # Show the plot\n\
+        plt.show()",
+        example: "\
+        plt.scatter(x, y, color='black', label='scatter_data')\n\
+        \n\
+        # Then perform a 1d polynom\n\
+        deg = 3\n\
+        coeffs = np.polyfit(x, y, deg)\n\
+        polynom_1d = np.poly1d(coeffs)\n\
+        \n\
+        # Plot the polynomial\n\
+        \n\
+        # Range of the polynomial\n\
+        domain = np.linspace(min(x), max(x), 100)\n\
+        plt.plot(domain, polynom_1d(domain), color='red', label='1d_polynom')\n\
+        plt.legend()\n\
+        plt.xlabel('x')\n\
+        plt.ylabel('y')\n\
+        plt.show()"
+    },
+    // Hw 7 + Exploration
+    {
+        term: "perceptron | perceptron composition",
+        prompt: "What is a perceptron? How is it structured?",
+        example: "A perceptron takes in a set of inputs and produces a single output. The output of the perceptron is calculated as follows:\n\n\
+        `output = activation_function(w1 * x1 + w2 * x2 + ... + wn * xn + b)`\n\n\
+        where `w1, w2, ..., wn` are the weights, `x1, x2, ..., xn` are the inputs, b is the bias term, and the activation function is a function that takes \n\
+        in the weighted sum of all of the inputs from the previous layer and then generates and passes an output value (typically nonlinear) to the next layer. \n\
+        The perceptron is typically used in the first layer of a neural network, where it takes in the input data and passes the output to the next layer. \n\
+        "
+    },
+    {
+        term: "sigmoid functions",
+        prompt: "What is sigmoid functions? Example usecase?",
+        description: "\n\
+        The sigmoid function is a special form of the logistic function and is usually denoted by σ(x) or sig(x). It is given by:\n\
+        \n\
+        σ(x) = 1/(1+exp(-x))\n\n\
+        The sigmoid function is also called a squashing function as its domain is the set of all real numbers, and its range is (0, 1). Hence, if the input to the function is either a very large negative number or a very large positive number,  the output is always between 0 and 1. Same goes for any number between -∞ and +∞.",
+        example: "It is commonly used for models where we have to predict the probability as an output. Since probability of anything exists only between the range of 0 and 1, sigmoid is the right choice because of its range."
+    },
+    {
+        term: "sigmoid functions | patterns",
+        prompt: "How is a perceptron used to classify 2 pattern classes?",
+        example: `A perceptron is a simple type of neural network that can be used to classify patterns into two classes. It learns to separate the patterns by adjusting its weights and bias based on the training data.`,
+    },
+    {
+        term: "sigmoid functions | augment patterns",
+        prompt: "What is an augmented pattern vector and why is it used.",
+        example: "An augmented pattern vector is an extended version of the original input pattern vector that includes an additional component called the bias or bias term. It is used in machine learning algorithms, including perceptrons and other neural network models.",
+    },
+    {
+        term: "reward-punishment",
+        prompt: "How is reward-punishment used to separate 2-D patterns such that (0,0)T\n\
+        and (0,1)T  represent one class (ω1 ) and (1,0)T  and (1, 1)T  to represent a second class (ω2 ). If it can separate these pattern",
+        example: "To separate the 2-D patterns into two classes using the reward-punishment procedure, \n\
+        we can apply the perceptron learning algorithm. Let's go through the steps:"
+    },
+    {
+        prompt: "Explain how the Neural Net program Neurolab in Python can be used to set up the network and train a perceptron to separate the patterns not using reward-punishment.\n\
+        ",
+        term: "neuro-lab",
+        example: "Although the perceptron learning algorithm with the reward-punishment procedure is not directly implemented in Neurolab, we can still use Neurolab to set up a network and train a perceptron to separate patterns. "
+    },
+    {
+        term: "3-layer neural network",
+        prompt: "Explain why a 3-layer neural network having a hidden layer can solve the deficiencies of the perceptron.",
+        description: "\n\
+            A 3-layer neural network with a hidden layer can solve the deficiencies of the perceptron by introducing non-linearity and allowing for more complex decision boundaries. Here are a few key reasons why a 3-layer neural network can overcome the limitations of a perceptron:\n\
+            \n\
+            1. Non-linearity: The perceptron is limited to learning linear decision boundaries. It can only classify patterns that are linearly separable. However, many real-world problems require non-linear decision boundaries to accurately classify complex patterns. By introducing a hidden layer with non-linear activation functions, a 3-layer neural network can learn and represent non-linear relationships between input features and output classes. This enables the network to solve more complex classification tasks that the perceptron cannot handle.\n\
+            \n\
+            2. Representation power: The perceptron has limited representation power due to its linear nature. It can only learn and represent simple linear functions. In contrast, a 3-layer neural network with a hidden layer can learn and represent highly complex functions by combining multiple non-linear transformations. The hidden layer allows the network to capture and represent intricate patterns and relationships within the data, enabling it to solve more challenging classification problems.\n\
+            \n\
+            3. Feature extraction: The hidden layer in a 3-layer neural network can act as a feature extractor. It learns to automatically extract relevant features from the input data and transform them into a higher-dimensional representation. This feature extraction capability enables the network to identify and capture informative representations of the input patterns, making it more effective at discriminating between different classes. In contrast, the perceptron directly operates on the raw input features without any intermediate feature extraction step.\n\
+            \n\
+            4. Generalization: A 3-layer neural network with a hidden layer has better generalization capabilities compared to a perceptron. The hidden layer allows the network to learn abstract representations of the input patterns, which helps in handling noise, variations, and unseen data. The additional layer provides more flexibility in modeling complex relationships, making the network less susceptible to overfitting and better able to generalize to unseen examples.\n\
+            \n\
+            In summary, a 3-layer neural network with a hidden layer can overcome the limitations of the perceptron by introducing non-linearity, enhancing representation power, enabling feature extraction, and improving generalization capabilities. These advantages make it capable of solving more complex classification tasks that involve non-linear decision boundaries and intricate patterns in the data.",
+        example: "The backpropagation algorithm uses the delta rule to adjust the weights and biases of the network based on the errors propagated backward from the output layer. The delta rule determines the weight updates by multiplying the error term with the input or output of the corresponding neuron. These weight updates gradually minimize the error by adjusting the network's parameters to improve its performance in approximating the target outputs."
+    },
+    {
+        term: "CNF Form",
+        prompt: "(p ∧ (q ∨ ¬r)) → (¬p ∨ r) into CNF:",
+        description: "\
+            Eliminate implications: Replace any implication (p → q) with its equivalent form (¬p ∨ q).\n\
+            \n\
+            Move negations inward: Use De Morgan's laws to push negations inward by applying the following rules:\n\
+            \n\
+            ¬(p ∧ q) becomes (¬p ∨ ¬q)\n\
+            ¬(p ∨ q) becomes (¬p ∧ ¬q)\n\
+            \n\
+            Distribute disjunctions over conjunctions: Use the distributive property to distribute disjunctions over conjunctions. This step involves converting any nested conjunctions or disjunctions into separate clauses.\n\
+            \n\
+            (p ∧ (q ∨ r)) becomes ((p ∧ q) ∨ (p ∧ r))\n\
+            \n\
+            Repeat steps 2 and 3 until no further simplification is possible.",
+        example: "\
+            Eliminate implications:\n\
+            (p ∧ (q ∨ ¬r)) → (¬p ∨ r) becomes (¬(p ∧ (q ∨ ¬r))) ∨ (¬p ∨ r)\n\
+            \n\
+            Move negations inward:\n\
+            ¬(p ∧ (q ∨ ¬r)) becomes (¬p ∨ ¬(q ∨ ¬r))\n\
+            ¬(q ∨ ¬r) becomes (¬q ∧ r)\n\
+            \n\
+            Updated formula: (¬p ∨ ¬(q ∨ ¬r)) ∨ (¬p ∨ r)\n\
+            \n\
+            Distribute disjunctions over conjunctions:\n\
+            (¬p ∨ ¬(q ∨ ¬r)) becomes (¬p ∨ (¬q ∧ r))\n\
+            \n\
+            Updated formula: (¬p ∨ (¬q ∧ r)) ∨ (¬p ∨ r)"
     }
-
 ]
 
 
@@ -2058,8 +2202,7 @@ const algebra = [
         prompt: "What is the difference between strict and nonstrict increase",
         example: "Strict increase is when the function is always increasing, nonstrict increase is when the function is increasing but can be equal\n\
         when is increasing it cannot be descrease, thus when the slope is 0 and increase and decrease rules applies then is non."
-
-    }
+    },
 
 ];
 
