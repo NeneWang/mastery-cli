@@ -419,6 +419,14 @@ const coderTerms = [
         example: "Implements remote procedure calls, allows your code to call servers via compiled function calls, can compile for different languages but work similarly.\n\
         Used to exchange data in an uncrashable way but with high performance.\n\
         Favored in internal systems, since the interface is complicated."
+    },
+
+    // Own Development Rules
+    {
+        term: "Where should your write learning documentation?",
+        prompt: "Where should your write learning documentation?",
+        description: "Think on an accessible, quickly linkeable site, where speed remains constant as you add in more learning documentation",
+        example: "In Notion page, as automatically can be linked on github, also better for search"
     }
 ]
 

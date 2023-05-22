@@ -6,6 +6,7 @@
 
 const sample_otutput_top = "top - 16:12:09 up  1:28,  2 users,  load average: 0.04, 0.01, 0.00\n\
 Tasks: 165 total,\t1 running,\t164 sleeping,\t0 stopped,\t0 zombie\n\n\
+\
 %Cpu(s):\t0.0 us,\t0.0 sy,\t0.0 ni,\t99.9 id,\t0.0 wa,\t0.0 hi,\t0.1 si,\t0.0 st\n\
 MiB Mem :\t1974.4 total,\t924.8 free,\t246.5 used,\t803.1 buff/cache\n\
 MiB Swap:\t2048.0 total,\t2048.0 free,\t0.0 used.\t1539.2 avail Mem\n\n\
@@ -2305,7 +2306,28 @@ const calculousOne = [
         h'(x) = f'(x)g(x) + f(x)g'(x)\n\
         = (-1) * x^2 + (1-x) * 2x (using the chain rule to differentiate f(x) and g(x))\n\
         = x(2-3x)",
-    }
+    },
+    {
+        term: "quotient function",
+        prompt: "Find the derivative of f(x) = (3x^2 + 2x) / (x + 1) using calculus.",
+        example: "To solve this problem, we can use the quotient rule of derivatives in calculus.\n\
+        The quotient rule states that if we have two functions, f(x) and g(x), their quotient h(x) = f(x) / g(x) \n\
+        can be differentiated as:\n\nh'(x) = (f'(x)g(x) - f(x)g'(x)) / g(x)^2\n\nIn this case, our function is \n\
+        f(x) = (3x^2 + 2x) / (x + 1). To find its derivative, we need to apply the quotient rule.\n\n\
+        Let's calculate the derivative step by step:\n\n\
+        f'(x) = (d/dx)[(3x^2 + 2x) / (x + 1)]\n\n\
+        Using the quotient rule:\n\n\
+        f'(x) = [(2x(x + 1) - (3x^2 + 2x)(1)) / (x + 1)^2]\n\n\
+        Simplifying further:\n\n\
+        f'(x) = (2x^2 + 2x - 3x^2 - 2x) / (x + 1)^2\n\n\
+        = (-x^2) / (x + 1)^2\n\n\
+        Therefore, the derivative of f(x) = (3x^2 + 2x) / (x + 1) is f'(x) = (-x^2) / (x + 1)^2."
+      },
+      {
+        "term": "quotient function II",
+        "prompt": "Find the derivative of f(x) = (2x + 3) / x using calculus.",
+        "example": "To solve this problem, we can use the quotient rule of derivatives in calculus. The quotient rule states that if we have two functions, f(x) and g(x), their quotient h(x) = f(x) / g(x) can be differentiated as:\n\nh'(x) = (f'(x)g(x) - f(x)g'(x)) / g(x)^2\n\nIn this case, our function is f(x) = (2x + 3) / x. To find its derivative, we need to apply the quotient rule.\n\nLet's calculate the derivative step by step:\n\nf'(x) = (d/dx)[(2x + 3) / x]\n\nUsing the quotient rule:\n\nf'(x) = [(2(x) - (2x + 3)(1)) / (x)^2]\n\nSimplifying further:\n\nf'(x) = (2x - 2x - 3) / x^2\n      = -3 / x^2\n\nTherefore, the derivative of f(x) = (2x + 3) / x is f'(x) = -3 / x^2."
+      }
 
 ];
 
