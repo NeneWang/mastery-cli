@@ -14,9 +14,6 @@ const { increasePerformance } = require('./utils/utils');
 const constants = require('./utils/constants');
 const demos = require('./utils/demo');
 const Settings = require('./utils/settings');
-
-
-const chart = require('@wangnene2/chart');
 const { populateMasterDeck: populateMasterDeck } = require("./utils/data/terms");
 const { Quizzer } = require('./utils/Quizzer');
 const DSATrainer = require('./utils/dsa-cli/dsa-trainer');
@@ -25,10 +22,8 @@ const cli_meow = cli[0]
 const cmInfo = cli[1]
 const flags = cli_meow.flags;
 const input = cli_meow.input;
-// const cmInfo = cli.options.cmInfo;
 
 const { debug } = flags;
-// const { cmInfo } = cli;
 const { getTalk, Maid } = utils;
 const { Demo, EDemo } = demos;
 
