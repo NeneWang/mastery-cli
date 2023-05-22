@@ -2007,7 +2007,7 @@ const artificialIntelligence_2 = [
         example: "The backpropagation algorithm uses the delta rule to adjust the weights and biases of the network based on the errors propagated backward from the output layer. The delta rule determines the weight updates by multiplying the error term with the input or output of the corresponding neuron. These weight updates gradually minimize the error by adjusting the network's parameters to improve its performance in approximating the target outputs."
     },
     {
-        term: "CNF Form",
+        term: "CNF Form | eg 1",
         prompt: "(p ∧ (q ∨ ¬r)) → (¬p ∨ r) into CNF:",
         description: "\
             Eliminate implications: Replace any implication (p → q) with its equivalent form (¬p ∨ q).\n\
@@ -2036,6 +2036,88 @@ const artificialIntelligence_2 = [
             (¬p ∨ ¬(q ∨ ¬r)) becomes (¬p ∨ (¬q ∧ r))\n\
             \n\
             Updated formula: (¬p ∨ (¬q ∧ r)) ∨ (¬p ∨ r)"
+    },
+    {
+        term: "CNF Form | eg 2",
+        prompt: " (p → q) ∧ (q → r) into CNF.",
+        example: `\n\
+        Eliminate implications:\n\
+        (p → q) ∧ (q → r) becomes (¬p ∨ q) ∧ (¬q ∨ r)\n\
+        \n\
+        The formula is already in CNF since it is a conjunction of clauses, and each clause is a disjunction of literals.\n\
+        \n\
+        CNF form: (¬p ∨ q) ∧ (¬q ∨ r)"`
+
+    },
+    {
+        term: "CNF Form | eg 3",
+        prompt: "¬(p ∧ (q ∨ ¬r)) into CNF.",
+        example: "\
+        Move negations inward:\n\
+        ¬(p ∧ (q ∨ ¬r)) becomes (¬p ∨ ¬(q ∨ ¬r))\n\
+        ¬(q ∨ ¬r) becomes (¬q ∧ r)\n\
+        \n\
+        Distribute disjunctions over conjunctions:\n\
+        (¬p ∨ ¬(q ∨ ¬r)) becomes (¬p ∨ (¬q ∧ r))\n\
+        \n\
+        CNF form: (¬p ∨ (¬q ∧ r))"
+    },
+    {
+        term: "CNF Form | eg 4",
+        prompt: "Convert the formula (p ∨ q) ∧ (¬p ∨ r) ∧ (¬q ∨ s) into CNF.",
+        example: "\
+        The formula is already in CNF since it is a conjunction of clauses, and each clause is a disjunction of literals.\n\
+        \n\
+        CNF form: (p ∨ q) ∧ (¬p ∨ r) ∧ (¬q ∨ s)"
+    },
+    {
+        term: "De morgan | 1",
+        prompt: "Apply De Morgan's laws to simplify the following expression: ¬(p ∨ q ∧ ¬r).",
+        example:"\
+        Using De Morgan's laws, we can distribute the negation sign to each component of the expression:\n\
+        ¬(p ∨ q ∧ ¬r) becomes (¬p ∧ ¬(q ∧ ¬r))\n\
+        Then, applying De Morgan's laws again to the nested conjunction:\n\
+        (¬p ∧ ¬(q ∧ ¬r)) becomes (¬p ∧ (¬q ∨ r))\n\
+        \n\
+        Simplified expression: ¬p ∧ (¬q ∨ r)"
+        
+    },
+    {
+        term: "Simplify |  =>  p ∧ (q ∨ r)",
+        prompt: "Simplify the following expression: (p ∧ q) ∨ (p ∧ r).",
+        example: "\
+        Applying the distributive law, we can distribute the conjunction over the disjunction:\n\
+        (p ∧ q) ∨ (p ∧ r) becomes (p ∧ (q ∨ r))\n\
+        \n\
+        Simplified expression: p ∧ (q ∨ r)"
+    },
+    {
+        term: "CNF of the Wampus World",
+        prompt: "B[1, 1] <=> (P [1, 2] V P [2, 1])",
+        example: "\
+        2. This is accomplished for the sentence in Wampus World: B1,1 ⇔(P1,2 ∨ P2,1) as follows:\n\
+            a) Eliminate ⇔ by replacing α⇔β, with (α→β ) ∧ (β→α).\n\
+            (B1,1 →(P1,2 ∨ P2,1)) ∧ ((P1,2 ∨P2,1)→B1,1)\n\
+            b) Eliminate → by replacing (α→β ) with ¬α ∨β\n\
+            (¬B1,1 ∨(P1,2 ∨ P2,1)) ∧ (¬(P1,2 ∨P2,1)∨B1,1)\n\
+            c) CNF requires only literals have a ¬\n\
+            (¬B1,1 ∨(P1,2 ∨ P2,1)) ∧ (¬P1,2 ∧¬P2,1)∨B1,1)\n\
+            d) After applying DeMorgan’s theorem and distributative laws:\n\
+            (¬B1,1 ∨P1,2 ∨ P2,1)∧(¬P1,2 ∨B1,1) ∧(¬P2,1∨B1,1)"
+    },
+    {
+        term: "maximum likelihood estimate",
+        prompt: "What is maximum likelihood estimate? What does it mean when someone says that they have found the maximum likelihood estimate for the mean or standard deviation?",
+        example: "It means that they found the value for the mean or the standard deviation that maximizes the likelihood that you observed the things you observed",
+        attachment: "./img/2023-05-21-20-30-12.png"
+
+    },
+    {
+        term: "Mutual Information",
+        description: "Here's a simple way to think about it: If the two tests are completely unrelated, knowing the score on one test wouldn't tell you anything about the score on the other test. The mutual information would be low because there is no information shared between the two.\n\
+        On the other hand, if the two tests are strongly related, knowing the score on one test could give you a lot of information about the score on the other test. The mutual information would be high because the scores on one test would provide valuable clues or hints about the scores on the other test.",
+        prompt: "What is mutual information?",
+        
     }
 ]
 
