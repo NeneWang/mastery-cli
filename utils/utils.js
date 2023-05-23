@@ -1,18 +1,16 @@
 const chalk = require('chalk');
 const axios = require('axios');
 const clipboard = require('copy-paste')
-// const {clipboard}
-// import clipboard from 'clipboardy';
 
 const chart = require('@wangnene2/chart')
-const { exec, spawn } = require('node:child_process');
+const { exec } = require('node:child_process');
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquirer');
 const { CSVAssistant } = require('./csvAssistant');
 
 const init = require('../utils/init');
 const constants = require('./constants');
 
-const { bar, scatter, bg, fg, annotation } = chart;
+const { bar, bg, annotation } = chart;
 const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
@@ -25,7 +23,6 @@ const Settings = require('./settings.js');
 const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
 );
-const { debug } = require('node:console');
 
 // https://www.npmjs.com/package/chalk
 
@@ -853,7 +850,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 	
 	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
-	console.log(`Pushed to origin with commit message: ${commitMessage} <3`);
+	console.log(`Pushed to origin with commit message: ${commitMessage}`);
 
 }
 

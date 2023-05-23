@@ -25,6 +25,28 @@ const react_terms = [
         (e) An input form element whose value is controlled by React is called a controlled component. When a user enters data into a controlled component a change event handler is triggered and your code decides whether the input is valid (by re-rendering with the updated value). If you do not re-render then the form element will remain unchanged.\n\n\
         "
     },
+    {
+        term: "Promise Complete | code",
+        prompt: "Complete the following code to resolve the promise, and rekect it as well",
+        description: "\
+        export function setStoredCities(cities: string[]): Promise<void> {\n\
+            return COMPLETE HERE => {\n\
+                const data: LocaStorage = {\n\
+                    cities\n\
+                }\n\
+                chrome.storage.local.set(data, () => {\n\
+                    if (chrome.runtime.lastError) {\n\
+                        ### COMPLETE HERE\n\
+                    } else {\n\
+                        ### COMPLETE HERE\n\
+                    }\n\
+                })\n\
+            })\n\
+        }",
+        example: "return new Promise((resolve, reject) => {\n\
+            reject(chrome.runtime.lastError)\n\
+            resolve()"
+    }
 
 
 
