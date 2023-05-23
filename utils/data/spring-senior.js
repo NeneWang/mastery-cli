@@ -1907,9 +1907,9 @@ const artificialIntelligence_2 = [
         x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 21, 22]\n\
         y = [100, 90, 80, 60, 60, 55, 60, 65, 66, 67, 70, 75, 76, 78, 79, 90, 99, 99, 100]\n\
         \n\
-        # Calculate the means of x and y\n\
+        ## => Calculate the means of x and y\n\
         \n\
-        # Calculate the slope and y-intercept of the line\n\
+        ## => Calculate the slope and y-intercept of the line\n\
         \n\
         # Create a line of 100 points between x=1 and x=22\n\
         myline = np.linspace(1, 22, 100)\n\
@@ -1929,23 +1929,16 @@ const artificialIntelligence_2 = [
         # Show the plot\n\
         plt.show()",
         example: "\
-        plt.scatter(x, y, color='black', label='scatter_data')\n\
-        \n\
-        # Then perform a 1d polynom\n\
-        deg = 3\n\
-        coeffs = np.polyfit(x, y, deg)\n\
-        polynom_1d = np.poly1d(coeffs)\n\
-        \n\
-        # Plot the polynomial\n\
-        \n\
-        # Range of the polynomial\n\
-        domain = np.linspace(min(x), max(x), 100)\n\
-        plt.plot(domain, polynom_1d(domain), color='red', label='1d_polynom')\n\
-        plt.legend()\n\
-        plt.xlabel('x')\n\
-        plt.ylabel('y')\n\
-        plt.show()"
-    },
+            # Calculate the means of x and y\n\
+            x_mean = sum(x) / len(x)\n\
+            y_mean = sum(y) / len(y)\n\
+            \n\
+            # Calculate the slope and y-intercept of the line\n\
+            numerator = sum((xi - x_mean)*(yi - y_mean) for xi, yi in zip(x, y))\n\
+            denominator = sum((xi - x_mean)**2 for xi in x)\n\
+            m = numerator / denominator\n\
+            b = y_mean - m*x_mean"
+        },
     // Hw 7 + Exploration
     {
         term: "perceptron | perceptron composition",
@@ -2253,7 +2246,7 @@ const artificialIntelligence_2 = [
         prompt: "What is semantics?",
         example: "The meaning of a sentence\n\
         Truth of senteces in a model (world)",
-        
+
     },
     {
         term: "What is an inference?",
@@ -2263,15 +2256,21 @@ const artificialIntelligence_2 = [
     {
         term: "What is soundness?",
         prompt: "What is soundness?",
+        description: "In the context of a KB agent, soundness is crucial because it ensures that the agent's reasoning process \n\
+        doesn't lead to false or incorrect conclusions. If an inference mechanism is sound, it means that it adheres to the rules of logic \n\
+        and follows a valid reasoning process, thereby preserving the truth of the knowledge it operates on.",
         example: "Derivations produce only entailed sentences\n\
         If KB |- α then KB |= α"
     },
     {
         term: "What is completeness?",
         prompt: "What is completeness?",
+        description: "Completeness, in the context of inference in a knowledge-based agent, is another important property that \n\
+        complements soundness. While soundness ensures that the conclusions drawn from true premises are also true, \n\
+        completeness focuses on ensuring that all true conclusions can be derived from the available knowledge base.",
         example: "Derivations can produce all entailed sentences\n\
         If KB |= α then KB |- α"
-    
+
     }
 ]
 
@@ -2475,12 +2474,12 @@ const calculousOne = [
         f'(x) = (2x^2 + 2x - 3x^2 - 2x) / (x + 1)^2\n\n\
         = (-x^2) / (x + 1)^2\n\n\
         Therefore, the derivative of f(x) = (3x^2 + 2x) / (x + 1) is f'(x) = (-x^2) / (x + 1)^2."
-      },
-      {
+    },
+    {
         "term": "quotient function II",
         "prompt": "Find the derivative of f(x) = (2x + 3) / x using calculus.",
         "example": "To solve this problem, we can use the quotient rule of derivatives in calculus. The quotient rule states that if we have two functions, f(x) and g(x), their quotient h(x) = f(x) / g(x) can be differentiated as:\n\nh'(x) = (f'(x)g(x) - f(x)g'(x)) / g(x)^2\n\nIn this case, our function is f(x) = (2x + 3) / x. To find its derivative, we need to apply the quotient rule.\n\nLet's calculate the derivative step by step:\n\nf'(x) = (d/dx)[(2x + 3) / x]\n\nUsing the quotient rule:\n\nf'(x) = [(2(x) - (2x + 3)(1)) / (x)^2]\n\nSimplifying further:\n\nf'(x) = (2x - 2x - 3) / x^2\n      = -3 / x^2\n\nTherefore, the derivative of f(x) = (2x + 3) / x is f'(x) = -3 / x^2."
-      }
+    }
 
 ];
 
