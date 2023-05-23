@@ -2073,14 +2073,14 @@ const artificialIntelligence_2 = [
     {
         term: "De morgan | 1",
         prompt: "Apply De Morgan's laws to simplify the following expression: ¬(p ∨ q ∧ ¬r).",
-        example:"\
+        example: "\
         Using De Morgan's laws, we can distribute the negation sign to each component of the expression:\n\
         ¬(p ∨ q ∧ ¬r) becomes (¬p ∧ ¬(q ∧ ¬r))\n\
         Then, applying De Morgan's laws again to the nested conjunction:\n\
         (¬p ∧ ¬(q ∧ ¬r)) becomes (¬p ∧ (¬q ∨ r))\n\
         \n\
         Simplified expression: ¬p ∧ (¬q ∨ r)"
-        
+
     },
     {
         term: "Simplify |  =>  p ∧ (q ∨ r)",
@@ -2116,8 +2116,161 @@ const artificialIntelligence_2 = [
         term: "Mutual Information",
         description: "Here's a simple way to think about it: If the two tests are completely unrelated, knowing the score on one test wouldn't tell you anything about the score on the other test. The mutual information would be low because there is no information shared between the two.\n\
         On the other hand, if the two tests are strongly related, knowing the score on one test could give you a lot of information about the score on the other test. The mutual information would be high because the scores on one test would provide valuable clues or hints about the scores on the other test.",
-        prompt: "What is mutual information?",
+        prompt: "What is mutual information? When is it useful?",
+        example: "Mutual information is a concept used to measue how much two things are related or provide information about each other. It helps us understand how knowing something about one thing can give us information about another thing.\n\
+        \n\
+        Mutual information is useful in machine learning because it can be used to measure the amount of information shared between two variables. This can be helpful in determining which features are most useful for predicting the target variable in a machine learning model."
+    },
+    {
+        term: "Minimum Description Length",
+        prompt: "What is minimum description length?",
+        example: "The MDL principle suggests that the best model is the one that achieves a balance between simplicity (fewer parameters) and accuracy (low residual errors). It avoids both underfitting (oversimplified model) and overfitting (excessively complex model).\n\
+        Model Complexity: This refers to the number of parameters or assumptions used by the model. A complex model with many parameters can potentially fit the data very closely but may overfit or capture noise instead of true patterns. On the other hand, a simple model with fewer parameters may not capture all the intricacies of the data but may be more robust and generalize better to new data.\n\
+        \n\
+        Residual Error: This represents the remaining discrepancies between the model's predictions and the actual data. The goal is to minimize these errors by finding a model that captures the most important patterns or relationships in the data."
+    },
+    {
+        term: "What is Gradient descent algorithm in Model searching?",
+        prompt: "What is Gradient descent algorithm in Model searching?",
+        example: "The idea behind Gradient Descent in machine learning is to iteratively adjust the model's parameters in a way that minimizes the difference between the model's predictions and the actual data. It's like finding the best combination of parameter values that make our model perform well on the given task.\n\
+        \n\
+        By continuously updating the parameters based on the gradients and the error, Gradient Descent helps us search through the space of possible parameter values to find the ones that yield the best model performance.",
+        attachment: "./img/2023-05-21-21-33-43.png"
+    },
+    {
+        term: "What is the learning rate in Gradient descent algorithm?",
+        prompt: "What is the learning rate in Gradient descent algorithm?",
+        example: "The learning rate is a hyperparameter that controls how much the model's parameters are updated at each step of the optimization process. It determines the size of the steps taken in the direction of the gradient. A larger learning rate means that the parameters are updated more quickly, while a smaller learning rate means that the parameters are updated more slowly.",
+        attachment: "./img/2023-05-21-21-37-25.png"
+    },
+    {
+        term: "What is regularization?",
+        prompt: "What is regularization?",
+        example: "Regularization is a technique used to prevent overfitting by adding a penalty term to the loss function.\
+        This penalty term encourages the model to learn simpler patterns that generalize better to new data. \
+        It helps to reduce the model's variance and improve its generalization performance.",
+    },
+    {
+        term: "What is a pattern class?",
+        prompt: "What is a pattern class?",
+        example: "Set of patterns that are 'Close' in Pattern Space"
+    },
+    {
+        term: "What is a pattern Space?",
+        prompt: "What is dimension of the pattern Space?",
+        example: "Is the number of features that are needed to determine the patterns."
+
+    },
+    {
+        term: "What are Epochs?",
+        prompt: "What are Epochs?",
+        description: "Imagine you are studying for an exam, and you have a set of practice questions. Each time you go through all the questions in the practice set, it counts as one epoch. Each question represents a training example, and your goal is to learn and improve your understanding of the material by repeatedly going through the practice questions.\n\
+        \n\
+        Similarly, in machine learning, an epoch represents a full iteration over the entire training dataset. The number of epochs determines how many times the model will see and learn from the training examples. By going through multiple epochs, the model has more opportunities to adjust its parameters and improve its predictions.\n\
+        \n\
+        Choosing the appropriate number of epochs is important. Too few epochs may result in an underfit model that hasn't fully learned the patterns in the data. On the other hand, too many epochs can lead to overfitting, where the model becomes too specialized to the training data and fails to generalize well to new, unseen examples.",
+        example: `
+        In machine learning, an epoch refers to a complete pass through the entire training dataset during the training phase of a model. It is a measure of how many times the algorithm has iterated over the entire dataset while updating the model's parameters.`
+    },
+    {
+        term: "Gradient Descent",
+        prompt: "What is the Gradient Descent Main Idea?",
+        description: "\
+        The main idea behind gradient descent is simple. Given a function defined by a set of parameters, gradient descent starts with an initial set of parameter values and iteratively moves toward a set of parameter values that minimize the function. This iterative minimization is achieved by taking steps in the negative direction of the function gradient.\n\
+        \n\
+        Here are the basic steps in the gradient descent algorithm:\n\
+        \n\
+        1. Initialize the parameters randomly.\n\
+        2. Compute the cost function.\n\
+        3. Compute the gradient of the cost function (i.e., the first derivative of the function with respect to the parameters).\n\
+        4. Update the parameters by taking a step in the direction opposite to the gradient. This step size is determined by the learning rate, which is a hyperparameter that you set.\n\
+        5. Repeat steps 2-4 until the algorithm converges to a minimum."
+    },
+    {
+        term: "Where does the gradient vector point to? What does it mean?",
+        prompt: "Where does the gradient vector point to? What does it mean?",
+        description: "The gradient vector points in the direction of the steepest ascent. It tells us which direction to move in order to increase the function's value the most.\n\
+        The magnitude of the gradient vector tells us how steep the slope is in that direction. \n\
+        A larger magnitude means that the slope is steeper, while a smaller magnitude means that the slope is flatter."
+    },
+    {
+        term: "Stochastic Gradient Descent",
+        "prompt": "What is Stochastic Gradient Descent?",
+        attachment: "./img/2023-05-22-23-29-13.png",
+        description: "\
+        Stochastic Gradient Descent (SGD) is a variant of the standard (batch) Gradient Descent algorithm. While standard gradient descent computes the gradient using the entire dataset, which can be computationally expensive and slow for large datasets, Stochastic Gradient Descent estimates the gradient using a single randomly picked training example.\n\
+        \n\
+        Here are the steps in Stochastic Gradient Descent:\n\
+        \n\
+        1. Randomly shuffle the dataset.\n\
+        2. For each example in the dataset:\n\
+            1. Compute the gradient of the cost function for the given example.\n\
+            2. Update the parameters by taking a step in the direction opposite to the gradient.\n\
+        \n\
+        Stochastic Gradient Descent has several advantages over standard gradient descent:\n\
+        \n\
+        1. Because it uses a single example at a time, it can be much faster for large datasets.\n\
+        2. Because it's stochastic (i.e., random), it can escape from shallow local minima of the cost function. This is a common problem in neural network training where the cost function is non-convex and has many local minima.\n\
+        \n\
+        However, Stochastic Gradient Descent also has some downsides. The main one is that it's noisy due to the stochastic nature. The cost function can fluctuate wildly during training, and the final parameters may not be the global optimum. To mitigate this, a variant called Mini-batch Gradient Descent is often used, which strikes a balance between batch gradient descent and stochastic gradient descent by using a mini-batch of n training examples at each step instead of just 1."
+    },
+    // Logical Equivalence
+    {
+        term: "Contrapostion",
+        prompt: "(a=>b)",
+        example: "(¬b=>¬a)"
+    },
+    {
+        term: "Implication Elimination",
+        prompt: "(a=>b)",
+        example: "(¬a∨b)"
+    },
+    {
+        term: "Biconditional Elimination",
+        prompt: "(a<=>b)",
+        example: "((a=>b)∧(b=>a))"
+    },
+    {
+        term: "De Morgan",
+        prompt: "¬(a∧b)",
+        example: "(¬a∨¬b)"
+    },
+    {
+        term: "Dsitribuity",
+        prompt: "(a∧(b∨c))",
+        example: "((a∧b)∨(a∧c))"
+    },
+    // Summary Inference and Knowledge Base
+    // TODO Ask Chat GPT more about these
+    {
+        term: "What is syntax?",
+        prompt: "What is syntax?",
+        example: "Formal rules for constructing valid sentences in a language"
+    },
+    {
+        term: "What is semantics?",
+        prompt: "What is semantics?",
+        example: "The meaning of a sentence\n\
+        Truth of senteces in a model (world)",
         
+    },
+    {
+        term: "What is an inference?",
+        prompt: "What is an inference?",
+        example: "Derovomg new sentences from old ones"
+    },
+    {
+        term: "What is soundness?",
+        prompt: "What is soundness?",
+        example: "Derivations produce only entailed sentences\n\
+        If KB |- α then KB |= α"
+    },
+    {
+        term: "What is completeness?",
+        prompt: "What is completeness?",
+        example: "Derivations can produce all entailed sentences\n\
+        If KB |= α then KB |- α"
+    
     }
 ]
 
