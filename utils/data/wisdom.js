@@ -1,14 +1,16 @@
 
 const wisdom_studies = [
     // Spring 2023 => Lessons Learned
+    // How can you derive this lessons learned to applpy this strategy in your life or work? | Or learning by your own?
     {
         term: "after-submitting-assigment",
         prompt: "What should you do before-after submitting an assigment?",
         description: "I know that it looks like extra work, especially after so many hours of work, but you should either: \n\
         create a focused anki (for focused tasks including charts and images)\n\
         And terminology compilation of cards \n\
+        Such philosophy should also \
         ",
-        example: ""
+        example: "Either flashcards or terminology compilation of the exercise for long term memory storage"
     },
     {
         term: "doing-during-class",
