@@ -1938,7 +1938,7 @@ const artificialIntelligence_2 = [
             denominator = sum((xi - x_mean)**2 for xi in x)\n\
             m = numerator / denominator\n\
             b = y_mean - m*x_mean"
-        },
+    },
     // Hw 7 + Exploration
     {
         term: "perceptron | perceptron composition",
@@ -2044,19 +2044,6 @@ const artificialIntelligence_2 = [
 
     },
     {
-        term: "CNF Form | eg 3",
-        prompt: "¬(p ∧ (q ∨ ¬r)) into CNF.",
-        example: "\
-        Move negations inward:\n\
-        ¬(p ∧ (q ∨ ¬r)) becomes (¬p ∨ ¬(q ∨ ¬r))\n\
-        ¬(q ∨ ¬r) becomes (¬q ∧ r)\n\
-        \n\
-        Distribute disjunctions over conjunctions:\n\
-        (¬p ∨ ¬(q ∨ ¬r)) becomes (¬p ∨ (¬q ∧ r))\n\
-        \n\
-        CNF form: (¬p ∨ (¬q ∧ r))"
-    },
-    {
         term: "CNF Form | eg 4",
         prompt: "Convert the formula (p ∨ q) ∧ (¬p ∨ r) ∧ (¬q ∨ s) into CNF.",
         example: "\
@@ -2117,7 +2104,7 @@ const artificialIntelligence_2 = [
     },
     {
         term: "Minimum Description Length",
-        prompt: "What is minimum description length?",
+        prompt: "What is minimum description length principle in MDL?",
         example: "The MDL principle suggests that the best model is the one that achieves a balance between simplicity (fewer parameters) and accuracy (low residual errors). It avoids both underfitting (oversimplified model) and overfitting (excessively complex model).\n\
         Model Complexity: This refers to the number of parameters or assumptions used by the model. A complex model with many parameters can potentially fit the data very closely but may overfit or capture noise instead of true patterns. On the other hand, a simple model with fewer parameters may not capture all the intricacies of the data but may be more robust and generalize better to new data.\n\
         \n\
@@ -2251,7 +2238,16 @@ const artificialIntelligence_2 = [
     {
         term: "What is an inference?",
         prompt: "What is an inference?",
-        example: "Derovomg new sentences from old ones"
+        example: "Deriving new sentences from old ones",
+        description: "\
+        Premise 1: If it is raining, then the ground is wet. (p → q)\n\
+        Premise 2: It is raining. (p)\n\
+        \n\
+        Conclusion: Therefore, the ground is wet. (q)\n\
+        \n\
+        In this example, we have two premises. The first premise establishes a logical implication between rain (p) and a wet ground (q). The second premise states that it is indeed raining. From these two premises, we can make the logical inference that the ground must be wet as a result.\n\
+        \n\
+        Using modus ponens, a valid inference rule in propositional logic, we can derive the conclusion. Modus ponens states that if we have a conditional statement (p → q) and the assertion of the antecedent (p), we can infer the consequent (q)."
     },
     {
         term: "What is soundness?",
@@ -2271,7 +2267,7 @@ const artificialIntelligence_2 = [
         example: "Derivations can produce all entailed sentences\n\
         If KB |= α then KB |- α"
 
-    }
+    },
 ]
 
 

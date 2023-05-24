@@ -9,7 +9,7 @@ y = [100,90,80,60,60,55,60,65,66, 67, 70,75,76,78,79,90,99,99,100]
 plt.scatter(x, y, color='black', label='scatter_data')
 
 # Then perform a 1d polynom
-deg = 15
+deg = 3
 coeffs = np.polyfit(x, y, deg)
 polynom_1d = np.poly1d(coeffs)
 

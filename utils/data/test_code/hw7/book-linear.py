@@ -12,7 +12,7 @@ class Perceptron:
     def predict(self, inputs):
         activation = np.dot(inputs[:-1], self.weights[:-1])
         results = activation + self.weights[-1] 
-        print("Activation:", activation, "Results:", results)
+        print("\n\Activation:", activation, "Results:", results)
         return np.where(results, 1, -1) 
 
     def train(self, training_inputs, labels, epochs):
