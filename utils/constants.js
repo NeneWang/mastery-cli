@@ -29,8 +29,7 @@ let APIDICT = {
     // DEPLOYED_MAID: 'http://127.0.0.1:8000',
     DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
     CURRENCY_EXCHANGE: 'https://api.apilayer.com/exchangerates_data',
-    CURRENCY_EXCHANGE_KEY: '3zPc7CzmznmueYsu3SttUWIE2QZ3ODYd',
-
+    CURRENCY_EXCHANGE_KEY: '3zPc7CzmznmueYsu3SttUWIE2QZ3ODYd'
 }
 
 // APIDICT.DEPLOYED_MAID = 'https://jmmgskxdgn.us-east-1.awsapprunner.com'
