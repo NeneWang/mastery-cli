@@ -958,7 +958,7 @@ const logCommitIfSpecialCategory = async (commitMessage, category, { print_previ
 			if (true) console.log("Printing previous commit")
 			// Print previous commits
 			const res = await getComments(category?.code ?? "log");
-			// console.log("res received", res);
+			console.log("res received", res);
 			printComments(res);
 		}
 	}
