@@ -957,6 +957,7 @@ const logCommitIfSpecialCategory = async (commitMessage, category, { print_previ
 		postCommentFromTerm(category.code, commitMessage);
 		const res = await getComments(category?.code ?? "log");
 		comments_to_populate = res.data;
+		console.log("comments_to_populate | special category", comments_to_populate)
 		if (print_previous_commits) {
 			// if (true) console.log("Printing previous commit")
 			// Print previous commits
