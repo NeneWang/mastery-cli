@@ -68,6 +68,7 @@ class Quizzer {
             if(debug) console.warn(e)
 
             CONSTANTS.online = false; //Lets mark it as such case for this call.
+            
             // get random 3 list of 3 problems
             potential_questions = get_random_of_size(potential_questions, { count: limit });
         }
@@ -398,7 +399,8 @@ class Quizzer {
                 throw ("isInvalidData: term_selected:", term_selected);
             }
 
-            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `)}|${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` ${term_selected.category} `)}`);
+            const isOfflineMessage = CONSTANTS.online ? "": `| ${chalk.hex(CONSTANTS.CUTEYELLOW).inverse('OFFLINE')}`
+            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `)}|${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` ${term_selected.category} `)} ${isOfflineMessage}`);
 
             if (term_selected?.attachment ?? false) {
                 let image_file = getAbsoluteUri(term_selected?.attachment);
