@@ -131,7 +131,6 @@ class Quizzer {
                 // increase the terms
             }
 
-            console.log("response", response);
             miniqueue.solveCard(response);
             attempts += 1;
         }
@@ -471,7 +470,6 @@ class Quizzer {
                 console.log("Is your response acceptable?");
                 const is_correct = new Confirm("Is the response correct?", { initial: true });
                 const response = await is_correct.run();
-                console.log("asnwered with ", response);
                 ISANSWERCORRECT = response;
             }
 
