@@ -950,15 +950,15 @@ const printComments = (comments) => {
  * @returns {void}
  */
 const logCommitIfSpecialCategory = async (commitMessage, category, { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
-	if (true) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
+	// if (true) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
 	if (special_categories.includes(category.code)) {
 		// Log the commit message in the comments database
 		await postCommentFromTerm(category.code, commitMessage);
 		if (print_previous_commits) {
-			if (true) console.log("Printing previous commit")
+			// if (true) console.log("Printing previous commit")
 			// Print previous commits
 			const res = await getComments(category?.code ?? "log");
-			console.log("res received", res.data);
+			// console.log("res received", res.data);
 			printComments(res.data);
 		}
 	}
