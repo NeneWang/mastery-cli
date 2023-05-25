@@ -805,14 +805,14 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 	}
 }
 
-const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true, debug=false } = {}) => {
+const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true, debug = false } = {}) => {
 
 
 
 	let commitMessage = process.argv[3];
 	if (debug) {
 		console.log(commitMessage)
-		
+
 	}
 	if (commitMessage == undefined) {
 		commitMessage = CONSTANTS.default_commit_message;
@@ -908,14 +908,14 @@ const logCommitIfSpecialCategory = async (commitMessage, category, { print_previ
 
 
 
-const commitCategory = (commitMessage, strict = false) => {
+const commitCategory = (commitMessage, strict = false, { debug = false } = {}) => {
 	if (strict) {
 		// TODO Strictly runs with space in between?
 		;
 	}
 
 	for (category of Object.values(ECommitCategory)) {
-		console.log("commitMessage", commitMessage)
+		if (debug) console.log("commitMessage", commitMessage)
 		if (commitMessage.includes(category.code)) {
 			return category;
 		}
