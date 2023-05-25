@@ -933,8 +933,7 @@ const printComments = (comments) => {
 
 
 	for (const row in comments) {
-		const obj = res.data[row]
-		console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
+		console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(row)?.[0]} ` ?? "date")} ${Object.values(row)?.[0] ?? "1"}`);
 	}
 }
 
