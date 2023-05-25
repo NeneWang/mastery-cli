@@ -202,7 +202,7 @@ class Maid {
 			}
 			// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
 			const missingFeatReport = this.missingFeatReport;
-			if (missingFeatReport??false) {
+			if (missingFeatReport ?? false) {
 				console.log("Missing Reports Missing: received: ", missingFeatReport ?? "")
 				return;
 			}
@@ -804,12 +804,15 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 	}
 }
 
-const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true } = {}) => {
+const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true, debug=false } = {}) => {
 
 
 
 	let commitMessage = process.argv[3];
-	console.log(commitMessage)
+	if (debug) {
+		console.log(commitMessage)
+		
+	}
 	if (commitMessage == undefined) {
 		commitMessage = "Committed by Maid ";
 	}
@@ -824,17 +827,18 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	}
 
 
-	let _ = await increasePerformance("commits");
+	// Removed await statement for hopes of faster responsee load
+	increasePerformance("commits");
 	if (commitCat?.code) {
-		_ = await increasePerformance(commitCat.code);
+		increasePerformance(commitCat.code);
 		if (addCommitEmoji) commitMessage = commitMessage + " " + commitCat.randomIcon();
 	}
 
 
 	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
-	
+
 	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
-	console.log(`Pushed to origin with commit message: ${commitMessage}`);
+	if (debug) console.log(`Pushed to origin with commit message: ${commitMessage}`);
 
 }
 
@@ -910,7 +914,7 @@ const commitCategory = (commitMessage, strict = false) => {
 	}
 
 	for (category of Object.values(ECommitCategory)) {
-		console.log(commitMessage)
+		console.log("commitMessage", commitMessage)
 		if (commitMessage.includes(category.code)) {
 			return category;
 		}

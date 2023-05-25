@@ -23,9 +23,11 @@ const cmInfo = cli[1]
 const flags = cli_meow.flags;
 const input = cli_meow.input;
 
-const { debug } = flags;
+let{ debug } = flags;
+debug = debug ?? false;
 const { getTalk, Maid } = utils;
 const { Demo, EDemo } = demos;
+
 
 (async () => {
 	const maid = new Maid();
@@ -66,12 +68,12 @@ const { Demo, EDemo } = demos;
 		maid.say(message, true);
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
-		await utils.commitpush();
+		utils.commitpush();
 		maid.populateMissingReport();
 		// as until the response is right?
 
 		const _ = await mQuizer.askQuestion();
-		await maid.provideMissingReport({ run_dsa: true });
+		await maid.provideMissingReport({ run_dsa: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
 		await maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {

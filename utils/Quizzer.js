@@ -399,7 +399,7 @@ class Quizzer {
                 throw ("isInvalidData: term_selected:", term_selected);
             }
 
-            const isOfflineMessage = CONSTANTS.online ? "": `|${chalk.hex(CONSTANTS.CUTEYELLOW).inverse(' OFFLINE ')}`
+            const isOfflineMessage = CONSTANTS.online ? "": `|${chalk.hex(CONSTANTS.CUTEYELLOW).inverse(' offline ')}`
             console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `)}|${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` ${term_selected.category} `)}${isOfflineMessage}`);
 
             if (term_selected?.attachment ?? false) {
