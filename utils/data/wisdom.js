@@ -1,6 +1,6 @@
 
-const wisdom_studies = [
-    // Spring 2023 => Lessons Learned
+const collective_wisdom = [
+    // Spring 2023 => Lessons Learned + Social Skill Improvements aat least ont he scholar level. What makes sense?
     // How can you derive this lessons learned to applpy this strategy in your life or work? | Or learning by your own?
     {
         term: "after-submitting-assigment",
@@ -10,7 +10,7 @@ const wisdom_studies = [
         And terminology compilation of cards \n\
         Such philosophy should also \
         ",
-        example: "Either flashcards or terminology compilation of the exercise for long term memory storage"
+        example: "Either flashcards or terminology compilation of the exercise for long term memory storage and residual learning."
     },
     {
         term: "doing-during-class",
@@ -44,6 +44,19 @@ const wisdom_studies = [
         2. Study and memorize slides watch videos and make anki cards for the terms. ANKI\n\
         3.a Memorize the entire ANki of the current homework\n\
         3.b Then redo and explore the homework based on the intuitive exploration."
+    },
+    {
+        term: "failing-and-stress",
+        prompt: "What to do when feeling stressed, anxious or beacuse your gpa might have dropped?",
+        description: "",
+        example: "Think of how you beat Sekiro\n\
+        You died, you rose again, took a break, Read some guides then you beat the boss."
+    },
+    {
+        term: "after class | homework partially complete",
+        prompt: "What should you do after doing the homework on class using AI?",
+        example: "You should keep a log of questions for the homework."
+
     }
 ]
 
