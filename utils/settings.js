@@ -46,7 +46,7 @@ module.exports = Settings = {
     "monday_ses": [
         ""
     ],
-    "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss"], // commits │ feat │ math_ss │ ref │ fix  │ algo │ acad │ pro  │ terms │ algo_w │ test │ tesrasd │ commits} │ terms}
+    "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss", "acad"], // commits │ feat │ math_ss │ ref │ fix  │ algo │ acad │ pro  │ terms │ algo_w │ test │ tesrasd │ commits} │ terms}
     "show_http_errors": false,
     "dev_mode": false, //If true, it will print communication receips
 }

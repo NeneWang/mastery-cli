@@ -1,6 +1,12 @@
 # Maid CLI
 
-CLI Assistnat tool to keep you in track.
+![](https://i.ibb.co/fCfYmbT/mapping-icon.png)
+
+Your assistant to improve as a programmer. Flashcards, DSA Practice, Statistics, and habit hooks. For example, everytime you commit code, you could have a random flashcard being prompted (or even a random DSA problem suggestion to be completed!). Designed to work offline, but when connected to the internet assists you to collect your progress and sync it with your other devices. 
+
+Other main features include:
+- Helping you keep track on your personal goal projects e.g. Doing some commit in a project on a daily basi
+- More than 150 programming problems (with tests that work offline)
 
 
 ## Created Features
@@ -28,6 +34,7 @@ CLI Assistnat tool to keep you in track.
 - [x] Image into Ascii
   - [x] As a tool
   - [x] As an automatic pattern ideal for terms images where no image is available. (Or you just want to preview 
+  - [x] Report the progress results of 1 year ago, 1 month ago + 1 week ago + 1 day ago.
 - [x] Serve as an organization extension for studying
 
 
@@ -63,8 +70,6 @@ CLI Assistnat tool to keep you in track.
 ### Life Quality
 
 the attechment on the console. You should also set it up so that it prints that onto the computer.)
-- [ ] Pomodoro Timers: [notifications]
-  - [ ] Report the progress results of 1 year ago, 1 month ago + 1 week ago + 1 day ago.
 - [ ] Pull out excels and tell you about the daily tasks you didnt finish
 - [ ] Integrated Daily Performance
 - [ ] Display daily metrics, or write into the daily metrics for the day where it stores based on datetime and you cna update the json that is being submitted.

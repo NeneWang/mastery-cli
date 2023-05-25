@@ -14,9 +14,7 @@ const url = require('url');
  * @returns any # picks the object and returns it. | If however the specified count of random objects is greater than the list, then it will return a list of random elements of that size.
  */
 function get_random(list) {
-
     return list[Math.floor((Math.random() * list.length))];
-
 }
 
 /**
@@ -129,8 +127,6 @@ const getRandomBool = (chances = 0.5) => {
     // 0.01 means 1% chance of being true
     return random_boolean = Math.random() < chances;
 }
-
-
 
 function populateTerms(termJson) {
     return termJson.map(obj => new Term(obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", obj?.references ?? "", obj?.category ?? "", obj?.attachment));

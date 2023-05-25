@@ -402,7 +402,6 @@ class Maid {
 	
 			// Return the filtered data
 			return filteredData;
-
 		}
 
 		// Create the requirements per Day
@@ -412,7 +411,7 @@ class Maid {
 
 		// Filter where only userPerformanceData that are highlighted in the table_feat show are allowed "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss"],
 		// console.log(userPerformanceData)
-		let filtered_data = filterProperties(userPerformanceData, ["commits", "feat", "algo_w", "pro", "math_ss"]);
+		let filtered_data = filterProperties(userPerformanceData, Settings.table_feat_show);
 		// console.log(filtered_data)
 
 		console.table(filtered_data);
