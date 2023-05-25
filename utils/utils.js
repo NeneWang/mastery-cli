@@ -876,7 +876,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 
 	if (log_special_categories) {
 		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: false });
-		console.log("comments_to_populate", comments_to_populate)
+		// console.log("comments_to_populate", comments_to_populate)
 	}
 
 
@@ -958,7 +958,7 @@ const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_p
 		postCommentFromTerm(category.code, commitMessage);
 		const res = await getComments(category?.code ?? "log");
 		comments_to_populate = res.data;
-		console.log("comments_to_populate | special category", comments_to_populate)
+		// console.log("comments_to_populate | special category", comments_to_populate)
 		if (print_previous_commits) {
 			// if (true) console.log("Printing previous commit")
 			// Print previous commits
