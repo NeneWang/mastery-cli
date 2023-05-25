@@ -41,7 +41,7 @@ class Quizzer {
      * OUT: 
      * - {form, replace}
      */
-    getYoungest = async (potential_questions, { limit = 3, account_id = 1, debug=false } = {}) => {
+    getYoungest = async (potential_questions, { limit = 3, account_id = 1, debug = false } = {}) => {
 
         try {
             // Filter only if they have formula_name property
@@ -65,10 +65,10 @@ class Quizzer {
 
         } catch (e) {
             // Such as no internet connection
-            if(debug) console.warn(e)
+            if (debug) console.warn(e)
 
             CONSTANTS.online = false; //Lets mark it as such case for this call.
-            
+
             // get random 3 list of 3 problems
             potential_questions = get_random_of_size(potential_questions, { count: limit });
         }
@@ -398,7 +398,7 @@ class Quizzer {
                 throw ("isInvalidData: term_selected:", term_selected);
             }
 
-            const isOfflineMessage = CONSTANTS.online ? "": `|${chalk.hex(CONSTANTS.CUTEYELLOW).inverse(' offline ')}`
+            const isOfflineMessage = CONSTANTS.online ? "" : `|${chalk.hex(CONSTANTS.CUTEYELLOW).inverse(' offline ')}`
             console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `)}|${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` ${term_selected.category} `)}${isOfflineMessage}`);
 
             if (term_selected?.attachment ?? false) {
@@ -565,7 +565,7 @@ class Quizzer {
 
     }
 
-    async ask_math_question({ exitMethod = () => { } } = {}) {
+    async ask_math_question({ exitMethod = () => { debug = false } } = {}) {
 
 
         const question_form = await this.pick_math_question();
@@ -621,9 +621,13 @@ class Quizzer {
                 }
 
             }
-            const _ = await updateConcept(question_form.formula_name, answerIsCorrect);
 
-            console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt, ", \n Formula:", question_prompt.form);
+            if (CONSTANTS.online) {
+
+                const _ = await updateConcept(question_form.formula_name, answerIsCorrect);
+            }
+
+            if(debug) console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt, ", \n Formula:", question_prompt.form);
 
             return answerIsCorrect;
         } catch (err) {
