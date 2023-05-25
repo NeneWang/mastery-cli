@@ -1,9 +1,9 @@
-class Problem {
-    solve(a, b) {
-        sum = a+b;
-        return;
-    }
+class EvalRPN {
+	solve(tokens, index = 0) {
+	// Your code here
+
+	}
 }
 
 
-module.exports = { Problem };
+module.exports = { Problem: EvalRPN };

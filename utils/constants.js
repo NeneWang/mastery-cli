@@ -62,7 +62,8 @@ let CONSTANTS = {
     CUTEYELLOW: '#ffffc2', // Very Pale Yello
     CUTEPURPLE: '#977fd7', // Medium Purple
     online: true,
-    default_commit_message: "Commited by Maid"
+    default_commit_message: "Commited by Maid",
+    algo_name: 'algo', // tag being used to identify if an algorithm had been solved that day.
 }
 
 

@@ -188,7 +188,8 @@ class Maid {
 		}
 
 		if (Settings?.report_settings?.missing_report) {
-			this.provideMissingReport({ run_dsa: true });
+			this.say(`Missing Report: ${todaydate}, dsa enabled: ${true}`, false)
+			await this.provideMissingReport({ run_dsa: true });
 		}
 	}
 
@@ -205,11 +206,11 @@ class Maid {
 			const missingFeatReport = this.missingFeatReport;
 			if (missingFeatReport ?? false) {
 				console.log("Missing Reports Missing: received: ", missingFeatReport ?? "")
-				return;
 			}
 			const missingFormatedAsStr = this.missingFeatReport.join(", ")
 			console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
 			if (run_dsa) {
+
 				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
 			}
 		}
@@ -225,9 +226,7 @@ class Maid {
 	 * 
 	 */
 	requests_if_run_dsa_trainer = async (missingFeatReport) => {
-		const algo = "algo";
-		const algo_missing = missingFeatReport.includes(algo);
-		// console.log("algo_missing", algo_missing, "algo", algo, "missingFeatReport", missingFeatReport)
+		const algo_missing = missingFeatReport.includes(CONSTANTS.algo_name);
 		if (algo_missing) {
 			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
 			console.log("Daily DSA Missing run algorithms?")
@@ -358,14 +357,65 @@ class Maid {
 			// Consult for needed to accomplish today (as -number something or X as finished)
 		}
 
+		function filterProperties(userPerformanceData, properties = [], abreviations = { "week_sum_exclude_today": "week_sum_ex", "week_average_exclude_today": "weeK_avg_ex" }) {
+			/**
+			 * e.g. userPerformanceData in:
+			 *  {'2023-05-20': { commits: 2, acad: 2, terms: 4 },
+				today: { test: 12, tesrasd: 2, 'commits}': 6, 'terms}': 10 },
+				month: {
+					commits: 154,
+					feat: 20,
+					math_ss: 24,
+					ref: 1,
+					fix: 3,
+					algo: 2,
+					acad: 18,
+					pro: 16,
+					terms: 686,
+					algo_w: 4,
+					test: 12,
+					tesrasd: 2,
+					'commits}': 6,
+					'terms}': 10
+				}
+				}
+				and properties: [feat]
+				should result in:
+				{'2023-05-20': { feat: 20 },
+				today: { feat: 20 },
+				month: { feat: 20 }
+				}
+			*/
+			// Iterate over the keys of the userPerformanceData object
+			let filteredData = {};
+			for(let date in userPerformanceData) {
+				const naming = abreviations[date] ?? date;
+				// For each key, create a new object that only contains the desired properties
+				filteredData[naming] = properties.reduce((obj, prop) => {
+					// If the current performance data has the current property, add it to the new object
+					if(userPerformanceData[date][prop]) {
+						obj[prop] = userPerformanceData[date][prop];
+					}
+					return obj;
+				}, {});
+			}
+	
+			// Return the filtered data
+			return filteredData;
+
+		}
+
 		// Create the requirements per Day
 		// const feat_accomplished_until_today = createFeaturesMap(feat_rules);
 		const feat_accomplished_until_today = {};
 		updateRequirements(feat_accomplished_until_today, feat_rules, userPerformanceData);
 
+		// Filter where only userPerformanceData that are highlighted in the table_feat show are allowed "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss"],
+		// console.log(userPerformanceData)
+		let filtered_data = filterProperties(userPerformanceData, ["commits", "feat", "algo_w", "pro", "math_ss"]);
+		// console.log(filtered_data)
 
-
-		console.table(userPerformanceData);
+		console.table(filtered_data);
 		console.table(feat_accomplished_until_today);
 
 	}
