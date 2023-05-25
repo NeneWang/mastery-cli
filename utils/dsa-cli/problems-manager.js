@@ -1,11 +1,12 @@
 const fs = require('fs');
-const { getDirAbsoluteUri, openEditorPlatformAgnostic } = require('./functions');
+const { getDirAbsoluteUri, openEditorPlatformAgnostic, get_random } = require('./functions');
 const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
 const { exec } = require('node:child_process');
 const { getPromptDict } = require('./prompt');
 const Constants = require('./constants');
 const { cloze_problems_list } = require('./cloze');
+
 
 
 
@@ -29,6 +30,9 @@ class ProblemsManager {
         return Object.keys(this.problems);
     }
 
+    get clozeProblemSlugs(){
+        return cloze_problems_list.map(cloze_problem => cloze_problem.filepath); //Useful as there is an algorithm that checks this slugs in order to detect priority
+    }
 
     getProblem(problemSlug) {
         return this.problems[problemSlug];
@@ -51,6 +55,16 @@ class ProblemsManager {
     getProblemClozes(problemSlug) {
 
         return cloze_problems_list.filter(cloze_problem => cloze_problem.problem_slug == problemSlug);
+    }
+
+    getRandomProblemCloze(problemSlug) {
+        // console.log("DEBUG | Cloze problems: ", cloze_problems);
+        if (cloze_problems.length == 0) {
+            console.log("No cloze problems found for this problem");
+            return
+        }
+        const cloze_problems = this.getProblemClozes(problemSlug);
+        return get_random(cloze_problems);
     }
 
     /**
@@ -136,6 +150,18 @@ class ProblemsManager {
         return this.problems[randomKey];
     }
 
+
+
+    /**
+     * 
+     * @returns {Problem} A random problem from the problems manager that has a cloze problem
+     */
+    getRandomProblemSlugWithCloze(){
+        // Get a random clozeProblem Slugs
+        return get_random(this.cloze_problems_list);
+    }
+    
+
     /**
      * Populates the template with the code inside of problem.file_path
      * @param {dict<problem>} problem The problem to populate the template with
@@ -179,11 +205,11 @@ class ProblemsManager {
     /**
      * Copies the file from problem_file_path to the temp_problem_filepath.
      * @param {str} problem_file_path The path to the file to copy
-     * @param {str} temp_problem_filepath The path to the file to copy from e.g. base_code'
+     * @param {str} base The path to the file to copy from e.g. base_code'
      */
     copyFileToTemp(problem_file_path, { base = "./base_code/" } = {}) {
         try {
-
+            // console.log("Copying file from", problem_file_path, "to", this.temp_problem_filepath)
             const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, base);
             const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
@@ -220,14 +246,14 @@ class ProblemsManager {
     async openTemporalProblemFile({ editor_instruction = "" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
-        await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
+        await openEditorPlatformAgnostic(editor_instruction, {absolute_temp_file_path: absolute_temp_file_path})
 
     }
 
     async openSolutionFile(problem_slug, { editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.solution_filepath + problem_slug + '.js', "./");
 
-        await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
+        await openEditorPlatformAgnostic(editor_instruction, {absolute_temp_file_path: absolute_temp_file_path})
 
     }
 
@@ -236,7 +262,7 @@ class ProblemsManager {
     async openBaseCodeFile(problem_slug, { editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.base_code_filepath + problem_slug + '.js', "./");
 
-        await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
+        await openEditorPlatformAgnostic(editor_instruction, {absolute_temp_file_path: absolute_temp_file_path})
 
     }
 

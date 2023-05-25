@@ -24,7 +24,7 @@ const getAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/
  * @param {str} fileimage : String containing the relative position of the image from utils directory
  * @returns {str} Formatted C:/github/testing/maid-cli/img/unicorn.png
  */
-const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './') => {
+const getDirAbsoluteUri = (fileimage = './img/unicor1n.png', subdirectory = './') => {
     // Note it should take from the root.
     const absolutePath = path.resolve(path.join(__dirname, subdirectory, fileimage)); // Note the '../' because it is inside of constants
 
@@ -164,6 +164,18 @@ const renderPromptDescription = (prompt, prompt_details) => {
 };
 
 
+// console.log("CURRENCY_SIMBOLS", CURRENCY_SIMBOLS);
+/**
+ * 
+ * @param {List: any} list A lit of any object
+ * @param {int: count} count The number of random objects to pick from the list. Default is 1.
+ * @returns any # picks the object and returns it. | If however the specified count of random objects is greater than the list, then it will return a list of random elements of that size.
+ */
+function get_random(list) {
+    return list[Math.floor((Math.random() * list.length))];
+}
+
+
 function writeUnresolvedClass(sourceFilePath, targetFilePath, { avoidOverwrite = true } = {}) {
 
     // Check if the target file exists
@@ -224,7 +236,7 @@ const openEditorPlatformAgnostic = async (editor_instruction, {absolute_temp_fil
 
     if (os.platform() === 'win32') {
 
-        console.log('Windows');
+        console.log(`Windows | start ${editor_instruction} ${absolute_temp_file_path}`);
         await openEditorWithCommand(`start ${editor_instruction} ${absolute_temp_file_path}`);
 
     } else if (os.platform() === 'linux') {
@@ -245,5 +257,5 @@ const openEditorPlatformAgnostic = async (editor_instruction, {absolute_temp_fil
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, renderPromptDescription,
-    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic, looselyDeepEqual
+    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic, looselyDeepEqual, get_random
 };
