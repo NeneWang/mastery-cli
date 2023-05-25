@@ -41,7 +41,7 @@ class Quizzer {
      * OUT: 
      * - {form, replace}
      */
-    getYoungest = async (potential_questions, { limit = 3, account_id = 1 } = {}) => {
+    getYoungest = async (potential_questions, { limit = 3, account_id = 1, debug=false } = {}) => {
 
         try {
             // Filter only if they have formula_name property
@@ -65,7 +65,7 @@ class Quizzer {
 
         } catch (e) {
             // Such as no internet connection
-            console.warn(e)
+            if(debug) console.warn(e)
 
             CONSTANTS.online = false; //Lets mark it as such case for this call.
             // get random 3 list of 3 problems
