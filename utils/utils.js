@@ -893,7 +893,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
 	if (debug) console.log(`Pushed to origin with commit message: ${commitMessage}`);
 
-	return { comments_to_populate: comments_to_populate }
+	return { comments_to_populate: comments_to_populate, commit_category: commitCat, commit_message: commitMessage };
 }
 
 /**

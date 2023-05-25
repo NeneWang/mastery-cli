@@ -76,6 +76,7 @@ const { Demo, EDemo } = demos;
 		const _ = await mQuizer.askQuestion();
 		await maid.provideMissingReport({ run_dsa: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
 		
+		// Slight optimization.
 		const commit_res = await commit_push_results;
 		comments_to_populate = commit_res.comments_to_populate;
 

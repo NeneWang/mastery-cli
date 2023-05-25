@@ -10,6 +10,7 @@ const { renderPromptDescription } = require('./functions');
 const { Toggle, AutoComplete } = require('enquirer');
 const { ProblemMetadata } = require('./structures');
 const { response } = require('express');
+const { util } = require('prettier');
 
 const DEBUG = false;
 
@@ -330,6 +331,21 @@ class DSATrainer {
                     console.log("Error running tests: ", e);
                     return false;
                 }
+            },
+            "cloze": async () => {
+                // Choose a random cloze problem to be solved
+                question_state_flag = true;
+                console.log("Populating the base prompt with a cloze problem");
+                const cloze_problems = this.problems_manager.getProblemClozes(problem.slug);
+                console.log("DEBUG | Cloze problems: ", cloze_problems);
+                if(cloze_problems.length == 0){
+                    console.log("No cloze problems found for this problem");
+                    return
+                }
+
+                const selected_cloze_problem = util.getRandomProblem(cloze_problems);
+                this.problems_manager.copyFileToTemp(selected_cloze_problem.file_path, problem.slug);
+
             },
             "Hint": async () => {
                 // TO Complete
