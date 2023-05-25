@@ -949,7 +949,7 @@ const printComments = (comments) => {
  * @param {bool} print_previous_commits ?= true : If to whether to print previous commits
  * @param {ECommitCategory[]} special_categories ?= [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code] : Special categories to log
  * @param {bool} debug ?= false : If to whether to debug api responses, etc.
- * @returns {void}
+ * @returns {List: [date: comment]}
  */
 const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_populate = [], { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
 	// if (true) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))

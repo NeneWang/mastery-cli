@@ -69,7 +69,8 @@ const { Demo, EDemo } = demos;
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
 		let comments_to_populate = [];
-		comments_to_populate = (await utils.commitpush({ comments_to_populate: comments_to_populate })).comments_to_populate;
+		const commit_push_results = utils.commitpush({ comments_to_populate: comments_to_populate });
+		comments_to_populate = commit_push_results.comments_to_populate;
 		maid.populateMissingReport();
 		// as until the response is right?
 
