@@ -917,7 +917,7 @@ const getComments = async (term, count = 5) => {
 	}
 	);
 
-	return res.data;
+	return res;
 	// return res.data;
 }
 
