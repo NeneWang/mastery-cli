@@ -62,6 +62,7 @@ let CONSTANTS = {
     CUTEYELLOW: '#ffffc2', // Very Pale Yello
     CUTEPURPLE: '#977fd7', // Medium Purple
     online: true,
+    default_commit_message: "Commited by Maid"
 }
 
 

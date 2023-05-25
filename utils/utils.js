@@ -23,6 +23,7 @@ const Settings = require('./settings.js');
 const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
 );
+const Constants = require('./dsa-cli/constants');
 
 // https://www.npmjs.com/package/chalk
 
@@ -814,7 +815,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 		
 	}
 	if (commitMessage == undefined) {
-		commitMessage = "Committed by Maid ";
+		commitMessage = CONSTANTS.default_commit_message;
 	}
 
 
