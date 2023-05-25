@@ -54,7 +54,7 @@ let APIDICT = {
 
 // APIDICT.DEPLOYED_MAID = 'https://jmmgskxdgn.us-east-1.awsapprunner.com'
 
-const CONSTANTS = {
+let CONSTANTS = {
     ACCOUNT_ID: 1,
     CUTEBLUE: '#9ccfe7', // Cornflower
     CUTEPINK: '#f5a9cb', // Lavander Pink

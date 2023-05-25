@@ -66,6 +66,8 @@ class Quizzer {
         } catch (e) {
             // Such as no internet connection
             console.warn(e)
+
+            CONSTANTS.online = false; //Lets mark it as such case for this call.
             // get random 3 list of 3 problems
             potential_questions = get_random_of_size(potential_questions, { count: limit });
         }
