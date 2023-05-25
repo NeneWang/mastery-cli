@@ -70,14 +70,14 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.coa.code)) {
 		let comments_to_populate = [];
 		const commit_push_results = utils.commitpush({ comments_to_populate: comments_to_populate });
-		comments_to_populate = await commit_push_results.comments_to_populate;
+		comments_to_populate = await commit_push_results;
 		maid.populateMissingReport();
 		// as until the response is right?
 
 		const _ = await mQuizer.askQuestion();
 		await maid.provideMissingReport({ run_dsa: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
 		
-		console.log("Comments to populate:", comments_to_populate)
+		console.log("Comments to populate:", comments_to_populate.comments_to_populate)
 		utils.printComments(comments_to_populate);
 
 		await maid.askToClean();
