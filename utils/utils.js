@@ -856,7 +856,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 	}
 }
 
-const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true, debug = false } = {}) => {
+const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true, debug = false, comments_to_populate = [] } = {}) => {
 
 
 
@@ -875,7 +875,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	// Log special categories
 
 	if (log_special_categories) {
-		logCommitIfSpecialCategory(commitMessage, commitCat);
+		logCommitIfSpecialCategory(commitMessage, commitCat, {comments_to_populate:comments_to_populate, printComments: false});
 	}
 
 
@@ -949,17 +949,18 @@ const printComments = (comments) => {
  * @param {bool} debug ?= false : If to whether to debug api responses, etc.
  * @returns {void}
  */
-const logCommitIfSpecialCategory = async (commitMessage, category, { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
+const logCommitIfSpecialCategory = async (commitMessage, category, { print_previous_commits = true, comments_to_populate=[], special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
 	// if (true) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
 	if (special_categories.includes(category.code)) {
 		// Log the commit message in the comments database
-		await postCommentFromTerm(category.code, commitMessage);
+		postCommentFromTerm(category.code, commitMessage);
+		const res = await getComments(category?.code ?? "log");
+		comments_to_populate = res.data;
 		if (print_previous_commits) {
 			// if (true) console.log("Printing previous commit")
 			// Print previous commits
-			const res = await getComments(category?.code ?? "log");
 			// console.log("res received", res.data);
-			printComments(res.data);
+			printComments(comments_to_populate);
 		}
 	}
 
@@ -995,7 +996,7 @@ const autorelease = () => {
 }
 
 module.exports = {
-	getTalk, commitpush, autorelease,
+	getTalk, commitpush, autorelease, printComments,
 	Maid, getToday, FlashQuizzer, increasePerformance,
 	commitCategory, logCommitIfSpecialCategory, postCommentFromTerm, getComments
 };
