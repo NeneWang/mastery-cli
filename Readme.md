@@ -8,7 +8,7 @@ Other main features include:
 
 
 
-![](https://i.ibb.co/fCfYmbT/mapping-icon.png)
+![](https://i.ibb.co/X3pgKJX/128-128.png)
 
 ## Install
 
