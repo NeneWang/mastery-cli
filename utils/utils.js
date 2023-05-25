@@ -701,7 +701,7 @@ increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
 		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}`)
 		if (debug) console.log(res.data);
 	} catch (err) {
-		if(debug) console.warn(err);
+		if (debug) console.warn(err);
 	}
 
 }
@@ -875,7 +875,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	// Log special categories
 
 	if (log_special_categories) {
-		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, {print_previous_commits: false});
+		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: false });
 		console.log("comments_to_populate", comments_to_populate)
 	}
 
@@ -893,6 +893,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
 	if (debug) console.log(`Pushed to origin with commit message: ${commitMessage}`);
 
+	return { comments_to_populate: comments_to_populate }
 }
 
 /**
@@ -950,7 +951,7 @@ const printComments = (comments) => {
  * @param {bool} debug ?= false : If to whether to debug api responses, etc.
  * @returns {void}
  */
-const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_populate=[], { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
+const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_populate = [], { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
 	// if (true) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
 	if (special_categories.includes(category.code)) {
 		// Log the commit message in the comments database
