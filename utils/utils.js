@@ -875,7 +875,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	// Log special categories
 
 	if (log_special_categories) {
-		logCommitIfSpecialCategory(commitMessage, commitCat, {comments_to_populate:comments_to_populate, printComments: false});
+		logCommitIfSpecialCategory(commitMessage, commitCat, {comments_to_populate:comments_to_populate, print_previous_commits: false});
 	}
 
 
