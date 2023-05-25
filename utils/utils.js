@@ -214,7 +214,7 @@ class Maid {
 			}
 		}
 		catch (err) {
-			// console.log("Error in provideMissingReport", err)
+			console.log("Error in provideMissingReport", err)
 		}
 	}
 

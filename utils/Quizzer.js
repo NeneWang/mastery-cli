@@ -565,7 +565,7 @@ class Quizzer {
 
     }
 
-    async ask_math_question({ exitMethod = () => { debug = false } } = {}) {
+    async ask_math_question({ exitMethod = () => {}} = {}) {
 
 
         const question_form = await this.pick_math_question();
@@ -627,7 +627,7 @@ class Quizzer {
                 const _ = await updateConcept(question_form.formula_name, answerIsCorrect);
             }
 
-            if(debug) console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt, ", \n Formula:", question_prompt.form);
+            if(DEBUG) console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt, ", \n Formula:", question_prompt.form);
 
             return answerIsCorrect;
         } catch (err) {
