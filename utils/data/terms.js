@@ -13,14 +13,14 @@
 const { TermStorage } = require('../structures');
 
 const layer_1 = true;
-const layer_2 = false;
+const layer_2 = true;
 const layer_3 = false;
 
 // Studying for Class Targetted. Start exclusive boolean this 1 month before finals.
 const study_cisc = false; 
 
 
-const study_legacy = true;
+const study_legacy = false;
 
 /**
  * 
