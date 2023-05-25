@@ -388,18 +388,18 @@ class Maid {
 			*/
 			// Iterate over the keys of the userPerformanceData object
 			let filteredData = {};
-			for(let date in userPerformanceData) {
+			for (let date in userPerformanceData) {
 				const naming = abreviations[date] ?? date;
 				// For each key, create a new object that only contains the desired properties
 				filteredData[naming] = properties.reduce((obj, prop) => {
 					// If the current performance data has the current property, add it to the new object
-					if(userPerformanceData[date][prop]) {
+					if (userPerformanceData[date][prop]) {
 						obj[prop] = userPerformanceData[date][prop];
 					}
 					return obj;
 				}, {});
 			}
-	
+
 			// Return the filtered data
 			return filteredData;
 		}
@@ -700,7 +700,7 @@ increasePerformance = async (feature_name, increaseBY = 1, debug = true) => {
 	try {
 		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}`)
 		if (debug) console.log(res.data);
-	} catch (err){
+	} catch (err) {
 		console.warn(err);
 	}
 
@@ -902,14 +902,22 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
  */
 const getComments = async (term, count = 5) => {
 
-	let res = [];
-	await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
+	// let res = [];
+	// await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
+	// 	headers: {
+	// 		'Accept-Encoding': 'application/json'
+	// 	}
+	// }).then(results => res = results.data).catch(err => console.log(err));
+
+	// Do it with await syntax as well
+	const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
 		headers: {
 			'Accept-Encoding': 'application/json'
 		}
-	}).then(results => res = results.data).catch(err => console.log(err));
+	}
+	);
 
-	return res;
+	return res.data;
 	// return res.data;
 }
 
@@ -945,11 +953,11 @@ const logCommitIfSpecialCategory = async (commitMessage, category, { print_previ
 	if (true) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
 	if (special_categories.includes(category.code)) {
 		// Log the commit message in the comments database
-
 		await postCommentFromTerm(category.code, commitMessage);
 		if (print_previous_commits) {
+			if (true) console.log("Printing previous commit")
 			// Print previous commits
-			const res = getComments(category?.code ?? "log");
+			const res = await getComments(category?.code ?? "log");
 			// console.log("res received", res);
 			printComments(res);
 		}
