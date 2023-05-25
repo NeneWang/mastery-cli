@@ -1,6 +1,6 @@
 const { qmathformulas } = require('./data/math_formulas');
 const { termJson } = require('./data/terms');
-const {Term, Terminology, TermStorage} = require('./structures');
+const { Term, Terminology, TermStorage } = require('./structures');
 const { CURRENCY_SIMBOLS } = require('./data/currency.js');
 
 const path = require("path");
@@ -10,10 +10,30 @@ const url = require('url');
 /**
  * 
  * @param {List: any} list A lit of any object
- * @returns any # picks the object and returns it.
+ * @param {int: count} count The number of random objects to pick from the list. Default is 1.
+ * @returns any # picks the object and returns it. | If however the specified count of random objects is greater than the list, then it will return a list of random elements of that size.
  */
 function get_random(list) {
+
     return list[Math.floor((Math.random() * list.length))];
+
+}
+
+/**
+ * 
+ * @param {List: any} list A lit of any object
+ * @param {int} count The number of random objects to pick from the list. Default is 1.
+ * @returns {List: any} # picks the object and returns it. | If however the specified count of random objects is greater than the list, then it will return a list of random elements of that size.
+ */
+function get_random_of_size(list, { count = 1 } = {}) {
+
+    const listOfRandomProblems = [];
+    for (let i = 0; i < count; i++) {
+        listOfRandomProblems.push(list[Math.floor((Math.random() * list.length))]);
+    }
+
+    return listOfRandomProblems;
+
 }
 const MAID_NAME = "Maid";
 
@@ -143,7 +163,8 @@ const countDecimals = (value) => {
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
     appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures,
-    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool, getAbsoluteUri, getDirAbsoluteUri
+    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool, getAbsoluteUri, getDirAbsoluteUri,
+    get_random_of_size
 };
 
 

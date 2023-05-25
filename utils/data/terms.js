@@ -29,8 +29,6 @@ const study_legacy = true;
 async function populateMasterDeck() {
     terms = []
 
-
-
     let decks = new TermStorage([], "Academic Terms");
 
     const { react_terms, apex, flutter, IDE_S, chrome_extensions } = require('./frameworks');

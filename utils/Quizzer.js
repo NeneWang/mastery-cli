@@ -10,7 +10,7 @@ const constants = require('./constants');
 const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
-const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
+const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals, get_random_of_size } = constants;
 const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
 
 const { TermScheduler } = require('./termScheduler');
@@ -36,22 +36,22 @@ class Quizzer {
     /**
      * Picks a random question from the enabled list
      * NOTE It requires the potential questions to have formula_name as the slug
+     * @param {string} potential_questions
+     * @param {int} limit | Optional
      * OUT: 
      * - {form, replace}
      */
-    getYoungest = async (potential_questions) => {
+    getYoungest = async (potential_questions, { limit = 3, account_id = 1 } = {}) => {
 
         try {
             // Filter only if they have formula_name property
             potential_questions = potential_questions.filter(x => x?.formula_name != undefined)
             const problem_names = potential_questions.map(x => x.formula_name)
             // Filter only if they have formula_name property again?
-            // problem_names = potential_questions.filter(x => x.formula_name)
 
 
-            // const dataToPost = ["string", "test", "new1", "New", "random", "received" ];
             if (DEBUG) console.log("problem_names", problem_names)
-            const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/`, problem_names);
+            const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/?account_id=${account_id}&limit=${limit}`, problem_names);
             const response_data = res.data;
             // if (DEBUG) console.log(response_data)
             // if (DEBUG) console.log("response_data", response_data);
@@ -66,6 +66,8 @@ class Quizzer {
         } catch (e) {
             // Such as no internet connection
             console.warn(e)
+            // get random 3 list of 3 problems
+            potential_questions = get_random_of_size(potential_questions, { count: limit });
         }
         return potential_questions;
     }
@@ -100,7 +102,7 @@ class Quizzer {
         return get_random(potential_questions);
     }
 
-    forceLearnMode = async ({ debug = false, exitMethod = () => {} } = {}) => {
+    forceLearnMode = async ({ debug = false, exitMethod = () => { } } = {}) => {
         let potential_questions = this.terms;
         potential_questions = await this.getYoungest(potential_questions);
         if (debug) console.log("potential_questions", potential_questions);
@@ -122,7 +124,7 @@ class Quizzer {
             const card = miniqueue.getCard();
             // console.log("card", card);
             const response = await this.ask_term_question(card, { exitMethod: wrappedExitMethod });
-            if(response == true ){
+            if (response == true) {
                 // increase the terms
             }
 
@@ -438,7 +440,7 @@ class Quizzer {
             try {
 
                 console.log("Submitting answer..., for sure...")
-                 if (constants.CONSTANTS.online) this.postCommentFromTerm(term_selected, user_res, true);
+                if (constants.CONSTANTS.online) this.postCommentFromTerm(term_selected, user_res, true);
                 const _ = await increasePerformance("terms");
 
                 this.printExample(term_selected)
@@ -469,12 +471,12 @@ class Quizzer {
                 ISANSWERCORRECT = response;
             }
 
-            try{
+            try {
 
-                if (constants.CONSTANTS.online){
+                if (constants.CONSTANTS.online) {
                     const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
-                } 
-            }catch{
+                }
+            } catch {
                 // Do nothing.
             }
 
