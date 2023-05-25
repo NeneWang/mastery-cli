@@ -39,7 +39,8 @@ Simple usage guide.
 - [x] Ability to create a grouper (inserts tags such as category or type to the collection of jsons it represents)
 
 
-![](https://i.ibb.co/fCfYmbT/mapping-icon.png)
+![](https://i.ibb.co/X3pgKJX/128-128.png)
+
 
 ## In Progress
 

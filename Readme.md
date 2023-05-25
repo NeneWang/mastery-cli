@@ -7,6 +7,9 @@ Other main features include:
 - More than 150 programming problems (with tests that work offline)
 
 
+
+![](https://i.ibb.co/fCfYmbT/mapping-icon.png)
+
 ## Install
 
 ```
