@@ -875,7 +875,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	// Log special categories
 
 	if (log_special_categories) {
-		await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, {print_previous_commits: false});
+		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, {print_previous_commits: false});
 		console.log("comments_to_populate", comments_to_populate)
 	}
 
@@ -965,6 +965,8 @@ const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_p
 			printComments(comments_to_populate);
 		}
 	}
+
+	return comments_to_populate;
 
 }
 
