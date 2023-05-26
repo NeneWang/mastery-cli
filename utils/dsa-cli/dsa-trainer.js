@@ -6,10 +6,11 @@ const StorableReport = require('./StorableReport');
 const { getPromptDict } = require('./prompt');
 
 const Constants = require('./constants');
-const { renderPromptDescription } = require('./functions');
+const { renderPromptDescription, get_random } = require('./functions');
 const { Toggle, AutoComplete } = require('enquirer');
 const { ProblemMetadata } = require('./structures');
 const { response } = require('express');
+const { util } = require('prettier');
 
 const DEBUG = false;
 
@@ -158,6 +159,19 @@ class DSATrainer {
         return problem_response;
     }
 
+    async openRandomClozeDSAProblem() {
+        const selectedClozeProblem = this.problems_manager.getRandomProblemSlugWithCloze();
+        const problem = this.problems_manager.getProblem(selectedClozeProblem.slug);
+
+        // Populate with that problem slug
+        this.problems_manager.copyFileToTemp(selectedClozeProblem.filepath, { base: Constants.PATHS.base_cloze });
+
+        const problem_response = await this.solveProblem(problem, { populate_with_cloze_filepaths: selectedClozeProblem.filepaths });
+
+        problem_response.is_problem_solved = problem_response.problem_status == Constants.ProblemStatus.solved;
+        return problem_response;
+    }
+
 
     /**
      * Updates the problem status, such as interfacing with the problem report and problem attempted (in the future this would create a report of things done.)
@@ -197,7 +211,7 @@ class DSATrainer {
      * @param {boolean} tryUntilSolved If true, the problem will be reprompted until it is solved. If false, the problem will be solved once.
      * @returns {ProblemStatus} The status of the problem
      */
-    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, populate_problem = true } = {}) {
+    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, populate_problem = true, populate_with_cloze_filepath } = {}) {
         if (populate_problem) {
             this.problems_manager.populateTemplate(problem);
         }
@@ -312,8 +326,14 @@ class DSATrainer {
 
         let question_state_flag = true;
         let did_pass_all_tests_before = false;
+        let cloze_problem_list = this.problems_manager.getProblemClozes(problem.slug);
 
         const choices = {
+
+            "Modify": async () => {
+                question_state_flag = true;
+                await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
+            },
             'Run Tests': async () => {
                 try {
                     // Sometimes errors can occur.
@@ -331,16 +351,13 @@ class DSATrainer {
                     return false;
                 }
             },
+
             "Hint": async () => {
                 // TO Complete
                 question_state_flag = true;
                 console.log("hint after state flag", question_state_flag);
                 console.log("Hint: ", "Use the problem of friendship");
 
-            },
-            "Modify": async () => {
-                question_state_flag = true;
-                await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
             },
             "Copy Link": async () => {
                 question_state_flag = true;
@@ -384,6 +401,32 @@ class DSATrainer {
 
         if (Constants.DEV_MODE) Object.assign(choices, choices_dev_mode); // Add dev mode choices
 
+        if (cloze_problem_list.length > 0) {
+
+            Object.assign(choices, {
+                cloze: async () => {
+                    // Choose a random cloze problem to be solved
+                    question_state_flag = true;
+                    console.log("Populating the base prompt with a cloze problem");
+                    const cloze_problems = cloze_problem_list;
+                    // console.log("DEBUG | Cloze problems: ", cloze_problems);
+                    if (cloze_problems.length == 0) {
+                        console.log("No cloze problems found for this problem");
+                        return
+                    }
+
+                    const selected_cloze_problem = get_random(cloze_problems);
+                    // console.log("DEBUG | Selected cloze problem: ", selected_cloze_problem);
+                    this.problems_manager.copyFileToTemp(selected_cloze_problem.filepath, { base: Constants.PATHS.base_cloze });
+                    console.log(" ==> CLOZE PROBLEM HAS BEEN COPIED TO  CURRENT PROBLEM <==");
+                    // Open using modify to update the version
+                    await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true });
+
+
+                },
+            });
+        }
+
         let res = Constants.ProblemStatus.unsolved;
         while (question_state_flag) {
 
@@ -413,7 +456,7 @@ class DSATrainer {
 
             const prommpt_problem_menu = new AutoComplete({
                 name: 'problem_menu',
-                message: 'What do you want to do?',
+                message: `Select action:`,
                 choices: selectable_choices,
             });
             const choice_selected = await prommpt_problem_menu.run();

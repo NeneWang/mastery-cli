@@ -12,10 +12,14 @@
 
 const { TermStorage } = require('../structures');
 
-const layer_1 = false;
-const layer_2 = false;
+const layer_1 = true;
+const layer_2 = true;
 const layer_3 = false;
-const study_cisc = true; // Studying for Class Targetted.
+
+// Studying for Class Targetted. Start exclusive boolean this 1 month before finals.
+const study_cisc = false; 
+
+
 const study_legacy = false;
 
 /**
@@ -24,8 +28,6 @@ const study_legacy = false;
  */
 async function populateMasterDeck() {
     terms = []
-
-
 
     let decks = new TermStorage([], "Academic Terms");
 
@@ -41,8 +43,8 @@ async function populateMasterDeck() {
     const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne, network_final } = require("./spring-senior");
     decks.addDeck(new TermStorage(network, "network", { is_active: study_legacy }));
     decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: study_legacy }));
-    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: study_cisc }));
-    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: false }));
+    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: false }));
     decks.addDeck(new TermStorage(algebra, "algebra", { is_active: study_legacy }));
     decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: study_legacy }));
     decks.addDeck(new TermStorage(network_final, "network final", { is_active: study_legacy }));

@@ -23,6 +23,7 @@ const Settings = require('./settings.js');
 const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
 );
+const Constants = require('./dsa-cli/constants');
 
 // https://www.npmjs.com/package/chalk
 
@@ -187,7 +188,8 @@ class Maid {
 		}
 
 		if (Settings?.report_settings?.missing_report) {
-			this.provideMissingReport({ run_dsa: true });
+			this.say(`Missing Report: ${todaydate}, dsa enabled: ${true}`, false)
+			await this.provideMissingReport({ run_dsa: true });
 		}
 	}
 
@@ -202,18 +204,18 @@ class Maid {
 			}
 			// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
 			const missingFeatReport = this.missingFeatReport;
-			if (missingFeatReport??false) {
+			if (missingFeatReport ?? false) {
 				console.log("Missing Reports Missing: received: ", missingFeatReport ?? "")
-				return;
 			}
 			const missingFormatedAsStr = this.missingFeatReport.join(", ")
 			console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
 			if (run_dsa) {
+
 				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
 			}
 		}
 		catch (err) {
-			// console.log("Error in provideMissingReport", err)
+			console.log("Error in provideMissingReport", err)
 		}
 	}
 
@@ -224,9 +226,7 @@ class Maid {
 	 * 
 	 */
 	requests_if_run_dsa_trainer = async (missingFeatReport) => {
-		const algo = "algo";
-		const algo_missing = missingFeatReport.includes(algo);
-		// console.log("algo_missing", algo_missing, "algo", algo, "missingFeatReport", missingFeatReport)
+		const algo_missing = missingFeatReport.includes(CONSTANTS.algo_name);
 		if (algo_missing) {
 			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
 			console.log("Daily DSA Missing run algorithms?")
@@ -357,31 +357,65 @@ class Maid {
 			// Consult for needed to accomplish today (as -number something or X as finished)
 		}
 
+		function filterProperties(userPerformanceData, properties = [], abreviations = { "week_sum_exclude_today": "week_sum_ex", "week_average_exclude_today": "weeK_avg_ex" }) {
+			/**
+			 * e.g. userPerformanceData in:
+			 *  {'2023-05-20': { commits: 2, acad: 2, terms: 4 },
+				today: { test: 12, tesrasd: 2, 'commits}': 6, 'terms}': 10 },
+				month: {
+					commits: 154,
+					feat: 20,
+					math_ss: 24,
+					ref: 1,
+					fix: 3,
+					algo: 2,
+					acad: 18,
+					pro: 16,
+					terms: 686,
+					algo_w: 4,
+					test: 12,
+					tesrasd: 2,
+					'commits}': 6,
+					'terms}': 10
+				}
+				}
+				and properties: [feat]
+				should result in:
+				{'2023-05-20': { feat: 20 },
+				today: { feat: 20 },
+				month: { feat: 20 }
+				}
+			*/
+			// Iterate over the keys of the userPerformanceData object
+			let filteredData = {};
+			for (let date in userPerformanceData) {
+				const naming = abreviations[date] ?? date;
+				// For each key, create a new object that only contains the desired properties
+				filteredData[naming] = properties.reduce((obj, prop) => {
+					// If the current performance data has the current property, add it to the new object
+					if (userPerformanceData[date][prop]) {
+						obj[prop] = userPerformanceData[date][prop];
+					}
+					return obj;
+				}, {});
+			}
+
+			// Return the filtered data
+			return filteredData;
+		}
+
 		// Create the requirements per Day
 		// const feat_accomplished_until_today = createFeaturesMap(feat_rules);
 		const feat_accomplished_until_today = {};
 		updateRequirements(feat_accomplished_until_today, feat_rules, userPerformanceData);
 
+		// Filter where only userPerformanceData that are highlighted in the table_feat show are allowed "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss"],
+		// console.log(userPerformanceData)
+		let filtered_data = filterProperties(userPerformanceData, Settings.table_feat_show);
+		// console.log(filtered_data)
 
-
-		console.table(userPerformanceData);
+		console.table(filtered_data);
 		console.table(feat_accomplished_until_today);
-
-		// try {
-		// 	this.barChartFeatzures(userPerformanceData, dayFeaturesToExtract, 2);
-		// }
-		// catch {
-		// 	console.warn("Error while attempting to plot features bar charts");
-		// 	try {
-		// 		console.warn("Using day features: ", userPerformanceData)
-		// 	} catch { }
-		// }
-		// try {
-		// 	this.printUserPerformanceDataSummary(userPerformanceData);
-		// } catch {
-		// 	console.warn("Wrror while attempting to print performance summary");
-		// }
-		// console.log('\n');
 
 	}
 
@@ -664,10 +698,12 @@ getArrayLastXDays = (days = 7) => {
 
 increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
 	try {
-		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}/${increaseBY}?increase_score=true`)
-	} catch {
+		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}`)
 		if (debug) console.log(res.data);
+	} catch (err) {
+		if (debug) console.warn(err);
 	}
+
 }
 
 updateConcept = async (problem_name, success = true, debug = false) => {
@@ -820,14 +856,17 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 	}
 }
 
-const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true } = {}) => {
+const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true, debug = false, comments_to_populate = [] } = {}) => {
 
 
 
 	let commitMessage = process.argv[3];
-	console.log(commitMessage)
+	if (debug) {
+		console.log(commitMessage)
+
+	}
 	if (commitMessage == undefined) {
-		commitMessage = "Committed by Maid ";
+		commitMessage = CONSTANTS.default_commit_message;
 	}
 
 
@@ -836,22 +875,25 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	// Log special categories
 
 	if (log_special_categories) {
-		logCommitIfSpecialCategory(commitMessage, commitCat);
+		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: false });
+		// console.log("comments_to_populate", comments_to_populate)
 	}
 
 
-	let _ = await increasePerformance("commits");
+	// Removed await statement for hopes of faster responsee load
+	increasePerformance("commits");
 	if (commitCat?.code) {
-		_ = await increasePerformance(commitCat.code);
+		increasePerformance(commitCat.code);
 		if (addCommitEmoji) commitMessage = commitMessage + " " + commitCat.randomIcon();
 	}
 
 
 	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
-	
-	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
-	console.log(`Pushed to origin with commit message: ${commitMessage}`);
 
+	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
+	if (debug) console.log(`Pushed to origin with commit message: ${commitMessage}`);
+
+	return { comments_to_populate: comments_to_populate, commit_category: commitCat, commit_message: commitMessage };
 }
 
 /**
@@ -862,12 +904,20 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
  */
 const getComments = async (term, count = 5) => {
 
-	let res = [];
-	await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
+	// let res = [];
+	// await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
+	// 	headers: {
+	// 		'Accept-Encoding': 'application/json'
+	// 	}
+	// }).then(results => res = results.data).catch(err => console.log(err));
+
+	// Do it with await syntax as well
+	const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
 		headers: {
 			'Accept-Encoding': 'application/json'
 		}
-	}).then(results => res = results.data).catch(err => console.log(err));
+	}
+	);
 
 	return res;
 	// return res.data;
@@ -885,7 +935,7 @@ const printComments = (comments) => {
 
 
 	for (const row in comments) {
-		const obj = res.data[row]
+		const obj = comments[row]
 		console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
 	}
 }
@@ -899,34 +949,38 @@ const printComments = (comments) => {
  * @param {bool} print_previous_commits ?= true : If to whether to print previous commits
  * @param {ECommitCategory[]} special_categories ?= [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code] : Special categories to log
  * @param {bool} debug ?= false : If to whether to debug api responses, etc.
- * @returns {void}
+ * @returns {List: [date: comment]}
  */
-const logCommitIfSpecialCategory = async (commitMessage, category, { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
-	if (debug) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
+const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_populate = [], { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
+	// if (true) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
 	if (special_categories.includes(category.code)) {
 		// Log the commit message in the comments database
-
-		await postCommentFromTerm(category.code, commitMessage);
+		postCommentFromTerm(category.code, commitMessage);
+		const res = await getComments(category?.code ?? "log");
+		comments_to_populate = res.data;
+		// console.log("comments_to_populate | special category", comments_to_populate)
 		if (print_previous_commits) {
+			// if (true) console.log("Printing previous commit")
 			// Print previous commits
-			const res = getComments(category?.code ?? "log");
-			// console.log("res received", res);
-			printComments(res);
+			// console.log("res received", res.data);
+			printComments(comments_to_populate);
 		}
 	}
+
+	return comments_to_populate;
 
 }
 
 
 
-const commitCategory = (commitMessage, strict = false) => {
+const commitCategory = (commitMessage, strict = false, { debug = false } = {}) => {
 	if (strict) {
 		// TODO Strictly runs with space in between?
 		;
 	}
 
 	for (category of Object.values(ECommitCategory)) {
-		console.log(commitMessage)
+		if (debug) console.log("commitMessage", commitMessage)
 		if (commitMessage.includes(category.code)) {
 			return category;
 		}
@@ -947,7 +1001,7 @@ const autorelease = () => {
 }
 
 module.exports = {
-	getTalk, commitpush, autorelease,
+	getTalk, commitpush, autorelease, printComments,
 	Maid, getToday, FlashQuizzer, increasePerformance,
 	commitCategory, logCommitIfSpecialCategory, postCommentFromTerm, getComments
 };

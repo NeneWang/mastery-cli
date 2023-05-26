@@ -1,6 +1,6 @@
 const { qmathformulas } = require('./data/math_formulas');
 const { termJson } = require('./data/terms');
-const {Term, Terminology, TermStorage} = require('./structures');
+const { Term, Terminology, TermStorage } = require('./structures');
 const { CURRENCY_SIMBOLS } = require('./data/currency.js');
 
 const path = require("path");
@@ -10,10 +10,28 @@ const url = require('url');
 /**
  * 
  * @param {List: any} list A lit of any object
- * @returns any # picks the object and returns it.
+ * @param {int: count} count The number of random objects to pick from the list. Default is 1.
+ * @returns any # picks the object and returns it. | If however the specified count of random objects is greater than the list, then it will return a list of random elements of that size.
  */
 function get_random(list) {
     return list[Math.floor((Math.random() * list.length))];
+}
+
+/**
+ * 
+ * @param {List: any} list A lit of any object
+ * @param {int} count The number of random objects to pick from the list. Default is 1.
+ * @returns {List: any} # picks the object and returns it. | If however the specified count of random objects is greater than the list, then it will return a list of random elements of that size.
+ */
+function get_random_of_size(list, { count = 1 } = {}) {
+
+    const listOfRandomProblems = [];
+    for (let i = 0; i < count; i++) {
+        listOfRandomProblems.push(list[Math.floor((Math.random() * list.length))]);
+    }
+
+    return listOfRandomProblems;
+
 }
 const MAID_NAME = "Maid";
 
@@ -29,13 +47,12 @@ let APIDICT = {
     // DEPLOYED_MAID: 'http://127.0.0.1:8000',
     DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
     CURRENCY_EXCHANGE: 'https://api.apilayer.com/exchangerates_data',
-    CURRENCY_EXCHANGE_KEY: '3zPc7CzmznmueYsu3SttUWIE2QZ3ODYd',
-
+    CURRENCY_EXCHANGE_KEY: '3zPc7CzmznmueYsu3SttUWIE2QZ3ODYd'
 }
 
 // APIDICT.DEPLOYED_MAID = 'https://jmmgskxdgn.us-east-1.awsapprunner.com'
 
-const CONSTANTS = {
+let CONSTANTS = {
     ACCOUNT_ID: 1,
     CUTEBLUE: '#9ccfe7', // Cornflower
     CUTEPINK: '#f5a9cb', // Lavander Pink
@@ -43,6 +60,8 @@ const CONSTANTS = {
     CUTEYELLOW: '#ffffc2', // Very Pale Yello
     CUTEPURPLE: '#977fd7', // Medium Purple
     online: true,
+    default_commit_message: "Commited by Maid",
+    algo_name: 'algo', // tag being used to identify if an algorithm had been solved that day.
 }
 
 
@@ -109,8 +128,6 @@ const getRandomBool = (chances = 0.5) => {
     return random_boolean = Math.random() < chances;
 }
 
-
-
 function populateTerms(termJson) {
     return termJson.map(obj => new Term(obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", obj?.references ?? "", obj?.category ?? "", obj?.attachment));
 }
@@ -144,7 +161,8 @@ const countDecimals = (value) => {
 module.exports = {
     MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
     appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures,
-    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool, getAbsoluteUri, getDirAbsoluteUri
+    qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool, getAbsoluteUri, getDirAbsoluteUri,
+    get_random_of_size
 };
 
 
