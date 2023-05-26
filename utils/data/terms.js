@@ -43,8 +43,8 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: study_legacy }));
     decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: study_cisc }));
     decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: study_cisc }));
-    decks.addDeck(new TermStorage(algebra, "algebra", { is_active: study_cisc }));
-    decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: study_cisc }));
+    decks.addDeck(new TermStorage(algebra, "algebra", { is_active: study_legacy }));
+    decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: study_legacy }));
     decks.addDeck(new TermStorage(network_final, "network final", { is_active: study_legacy }));
 
 
