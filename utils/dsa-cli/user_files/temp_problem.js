@@ -1,47 +1,84 @@
+class EvalRPN {
+
+    /**
+     * https://leetcode.com/problems/evaluate-reverse-polish-notation
+     * Time O(N^2) | Space(1)
+     * @param {string[]} tokens
+     * @return {number}
+     */
+    solve(tokens, index = 0) {
+
+        var OPERATORS = {
+            '+': (a, b) => a + b,
+            '-': (a, b) => a - b,
+            '*': (a, b) => a * b,
+            '/': (a, b) => Math.trunc(a / b),
+        };
 
 
-/** 
- * https://leetcode.com/problems/design-twitter/
- * Your Twitter object will be instantiated and called as such:
- * var obj = new Twitter()
- * obj.postTweet(userId,tweetId)
- * var param_2 = obj.getNewsFeed(userId)
- * obj.follow(followerId,followeeId)
- * obj.unfollow(followerId,followeeId)
- */
-class Twitter {
-    constructor() {
-        this.tweets = [];
-        this.following = new Map();
-    }
+        var performOperation = (tokens, index) => {
+            const [rightNum, leftNum] = [Number(tokens[index - 1]), Number(tokens[index - 2])]
+            const operation = OPERATORS[tokens[index]];
 
-    postTweet(userId, tweetId, { tweets } = this) {
-        tweets.push({ authorId: userId, id: tweetId });
-    }
-
-    getNewsFeed(userId, newsIDs = [], { tweets, following } = this) {
-        for (let i = (tweets.length - 1); ((0 <= i) && (newsIDs.length < 10)); i--) {
-            const tweet = tweets[i];
-
-            const isAuthor = tweet.authorId === userId
-            const isFollowing = following?.get(userId)?.has(tweet.authorId);
-            const canAddTweet = isAuthor || isFollowing
-            if (canAddTweet) newsIDs.push(tweet.id);
+            return operation(leftNum, rightNum);
         }
 
-        return newsIDs;
+        while (1 < tokens.length) {/* Time O(N) */
+            const isOperation = () => tokens[index] in OPERATORS;
+            while (!isOperation()) index++;/* Time O(N) */
+
+            const value = performOperation(tokens, index);
+
+            tokens[index] = value;
+            tokens.splice((index - 2), 2);/* Time O(N) */
+            index--;
+        }
+
+        return tokens[0];
     }
 
-    follow(followerId, followeeId, { following } = this) {
-        if (!following.has(followerId)) following.set(followerId, new Set());
 
-        following.get(followerId).add(followeeId);
-    }
+    /**
+     * https://leetcode.com/problems/evaluate-reverse-polish-notation
+     * Time O(N) | Space(N)
+     * @param {string[]} tokens
+     * @return {number}
+     */
+    solve2(tokens, stack = []) {
+        var OPERATORS = {
+            '+': (a, b) => a + b,
+            '-': (a, b) => a - b,
+            '*': (a, b) => a * b,
+            '/': (a, b) => Math.trunc(a / b),
+        };
 
-    unfollow(followerId, followeeId, { following } = this) {
-        if (following.has(followerId)) following.get(followerId).delete(followeeId);
+
+        var performOperation = (char, stack) => {
+            const [rightNum, leftNum] = [stack.pop(), stack.pop()];
+            const operation = OPERATORS[char];
+
+            return operation(leftNum, rightNum);
+        }
+
+        for (const char of tokens) {/* Time O(N) */
+            const isOperation = char in OPERATORS;
+            if (isOperation) {
+                const value = performOperation(char, stack);
+
+                stack.push(value);      /* Space O(N) */
+
+                continue;
+            }
+
+            stack.push(Number(char));   /* Space O(N) */
+        }
+
+        return stack.pop();
     }
 }
 
 
-module.exports = { Problem: Twitter };
+
+
+
+module.exports = { Problem: EvalRPN };

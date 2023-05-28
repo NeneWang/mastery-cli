@@ -5245,8 +5245,6 @@ class TopologicalSort extends ProblemTests {
         assert.deepStrictEqual(topologicalSort.solve([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [[1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [2, 3], [2, 4], [5, 4], [7, 6], [6, 2], [6, 3], [6, 5], [5, 9], [9, 8], [8, 0], [4, 0], [5, 0], [9, 0], [2, 0], [3, 9], [3, 10], [10, 11], [11, 12], [12, 2]]), []);
     }
 
-
-
 }
 
 class KruskalsAlgorithm extends ProblemTests {
@@ -6360,6 +6358,8 @@ class FindLoop extends ProblemTests {
         this.tests.push(() => this.test_6());
         this.tests.push(() => this.test_7());
         this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
     }
 
     test_1() {
@@ -6494,7 +6494,7 @@ class FindLoop extends ProblemTests {
         assert.equal(findLoop.solve(nodesRoot), nodesRoot);
     }
 
-    test_5(){
+    test_5() {
         /**
          * {
             "head": "3",
@@ -6524,7 +6524,7 @@ class FindLoop extends ProblemTests {
         assert.equal(findLoop.solve(nodesRoot), nodesRoot);
     }
 
-    test_6(){
+    test_6() {
         /**
          * {
             "head": "5",
@@ -6549,7 +6549,7 @@ class FindLoop extends ProblemTests {
 
     }
 
-    test_7(){
+    test_7() {
         /**
          * {
             "head": "6",
@@ -6572,11 +6572,11 @@ class FindLoop extends ProblemTests {
         nodesRoot.next.next.next.next = nodesRoot;
 
         assert.equal(findLoop.solve(nodesRoot), nodesRoot);
-        
+
 
     }
 
-    test_8(){
+    test_8() {
         /**
          * {
             "head": "7",
@@ -6599,7 +6599,389 @@ class FindLoop extends ProblemTests {
 
     }
 
+    test_9() {
+        /**
+         * {
+            "linkedList": {
+                "head": "0",
+                "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "6", "value": 5},
+                {"id": "6", "next": "7", "value": 6},
+                {"id": "7", "next": "8", "value": 7},
+                {"id": "8", "next": "9", "value": 8},
+                {"id": "9", "next": "9", "value": 9}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "({\"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": \"6\", \"value\": 5}, {\"id\": \"6\", \"next\": \"7\", \"value\": 6}, {\"id\": \"7\", \"next\": \"8\", \"value\": 7}, {\"id\": \"8\", \"next\": \"9\", \"value\": 8}, {\"id\": \"9\", \"next\": \"9\", \"value\": 9}]}}) => 9";
+        const findLoop = new this.Problem();
+        const nodesRoot = new LinkedList(0);
+        nodesRoot.next = new LinkedList(1);
+        nodesRoot.next.next = new LinkedList(2);
+        nodesRoot.next.next.next = new LinkedList(3);
+        nodesRoot.next.next.next.next = new LinkedList(4);
+        nodesRoot.next.next.next.next.next = new LinkedList(5);
+        nodesRoot.next.next.next.next.next.next = new LinkedList(6);
+        nodesRoot.next.next.next.next.next.next.next = new LinkedList(7);
+        nodesRoot.next.next.next.next.next.next.next.next = new LinkedList(8);
+        nodesRoot.next.next.next.next.next.next.next.next.next = new LinkedList(9);
+        nodesRoot.next.next.next.next.next.next.next.next.next.next = nodesRoot.next.next.next.next.next.next.next.next;
+
+        assert.equal(findLoop.solve(nodesRoot), nodesRoot.next.next.next.next.next.next.next.next);
+
+    }
+
+    test_10() {
+        /**
+         * {
+            "head": "9",
+            "nodes": [
+                {"id": "9", "next": "9", "value": 9}
+            ]
+            }
+         */
+
+        this.current_test_name = "({\"head\": \"9\", \"nodes\": [{\"id\": \"9\", \"next\": \"9\", \"value\": 9}]}) => 9";
+        const findLoop = new this.Problem();
+        const nodesRoot = new LinkedList(9);
+        nodesRoot.next = nodesRoot;
+
+        assert.equal(findLoop.solve(nodesRoot), nodesRoot);
+    }
+
 }
+
+class mergeLinkedLists extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+    }
+
+    test_1() {
+        /**
+         * 
+         * {
+            "head": "1",
+            "nodes": [
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "6", "value": 5},
+                {"id": "6", "next": "7", "value": 6},
+                {"id": "7", "next": "8", "value": 7},
+                {"id": "8", "next": "9", "value": 8},
+                {"id": "9", "next": "10", "value": 9},
+                {"id": "10", "next": null, "value": 10}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "linkedListOne": {
+                "head": "2",
+                "nodes": [
+                {"id": "2", "next": "6", "value": 2},
+                {"id": "6", "next": "7", "value": 6},
+                {"id": "7", "next": "8", "value": 7},
+                {"id": "8", "next": null, "value": 8}
+                ]
+            },
+            "linkedListTwo": {
+                "head": "1",
+                "nodes": [
+                {"id": "1", "next": "3", "value": 1},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "9", "value": 5},
+                {"id": "9", "next": "10", "value": 9},
+                {"id": "10", "next": null, "value": 10}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "({\"linkedListOne\": {\"head\": \"2\", \"nodes\": [{\"id\": \"2\", \"next\": \"6\", \"value\": 2}, {\"id\": \"6\", \"next\": \"7\", \"value\": 6}, {\"id\": \"7\", \"next\": \"8\", \"value\": 7}, {\"id\": \"8\", \"next\": null, \"value\": 8}]}, \"linkedListTwo\": {\"head\": \"1\", \"nodes\": [{\"id\": \"1\", \"next\": \"3\", \"value\": 1}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": \"9\", \"value\": 5}, {\"id\": \"9\", \"next\": \"10\", \"value\": 9}, {\"id\": \"10\", \"next\": null, \"value\": 10}]}}) => 1,2,3,4,5,6,7,8,9,10";
+        const mergeLinkedLists = new this.Problem();
+        const linkedListOne = new LinkedList(2);
+        linkedListOne.next = new LinkedList(6);
+        linkedListOne.next.next = new LinkedList(7);
+        linkedListOne.next.next.next = new LinkedList(8);
+        const linkedListTwo = new LinkedList(1);
+        linkedListTwo.next = new LinkedList(3);
+        linkedListTwo.next.next = new LinkedList(4);
+        linkedListTwo.next.next.next = new LinkedList(5);
+        linkedListTwo.next.next.next.next = new LinkedList(9);
+
+        linkedListTwo.next.next.next.next.next = new LinkedList(10);
+        assert.equal(mergeLinkedLists.solve(linkedListOne, linkedListTwo), linkedListTwo);
+
+
+
+    }
+
+    test_2() {
+        /**
+         * {
+            "head": "1",
+            "nodes": [
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "6", "value": 5},
+                {"id": "6", "next": "7", "value": 6},
+                {"id": "7", "next": "8", "value": 7},
+                {"id": "8", "next": "9", "value": 8},
+                {"id": "9", "next": "10", "value": 9},
+                {"id": "10", "next": null, "value": 10}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "linkedListOne": {
+                "head": "1",
+                "nodes": [
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+                ]
+            },
+            "linkedListTwo": {
+                "head": "6",
+                "nodes": [
+                {"id": "6", "next": "7", "value": 6},
+                {"id": "7", "next": "8", "value": 7},
+                {"id": "8", "next": "9", "value": 8},
+                {"id": "9", "next": "10", "value": 9},
+                {"id": "10", "next": null, "value": 10}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "test 2 | ({\"linkedListOne\": {\"head\": \"1\", \"nodes\": [{\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}, \"linkedListTwo\": {\"head\": \"6\", \"nodes\": [{\"id\": \"6\", \"next\": \"7\", \"value\": 6}, {\"id\": \"7\", \"next\": \"8\", \"value\": 7}, {\"id\": \"8\", \"next\": \"9\", \"value\": 8}, {\"id\": \"9\", \"next\": \"10\", \"value\": 9}, {\"id\": \"10\", \"next\": null, \"value\": 10}]}}) => 1,2,3,4,5,6,7,8,9,10";
+        const mergeLinkedLists = new this.Problem();
+        const linkedListOne = new LinkedList(1);
+        linkedListOne.next = new LinkedList(2);
+        linkedListOne.next.next = new LinkedList(3);
+        linkedListOne.next.next.next = new LinkedList(4);
+        linkedListOne.next.next.next.next = new LinkedList(5);
+        
+        const linkedListTwo = new LinkedList(6);
+        linkedListTwo.next = new LinkedList(7);
+        linkedListTwo.next.next = new LinkedList(8);
+        linkedListTwo.next.next.next = new LinkedList(9);
+        linkedListTwo.next.next.next.next = new LinkedList(10);
+
+        assert.equal(mergeLinkedLists.solve(linkedListOne, linkedListTwo), linkedListOne);
+    }
+
+    test_3(){
+        /**
+         * {
+            "head": "1",
+            "nodes": [
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "6", "value": 5},
+                {"id": "6", "next": "7", "value": 6},
+                {"id": "7", "next": "8", "value": 7},
+                {"id": "8", "next": "9", "value": 8},
+                {"id": "9", "next": "10", "value": 9},
+                {"id": "10", "next": null, "value": 10}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "linkedListOne": {
+                "head": "6",
+                "nodes": [
+                {"id": "6", "next": "7", "value": 6},
+                {"id": "7", "next": "8", "value": 7},
+                {"id": "8", "next": "9", "value": 8},
+                {"id": "9", "next": "10", "value": 9},
+                {"id": "10", "next": null, "value": 10}
+                ]
+            },
+            "linkedListTwo": {
+                "head": "1",
+                "nodes": [
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "test 3 | ({\"linkedListOne\": {\"head\": \"6\", \"nodes\": [{\"id\": \"6\", \"next\": \"7\", \"value\": 6}, {\"id\": \"7\", \"next\": \"8\", \"value\": 7}, {\"id\": \"8\", \"next\": \"9\", \"value\": 8}, {\"id\": \"9\", \"next\": \"10\", \"value\": 9}, {\"id\": \"10\", \"next\": null, \"value\": 10}]}, \"linkedListTwo\": {\"head\": \"1\", \"nodes\": [{\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 1,2,3,4,5,6,7,8,9,10";
+        const mergeLinkedLists = new this.Problem();
+        const linkedListOne = new LinkedList(6);
+        linkedListOne.next = new LinkedList(7);
+        linkedListOne.next.next = new LinkedList(8);
+        linkedListOne.next.next.next = new LinkedList(9);
+        linkedListOne.next.next.next.next = new LinkedList(10);
+
+        const linkedListTwo = new LinkedList(1);
+        linkedListTwo.next = new LinkedList(2);
+        linkedListTwo.next.next = new LinkedList(3);
+        linkedListTwo.next.next.next = new LinkedList(4);
+        linkedListTwo.next.next.next.next = new LinkedList(5);
+
+        assert.equal(mergeLinkedLists.solve(linkedListOne, linkedListTwo), linkedListTwo);
+
+    }
+
+    test_4(){
+        /**
+         * {
+        "head": "1",
+        "nodes": [
+            {"id": "1", "next": "2", "value": 1},
+            {"id": "2", "next": "3", "value": 2},
+            {"id": "3", "next": "4", "value": 3},
+            {"id": "4", "next": "5", "value": 4},
+            {"id": "5", "next": "6", "value": 5},
+            {"id": "6", "next": "7", "value": 6},
+            {"id": "7", "next": "8", "value": 7},
+            {"id": "8", "next": "9", "value": 8},
+            {"id": "9", "next": "10", "value": 9},
+            {"id": "10", "next": null, "value": 10}
+        ]
+        }
+        View Outputs Side By Side
+        Input(s)
+        {
+        "linkedListOne": {
+            "head": "1",
+            "nodes": [
+            {"id": "1", "next": "3", "value": 1},
+            {"id": "3", "next": "5", "value": 3},
+            {"id": "5", "next": "7", "value": 5},
+            {"id": "7", "next": "9", "value": 7},
+            {"id": "9", "next": null, "value": 9}
+            ]
+        },
+        "linkedListTwo": {
+            "head": "2",
+            "nodes": [
+            {"id": "2", "next": "4", "value": 2},
+            {"id": "4", "next": "6", "value": 4},
+            {"id": "6", "next": "8", "value": 6},
+            {"id": "8", "next": "10", "value": 8},
+            {"id": "10", "next": null, "value": 10}
+            ]
+        }
+        }
+         */
+
+        this.current_test_name = "";
+        const mergeLinkedLists = new this.Problem();
+        const linkedListOne = new LinkedList(1);
+        linkedListOne.next = new LinkedList(3);
+        linkedListOne.next.next = new LinkedList(5);
+        linkedListOne.next.next.next = new LinkedList(7);
+        linkedListOne.next.next.next.next = new LinkedList(9);
+
+        const linkedListTwo = new LinkedList(2);
+        linkedListTwo.next = new LinkedList(4);
+        linkedListTwo.next.next = new LinkedList(6);
+        linkedListTwo.next.next.next = new LinkedList(8);
+        linkedListTwo.next.next.next.next = new LinkedList(10);
+
+        assert.equal(mergeLinkedLists.solve(linkedListOne, linkedListTwo), linkedListOne);
+
+    }
+
+    test_5(){
+        /**
+         * {
+        "head": "0",
+        "nodes": [
+            {"id": "0", "next": "1", "value": 0},
+            {"id": "1", "next": "2", "value": 1},
+            {"id": "2", "next": "3", "value": 2},
+            {"id": "3", "next": "4", "value": 3},
+            {"id": "4", "next": "5", "value": 4},
+            {"id": "5", "next": "6", "value": 5},
+            {"id": "6", "next": "7", "value": 6},
+            {"id": "7", "next": "8", "value": 7},
+            {"id": "8", "next": "9", "value": 8},
+            {"id": "9", "next": "10", "value": 9},
+            {"id": "10", "next": null, "value": 10}
+        ]
+        }
+        View Outputs Side By Side
+        Input(s)
+        {
+        "linkedListOne": {
+            "head": "0",
+            "nodes": [
+            {"id": "0", "next": "1", "value": 0},
+            {"id": "1", "next": "2", "value": 1},
+            {"id": "2", "next": "3", "value": 2},
+            {"id": "3", "next": "4", "value": 3},
+            {"id": "4", "next": "5", "value": 4},
+            {"id": "5", "next": "7", "value": 5},
+            {"id": "7", "next": "8", "value": 7},
+            {"id": "8", "next": "9", "value": 8},
+            {"id": "9", "next": "10", "value": 9},
+            {"id": "10", "next": null, "value": 10}
+            ]
+        },
+        "linkedListTwo": {
+            "head": "6",
+            "nodes": [
+            {"id": "6", "next": null, "value": 6}
+            ]
+        }
+        }
+         */
+        
+        this.current_test_name = "test 5 | ({\"linkedListOne\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": \"7\", \"value\": 5}, {\"id\": \"7\", \"next\": \"8\", \"value\": 7}, {\"id\": \"8\", \"next\": \"9\", \"value\": 8}, {\"id\": \"9\", \"next\": \"10\", \"value\": 9}, {\"id\": \"10\", \"next\": null, \"value\": 10}]}, \"linkedListTwo\": {\"head\": \"6\", \"nodes\": [{\"id\": \"6\", \"next\": null, \"value\": 6}]}}) => 0,1,2,3,4,5,6,7,8,9,10";
+
+        const mergeLinkedLists = new this.Problem();
+        const linkedListOne = new LinkedList(0);
+        linkedListOne.next = new LinkedList(1);
+        linkedListOne.next.next = new LinkedList(2);
+        linkedListOne.next.next.next = new LinkedList(3);
+        linkedListOne.next.next.next.next = new LinkedList(4);
+        linkedListOne.next.next.next.next.next = new LinkedList(5);
+        linkedListOne.next.next.next.next.next.next = new LinkedList(7);
+        linkedListOne.next.next.next.next.next.next.next = new LinkedList(8);
+        linkedListOne.next.next.next.next.next.next.next.next = new LinkedList(9);
+        linkedListOne.next.next.next.next.next.next.next.next.next = new LinkedList(10);
+
+        const linkedListTwo = new LinkedList(6);
+        
+        assert.equal(mergeLinkedLists.solve(linkedListOne, linkedListTwo), linkedListOne);
+    }
+
+
+}
+
+
+
 
 
 
@@ -6626,7 +7008,8 @@ const TEST_DICTIONARY = {
     'kruskals-algorithm': KruskalsAlgorithm,
     'boggle-board': BoggleBoard,
     'laptop-rentals': LaptopRentals,
-    'find-loop': FindLoop
+    'find-loop': FindLoop,
+    'merge-linked-lists': mergeLinkedLists,
 
 }
 
