@@ -6110,6 +6110,233 @@ class BoggleBoard extends ProblemTests {
 
 }
 
+class LaptopRentals extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+
+    }
+
+    test_1() {
+        /**
+         * 3
+            View Outputs Side By Side
+            Input(s)
+            {
+            "times": [
+                [0, 2],
+                [1, 4],
+                [4, 6],
+                [0, 4],
+                [7, 8],
+                [9, 11],
+                [3, 10]
+            ]
+            }
+         */
+
+        this.current_test_name = "([[0, 2], [1, 4], [4, 6], [0, 4], [7, 8], [9, 11], [3, 10]]) => 3";
+        const laptopRentals = new this.Problem();
+
+        assert.equal(laptopRentals.solve([[0, 2], [1, 4], [4, 6], [0, 4], [7, 8], [9, 11], [3, 10]]), 3);
+    }
+
+    test_2() {
+        /**
+         * 4
+            View Outputs Side By Side
+            Input(s)
+            {
+            "times": [
+                [0, 4],
+                [2, 3],
+                [2, 3],
+                [2, 3]
+            ]
+            }
+         */
+
+        this.current_test_name = "([[0, 4], [2, 3], [2, 3], [2, 3]]) => 4";
+        const laptopRentals = new this.Problem();
+
+        assert.equal(laptopRentals.solve([[0, 4], [2, 3], [2, 3], [2, 3]]), 4);
+    }
+
+    test_3() {
+        /**
+         * 1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "times": [
+                [1, 5],
+                [5, 6],
+                [6, 7],
+                [7, 9]
+            ]
+            }
+         */
+
+        this.current_test_name = "([[1, 5], [5, 6], [6, 7], [7, 9]]) => 1";
+        const laptopRentals = new this.Problem();
+
+        assert.equal(laptopRentals.solve([[1, 5], [5, 6], [6, 7], [7, 9]]), 1);
+    }
+
+
+    test_4() {
+        /**
+         * 1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "times": [
+                [0, 4]
+            ]
+            }
+         */
+
+
+        this.current_test_name = "([[0, 4]]) => 1";
+        const laptopRentals = new this.Problem();
+
+        assert.equal(laptopRentals.solve([[0, 4]]), 1);
+
+    }
+
+    test_5() {
+        /**
+         * 0
+            View Outputs Side By Side
+            Input(s)
+            {
+            "times": []
+            }
+         */
+
+        this.current_test_name = "([]) => 0";
+        const laptopRentals = new this.Problem();
+
+        assert.equal(laptopRentals.solve([]), 0);
+    }
+
+    test_6() {
+        /**
+         * 4
+        View Outputs Side By Side
+        Input(s)
+        {
+        "times": [
+            [0, 5],
+            [2, 4],
+            [4, 7],
+            [5, 7],
+            [9, 20],
+            [3, 15],
+            [6, 10]
+        ]
+        }
+         */
+
+        this.current_test_name = "([[0, 5], [2, 4], [4, 7], [5, 7], [9, 20], [3, 15], [6, 10]]) => 4";
+        const laptopRentals = new this.Problem();
+
+    }
+
+    test_7() {
+        /**
+         * 2
+            View Outputs Side By Side
+            Input(s)
+            {
+            "times": [
+                [10, 20],
+                [0, 5],
+                [5, 10],
+                [10, 15]
+            ]
+            }
+         */
+
+        this.current_test_name = "([[10, 20], [0, 5], [5, 10], [10, 15]]) => 2";
+        const laptopRentals = new this.Problem();
+
+        assert.equal(laptopRentals.solve([[10, 20], [0, 5], [5, 10], [10, 15]]), 2);
+    }
+
+    test_8() {
+        /**
+         * 4
+        View Outputs Side By Side
+        Input(s)
+        {
+        "times": [
+            [0, 5],
+            [3, 8],
+            [4, 10],
+            [7, 11],
+            [6, 10]
+        ]
+        }
+         */
+
+        this.current_test_name = "([[0, 5], [3, 8], [4, 10], [7, 11], [6, 10]]) => 4";
+        const laptopRentals = new this.Problem();
+
+        assert.equal(laptopRentals.solve([[0, 5], [3, 8], [4, 10], [7, 11], [6, 10]]), 4);
+    }
+
+    test_9() {
+        /**
+         * 4
+        View Outputs Side By Side
+        Input(s)
+        {
+        "times": [
+            [1, 5],
+            [2, 6],
+            [3, 7],
+            [4, 8],
+            [5, 9]
+        ]
+        }
+         */
+
+        this.current_test_name = "([[1, 5], [2, 6], [3, 7], [4, 8], [5, 9]]) => 4";
+        const laptopRentals = new this.Problem();
+
+        assert.equal(laptopRentals.solve([[1, 5], [2, 6], [3, 7], [4, 8], [5, 9]]), 4);
+    }
+    
+
+    test_10(){
+        /**
+         * [false, false, false, false, false, false]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "bigString": "Everything in this test should fail.",
+            "smallStrings": ["everything", "inn", "that", "testers", "shall", "failure"]
+            }
+         */
+
+        this.current_test_name = "(['Everything in this test should fail.', ['everything', 'inn', 'that', 'testers', 'shall', 'failure']]) => [false, false, false, false, false, false]";
+        const multiStringSearch = new this.Problem();
+
+        assert.deepEqual(multiStringSearch.solve("Everything in this test should fail.", ["everything", "inn", "that", "testers", "shall", "failure"]), [false, false, false, false, false, false]);
+    }   
+
+}
 
 
 
@@ -6135,6 +6362,8 @@ const TEST_DICTIONARY = {
     'topological-sort': TopologicalSort,
     'kruskals-algorithm': KruskalsAlgorithm,
     'boggle-board': BoggleBoard,
+    'laptop-rentals': LaptopRentals,
+
 }
 
 module.exports = TEST_DICTIONARY;
