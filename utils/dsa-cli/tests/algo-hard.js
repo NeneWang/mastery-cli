@@ -3,6 +3,7 @@ const assert = require('assert');
 const ProblemTests = require('./problem-test');
 const maximizeExpression = require('../solutions/maximize-expression');
 const { looselyDeepEqual } = require('../functions');
+const { link } = require('fs');
 
 function compareNestedLists(a, b) {
     if (typeof a !== typeof b) {
@@ -6667,7 +6668,10 @@ class mergeLinkedLists extends ProblemTests {
         this.tests.push(() => this.test_3());
         this.tests.push(() => this.test_4());
         this.tests.push(() => this.test_5());
-        
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+
+
     }
 
     test_1() {
@@ -6783,7 +6787,7 @@ class mergeLinkedLists extends ProblemTests {
         linkedListOne.next.next = new LinkedList(3);
         linkedListOne.next.next.next = new LinkedList(4);
         linkedListOne.next.next.next.next = new LinkedList(5);
-        
+
         const linkedListTwo = new LinkedList(6);
         linkedListTwo.next = new LinkedList(7);
         linkedListTwo.next.next = new LinkedList(8);
@@ -6793,7 +6797,7 @@ class mergeLinkedLists extends ProblemTests {
         assert.equal(mergeLinkedLists.solve(linkedListOne, linkedListTwo), linkedListOne);
     }
 
-    test_3(){
+    test_3() {
         /**
          * {
             "head": "1",
@@ -6854,7 +6858,7 @@ class mergeLinkedLists extends ProblemTests {
 
     }
 
-    test_4(){
+    test_4() {
         /**
          * {
         "head": "1",
@@ -6915,7 +6919,7 @@ class mergeLinkedLists extends ProblemTests {
 
     }
 
-    test_5(){
+    test_5() {
         /**
          * {
         "head": "0",
@@ -6959,7 +6963,7 @@ class mergeLinkedLists extends ProblemTests {
         }
         }
          */
-        
+
         this.current_test_name = "test 5 | ({\"linkedListOne\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": \"7\", \"value\": 5}, {\"id\": \"7\", \"next\": \"8\", \"value\": 7}, {\"id\": \"8\", \"next\": \"9\", \"value\": 8}, {\"id\": \"9\", \"next\": \"10\", \"value\": 9}, {\"id\": \"10\", \"next\": null, \"value\": 10}]}, \"linkedListTwo\": {\"head\": \"6\", \"nodes\": [{\"id\": \"6\", \"next\": null, \"value\": 6}]}}) => 0,1,2,3,4,5,6,7,8,9,10";
 
         const mergeLinkedLists = new this.Problem();
@@ -6975,15 +6979,638 @@ class mergeLinkedLists extends ProblemTests {
         linkedListOne.next.next.next.next.next.next.next.next.next = new LinkedList(10);
 
         const linkedListTwo = new LinkedList(6);
-        
+
         assert.equal(mergeLinkedLists.solve(linkedListOne, linkedListTwo), linkedListOne);
+    }
+
+
+    test_6() {
+        /**
+         * {
+            "head": "0",
+            "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "6", "value": 5},
+                {"id": "6", "next": "7", "value": 6},
+                {"id": "7", "next": "8", "value": 7},
+                {"id": "8", "next": "9", "value": 8},
+                {"id": "9", "next": "10", "value": 9},
+                {"id": "10", "next": null, "value": 10}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "linkedListOne": {
+                "head": "6",
+                "nodes": [
+                {"id": "6", "next": null, "value": 6}
+                ]
+            },
+            "linkedListTwo": {
+                "head": "0",
+                "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "7", "value": 5},
+                {"id": "7", "next": "8", "value": 7},
+                {"id": "8", "next": "9", "value": 8},
+                {"id": "9", "next": "10", "value": 9},
+                {"id": "10", "next": null, "value": 10}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "Test 6 | ({\"linkedListOne\": {\"head\": \"6\", \"nodes\": [{\"id\": \"6\", \"next\": null, \"value\": 6}]}, \"linkedListTwo\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": \"7\", \"value\": 5}, {\"id\": \"7\", \"next\": \"8\", \"value\": 7}, {\"id\": \"8\", \"next\": \"9\", \"value\": 8}, {\"id\": \"9\", \"next\": \"10\", \"value\": 9}, {\"id\": \"10\", \"next\": null, \"value\": 10}]}}) => 0,1,2,3,4,5,6,7,8,9,10";
+        const mergeLinkedLists = new this.Problem();
+        const linkedListOne = new LinkedList(6);
+
+        const linkedListTwo = new LinkedList(0);
+        linkedListTwo.next = new LinkedList(1);
+        linkedListTwo.next.next = new LinkedList(2);
+        linkedListTwo.next.next.next = new LinkedList(3);
+        linkedListTwo.next.next.next.next = new LinkedList(4);
+        linkedListTwo.next.next.next.next.next = new LinkedList(5);
+        linkedListTwo.next.next.next.next.next.next = new LinkedList(7);
+        linkedListTwo.next.next.next.next.next.next.next = new LinkedList(8);
+        linkedListTwo.next.next.next.next.next.next.next.next = new LinkedList(9);
+        linkedListTwo.next.next.next.next.next.next.next.next.next = new LinkedList(10);
+
+        assert.equal(mergeLinkedLists.solve(linkedListOne, linkedListTwo), linkedListTwo);
+
+    }
+
+    test_7() {
+        /**
+         * {
+            "head": "1",
+            "nodes": [
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": null, "value": 2}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "linkedListOne": {
+                "head": "1",
+                "nodes": [
+                {"id": "1", "next": null, "value": 1}
+                ]
+            },
+            "linkedListTwo": {
+                "head": "2",
+                "nodes": [
+                {"id": "2", "next": null, "value": 2}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "Test 7 | ({\"linkedListOne\": {\"head\": \"1\", \"nodes\": [{\"id\": \"1\", \"next\": null, \"value\": 1}]}, \"linkedListTwo\": {\"head\": \"2\", \"nodes\": [{\"id\": \"2\", \"next\": null, \"value\": 2}]}}) => 1,2";
+        const mergeLinkedLists = new this.Problem();
+        const linkedListOne = new LinkedList(1);
+
+        const linkedListTwo = new LinkedList(2);
+
+        assert.equal(mergeLinkedLists.solve(linkedListOne, linkedListTwo), linkedListOne)
     }
 
 
 }
 
+class ShiftLinkedList extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+    }
 
 
+    test_1() {
+        /**
+         * 
+        "head": "4",
+        "nodes": [
+            {"id": "4", "next": "5", "value": 4},
+            {"id": "5", "next": "0", "value": 5},
+            {"id": "0", "next": "1", "value": 0},
+            {"id": "1", "next": "2", "value": 1},
+            {"id": "2", "next": "3", "value": 2},
+            {"id": "3", "next": null, "value": 3}
+        ]
+        }
+        View Outputs Side By Side
+        Input(s)
+        {
+        "k": 2,
+        "linkedList": {
+            "head": "0",
+            "nodes": [
+            {"id": "0", "next": "1", "value": 0},
+            {"id": "1", "next": "2", "value": 1},
+            {"id": "2", "next": "3", "value": 2},
+            {"id": "3", "next": "4", "value": 3},
+            {"id": "4", "next": "5", "value": 4},
+            {"id": "5", "next": null, "value": 5}
+            ]
+        }
+        }
+         */
+
+        this.current_test_name = "({\"k\": 2, \"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 4";
+        const linkedList = new this.Problem();
+        const head = new LinkedList(0);
+        head.next = new LinkedList(1);
+        head.next.next = new LinkedList(2);
+        head.next.next.next = new LinkedList(3);
+        head.next.next.next.next = new LinkedList(4);
+        head.next.next.next.next.next = new LinkedList(5);
+
+        const solutionLink = linkedList.solve(head, 2);
+        assert.equal(solutionLink.value, 4);
+        assert.equal(solutionLink.next.value, 5);
+        assert.equal(solutionLink.next.next.value, 0);
+        assert.equal(solutionLink.next.next.next.value, 1);
+        assert.equal(solutionLink.next.next.next.next.value, 2);
+        assert.equal(solutionLink.next.next.next.next.next.value, 3);
+
+
+    }
+
+    test_2() {
+        /**
+         * {
+        "head": "0",
+        "nodes": [
+            {"id": "0", "next": "1", "value": 0},
+            {"id": "1", "next": "2", "value": 1},
+            {"id": "2", "next": "3", "value": 2},
+            {"id": "3", "next": "4", "value": 3},
+            {"id": "4", "next": "5", "value": 4},
+            {"id": "5", "next": null, "value": 5}
+        ]
+        }
+        View Outputs Side By Side
+        Input(s)
+        {
+        "k": 0,
+        "linkedList": {
+            "head": "0",
+            "nodes": [
+            {"id": "0", "next": "1", "value": 0},
+            {"id": "1", "next": "2", "value": 1},
+            {"id": "2", "next": "3", "value": 2},
+            {"id": "3", "next": "4", "value": 3},
+            {"id": "4", "next": "5", "value": 4},
+            {"id": "5", "next": null, "value": 5}
+            ]
+        }
+        }
+         */
+
+        this.current_test_name = "({\"k\": 0, \"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 0";;
+        const linkedList = new this.Problem();
+        const head = new LinkedList(0);
+        head.next = new LinkedList(1);
+        head.next.next = new LinkedList(2);
+        head.next.next.next = new LinkedList(3);
+        head.next.next.next.next = new LinkedList(4);
+        head.next.next.next.next.next = new LinkedList(5);
+
+        const solutionLink = linkedList.solve(head, 0);
+        assert.equal(solutionLink.value, 0);
+        assert.equal(solutionLink.next.value, 1);
+        assert.equal(solutionLink.next.next.value, 2);
+        assert.equal(solutionLink.next.next.next.value, 3);
+        assert.equal(solutionLink.next.next.next.next.value, 4);
+        assert.equal(solutionLink.next.next.next.next.next.value, 5);
+
+
+    }
+
+    test_3() {
+        /**
+         * {
+            "head": "5",
+            "nodes": [
+                {"id": "5", "next": "0", "value": 5},
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": null, "value": 4}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 1,
+            "linkedList": {
+                "head": "0",
+                "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "({\"k\": 1, \"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 5";
+        const linkedList = new this.Problem();
+
+        const head = new LinkedList(0);
+        head.next = new LinkedList(1);
+        head.next.next = new LinkedList(2);
+        head.next.next.next = new LinkedList(3);
+        head.next.next.next.next = new LinkedList(4);
+        head.next.next.next.next.next = new LinkedList(5);
+
+        const solutionLink = linkedList.solve(head, 1);
+        assert.equal(solutionLink.value, 5);
+        assert.equal(solutionLink.next.value, 0);
+        assert.equal(solutionLink.next.next.value, 1);
+        assert.equal(solutionLink.next.next.next.value, 2);
+        assert.equal(solutionLink.next.next.next.next.value, 3);
+        assert.equal(solutionLink.next.next.next.next.next.value, 4);
+
+
+
+    }
+
+    test_4() {
+        /** 
+         * {
+            "head": "3",
+            "nodes": [
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "0", "value": 5},
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": null, "value": 2}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 3,
+            "linkedList": {
+                "head": "0",
+                "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+                ]
+            }
+            }
+        */
+
+        this.current_test_name = "({\"k\": 3, \"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 3";
+        const linkedList = new this.Problem();
+
+        const head = new LinkedList(0);
+        head.next = new LinkedList(1);
+        head.next.next = new LinkedList(2);
+        head.next.next.next = new LinkedList(3);
+        head.next.next.next.next = new LinkedList(4);
+        head.next.next.next.next.next = new LinkedList(5);
+
+        const solutionLink = linkedList.solve(head, 3);
+        assert.equal(solutionLink.value, 3);
+        assert.equal(solutionLink.next.value, 4);
+        assert.equal(solutionLink.next.next.value, 5);
+        assert.equal(solutionLink.next.next.next.value, 0);
+        assert.equal(solutionLink.next.next.next.next.value, 1);
+        assert.equal(solutionLink.next.next.next.next.next.value, 2);
+    }
+
+    test_5() {
+        /**
+         * {
+            "head": "2",
+            "nodes": [
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "0", "value": 5},
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": null, "value": 1}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 4,
+            "linkedList": {
+                "head": "0",
+                "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+                ]
+            }
+            }
+         * 
+         */
+
+        this.current_test_name = "({\"k\": 4, \"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 2";
+        const linkedList = new this.Problem();
+        const head = new LinkedList(0);
+        head.next = new LinkedList(1);
+        head.next.next = new LinkedList(2);
+        head.next.next.next = new LinkedList(3);
+        head.next.next.next.next = new LinkedList(4);
+        head.next.next.next.next.next = new LinkedList(5);
+
+        const solutionLink = linkedList.solve(head, 4);
+        assert.equal(solutionLink.value, 2);
+        assert.equal(solutionLink.next.value, 3);
+        assert.equal(solutionLink.next.next.value, 4);
+        assert.equal(solutionLink.next.next.next.value, 5);
+        assert.equal(solutionLink.next.next.next.next.value, 0);
+        assert.equal(solutionLink.next.next.next.next.next.value, 1);
+    }
+
+    test_6() {
+        /**
+         * {
+            "head": "1",
+            "nodes": [
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "0", "value": 5},
+                {"id": "0", "next": null, "value": 0}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 5,
+            "linkedList": {
+                "head": "0",
+                "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "({\"k\": 5, \"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 1";
+        const linkedList = new this.Problem();
+        const head = new LinkedList(0);
+        head.next = new LinkedList(1);
+        head.next.next = new LinkedList(2);
+        head.next.next.next = new LinkedList(3);
+        head.next.next.next.next = new LinkedList(4);
+        head.next.next.next.next.next = new LinkedList(5);
+
+        const solutionLink = linkedList.solve(head, 5);
+        assert.equal(solutionLink.value, 1);
+        assert.equal(solutionLink.next.value, 2);
+        assert.equal(solutionLink.next.next.value, 3);
+        assert.equal(solutionLink.next.next.next.value, 4);
+        assert.equal(solutionLink.next.next.next.next.value, 5);
+        assert.equal(solutionLink.next.next.next.next.next.value, 0);
+
+
+
+    }
+
+    test_7() {
+
+        /**
+         * {
+            "head": "0",
+            "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 6,
+            "linkedList": {
+                "head": "0",
+                "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "({\"k\": 6, \"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 0";
+        const linkedList = new this.Problem();
+        const head = new LinkedList(0);
+        head.next = new LinkedList(1);
+        head.next.next = new LinkedList(2);
+        head.next.next.next = new LinkedList(3);
+        head.next.next.next.next = new LinkedList(4);
+        head.next.next.next.next.next = new LinkedList(5);
+
+        const solutionLink = linkedList.solve(head, 6);
+        assert.equal(solutionLink.value, 0);
+        assert.equal(solutionLink.next.value, 1);
+        assert.equal(solutionLink.next.next.value, 2);
+        assert.equal(solutionLink.next.next.next.value, 3);
+        assert.equal(solutionLink.next.next.next.next.value, 4);
+        assert.equal(solutionLink.next.next.next.next.next.value, 5);
+
+    }
+
+    test_8() {
+        /**
+         * {
+            "head": "4",
+            "nodes": [
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "0", "value": 5},
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": null, "value": 3}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 8,
+            "linkedList": {
+                "head": "0",
+                "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "test 8 | ({\"k\": 8, \"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 4";
+        const linkedList = new this.Problem();
+        const head = new LinkedList(0);
+        head.next = new LinkedList(1);
+        head.next.next = new LinkedList(2);
+        head.next.next.next = new LinkedList(3);
+        head.next.next.next.next = new LinkedList(4);
+        head.next.next.next.next.next = new LinkedList(5);
+
+        const solutionLink = linkedList.solve(head, 8);
+        assert.equal(solutionLink.value, 4);
+        assert.equal(solutionLink.next.value, 5);
+        assert.equal(solutionLink.next.next.value, 0);
+        assert.equal(solutionLink.next.next.next.value, 1);
+        assert.equal(solutionLink.next.next.next.next.value, 2);
+        assert.equal(solutionLink.next.next.next.next.next.value, 3);
+
+    }
+
+    test_9(){
+        /**
+         * {
+            "head": "4",
+            "nodes": [
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": "0", "value": 5},
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": null, "value": 3}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 14,
+            "linkedList": {
+                "head": "0",
+                "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+                ]
+            }
+            }
+         */
+
+        this.current_test_name = "test 9 | ({\"k\": 14, \"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 4";
+        const linkedList = new this.Problem();
+        const head = new LinkedList(0);
+        head.next = new LinkedList(1);
+        head.next.next = new LinkedList(2);
+        head.next.next.next = new LinkedList(3);    
+        head.next.next.next.next = new LinkedList(4);
+        head.next.next.next.next.next = new LinkedList(5);
+
+        const solutionLink = linkedList.solve(head, 14);
+        assert.equal(solutionLink.value, 4);
+        assert.equal(solutionLink.next.value, 5);
+        assert.equal(solutionLink.next.next.value, 0);
+        assert.equal(solutionLink.next.next.next.value, 1);
+        assert.equal(solutionLink.next.next.next.next.value, 2);
+        assert.equal(solutionLink.next.next.next.next.next.value, 3);
+    }
+
+    test_10(){
+        /**
+         * {
+            "head": "0",
+            "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+            ]
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "k": 18,
+            "linkedList": {
+                "head": "0",
+                "nodes": [
+                {"id": "0", "next": "1", "value": 0},
+                {"id": "1", "next": "2", "value": 1},
+                {"id": "2", "next": "3", "value": 2},
+                {"id": "3", "next": "4", "value": 3},
+                {"id": "4", "next": "5", "value": 4},
+                {"id": "5", "next": null, "value": 5}
+                ]
+            }
+            }
+         */
+
+
+        this.current_test_name = "test 10 | ({\"k\": 18, \"linkedList\": {\"head\": \"0\", \"nodes\": [{\"id\": \"0\", \"next\": \"1\", \"value\": 0}, {\"id\": \"1\", \"next\": \"2\", \"value\": 1}, {\"id\": \"2\", \"next\": \"3\", \"value\": 2}, {\"id\": \"3\", \"next\": \"4\", \"value\": 3}, {\"id\": \"4\", \"next\": \"5\", \"value\": 4}, {\"id\": \"5\", \"next\": null, \"value\": 5}]}}) => 0";
+        const linkedList = new this.Problem();
+        const head = new LinkedList(0);
+        head.next = new LinkedList(1);
+        head.next.next = new LinkedList(2);
+        head.next.next.next = new LinkedList(3);
+        head.next.next.next.next = new LinkedList(4);
+        head.next.next.next.next.next = new LinkedList(5);
+
+        const solutionLink = linkedList.solve(head, 18);
+        assert.equal(solutionLink.value, 0);
+        assert.equal(solutionLink.next.value, 1);
+        assert.equal(solutionLink.next.next.value, 2);
+        assert.equal(solutionLink.next.next.next.value, 3);
+        assert.equal(solutionLink.next.next.next.next.value, 4);
+        assert.equal(solutionLink.next.next.next.next.next.value, 5);
+    }
+}
 
 
 
@@ -7012,6 +7639,7 @@ const TEST_DICTIONARY = {
     'laptop-rentals': LaptopRentals,
     'find-loop': FindLoop,
     'merge-linked-lists': mergeLinkedLists,
+    'shift-linked-list': ShiftLinkedList,
 
 }
 
