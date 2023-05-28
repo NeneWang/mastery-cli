@@ -6666,6 +6666,8 @@ class mergeLinkedLists extends ProblemTests {
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
         this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        
     }
 
     test_1() {
