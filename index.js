@@ -15,8 +15,8 @@ const constants = require('./utils/constants');
 const demos = require('./utils/demo');
 const Settings = require('./utils/settings');
 const { populateMasterDeck: populateMasterDeck } = require("./utils/data/terms");
-const { Quizzer } = require('./utils/Quizzer');
 const DSATrainer = require('./utils/dsa-cli/dsa-trainer');
+const { QuizzerWithDSA } = require('./utils/QuizzerWithDSA');
 
 const cli_meow = cli[0]
 const cmInfo = cli[1]
@@ -39,7 +39,7 @@ const { Demo, EDemo } = demos;
 	});
 
 	// console.log(terms);
-	const mQuizer = new Quizzer(constants.qmathformulas, constants.qmathenabled, masterDeck);
+	const mQuizer = new QuizzerWithDSA(constants.qmathformulas, constants.qmathenabled, masterDeck);
 
 
 	// console.log(getAbsoluteUri("./img/unicorn.png"))

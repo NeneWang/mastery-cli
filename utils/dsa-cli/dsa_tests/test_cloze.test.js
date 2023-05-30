@@ -28,7 +28,7 @@ describe('Cloze Tests', function () {
         const problemClozes = problemManager.getProblemClozes(problemSlug);
 
         for (let clozeFile of problemClozes) {
-            problemManager.copyFileToTemp(clozeFile.filepath, { base: 'cloze/base_cloze' });
+            problemManager.copyFileToTemp(clozeFile.file_path, { base: 'cloze/base_cloze' });
         }
 
     });

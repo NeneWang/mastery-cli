@@ -160,13 +160,18 @@ class DSATrainer {
     }
 
     async openRandomClozeDSAProblem() {
+        // const _ = await this.problemReport.getReport();
+        await this.loaded_problem_manager;
         const selectedClozeProblem = this.problems_manager.getRandomProblemSlugWithCloze();
-        const problem = this.problems_manager.getProblem(selectedClozeProblem.slug);
+        // console.log("selectedClozeProblem", selectedClozeProblem);
+        // console.log("problem manager problems?", this.problems_manager.problems)
+        const problem = this.problems_manager.getProblem(selectedClozeProblem.problem_slug);
+        // console.log("problem | problem received", problem);
 
         // Populate with that problem slug
-        this.problems_manager.copyFileToTemp(selectedClozeProblem.filepath, { base: Constants.PATHS.base_cloze });
+        this.problems_manager.copyFileToTemp(selectedClozeProblem.file_path, { base: Constants.PATHS.base_cloze });
 
-        const problem_response = await this.solveProblem(problem, { populate_with_cloze_filepaths: selectedClozeProblem.filepaths });
+        const problem_response = await this.solveProblem(problem, { populate_with_cloze_filepath: selectedClozeProblem.file_path });
 
         problem_response.is_problem_solved = problem_response.problem_status == Constants.ProblemStatus.solved;
         return problem_response;
@@ -211,9 +216,17 @@ class DSATrainer {
      * @param {boolean} tryUntilSolved If true, the problem will be reprompted until it is solved. If false, the problem will be solved once.
      * @returns {ProblemStatus} The status of the problem
      */
-    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, populate_problem = true, populate_with_cloze_filepath } = {}) {
+    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, populate_problem = true, populate_with_cloze_filepath = "" } = {}) {
         if (populate_problem) {
-            this.problems_manager.populateTemplate(problem);
+
+            if (populate_with_cloze_filepath != "") {
+                
+                this.problems_manager.populateTemplate({ file_path: populate_with_cloze_filepath });
+            } else {
+
+                this.problems_manager.populateTemplate(problem);
+
+            }
         }
 
         let did_pass_all_tests = false
@@ -417,7 +430,7 @@ class DSATrainer {
 
                     const selected_cloze_problem = get_random(cloze_problems);
                     // console.log("DEBUG | Selected cloze problem: ", selected_cloze_problem);
-                    this.problems_manager.copyFileToTemp(selected_cloze_problem.filepath, { base: Constants.PATHS.base_cloze });
+                    this.problems_manager.copyFileToTemp(selected_cloze_problem.file_path, { base: Constants.PATHS.base_cloze });
                     console.log(" ==> CLOZE PROBLEM HAS BEEN COPIED TO  CURRENT PROBLEM <==");
                     // Open using modify to update the version
                     await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true });

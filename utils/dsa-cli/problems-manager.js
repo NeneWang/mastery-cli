@@ -31,9 +31,14 @@ class ProblemsManager {
     }
 
     get clozeProblemSlugs(){
-        return cloze_problems_list.map(cloze_problem => cloze_problem.filepath); //Useful as there is an algorithm that checks this slugs in order to detect priority
+        return cloze_problems_list.map(cloze_problem => cloze_problem.file_path); //Useful as there is an algorithm that checks this slugs in order to detect priority
     }
 
+    /**
+     * 
+     * @param {string} problemSlug SLug of the problem to be skipped
+     * @returns 
+     */
     getProblem(problemSlug) {
         return this.problems[problemSlug];
     }
@@ -87,8 +92,7 @@ class ProblemsManager {
 
     getProblemsByCategory(category) {
 
-        const fiteredProblemsByCategory = Object.values(this.problems).filter(problem => problem.tags.includes(category))
-
+        const fiteredProblemsByCategory = Object.values(this.problems).filter(problem => problem.tags.includes(category));
         return fiteredProblemsByCategory;
     }
 
@@ -154,9 +158,7 @@ class ProblemsManager {
         let keys = Object.keys(this.problems);
         // Filter the porblems that are in the skip_problems list
         keys = keys.filter((key) => !this.skip_problems.includes(key));
-
         const randomKey = keys[Math.floor(Math.random() * keys.length)];
-
         return this.problems[randomKey];
     }
 
@@ -168,7 +170,8 @@ class ProblemsManager {
      */
     getRandomProblemSlugWithCloze(){
         // Get a random clozeProblem Slugs
-        return get_random(this.cloze_problems_list);
+        console.log("cloze_problems_list", cloze_problems_list)
+        return get_random(cloze_problems_list);
     }
     
 
@@ -177,6 +180,7 @@ class ProblemsManager {
      * @param {dict<problem>} problem The problem to populate the template with
      */
     populateTemplate(problem) {
+        console.log("Populating template with ", problem);
         this.copyFileToTemp(problem.file_path);
     }
 

@@ -68,6 +68,9 @@ class QuizzerWithDSA extends Quizzer {
 
     ask_cloze_algorithm_question = async ({ exitMethod = () => { } } = {}) => {
         // TODO, create an openRandomProblem where it cleans and loads for you.
+        
+        const problem_status = this.dsaTrainer.openRandomClozeDSAProblem();
+        return problem_status;
     }
 
 }
