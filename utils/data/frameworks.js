@@ -47,10 +47,184 @@ const react_terms = [
             reject(chrome.runtime.lastError)\n\
             resolve()"
     }
-
-
-
 ];
+
+const react_typescript = [
+    {
+        term: "create react app named bases using typescript template",
+        example: "npx create-react-app bases --template typescript",
+        description: "Create the react app remember that you can use --template typescript to create the app with typescript"
+    },
+    {
+        term: "interface design: CounterState",
+        description: ":m\
+        interface Props {\n\
+            initialValue: number;\n\
+        }\n\
+        \n\
+        ### CREATE an interface named CounterState with the following properties\n\
+        \n\
+        \n\
+        export const CounterBy = ({ initialValue = 5 }: Props) => {\n\
+        \n\
+            const [counter, setCounter] = useState<CounterState>({\
+                counter: initialValue,\n\
+                clicks: 0,\n\
+            });\n\
+        \n\
+        const handleClick = (value:number ) => {\n\
+            setCounter(({clicks, counter}) => ({\n\
+                counter: counter + value,\n\
+                clicks: clicks + 1,\n\
+            }));\n\
+        };\n\
+        \n\
+        return (\n\
+            <>\n\
+            \n\
+            <h1> Counter: {counter.counter} </h1>\n\
+            <h1>Clicks: {counter.clicks}</h1>\n\
+        \n\
+            <button onClick={() => handleClick(1)}>+1</button>\n\
+                <button onClick={() => handleClick(2)}>+2</button>\n\
+            </>\n\
+        );\n\
+        };",
+        prompt: "Create a interface named CounterState with the following properties: counter: int and clicks as well.",
+        example: "\n\
+        interface CounterState {\n\
+        counter: number;\n\
+        clicks: number;\n\
+        }"
+    },
+    {
+        term: "defaulted class",
+        description: ":m\
+        interface Props {\n\
+            initialValue: number;\n\
+        }\n\
+        \n\
+        interface CounterState {\n\
+            counter: number;\n\
+            clicks: number;\n\
+        }\n\
+        \n\
+        ### Complete with the header CounterBy exported by defaultand props with initiatedValue as 5\n\
+        \n\
+            const [counter, setCounter] = useState<CounterState>({\
+                counter: initialValue,\n\
+                clicks: 0,\n\
+            });\n\
+        \n\
+        const handleClick = (value:number ) => {\n\
+            setCounter(({clicks, counter}) => ({\n\
+                counter: counter + value,\n\
+                clicks: clicks + 1,\n\
+            }));\n\
+        };\n\
+        \n\
+        return (\n\
+            <>\n\
+            \n\
+            <h1> Counter: {counter.counter} </h1>\n\
+            <h1>Clicks: {counter.clicks}</h1>\n\
+        \n\
+            <button onClick={() => handleClick(1)}>+1</button>\n\
+                <button onClick={() => handleClick(2)}>+2</button>\n\
+            </>\n\
+        );\n\
+        };",
+        prompt: "Complete with the header CounterBy exported by defaultand props with initiatedValue as 5",
+        example: "export const CounterBy = ({ initialValue = 5 }: Props) => {"
+    },
+    {
+        term: "useState with typescript",
+        description: ":m\
+        interface Props {\n\
+            initialValue: number;\n\
+        }\n\
+        \n\
+        interface CounterState {\n\
+            counter: number;\n\
+            clicks: number;\n\
+        }\n\
+        \n\
+        export const COunterBy = ({initialValue = 5}: Props) => {\n\
+        \n\
+        ### Complete with the useState hook with the type CounterState\n\
+        \n\
+        const handleClick = (value:number ) => {\n\
+            setCounter(({clicks, counter}) => ({\n\
+                counter: counter + value,\n\
+                clicks: clicks + 1,\n\
+            }));\n\
+        };\n\
+        \n\
+        return (\n\
+            <>\n\
+            \n\
+            <h1> Counter: {counter.counter} </h1>\n\
+            <h1>Clicks: {counter.clicks}</h1>\n\
+        \n\
+            <button onClick={() => handleClick(1)}>+1</button>\n\
+                <button onClick={() => handleClick(2)}>+2</button>\n\
+            </>\n\
+        );\n\
+        };",
+        prompt: "Create a useState hook with the type CounterState with counter valu as initialValue and clicks as 0",
+        example: "[counter, setCounter] = useState<CounterState>({\n\
+            counter: initialValue,\n\
+            clicks: 0,\n\
+        });"
+    },
+    {
+        term: "useEffect",
+        prompt: "Create an hook that load everytime counter is modified that checks if counter",
+        example: "\n\
+        useEffect(() => {\n\
+          \n\
+          // code\n\
+        }, [counter])",
+    },
+    {
+        term: "animation effect",
+        prompt: "Create an animation effect that when counter (h2) is equal to 3 it moves the h2 element 10px up and then down for 0.1 seconds both with ease out effect.",
+        description: "\
+        import React, { useEffect } from 'react';\n\
+        import { gsap } from 'gsap';\n\
+        \n\
+        const MAXIMUM_COUNT = 3;\n\
+        \n\
+        export const CounterEffect = ({ initialValue = 0 }) => {\n\
+          const [counter, setCounter] = React.useState(initialValue);\n\
+        \n\
+          const handleClick = () => {\n\
+            setCounter((prev) => Math.min(prev + 1, MAXIMUM_COUNT));\n\
+          };\n\
+        \n\
+          useEffect(() => {\n\
+            if (counter < MAXIMUM_COUNT) return;\n\
+        \n\
+        ### Create the animation effect\n\
+          }, [counter]);\n\
+        \n\
+          // ... rest of the component\n\
+        };",
+        example: "\
+        gsap.to('h2', {\n\
+          y: -10,\n\
+          duration: 0.1,\n\
+          ease: 'ease.out',\n\
+        }).then(() => {\n\
+          gsap.to('h2', {\n\
+            y: 0,\n\
+            duration: 0.1,\n\
+            ease: 'ease.out',\n\
+          });\n\
+        });"
+    }
+
+]
 
 
 const apex = [

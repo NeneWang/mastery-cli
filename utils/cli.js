@@ -67,6 +67,7 @@ class CommandsInformation {
 			prio: new Command("Outputs the priorities", "prio"),
 			ses: new Command("Study session", 'ses'),
 			dsa: new Command("Random Data structures and algorithms", 'dsa'),
+			cloze: new Command("Cloze algorithm", 'cloze'),
 
 		};
 	}

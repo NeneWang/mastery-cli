@@ -142,6 +142,10 @@ const { Demo, EDemo } = demos;
 		}
 
 	}
+	else if(input.includes(cmInfo.commands.cloze.code)) {
+		const problem_response = await dsaTrainer.openRandomClozeDSAProblem();
+		console.log("problem_response of cloze", problem_response)
+	}
 	// else if (input.includes(cmInfo.commands.dsa.code)) {
 	else {
 		cli_meow.showHelp(0);

@@ -52,11 +52,21 @@ class ProblemsManager {
         return cloze_problems_list.some(cloze_problem => cloze_problem.problem_slug == problemSlug);
     }
 
+    /**
+     * 
+     * @param {string} problemSlug Gets the cloze problems for a given problem slug.
+     * @returns {List<{filepath, difficulty, problem_slug}>} List of cloze problems for a given problem slug.
+     */
     getProblemClozes(problemSlug) {
 
         return cloze_problems_list.filter(cloze_problem => cloze_problem.problem_slug == problemSlug);
     }
 
+    /**
+     * Gets a single random cloze problem for a given problem slug.
+     * @param {string} problemSlug Gets a random cloze problem for a given problem slug.
+     * @returns {<{filepath, difficulty, problem_slug}>} A random cloze problem for a given problem slug.
+     */
     getRandomProblemCloze(problemSlug) {
         // console.log("DEBUG | Cloze problems: ", cloze_problems);
         if (cloze_problems.length == 0) {

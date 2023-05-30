@@ -15,7 +15,7 @@ class QuizzerWithDSA extends Quizzer {
 
     async askQuestion({ ask_until_one_is_correct = true, } = {}) {
         let exit = false;
-        const problem_types = ['math', 'term', 'algorithm'];
+        const problem_types = ['math', 'term', 'cloze-algo'];
 
         const exitMethod = () => {
             if (DEBUG) console.log("Exit method requested");
@@ -36,7 +36,10 @@ class QuizzerWithDSA extends Quizzer {
                 case 'term':
                     return await this.pick_and_ask_term_question({ exitMethod: exitMethod });
                 case 'algorithm':
+                    // Wont be called for now
                     return await this.ask_algorithm_question({ exitMethod: exitMethod });
+                case 'cloze-algo':
+                    return await this.ask_cloze_algorithm_question({ exitMethod: exitMethod });
                 default:
                     return false;
             }
@@ -62,6 +65,11 @@ class QuizzerWithDSA extends Quizzer {
         const problem_status = this.dsaTrainer.openRandomProblem();
         return problem_status;
     }
+
+    ask_cloze_algorithm_question = async ({ exitMethod = () => { } } = {}) => {
+        // TODO, create an openRandomProblem where it cleans and loads for you.
+    }
+
 }
 
 module.exports = { QuizzerWithDSA };
