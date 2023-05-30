@@ -33,13 +33,17 @@ class QuizzerWithDSA extends Quizzer {
             switch (problem_type_selected) {
                 case 'math':
                     return await this.ask_math_question({ exitMethod: exitMethod });
+                    break;
                 case 'term':
                     return await this.pick_and_ask_term_question({ exitMethod: exitMethod });
+                    break;
                 case 'algorithm':
                     // Wont be called for now
                     return await this.ask_algorithm_question({ exitMethod: exitMethod });
+                    break;
                 case 'cloze-algo':
                     return await this.ask_cloze_algorithm_question({ exitMethod: exitMethod });
+                    break;
                 default:
                     return false;
             }
@@ -55,9 +59,7 @@ class QuizzerWithDSA extends Quizzer {
             const _ = askQuestionRandom();
         }
 
-        const problem = this.dsaTrainer.problems_manager.getRandomProblem();
-        const problem_status = this.dsaTrainer.solveProblem(problem);
-        return problem_status;
+        return true;
 
     }
 
