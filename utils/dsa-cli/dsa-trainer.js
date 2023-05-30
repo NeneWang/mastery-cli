@@ -220,7 +220,7 @@ class DSATrainer {
         if (populate_problem) {
 
             if (populate_with_cloze_filepath != "") {
-                
+
                 this.problems_manager.populateTemplate({ file_path: populate_with_cloze_filepath });
             } else {
 
@@ -456,8 +456,10 @@ class DSATrainer {
                         } else {
                             console.log("Submission running", Constants.ProblemStatus.solved);
                             question_state_flag = false;
-                            return { status: Constants.ProblemStatus.solved, details: { failed_attempts: failed_attempts }, problem_details: problem_details };
+                            // TODO Submit the current code that was there at least.
 
+                            return { status: Constants.ProblemStatus.solved, details: { failed_attempts: failed_attempts }, problem_details: problem_details };
+                            
                         }
                     }
                 })

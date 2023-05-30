@@ -109,6 +109,22 @@ class StorableReport {
         }
     }
 
+    // promise Syntax for getReport
+    getReportPromise() {
+
+        return new Promise(async (resolve, reject) => {
+            try {
+                const data = await this.db.getData("/");
+                if (DEBUG) console.log("data", data);
+                this.report = data;
+                resolve(data);
+            } catch (error) {
+                console.error(error);
+                reject(error);
+            }
+        });
+    }
+
     saveReport() {
         try {
             this.db.push("/", this.report);
