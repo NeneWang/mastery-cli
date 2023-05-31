@@ -170,7 +170,7 @@ class DSATrainer {
 
         // Populate with that problem slug
         // this.problems_manager.copyFileToTemp(selectedClozeProblem.file_path, { base: Constants.PATHS.base_cloze });
-
+        problem.is_cloze = true;
         const problem_response = await this.solveProblem(problem, { base: Constants.PATHS.base_cloze, populate_with_cloze_filepath: selectedClozeProblem.file_path });
 
         problem_response.is_problem_solved = problem_response.problem_status == Constants.ProblemStatus.solved;
@@ -231,7 +231,8 @@ class DSATrainer {
 
         let did_pass_all_tests = false
         const statusMetadata = {
-            failed_attempts: this.getCurrentProblemAttempts()
+            failed_attempts: this.getCurrentProblemAttempts(),
+            is_cloze: problem.is_cloze ?? false,
         };
 
         // Try to solve the problem once.
@@ -297,8 +298,8 @@ class DSATrainer {
 
 
 
-        if (DEBUG) console.log("Problem prompt selected: ", promblem_prompt);
-        renderPromptDescription(promblem_prompt, problem_details);
+        if (true) console.log("Problem prompt selected: ", promblem_prompt, "for problem", problem, "cloze?", problem.is_cloze);
+        renderPromptDescription(promblem_prompt, problem_details, { is_cloze: problem.is_cloze ?? false });
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
         if (open_problem_temporal) {

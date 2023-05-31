@@ -51,11 +51,11 @@ const getFilesInDirectory = async (directoryPath = './data/priorities') => {
 }
 
 
-const looselyDeepEqual = (a, b, {DEBUG = true} = {}) => {
+const looselyDeepEqual = (a, b, { DEBUG = true } = {}) => {
     if (DEBUG) console.log("Your Output: ", a);
     return JSON.stringify(a.sort()) === JSON.stringify(b.sort());
-  }
-  
+}
+
 
 
 const getMaidDirectory = () => {
@@ -122,7 +122,7 @@ const countDecimals = (value) => {
 
 
 
-const renderPromptDescription = (prompt, prompt_details) => {
+const renderPromptDescription = (prompt, prompt_details, { is_cloze = false} = {}) => {
     try {
         const Constants = require("./constants");
         const chalk = require("chalk");
@@ -130,15 +130,16 @@ const renderPromptDescription = (prompt, prompt_details) => {
             renderer: new TerminalRenderer()
         });
         // Print title in Blue
-        console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(prompt?.["title"] ?? "")}`)
+        const title = prompt?.["title"]  ?? "";
+        console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(` ${title} `)} ${is_cloze? "| " + chalk.hex(Constants.CONSTANTS.CUTEPINK).inverse(` Cloze `): ""}`)
 
 
         // Colored Difficulty tag.
         const prompt_difficulty = prompt_details?.["difficulty"] ?? "";
         const color_based_on_difficulty = (difficulty) => {
-            if(difficulty === Constants.difficulty.easy) return Constants.CONSTANTS.CUTEGREEN;
-            if(difficulty === Constants.difficulty.medium) return Constants.CONSTANTS.CUTEYELLOW;
-            if(difficulty === Constants.difficulty.hard) return Constants.CONSTANTS.CUTEPINK;
+            if (difficulty === Constants.difficulty.easy) return Constants.CONSTANTS.CUTEGREEN;
+            if (difficulty === Constants.difficulty.medium) return Constants.CONSTANTS.CUTEYELLOW;
+            if (difficulty === Constants.difficulty.hard) return Constants.CONSTANTS.CUTEPINK;
             return Constants.CONSTANTS.CUTEGREEN;
         }
         // Print tags but remove the difficulty from the tags array first
@@ -146,11 +147,11 @@ const renderPromptDescription = (prompt, prompt_details) => {
         const tags_without_difficulty = tags.filter(tag => tag !== prompt_difficulty);
         // console.log(tags_without_difficulty);
 
-        try{
+        try {
 
             console.log(`${chalk.hex(color_based_on_difficulty(prompt_difficulty)).inverse(` ${prompt_difficulty} `)}`, tags_without_difficulty)
-        }catch{
-            
+        } catch {
+
         }
 
         console.log(marked(prompt?.["description"] ?? ""));
@@ -229,7 +230,7 @@ const openEditorWithCommand = async (instruction) => {
  * @param {string} editor_instruction  e.g. code, vim, nano, etc.
  * @param {string} absolute_temp_file_path e.g. /home/username/.../temp.js
  */
-const openEditorPlatformAgnostic = async (editor_instruction, {absolute_temp_file_path = ""} = {}) => {
+const openEditorPlatformAgnostic = async (editor_instruction, { absolute_temp_file_path = "" } = {}) => {
 
 
     const os = require('os');
