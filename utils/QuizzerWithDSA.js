@@ -52,7 +52,7 @@ class QuizzerWithDSA extends Quizzer {
         let answerIsCorrect = false;
         if (ask_until_one_is_correct)
             while (!answerIsCorrect && !exit) {
-                if (DEBUG) console.log("Answer is correct", answerIsCorrect, "exit", exit);
+                if (true) console.log("Answer is correct", answerIsCorrect, "exit", exit);
                 answerIsCorrect = await askQuestionRandom({ exitMethod: exitMethod });
             }
         else {

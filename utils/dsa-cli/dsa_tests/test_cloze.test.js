@@ -33,6 +33,10 @@ describe('Cloze Tests', function () {
 
     });
 
+    it("Test each cloze in a problem by loading it into the problem manager", async function () {
+
+    });
+
 });
 
 

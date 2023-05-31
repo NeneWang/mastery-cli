@@ -33,7 +33,7 @@ module.exports = Settings = {
         "performance_summary": true,
         "weather": false,
         "missing_report": true
-    }, //Order matters,    "quiz_enabled"
+    }, //Order matters, "quiz_enabled"
     "quiz_enable": [
         "math"
     ], //Quick quizes enabled when commiting, 
