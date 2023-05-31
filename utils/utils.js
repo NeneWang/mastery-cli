@@ -492,7 +492,7 @@ class Maid {
 		// if services == get_credi
 
 		console.log("service Selected", serviceSelected);
-		if (serviceSelected == choices[CHOICE_CREDENTIAL].value) {
+		if (serviceSelected == choices[CHOICE_CREDENTIAL].value && Settings.account_settings.access_credentials_enabled) {
 
 			console.log('Retrieve credentials for...')
 			const creds = await axios.get(`${APIDICT.DEPLOYED_MAID}/services`, {
