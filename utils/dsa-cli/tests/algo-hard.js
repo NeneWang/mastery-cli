@@ -7512,7 +7512,7 @@ class ShiftLinkedList extends ProblemTests {
 
     }
 
-    test_9(){
+    test_9() {
         /**
          * {
             "head": "4",
@@ -7548,7 +7548,7 @@ class ShiftLinkedList extends ProblemTests {
         const head = new LinkedList(0);
         head.next = new LinkedList(1);
         head.next.next = new LinkedList(2);
-        head.next.next.next = new LinkedList(3);    
+        head.next.next.next = new LinkedList(3);
         head.next.next.next.next = new LinkedList(4);
         head.next.next.next.next.next = new LinkedList(5);
 
@@ -7561,7 +7561,7 @@ class ShiftLinkedList extends ProblemTests {
         assert.equal(solutionLink.next.next.next.next.next.value, 3);
     }
 
-    test_10(){
+    test_10() {
         /**
          * {
             "head": "0",
@@ -7613,6 +7613,688 @@ class ShiftLinkedList extends ProblemTests {
 }
 
 
+// This is an input class. Do not edit.
+class OrgChart {
+    constructor(name) {
+        this.name = name;
+        this.directReports = [];
+    }
+}
+
+class LowestCommonManager extends ProblemTests {
+
+    constructor(Problem) {
+
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+    }
+
+    test_1() {
+        /** 
+         * {
+            "nodeId": "B"
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "orgChart": {
+                "nodes": [
+                {"directReports": ["B", "C"], "id": "A", "name": "A"},
+                {"directReports": ["D", "E"], "id": "B", "name": "B"},
+                {"directReports": ["F", "G"], "id": "C", "name": "C"},
+                {"directReports": ["H", "I"], "id": "D", "name": "D"},
+                {"directReports": [], "id": "E", "name": "E"},
+                {"directReports": [], "id": "F", "name": "F"},
+                {"directReports": [], "id": "G", "name": "G"},
+                {"directReports": [], "id": "H", "name": "H"},
+                {"directReports": [], "id": "I", "name": "I"}
+                ]
+            },
+            "reportOne": "E",
+            "reportTwo": "I",
+            "topManager": "A"
+            }
+        */
+        this.current_test_name = "Test 1 | E, I and A";
+        const orgChart = new this.Problem();
+        const A = new OrgChart("A");
+        const B = new OrgChart("B");
+        const C = new OrgChart("C");
+        const D = new OrgChart("D");
+        const E = new OrgChart("E");
+        const F = new OrgChart("F");
+        const G = new OrgChart("G");
+        const H = new OrgChart("H");
+        const I = new OrgChart("I");
+
+        A.directReports = [B, C];
+        B.directReports = [D, E];
+        C.directReports = [F, G];
+        D.directReports = [H, I];
+
+        const solution = orgChart.solve(A, E, I);
+        assert.equal(solution.name, "B");
+
+    }
+
+    test_2() {
+        /**
+         * {
+            "nodeId": "A"
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "orgChart": {
+                "nodes": [
+                {"directReports": ["B", "C", "D", "E", "F"], "id": "A", "name": "A"},
+                {"directReports": ["G", "H", "I"], "id": "B", "name": "B"},
+                {"directReports": ["J"], "id": "C", "name": "C"},
+                {"directReports": ["K", "L"], "id": "D", "name": "D"},
+                {"directReports": [], "id": "E", "name": "E"},
+                {"directReports": ["M", "N"], "id": "F", "name": "F"},
+                {"directReports": [], "id": "G", "name": "G"},
+                {"directReports": ["O", "P", "Q", "R"], "id": "H", "name": "H"},
+                {"directReports": [], "id": "I", "name": "I"},
+                {"directReports": [], "id": "J", "name": "J"},
+                {"directReports": ["S"], "id": "K", "name": "K"},
+                {"directReports": [], "id": "L", "name": "L"},
+                {"directReports": [], "id": "M", "name": "M"},
+                {"directReports": [], "id": "N", "name": "N"},
+                {"directReports": [], "id": "O", "name": "O"},
+                {"directReports": ["T", "U"], "id": "P", "name": "P"},
+                {"directReports": [], "id": "Q", "name": "Q"},
+                {"directReports": ["V"], "id": "R", "name": "R"},
+                {"directReports": [], "id": "S", "name": "S"},
+                {"directReports": [], "id": "T", "name": "T"},
+                {"directReports": [], "id": "U", "name": "U"},
+                {"directReports": ["W", "X", "Y"], "id": "V", "name": "V"},
+                {"directReports": [], "id": "W", "name": "W"},
+                {"directReports": ["Z"], "id": "X", "name": "X"},
+                {"directReports": [], "id": "Y", "name": "Y"},
+                {"directReports": [], "id": "Z", "name": "Z"}
+                ]
+            },
+            "reportOne": "A",
+            "reportTwo": "B",
+            "topManager": "A"
+            }
+         */
+
+        this.current_test_name = "Test 2 | A, B and A";
+        const orgChart = new this.Problem();
+        const A = new OrgChart("A");
+        const B = new OrgChart("B");
+        const C = new OrgChart("C");
+        const D = new OrgChart("D");
+        const E = new OrgChart("E");
+        const F = new OrgChart("F");
+        const G = new OrgChart("G");
+        const H = new OrgChart("H");
+        const I = new OrgChart("I");
+        const J = new OrgChart("J");
+
+        A.directReports = [B, C, D, E, F];
+        B.directReports = [G, H, I];
+        C.directReports = [J];
+        D.directReports = [];
+        E.directReports = [];
+        F.directReports = [];
+        G.directReports = [];
+        H.directReports = [];
+        I.directReports = [];
+        J.directReports = [];
+
+        const solution = orgChart.solve(A, B, A);
+        assert.equal(solution.name, "A");
+
+
+    }
+
+    test_3() {
+        /**
+         * {
+            "nodeId": "A"
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "orgChart": {
+                "nodes": [
+                {"directReports": ["B", "C", "D", "E", "F"], "id": "A", "name": "A"},
+                {"directReports": ["G", "H", "I"], "id": "B", "name": "B"},
+                {"directReports": ["J"], "id": "C", "name": "C"},
+                {"directReports": ["K", "L"], "id": "D", "name": "D"},
+                {"directReports": [], "id": "E", "name": "E"},
+                {"directReports": ["M", "N"], "id": "F", "name": "F"},
+                {"directReports": [], "id": "G", "name": "G"},
+                {"directReports": ["O", "P", "Q", "R"], "id": "H", "name": "H"},
+                {"directReports": [], "id": "I", "name": "I"},
+                {"directReports": [], "id": "J", "name": "J"},
+                {"directReports": ["S"], "id": "K", "name": "K"},
+                {"directReports": [], "id": "L", "name": "L"},
+                {"directReports": [], "id": "M", "name": "M"},
+                {"directReports": [], "id": "N", "name": "N"},
+                {"directReports": [], "id": "O", "name": "O"},
+                {"directReports": ["T", "U"], "id": "P", "name": "P"},
+                {"directReports": [], "id": "Q", "name": "Q"},
+                {"directReports": ["V"], "id": "R", "name": "R"},
+                {"directReports": [], "id": "S", "name": "S"},
+                {"directReports": [], "id": "T", "name": "T"},
+                {"directReports": [], "id": "U", "name": "U"},
+                {"directReports": ["W", "X", "Y"], "id": "V", "name": "V"},
+                {"directReports": [], "id": "W", "name": "W"},
+                {"directReports": ["Z"], "id": "X", "name": "X"},
+                {"directReports": [], "id": "Y", "name": "Y"},
+                {"directReports": [], "id": "Z", "name": "Z"}
+                ]
+            },
+            "reportOne": "B",
+            "reportTwo": "F",
+            "topManager": "A"
+            }
+         */
+
+        this.current_test_name = "Test 2 | B, F, and A";
+        const orgChart = new this.Problem();
+        const A = new OrgChart("A");
+        const B = new OrgChart("B");
+        const C = new OrgChart("C");
+        const D = new OrgChart("D");
+        const E = new OrgChart("E");
+        const F = new OrgChart("F");
+        const G = new OrgChart("G");
+        const H = new OrgChart("H");
+        const I = new OrgChart("I");
+        const J = new OrgChart("J");
+        const K = new OrgChart("K");
+        const L = new OrgChart("L");
+        const M = new OrgChart("M");
+        const N = new OrgChart("N");
+        const O = new OrgChart("O");
+        const P = new OrgChart("P");
+        const Q = new OrgChart("Q");
+        const R = new OrgChart("R");
+        const S = new OrgChart("S");
+        const T = new OrgChart("T");
+        const U = new OrgChart("U");
+        const V = new OrgChart("V");
+        const W = new OrgChart("W");
+        const X = new OrgChart("X");
+        const Y = new OrgChart("Y");
+        const Z = new OrgChart("Z");
+
+        A.directReports = [B, C, D, E, F];
+        B.directReports = [G, H, I];
+        C.directReports = [J];
+        D.directReports = [K, L];
+        E.directReports = [];
+        F.directReports = [M, N];
+        G.directReports = [];
+        H.directReports = [O, P, Q, R];
+        I.directReports = [];
+        J.directReports = [];
+        K.directReports = [S];
+        L.directReports = [];
+        M.directReports = [];
+        N.directReports = [];
+        O.directReports = [];
+        P.directReports = [T, U];
+        Q.directReports = [];
+        R.directReports = [V];
+        S.directReports = [];
+        T.directReports = [];
+        U.directReports = [];
+        V.directReports = [W, X, Y];
+        W.directReports = [];
+        X.directReports = [Z];
+        Y.directReports = [];
+        Z.directReports = [];
+
+        const solution = orgChart.solve(A, B, F);
+        assert.equal(solution.name, "A");
+
+
+    }
+
+    test_4() {
+        /**
+         * {
+            "orgChart": {
+                "nodes": [
+                {"directReports": ["B", "C", "D", "E", "F"], "id": "A", "name": "A"},
+                {"directReports": ["G", "H", "I"], "id": "B", "name": "B"},
+                {"directReports": ["J"], "id": "C", "name": "C"},
+                {"directReports": ["K", "L"], "id": "D", "name": "D"},
+                {"directReports": [], "id": "E", "name": "E"},
+                {"directReports": ["M", "N"], "id": "F", "name": "F"},
+                {"directReports": [], "id": "G", "name": "G"},
+                {"directReports": ["O", "P", "Q", "R"], "id": "H", "name": "H"},
+                {"directReports": [], "id": "I", "name": "I"},
+                {"directReports": [], "id": "J", "name": "J"},
+                {"directReports": ["S"], "id": "K", "name": "K"},
+                {"directReports": [], "id": "L", "name": "L"},
+                {"directReports": [], "id": "M", "name": "M"},
+                {"directReports": [], "id": "N", "name": "N"},
+                {"directReports": [], "id": "O", "name": "O"},
+                {"directReports": ["T", "U"], "id": "P", "name": "P"},
+                {"directReports": [], "id": "Q", "name": "Q"},
+                {"directReports": ["V"], "id": "R", "name": "R"},
+                {"directReports": [], "id": "S", "name": "S"},
+                {"directReports": [], "id": "T", "name": "T"},
+                {"directReports": [], "id": "U", "name": "U"},
+                {"directReports": ["W", "X", "Y"], "id": "V", "name": "V"},
+                {"directReports": [], "id": "W", "name": "W"},
+                {"directReports": ["Z"], "id": "X", "name": "X"},
+                {"directReports": [], "id": "Y", "name": "Y"},
+                {"directReports": [], "id": "Z", "name": "Z"}
+                ]
+            },
+            "reportOne": "G",
+            "reportTwo": "M",
+            "topManager": "A"
+            }
+         */
+
+        this.current_test_name = "Test 3 | G, M, and A";
+        const orgChart = new this.Problem();
+        const A = new OrgChart("A");
+        const B = new OrgChart("B");
+        const C = new OrgChart("C");
+        const D = new OrgChart("D");
+        const E = new OrgChart("E");
+        const F = new OrgChart("F");
+        const G = new OrgChart("G");
+        const H = new OrgChart("H");
+        const I = new OrgChart("I");
+        const J = new OrgChart("J");
+        const K = new OrgChart("K");
+        const L = new OrgChart("L");
+        const M = new OrgChart("M");
+        const N = new OrgChart("N");
+        const O = new OrgChart("O");
+        const P = new OrgChart("P");
+        const Q = new OrgChart("Q");
+        const R = new OrgChart("R");
+        const S = new OrgChart("S");
+        const T = new OrgChart("T");
+        const U = new OrgChart("U");
+        const V = new OrgChart("V");
+        const W = new OrgChart("W");
+        const X = new OrgChart("X");
+        const Y = new OrgChart("Y");
+        const Z = new OrgChart("Z");
+
+        A.directReports = [B, C, D, E, F];
+        B.directReports = [G, H, I];
+        C.directReports = [J];
+        D.directReports = [K, L];
+        E.directReports = [];
+        F.directReports = [M, N];
+        G.directReports = [];
+        H.directReports = [O, P, Q, R];
+        I.directReports = [];
+        J.directReports = [];
+        K.directReports = [S];
+        L.directReports = [];
+        M.directReports = [];
+        N.directReports = [];
+        O.directReports = [];
+        P.directReports = [T, U];
+        Q.directReports = [];
+        R.directReports = [V];
+        S.directReports = [];
+        T.directReports = [];
+        U.directReports = [];
+        V.directReports = [W, X, Y];
+        W.directReports = [];
+        X.directReports = [Z];
+        Y.directReports = [];
+        Z.directReports = [];
+
+        const solution = orgChart.solve(A, G, M);
+        assert.equal(solution.name, "A");
+
+
+    }
+
+    test_5() {
+        /**
+         * {
+            "nodeId": "A"
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "orgChart": {
+                "nodes": [
+                {"directReports": ["B", "C", "D", "E", "F"], "id": "A", "name": "A"},
+                {"directReports": ["G", "H", "I"], "id": "B", "name": "B"},
+                {"directReports": ["J"], "id": "C", "name": "C"},
+                {"directReports": ["K", "L"], "id": "D", "name": "D"},
+                {"directReports": [], "id": "E", "name": "E"},
+                {"directReports": ["M", "N"], "id": "F", "name": "F"},
+                {"directReports": [], "id": "G", "name": "G"},
+                {"directReports": ["O", "P", "Q", "R"], "id": "H", "name": "H"},
+                {"directReports": [], "id": "I", "name": "I"},
+                {"directReports": [], "id": "J", "name": "J"},
+                {"directReports": ["S"], "id": "K", "name": "K"},
+                {"directReports": [], "id": "L", "name": "L"},
+                {"directReports": [], "id": "M", "name": "M"},
+                {"directReports": [], "id": "N", "name": "N"},
+                {"directReports": [], "id": "O", "name": "O"},
+                {"directReports": ["T", "U"], "id": "P", "name": "P"},
+                {"directReports": [], "id": "Q", "name": "Q"},
+                {"directReports": ["V"], "id": "R", "name": "R"},
+                {"directReports": [], "id": "S", "name": "S"},
+                {"directReports": [], "id": "T", "name": "T"},
+                {"directReports": [], "id": "U", "name": "U"},
+                {"directReports": ["W", "X", "Y"], "id": "V", "name": "V"},
+                {"directReports": [], "id": "W", "name": "W"},
+                {"directReports": ["Z"], "id": "X", "name": "X"},
+                {"directReports": [], "id": "Y", "name": "Y"},
+                {"directReports": [], "id": "Z", "name": "Z"}
+                ]
+            },
+            "reportOne": "U",
+            "reportTwo": "S",
+            "topManager": "A"
+            }
+         */
+
+        this.current_test_name = "Test 5 | U, S, and A";
+        const orgChart = new this.Problem();
+        const A = new OrgChart("A");
+        const B = new OrgChart("B");
+        const C = new OrgChart("C");
+        const D = new OrgChart("D");
+        const E = new OrgChart("E");
+        const F = new OrgChart("F");
+        const G = new OrgChart("G");
+        const H = new OrgChart("H");
+        const I = new OrgChart("I");
+        const J = new OrgChart("J");
+        const K = new OrgChart("K");
+        const L = new OrgChart("L");
+        const M = new OrgChart("M");
+        const N = new OrgChart("N");
+        const O = new OrgChart("O");
+        const P = new OrgChart("P");
+        const Q = new OrgChart("Q");
+        const R = new OrgChart("R");
+        const S = new OrgChart("S");
+        const T = new OrgChart("T");
+        const U = new OrgChart("U");
+        const V = new OrgChart("V");
+        const W = new OrgChart("W");
+        const X = new OrgChart("X");
+        const Y = new OrgChart("Y");
+        const Z = new OrgChart("Z");
+
+        A.directReports = [B, C, D, E, F];
+        B.directReports = [G, H, I];
+        C.directReports = [J];
+        D.directReports = [K, L];
+        E.directReports = [];
+        F.directReports = [M, N];
+        G.directReports = [];
+        H.directReports = [O, P, Q, R];
+        I.directReports = [];
+        J.directReports = [];
+        K.directReports = [S];
+        L.directReports = [];
+        M.directReports = [];
+        N.directReports = [];
+        O.directReports = [];
+        P.directReports = [T, U];
+        Q.directReports = [];
+        R.directReports = [V];
+        S.directReports = [];
+        T.directReports = [];
+        U.directReports = [];
+        V.directReports = [W, X, Y];
+        W.directReports = [];
+        X.directReports = [Z];
+        Y.directReports = [];
+        Z.directReports = [];
+
+        const solution = orgChart.solve(A, U, S);
+        assert.equal(solution.name, "A");
+
+    }
+
+    test_6() {
+        /**
+         * {
+            "nodeId": "A"
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "orgChart": {
+                "nodes": [
+                {"directReports": ["B", "C", "D", "E", "F"], "id": "A", "name": "A"},
+                {"directReports": ["G", "H", "I"], "id": "B", "name": "B"},
+                {"directReports": ["J"], "id": "C", "name": "C"},
+                {"directReports": ["K", "L"], "id": "D", "name": "D"},
+                {"directReports": [], "id": "E", "name": "E"},
+                {"directReports": ["M", "N"], "id": "F", "name": "F"},
+                {"directReports": [], "id": "G", "name": "G"},
+                {"directReports": ["O", "P", "Q", "R"], "id": "H", "name": "H"},
+                {"directReports": [], "id": "I", "name": "I"},
+                {"directReports": [], "id": "J", "name": "J"},
+                {"directReports": ["S"], "id": "K", "name": "K"},
+                {"directReports": [], "id": "L", "name": "L"},
+                {"directReports": [], "id": "M", "name": "M"},
+                {"directReports": [], "id": "N", "name": "N"},
+                {"directReports": [], "id": "O", "name": "O"},
+                {"directReports": ["T", "U"], "id": "P", "name": "P"},
+                {"directReports": [], "id": "Q", "name": "Q"},
+                {"directReports": ["V"], "id": "R", "name": "R"},
+                {"directReports": [], "id": "S", "name": "S"},
+                {"directReports": [], "id": "T", "name": "T"},
+                {"directReports": [], "id": "U", "name": "U"},
+                {"directReports": ["W", "X", "Y"], "id": "V", "name": "V"},
+                {"directReports": [], "id": "W", "name": "W"},
+                {"directReports": ["Z"], "id": "X", "name": "X"},
+                {"directReports": [], "id": "Y", "name": "Y"},
+                {"directReports": [], "id": "Z", "name": "Z"}
+                ]
+            },
+            "reportOne": "Z",
+            "reportTwo": "M",
+            "topManager": "A"
+            }
+         */
+
+        this.current_test_name = "Test 5 | Z, M, and A";
+        const orgChart = new this.Problem();
+        const A = new OrgChart("A");
+        const B = new OrgChart("B");
+        const C = new OrgChart("C");
+        const D = new OrgChart("D");
+        const E = new OrgChart("E");
+        const F = new OrgChart("F");
+        const G = new OrgChart("G");
+        const H = new OrgChart("H");
+        const I = new OrgChart("I");
+        const J = new OrgChart("J");
+        const K = new OrgChart("K");
+        const L = new OrgChart("L");
+        const M = new OrgChart("M");
+        const N = new OrgChart("N");
+        const O = new OrgChart("O");
+        const P = new OrgChart("P");
+        const Q = new OrgChart("Q");
+        const R = new OrgChart("R");
+        const S = new OrgChart("S");
+        const T = new OrgChart("T");
+        const U = new OrgChart("U");
+        const V = new OrgChart("V");
+        const W = new OrgChart("W");
+        const X = new OrgChart("X");
+        const Y = new OrgChart("Y");
+        const Z = new OrgChart("Z");
+
+        A.directReports = [B, C, D, E, F];
+        B.directReports = [G, H, I];
+        C.directReports = [J];
+        D.directReports = [K, L];
+        E.directReports = [];
+        F.directReports = [M, N];
+        G.directReports = [];
+        H.directReports = [O, P, Q, R];
+        I.directReports = [];
+        J.directReports = [];
+        K.directReports = [S];
+        L.directReports = [];
+        M.directReports = [];
+        N.directReports = [];
+        O.directReports = [];
+        P.directReports = [T, U];
+        Q.directReports = [];
+        R.directReports = [V];
+        S.directReports = [];
+        T.directReports = [];
+        U.directReports = [];
+        V.directReports = [W, X, Y];
+        W.directReports = [];
+        X.directReports = [Z];
+        Y.directReports = [];
+        Z.directReports = [];
+
+        const solution = orgChart.solve(A, Z, M);
+        assert.equal(solution.name, "A");
+
+    }
+
+    test_7() {
+
+        /**
+         * {
+            "nodeId": "B"
+            }
+            View Outputs Side By Side
+            Input(s)
+            {
+            "orgChart": {
+                "nodes": [
+                {"directReports": ["B", "C", "D", "E", "F"], "id": "A", "name": "A"},
+                {"directReports": ["G", "H", "I"], "id": "B", "name": "B"},
+                {"directReports": ["J"], "id": "C", "name": "C"},
+                {"directReports": ["K", "L"], "id": "D", "name": "D"},
+                {"directReports": [], "id": "E", "name": "E"},
+                {"directReports": ["M", "N"], "id": "F", "name": "F"},
+                {"directReports": [], "id": "G", "name": "G"},
+                {"directReports": ["O", "P", "Q", "R"], "id": "H", "name": "H"},
+                {"directReports": [], "id": "I", "name": "I"},
+                {"directReports": [], "id": "J", "name": "J"},
+                {"directReports": ["S"], "id": "K", "name": "K"},
+                {"directReports": [], "id": "L", "name": "L"},
+                {"directReports": [], "id": "M", "name": "M"},
+                {"directReports": [], "id": "N", "name": "N"},
+                {"directReports": [], "id": "O", "name": "O"},
+                {"directReports": ["T", "U"], "id": "P", "name": "P"},
+                {"directReports": [], "id": "Q", "name": "Q"},
+                {"directReports": ["V"], "id": "R", "name": "R"},
+                {"directReports": [], "id": "S", "name": "S"},
+                {"directReports": [], "id": "T", "name": "T"},
+                {"directReports": [], "id": "U", "name": "U"},
+                {"directReports": ["W", "X", "Y"], "id": "V", "name": "V"},
+                {"directReports": [], "id": "W", "name": "W"},
+                {"directReports": ["Z"], "id": "X", "name": "X"},
+                {"directReports": [], "id": "Y", "name": "Y"},
+                {"directReports": [], "id": "Z", "name": "Z"}
+                ]
+            },
+            "reportOne": "O",
+            "reportTwo": "I",
+            "topManager": "A"
+            }
+         */
+        this.current_test_name = "Test 7 | O, I, and B";
+        const orgChart = new this.Problem();
+        const A = new OrgChart("A");
+        const B = new OrgChart("B");
+        const C = new OrgChart("C");
+        const D = new OrgChart("D");
+        const E = new OrgChart("E");
+        const F = new OrgChart("F");
+        const G = new OrgChart("G");
+        const H = new OrgChart("H");
+        const I = new OrgChart("I");
+        const J = new OrgChart("J");
+        const K = new OrgChart("K");
+        const L = new OrgChart("L");
+        const M = new OrgChart("M");
+        const N = new OrgChart("N");
+        const O = new OrgChart("O");
+        const P = new OrgChart("P");
+        const Q = new OrgChart("Q");
+        const R = new OrgChart("R");
+        const S = new OrgChart("S");
+        const T = new OrgChart("T");
+        const U = new OrgChart("U");
+        const V = new OrgChart("V");
+        const W = new OrgChart("W");
+        const X = new OrgChart("X");
+        const Y = new OrgChart("Y");
+        const Z = new OrgChart("Z");
+
+        A.directReports = [B, C, D, E, F];
+        B.directReports = [G, H, I];
+        C.directReports = [J];
+        D.directReports = [K, L];
+        E.directReports = [];
+        F.directReports = [M, N];
+        G.directReports = [];
+        H.directReports = [O, P, Q, R];
+        I.directReports = [];
+        J.directReports = [];
+        K.directReports = [S];
+        L.directReports = [];
+        M.directReports = [];
+        N.directReports = [];
+        O.directReports = [];
+        P.directReports = [T, U];
+        Q.directReports = [];
+        R.directReports = [V];
+        S.directReports = [];
+        T.directReports = [];
+        U.directReports = [];
+        V.directReports = [W, X, Y];
+        W.directReports = [];
+        X.directReports = [Z];
+        Y.directReports = [];
+        Z.directReports = [];
+
+        const solution = orgChart.solve(B, O, I);
+        assert.equal(solution.name, "B");
+
+    }
+
+
+}
+
+class InterviedwingStrings extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+
+    }
+
+    
+
+}
+
+
+
 
 const TEST_DICTIONARY = {
     'subarray-sort': SubarraySort,
@@ -7640,6 +8322,7 @@ const TEST_DICTIONARY = {
     'find-loop': FindLoop,
     'merge-linked-lists': mergeLinkedLists,
     'shift-linked-list': ShiftLinkedList,
+    'lowest-common-manager': LowestCommonManager,
 
 }
 
