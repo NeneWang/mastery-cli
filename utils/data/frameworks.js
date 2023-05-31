@@ -1340,7 +1340,7 @@ const python_frameworks = [
         term: "Skipping tables",
         description: "You have alembic setted up and you made revisions to your models.py file. You want to update your database with the new changes.",
         prompt: "Is there a way to do it? How? explain, no need to write the code down",
-        exmaple: ":m Yes, HERE I AM SKIPPING event table: \
+        exmaple: "Yes, HERE I AM SKIPPING event table: \
             def include_name(name, type_, parent_names):\n\
                 \"\"\"\n\
                 Skips the tables indicated\n\
