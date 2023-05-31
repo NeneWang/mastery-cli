@@ -105,9 +105,16 @@ class Quizzer {
         return get_random(potential_questions);
     }
 
+    /**
+     * Runs terms questions until the terms are done.
+     * @param {boolean} debug the debug flag
+     * @param {function} exitMethod the exit method
+     * @returns 
+     */
     forceLearnMode = async ({ debug = false, exitMethod = () => { } } = {}) => {
         let potential_questions = this.terms;
-        potential_questions = await this.getYoungest(potential_questions);
+        
+        potential_questions = await this.getYoungest(potential_questions, {limit: 2});
         if (debug) console.log("potential_questions", potential_questions);
         if (debug) console.log("length", potential_questions.length);
         let attempts = 0;
