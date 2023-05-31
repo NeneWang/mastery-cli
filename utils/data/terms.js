@@ -17,7 +17,7 @@ const layer_2 = true;
 const layer_3 = false;
 
 // Studying for Class Targetted. Start exclusive boolean this 1 month before finals.
-const study_cisc = false; 
+const study_cisc = true; 
 
 
 const study_legacy = false;
@@ -31,12 +31,13 @@ async function populateMasterDeck() {
 
     let decks = new TermStorage([], "Academic Terms");
 
-    const { react_terms, apex, flutter, IDE_S, chrome_extensions } = require('./frameworks');
+    const { react_terms, apex, flutter, IDE_S, chrome_extensions, python_frameworks } = require('./frameworks');
     decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(apex, "apex", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(flutter, "flutter", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(IDE_S, "IDEs", { is_active: layer_1 }));
     decks.addDeck(new TermStorage(chrome_extensions, "chrome extensions", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(python_frameworks, "python frameworks", { is_active: layer_1 }));
     
 
 

@@ -1311,5 +1311,33 @@ const chrome_extensions = [
 ]
 
 
+const python_frameworks = [
+    {
+        term: "setup migrations database",
+        description: "You are looking for a library to manage your postgresql database in your fastapi application. ",
+        prompt: "Describe installation of a useful library for th ecase",
+        example: "pip install alembic\n\
+        alembic init alembic\n\
+        \n\
+        then go into the alembic.ini file and change the sqlalchemy.url to your database url\n\\n\e.g.:\n\
+        sqlalchemy.url = postgresql://username:password@test-ddanalytics-rds-v2.cpcwi20k2qgg.us-east-1.rds.amazonaws.com/tablename\n\n\
+        Then add in alembic/env.py\n\
+        from alembic import context\n\
+        from logging.config import fileConfig\n\
+        etc\n\
+        "
 
-module.exports = { react_terms, apex, flutter: flutter_dart, IDE_S, chrome_extensions };
+    },
+    {
+        term: "alembic revise and upgrade",
+        description: "You have alembic setted up and you made revisions to your models.py file. You want to update your database with the new changes.",
+        prompt: "Provide the terminal commands for it",
+        example: "alembic revision --autogenerate -m 'added new column to table'\n\
+        alembic upgrade head\n\
+        "
+    }
+]
+
+
+
+module.exports = { react_terms, apex, flutter: flutter_dart, IDE_S, chrome_extensions, python_frameworks };
