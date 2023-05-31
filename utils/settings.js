@@ -38,6 +38,7 @@ module.exports = Settings = {
         "math"
     ], //Quick quizes enabled when commiting, 
     "quiz_allow_reattempts": 3,
+    "terms_force_mode_cards" : 2, //Cards fetched when in force mode.
     "strict_commit": false,
     "features_ignore": [
         "features",
