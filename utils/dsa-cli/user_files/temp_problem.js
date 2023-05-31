@@ -7,6 +7,11 @@ class ContainerWithMostWater {
 
 	    // gets Area by passing in the heights arr, the left and right index
         // TODO Complete the getArea function
+		const getArea = (height, left, right) => {
+			const width = right - left;
+			const height_min = Math.min(...getHeights(height, left, right));
+			return height_min * width;
+		}
 
         
 	    // Initial values
