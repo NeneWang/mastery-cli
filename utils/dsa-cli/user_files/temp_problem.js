@@ -1,7 +1,7 @@
 class Problem {
     solve(a, b) {
-        sum = a+b;
-        return;
+        const sum = a+b;
+        return sum;
     }
 }
 

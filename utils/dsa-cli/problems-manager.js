@@ -30,7 +30,7 @@ class ProblemsManager {
         return Object.keys(this.problems);
     }
 
-    get clozeProblemSlugs(){
+    get clozeProblemSlugs() {
         return cloze_problems_list.map(cloze_problem => cloze_problem.file_path); //Useful as there is an algorithm that checks this slugs in order to detect priority
     }
 
@@ -168,19 +168,22 @@ class ProblemsManager {
      * 
      * @returns {Problem} A random problem from the problems manager that has a cloze problem
      */
-    getRandomProblemSlugWithCloze(){
+    getRandomProblemSlugWithCloze() {
         // Get a random clozeProblem Slugs
-        console.log("cloze_problems_list", cloze_problems_list)
+        if (DEBUG) console.log("cloze_problems_list", cloze_problems_list)
         return get_random(cloze_problems_list);
     }
-    
+
 
     /**
      * Populates the template with the code inside of problem.file_path
      * @param {dict<problem>} problem The problem to populate the template with
      */
-    populateTemplate(problem) {
-        console.log("Populating template with ", problem);
+    populateTemplate(problem, {base=""}) {
+        if (DEBUG) console.log("Populating template with ", problem);
+        if(base != "") {
+            return this.copyFileToTemp(problem.file_path, {base: base});
+        }
         this.copyFileToTemp(problem.file_path);
     }
 
@@ -260,14 +263,14 @@ class ProblemsManager {
     async openTemporalProblemFile({ editor_instruction = "" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
 
-        await openEditorPlatformAgnostic(editor_instruction, {absolute_temp_file_path: absolute_temp_file_path})
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
 
     }
 
     async openSolutionFile(problem_slug, { editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.solution_filepath + problem_slug + '.js', "./");
 
-        await openEditorPlatformAgnostic(editor_instruction, {absolute_temp_file_path: absolute_temp_file_path})
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
 
     }
 
@@ -276,7 +279,7 @@ class ProblemsManager {
     async openBaseCodeFile(problem_slug, { editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.base_code_filepath + problem_slug + '.js', "./");
 
-        await openEditorPlatformAgnostic(editor_instruction, {absolute_temp_file_path: absolute_temp_file_path})
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
 
     }
 

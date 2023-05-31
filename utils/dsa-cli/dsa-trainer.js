@@ -169,9 +169,9 @@ class DSATrainer {
         // console.log("problem | problem received", problem);
 
         // Populate with that problem slug
-        this.problems_manager.copyFileToTemp(selectedClozeProblem.file_path, { base: Constants.PATHS.base_cloze });
+        // this.problems_manager.copyFileToTemp(selectedClozeProblem.file_path, { base: Constants.PATHS.base_cloze });
 
-        const problem_response = await this.solveProblem(problem, { populate_with_cloze_filepath: selectedClozeProblem.file_path });
+        const problem_response = await this.solveProblem(problem, { base: Constants.PATHS.base_cloze, populate_with_cloze_filepath: selectedClozeProblem.file_path });
 
         problem_response.is_problem_solved = problem_response.problem_status == Constants.ProblemStatus.solved;
         return problem_response;
@@ -216,12 +216,12 @@ class DSATrainer {
      * @param {boolean} tryUntilSolved If true, the problem will be reprompted until it is solved. If false, the problem will be solved once.
      * @returns {ProblemStatus} The status of the problem
      */
-    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, populate_problem = true, populate_with_cloze_filepath = "" } = {}) {
+    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, populate_problem = true, populate_with_cloze_filepath = "", base = "" } = {}) {
         if (populate_problem) {
 
             if (populate_with_cloze_filepath != "") {
 
-                this.problems_manager.populateTemplate({ file_path: populate_with_cloze_filepath });
+                this.problems_manager.populateTemplate(populate_with_cloze_filepath, { base: base });
             } else {
 
                 this.problems_manager.populateTemplate(problem);
@@ -459,7 +459,7 @@ class DSATrainer {
                             // TODO Submit the current code that was there at least.
 
                             return { status: Constants.ProblemStatus.solved, details: { failed_attempts: failed_attempts }, problem_details: problem_details };
-                            
+
                         }
                     }
                 })
