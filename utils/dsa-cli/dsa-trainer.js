@@ -221,7 +221,7 @@ class DSATrainer {
 
             if (populate_with_cloze_filepath != "") {
 
-                this.problems_manager.populateTemplate(populate_with_cloze_filepath, { base: base });
+                this.problems_manager.populateTemplate({ file_path: populate_with_cloze_filepath }, { base: base });
             } else {
 
                 this.problems_manager.populateTemplate(problem);
@@ -294,11 +294,11 @@ class DSATrainer {
             }
         */
 
-        let promblem_prompt = await getPromptDict(problem.slug);;
+        let promblem_prompt = await getPromptDict(problem.slug);
 
 
 
-        if (true) console.log("Problem prompt selected: ", promblem_prompt, "for problem", problem, "cloze?", problem.is_cloze);
+        if (DEBUG) console.log("Problem prompt selected: ", promblem_prompt, "for problem", problem, "cloze?", problem.is_cloze);
         renderPromptDescription(promblem_prompt, problem_details, { is_cloze: problem.is_cloze ?? false });
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
@@ -329,7 +329,7 @@ class DSATrainer {
      * @returns {Constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
      */
     async openAndTest(problem, { failed_attempts = 0 } = {}) {
-        console.log(
+        if (DEBUG) console.log(
             "Opening problem: ", problem.slug,
         );
         // Print the problem markdown.

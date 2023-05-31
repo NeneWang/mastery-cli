@@ -1335,6 +1335,44 @@ const python_frameworks = [
         example: "alembic revision --autogenerate -m 'added new column to table'\n\
         alembic upgrade head\n\
         "
+    },
+    {
+        term: "Skipping tables",
+        description: "You have alembic setted up and you made revisions to your models.py file. You want to update your database with the new changes.",
+        prompt: "Is there a way to do it? How? explain, no need to write the code down",
+        exmaple: ":m Yes, HERE I AM SKIPPING event table: \
+            def include_name(name, type_, parent_names):\n\
+                \"\"\"\n\
+                Skips the tables indicated\n\
+                \"\"\"\n\
+                if name in ['event']:\n\
+                    return False\n\
+                return True\n\
+            \n\
+            \n\
+            def run_migrations_online() -> None:\n\
+                \"\"\"Run migrations in 'online' mode.\n\
+            \n\
+                In this scenario we need to create an Engine\n\
+                and associate a connection with the context.\n\
+            \n\
+                \"\"\"\n\
+                connectable = engine_from_config(\n\
+                    config.get_section(config.config_ini_section),\n\
+                    prefix='sqlalchemy.',\n\
+                    poolclass=pool.NullPool,\n\
+                )\n\
+            \n\
+                with connectable.connect() as connection:\n\
+                    context.configure(\n\
+                        connection=connection,\n\
+                        target_metadata=target_metadata,\n\
+                        include_schemas=True,\n\
+                        include_name=include_name\n\
+                    )\n\
+            \n\
+                    with context.begin_transaction():\n\
+                        context.run_migrations()"
     }
 ]
 

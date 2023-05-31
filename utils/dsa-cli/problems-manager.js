@@ -180,7 +180,7 @@ class ProblemsManager {
      * @param {dict<problem>} problem The problem to populate the template with
      */
     populateTemplate(problem, {base=""} = {}) {
-        if (DEBUG) console.log("Populating template with ", problem);
+        if (DEBUG) console.log("Populating template with ", problem, " and base ", base);
         if(base != "") {
             return this.copyFileToTemp(problem.file_path, {base: base});
         }
