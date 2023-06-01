@@ -99,33 +99,6 @@ async function populateMasterDeck() {
     const { salesforce_experience } = require('./salesforce_certification');
     decks.addDeck(new TermStorage(salesforce_experience, "salesforce experience", { is_active: layer_2 }));
 
-    // Generic Term Generators
-    const filesData = [{
-        title: "mock-v1",
-        filename: "terms/mock.csv"
-    }];
-    const { TermGenerator } = require('./terms_generator');
-    const termGenerator = new TermGenerator(filesData);
-    const _ = await termGenerator.fetchTerms();
-    decks.addDecks(termGenerator.termStorageList(), { is_active: layer_1 });
-
-
-    const strategyFilesData = [
-        {
-            filename: "terms/strat_cloud_patterns.csv",
-            title: "Cloud-pattern"
-        },
-        {
-            filename: "terms/artificial-intelligence.csv",
-            title: "artificial-intelligence-strategy"
-        },
-    ];
-
-    const strategyGenerator = new TermGenerator(strategyFilesData, { default_prompt: "How could you use this?" });
-    const __ = await strategyGenerator.fetchTerms();
-    decks.addDecks(strategyGenerator.termStorageList(), { is_active: layer_1 });
-
-
 
     return decks;
 }
