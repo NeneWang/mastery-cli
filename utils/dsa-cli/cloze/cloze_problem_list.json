@@ -23,5 +23,20 @@
         "file_path": "three-number-sum-c2.js",
         "difficulty": 2,
         "problem_slug": "three-number-sum"
+    },
+    {
+        "file_path": "container-with-most-water-c1.js",
+        "difficulty": 2,
+        "problem_slug": "container-with-most-water"
+    },
+    {
+        "file_path": "container-with-most-water-c2.js",
+        "difficulty": 2,
+        "problem_slug": "container-with-most-water"
+    },
+    {
+        "file_path": "container-with-most-water-c3.js",
+        "difficulty": 2,
+        "problem_slug": "container-with-most-water"
     }
 ]

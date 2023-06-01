@@ -48,6 +48,7 @@ const { Demo, EDemo } = demos;
 	debug && log(flags);
 
 	maid.clearOnTalk = true;
+	
 
 	if (input.includes(cmInfo.commands.chart.code)) {
 		// Demo for showing charts
@@ -124,8 +125,8 @@ const { Demo, EDemo } = demos;
 			if (dsa_is_correct) {
 				(async () => {
 
-					const res = await increasePerformance("algo_w", problem_response.score_to_increase);
-					const res_2 = await increasePerformance("algo", 1);
+					await increasePerformance("algo_w", problem_response.score_to_increase);
+					await increasePerformance("algo", 1);
 
 				})();
 
