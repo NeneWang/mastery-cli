@@ -32,12 +32,12 @@ class CharacterReplacement {
         const frequencyMap = new Array(26).fill(0);
 
         while (right < s.length) {
-			// Starting with the right Keep increasing the right boundaries frequencies until reaches max length
-            const count = addRightFrequency(s, right, frequencyMap);
 			
+            // TODO Complete the following code so that hte right frequency is added to the map
+            // Starting with the right Keep increasing the right boundaries frequencies until reaches max length
+            
 			// longest being either the current count of that letter, or the longest letter seen on the past. Longest being the count of word with the longest leter found
-			longest = Math.max(longest, count);
-
+			
 			// Get the windoes length
             let window = right - left + 1;
             

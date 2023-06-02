@@ -12,14 +12,13 @@ class DailyTemperatures {
 
 		
         const canShrink = (stack, temperatures, day) => {
-			// Previous day as the output of the stack
-            const previousDay = stack[stack.length - 1]; //Get the last cold day in the stack. 
-			// Then get and compare with the temperature of the previous and current termperature to compute if it is warmer
-            const [prevTemperature, currTemperature] = [temperatures[previousDay], temperatures[day]];
-            const isWarmer = prevTemperature < currTemperature;
-				
+			// TODO: Complete the function
+            
+            // Previous day as the output of the stack
+            // Then get and compare with the temperature of the previous and current termperature to compute if it is warmer
+            	
 			// If the stack is less than 0 means that there is not to compare (last one cannot shrink)
-            return stack.length && isWarmer;
+            
         }
 
 		// Create the array of things to print
@@ -43,44 +42,6 @@ class DailyTemperatures {
 
         return days;
     }
-
-
-    /**
-     * https://leetcode.com/problems/daily-temperatures
-     * Time O(N) | Space O(1)
-     * @param {number[]} temperatures
-     * @return {number[]}
-     */
-    solve2(temperatures, hottest = 0) {
-
-
-		// Searches ahead how many days until it becomes hotter than the current temperature. starting from a certain date.
-        const search = (temperatures, day, temperature, days, dayCount = 1) => {
-            const isHotter = () => temperatures[day + dayCount] <= temperature;
-			// Note this optimization that adds the day count using previous calculations (made on the future dates) and then loops again to check if the dayCount + day is less than the temperature.
-            while (isHotter()) dayCount += days[day + dayCount];          /* Time O(N + N) */
-
-            days[day] = dayCount;                                         /* Ignore Space O(N) */
-        }
-
-        
-        const days = new Array(temperatures.length).fill(0);
-		
-        for (let day = (temperatures.length - 1); (0 <= day); day--) {/* Time O(N + N) */
-            const temperature = temperatures[day];
-
-            const isHotter = hottest <= temperature
-            if (isHotter) {
-                hottest = temperature;
-                continue;                                             /* Time O(N + N) */
-            }
-
-            search(temperatures, day, temperature, days);             /* Time O(N + N) | Ignore Space O(N) */
-        }
-
-        return days;
-    }
-
 
 }
 

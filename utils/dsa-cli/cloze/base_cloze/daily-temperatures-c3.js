@@ -36,51 +36,13 @@ class DailyTemperatures {
                 days[prevColdDay] = daysToWait;              /* Ignore Space O(N) */
             }
 
-            stack.push(day); // Push into the stack the last temperature checked   which will be the last cold temperature to be used to calculate the difference (Since the while-loop will break once the colder temperature is detected)
+            // TODO: Push into the stack the last temperature checked   which will be the last cold temperature to be used to calculate the difference (Since the while-loop will break once the colder temperature is detected)
         }
 
 		console.log("Days:", days);
 
         return days;
     }
-
-
-    /**
-     * https://leetcode.com/problems/daily-temperatures
-     * Time O(N) | Space O(1)
-     * @param {number[]} temperatures
-     * @return {number[]}
-     */
-    solve2(temperatures, hottest = 0) {
-
-
-		// Searches ahead how many days until it becomes hotter than the current temperature. starting from a certain date.
-        const search = (temperatures, day, temperature, days, dayCount = 1) => {
-            const isHotter = () => temperatures[day + dayCount] <= temperature;
-			// Note this optimization that adds the day count using previous calculations (made on the future dates) and then loops again to check if the dayCount + day is less than the temperature.
-            while (isHotter()) dayCount += days[day + dayCount];          /* Time O(N + N) */
-
-            days[day] = dayCount;                                         /* Ignore Space O(N) */
-        }
-
-        
-        const days = new Array(temperatures.length).fill(0);
-		
-        for (let day = (temperatures.length - 1); (0 <= day); day--) {/* Time O(N + N) */
-            const temperature = temperatures[day];
-
-            const isHotter = hottest <= temperature
-            if (isHotter) {
-                hottest = temperature;
-                continue;                                             /* Time O(N + N) */
-            }
-
-            search(temperatures, day, temperature, days);             /* Time O(N + N) | Ignore Space O(N) */
-        }
-
-        return days;
-    }
-
 
 }
 

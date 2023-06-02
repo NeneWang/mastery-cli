@@ -14,15 +14,7 @@ class CharacterReplacement {
         };
 
 		// Substract the frequency on the left
-        const subtractLeftFrequency = (s, left, map) => {
-
-            const char = s[left];
-            const index = getCode(char);
-
-            map[index]--;
-
-            return map[index];
-        };
+        //TODO Create a method to substract the frequency on the left once the window has been slided
 		
 		// Getting the encode by substracting the character with A characterCode
         const getCode = (char) => char.charCodeAt(0) - 'A'.charCodeAt(0);
