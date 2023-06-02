@@ -20,6 +20,9 @@ Other main features include:
 npm install -g maid-cli
 ```
 
+- You need to install nvim for the dsa option to work
+- Eventually you would be able to select your own editor.
+
 ## Usage
 
 Commiting a code and pushing it to HEAD

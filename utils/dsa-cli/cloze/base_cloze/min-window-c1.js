@@ -49,18 +49,7 @@ class MinWindow {
 
 		// addRightFrequency is a function is a helper function used by getWindowPointers to add a character to the window and update the frequency map returning the matched frequency map..
         const addRightFrequency = (s, right, frequencyMap, matched) => {
-            const char = s[right];
-
-            if (frequencyMap.has(char)) {
-				//set the frquency map reduce it to use that and matchit to see. 
-                frequencyMap.set(char, frequencyMap.get(char) - 1);
-
-				//If the frequency is less than 0 means that is at least once on the windows. I am guessing that if he match reqred is 2, it will start with 2 on the frequency map?
-                const isInWindow = 0 <= frequencyMap.get(char); //Because you dont want to continue counting if you arlready past the amount of number you need
-                if (isInWindow) matched++;
-            }
-
-            return matched;
+            // TODO: Complete add right frequency. and return the matched frequency map.
         };
 
 		// The subtractLeftFrequency function is a helper function used by getWindowPointers to remove a character from the window and update the frequency map.

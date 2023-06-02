@@ -14,10 +14,12 @@ class LenghtOfLongestSubString {
                 l++;
             }
 
+            // TODO: Add the rightmost letter then rotate and check if the newest subset ends up being indeed the largest.
+
 			// Add the rightmost letter then. 
-            set.add(s[r]);
+            
 			// You have to update the set size and the current max. Here to check if the newest subset ends up being indeed the largest.
-            max = Math.max(max, set.size);
+            
         }
         return max;
     }
