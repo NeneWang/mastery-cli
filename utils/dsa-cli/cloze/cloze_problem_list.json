@@ -35,8 +35,18 @@
         "problem_slug": "container-with-most-water"
     },
     {
-        "file_path": "container-with-most-water-c3.js",
+        "file_path": "trapping-rain-water-c1",
         "difficulty": 2,
-        "problem_slug": "container-with-most-water"
+        "problem_slug": "trapping-rain-water"
+    },
+    {
+        "file_path": "trapping-rain-water-c2",
+        "difficulty": 2,
+        "problem_slug": "trapping-rain-water"
+    },
+    {
+        "file_path": "trapping-rain-water-c3",
+        "difficulty": 2,
+        "problem_slug": "trapping-rain-water"
     }
 ]

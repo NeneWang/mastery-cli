@@ -89,7 +89,9 @@ const interview = [
         term: "wrong-food-order",
         prompt: "If you were at a business lunch and you ordered a rare steak and they brought it to you well done, what would you do?",
         description: "The interviewer is likely interested in understanding how I handle unexpected situations, how I communicate with others, and my problem-solving skills.",
-        example: "If the waiter brought me a well-done steak instead of the rare one I ordered, I'd probably crack a joke and say something like 'Looks like I'm not the only one who's hungry!' and laugh it off. Then, I would politely ask the waiter if they could bring me a new steak cooked to my liking. It's important to be polite, understanding and maintain a positive attitude in those types of situations. Plus, it's a great opportunity to show off your sense of humor and make the most out of a potentially awkward moment."
+        example: "In my opinion I am the type of guy that say food is food, I will probably eat it regardless, I dont want to create extra troubles for the waiter or make a scene and make the restaurant look bad\n\
+        I barely eat any steak because I dont have that money so I would honestly be happy to eat anything that is in front of me.\n\
+        If this is more of a problem solving question, perphaps I would lightly crack a joke and say something like 'Looks like I'm not the only one who's hungry!' and laugh it off. Then, I would politely ask the waiter if they could bring me a new steak cooked to my liking. It's important to be polite, understanding and maintain a positive attitude in those types of situations. Plus, it's a great opportunity to show off your sense of humor and make the most out of a potentially awkward moment."
     },
     {
         term: "doing-something-wrong",
@@ -156,13 +158,16 @@ const interview = [
         term: "why-this-job",
         prompt: "Why do you want this job?",
         description: "The interviewer is likely interested in understanding my motivation for applying, how well my skills align with the job requirements, and my potential fit with the company culture.",
-        example: "I'm excited about this job because it aligns perfectly with my passion for technology and my skills as a software engineer. The company's mission to make a positive impact on people's lives through technology also resonates with me, and I'm eager to contribute to that mission. Additionally, I appreciate the company's focus on employee growth and development, which aligns with my career goals. I believe that this company is an excellent fit for me, both in terms of the work I'll be doing and the culture of the organization."
+        example: "I'm excited about this job because I find gret joy increating useful tools, and solving problems or making people's life easier, and from what I have seen in this company mission and culture, you guys are looking forward. \
+        to also serve peoples need by providing the best quality service that matches the customer needs. \n\
+        The company's mission to make a positive impact on people's lives through technology also resonates with me, and I'm eager to contribute to that mission. Additionally, I appreciate the company's focus on employee growth and development, which aligns with my career goals. I believe that this company is an excellent fit for me, both in terms of the work I'll be doing and the culture of the organization."
     },
     {
         term: "career-goals",
         prompt: "Where would you like to be in your career five years from now?",
         description: "The interviewer is likely interested in understanding my career aspirations, my ability to set and achieve goals, and my potential fit with the company's long-term plans.",
-        example: "In five years, I see myself as a senior software engineer, leading a team of talented engineers and contributing to cutting-edge technologies that have a positive impact on society. I'm committed to continuous learning and growth, and I plan to take on new challenges and responsibilities that will help me develop as a professional. I believe that this company's focus on employee development and innovation will provide me with the opportunities I need to achieve my goals and reach my full potential."
+        example: "In five years, Perphaps is a little simple what I want to do, but I hope I can continue working as a software engineer in the company, my dreams is to be able to have a dependable job, and someday being able to make enough to start my own family, I love programming\n\
+        and I see myself as a senior software engineer, leading a team of talented engineers and contributing to cutting-edge technologies that have a positive impact on society. I'm committed to continuous learning and growth, and I plan to take on new challenges and responsibilities that will help me develop as a professional. I believe that this company's focus on employee development and innovation will provide me with the opportunities I need to achieve my goals and reach my full potential."
     },
     {
         term: "ideal-company",

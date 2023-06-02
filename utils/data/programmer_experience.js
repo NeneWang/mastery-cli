@@ -937,6 +937,16 @@ const git = [
         prompt: "Create a branch on the C2 Location",
         attachment: "./img/2023-05-10-11-23-18.png",
         example: "git branch bugWork HEAD~^2^",
+    },
+    {
+        term: "git | get the remote url",
+        prompt: "Get the remote origin url",
+        example: "git config --get remote.origin.url",
+    },
+    {
+        term: "git | set to a new remote url",
+        prompt: "Set the remote origin url to URL",
+        example: "git remote set-url origin URL"
     }
 ]
 

@@ -24,6 +24,7 @@ class ContainerWithMostWater {
             const area = getArea(height, left, right);
 
             // TODO: Complete the iteration so that it can figure out the max water container.
+            
 
     	    // Update the boundaries if the left is smaller 
 
