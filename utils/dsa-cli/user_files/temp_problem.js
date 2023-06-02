@@ -1,39 +1,49 @@
-class ThreeNumberSum {
-    threeSum(array) {
+class ContainerWithMostWater {
+    maxArea(height) {
 
-        const res = [];
-        array.sort((a, b) => a - b)
 
-        for (let i = 0; i < array.length; i++) {
-            const a = array[i];
-            if (a > 0) break;
-            if (i > 0 && a === array[i - 1]) continue;
+	    // Returns the heigths of the left and right given the arr of heights and 
+        const getHeights = (height, left, right) => [height[left], height[right]];
 
-            let l = i + 1;
-            let r = array.length - 1;
-            while (l < r) {
-                const threeSum = a + array[l] + array[r];
-                if (threeSum > 0) {
-                    r--;
-                } else if (threeSum < 0) {
-                    l++;
-                } else {
-                    res.push([a, array[l], array[r]]);
-                    l++;
-                    r--;
-                    // ## CREATE code to skip duplicates in js
-					while(array[l] == array[l-1] && l < r){
-						l++;
-					}
-                }
-            }
+	    // gets Area by passing in the heights arr, the left and right index
+        // TODO Complete the getArea function
+		const getArea = (height, left, right) => {
+			const common_height = Math.min(...getHeights(height, left, right));
+
+			const distance = right - left;
+			console.log("common heights", common_height, "distance", distance);
+			return common_height * distance;
+		} 
+
+        
+	    // Initial values
+        let [left, right, max] = [0, height.length - 1, 0];
+
+	    // While the left is younger than the right one go and tr getting the heights and then calculate the area. 
+        while (left < right) {
+            const [leftHeight, rightHeight] = getHeights(height, left, right);
+            const area = getArea(height, left, right);
+
+            max = Math.max(max, area);
+		
+	    // Update the boundaries if the left is smaller 
+            const isRightGreater = leftHeight <= rightHeight;
+            if (isRightGreater) left++;
+
+	    //The same for the less, until it finds the perfect boundary	
+            const isRightLess = rightHeight < leftHeight;
+            if (isRightLess) right--;
         }
-        return res;
+
+        return max;
     }
-    solve(array) {
-        return this.threeSum(array);
+
+
+    solve(heights) {
+        return this.maxArea(heights);
+
     }
 }
 
 
-module.exports = { Problem: ThreeNumberSum };
+module.exports = { Problem: ContainerWithMostWater };
