@@ -8282,14 +8282,152 @@ class LowestCommonManager extends ProblemTests {
 
 }
 
-class InterviedwingStrings extends ProblemTests {
+class InterweavingStrings extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
 
+        this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_3());
+        // this.tests.push(() => this.test_4());
+
     }
 
-    
+    test_1() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "algoexpert",
+            "three": "your-algodream-expertjob",
+            "two": "your-dream-job"
+            }
+         */
+
+        this.current_test_name = "Test 1 | algoexpert, your-algodream-expertjob, and your-dream-job";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("algoexpert", "your-dream-job", "your-algodream-expertjob");
+        assert.equal(solution, true);
+        // console.log("solution test_1", solution)
+
+    }
+
+    test_2() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "a",
+            "two": "b"
+            "three": "ab",
+            }
+         */
+
+        this.current_test_name = "Test 2 | a, ab, and b";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("a", "b", "ab");
+        assert.equal(solution, true);
+
+    }
+
+    test_3() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "a",
+            "two": "b"
+            "three": "ba",
+            }
+         */
+
+        this.current_test_name = "Test 3 | a, ba, and b";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("a", "b", "ba");
+        assert.equal(solution, true);
+    }
+
+    test_4() {
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "a",
+            "two": "b"
+            "three": "ac",
+            }
+         */
+
+        this.current_test_name = "Test 4 | a, ac, and b";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("a", "b", "ac");
+        assert.equal(solution, false);
+    }
+
+
+    test_5() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "abc",
+            "two": "def"
+            "three": "abcdef",
+            }
+         */
+
+        this.current_test_name = "Test 5 | abc, abcdef, and def";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("abc", "def", "abcdef");
+        assert.equal(solution, true);
+    }
+
+    test_6() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "abc",
+            "three": "adbecf",
+            "two": "def"
+            }
+         */
+
+        this.current_test_name = "Test 6 | abc, adbecf, and def";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("abc", "adbecf", "def");
+        assert.equal(solution, true);
+    }
+
+    test_7() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "abc",
+            "three": "deabcf",
+            "two": "def"
+            }
+         */
+
+        this.current_test_name = "Test 7 | abc, deabcf, and def";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("abc", "deabcf", "def");
+        assert.equal(solution, true);
+    }
+
+
+
+
+
 
 }
 
@@ -8323,6 +8461,7 @@ const TEST_DICTIONARY = {
     'merge-linked-lists': mergeLinkedLists,
     'shift-linked-list': ShiftLinkedList,
     'lowest-common-manager': LowestCommonManager,
+    'interweaving-strings': InterweavingStrings,
 
 }
 
