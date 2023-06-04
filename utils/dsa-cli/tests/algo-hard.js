@@ -8288,9 +8288,26 @@ class InterweavingStrings extends ProblemTests {
         super(Problem);
 
         this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
-        // this.tests.push(() => this.test_3());
-        // this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+        this.tests.push(() => this.test_11());
+        this.tests.push(() => this.test_12());
+        this.tests.push(() => this.test_13());
+        this.tests.push(() => this.test_14());
+        this.tests.push(() => this.test_15());
+        this.tests.push(() => this.test_16());
+        this.tests.push(() => this.test_17());
+        this.tests.push(() => this.test_18());
+        this.tests.push(() => this.test_19());
+        this.tests.push(() => this.test_20());
+
 
     }
 
@@ -8395,14 +8412,14 @@ class InterweavingStrings extends ProblemTests {
             Input(s)
             {
             "one": "abc",
-            "three": "adbecf",
             "two": "def"
+            "three": "adbecf",
             }
          */
 
         this.current_test_name = "Test 6 | abc, adbecf, and def";
         const interweavingStrings = new this.Problem();
-        const solution = interweavingStrings.solve("abc", "adbecf", "def");
+        const solution = interweavingStrings.solve("abc", "def", "adbecf");
         assert.equal(solution, true);
     }
 
@@ -8413,14 +8430,258 @@ class InterweavingStrings extends ProblemTests {
             Input(s)
             {
             "one": "abc",
-            "three": "deabcf",
             "two": "def"
+            "three": "deabcf",
             }
          */
 
-        this.current_test_name = "Test 7 | abc, deabcf, and def";
+        this.current_test_name = "Test 7 | abc, def and deabcf => true";
         const interweavingStrings = new this.Problem();
-        const solution = interweavingStrings.solve("abc", "deabcf", "def");
+        const solution = interweavingStrings.solve("abc", "def", "deabcf");
+        assert.equal(solution, true);
+    }
+
+    test_8(){
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "aabcc",
+            "two": "dbbca"
+            "three": "aadbbcbcac",
+            }
+         */
+
+
+        this.current_test_name = "Test 8 | aabcc, dbbca and aadbbcbcac => true";
+        const interweavingStrings = new this.Problem();
+            
+        const solution = interweavingStrings.solve("aabcc", "dbbca", "aadbbcbcac");
+        assert.equal(solution, true);
+    }
+
+
+    test_9(){
+       /**
+        * false
+        View Outputs Side By Side
+        Input(s)
+        {
+        "one": "aabcc",
+        "three": "aadbbbaccc",
+        "two": "dbbca"
+        } */ 
+
+
+        this.current_test_name = "Test 9 | aabcc, dbbca and aadbbbaccc => false";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("aabcc", "dbbca", "aadbbbaccc");
+        assert.equal(solution, false);
+
+    }
+
+    test_10(){
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "algoexpert",
+            "three": "ayloguore-xdpreeratm-job",
+            "two": "your-dream-job"
+            }
+         */
+
+        this.current_test_name = "Test 10 | algoexpert, your-dream-job and ayloguore-xdpreeratm-job => true";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("algoexpert", "your-dream-job", "ayloguore-xdpreeratm-job");
+        assert.equal(solution, true);
+            
+    }
+
+    test_11(){
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "aaaaaaa",
+            "two": "aaaabaaa"
+            "three": "aaaaaaaaaaaaaab",
+            }
+         */
+
+        this.current_test_name = "Test 11 | aaaaaaa, aaaabaaa and aaaaaaaaaaaaaab => false";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("aaaaaaa", "aaaabaaa", "aaaaaaaaaaaaaab");
+        assert.equal(solution, false);
+    }
+
+    test_12(){
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "aaaaaaa",
+            "two": "aaaaaaa"
+            "three": "aaaaaaaaaaaaaa",
+            }
+         */
+
+        this.current_test_name = "Test 12 | aaaaaaa, aaaaaaa and aaaaaaaaaaaaaa => true";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("aaaaaaa", "aaaaaaa", "aaaaaaaaaaaaaa");
+        assert.equal(solution, true);
+    }
+
+    test_13(){
+        /**
+         * true
+        View Outputs Side By Side
+        Input(s)
+        {
+        "one": "aacaaaa",
+        "two": "aaabaaa"
+        "three": "aaaabacaaaaaaa",
+        }
+         */
+
+        this.current_test_name = "Test 13 | aacaaaa, aaabaaa and aaaabacaaaaaaa => true";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("aacaaaa", "aaabaaa", "aaaabacaaaaaaa");
+        assert.equal(solution, true);
+    }
+
+    test_14(){
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "aacaaaa",
+            "three": "aaaacabaaaaaaa",
+            "two": "aaabaaa"
+            }
+         */
+
+        this.current_test_name = "Test 14 | aacaaaa, aaabaaa and aaaacabaaaaaaa => true";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("aacaaaa", "aaabaaa", "aaaacabaaaaaaa");
+        assert.equal(solution, true);
+    }
+
+
+    test_15(){
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "aacaaaa",
+            "three": "aaaaaacbaaaaaa",
+            "two": "aaabaaa"
+            }
+         */
+
+        this.current_test_name = "Test 15 | aacaaaa, aaabaaa and aaaaaacbaaaaaa => false";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("aacaaaa", "aaabaaa", "aaaaaacbaaaaaa");
+        assert.equal(solution, false);
+    }
+
+    test_16(){
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "algoexpert",
+            "three": "1your-algodream-expertjob",
+            "two": "your-dream-job"
+            }
+         */
+
+        this.current_test_name = "Test 16 | algoexpert, your-dream-job and 1your-algodream-expertjob => false";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("algoexpert", "your-dream-job", "1your-algodream-expertjob");
+        assert.equal(solution, false);
+
+    }
+
+
+    test_17(){
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "algoexpert",
+            "three": "your-algodream-expertjob1",
+            "two": "your-dream-job"
+            }
+         */
+
+        this.current_test_name = "Test 17 | algoexpert, your-dream-job and your-algodream-expertjob1 => false";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("algoexpert", "your-dream-job", "your-algodream-expertjob1");
+        assert.equal(solution, false);
+    }
+    
+
+    test_18(){
+
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "algoexpert",
+            "three": "your-algodream-expertjo",
+            "two": "your-dream-job"
+            }
+         */
+
+        this.current_test_name = "Test 18 | algoexpert, your-dream-job and your-algodream-expertjo => false";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("algoexpert", "your-dream-job", "your-algodream-expertjo");
+        assert.equal(solution, false);
+    }
+
+    test_19(){
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "ae",
+            "two": "e"
+            "three": "see",
+            }
+         */
+
+        this.current_test_name = "Test 19 | ae, e and see => false";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("ae", "e", "see");
+        assert.equal(solution, false);
+    }
+
+    test_20(){
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "one": "algo",
+            "three": "fralgogo",
+            "two": "frog"
+            }
+         */
+
+        this.current_test_name = "Test 20 | algo, frog and fralgogo => true";
+        const interweavingStrings = new this.Problem();
+        const solution = interweavingStrings.solve("algo", "frog", "fralgogo");
         assert.equal(solution, true);
     }
 
@@ -8428,8 +8689,9 @@ class InterweavingStrings extends ProblemTests {
 
 
 
-
 }
+
+
 
 
 
