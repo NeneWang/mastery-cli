@@ -8441,7 +8441,7 @@ class InterweavingStrings extends ProblemTests {
         assert.equal(solution, true);
     }
 
-    test_8(){
+    test_8() {
         /**
          * true
             View Outputs Side By Side
@@ -8456,22 +8456,22 @@ class InterweavingStrings extends ProblemTests {
 
         this.current_test_name = "Test 8 | aabcc, dbbca and aadbbcbcac => true";
         const interweavingStrings = new this.Problem();
-            
+
         const solution = interweavingStrings.solve("aabcc", "dbbca", "aadbbcbcac");
         assert.equal(solution, true);
     }
 
 
-    test_9(){
-       /**
-        * false
-        View Outputs Side By Side
-        Input(s)
-        {
-        "one": "aabcc",
-        "three": "aadbbbaccc",
-        "two": "dbbca"
-        } */ 
+    test_9() {
+        /**
+         * false
+         View Outputs Side By Side
+         Input(s)
+         {
+         "one": "aabcc",
+         "three": "aadbbbaccc",
+         "two": "dbbca"
+         } */
 
 
         this.current_test_name = "Test 9 | aabcc, dbbca and aadbbbaccc => false";
@@ -8481,7 +8481,7 @@ class InterweavingStrings extends ProblemTests {
 
     }
 
-    test_10(){
+    test_10() {
         /**
          * true
             View Outputs Side By Side
@@ -8497,10 +8497,10 @@ class InterweavingStrings extends ProblemTests {
         const interweavingStrings = new this.Problem();
         const solution = interweavingStrings.solve("algoexpert", "your-dream-job", "ayloguore-xdpreeratm-job");
         assert.equal(solution, true);
-            
+
     }
 
-    test_11(){
+    test_11() {
         /**
          * false
             View Outputs Side By Side
@@ -8518,7 +8518,7 @@ class InterweavingStrings extends ProblemTests {
         assert.equal(solution, false);
     }
 
-    test_12(){
+    test_12() {
         /**
          * true
             View Outputs Side By Side
@@ -8536,7 +8536,7 @@ class InterweavingStrings extends ProblemTests {
         assert.equal(solution, true);
     }
 
-    test_13(){
+    test_13() {
         /**
          * true
         View Outputs Side By Side
@@ -8554,7 +8554,7 @@ class InterweavingStrings extends ProblemTests {
         assert.equal(solution, true);
     }
 
-    test_14(){
+    test_14() {
         /**
          * true
             View Outputs Side By Side
@@ -8573,7 +8573,7 @@ class InterweavingStrings extends ProblemTests {
     }
 
 
-    test_15(){
+    test_15() {
         /**
          * false
             View Outputs Side By Side
@@ -8591,7 +8591,7 @@ class InterweavingStrings extends ProblemTests {
         assert.equal(solution, false);
     }
 
-    test_16(){
+    test_16() {
         /**
          * false
             View Outputs Side By Side
@@ -8611,7 +8611,7 @@ class InterweavingStrings extends ProblemTests {
     }
 
 
-    test_17(){
+    test_17() {
         /**
          * false
             View Outputs Side By Side
@@ -8628,9 +8628,9 @@ class InterweavingStrings extends ProblemTests {
         const solution = interweavingStrings.solve("algoexpert", "your-dream-job", "your-algodream-expertjob1");
         assert.equal(solution, false);
     }
-    
 
-    test_18(){
+
+    test_18() {
 
         /**
          * false
@@ -8649,7 +8649,7 @@ class InterweavingStrings extends ProblemTests {
         assert.equal(solution, false);
     }
 
-    test_19(){
+    test_19() {
         /**
          * false
             View Outputs Side By Side
@@ -8667,7 +8667,7 @@ class InterweavingStrings extends ProblemTests {
         assert.equal(solution, false);
     }
 
-    test_20(){
+    test_20() {
         /**
          * true
             View Outputs Side By Side
@@ -8691,7 +8691,248 @@ class InterweavingStrings extends ProblemTests {
 
 }
 
+class solveSudoku extends ProblemTests {
 
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+    }
+
+    test_1() {
+        /**
+           [7, 8, 0, 4, 0, 0, 1, 2, 0],
+            [6, 0, 0, 0, 7, 5, 0, 0, 9],
+            [0, 0, 0, 6, 0, 1, 0, 7, 8],
+            [0, 0, 7, 0, 4, 0, 2, 6, 0],
+            [0, 0, 1, 0, 5, 0, 9, 3, 0],
+            [9, 0, 4, 0, 6, 0, 0, 0, 5],
+            [0, 7, 0, 3, 0, 0, 0, 1, 2],
+            [1, 2, 0, 0, 0, 7, 4, 0, 0],
+            [0, 4, 9, 2, 0, 6, 0, 0, 7]
+            ]
+            Our Code's Output
+            [
+            [7, 8, 5, 4, 3, 9, 1, 2, 6],
+            [6, 1, 2, 8, 7, 5, 3, 4, 9],
+            [4, 9, 3, 6, 2, 1, 5, 7, 8],
+            [8, 5, 7, 9, 4, 3, 2, 6, 1],
+            [2, 6, 1, 7, 5, 8, 9, 3, 4],
+            [9, 3, 4, 1, 6, 2, 7, 8, 5],
+            [5, 7, 8, 3, 9, 4, 6, 1, 2],
+            [1, 2, 6, 5, 8, 7, 4, 9, 3],
+            [3, 4, 9, 2, 1, 6, 8, 5, 7]
+            ]
+         */
+
+        this.current_test_name = "Test 1 | 9x9 Sudoku";
+        const sudoku = new this.Problem();
+        const board = [
+            [7, 8, 0, 4, 0, 0, 1, 2, 0],
+            [6, 0, 0, 0, 7, 5, 0, 0, 9],
+            [0, 0, 0, 6, 0, 1, 0, 7, 8],
+            [0, 0, 7, 0, 4, 0, 2, 6, 0],
+            [0, 0, 1, 0, 5, 0, 9, 3, 0],
+            [9, 0, 4, 0, 6, 0, 0, 0, 5],
+            [0, 7, 0, 3, 0, 0, 0, 1, 2],
+            [1, 2, 0, 0, 0, 7, 4, 0, 0],
+            [0, 4, 9, 2, 0, 6, 0, 0, 7]
+        ];
+
+        const solution = sudoku.solve(board);
+        assert.deepEqual(solution, [
+            [7, 8, 5, 4, 3, 9, 1, 2, 6],
+            [6, 1, 2, 8, 7, 5, 3, 4, 9],
+            [4, 9, 3, 6, 2, 1, 5, 7, 8],
+            [8, 5, 7, 9, 4, 3, 2, 6, 1],
+            [2, 6, 1, 7, 5, 8, 9, 3, 4],
+            [9, 3, 4, 1, 6, 2, 7, 8, 5],
+            [5, 7, 8, 3, 9, 4, 6, 1, 2],
+            [1, 2, 6, 5, 8, 7, 4, 9, 3],
+            [3, 4, 9, 2, 1, 6, 8, 5, 7]
+        ]);
+
+    }
+
+
+    test_2() {
+        /**
+         * Expected Output
+            [
+            [1, 8, 5, 7, 3, 6, 2, 4, 9],
+            [3, 4, 6, 5, 2, 9, 1, 7, 8],
+            [2, 9, 7, 4, 8, 1, 6, 5, 3],
+            [5, 7, 8, 2, 9, 3, 4, 1, 6],
+            [9, 3, 2, 1, 6, 4, 7, 8, 5],
+            [6, 1, 4, 8, 5, 7, 9, 3, 2],
+            [4, 6, 3, 9, 1, 8, 5, 2, 7],
+            [7, 2, 9, 3, 4, 5, 8, 6, 1],
+            [8, 5, 1, 6, 7, 2, 3, 9, 4]
+            ]
+            Our Code's Output
+            [
+            [1, 8, 5, 7, 3, 6, 2, 4, 9],
+            [3, 4, 6, 5, 2, 9, 1, 7, 8],
+            [2, 9, 7, 4, 8, 1, 6, 5, 3],
+            [5, 7, 8, 2, 9, 3, 4, 1, 6],
+            [9, 3, 2, 1, 6, 4, 7, 8, 5],
+            [6, 1, 4, 8, 5, 7, 9, 3, 2],
+            [4, 6, 3, 9, 1, 8, 5, 2, 7],
+            [7, 2, 9, 3, 4, 5, 8, 6, 1],
+            [8, 5, 1, 6, 7, 2, 3, 9, 4]
+            ]
+         */
+
+        this.current_test_name = "Test 2 | 9x9 Sudoku";
+        const sudoku = new this.Problem();
+        const board = [
+            [0, 8, 5, 7, 3, 6, 2, 4, 0],
+            [3, 4, 6, 5, 2, 9, 1, 7, 8],
+            [2, 9, 7, 4, 8, 1, 6, 5, 3],
+            [5, 7, 8, 2, 9, 3, 4, 1, 6],
+            [9, 3, 2, 1, 6, 4, 7, 8, 5],
+            [6, 1, 4, 8, 5, 7, 9, 3, 2],
+            [4, 6, 3, 9, 1, 8, 5, 2, 7],
+            [7, 2, 9, 3, 4, 5, 8, 6, 1],
+            [8, 5, 1, 6, 7, 2, 3, 9, 4],
+        ];
+
+        const solution = sudoku.solve(board);
+        assert.deepEqual(solution, [
+            [1, 8, 5, 7, 3, 6, 2, 4, 9],
+            [3, 4, 6, 5, 2, 9, 1, 7, 8],
+            [2, 9, 7, 4, 8, 1, 6, 5, 3],
+            [5, 7, 8, 2, 9, 3, 4, 1, 6],
+            [9, 3, 2, 1, 6, 4, 7, 8, 5],
+            [6, 1, 4, 8, 5, 7, 9, 3, 2],
+            [4, 6, 3, 9, 1, 8, 5, 2, 7],
+            [7, 2, 9, 3, 4, 5, 8, 6, 1],
+            [8, 5, 1, 6, 7, 2, 3, 9, 4]
+        ]);
+    }
+
+    test_3() {
+        /**
+         * [
+            [5, 3, 8, 0, 1, 0, 0, 0, 0],
+    [0, 7, 9, 6, 0, 0, 0, 0, 0],
+    [0, 0, 4, 0, 0, 2, 0, 0, 0],
+    [0, 0, 7, 0, 2, 3, 4, 0, 0],
+    [0, 0, 5, 0, 8, 0, 0, 0, 9],
+    [4, 6, 0, 0, 9, 0, 0, 0, 1],
+    [0, 9, 0, 2, 3, 4, 1, 5, 0],
+    [0, 4, 1, 5, 0, 0, 2, 0, 0],
+    [0, 0, 0, 8, 6, 1, 0, 3, 0]
+            ]
+            Our Code's Output
+            [
+            [5, 3, 8, 9, 1, 7, 6, 4, 2],
+            [2, 7, 9, 6, 4, 8, 5, 1, 3],
+            [6, 1, 4, 3, 5, 2, 7, 9, 8],
+            [9, 8, 7, 1, 2, 3, 4, 6, 5],
+            [1, 2, 5, 4, 8, 6, 3, 7, 9],
+            [4, 6, 3, 7, 9, 5, 8, 2, 1],
+            [8, 9, 6, 2, 3, 4, 1, 5, 7],
+            [3, 4, 1, 5, 7, 9, 2, 8, 6],
+            [7, 5, 2, 8, 6, 1, 9, 3, 4]
+            ]
+
+         */
+
+        this.current_test_name = "Test 3 | 9x9 Sudoku";
+        const sudoku = new this.Problem();
+        const board = [
+            [5, 3, 8, 0, 1, 0, 0, 0, 0],
+            [0, 7, 9, 6, 0, 0, 0, 0, 0],
+            [0, 0, 4, 0, 0, 2, 0, 0, 0],
+            [0, 0, 7, 0, 2, 3, 4, 0, 0],
+            [0, 0, 5, 0, 8, 0, 0, 0, 9],
+            [4, 6, 0, 0, 9, 0, 0, 0, 1],
+            [0, 9, 0, 2, 3, 4, 1, 5, 0],
+            [0, 4, 1, 5, 0, 0, 2, 0, 0],
+            [0, 0, 0, 8, 6, 1, 0, 3, 0]
+        ];
+
+        const solution = sudoku.solve(board);
+        assert.deepEqual(solution, [
+            [5, 3, 8, 9, 1, 7, 6, 4, 2],
+            [2, 7, 9, 6, 4, 8, 5, 1, 3],
+            [6, 1, 4, 3, 5, 2, 7, 9, 8],
+            [9, 8, 7, 1, 2, 3, 4, 6, 5],
+            [1, 2, 5, 4, 8, 6, 3, 7, 9],
+            [4, 6, 3, 7, 9, 5, 8, 2, 1],
+            [8, 9, 6, 2, 3, 4, 1, 5, 7],
+            [3, 4, 1, 5, 7, 9, 2, 8, 6],
+            [7, 5, 2, 8, 6, 1, 9, 3, 4]
+        ]);
+    }
+
+    test_4() {
+        /**
+         * Our Code's Output
+        [
+          [5, 2, 4, 3, 9, 6, 1, 7, 8],
+          [3, 6, 7, 8, 4, 1, 9, 5, 2],
+          [1, 8, 9, 7, 5, 2, 3, 6, 4],
+          [2, 5, 1, 9, 7, 4, 8, 3, 6],
+          [9, 4, 3, 6, 8, 5, 2, 1, 7],
+          [8, 7, 6, 2, 1, 3, 5, 4, 9],
+          [6, 1, 5, 4, 2, 8, 7, 9, 3],
+          [7, 3, 2, 1, 6, 9, 4, 8, 5],
+          [4, 9, 8, 5, 3, 7, 6, 2, 1]
+        ]
+        View Outputs Side By Side
+        Input(s)
+        {
+          "board": [
+            [0, 2, 0, 0, 9, 0, 1, 0, 0],
+            [0, 0, 7, 8, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 3, 6, 0],
+            [0, 0, 1, 9, 0, 4, 0, 0, 0],
+            [0, 0, 0, 6, 0, 5, 0, 0, 7],
+            [8, 0, 0, 0, 0, 0, 0, 0, 9],
+            [0, 0, 0, 0, 2, 0, 0, 0, 0],
+            [7, 0, 0, 0, 0, 0, 0, 8, 5],
+            [4, 9, 0, 0, 3, 0, 0, 0, 0]
+          ]
+        }
+        
+         */
+
+        this.current_test_name = "Test 4 | 9x9 Sudoku";
+        const sudoku = new this.Problem();
+        const board = [
+            [0, 2, 0, 0, 9, 0, 1, 0, 0],
+            [0, 0, 7, 8, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 3, 6, 0],
+            [0, 0, 1, 9, 0, 4, 0, 0, 0],
+            [0, 0, 0, 6, 0, 5, 0, 0, 7],
+            [8, 0, 0, 0, 0, 0, 0, 0, 9],
+            [0, 0, 0, 0, 2, 0, 0, 0, 0],
+            [7, 0, 0, 0, 0, 0, 0, 8, 5],
+            [4, 9, 0, 0, 3, 0, 0, 0, 0]
+        ];
+
+        const solution = sudoku.solve(board);
+        assert.deepEqual(solution, [
+            [5, 2, 4, 3, 9, 6, 1, 7, 8],
+            [3, 6, 7, 8, 4, 1, 9, 5, 2],
+            [1, 8, 9, 7, 5, 2, 3, 6, 4],
+            [2, 5, 1, 9, 7, 4, 8, 3, 6],
+            [9, 4, 3, 6, 8, 5, 2, 1, 7],
+            [8, 7, 6, 2, 1, 3, 5, 4, 9],
+            [6, 1, 5, 4, 2, 8, 7, 9, 3],
+            [7, 3, 2, 1, 6, 9, 4, 8, 5],
+            [4, 9, 8, 5, 3, 7, 6, 2, 1]
+        ]);
+
+
+
+    }
+
+}
 
 
 
@@ -8724,6 +8965,7 @@ const TEST_DICTIONARY = {
     'shift-linked-list': ShiftLinkedList,
     'lowest-common-manager': LowestCommonManager,
     'interweaving-strings': InterweavingStrings,
+    'solve-sudoku': solveSudoku,
 
 }
 
