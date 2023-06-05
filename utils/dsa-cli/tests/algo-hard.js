@@ -8935,6 +8935,94 @@ class solveSudoku extends ProblemTests {
 }
 
 
+class GenerateDivTags extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+
+    }
+
+    test_1() {
+
+        /**
+         * Our Code's Output
+            ["<div><div><div></div></div></div>", "<div><div></div><div></div></div>", "<div><div></div></div><div></div>", "<div></div><div><div></div></div>", "<div></div><div></div><div></div>"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numberOfTags": 3
+            }
+         */
+
+        this.current_test_name = "Test 1 | 3 div tags";
+        const generateDivTags = new this.Problem();
+        const solution = generateDivTags.solve(3);
+
+        assert.deepEqual(solution, ["<div><div><div></div></div></div>", "<div><div></div><div></div></div>", "<div><div></div></div><div></div>", "<div></div><div><div></div></div>", "<div></div><div></div><div></div>"]);
+    }
+
+    test_2() {
+        /**
+         * Our Code's Output
+        ["<div><div></div></div>", "<div></div><div></div>"]
+        View Outputs Side By Side
+        Input(s)
+        {
+        "numberOfTags": 2
+        }
+         */
+
+        this.current_test_name = "Test 2 | 2 div tags";
+        const generateDivTags = new this.Problem();
+        const solution = generateDivTags.solve(2);
+
+        assert.deepEqual(solution, ["<div><div></div></div>", "<div></div><div></div>"]);
+
+    }
+
+    test_3() {
+        /**
+         * ["<div></div>"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numberOfTags": 1
+            }
+         */
+
+        this.current_test_name = "Test 3 | 1 div tag";
+        const generateDivTags = new this.Problem();
+        const solution = generateDivTags.solve(1);
+
+        assert.deepEqual(solution, ["<div></div>"]);
+    }
+
+    test_4() {
+        /**
+         * ["<div><div><div><div></div></div></div></div>", "<div><div><div></div><div></div></div></div>", "<div><div><div></div></div><div></div></div>", "<div><div><div></div></div></div><div></div>", "<div><div></div><div><div></div></div></div>", "<div><div></div><div></div><div></div></div>", "<div><div></div><div></div></div><div></div>", "<div><div></div></div><div><div></div></div>", "<div><div></div></div><div></div><div></div>", "<div></div><div><div><div></div></div></div>", "<div></div><div><div></div><div></div></div>", "<div></div><div><div></div></div><div></div>", "<div></div><div></div><div><div></div></div>", "<div></div><div></div><div></div><div></div>"]
+            View Outputs Side By Side
+            Input(s)
+            {
+            "numberOfTags": 4
+            }
+         */
+
+        this.current_test_name = "Test 4 | 4 div tags";
+        const generateDivTags = new this.Problem();
+        const solution = generateDivTags.solve(4);
+
+        assert.deepEqual(solution, ["<div><div><div><div></div></div></div></div>", "<div><div><div></div><div></div></div></div>", "<div><div><div></div></div><div></div></div>", "<div><div><div></div></div></div><div></div>", "<div><div></div><div><div></div></div></div>", "<div><div></div><div></div><div></div></div>", "<div><div></div><div></div></div><div></div>", "<div><div></div></div><div><div></div></div>", "<div><div></div></div><div></div><div></div>", "<div></div><div><div><div></div></div></div>", "<div></div><div><div></div><div></div></div>", "<div></div><div><div></div></div><div></div>", "<div></div><div></div><div><div></div></div>", "<div></div><div></div><div></div><div></div>"]);
+    }
+
+
+}
+
+
+
 
 
 const TEST_DICTIONARY = {
@@ -8966,6 +9054,7 @@ const TEST_DICTIONARY = {
     'lowest-common-manager': LowestCommonManager,
     'interweaving-strings': InterweavingStrings,
     'solve-sudoku': solveSudoku,
+    'generate-div-tags': GenerateDivTags,
 
 }
 
