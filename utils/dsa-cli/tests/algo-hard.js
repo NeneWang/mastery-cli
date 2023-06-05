@@ -9021,6 +9021,377 @@ class GenerateDivTags extends ProblemTests {
 
 }
 
+class AmbiguousMeasurements extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+        this.tests.push(() => this.test_11());
+        this.tests.push(() => this.test_12());
+        this.tests.push(() => this.test_13());
+        this.tests.push(() => this.test_14());
+        this.tests.push(() => this.test_15());
+    }
+
+    test_1() {
+        /**
+         * Our Code's Output
+            true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "high": 2300,
+            "low": 2100,
+            "measuringCups": [
+                [200, 210],
+                [450, 465],
+                [800, 850]
+            ]
+            }
+         */
+
+        this.current_test_name = "Test 1 | 2300, 2100 and [[200, 210], [450, 465], [800, 850]] => true";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(2300, 2100, [[200, 210], [450, 465], [800, 850]]);
+
+        assert.equal(solution, true);
+
+    }
+
+    test_2() {
+        /**
+         * Our Code's Output
+            false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "high": 20,
+            "low": 10,
+            "measuringCups": [
+                [200, 210]
+            ]
+            }
+         */
+
+        this.current_test_name = "Test 2 | 20, 10 and [[200, 210]] => false";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(20, 10, [[200, 210]]);
+
+        assert.equal(solution, false);
+    }
+
+    test_3() {
+        /**
+         * Our Code's Output
+            true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "high": 2300,
+            "low": 2100,
+            "measuringCups": [
+                [230, 240],
+                [290, 310],
+                [500, 515]
+            ]
+            }
+         */
+
+        this.current_test_name = "Test 3 | 2300, 2100 and [[230, 240], [290, 310], [500, 515]] => true";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(2300, 2100, [[230, 240], [290, 310], [500, 515]]);
+
+        assert.equal(solution, true);
+    }
+
+    test_4() {
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "high": 101,
+            "low": 100,
+            "measuringCups": [
+                [1, 3],
+                [2, 4],
+                [5, 6]
+            ]
+            }
+         */
+
+        this.current_test_name = "Test 4 | 101, 100 and [[1, 3], [2, 4], [5, 6]] => false";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(101, 100, [[1, 3], [2, 4], [5, 6]]);
+
+        assert.equal(solution, false);
+
+    }
+
+    test_5() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "high": 120,
+            "low": 100,
+            "measuringCups": [
+                [1, 3],
+                [2, 4],
+                [5, 6]
+            ]
+            }
+         */
+
+        this.current_test_name = "Test 5 | 120, 100 and [[1, 3], [2, 4], [5, 6]] => true";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(120, 100, [[1, 3], [2, 4], [5, 6]]);
+
+        assert.equal(solution, true);
+    }
+
+
+    test_6() {
+        /**true
+        View Outputs Side By Side
+        Input(s)
+        {
+        "high": 120,
+        "low": 100,
+        "measuringCups": [
+            [1, 3],
+            [2, 4],
+            [5, 6]
+        ]
+        } */
+
+        this.current_test_name = "Test 6 | 120, 100 and [[1, 3], [2, 4], [5, 6]] => true";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(120, 100, [[1, 3], [2, 4], [5, 6]]);
+        assert.equal(solution, true);
+
+    }
+
+    test_7() {
+        /**
+         * true
+        View Outputs Side By Side
+        Input(s)
+        {
+        "high": 12,
+        "low": 10,
+        "measuringCups": [
+            [1, 3],
+            [2, 4],
+            [5, 6],
+            [10, 20]
+        ]
+        }
+         */
+
+        this.current_test_name = "Test 7 | 12, 10 and [[1, 3], [2, 4], [5, 6], [10, 20]] => true";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(12, 10, [[1, 3], [2, 4], [5, 6], [10, 20]]);
+        assert.equal(solution, true);
+    }
+
+
+    test_8() {
+        /**
+         * false
+        View Outputs Side By Side
+        Input(s)
+        {
+        "high": 1050,
+        "low": 1000,
+        "measuringCups": [
+            [50, 60],
+            [100, 120],
+            [20, 40],
+            [10, 15],
+            [400, 500]
+        ]
+        }
+         */
+
+        this.current_test_name = "Test 8 | 1050, 1000 and [[50, 60], [100, 120], [20, 40], [10, 15], [400, 500]] => false";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(1050, 1000, [[50, 60], [100, 120], [20, 40], [10, 15], [400, 500]]);
+        assert.equal(solution, false);
+    }
+
+    test_9() {
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "high": 1200,
+            "low": 1000,
+            "measuringCups": [
+                [50, 65],
+                [100, 120],
+                [20, 40],
+                [10, 15],
+                [400, 500]
+            ]
+            }
+         */
+
+        this.current_test_name = "Test 9 | 1200, 1000 and [[50, 65], [100, 120], [20, 40], [10, 15], [400, 500]] => true";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(1200, 1000, [[50, 65], [100, 120], [20, 40], [10, 15], [400, 500]]);
+        assert.equal(solution, true);
+    }
+
+    test_10() {
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "high": 3300,
+            "low": 3000,
+            "measuringCups": [
+                [50, 65],
+                [100, 120],
+                [20, 40],
+                [10, 15],
+                [400, 500],
+                [300, 350],
+                [10, 25]
+            ]
+            }
+         */
+
+        this.current_test_name = "Test 10 | 3300, 3000 and [[50, 65], [100, 120], [20, 40], [10, 15], [400, 500], [300, 350], [10, 25]] => false";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(3300, 3000, [[50, 65], [100, 120], [20, 40], [10, 15], [400, 500], [300, 350], [10, 25]]);
+        assert.equal(solution, false);
+    }
+
+    test_11() {
+        /**
+         * false
+        View Outputs Side By Side
+        Input(s)
+        {
+        "high": 1050,
+        "low": 1000,
+        "measuringCups": [
+            [50, 60],
+            [100, 120],
+            [20, 40],
+            [400, 500]
+        ]
+        }
+         */
+
+        this.current_test_name = "Test 11 | 1050, 1000 and [[50, 60], [100, 120], [20, 40], [400, 500]] => false";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(1050, 1000, [[50, 60], [100, 120], [20, 40], [400, 500]]);
+        assert.equal(solution, false);
+
+
+    }
+
+    test_12() {
+        /**
+         * false
+            View Outputs Side By Side
+            Input(s)
+            {
+            "high": 200,
+            "low": 200,
+            "measuringCups": [
+                [50, 65]
+            ]
+            }
+         */
+
+        this.current_test_name = "Test 12 | 200, 200 and [[50, 65]] => false";
+        const ambiguousMeasurements = new this.Problem();
+
+        const solution = ambiguousMeasurements.solve(200, 200, [[50, 65]]);
+        assert.equal(solution, false);
+    }
+
+    test_13() {
+        /**
+         * true
+        View Outputs Side By Side
+        Input(s)
+        {
+        "high": 200,
+        "low": 200,
+        "measuringCups": [
+            [50, 50]
+        ]
+        }
+         */
+
+        this.current_test_name = "Test 13 | 200, 200 and [[50, 50]] => true";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(200, 200, [[50, 50]]);
+        assert.equal(solution, true);
+    }
+
+    test_14() {
+        /**
+         * true
+        View Outputs Side By Side
+        Input(s)
+        {
+        "high": 200,
+        "low": 200,
+        "measuringCups": [
+            [50, 50],
+            [50, 51]
+        ]
+        }
+         */
+
+        this.current_test_name = "Test 14 | 200, 200 and [[50, 50], [50, 51]] => true";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(200, 200, [[50, 50], [50, 51]]);
+        assert.equal(solution, true);
+    }
+
+    test_15(){
+        /**
+         * true
+            View Outputs Side By Side
+            Input(s)
+            {
+            "high": 1000,
+            "low": 0,
+            "measuringCups": [
+                [100, 150],
+                [1000, 2000]
+            ]
+            }
+         */
+
+        this.current_test_name = "Test 15 | 1000, 0 and [[100, 150], [1000, 2000]] => true";
+        const ambiguousMeasurements = new this.Problem();
+        const solution = ambiguousMeasurements.solve(1000, 0, [[100, 150], [1000, 2000]]);
+        assert.equal(solution, true);
+    }
+
+
+}
+
 
 
 
@@ -9055,6 +9426,7 @@ const TEST_DICTIONARY = {
     'interweaving-strings': InterweavingStrings,
     'solve-sudoku': solveSudoku,
     'generate-div-tags': GenerateDivTags,
+    'ambiguous-measurements': AmbiguousMeasurements,
 
 }
 
