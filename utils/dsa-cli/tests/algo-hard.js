@@ -9368,7 +9368,7 @@ class AmbiguousMeasurements extends ProblemTests {
         assert.equal(solution, true);
     }
 
-    test_15(){
+    test_15() {
         /**
          * true
             View Outputs Side By Side
@@ -9388,6 +9388,338 @@ class AmbiguousMeasurements extends ProblemTests {
         const solution = ambiguousMeasurements.solve(1000, 0, [[100, 150], [1000, 2000]]);
         assert.equal(solution, true);
     }
+
+
+}
+
+class ShiftedBinarySearch extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+        this.tests.push(() => this.test_5());
+        this.tests.push(() => this.test_6());
+        this.tests.push(() => this.test_7());
+        this.tests.push(() => this.test_8());
+        this.tests.push(() => this.test_9());
+        this.tests.push(() => this.test_10());
+        this.tests.push(() => this.test_11());
+        this.tests.push(() => this.test_12());
+        this.tests.push(() => this.test_13());
+        this.tests.push(() => this.test_14());
+        this.tests.push(() => this.test_15());
+        this.tests.push(() => this.test_16());
+    }
+
+
+    test_1() {
+        /**
+         * Our Code's Output
+            8
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [45, 61, 71, 72, 73, 0, 1, 21, 33, 37],
+            "target": 33
+            }
+         */
+
+        this.current_test_name = "Test 1 | [45, 61, 71, 72, 73, 0, 1, 21, 33, 37] and 33 => 8";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([45, 61, 71, 72, 73, 0, 1, 21, 33, 37], 33);
+        assert.equal(solution, 8);
+    }
+
+    test_2() {
+        /**
+         * Our Code's Output
+            2
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [5, 23, 111, 1],
+            "target": 111
+            }
+         */
+
+        this.current_test_name = "Test 2 | [5, 23, 111, 1] and 111 => 2";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([5, 23, 111, 1], 111);
+        assert.equal(solution, 2);
+    }
+
+    test_3() {
+        /**
+         * 2
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [111, 1, 5, 23],
+            "target": 5
+            }
+         */
+
+        this.current_test_name = "Test 3 | [111, 1, 5, 23] and 5 => 2";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([111, 1, 5, 23], 5);
+    }
+
+    test_4() {
+        /**
+         * Our Code's Output
+            -1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [23, 111, 1, 5],
+            "target": 35
+            }
+         */
+
+        this.current_test_name = "Test 4 | [23, 111, 1, 5] and 35 => -1";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([23, 111, 1, 5], 35);
+        assert.equal(solution, -1);
+
+    }
+
+    test_5(){
+        /**
+         * Our Code's Output
+            7
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [61, 71, 72, 73, 0, 1, 21, 33, 37, 45],
+            "target": 33
+            }
+         */
+
+        this.current_test_name = "Test 5 | [61, 71, 72, 73, 0, 1, 21, 33, 37, 45] and 33 => 7";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([61, 71, 72, 73, 0, 1, 21, 33, 37, 45], 33);
+        assert.equal(solution, 7);
+
+    }
+
+    test_6(){
+        /**
+         * Our Code's Output
+            0
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [72, 73, 0, 1, 21, 33, 37, 45, 61, 71],
+            "target": 72
+            }
+         */
+
+        this.current_test_name = "Test 6 | [72, 73, 0, 1, 21, 33, 37, 45, 61, 71] and 72 => 0";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([72, 73, 0, 1, 21, 33, 37, 45, 61, 71], 72);
+        assert.equal(solution, 0);
+    }
+
+    test_7(){
+        /**
+         * 
+        View Outputs Side By Side
+        Input(s)
+        {
+        "array": [71, 72, 73, 0, 1, 21, 33, 37, 45, 61],
+        "target": 73
+        }
+         */
+
+        this.current_test_name = "Test 7 | [71, 72, 73, 0, 1, 21, 33, 37, 45, 61] and 73 => 2";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([71, 72, 73, 0, 1, 21, 33, 37, 45, 61], 73);
+        assert.equal(solution, 2);
+    }
+
+    test_8(){
+        /**
+         * Our Code's Output
+            -1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [73, 0, 1, 21, 33, 37, 45, 61, 71, 72],
+            "target": 70
+            }
+         */
+
+        this.current_test_name = "Test 8 | [73, 0, 1, 21, 33, 37, 45, 61, 71, 72] and 70 => -1";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([73, 0, 1, 21, 33, 37, 45, 61, 71, 72], 70);
+        assert.equal(solution, -1);
+    }
+
+    test_9(){
+        /**
+         * Our Code's Output
+        7
+        View Outputs Side By Side
+        Input(s)
+        {
+        "array": [33, 37, 45, 61, 71, 72, 73, 355, 0, 1, 21],
+        "target": 355
+        }
+         */
+
+        this.current_test_name = "Test 9 | [33, 37, 45, 61, 71, 72, 73, 355, 0, 1, 21] and 355 => 7";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([33, 37, 45, 61, 71, 72, 73, 355, 0, 1, 21], 355);
+        assert.equal(solution, 7);
+    }
+
+    test_10(){
+        /**
+         * ur Code's Output
+            -1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [33, 37, 45, 61, 71, 72, 73, 355, 0, 1, 21],
+            "target": 354
+            }
+         */
+
+        this.current_test_name = "Test 10 | [33, 37, 45, 61, 71, 72, 73, 355, 0, 1, 21] and 354 => -1";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([33, 37, 45, 61, 71, 72, 73, 355, 0, 1, 21], 354);
+        assert.equal(solution, -1);
+    }
+
+    test_11(){
+        /**
+         * Our Code's Output
+            0
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [45, 61, 71, 72, 73, 0, 1, 21, 33, 37],
+            "target": 45
+            }
+        */
+        this.current_test_name = "Test 11 | [45, 61, 71, 72, 73, 0, 1, 21, 33, 37] and 45 => 0";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([45, 61, 71, 72, 73, 0, 1, 21, 33, 37], 45);
+        assert.equal(solution, 0);
+
+    }
+
+    test_12(){
+        /**
+         * Our Code's Output
+            1
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [45, 61, 71, 72, 73, 0, 1, 21, 33, 37],
+            "target": 61
+            }
+         */
+
+        this.current_test_name = "Test 12 | [45, 61, 71, 72, 73, 0, 1, 21, 33, 37] and 61 => 1";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([45, 61, 71, 72, 73, 0, 1, 21, 33, 37], 61);
+        assert.equal(solution, 1);
+    }
+
+    test_13(){
+        /**
+         * Our Code's Output
+            2
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [45, 61, 71, 72, 73, 0, 1, 21, 33, 37],
+            "target": 71
+            }
+         */
+
+        this.current_test_name = "Test 13 | [45, 61, 71, 72, 73, 0, 1, 21, 33, 37] and 71 => 2";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([45, 61, 71, 72, 73, 0, 1, 21, 33, 37], 71);
+        assert.equal(solution, 2);
+    }
+
+
+    test_14(){
+        /**
+         * 3
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [45, 61, 71, 72, 73, 0, 1, 21, 33, 37],
+            "target": 72
+            }
+         */
+
+        this.current_test_name = "Test 14 | [45, 61, 71, 72, 73, 0, 1, 21, 33, 37] and 72 => 3";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([45, 61, 71, 72, 73, 0, 1, 21, 33, 37], 72);
+        assert.equal(solution, 3);
+    }
+
+    test_15(){
+        /**
+         * Our Code's Output
+            4
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [45, 61, 71, 72, 73, 0, 1, 21, 33, 37],
+            "target": 73
+            }
+         */
+
+        this.current_test_name = "Test 15 | [45, 61, 71, 72, 73, 0, 1, 21, 33, 37] and 73 => 4";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([45, 61, 71, 72, 73, 0, 1, 21, 33, 37], 73);
+        assert.equal(solution, 4);
+    }
+
+    test_16(){
+        /**
+         * Our Code's Output
+            5
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [45, 61, 71, 72, 73, 0, 1, 21, 33, 37],
+            "target": 0
+            }
+         */
+
+        this.current_test_name = "Test 16 | [45, 61, 71, 72, 73, 0, 1, 21, 33, 37] and 0 => 5";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([45, 61, 71, 72, 73, 0, 1, 21, 33, 37], 0);
+        assert.equal(solution, 5);
+    }
+
+    test_17(){
+        /**
+         * 6
+            View Outputs Side By Side
+            Input(s)
+            {
+            "array": [45, 61, 71, 72, 73, 0, 1, 21, 33, 37],
+            "target": 1
+            }
+         */
+
+        this.current_test_name = "Test 17 | [45, 61, 71, 72, 73, 0, 1, 21, 33, 37] and 1 => 6";
+        const shiftedBinarySearch = new this.Problem();
+        const solution = shiftedBinarySearch.solve([45, 61, 71, 72, 73, 0, 1, 21, 33, 37], 1);
+        assert.equal(solution, 6);
+    }
+
 
 
 }
@@ -9427,6 +9759,7 @@ const TEST_DICTIONARY = {
     'solve-sudoku': solveSudoku,
     'generate-div-tags': GenerateDivTags,
     'ambiguous-measurements': AmbiguousMeasurements,
+    'shifted-binary-search': ShiftedBinarySearch,
 
 }
 

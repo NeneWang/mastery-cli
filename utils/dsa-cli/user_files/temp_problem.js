@@ -6,14 +6,13 @@ class ContainerWithMostWater {
         const getHeights = (height, left, right) => [height[left], height[right]];
 
 	    // gets Area by passing in the heights arr, the left and right index
-        // TODO Complete the getArea function
-		const getArea = (height, left, right) => {
-			const common_height = Math.min(...getHeights(height, left, right));
+        const getArea = (height, left, right) => {
+            const [leftHeight, rightHeight] = getHeights(height, left, right);
+            const _height = Math.min(leftHeight, rightHeight);
+            const width = right - left;
 
-			const distance = right - left;
-			console.log("common heights", common_height, "distance", distance);
-			return common_height * distance;
-		} 
+            return _height * width;
+        };
 
         
 	    // Initial values
@@ -24,15 +23,12 @@ class ContainerWithMostWater {
             const [leftHeight, rightHeight] = getHeights(height, left, right);
             const area = getArea(height, left, right);
 
-            max = Math.max(max, area);
-		
-	    // Update the boundaries if the left is smaller 
-            const isRightGreater = leftHeight <= rightHeight;
-            if (isRightGreater) left++;
+            // TODO: Complete the iteration so that it can figure out the max water container.
+            
 
-	    //The same for the less, until it finds the perfect boundary	
-            const isRightLess = rightHeight < leftHeight;
-            if (isRightLess) right--;
+    	    // Update the boundaries if the left is smaller 
+
+	        //The same for the less, until it finds the perfect boundary	
         }
 
         return max;
