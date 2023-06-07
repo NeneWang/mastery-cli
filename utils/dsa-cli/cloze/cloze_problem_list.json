@@ -88,5 +88,51 @@
         "file_path": "max-profit-c3.js",
         "difficulty": 2,
         "problem_slug": "max-profit"
+    },
+    {
+        "file_path": "min-window-c1.js",
+        "difficulty": 1,
+        "problem_slug": "min-window"
+    },
+    {
+        "file_path": "min-window-c2.js",
+        "difficulty": 2,
+        "problem_slug": "min-window"
+    },
+    {
+        "file_path": "min-window-c3.js",
+        "difficulty": 2,
+        "problem_slug": "min-window"
+    },
+    {
+        "file_path": "min-window-c4.js",
+        "difficulty": 2,
+        "problem_slug": "min-window"
+    },
+    {
+        "file_path": "max-sliding-window-c1.js",
+        "difficulty": 2,
+        "problem_slug": "max-sliding-window"
+    },
+    {
+        "file_path": "max-sliding-window-c2.js",
+        "difficulty": 2,
+        "problem_slug": "max-sliding-window"
+    },
+    {
+        "file_path": "max-sliding-window-c3.js",
+        "difficulty": 2,
+        "problem_slug": "max-sliding-window"
+    },
+    {
+        "file_path": "max-sliding-window-c4.js",
+        "difficulty": 2,
+        "problem_slug": "max-sliding-window"
+    },
+    {
+        "file_path": "max-sliding-window-c5.js",
+        "difficulty": 2,
+        "problem_slug": "max-sliding-window"
     }
+
 ]

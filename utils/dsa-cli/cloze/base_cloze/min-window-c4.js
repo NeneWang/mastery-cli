@@ -15,8 +15,8 @@ class MinWindow {
 		// and returns the start and end indices of the minimum window in s that contains all the characters in t
         const getWindowPointers = (s, t, frequencyMap) => {
             let [left, right, matched, start, end] = [0, 0, 0, 0, s.length + 1];
-				// Can slide being the case if matched is equals to the length. => if it cant slide then doesnt make sense because not even make sense
-                const canSlide = () => matched === t.length;
+            // Can slide being the case if matched is equals to the length. => if it cant slide then doesnt make sense because not even make sense
+            const canSlide = () => matched === t.length;
 
 			// Since the right pointer goes increasing, when it reaches this then we see the 
             while (right < s.length) {
@@ -31,7 +31,8 @@ class MinWindow {
 					//My guess here is that it will always reduce the right and left, there fore the new samalelst can just use window to compare 
                     const isSmaller = window < end;
                     if (isSmaller) {
-                        // TODO Update the start and end variables
+                        [start, end] = [left, window];
+						console.log(`==> updated last end ${end} start ${start} `);
                     }
 
                     matched = subtractLeftFrequency(s, left, frequencyMap, matched);
@@ -48,21 +49,23 @@ class MinWindow {
 
 		// addRightFrequency is a function is a helper function used by getWindowPointers to add a character to the window and update the frequency map returning the matched frequency map..
         const addRightFrequency = (s, right, frequencyMap, matched) => {
-            // TODO: Complete add right frequency. and return the matched frequency map.
+            const char = s[right];
+
+            if (frequencyMap.has(char)) {
+				//set the frquency map reduce it to use that and matchit to see. 
+                frequencyMap.set(char, frequencyMap.get(char) - 1);
+
+				//If the frequency is less than 0 means that is at least once on the windows. I am guessing that if he match reqred is 2, it will start with 2 on the frequency map?
+                const isInWindow = 0 <= frequencyMap.get(char); //Because you dont want to continue counting if you arlready past the amount of number you need
+                if (isInWindow) matched++;
+            }
+
+            return matched;
         };
 
 		// The subtractLeftFrequency function is a helper function used by getWindowPointers to remove a character from the window and update the frequency map.
         const subtractLeftFrequency = (s, left, frequencyMap, matched) => {
-            const char = s[left];
-
-            if (frequencyMap.has(char)) {
-                const isOutOfWindow = frequencyMap.get(char) === 0;
-                if (isOutOfWindow) matched--;
-
-                frequencyMap.set(char, frequencyMap.get(char) + 1);
-            }
-
-            return matched;
+            // TODO Complete the substractLeftFrequency function
         };
 			
 		const printSequence = (right, left, s) => {

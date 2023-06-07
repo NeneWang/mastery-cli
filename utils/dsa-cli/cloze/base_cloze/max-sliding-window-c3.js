@@ -10,17 +10,7 @@ function Deque() {
     this.right = null;
     this.size = 0;
     this.pushRight = function (value) {
-        const node = new Node(value);
-        if (this.size == 0) {
-            this.left = node;
-            this.right = node;
-        } else {
-            this.right.next = node;
-            node.prev = this.right;
-            this.right = node;
-        }
-        this.size++;
-        return this.size;
+        // TODO Complete the push right
     };
     this.popRight = function () {
         if (this.size == 0) return null;

@@ -26,19 +26,7 @@ class MinWindow {
 				
 				console.log("can it slide?", canSlide());
                 while (canSlide()) {
-                    const window = right - left + 1;
-					
-					//My guess here is that it will always reduce the right and left, there fore the new samalelst can just use window to compare 
-                    const isSmaller = window < end;
-                    if (isSmaller) {
-                        [start, end] = [left, window];
-						console.log(`==> updated last end ${end} start ${start} `);
-                    }
-
-                    matched = subtractLeftFrequency(s, left, frequencyMap, matched);
-				
-					console.log("Matchment after freq subst", matched, " | s", s, "| right", right, "| left", left, "| freqmap", frequencyMap, "seq", printSequence(right, left, s));
-					left++;
+                    // TODO Complete the sliding algorithm
                 }
 
                 right++;

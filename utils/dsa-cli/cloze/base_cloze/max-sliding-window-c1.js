@@ -63,11 +63,7 @@ class MaxSlidingWindow {
 
         while (right < nums.length) {
             // pop from the rightmost if the new value is smaller, making the deque always sorted increasingly or equals like 6, 3. 1 => would replace if finds smaller like this: new is 5 then dequeue becomes 6, 5. Being the left one always the largest, if it becomes [] then it will still add the next value on the dequeue.
-            while (deque.right && nums[deque.right.value] < nums[right])
-                deque.popRight();
-			
-
-            deque.pushRight(right);
+            // TODO Complete here the while loop and the setup
 
             // remove left if the left pointer is pointing something outside the 3 wide windows.
             if (left > deque.left.value) deque.popLeft();

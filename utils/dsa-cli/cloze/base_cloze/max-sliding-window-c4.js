@@ -23,12 +23,7 @@ function Deque() {
         return this.size;
     };
     this.popRight = function () {
-        if (this.size == 0) return null;
-        const removedNode = this.right;
-        this.right = this.right.prev;
-        if (this.right) this.right.next = null;
-        this.size--;
-        return removedNode;
+        // TODO Complete the pop right
     };
     this.pushLeft = function (value) {
         const node = new Node(value);
@@ -70,8 +65,14 @@ class MaxSlidingWindow {
             deque.pushRight(right);
 
             // remove left if the left pointer is pointing something outside the 3 wide windows.
-            // TODO complete the if cases and updateRequirements
-            
+            if (left > deque.left.value) deque.popLeft();
+			
+			// If the right pointer is enough to create a 3 pointer, then start adding to the max items. 
+            if (right + 1 >= k) {
+                output.push(nums[deque.left.value]);
+                left++;
+            }
+            right++;
         }
         return output;
     }
