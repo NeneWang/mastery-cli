@@ -133,6 +133,52 @@
         "file_path": "max-sliding-window-c5.js",
         "difficulty": 2,
         "problem_slug": "max-sliding-window"
+    },
+    {
+        "file_path": "car-fleet-c1.js",
+        "difficulty": 2,
+        "problem_slug": "car-fleet"
+    },
+    {
+        "file_path": "car-fleet-c2.js",
+        "difficulty": 2,
+        "problem_slug": "car-fleet"
+    },
+    {
+        "file_path": "largest-rectangle-area-c1.js",
+        "difficulty": 2,
+        "problem_slug": "largest-rectangle-area"
+    },
+    {
+        "file_path": "largest-rectangle-area-c2.js",
+        "difficulty": 2,
+        "problem_slug": "largest-rectangle-area"
+    },
+    {
+        "file_path": "largest-rectangle-area-c3.js",
+        "difficulty": 2,
+        "problem_slug": "largest-rectangle-area"
+    },
+    {
+        "file_path": "min-stack-c1.js",
+        "difficulty": 1,
+        "problem_slug": "min-stack"
+    },
+    {
+        "file_path": "min-stack-c2.js",
+        "difficulty": 1,
+        "problem_slug": "min-stack"
+    },
+    {
+        "file_path": "min-stack-c3.js",
+        "difficulty": 1,
+        "problem_slug": "min-stack"
+    },
+    {
+        "file_path": "min-stack-c4.js",
+        "difficulty": 1,
+        "problem_slug": "min-stack"
     }
+    
 
 ]

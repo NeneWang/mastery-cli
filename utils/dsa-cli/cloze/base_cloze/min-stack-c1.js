@@ -13,13 +13,7 @@ class MinStack {
      * @return {void}
      */
     push (val, { minStack } = this) {
-        this.stack.push(val);             /* Space O(N) */
-
-		// It adds nothing until is pushed in.
-        const isMinEmpty = !minStack.length;
-        const hasNewMin = val <= this.top(minStack);
-        const canAddMin = isMinEmpty || hasNewMin;
-        if (canAddMin) minStack.push(val);/* Space O(N) */
+        // TODO Complete the min stack push implementation. Check if the minimum is empty and add if that's the case.
     }
 
     /**

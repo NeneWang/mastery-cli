@@ -15,12 +15,7 @@ class LargestRectangleArea {
                 const isCurrHeightLess = ([prevIndex, prevHeight], currHeight) => currHeight < prevHeight;
                 const canShrink = () => isCurrHeightLess(stack[stack.length - 1], heights[index]);
                 while (stack.length && canShrink()) {             /* Time O(N + N) */
-                    const [_index, _height] = stack.pop();
-                    const width = index - _index;
-                    const area = _height * width;
-
-                    maxArea = Math.max(maxArea, area);
-                    start = _index;
+                    // TODO COmplete the canShrink function and shrink the stack
                 }
 
                 stack.push([start, heights[index]]);            /* Space O(N) */

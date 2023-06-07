@@ -30,12 +30,7 @@ class LargestRectangleArea {
         }
 
         const getMaxArea = (heights, stack, maxArea) => {
-            for (const [index, height] of stack) {              /* Time O(N) */
-                const width = heights.length - index;
-                const area = height * width;
-
-                maxArea = Math.max(maxArea, area);
-            }
+            //  TODO Complete the getMaxArea function which computes the rectangle area and calculates it.
 
             return maxArea;
         }

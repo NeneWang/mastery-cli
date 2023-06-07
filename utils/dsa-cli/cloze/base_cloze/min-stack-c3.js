@@ -26,8 +26,10 @@ class MinStack {
      * @return {void}
      */
     pop ({ stack, minStack } = this) {
+        const top = stack.pop();          /* Time O(1) */
 
-        // TODO pop the top of the stack, and pop the min of the stack if it is the same as the top of the minStack
+        const canPopMin = top === this.getMin();
+        if (canPopMin) minStack.pop();    /* Time O(1) */
     }
 
     /**
@@ -35,9 +37,8 @@ class MinStack {
      * @return {number}
      */
     top (stack = this.stack) {
-        return stack.length
-            ? stack[stack.length - 1]     /* Time O(1) */
-            : null;
+        // TODO Impleement the top method Make sure you are checking for empties!
+        
     }
 
     /**
