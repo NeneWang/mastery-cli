@@ -1,45 +1,67 @@
-class ContainerWithMostWater {
-    maxArea(height) {
 
+class CharacterReplacement {
+    solve(s, k) {
+		
+		// Add Right Frequency to the map. 
+        const addRightFrequency = (s, right, map) => {
+            // Gets the character on the right, and the index code there, 
+			const char = s[right];
+            const index = getCode(char);
+			// Increase that on the map of counts
+            map[index]++;
 
-	    // Returns the heigths of the left and right given the arr of heights and 
-        const getHeights = (height, left, right) => [height[left], height[right]];
-
-	    // gets Area by passing in the heights arr, the left and right index
-        const getArea = (height, left, right) => {
-            const [leftHeight, rightHeight] = getHeights(height, left, right);
-            const _height = Math.min(leftHeight, rightHeight);
-            const width = right - left;
-
-            return _height * width;
+            return map[index];
         };
 
-        
-	    // Initial values
-        let [left, right, max] = [0, height.length - 1, 0];
+		// Substract the frequency on the left
+        const subtractLeftFrequency = (s, left, map) => {
 
-	    // While the left is younger than the right one go and tr getting the heights and then calculate the area. 
-        while (left < right) {
-            const [leftHeight, rightHeight] = getHeights(height, left, right);
-            const area = getArea(height, left, right);
+            const char = s[left];
+            const index = getCode(char);
 
-            // TODO: Complete the iteration so that it can figure out the max water container.
+            map[index]--;
+
+            return map[index];
+        };
+		
+		// Getting the encode by substracting the character with A characterCode
+        const getCode = (char) => char.charCodeAt(0) - 'A'.charCodeAt(0);
+
+		// Lets the left, right, longest to be all 0 at the start
+        let [left, right, longest, max] = new Array(4).fill(0);
+        const frequencyMap = new Array(26).fill(0);
+
+        while (right < s.length) {
+			
+            // TODO Complete the following code so that hte right frequency is added to the map
+            // Starting with the right Keep increasing the right boundaries frequencies until reaches max length
             
+			// longest being either the current count of that letter, or the longest letter seen on the past. Longest being the count of word with the longest leter found
+			
+			// Get the windoes length
+            let window = right - left + 1;
+            
+			// We can move the slider where `k` beign the amount of changes we can make, and windows - longest beng the longest letter seen (that we can ignore because it moves at the same time) and the distance of letters.
+			const canSlide = k < window - longest;
+            if (canSlide) {
+				// If we can slide then we need to update the frequency map of the current letters being seen.
+                subtractLeftFrequency(s, left, frequencyMap);
+                left++;
+            }
+			
+			// Recalculate the windows size after sliding
+            window = right - left + 1;
 
-    	    // Update the boundaries if the left is smaller 
+			//Max Length is the length of the longest substring containing the same letter that can be obtained after performing at most k operations.
+            max = Math.max(max, window);
 
-	        //The same for the less, until it finds the perfect boundary	
+            right++;
         }
 
         return max;
     }
-
-
-    solve(heights) {
-        return this.maxArea(heights);
-
-    }
 }
 
 
-module.exports = { Problem: ContainerWithMostWater };
+
+module.exports = { Problem: CharacterReplacement };

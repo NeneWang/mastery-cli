@@ -35,62 +35,62 @@
         "problem_slug": "container-with-most-water"
     },
     {
-        "file_path": "trapping-rain-water-c1",
+        "file_path": "trapping-rain-water-c1.js",
         "difficulty": 2,
         "problem_slug": "trapping-rain-water"
     },
     {
-        "file_path": "trapping-rain-water-c2",
+        "file_path": "trapping-rain-water-c2.js",
         "difficulty": 2,
         "problem_slug": "trapping-rain-water"
     },
     {
-        "file_path": "trapping-rain-water-c3",
+        "file_path": "trapping-rain-water-c3.js",
         "difficulty": 2,
         "problem_slug": "trapping-rain-water"
     },    
     {
-        "file_path": "character-replacement-c1",
+        "file_path": "character-replacement-c1.js",
         "difficulty": 2,
         "problem_slug": "character-replacement"
     },
     {
-        "file_path": "character-replacement-c2",
+        "file_path": "character-replacement-c2.js",
         "difficulty": 4,
         "problem_slug": "character-replacement"
     },
     {
-        "file_path": "character-replacement-c2",
+        "file_path": "character-replacement-c2.js",
         "difficulty": 2,
         "problem_slug": "character-replacement"
     },
     {
-        "file_path": "daily-temperatures-c1",
+        "file_path": "daily-temperatures-c1.js",
         "difficulty": 2,
         "problem_slug": "daily-temperatures"
     },
     {
-        "file_path": "daily-temperatures-c2",
+        "file_path": "daily-temperatures-c2.js",
         "difficulty": 2,
         "problem_slug": "daily-temperatures"
     },
     {
-        "file_path": "daily-temperatures-c3",
+        "file_path": "daily-temperatures-c3.js",
         "difficulty": 2,
         "problem_slug": "daily-temperatures"
     },
     {
-        "file_path": "max-profit-c1",
+        "file_path": "max-profit-c1.js",
         "difficulty": 2,
         "problem_slug": "max-profit"
     },
     {
-        "file_path": "max-profit-c2",
+        "file_path": "max-profit-c2.js",
         "difficulty": 2,
         "problem_slug": "max-profit"
     },
     {
-        "file_path": "max-profit-c3",
+        "file_path": "max-profit-c3.js",
         "difficulty": 2,
         "problem_slug": "max-profit"
     }
