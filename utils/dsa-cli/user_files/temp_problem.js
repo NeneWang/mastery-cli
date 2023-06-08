@@ -14,7 +14,19 @@ class CharacterReplacement {
         };
 
 		// Substract the frequency on the left
+<<<<<<< HEAD
         //TODO Create a method to substract the frequency on the left once the window has been slided
+=======
+        const subtractLeftFrequency = (s, left, map) => {
+
+            const char = s[left];
+            const index = getCode(char);
+
+            map[index]--;
+
+            return map[index];
+        };
+>>>>>>> 7039d559e30cb89cd4208e52c96ac36dbafbb9ea
 		
 		// Getting the encode by substracting the character with A characterCode
         const getCode = (char) => char.charCodeAt(0) - 'A'.charCodeAt(0);
@@ -24,12 +36,21 @@ class CharacterReplacement {
         const frequencyMap = new Array(26).fill(0);
 
         while (right < s.length) {
+<<<<<<< HEAD
 			// Starting with the right Keep increasing the right boundaries frequencies until reaches max length
             const count = addRightFrequency(s, right, frequencyMap);
 			
 			// longest being either the current count of that letter, or the longest letter seen on the past. Longest being the count of word with the longest leter found
 			longest = Math.max(longest, count);
 
+=======
+			
+            // TODO Complete the following code so that hte right frequency is added to the map
+            // Starting with the right Keep increasing the right boundaries frequencies until reaches max length
+            
+			// longest being either the current count of that letter, or the longest letter seen on the past. Longest being the count of word with the longest leter found
+			
+>>>>>>> 7039d559e30cb89cd4208e52c96ac36dbafbb9ea
 			// Get the windoes length
             let window = right - left + 1;
             

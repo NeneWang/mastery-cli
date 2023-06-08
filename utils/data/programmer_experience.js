@@ -427,7 +427,39 @@ const coderTerms = [
         prompt: "Where should your write learning documentation?",
         description: "Think on an accessible, quickly linkeable site, where speed remains constant as you add in more learning documentation",
         example: "In Notion page, as automatically can be linked on github, also better for search"
+    },
+    {
+        "term": "CASCADE",
+        "prompt": "What does cascade deletion option do? When to use it?",
+        "example": "When a row in the parent table is deleted, all associated rows in the child table are also deleted. It is useful when you want to ensure that child records are always deleted along with the parent record to maintain data integrity."
+    },
+    {
+        "term": "SET NULL",
+        "prompt": "What does set null deletion option do? When to use it?",
+        "example": "When a row in the parent table is deleted, the foreign key columns in the child table are set to NULL. It is useful when you want to remove the association between the parent and child records without deleting the child records themselves."
+    },
+    {
+        "term": "SET DEFAULT",
+        "prompt": "What does set default deletion option do? When to use it?",
+        "example": "When a row in the parent table is deleted, the foreign key columns in the child table are set to their default values defined in the table schema. It is useful when you want to provide default values for the foreign key columns instead of leaving them NULL."
+    },
+    {
+        "term": "RESTRICT",
+        "prompt": "What does restrict deletion option do? When to use it?",
+        "example": "Prevents deletion of a row in the parent table if there are associated rows in the child table. It enforces referential integrity and avoids orphaned child records. It is useful when you want to ensure that the parent record cannot be deleted as long as there are associated child records."
+    },
+    {
+        "term": "NO ACTION",
+        "prompt": "What does no action deletion option do? When to use it?",
+        "example": "Similar to RESTRICT, it prevents deletion of a row in the parent table if there are associated rows in the child table. However, it may depend on the database engine's default behavior for handling such cases. It is useful when you want to rely on the default behavior of the database engine for handling referential integrity."
+    },
+    {
+        "term": "SET DEFAULT/SET NULL with a default value",
+        "prompt": "What does set default/set null with a default value deletion option do? When to use it?",
+        "example": "In this approach, the foreign key columns are set to a specific default value defined in the table schema when a row in the parent table is deleted. It is useful when you want to maintain referential integrity and still have a valid foreign key value by setting a predefined default value for the foreign key columns."
     }
+
+
 ]
 
 const docker = [
@@ -890,7 +922,7 @@ const git = [
         description: "It's a very straightforward way of saying that you would like to copy a series of commits below your current location (HEAD). I personally love cherry-pick because there is very little magic involved and it's easy to understand.",
         attachment: "./img/2023-05-09-15-20-04.png",
         example: "git cherry-pick C3 C4 C7"
-    }, 
+    },
     {
         term: "git | rebase",
         prompt: "Rebase from 4 commits ago",
@@ -962,7 +994,7 @@ const regex = [
         description: "The dot .Similarly, there is the concept of a wildcard, which is represented by the . (dot) metacharacter, and can match any single character (letter, digit, whitespace, everything).",
         term: "Wildcard ."
     },
-    {   
+    {
         prompt: "Match the following:\n\
         can\n\
         man\n\

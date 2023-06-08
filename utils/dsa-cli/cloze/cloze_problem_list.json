@@ -178,6 +178,31 @@
         "file_path": "min-stack-c4.js",
         "difficulty": 1,
         "problem_slug": "min-stack"
+    },
+    {
+        "file_path": "valid-parenthesis-c1.js",
+        "difficulty": 1,
+        "problem_slug": "valid-parenthesis"
+    },
+    {
+        "file_path": "valid-parenthesis-c2.js",
+        "difficulty": 1,
+        "problem_slug": "valid-parenthesis"
+    },
+    {
+        "file_path": "valid-parenthesis-c3.js",
+        "difficulty": 1,
+        "problem_slug": "valid-parenthesis"
+    },
+    {
+        "file_path": "generate-parenthesis-c1.js",
+        "difficulty": 1,
+        "problem_slug": "generate-parenthesis"
+    },
+    {
+        "file_path": "generate-parenthesis-c2.js",
+        "difficulty": 1,
+        "problem_slug": "generate-parenthesis"
     }
     
 

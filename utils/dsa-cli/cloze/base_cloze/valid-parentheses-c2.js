@@ -12,8 +12,9 @@ class IsValidParenthesis {
             const isBracket = (char in map)
             if (!isBracket) { stack.push(char); continue; }/* Space O(N) */
 
-            const isEqual = (stack[stack.length - 1] === map[char])
-            if (isEqual) { stack.pop(); continue; }
+            
+            // TODO Complete where is equal it should pop out the function
+            
 
             return false;
         }
