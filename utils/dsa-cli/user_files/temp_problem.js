@@ -1,80 +1,49 @@
 
-class CharacterReplacement {
-    solve(s, k) {
+class TrappingRainWater {
+    trappingRainWater(height) {
+
+        const maxLeft = [];
+        const maxRight = [];
+        const minLeftRight = [];
+
+        let current = 0;
+
+		//Create an array of the max lefts and max rights for each element in the heights
+        for (let i = 0; i < height.length; i++) {
+            maxLeft.push(current);
+            current = Math.max(current, height[i]);
+        }
+        current = 0;
+		//Note how maxRight is calculated by going from the mostright to the left.
+        // TODO Calculate from the right to the left the maximum found from that perspective
+		for(let i = height.length-1; i>-1; i--){
+			maxRight.push(current);
+			current = Math.max(current, height[i]);
+		}
+
+        // because the elements were added reverse. 
+        maxRight.reverse();
 		
-		// Add Right Frequency to the map. 
-        const addRightFrequency = (s, right, map) => {
-            // Gets the character on the right, and the index code there, 
-			const char = s[right];
-            const index = getCode(char);
-			// Increase that on the map of counts
-            map[index]++;
-
-            return map[index];
-        };
-
-		// Substract the frequency on the left
-<<<<<<< HEAD
-        //TODO Create a method to substract the frequency on the left once the window has been slided
-=======
-        const subtractLeftFrequency = (s, left, map) => {
-
-            const char = s[left];
-            const index = getCode(char);
-
-            map[index]--;
-
-            return map[index];
-        };
->>>>>>> 7039d559e30cb89cd4208e52c96ac36dbafbb9ea
+		// The smallest common area calculable of them	
+        for (let i = 0; i < height.length; i++) {
+            const minofLeftRight = Math.min(maxLeft[i], maxRight[i]);
+            minLeftRight.push(minofLeftRight);
+        }
 		
-		// Getting the encode by substracting the character with A characterCode
-        const getCode = (char) => char.charCodeAt(0) - 'A'.charCodeAt(0);
-
-		// Lets the left, right, longest to be all 0 at the start
-        let [left, right, longest, max] = new Array(4).fill(0);
-        const frequencyMap = new Array(26).fill(0);
-
-        while (right < s.length) {
-<<<<<<< HEAD
-			// Starting with the right Keep increasing the right boundaries frequencies until reaches max length
-            const count = addRightFrequency(s, right, frequencyMap);
-			
-			// longest being either the current count of that letter, or the longest letter seen on the past. Longest being the count of word with the longest leter found
-			longest = Math.max(longest, count);
-
-=======
-			
-            // TODO Complete the following code so that hte right frequency is added to the map
-            // Starting with the right Keep increasing the right boundaries frequencies until reaches max length
-            
-			// longest being either the current count of that letter, or the longest letter seen on the past. Longest being the count of word with the longest leter found
-			
->>>>>>> 7039d559e30cb89cd4208e52c96ac36dbafbb9ea
-			// Get the windoes length
-            let window = right - left + 1;
-            
-			// We can move the slider where `k` beign the amount of changes we can make, and windows - longest beng the longest letter seen (that we can ignore because it moves at the same time) and the distance of letters.
-			const canSlide = k < window - longest;
-            if (canSlide) {
-				// If we can slide then we need to update the frequency map of the current letters being seen.
-                subtractLeftFrequency(s, left, frequencyMap);
-                left++;
+		// Then you can calculate the water amount by checking that if the size is larger than the minium left, then you can add that to the water amount..
+        let water = 0;
+        for (let i = 0; i < height.length; i++) {
+            if (minLeftRight[i] - height[i] > 0) {
+                water += minLeftRight[i] - height[i];
             }
-			
-			// Recalculate the windows size after sliding
-            window = right - left + 1;
-
-			//Max Length is the length of the longest substring containing the same letter that can be obtained after performing at most k operations.
-            max = Math.max(max, window);
-
-            right++;
         }
 
-        return max;
+        return water;
     }
+
+    //Dont edit this.
+    solve = this.trappingRainWater;
 }
 
 
-
-module.exports = { Problem: CharacterReplacement };
+module.exports = { Problem: TrappingRainWater };

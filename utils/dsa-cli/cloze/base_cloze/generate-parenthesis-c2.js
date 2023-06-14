@@ -17,6 +17,7 @@ class GenerateParentesis {
                 return combos;
             }
 
+
             const isOpen = open < n;
             if (isOpen) backTrackOpen(n, combos, open, close, path);  /* Time O(2^N) | Space O(2^N) */
 
@@ -26,11 +27,7 @@ class GenerateParentesis {
             return combos;
         }
 
-        const backTrackOpen = (n, combos, open, close, path) => {
-            path.push('(');                             /*             | Space O(N) */
-            dfs(n, combos, (open + 1), close, path);/* Time O(2^N) | Space O(2^N) */
-            path.pop();
-        }
+    //    TODO Backtrack Open
 
         const backTrackClose = (n, combos, open, close, path) => {
             path.push(')');                             /*             | Space O(N) */

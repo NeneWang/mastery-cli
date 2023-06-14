@@ -32,11 +32,7 @@ class GenerateParentesis {
             path.pop();
         }
 
-        const backTrackClose = (n, combos, open, close, path) => {
-            path.push(')');                             /*             | Space O(N) */
-            dfs(n, combos, open, (close + 1), path);/* Time O(2^N) | Space O(2^N) */
-            path.pop();
-        }
+        //TODO Backtrack Close
 
         return dfs(n);
     }
