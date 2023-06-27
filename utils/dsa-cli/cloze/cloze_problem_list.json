@@ -208,7 +208,23 @@
         "file_path":"generate-parenthesis-c3.js",
         "difficulty": 1,
         "problem_slug": "generate-parenthesis"
+    },
+    {
+        "file_path": "letter-combinations-of-a-phone-number-c1.js",
+        "difficulty": 1,
+        "problem_slug": "letter-combinations-of-a-phone-number"
+    },
+    {
+        "file_path": "letter-combinations-of-a-phone-number-c2.js",
+        "difficulty": 1,
+        "problem_slug": "letter-combinations-of-a-phone-number"
+    },
+    {
+        "file_path": "letter-combinations-of-a-phone-number-c3.js",
+        "difficulty": 1,
+        "problem_slug": "letter-combinations-of-a-phone-number"
     }
+
     
 
 ]
