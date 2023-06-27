@@ -223,6 +223,36 @@
         "file_path": "letter-combinations-of-a-phone-number-c3.js",
         "difficulty": 1,
         "problem_slug": "letter-combinations-of-a-phone-number"
+    },
+    {
+        "file_path": "n-queens-c1.js",
+        "difficulty": 1,
+        "problem_slug": "n-queens"
+    },
+    {
+        "file_path": "n-queens-c2.js",
+        "difficulty": 1,
+        "problem_slug": "n-queens"
+    },
+    {
+        "file_path": "n-queens-c3.js",
+        "difficulty": 1,
+        "problem_slug": "n-queens"
+    },
+    {
+        "file_path": "permutations-c1.js",
+        "difficulty": 1,
+        "problem_slug": "permutations"
+    },
+    {
+        "file_path": "permutations-c2.js",
+        "difficulty": 1,
+        "problem_slug": "permutations"
+    },
+    {
+        "file_path": "permutations-c3.js",
+        "difficulty": 1,
+        "problem_slug": "permutations"
     }
 
     
