@@ -166,6 +166,12 @@ const aws_services = [
         prompt: "What is an internet gateway? When or why would you ever use it?",
         description: "An Internet Gateway is a networking component in Amazon Web Services (AWS) that allows communication between resources within a Virtual Private Cloud (VPC) and the internet.  An internet gateway provides a path for internet traffic to and from your VPC. This is important when you want to make resources within your VPC accessible from the internet, such as a web server or a database server. Without an internet gateway, resources in your VPC are not accessible from the internet.",
         example: "An internet gateway is used when you want to create a public-facing application that needs to be accessed by users on the internet. For example, if you are building a website or a mobile application that needs to be accessed by users outside of your network, you would use an internet gateway to connect your VPC to the internet.  It's important to note that an internet gateway is not required for all VPC configurations. If you are building an internal application that doesn't need to be accessed by users on the internet, you might not need an internet gateway. However, for most public-facing applications, an internet gateway is a necessary component of the network architecture."
+    },
+    {
+        term: "Describe all instances",
+        prompt: "describe all instances data",
+        description: `aws ec2 describe-instances --query "Reservations[*].Instances[*].{Instance:InstanceId, Status:State.Name}" --output json`,
+        example: "aws ec2 describe-instances"
     }
 ]
 
