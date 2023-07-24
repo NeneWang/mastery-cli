@@ -1165,7 +1165,25 @@ const flutter_dart = [
         prompt: "Create a TextButton with onPressed: () => print('Pressed'), color of the text is white and child: Text('Text Button')",
         example: "TextButton(onPressed: () => print('Pressed'), child: Text('Text Button'), style: TextButton.styleFrom(primary: Colors.white),)"
 
-    }
+    }, {
+        "term": "Flutter | loaders",
+        "description": ":m\n\
+          ```js\n\
+          class SomeWidget extends StatefulWidget {\n @override\n _SomeWidgetState createState() => _SomeWidgetState();\n}\nclass _SomeWidgetState extends State<SomeWidget> {\n late Future future;\n @override\n void initState() {\n\
+              ##[1]\n\
+              super.initState();\n }\n @override\n Widget build(BuildContext context) {\n\
+              return FutureBuilder(\n future: future,\n\
+              builder: (context, snapshot) {\n\
+              return ##[2] \n\
+              ? const Text('Loaded')\n : const CircularProgressIndicator();\n },\n );\n }\n}\n\
+          ```",
+        "prompt": "Complete the following code to show a CircularProgressIndicator while the future is not done, and show 'Loaded' when the future is done\n\
+          [1] create the artificial delay using future.\n\
+          [2] check if the future is done using the snapshot state",
+        "example": "[1] future = Future.delayed(const Duration(seconds: 8));\n\
+          [2] snapshot.connectionState == ConnectionState.done"
+    },
+
 
 
 ];

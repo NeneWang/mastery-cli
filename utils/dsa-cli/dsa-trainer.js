@@ -386,7 +386,12 @@ class DSATrainer {
 
                 // return Constants.ProblemStatus.unsolved;
             },
-
+            "Repopulate Code": async () => {
+                question_state_flag = true;
+                // Repopulates the 
+                this.problems_manager.repopulateCode(problem.slug);
+                // return Constants.ProblemStatus.unsolved;
+            },
             'Quit': async () => {
                 question_state_flag = false;
                 return { status: Constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
