@@ -43,7 +43,7 @@
         "file_path": "trapping-rain-water-c3.js",
         "difficulty": 2,
         "problem_slug": "trapping-rain-water"
-    },    
+    },
     {
         "file_path": "character-replacement-c1.js",
         "difficulty": 2,
@@ -205,7 +205,7 @@
         "problem_slug": "generate-parenthesis"
     },
     {
-        "file_path":"generate-parenthesis-c3.js",
+        "file_path": "generate-parenthesis-c3.js",
         "difficulty": 1,
         "problem_slug": "generate-parenthesis"
     },
@@ -333,5 +333,70 @@
         "file_path": "median-sorted-arrays-c4.js",
         "difficulty": 1,
         "problem_slug": "median-sorted-arrays"
+    },
+    {
+        "file_path": "search-matrix-c1.js",
+        "difficulty": 1,
+        "problem_slug": "search-matrix"
+    },
+    {
+        "file_path": "search-matrix-c2.js",
+        "difficulty": 1,
+        "problem_slug": "search-matrix"
+    },
+    {
+        "file_path": "search-matrix-c3.js",
+        "difficulty": 1,
+        "problem_slug": "search-matrix"
+    },
+    {
+        "file_path": "search-rotated-array-c1.js",
+        "difficulty": 1,
+        "problem_slug": "search-rotated-array"
+    },
+    {
+        "file_path": "search-rotated-array-c2.js",
+        "difficulty": 1,
+        "problem_slug": "search-rotated-array"
+    },
+    {
+        "file_path": "search-rotated-array-c3.js",
+        "difficulty": 1,
+        "problem_slug": "search-rotated-array"
+    },
+    {
+        "file_path": "search-rotated-array-c4.js",
+        "difficulty": 1,
+        "problem_slug": "search-rotated-array"
+    },
+    {
+        "file_path": "search-rotated-array-c4.js",
+        "difficulty": 1,
+        "problem_slug": "search-rotated-array"
+    },
+    {
+        "file_path": "search-rotated-array-c4.js",
+        "difficulty": 1,
+        "problem_slug": "search-rotated-array"
+    },
+    {
+        "file_path": "search-rotated-array-c4.js",
+        "difficulty": 1,
+        "problem_slug": "search-rotated-array"
+    },
+    {
+        "file_path": "add-two-numbers-c1.js",
+        "difficulty": 1,
+        "problem_slug": "add-two-numbers"
+    },
+    {
+        "file_path": "add-two-numbers-c2.js",
+        "difficulty": 1,
+        "problem_slug": "add-two-numbers"
+    },
+    {
+        "file_path": "add-two-numbers-c3.js",
+        "difficulty": 1,
+        "problem_slug": "add-two-numbers"
     }
 ]

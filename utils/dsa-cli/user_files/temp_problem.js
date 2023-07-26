@@ -1,61 +1,74 @@
-class MedianSortedArrays {
-
-	findMedianSortedArrays(nums1, nums2){
-	
-		const getPointers = (nums1, mid1, nums2, mid2) => {
-			const getLeft = (nums, index) => (0 <= index ? nums[index] : -Infinity);
-			const [aLeft, bLeft] = [getLeft(nums1, mid1), getLeft(nums2, mid2)];
-
-			const getRight = (nums, index) => index + 1 < nums.length ? nums[index + 1] : Infinity;
-
-			const [aRight, bRight] = [getRight(nums1, mid1), getRight(nums2, mid2)];
-			return {aLeft, aRight, bLeft, bRight};
-		};
-
-		const canSwap = nums2.length < nums1.length;
-		if(canSwap) [nums1, nums2] = [nums2, nums1];
-
-		let [left, right] = [0, nums1.length - 1];
-		const totalLength = nums1.length + nums2.length;
-		const mid = totalLength >> 1;
-		const isEven = totalLength %2 ===0;
-
-		while(true){
-			const mid1 = left + right;
-			const mid2 = mid - mid1 -2;
-			const {aLeft, aRight, bLeft, bRight } = getPointers(
-				nums1,
-				mid1,
-				nums2,
-				mid2
-			);
-
-			const isTarget = aLeft <= bRight && bLeft <= aRight;
-			if(isTarget){
-				return isEven ? (Math.max(aLeft, bLeft) + Math.min(aRight, bRight)) / 2
-				: Math.min(aRight, bRight);
-			}
-
-			const isTargetGreater = aLeft <= bRight;
-			if(isTargetGreater) left = mid1 + 1;
-
-			const isTargetLess = bRight < aLeft;
-			if(isTargetLess) right = mid1 - 1;
-
-		
-		}
-
-
-	};
-
-	
-
-	solve(nums1, nums2) {
-		// Your code here
-	
-		return this.findMedianSortedArrays(nums1, nums2);
+class ListNode {
+	constructor(val = 0, next = null) {
+		this.val = val;
+		this.next = next;
 	}
 }
 
 
-module.exports = { Problem: MedianSortedArrays };
+class AddTwoNumbers {
+	solve(l1Arr, l2Arr){
+
+		const createLinkedList = (arr) => {
+			
+			let tail;
+			let sentinel = tail = new ListNode();
+			for(const element of arr){
+				tail.next = new ListNode(element);
+				tail = tail.next
+			}
+
+			return sentinel.next;
+		}
+
+		const convertToArray = (linkedList) => {
+			const arr = [];
+
+			while(linkedList){
+				arr.push(linkedList.val);
+				linkedList = linkedList.next;
+			}
+			return arr;
+		}
+
+		const l1 = createLinkedList(l1Arr);
+		const l2 = createLinkedList(l2Arr);
+
+		const result = this.AddTwoNumbers(l1, l2);
+		return convertToArray(result);
+
+
+
+	}
+
+	AddTwoNumbers(l1, l2, carry = 0){
+		
+		let tail;
+		let sentinel = tail = new ListNode();
+		while(l1 || l2 || carry){
+			
+			// Calculate carry and val as the top decimal. THen calculate it witht hat value.
+			const sum = (l1?.val || 0) + (l2?.val || 0) + (carry);
+			const val = sum % 10;
+			carry = Math.floor(sum/10);
+
+			tail.next = new ListNode(val);
+			tail = tail.next;
+
+			l1 = l1?.next || null;
+			l2 = l2?.next || null;
+
+		}
+
+		return sentinel.next;
+
+
+	}
+
+
+
+}
+
+
+module.exports = { Problem: AddTwoNumbers };
+

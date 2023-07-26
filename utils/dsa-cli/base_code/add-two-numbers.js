@@ -1,9 +1,15 @@
 class ListNode {
-	solve(l1Arr, l2Arr) {
-	// Your code here
-
+	constructor(val = 0, next = null) {
+		this.val = val;
+		this.next = next;
 	}
 }
 
 
-module.exports = { Problem: ListNode };
+class AddTwoNumbers {
+	
+
+}
+
+
+module.exports = { Problem: AddTwoNumbers };
