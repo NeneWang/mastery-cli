@@ -16,8 +16,6 @@ class MedianSortedArrays {
             return { aLeft, aRight, bLeft, bRight };
         };
 
-
-        // We want to swap so we run binary search on the smaller array.
         const canSwap = nums2.length < nums1.length;
         if (canSwap) [nums1, nums2] = [nums2, nums1];
 
@@ -28,7 +26,7 @@ class MedianSortedArrays {
 
         while (true) {
             const mid1 = left + right;
-            const mid2 = mid - mid1 - 2; // Althought I dont get why is getting not the max and then substracting the mid1 and then 2.
+            const mid2 = mid - mid1 - 2;
             const { aLeft, aRight, bLeft, bRight } = getPointers(
                 nums1,
                 mid1,
@@ -38,7 +36,6 @@ class MedianSortedArrays {
 
             const isTarget = aLeft <= bRight && bLeft <= aRight;
             if (isTarget)
-                // Calculating the median using the max of the left and the min of the right
                 return isEven
                     ? (Math.max(aLeft, bLeft) + Math.min(aRight, bRight)) / 2
                     : Math.min(aRight, bRight);

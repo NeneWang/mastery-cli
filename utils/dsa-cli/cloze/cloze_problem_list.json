@@ -253,8 +253,65 @@
         "file_path": "permutations-c3.js",
         "difficulty": 1,
         "problem_slug": "permutations"
+    },
+    {
+        "file_path": "binary-search-c1.js",
+        "difficulty": 1,
+        "problem_slug": "binary-search"
+    },
+    {
+        "file_path": "binary-search-c2.js",
+        "difficulty": 1,
+        "problem_slug": "binary-search"
+    },
+    {
+        "file_path": "binary-search-c3.js",
+        "difficulty": 1,
+        "problem_slug": "binary-search"
+    },
+    {
+        "file_path": "find-min-c1.js",
+        "difficulty": 1,
+        "problem_slug": "find-min"
+    },
+    {
+        "file_path": "find-min-c2.js",
+        "difficulty": 1,
+        "problem_slug": "find-min"
+    },
+    {
+        "file_path": "find-min-c3.js",
+        "difficulty": 1,
+        "problem_slug": "find-min"
+    },
+    {
+        "file_path": "key-based-value-store-c1.js",
+        "difficulty": 1,
+        "problem_slug": "key-based-value-store"
+    },
+    {
+        "file_path": "key-based-value-store-c2.js",
+        "difficulty": 1,
+        "problem_slug": "key-based-value-store"
+    },
+    {
+        "file_path": "key-based-value-store-c3.js",
+        "difficulty": 1,
+        "problem_slug": "key-based-value-store"
+    },
+    {
+        "file_path": "koko-eating-bananas-c1.js",
+        "difficulty": 1,
+        "problem_slug": "key-based-value-store"
+    },
+    {
+        "file_path": "koko-eating-bananas-c2.js",
+        "difficulty": 1,
+        "problem_slug": "key-based-value-store"
+    },
+    {
+        "file_path": "koko-eating-bananas-c3.js",
+        "difficulty": 1,
+        "problem_slug": "key-based-value-store"
     }
-
-    
-
 ]
