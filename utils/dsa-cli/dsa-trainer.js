@@ -458,11 +458,12 @@ class DSATrainer {
                         if (!did_pass_all_tests_before) {
                             console.log("You must pass all tests before submitting!");
                             // return false;
+                            
 
                         } else {
                             console.log("Submission running", Constants.ProblemStatus.solved);
                             question_state_flag = false;
-                            // TODO Submit the current code that was there at least.
+                            // TODO Submit the current code that was there at least. to an post documnet.
 
                             return { status: Constants.ProblemStatus.solved, details: { failed_attempts: failed_attempts }, problem_details: problem_details };
 
