@@ -35,10 +35,11 @@ class MedianSortedArrays {
             );
 
             const isTarget = aLeft <= bRight && bLeft <= aRight;
-            if (isTarget)
-                return isEven
-                    ? (Math.max(aLeft, bLeft) + Math.min(aRight, bRight)) / 2
-                    : Math.min(aRight, bRight);
+            if (isTarget){
+                // TODO If is the target then we calculate the median take note of if is even, then the median 
+                // is the max of the left and the min of the right divided by 2
+                
+            }
 
             const isTargetGreater = aLeft <= bRight;
             if (isTargetGreater) left = mid1 + 1;

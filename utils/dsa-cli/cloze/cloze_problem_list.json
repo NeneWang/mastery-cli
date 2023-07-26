@@ -313,5 +313,25 @@
         "file_path": "koko-eating-bananas-c3.js",
         "difficulty": 1,
         "problem_slug": "key-based-value-store"
+    },
+    {
+        "file_path": "median-sorted-arrays-c1.js",
+        "difficulty": 1,
+        "problem_slug": "median-sorted-arrays"
+    },
+    {
+        "file_path": "median-sorted-arrays-c2.js",
+        "difficulty": 1,
+        "problem_slug": "median-sorted-arrays"
+    },
+    {
+        "file_path": "median-sorted-arrays-c3.js",
+        "difficulty": 1,
+        "problem_slug": "median-sorted-arrays"
+    },
+    {
+        "file_path": "median-sorted-arrays-c4.js",
+        "difficulty": 1,
+        "problem_slug": "median-sorted-arrays"
     }
 ]

@@ -25,16 +25,10 @@ class MedianSortedArrays {
         const isEven = totalLength % 2 === 0;
 
         while (true) {
-            const mid1 = left + right;
-            const mid2 = mid - mid1 - 2;
-            const { aLeft, aRight, bLeft, bRight } = getPointers(
-                nums1,
-                mid1,
-                nums2,
-                mid2
-            );
 
-            const isTarget = aLeft <= bRight && bLeft <= aRight;
+            // TODO Calculate the mid1 and mid2 and check if the target is found
+            // The target is a left less than b right and b right less than a left
+            
             if (isTarget)
                 return isEven
                     ? (Math.max(aLeft, bLeft) + Math.min(aRight, bRight)) / 2
