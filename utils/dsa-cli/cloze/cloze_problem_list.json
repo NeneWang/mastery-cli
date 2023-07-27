@@ -438,5 +438,15 @@
         "file_path": "lru-cache-c3.js",
         "difficulty": 1,
         "problem_slug": "lru-cache"
+    },
+    {
+        "file_path": "lru-cache-c4.js",
+        "difficulty": 1,
+        "problem_slug": "lru-cache"
+    },
+    {
+        "file_path": "lru-cache-c5.js",
+        "difficulty": 1,
+        "problem_slug": "lru-cache"
     }
 ]
