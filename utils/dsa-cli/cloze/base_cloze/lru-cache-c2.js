@@ -1,4 +1,3 @@
-
 /** 
  * https://leetcode.com/problems/lru-cache/
  * Time O(1) | Space O(N)
@@ -7,7 +6,7 @@
  * var param_1 = obj.get(key)
  * obj.put(key,value)
  */
- class LRUCache {
+class LRUCache {
     constructor(capacity) {
         this.capacity = capacity;
         this.map = new Map();
@@ -19,59 +18,56 @@
         this.tail.prev = this.head;
     }
 
-    removeLastUsed () {
-        const [ key, next, prev ]  = [ this.head.next.key, this.head.next.next, this.head ];
+    removeLastUsed() {
+        const [key, next, prev] = [this.head.next.key, this.head.next.next, this.head];
 
         this.map.delete(key);
         this.head.next = next;
         this.head.next.prev = prev;
     }
 
-    put (key, value) {
+    put(key, value) {
         const hasKey = this.get(key) !== -1;
         const isAtCapacity = this.map.size === this.capacity;
         
-        if (hasKey) return (this.tail.prev.value = value);
-        if (isAtCapacity) this.removeLastUsed();
-
+        // TODO If the key is in the map then we update the value and move the node to the front
+        
+        
         const node = { key, value };
         this.map.set(key, node);
         this.moveToFront(node);
     }
 
-    moveToFront (node) {
-        const [ prev, next ] = [ this.tail.prev, this.tail ];
+    moveToFront(node) {
+        const [prev, next] = [this.tail.prev, this.tail];
 
         this.tail.prev.next = node;
         this.connectNode(node, { prev, next });
         this.tail.prev = node;
     }
 
-    connectNode (node, top) {
+    connectNode(node, top) {
         node.prev = top.prev;
         node.next = top.next;
     }
 
-    get (key) {
+    get(key) {
         const hasKey = this.map.has(key);
         if (!hasKey) return -1;
 
         const node = this.map.get(key);
-        
+
         this.disconnectNode(node);
         this.moveToFront(node);
 
         return node.value;
     }
 
-    disconnectNode (node) {
+    disconnectNode(node) {
         node.next.prev = node.prev;
         node.prev.next = node.next;
     }
 }
 
 
-
 module.exports = { Problem: LRUCache };
-
-

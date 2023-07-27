@@ -423,5 +423,20 @@
         "file_path": "linked-list-cycle-c2.js",
         "difficulty": 1,
         "problem_slug": "linked-list-cycle"
+    },
+    {
+        "file_path": "lru-cache-c1.js",
+        "difficulty": 1,
+        "problem_slug": "lru-cache"
+    },
+    {
+        "file_path": "lru-cache-c2.js",
+        "difficulty": 1,
+        "problem_slug": "lru-cache"
+    },
+    {
+        "file_path": "lru-cache-c3.js",
+        "difficulty": 1,
+        "problem_slug": "lru-cache"
     }
 ]

@@ -90,7 +90,7 @@ class ListNode {
 }
 
 const arrayToListNode = (array) => {
-    if (!array || array.length === 0) {
+    if (!array || array.length == 0) {
         return null;
     }
 
@@ -155,14 +155,14 @@ class LRUCache extends ProblemTests {
         const problemToTest = new this.Problem(2);
         problemToTest.put(1, 1);
         problemToTest.put(2, 2);
-        assert(problemToTest.get(1) == 1);
+        assert.equal(problemToTest.get(1), 1);
         problemToTest.put(3, 3);
         console.log("Attempting to get 2", problemToTest.get(2));
-        assert(problemToTest.get(2) == -1);
+        assert.equal(problemToTest.get(2), -1);
         problemToTest.put(4, 4);
-        assert(problemToTest.get(1) == -1);
-        assert(problemToTest.get(3) == 3);
-        assert(problemToTest.get(4) == 4);
+        assert.equal(problemToTest.get(1), -1);
+        assert.equal(problemToTest.get(3), 3);
+        assert.equal(problemToTest.get(4), 4);
 
     }
 
@@ -173,13 +173,13 @@ class LRUCache extends ProblemTests {
         problemToTest.put(2, 2);
         problemToTest.put(3, 3);
         problemToTest.put(4, 4);
-        assert(problemToTest.get(4) == 4);
-        assert(problemToTest.get(1) == -1);
+        assert.equal(problemToTest.get(4), 4);
+        assert.equal(problemToTest.get(1), -1);
 
 
         problemToTest.put(1, 2);
-        assert(problemToTest.get(1) == 2);
-        assert(problemToTest.get(2) == -1);
+        assert.equal(problemToTest.get(1), 2);
+        assert.equal(problemToTest.get(2), -1);
 
     }
 
@@ -189,12 +189,12 @@ class LRUCache extends ProblemTests {
         const problemToTest = new this.Problem(2);
         problemToTest.put(2, 1);
         problemToTest.put(2, 2);
-        assert(problemToTest.get(2) == 2);
+        assert.equal(problemToTest.get(2), 2);
         problemToTest.put(1, 1);
         problemToTest.put(4, 1);
-        assert(problemToTest.get(2) == -1);
+        assert.equal(problemToTest.get(2), -1);
         problemToTest.put(5, 5);
-        assert(problemToTest.get(5) == 5);
+        assert.equal(problemToTest.get(5), 5);
 
     }
 
@@ -218,14 +218,14 @@ class MergeKSortedList extends ProblemTests {
         const list3 = arrayToListNode([2, 6]);
         const lists = [list1, list2, list3];
         const result = problemToTest.solve(lists);
-        assert(result.val, 1);
-        assert(result.next.val, 1);
-        assert(result.next.next.val, 2);
-        assert(result.next.next.next.val, 3);
-        assert(result.next.next.next.next.val, 4);
-        assert(result.next.next.next.next.next.val, 4);
-        assert(result.next.next.next.next.next.next.val, 5);
-        assert(result.next.next.next.next.next.next.next.val, 6);
+        assert.equal(result.val, 1);
+        assert.equal(result.next.val, 1);
+        assert.equal(result.next.next.val, 2);
+        assert.equal(result.next.next.next.val, 3);
+        assert.equal(result.next.next.next.next.val, 4);
+        assert.equal(result.next.next.next.next.next.val, 4);
+        assert.equal(result.next.next.next.next.next.next.val, 5);
+        assert.equal(result.next.next.next.next.next.next.next.val, 6);
     }
 
 
@@ -235,7 +235,7 @@ class MergeKSortedList extends ProblemTests {
         const lists = [];
         const result = problemToTest.solve(lists);
         // console.log("test_2 result", result);
-        assert(result, null);
+        assert.equal(result, null);
 
     }
 
@@ -309,10 +309,10 @@ class RemoveFromNthNode extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2, 3, 4, 5]);
         const result = problemToTest.solve(list, 2);
-        assert(result.val, 1);
-        assert(result.next.val, 2);
-        assert(result.next.next.val, 3);
-        assert(result.next.next.next.val, 5);
+        assert.equal(result.val, 1);
+        assert.equal(result.next.val, 2);
+        assert.equal(result.next.next.val, 3);
+        assert.equal(result.next.next.next.val, 5);
     }
 
     test_2() {
