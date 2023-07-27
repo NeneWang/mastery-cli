@@ -22,10 +22,8 @@ class LinkedListCycle {
      */
     hasCycle(head) {
         let [slow, fast] = [head, head];
-        // TODO The fast pointer is going to be 2 times faster than the slow pointer
-        // While the fast pointer is not null and the fast pointer next is not null
-        
-        while (true) {/* Time O(N) */
+
+        while (fast && fast.next) {/* Time O(N) */
             slow = slow.next;
             fast = fast.next.next;
 

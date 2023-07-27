@@ -413,5 +413,15 @@
         "file_path": "find-duplicate-c3.js",
         "difficulty": 1,
         "problem_slug": "find-duplicate"
+    },
+    {
+        "file_path": "linked-list-cycle-c1.js",
+        "difficulty": 1,
+        "problem_slug": "linked-list-cycle"
+    },
+    {
+        "file_path": "linked-list-cycle-c2.js",
+        "difficulty": 1,
+        "problem_slug": "linked-list-cycle"
     }
 ]
