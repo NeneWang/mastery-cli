@@ -302,6 +302,7 @@ class RemoveFromNthNode extends ProblemTests {
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
     }
 
     test_1() {

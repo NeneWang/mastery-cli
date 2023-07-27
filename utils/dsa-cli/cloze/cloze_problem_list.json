@@ -483,5 +483,20 @@
         "file_path": "merge-two-sorted-list-c3.js",
         "difficulty": 1,
         "problem_slug": "merge-two-sorted-list"
+    },
+    {
+        "file_path": "remove-from-nth-c1.js",
+        "difficulty": 1,
+        "problem_slug": "remove-from-nth"
+    },
+    {
+        "file_path": "remove-from-nth-c2.js",
+        "difficulty": 1,
+        "problem_slug": "remove-from-nth"
+    },
+    {
+        "file_path": "remove-from-nth-c3.js",
+        "difficulty": 1,
+        "problem_slug": "remove-from-nth"
     }
 ]
