@@ -7,11 +7,11 @@ class ListNode {
 
 
 
-class MergeTwoSortedList {
+class RemoveFromNth {
 	 solve(head, n) {
 
     }
 }
 
 
-module.exports = { Problem: MergeTwoSortedList };
+module.exports = { Problem: RemoveFromNth };

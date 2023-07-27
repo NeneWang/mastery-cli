@@ -331,6 +331,20 @@ class RemoveFromNthNode extends ProblemTests {
         assert.equal(result.val, 1);
     }
 
+    test_4() {
+        this.current_test_name = "[1,2, 3, 4, 5, 6, 7, 8], 2 => [1,2,3,4,5,6,8]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1, 2, 3, 4, 5, 6, 7, 8]);
+        const result = problemToTest.solve(list, 2);
+        assert.equal(result.val, 1);
+        assert.equal(result.next.val, 2);
+        assert.equal(result.next.next.val, 3);
+        assert.equal(result.next.next.next.val, 4);
+        assert.equal(result.next.next.next.next.val, 5);
+        assert.equal(result.next.next.next.next.next.val, 6);
+        assert.equal(result.next.next.next.next.next.next.val, 8);
+    }
+
 }
 
 
@@ -406,7 +420,7 @@ class ReverseLinkedList extends ProblemTests {
         assert.equal(result.val, 1);
     }
 
-    
+
     test_4() {
         this.current_test_name = "[] => []"
         const problemToTest = new this.Problem();
@@ -416,7 +430,7 @@ class ReverseLinkedList extends ProblemTests {
     }
 }
 
-class ReverseNodesInKGroup extends ProblemTests{
+class ReverseNodesInKGroup extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
@@ -449,7 +463,7 @@ class ReverseNodesInKGroup extends ProblemTests{
         assert.equal(result.next.next.next.next.val, 5);
     }
 
-    test_3(){
+    test_3() {
         this.current_test_name = "[1,2,3,4,5], k=1 => [1,2,3,4,5]"
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2, 3, 4, 5]);
