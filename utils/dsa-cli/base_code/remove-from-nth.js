@@ -1,9 +1,17 @@
 class ListNode {
-	solve(head, n) {
-	// Your code here
-
-	}
+    constructor(val = 0, next = null) {
+        this.val = val;
+        this.next = next;
+    }
 }
 
 
-module.exports = { Problem: ListNode };
+
+class MergeTwoSortedList {
+	 solve(head, n) {
+
+    }
+}
+
+
+module.exports = { Problem: MergeTwoSortedList };

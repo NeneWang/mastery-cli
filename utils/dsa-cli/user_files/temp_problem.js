@@ -5,45 +5,42 @@ class ListNode {
     }
 }
 
-class MergeTwoSorted {
 
 
-    /**
-     * https://leetcode.com/problems/merge-two-sorted-lists/
-     * Time O(N + M) | Space O(N + M)
-     * @param {ListNode} list1
-     * @param {ListNode} list2
-     * @return {ListNode}
-     */
-    mergeTwoLists(list1, list2) {
-		let tail;
-		let sentinel = tail = new ListNode();
-		while(list1 && list2){
-			 const isL2Greater = list1.val > list2.val;
+class MergeTwoSortedList {
+	 solve(head, n) {
 
-			if(isL2Greater){
+        const moveFast = (fast, n) => {
+            for (let i = 1; i <= (n + 1); i++) {/* Time O(N) */
+                fast = fast.next;
+            }
 
-				tail.next = list2;
-				list2 = list2.next;
-			}
-			else{
-				tail.next = list1;
-				list1 = list1.next;
-			}
-			
-			tail = tail.next;
-		}
+            return fast;
+        }
 
-		tail.next = list1 || list2;
-		return sentinel.next;
-    }
+        const moveSlow = (slow, fast) => {
+            while (fast) {                     /* Time O(N) */
+                slow = slow.next;
+                fast = fast.next;
+            }
 
-    solve(list1, list2) {
-        return this.mergeTwoLists(list1, list2);
+            return slow;
+        }
+
+        const sentinel = new ListNode();
+
+        sentinel.next = head;
+
+        const fast = moveFast(sentinel, n);   /* Time O(N) */
+        const slow = moveSlow(sentinel, fast);/* Time O(N) */
+
+        slow.next = slow.next.next || null;
+
+        return sentinel.next;
     }
 
 
 }
 
 
-module.exports = { Problem: MergeTwoSorted };
+module.exports = { Problem: MergeTwoSortedList };
