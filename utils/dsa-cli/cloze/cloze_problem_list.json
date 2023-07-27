@@ -398,5 +398,20 @@
         "file_path": "add-two-numbers-c3.js",
         "difficulty": 1,
         "problem_slug": "add-two-numbers"
+    },
+    {
+        "file_path": "find-duplicate-c1.js",
+        "difficulty": 1,
+        "problem_slug": "find-duplicate"
+    },
+    {
+        "file_path": "find-duplicate-c2.js",
+        "difficulty": 1,
+        "problem_slug": "find-duplicate"
+    },
+    {
+        "file_path": "find-duplicate-c3.js",
+        "difficulty": 1,
+        "problem_slug": "find-duplicate"
     }
 ]

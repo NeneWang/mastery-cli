@@ -22,13 +22,9 @@ const moveFast = (nums, start = 0) => {
 }
 
 const moveSlow = (nums, slow, fast) => {
-    const isSame = () => slow === fast;
-    while (!isSame()) {                 /* Time O(N) */
-        slow = nums[slow];
-        fast = nums[fast];
-    }
-
-    return [ slow, fast ];
+    // TODO Move slow and find the equal disntance
+    
+    
 }
 
 
@@ -41,4 +37,3 @@ class FindDuplicateNumber {
 
 
 module.exports = { Problem: FindDuplicateNumber };
-

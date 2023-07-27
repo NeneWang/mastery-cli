@@ -62,19 +62,19 @@ class FindTHeDuplicateNumber extends ProblemTests {
     test_1() {
         this.current_test_name = "[1,3,4,2,2] => 2"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([1, 3, 4, 2, 2]) == 2);
+        assert.equal(problemToTest.solve([1, 3, 4, 2, 2]), 2);
     }
 
     test_2() {
         this.current_test_name = "[3,1,3,4,2] => 3"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([3, 1, 3, 4, 2]) == 3);
+        assert.equal(problemToTest.solve([3, 1, 3, 4, 2]), 3);
     }
 
     test_3() {
         this.current_test_name = "[1,1] => 1"
         const problemToTest = new this.Problem();
-        assert(problemToTest.solve([1, 1]) == 1);
+        assert.equal(problemToTest.solve([1, 1]), 1);
     }
 
 
@@ -119,7 +119,7 @@ class LinkedListCycle extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([3, 2, 0, -4]);
         list.next.next.next.next = list.next;
-        assert(problemToTest.solve(list) == true);
+        assert.equal(problemToTest.solve(list), true);
     }
 
     test_2() {
@@ -127,14 +127,14 @@ class LinkedListCycle extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2]);
         list.next.next = list;
-        assert(problemToTest.solve(list) == true);
+        assert.equal(problemToTest.solve(list), true);
     }
 
     test_3() {
         this.current_test_name = "[1] => false"
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1]);
-        assert(problemToTest.solve(list) == false);
+        assert.equal(problemToTest.solve(list), false);
 
     }
 
@@ -218,14 +218,14 @@ class MergeKSortedList extends ProblemTests {
         const list3 = arrayToListNode([2, 6]);
         const lists = [list1, list2, list3];
         const result = problemToTest.solve(lists);
-        assert(result.val == 1);
-        assert(result.next.val == 1);
-        assert(result.next.next.val == 2);
-        assert(result.next.next.next.val == 3);
-        assert(result.next.next.next.next.val == 4);
-        assert(result.next.next.next.next.next.val == 4);
-        assert(result.next.next.next.next.next.next.val == 5);
-        assert(result.next.next.next.next.next.next.next.val == 6);
+        assert(result.val, 1);
+        assert(result.next.val, 1);
+        assert(result.next.next.val, 2);
+        assert(result.next.next.next.val, 3);
+        assert(result.next.next.next.next.val, 4);
+        assert(result.next.next.next.next.next.val, 4);
+        assert(result.next.next.next.next.next.next.val, 5);
+        assert(result.next.next.next.next.next.next.next.val, 6);
     }
 
 
@@ -235,7 +235,7 @@ class MergeKSortedList extends ProblemTests {
         const lists = [];
         const result = problemToTest.solve(lists);
         // console.log("test_2 result", result);
-        assert(result == null);
+        assert(result, null);
 
     }
 
@@ -266,12 +266,12 @@ class MergeTwoSortedList extends ProblemTests {
         const list1 = arrayToListNode([1, 2, 4]);
         const list2 = arrayToListNode([1, 3, 4]);
         const result = problemToTest.solve(list1, list2);
-        assert(result.val == 1);
-        assert(result.next.val == 1);
-        assert(result.next.next.val == 2);
-        assert(result.next.next.next.val == 3);
-        assert(result.next.next.next.next.val == 4);
-        assert(result.next.next.next.next.next.val == 4);
+        assert.equal(result.val, 1);
+        assert.equal(result.next.val, 1);
+        assert.equal(result.next.next.val, 2);
+        assert.equal(result.next.next.next.val, 3);
+        assert.equal(result.next.next.next.next.val, 4);
+        assert.equal(result.next.next.next.next.next.val, 4);
     }
 
     test_2() {
@@ -280,7 +280,7 @@ class MergeTwoSortedList extends ProblemTests {
         const list1 = arrayToListNode([]);
         const list2 = arrayToListNode([]);
         const result = problemToTest.solve(list1, list2);
-        assert(result == null);
+        assert.equal(result, null);
     }
 
     test_3() {
@@ -289,8 +289,8 @@ class MergeTwoSortedList extends ProblemTests {
         const list1 = arrayToListNode([1]);
         const list2 = arrayToListNode([2]);
         const result = problemToTest.solve(list1, list2);
-        assert(result.val == 1);
-        assert(result.next.val == 2);
+        assert.equal(result.val, 1);
+        assert.equal(result.next.val, 2);
     }
 
 }
@@ -309,10 +309,10 @@ class RemoveFromNthNode extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2, 3, 4, 5]);
         const result = problemToTest.solve(list, 2);
-        assert(result.val == 1);
-        assert(result.next.val == 2);
-        assert(result.next.next.val == 3);
-        assert(result.next.next.next.val == 5);
+        assert(result.val, 1);
+        assert(result.next.val, 2);
+        assert(result.next.next.val, 3);
+        assert(result.next.next.next.val, 5);
     }
 
     test_2() {
@@ -320,7 +320,7 @@ class RemoveFromNthNode extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1]);
         const result = problemToTest.solve(list, 1);
-        assert(result == null);
+        assert.equal(result, null);
     }
 
     test_3() {
@@ -328,7 +328,7 @@ class RemoveFromNthNode extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2]);
         const result = problemToTest.solve(list, 1);
-        assert(result.val == 1);
+        assert.equal(result.val, 1);
     }
 
 }
@@ -346,10 +346,10 @@ class ReorderList extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2, 3, 4]);
         problemToTest.solve(list);
-        assert(list.val == 1);
-        assert(list.next.val == 4);
-        assert(list.next.next.val == 2);
-        assert(list.next.next.next.val == 3);
+        assert.equal(list.val, 1);
+        assert.equal(list.next.val, 4);
+        assert.equal(list.next.next.val, 2);
+        assert.equal(list.next.next.next.val, 3);
     }
 
     test_2() {
@@ -357,11 +357,11 @@ class ReorderList extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2, 3, 4, 5]);
         problemToTest.solve(list);
-        assert(list.val == 1);
-        assert(list.next.val == 5);
-        assert(list.next.next.val == 2);
-        assert(list.next.next.next.val == 4);
-        assert(list.next.next.next.next.val == 3);
+        assert.equal(list.val, 1);
+        assert.equal(list.next.val, 5);
+        assert.equal(list.next.next.val, 2);
+        assert.equal(list.next.next.next.val, 4);
+        assert.equal(list.next.next.next.next.val, 3);
     }
 
 }
@@ -382,11 +382,11 @@ class ReverseLinkedList extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2, 3, 4, 5]);
         const result = problemToTest.solve(list);
-        assert(result.val == 5);
-        assert(result.next.val == 4);
-        assert(result.next.next.val == 3);
-        assert(result.next.next.next.val == 2);
-        assert(result.next.next.next.next.val == 1);
+        assert.equal(result.val, 5);
+        assert.equal(result.next.val, 4);
+        assert.equal(result.next.next.val, 3);
+        assert.equal(result.next.next.next.val, 2);
+        assert.equal(result.next.next.next.next.val, 1);
     }
 
     test_2() {
@@ -394,8 +394,8 @@ class ReverseLinkedList extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2]);
         const result = problemToTest.solve(list);
-        assert(result.val == 2);
-        assert(result.next.val == 1);
+        assert.equal(result.val, 2);
+        assert.equal(result.next.val, 1);
     }
 
     test_3() {
@@ -403,7 +403,7 @@ class ReverseLinkedList extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1]);
         const result = problemToTest.solve(list);
-        assert(result.val == 1);
+        assert.equal(result.val, 1);
     }
 
     
@@ -412,7 +412,7 @@ class ReverseLinkedList extends ProblemTests {
         const problemToTest = new this.Problem();
         const list = arrayToListNode([]);
         const result = problemToTest.solve(list);
-        assert(result == null);
+        assert.equal(result, null);
     }
 }
 
@@ -430,11 +430,11 @@ class ReverseNodesInKGroup extends ProblemTests{
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2, 3, 4, 5]);
         const result = problemToTest.solve(list, 2);
-        assert(result.val == 2);
-        assert(result.next.val == 1);
-        assert(result.next.next.val == 4);
-        assert(result.next.next.next.val == 3);
-        assert(result.next.next.next.next.val == 5);
+        assert.equal(result.val, 2);
+        assert.equal(result.next.val, 1);
+        assert.equal(result.next.next.val, 4);
+        assert.equal(result.next.next.next.val, 3);
+        assert.equal(result.next.next.next.next.val, 5);
     }
 
     test_2() {
@@ -442,11 +442,11 @@ class ReverseNodesInKGroup extends ProblemTests{
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2, 3, 4, 5]);
         const result = problemToTest.solve(list, 3);
-        assert(result.val == 3);
-        assert(result.next.val == 2);
-        assert(result.next.next.val == 1);
-        assert(result.next.next.next.val == 4);
-        assert(result.next.next.next.next.val == 5);
+        assert.equal(result.val, 3);
+        assert.equal(result.next.val, 2);
+        assert.equal(result.next.next.val, 1);
+        assert.equal(result.next.next.next.val, 4);
+        assert.equal(result.next.next.next.next.val, 5);
     }
 
     test_3(){
@@ -454,11 +454,11 @@ class ReverseNodesInKGroup extends ProblemTests{
         const problemToTest = new this.Problem();
         const list = arrayToListNode([1, 2, 3, 4, 5]);
         const result = problemToTest.solve(list, 1);
-        assert(result.val == 1);
-        assert(result.next.val == 2);
-        assert(result.next.next.val == 3);
-        assert(result.next.next.next.val == 4);
-        assert(result.next.next.next.next.val == 5);
+        assert.equal(result.val, 1);
+        assert.equal(result.next.val, 2);
+        assert.equal(result.next.next.val, 3);
+        assert.equal(result.next.next.next.val, 4);
+        assert.equal(result.next.next.next.next.val, 5);
     }
 
 

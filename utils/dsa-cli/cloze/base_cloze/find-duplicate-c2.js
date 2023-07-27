@@ -10,15 +10,9 @@ var findDuplicate = function(nums) {
 const moveFast = (nums, start = 0) => {
     let [ slow, fast ] = [ nums[start], nums[nums[start]] ];
 
-    const isSame = () => slow === fast;
-    while (!isSame()) {                   /* Time O(N) */
-        slow = nums[slow];
-        fast = nums[nums[fast]];
-    }
+    // TODO Implement the Floyd's Tortoise and Hare (Cycle Detection) algorithm
 
-    fast = start;
-
-    return [ slow, fast ];
+    // Rememeber to reset the fast as start and return [fast, slow]
 }
 
 const moveSlow = (nums, slow, fast) => {
@@ -41,4 +35,3 @@ class FindDuplicateNumber {
 
 
 module.exports = { Problem: FindDuplicateNumber };
-
