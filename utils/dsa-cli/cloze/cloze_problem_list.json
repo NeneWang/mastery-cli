@@ -448,5 +448,40 @@
         "file_path": "lru-cache-c5.js",
         "difficulty": 1,
         "problem_slug": "lru-cache"
+    },
+    {
+        "file_path": "lru-cache-c5.js",
+        "difficulty": 1,
+        "problem_slug": "lru-cache"
+    },
+    {
+        "file_path": "merge-k-sorted-lists-c1.js",
+        "difficulty": 1,
+        "problem_slug": "merge-k-sorted-lists"
+    },
+    {
+        "file_path": "merge-k-sorted-lists-c2.js",
+        "difficulty": 1,
+        "problem_slug": "merge-k-sorted-lists"
+    },
+    {
+        "file_path": "merge-k-sorted-lists-c3.js",
+        "difficulty": 1,
+        "problem_slug": "merge-k-sorted-lists"
+    },
+    {
+        "file_path": "merge-two-sorted-list-c1.js",
+        "difficulty": 1,
+        "problem_slug": "merge-two-sorted-list"
+    },
+    {
+        "file_path": "merge-two-sorted-list-c2.js",
+        "difficulty": 1,
+        "problem_slug": "merge-two-sorted-list"
+    },
+    {
+        "file_path": "merge-two-sorted-list-c3.js",
+        "difficulty": 1,
+        "problem_slug": "merge-two-sorted-list"
     }
 ]

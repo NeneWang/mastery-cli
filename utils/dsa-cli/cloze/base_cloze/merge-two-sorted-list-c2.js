@@ -1,3 +1,4 @@
+
 class ListNode {
     constructor(val = 0, next = null) {
         this.val = val;
@@ -34,8 +35,8 @@ class MergeTwoSorted {
 			tail = tail.next;
 		}
 
-		tail.next = list1 || list2;
-		return sentinel.next;
+        // TODO If there is a list that is not null then we add it to the tail
+
     }
 
     solve(list1, list2) {

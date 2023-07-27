@@ -19,7 +19,8 @@ class MergeTwoSorted {
 		let tail;
 		let sentinel = tail = new ListNode();
 		while(list1 && list2){
-			 const isL2Greater = list1.val > list2.val;
+
+            // TODO compute if isL2Greater
 
 			if(isL2Greater){
 
@@ -47,3 +48,4 @@ class MergeTwoSorted {
 
 
 module.exports = { Problem: MergeTwoSorted };
+
