@@ -51,6 +51,6 @@ module.exports = Settings = {
     "show_http_errors": false,
     "dev_mode": false, //If true, it will print communication receips
     "account_settings": {
-        "access_credentials_enabled": false,
+    "access_credentials_enabled": true,
     }
 }
