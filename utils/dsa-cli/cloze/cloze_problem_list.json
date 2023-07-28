@@ -498,5 +498,20 @@
         "file_path": "remove-from-nth-c3.js",
         "difficulty": 1,
         "problem_slug": "remove-from-nth"
+    },
+    {
+        "file_path": "reorder-list-c1.js",
+        "difficulty": 1,
+        "problem_slug": "reorder-list"
+    },
+    {
+        "file_path": "reorder-list-c2.js",
+        "difficulty": 1,
+        "problem_slug": "reorder-list"
+    },
+    {
+        "file_path": "reorder-list-c3.js",
+        "difficulty": 1,
+        "problem_slug": "reorder-list"
     }
 ]
