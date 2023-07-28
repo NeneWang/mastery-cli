@@ -29,31 +29,21 @@ class ReverseKGroup {
         }
 
         const reverse = ([prev, curr, start]) => {
-            const isSame = () => curr === start;
-            while (!isSame()) {
-                const next = curr.next;
-                curr.next = prev;
-
-                prev = curr;
-                curr = next;
-            }
+            // Create a reversed linked list
+            
         }
         let tail;
         const sentinel = tail = new ListNode(0, head);
 
         while (true) {
             let [start, last] = moveNode(tail, k);
-            console.log("start", start, "last", last, "tail", tail, "k", k);
-			if (!last) break;
-			
+            if (!last) break;
+
             reverse([start, tail.next, start])
 
             const next = tail.next;
-
             tail.next = last;
             tail = next;
-
-			console.log("ended with tail:", tail, "tail.next", tail.next, "next", next);
         }
 
         return sentinel.next;
@@ -62,4 +52,3 @@ class ReverseKGroup {
 
 
 module.exports = { Problem: ReverseKGroup };
-

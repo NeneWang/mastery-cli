@@ -20,11 +20,12 @@ class ReverseKGroup {
 
         const moveNode = (curr, k) => {
             const canMove = () => k && curr;
-            while (canMove()) {
-                curr = curr.next;
-                k--;
-            }
+            // Either move k times or reach the end of the list.
+            // TODO Complete the moveNode function, which moves the current node k times.
 
+
+
+            // TODO Return the next node if exists and the current node.
             return [(curr?.next || null), curr];
         }
 
@@ -43,17 +44,13 @@ class ReverseKGroup {
 
         while (true) {
             let [start, last] = moveNode(tail, k);
-            console.log("start", start, "last", last, "tail", tail, "k", k);
-			if (!last) break;
-			
+            if (!last) break;
+
             reverse([start, tail.next, start])
 
             const next = tail.next;
-
             tail.next = last;
             tail = next;
-
-			console.log("ended with tail:", tail, "tail.next", tail.next, "next", next);
         }
 
         return sentinel.next;
@@ -62,4 +59,3 @@ class ReverseKGroup {
 
 
 module.exports = { Problem: ReverseKGroup };
-

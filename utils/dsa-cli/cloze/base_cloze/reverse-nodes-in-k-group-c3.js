@@ -42,18 +42,16 @@ class ReverseKGroup {
         const sentinel = tail = new ListNode(0, head);
 
         while (true) {
-            let [start, last] = moveNode(tail, k);
-            console.log("start", start, "last", last, "tail", tail, "k", k);
-			if (!last) break;
-			
-            reverse([start, tail.next, start])
 
-            const next = tail.next;
+            // TODO Complete the while loop until there is no Last.
+            // Get the last for the next one and last to run the joins. 
 
-            tail.next = last;
-            tail = next;
+            // The next becoming the next to be runned.
 
-			console.log("ended with tail:", tail, "tail.next", tail.next, "next", next);
+            // Then tail which should be the first is connected to last next according to moveNode..
+
+            // And then the tail as next. to be runned.
+
         }
 
         return sentinel.next;
@@ -62,4 +60,3 @@ class ReverseKGroup {
 
 
 module.exports = { Problem: ReverseKGroup };
-

@@ -513,5 +513,20 @@
         "file_path": "reorder-list-c3.js",
         "difficulty": 1,
         "problem_slug": "reorder-list"
+    },
+    {
+        "file_path": "reverse-nodes-in-k-group-c1.js",
+        "difficulty": 1,
+        "problem_slug": "reverse-nodes-in-k-group"
+    },
+    {
+        "file_path": "reverse-nodes-in-k-group-c2.js",
+        "difficulty": 1,
+        "problem_slug": "reverse-nodes-in-k-group"
+    },
+    {
+        "file_path": "reverse-nodes-in-k-group-c3.js",
+        "difficulty": 1,
+        "problem_slug": "reverse-nodes-in-k-group"
     }
 ]
