@@ -1,9 +1,9 @@
-class BinaryTreeRightSideView {
-	solve(root) {
+class TreeNode {
+	solve(preoreder, inorder) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: BinaryTreeRightSideView };
+module.exports = { Problem: TreeNode };

@@ -583,5 +583,20 @@
         "file_path": "binary-tree-maximum-path-sum-c3.js",
         "difficulty": 1,
         "problem_slug": "binary-tree-maximum-path-sum"
+    },
+    {
+        "file_path": "binary-tree-right-side-view-c1.js",
+        "difficulty": 1,
+        "problem_slug": "binary-tree-right-side-view"
+    },
+    {
+        "file_path": "binary-tree-right-side-view-c2.js",
+        "difficulty": 1,
+        "problem_slug": "binary-tree-right-side-view"
+    },
+    {
+        "file_path": "binary-tree-right-side-view-c3.js",
+        "difficulty": 1,
+        "problem_slug": "binary-tree-right-side-view"
     }
 ]
