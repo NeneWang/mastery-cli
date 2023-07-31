@@ -1,60 +1,32 @@
-class BalanceBinaryTree {
+const bfs = (queue, levels = []) => {
+	while(queue.length){
+		const level = [];
 
-	isBalanced = function (root) {
+		for(let i = (queue.length - 1); 0 <= i; i--){
+			const node = queue.shift();
 
-		const isChildBalanced = (root) => {
+			if(node.left) queue.push(node.left);
+			if(node.right) queue.push(node.right);
 
-			const left = this.isBalanced(root.left);
-			const right = this.isBalanced(root.right);
-
-			return left && right;
-
+			level.push(node.val);
 		}
 
-	const isAcceptableHeight = (root) => {
+		levels.push(level.slice());
 
-		const left = getHeight(root.left);
-		const right = getHeight(root.right);
-
-		const difference = Math.abs(left-right);
-
-		return difference <= 1;
 	}
-
-	const getHeight = (root) => {
-		const isBaseCase = root == null;
-		if(isBaseCase) return 0;
-		
-		return dfs(root);
-	}
-
-	var dfs = (root) => {
-		const left = getHeight(root.left);
-		const right = getHeight(root.right);
-
-		const height = Math.max(left, right);
-
-		return height + 1;
-	}
-
-	const isBaseCase = root == null;
-	if(isBaseCase) return true;
-	if(!isAcceptableHeight(root)) return false;
-	if(!isChildBalanced) return false;
-
-	return true;
-	
-	}
+	return levels;
+}
 
 
-
+class BinaryTreeLevel {
 	solve(root) {
-		return this.isBalanced(root);	
-		
-		// Your code here
+	// Your code here
+		const isBaseCase = root == null;
+		if(isBaseCase) return [];
 
+		return bfs([root]);
 	}
 }
 
 
-module.exports = { Problem: BalanceBinaryTree };
+module.exports = { Problem: BinaryTreeLevel };
