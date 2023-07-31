@@ -553,5 +553,20 @@
         "file_path": "balanced-binary-tree-c5.js",
         "difficulty": 1,
         "problem_slug": "balanced-binary-tree"
+    },
+    {
+        "file_path": "binary-tree-level-order-traversal-c1.js",
+        "difficulty": 1,
+        "problem_slug": "binary-tree-level-order-traversal"
+    },
+    {
+        "file_path": "binary-tree-level-order-traversal-c2.js",
+        "difficulty": 1,
+        "problem_slug": "binary-tree-level-order-traversal"
+    },
+    {
+        "file_path": "binary-tree-level-order-traversal-c3.js",
+        "difficulty": 1,
+        "problem_slug": "binary-tree-level-order-traversal"
     }
 ]
