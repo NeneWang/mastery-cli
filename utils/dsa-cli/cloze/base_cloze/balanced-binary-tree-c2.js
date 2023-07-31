@@ -19,10 +19,8 @@ class BalanceBinaryTree {
         }
 
         const getHeight = (root) => {
-            const isBaseCase = root === null;
-            if (isBaseCase) return 0;
 
-            return dfs(root);
+            // TODO Complete the getHeight function, which obtains the height of the tree.
         }
 
         var dfs = (root) => {

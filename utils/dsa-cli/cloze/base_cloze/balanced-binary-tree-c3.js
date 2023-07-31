@@ -10,12 +10,9 @@ class BalanceBinaryTree {
         }
 
         const isAcceptableHeight = (root) => {
-            const left = getHeight(root.left);
-            const right = getHeight(root.right);
+            // TODO Complete the isAcceptableHeight function, which checks if the height is acceptable.
 
-            const difference = Math.abs(left - right);
-
-            return difference <= 1;
+            
         }
 
         const getHeight = (root) => {
@@ -34,7 +31,10 @@ class BalanceBinaryTree {
             return height + 1;
         }
 
-        //TODO  Complete the isBalanced function.
+        const isBaseCase = root === null;
+        if (isBaseCase) return true;
+        if (!isAcceptableHeight(root)) return false;
+        if (!isChildBalanced(root)) return false;
 
         return true;
     }

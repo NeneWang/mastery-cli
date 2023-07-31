@@ -34,10 +34,7 @@ class BalanceBinaryTree {
             return height + 1;
         }
 
-        const isBaseCase = root === null;
-        if (isBaseCase) return true;
-        if (!isAcceptableHeight(root)) return false;
-        if (!isChildBalanced(root)) return false;
+        //TODO  Complete the isBalanced function. If it is of a allowable heigh
 
         return true;
     }

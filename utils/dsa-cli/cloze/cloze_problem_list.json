@@ -528,5 +528,30 @@
         "file_path": "reverse-nodes-in-k-group-c3.js",
         "difficulty": 1,
         "problem_slug": "reverse-nodes-in-k-group"
+    },
+    {
+        "file_path": "balanced-binary-tree-c1.js",
+        "difficulty": 1,
+        "problem_slug": "balanced-binary-tree"
+    },
+    {
+        "file_path": "balanced-binary-tree-c2.js",
+        "difficulty": 1,
+        "problem_slug": "balanced-binary-tree"
+    },
+    {
+        "file_path": "balanced-binary-tree-c3.js",
+        "difficulty": 1,
+        "problem_slug": "balanced-binary-tree"
+    },
+    {
+        "file_path": "balanced-binary-tree-c4.js",
+        "difficulty": 1,
+        "problem_slug": "balanced-binary-tree"
+    },
+    {
+        "file_path": "balanced-binary-tree-c5.js",
+        "difficulty": 1,
+        "problem_slug": "balanced-binary-tree"
     }
 ]

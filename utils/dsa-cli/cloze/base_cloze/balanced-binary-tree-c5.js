@@ -2,21 +2,9 @@ class BalanceBinaryTree {
 
     isBalanced = function (root) {
 
-        const isChildBalanced = (root) => {
-            const left = this.isBalanced(root.left);
-            const right = this.isBalanced(root.right);
 
-            return left && right
-        }
-
-        const isAcceptableHeight = (root) => {
-            const left = getHeight(root.left);
-            const right = getHeight(root.right);
-
-            const difference = Math.abs(left - right);
-
-            return difference <= 1;
-        }
+        // TODO Create isChildBalanced and isAcceptableHeight
+        
 
         const getHeight = (root) => {
             const isBaseCase = root === null;
