@@ -568,5 +568,20 @@
         "file_path": "binary-tree-level-order-traversal-c3.js",
         "difficulty": 1,
         "problem_slug": "binary-tree-level-order-traversal"
+    },
+    {
+        "file_path": "binary-tree-maximum-path-sum-c1.js",
+        "difficulty": 1,
+        "problem_slug": "binary-tree-maximum-path-sum"
+    },
+    {
+        "file_path": "binary-tree-maximum-path-sum-c2.js",
+        "difficulty": 1,
+        "problem_slug": "binary-tree-maximum-path-sum"
+    },
+    {
+        "file_path": "binary-tree-maximum-path-sum-c3.js",
+        "difficulty": 1,
+        "problem_slug": "binary-tree-maximum-path-sum"
     }
 ]
