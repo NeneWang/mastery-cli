@@ -1,4 +1,13 @@
-class TreeNode {
+class TreeNode{
+    constructor(val, left = null, right = null){
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+
+class ConstructBinaryFromPreorderAndInorder {
 	solve(preoreder, inorder) {
 	// Your code here
 
@@ -6,4 +15,4 @@ class TreeNode {
 }
 
 
-module.exports = { Problem: TreeNode };
+module.exports = { Problem: ConstructBinaryFromPreorderAndInorder };
