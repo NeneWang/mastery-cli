@@ -32,10 +32,8 @@ class ConstructBinaryFromPreorderAndInorder {
         };
 
         const getPointers = (preorder, inorder) => {
-            const next = preorder.shift();
-            const mid = inorder.indexOf(next);
-            const leftInorder = inorder.slice(0, mid);
-            const rightInorder = inorder.slice(mid + 1);
+
+            // TODO Complete the getPointers function, which obtains the pointers for the left and right inorder.
 
             return { leftInorder, mid, rightInorder };
         };

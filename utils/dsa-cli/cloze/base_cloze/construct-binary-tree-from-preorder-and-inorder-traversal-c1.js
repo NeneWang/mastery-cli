@@ -22,13 +22,8 @@ class ConstructBinaryFromPreorderAndInorder {
         }
 
         const dfs = (preorder, inorder) => {
-            const { leftInorder, mid, rightInorder } = getPointers(preorder, inorder);
-            const root = new TreeNode(inorder[mid]);
 
-            root.left = this.buildTree(preorder, leftInorder);
-            root.right = this.buildTree(preorder, rightInorder);
-
-            return root;
+            // TODO using getPointer, build the tree down 
         };
 
         const getPointers = (preorder, inorder) => {

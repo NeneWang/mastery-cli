@@ -598,5 +598,20 @@
         "file_path": "binary-tree-right-side-view-c3.js",
         "difficulty": 1,
         "problem_slug": "binary-tree-right-side-view"
+    },
+    {
+        "file_path": "construct-binary-tree-from-preorder-and-inorder-traversal-c1",
+        "difficulty": 1,
+        "problem_slug": "construct-binary-tree-from-preorder-and-inorder-traversal"
+    },
+    {
+        "file_path": "construct-binary-tree-from-preorder-and-inorder-traversal-c2",
+        "difficulty": 1,
+        "problem_slug": "construct-binary-tree-from-preorder-and-inorder-traversal"
+    },
+    {
+        "file_path": "construct-binary-tree-from-preorder-and-inorder-traversal-c3",
+        "difficulty": 1,
+        "problem_slug": "construct-binary-tree-from-preorder-and-inorder-traversal"
     }
 ]

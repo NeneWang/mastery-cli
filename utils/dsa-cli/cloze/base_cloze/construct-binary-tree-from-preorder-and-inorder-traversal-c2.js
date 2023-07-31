@@ -49,7 +49,7 @@ class ConstructBinaryFromPreorderAndInorder {
         return dfs(preorder, inorder);
     }
 
-solve(preoreder, inorder) {
+    solve(preoreder, inorder) {
         return this.buildTree(preoreder, inorder);
     }
 }
