@@ -613,5 +613,20 @@
         "file_path": "construct-binary-tree-from-preorder-and-inorder-traversal-c3",
         "difficulty": 1,
         "problem_slug": "construct-binary-tree-from-preorder-and-inorder-traversal"
+    },
+    {
+        "file_path": "count-good-nodes-in-binary-tree-c1.js",
+        "difficulty": 1,
+        "problem_slug": "count-good-nodes-in-binary-tree"
+    },
+    {
+        "file_path": "count-good-nodes-in-binary-tree-c2.js",
+        "difficulty": 1,
+        "problem_slug": "count-good-nodes-in-binary-tree"
+    },
+    {
+        "file_path": "count-good-nodes-in-binary-tree-c3.js",
+        "difficulty": 1,
+        "problem_slug": "count-good-nodes-in-binary-tree"
     }
 ]

@@ -40,13 +40,9 @@ class ConstructBinaryFromPreorderAndInorder {
             return { leftInorder, mid, rightInorder };
         };
 
-        if(preorder == null || inorder == null) return null;
 
-        if (preorder?.length === 0 || inorder?.length === 0) {
-            return null;
-        }
-
-        return dfs(preorder, inorder);
+        // TODO Null check for preorder and inorder. as well as for empty returns Null
+        
     }
 
     solve(preoreder, inorder) {
