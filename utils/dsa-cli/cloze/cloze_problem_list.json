@@ -643,5 +643,20 @@
         "file_path": "diameter-of-binary-tree-c3.js",
         "difficulty": 1,
         "problem_slug": "diameter-of-binary-tree"
+    },
+    {
+        "file_path": "serialize-and-deserialize-binary-tree-c1.js",
+        "difficulty": 1,
+        "problem_slug": "serialize-and-deserialize-binary-tree"
+    },
+    {
+        "file_path": "serialize-and-deserialize-binary-tree-c2.js",
+        "difficulty": 1,
+        "problem_slug": "serialize-and-deserialize-binary-tree"
+    },
+    {
+        "file_path": "serialize-and-deserialize-binary-tree-c3.js",
+        "difficulty": 1,
+        "problem_slug": "serialize-and-deserialize-binary-tree"
     }
 ]

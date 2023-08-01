@@ -27,9 +27,8 @@ class SerializeAndDeserialize {
         }
 
         const dfsSerialize = (node, result) => {
-            result.push(node.val);
-            serial(node.left, result);
-            serial(node.right, result);
+            // TODO Serialize the node and push it to the result. then do the same in dfs.
+            
         };
         serial(root, result);
 

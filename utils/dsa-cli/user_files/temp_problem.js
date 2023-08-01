@@ -1,31 +1,47 @@
-class DiameterOfBinaryTree {
-	
+class SubstreeOfAnotherTree {
 
-	solve(root, max = [0]) {
-	// Your code here
+	isSubtree(root, subtree){
+
+		const dfs = (p, q) => {
+			const isRightSame = isSame(p.right, q.right);
+			const isLeftSame = isSame(p.left, q.left);
+
+			return isRightSame && isLeftSame;
+		}
+
+		const isSame = (p, q) => {
+			//Base case
+			const isBaseCase = !(p || q);
+			if(isBaseCase) return true;
+
+			const isBalanced = p && q;
+			if(!isBalanced) return false;
+
+			const isSame = p.val === q.val;
+			if(!isSame) return false;
+
+			return dfs(p, q);
+
+		}
+
+		if(root ==null && subtree == null) return true;
+
+		if(root == null) return false;
+
 		
-		const findDiameterOfTree = (root, max) => {
-			if (root == null) return 0;
+		if(isSame(root, subtree)) return true;
 
-			return dfs(root, max);
-		}
+		const leftHasSubtree = this.isSubtree(root.left, subtree);
+		const rightHasSubtee = this.isSubtree(root.right, subtree);
 
-		const dfs = (root, max) => {
-			const right = findDiameterOfTree(root.right, max);
-			const left = findDiameterOfTree(root.left, max);
+		return leftHasSubtree || rightHasSubtee;
+	}
 
-			const width = right + left;
-			max[0] = Math.max(width, max[0]);
-
-			const height = Math.max(left, right);
-			return height + 1;
-		}
-
-		findDiameterOfTree(root, max);
-		return max[0];
-
+	solve(root, subRoot) {
+	// Your code here
+		return this.isSubtree(root, subRoot);
 	}
 }
 
 
-module.exports = { Problem: DiameterOfBinaryTree };
+module.exports = { Problem: SubstreeOfAnotherTree };

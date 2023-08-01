@@ -54,14 +54,13 @@ class SerializeAndDeserialize {
 
             return node;
         }
-        const isBaseCase = !data.length;
-        if (isBaseCase) return null;
 
-        const val = data.shift();
-
-        const isNull = val === null;
-        if (isNull) return null;
-
+        // TODO Base case is when there is no data left.
+        
+        // TODO Get the first value and remove it from the array.
+        
+        // TODO Check if the value is null.
+        
         return dfsDeserialize(val, data)
     };
 

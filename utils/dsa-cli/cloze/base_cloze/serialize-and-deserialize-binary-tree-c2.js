@@ -47,10 +47,8 @@ class SerializeAndDeserialize {
     deserialize = function (data) {
 
         const dfsDeserialize = (val, data) => {
-            const node = new TreeNode(val);
-
-            node.left = this.deserialize(data);
-            node.right = this.deserialize(data);
+            // TODO Complete the dfsDeserialize function.
+            
 
             return node;
         }
