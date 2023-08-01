@@ -39,12 +39,8 @@ class WordSearch {
             right: [row, col + 1]
         })
 
-
-        for (let row = 0; row < board.length; row++) {
-            for (let col = 0; col < board[0].length; col++) {
-                if (dfs(board, row, col, word, 0)) return true;
-            }
-        }
+        // TODO Complete the exist function which runs dfs for every cell in the board.
+        
 
         return false;
     }

@@ -11,20 +11,17 @@ class WordSearch {
 
 
         const dfs = (board, row, col, word, index) => {
-            // TODO  Check if the index is the same as the word length which means that the all the letters had been found with no disruption.
-            
-            
-            // TODO Check if it is out of bound, or if the letter is not the same as the word letter.
+            if (index === word.length) return true;
+            if (isOutOfBound(board, row, col)) return false;
+            if (board[row][col] !== word[index]) return false
+
+            // TODO Hide the letter so it is not used again.
             
 
-            board[row][col] = '*';
+            //TODO  Search for the next letter in the word using the values of the direction objects created.
 
-            const hasWord = Object
-                .values(directions(row, col))
-                .filter(([r, c]) => dfs(board, r, c, word, index + 1))
-                .length
-
-            board[row][col] = word[index];
+            // TODO  Return the word after looking for each direction.
+            
             return hasWord;
         }
 

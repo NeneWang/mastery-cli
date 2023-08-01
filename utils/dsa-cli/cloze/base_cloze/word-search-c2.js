@@ -27,9 +27,8 @@ class WordSearch {
         }
 
         const isOutOfBound = (board, row, col) => {
-            const isRowOutOfBound = row < 0 || board.length - 1 < row
-            const isColOutOfBound = col < 0 || board[0].length - 1 < col
-            return isRowOutOfBound || isColOutOfBound
+            // TODO Complete the isOutOfBound function.
+            
         }
 
         const directions = (row, col) => ({

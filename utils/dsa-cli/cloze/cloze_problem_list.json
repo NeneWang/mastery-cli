@@ -678,6 +678,26 @@
         "file_path": "design-add-and-search-words-data-structure-c4.js",
         "difficulty": 1,
         "problem_slug": "design-add-and-search-words-data-structure"
+    },
+    {
+        "file_path": "word-search-c1.js",
+        "difficulty": 1,
+        "problem_slug": "word-search"
+    },
+    {
+        "file_path": "word-search-c2.js",
+        "difficulty": 1,
+        "problem_slug": "word-search"
+    },
+    {
+        "file_path": "word-search-c3.js",
+        "difficulty": 1,
+        "problem_slug": "word-search"
+    },
+    {
+        "file_path": "word-search-c4.js",
+        "difficulty": 1,
+        "problem_slug": "word-search"
     }
 
 ]
