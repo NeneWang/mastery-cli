@@ -10,7 +10,7 @@ const to_test = {
     'printable': false, //Also updates the metadata for all.
     'category': false,
     'exact-category': false, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
-    'basic': false,
+    'basic': true,
     'runnable': true,
 }
 
