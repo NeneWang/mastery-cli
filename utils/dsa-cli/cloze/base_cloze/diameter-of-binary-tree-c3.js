@@ -20,11 +20,7 @@ class DiameterOfBinaryTreer{
             const left = diameterOfTree(root.left, max);
             const right = diameterOfTree(root.right, max);
 
-            const diameter = left + right;
-            max[0] = Math.max(max[0], diameter);
-
-            const height = Math.max(left, right);
-
+            // TODO Calculate the diameter and the height of the tree., update max as 
             return height + 1;
         }
 

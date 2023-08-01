@@ -10,10 +10,7 @@ class DiameterOfBinaryTreer{
 
 
         const diameterOfTree = (root, max) => {
-            const isBaseCase = root === null;
-            if (isBaseCase) return 0;
-
-            return dfs(root, max);
+            // TODO Run dfs unless is the base case
         }
 
         const dfs = (root, max) => {

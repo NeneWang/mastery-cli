@@ -628,5 +628,20 @@
         "file_path": "count-good-nodes-in-binary-tree-c3.js",
         "difficulty": 1,
         "problem_slug": "count-good-nodes-in-binary-tree"
+    },
+    {
+        "file_path": "diameter-of-binary-tree-c1.js",
+        "difficulty": 1,
+        "problem_slug": "diameter-of-binary-tree"
+    },
+    {
+        "file_path": "diameter-of-binary-tree-c2.js",
+        "difficulty": 1,
+        "problem_slug": "diameter-of-binary-tree"
+    },
+    {
+        "file_path": "diameter-of-binary-tree-c3.js",
+        "difficulty": 1,
+        "problem_slug": "diameter-of-binary-tree"
     }
 ]

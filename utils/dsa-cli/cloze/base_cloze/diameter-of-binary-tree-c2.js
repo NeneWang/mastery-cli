@@ -28,9 +28,10 @@ class DiameterOfBinaryTreer{
             return height + 1;
         }
 
-
-        diameterOfTree(root, max);
-        return max[0];
+        // TODO Complete the diameterOfTree function, which obtains the diameter of the tree.
+        
+        // TODO Then return the max 
+        
     };
 
 }
