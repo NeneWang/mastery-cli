@@ -28,8 +28,7 @@ class WordDictionary {
 
             node = child;
         }
-		
-		// To the last letter to sign that this is a word.
+
         node.isWord = true;
     }
 
