@@ -1,7 +1,7 @@
 ---
 title: Word Search
 description: Given an m x n grid of characters board and a string word, return true if word exists in the grid.
-tags: [ neetcode, ]
+tags: [ neetcode, trie, medium ]
 link: https://leetcode.com/problems/word-search/
 images: [ https://assets.leetcode.com/uploads/2020/11/04/word2.jpg, https://assets.leetcode.com/uploads/2020/11/04/word-1.jpg, https://assets.leetcode.com/uploads/2020/10/15/word3.jpg ]
 ---

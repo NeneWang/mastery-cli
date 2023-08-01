@@ -3,6 +3,7 @@ const assert = require('assert');
 const ProblemTests = require('./problem-test');
 
 
+
 class DesignAddAndSearchWordsDataStructure extends ProblemTests{
 
     constructor(Problem){
@@ -42,6 +43,62 @@ class DesignAddAndSearchWordsDataStructure extends ProblemTests{
     }
 
     
+}
+
+
+class WordSearch extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const wordSearch = new this.Problem();
+        this.current_test_name = '[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]] | ABCCED';
+
+        const board = [
+            ["A","B","C","E"],
+            ["S","F","C","S"],
+            ["A","D","E","E"]
+        ];
+
+        const word = "ABCCED";
+
+        assert(wordSearch.solve(board, word) == true);
+    }
+
+    test_2(){
+        const wordSearch = new this.Problem();
+        this.current_test_name = '[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]] | ABCCED';
+        
+        const board = [
+            ["A","B","C","E"],
+            ["S","F","C","S"],
+            ["A","D","E","E"]
+        ];
+
+        const word = "SEE";
+        assert(wordSearch.solve(board, word) == true);
+    }
+
+    test_3(){
+        const wordSearch = new this.Problem();
+        this.current_test_name = '[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]] | ABCCED';
+
+        const board = [
+            ["A","B","C","E"],
+            ["S","F","C","S"],
+            ["A","D","E","E"]
+        ];
+
+        const word = "ABCB";
+        assert(wordSearch.solve(board, word) == false);
+    }
+
+
 }
 
 class ImplementTriePrefixTree extends ProblemTests{
@@ -115,6 +172,7 @@ class WordSearchII extends ProblemTests{
 
 
 const TEST_DICTIONARY = {
+    'word-search': WordSearch,
     'design-add-and-search-words-data-structure': DesignAddAndSearchWordsDataStructure,
     'implement-trie-prefix-tree': ImplementTriePrefixTree,
     'word-search-ii': WordSearchII,
