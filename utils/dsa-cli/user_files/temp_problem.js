@@ -1,47 +1,29 @@
-class SubstreeOfAnotherTree {
+class ValidateBinarySearchTree {
+	
 
-	isSubtree(root, subtree){
+	isValidBST(root, min = -Infinity, max = Infinity){
+		const dfs = (root, min, max) => {
+			const left = this.isValidBST(root.left, min, root.val);
+			const right = this.isValidBST(root.right, root.val, max);
 
-		const dfs = (p, q) => {
-			const isRightSame = isSame(p.right, q.right);
-			const isLeftSame = isSame(p.left, q.left);
-
-			return isRightSame && isLeftSame;
-		}
-
-		const isSame = (p, q) => {
-			//Base case
-			const isBaseCase = !(p || q);
-			if(isBaseCase) return true;
-
-			const isBalanced = p && q;
-			if(!isBalanced) return false;
-
-			const isSame = p.val === q.val;
-			if(!isSame) return false;
-
-			return dfs(p, q);
+			return left && right;
 
 		}
 
-		if(root ==null && subtree == null) return true;
+		const isBaseCase = root === null;
+		if(isBaseCase) return true;
 
-		if(root == null) return false;
+		const isInvalid = root.val <= min || root.val >= max;
+		if(isInvalid) return false;
 
-		
-		if(isSame(root, subtree)) return true;
-
-		const leftHasSubtree = this.isSubtree(root.left, subtree);
-		const rightHasSubtee = this.isSubtree(root.right, subtree);
-
-		return leftHasSubtree || rightHasSubtee;
+		return dfs(root);
 	}
 
-	solve(root, subRoot) {
+	solve(root) {
 	// Your code here
-		return this.isSubtree(root, subRoot);
+		return this.isValidBST(root);
 	}
 }
 
 
-module.exports = { Problem: SubstreeOfAnotherTree };
+module.exports = { Problem: ValidateBinarySearchTree };
