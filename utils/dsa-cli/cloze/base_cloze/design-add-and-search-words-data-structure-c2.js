@@ -21,15 +21,12 @@ class WordDictionary {
 
     /* Time O(N) | Space O(N) */
     addWord(word, node = this.root) {
-        for (const char of word) {
-            const child = node.children[char] || new TrieNode();
-
-            node.children[char] = child;
-
-            node = child;
-        }
-
-        node.isWord = true;
+        // TODO Complete addWord which just adds the word to the trie. 
+        // By looping each letter of the query and creating a new node if it does not exist.
+        
+        
+        // TODO At the end remember to assign the isWord as true.
+        
     }
 
     /* Time O(N) | Space O(N) */

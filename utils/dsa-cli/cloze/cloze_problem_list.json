@@ -658,5 +658,26 @@
         "file_path": "serialize-and-deserialize-binary-tree-c3.js",
         "difficulty": 1,
         "problem_slug": "serialize-and-deserialize-binary-tree"
+    },
+    {
+        "file_path": "design-add-and-search-words-data-structure-c1.js",
+        "difficulty": 1,
+        "problem_slug": "design-add-and-search-words-data-structure"
+    },
+    {
+        "file_path": "design-add-and-search-words-data-structure-c2.js",
+        "difficulty": 1,
+        "problem_slug": "design-add-and-search-words-data-structure"
+    },
+    {
+        "file_path": "design-add-and-search-words-data-structure-c3.js",
+        "difficulty": 1,
+        "problem_slug": "design-add-and-search-words-data-structure"
+    },
+    {
+        "file_path": "design-add-and-search-words-data-structure-c4.js",
+        "difficulty": 1,
+        "problem_slug": "design-add-and-search-words-data-structure"
     }
+
 ]

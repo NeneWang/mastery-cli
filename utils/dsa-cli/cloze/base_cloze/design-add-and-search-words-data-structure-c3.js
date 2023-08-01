@@ -38,11 +38,11 @@ class WordDictionary {
     }
 
     dfs(word, node, level) {
-        if (!node) return false;
+        // TODO If the node is null it means that there might not be any word added yet.
+        
+        // TODO If the level is the same as the word length it means that we have reached the end of the word.
 
-        const isWord = level === word.length;
-        if (isWord) return node.isWord;
-
+        
         const isWildCard = word[level] === '.';
         if (isWildCard) return this.hasWildCard(word, node, level);
 

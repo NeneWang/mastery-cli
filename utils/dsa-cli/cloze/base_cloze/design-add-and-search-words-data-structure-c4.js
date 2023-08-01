@@ -38,21 +38,24 @@ class WordDictionary {
     }
 
     dfs(word, node, level) {
-
         if (!node) return false;
 
         const isWord = level === word.length;
         if (isWord) return node.isWord;
 
-        const isWildCard = word[level] === '.';
-        if (isWildCard) return this.hasWildCard(word, node, level);
-
-        return this.dfs(word, node.children[word[level]], level + 1);
+        // TODO Complete the isWildcase occurence.
+        
+        // TODO Complete the dfs with the next level and the next level.
+        
     }
 
     hasWildCard(word, node, level) {
-        // TODO Complete hasWildCard which just searches the next level if there is a word. at the end that fits.
-        
+        for (const char of Object.keys(node.children)) {
+            const child = node.children[char];
+
+            const hasWord = this.dfs(word, child, level + 1);
+            if (hasWord) return true;
+        }
 
         return false;
     }
