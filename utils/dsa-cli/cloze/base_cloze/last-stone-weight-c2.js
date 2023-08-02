@@ -97,11 +97,9 @@ class LastStoneWeight {
 
 
         const getMaxHeap = (stones, maxHeap = new MaxPriorityQueue()) => {
-            for (const stone of stones) {
-                maxHeap.enqueue(stone)
-            }
-
-            return maxHeap
+            
+            // TODO Create the maxHeap by using the enqueue method.
+            
         }
 
         const shrink = (maxHeap) => {

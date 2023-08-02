@@ -112,16 +112,11 @@ class LastStoneWeight {
                 const isPositive = 0 < difference
                 if (isPositive) maxHeap.enqueue(difference);
             }
-        }
+    }
 
 
-        const maxHeap = getMaxHeap(stones)
-
-        shrink(maxHeap)
-
-        return !maxHeap.isEmpty()
-            ? maxHeap.front()
-            : 0
+        // TODO Implement max Heap
+        
     };
 
 

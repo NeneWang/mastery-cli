@@ -730,7 +730,78 @@
         "problem_slug": "k-closest"
     },
     {
-        
+        "file_path": "kth-largest-element-c1.js",
+        "difficulty": 1,
+        "problem_slug": "kth-largest-element"
+    },
+    {
+        "file_path": "kth-largest-element-c2.js",
+        "difficulty": 1,
+        "problem_slug": "kth-largest-element"
+    },
+    {
+        "file_path": "kth-largest-element-c3.js",
+        "difficulty": 1,
+        "problem_slug": "kth-largest-element"
+    },
+    {
+        "file_path": "kth-largest-element-c3.js",
+        "difficulty": 1,
+        "problem_slug": "kth-largest-element"
+    },
+    {
+        "file_path": "kth-largest-element-c3.js",
+        "difficulty": 1,
+        "problem_slug": "kth-largest-element"
+    },
+    {
+        "file_path": "word-search-ii-c1.js",
+        "difficulty": 1,
+        "problem_slug": "word-search-ii"
+    },
+    {
+        "file_path": "word-search-ii-c2.js",
+        "difficulty": 1,
+        "problem_slug": "word-search-ii"
+    },
+    {
+        "file_path": "word-search-ii-c3.js",
+        "difficulty": 1,
+        "problem_slug": "word-search-ii"
+    },
+    {
+        "file_path": "kth-largest-element-in-an-array-c1.js",
+        "difficulty": 1,
+        "problem_slug": "kth-largest-element-in-an-array"
+    },
+    {
+        "file_path": "kth-largest-element-in-an-array-c2.js",
+        "difficulty": 1,
+        "problem_slug": "kth-largest-element-in-an-array"
+    },
+    {
+        "file_path": "kth-largest-element-in-an-array-c3.js",
+        "difficulty": 1,
+        "problem_slug": "kth-largest-element-in-an-array"
+    },
+    {
+        "file_path": "kth-largest-element-in-an-array-c4.js",
+        "difficulty": 1,
+        "problem_slug": "kth-largest-element-in-an-array"
+    },
+    {
+        "file_path": "last-stone-weight-c1.js",
+        "difficulty": 1,
+        "problem_slug": "last-stone-weight"
+    },
+    {
+        "file_path": "last-stone-weight-c2.js",
+        "difficulty": 1,
+        "problem_slug": "last-stone-weight"
+    },
+    {
+        "file_path": "last-stone-weight-c3.js",
+        "difficulty": 1,
+        "problem_slug": "last-stone-weight"
     }
-
 ]

@@ -105,13 +105,10 @@ class LastStoneWeight {
         }
 
         const shrink = (maxHeap) => {
+			// TODO Complete the shrink function while the size is larger than 1.
             while (1 < maxHeap.size()) {
-                const [x, y] = [maxHeap.dequeue(), maxHeap.dequeue()]
-                const difference = x - y;
-
-                const isPositive = 0 < difference
-                if (isPositive) maxHeap.enqueue(difference);
-            }
+                
+			}
         }
 
 
