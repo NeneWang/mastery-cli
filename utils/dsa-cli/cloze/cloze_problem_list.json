@@ -770,6 +770,16 @@
         "problem_slug": "word-search-ii"
     },
     {
+        "file_path": "word-search-ii-c4.js",
+        "difficulty": 1,
+        "problem_slug": "word-search-ii"
+    },
+    {
+        "file_path": "word-search-ii-c5.js",
+        "difficulty": 1,
+        "problem_slug": "word-search-ii"
+    },
+    {
         "file_path": "kth-largest-element-in-an-array-c1.js",
         "difficulty": 1,
         "problem_slug": "kth-largest-element-in-an-array"
