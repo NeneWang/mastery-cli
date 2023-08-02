@@ -72,7 +72,7 @@ class WordSearch extends ProblemTests{
 
     test_2(){
         const wordSearch = new this.Problem();
-        this.current_test_name = '[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]] | ABCCED';
+        this.current_test_name = '[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]] | SEE';
         
         const board = [
             ["A","B","C","E"],
@@ -86,7 +86,7 @@ class WordSearch extends ProblemTests{
 
     test_3(){
         const wordSearch = new this.Problem();
-        this.current_test_name = '[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]] | ABCCED';
+        this.current_test_name = '[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]] | ABCB';
 
         const board = [
             ["A","B","C","E"],

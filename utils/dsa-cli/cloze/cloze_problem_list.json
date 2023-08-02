@@ -698,6 +698,36 @@
         "file_path": "word-search-c4.js",
         "difficulty": 1,
         "problem_slug": "word-search"
+    },
+    {
+        "file_path": "design-twitter-c1.js",
+        "difficulty": 1,
+        "problem_slug": "design-twitter"
+    },
+    {
+        "file_path": "design-twitter-c2.js",
+        "difficulty": 1,
+        "problem_slug": "design-twitter"
+    },
+    {
+        "file_path": "design-twitter-c3.js",
+        "difficulty": 1,
+        "problem_slug": "design-twitter"
+    },
+    {
+        "file_path": "design-twitter-c4.js",
+        "difficulty": 1,
+        "problem_slug": "design-twitter"
+    },
+    {
+        "file_path": "k-closest-c1.js",
+        "difficulty": 1,
+        "problem_slug": "k-closest"
+    },
+    {
+        "file_path": "k-closest-c1.js",
+        "difficulty": 1,
+        "problem_slug": "k-closest"
     }
 
 ]
