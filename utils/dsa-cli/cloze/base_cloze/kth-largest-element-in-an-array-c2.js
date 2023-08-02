@@ -28,12 +28,8 @@ class MinPriorityQueue {
     }
 
     dequeue() {
-        const min = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.bubbleUp()
-        }
+        // TODO Complete the dequeue function which removes the min element and bubbles up the last element to the correct position.
+        
         return min
     }
 

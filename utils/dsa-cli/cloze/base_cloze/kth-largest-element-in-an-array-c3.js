@@ -48,20 +48,16 @@ class MinPriorityQueue {
             let swap = null
 
             if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild < element) {
-                    swap = leftChildIndex
-                }
+                // TODO If the left child is less than the element, then swap it.
+                
             }
 
             if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild < element) ||
-                    (swap !== null && rightChild < leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
+                // TODO if didnt swap and the right child is less than the element, then swap it.
+
+                // TODO if swapped and the right child is less than the left child, then assign swap for the right child.
+                
+                
             }
 
             if (swap === null) break

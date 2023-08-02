@@ -94,16 +94,7 @@ class KthLargestElementInAnArray {
      */
         findKthLargest = function (nums, k) {
             // TODO Complete finding the kth largest element in an array.
-            const minHeap = new MinPriorityQueue()
-    
-            for (const num of nums) {
-                minHeap.enqueue(num);
-    
-                const isAtCapacity = k < minHeap.size();
-                if (isAtCapacity) minHeap.dequeue();
-            }
-    
-            return minHeap.front()
+            
         }
     
     

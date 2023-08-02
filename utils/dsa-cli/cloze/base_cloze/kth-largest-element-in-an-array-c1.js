@@ -13,11 +13,10 @@ class MinPriorityQueue {
 
     sinkDown() {
         let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] <= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
+        // TODO Complete the sinkDown function which bubbles up the element to the correct position. until it is index 0
+        while (true) {
+            // TODO You can get the parent index by using the formula: Math.floor((index - 1) / 2)
+            
         }
     }
 
