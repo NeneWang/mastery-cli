@@ -8,10 +8,10 @@ class MinPriorityQueue {
 
     enqueue(element) {
         this.heap.push(element)
-        this.bubbleUp()
+        this.sinkDown()
     }
 
-    bubbleUp() {
+    sinkDown() {
         let index = this.heap.length - 1
         while (index > 0) {
             const parentIndex = Math.floor((index - 1) / 2)
@@ -32,12 +32,12 @@ class MinPriorityQueue {
         const end = this.heap.pop()
         if (this.heap.length > 0) {
             this.heap[0] = end
-            this.sinkDown()
+            this.bubbleUp()
         }
         return min
     }
 
-    sinkDown() {
+    bubbleUp() {
         let index = 0
         const length = this.heap.length
         const element = this.heap[0]
@@ -85,10 +85,30 @@ class MinPriorityQueue {
 }
 
 class KthLargestElementInAnArray {
-	solve(nums, k) {
-	// Your code here
-
-	}
+	    /**
+     * https://leetcode.com/problems/kth-largest-element-in-an-array/
+     * Time O(N * log(K)) | Space O(K)
+     * @param {number[]} nums
+     * @param {number} k
+     * @return {number}
+     */
+        findKthLargest = function (nums, k) {
+            const minHeap = new MinPriorityQueue()
+    
+            for (const num of nums) {
+                minHeap.enqueue(num);
+    
+                const isAtCapacity = k < minHeap.size();
+                if (isAtCapacity) minHeap.dequeue();
+            }
+    
+            return minHeap.front()
+        }
+    
+    
+        solve(nums, k) {
+            return this.findKthLargest(nums, k);
+        }
 }
 
 

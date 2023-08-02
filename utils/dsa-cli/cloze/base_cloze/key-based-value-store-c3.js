@@ -13,11 +13,7 @@ class TimeMap {
     set(key, value, timestamp) {
 
         // TODO Set the bucket to the map key or an empty array and then configure just in case. Then push the vaue and timestamp to the buccket
-        const bucket = this.map[key] || [];
 
-        this.map[key] = bucket;
-
-        bucket.push([value, timestamp]);
     }
 
     /**

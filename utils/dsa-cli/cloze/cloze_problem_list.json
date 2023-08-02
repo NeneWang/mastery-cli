@@ -725,9 +725,12 @@
         "problem_slug": "k-closest"
     },
     {
-        "file_path": "k-closest-c1.js",
+        "file_path": "k-closest-c2.js",
         "difficulty": 1,
         "problem_slug": "k-closest"
+    },
+    {
+        
     }
 
 ]
