@@ -1,7 +1,9 @@
-class MinPriorityQueue {	// Your code here
+class CombinationSumII {
+	solve(candidates, target) {
+	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: MinPriorityQueue };
+module.exports = { Problem: CombinationSumII };

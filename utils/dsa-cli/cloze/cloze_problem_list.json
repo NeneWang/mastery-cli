@@ -813,5 +813,20 @@
         "file_path": "last-stone-weight-c3.js",
         "difficulty": 1,
         "problem_slug": "last-stone-weight"
+    },
+    {
+        "file_path": "find-median-from-data-stream-c1.js",
+        "difficulty": 1,
+        "problem_slug": "find-median-from-data-stream"
+    },
+    {
+        "file_path": "find-median-from-data-stream-c2.js",
+        "difficulty": 1,
+        "problem_slug": "find-median-from-data-stream"
+    },
+    {
+        "file_path": "find-median-from-data-stream-c3.js",
+        "difficulty": 1,
+        "problem_slug": "find-median-from-data-stream"
     }
 ]
