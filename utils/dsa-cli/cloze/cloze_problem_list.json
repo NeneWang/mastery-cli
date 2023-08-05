@@ -828,5 +828,30 @@
         "file_path": "find-median-from-data-stream-c3.js",
         "difficulty": 1,
         "problem_slug": "find-median-from-data-stream"
+    },
+    {
+        "file_path": "find-median-from-data-stream-c4.js",
+        "difficulty": 1,
+        "problem_slug": "find-median-from-data-stream"
+    },
+    {
+        "file_path": "find-median-from-data-stream-c5.js",
+        "difficulty": 1,
+        "problem_slug": "find-median-from-data-stream"
+    },
+    {
+        "file_path": "combination-sum-ii-c1.js",
+        "difficulty": 1,
+        "problem_slug": "combination-sum-ii"
+    },
+    {
+        "file_path": "combination-sum-ii-c2.js",
+        "difficulty": 1,
+        "problem_slug": "combination-sum-ii"
+    },
+    {
+        "file_path": "combination-sum-ii-c3.js",
+        "difficulty": 1,
+        "problem_slug": "combination-sum-ii"
     }
 ]
