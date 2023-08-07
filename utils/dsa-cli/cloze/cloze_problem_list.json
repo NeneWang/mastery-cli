@@ -853,5 +853,25 @@
         "file_path": "combination-sum-ii-c3.js",
         "difficulty": 1,
         "problem_slug": "combination-sum-ii"
+    },
+    {
+        "file_path": "combination-sum-ii-c4.js",
+        "difficulty": 1,
+        "problem_slug": "combination-sum-ii"
+    },
+    {
+        "file_path": "subsets-ii-c1.js",
+        "difficulty": 1,
+        "problem_slug": "subsets-ii"
+    },
+    {
+        "file_path": "subsets-ii-c2.js",
+        "difficulty": 1,
+        "problem_slug": "subsets-ii"
+    },
+    {
+        "file_path": "subsets-ii-c3.js",
+        "difficulty": 1,
+        "problem_slug": "subsets-ii"
     }
 ]

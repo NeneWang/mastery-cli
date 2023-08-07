@@ -11,15 +11,12 @@ class CombinationSumII {
 
 
         const dfs = (candidates, target, index = 0, combination = [], combinations = []) => {
-            const isBaseCase = target < 0;
-            if (isBaseCase) return combinations;
+            // TODO Check if the target is less than 0, if it is return the combinations.
 
-            const isTarget = target === 0;
-            if (isTarget) {
-                if (combination.length) combinations.push(combination.slice());
-
-                return combinations
-            }
+            
+            // TODO if the target is 0, then add the combination to the combinations and return the combinations.
+            
+            
 
             for (let i = index; i < candidates.length; i++) {
                 const isDuplicate = (index < i) && (candidates[i - 1] === candidates[i]);

@@ -21,9 +21,12 @@ class CombinationSumII {
                 return combinations
             }
 
-            // TDOO iterate trought the candidates that are indicated to be after and within the index.
-            // TODO if is duplicate then ip. Otherwise continue to backtrack.
-            
+            for (let i = index; i < candidates.length; i++) {
+                const isDuplicate = (index < i) && (candidates[i - 1] === candidates[i]);
+                if (isDuplicate) continue;
+
+                backTrack(candidates, target, i, combination, combinations);
+            }
 
             return combinations;
         }
@@ -34,9 +37,9 @@ class CombinationSumII {
             combination.pop()
         }
 
-        candidates.sort((a, b) => a - b)
+        // TODO Sort the candidates to avoid duplicates.
 
-        return dfs(candidates, target)
+        // TODO Run the dfs 
     };
 
     solve(candidates, target) {
