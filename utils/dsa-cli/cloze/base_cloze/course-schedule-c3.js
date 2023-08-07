@@ -31,6 +31,7 @@ class CourseSchedule {
 
         var hasPath = (numCourses, graph, path) => {
             for (let course = 0; course < numCourses; course++) {
+                // If is cyclick found then there is no path.
                 if (isCyclic(course, graph, path)) return false;
             }
 
@@ -38,12 +39,12 @@ class CourseSchedule {
         }
 
         var isCyclic = (currCourse, graph, path) => {
-            const hasSeen = path[currCourse]
-            if (hasSeen) return true
+            // TODO If the path had been seen, then it is cyclic 
+            
 
-            const isMissingNext = !(currCourse in graph)
-            if (isMissingNext) return false;
-
+            // TODO Otherwise if the current course doesnt have that in the graph returns false
+            
+            
             return backTrack(currCourse, graph, path);
         }
 

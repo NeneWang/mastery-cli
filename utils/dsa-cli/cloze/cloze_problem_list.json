@@ -888,5 +888,30 @@
         "file_path": "clone-graph-c3.js",
         "difficulty": 1,
         "problem_slug": "clone-graph"
+    }, 
+    {
+        "file_path": "course-schedule-c1.js",
+        "difficulty": 1,
+        "problem_slug": "course-schedule"
+    }, 
+    {
+        "file_path": "course-schedule-c2.js",
+        "difficulty": 1,
+        "problem_slug": "course-schedule"
+    }, 
+    {
+        "file_path": "course-schedule-c3.js",
+        "difficulty": 1,
+        "problem_slug": "course-schedule"
+    }, 
+    {
+        "file_path": "course-schedule-c4.js",
+        "difficulty": 1,
+        "problem_slug": "course-schedule"
+    }, 
+    {
+        "file_path": "course-schedule-c5.js",
+        "difficulty": 1,
+        "problem_slug": "course-schedule"
     }
 ]

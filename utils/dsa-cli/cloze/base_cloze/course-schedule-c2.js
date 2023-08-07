@@ -16,15 +16,12 @@ class CourseSchedule {
         })
 
         var buildGraph = (numCourses, prerequisites) => {
-            const { graph, path } = initGraph(numCourses);
-
-            for (const [src, dst] of prerequisites) {
-                const neighbors = (graph[dst] || []);
-
-                neighbors.push(src);
-
-                graph[dst] = neighbors;
-            }
+            // TODO Initialize the graph and path
+            
+            // TODO Iterate over the prerequisites and add the neighbors to the neighbors lists.
+            // TODO and the graph where the it indicates the neighbors of each course.
+            
+            
 
             return { graph, path };
         }

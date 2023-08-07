@@ -38,9 +38,11 @@ class CourseSchedule {
         }
 
         var isCyclic = (currCourse, graph, path) => {
-            // TODO If has seen return true
+            const hasSeen = path[currCourse]
+            if (hasSeen) return true
 
-            // TODO If the course is not in the graph return false
+            const isMissingNext = !(currCourse in graph)
+            if (isMissingNext) return false;
 
             return backTrack(currCourse, graph, path);
         }
@@ -54,9 +56,8 @@ class CourseSchedule {
         }
 
         var hasCycle = (currCourse, graph, path) => {
-            for (const neighbor of graph[currCourse]) {
-                if (isCyclic(neighbor, graph, path)) return true;
-            }
+            // TODO return true if the current course is in the path, iterate each neighbor of the current course
+            
 
             return false
         }

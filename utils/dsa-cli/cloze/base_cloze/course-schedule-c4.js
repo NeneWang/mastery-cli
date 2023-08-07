@@ -30,17 +30,16 @@ class CourseSchedule {
         }
 
         var hasPath = (numCourses, graph, path) => {
-            for (let course = 0; course < numCourses; course++) {
-                if (isCyclic(course, graph, path)) return false;
-            }
-
-            return true;
+            // TODO Check if all the courses can be travelled, by checking course by course.
+            
         }
 
         var isCyclic = (currCourse, graph, path) => {
-            // TODO If has seen return true
+            const hasSeen = path[currCourse]
+            if (hasSeen) return true
 
-            // TODO If the course is not in the graph return false
+            const isMissingNext = !(currCourse in graph)
+            if (isMissingNext) return false;
 
             return backTrack(currCourse, graph, path);
         }
