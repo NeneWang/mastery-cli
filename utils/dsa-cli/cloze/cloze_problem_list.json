@@ -873,5 +873,20 @@
         "file_path": "subsets-ii-c3.js",
         "difficulty": 1,
         "problem_slug": "subsets-ii"
+    }, 
+    {
+        "file_path": "clone-graph-c1.js",
+        "difficulty": 1,
+        "problem_slug": "clone-graph"
+    }, 
+    {
+        "file_path": "clone-graph-c2.js",
+        "difficulty": 1,
+        "problem_slug": "clone-graph"
+    }, 
+    {
+        "file_path": "clone-graph-c3.js",
+        "difficulty": 1,
+        "problem_slug": "clone-graph"
     }
 ]

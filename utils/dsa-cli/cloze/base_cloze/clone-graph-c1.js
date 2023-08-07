@@ -24,9 +24,8 @@ class CloneGraph {
 
 
         const dfs = (node, seen) => {
-            const clone = new Node(node.val);
+            // TODO Clone the node, set the node on seen from the clone.
 
-            seen.set(node, clone);                               /*               | Space O(N) */
 
             for (const neighbor of node.neighbors) {
                 const cloneNeighbor = this.cloneGraph(neighbor, seen);/* Time O(V + E) | Space O(H) */

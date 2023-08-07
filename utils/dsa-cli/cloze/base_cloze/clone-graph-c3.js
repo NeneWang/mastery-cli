@@ -37,10 +37,10 @@ class CloneGraph {
             return clone;
         }
 
-        const isBaseCase = node === null;
-        if (isBaseCase) return null;
 
-        if (seen.has(node)) return seen.get(node);
+        // TODO If the base case then returns null. 
+        // TODO if it had been seen then return the clone.
+        
 
         return dfs(node, seen);                              /* Time O(V + E) | Space O(N) */
     }
