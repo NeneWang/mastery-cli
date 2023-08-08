@@ -913,5 +913,36 @@
         "file_path": "course-schedule-c5.js",
         "difficulty": 1,
         "problem_slug": "course-schedule"
+    }, 
+    {
+        "file_path": "max-area-of-island-c1.js",
+        "difficulty": 1,
+        "problem_slug": "max-area-of-island"
+    }, 
+    {
+        "file_path": "max-area-of-island-c2.js",
+        "difficulty": 1,
+        "problem_slug": "max-area-of-island"
+    }, 
+    {
+        "file_path": "max-area-of-island-c3.js",
+        "difficulty": 1,
+        "problem_slug": "max-area-of-island"
+    },
+    {
+        "file_path": "number-of-islands-c1.js",
+        "difficulty": 1,
+        "problem_slug": "number-of-islands"
+    },
+    {
+        "file_path": "number-of-islands-c2.js",
+        "difficulty": 1,
+        "problem_slug": "number-of-islands"
+    },
+    {
+        "file_path": "number-of-islands-c3.js",
+        "difficulty": 1,
+        "problem_slug": "number-of-islands"
     }
+
 ]

@@ -19,7 +19,7 @@ class NumberOfIslands {
 
 
     /**
-u    * https://leetcode.com/problems/number-of-islands/
+     * https://leetcode.com/problems/number-of-islands/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
      * @param {character[][]} grid
      * @return {number}
@@ -28,17 +28,9 @@ u    * https://leetcode.com/problems/number-of-islands/
 
         const [rows, cols] = [grid.length, grid[0].length]
 
-        for (let row = 0; row < rows; row++) {/* Time O(ROWS) */
-            for (let col = 0; col < cols; col++) {/* Time O(COLS) */
-                const isIsland = grid[row][col] === '1'
-                if (isIsland) {
-                    // console.log("connectedComponents", connectedComponents);
-                    connectedComponents++
-                }
+        // TODO Iterate over each of the rows and cols, and if it is an island, increment the connectedComponents and dfs to block other connected ndodes.
 
-                dfs(grid, row, rows, col, cols);    /* Space O(ROWS * COLS) */
-            }
-        }
+        
 
         return connectedComponents
     };

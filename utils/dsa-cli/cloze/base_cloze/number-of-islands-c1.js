@@ -5,21 +5,19 @@ var getNeighbors = (row, rows, col, cols) => [[0, 1], [0, -1], [1, 0], [-1, 0]]
     .filter(([_row, _col]) => (0 <= _row) && (_row < rows) && (0 <= _col) && (_col < cols))
 
 const dfs = (grid, row, rows, col, cols) => {
-    const isBaseCase = grid[row][col] === '0';
-    if (isBaseCase) return;
 
-    grid[row][col] = '0';
+    // TODO If the base case is found then return, otherwise, convert it into 0.
+    
 
-    for (const [_row, _col] of getNeighbors(row, rows, col, cols)) {
-        dfs(grid, _row, rows, _col, cols);      /* Space O(ROWS * COLS) */
-    }
+    // TODO Do the same for the neighbors
+    
 }
 
 class NumberOfIslands {
 
 
     /**
-u    * https://leetcode.com/problems/number-of-islands/
+     * https://leetcode.com/problems/number-of-islands/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
      * @param {character[][]} grid
      * @return {number}

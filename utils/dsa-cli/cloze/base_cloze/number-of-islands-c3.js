@@ -1,8 +1,10 @@
 
 
+// TODO filter the neighbors that are not valid
 var getNeighbors = (row, rows, col, cols) => [[0, 1], [0, -1], [1, 0], [-1, 0]]
     .map(([_row, _col]) => [(row + _row), (col + _col)])
-    .filter(([_row, _col]) => (0 <= _row) && (_row < rows) && (0 <= _col) && (_col < cols))
+    
+    // TODO Filter here.
 
 const dfs = (grid, row, rows, col, cols) => {
     const isBaseCase = grid[row][col] === '0';
@@ -19,7 +21,7 @@ class NumberOfIslands {
 
 
     /**
-u    * https://leetcode.com/problems/number-of-islands/
+     * https://leetcode.com/problems/number-of-islands/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
      * @param {character[][]} grid
      * @return {number}

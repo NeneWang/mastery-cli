@@ -1,9 +1,9 @@
-class CourseSchedule {
-	solve(numCourses, prerequisistes) {
+class PacificAtlantic {
+	solve(heights) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: CourseSchedule };
+module.exports = { Problem: PacificAtlantic };
