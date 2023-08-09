@@ -67,9 +67,8 @@ class PacificAtlantic {
             .map(([_row, _col]) => [(row + _row), (col + _col)])
             .filter(([_row, _col]) => (0 <= _row) && (_row < rows) && (0 <= _col) && (_col < cols))
 
-        const [pacificReachable, atlanticReachable] = search(heights);   /* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
 
-        return searchGrid(heights, pacificReachable, atlanticReachable);/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
+            // TODO Implement the search of the heights.
     };
 
     solve(heights) {

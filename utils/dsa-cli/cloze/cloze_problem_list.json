@@ -968,6 +968,21 @@
         "file_path": "pacific-atlantic-water-flow-c5.js",
         "difficulty": 1,
         "problem_slug": "pacific-atlantic-water-flow"
+    },
+    {
+        "file_path": "redundant-connection-c1.js",
+        "difficulty": 1,
+        "problem_slug": "redundant-connection"
+    },
+    {
+        "file_path": "redundant-connection-c2.js",
+        "difficulty": 1,
+        "problem_slug": "redundant-connection"
+    },
+    {
+        "file_path": "redundant-connection-c3.js",
+        "difficulty": 1,
+        "problem_slug": "redundant-connection"
     }
 
 ]

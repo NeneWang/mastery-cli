@@ -21,9 +21,11 @@ class ReduntantConnection {
         }
 
         const dfs = (graph, source, target, seen) => {
-            for (const neighbor of graph[source]) {
-                if (hasRedundantConnection(graph, neighbor, target, seen)) return true;
-            }
+            
+            // TODO Iterate over each of the neighbors, and call hasRedundantConnection on each of them.
+            // If they have so return true;
+
+            
 
             return false;
         }
@@ -31,21 +33,13 @@ class ReduntantConnection {
 
         const graph = new Array((1000 + 1)).fill().map(() => []);
 
-        // TODO Iterate over each of the edges, and check if there is a redundant connection.
-        // TODO There are nodes in the graph wheather src is in graph or destiny. Add them both after iterating.
-        // TODO If there is nodes and there is a redundant connection return the src and dst.
-		
-		for(const [src, dst] of edges){
-			
-			const hasNode = (src in graph) && (dst in graph);
-			if(hasNode && hasRedundantConnection(graph, src, dst)) return [src, dst];
+        for (const [src, dst] of edges) {
+            const hasNodes = (src in graph) && (dst in graph)
+            if (hasNodes && hasRedundantConnection(graph, src, dst)) return [src, dst];
 
-			graph[src].push(dst);
-			graph[dst].push(src);
-
-		}
-
-
+            graph[src].push(dst);
+            graph[dst].push(src);
+        }
     }
 
     solve(edges) {
