@@ -38,26 +38,14 @@ class PacificAtlantic {
 
         const dfs = (row, col, rows, cols, isReachable, heights) => {
             // TODO Set as the current node as reachable
-			
-			isReachable[row][col] = true;
 
             // TODO Iterate over each of the neighbors, if it had been already reach, then skip it
-
 
 
             // TODO Otherwise, check if the neighbor is lower than the current node, if it is, then skip it (Because we want to move up.) 
 
             // TODO Otherwise, call dfs on the neighbor
 
-			for(const [_row, _col] of getNeighbors(row, rows, col, cols)){
-				if(isReachable[_row][_col]) continue;
-
-				const isLower = heights[_row][_col] < heights[row][col];
-				if(isLower) continue;
-
-				dfs(_row, _col, rows, cols, isReachable, heights);
-				
-			}
 
         }
 

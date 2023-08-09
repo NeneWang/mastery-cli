@@ -5,21 +5,21 @@ class PacificAtlantic {
 
         var search = (heights) => {
             const [rows, cols] = [heights.length, heights[0].length];
-            const [pacificReachable, atlanticReachable] = [getMatrix(rows, cols), getMatrix(rows, cols)];/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
-
-            searchRows(heights, rows, cols, pacificReachable, atlanticReachable);
-            searchCols(heights, rows, cols, pacificReachable, atlanticReachable);
-
+            
+            // TODO Searches  using a copy of false and false get Matrix rows. .
+            
+            // TODO Search the rows and cols. 
+            
             return [pacificReachable, atlanticReachable];
         }
 
         var getMatrix = (rows, cols) => new Array(rows).fill()/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
             .map(() => new Array(cols).fill(false));
 
-
         var searchRows = (heights, rows, cols, pacificReachable, atlanticReachable) => {
-
+            
             for (let row = 0; row < rows; row++) {/* Time O(ROWS) */
+
                 const [pacificStart, atlanticStart] = [0, (cols - 1)];
 
                 dfs(row, pacificStart, rows, cols, pacificReachable, heights);   /* Space O(ROWS * COLS) */
@@ -37,28 +37,17 @@ class PacificAtlantic {
         }
 
         const dfs = (row, col, rows, cols, isReachable, heights) => {
-            // TODO Set as the current node as reachable
-			
-			isReachable[row][col] = true;
+            isReachable[row][col] = true;
 
-            // TODO Iterate over each of the neighbors, if it had been already reach, then skip it
+            for (const [_row, _col] of getNeighbors(row, rows, col, cols)) {
+                if (isReachable[_row][_col]) continue;
+
+                const isLower = heights[_row][_col] < heights[row][col];
+                if (isLower) continue;
 
 
-
-            // TODO Otherwise, check if the neighbor is lower than the current node, if it is, then skip it (Because we want to move up.) 
-
-            // TODO Otherwise, call dfs on the neighbor
-
-			for(const [_row, _col] of getNeighbors(row, rows, col, cols)){
-				if(isReachable[_row][_col]) continue;
-
-				const isLower = heights[_row][_col] < heights[row][col];
-				if(isLower) continue;
-
-				dfs(_row, _col, rows, cols, isReachable, heights);
-				
-			}
-
+                dfs(_row, _col, rows, cols, isReachable, heights);              /* Space O(ROWS * COLS) */
+            }
         }
 
         var searchGrid = (heights, pacificReachable, atlanticReachable, intersection = []) => {

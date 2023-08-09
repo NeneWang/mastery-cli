@@ -943,6 +943,31 @@
         "file_path": "number-of-islands-c3.js",
         "difficulty": 1,
         "problem_slug": "number-of-islands"
+    },
+    {
+        "file_path": "pacific-atlantic-water-flow-c1.js",
+        "difficulty": 1,
+        "problem_slug": "pacific-atlantic-water-flow"
+    },
+    {
+        "file_path": "pacific-atlantic-water-flow-c2.js",
+        "difficulty": 1,
+        "problem_slug": "pacific-atlantic-water-flow"
+    },
+    {
+        "file_path": "pacific-atlantic-water-flow-c3.js",
+        "difficulty": 1,
+        "problem_slug": "pacific-atlantic-water-flow"
+    },
+    {
+        "file_path": "pacific-atlantic-water-flow-c4.js",
+        "difficulty": 1,
+        "problem_slug": "pacific-atlantic-water-flow"
+    },
+    {
+        "file_path": "pacific-atlantic-water-flow-c5.js",
+        "difficulty": 1,
+        "problem_slug": "pacific-atlantic-water-flow"
     }
 
 ]
