@@ -9,10 +9,8 @@ class UnionFind {
     }
 
     search(edges) {
-        for(let [src, dst] of edges) {
-            const hasConnection = this.union(src, dst);
-            if (!hasConnection) return (this.redundantConnection = [src, dst]);
-        }
+        // TODO Search src and dst of edges and union the src and dst if it doesnt have a connection then return redundant connection.
+        
     }
 
     find(node, { parent } = this) {
@@ -29,13 +27,11 @@ class UnionFind {
     }
 
     compress(tail, head, {parent} = this) {
-        // TODO Implement Compressing, by adding to the parent tail the head.
-		parent[tail] = head; 
+        parent[tail] = head;
     }
 
     increaseRank(head, tail, {rank} = this) {
-        // TODO Increase the rank of the head by adding the rank of the tail.
-        rank[head] += rank[tail]
+        rank[head] += rank[tail];
     }
 
     union(src, dst, {rank} = this) {
@@ -83,5 +79,4 @@ class ReduntantConnection {
 
 
 module.exports = { Problem: ReduntantConnection };
-
 

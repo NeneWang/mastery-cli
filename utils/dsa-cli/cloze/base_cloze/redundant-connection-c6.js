@@ -29,32 +29,25 @@ class UnionFind {
     }
 
     compress(tail, head, {parent} = this) {
-        // TODO Implement Compressing, by adding to the parent tail the head.
-		parent[tail] = head; 
+        parent[tail] = head;
     }
 
     increaseRank(head, tail, {rank} = this) {
-        // TODO Increase the rank of the head by adding the rank of the tail.
-        rank[head] += rank[tail]
+        rank[head] += rank[tail];
     }
 
     union(src, dst, {rank} = this) {
-        const [rootSrc, rootDst] = [this.find(src), this.find(dst)];
+        // TODO Find the root of src and dst and union them if they are not equal.
+        
 
-        const hasCycle = rootSrc === rootDst;
-        if (hasCycle) return false;
+        // TODO Otherwise return false. Which is the base case when a cycle is found.
+        
+        
 
-        const isSrcGreater = rank[rootSrc] > rank[rootDst];
-        if(isSrcGreater){
-            this.increaseRank(rootDst, rootSrc);
-            this.compress(rootSrc, rootDst);
-        }
-
-        const isDstGreater = rank[rootSrc] <= rank[rootDst];
-        if(isDstGreater){
-            this.increaseRank(rootSrc, rootDst);
-            this.compress(rootDst, rootSrc);
-        }
+        // TODO Increase the rank of the root of the src and dst if the rank of src is greater than dst.
+        
+        
+        // After running the updates return true to continue.
 
         return true;
 
@@ -83,5 +76,4 @@ class ReduntantConnection {
 
 
 module.exports = { Problem: ReduntantConnection };
-
 

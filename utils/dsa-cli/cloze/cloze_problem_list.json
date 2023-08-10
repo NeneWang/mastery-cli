@@ -983,6 +983,26 @@
         "file_path": "redundant-connection-c3.js",
         "difficulty": 1,
         "problem_slug": "redundant-connection"
+    },
+    {
+        "file_path": "redundant-connection-c4.js",
+        "difficulty": 1,
+        "problem_slug": "redundant-connection"
+    },
+    {
+        "file_path": "redundant-connection-c5.js",
+        "difficulty": 1,
+        "problem_slug": "redundant-connection"
+    },
+    {
+        "file_path": "redundant-connection-c6.js",
+        "difficulty": 1,
+        "problem_slug": "redundant-connection"
+    },
+    {
+        "file_path": "redundant-connection-c7.js",
+        "difficulty": 1,
+        "problem_slug": "redundant-connection"
     }
 
 ]

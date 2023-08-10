@@ -30,12 +30,12 @@ class UnionFind {
 
     compress(tail, head, {parent} = this) {
         // TODO Implement Compressing, by adding to the parent tail the head.
-		parent[tail] = head; 
+        
     }
 
     increaseRank(head, tail, {rank} = this) {
         // TODO Increase the rank of the head by adding the rank of the tail.
-        rank[head] += rank[tail]
+        
     }
 
     union(src, dst, {rank} = this) {
@@ -83,5 +83,4 @@ class ReduntantConnection {
 
 
 module.exports = { Problem: ReduntantConnection };
-
 

@@ -16,26 +16,20 @@ class UnionFind {
     }
 
     find(node, { parent } = this) {
-        let head = parent[node];
-        const isEqual = () => head === parent[head];
-        while(!isEqual()){
-            const tail = parent[parent[head]];
+        // Objective is findinging until the parent moves to the head.
+        // TODO Find the parent of the node and compress the path if they are not equal.
+        
 
-            this.compress(head, tail);
-            head = parent[head];
-        }
-
-        return head;
+        // TODO Return the HEAD
+        
     }
 
     compress(tail, head, {parent} = this) {
-        // TODO Implement Compressing, by adding to the parent tail the head.
-		parent[tail] = head; 
+        parent[tail] = head;
     }
 
     increaseRank(head, tail, {rank} = this) {
-        // TODO Increase the rank of the head by adding the rank of the tail.
-        rank[head] += rank[tail]
+        rank[head] += rank[tail];
     }
 
     union(src, dst, {rank} = this) {
@@ -83,5 +77,4 @@ class ReduntantConnection {
 
 
 module.exports = { Problem: ReduntantConnection };
-
 
