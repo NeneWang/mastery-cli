@@ -59,22 +59,7 @@ class WordLadder {
         const transform = (queue, wordSet, seen, word, depth) => {
             // TODO For each letter of the word, loop alphabet, and create the neighbor.
             // If the neighbor is either not in the wordSet or seen then skip otherwise enqueue the word, and remmeber that you seen it..
-           
-			for(const index in word){
-				for (const letter of 'abcdefghijklmnopqrstuvwxyz'){
-					
-					const neighbor = getNeighbor(word, index, letter);
-					const notUsable = !wordSet.has(neighbor) || seen.has(neighbor);
-
-					if(notUsable) continue;
-
-					seen.add(neighbor);
-					queue.enqueue([neighbor, depth + 1]);
-
-
-				}
-			
-			}
+            
             
         }
 

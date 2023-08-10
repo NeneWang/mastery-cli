@@ -873,57 +873,57 @@
         "file_path": "subsets-ii-c3.js",
         "difficulty": 1,
         "problem_slug": "subsets-ii"
-    }, 
+    },
     {
         "file_path": "clone-graph-c1.js",
         "difficulty": 1,
         "problem_slug": "clone-graph"
-    }, 
+    },
     {
         "file_path": "clone-graph-c2.js",
         "difficulty": 1,
         "problem_slug": "clone-graph"
-    }, 
+    },
     {
         "file_path": "clone-graph-c3.js",
         "difficulty": 1,
         "problem_slug": "clone-graph"
-    }, 
+    },
     {
         "file_path": "course-schedule-c1.js",
         "difficulty": 1,
         "problem_slug": "course-schedule"
-    }, 
+    },
     {
         "file_path": "course-schedule-c2.js",
         "difficulty": 1,
         "problem_slug": "course-schedule"
-    }, 
+    },
     {
         "file_path": "course-schedule-c3.js",
         "difficulty": 1,
         "problem_slug": "course-schedule"
-    }, 
+    },
     {
         "file_path": "course-schedule-c4.js",
         "difficulty": 1,
         "problem_slug": "course-schedule"
-    }, 
+    },
     {
         "file_path": "course-schedule-c5.js",
         "difficulty": 1,
         "problem_slug": "course-schedule"
-    }, 
+    },
     {
         "file_path": "max-area-of-island-c1.js",
         "difficulty": 1,
         "problem_slug": "max-area-of-island"
-    }, 
+    },
     {
         "file_path": "max-area-of-island-c2.js",
         "difficulty": 1,
         "problem_slug": "max-area-of-island"
-    }, 
+    },
     {
         "file_path": "max-area-of-island-c3.js",
         "difficulty": 1,
@@ -1006,22 +1006,22 @@
     },
     {
         "file_path": "rotting-oranges-c1.js",
-        "difficulty": 1, 
+        "difficulty": 1,
         "problem_slug": "rotting-oranges"
     },
     {
         "file_path": "rotting-oranges-c2.js",
-        "difficulty": 1, 
+        "difficulty": 1,
         "problem_slug": "rotting-oranges"
     },
     {
         "file_path": "rotting-oranges-c3.js",
-        "difficulty": 1, 
+        "difficulty": 1,
         "problem_slug": "rotting-oranges"
     },
     {
         "file_path": "rotting-oranges-c4.js",
-        "difficulty": 1, 
+        "difficulty": 1,
         "problem_slug": "rotting-oranges"
     },
     {
@@ -1043,6 +1043,35 @@
         "file_path": "surrounded-regions-c4.js",
         "difficulty": 1,
         "problem_slug": "surrounded-regions"
+    },
+    {
+        "file_path": "wall-and-gates-c1.js",
+        "difficulty": 1,
+        "problem_slug": "surrounded-regions"
+    },
+    {
+        "file_path": "wall-and-gates-c2.js",
+        "difficulty": 1,
+        "problem_slug": "surrounded-regions"
+    },
+    {
+        "file_path": "wall-and-gates-c3.js",
+        "difficulty": 1,
+        "problem_slug": "surrounded-regions"
+    },
+    {
+        "file_path": "word-ladder-c1.js",
+        "difficulty": 1,
+        "problem_slug": "word-ladder"
+    },
+    {
+        "file_path": "word-ladder-c2.js",
+        "difficulty": 1,
+        "problem_slug": "word-ladder"
+    },
+    {
+        "file_path": "word-ladder-c3.js",
+        "difficulty": 1,
+        "problem_slug": "word-ladder"
     }
-
 ]

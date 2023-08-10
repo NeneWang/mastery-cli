@@ -42,40 +42,27 @@ class WordLadder {
     ladderLength = function (beginWord, endWord, wordList) {
 
         const bfs = (queue, wordSet, seen, endWord) => {
-            while (!queue.isEmpty()) {
-                for (let i = (queue.size() - 1); 0 <= i; i--) {
-                    const [word, depth] = queue.dequeue();
-                    // console.log("looping on the queue", word, depth, endWord);
-
-                    const isTarget = word === endWord
-                    if (isTarget) return depth
-
-                    transform(queue, wordSet, seen, word, depth)
-                }
-            }
+            // TODO While the queue is not empty, we loop on the queue size and dequeue the word 
+            // The queue starting with the beginWord and the depth of 1.
+            // Go and create the neighbors of the word and add them to the queue.
+            // If the word is the endWord then return the depth.
+            // Otherwise run transform to find the neighbors to been add on the queue..
+            
 
             return 0
         }
         const transform = (queue, wordSet, seen, word, depth) => {
-            // TODO For each letter of the word, loop alphabet, and create the neighbor.
-            // If the neighbor is either not in the wordSet or seen then skip otherwise enqueue the word, and remmeber that you seen it..
-           
-			for(const index in word){
-				for (const letter of 'abcdefghijklmnopqrstuvwxyz'){
-					
-					const neighbor = getNeighbor(word, index, letter);
-					const notUsable = !wordSet.has(neighbor) || seen.has(neighbor);
+            for (const index in word) {
+                for (const char of 'abcdefghijklmnopqrstuvwxyz') {
+                    const neighbor = getNeighbor(word, index, char);
 
-					if(notUsable) continue;
+                    const hasSeen = !wordSet.has(neighbor) || seen.has(neighbor);
+                    if (hasSeen) continue;
 
-					seen.add(neighbor);
-					queue.enqueue([neighbor, depth + 1]);
-
-
-				}
-			
-			}
-            
+                    queue.enqueue([neighbor, (depth + 1)]);
+                    seen.add(neighbor);
+                }
+            }
         }
 
         const getNeighbor = (word, index, char) => {
