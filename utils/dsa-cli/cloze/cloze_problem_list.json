@@ -1003,6 +1003,26 @@
         "file_path": "redundant-connection-c7.js",
         "difficulty": 1,
         "problem_slug": "redundant-connection"
+    },
+    {
+        "file_path": "rotting-oranges-c1.js",
+        "difficulty": 1, 
+        "problem_slug": "rotting-oranges"
+    },
+    {
+        "file_path": "rotting-oranges-c2.js",
+        "difficulty": 1, 
+        "problem_slug": "rotting-oranges"
+    },
+    {
+        "file_path": "rotting-oranges-c3.js",
+        "difficulty": 1, 
+        "problem_slug": "rotting-oranges"
+    },
+    {
+        "file_path": "rotting-oranges-c4.js",
+        "difficulty": 1, 
+        "problem_slug": "rotting-oranges"
     }
 
 ]

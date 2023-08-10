@@ -57,35 +57,25 @@ class RottingOranges {
         }
 
         const bfs = (grid, queue, rottenCount = 0, minutes = 0) => {
-            while (!queue.isEmpty()) {
-                rottenCount += queue.size();
-
-                for (let i = (queue.size() - 1); 0 <= i; i--) {/* Time O(WIDTH) */
-                    expireFresh(grid, queue);
-                }
-
-                if (queue.size()) minutes++;
-            }
-
-            return { rottenCount, minutes };
+            // TODO Multisource bfs, whereas while the queue is empty, 
+            // We fetch the count of the queue and expire the batch, if there were added then increase the q time.
+            
+            
+            // TODO Return the rottenCount and minutes.
+            
         }
 
         var expireFresh = (grid, queue) => {
-            //TODO Find the coordinates and then expire the neighbors. If they were expired, add them to the queue.
-			const [rows, cols] = [grid.length, grid[0].length];
-			const [row, col] = queue.dequeue();
+            const [rows, cols] = [grid.length, grid[0].length];
+            const [row, col] = queue.dequeue();
 
-			for( const [_row, _col] of getNeighbors(row, rows, col, cols)){
+            for (const [_row, _col] of getNeighbors(row, rows, col, cols)) {
+                const isFresh = grid[_row][_col] === 1;
+                if (!isFresh) continue;
 
-				const is_fresh = grid[_row][_col] == 1;
-
-				if(!is_fresh) continue;
-
-				grid[_row][_col] = 2;
-				queue.enqueue([_row, _col]);
-
-			}
-            
+                grid[_row][_col] = 2;
+                queue.enqueue([_row, _col]);/* Space O(ROWS * COLS) */
+            }
         }
 
         var getNeighbors = (row, rows, col, cols) => [[0, 1], [0, -1], [1, 0], [-1, 0]]

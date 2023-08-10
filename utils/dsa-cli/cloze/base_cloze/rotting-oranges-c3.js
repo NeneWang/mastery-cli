@@ -43,15 +43,7 @@ class RottingOranges {
         const searchGrid = (grid, orangeCount = 0, queue = new Queue([])) => {
             const [rows, cols] = [grid.length, grid[0].length];
 
-            for (let row = 0; row < rows; row++) {/* Time O(ROWS) */
-                for (let col = 0; col < cols; col++) {/* Time O(COLS) */
-                    const isEmpty = grid[row][col] === 0;
-                    if (!isEmpty) orangeCount++;
-
-                    const isRotten = grid[row][col] === 2;
-                    if (isRotten) queue.enqueue([row, col]);/* Space O(ROWS * COLS) */
-                }
-            }
+            // TODO Searches the grid for oranges and rotten oranges, Returning the queue of rotten oranges to explore
 
             return { queue, orangeCount }
         }
@@ -71,21 +63,16 @@ class RottingOranges {
         }
 
         var expireFresh = (grid, queue) => {
-            //TODO Find the coordinates and then expire the neighbors. If they were expired, add them to the queue.
-			const [rows, cols] = [grid.length, grid[0].length];
-			const [row, col] = queue.dequeue();
+            const [rows, cols] = [grid.length, grid[0].length];
+            const [row, col] = queue.dequeue();
 
-			for( const [_row, _col] of getNeighbors(row, rows, col, cols)){
+            for (const [_row, _col] of getNeighbors(row, rows, col, cols)) {
+                const isFresh = grid[_row][_col] === 1;
+                if (!isFresh) continue;
 
-				const is_fresh = grid[_row][_col] == 1;
-
-				if(!is_fresh) continue;
-
-				grid[_row][_col] = 2;
-				queue.enqueue([_row, _col]);
-
-			}
-            
+                grid[_row][_col] = 2;
+                queue.enqueue([_row, _col]);/* Space O(ROWS * COLS) */
+            }
         }
 
         var getNeighbors = (row, rows, col, cols) => [[0, 1], [0, -1], [1, 0], [-1, 0]]

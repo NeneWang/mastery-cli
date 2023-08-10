@@ -72,19 +72,7 @@ class RottingOranges {
 
         var expireFresh = (grid, queue) => {
             //TODO Find the coordinates and then expire the neighbors. If they were expired, add them to the queue.
-			const [rows, cols] = [grid.length, grid[0].length];
-			const [row, col] = queue.dequeue();
-
-			for( const [_row, _col] of getNeighbors(row, rows, col, cols)){
-
-				const is_fresh = grid[_row][_col] == 1;
-
-				if(!is_fresh) continue;
-
-				grid[_row][_col] = 2;
-				queue.enqueue([_row, _col]);
-
-			}
+            
             
         }
 

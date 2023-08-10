@@ -71,34 +71,24 @@ class RottingOranges {
         }
 
         var expireFresh = (grid, queue) => {
-            //TODO Find the coordinates and then expire the neighbors. If they were expired, add them to the queue.
-			const [rows, cols] = [grid.length, grid[0].length];
-			const [row, col] = queue.dequeue();
+            const [rows, cols] = [grid.length, grid[0].length];
+            const [row, col] = queue.dequeue();
 
-			for( const [_row, _col] of getNeighbors(row, rows, col, cols)){
+            for (const [_row, _col] of getNeighbors(row, rows, col, cols)) {
+                const isFresh = grid[_row][_col] === 1;
+                if (!isFresh) continue;
 
-				const is_fresh = grid[_row][_col] == 1;
-
-				if(!is_fresh) continue;
-
-				grid[_row][_col] = 2;
-				queue.enqueue([_row, _col]);
-
-			}
-            
+                grid[_row][_col] = 2;
+                queue.enqueue([_row, _col]);/* Space O(ROWS * COLS) */
+            }
         }
 
         var getNeighbors = (row, rows, col, cols) => [[0, 1], [0, -1], [1, 0], [-1, 0]]
             .map(([_row, _col]) => [(row + _row), (col + _col)])
             .filter(([_row, _col]) => (0 <= _row) && (_row < rows) && (0 <= _col) && (_col < cols));
 
-        const { queue, orangeCount } = searchGrid(grid);  /* Time O(ROWS * COLS) */
-        const { rottenCount, minutes } = bfs(grid, queue);
-
-        const isEqual = orangeCount === rottenCount;
-        return isEqual
-            ? minutes
-            : -1;
+        // TODO Search the grid, then run the bfs on the grid and queue, to then if is equal, return the minutes otherwise -1
+        
     };
 
 
