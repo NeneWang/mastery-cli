@@ -2,15 +2,9 @@
 const initMemo = (amount) => Array(amount).fill(0);
 
 var dfs = (coins, amount, memo, min = Infinity) => {
+    // TODO Loop for each coin, check if the cost is less than the min, if so update the min.
     
-    for (const coin of coins) {                               /* Time O(N) */
-        const cost = coinChange(coins, (amount - coin), memo);/* Time O(N) | Space O(N) */
-
-        const canUpdate = ((0 <= cost) && (cost < min));
-        if (!canUpdate) continue;
-
-        min = (cost + 1);
-    }
+    
 
     memo[amount - 1] = (min !== Infinity)
         ? min

@@ -2,7 +2,6 @@
 const initMemo = (amount) => Array(amount).fill(0);
 
 var dfs = (coins, amount, memo, min = Infinity) => {
-    
     for (const coin of coins) {                               /* Time O(N) */
         const cost = coinChange(coins, (amount - coin), memo);/* Time O(N) | Space O(N) */
 
@@ -31,16 +30,12 @@ var dfs = (coins, amount, memo, min = Infinity) => {
  */
 const coinChange = (coins, amount, memo = initMemo(amount)) => {
 
+    // TODO If the amount is less than 0 then return -1, which means likely used a coin larger than the target.
 
-
-    const isBaseCase1 = (amount < 0);
-    if (isBaseCase1) return -1;
-
-    const isBaseCase2 = (amount < 1);
-    if (isBaseCase2) return 0;
-
-    const isBaseCase3 = (memo[amount - 1] !== 0);
-    if (isBaseCase3) return memo[amount - 1];
+    // TODO If the amount is 0 then return 0, which means we have found the target.
+    
+    // TODO If The amount is already in the memo then return the value, which means we have already computed the value.
+    
 
     return dfs(coins, amount, memo);/* Time O(N) | Space O(N) */
 }

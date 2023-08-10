@@ -20,16 +20,17 @@ var climbStairs = (n) => {
 };
 
 var initTabu = (n) => {
-    // TODO Initialize the tabu array with the base cases.
-    
+    const tabu = new Array(n + 1).fill(0);
+
+    tabu[1] = 1;
+    tabu[2] = 2;
+
+    return tabu;
 }
 
 var search = (n, tabu) => {
-    for (let index = 3; (index <= n); index++) {/* Time O(N) */
-        const [prev, prevPrev] = [(index - 1), (index - 2)];
-
-        tabu[index] = (tabu[prev] + tabu[prevPrev]);/* Space O(N) */
-    }
+    // TODO Loop from 3 to n and calculate the tabu value.
+    
 }
 
 

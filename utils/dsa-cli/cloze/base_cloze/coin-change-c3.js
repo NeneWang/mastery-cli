@@ -12,11 +12,10 @@ var dfs = (coins, amount, memo, min = Infinity) => {
         min = (cost + 1);
     }
 
-    memo[amount - 1] = (min !== Infinity)
-        ? min
-        : -1;
-
-    return memo[amount - 1];
+    // TODO If the min is not Infinity then update the memo otherwise there is no solution.
+   
+    // TODO Return the memo of that amount.
+    
 }
 
 
@@ -42,7 +41,8 @@ const coinChange = (coins, amount, memo = initMemo(amount)) => {
     const isBaseCase3 = (memo[amount - 1] !== 0);
     if (isBaseCase3) return memo[amount - 1];
 
-    return dfs(coins, amount, memo);/* Time O(N) | Space O(N) */
+    // TODO Upon all not having any of the the base cases, we run the dfs to find the min cost.
+    
 }
 
 

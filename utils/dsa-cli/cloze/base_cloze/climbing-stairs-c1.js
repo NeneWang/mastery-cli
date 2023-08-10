@@ -9,19 +9,21 @@
  * @return {number}
  */
 var climbStairs = (n) => {
-    const isBaseCase = (n === 1);
-    if (isBaseCase) return 1;
+    // TODO The base case is when n is 1, then return 1.
 
-    const tabu = initTabu(n);/* Space O(N) */
+    
 
-    search(n, tabu);
-
-    return tabu[n];
+    // TODO The initialize on table, is to set the first two steps to 1 and 2.
+    
 };
 
 var initTabu = (n) => {
-    // TODO Initialize the tabu array with the base cases.
-    
+    const tabu = new Array(n + 1).fill(0);
+
+    tabu[1] = 1;
+    tabu[2] = 2;
+
+    return tabu;
 }
 
 var search = (n, tabu) => {

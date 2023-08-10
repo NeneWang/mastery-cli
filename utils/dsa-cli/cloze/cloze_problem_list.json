@@ -1073,5 +1073,35 @@
         "file_path": "word-ladder-c3.js",
         "difficulty": 1,
         "problem_slug": "word-ladder"
+    },
+    {
+        "file_path": "climbing-stairs-c1.js",
+        "difficulty": 1,
+        "problem_slug": "climbing-stairs"
+    },
+    {
+        "file_path": "climbing-stairs-c2.js",
+        "difficulty": 1,
+        "problem_slug": "climbing-stairs"
+    },
+    {
+        "file_path": "climbing-stairs-c3.js",
+        "difficulty": 1,
+        "problem_slug": "climbing-stairs"
+    },
+    {
+        "file_path": "coin-change-c1.js",
+        "difficulty": 1,
+        "problem_slug": "coin-change"
+    },
+    {
+        "file_path": "coin-change-c2.js",
+        "difficulty": 1,
+        "problem_slug": "coin-change"
+    },
+    {
+        "file_path": "coin-change-c3.js",
+        "difficulty": 1,
+        "problem_slug": "coin-change"
     }
 ]
