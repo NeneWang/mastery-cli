@@ -1023,6 +1023,26 @@
         "file_path": "rotting-oranges-c4.js",
         "difficulty": 1, 
         "problem_slug": "rotting-oranges"
+    },
+    {
+        "file_path": "surrounded-regions-c1.js",
+        "difficulty": 1,
+        "problem_slug": "surrounded-regions"
+    },
+    {
+        "file_path": "surrounded-regions-c2.js",
+        "difficulty": 1,
+        "problem_slug": "surrounded-regions"
+    },
+    {
+        "file_path": "surrounded-regions-c3.js",
+        "difficulty": 1,
+        "problem_slug": "surrounded-regions"
+    },
+    {
+        "file_path": "surrounded-regions-c4.js",
+        "difficulty": 1,
+        "problem_slug": "surrounded-regions"
     }
 
 ]

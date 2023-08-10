@@ -10,8 +10,11 @@ class SurroundedRegions {
 
         var searchRows = (board) => {
             const [rows, cols] = [board.length, board[0].length];
-            // TODO Search the first and last row and expire the neighbors.
-            
+
+            for (let row = 0; row < rows; row++) {      /* Time O(ROWS) */
+                dfs(board, row, rows, 0, cols);         /* Space O(ROWS) */
+                dfs(board, row, rows, (cols - 1), cols);/* Space O(ROWS) */
+            }
         }
 
         var searchCols = (board) => {
@@ -53,9 +56,8 @@ class SurroundedRegions {
             .filter(([_row, _col]) => (0 <= _row) && (_row < rows) && (0 <= _col) && (_col < cols))
 
 
-        searchRows(board);/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
-        searchCols(board);/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
-        searchGrid(board);/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
+        // TODO Row Search. Col Search and then grid search.
+        
     }
 }
 

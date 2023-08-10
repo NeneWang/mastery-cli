@@ -41,14 +41,8 @@ class SurroundedRegions {
         }
 
         const dfs = (board, row, rows, col, cols) => {
-            const isBaseCase = board[row][col] !== 'O';
-            if (isBaseCase) return;
-
-            board[row][col] = '*';
-
-            for (const [_row, _col] of getNeighbors(row, rows, col, cols)) {
-                dfs(board, _row, rows, _col, cols);/* Time O(HEIGHT) | Space O(HEIGHT) */
-            }
+            // TODO If is not 0 then dfs search the neighbors.
+            
         }
 
         var getNeighbors = (row, rows, col, cols) => [[0, 1], [0, -1], [1, 0], [-1, 0]]

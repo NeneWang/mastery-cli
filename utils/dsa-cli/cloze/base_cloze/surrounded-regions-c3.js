@@ -29,15 +29,9 @@ class SurroundedRegions {
         var searchGrid = (board) => {
             const [rows, cols] = [board.length, board[0].length];
 
-            for (let row = 0; row < rows; row++) {/* Time O(ROWS) */
-                for (let col = 0; col < cols; col++) {/* Time O(COLS) */
-                    const isO = board[row][col] === 'O';
-                    if (isO) board[row][col] = 'X';
-
-                    const isStar = board[row][col] === '*';
-                    if (isStar) board[row][col] = 'O';
-                }
-            }
+            // TODO Search the grid and flip the Os to Xs and the *s to Os.
+            
+            
         }
 
         const dfs = (board, row, rows, col, cols) => {
