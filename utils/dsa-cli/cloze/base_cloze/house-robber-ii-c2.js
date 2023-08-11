@@ -13,10 +13,8 @@ const rob = (nums) => {
     const isBaseCase2 = (nums.length === 1);
     if (isBaseCase2) return nums[0]
 
-    const left = search(nums, 0, (nums.length - 2)); /* Time O(N) */
-    const right = search(nums, 1, (nums.length - 1));/* Time O(N) */
-
-    return Math.max(left, right);
+    // TODO Run the search twice, once with the first element and once with the last element.
+    // Return the max of the two searches.
 };
 
 

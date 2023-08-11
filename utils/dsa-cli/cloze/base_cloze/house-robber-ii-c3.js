@@ -21,18 +21,11 @@ const rob = (nums) => {
 
 
 const search = (nums, start, end) => {
-    let [left, mid] = [0, 0];
-
-    for (let i = start; i <= end; i++) {/* Time O(N) */
-        const temp = mid;
-        const right = nums[i];
-        const house = left + right;
-
-        mid = Math.max(mid, house);
-        left = temp;
-    }
-
-    return mid;
+    // TODO Find the max amount of money that can be robbed from the houses. from start to end.
+    
+    
+    // TODO Loop from start to end and find the max amount of money that can be robbed.
+    
 }
 
 
