@@ -1118,5 +1118,30 @@
         "file_path": "decode-ways-c3.js",
         "difficulty": 1,
         "problem_slug": "decode-ways"
+    },
+    {
+        "file_path": "house-robber-c1.js",
+        "difficulty": 1,
+        "problem_slug": "house-robber"
+    },
+    {
+        "file_path": "house-robber-c2.js",
+        "difficulty": 1,
+        "problem_slug": "house-robber"
+    },
+    {
+        "file_path": "house-robber-ii-c1.js",
+        "difficulty": 1,
+        "problem_slug": "house-robber-ii"
+    },
+    {
+        "file_path": "house-robber-ii-c2.js",
+        "difficulty": 1,
+        "problem_slug": "house-robber-ii"
+    },
+    {
+        "file_path": "house-robber-ii-c3.js",
+        "difficulty": 1,
+        "problem_slug": "house-robber-ii"
     }
 ]

@@ -9,9 +9,11 @@ class HouseRobber {
      * @return {number}
      */
     rob = (nums) => {
-        if (!nums.length) return 0;
-
-        let [left, maxAndPrev] = [0, 0];
+        // TODO Detect basecase when there is no houses. Then return 0
+        
+        
+        // TODO Initialize the left and maxAndPrev variables.
+        
 
         for (const right of nums) {/* Time O(N) */
             const leftForNextHouse = maxAndPrev;
@@ -21,7 +23,8 @@ class HouseRobber {
             left = leftForNextHouse;
         }
 
-        return maxAndPrev;
+        // TODO Return the maxAndPrev.
+        
     };
 
     solve(nums) {

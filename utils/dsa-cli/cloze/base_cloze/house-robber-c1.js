@@ -13,13 +13,8 @@ class HouseRobber {
 
         let [left, maxAndPrev] = [0, 0];
 
-        for (const right of nums) {/* Time O(N) */
-            const leftForNextHouse = maxAndPrev;
-            const currentHouseMax = left + right;
-
-            maxAndPrev = Math.max(maxAndPrev, currentHouseMax);
-            left = leftForNextHouse;
-        }
+        // TODO Loop on the nums and prepare leftForNextHouse, maxAndPrev, currentHouseMax.
+        
 
         return maxAndPrev;
     };
