@@ -1103,5 +1103,20 @@
         "file_path": "coin-change-c3.js",
         "difficulty": 1,
         "problem_slug": "coin-change"
+    },
+    {
+        "file_path": "decode-ways-c1.js",
+        "difficulty": 1,
+        "problem_slug": "decode-ways"
+    },
+    {
+        "file_path": "decode-ways-c2.js",
+        "difficulty": 1,
+        "problem_slug": "decode-ways"
+    },
+    {
+        "file_path": "decode-ways-c3.js",
+        "difficulty": 1,
+        "problem_slug": "decode-ways"
     }
 ]

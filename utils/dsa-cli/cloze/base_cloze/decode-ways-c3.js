@@ -1,12 +1,14 @@
 
 
 const dfs = (str, index, memo) => {
-    // TODO Perform both Num Decodings for the next index and the next two indexes.
-   
-	let count = numDecodings(str, index + 1, memo);
-	if(isTwoDigit(str, index)) count += numDecodings(str, index + 2, memo);
+    let count = numDecodings(str, (index + 1), memo);
 
-    return count;
+    if (isTwoDigit(str, index)) {
+        count += numDecodings(str, (index + 2), memo);
+    }
+
+    // TODO Remember the count for the index at the dfs point and return the count.
+    
 }
 
 var isTwoDigit = (str, index) => {

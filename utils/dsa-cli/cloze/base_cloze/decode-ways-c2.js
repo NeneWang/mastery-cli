@@ -7,6 +7,7 @@ const dfs = (str, index, memo) => {
         count += numDecodings(str, (index + 2), memo);
     }
 
+    
     memo.set(index, count);
 
     return count;
@@ -30,16 +31,17 @@ var isTwoDigit = (str, index) => {
  */
 const numDecodings = (str, index = 0, memo = new Map()) => {
 
-
-    const caseThereIsNoLeftOrZero = !str.length || (str[index] === '0');
-    if (caseThereIsNoLeftOrZero) return 0;
-
-    const isCaseReachedEnd = index === str.length;
-    if (isCaseReachedEnd) return 1;
-
-    if (memo.has(index)) return memo.get(index);
-
-    return dfs(str, index, memo);
+    // TODO Detect basecase when there is no left or the left is zero. Then return 0
+    
+    
+    // TODO Detect basecase when the index is at the end of the string. Then return 1 (Only one option)
+    
+    
+    // TODO Otherwise if the memo already has the index then return the memo.
+    
+    
+    // TODO Continue running DFS and return the count down the line until a base case is found.
+    
 };
 
 class DecodeWays {

@@ -3,8 +3,7 @@
 const dfs = (str, index, memo) => {
     // TODO Perform both Num Decodings for the next index and the next two indexes.
    
-	let count = numDecodings(str, index + 1, memo);
-	if(isTwoDigit(str, index)) count += numDecodings(str, index + 2, memo);
+    
 
     return count;
 }
