@@ -1163,5 +1163,20 @@
         "file_path": "detect-squares-c4.js",
         "difficulty": 1,
         "problem_slug": "detect-squares"
+    },
+    {
+        "file_path": "longest-common-sequence-c1.js",
+        "difficulty": 1,
+        "problem_slug": "longest-common-sequence"
+    },
+    {
+        "file_path": "longest-common-sequence-c2.js",
+        "difficulty": 1,
+        "problem_slug": "longest-common-sequence"
+    },
+    {
+        "file_path": "longest-common-sequence-c3.js",
+        "difficulty": 1,
+        "problem_slug": "longest-common-sequence"
     }
 ]

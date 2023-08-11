@@ -1,7 +1,9 @@
-class DetectSquares {	// Your code here
+class JumpGame {
+	solve(nums) {
+	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: DetectSquares };
+module.exports = { Problem: JumpGame };
