@@ -1143,5 +1143,25 @@
         "file_path": "house-robber-ii-c3.js",
         "difficulty": 1,
         "problem_slug": "house-robber-ii"
+    },
+    {
+        "file_path": "detect-squares-c1.js",
+        "difficulty": 1,
+        "problem_slug": "detect-squares"
+    },
+    {
+        "file_path": "detect-squares-c2.js",
+        "difficulty": 1,
+        "problem_slug": "detect-squares"
+    },
+    {
+        "file_path": "detect-squares-c3.js",
+        "difficulty": 1,
+        "problem_slug": "detect-squares"
+    },
+    {
+        "file_path": "detect-squares-c4.js",
+        "difficulty": 1,
+        "problem_slug": "detect-squares"
     }
 ]
