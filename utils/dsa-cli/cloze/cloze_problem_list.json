@@ -1263,6 +1263,16 @@
         "file_path": "word-break-c3.js",
         "difficulty": 1,
         "problem_slug": "word-break"
+    },
+    {
+        "file_path": "meeting-rooms-c1.js",
+        "difficulty": 1,
+        "problem_slug": "meeting-rooms"
+    },
+    {
+        "file_path": "meeting-rooms-c2.js",
+        "difficulty": 1,
+        "problem_slug": "meeting-rooms"
     }
 
 ]
