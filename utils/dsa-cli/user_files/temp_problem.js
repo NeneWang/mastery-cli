@@ -1,31 +1,56 @@
-class NumberOf1Bits {
 
+const initMemo = (amount) => Array(amount).fill(0);
 
-    /**
-     * https://leetcode.com/problems/number-of-1-bits/
-     * Time O(1) | Space (1)
-     * @param {number} n - a positive integer
-     * @return {number}
-     */
-    hammingWeight = function (n) {
-        let [bits, mask] = [0, 1]
+var dfs = (coins, amount, memo, min = Infinity) => {
+    for (const coin of coins) {                               /* Time O(N) */
+        const cost = coinChange(coins, (amount - coin), memo);/* Time O(N) | Space O(N) */
 
-        for (let i = 0; i < 32; i++) {
-            // TODO Perform bitwise AND then add a 1 to the mask.
-            const hasBit = ((n & mask) !== 0)
-            if (hasBit) bits++
+        const canUpdate = ((0 <= cost) && (cost < min));
+        if (!canUpdate) continue;
 
-            mask <<= 1
-            console.log(mask)
-        }
-
-        return bits
-    };
-
-    solve(n) {
-        return this.hammingWeight(n)
+        min = (cost + 1);
     }
+
+    memo[amount - 1] = (min !== Infinity)
+        ? min
+        : -1;
+
+    return memo[amount - 1];
 }
 
 
-module.exports = { Problem: NumberOf1Bits };
+/**
+ * DP - Top Down
+ * Array - Memoization
+ * Time O(N) | Space O(N)
+ * https://leetcode.com/problems/coin-change/
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+const coinChange = (coins, amount, memo = initMemo(amount)) => {
+
+    // TODO If the amount is less than 0 then return -1, which means likely used a coin larger than the target.
+
+    // TODO If the amount is 0 then return 0, which means we have found the target.
+    
+    // TODO If The amount is already in the memo then return the value, which means we have already computed the value.
+    
+
+    return dfs(coins, amount, memo);/* Time O(N) | Space O(N) */
+}
+
+
+class CoinChnage {
+
+
+    solve(coins, amount) {
+        return coinChange(coins, amount);
+    }
+}
+
+module.exports = { Problem: CoinChnage };
+
+
+
+

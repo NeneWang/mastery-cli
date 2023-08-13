@@ -1205,17 +1205,17 @@
         "problem_slug": "min-cost-climbing-stairs"
     },
     {
-        "file_path": "palindromic-substrings-c1",
+        "file_path": "palindromic-substrings-c1.js",
         "difficulty": 1,
         "problem_slug": "palindromic-substrings"
     },
     {
-        "file_path": "palindromic-substrings-c2",
+        "file_path": "palindromic-substrings-c2.js",
         "difficulty": 1,
         "problem_slug": "palindromic-substrings"
     },
     {
-        "file_path": "palindromic-substrings-c3",
+        "file_path": "palindromic-substrings-c3.js",
         "difficulty": 1,
         "problem_slug": "palindromic-substrings"
     },
@@ -1275,32 +1275,32 @@
         "problem_slug": "meeting-rooms"
     },
     {
-        "file_path": "non-overlapping-intervals-c1",
+        "file_path": "non-overlapping-intervals-c1.js",
         "difficulty": 1,
         "problem_slug": "non-overlapping-intervals"
     },
     {
-        "file_path": "non-overlapping-intervals-c2",
+        "file_path": "non-overlapping-intervals-c2.js",
         "difficulty": 1,
         "problem_slug": "non-overlapping-intervals"
     },
     {
-        "file_path": "non-overlapping-intervals-c3",
+        "file_path": "non-overlapping-intervals-c3.js",
         "difficulty": 1,
         "problem_slug": "non-overlapping-intervals"
     },
     {
-        "file_path": "gas-station-c1",
+        "file_path": "gas-station-c1.js",
         "difficulty": 1,
         "problem_slug": "gas-station"
     },
     {
-        "file_path": "gas-station-c2",
+        "file_path": "gas-station-c2.js",
         "difficulty": 1,
         "problem_slug": "gas-station"
     },
     {
-        "file_path": "gas-station-c3",
+        "file_path": "gas-station-c3.js",
         "difficulty": 1,
         "problem_slug": "gas-station"
     },
