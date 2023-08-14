@@ -7,11 +7,12 @@ class JumpGame {
      */
     canJump = (nums, max = 0, index = 0) => {
         while (index < nums.length) {
-            const num = nums[index]
-            const jumps = num + index
+            // TODO If the index is greater than the max, then we can't reach the end
+			
+			if(max < index) return false;
 
-            const canNotReachEnd = max < index
-            if (canNotReachEnd) return false
+			const jumps = index + nums[index]
+
 
             max = Math.max(max, jumps)
             index++
@@ -27,3 +28,5 @@ solve(nums) {
 
 
 module.exports = { Problem: JumpGame };
+
+

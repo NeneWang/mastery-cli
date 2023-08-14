@@ -1178,5 +1178,25 @@
         "file_path": "longest-common-sequence-c3.js",
         "difficulty": 1,
         "problem_slug": "longest-common-sequence"
+    },
+    {
+        "file_path": "maximum-product-subarray-c1.js",
+        "difficulty": 1,
+        "problem_slug": "maximum-product-subarray"
+    },
+    {
+        "file_path": "maximum-product-subarray-c2.js",
+        "difficulty": 1,
+        "problem_slug": "maximum-product-subarray"
+    },
+    {
+        "file_path": "maximum-subarray-c1.js",
+        "difficulty": 1,
+        "problem_slug": "maximum-subarray"
+    },
+    {
+        "file_path": "maximum-subarray-c2.js",
+        "difficulty": 1,
+        "problem_slug": "maximum-subarray"
     }
 ]
