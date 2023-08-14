@@ -3,6 +3,7 @@ const axios = require('axios');
 const clipboard = require('copy-paste')
 
 
+
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = require('enquirer');
 
 const constants = require('./constants');
@@ -15,6 +16,9 @@ const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, 
 
 const { TermScheduler } = require('./termScheduler');
 const { MiniTermScheduler } = require('./miniTermScheduler');
+const DSATrainer = require('./dsa-cli/dsa-trainer');
+const { cloze_problems_list } = require('./dsa-cli/cloze');
+
 
 // const DEBUG = true
 const DEBUG = false
@@ -283,6 +287,25 @@ class Quizzer {
     // Returns the term deck name (key), in which is stored the term's deck.
     async pick_terms_deck() {
         return ""
+    }
+
+
+    
+    cloze_study_session = async () => {
+
+            // Pick all the available string keys.
+            const dsaTrainer = new DSATrainer({
+                skip_problem: ["hello-world", "simple-sum"]
+            })
+
+            // const cloze_names = dsaTrainer.problem_manager.clozeProblemSlugs;
+            const cloze_names = cloze_problems_list;
+            
+            console.log("Running Cloze Study Session");
+            console.log(cloze_names);
+
+            // Populate the cloze names, and iterate while loop until all of them are completed
+
     }
 
 

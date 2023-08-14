@@ -68,6 +68,7 @@ class CommandsInformation {
 			ses: new Command("Study session", 'ses'),
 			dsa: new Command("Random Data structures and algorithms", 'dsa'),
 			cloze: new Command("Cloze algorithm", 'cloze'),
+			cses: new Command("Algo Cloze study session", 'cses'),
 
 		};
 	}

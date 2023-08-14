@@ -115,6 +115,10 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.ses.code)) {
 		mQuizer.study_session(masterDeck);
 	}
+	else if (input.includes(cmInfo.commands.dsa.cses)) {
+		console.log("dsa study session")
+		mQuizer.cloze_study_session();
+	}
 	else if (input.includes(cmInfo.commands.dsa.code)) {
 		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
 
