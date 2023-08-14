@@ -216,7 +216,9 @@ class DSATrainer {
      * @param {boolean} tryUntilSolved If true, the problem will be reprompted until it is solved. If false, the problem will be solved once.
      * @returns {ProblemStatus} The status of the problem
      */
-    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, populate_problem = true, populate_with_cloze_filepath = "", base = "" } = {}) {
+    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, 
+        populate_problem = true, 
+        populate_with_cloze_filepath = "", base = "" } = {}) {
         if (populate_problem) {
 
             if (populate_with_cloze_filepath != "") {
@@ -417,6 +419,8 @@ class DSATrainer {
                 this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_test_cases: true });
             }
         }
+
+        
 
         if (Constants.DEV_MODE) Object.assign(choices, choices_dev_mode); // Add dev mode choices
 

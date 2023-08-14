@@ -115,7 +115,7 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.ses.code)) {
 		mQuizer.study_session(masterDeck);
 	}
-	else if (input.includes(cmInfo.commands.dsa.cses)) {
+	else if (input.includes(cmInfo.commands.cses.code)) {
 		console.log("dsa study session")
 		mQuizer.cloze_study_session();
 	}

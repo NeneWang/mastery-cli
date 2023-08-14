@@ -6,12 +6,13 @@ const clipboard = require('copy-paste')
 
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = require('enquirer');
 
-const constants = require('./constants');
+const Constants = require('./constants');
+const DSAConstants = require('./dsa-cli/constants');
 
 const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
-const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals, get_random_of_size } = constants;
+const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals, get_random_of_size } = Constants;
 const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
 
 const { TermScheduler } = require('./termScheduler');
@@ -298,11 +299,41 @@ class Quizzer {
                 skip_problem: ["hello-world", "simple-sum"]
             })
 
+            await dsaTrainer.loaded_problem_manager;
             // const cloze_names = dsaTrainer.problem_manager.clozeProblemSlugs;
-            const cloze_names = cloze_problems_list;
+            const cloze_problems = cloze_problems_list;
             
-            console.log("Running Cloze Study Session");
-            console.log(cloze_names);
+            // console.log("Running Cloze Study Session");
+            // console.log(cloze_problems);
+            const clozeScheduler = new TermScheduler({
+                cards: cloze_problems,
+                cards_category: "Algo"
+            });
+            await clozeScheduler.setLearningCards(cloze_problems);
+            let exit = false;
+
+            const printCardsLeft = (cardsLeft, cardsLearnt) => {
+                console.log(`\nAlgorithms left: ${cardsLeft} || Algorithms completed: ${cardsLearnt}\n`);
+            }
+
+            const exitMethod = () => {
+                exit = true;
+                return false;
+            }
+            while(!clozeScheduler.is_completed && !exit){
+                const [cardsLeft, cardsLearnt] = [clozeScheduler.getCardsToLearn(), clozeScheduler.getCardsLearnt()];
+                
+                const card = await clozeScheduler.getCard();
+                let problem = dsaTrainer.problems_manager.getProblem(card.problem_slug);
+                
+                problem.is_cloze = true;
+                const solution_metadata = await dsaTrainer.solveProblem(problem, { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path });
+     
+                const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
+                clozeScheduler.solveCard(answerIsCorrect);
+                await clozeScheduler.saveCards();
+                printCardsLeft(cardsLeft, cardsLearnt);
+            }
 
             // Populate the cloze names, and iterate while loop until all of them are completed
 
