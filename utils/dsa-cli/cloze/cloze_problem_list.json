@@ -1198,5 +1198,15 @@
         "file_path": "maximum-subarray-c2.js",
         "difficulty": 1,
         "problem_slug": "maximum-subarray"
+    },
+    {
+        "file_path": "min-cost-climbing-stairs-c1.js",
+        "difficulty": 1,
+        "problem_slug": "min-cost-climbing-stairs"
+    },
+    {
+        "file_path": "min-cost-climbing-stairs-c2.js",
+        "difficulty": 1,
+        "problem_slug": "min-cost-climbing-stairs"
     }
 ]
