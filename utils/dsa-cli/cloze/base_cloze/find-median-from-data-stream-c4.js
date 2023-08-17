@@ -198,8 +198,7 @@ class MedianFinder {
 
     addNum(num, heap = this.getHeap(num)) {
         // TODO Enqueue the number to the heap, and revaance the heaps if there is more than 1 of distance.
-        heap.enqueue(num)
-        this.rebalance()
+     
     }
 
     getHeap(num, { maxHeap, minHeap } = this) {
