@@ -7,14 +7,36 @@ const assert = require('assert');
 
 
 const to_test = {
-    'printable': false, //Also updates the metadata for all.
+    'printable': true, //Also updates the metadata for all.
     'category': false,
     'exact-category': false, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
-    'basic': true,
-    'runnable': true,
+    'basic': false,
+    'runnable': false,
+    'cloze': false, // Test that cloze cards are populable. Also that the solution exists.
 }
 
 describe('Problem integrity', function () {
+
+    it("Test that cloze cards are populable", async function () {
+        if (!to_test.cloze) return this.skip();
+        
+        const cloze_problem_list = require('../cloze/cloze_problem_list.json');
+        // console.log("cloze_problem_list", cloze_problem_list);
+        
+        const problemManager = new ProblemsManager();
+        await problemManager.autoPopulateUsingTestDictionary();
+
+        for(const cloze_card of cloze_problem_list){
+            const problem = problemManager.getProblem(cloze_card.problem_slug);
+            if(problem == null || problem == undefined){
+                console.log("_____________ Problem found at _____________")
+                console.log("cloze_card.problem_slug", cloze_card.problem_slug);
+                console.log("cloze_card.file_path", cloze_card.file_path);
+                console.log("problem", problem);
+            }
+            assert(problem != null || problem != undefined);
+        }
+    });
 
     it("Test that all problems have printable prompts", async function () {
         if (!to_test.printable) return this.skip();

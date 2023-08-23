@@ -2,8 +2,6 @@
 title: Hand of Straights
 description: Given an integer array hand where hand[i] is the value written on the ith card and an integer groupSize, return true if she can rearrange the cards, or false otherwise.
 tags: [medium, greedy, neetcode]
-link: https://leetcode.com/problems/hand-of-straights/
-images: []
 ---
 
 ### Description

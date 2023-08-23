@@ -1,240 +1,102 @@
-
-
-class MinPriorityQueue {
-
-    constructor() {
-        this.heap = []
-    }
-
-    enqueue(element) {
-        this.heap.push(element)
-        this.bubbleUp()
-    }
-
-    bubbleUp() {
-        let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] <= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
-        }
-    }
-
-    swap(index1, index2) {
-        const temp = this.heap[index1]
-        this.heap[index1] = this.heap[index2]
-        this.heap[index2] = temp
-    }
-
-    dequeue() {
-        const min = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.sinkDown()
-        }
-        return min
-    }
-
-    sinkDown() {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
-
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild < element) {
-                    swap = leftChildIndex
-                }
-            }
-
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild < element) ||
-                    (swap !== null && rightChild < leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
-
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
-        }
-    }
-
-    front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
+class FindWords {
+    solve(board, words) {
+        return new Trie(words).searchBoard(board);
+    };
 }
 
-class MaxPriorityQueue {
-
+class TrieNode {
     constructor() {
-        this.heap = []
+        this.children = {};
+        this.word = '';
     }
-
-    enqueue(element) {
-        this.heap.push(element)
-        this.bubbleUp()
-    }
-
-    bubbleUp() {
-        let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] >= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
-        }
-    }
-
-    swap(index1, index2) {
-        const temp = this.heap[index1]
-        this.heap[index1] = this.heap[index2]
-        this.heap[index2] = temp
-    }
-
-    dequeue() {
-        const max = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.sinkDown()
-        }
-        return max
-    }
-
-    sinkDown() {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
-
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild > element) {
-                    swap = leftChildIndex
-                }
-            }
-
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild > element) ||
-                    (swap !== null && rightChild > leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
-
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
-        }
-    }
-
-    front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
-
 }
 
-
-/** 
- * https://leetcode.com/problems/find-median-from-data-stream/
- * Your MedianFinder object will be instantiated and called as such:
- * var obj = new MedianFinder()
- * obj.addNum(num)
- * var param_2 = obj.findMedian()
- */
-class MedianFinder {
-    constructor() {
-        this.maxHeap = new MaxPriorityQueue()
-        this.minHeap = new MinPriorityQueue()
+class Trie {
+    constructor(words) {
+        this.root = new TrieNode();
+        words.forEach((word) => this.insert(word));
     }
 
-    /* Time O(log(N)) | Space (N) */
-    insertNum(num) {
-        this.addNum(num)
+    /* Time O(N) | Space O(N) */
+    insert(word, node = this.root) {
+        for (const char of word) {
+            const child = node.children[char] || new TrieNode();
+
+            node.children[char] = child;
+
+            node = child;
+        }
+
+        node.word = word;
     }
 
-    addNum(num, heap = this.getHeap(num)) {
-        // TODO Enqueue the number to the heap, and revaance the heaps if there is more than 1 of distance.
-        heap.enqueue(num)
-        this.rebalance()
+    /* Time O((ROWS * COLS) * (4 * (3 ^ (WORDS - 1)))) | Space O(N) */
+    searchBoard(board, node = this.root, words = []) {
+        const [rows, cols] = [board.length, board[0].length];
+
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+                this.dfs(board, row, rows, col, cols, node, words);
+            }
+        }
+
+        return words;
     }
 
-    getHeap(num, { maxHeap, minHeap } = this) {
-        const isFirst = maxHeap.isEmpty()
-        const isGreater = num <= this.top(maxHeap);
-        const isMaxHeap = (isFirst || isGreater);
-        return (isMaxHeap)
-            ? maxHeap
-            : minHeap
+    dfs(board, row, rows, col, cols, node, words) {
+        const char = board[row][col];
+        const child = node.children[char] || null;
+
+        if (this.canSkip(char, child)) return;
+
+        node = child;
+        this.checkWord(node, words);
+        this.backTrack(board, row, rows, col, cols, node, words);
     }
 
-    rebalance({ maxHeap, minHeap } = this) {
-        const canShiftMax = (minHeap.size() + 1) < maxHeap.size()
-        if (canShiftMax) return minHeap.enqueue(maxHeap.dequeue())
+    canSkip(char, child) {
+        const hasSeen = char === '#';
+        const isMissingChild = !child;
 
-        const canShiftMin = maxHeap.size() < minHeap.size()
-        if (canShiftMin) return maxHeap.enqueue(minHeap.dequeue())
+        return hasSeen || isMissingChild;
     }
 
-    /* Time O(1) | Space (1) */
-    findMedian({ maxHeap, minHeap } = this) {
-        const isEven = maxHeap.size() === minHeap.size()
-        return (isEven)
-            ? this.average(maxHeap, minHeap)
-            : this.top(maxHeap)
+    checkWord(node, words) {
+        if (!node.word.length) return;
+
+        words.push(node.word);
+        node.word = '';
     }
 
-    average(maxHeap, minHeap) {
-        return (this.top(maxHeap) + this.top(minHeap)) / 2
+    backTrack(board, row, rows, col, cols, node, words) {
+        const char = board[row][col];
+
+        board[row][col] = '#';
+
+        for (const [_row, _col] of this.getNeighbors(row, rows, col, cols)) {
+            this.dfs(board, _row, rows, _col, cols, node, words);
+        }
+
+        board[row][col] = char;
     }
 
-    top(heap) {
-        return heap.front() || 0
+    getNeighbors(row, rows, col, cols) {
+        return [
+            [row - 1, col],
+            [row + 1, col],
+            [row, col - 1],
+            [row, col + 1],
+        ].filter(([_row, _col]) => !this.isOutOfBounds(_row, rows, _col, cols));
+    }
+
+    isOutOfBounds(row, rows, col, cols) {
+        const isRowOut = row < 0 || rows <= row;
+        const isColOut = col < 0 || cols <= col;
+
+        return isRowOut || isColOut;
     }
 }
 
 
-module.exports = { Problem: MedianFinder };
+module.exports = { Problem: FindWords };
+

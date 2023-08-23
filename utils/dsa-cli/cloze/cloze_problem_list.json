@@ -180,19 +180,19 @@
         "problem_slug": "min-stack"
     },
     {
-        "file_path": "valid-parenthesis-c1.js",
+        "file_path": "valid-parentheses-c1.js",
         "difficulty": 1,
-        "problem_slug": "valid-parenthesis"
+        "problem_slug": "valid-parentheses"
     },
     {
-        "file_path": "valid-parenthesis-c2.js",
+        "file_path": "valid-parentheses-c2.js",
         "difficulty": 1,
-        "problem_slug": "valid-parenthesis"
+        "problem_slug": "valid-parentheses"
     },
     {
-        "file_path": "valid-parenthesis-c3.js",
+        "file_path": "valid-parentheses-c3.js",
         "difficulty": 1,
-        "problem_slug": "valid-parenthesis"
+        "problem_slug": "valid-parentheses"
     },
     {
         "file_path": "generate-parenthesis-c1.js",
@@ -730,29 +730,24 @@
         "problem_slug": "k-closest"
     },
     {
-        "file_path": "kth-largest-element-c1.js",
+        "file_path": "kth-largest-element-in-an-array-c1.js",
         "difficulty": 1,
-        "problem_slug": "kth-largest-element"
+        "problem_slug": "kth-largest-element-in-an-array"
     },
     {
-        "file_path": "kth-largest-element-c2.js",
+        "file_path": "kth-largest-element-in-an-array-c2.js",
         "difficulty": 1,
-        "problem_slug": "kth-largest-element"
+        "problem_slug": "kth-largest-element-in-an-array"
     },
     {
-        "file_path": "kth-largest-element-c3.js",
+        "file_path": "kth-largest-element-in-an-array-c3.js",
         "difficulty": 1,
-        "problem_slug": "kth-largest-element"
+        "problem_slug": "kth-largest-element-in-an-array"
     },
     {
-        "file_path": "kth-largest-element-c3.js",
+        "file_path": "kth-largest-element-in-an-array-c4.js",
         "difficulty": 1,
-        "problem_slug": "kth-largest-element"
-    },
-    {
-        "file_path": "kth-largest-element-c3.js",
-        "difficulty": 1,
-        "problem_slug": "kth-largest-element"
+        "problem_slug": "kth-largest-element-in-an-array"
     },
     {
         "file_path": "word-search-ii-c1.js",

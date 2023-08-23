@@ -51,7 +51,7 @@ class Trie {
 
         node = child;
         this.checkWord(node, words);
-        this.backTrack(board, row, rows, col, cols, node, wurds);
+        this.backTrack(board, row, rows, col, cols, node, words);
     }
 
     canSkip(char, child) {

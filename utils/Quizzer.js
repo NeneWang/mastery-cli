@@ -118,8 +118,8 @@ class Quizzer {
      */
     forceLearnMode = async ({ debug = false, exitMethod = () => { } } = {}) => {
         let potential_questions = this.terms;
-        
-        potential_questions = await this.getYoungest(potential_questions, {limit: 2});
+
+        potential_questions = await this.getYoungest(potential_questions, { limit: 2 });
         if (debug) console.log("potential_questions", potential_questions);
         if (debug) console.log("length", potential_questions.length);
         let attempts = 0;
@@ -291,51 +291,52 @@ class Quizzer {
     }
 
 
-    
+
     cloze_study_session = async () => {
 
-            // Pick all the available string keys.
-            const dsaTrainer = new DSATrainer({
-                skip_problem: ["hello-world", "simple-sum"]
-            })
+        // Pick all the available string keys.
+        const dsaTrainer = new DSATrainer({
+            skip_problem: ["hello-world", "simple-sum"]
+        })
 
-            await dsaTrainer.loaded_problem_manager;
-            // const cloze_names = dsaTrainer.problem_manager.clozeProblemSlugs;
-            const cloze_problems = cloze_problems_list;
-            
-            // console.log("Running Cloze Study Session");
-            // console.log(cloze_problems);
-            const clozeScheduler = new TermScheduler({
-                cards: cloze_problems,
-                cards_category: "Algo"
-            });
-            await clozeScheduler.setLearningCards(cloze_problems);
-            let exit = false;
+        await dsaTrainer.loaded_problem_manager;
+        // const cloze_names = dsaTrainer.problem_manager.clozeProblemSlugs;
+        const cloze_problems = cloze_problems_list;
 
-            const printCardsLeft = (cardsLeft, cardsLearnt) => {
-                console.log(`\nAlgorithms left: ${cardsLeft} || Algorithms completed: ${cardsLearnt}\n`);
-            }
+        // console.log("Running Cloze Study Session");
+        // console.log(cloze_problems);
+        const clozeScheduler = new TermScheduler({
+            cards: cloze_problems,
+            cards_category: "Algo"
+        });
+        await clozeScheduler.setLearningCards(cloze_problems);
+        let exit = false;
 
-            const exitMethod = () => {
-                exit = true;
-                return false;
-            }
-            while(!clozeScheduler.is_completed && !exit){
-                const [cardsLeft, cardsLearnt] = [clozeScheduler.getCardsToLearn(), clozeScheduler.getCardsLearnt()];
-                
-                const card = await clozeScheduler.getCard();
-                let problem = dsaTrainer.problems_manager.getProblem(card.problem_slug);
-                
-                problem.is_cloze = true;
-                const solution_metadata = await dsaTrainer.solveProblem(problem, { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path });
-     
-                const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
-                clozeScheduler.solveCard(answerIsCorrect);
-                await clozeScheduler.saveCards();
-                printCardsLeft(cardsLeft, cardsLearnt);
-            }
+        const printCardsLeft = (cardsLeft, cardsLearnt) => {
+            console.log(`\nAlgorithms left: ${cardsLeft} || Algorithms completed: ${cardsLearnt}\n`);
+        }
 
-            // Populate the cloze names, and iterate while loop until all of them are completed
+        const exitMethod = () => {
+            exit = true;
+            return false;
+        }
+        while (!clozeScheduler.is_completed && !exit) {
+            const [cardsLeft, cardsLearnt] = [clozeScheduler.getCardsToLearn(), clozeScheduler.getCardsLearnt()];
+
+            const card = await clozeScheduler.getCard();
+            let problem = dsaTrainer.problems_manager.getProblem(card.problem_slug);
+
+            console.log("Card", card);
+            problem.is_cloze = true;
+            const solution_metadata = await dsaTrainer.solveProblem(problem, { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path });
+
+            const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
+            clozeScheduler.solveCard(answerIsCorrect);
+            await clozeScheduler.saveCards();
+            printCardsLeft(cardsLeft, cardsLearnt);
+        }
+
+        // Populate the cloze names, and iterate while loop until all of them are completed
 
     }
 
@@ -626,7 +627,7 @@ class Quizzer {
 
     }
 
-    async ask_math_question({ exitMethod = () => {}} = {}) {
+    async ask_math_question({ exitMethod = () => { } } = {}) {
 
 
         const question_form = await this.pick_math_question();
@@ -688,7 +689,7 @@ class Quizzer {
                 const _ = await updateConcept(question_form.formula_name, answerIsCorrect);
             }
 
-            if(DEBUG) console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt, ", \n Formula:", question_prompt.form);
+            if (DEBUG) console.log("expected Answer:", question_prompt.expectedAnswer, ", Prompt:", question_prompt.question_prompt, ", \n Formula:", question_prompt.form);
 
             return answerIsCorrect;
         } catch (err) {
