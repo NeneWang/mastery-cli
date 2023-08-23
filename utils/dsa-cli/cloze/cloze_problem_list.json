@@ -1203,5 +1203,10 @@
         "file_path": "min-cost-climbing-stairs-c2.js",
         "difficulty": 1,
         "problem_slug": "min-cost-climbing-stairs"
+    },
+    {
+        "file_path": "palindromic-substrings-c1",
+        "difficulty": 1,
+        "problem_slug": "palindromic-substrings"
     }
 ]
