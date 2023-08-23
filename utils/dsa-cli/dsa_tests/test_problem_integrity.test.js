@@ -11,7 +11,7 @@ const to_test = {
     'category': false,
     'exact-category': false, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
     'basic': false,
-    'runnable': false,
+    'runnable': true,
     'cloze': true, // Test that cloze cards are populable. Also that the solution exists.
 }
 
