@@ -475,8 +475,33 @@ class ReverseNodesInKGroup extends ProblemTests {
         assert.equal(result.next.next.next.val, 4);
         assert.equal(result.next.next.next.next.val, 5);
     }
+}
 
+class FindDuplicate extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
 
+    test_1(){
+        this.current_test_name = "[1,3,4,2,2] => 2"
+        const problemToTest = new this.Problem();
+        assert.equal(problemToTest.solve([1,3,4,2,2]), 2);
+    }
+
+    test_2(){
+        this.current_test_name = "[3,1,3,4,2] => 3"
+        const problemToTest = new this.Problem();
+        assert.equal(problemToTest.solve([3,1,3,4,2]), 3);
+    }
+
+    test_3(){
+        this.current_test_name = "[1,1] => 1"
+        const problemToTest = new this.Problem();  
+        assert.equal(problemToTest.solve([1,1]), 1);
+    }
 }
 
 
@@ -493,6 +518,7 @@ const PROBLEM_DICT = {
     'reorder-list': ReorderList,
     'reverse-linked-list': ReverseLinkedList,
     'reverse-nodes-in-k-group': ReverseNodesInKGroup,
+    'find-duplicate': FindDuplicate,
 }
 
 

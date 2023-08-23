@@ -455,19 +455,19 @@
         "problem_slug": "lru-cache"
     },
     {
-        "file_path": "merge-k-sorted-lists-c1.js",
+        "file_path": "merge-k-sorted-list-c1.js",
         "difficulty": 1,
-        "problem_slug": "merge-k-sorted-lists"
+        "problem_slug": "merge-k-sorted-list"
     },
     {
-        "file_path": "merge-k-sorted-lists-c2.js",
+        "file_path": "merge-k-sorted-list-c2.js",
         "difficulty": 1,
-        "problem_slug": "merge-k-sorted-lists"
+        "problem_slug": "merge-k-sorted-list"
     },
     {
-        "file_path": "merge-k-sorted-lists-c3.js",
+        "file_path": "merge-k-sorted-list-c3.js",
         "difficulty": 1,
-        "problem_slug": "merge-k-sorted-lists"
+        "problem_slug": "merge-k-sorted-list"
     },
     {
         "file_path": "merge-two-sorted-list-c1.js",
