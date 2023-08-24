@@ -1273,6 +1273,51 @@
         "file_path": "meeting-rooms-c2.js",
         "difficulty": 1,
         "problem_slug": "meeting-rooms"
+    },
+    {
+        "file_path": "non-overlapping-intervals-c1",
+        "difficulty": 1,
+        "problem_slug": "non-overlapping-intervals"
+    },
+    {
+        "file_path": "non-overlapping-intervals-c2",
+        "difficulty": 1,
+        "problem_slug": "non-overlapping-intervals"
+    },
+    {
+        "file_path": "non-overlapping-intervals-c3",
+        "difficulty": 1,
+        "problem_slug": "non-overlapping-intervals"
+    },
+    {
+        "file_path": "gas-station-c1",
+        "difficulty": 1,
+        "problem_slug": "gas-station"
+    },
+    {
+        "file_path": "gas-station-c2",
+        "difficulty": 1,
+        "problem_slug": "gas-station"
+    },
+    {
+        "file_path": "gas-station-c3",
+        "difficulty": 1,
+        "problem_slug": "gas-station"
+    },
+    {
+        "file_path": "hand-of-straights-c1.js",
+        "difficulty": 1,
+        "problem_slug": "hand-of-straights"
+    },
+    {
+        "file_path": "hand-of-straights-c2.js",
+        "difficulty": 1,
+        "problem_slug": "hand-of-straights"
+    },
+    {
+        "file_path": "hand-of-straights-c3.js",
+        "difficulty": 1,
+        "problem_slug": "hand-of-straights"
     }
 
 ]
