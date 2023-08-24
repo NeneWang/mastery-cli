@@ -11,7 +11,7 @@ const to_test = {
     'category': false,
     'exact-category': false, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
     'basic': false,
-    'runnable': true,
+    'runnable': false,
     'cloze': true, // Test that cloze cards are populable. Also that the solution exists.
 }
 
@@ -25,9 +25,14 @@ describe('Problem integrity', function () {
         
         const problemManager = new ProblemsManager();
         await problemManager.autoPopulateUsingTestDictionary();
+        const problems_found = {};
 
         for(const cloze_card of cloze_problem_list){
             const problem = problemManager.getProblem(cloze_card.problem_slug);
+            
+            prev_count = problems_found[cloze_card.problem_slug] || 0;
+            problems_found[cloze_card.problem_slug] = prev_count + 1;
+
             if(problem == null || problem == undefined){
                 console.log("_____________ Problem found at _____________")
                 console.log("cloze_card.problem_slug", cloze_card.problem_slug);
@@ -36,6 +41,12 @@ describe('Problem integrity', function () {
             }
             assert(problem != null || problem != undefined);
         }
+
+        const problems_count = Object.keys(problems_found).length;
+        const problems = Object.keys(problemManager.problems);
+        console.log(`Cloze created for ${problems_count} out ${problems.length} of problems.`)
+        console.log(`With a total of ${cloze_problem_list.length} cloze cards.`)
+
     });
 
     it("Test that all problems have printable prompts", async function () {

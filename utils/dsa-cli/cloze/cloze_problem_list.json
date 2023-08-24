@@ -1208,5 +1208,15 @@
         "file_path": "palindromic-substrings-c1",
         "difficulty": 1,
         "problem_slug": "palindromic-substrings"
+    },
+    {
+        "file_path": "palindromic-substrings-c2",
+        "difficulty": 1,
+        "problem_slug": "palindromic-substrings"
+    },
+    {
+        "file_path": "palindromic-substrings-c3",
+        "difficulty": 1,
+        "problem_slug": "palindromic-substrings"
     }
 ]
