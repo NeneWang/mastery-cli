@@ -49,18 +49,18 @@ class MultiplyStrings {
         }
 
         var getProduct = (num1, i, num2, j) => {
-            // TODO Convert the indexed character in the string string to a number.
+            const [iNum, jNum] = [Number(num1[i]), Number(num2[j])];
 
+            return (iNum * jNum);
         }
-        const isZero = ((num1 === '0') || (num2 === '0'));
-        if (isZero) return '0';
 
-        const buffer = initBuffer(num1, num2);/*               | Space (N + M) */
 
-        multiplication(num1, num2, buffer)    /* Time O(N * M) */
-        removeLeadingZero(buffer);            /* Time O(N + M) | Time O(N + M)*/
-
-        return buffer.join('');               /* Time O(N + M) | Space O(N + M) */
+        // TODO If any is 0 return 0.
+        
+        // Otherwise create a buffer, multiply the numbers, and remove the leading zero.
+        
+        // In the end join the buffer and return the result.
+        
     };
 
     solve(num1, num2) {

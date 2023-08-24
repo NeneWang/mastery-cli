@@ -13,9 +13,8 @@ class MultiplyStrings {
 
 
         var initBuffer = (num1, num2) => {
-            const size = (num1.length + num2.length);
-
-            return new Array(size).fill(0);/* Space (N + M) */
+            // TODO Create an array size, decide the correct size based on the length of num1 and num2
+            
         }
 
         var multiplication = (num1, num2, buffer) => {

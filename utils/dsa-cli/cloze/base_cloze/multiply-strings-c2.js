@@ -34,18 +34,16 @@ class MultiplyStrings {
         }
 
         var update = (num1, i, num2, j, buffer) => {
-            const curPos = (i + j);
-            const prevPos = curPos + 1;
 
-            const carry = buffer[prevPos];
-            const product = getProduct(num1, i, num2, j);
-            const sum = (carry + product);
-
-            const remainder = (sum % 10);
-            const value = ((sum - remainder) / 10);
-
-            buffer[prevPos] = remainder;/* Space O(N + M) */
-            buffer[curPos] += value;    /* Space O(N + M) */
+            // TODO The current possition current position and previous position. 
+            // The current position should be i + j. 
+            
+            
+            // TODO Get the current product and sum it with the buffer.
+            
+            
+            // TODO Get the remainder and value and update the buffer.
+            
         }
 
         var getProduct = (num1, i, num2, j) => {

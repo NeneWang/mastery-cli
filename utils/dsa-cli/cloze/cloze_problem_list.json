@@ -1343,6 +1343,26 @@
         "file_path": "valid-parenthesis-string-c2.js",
         "difficulty": 1,
         "problem_slug": "valid-parenthesis-string"
+    },
+    {
+        "file_path": "multiply-strings-c1.js",
+        "difficulty": 1,
+        "problem_slug": "multiply-strings"
+    },
+    {
+        "file_path": "multiply-strings-c2.js",
+        "difficulty": 1,
+        "problem_slug": "multiply-strings"
+    },
+    {
+        "file_path": "multiply-strings-c3.js",
+        "difficulty": 1,
+        "problem_slug": "multiply-strings"
+    },
+    {
+        "file_path": "multiply-strings-c4.js",
+        "difficulty": 1,
+        "problem_slug": "multiply-strings"
     }
     
 

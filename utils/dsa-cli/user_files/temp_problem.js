@@ -1,9 +1,9 @@
-class MultiplyStrings {
-	solve(num1, num2) {
+class PlusOne {
+	solve(digits) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: MultiplyStrings };
+module.exports = { Problem: PlusOne };
