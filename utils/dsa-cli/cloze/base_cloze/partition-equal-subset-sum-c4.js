@@ -8,14 +8,11 @@ var getSum = (nums, sum = 0) => {
     return sum;
 }
 var dfs = (nums, index, subSetSum, memo) => {
-    // TODO Base cases when the subset sum is 0
-	
-	if(subSetSum === 0) return true;
+    const isBaseCase1 = (subSetSum === 0);
+    if (isBaseCase1) return true;
 
-    // TODO Base cases when the subset sum is less than 0 or the index is 0 or the subset sum is less than 0
-    
-	if(subSetSum < 0 || index === 0) return false;
-
+    const isBaseCase2 = ((index === 0) || (subSetSum < 0));
+    if (isBaseCase2) return false;
 
     const hasSeen = (memo[index][subSetSum] !== null);
     if (hasSeen) return memo[index][subSetSum];
@@ -25,8 +22,8 @@ var dfs = (nums, index, subSetSum, memo) => {
     const left = dfs(nums, (index - 1), difference, memo);
     const right = dfs(nums, (index - 1), subSetSum, memo);
 
-    memo[index][subSetSum] = (left || right);
-    return memo[index][subSetSum];
+    // TODO Then answer is the true if any of the left or right is true
+    
 }
 
 /**

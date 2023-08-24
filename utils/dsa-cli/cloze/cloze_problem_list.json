@@ -1218,5 +1218,36 @@
         "file_path": "palindromic-substrings-c3",
         "difficulty": 1,
         "problem_slug": "palindromic-substrings"
+    },
+    {
+        "file_path": "partition-equal-subset-sum-c1.js",
+        "difficulty": 1,
+        "problem_slug": "partition-equal-subset-sum"
+    },
+    {
+        "file_path": "partition-equal-subset-sum-c2.js",
+        "difficulty": 1,
+        "problem_slug": "partition-equal-subset-sum"
+    },
+    {
+        "file_path": "partition-equal-subset-sum-c3.js",
+        "difficulty": 1,
+        "problem_slug": "partition-equal-subset-sum"
+    },
+    {
+        "file_path": "partition-equal-subset-sum-c4.js",
+        "difficulty": 1,
+        "problem_slug": "partition-equal-subset-sum"
+    },
+    {
+        "file_path": "partition-equal-subset-sum-c5.js",
+        "difficulty": 1,
+        "problem_slug": "partition-equal-subset-sum"
+    },
+    {
+        "file_path": "partition-equal-subset-sum-c6.js",
+        "difficulty": 1,
+        "problem_slug": "partition-equal-subset-sum"
     }
+
 ]

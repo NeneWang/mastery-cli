@@ -9,13 +9,9 @@ var getSum = (nums, sum = 0) => {
 }
 var dfs = (nums, index, subSetSum, memo) => {
     // TODO Base cases when the subset sum is 0
-	
-	if(subSetSum === 0) return true;
 
     // TODO Base cases when the subset sum is less than 0 or the index is 0 or the subset sum is less than 0
     
-	if(subSetSum < 0 || index === 0) return false;
-
 
     const hasSeen = (memo[index][subSetSum] !== null);
     if (hasSeen) return memo[index][subSetSum];
