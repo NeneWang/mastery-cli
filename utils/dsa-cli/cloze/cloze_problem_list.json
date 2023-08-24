@@ -1363,6 +1363,21 @@
         "file_path": "multiply-strings-c4.js",
         "difficulty": 1,
         "problem_slug": "multiply-strings"
+    },
+    {
+        "file_path": "plus-one-c1.js",
+        "difficulty": 1,
+        "problem_slug": "plus-one"
+    },
+    {
+        "file_path": "plus-one-c2.js",
+        "difficulty": 1,
+        "problem_slug": "plus-one"
+    },
+    {
+        "file_path": "plus-one-c3.js",
+        "difficulty": 1,
+        "problem_slug": "plus-one"
     }
     
 
