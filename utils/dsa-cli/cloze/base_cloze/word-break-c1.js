@@ -13,13 +13,13 @@ class WordBreak {
     wordBreak = (s, wordDict) => {
 
         var canBreak = (s, wordSet, start, memo) => {
-            const isBaseCase1 = (s.length === start);
-            if (isBaseCase1) return true;
+            // TODO If the start is equal to the length of the string, return true
+            
 
-            const hasSeen = (memo[start] !== null);
-            if (hasSeen) return memo[start];
-
-            return dfs(s, wordSet, start, memo);/* Time O(N * N * N) | Space O(N) */
+            // TODO If the memo at the start is not null, return the memo at the start
+            
+            // TODO Call the dfs function with the string, word set, end, and memo
+            
         }
 
         var dfs = (s, wordSet, start, memo) => {

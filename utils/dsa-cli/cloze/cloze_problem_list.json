@@ -1248,6 +1248,21 @@
         "file_path": "partition-equal-subset-sum-c6.js",
         "difficulty": 1,
         "problem_slug": "partition-equal-subset-sum"
+    },
+    {
+        "file_path": "word-break-c1.js",
+        "difficulty": 1,
+        "problem_slug": "word-break"
+    },
+    {
+        "file_path": "word-break-c2.js",
+        "difficulty": 1,
+        "problem_slug": "word-break"
+    },
+    {
+        "file_path": "word-break-c3.js",
+        "difficulty": 1,
+        "problem_slug": "word-break"
     }
 
 ]

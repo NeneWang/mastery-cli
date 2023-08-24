@@ -38,11 +38,8 @@ class WordBreak {
             return false;
         }
 
-        const wordSet = new Set(wordDict);           /* Time O(N)         | Space O(N) */
-        const memo = new Array(s.length).fill(null); /*                   | Space O(N) */
-        const start = 0;
-
-        return canBreak(s, wordSet, start, memo);    /* Time O(N * N * N) | Space O(N) */
+        // TODO wordset being a set of words. The memo being an array of nulls. The start
+        
     }
 
 

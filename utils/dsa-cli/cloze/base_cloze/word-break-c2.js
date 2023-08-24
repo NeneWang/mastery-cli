@@ -1,4 +1,4 @@
-class WordBreak {
+class Problem {
 
     /**
      * DP - Top Down
@@ -23,19 +23,13 @@ class WordBreak {
         }
 
         var dfs = (s, wordSet, start, memo) => {
-            for (let end = (start + 1); (end <= s.length); end++) {/* Time O(N) */
-                const word = s.slice(start, end);                      /* Time O(N) | Space O(N) */
+            // TODO Iterate from the start + 1 to the length of the string
+            // TODO Get the word from the start to the end, Check if the word exist and can break, 
+            // if it can break then set the memo at the start to true and return true
+            
 
-                const _canBreak = wordSet.has(word)
-                    && canBreak(s, wordSet, end, memo);                /* Time O(N * N) */
-                if (_canBreak) {
-                    memo[start] = true;
-                    return true;
-                }
-            }
-
-            memo[start] = false;
-            return false;
+            // TODO Set the memo at the start to false and return false
+            
         }
 
         const wordSet = new Set(wordDict);           /* Time O(N)         | Space O(N) */
@@ -52,4 +46,4 @@ class WordBreak {
     }
 }
 
-module.exports = { Problem: WordBreak };
+module.exports = { Problem };
