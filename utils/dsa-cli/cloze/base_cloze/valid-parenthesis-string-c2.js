@@ -23,7 +23,8 @@ class CheckValidString {
             left = Math.max(left, 0);
         }
 
-        return left === 0;
+        // TODO As long as the left can be closed, it means that the string is valid.
+        
     }
 
     solve(s) {
@@ -33,4 +34,3 @@ class CheckValidString {
 
 
 module.exports = { Problem: CheckValidString };
-

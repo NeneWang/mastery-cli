@@ -1333,6 +1333,17 @@
         "file_path": "partition-labels-c3",
         "difficulty": 1,
         "problem_slug": "partition-labels"
+    },
+    {
+        "file_path": "valid-parenthesis-string-c1.js",
+        "difficulty": 1,
+        "problem_slug": "valid-parenthesis-string"
+    },
+    {
+        "file_path": "valid-parenthesis-string-c2.js",
+        "difficulty": 1,
+        "problem_slug": "valid-parenthesis-string"
     }
+    
 
 ]

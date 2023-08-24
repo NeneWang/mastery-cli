@@ -504,7 +504,7 @@ class ValidParenthesisString extends ProblemTests {
 
     test_5() {
 
-        this.current_test_name = "(((*)) => false"
+        this.current_test_name = "((((*)) => false"
         const problemToTest = new this.Problem();
         assert.equal(problemToTest.solve('((((*))'), false);
 
