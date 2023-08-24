@@ -1318,6 +1318,21 @@
         "file_path": "hand-of-straights-c3.js",
         "difficulty": 1,
         "problem_slug": "hand-of-straights"
+    },
+    {
+        "file_path": "partition-labels-c1",
+        "difficulty": 1,
+        "problem_slug": "partition-labels"
+    },
+    {
+        "file_path": "partition-labels-c2",
+        "difficulty": 1,
+        "problem_slug": "partition-labels"
+    },
+    {
+        "file_path": "partition-labels-c3",
+        "difficulty": 1,
+        "problem_slug": "partition-labels"
     }
 
 ]

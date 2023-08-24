@@ -33,10 +33,8 @@ class HandOfStraights {
 
                 // TODO Iterate from the smallest element to the smallest element + groupSize
                 // TODO Check if it has the item on the map, otherwise return false, update the value. 
-                // TODO Check if the value is 0, 
+                // TODO If the eleemnt is not the same as the smallest 
                 
-                // If we dont reach the end of the group size, then return false
-                // Otherwise pop the element from the last list element of the ordered unique hand
                 
             }
 

@@ -1,9 +1,9 @@
-class MergeTriplets {
-	solve(triplets, target) {
+class CheckValidString {
+	solve(s) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: MergeTriplets };
+module.exports = { Problem: CheckValidString };
