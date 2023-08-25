@@ -1483,5 +1483,25 @@
         "file_path": "counting-bits-c2.js",
         "difficulty": 1,
         "problem_slug": "counting-bits"
+    },
+    {
+        "file_path": "missing-number-c1.js",
+        "difficulty": 1,
+        "problem_slug": "missing-number"
+    },
+    {
+        "file_path": "missing-number-c2.js",
+        "difficulty": 1,
+        "problem_slug": "missing-number"
+    },
+    {
+        "file_path": "number-of-1-bits-c1.js",
+        "difficulty": 1,
+        "problem_slug": "number-of-1-bits"
+    },
+    {
+        "file_path": "number-of-1-bits-c2.js",
+        "difficulty": 1,
+        "problem_slug": "number-of-1-bits"
     }
 ]

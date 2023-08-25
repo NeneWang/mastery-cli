@@ -11,12 +11,7 @@ class NumberOf1Bits {
         let [bits, mask] = [0, 1]
 
         for (let i = 0; i < 32; i++) {
-            // TODO Perform bitwise AND then add a 1 to the mask.
-            const hasBit = ((n & mask) !== 0)
-            if (hasBit) bits++
-
-            mask <<= 1
-            console.log(mask)
+        
         }
 
         return bits
