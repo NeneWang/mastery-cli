@@ -1,4 +1,4 @@
-class SetMatrixZeroes {
+class SpiralOrder {
 	solve(matrix) {
 	// Your code here
 
@@ -6,4 +6,4 @@ class SetMatrixZeroes {
 }
 
 
-module.exports = { Problem: SetMatrixZeroes };
+module.exports = { Problem: SpiralOrder };

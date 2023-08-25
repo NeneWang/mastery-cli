@@ -3,14 +3,9 @@
 var setCellsToZero = (matrix) => {
     const [rows, cols] = [matrix.length, matrix[0].length];
 
-    for (let row = 1; (row < rows); row++) {/* Time O(ROWS) */
-        for (let col = 1; (col < cols); col++) {/* Time O(COLS) */
-            const isZero = ((matrix[row][0] === 0) || (matrix[0][col] == 0));
-            if (!isZero) continue;
-
-            matrix[row][col] = 0;
-        }
-    }
+    // TODO Loop through the matrix and set the cell to zero if the first row or column is zero
+    
+    
 }
 
 var setEdgesToZero = (matrix, isColZero = false) => {

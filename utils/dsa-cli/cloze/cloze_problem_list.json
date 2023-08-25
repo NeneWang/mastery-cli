@@ -1433,7 +1433,47 @@
         "file_path": "set-matrix-zeroes-c3.js",
         "difficulty": 1,
         "problem_slug": "set-matrix-zeroes"
+    },
+    {
+        "file_path": "set-matrix-zeroes-c4.js",
+        "difficulty": 1,
+        "problem_slug": "set-matrix-zeroes"
+    },
+    {
+        "file_path": "set-matrix-zeroes-c5.js",
+        "difficulty": 1,
+        "problem_slug": "set-matrix-zeroes"
+    },
+    {
+        "file_path": "spiral-matrix-c1.js",
+        "difficulty": 1,
+        "problem_slug": "spiral-matrix"
+    },
+    {
+        "file_path": "spiral-matrix-c2.js",
+        "difficulty": 1,
+        "problem_slug": "spiral-matrix"
+    },
+    {
+        "file_path": "spiral-matrix-c3.js",
+        "difficulty": 1,
+        "problem_slug": "spiral-matrix"
+    },
+    {
+        "file_path": "spiral-matrix-c1.js",
+        "difficulty": 1,
+        "problem_slug": "spiral-matrix"
+    },
+    {
+        "file_path": "spiral-matrix-c2.js",
+        "difficulty": 1,
+        "problem_slug": "spiral-matrix"
+    },
+    {
+        "file_path": "spiral-matrix-c3.js",
+        "difficulty": 1,
+        "problem_slug": "spiral-matrix"
     }
-    
+
 
 ]

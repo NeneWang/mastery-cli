@@ -32,12 +32,12 @@ var setEdgesToZero = (matrix, isColZero = false) => {
 }
 
 var setFirstRowZero = (matrix, cols = matrix[0].length) => {
-    for (let col = 0; (col < cols); col++) {/* Time O(COLS) */
-        matrix[0][col] = 0;
-    }
+    // TODO For each row, set the first element to zero
+    
 }
 
 var setFirstColZero = (matrix, rows = matrix.length) => {
+    
     for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
         matrix[row][0] = 0;
     }

@@ -14,11 +14,19 @@ var setCellsToZero = (matrix) => {
 }
 
 var setEdgesToZero = (matrix, isColZero = false) => {
-    // TODO Rows and Cols are not needed
-    
-    
-    // TODO Iterate over the matrix, if it is zero, set the first row and col to zero
-    
+    const [rows, cols] = [matrix.length, matrix[0].length];
+
+    for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
+        if (matrix[row][0] === 0) isColZero = true;
+
+        for (let col = 1; (col < cols); col++) {/* Time O(COLS) */
+            const canSet = (matrix[row][col] === 0);
+            if (!canSet) continue;
+
+            matrix[0][col] = 0;
+            matrix[row][0] = 0;
+        }
+    }
 
     return isColZero;
 }
@@ -45,14 +53,10 @@ var setFirstColZero = (matrix, rows = matrix.length) => {
 const setZeroes = (matrix) => {
 
 
-    const isColZero = setEdgesToZero(matrix);/* Time O(ROWS * COLS) */
-
-    setCellsToZero(matrix);                  /* Time O(ROWS * COLS) */
-
-    const isZero = (matrix[0][0] === 0);
-    if (isZero) setFirstRowZero(matrix);     /* Time O(COLS) */
-
-    if (isColZero) setFirstColZero(matrix);  /* Time O(ROWS) */
+    // TODO Implement all the methods. to modify the matrix.
+    // Set the edges as zero, set the cells as zero, 
+    // Then set the first row and first column as zero if needed.
+    
 }
 
 
