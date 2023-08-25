@@ -1398,6 +1398,41 @@
         "file_path": "powx-n-c4.js",
         "difficulty": 1,
         "problem_slug": "powx-n"
+    },
+    {
+        "file_path": "rotate-image-c1.js",
+        "difficulty": 1,
+        "problem_slug": "rotate-image"
+    },
+    {
+        "file_path": "rotate-image-c2.js",
+        "difficulty": 1,
+        "problem_slug": "rotate-image"
+    },
+    {
+        "file_path": "rotate-image-c3.js",
+        "difficulty": 1,
+        "problem_slug": "rotate-image"
+    },
+    {
+        "file_path": "rotate-image-c4.js",
+        "difficulty": 1,
+        "problem_slug": "rotate-image"
+    },
+    {
+        "file_path": "set-matrix-zeroes-c1.js",
+        "difficulty": 1,
+        "problem_slug": "set-matrix-zeroes"
+    },
+    {
+        "file_path": "set-matrix-zeroes-c2.js",
+        "difficulty": 1,
+        "problem_slug": "set-matrix-zeroes"
+    },
+    {
+        "file_path": "set-matrix-zeroes-c3.js",
+        "difficulty": 1,
+        "problem_slug": "set-matrix-zeroes"
     }
     
 

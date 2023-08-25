@@ -9,7 +9,9 @@ class RotateImage {
     rotate = (matrix) => {
 
 
+
         var transpose = (matrix) => {
+        
             const rows = matrix.length;
 
             for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
@@ -33,7 +35,8 @@ class RotateImage {
             }
         }
 
-        var swap2 = (matrix, row, col, reflection) => [matrix[row][col], matrix[row][reflection]] = [matrix[row][reflection], matrix[row][col]];
+        // TODO Create the swap2 function. Which performs the reflection by switching their cols and rows and the row reflection. | Similarly on the reflection.
+        
 
         transpose(matrix);/* Time O(ROWS * COLS) */
         reflect(matrix);  /* Time O(ROWS * COLS) */

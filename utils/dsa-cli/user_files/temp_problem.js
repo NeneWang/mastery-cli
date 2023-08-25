@@ -1,9 +1,9 @@
-class PowX {
-	solve(x, n) {
+class SetMatrixZeroes {
+	solve(matrix) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: PowX };
+module.exports = { Problem: SetMatrixZeroes };

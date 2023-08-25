@@ -9,7 +9,9 @@ class RotateImage {
     rotate = (matrix) => {
 
 
+
         var transpose = (matrix) => {
+        
             const rows = matrix.length;
 
             for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
@@ -21,16 +23,11 @@ class RotateImage {
 
         var swap1 = (matrix, row, col) => [matrix[row][col], matrix[col][row]] = [matrix[col][row], matrix[row][col]];
 
+
         var reflect = (matrix) => {
-            const rows = matrix.length;
+            // TODO Create reflection which finds the reflection using the rows max minus the columns muved -1. 
+            // This should only happen if the column is less than the rows / 2.
 
-            for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
-                for (let col = 0; (col < (rows / 2)); col++) {/* Time O(COLS) */
-                    const reflection = ((rows - col) - 1);
-
-                    swap2(matrix, row, col, reflection);
-                }
-            }
         }
 
         var swap2 = (matrix, row, col, reflection) => [matrix[row][col], matrix[row][reflection]] = [matrix[row][reflection], matrix[row][col]];

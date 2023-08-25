@@ -9,14 +9,10 @@ class RotateImage {
     rotate = (matrix) => {
 
 
-        var transpose = (matrix) => {
-            const rows = matrix.length;
 
-            for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
-                for (let col = (row + 1); (col < rows); col++) {/* Time O(COLS) */
-                    swap1(matrix, row, col);
-                }
-            }
+        var transpose = (matrix) => {
+            // TODO Implement the transpose wheras you can think of it as fliping by the first rows first element and the last row last element as the pivots.
+
         };
 
         var swap1 = (matrix, row, col) => [matrix[row][col], matrix[col][row]] = [matrix[col][row], matrix[row][col]];
