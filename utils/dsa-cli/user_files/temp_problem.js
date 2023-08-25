@@ -1,9 +1,9 @@
-class PlusOne {
-	solve(digits) {
+class PowX {
+	solve(x, n) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: PlusOne };
+module.exports = { Problem: PowX };

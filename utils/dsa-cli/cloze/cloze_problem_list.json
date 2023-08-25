@@ -1378,6 +1378,26 @@
         "file_path": "plus-one-c3.js",
         "difficulty": 1,
         "problem_slug": "plus-one"
+    },
+    {
+        "file_path": "powx-n-c1.js",
+        "difficulty": 1,
+        "problem_slug": "powx-n"
+    },
+    {
+        "file_path": "powx-n-c2.js",
+        "difficulty": 1,
+        "problem_slug": "powx-n"
+    },
+    {
+        "file_path": "powx-n-c3.js",
+        "difficulty": 1,
+        "problem_slug": "powx-n"
+    },
+    {
+        "file_path": "powx-n-c4.js",
+        "difficulty": 1,
+        "problem_slug": "powx-n"
     }
     
 
