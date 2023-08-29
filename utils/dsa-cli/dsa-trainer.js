@@ -388,10 +388,11 @@ class DSATrainer {
 
                 // return Constants.ProblemStatus.unsolved;
             },
-            "Repopulate Code": async () => {
+            "Re Base": async () => {
                 question_state_flag = true;
                 // Repopulates the 
-                this.problems_manager.repopulateCode(problem.slug);
+                // this.problems_manager.repopulateCode(problem.slug);
+                this.problems_manager.populateTemplate(problem);
                 // return Constants.ProblemStatus.unsolved;
             },
             'Quit': async () => {

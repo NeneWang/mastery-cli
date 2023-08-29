@@ -1042,17 +1042,17 @@
     {
         "file_path": "wall-and-gates-c1.js",
         "difficulty": 1,
-        "problem_slug": "surrounded-regions"
+        "problem_slug": "wall-and-gates"
     },
     {
         "file_path": "wall-and-gates-c2.js",
         "difficulty": 1,
-        "problem_slug": "surrounded-regions"
+        "problem_slug": "wall-and-gates"
     },
     {
         "file_path": "wall-and-gates-c3.js",
         "difficulty": 1,
-        "problem_slug": "surrounded-regions"
+        "problem_slug": "wall-and-gates"
     },
     {
         "file_path": "word-ladder-c1.js",
