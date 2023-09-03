@@ -1586,13 +1586,13 @@ const angular = [
     {
         term: "Add ssl loally",
         prompt: "How to add ssl locally?",
-        example: '"serve": {\n\
+        description: '"serve": {\n\
             "options": {\n\
               "ssl": true,\n\
               "sslCert": "./ssl/localhost.pem",\n\
               "sslKey": "./ssl/localhost-key.pem"\n\
             },',
-        description: "Install mkcert using brew or choco\n\
+        example: "Install mkcert using brew or choco\n\
         mkdir ssl\n\
         cd ssl\n\
         mkcert localhost\n\
