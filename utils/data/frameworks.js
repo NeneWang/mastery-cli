@@ -1397,9 +1397,36 @@ const python_frameworks = [
 
 const dotNet = [
     {
+        term: "orm",
         prompt: "What is Object Relational Mapping (ORM)?",
         description: "Object Relational Mapping (ORM) is the process of mapping between objects and relational database systems. It is a programming technique that allows us to query and manipulate data from a database using an object-oriented paradigm.",
-        example: "Entity Framework is an example of an ORM"
+        example: "Entity Framework is an example of an ORM\n\
+        Which features are: \n\
+        migrations, querying, caching, Concurrency, Saving, Configrations"
+    },
+    {
+        term: "dotnet | create a new project",
+        prompt: "Dotnet check the templates list, then creat new snl (Solution File) + webapi. Then Run it.",
+        example: "dotnet new list\n\
+        dotnet new sln\n\
+        dotnet new webapi-n API\n\
+        dotnet run",
+    },
+    {
+        term: "dotnet | add a project to the solution",
+        prompt: "Dotnet add the project (API) to the solution file (sln)",
+        example: "dotnet sln add API"
+    },
+    {
+        term: "dotnet | add a project to the solution",
+        prompt: "How to add entity sqlite framework in vsstudio?",
+        example: "Install the NuGet extension, then you can search it."
+    },
+    {
+        term: "dotnet | add a project to the solution",
+        prompt: "In vsCode, how to add a class prop shortcut?",
+        example: "type prop, then press tab",
+        description: "public string UserName { get; set; }"
     }
 
 ]
