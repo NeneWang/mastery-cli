@@ -156,6 +156,6 @@ const csharp = []
 const cpp = []
 
 
-export { python, swift, js, dart, php, java, csharp, cpp };
+module.exports = { python, swift, js, dart, php, java, csharp, cpp };
 
 
