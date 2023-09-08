@@ -1,44 +1,37 @@
 
 
 /**
- * DP - Bottom Up
- * Array - Tabulation
- * Time O(N) | Space O(N)
- * https://leetcode.com/problems/climbing-stairs/
+ * DFS 
+ * Time (log(N)) | Space O(log(N))
+ * https://leetcode.com/problems/powx-n/
+ * @param {number} x
  * @param {number} n
  * @return {number}
  */
-var climbStairs = (n) => {
-    const isBaseCase = (n === 1);
-    if (isBaseCase) return 1;
+const myPow = (x, n) => {
+    const isBaseCase1 = ((x === 1.0) || (n === 0));
+    if (isBaseCase1) return 1;
 
-    const tabu = initTabu(n);/* Space O(N) */
+    const isBaseCase2 = (n === 1);
+    if (isBaseCase2) return x;
 
-    search(n, tabu);
+    // TODO If the exponent is even return as the half of the exponent. Muliplied by a double base case
+    
 
-    return tabu[n];
+    const isOdd = ((n % 2) === 1);
+    if (isOdd) return (x * myPow(x, (n - 1)));/* Time O(log(N)) | Space O(log(N)) */
+
+    return (1 / myPow(x, -n));
 };
 
-var initTabu = (n) => {
-    const tabu = new Array(n + 1).fill(0);
 
-    tabu[1] = 1;
-    tabu[2] = 2;
-
-    return tabu;
-}
-
-var search = (n, tabu) => {
-    // TODO Loop from 3 to n and calculate the tabu value.
-    
-}
+class PowX {
 
 
-
-class ClimbStiars {
-    solve(n) {
-        return climbStairs(n);
+    solve(x, n) {
+        return myPow(x, n);
     }
 }
 
-module.exports = { Problem: ClimbStiars };
+
+module.exports = { Problem: PowX };

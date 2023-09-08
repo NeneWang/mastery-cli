@@ -1396,6 +1396,11 @@ const python_frameworks = [
 
 
 const dotNet = [
+    {
+        prompt: "What is Object Relational Mapping (ORM)?",
+        description: "Object Relational Mapping (ORM) is the process of mapping between objects and relational database systems. It is a programming technique that allows us to query and manipulate data from a database using an object-oriented paradigm.",
+        example: "Entity Framework is an example of an ORM"
+    }
 
 ]
 
