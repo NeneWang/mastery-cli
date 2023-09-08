@@ -1,30 +1,44 @@
-class IsValidParenthesis {
-	solve(s, stack = []) {
-	// Your code here
-		const openBracket = {
-			'}': '{',
-			']': '[',
-			')': '('
-		}
-		for(let character of s){
-				
-			if(character in openBracket){
-				
-				const sizeLeft = stack.length;
-				if( !sizeLeft || sizeLeft == 0) return false;
-				if(stack[sizeLeft - 1] != openBracket[character]) return false;
-				//Otherwise continue.
-				
-				const popped = stack.pop();
-			}
-			else{
-				stack.push(character);
-			}
 
-		}
-		return true;
-	}
+
+/**
+ * DP - Bottom Up
+ * Array - Tabulation
+ * Time O(N) | Space O(N)
+ * https://leetcode.com/problems/climbing-stairs/
+ * @param {number} n
+ * @return {number}
+ */
+var climbStairs = (n) => {
+    const isBaseCase = (n === 1);
+    if (isBaseCase) return 1;
+
+    const tabu = initTabu(n);/* Space O(N) */
+
+    search(n, tabu);
+
+    return tabu[n];
+};
+
+var initTabu = (n) => {
+    const tabu = new Array(n + 1).fill(0);
+
+    tabu[1] = 1;
+    tabu[2] = 2;
+
+    return tabu;
+}
+
+var search = (n, tabu) => {
+    // TODO Loop from 3 to n and calculate the tabu value.
+    
 }
 
 
-module.exports = { Problem: IsValidParenthesis };
+
+class ClimbStiars {
+    solve(n) {
+        return climbStairs(n);
+    }
+}
+
+module.exports = { Problem: ClimbStiars };
