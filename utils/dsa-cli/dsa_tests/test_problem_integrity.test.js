@@ -151,9 +151,9 @@ describe('Problem integrity', function () {
          */
 
         // Loop over the categories from constatns
-        const Constants = require('../constants');
+        const constants = require('../constants');
 
-        for (const category of Object.values(Constants.PROBLEM_CATEGORIES)) {
+        for (const category of Object.values(constants.PROBLEM_CATEGORIES)) {
             if (category.order == null || category.order == undefined) continue; // Skip the ones that are not ordered, or don't even have an order.
             if (category?.order <= 0) continue; // Skip the ones that are not ordered, or don't even have an order.
 
@@ -205,9 +205,9 @@ describe('Problem integrity', function () {
          */
 
         // Loop over the categories from constatns
-        const Constants = require('../constants');
+        const constants = require('../constants');
 
-        for (const category of Object.values(Constants.PROBLEM_CATEGORIES)) {
+        for (const category of Object.values(constants.PROBLEM_CATEGORIES)) {
             if (category.order == null || category.order == undefined) continue; // Skip the ones that are not ordered, or don't even have an order.
             if (category?.order <= 0) continue; // Skip the ones that are not ordered, or don't even have an order.
 

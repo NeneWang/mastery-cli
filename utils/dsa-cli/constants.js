@@ -1,6 +1,6 @@
 // Enumerator indicating the status of the problem e.g. solved, unsolved, aborted.
 
-const Constants = {
+const constants = {
     DEV_MODE: true,
     PATHS: {
         base_cloze: "./cloze/base_cloze/"
@@ -47,5 +47,5 @@ CONSTANTS: {
 
 
 
-module.exports = Constants;
+module.exports = constants;
 

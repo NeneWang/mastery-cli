@@ -23,7 +23,6 @@ const Settings = require('./settings.js');
 const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
 );
-const Constants = require('./dsa-cli/constants');
 
 // https://www.npmjs.com/package/chalk
 

@@ -6,13 +6,13 @@ const clipboard = require('copy-paste')
 
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = require('enquirer');
 
-const Constants = require('./constants');
+const constants = require('./constants');
 const DSAConstants = require('./dsa-cli/constants');
 
 const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
-const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals, get_random_of_size } = Constants;
+const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals, get_random_of_size } = constants;
 const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
 
 const { TermScheduler } = require('./termScheduler');
@@ -504,11 +504,11 @@ class Quizzer {
 
             try {
 
-                console.log("Submitting answer..., for sure...")
+                // console.log("Submitting answer..., for sure...")
+                this.printExample(term_selected)
                 if (constants.CONSTANTS.online) this.postCommentFromTerm(term_selected, user_res, true);
                 const _ = await increasePerformance("terms");
 
-                this.printExample(term_selected)
 
                 /**
                  * date: submission answer
@@ -516,8 +516,10 @@ class Quizzer {
                  * ....
                  */
                 if (constants.CONSTANTS.online) await this.printPreviousTerms(term_selected.formula_name)
-            } catch {
+            } catch (Exception) {
                 // Do nothing, doesnt matter offline.
+                console.log("- Server Offline - ")
+                console.log(Exception)
             }
 
 

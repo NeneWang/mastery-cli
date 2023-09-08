@@ -5,7 +5,7 @@ const StorableReport = require('./StorableReport');
 
 const { getPromptDict } = require('./prompt');
 
-const Constants = require('./constants');
+const constants = require('./constants');
 const { renderPromptDescription, get_random } = require('./functions');
 const { Toggle, AutoComplete } = require('enquirer');
 const { ProblemMetadata } = require('./structures');
@@ -32,7 +32,7 @@ class DSATrainer {
         this.skip_problems = skip_problems;
 
         this.problemReport = new StorableReport({ filename: 'problem_report' });
-        this.order_categories = Object.values(Constants.PROBLEM_CATEGORIES).map(category => category.slug);
+        this.order_categories = Object.values(constants.PROBLEM_CATEGORIES).map(category => category.slug);
 
 
         this.first_non_completed_category_non_completed_problems = this.getFirstNonCompletedCategoryNonCompletedProblems();
@@ -123,7 +123,7 @@ class DSATrainer {
 
 
             // Get the non hard problems
-            const non_hard_problems = problems.filter(problem => problem.difficulty != Constants.difficulty.hard);
+            const non_hard_problems = problems.filter(problem => problem.difficulty != constants.difficulty.hard);
 
             // Also check that the non hard problems are not completed
             const non_completed_non_hard_problems = non_hard_problems.filter(problem => !this.problemReport.isProblemCompleted(problem.slug));
@@ -155,7 +155,7 @@ class DSATrainer {
         const problem = this.problems_manager.getRandomProblem();
         const problem_response = await this.solveProblem(problem);
 
-        problem_response.is_problem_solved = problem_response.problem_status == Constants.ProblemStatus.solved;
+        problem_response.is_problem_solved = problem_response.problem_status == constants.ProblemStatus.solved;
         return problem_response;
     }
 
@@ -169,11 +169,11 @@ class DSATrainer {
         // console.log("problem | problem received", problem);
 
         // Populate with that problem slug
-        // this.problems_manager.copyFileToTemp(selectedClozeProblem.file_path, { base: Constants.PATHS.base_cloze });
+        // this.problems_manager.copyFileToTemp(selectedClozeProblem.file_path, { base: constants.PATHS.base_cloze });
         problem.is_cloze = true;
-        const problem_response = await this.solveProblem(problem, { base: Constants.PATHS.base_cloze, populate_with_cloze_filepath: selectedClozeProblem.file_path });
+        const problem_response = await this.solveProblem(problem, { base: constants.PATHS.base_cloze, populate_with_cloze_filepath: selectedClozeProblem.file_path });
 
-        problem_response.is_problem_solved = problem_response.problem_status == Constants.ProblemStatus.solved;
+        problem_response.is_problem_solved = problem_response.problem_status == constants.ProblemStatus.solved;
         return problem_response;
     }
 
@@ -197,9 +197,9 @@ class DSATrainer {
 
         // Score to increase given this problem
         const scoreGivenDifficulty = {
-            [Constants.difficulty.easy]: 1,
-            [Constants.difficulty.medium]: 2,
-            [Constants.difficulty.hard]: 4
+            [constants.difficulty.easy]: 1,
+            [constants.difficulty.medium]: 2,
+            [constants.difficulty.hard]: 4
         };
 
         // Lowercase
@@ -246,21 +246,21 @@ class DSATrainer {
 
         while (!did_pass_all_tests && try_until_solved) {
 
-            if (status == Constants.ProblemStatus.aborted) {
-                statusMetadata.status = Constants.ProblemStatus.aborted;
+            if (status == constants.ProblemStatus.aborted) {
+                statusMetadata.status = constants.ProblemStatus.aborted;
                 return statusMetadata;
             }
 
-            else if (status == Constants.ProblemStatus.solved) {
+            else if (status == constants.ProblemStatus.solved) {
                 this.problemReport.increaseAnswerFor(problem.slug);
                 if (DEBUG) { console.log("Times the problem was solved.", this.problemReport.getAnswerFor(problem.slug)); }
                 this.cleanCurrentProblem();
                 did_pass_all_tests = true;
-                statusMetadata.status = Constants.ProblemStatus.solved;
+                statusMetadata.status = constants.ProblemStatus.solved;
                 return statusMetadata;
             }
 
-            else if (status == Constants.ProblemStatus.unsolved) {
+            else if (status == constants.ProblemStatus.unsolved) {
                 continue; // Try again
             }
 
@@ -328,7 +328,7 @@ class DSATrainer {
     /**
      * Opens and tests prints a menu where user can choose to test, or other operations, returns once the user is finished with the problem or aborts
      * @param {ProblemMetadata} problem The problem to open and test
-     * @returns {Constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
+     * @returns {constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
      */
     async openAndTest(problem, { failed_attempts = 0 } = {}) {
         if (DEBUG) console.log(
@@ -360,7 +360,7 @@ class DSATrainer {
                     } else {
                         failed_attempts += 1;
                     }
-                    return { status: Constants.ProblemStatus.unsolved, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
+                    return { status: constants.ProblemStatus.unsolved, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
                 }
                 catch (e) {
                     console.log("Error running tests: ", e);
@@ -386,18 +386,18 @@ class DSATrainer {
                 question_state_flag = true;
                 this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_solution: true });
 
-                // return Constants.ProblemStatus.unsolved;
+                // return constants.ProblemStatus.unsolved;
             },
             "Re Base": async () => {
                 question_state_flag = true;
                 // Repopulates the 
                 // this.problems_manager.repopulateCode(problem.slug);
                 this.problems_manager.populateTemplate(problem);
-                // return Constants.ProblemStatus.unsolved;
+                // return constants.ProblemStatus.unsolved;
             },
             'Quit': async () => {
                 question_state_flag = false;
-                return { status: Constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
+                return { status: constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
             }
 
         }
@@ -423,7 +423,7 @@ class DSATrainer {
 
         
 
-        if (Constants.DEV_MODE) Object.assign(choices, choices_dev_mode); // Add dev mode choices
+        if (constants.DEV_MODE) Object.assign(choices, choices_dev_mode); // Add dev mode choices
 
         if (cloze_problem_list.length > 0) {
 
@@ -441,7 +441,7 @@ class DSATrainer {
 
                     const selected_cloze_problem = get_random(cloze_problems);
                     // console.log("DEBUG | Selected cloze problem: ", selected_cloze_problem);
-                    this.problems_manager.copyFileToTemp(selected_cloze_problem.file_path, { base: Constants.PATHS.base_cloze });
+                    this.problems_manager.copyFileToTemp(selected_cloze_problem.file_path, { base: constants.PATHS.base_cloze });
                     console.log(" ==> CLOZE PROBLEM HAS BEEN COPIED TO  CURRENT PROBLEM <==");
                     // Open using modify to update the version
                     await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true });
@@ -451,7 +451,7 @@ class DSATrainer {
             });
         }
 
-        let res = Constants.ProblemStatus.unsolved;
+        let res = constants.ProblemStatus.unsolved;
         while (question_state_flag) {
 
             const selectable_choices_prompt = {};
@@ -466,11 +466,11 @@ class DSATrainer {
                             
 
                         } else {
-                            console.log("Submission running", Constants.ProblemStatus.solved);
+                            console.log("Submission running", constants.ProblemStatus.solved);
                             question_state_flag = false;
                             // TODO Submit the current code that was there at least. to an post documnet.
 
-                            return { status: Constants.ProblemStatus.solved, details: { failed_attempts: failed_attempts }, problem_details: problem_details };
+                            return { status: constants.ProblemStatus.solved, details: { failed_attempts: failed_attempts }, problem_details: problem_details };
 
                         }
                     }
@@ -616,7 +616,7 @@ class DSATrainer {
         const is_new_problem = problem_selected != current_problem_prompt;
         const problem_response = await this.solveProblem(problem, { populate_problem: is_new_problem });
 
-        problem_response.is_problem_solved = problem_response.status == Constants.ProblemStatus.solved;
+        problem_response.is_problem_solved = problem_response.status == constants.ProblemStatus.solved;
         return problem_response;
     }
 

@@ -4,7 +4,7 @@ const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
 const { exec } = require('node:child_process');
 const { getPromptDict } = require('./prompt');
-const Constants = require('./constants');
+const constants = require('./constants');
 const { cloze_problems_list } = require('./cloze');
 
 
@@ -122,9 +122,9 @@ class ProblemsManager {
 
         const classifyDifficulty = (tags) => {
             if (tags == undefined || tags == null || tags?.length <= 0) return "unknown";
-            if (tags.includes("easy")) return Constants.difficulty.easy;
-            if (tags.includes("medium")) return Constants.difficulty.medium;
-            if (tags.includes("hard")) return Constants.difficulty.hard;
+            if (tags.includes("easy")) return constants.difficulty.easy;
+            if (tags.includes("medium")) return constants.difficulty.medium;
+            if (tags.includes("hard")) return constants.difficulty.hard;
         }
 
         const promblem_prompts = await getPromptDict(); //Gets all because no slug was passed in.
@@ -290,7 +290,7 @@ class ProblemsManager {
         const tags = problem_metadata.tags;
 
         // Identify the correct category by filtering the Constant.PROBLEM_CATEGORIES by the tags
-        const categoriesObjects = Object.values(Constants.PROBLEM_CATEGORIES);
+        const categoriesObjects = Object.values(constants.PROBLEM_CATEGORIES);
         const categories_slugs = categoriesObjects.map(category => category.slug); //Names of the testfiles
 
         const categories = categories_slugs.filter(test_file_name =>

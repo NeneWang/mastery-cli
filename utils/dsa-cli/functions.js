@@ -3,7 +3,7 @@ const url = require('url');
 const fs = require('fs');
 const { marked } = require('marked');
 const TerminalRenderer = require('marked-terminal');
-const Constants = require("./constants");
+const constants = require("./constants");
 const { exec } = require('child_process');
 
 const DEBUG = false;
@@ -124,23 +124,23 @@ const countDecimals = (value) => {
 
 const renderPromptDescription = (prompt, prompt_details, { is_cloze = false} = {}) => {
     try {
-        const Constants = require("./constants");
+        const constants = require("./constants");
         const chalk = require("chalk");
         marked.setOptions({
             renderer: new TerminalRenderer()
         });
         // Print title in Blue
         const title = prompt?.["title"]  ?? "";
-        console.log(`${chalk.hex(Constants.CONSTANTS.CUTEBLUE).inverse(` ${title} `)} ${is_cloze? "| " + chalk.hex(Constants.CONSTANTS.CUTEPINK).inverse(` Cloze `): ""}`)
+        console.log(`${chalk.hex(constants.CONSTANTS.CUTEBLUE).inverse(` ${title} `)} ${is_cloze? "| " + chalk.hex(constants.CONSTANTS.CUTEPINK).inverse(` Cloze `): ""}`)
 
 
         // Colored Difficulty tag.
         const prompt_difficulty = prompt_details?.["difficulty"] ?? "";
         const color_based_on_difficulty = (difficulty) => {
-            if (difficulty === Constants.difficulty.easy) return Constants.CONSTANTS.CUTEGREEN;
-            if (difficulty === Constants.difficulty.medium) return Constants.CONSTANTS.CUTEYELLOW;
-            if (difficulty === Constants.difficulty.hard) return Constants.CONSTANTS.CUTEPINK;
-            return Constants.CONSTANTS.CUTEGREEN;
+            if (difficulty === constants.difficulty.easy) return constants.CONSTANTS.CUTEGREEN;
+            if (difficulty === constants.difficulty.medium) return constants.CONSTANTS.CUTEYELLOW;
+            if (difficulty === constants.difficulty.hard) return constants.CONSTANTS.CUTEPINK;
+            return constants.CONSTANTS.CUTEGREEN;
         }
         // Print tags but remove the difficulty from the tags array first
         const tags = prompt_details?.["tags"] ?? [];

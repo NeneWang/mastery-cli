@@ -1,73 +1,135 @@
-class MultiplyStrings {
 
-    /**
-     * Matrix
-     * Time O(N * M) | Space O(N + M)
-     * https://leetcode.com/problems/multiply-strings/
-     * @param {string} num1
-     * @param {string} num2
-     * @return {string}
-     */
-    multiply = (num1, num2) => {
+class MaxPriorityQueue {
 
+    constructor() {
+        this.heap = []
+    }
 
+    enqueue(element) {
+        this.heap.push(element)
+        this.bubbleUp()
+    }
 
-        var initBuffer = (num1, num2) => {
-            // TODO Create an array size, decide the correct size based on the length of num1 and num2
-			const length = num1.length + num2.length;
-			return new Array(length).fill(0);
+    bubbleUp() {
+        let index = this.heap.length - 1
+        while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2)
+            if (this.heap[parentIndex] >= this.heap[index]) break
+            this.swap(parentIndex, index)
+            index = parentIndex
         }
+    }
 
-        var multiplication = (num1, num2, buffer) => {
-            for (let i = (num1.length - 1); (0 <= i); i--) {/* Time O(N) */
-                for (let j = (num2.length - 1); (0 <= j); j--) {/* Time O(M) */
-                    update(num1, i, num2, j, buffer);               /* Space O(N + M) */
+    swap(index1, index2) {
+        const temp = this.heap[index1]
+        this.heap[index1] = this.heap[index2]
+        this.heap[index2] = temp
+    }
+
+    dequeue() {
+        const max = this.heap[0]
+        const end = this.heap.pop()
+        if (this.heap.length > 0) {
+            this.heap[0] = end
+            this.sinkDown()
+        }
+        return max
+    }
+
+    sinkDown() {
+        let index = 0
+        const length = this.heap.length
+        const element = this.heap[0]
+        while (true) {
+            const leftChildIndex = 2 * index + 1
+            const rightChildIndex = 2 * index + 2
+            let leftChild, rightChild
+            let swap = null
+
+            if (leftChildIndex < length) {
+                leftChild = this.heap[leftChildIndex]
+                if (leftChild > element) {
+                    swap = leftChildIndex
                 }
             }
+
+            if (rightChildIndex < length) {
+                rightChild = this.heap[rightChildIndex]
+                if (
+                    (swap === null && rightChild > element) ||
+                    (swap !== null && rightChild > leftChild)
+                ) {
+                    swap = rightChildIndex
+                }
+            }
+
+            if (swap === null) break
+            this.swap(index, swap)
+            index = swap
+        }
+    }
+
+    front() {
+        return this.heap[0]
+    }
+
+    size() {
+        return this.heap.length
+    }
+
+    isEmpty() {
+        return this.size() === 0
+    }
+
+}
+
+
+
+class LastStoneWeight {
+    /**
+     * https://leetcode.com/problems/last-stone-weight/
+     * Time O(N * log(N)) | Space O(N)
+     * @param {number[]} stones
+     * @return {number}
+     */
+    lastStoneWeight = (stones) => {
+
+
+
+        const getMaxHeap = (stones, maxHeap = new MaxPriorityQueue()) => {
+            for (const stone of stones) {
+                maxHeap.enqueue(stone)
+            }
+
+            return maxHeap
         }
 
-        var removeLeadingZero = (buffer) => {
-            const isLeadZero = (buffer[0] === 0);
-            if (!isLeadZero) return;
+        const shrink = (maxHeap) => {
+            while (1 < maxHeap.size()) {
+                const [x, y] = [maxHeap.dequeue(), maxHeap.dequeue()]
+                const difference = x - y;
 
-            buffer.shift();/* Time O(N + M) | Time O(N + M) */
-        }
+                const isPositive = 0 < difference
+                if (isPositive) maxHeap.enqueue(difference);
+            }
+    }
 
-        var update = (num1, i, num2, j, buffer) => {
-            const curPos = (i + j);
-            const prevPos = curPos + 1;
 
-            const carry = buffer[prevPos];
-            const product = getProduct(num1, i, num2, j);
-            const sum = (carry + product);
+        // TODO Implement max Heap
+		
+		const maxH = getMaxHeap(stones);
+		shrink(maxH);
+		return maxH.isEmpty() ? 0: maxH.dequeue();
 
-            const remainder = (sum % 10);
-            const value = ((sum - remainder) / 10);
 
-            buffer[prevPos] = remainder;/* Space O(N + M) */
-            buffer[curPos] += value;    /* Space O(N + M) */
-        }
-
-        var getProduct = (num1, i, num2, j) => {
-            const [iNum, jNum] = [Number(num1[i]), Number(num2[j])];
-
-            return (iNum * jNum);
-        }
-        const isZero = ((num1 === '0') || (num2 === '0'));
-        if (isZero) return '0';
-
-        const buffer = initBuffer(num1, num2);/*               | Space (N + M) */
-
-        multiplication(num1, num2, buffer)    /* Time O(N * M) */
-        removeLeadingZero(buffer);            /* Time O(N + M) | Time O(N + M)*/
-
-        return buffer.join('');               /* Time O(N + M) | Space O(N + M) */
     };
 
-    solve(num1, num2) {
-        return this.multiply(num1, num2);
+
+
+    solve(stones) {
+        return this.lastStoneWeight(stones);
     }
 }
 
 
-module.exports = { Problem: MultiplyStrings };
+module.exports = { Problem: LastStoneWeight };
