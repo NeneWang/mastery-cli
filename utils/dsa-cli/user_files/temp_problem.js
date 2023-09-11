@@ -1,135 +1,38 @@
 
-class MaxPriorityQueue {
 
-    constructor() {
-        this.heap = []
-    }
+/**
+ * DFS 
+ * Time (log(N)) | Space O(log(N))
+ * https://leetcode.com/problems/powx-n/
+ * @param {number} x
+ * @param {number} n
+ * @return {number}
+ */
+const myPow = (x, n) => {
+    const isBaseCase1 = ((x === 1.0) || (n === 0));
+    if (isBaseCase1) return 1;
 
-    enqueue(element) {
-        this.heap.push(element)
-        this.bubbleUp()
-    }
+    const isBaseCase2 = (n === 1);
+    if (isBaseCase2) return x;
 
-    bubbleUp() {
-        let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] >= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
-        }
-    }
+    // TODO If the exponent is even return as the half of the exponent. Muliplied by a double base case
+	const isEven = (n%2) == 0;
+	if(isEven) return myPow(x*x, n>>1);
 
-    swap(index1, index2) {
-        const temp = this.heap[index1]
-        this.heap[index1] = this.heap[index2]
-        this.heap[index2] = temp
-    }
+    const isOdd = ((n % 2) === 1);
+    if (isOdd) return (x * myPow(x, (n - 1)));/* Time O(log(N)) | Space O(log(N)) */
 
-    dequeue() {
-        const max = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.sinkDown()
-        }
-        return max
-    }
-
-    sinkDown() {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
-
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild > element) {
-                    swap = leftChildIndex
-                }
-            }
-
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild > element) ||
-                    (swap !== null && rightChild > leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
-
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
-        }
-    }
-
-    front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-}
+    return (1 / myPow(x, -n));
+};
 
 
-
-class LastStoneWeight {
-    /**
-     * https://leetcode.com/problems/last-stone-weight/
-     * Time O(N * log(N)) | Space O(N)
-     * @param {number[]} stones
-     * @return {number}
-     */
-    lastStoneWeight = (stones) => {
+class PowX {
 
 
-
-        const getMaxHeap = (stones, maxHeap = new MaxPriorityQueue()) => {
-            for (const stone of stones) {
-                maxHeap.enqueue(stone)
-            }
-
-            return maxHeap
-        }
-
-        const shrink = (maxHeap) => {
-            while (1 < maxHeap.size()) {
-                const [x, y] = [maxHeap.dequeue(), maxHeap.dequeue()]
-                const difference = x - y;
-
-                const isPositive = 0 < difference
-                if (isPositive) maxHeap.enqueue(difference);
-            }
-    }
-
-
-        // TODO Implement max Heap
-		
-		const maxH = getMaxHeap(stones);
-		shrink(maxH);
-		return maxH.isEmpty() ? 0: maxH.dequeue();
-
-
-    };
-
-
-
-    solve(stones) {
-        return this.lastStoneWeight(stones);
+    solve(x, n) {
+        return myPow(x, n);
     }
 }
 
 
-module.exports = { Problem: LastStoneWeight };
+module.exports = { Problem: PowX };

@@ -203,7 +203,7 @@ class Maid {
 			}
 			// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
 			const missingFeatReport = this.missingFeatReport;
-			if (missingFeatReport ?? false) {
+			if (missingFeatReport ? false : true) {
 				console.log("Missing Reports Missing: received: ", missingFeatReport ?? "")
 			}
 			const missingFormatedAsStr = this.missingFeatReport.join(", ")
@@ -256,8 +256,9 @@ class Maid {
 			this.missingFeatReport = res.data;
 		}
 		catch (err) {
+			console.log("API call", `${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
+			console.log("Error in populateMissingReport", err)
 			if (Settings.show_http_errors) {
-
 				console.log(err);
 			}
 		}

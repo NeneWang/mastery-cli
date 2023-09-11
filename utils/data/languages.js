@@ -130,6 +130,52 @@ const swift = [
         term: "Format decimals",
         prompt: "How to print a double in 6 places after the decimal?",
         example: "String(format: \"%.6f\", 1.0)"
+    }, 
+    {
+        term: "Dict | Swift",
+        prompt: "Create a dictionary with key as string and value as int",
+        example: "var dict: [String: Int] = [:]"
+    },
+    {
+        term: "Dict | Add, , update",
+        prompt: "How to add, update a dictionary?",
+        example: "dict[\"a\"] = 1\n\
+        dict[\"b\"] = 2"
+    },
+    {
+        term: "Dict | Remove",
+        prompt: "How to remove a key from a dictionary?",
+        example: "dict.removeValue(forKey: \"a\")"
+    },
+    {
+        term: "Set | init",
+        prompt: "How to initialize a set of Integers?",
+        example: "var set: Set<Int> = []\n\
+        var set: Set<Int> = [1, 2, 3]\n\
+        "
+    },
+    {
+        term: "Set | Add, check if contains",
+        prompt: "How to add an element to a set and check if it contains an element?",
+        example: "set.insert(1)\n\
+        set.contains(1)"
+    },
+    {
+        term: "Set | Remove & Remove All",
+        prompt: "How to remove an element from a set and remove all elements?",
+        example: "set.remove(1)\n\
+        set.removeAll()"
+    },
+    {
+        term: "For loop from 2 to count",
+        prompt: "How to iterate from 2 to count?",
+        example: "for i in 2..<count { print(i) }"
+    },
+    {
+        term: "Get first and second half array",
+        prompt: "How to get the first and second half of an array? from middle = nums.count - ( k % nums.count )",
+        example: "let firstHalf = nums[0..<middle]\n\
+        let secondHalf = nums[middle..<nums.count]"
     }
 ]
 

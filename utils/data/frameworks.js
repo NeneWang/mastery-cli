@@ -1427,7 +1427,95 @@ const dotNet = [
         prompt: "In vsCode, how to add a class prop shortcut?",
         example: "type prop, then press tab",
         description: "public string UserName { get; set; }"
-    }
+    },
+    {
+        term: "dotnet | add a model to api",
+        prompt: "Add a model to the api project and create a get request",
+        example: "Create the model inside of entities, Then include the dataContext\n\
+        dotnet tool install --global dotnet-ef\n\
+        cd API\n\
+        dotnet add package Microsoft.EntityFrameworkCore.Design\n\
+        dotnet ef migrations add InitialCreate -o Data/Migrations and then add the controller with the get request",
+        description: "Example model:\n\
+        public class AppUser\n\
+        {\n\
+            public int Id { get; set; }\n\
+            public string UserName { get; set; }\n\
+            }"
+    },
+    {
+        term: "dotnet | controllers | get users",
+        prompt: "Complete the following",
+        description: "using API.Entities;\n\
+        using Microsoft.AspNetCore.Mvc;\n\
+        namespace API.Controllers\n\
+        {\n\
+            [ApiController]\n\
+            [Route(\"api/[controller]\")]\n\
+            public class UsersController : ControllerBase\n\
+            {\n\
+                private readonly DataContext _context;\n\
+                public UsersController(DataContext context)\n\
+                {\n\
+                    _context = context;\n\
+                }\n\
+        \n\
+                [HttpGet]\n\
+                ## Create header for method: getUsers()\n\
+                {\n\
+                    ### Get the users from context\n\
+                    return users;\n\
+                }\n\
+        \n\
+                [HttpGet(\"{id}\")]\n\
+                public ActionResult<AppUser> GetUser(int id)\n\
+                {\n\
+                    var user = _context.Users.Find(id);\n\
+                    return user;\n\
+                }\n\
+            }\n\
+        }",
+        example: "public ActionResult<IEnumerable<AppUser>> GetUsers()\n\
+        var users = _context.Users.ToList();\n\
+        "
+    },
+    {
+        term: "dotnet | controllers | get user with id",
+        prompt: "Complete the following",
+        description: "using API.Entities;\n\
+        using Microsoft.AspNetCore.Mvc;\n\
+        namespace API.Controllers\n\
+        {\n\
+            [ApiController]\n\
+            [Route(\"api/[controller]\")]\n\
+            public class UsersController : ControllerBase\n\
+            {\n\
+                private readonly DataContext _context;\n\
+                public UsersController(DataContext context)\n\
+                {\n\
+                    _context = context;\n\
+                }\n\
+        \n\
+                [HttpGet]\n\
+                public ActionResult<IEnumerable<AppUser>> GetUsers()\n\
+                {\n\
+                    var users = _context.Users.ToList();\n\
+                    return users;\n\
+                }\n\
+        \n\
+                ### Http Get \n\
+                ### Complete header GetUser\n\
+                {\n\
+                    ### find the user through the context\n\
+                    return user;\n\
+                }\n\
+            }\n\
+        }",
+        example: "[HttpGet(\"{id}\")]\n\
+        public ActionResult<AppUser> GetUser(int id)\n\
+        var user = _context.Users.Find(id);"
+    },
+    
 
 ]
 
@@ -1436,5 +1524,7 @@ const angular = [
 ]
 
 
-module.exports = { react_terms, apex, flutter: flutter_dart, IDE_S, chrome_extensions, python_frameworks, react_typescript,
-dotNet, angular };
+module.exports = {
+    react_terms, apex, flutter: flutter_dart, IDE_S, chrome_extensions, python_frameworks, react_typescript,
+    dotNet, angular
+};
