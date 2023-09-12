@@ -1515,12 +1515,75 @@ const dotNet = [
         public ActionResult<AppUser> GetUser(int id)\n\
         var user = _context.Users.Find(id);"
     },
-    
+    {
+        term: "dotnet | watch",
+        prompt: "How to run the server while in watch for changes in the api project?",
+        example: "dotnet watch"
+    },
+    {
+        term: "async get",
+        prompt: "Complete the following (model: AppUser)",
+        description: "[HttpGet('/async/{id}')]\n\
+        ### Complete header for method GetUserAsync]\n\
+            ### Complete method to get the user in async \n\
+            return user;]\n\
+        }]",
+        example: "public async Task<ActionResult<AppUser>> GetUserAsync(int id)\n\
+        var user = await _content.Users.FindAsync(id);]"
+    }
+
 
 ]
 
 const angular = [
+    {
+        term: "angular | create a new project",
+        prompt: "Create a new project with the name 'my-app' and run it locally?",
+        example: "ng new my-app\n\
+        cd my-app\n\
+        ng serve --open"   
+    },
+    {
+        term: "module | How to make http requests?",
+        prompt: "How to make http requests?",
+        description: "import { HttpClientModule} from '@angular/common/http';\n\
+        \n\
+        @NgModule({\n\
+            ...\n\
+            imports: [\n\
+                ...\n\
+                HttpClientModule\n\
+            ],\n\
+            ...\n\
+        })\n\
+        >>> app.components.ts\n\
+        import {HttpClient } from '@angular/common/http';\n\
+        export class AppModule {\n\
+            constructor(private http: HttpClient) { }\n\
+         }",
 
+        example: "go to app.module.ts and add the following import:"
+
+    },
+    {
+        term: "module | How to allow for cross origin requests?",
+        prompt: "How to allow for cross origin requests?",
+        description: 'app.UseCors( builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200")); ',
+        example: "Go to Program.cs and add the following line to the Configure method:"
+    }
+]
+
+const npm = [
+    {
+        "term": "nvm install a version",
+        "prompt": "Install node version 14.17.0",
+        "example": "nvm install 14.17.0"
+    },
+    {
+        term: "nvm | use a version",
+        prompt: "Use node version 14.17.0",
+        example: "nvm use 14.17.0"
+    },
 ]
 
 

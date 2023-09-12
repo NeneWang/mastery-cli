@@ -1,38 +1,36 @@
+class GenerateParentesis {
+	
+	dfsParenthesis(n, open, closed, current, combinations){
+		
+		if(n*2 == current.length){
+			console.log("Pushing combination", current.join(''), "Combiantions", combinations);
+			combinations.push(current.join(''));
+			return combinations;
+		}
 
+		if(open < n){
+			const newCombination = [...current, '('];
+			console.log("adding open", open, n, newCombination)
+			this.dfsParenthesis(n, open + 1, closed, newCombination, combinations);
+		}
 
-/**
- * DFS 
- * Time (log(N)) | Space O(log(N))
- * https://leetcode.com/problems/powx-n/
- * @param {number} x
- * @param {number} n
- * @return {number}
- */
-const myPow = (x, n) => {
-    const isBaseCase1 = ((x === 1.0) || (n === 0));
-    if (isBaseCase1) return 1;
+		if(closed < open){
+			const newCombination = [...current, ')'];
+			console.log("Closing COmbination closed:", closed, "open", open, "new combo", newCombination);
+			this.dfsParenthesis(n, open, closed + 1, newCombination, combinations);
+		}
 
-    const isBaseCase2 = (n === 1);
-    if (isBaseCase2) return x;
+		return combinations
 
-    // TODO If the exponent is even return as the half of the exponent. Muliplied by a double base case
-	const isEven = (n%2) == 0;
-	if(isEven) return myPow(x*x, n>>1);
+	}
 
-    const isOdd = ((n % 2) === 1);
-    if (isOdd) return (x * myPow(x, (n - 1)));/* Time O(log(N)) | Space O(log(N)) */
+	solve(n) {
+	// Your code here
+		const combinations = [];
+		return this.dfsParenthesis(n, 0, 0, [], combinations);
 
-    return (1 / myPow(x, -n));
-};
-
-
-class PowX {
-
-
-    solve(x, n) {
-        return myPow(x, n);
-    }
+	}
 }
 
 
-module.exports = { Problem: PowX };
+module.exports = { Problem: GenerateParentesis };
