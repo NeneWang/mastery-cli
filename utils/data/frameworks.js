@@ -1570,6 +1570,35 @@ const angular = [
         prompt: "How to allow for cross origin requests?",
         description: 'app.UseCors( builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200")); ',
         example: "Go to Program.cs and add the following line to the Configure method:"
+    },
+    {
+        term: "html | loop over users in a li in a ul",
+        prompt: "Loop over users in a li in a ul printing it's name",
+        example: "<ul>\n\
+        <li *ngFor='let user of users'>{{user.name}}</li>\n\
+        </ul>"
+    },
+    {
+        term: "add Bootstrap",
+        prompt: "How to add bootstrap to an angular project (ngx-bootstrap)?",
+        example: "ngx add ngx-bootstrap"
+    },
+    {
+        term: "Add ssl loally",
+        prompt: "How to add ssl locally?",
+        example: '"serve": {\n\
+            "options": {\n\
+              "ssl": true,\n\
+              "sslCert": "./ssl/localhost.pem",\n\
+              "sslKey": "./ssl/localhost-key.pem"\n\
+            },',
+        description: "Install mkcert using brew or choco\n\
+        mkdir ssl\n\
+        cd ssl\n\
+        mkcert localhost\n\
+        Add the above to angular.json"
+
+
     }
 ]
 
