@@ -11,8 +11,8 @@ const to_test = {
     'category': false,
     'exact-category': false, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
     'basic': false,
-    'runnable': false,
-    'cloze': true, // Test that cloze cards are populable. Also that the solution exists.
+    'runnable': true,
+    'cloze': false, // Test that cloze cards are populable. Also that the solution exists.
 }
 
 describe('Problem integrity', function () {

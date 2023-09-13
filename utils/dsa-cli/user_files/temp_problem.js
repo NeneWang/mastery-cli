@@ -1,36 +1,69 @@
-class GenerateParentesis {
-	
-	dfsParenthesis(n, open, closed, current, combinations){
-		
-		if(n*2 == current.length){
-			console.log("Pushing combination", current.join(''), "Combiantions", combinations);
-			combinations.push(current.join(''));
-			return combinations;
-		}
 
-		if(open < n){
-			const newCombination = [...current, '('];
-			console.log("adding open", open, n, newCombination)
-			this.dfsParenthesis(n, open + 1, closed, newCombination, combinations);
-		}
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * var obj = new WordDictionary()
+ * obj.addWord(word)
+ * var param_2 = obj.search(word)
+ */
 
-		if(closed < open){
-			const newCombination = [...current, ')'];
-			console.log("Closing COmbination closed:", closed, "open", open, "new combo", newCombination);
-			this.dfsParenthesis(n, open, closed + 1, newCombination, combinations);
-		}
-
-		return combinations
-
-	}
-
-	solve(n) {
-	// Your code here
-		const combinations = [];
-		return this.dfsParenthesis(n, 0, 0, [], combinations);
-
-	}
+class TrieNode {
+    constructor() {
+        this.children = {};
+        this.isWord = false;
+    }
 }
 
 
-module.exports = { Problem: GenerateParentesis };
+class WordDictionary {
+    constructor() {
+        this.root = new TrieNode();
+    }
+
+    /* Time O(N) | Space O(N) */
+    addWord(word, node = this.root) {
+        for (const char of word) {
+            const child = node.children[char] || new TrieNode();
+
+            node.children[char] = child;
+
+            node = child;
+        }
+
+        node.isWord = true;
+    }
+
+    /* Time O(N) | Space O(N) */
+    search(word) {
+        return this.dfs(word, this.root, 0);
+    }
+
+    dfs(word, node, level) {
+        // TODO If the node is null it means that there might not be any word added yet.
+		if(!node){
+		return false;	
+		} 
+        // TODO If the level is the same as the word length it means that we have reached the end of the word.
+		if(level == word.length){
+			return node.isWord;
+		}
+        
+        const isWildCard = word[level] === '.';
+        if (isWildCard) return this.hasWildCard(word, node, level);
+
+        return this.dfs(word, node.children[word[level]], level + 1);
+    }
+
+    hasWildCard(word, node, level) {
+        for (const char of Object.keys(node.children)) {
+            const child = node.children[char];
+
+            const hasWord = this.dfs(word, child, level + 1);
+            if (hasWord) return true;
+        }
+
+        return false;
+    }
+}
+
+
+module.exports = { Problem: WordDictionary };
