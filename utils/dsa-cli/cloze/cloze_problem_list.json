@@ -145,6 +145,11 @@
         "problem_slug": "car-fleet"
     },
     {
+        "file_path": "car-fleet-c3.js",
+        "difficulty": 2,
+        "problem_slug": "car-fleet"
+    },
+    {
         "file_path": "largest-rectangle-area-c1.js",
         "difficulty": 2,
         "problem_slug": "largest-rectangle-area"

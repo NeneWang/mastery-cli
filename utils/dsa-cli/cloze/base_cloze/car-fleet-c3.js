@@ -10,15 +10,13 @@ var carFleet = function (target, position, speed) {
     const stack = [];
     //sort in asc
     pair.sort((posA, posB) => posA[0] - posB[0]);
-    // TODO for loop reverse
-    {
+    //for loop reverse
+    for (let i = pair.length - 1; i >= 0; i--) {
         //calculate time and add it to stack
         const [pos, speed] = pair[i];
         stack.push((target - pos) / speed)
-        //if stack.length >=2 and stack[-1] <= stack[-2] ---> pop
-        if(stack.length >= 2 && stack[stack.length-1] <= stack[stack.length-2]){
-            stack.pop()
-        }
+        //TODO if stack.length >=2 and stack[-1] <= stack[-2] ---> pop
+        
     }
     // at the end of the loop return the length of the stack
     return stack.length;
