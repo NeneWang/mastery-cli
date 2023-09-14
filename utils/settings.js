@@ -16,17 +16,7 @@ module.exports = Settings = {
     ],
     "maid_name": "Lily",
     "maid_icons": [
-        "genie_woman",
-        "elf_woman",
-        "construction_worker_woman",
-        "zombie_woman",
-        "policewoman",
-        "mage_woman",
-        "sauna_woman",
-        "woman_juggling",
-        "woman_pilot",
-        "woman_office_worker",
-        "woman_health_worker"
+        ":hammer:",
     ],
     "report_settings": {
         "week_features": true,
