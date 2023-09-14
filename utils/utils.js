@@ -801,12 +801,12 @@ class CommitCategoryType {
 };
 
 let ECommitCategory = {
-	FEAT: new CommitCategoryType('feat', [':tada:', ':santa:', ':gift:']),
-	FIX: new CommitCategoryType('fix', [':hammer:', ':shipit:', ':ambulance:']),
-	REFACTOR: new CommitCategoryType('ref', [':ghost:', ':pencil2:'], feature_name = "Refactoring"),
-	ACADEMY: new CommitCategoryType('acad', [':triangular_ruler:', ":japanese_castle:", ":factory:"]),
-	ALGO: new CommitCategoryType('algo', [':herb:', ":crown:", ":japanese_goblin:"]),
-	PROJECT: new CommitCategoryType('pro', [":crown:"])
+	FEAT: new CommitCategoryType('feat ', [':tada:', ':santa:', ':gift:']),
+	FIX: new CommitCategoryType('fix ', [':hammer:', ':shipit:', ':ambulance:']),
+	REFACTOR: new CommitCategoryType('ref ', [':ghost:', ':pencil2:'], feature_name = "Refactoring"),
+	ACADEMY: new CommitCategoryType('acad ', [':triangular_ruler:', ":japanese_castle:", ":factory:"]),
+	ALGO: new CommitCategoryType('algo ', [':herb:', ":crown:", ":japanese_goblin:"]),
+	PROJECT: new CommitCategoryType('pro ', [":crown:"])
 }
 
 /**

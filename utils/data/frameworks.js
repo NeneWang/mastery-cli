@@ -1599,6 +1599,11 @@ const angular = [
         Add the above to angular.json"
 
 
+    },
+    {
+        term: "Create a component",
+        prompt: "How to create a component - Create a counter component inside components folder?",
+        example: "ng g c components/counter"
     }
 ]
 
