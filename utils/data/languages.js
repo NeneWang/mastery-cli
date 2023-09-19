@@ -187,9 +187,13 @@ const js = [
 const dart = [
 ]
 
+const matlab = []
+
+const r = []
+
+const kotlin = []
 
 const php = [
-
 ]
 
 const java = []
@@ -236,6 +240,6 @@ const typescript = [
 ]
 
 
-module.exports = { python, swift, js, dart, php, java, csharp, cpp, typescript };
+module.exports = { python, swift, js, dart, php, java, csharp, cpp, typescript, r, matlab, kotlin };
 
 

@@ -46,7 +46,11 @@ class Quizzer {
      * OUT: 
      * - {form, replace}
      */
-    getYoungest = async (potential_questions, { limit = 3, account_id = 1, debug = false } = {}) => {
+    getYoungest = async (potential_questions, { limit = 3, account_id = 1, debug = false, randomOffline = false } = {}) => {
+
+        if(randomOffline){
+            return get_random_of_size(potential_questions, { count: limit });
+        }
 
         try {
             // Filter only if they have formula_name property
@@ -83,7 +87,7 @@ class Quizzer {
     pick_math_question = async () => {
 
         let potential_questions = this.enabledqmathformulas;
-        potential_questions = await this.getYoungest(potential_questions);
+        potential_questions = await this.getYoungest(potential_questions, {randomOffline: true});
         // if (DEBUG) console.log("potential_questions", potential_questions);
         return await get_random(potential_questions);
     }
@@ -103,7 +107,7 @@ class Quizzer {
                 formula_name: 'singleton-pattern'
             }
          */
-        potential_questions = await this.getYoungest(potential_questions)
+        potential_questions = await this.getYoungest(potential_questions, {randomOffline: true})
 
         // if (DEBUG) console.log("Left with", potential_questions)
 
@@ -119,7 +123,7 @@ class Quizzer {
     forceLearnMode = async ({ debug = false, exitMethod = () => { } } = {}) => {
         let potential_questions = this.terms;
 
-        potential_questions = await this.getYoungest(potential_questions, { limit: 2 });
+        potential_questions = await this.getYoungest(potential_questions, { limit: 2, randomOffline: true });
         if (debug) console.log("potential_questions", potential_questions);
         if (debug) console.log("length", potential_questions.length);
         let attempts = 0;
