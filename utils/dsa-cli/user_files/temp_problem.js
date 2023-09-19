@@ -1,237 +1,78 @@
+class CourseSchedule {
+
+    /**
+     * https://leetcode.com/problems/course-schedule/
+     * Time O((V)^2 + E) | Space O(V + E)
+     * @param {number} numCourses
+     * @param {number[][]} prerequisites
+     * @return {boolean}
+     */
+    canFinish = function (numCourses, prerequisites) {
 
 
-class MinPriorityQueue {
+        var initGraph = (numCourses) => ({
+            graph: new Array(numCourses).fill().map(() => []),
+            path: new Array(numCourses).fill(false)
+        })
 
-    constructor() {
-        this.heap = []
-    }
+        var buildGraph = (numCourses, prerequisites) => {
+            const { graph, path } = initGraph(numCourses);
 
-    enqueue(element) {
-        this.heap.push(element)
-        this.bubbleUp()
-    }
+            for (const [src, dst] of prerequisites) {
+                const neighbors = (graph[dst] || []);
 
-    bubbleUp() {
-        let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] <= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
-        }
-    }
+                neighbors.push(src);
 
-    swap(index1, index2) {
-        const temp = this.heap[index1]
-        this.heap[index1] = this.heap[index2]
-        this.heap[index2] = temp
-    }
-
-    dequeue() {
-        const min = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.sinkDown()
-        }
-        return min
-    }
-
-    sinkDown() {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
-
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild < element) {
-                    swap = leftChildIndex
-                }
+                graph[dst] = neighbors;
             }
 
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild < element) ||
-                    (swap !== null && rightChild < leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
+            return { graph, path };
+        }
+
+        var hasPath = (numCourses, graph, path) => {
+            for (let course = 0; course < numCourses; course++) {
+                if (isCyclic(course, graph, path)) return false;
             }
 
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
+            return true;
         }
-    }
 
-    front() {
-        return this.heap[0]
-    }
+        var isCyclic = (currCourse, graph, path) => {
+            const hasSeen = path[currCourse]
+            if (hasSeen) return true
 
-    size() {
-        return this.heap.length
-    }
+            const isMissingNext = !(currCourse in graph)
+            if (isMissingNext) return false;
 
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
-}
-
-class MaxPriorityQueue {
-
-    constructor() {
-        this.heap = []
-    }
-
-    enqueue(element) {
-        this.heap.push(element)
-        this.bubbleUp()
-    }
-
-    bubbleUp() {
-        let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] >= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
+            return backTrack(currCourse, graph, path);
         }
-    }
 
-    swap(index1, index2) {
-        const temp = this.heap[index1]
-        this.heap[index1] = this.heap[index2]
-        this.heap[index2] = temp
-    }
+        var backTrack = (currCourse, graph, path) => {
+            path[currCourse] = true;
+            const _hasCycle = hasCycle(currCourse, graph, path)
+            path[currCourse] = false;
 
-    dequeue() {
-        const max = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.sinkDown()
+            return _hasCycle
         }
-        return max
-    }
 
-    sinkDown() {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
+        var hasCycle = (currCourse, graph, path) => {
+            // TODO return true if the current course is in the path, iterate each neighbor of the current course
+            
 
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild > element) {
-                    swap = leftChildIndex
-                }
-            }
-
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild > element) ||
-                    (swap !== null && rightChild > leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
-
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
+            return false
         }
-    }
 
-    front() {
-        return this.heap[0]
-    }
+        const { graph, path } = buildGraph(numCourses, prerequisites);
 
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
+        return hasPath(numCourses, graph, path);
     }
 
 
-}
 
-
-/** 
- * https://leetcode.com/problems/find-median-from-data-stream/
- * Your MedianFinder object will be instantiated and called as such:
- * var obj = new MedianFinder()
- * obj.addNum(num)
- * var param_2 = obj.findMedian()
- */
-class MedianFinder {
-    constructor() {
-        this.maxHeap = new MaxPriorityQueue()
-        this.minHeap = new MinPriorityQueue()
-    }
-
-    /* Time O(log(N)) | Space (N) */
-    insertNum(num) {
-        this.addNum(num)
-    }
-
-    addNum(num, heap = this.getHeap(num)) {
-        heap.enqueue(num)
-        this.rebalance()
-    }
-
-    getHeap(num, { maxHeap, minHeap } = this) {
-        const isFirst = maxHeap.isEmpty()
-        const isGreater = num <= this.top(maxHeap);
-        const isMaxHeap = (isFirst || isGreater);
-        return (isMaxHeap)
-            ? maxHeap
-            : minHeap
-    }
-
-    rebalance({ maxHeap, minHeap } = this) {
-        // TODO Shift elements from one heap to the other if the size difference is greater than 1.
-        // TODO canShiftMax = (minHeap.size() + 1) < maxHeap.size()
-        
-    }
-
-    /* Time O(1) | Space (1) */
-    findMedian({ maxHeap, minHeap } = this) {
-        const isEven = maxHeap.size() === minHeap.size()
-        return (isEven)
-            ? this.average(maxHeap, minHeap)
-            : this.top(maxHeap)
-    }
-
-    average(maxHeap, minHeap) {
-        return (this.top(maxHeap) + this.top(minHeap)) / 2
-    }
-
-    top(heap) {
-        return heap.front() || 0
+    solve(numCourses, prerequisistes) {
+        return this.canFinish(numCourses, prerequisistes);
     }
 }
 
 
-module.exports = { Problem: MedianFinder };
+module.exports = { Problem: CourseSchedule };
