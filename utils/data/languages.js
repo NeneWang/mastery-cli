@@ -3,15 +3,12 @@
 // Make sure for all know how to instantiate the specific structures.
 
 const python = [
-    {
-
-    }
 ]
 
 const swift = [
     {
         term: "Using Regex",
-        description:  "Check the following regex example.\
+        description: "Check the following regex example.\
         import Foundation\n\
         \n\
         func timeConversion(s: String) -> String {\n\
@@ -59,7 +56,7 @@ const swift = [
     },
     {
         term: "Using Regex II",
-        description:  "Check the following regex example.\
+        description: "Check the following regex example.\
         import Foundation\n\
         \n\
         func timeConversion(s: String) -> String {\n\
@@ -130,7 +127,7 @@ const swift = [
         term: "Format decimals",
         prompt: "How to print a double in 6 places after the decimal?",
         example: "String(format: \"%.6f\", 1.0)"
-    }, 
+    },
     {
         term: "Dict | Swift",
         prompt: "Create a dictionary with key as string and value as int",
@@ -201,7 +198,44 @@ const csharp = []
 
 const cpp = []
 
+const typescript = [
+    {
+        term: "Create a tuple",
+        prompt: "How to create a tuple? of number, string and last element as boolean | named tuple",
+        example: "let tuple: [number, string, boolean] = [1, 'a', true]"
+    },
+    {
+        term: "Create an Enum",
+        prompt: "How to create an enum? of Bajo: 10, Normal: 50, Alto: 100",
+        example: "enum Priority {\n\
+            Bajo = 10,\n\
+            Normal = 50,\n\
+            Alto = 100\n\
+        }"
+    },
+    {
+        term: "Declare a variable of Enum",
+        prompt: "How to declare a variable of Enum type Priority which starts as Bajo?",
+        example: "let priority: Priority = Priority.Bajo"
+    },
+    {
+        term: "Create an array of String",
+        prompt: "How to create an array of String?",
+        example: "let array: string[] = []"
+    },
+    {
+        term: "Create an array  II",
+        prompt: "How to create an array of String and Numbers",
+        example: "let array: (string | number)[] = []"
+    },
+    {
+        term: "Create an array III",
+        prompt: "How to create an array of any type?",
+        example: "let array: any[] = []"
+    },
+]
 
-module.exports = { python, swift, js, dart, php, java, csharp, cpp };
+
+module.exports = { python, swift, js, dart, php, java, csharp, cpp, typescript };
 
 

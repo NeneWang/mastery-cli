@@ -859,7 +859,6 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true, debug = false, comments_to_populate = [] } = {}) => {
 
 
-
 	let commitMessage = process.argv[3];
 	if (debug) {
 		console.log(commitMessage)
@@ -868,6 +867,8 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	if (commitMessage == undefined) {
 		commitMessage = CONSTANTS.default_commit_message;
 	}
+
+	
 
 
 	// If any category found then increase the score please.
@@ -878,6 +879,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: false });
 		// console.log("comments_to_populate", comments_to_populate)
 	}
+
 
 
 	// Removed await statement for hopes of faster responsee load
@@ -891,7 +893,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
 	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
-	if (debug) console.log(`Pushed to origin with commit message: ${commitMessage}`);
+	if (true) console.log(`Pushed to origin with commit message: ${commitMessage}`);
 
 	return { comments_to_populate: comments_to_populate, commit_category: commitCat, commit_message: commitMessage };
 }

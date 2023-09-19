@@ -108,7 +108,7 @@ async function populateMasterDeck() {
     const { salesforce_experience } = require('./salesforce_certification');
     decks.addDeck(new TermStorage(salesforce_experience, "salesforce experience", { is_active: layer_2 }));
 
-    const { python, swift, js, dart, php, java, csharp, cpp } = require('./languages');
+    const { python, swift, js, dart, php, java, csharp, cpp, typescript } = require('./languages');
     decks.addDeck(new TermStorage(python, "python", { is_active: projects_layer }));
     decks.addDeck(new TermStorage(swift, "swift", { is_active: projects_layer }));
     decks.addDeck(new TermStorage(js, "js", { is_active: projects_layer }));
@@ -117,6 +117,7 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(java, "java", { is_active: projects_layer }));
     decks.addDeck(new TermStorage(csharp, "csharp", { is_active: projects_layer }));
     decks.addDeck(new TermStorage(cpp, "cpp", { is_active: projects_layer }));
+    decks.addDeck(new TermStorage(typescript, "typescript", { is_active: projects_layer }));
 
     return decks;
 }

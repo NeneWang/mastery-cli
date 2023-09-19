@@ -35,9 +35,10 @@ function get_random_of_size(list, { count = 1 } = {}) {
 }
 const MAID_NAME = "Maid";
 
-const MAID_EMOJIS = ["genie_woman", "elf_woman", "construction_worker_woman", "zombie_woman", "policewoman",
-    "mage_woman", "sauna_woman", "woman_juggling", "woman_pilot", "woman_office_worker",
-    "woman_health_worker"];
+// const MAID_EMOJIS = ["genie_woman", "elf_woman", "construction_worker_woman", "zombie_woman", "policewoman",
+//     "mage_woman", "sauna_woman", "woman_juggling", "woman_pilot", "woman_office_worker",
+//     "woman_health_worker"];
+const MAID_EMOJIS = ["genie"]
 
 
 let APIDICT = {
