@@ -237,6 +237,26 @@ const typescript = [
         prompt: "How to create an array of any type?",
         example: "let array: any[] = []"
     },
+    {
+        term: "Method that returns a String",
+        prompt: "How to create a method that returns a String?",
+        example: "function sayHello(name: string): string {\n\
+            return `Hello ${name}`\n\
+        }"
+    },
+    {
+        term: "Create an interface",
+        prompt: "How to create an interface of a Person with name and age?",
+        example: "interface Person {\n\
+            name: string,\n\
+            age: number\n\
+        }"
+    },
+    {
+        term: "Use Person Interface in an array",
+        prompt: "How to create an array of interface Person that has name and age??",
+        example: "let people: Person[] = []"
+    }
 ]
 
 

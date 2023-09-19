@@ -87,10 +87,10 @@ const qmathformulas = [] //To be returned as the set of problems availale
 
 // Adding the modules that are of interest
 
-qmathformulas.push(...mathSimple);
-qmathformulas.push(...business_marketing);
+// qmathformulas.push(...mathSimple);
+// qmathformulas.push(...business_marketing);
+// qmathformulas.push(...algebra_properties);
 qmathformulas.push(...statistics_basics);
-qmathformulas.push(...algebra_properties);
 
 
 module.exports = { qmathformulas }
