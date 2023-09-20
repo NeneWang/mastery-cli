@@ -29,10 +29,36 @@ class HIndex extends ProblemTests{
     }
 }
 
+class InsertDeleteGetRandomO1 extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '["RandomizedSet","insert","remove","insert","getRandom","remove","insert","getRandom"]\n[[],[1],[2],[2],[],[1],[2],[]] | [null,true,false,true,2,true,false,2]';
+        
+        assert.equal(structure.RandomizedSet(), null);
+        assert.equal(structure.insert(1), true);
+        assert.equal(structure.remove(2), false);
+        assert.equal(structure.insert(2), true);
+        assert.equal(structure.remove(1), true);
+        assert.equal(structure.RandomizedSet(), 2);
+        assert.equal(structure.insert(2), false);
+        assert.equal(structure.RandomizedSet(), 2);
+
+    }
+
+
+}
 
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
+    'insert-delete-getrandom-o1': InsertDeleteGetRandomO1,
 }
 
 module.exports = TEST_DICTIONARY;
