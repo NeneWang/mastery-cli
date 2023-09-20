@@ -36,3 +36,10 @@ Total profit is 4.
 
 - 1 <= prices.length <= 3 * 10^4
 - 0 <= prices[i] <= 10^4
+
+
+### Hint
+
+![](https://wiki.anviltech.net/images/Tets.jpg)
+
+

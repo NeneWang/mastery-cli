@@ -1,9 +1,9 @@
-class HIndex {
-	solve(citations) {
+class GasStation {
+	solve(gas, cost) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: HIndex };
+module.exports = { Problem: GasStation };
