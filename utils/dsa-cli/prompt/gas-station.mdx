@@ -54,6 +54,12 @@ Therefore, you can't travel around the circuit once no matter where you start.
 
 ### Understand
 
+First we convert them all in a format of gains:
+
+![](./../../../img/2023-09-19-21-04-00.png)
+
+Then you can intuitivelly think that you wouldnt start from somewhere where the gain is negative. You could think the same as for the "segment that lead you to that path"
+
 ![](./../../../img/2023-09-19-21-00-56.png)
 
 THe idea is that we can think of it as segments of gas stations. If we can't complete a segment, then we try starting from the next one. Eventually we find out that if it is possible to complete the circuit, then the starting point is the one that has the most gas left. (the only possible segment)
