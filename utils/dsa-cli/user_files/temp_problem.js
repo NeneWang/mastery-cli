@@ -6,4 +6,4 @@ class HIndex {
 }
 
 
-module.exports = { Problem: HIndex };oku };mO1 };ivTags };Search };Measurements };mblem };
+module.exports = { Problem: HIndex };

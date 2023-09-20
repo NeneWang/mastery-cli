@@ -1,7 +1,7 @@
 ---
 title: Gas Station
 description: There are n gas stations along a circular route, where the amount of gas at the ith station is gas[i].
-tags: [greedy, medium, neetcode]
+tags: [greedy, medium, neetcode, solved]
 link: https://leetcode.com/problems/gas-station/
 images: []
 ---
@@ -48,3 +48,72 @@ Therefore, you can't travel around the circuit once no matter where you start.
 - n == gas.length == cost.length
 - 1 <= n <= 10^5
 - 0 <= gas[i], cost[i] <= 10^4
+
+
+## Umpire
+
+### Understand
+
+![](./../../../img/2023-09-19-21-00-56.png)
+
+THe idea is that we can think of it as segments of gas stations. If we can't complete a segment, then we try starting from the next one. Eventually we find out that if it is possible to complete the circuit, then the starting point is the one that has the most gas left. (the only possible segment)
+
+![](./../../../img/2023-09-19-21-02-20.png)
+
+
+
+### Implement
+
+<iframe src="" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+<Tabs>
+<TabItem value="Javascript Naive" label="JavaScript">
+
+```js
+var canCompleteCircuit = function(gas, cost) {
+    
+    let startPoint = 0;
+    let totalGas = 0;
+    let currentSegmentGas = 0;
+    for(let i = 0; i < gas.length; i++){
+        const currentGain = gas[i] - cost[i];
+        totalGas += currentGain;
+        currentSegmentGas += currentGain;
+        
+        if(currentSegmentGas < 0){
+            startPoint = i+1;
+            currentSegmentGas = 0;
+            
+        }
+           
+           
+        
+    }
+    return totalGas>=0?startPoint:-1;
+    
+};
+```
+
+</TabItem>
+<TabItem value="Javascript Optimized" label="Javascript Optimized">
+
+```js
+
+```
+
+</TabItem>
+<TabItem value="Python" label="Java">
+
+```java
+
+```
+
+</TabItem>
+</Tabs>
+
+### Review if your code is ok
+
+### Evaluate
+
+- [ ] Time Complexity
+- [ ] Space Complexity
