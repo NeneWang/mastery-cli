@@ -1729,6 +1729,87 @@ const angular = [
           }\n\
         }",
 
+    },
+    {
+        term: "Create a component with input as employee",
+        prompt: "Create a component with input as employee",
+        example: "ng g c components/employee --skipTests=true\n\
+        import { Component, Input, OnInit } from '@angular/core';\n\
+        import { Employee } from 'src/app/models/employee';\n\
+        \n\
+        @Component({\n\
+          selector: 'app-employee',\n\
+          templateUrl: './employee.component.html',\n\
+          styleUrls: ['./employee.component.css']\n\
+        })\n\
+        export class EmployeeComponent implements OnInit {\n\
+            @Input() employee: Employee;\n\
+            constructor() { }\n\
+            ngOnInit(): void {\n\
+            }\n\
+        }",
+        description: "Complete:\n\
+        \n\
+        ng g c components/employee --skipTests=true\n\
+        import { Component, Input, OnInit } from '@angular/core';\n\
+        import { Employee } from 'src/app/models/employee';\n\
+        \n\
+        @Component({\n\
+          selector: 'app-employee',\n\
+          templateUrl: './employee.component.html',\n\
+          styleUrls: ['./employee.component.css']\n\
+        })\n\
+        export class EmployeeComponent implements OnInit {\n\
+            ...\n\
+            constructor() { }\n\
+            ngOnInit(): void {\n\
+            }\n\
+        }\n\
+        ... In the component html...\n\
+        <div>\n\
+        <p>{{employee.name}}</p>\n\
+        <p>{{employee.surname}}</p>\n\
+        <p>{{employee.age}}</p>\n\
+        </div>",
+
+    },
+    {
+        term: "Output example",
+        prompt: "Create a counterChange that will emit the value of the counter on increment button clicked",
+        example: "import { Component, EventEmitter, OnInit, Output } from '@angular/core';\n\
+        \n\
+        export class CounterComponent implements OnInit {\n\
+            counter = 0;\n\
+            @Output() counterChange = new EventEmitter<number>();\n\
+            constructor() { }\n\
+            ngOnInit(): void {\n\
+            }\n\
+            increment() {\n\
+                this.counter++;\n\
+                this.counterChange.emit(this.counter);\n\
+            }\n\
+            }",
+        description: "import { Component, EventEmitter, OnInit, Output } from '@angular/core';\n\
+        \n\
+        export class CounterComponent implements OnInit {\n\
+            counter = 0;\n\
+            ....\n\
+            constructor() { }\n\
+            ngOnInit(): void {\n\
+            }\n\
+            increment() {\n\
+                this.counter++;\n\
+                ......\n\
+            }\n\
+            }\n\n\
+            ... In the component html...\n\
+            <button (click)='increment()'>Increment</button>\n\
+            \n\
+            in App component:\n\
+            \n\
+            parentCounter: number = 0;\n\
+            .... In app html\n\
+            <app-counter (counterChange)='onCounterChange($event)'></app-counter>"
     }
 ]
 
