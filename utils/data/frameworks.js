@@ -1541,7 +1541,7 @@ const angular = [
         prompt: "Create a new project with the name 'my-app' and run it locally?",
         example: "ng new my-app\n\
         cd my-app\n\
-        ng serve --open"   
+        ng serve --open"
     },
     {
         term: "module | How to make http requests?",
@@ -1603,7 +1603,132 @@ const angular = [
     {
         term: "Create a component",
         prompt: "How to create a component - Create a counter component inside components folder?",
-        example: "ng g c components/counter"
+        example: "ng g c components/counter",
+    },
+    {
+        term: "ng class",
+        prompt: "Using 'errorExists' varibale from the component, add the class 'error' to the div if the errorExists is true. Otherwise 'success'",
+        example: "<div [ngClass]='{error: errorExists, success: !errorExists}'></div>",
+        description: "ngClass is a directive that allows you to set more than one CSS class on an element. It can accept an object, a string, or an array of strings. The ngClass directive behaves very similarly to how ngStyle behaves."
+    },
+    {
+        term: "ng style",
+        prompt: "using 'size' set font-size to 'x-large' if size is 1, 'large' if size is 2",
+        example: "<div [ngStyle]='{fontSize: size === 1 ? 'x-large' : 'large'}'></div>",
+    },
+    {
+        term: "How to creaete a custom directive?",
+        prompt: "Create a directive that will change the background color of the element to red",
+        example: "ng g d directives/red\n\
+        import { Directive, ElementRef, OnInit } from '@angular/core';\n\
+        \n\
+        @Directive({\n\
+          selector: '[appRed]'\n\
+        })\n\
+        export class RedDirective implements OnInit {\n\
+            constructor(private elementRef: ElementRef) {}\n\
+            ngOnInit() {\n\
+                this.elementRef.nativeElement.style.backgroundColor = 'red';\n\
+            }\n\
+            }",
+        description: "You would use it by having in your component:\n\
+            <p appRed>Red Directive</p>"
+
+    },
+    {
+        term: "ngFor ",
+        prompt: "Create a list of users using ngFor",
+        example: "<ul>\n\
+        <li *ngFor='let user of users'>{{user.name}}</li>\n\
+        </ul>",
+        description: "Iterate over the users list where each user has a name property"
+    },
+    {
+        term: "ngIf",
+        prompt: "Create a div that will show if the errorExists is true",
+        example: "<div *ngIf='errorExists'>Error exists</div>",
+        description: "ngIf is a directive that allows you to conditionally add or remove an element from the DOM. It can accept an expression that evaluates to true or false. If the expression evaluates to true then the element is added to the DOM, otherwise it is removed."
+    },
+    {
+        term: "ngSwitch",
+        prompt: "Create a div that if the 'valorSwitch' is 1, it will show 'one', if 2, 'two', otherwise 'other'",
+        example: "<div [ngSwitch]='valorSwitch'>\n\
+        <p *ngSwitchCase='1'>one</p>\n\
+        <p *ngSwitchCase='2'>two</p>\n\
+        <p *ngSwitchDefault>other</p>\n\
+        </div>",
+        description: "ngSwitch is a directive that conditionally adds or removes an element from the DOM based on an expression. It behaves similarly to the JavaScript switch statement."
+    },
+    {
+        term: "template",
+        prompt: "Create a template that will show the name of the user",
+        example: "<ng-template #templateRef let-user>\n\
+        <p>{{user.name}}</p>\n\
+        </ng-template>",
+        description: "ng-template is an Angular element for rendering HTML. It is never displayed directly. In fact, before rendering the view, Angular replaces the ng-template and its contents with a comment."
+    },
+    {
+        term: "form and click",
+        prompt: "Create a form that will show the name of the user when clicking the button",
+        example: "<form (submit)='showUser()'>\n\
+        <input type='text' [(ngModel)]='name'>\n\
+        <button type='submit'>Show</button>\n\
+        </form>",
+
+    },
+    {
+        term: "one-way",
+        prompt: "Create a one-way binding for iamge source using variable 'urlImage'",
+        example: "<img [src]='urlImage'>",
+    },
+    {
+        term: "Two-way binding",
+        prompt: "Create a two-way binding for input using variable 'name'\n\
+        And save the variable when clicking the button",
+        example: "<input type='text' [(ngModel)]='name'>\n\
+        <button (click)='saveName()'>Save</button>",
+        description: "<input type='text' ....>\n\
+        <button ...>Save</button>",
+    },
+    {
+        term: "Pipes | date",
+        prompt: "Create a pipe that will show the date in the format 'dd/MM/yyyy' for the variable date",
+        example: "{{date | date: 'dd/MM/yyyy'}}",
+    },
+    {
+        term: "Pipes | uppercase lowercase",
+        prompt: "Create a pipe that will show the name in uppercase and surname in lowercase",
+        example: "{{name | uppercase}} {{surname | lowercase}}",
+    },
+    {
+        term: "Create a custom pipe",
+        prompt: "Create pipe tha displays 'SENIOR' if year is greater than 3 and 'JUNIOR' otherwise",
+        example: "ng g p pipes/seniorJunior\n\
+        import { Pipe, PipeTransform } from '@angular/core';\n\
+        \n\
+        @Pipe({\n\
+          name: 'seniorJunior'\n\
+        })\n\
+        export class SeniorJuniorPipe implements PipeTransform {\n\
+          transform(value: number): string {\n\
+            return value > 3 ? 'SENIOR' : 'JUNIOR';\n\
+          }\n\
+        }",
+        description: "It would be used as the following: \n\
+        {{year | seniorJunior}}\n\
+        Complete the following: \n\
+        ng g ....\n\n\
+        import { Pipe, PipeTransform } from '@angular/core';\n\
+        \n\
+        @Pipe({\n\
+          name: '....'\n\
+        })\n\
+        export class SeniorJuniorPipe implements PipeTransform {\n\
+          .... {\n\
+            return value > 3 ? 'SENIOR' : 'JUNIOR';\n\
+          }\n\
+        }",
+
     }
 ]
 
