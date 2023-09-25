@@ -644,6 +644,28 @@ class BasicCalculator extends ProblemTests {
 }
 
 
+class RemoveNthFromEnd extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,3,4,5] | 2 => [1,2,3,5]';
+        assert.deepEqual(structure.removeNthFromEnd(arrayToListNode([1, 2, 3, 4, 5]), 2), arrayToListNode([1, 2, 3, 5]));
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1] | 1 => []';
+        assert.deepEqual(structure.removeNthFromEnd(arrayToListNode([1]), 1), arrayToListNode([]));
+    }
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -668,6 +690,7 @@ const TEST_DICTIONARY = {
     'rotate-list': RotateList,
     'simplify-path': SimplifyPath,
     'basic-calculator': BasicCalculator,
+    'remove-nth-node-from-end-of-list': RemoveNthFromEnd,
 }
 
 module.exports = TEST_DICTIONARY;
