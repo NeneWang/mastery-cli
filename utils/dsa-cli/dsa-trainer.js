@@ -42,6 +42,9 @@ class DSATrainer {
         this.first_non_completed_category_non_completed_problems = this.getFirstNonCompletedCategoryNonCompletedProblems();
         this.first_non_only_hard_left_category_non_hard_problems = this.getFirstNonOnlyHardLeftCategoryNonHardProblems();
         this.completed_problems_sorted_by_times_completed = this.getCompletedProblemsSortedByTimesCompleted();
+
+        this.uploadCodeFileUrl = `${constants.CONSTANTS.API_URL}/utils/upload_file/`;
+        this.uploadCodeMetadataUrl = `${constants.CONSTANTS.API_URL}/performance/code_file/`;
     }
 
     /**
@@ -183,13 +186,8 @@ class DSATrainer {
 
 
     async postProblemSolution(problem, { attempts_timestamp = [] }) {
-        const filePath = this.problems_manager.temp_problem_filepath;
         const absoluteFilePath = this.problems_manager.absolute_problem_file_path;
-       
 
-        // Replace 'upload_url' with the URL where you want to upload the file
-        const uploadFileUrl = 'http://127.0.0.1:8000/utils/upload_file/';
-        const uploadCodeMetadataUrl = 'http://127.0.0.1:8000/performance/code_file/';
         const ACCOUNT_ID = constants.CONSTANTS.ACCOUNT_ID
 
         const formData = new FormData();
@@ -200,7 +198,7 @@ class DSATrainer {
 
         axios({
             method: 'post',
-            url: uploadFileUrl,
+            url: this.uploadCodeFileUrl,
             data: formData,
             headers: {
                 ...formData.getHeaders(), // Include necessary headers for form data
@@ -247,10 +245,10 @@ class DSATrainer {
                     };
 
 
-                    console.log("Posting metadata", metadata,"to url", uploadCodeMetadataUrl)
+                    // console.log("Posting metadata", metadata,"to url", uploadCodeMetadataUrl)
                     axios({
                         method: 'post',
-                        url: uploadCodeMetadataUrl,
+                        url: this.uploadCodeMetadataUrl,
                         data: metadata,
                         headers: {
                             'accept': 'application/json',
@@ -429,7 +427,7 @@ class DSATrainer {
      * @param {ProblemMetadata} problem The problem to open and test
      * @returns {constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
      */
-    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [] } = {}) {
+    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], } = {}) {
         if (DEBUG) console.log(
             "Opening problem: ", problem.slug,
         );
