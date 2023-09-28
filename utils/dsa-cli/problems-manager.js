@@ -18,6 +18,7 @@ class ProblemsManager {
         this.problems = {};
         this.skip_problems = skip_problems;
         this.temp_problem_filepath = './user_files/temp_problem.js';
+        this.absolute_problem_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
         this.solution_filepath = './solutions/';
         this.markdown_filepath = './prompt/';
         this.base_code_filepath = './base_code/';

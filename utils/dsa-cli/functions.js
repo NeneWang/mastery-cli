@@ -5,6 +5,7 @@ const { marked } = require('marked');
 const TerminalRenderer = require('marked-terminal');
 const constants = require("./constants");
 const { exec } = require('child_process');
+const axios = require('axios');
 
 const DEBUG = false;
 
@@ -31,6 +32,7 @@ const getDirAbsoluteUri = (fileimage = './img/unicor1n.png', subdirectory = './'
     // const fileUrl = url.pathToFileURL(absolutePath);
     return (absolutePath.toString());
 };
+
 
 
 
@@ -215,6 +217,13 @@ function getCurrentDate() {
 
 }
 
+function getCurrentDateTimeIso() {
+    const today = new Date();
+    const currentDate = today.toISOString();
+    // console.log(currentDate); // Output: 2023-07-03
+    return currentDate;
+}
+
 const openEditorWithCommand = async (instruction) => {
     await exec(`${instruction}`, (error, stdout, stderr) => {
         if (error) {
@@ -258,5 +267,5 @@ const openEditorPlatformAgnostic = async (editor_instruction, { absolute_temp_fi
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, renderPromptDescription,
-    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic, looselyDeepEqual, get_random
+    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic, looselyDeepEqual, get_random, getCurrentDateTimeIso
 };

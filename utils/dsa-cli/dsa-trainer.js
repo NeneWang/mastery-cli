@@ -6,11 +6,15 @@ const StorableReport = require('./StorableReport');
 const { getPromptDict } = require('./prompt');
 
 const constants = require('./constants');
-const { renderPromptDescription, get_random } = require('./functions');
-const { Toggle, AutoComplete } = require('enquirer');
+const axios = require('axios');
+const FormData = require('form-data');
+
+const { renderPromptDescription, get_random, getCurrentDateTimeIso } = require('./functions');
+const { Toggle, AutoComplete, Input } = require('enquirer');
 const { ProblemMetadata } = require('./structures');
 const { response } = require('express');
 const { util } = require('prettier');
+const fs = require('fs');
 
 const DEBUG = false;
 
@@ -178,6 +182,101 @@ class DSATrainer {
     }
 
 
+    async postProblemSolution(problem, { attempts_timestamp = [] }) {
+        const filePath = this.problems_manager.temp_problem_filepath;
+        const absoluteFilePath = this.problems_manager.absolute_problem_file_path;
+       
+
+        // Replace 'upload_url' with the URL where you want to upload the file
+        const uploadFileUrl = 'http://127.0.0.1:8000/utils/upload_file/';
+        const uploadCodeMetadataUrl = 'http://127.0.0.1:8000/performance/code_file/';
+        const ACCOUNT_ID = constants.CONSTANTS.ACCOUNT_ID
+
+        const formData = new FormData();
+        formData.append('file', fs.createReadStream(absoluteFilePath), {
+            filename: `_${ACCOUNT_ID}_${problem.slug}_solution.js`,
+            contentType: 'text/javascript', // Set the content type to text/javascript
+        });
+
+        axios({
+            method: 'post',
+            url: uploadFileUrl,
+            data: formData,
+            headers: {
+                ...formData.getHeaders(), // Include necessary headers for form data
+                'accept': 'application/json',
+            },
+        })
+            .then(response => {
+                // Handle the response here
+                if (response.status === 200) {
+                    const file_url = response.data.location;
+                    console.log('File uploaded successfully to ' + file_url);
+
+
+                    // Now post the metadata into 
+
+                    /** Metadata
+                     * {
+                        "comments": [
+                            "string"
+                        ],
+                        "code_url": "string",
+                        "language": "string",
+                        "date": "2023-10-03T17:57:26.591Z",
+                        "attempt_counts": 0,
+                        "attempt_timestamps": [
+                            "2023-10-03T17:57:26.591Z"
+                        ],
+                        "is_correct": true,
+                        "problem_slug": "string",
+                        "account_id": 0
+                        }
+                     */
+
+                    const metadata = {
+                        "comments": [],
+                        "code_url": file_url,
+                        "language": "javascript",
+                        "date": getCurrentDateTimeIso(),
+                        "attempt_counts": attempts_timestamp.length,
+                        "attempt_timestamps": attempts_timestamp,
+                        "is_correct": true,
+                        "problem_slug": problem.slug,
+                        "account_id": ACCOUNT_ID
+                    };
+
+
+                    console.log("Posting metadata", metadata,"to url", uploadCodeMetadataUrl)
+                    axios({
+                        method: 'post',
+                        url: uploadCodeMetadataUrl,
+                        data: metadata,
+                        headers: {
+                            'accept': 'application/json',
+                        },
+                    }).then(
+                        console.log("Metadata posted successfully")
+                    ).catch(
+                        error => {
+                            console.log("Error from metadata", error);
+                        }
+
+                    );
+
+
+                } else {
+                    console.error('File upload failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+
+    }
+
+
     /**
      * Updates the problem status, such as interfacing with the problem report and problem attempted (in the future this would create a report of things done.)
      * @param {ProblemMetadata} problem the problem to solve
@@ -216,8 +315,8 @@ class DSATrainer {
      * @param {boolean} tryUntilSolved If true, the problem will be reprompted until it is solved. If false, the problem will be solved once.
      * @returns {ProblemStatus} The status of the problem
      */
-    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true, 
-        populate_problem = true, 
+    async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true,
+        populate_problem = true,
         populate_with_cloze_filepath = "", base = "" } = {}) {
         if (populate_problem) {
 
@@ -330,7 +429,7 @@ class DSATrainer {
      * @param {ProblemMetadata} problem The problem to open and test
      * @returns {constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
      */
-    async openAndTest(problem, { failed_attempts = 0 } = {}) {
+    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [] } = {}) {
         if (DEBUG) console.log(
             "Opening problem: ", problem.slug,
         );
@@ -359,6 +458,7 @@ class DSATrainer {
 
                     } else {
                         failed_attempts += 1;
+                        attempts_timestamp.push(getCurrentDateTimeIso());
                     }
                     return { status: constants.ProblemStatus.unsolved, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
                 }
@@ -395,6 +495,25 @@ class DSATrainer {
                 this.problems_manager.populateTemplate(problem);
                 // return constants.ProblemStatus.unsolved;
             },
+            'Post Solution': async () => {
+                question_state_flag = true;
+                this.postProblemSolution(problem, { attempts_timestamp: attempts_timestamp, comments: comments });
+
+            },
+            'Comment': async () => {
+                question_state_flag = true;
+                // Ask for comment
+                const prompt_comment = new Input(
+                    {
+                        name: 'comment',
+                    }
+                )
+
+                const comment = await prompt_comment.run();
+                comments.push(comment);
+                console.log("All Comments: ");
+                console.log(comments);
+            },
             'Quit': async () => {
                 question_state_flag = false;
                 return { status: constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
@@ -421,7 +540,7 @@ class DSATrainer {
             }
         }
 
-        
+
 
         if (constants.DEV_MODE) Object.assign(choices, choices_dev_mode); // Add dev mode choices
 
@@ -463,7 +582,7 @@ class DSATrainer {
                         if (!did_pass_all_tests_before) {
                             console.log("You must pass all tests before submitting!");
                             // return false;
-                            
+                            this.postProblemSolution(problem, { attempts_timestamp: attempts_timestamp, comments: comments });
 
                         } else {
                             console.log("Submission running", constants.ProblemStatus.solved);

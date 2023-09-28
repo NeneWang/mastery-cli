@@ -127,6 +127,7 @@ class Quizzer {
         if (debug) console.log("potential_questions", potential_questions);
         if (debug) console.log("length", potential_questions.length);
         let attempts = 0;
+        let attempts_timestamps = [];
 
         let exit_force_method = false;
         // Create miniqueue
@@ -149,6 +150,7 @@ class Quizzer {
 
             miniqueue.solveCard(response);
             attempts += 1;
+            attempts_timestamps.push(new Date());
         }
 
         return attempts;
