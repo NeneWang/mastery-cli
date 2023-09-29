@@ -55,10 +55,40 @@ class InsertDeleteGetRandomO1 extends ProblemTests{
 
 }
 
+class MinimumSizeSubArraySum extends ProblemTests{
+    constructor(problem){
+        super(problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[2,3,1,2,4,3] | 7 => 2';
+        assert.equal(structure.solve(7, [2,3,1,2,4,3]), 2);
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,4,4] | 4 => 1';
+        assert.equal(structure.solve(4, [1,4,4]), 1);
+    }
+
+    test_3(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,1,1,1,1,1,1,1] | 11 => 0';
+        assert.equal(structure.solve(11, [1,1,1,1,1,1,1,1]), 0);
+    }
+
+
+}
+
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
     'insert-delete-getrandom-o1': InsertDeleteGetRandomO1,
+    'minimum-size-subarray-sum': MinimumSizeSubArraySum,
 }
 
 module.exports = TEST_DICTIONARY;
