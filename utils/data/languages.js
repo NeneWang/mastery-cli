@@ -3,6 +3,127 @@
 // Make sure for all know how to instantiate the specific structures.
 
 const python = [
+    {
+        term: "set | add, remove, check if contains",
+        prompt: "How to create a set of integers? and add, remove, check if contains?",
+        example: "set = set()\n\
+        set.add(1)\n\
+        set.remove(1)\n\
+        1 in set",
+        description: "The time complexity of set is O(1) for add, remove and check if contains.\n\
+        The speciality of set is that it does not allow duplicates. or more like it will not add duplicates."
+    },
+    {
+        "term": "List | append, pop, check if contains",
+        "prompt": "How to create a list of integers? and append, pop, check if contains?",
+        "example": "my_list = []\n\
+    my_list.append(1)\n\
+    my_list.pop()\n\
+    1 in my_list",
+        "description": "The time complexity of a list is O(1) for append, pop, and O(n) for checking if it contains an element (in the worst case, where n is the number of elements).\n\
+    Lists are ordered and allow duplicates."
+    },
+    {
+        "term": "Dictionary | add, remove, check if key exists",
+        "prompt": "How to create a dictionary of names and ages? and add, remove, check if a key exists?",
+        "example": "my_dict = {}\n\
+    my_dict['Alice'] = 30\n\
+    del my_dict['Alice']\n\
+    'Alice' in my_dict",
+        "description": "The time complexity of a dictionary is O(1) for adding, removing, and checking if a key exists.\n\
+    Dictionaries store key-value pairs, are unordered, and keys are unique."
+    },
+    {
+        "term": "Tuple | create, access elements",
+        "prompt": "How to create a tuple of integers and access its elements?",
+        "example": "my_tuple = (1, 2, 3)\n\
+    element = my_tuple[0]",
+        "description": "Tuples are immutable, ordered collections of elements. Once created, you cannot change their content. They are typically used to group related data.\n\
+    The time complexity for accessing elements is O(1)."
+    },
+    {
+        "term": "Counter | count elements in iterable",
+        "prompt": "How to count the occurrences of elements in a list?",
+        "example": "from collections import Counter\n\
+      my_list = [1, 2, 2, 3, 3, 3]\n\
+      counter = Counter(my_list)\n\
+      count = counter[2]",
+        "description": "The `Counter` class from the `collections` module is used to count the occurrences of elements in an iterable, such as a list, tuple, or string.\n\
+      It returns a dictionary-like object with elements as keys and their counts as values. Accessing the count of an element is done with O(1) time complexity."
+    },
+    {
+        "term": "deque | double-ended queue",
+        "prompt": "How to create a double-ended queue and perform operations?",
+        "example": "from collections import deque\n\
+      my_deque = deque([1, 2, 3])\n\
+      my_deque.append(4)\n\
+      my_deque.appendleft(0)\n\
+      my_deque.pop()\n\
+      my_deque.popleft()",
+        "description": "A `deque` (double-ended queue) is a versatile data structure that allows efficient append and pop operations from both ends. It is useful for implementing queues and stacks.\n\
+      Append and pop operations from either end have O(1) time complexity."
+    },
+    {
+        "term": "defaultdict | dictionary with default value",
+        "prompt": "How to create a dictionary with default values for missing keys?",
+        "example": "from collections import defaultdict\n\
+      my_dict = defaultdict(int)\n\
+      my_dict['Alice'] += 1",
+        "description": "A `defaultdict` is a subclass of the standard dictionary (`dict`) that provides default values for missing keys. In the example, it initializes missing keys with an integer value of 0.\n\
+      Accessing and modifying keys have O(1) time complexity."
+    },
+    {
+        "term": "OrderedDict | ordered dictionary",
+        "prompt": "How to create an `OrderedDict` and perform ordered operations?",
+        "example": "from collections import OrderedDict\n\
+      my_ordered_dict = OrderedDict()\n\
+      my_ordered_dict['b'] = 2\n\
+      my_ordered_dict['a'] = 1\n\
+      keys_in_order = list(my_ordered_dict.keys())",
+        "description": "An `OrderedDict` is a dictionary subclass in Python's `collections` module that remembers the order in which items were inserted. This order is maintained when iterating or performing operations on the dictionary.\n\
+      Accessing and iterating over items in an `OrderedDict` is done in the order of insertion, making it useful when order matters. Common dictionary operations like key access, insertion, and deletion have O(1) time complexity."
+    },
+    {
+        "term": "Heap (heapq module)",
+        prompt: "Create a heap of 3,1, 2 and pop the smallest element",
+        "example": "import heapq\n\
+        heap = [3, 1, 2]\n\
+        heapq.heapify(heap)\n\
+        min_element = heapq.heappop(heap)",
+        "description": "A heap is a binary tree-based data structure often used to implement priority queues.\n\
+         The `heapq` module provides functions to create and manipulate heaps in Python. Operations like insertion \n\
+         and removal of the smallest element have O(log n) time complexity."
+    },
+    {
+        "term": "Linked List",
+        "example": "class Node:\n\
+      def __init__(self, data):\n\
+        self.data = data\n\
+        self.next = None\n\
+    \n\
+    # Create and manipulate linked lists with Node instances.",
+        "description": "A linked list is a linear data structure made up of nodes, where each node stores a value and a reference to the next node. Linked lists are used for dynamic data storage and often implemented using classes in Python."
+    },
+    {
+        "term": "Queue (list or deque-based)",
+        "example": "from collections import deque\n\
+            queue = deque()\n\
+            queue.append(1)\n\
+            front_element = queue.popleft()",
+        "description": "A queue is a linear data structure that follows the First-In-First-Out (FIFO) principle. Like stacks, queues can be implemented using lists or the `deque` data structure. Queues are used for tasks like managing tasks in a print queue."
+    },
+    {
+        "term": "Trie",
+        "example": "class TrieNode:\n\
+      def __init__(self):\n\
+        self.children = {}\n\
+        self.is_end_of_word = False\n\
+    \n\
+    # Create and manipulate tries with TrieNode instances.",
+        "description": "A trie is a tree-like data structure used for storing a dynamic set of strings. It's particularly useful for string manipulation and searching, such as autocomplete and spell-checking."
+    },
+
+
 ]
 
 const swift = [
