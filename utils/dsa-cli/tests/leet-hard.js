@@ -31,8 +31,37 @@ class Candy extends ProblemTests{
 }
 
 
+class SubstringWithConcatenationOfAllWords extends ProblemTests{
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '"barfoothefoobarman", ["foo","bar"]';
+        assert.deepEqual(sub.solve('barfoothefoobarman', ['foo','bar']), [0,9]);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '"wordgoodgoodgoodbestword", ["word","good","best","word"]';
+        assert.deepEqual(sub.solve('wordgoodgoodgoodbestword', ['word','good','best','word']), []);
+    }
+
+    test_3(){
+        const sub = new this.Problem();
+        this.current_test_name = '"barfoofoobarthefoobarman", ["bar","foo","the"]';
+        assert.deepEqual(sub.solve('barfoofoobarthefoobarman', ['bar','foo','the']), [6,9,12]);
+    }
+}
+
+
 const TEST_DICTIONARY = {
     'candy': Candy,
+    'substring-with-concatenation-of-all-words': SubstringWithConcatenationOfAllWords,
 }
 
 module.exports = TEST_DICTIONARY;

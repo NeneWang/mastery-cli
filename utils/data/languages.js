@@ -1,7 +1,11 @@
 // Language speciifc questions for code interview practice. Such as Python, Swift, Javascript, Dart.
 
-// Make sure for all know how to instantiate the specific structures.
+// Make sure for all know how to instantiate the specific structures. Please dont go very specific into some niche libraries, but focus on the main libraries as well as the focus that will be in programming interviews.
 
+
+/* TODO For Python
+- [ ] 
+*/
 const python = [
     {
         term: "set | add, remove, check if contains",
@@ -121,6 +125,21 @@ const python = [
     \n\
     # Create and manipulate tries with TrieNode instances.",
         "description": "A trie is a tree-like data structure used for storing a dynamic set of strings. It's particularly useful for string manipulation and searching, such as autocomplete and spell-checking."
+    },
+    {
+        "term": "Range basic",
+        "prompt": "Create a range from 1 to 10",
+        "example": "my_range = range(1, 11)",
+    },
+    {
+        term: "Range | Iterate on three",
+        prompt: "Print left right left being always 3 less than right starting from 0 to 10",
+        example: "left = 0\n\
+        for right in range(3, 10, 3):\n\
+            print(left, right)\n\
+            left = right",
+        description: "The range function can be used to iterate on a range of numbers. The first argument is the start, the second argument is the end and the third argument is the step."
+
     },
 
 
