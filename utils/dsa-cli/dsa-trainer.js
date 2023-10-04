@@ -12,8 +12,6 @@ const FormData = require('form-data');
 const { renderPromptDescription, get_random, getCurrentDateTimeIso } = require('./functions');
 const { Toggle, AutoComplete, Input } = require('enquirer');
 const { ProblemMetadata } = require('./structures');
-const { response } = require('express');
-const { util } = require('prettier');
 const fs = require('fs');
 
 const DEBUG = false;
