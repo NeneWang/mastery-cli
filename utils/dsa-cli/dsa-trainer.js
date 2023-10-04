@@ -43,8 +43,8 @@ class DSATrainer {
         this.first_non_only_hard_left_category_non_hard_problems = this.getFirstNonOnlyHardLeftCategoryNonHardProblems();
         this.completed_problems_sorted_by_times_completed = this.getCompletedProblemsSortedByTimesCompleted();
 
-        this.uploadCodeFileUrl = `${constants.CONSTANTS.API_URL}/utils/upload_file/`;
-        this.uploadCodeMetadataUrl = `${constants.CONSTANTS.API_URL}/performance/code_file/`;
+        this.uploadCodeFileUrl = `${constants.CONSTANTS.API_URL}/utils/upload_file`;
+        this.uploadCodeMetadataUrl = `${constants.CONSTANTS.API_URL}/performance/code_file`;
     }
 
     /**
@@ -185,7 +185,7 @@ class DSATrainer {
     }
 
 
-    async postProblemSolution(problem, { attempts_timestamp = [] }) {
+    async postProblemSolution(problem, { attempts_timestamp = [], comments = [], comm = "" } = { }) {
         const absoluteFilePath = this.problems_manager.absolute_problem_file_path;
 
         const ACCOUNT_ID = constants.CONSTANTS.ACCOUNT_ID
@@ -233,7 +233,7 @@ class DSATrainer {
                      */
 
                     const metadata = {
-                        "comments": [],
+                        "comments": comments,
                         "code_url": file_url,
                         "language": "javascript",
                         "date": getCurrentDateTimeIso(),
@@ -254,7 +254,7 @@ class DSATrainer {
                             'accept': 'application/json',
                         },
                     }).then(
-                        console.log("Metadata posted successfully")
+                        console.log("Metadata posted successfully", metadata)
                     ).catch(
                         error => {
                             console.log("Error from metadata", error);

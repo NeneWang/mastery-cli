@@ -15,15 +15,17 @@ const constants = {
         medium: "medium",
         hard: "hard",
     },
-CONSTANTS: {
+    CONSTANTS: {
         ACCOUNT_ID: 1,
+        API_URL: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
+        // API_URL: 'http://127.0.0.1:8000',
         CUTEBLUE: '#9ccfe7', // Cornflower
         CUTEPINK: '#f5a9cb', // Lavander Pink
         PUNCHPINK: '#F25278',
         CUTEYELLOW: '#ffffc2', // Very Pale Yello
         CUTEPURPLE: '#977fd7', // Medium Purple
     },
-    PROBLEM_CATEGORIES : {
+    PROBLEM_CATEGORIES: {
         'neet-array': { slug: 'array', name: 'Array', test_problem_slug: 'neet-array', order: 1 },
         'neet-sliding-windows': { slug: 'sliding-window', name: 'Sliding Windows', test_problem_slug: 'neet-sliding-windows', order: 2 },
         'neet-stack': { slug: 'stack', name: 'Stack', test_problem_slug: 'neet-stack', order: 3 },
