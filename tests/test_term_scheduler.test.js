@@ -22,20 +22,18 @@ describe('TermScheduler getCard', () => {
     assert(termScheduler.getCard(), card);
   });
 
-  it('should return the total amount of cards to learn', () => {
+  it('should return the total amount of cards to learn', async () => {
     const cards = [{ term: 'term1', definition: 'definition1' }, { term: 'term2', definition: 'definition2' }];
-    const termScheduler = new TermScheduler({ cards: cards });
-
+    // Here the correct way to do it is to use the TermCardsOfflineStrategy
+    const termScheduler = new TermScheduler({
+      cards: cards,
+      cards_category: "test"
+    });
+    await termScheduler.setLearningCards(cards);
     assert.strictEqual(termScheduler.getCardsToLearn(), 2);
   });
 
 
-  it('should return the total amount of cards to learn', () => {
-    const cards = [{ term: 'term1', definition: 'definition1' }, { term: 'term2', definition: 'definition2' }];
-    const termScheduler = new TermScheduler({ cards: cards });
-
-    assert.strictEqual(termScheduler.getCardsToLearn(), 2);
-  });
 
 });
 
@@ -57,12 +55,16 @@ describe("Testing Behaviour", () => {
     { term: 'term10', definition: 'definition10' }
   ];
 
-  beforeEach(() => {
+  beforeEach(async () => {
 
-    termScheduler = new TermScheduler({ cards });
+    termScheduler = new TermScheduler({
+      cards: cards,
+      cards_category: "test"
+    });
+    await termScheduler.setLearningCards(cards);
   });
 
-  afterEach(()=>{
+  afterEach(() => {
     termScheduler.cleanCards();
     termScheduler.saveCards();
   })
@@ -95,11 +97,12 @@ describe("Testing Behaviour", () => {
 
   it('Removes all cards when all correctly answered, cant learn the last card if basically the card is not left', () => {
     const cardsCount = cards.length; //Plus some extra interactions
-    for (let i = 0; i < cardsCount+2; i++) {
+    for (let i = 0; i < cardsCount + 2; i++) {
       termScheduler.solveCard(true);
     }
     assert.strictEqual(termScheduler.learning_queue.length, 0); // No cards to have
     assert.strictEqual(termScheduler.working_set.length, 0); // No cards to have
+    console.log(termScheduler.learned_queue.length, termScheduler.learned_queue)
     assert.strictEqual(termScheduler.learned_queue.length, cardsCount); // Should contain all cards
     // Shouldnt be able to solve this card if there is more.
   });

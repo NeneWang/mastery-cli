@@ -18,7 +18,7 @@ const to_test = {
 describe('Problem integrity', function () {
 
     it("Test that cloze cards are populable", async function () {
-        if (!to_test.cloze) return this.skip();
+        if (!to_test.cloze) return
         
         const cloze_problem_list = require('../cloze/cloze_problem_list.json');
         // console.log("cloze_problem_list", cloze_problem_list);
@@ -50,7 +50,7 @@ describe('Problem integrity', function () {
     });
 
     it("Test that all problems have printable prompts", async function () {
-        if (!to_test.printable) return this.skip();
+        if (!to_test.printable) return
         const problemManager = new ProblemsManager();
         await problemManager.autoPopulateUsingTestDictionary();
 
@@ -74,7 +74,7 @@ describe('Problem integrity', function () {
     });
 
     it("Test that all problems have basic prompts", async function () {
-        if (!to_test.basic) return this.skip();
+        if (!to_test.basic) return
         const problemManager = new ProblemsManager();
         await problemManager.autoPopulateUsingTestDictionary();
         // if this test fails, make sure you can run func_create_empty_base_codes to populate with a basic template of them all.
@@ -94,7 +94,7 @@ describe('Problem integrity', function () {
 
     // Run and test test available
     it('Should run and test the problem', async function () {
-        if (!to_test.runnable) return this.skip();
+        if (!to_test.runnable) return
         const problemManager = new ProblemsManager();
         await problemManager.autoPopulateUsingTestDictionary();
 
@@ -117,7 +117,7 @@ describe('Problem integrity', function () {
     });
 
     it("Categories matches ", async function () {
-        if (!to_test.category) return this.skip();
+        if (!to_test.category) return
 
         const problemManager = new ProblemsManager();
 
@@ -171,7 +171,7 @@ describe('Problem integrity', function () {
 
 
     it("Categories matches Exactly ", async function () {
-        if (!to_test.category) return this.skip();
+        if (!to_test.category) return
 
         const problemManager = new ProblemsManager();
 

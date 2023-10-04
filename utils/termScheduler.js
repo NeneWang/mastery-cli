@@ -5,21 +5,17 @@ const DEBUG = false
 
 class TermScheduler {
 
-    constructor({ working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy(), cards_category = "" } = {}) {
-
-
+    constructor({ working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy(), cards_category = "", cards = {} } = {}) {
         this.working_set_length = working_set_length;
-        const naming_post = cards_category == "" ? cards_category : "_" + cards_category;
-        // Set loading as false for now. Too may bugs.
+        const naming_post = cards_category === "" ? cards_category : "_" + cards_category;
+        // Set loading as false for now. Too many bugs.
         this.working_set = new StorableQueue({ name: "working_set" + naming_post });
         this.learning_queue = new StorableQueue({ name: "learning_queue" + naming_post });
         this.learned_queue = new StorableQueue({ name: "learned_queue" + naming_post });
         this.cardsRefreshStrategy = cardsRefreshStrategy;
 
+    }
 
-
-        // this.setLearningCards(cards);
-    };
 
 
     async loadQueues() {

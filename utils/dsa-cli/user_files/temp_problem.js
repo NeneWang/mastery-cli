@@ -1,225 +1,54 @@
-class SubstringWithConcatenationOfAllWords {
-	solve(s, words) {
-	// Your code here
 
-	}
-}
-
-
-module.exports = { Problem: SubstringWithConcatenationOfAllWords };        return this.queue.shift()
-    }
-
-    front() {
-        return this.queue[0]
-    }
-
-    size() {
-        return this.queue.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-}
-
-class WordLadder {
-
-
-    /**
-     * https://leetcode.com/problems/word-ladder/
-     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
-     * @return {number}
-     */
-    ladderLength = function (beginWord, endWord, wordList) {
-		
-	};
-
-
-    solve(beingWord, endWord, wordList) {
-        return this.ladderLength(beingWord, endWord, wordList);
-    }
-}
-
-
-module.exports = { Problem: WordLadder };) {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
-
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild < element) {
-                    swap = leftChildIndex
-                }
-            }
-
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild < element) ||
-                    (swap !== null && rightChild < leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
-
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
-        }
-    }
-
-    front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
-}
-
-class MaxPriorityQueue {
-
-    constructor() {
-        this.heap = []
-    }
-
-    enqueue(element) {
-        this.heap.push(element)
-        this.bubbleUp()
-    }
-
-    bubbleUp() {
-        let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] >= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
-        }
-    }
-
-    swap(index1, index2) {
-        const temp = this.heap[index1]
-        this.heap[index1] = this.heap[index2]
-        this.heap[index2] = temp
-    }
-
-    dequeue() {
-        const max = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.sinkDown()
-        }
-        return max
-    }
-
-    sinkDown() {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
-
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild > element) {
-                    swap = leftChildIndex
-                }
-            }
-
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild > element) ||
-                    (swap !== null && rightChild > leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
-
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
-        }
-    }
-
-    front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
-
-}
-
-
-/** 
- * https://leetcode.com/problems/find-median-from-data-stream/
- * Your MedianFinder object will be instantiated and called as such:
- * var obj = new MedianFinder()
- * obj.addNum(num)
- * var param_2 = obj.findMedian()
+/*
+ * Time O(N) | Space O(N)
+ * https://leetcode.com/problems/detect-squares
  */
-class MedianFinder {
-    constructor() {
-        this.maxHeap = new MaxPriorityQueue()
-        this.minHeap = new MinPriorityQueue()
+class DetectSquares {
+    constructor () {
+        this.map = {};   /* Space O(N) */
+        this.points = [];/* Space O(N) */
+    }
+    
+    add (point, { map, points } = this) {
+        const [ x, y ] = point;
+        const key = this.getKey(x, y);
+        const value = ((map[key] || 0) + 1);
+
+        map[key] = value;  /* Space O(N) */
+        points.push(point);/* Space O(N) */
     }
 
-    /* Time O(log(N)) | Space (N) */
-    insertNum(num) {
+    count (point, { points } = this, score = 0) {
+        const [ x1, y1 ] = point;
+
+        for (const [ x2, y2 ] of points) {/* Time O(N) */
+            const isSame = (Math.abs(x2 - x1) === Math.abs(y2 - y1));
+            const isEqual = ((x1 === x2) || (y1 === y2));
+            const canSkip = (!isSame || isEqual);
+            if (canSkip) continue;
+
+            score += this.getScore(x1, y1, x2, y2);
+        }
+
+        return score;
+    };
+
+    getKey (x, y) {
+        return `${x},${y}`;
+    }
+
+    getScore (x1, y1, x2, y2, { map } = this) {
+        // TODO Get the expected points and check if they exist in the map.
+
+        
+        
+        // TODO If they exist then return the product of the values.
+        
     
-	}
-
-    addNum(num, heap = this.getHeap(num)) {
-     
-	}
-
-    getHeap(num, { maxHeap, minHeap } = this) {
+        // TODO Return the product
         
     }
-
-    rebalance({ maxHeap, minHeap } = this) {
-    }
-
-    /* Time O(1) | Space (1) */
-    findMedian({ maxHeap, minHeap } = this) {
-    }
-
 }
 
 
-module.exports = { Problem: MedianFinder };
+module.exports = { Problem: DetectSquares };

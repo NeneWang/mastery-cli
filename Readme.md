@@ -87,5 +87,11 @@ markdown-it-toc-done-right
 ```
 
 
+Added
+
+```js
+node-fetch => For fetching images 
+```
+
 
 

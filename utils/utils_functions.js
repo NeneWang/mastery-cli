@@ -74,7 +74,7 @@ async function show_image(image_file, { is_url = false } = {}) {
         if (is_url) {
 
             const { default: terminalImage } = await import('terminal-image');
-            const fetch = require('node-fetch');
+            const {default: fetch} = await import('node-fetch');
             const response = await fetch(image_file_dir);
             const buffer = await response.arrayBuffer();
             const image = await terminalImage.buffer(Buffer.from(buffer));

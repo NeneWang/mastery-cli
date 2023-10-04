@@ -36,7 +36,9 @@ class StorableQueue {
     }
 
     enqueue(element) {
-        this.elements.push(element);
+        // If not undefined
+        if (element)
+            this.elements.push(element);
     }
 
     enqueueMultiple(elements) {
