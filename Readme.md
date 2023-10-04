@@ -23,6 +23,13 @@ npm install -g maid-cli
 - You need to install nvim for the dsa option to work
 - Eventually you would be able to select your own editor.
 
+Recommended:
+
+```
+Install nvim
+```
+
+
 ## Usage
 
 Commiting a code and pushing it to HEAD
