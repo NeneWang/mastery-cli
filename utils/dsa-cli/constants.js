@@ -13,6 +13,7 @@ const constants = {
     difficulty: {
         easy: "easy",
         medium: "medium",
+        mid: "mid",
         hard: "hard",
     },
     CONSTANTS: {

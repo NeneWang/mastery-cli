@@ -20,7 +20,7 @@ var dfs = (nums, index, subSetSum, memo) => {
     const difference = (subSetSum - nums[(index - 1)]);
 
     const left = dfs(nums, (index - 1), difference, memo);
-    const right = dfs(nums, (index - 1), subSetSum, memo);
+    const right = dfs(nums, (index - 1), subSetSum, memo); // The non adding option
 
     memo[index][subSetSum] = (left || right);
     return memo[index][subSetSum];
@@ -37,7 +37,10 @@ var dfs = (nums, index, subSetSum, memo) => {
 canPartition = (nums) => {
 
     // TODO Is false if it is empty or sum is odd
-    
+	if(nums.length == 0) return false;
+
+	const sum = getSum(nums);
+	if(sum %2 != 0 ) return false;
 
     const subSetSum = (sum >> 1);
     const memo = initMemo(nums, subSetSum);        /*               | Space O(N * M) */

@@ -125,6 +125,7 @@ class ProblemsManager {
             if (tags == undefined || tags == null || tags?.length <= 0) return "unknown";
             if (tags.includes("easy")) return constants.difficulty.easy;
             if (tags.includes("medium")) return constants.difficulty.medium;
+            if (tags.includes("mid")) return constants.difficulty.medium;
             if (tags.includes("hard")) return constants.difficulty.hard;
         }
 
@@ -180,10 +181,10 @@ class ProblemsManager {
      * Populates the template with the code inside of problem.file_path
      * @param {dict<problem>} problem The problem to populate the template with
      */
-    populateTemplate(problem, {base=""} = {}) {
+    populateTemplate(problem, { base = "" } = {}) {
         if (DEBUG) console.log("Populating template with ", problem, " and base ", base);
-        if(base != "") {
-            return this.copyFileToTemp(problem.file_path, {base: base});
+        if (base != "") {
+            return this.copyFileToTemp(problem.file_path, { base: base });
         }
         this.copyFileToTemp(problem.file_path);
     }
