@@ -1,6 +1,6 @@
 {
 	"name": "maid-cli",
-	"description": "CLI Life habit builder",
+	"description": "Continuous learning for engineers",
 	"version": "1.0.8",
 	"license": "UNLICENSED",
 	"bin": {
