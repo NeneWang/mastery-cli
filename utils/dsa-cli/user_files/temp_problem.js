@@ -1,54 +1,58 @@
 
-/*
- * Time O(N) | Space O(N)
- * https://leetcode.com/problems/detect-squares
+var initMemo = (nums, subSetSum) => new Array((nums.length + 1)).fill()/* Space O(N) */
+    .map(() => new Array((subSetSum + 1)).fill(null));                     /* Space O(M) */
+
+var getSum = (nums, sum = 0) => {
+    for (const num of nums) (sum += num);/* Time O(N) */
+
+    return sum;
+}
+var dfs = (nums, index, subSetSum, memo) => {
+    const isBaseCase1 = (subSetSum === 0);
+    if (isBaseCase1) return true;
+
+    const isBaseCase2 = ((index === 0) || (subSetSum < 0));
+    if (isBaseCase2) return false;
+
+    const hasSeen = (memo[index][subSetSum] !== null);
+    if (hasSeen) return memo[index][subSetSum];
+
+    const difference = (subSetSum - nums[(index - 1)]);
+
+    const left = dfs(nums, (index - 1), difference, memo);
+    const right = dfs(nums, (index - 1), subSetSum, memo);
+
+    memo[index][subSetSum] = (left || right);
+    return memo[index][subSetSum];
+}
+
+/**
+ * DP - Top Down
+ * Matrix - Memo
+ * Time O(N * M) | Space O(N * M)
+ * https://leetcode.com/problems/partition-equal-subset-sum/
+ * @param {number[]} nums
+ * @return {boolean}
  */
-class DetectSquares {
-    constructor () {
-        this.map = {};   /* Space O(N) */
-        this.points = [];/* Space O(N) */
-    }
+canPartition = (nums) => {
+
+    // TODO Is false if it is empty or sum is odd
     
-    add (point, { map, points } = this) {
-        const [ x, y ] = point;
-        const key = this.getKey(x, y);
-        const value = ((map[key] || 0) + 1);
 
-        map[key] = value;  /* Space O(N) */
-        points.push(point);/* Space O(N) */
-    }
+    const subSetSum = (sum >> 1);
+    const memo = initMemo(nums, subSetSum);        /*               | Space O(N * M) */
+    const index = (nums.length - 1);
 
-    count (point, { points } = this, score = 0) {
-        const [ x1, y1 ] = point;
-
-        for (const [ x2, y2 ] of points) {/* Time O(N) */
-            const isSame = (Math.abs(x2 - x1) === Math.abs(y2 - y1));
-            const isEqual = ((x1 === x2) || (y1 === y2));
-            const canSkip = (!isSame || isEqual);
-            if (canSkip) continue;
-
-            score += this.getScore(x1, y1, x2, y2);
-        }
-
-        return score;
-    };
-
-    getKey (x, y) {
-        return `${x},${y}`;
-    }
-
-    getScore (x1, y1, x2, y2, { map } = this) {
-        // TODO Get the expected points and check if they exist in the map.
-
-        
-        
-        // TODO If they exist then return the product of the values.
-        
-    
-        // TODO Return the product
-        
-    }
+    return dfs(nums, index, subSetSum, memo);/* Time O(N * M) | Space O(N * M) */
 }
 
 
-module.exports = { Problem: DetectSquares };
+class PartitionEqualSubsetSum {
+
+
+    solve(nums) {
+        return canPartition(nums);
+    }
+}
+
+module.exports = { Problem: PartitionEqualSubsetSum };

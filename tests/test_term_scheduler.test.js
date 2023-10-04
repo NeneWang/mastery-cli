@@ -26,7 +26,7 @@ describe('TermScheduler getCard', () => {
     const cards = [{ term: 'term1', definition: 'definition1' }, { term: 'term2', definition: 'definition2' }];
     // Here the correct way to do it is to use the TermCardsOfflineStrategy
     const termScheduler = new TermScheduler({
-      cards: cards,
+
       cards_category: "test"
     });
     await termScheduler.setLearningCards(cards);
@@ -58,7 +58,7 @@ describe("Testing Behaviour", () => {
   beforeEach(async () => {
 
     termScheduler = new TermScheduler({
-      cards: cards,
+
       cards_category: "test"
     });
     await termScheduler.setLearningCards(cards);

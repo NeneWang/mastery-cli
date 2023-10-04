@@ -48,7 +48,7 @@ class Quizzer {
      */
     getYoungest = async (potential_questions, { limit = 3, account_id = 1, debug = false, randomOffline = false } = {}) => {
 
-        if(randomOffline){
+        if (randomOffline) {
             return get_random_of_size(potential_questions, { count: limit });
         }
 
@@ -87,7 +87,7 @@ class Quizzer {
     pick_math_question = async () => {
 
         let potential_questions = this.enabledqmathformulas;
-        potential_questions = await this.getYoungest(potential_questions, {randomOffline: true});
+        potential_questions = await this.getYoungest(potential_questions, { randomOffline: true });
         // if (DEBUG) console.log("potential_questions", potential_questions);
         return await get_random(potential_questions);
     }
@@ -107,7 +107,7 @@ class Quizzer {
                 formula_name: 'singleton-pattern'
             }
          */
-        potential_questions = await this.getYoungest(potential_questions, {randomOffline: true})
+        potential_questions = await this.getYoungest(potential_questions, { randomOffline: true })
 
         // if (DEBUG) console.log("Left with", potential_questions)
 
@@ -312,7 +312,6 @@ class Quizzer {
         // console.log("Running Cloze Study Session");
         // console.log(cloze_problems);
         const clozeScheduler = new TermScheduler({
-            cards: cloze_problems,
             cards_category: "Algo"
         });
         await clozeScheduler.setLearningCards(cloze_problems);
@@ -374,7 +373,7 @@ class Quizzer {
         let deck_selected = await ms_deck.run();
         const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
 
-        const studyScheduler = new TermScheduler({ cards: selected_terms, cards_category: deck_selected });
+        const studyScheduler = new TermScheduler({ cards_category: deck_selected });
 
         await studyScheduler.setLearningCards(selected_terms); // Populate the right cards.
         // console.log(studyScheduler.learning_queue);

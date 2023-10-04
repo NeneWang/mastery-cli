@@ -5,7 +5,7 @@ const DEBUG = false
 
 class TermScheduler {
 
-    constructor({ working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy(), cards_category = "", cards = {} } = {}) {
+    constructor({ working_set_length = 5, cardsRefreshStrategy = new TermCardsOfflineStrategy(), cards_category = "" } = {}) {
         this.working_set_length = working_set_length;
         const naming_post = cards_category === "" ? cards_category : "_" + cards_category;
         // Set loading as false for now. Too many bugs.
