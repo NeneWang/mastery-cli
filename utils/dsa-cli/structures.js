@@ -5,7 +5,7 @@ const SOLUTION_DIR = 'solutions'
 
 
 class ProblemMetadata {
-    constructor(slug, { name = "", description = "", difficulty = "EASY", tags = [], link = "" } = {}) {
+    constructor(slug, { name = "", description = "", difficulty = "EASY", tags = [], link = "", hints = [] } = {}) {
         this.slug = slug;
         this.file_path = `${slug}.js`;
         this.test_slug = slug;
@@ -15,6 +15,7 @@ class ProblemMetadata {
         this.tags = tags;
         this.link = link;
         this.absolute_solution_path = getDirAbsoluteUri(`./${SOLUTION_DIR}/${slug}.js`);
+        this.hints = hints;
     }
 
     get asJson() {

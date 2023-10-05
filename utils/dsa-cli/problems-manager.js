@@ -133,8 +133,8 @@ class ProblemsManager {
         // console.log("promblem_prompts", promblem_prompts)
         for (let problem of Object.keys(TEST_DICTIONARY)) {
             // console.log("Searching if", problem);
-            const promblem_prompt = promblem_prompts[problem];
-            if (promblem_prompt == undefined || promblem_prompt == null) {
+            const problem_prompt = promblem_prompts[problem];
+            if (problem_prompt == undefined || problem_prompt == null) {
                 if (skip_non_markdown) continue;
 
                 this.addProblem(new ProblemMetadata(problem));
@@ -144,8 +144,9 @@ class ProblemsManager {
 
 
             this.addProblem(new ProblemMetadata(problem, {
-                tags: promblem_prompt.tags, difficulty: classifyDifficulty(promblem_prompt.tags),
-                name: promblem_prompt.title, description: promblem_prompt.description, link: promblem_prompt.link
+                tags: problem_prompt.tags, difficulty: classifyDifficulty(problem_prompt.tags),
+                name: problem_prompt.title, description: problem_prompt.description, link: problem_prompt.link,
+                hints: problem_prompt.hints ?? []
             }));
 
         }

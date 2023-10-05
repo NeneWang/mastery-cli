@@ -66,31 +66,25 @@ const getMaidDirectory = () => {
     return (absolutePath.toString());
 };
 
-async function show_image(image_file, { is_url = false } = {}) {
-    // let ima
-    let image_file_dir = is_url ? image_file : getDirAbsoluteUri(image_file);
+
+async function show_image_if_isurl(message) {
+    // check if is url if not, then just print the message
+    let is_url = message.startsWith("http"); // Includes https
     try {
         if (is_url) {
 
             const { default: terminalImage } = await import('terminal-image');
-            const fetch = require('node-fetch');
-            const response = await fetch(image_file_dir);
+            const { default: fetch } = await import('node-fetch');
+            const response = await fetch(message);
             const buffer = await response.arrayBuffer();
             const image = await terminalImage.buffer(Buffer.from(buffer));
             console.log(image);
         } else {
-
-            //If it is not url, finds the absolute path of the local file
-            const fs = await import('fs').then((mod) => mod.promises);
-            const { default: terminalImage } = await import('terminal-image');
-            // console.log("reading from path: " + image_file_dir)node
-            const data = await fs.readFile(image_file_dir);
-            const image = await terminalImage.buffer(data);
-            console.log(image);
+            console.log(`Hint: ${message}`)
         }
     }
     catch (err) {
-        console.log("Error while attempting to fetch image", err, image_file_dir);
+        console.log("Error while attempting to fetch image", err);
     }
 };
 
@@ -124,7 +118,7 @@ const countDecimals = (value) => {
 
 
 
-const renderPromptDescription = (prompt, prompt_details, { is_cloze = false} = {}) => {
+const renderPromptDescription = (prompt, prompt_details, { is_cloze = false } = {}) => {
     try {
         const constants = require("./constants");
         const chalk = require("chalk");
@@ -132,8 +126,8 @@ const renderPromptDescription = (prompt, prompt_details, { is_cloze = false} = {
             renderer: new TerminalRenderer()
         });
         // Print title in Blue
-        const title = prompt?.["title"]  ?? "";
-        console.log(`${chalk.hex(constants.CONSTANTS.CUTEBLUE).inverse(` ${title} `)} ${is_cloze? "| " + chalk.hex(constants.CONSTANTS.CUTEPINK).inverse(` Cloze `): ""}`)
+        const title = prompt?.["title"] ?? "";
+        console.log(`${chalk.hex(constants.CONSTANTS.CUTEBLUE).inverse(` ${title} `)} ${is_cloze ? "| " + chalk.hex(constants.CONSTANTS.CUTEPINK).inverse(` Cloze `) : ""}`)
 
 
         // Colored Difficulty tag.
@@ -263,9 +257,31 @@ const openEditorPlatformAgnostic = async (editor_instruction, { absolute_temp_fi
 
 
 
+async function show_image_if_isurl(message) {
+    // check if is url if not, then just print the message
+    let is_url = message.startsWith("http"); // Includes https
+    try {
+        if (is_url) {
+
+            const { default: terminalImage } = await import('terminal-image');
+            const { default: fetch } = await import('node-fetch');
+            const response = await fetch(message);
+            const buffer = await response.arrayBuffer();
+            const image = await terminalImage.buffer(Buffer.from(buffer));
+            console.log(image);
+        } else {
+            console.log(`Hint: ${message}`)
+        }
+    }
+    catch (err) {
+        console.log("Error while attempting to fetch image", err);
+    }
+};
+
+
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
-    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, renderPromptDescription,
-    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic, looselyDeepEqual, get_random, getCurrentDateTimeIso
+    getRandomBool, countDecimals, getMaidDirectory, getFilesInDirectory, renderPromptDescription,
+    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic, looselyDeepEqual, get_random, getCurrentDateTimeIso, show_image_if_isurl
 };

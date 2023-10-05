@@ -95,6 +95,28 @@ async function show_image(image_file, { is_url = false } = {}) {
     }
 };
 
+
+async function show_image_if_isurl(message) {
+    // check if is url if not, then just print the message
+    let is_url = message.startsWith("http"); // Includes https
+    try {
+        if (is_url) {
+
+            const { default: terminalImage } = await import('terminal-image');
+            const {default: fetch} = await import('node-fetch');
+            const response = await fetch(image_file_dir);
+            const buffer = await response.arrayBuffer();
+            const image = await terminalImage.buffer(Buffer.from(buffer));
+            console.log(image);
+        } else {
+            console.log(message)
+        }
+    }
+    catch (err) {
+        console.log("Error while attempting to fetch image", err, image_file_dir);
+    }
+};
+
 // https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}
 const getRandomMaidEmoji = () => {
     return `:${get_random(MAID_EMOJIS)}:`;
@@ -234,5 +256,5 @@ const openEditorPlatformAgnostic = async (editor_instruction, {absolute_temp_fil
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, user_requests_exit,
-    user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic
+    user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic, show_image_if_isurl
 };

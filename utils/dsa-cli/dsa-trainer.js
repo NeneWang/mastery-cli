@@ -13,6 +13,8 @@ const { renderPromptDescription, get_random, getCurrentDateTimeIso } = require('
 const { Toggle, AutoComplete, Input } = require('enquirer');
 const { ProblemMetadata } = require('./structures');
 const fs = require('fs');
+const { show_image_if_isurl } = require('./functions');
+
 
 const DEBUG = false;
 
@@ -425,7 +427,7 @@ class DSATrainer {
      * @param {ProblemMetadata} problem The problem to open and test
      * @returns {constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
      */
-    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], } = {}) {
+    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], hintsGiven = [] } = {}) {
         if (DEBUG) console.log(
             "Opening problem: ", problem.slug,
         );
@@ -434,7 +436,8 @@ class DSATrainer {
         // console.log("Keys from prompt_dict", Object.keys(prompt_dict));
         let problem_details = this.problems_manager.getProblem(problem.slug);
         await this.openProblemMetadataInTerminal(problem);
-
+        
+        let hints = problem
         let question_state_flag = true;
         let did_pass_all_tests_before = false;
         let cloze_problem_list = this.problems_manager.getProblemClozes(problem.slug);
@@ -445,6 +448,7 @@ class DSATrainer {
                 question_state_flag = true;
                 await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
             },
+            
             'Run Tests': async () => {
                 try {
                     // Sometimes errors can occur.
@@ -466,9 +470,15 @@ class DSATrainer {
 
             "Hint": async () => {
                 // TO Complete
+                let hintsMssage = "No hints available";
+                if(hintsGiven.length < problem.hints.length){
+                    hintsMssage = problem.hints[hintsGiven.length];
+                    hintsGiven.push(hintsMssage);
+                }
                 question_state_flag = true;
-                console.log("hint after state flag", question_state_flag);
-                console.log("Hint: ", "Use the problem of friendship");
+                
+                console.log(hintsGiven)
+                show_image_if_isurl(hintsMssage);
 
             },
             "Copy Link": async () => {

@@ -32,8 +32,6 @@ class Quizzer {
         terms.push(...masterDeck.listTerms());
         this.masterDeck = masterDeck;
         this.terms = terms;
-        // this.enabledqmathformulas = qmathenabled.map(formula_name => { qmathformulas[formula_name].formula_name = formula_name; return qmathformulas[formula_name] });
-        // this.enabledqmathformulas = qmathenabled.map(form => form.formula_name);
         this.enabledqmathformulas = qmathenabled;
     }
 
