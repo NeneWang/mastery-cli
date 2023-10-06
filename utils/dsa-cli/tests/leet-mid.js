@@ -375,7 +375,7 @@ class FlattenBinaryTreeToLinkedList extends ProblemTests {
          */
 
         const entry = arrayToBinaryTree([1, 2, 5, 3, 4, null, 6])
-        const root = structure.solve(entry)
+        structure.solve(entry)
         const expectedSolution = new TreeNode(1, null,
             new TreeNode(2, null,
                 new TreeNode(3, null,
@@ -389,13 +389,18 @@ class FlattenBinaryTreeToLinkedList extends ProblemTests {
     test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[] => []';
-        const root = structure.solve(arrayToBinaryTree([]))
+        const entry = arrayToBinaryTree([])
+        structure.solve(entry)
+        assert.deepEqual(entry, arrayToBinaryTree([]));
+        
     }
 
     test_3(){
         const structure = new this.Problem();
         this.current_test_name = '[0] => [0]';
-        const root = structure.solve(arrayToBinaryTree([0]))
+        const entry = arrayToBinaryTree([0])
+        structure.solve(entry)
+        assert.deepEqual(entry, arrayToBinaryTree([0]));
     }
 }
 
