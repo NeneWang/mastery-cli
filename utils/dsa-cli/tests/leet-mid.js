@@ -1,6 +1,6 @@
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
-const { arrayToListNode, arrayToBinaryTree } = require('./utils');
+const { arrayToListNode, arrayToBinaryTree, TreeNode } = require('./utils');
 
 
 class HIndex extends ProblemTests {
@@ -247,24 +247,24 @@ class MinimumNumberOfArrowsToBurstBalloons extends ProblemTests {
 
 
 
-class PartitionList extends ProblemTests{
+class PartitionList extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
 
         this.tests.push(() => this.test_1());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[1,4,3,2,5,2] | 3 => [1,2,2,4,3,5]';
-        assert.deepEqual(structure.solve(arrayToListNode([1,4,3,2,5,2]), 3), arrayToListNode([1,2,2,4,3,5]));
+        assert.deepEqual(structure.solve(arrayToListNode([1, 4, 3, 2, 5, 2]), 3), arrayToListNode([1, 2, 2, 4, 3, 5]));
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[2,1] | 2 => [1,2]';
-        assert.deepEqual(structure.solve(arrayToListNode([2,1]), 2), arrayToListNode([1,2]));
+        assert.deepEqual(structure.solve(arrayToListNode([2, 1]), 2), arrayToListNode([1, 2]));
     }
 
 
@@ -272,48 +272,48 @@ class PartitionList extends ProblemTests{
 
 
 class SymmetricTree extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[1,2,2,3,4,4,3] => true';
-        assert.equal(structure.solve(arrayToBinaryTree([1,2,2,3,4,4,3])), true);
+        assert.equal(structure.solve(arrayToBinaryTree([1, 2, 2, 3, 4, 4, 3])), true);
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[1,2,2,null,3,null,3] => false';
-        assert.equal(structure.solve(arrayToBinaryTree([1,2,2,null,3,null,3])), false);
+        assert.equal(structure.solve(arrayToBinaryTree([1, 2, 2, null, 3, null, 3])), false);
     }
 }
 
 
 class ConstructBinaryTreeFromInorderAndPostorderTraversal extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[9,3,15,20,7] | [9,15,7,20,3] => [3,9,20,null,null,15,7]';
-        const root = structure.buildTree([9,3,15,20,7], [9,15,7,20,3])
-        
-        assert.deepEqual(root, arrayToBinaryTree([3,9,20,null,null,15,7]));
+        const root = structure.buildTree([9, 3, 15, 20, 7], [9, 15, 7, 20, 3])
+
+        assert.deepEqual(root, arrayToBinaryTree([3, 9, 20, null, null, 15, 7]));
         // assert.deepEqual(structure.solve([9,3,15,20,7], [9,15,7,20,3]), arrayToBinaryTree([3,9,20,null,null,15,7]));
     }
 
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[-1] | [-1] => [-1]';
         const root = structure.buildTree([-1], [-1])
-        
+
         assert.deepEqual(root, arrayToBinaryTree([-1]));
         // assert.deepEqual(structure.solve([9,3,15,20,7], [9,15,7,20,3]), arrayToBinaryTree([3,9,20,null,null,15,7]));
     }
@@ -321,20 +321,84 @@ class ConstructBinaryTreeFromInorderAndPostorderTraversal extends ProblemTests {
 
 
 class PopulatingNextRightPointersInEachNode extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_2());
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[] => []';
         const root = structure.connect(arrayToBinaryTree([]))
-        
+
         assert.deepEqual(root, arrayToBinaryTree([]));
     }
 
 }
+
+class FlattenBinaryTreeToLinkedList extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,5,3,4,null,6] => ';
+        /**
+         * TreeNode {
+            left: null,
+            right: TreeNode {
+                left: null,
+                right: TreeNode {
+                left: TreeNode {
+                    left: TreeNode {
+                    left: TreeNode {
+                        left: null,
+                        right: null,
+                        val: 6
+                    },
+                    right: null,
+                    val: 5
+                    },
+                    right: null,
+                    val: 4
+                },
+                right: null,
+                val: 3
+                },
+                val: 2
+            },
+            val: 1
+            }
+         */
+
+        const entry = arrayToBinaryTree([1, 2, 5, 3, 4, null, 6])
+        const root = structure.solve(entry)
+        const expectedSolution = new TreeNode(1, null,
+            new TreeNode(2, null,
+                new TreeNode(3, null,
+                    new TreeNode(4, null,
+                        new TreeNode(5, null,
+                            new TreeNode(6))))));
+
+        assert.deepEqual(entry, expectedSolution);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '[] => []';
+        const root = structure.solve(arrayToBinaryTree([]))
+    }
+
+    test_3(){
+        const structure = new this.Problem();
+        this.current_test_name = '[0] => [0]';
+        const root = structure.solve(arrayToBinaryTree([0]))
+    }
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -350,6 +414,7 @@ const TEST_DICTIONARY = {
     'symmetric-tree': SymmetricTree,
     'construct-binary-tree-from-inorder-and-postorder-traversal': ConstructBinaryTreeFromInorderAndPostorderTraversal,
     'populating-next-right-pointers-in-each-node': PopulatingNextRightPointersInEachNode,
+    'flatten-binary-tree-to-linked-list': FlattenBinaryTreeToLinkedList,
 }
 
 module.exports = TEST_DICTIONARY;
