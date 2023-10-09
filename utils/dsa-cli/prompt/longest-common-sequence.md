@@ -4,6 +4,7 @@ description: Given two strings text1 and text2, return the length of their longe
 tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/longest-increasing-subsequence/
 images: []
+hints: ["https://wngnelson.com/assets/img_src/dsa/longest-common-sequence.gif"]
 ---
 
 ### Description

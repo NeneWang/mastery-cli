@@ -4,7 +4,10 @@ description: You may assume that you have an infinite number of each kind of coi
 tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/coin-change/
 images: []
+hints: ["https://wngnelson.com/assets/img_src/dsa/coin_change.gif"]
 ---
+
+
 
 ### Description
 

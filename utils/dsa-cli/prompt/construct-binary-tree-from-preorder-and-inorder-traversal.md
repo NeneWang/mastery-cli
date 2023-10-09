@@ -4,6 +4,7 @@ description: Given two integer arrays preorder and inorder where preorder is the
 tags: [ neetcode, medium, binary-tree]
 link: https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 images: [ https://assets.leetcode.com/uploads/2021/02/19/tree.jpg ]
+hints: ["https://wngnelson.com/assets/img_src/dsa/constructbinary.gif"]
 ---
 
 ### Description

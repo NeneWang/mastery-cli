@@ -4,6 +4,7 @@ description: Given an integer array nums representing the amount of money of eac
 tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/house-robber/
 images: []
+hints: ["https://wngnelson.com/assets/img_src/dsa/house-robber.gif"]
 ---
 
 ### Description

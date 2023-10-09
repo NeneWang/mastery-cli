@@ -4,6 +4,7 @@ description: Given a non-empty binary tree, find the maximum path sum.
 tags: [hard, algoexpert]
 link: 
 images: []
+hints: ["https://wngnelson.com/assets/img_src/dsa/maxpathsum.gif"]
 ---
 
 # Max Path Sum In Binary Tree

@@ -4,6 +4,7 @@ description: Given a string s containing only digits, return the number of ways 
 tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/decode-ways/
 images: []
+hints: ["https://wngnelson.com/assets/img_src/dsa/decodeways.gif"]
 ---
 
 ### Description

@@ -4,6 +4,7 @@ description: Given an integer array nums, find a subarray that has the largest p
 tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/maximum-product-subarray/
 images: []
+hints: ["https://wngnelson.com/assets/img_src/dsa/maximum+Product+subarray.gif"]
 ---
 
 ### Description

@@ -4,6 +4,8 @@ description: Serialization is the process of converting a data structure or obje
 tags: [ neetcode, hard, binary-tree]
 link: https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
 images: [ https://assets.leetcode.com/uploads/2020/09/15/serdeser.jpg]
+hints: ["https://wngnelson.com/assets/img_src/dsa/serialize.gif", "https://wngnelson.com/assets/img_src/dsa/heapoperation.gif",
+"https://wngnelson.com/assets/img_src/dsa/heapoperationsubstract.gif"]
 ---
 
 ### Description

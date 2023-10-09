@@ -4,6 +4,7 @@ description: There is an m x n rectangular island that borders both the Pacific 
 tags: [ neetcode, medium, graphs]
 link: https://leetcode.com/problems/pacific-atlantic-water-flow/
 images: []
+hints: ["https://wngnelson.com/assets/img_src/dsa/pacific-atlantic.gif"]
 ---
 
 ### Description

@@ -4,6 +4,7 @@ description: The median is the middle value in an ordered integer list. If the s
 tags: [ neetcode, hard, heap]
 link: https://leetcode.com/problems/find-median-from-data-stream/
 images: []
+hints: "https://wngnelson.com/assets/img_src/dsa/mediandata.gif"
 ---
 
 ### Description

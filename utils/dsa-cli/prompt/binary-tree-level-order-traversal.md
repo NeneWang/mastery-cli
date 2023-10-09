@@ -4,6 +4,7 @@ description: Given the root of a binary tree, return the level order traversal o
 tags: [ neetcode, medium, binary-tree]
 link: https://leetcode.com/problems/binary-tree-level-order-traversal/
 images: [https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg]
+hints: ["https://wngnelson.com/assets/img_src/dsa/binary_traversal.gif"]
 ---
 
 ### Description
@@ -30,3 +31,4 @@ Output: [[1]]
 
 - The number of nodes in the tree is in the range [0, 2000]. 
 - -1000 <= Node.val <= 1000
+

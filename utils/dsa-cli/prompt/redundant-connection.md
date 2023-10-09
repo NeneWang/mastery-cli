@@ -4,6 +4,8 @@ description: In this problem, a tree is an undirected graph that is connected an
 tags: [ neetcode, medium, graphs]
 link: https://leetcode.com/problems/redundant-connection/
 images: [https://assets.leetcode.com/uploads/2021/05/02/reduntant1-1-graph.jpg, https://assets.leetcode.com/uploads/2021/05/02/reduntant1-2-graph.jpg]
+hints: ["https://wngnelson.com/assets/img_src/dsa/redundant_connection_dfs.gif",
+"https://wngnelson.com/assets/img_src/dsa/redundant_connection.gif"]
 ---
 
 ### Description

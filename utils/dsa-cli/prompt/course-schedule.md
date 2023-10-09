@@ -4,6 +4,7 @@ description: Return true if you can finish all courses. Otherwise, return false.
 tags: [ neetcode, medium, graphs, topological-sort]
 link: https://leetcode.com/problems/course-schedule/
 images: []
+hints: ["https://wngnelson.com/assets/img_src/dsa/course_schedule.gif"]
 ---
 
 ### Description

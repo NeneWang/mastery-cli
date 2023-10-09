@@ -4,6 +4,7 @@ description: Given the root of a binary search tree, and an integer k, return th
 tags: [ neetcode, medium, binary-tree]
 link: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 images: [ https://assets.leetcode.com/uploads/2021/01/28/kthtree1.jpg, https://assets.leetcode.com/uploads/2021/01/28/kthtree2.jpg ]
+hints: ["https://wngnelson.com/assets/img_src/dsa/kthsmallest.gif"]
 ---
 
 ### Description

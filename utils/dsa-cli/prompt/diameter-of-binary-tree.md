@@ -4,6 +4,7 @@ description: Given the root of a binary tree, return the length of the diameter 
 tags: [ neetcode, easy, binary-tree]
 link: https://leetcode.com/problems/diameter-of-binary-tree/
 images: [https://assets.leetcode.com/uploads/2021/03/06/diamtree.jpg]
+hints: ["https://wngnelson.com/assets/img_src/dsa/diameter.gif"]
 ---
 
 ### Description

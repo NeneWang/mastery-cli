@@ -4,6 +4,7 @@ description: Return the minimum number of candies you need to have to distribute
 tags: [hard, array]
 link: https://leetcode.com/problems/candy/
 images: []
+hint: ["https://wngnelson.com/assets/img_src/dsa/Candy.gif"]
 ---
 
 ### Description
@@ -18,6 +19,9 @@ You are giving candies to these children subjected to the following requirements
 Return the minimum number of candies you need to have to distribute the candies to the children.
 
 ### Example 1
+
+![](https://wngnelson.com/assets/img_src/dsa/Candy.gif)
+
 
 ```bash
 Input: ratings = [1,0,2]
@@ -40,6 +44,41 @@ The third child gets 1 candy because it satisfies the above two conditions.
 -       1 <= n <= 2 * 104
 -       0 <= ratings[i] <= 2 * 104
 
-![](https://wiki.anviltech.net/images/Candy.brute.gif)
 
-![](./../../../img/2023-09-13-18-36-34.png)
+
+### To Add
+
+- [ ] BestMea
+
+
+- [ ] Binary Traversal
+
+
+\
+- [ ] Coin Change
+- [ ] Construction Binary
+- [ ] Course Schedule
+- [ ] Decode Ways
+- [ ] Deserialize
+- [ ] Diameter
+- [ ] Heap Operation
+- [ ] House Robber
+- [ ] KthSmallest
+- [ ] Longest Common Sequence
+- [ ] Max Path Sum
+- [ ] Median Data
+- [ ] Redundant Connection
+- [ ] Redundant Connection DFS
+- [ ] Right Side View
+- [ ] Word Search 2
+- [ ] Subsets
+- [ ] Surrounded
+- [ ] Valid Parenthesis
+- [ ] Pacific Atlantic
+- [ ] WordBreak
+- [ ] Word Search
+- [ ] Remove Duplicates
+
+
+
+
