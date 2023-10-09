@@ -4,6 +4,7 @@ description: Given an m x n grid of characters board and a string word, return t
 tags: [ neetcode, trie, medium ]
 link: https://leetcode.com/problems/word-search/
 images: [ https://assets.leetcode.com/uploads/2020/11/04/word2.jpg, https://assets.leetcode.com/uploads/2020/11/04/word-1.jpg, https://assets.leetcode.com/uploads/2020/10/15/word3.jpg ]
+hints: ["https://wngnelson.com/assets/img_src/dsa/word-search.gif"]
 ---
 
 ### Description

@@ -4,6 +4,7 @@ description: Given an m x n board of characters and a list of strings words, ret
 tags: [ neetcode, hard, trie]
 link: https://leetcode.com/problems/word-search-ii/
 images: [ https://assets.leetcode.com/uploads/2020/11/07/search1.jpg, https://assets.leetcode.com/uploads/2020/11/07/search2.jpg]
+hints: ["https://wngnelson.com/assets/img_src/dsa/wordsearch2.gif"]
 ---
 
 ### Description

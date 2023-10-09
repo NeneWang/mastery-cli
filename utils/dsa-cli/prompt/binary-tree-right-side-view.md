@@ -4,6 +4,7 @@ description: Given the root of a binary tree, imagine yourself standing on the r
 tags: [ neetcode, medium, binary-tree]
 link: https://leetcode.com/problems/binary-tree-right-side-view/
 images: [ https://assets.leetcode.com/uploads/2021/02/14/tree.jpg]
+hints: ["https://wngnelson.com/assets/img_src/dsa/rightsideview.gif"]
 ---
 
 ### Description

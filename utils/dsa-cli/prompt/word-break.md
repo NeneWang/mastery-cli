@@ -4,6 +4,7 @@ description: Given a string s and a dictionary of strings wordDict, return true 
 tags: [medium, dp, neetcode]
 link: https://leetcode.com/problems/word-break/
 images: []
+hints: ["https://wngnelson.com/assets/img_src/dsa/wordbreak.gif"]
 ---
 
 ### Description

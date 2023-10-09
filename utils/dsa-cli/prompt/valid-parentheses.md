@@ -3,6 +3,7 @@ title: Valid Parentheses
 description: Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 tags: [ neetcode, easy, stack]
 link: https://leetcode.com/problems/valid-parentheses/
+hints: ["https://wngnelson.com/assets/img_src/dsa/validparentheses.gif"]
 ---
 
 ### Description

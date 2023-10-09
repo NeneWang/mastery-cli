@@ -4,6 +4,7 @@ description: Given an m x n matrix board containing 'X' and 'O', capture all reg
 tags: [ neetcode, medium, graphs]
 link: https://leetcode.com/problems/surrounded-regions/
 images: [https://assets.leetcode.com/uploads/2021/02/19/xogrid.jpg]
+hints: ["https://wngnelson.com/assets/img_src/dsa/surrounded.gif"]
 ---
 
 ### Description

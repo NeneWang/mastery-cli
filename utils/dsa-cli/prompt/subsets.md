@@ -4,6 +4,7 @@ description: Given an integer array nums of unique elements, return all possible
 tags: [neetcode, medium, backtracking]
 link: https://leetcode.com/problems/subsets/
 images: []
+hints: ["https://wngnelson.com/assets/img_src/dsa/subsets.gif"]
 ---
 
 ### Description
