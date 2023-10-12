@@ -147,6 +147,67 @@ class WordPattern extends ProblemTests{
 }
 
 
+class ContainsDuplicateII extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,3,1] | 3 => true';
+        assert.equal(structure.solve([1,2,3,1], 3), true);
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,0,1,1] | 1 => true';
+        assert.equal(structure.solve([1,0,1,1], 1), true);
+    }
+
+    test_3(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,3,1,2,3] | 2 => false';
+        assert.equal(structure.solve([1,2,3,1,2,3], 2), false);
+    }
+}
+
+class SummaryRanges extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[0,1,2,4,5,7] => ["0->2","4->5","7"]';
+        assert.deepEqual(structure.solve([0,1,2,4,5,7]), ["0->2","4->5","7"]);
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[0,2,3,4,6,8,9] => ["0","2->4","6","8->9"]';
+        assert.deepEqual(structure.solve([0,2,3,4,6,8,9]), ["0","2->4","6","8->9"]);
+    }
+
+    test_3(){
+        const structure = new this.Problem();
+        this.current_test_name = '[] => []';
+        assert.deepEqual(structure.solve([]), []);
+    }
+
+
+}
 
 
 
@@ -156,7 +217,9 @@ const TEST_DICTIONARY = {
     'insert-delete-getrandom-o1': InsertDeleteGetRandomO1,
     'minimum-size-subarray-sum': MinimumSizeSubArraySum,
     'game-of-life': GameOfLife,
-    'word-pattern': WordPattern
+    'word-pattern': WordPattern,
+    'contains-duplicate-ii': ContainsDuplicateII,
+    'summary-ranges': SummaryRanges,
 }
 
 module.exports = TEST_DICTIONARY;
