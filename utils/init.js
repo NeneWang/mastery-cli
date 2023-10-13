@@ -6,7 +6,7 @@ module.exports = ({ clear = true }) => {
 	unhandled();
 	welcome({
 		title: `maid-cli`,
-		tagLine: `by Nelson`,
+		tagLine: `by neneWang`,
 		description: pkg.description,
 		version: pkg.version,
 		bgColor: '#36BB09',

@@ -1810,7 +1810,54 @@ const angular = [
             parentCounter: number = 0;\n\
             .... In app html\n\
             <app-counter (counterChange)='onCounterChange($event)'></app-counter>"
-    }
+    },
+    {
+        term: "Create a service",
+        prompt: "Create a service that will return a list of employees",
+        example: "ng g s services/employee\n\
+        import { Injectable } from '@angular/core';\n\
+        import { Employee } from '../models/employee';\n\
+        \n\
+        @Injectable({\n\
+          providedIn: 'root'\n\
+        })\n\
+        export class EmployeeService {\n\
+            employees: Employee[] = [\n\
+                {name: 'John', surname: 'Doe', age: 30},\n\
+                {name: 'Jane', surname: 'Doe', age: 25},\n\
+                {name: 'Jack', surname: 'Doe', age: 20},\n\
+            ];\n\
+            constructor() { }\n\
+            getEmployees(): Employee[] {\n\
+                return this.employees;\n\
+            }\n\
+        }\n\n\
+        ## TO be used\n\
+        import { EmployeeService} from '../employeee.service';\n\
+        constructor(private employeeService: EmployeeService) { }\n\
+        ngOnInit(): void {\n\
+            this.employees = this.employeeService.getEmployees();\n\
+        }",
+        description: "ng g s services/employee\n\
+        ### TODO Import the Injectable library\n\
+        import { Employee } from '../models/employee';\n\
+        \n\
+        @Injectable({\n\
+          providedIn: 'root'\n\
+        })\n\
+        export class EmployeeService {\n\
+            employees: Employee[] = [\n\
+                {name: 'John', surname: 'Doe', age: 30},\n\
+                {name: 'Jane', surname: 'Doe', age: 25},\n\
+                {name: 'Jack', surname: 'Doe', age: 20},\n\
+            ];\n\
+            constructor() { }\n\
+            getEmployees(): Employee[] {\n\
+                return this.employees;\n\
+            }\n\
+        }\n\n\
+        ### TODO Example of how to use it suppose the \n",
+    },
 ]
 
 const npm = [
@@ -1824,6 +1871,81 @@ const npm = [
         prompt: "Use node version 14.17.0",
         example: "nvm use 14.17.0"
     },
+]
+
+const postgresql = [
+    {
+        term: "Generate Series",
+        prompt: "Generate a series from 1 to 10",
+        example: "SELECT generate_series(1, 10);",
+    },
+    {
+        term: "Series get from using series ",
+        prompt: "Generate a series from 1 to max user_id in table users",
+        example: "SELECT generate_series(1, (SELECT MAX(user_id) FROM users)) AS user_id;"
+    },
+    {
+        term: "Calculating Average Age of Users with a Condition",
+        prompt: "Suppose you have a products table with a price column, and you want to find the maximum price for products in a specific category, e.g., 'Electronics':",
+        example: "SELECT MAX(price) FILTER (WHERE category = 'Electronics') AS max_price_electronics FROM products;",
+        description: "In summary, you use the WHERE clause to filter rows in the table before aggregation, and you use the FILTER clause to filter rows within an aggregate function after aggregation. The choice between them depends on your specific use case. If you need to filter rows before aggregation, use WHERE. If you need to apply an aggregate function to a subset of rows based on a condition, use FILTER. They are complementary features in SQL and serve different purposes."
+    },
+    {
+        term: "Create View and Update",
+        prompt: "Let's create a view that joins the students and courses tables to display the names of students and the courses they are enrolled in:",
+        example: "-- Create a view to display student names and course names\n\
+        CREATE VIEW student_course_view AS\n\
+        SELECT\n\
+            students.first_name || ' ' || students.last_name AS student_name\n\
+            courses.course_name\n\
+        FROM\n\
+            students\n\
+        JOIN\n\
+            courses ON students.student_id = courses.course_id;"
+
+    },
+    {
+        term: "SQL Multiple join example",
+        prompt: "Create SQL a join of timeslots and events, and then filter by date of the format: dd-mm-yyyyy from timestamp which is datetime format and user_id in an array of :user_id\n\
+        Call it RankedTimeslots and then JOIN it with users fetch for user first_name and rankedTimeslots user id and timeslot_local ",
+        example: "/*  */\n\
+    WITH RankedTimeslots AS (\n\
+        SELECT\n\
+            e.user_id,\n\
+            e.timestamp_local\n\
+        FROM timeslot t\n\
+        JOIN event e ON t.event_guid = e.guid\n\
+        WHERE\n\
+            e.timestamp_local::date = :date\n\
+            AND user_id IN :user_id\n\
+    )\n\
+    SELECT\n\
+        rt.user_id,\n\
+        rt.timeslot_local,\n\
+        u.first_name,\n\
+    FROM RankedTimeslots rt\n\
+    JOIN users u ON rt.user_id = u.id\n\
+    ORDER BY rt.timeslot_local DESC;",
+    description: "table: timeslot {event_guid: string, timeslot_local: datetime}\n\
+    table: event {guid: string, user_id: int, timestamp_local: datetime}\n\
+    table: users {id: int, first_name: string}"
+    },
+    {
+        term: "Find the stores who have sold more units than the average by all stores",
+        prompt: "Find the stores who have sold more units than the average by all stores",
+        example: "SELECT\n\
+        store_id,\n\
+        SUM(units_sold) AS total_units_sold\n\
+        FROM\n\
+            sales\n\
+        GROUP BY\n\
+            store_id\n\
+        HAVING\n\
+            SUM(units_sold) > (SELECT AVG(units_sold) FROM sales);",
+            description: "table: sales {units_sold: int, store_id: int}"
+        
+    }
+
 ]
 
 
