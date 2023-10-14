@@ -341,6 +341,7 @@ class FlattenBinaryTreeToLinkedList extends ProblemTests {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
     }
 
     test_1() {
@@ -405,6 +406,30 @@ class FlattenBinaryTreeToLinkedList extends ProblemTests {
 }
 
 
+class SumRootToLeafNumbers extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,3] => 25';
+        const entry = arrayToBinaryTree([1,2,3])
+        assert.equal(structure.solve(entry), 25);
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[4,9,0,5,1] => 1026';
+        const entry = arrayToBinaryTree([4,9,0,5,1])
+        assert.equal(structure.solve(entry), 1026);
+    }
+
+}
+
+
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
@@ -420,6 +445,7 @@ const TEST_DICTIONARY = {
     'construct-binary-tree-from-inorder-and-postorder-traversal': ConstructBinaryTreeFromInorderAndPostorderTraversal,
     'populating-next-right-pointers-in-each-node': PopulatingNextRightPointersInEachNode,
     'flatten-binary-tree-to-linked-list': FlattenBinaryTreeToLinkedList,
+    'sum-root-to-leaf-numbers': SumRootToLeafNumbers,
 }
 
 module.exports = TEST_DICTIONARY;
