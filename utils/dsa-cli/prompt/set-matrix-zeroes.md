@@ -3,8 +3,10 @@ title: Set Matrix Zeroes
 description: Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
 tags: [neetcode, medium, math, neetcode, geometry]
 link: https://leetcode.com/problems/set-matrix-zeroes/
-images: []
+images: ["https://wiki.anviltech.net/images/Setzero.jpeg"]
+hints: ["https://assets.leetcode.com/uploads/2020/08/17/mat1.jpg", "https://assets.leetcode.com/uploads/2020/08/17/mat2.jpg", "https://wiki.anviltech.net/images/Setmatrixzero.gif", "Use the first row and first column as a flag to indicate if a row or column should be set to zero."]
 ---
+
 
 ### Description
 

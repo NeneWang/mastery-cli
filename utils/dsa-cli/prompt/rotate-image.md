@@ -4,6 +4,7 @@ description: You are given an n x n 2D matrix representing an image, rotate the 
 tags: [neetcode, medium, math, neetcode, geometry]
 link: https://leetcode.com/problems/rotate-image/
 images: [ https://assets.leetcode.com/uploads/2020/08/28/mat1.jpg, https://assets.leetcode.com/uploads/2020/08/28/mat2.jpg ]
+hints: ["https://wiki.anviltech.net/images/Setzero.jpeg"]
 ---
 
 ### Description

@@ -141,8 +141,19 @@ const python = [
         description: "The range function can be used to iterate on a range of numbers. The first argument is the start, the second argument is the end and the third argument is the step."
 
     },
-
-
+    {
+        term: "Create 2D list",
+        prompt: "Create a 2D list of 3 rows and 4 columns where elements are not linked",
+        example: "[[0] * len(matrix[0]) for x in range(height)]"
+    },
+    {
+        term: "Math FLoor and Ceil",
+        prompt: "How to get the floor and ceil of a number?",
+        example: "import math\n\
+        math.floor(1.5)\n\
+        math.ceil(1.5)"
+    
+    }
 ]
 
 const swift = [

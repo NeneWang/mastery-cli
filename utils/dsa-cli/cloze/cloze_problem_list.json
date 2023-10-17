@@ -1508,5 +1508,20 @@
         "file_path": "number-of-1-bits-c2.js",
         "difficulty": 1,
         "problem_slug": "number-of-1-bits"
+    },
+    {
+        "file_path": "candy-c1.js",
+        "difficulty": 1,
+        "problem_slug": "candy"
+    },
+    {
+        "file_path": "candy-c2.js",
+        "difficulty": 1,
+        "problem_slug": "candy"
+    },
+    {
+        "file_path": "candy-c3.js",
+        "difficulty": 1,
+        "problem_slug": "candy"
     }
 ]

@@ -37,7 +37,7 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './da
     // Note it should take from the root.
     const absolutePath = path.resolve(path.join(__dirname, './data/', fileimage)); // Note the '../' because it is inside of constants
 
-    // const fileUrl = url.pathToFileURL(absolutePath);
+    // const fileUrl = url.pathToFileURL(abosolutePath);
     return (absolutePath.toString());
 };
 
