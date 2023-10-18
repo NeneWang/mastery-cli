@@ -5,8 +5,6 @@
 Your assistant to improve as a programmer. Flashcards, DSA Practice, Statistics, and habit hooks. For example, everytime you commit code, you could have a random flashcard being prompted (or even a random DSA problem suggestion to be completed!). Designed to work offline, but when connected to the internet assists you to collect your progress and sync it with your other devices. 
 
 
-![](https://i.ibb.co/X3pgKJX/128-128.png)
-
 Other main features include:
 - Helping you keep track on your personal goal projects e.g. Doing some commit in a project on a daily basi
 - More than 150 programming problems (with tests that work offline)
