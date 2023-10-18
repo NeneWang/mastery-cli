@@ -1,9 +1,9 @@
-class AmbiguousMeasurements {
-	solve(high, low, measuringCups) {
+class Candy {
+	solve(ratings) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: AmbiguousMeasurements };nOfAllWords };
+module.exports = { Problem: Candy };le.exports = { Problem: SubstringWithConcatenationOfAllWords };
