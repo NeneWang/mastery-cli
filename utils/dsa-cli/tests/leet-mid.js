@@ -84,11 +84,47 @@ class MinimumSizeSubArraySum extends ProblemTests{
 
 }
 
+class GameOfLife extends ProblemTests{
+    constructor(problem){
+        super(problem);
+
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        // Input: board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
+        // Output: [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]
+
+        const structure = new this.Problem();
+        this.current_test_name = '[[0,1,0],[0,0,1],[1,1,1],[0,0,0]] | [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]';
+        const board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
+        structure.solve(board)
+        assert.deepEqual(board, [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]);
+
+        
+    }
+
+    test_2(){
+        // Input: const board = [[1,1],[1,0]]
+        // Output: [[1,1],[1,1]]
+
+        const structure = new this.Problem();
+        this.current_test_name = '[[1,1],[1,0]] | [[1,1],[1,1]]';
+        const board = [[1,1],[1,0]]
+        structure.solve(board)
+        assert.deepEqual(board, [[1,1],[1,1]]);
+    }
+
+}
+
+
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
     'insert-delete-getrandom-o1': InsertDeleteGetRandomO1,
     'minimum-size-subarray-sum': MinimumSizeSubArraySum,
+    'game-of-life': GameOfLife,
 }
 
 module.exports = TEST_DICTIONARY;
