@@ -81,9 +81,9 @@ mastery math
 ```
 
 
-#### Update Notes
+#### Credits and Updates
 
-- Removing 
+- Removing the following libraries to make the program shorter.
 
 ```
 express
