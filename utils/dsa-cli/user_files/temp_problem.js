@@ -1,12 +1,12 @@
-class JumpGame {
-	solve(nums) {
+class Candy {
+	solve(ratings) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: JumpGame };exports = { Problem: SubstringWithConcatenationOfAllWords };        return this.queue.shift()
+module.exports = { Problem: Candy };le.exports = { Problem: SubstringWithConcatenationOfAllWords };        return this.queue.shift()
     }
 
     front() {

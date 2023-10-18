@@ -118,6 +118,37 @@ class GameOfLife extends ProblemTests{
 
 }
 
+class WordPattern extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = 'abba | dog cat cat dog => true';
+        assert.equal(structure.solve('abba', 'dog cat cat dog'), true);
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = 'abba | dog cat cat fish => false';
+        assert.equal(structure.solve('abba', 'dog cat cat fish'), false);
+    }
+
+    test_3(){
+        const structure = new this.Problem();
+        this.current_test_name = 'aaaa | dog cat cat dog => false';
+        assert.equal(structure.solve('aaaa', 'dog cat cat dog'), false);
+    }
+}
+
+
+
+
 
 
 const TEST_DICTIONARY = {
@@ -125,6 +156,7 @@ const TEST_DICTIONARY = {
     'insert-delete-getrandom-o1': InsertDeleteGetRandomO1,
     'minimum-size-subarray-sum': MinimumSizeSubArraySum,
     'game-of-life': GameOfLife,
+    'word-pattern': WordPattern
 }
 
 module.exports = TEST_DICTIONARY;
