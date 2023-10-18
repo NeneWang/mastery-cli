@@ -1,4 +1,4 @@
-# mastery CLI
+# Mastery CLI
 
 ![](https://media.giphy.com/media/eveBk0ptKzjqUe0iTg/giphy.gif)
 
