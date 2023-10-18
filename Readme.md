@@ -1,4 +1,4 @@
-# Maid CLI
+# mastery CLI
 
 ![](https://media.giphy.com/media/eveBk0ptKzjqUe0iTg/giphy.gif)
 
@@ -17,7 +17,7 @@ Other main features include:
 ## Install
 
 ```
-npm install -g maid-cli
+npm install -g mastery-cli
 ```
 
 - You need to install nvim for the dsa option to work
@@ -35,7 +35,7 @@ Install nvim
 Commiting a code and pushing it to HEAD
 
 ```
-maid coa "Commit message"
+mastery coa "Commit message"
 ```
 
 
@@ -44,14 +44,14 @@ maid coa "Commit message"
 Reporting:
 
 ```
-maid report
+mastery report
 ```
 
 
 Help 
 
 ```
-maid --help
+mastery --help
 ```
 
 
@@ -60,26 +60,26 @@ maid --help
 View DSA problems
 
 ```
-maid dsa
+mastery dsa
 ```
 
 
 View all DSA Problems
 
 ```
-maid dsa --all
+mastery dsa --all
 ```
 
 ### Flashcards
 
 ```
-maid term
+mastery term
 ```
 
 Math Problems:
 
 ```
-maid math
+mastery math
 ```
 
 

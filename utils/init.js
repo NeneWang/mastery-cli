@@ -5,7 +5,7 @@ const unhandled = require('cli-handle-unhandled');
 module.exports = ({ clear = true }) => {
 	unhandled();
 	welcome({
-		title: `maid-cli`,
+		title: `mastery-cli`,
 		tagLine: `by neneWang`,
 		description: pkg.description,
 		version: pkg.version,

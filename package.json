@@ -1,11 +1,12 @@
 {
-	"name": "maid-cli",
+	"name": "mastery-cli",
 	"description": "Continuous learning for engineers",
 	"version": "1.0.10",
 	"license": "UNLICENSED",
 	"bin": {
 		"m-cli": "index.js",
-		"maid": "index.js"
+		"maid": "index.js",
+		"mastery": "index.js"
 	},
 	"author": {
 		"name": "nenwang",
@@ -13,7 +14,7 @@
 		"url": "https://github.com/NeneWang"
 	},
 	"keywords": [
-		"maid-cli"
+		"mastery-cli"
 	],
 	"files": [
 		"index.js",

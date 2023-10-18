@@ -19,7 +19,7 @@ new:
 	npm publish
 
 uninstall:
-	npm uninstall -g maid-cli
+	npm uninstall -g mastery-cli
 
 install:
-	npm install -g maid-cli
+	npm install -g mastery-cli

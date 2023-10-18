@@ -12,7 +12,7 @@ const DEBUG = false;
 /**
  * Gets clickeable path that could be printed on the console and clicked.
  * @param {str} fileimage : String containing the relative position of the image from utils directory
- * @returns {str} Formatted file:///C:/github/testing/maid-cli/img/unicorn.png
+ * @returns {str} Formatted file:///C:/github/testing/mastery-cli/img/unicorn.png
  */
 const getAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/') => {
     // Note it should take from the root.
@@ -23,7 +23,7 @@ const getAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './data/
 /**
  * Gets directory path
  * @param {str} fileimage : String containing the relative position of the image from utils directory
- * @returns {str} Formatted C:/github/testing/maid-cli/img/unicorn.png
+ * @returns {str} Formatted C:/github/testing/mastery-cli/img/unicorn.png
  */
 const getDirAbsoluteUri = (fileimage = './img/unicor1n.png', subdirectory = './') => {
     // Note it should take from the root.

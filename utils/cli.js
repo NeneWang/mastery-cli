@@ -78,7 +78,7 @@ class CommandsInformation {
 const cmInfo = new CommandsInformation()
 
 const helpText = meowHelp({
-	name: `maid`,
+	name: `mastery`,
 	flags,
 	commands: cmInfo.commands
 });

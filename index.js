@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * maid-cli
+ * mastery-cli
  * Life is a game, and the game is to be the best version of yourself
  *
  * @author Nelson <github.com/neneWang>

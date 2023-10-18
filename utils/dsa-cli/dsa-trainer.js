@@ -389,7 +389,7 @@ class DSATrainer {
             description: 'Longest Repeating Character Replacement',  
             difficulty: 'medium',
             tags: [ 'neetcode', 'medium', 'sliding-window' ],        
-            absolute_solution_path: 'C:\\github\\testing\\maid-cli\\utils\\dsa-cli\\solutions\\character-replacement.js'        
+            absolute_solution_path: 'C:\\github\\testing\\mastery-cli\\utils\\dsa-cli\\solutions\\character-replacement.js'        
             }
         */
 
