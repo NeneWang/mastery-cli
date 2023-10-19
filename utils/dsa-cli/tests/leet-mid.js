@@ -243,6 +243,55 @@ class MinimumNumberOfArrowsToBurstBalloons extends ProblemTests {
 
 
 
+class ListNode {
+    constructor(val = 0, next = null) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+const arrayToListNode = (array) => {
+    if (!array || array.length == 0) {
+        return null;
+    }
+
+    let head = new ListNode(array[0]);
+    let node = head;
+
+    for (let i = 1; i < array.length; i++) {
+        node.next = new ListNode(array[i]);
+        node = node.next;
+    }
+
+    return head;
+};
+
+
+
+
+class PartitionList extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+
+        this.tests.push(() => this.test_1());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,4,3,2,5,2] | 3 => [1,2,2,4,3,5]';
+        assert.deepEqual(structure.solve(arrayToListNode([1,4,3,2,5,2]), 3), arrayToListNode([1,2,2,4,3,5]));
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[2,1] | 2 => [1,2]';
+        assert.deepEqual(structure.solve(arrayToListNode([2,1]), 2), arrayToListNode([1,2]));
+    }
+
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -253,7 +302,8 @@ const TEST_DICTIONARY = {
     'word-pattern': WordPattern,
     'contains-duplicate-ii': ContainsDuplicateII,
     'summary-ranges': SummaryRanges,
-    'minimum-number-of-arrows-to-burst-balloons': MinimumNumberOfArrowsToBurstBalloons
+    'minimum-number-of-arrows-to-burst-balloons': MinimumNumberOfArrowsToBurstBalloons,
+    'partition-list': PartitionList
 }
 
 module.exports = TEST_DICTIONARY;
