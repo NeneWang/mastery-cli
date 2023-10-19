@@ -25,6 +25,8 @@ class FlattenTree {
         // Move on to the right side of the tree
         node = node.right;
       }
+      
+      
     }
   }
   
