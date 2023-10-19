@@ -1,6 +1,6 @@
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
-const { arrayToListNode, ListNode } = require('./utils');
+const { arrayToListNode, arrayToBinaryTree } = require('./utils');
 
 
 class HIndex extends ProblemTests {
@@ -271,6 +271,26 @@ class PartitionList extends ProblemTests{
 }
 
 
+class SymmetricTree extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,2,3,4,4,3] => true';
+        assert.equal(structure.solve(arrayToBinaryTree([1,2,2,3,4,4,3])), true);
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,2,null,3,null,3] => false';
+        assert.equal(structure.solve(arrayToBinaryTree([1,2,2,null,3,null,3])), false);
+    }
+}
+
+
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
@@ -281,7 +301,8 @@ const TEST_DICTIONARY = {
     'contains-duplicate-ii': ContainsDuplicateII,
     'summary-ranges': SummaryRanges,
     'minimum-number-of-arrows-to-burst-balloons': MinimumNumberOfArrowsToBurstBalloons,
-    'partition-list': PartitionList
+    'partition-list': PartitionList,
+    'symmetric-tree': SymmetricTree,
 }
 
 module.exports = TEST_DICTIONARY;
