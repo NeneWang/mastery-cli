@@ -1,63 +1,7 @@
 
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
-
-class TreeNode {
-    constructor(val, left = null, right = null) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
-
-function arrayToBinaryTree(arr) {
-    if (arr.length === 0) {
-        return null;
-    }
-
-    const nodes = arr.map((val) => (val === null) ? null : new TreeNode(val));
-
-    for (let i = 0; i < nodes.length; i++) {
-        if (nodes[i] !== null) {
-            const leftIndex = 2 * i + 1;
-            const rightIndex = 2 * i + 2;
-
-            nodes[i].left = (leftIndex < nodes.length) ? nodes[leftIndex] : null;
-            nodes[i].right = (rightIndex < nodes.length) ? nodes[rightIndex] : null;
-        }
-    }
-
-    return nodes[0];
-}
-
-function binaryTreeToArray(root) {
-    if (!root) {
-        return [];
-    }
-
-    const queue = [root];
-    const result = [];
-
-    while (queue.length > 0) {
-        const node = queue.shift();
-
-        if (node) {
-            result.push(node.val);
-            queue.push(node.left);
-            queue.push(node.right);
-        } else {
-            result.push(null);
-        }
-    }
-
-    // Remove trailing null values from the result
-    while (result.length > 0 && result[result.length - 1] === null) {
-        result.pop();
-    }
-
-    return result;
-}
-
+const { arrayToBinaryTree, binaryTreeToArray } = require('./utils');
 
 class BalancedBinaryTree extends ProblemTests {
     constructor(Problem) {

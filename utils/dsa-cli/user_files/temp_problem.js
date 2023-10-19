@@ -1,17 +1,9 @@
-class SolveSudoku {
-	solve(board) {
+class SubstringWithConcatenationOfAllWords {
+	solve(s, words) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: SolveSudoku };m: InterviewingString };ithConcatenationOfAllWords };t {
-	solve(head, x) {
-	// Your code here
-
-	}
-}
-
-
-module.exports = { Problem: PartitionList };
+module.exports = { Problem: SubstringWithConcatenationOfAllWords };
