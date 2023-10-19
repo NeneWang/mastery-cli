@@ -1,16 +1,12 @@
-class SummaryRanges {
-	solve(nums) {
+class SolveSudoku {
+	solve(board) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: SummaryRanges };ndefined ? null : next;
-  }
-  
-
-class PartitionList {
+module.exports = { Problem: SolveSudoku };m: InterviewingString };ithConcatenationOfAllWords };t {
 	solve(head, x) {
 	// Your code here
 

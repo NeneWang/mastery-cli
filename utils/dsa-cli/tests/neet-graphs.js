@@ -1,35 +1,8 @@
 
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
+const { arrayToNodeHeadNeighbors } = require('./utils');
 
-class Node {
-    constructor(val) {
-        this.val = val;
-        this.neighbors = [];
-    }
-
-    push(neighbor) {
-        this.neighbors.push(neighbor);
-    }
-
-}
-
-function arrayToNodeHeadNeighbors(array) {
-    const nodes = [];
-    for (let i = 0; i < array.length; i++) {
-        nodes.push(new Node(i + 1));
-    }
-    for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array[i].length; j++) {
-            nodes[i].push(nodes[array[i][j] - 1]);
-        }
-    }
-
-    const head = new Node();
-    head.neighbors = nodes;
-    return head;
-
-}
 
 class CloneGraph extends ProblemTests {
 
