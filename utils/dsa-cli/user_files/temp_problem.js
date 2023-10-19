@@ -1,7 +1,12 @@
+class SummaryRanges {
+	solve(nums) {
+	// Your code here
 
-function ListNode(val, next = null) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null : next;
+	}
+}
+
+
+module.exports = { Problem: SummaryRanges };ndefined ? null : next;
   }
   
 
