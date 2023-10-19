@@ -393,10 +393,10 @@ class FlattenBinaryTreeToLinkedList extends ProblemTests {
         const entry = arrayToBinaryTree([])
         structure.solve(entry)
         assert.deepEqual(entry, arrayToBinaryTree([]));
-        
+
     }
 
-    test_3(){
+    test_3() {
         const structure = new this.Problem();
         this.current_test_name = '[0] => [0]';
         const entry = arrayToBinaryTree([0])
@@ -407,27 +407,190 @@ class FlattenBinaryTreeToLinkedList extends ProblemTests {
 
 
 class SumRootToLeafNumbers extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[1,2,3] => 25';
-        const entry = arrayToBinaryTree([1,2,3])
+        const entry = arrayToBinaryTree([1, 2, 3])
         assert.equal(structure.solve(entry), 25);
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[4,9,0,5,1] => 1026';
-        const entry = arrayToBinaryTree([4,9,0,5,1])
+        const entry = arrayToBinaryTree([4, 9, 0, 5, 1])
         assert.equal(structure.solve(entry), 1026);
     }
 
 }
+
+class CountCompleteTreeNodes extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,3,4,5,6] => 6';
+        const entry = arrayToBinaryTree([1, 2, 3, 4, 5, 6])
+        assert.equal(structure.solve(entry), 6);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '[] => 0';
+        const entry = arrayToBinaryTree([])
+        assert.equal(structure.solve(entry), 0);
+    }
+
+    test_3() {
+        const structure = new this.Problem();
+        this.current_test_name = '[1] => 1';
+        const entry = arrayToBinaryTree([1])
+        assert.equal(structure.solve(entry), 1);
+    }
+
+}
+
+
+class AverageOfLevelsInBinaryTree extends ProblemTests {
+    constructor(Problem) {
+
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[3,9,20, null, null, 15,7] => [3,14.5,11]';
+        const entry = arrayToBinaryTree([3, 9, 20, null, null, 15, 7])
+        assert.deepEqual(structure.solve(entry), [3, 14.5, 11]);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '[3,9,20,15,7] => [3,14.5,11]';
+        const entry = arrayToBinaryTree([3, 9, 20, 15, 7])
+        assert.deepEqual(structure.solve(entry), [3, 14.5, 11]);
+    }
+
+}
+
+
+class MinimumAbsoluteDifferenceInBst extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    
+    }
+
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[4,2,6,1,3] => 1';
+        const entry = arrayToBinaryTree([4,2,6,1,3])
+        assert.equal(structure.solve(entry), 1);
+    }
+
+
+    test_2(){
+        
+        const structure = new this.Problem();
+        this.current_test_name = '[1,0,48,null,null,12,49] => 1';
+        const entry = arrayToBinaryTree([1,0,48,null,null,12,49])
+        assert.equal(structure.solve(entry), 1);
+
+    }
+
+}
+
+
+class RemoveDuplicatesFromLinkedList extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_4());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,1,2] => [2]';
+        const entry = arrayToListNode([1,1,2])
+        assert.deepEqual(structure.solve(entry), arrayToListNode([2]));
+
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,1,2,3,3] => [2]';
+        const entry = arrayToListNode([1,1,2,3,3])
+        assert.deepEqual(structure.solve(entry), arrayToListNode([2]));
+
+    }
+
+    test_3(){
+        /**
+         * Input: head = [1,2,3,3,4,4,5]
+            Output: [1,2,5]
+         */
+
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,3,3,4,4,5] => [1,2,5]';
+        const entry = arrayToListNode([1,2,3,3,4,4,5])
+        assert.deepEqual(structure.solve(entry), arrayToListNode([1,2,5]));
+    }
+
+    test_4(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,1,1,2,3] => [2,3]';
+        const entry = arrayToListNode([1,1,1,2,3])
+        assert.deepEqual(structure.solve(entry), arrayToListNode([2,3]));
+    }
+}
+
+class RotateList extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+
+    }
+
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,3,4,5] | 2 => [4,5,1,2,3]';
+        const entry = arrayToListNode([1,2,3,4,5])
+        assert.deepEqual(structure.solve(entry, 2), arrayToListNode([4,5,1,2,3]));
+
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[0,1,2] | 4 => [2,0,1]';
+        const entry = arrayToListNode([0,1,2])
+        assert.deepEqual(structure.solve(entry, 4), arrayToListNode([2,0,1]));
+
+    }
+
+
+}
+
 
 
 
@@ -446,6 +609,11 @@ const TEST_DICTIONARY = {
     'populating-next-right-pointers-in-each-node': PopulatingNextRightPointersInEachNode,
     'flatten-binary-tree-to-linked-list': FlattenBinaryTreeToLinkedList,
     'sum-root-to-leaf-numbers': SumRootToLeafNumbers,
+    'count-complete-tree-nodes': CountCompleteTreeNodes,
+    'average-of-levels-in-binary-tree': AverageOfLevelsInBinaryTree,
+    'minimum-absolute-difference-in-bst': MinimumAbsoluteDifferenceInBst,
+    'remove-duplicates-from-sorted-list-ii': RemoveDuplicatesFromLinkedList,
+    'rotate-list': RotateList
 }
 
 module.exports = TEST_DICTIONARY;

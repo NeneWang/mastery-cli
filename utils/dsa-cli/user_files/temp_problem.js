@@ -1,116 +1,76 @@
-class SubstringWithConcatenationOfAllWords {
-	solve(s, words) {
-	// Your code here
 
-	}
+function TreeNode(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+  
+
+  
+
+class GetMinimumDifference {	// Your code here
+
+
 }
 
 
-module.exports = { Problem: SubstringWithConcatenationOfAllWords };t {
-	solve(head, x) {
-	// Your code here
-
-	}
-}
-
-
-module.exports = { Problem: PartitionList };
-	}
-}
-
-
-module.exports = { Problem: IsSymmetric };
-    isEmpty() {
-        return this.size() === 0
+module.exports = { Problem: GetMinimumDifference };orts = { Problem: ConnectTree };titionList };          const parentIndex = Math.floor((index - 1) / 2)
+            if (this.heap[parentIndex] <= this.heap[index]) break
+            this.swap(parentIndex, index)
+            index = parentIndex
+        }
     }
 
-}
-
-class WordLadder {
-
-
-    /**
-     * https://leetcode.com/problems/word-ladder/
-     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
-     * @return {number}
-     */
-    ladderLength = function (beginWord, endWord, wordList) {
-		
-	};
-
-
-    solve(beingWord, endWord, wordList) {
-        return this.ladderLength(beingWord, endWord, wordList);
+    swap(index1, index2) {
+        const temp = this.heap[index1]
+        this.heap[index1] = this.heap[index2]
+        this.heap[index2] = temp
     }
-}
 
+    dequeue() {
+        const min = this.heap[0]
+        const end = this.heap.pop()
+        if (this.heap.length > 0) {
+            this.heap[0] = end
+            this.sinkDown()
+        }
+        return min
+    }
 
-module.exports = { Problem: WordLadder }; index + 2
-			let leftChild, rightChild
-			let swap = null
+    sinkDown() {
+        let index = 0
+        const length = this.heap.length
+        const element = this.heap[0]
+        while (true) {
+            const leftChildIndex = 2 * index + 1
+            const rightChildIndex = 2 * index + 2
+            let leftChild, rightChild
+            let swap = null
 
-			if (leftChildIndex < length) {
-				leftChild = this.heap[leftChildIndex]
-				if (leftChild > element) {
-					swap = leftChildIndex
-				}
-			}
+            if (leftChildIndex < length) {
+                leftChild = this.heap[leftChildIndex]
+                if (leftChild < element) {
+                    swap = leftChildIndex
+                }
+            }
 
-			if (rightChildIndex < length) {
-				rightChild = this.heap[rightChildIndex]
-				if (
-					(swap === null && rightChild > element) ||
-					(swap !== null && rightChild > leftChild)
-				) {
-					swap = rightChildIndex
-				}
-			}
+            if (rightChildIndex < length) {
+                rightChild = this.heap[rightChildIndex]
+                if (
+                    (swap === null && rightChild < element) ||
+                    (swap !== null && rightChild < leftChild)
+                ) {
+                    swap = rightChildIndex
+                }
+            }
 
-			if (swap === null) break
-			this.swap(index, swap)
-			index = swap
-		}
-	}
+            if (swap === null) break
+            this.swap(index, swap)
+            index = swap
+        }
+    }
 
-	front() {
-		return this.heap[0]
-	}
-
-	size() {
-		return this.heap.length
-	}
-
-	isEmpty() {
-		return this.size() === 0
-	}
-
-}
-
-
-class LastStoneWeight {
-	/**
-	 * https://leetcode.com/problems/last-stone-weight/
-	 * Time O(N * log(N)) | Space O(N)
-	 * @param {number[]} stones
-	 * @return {number}
-	 */
-	lastStoneWeight = (stones) => {
-
-	};
-
-
-
-	solve(stones) {
-		return this.lastStoneWeight(stones);
-	}
-}
-
-
-module.exports = { Problem: LastStoneWeight };
-   front() {
+    front() {
         return this.heap[0]
     }
 
@@ -122,17 +82,19 @@ module.exports = { Problem: LastStoneWeight };
         return this.size() === 0
     }
 
+    top(){
+        return this.heap[0]
+    }
+
 }
 
-class KthLargestElementInAnArray {
-	solve(nums, k) {
-	// Your code here
+class MaxPriorityQueue {
 
-	}
-}
+    constructor() {
+        this.heap = []
+    }
 
-
-module.exports = { Problem: KthLargestElementInAnArray };ment) {
+    enqueue(element) {
         this.heap.push(element)
         this.bubbleUp()
     }

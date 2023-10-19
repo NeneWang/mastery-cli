@@ -1,7 +1,8 @@
-class BuildTreeFromInPost {	// Your code here
-
+class AverageOfLevels {	// Your code here
 
 }
+
+
 
 function TreeNode(val) {
     this.val = val;
@@ -9,4 +10,4 @@ function TreeNode(val) {
     this.right = null;
   }
 
-module.exports = { Problem: BuildTreeFromInPost };
+module.exports = { Problem: AverageOfLevels };
