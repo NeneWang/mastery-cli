@@ -275,6 +275,7 @@ class SymmetricTree extends ProblemTests {
     constructor(Problem){
         super(Problem);
         this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
     }
 
     test_1(){
@@ -291,6 +292,50 @@ class SymmetricTree extends ProblemTests {
 }
 
 
+class ConstructBinaryTreeFromInorderAndPostorderTraversal extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[9,3,15,20,7] | [9,15,7,20,3] => [3,9,20,null,null,15,7]';
+        const root = structure.buildTree([9,3,15,20,7], [9,15,7,20,3])
+        
+        assert.deepEqual(root, arrayToBinaryTree([3,9,20,null,null,15,7]));
+        // assert.deepEqual(structure.solve([9,3,15,20,7], [9,15,7,20,3]), arrayToBinaryTree([3,9,20,null,null,15,7]));
+    }
+
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[-1] | [-1] => [-1]';
+        const root = structure.buildTree([-1], [-1])
+        
+        assert.deepEqual(root, arrayToBinaryTree([-1]));
+        // assert.deepEqual(structure.solve([9,3,15,20,7], [9,15,7,20,3]), arrayToBinaryTree([3,9,20,null,null,15,7]));
+    }
+}
+
+
+class PopulatingNextRightPointersInEachNode extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_2());
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[] => []';
+        const root = structure.connect(arrayToBinaryTree([]))
+        
+        assert.deepEqual(root, arrayToBinaryTree([]));
+    }
+
+}
+
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
@@ -303,6 +348,8 @@ const TEST_DICTIONARY = {
     'minimum-number-of-arrows-to-burst-balloons': MinimumNumberOfArrowsToBurstBalloons,
     'partition-list': PartitionList,
     'symmetric-tree': SymmetricTree,
+    'construct-binary-tree-from-inorder-and-postorder-traversal': ConstructBinaryTreeFromInorderAndPostorderTraversal,
+    'populating-next-right-pointers-in-each-node': PopulatingNextRightPointersInEachNode,
 }
 
 module.exports = TEST_DICTIONARY;
