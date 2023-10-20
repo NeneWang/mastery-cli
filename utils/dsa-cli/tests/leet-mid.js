@@ -592,6 +592,58 @@ class RotateList extends ProblemTests {
 }
 
 
+class SimplifyPath extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '/home/ => /home';
+        assert.equal(structure.solve('/home/'), '/home');
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '/../ => /';
+        assert.equal(structure.solve('/../'), '/');
+    }
+
+    test_3() {
+        const structure = new this.Problem();
+        this.current_test_name = '/home//foo/ => /home/foo';
+        assert.equal(structure.solve('/home//foo/'), '/home/foo');
+    }
+}
+
+
+class BasicCalculator extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '"1 + 1" => 2';
+        assert.equal(structure.calculate('1 + 1'), 2);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '" 2-1 + 2 " => 3';
+        assert.equal(structure.calculate(' 2-1 + 2 '), 3);
+    }
+
+}
+
+
 
 
 const TEST_DICTIONARY = {
@@ -613,7 +665,9 @@ const TEST_DICTIONARY = {
     'average-of-levels-in-binary-tree': AverageOfLevelsInBinaryTree,
     'minimum-absolute-difference-in-bst': MinimumAbsoluteDifferenceInBst,
     'remove-duplicates-from-sorted-list-ii': RemoveDuplicatesFromLinkedList,
-    'rotate-list': RotateList
+    'rotate-list': RotateList,
+    'simplify-path': SimplifyPath,
+    'basic-calculator': BasicCalculator,
 }
 
 module.exports = TEST_DICTIONARY;
