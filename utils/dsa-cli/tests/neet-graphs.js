@@ -1,7 +1,8 @@
 
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
-const { arrayToNodeHeadNeighbors, arrayToBinaryTree, binaryTreeToArray } = require('./utils');
+const { arrayToNodeHeadNeighbors, arrayToBinaryTree, binaryTreeToArray, arrayToListNode } = require('./utils');
+const { link } = require('fs');
 
 
 class CloneGraph extends ProblemTests {
@@ -404,6 +405,141 @@ class ConvertSortedArrayToBinarySearchTree extends ProblemTests{
 }
 
 
+class NQueensII extends ProblemTests{
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const nQueens2 = new this.Problem();
+        this.current_test_name = 'n = 4 | 2';
+        const n = 4;
+        assert.deepEqual(nQueens2.solve(n), 2);
+    }
+
+    test_2(){
+        const nQueens2 = new this.Problem();
+        this.current_test_name = 'n = 1 | 1';
+        const n = 1;
+        assert.deepEqual(nQueens2.solve(n), 1);
+    }
+
+    test_3(){
+        const nQueens2 = new this.Problem();
+        this.current_test_name = 'n = 2 | 0';
+        const n = 2;
+        assert.deepEqual(nQueens2.solve(n), 0);
+    }
+
+}
+
+class SortList extends ProblemTests{
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const sortList = new this.Problem();
+        this.current_test_name = '[-1,5,3,4,0] | [-1,0,3,4,5]';
+        const linkedList = arrayToListNode([-1,5,3,4,0]);
+        // console.log(linkedList)
+        assert.deepEqual(sortList.solve(linkedList), arrayToListNode([-1,0,3,4,5]));
+    }
+
+    test_2(){
+        const sortList = new this.Problem();
+        this.current_test_name = '[] | []';
+        const linkedList = arrayToListNode([]);
+        // console.log(linkedList)
+        assert.deepEqual(sortList.solve(linkedList), arrayToListNode([]));
+    }
+
+    test_3(){
+        const sortList = new this.Problem();
+        this.current_test_name = '[-1, 5, 3, 4, 0] | [-1, 0, 3, 4, 5]';
+        const linkedList = arrayToListNode([-1, 5, 3, 4, 0]);
+        // console.log(linkedList)
+        assert.deepEqual(sortList.solve(linkedList), arrayToListNode([-1, 0, 3, 4, 5]));
+    }
+
+
+}
+
+
+class ConstructQuadTree extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const constructQuadTree = new this.Problem();
+        this.current_test_name = '[[0,1],[1,0]] | [[0,1],[1,0]]';
+        const grid = [[0,1],[1,0]];
+        console.log(constructQuadTree.solve(grid))
+        // assert.deepEqual(constructQuadTree.solve(grid), arrayToBinaryTree([[0,1],[1,0]]));
+        // throw new Error('Not implemented');
+    }
+
+
+    test_2(){
+        const constructQuadTree = new this.Problem();
+        this.current_test_name = '[[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,1,1,1,1],[1, 1, 1, 1, 1, 1, 1, 1],[1,1,1,1,0,0,0,0],[1, 1, 1, 1, 0, 0, 0, 0],[1,1,1,1,0,0,0,0],[1, 1, 1, 1, 0, 0, 0, 0]] | [[0,1],[1,0]]';
+        const grid = [[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,1,1,1,1],[1, 1, 1, 1, 1, 1, 1, 1],[1,1,1,1,0,0,0,0],[1, 1, 1, 1, 0, 0, 0, 0],[1,1,1,1,0,0,0,0],[1, 1, 1, 1, 0, 0, 0, 0]];
+        // assert.deepEqual(constructQuadTree.solve(grid), arrayToBinaryTree([[0,1],[1,0]]));
+        console.log(constructQuadTree.solve(grid))
+    
+    }
+
+}
+
+
+class SearchInsertPosition extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const searchInsertPosition = new this.Problem();
+        this.current_test_name = '[1,3,5,6], 5 | 2';
+        const nums = [1,3,5,6];
+        const target = 5;
+        assert.deepEqual(searchInsertPosition.solve(nums, target), 2);
+    }
+
+    test_2(){
+        const searchInsertPosition = new this.Problem();
+        this.current_test_name = '[1,3,5,6], 2 | 1';
+        const nums = [1,3,5,6];
+        const target = 2;
+        assert.deepEqual(searchInsertPosition.solve(nums, target), 1);
+    }
+
+    test_3(){
+        const searchInsertPosition = new this.Problem();
+        this.current_test_name = '[1,3,5,6], 7 | 4';
+        const nums = [1,3,5,6];
+        const target = 7;
+        assert.deepEqual(searchInsertPosition.solve(nums, target), 4);
+    }
+
+}
+
+
 
 const TEST_DICTIONARY = {
     'clone-graph': CloneGraph,
@@ -419,7 +555,11 @@ const TEST_DICTIONARY = {
     'evaluate-division': EvaluateDivision,
     'snakes-and-ladders': SnakesAndLadders,
     'minimum-genetic-mutation': MinMutation,
-    'convert-sorted-array-to-binary-search-tree': ConvertSortedArrayToBinarySearchTree
+    'convert-sorted-array-to-binary-search-tree': ConvertSortedArrayToBinarySearchTree,
+    'n-queens-ii': NQueensII,
+    'sort-list': SortList,
+    // 'construct-quad-tree': ConstructQuadTree,
+    'search-insert-position': SearchInsertPosition,
 }
 
 

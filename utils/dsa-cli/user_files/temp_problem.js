@@ -6,108 +6,77 @@ class SubstringWithConcatenationOfAllWords {
 }
 
 
-module.exports = { Problem: SubstringWithConcatenationOfAllWords };romEnd };m: AverageOfLevels };nimumDifference };orts = { Problem: ConnectTree };titionList };
+module.exports = { Problem: SubstringWithConcatenationOfAllWords };romEnd };m: AverageOfLevels };nimumDifference };mmetric {
+	solve(root) {
+		// Your code here
+
 	}
 }
 
 
-module.exports = { Problem: IsSymmetric };) {
+module.exports = { Problem: IsSymmetric };
+    isEmpty() {
         return this.size() === 0
     }
 
 }
 
-
-class RottingOranges {
+class WordLadder {
 
 
     /**
-     * https://leetcode.com/problems/rotting-oranges/
+     * https://leetcode.com/problems/word-ladder/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {number[][]} grid
+     * @param {string} beginWord
+     * @param {string} endWord
+     * @param {string[]} wordList
      * @return {number}
      */
-    orangesRotting = function (grid) {
+    ladderLength = function (beginWord, endWord, wordList) {
 		
-    };
+	};
 
 
-    solve(grid) {
-        return this.orangesRotting(grid);
-    }
-}
-
-
-module.exports = { Problem: RottingOranges };
-d, wordList) {
+    solve(beingWord, endWord, wordList) {
         return this.ladderLength(beingWord, endWord, wordList);
     }
 }
 
 
-module.exports = { Problem: WordLadder }; index + 2
-			let leftChild, rightChild
-			let swap = null
+module.exports = { Problem: WordLadder };) {
+        let index = 0
+        const length = this.heap.length
+        const element = this.heap[0]
+        while (true) {
+            const leftChildIndex = 2 * index + 1
+            const rightChildIndex = 2 * index + 2
+            let leftChild, rightChild
+            let swap = null
 
-			if (leftChildIndex < length) {
-				leftChild = this.heap[leftChildIndex]
-				if (leftChild > element) {
-					swap = leftChildIndex
-				}
-			}
+            if (leftChildIndex < length) {
+                leftChild = this.heap[leftChildIndex]
+                if (leftChild < element) {
+                    swap = leftChildIndex
+                }
+            }
 
-			if (rightChildIndex < length) {
-				rightChild = this.heap[rightChildIndex]
-				if (
-					(swap === null && rightChild > element) ||
-					(swap !== null && rightChild > leftChild)
-				) {
-					swap = rightChildIndex
-				}
-			}
+            if (rightChildIndex < length) {
+                rightChild = this.heap[rightChildIndex]
+                if (
+                    (swap === null && rightChild < element) ||
+                    (swap !== null && rightChild < leftChild)
+                ) {
+                    swap = rightChildIndex
+                }
+            }
 
-			if (swap === null) break
-			this.swap(index, swap)
-			index = swap
-		}
-	}
+            if (swap === null) break
+            this.swap(index, swap)
+            index = swap
+        }
+    }
 
-	front() {
-		return this.heap[0]
-	}
-
-	size() {
-		return this.heap.length
-	}
-
-	isEmpty() {
-		return this.size() === 0
-	}
-
-}
-
-
-class LastStoneWeight {
-	/**
-	 * https://leetcode.com/problems/last-stone-weight/
-	 * Time O(N * log(N)) | Space O(N)
-	 * @param {number[]} stones
-	 * @return {number}
-	 */
-	lastStoneWeight = (stones) => {
-
-	};
-
-
-
-	solve(stones) {
-		return this.lastStoneWeight(stones);
-	}
-}
-
-
-module.exports = { Problem: LastStoneWeight };
-   front() {
+    front() {
         return this.heap[0]
     }
 
@@ -119,19 +88,17 @@ module.exports = { Problem: LastStoneWeight };
         return this.size() === 0
     }
 
-    top(){
-        return this.heap[0]
-    }
-
 }
 
-class MaxPriorityQueue {
+class KthLargestElementInAnArray {
+	solve(nums, k) {
+	// Your code here
 
-    constructor() {
-        this.heap = []
-    }
+	}
+}
 
-    enqueue(element) {
+
+module.exports = { Problem: KthLargestElementInAnArray };ment) {
         this.heap.push(element)
         this.bubbleUp()
     }
