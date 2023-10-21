@@ -1,16 +1,12 @@
-class DeleteDuplicates {
-	solve(head) {
+class SubstringWithConcatenationOfAllWords {
+	solve(s, words) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: DeleteDuplicates };  }
-
-
-module.exports = { Problem: RemoveNthFromEnd };m: AverageOfLevels };nimumDifference };orts = { Problem: ConnectTree };ur code here
-
+module.exports = { Problem: SubstringWithConcatenationOfAllWords };romEnd };m: AverageOfLevels };nimumDifference };orts = { Problem: ConnectTree };titionList };
 	}
 }
 
@@ -49,40 +45,69 @@ d, wordList) {
 }
 
 
-module.exports = { Problem: WordLadder };) {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
+module.exports = { Problem: WordLadder }; index + 2
+			let leftChild, rightChild
+			let swap = null
 
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild < element) {
-                    swap = leftChildIndex
-                }
-            }
+			if (leftChildIndex < length) {
+				leftChild = this.heap[leftChildIndex]
+				if (leftChild > element) {
+					swap = leftChildIndex
+				}
+			}
 
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild < element) ||
-                    (swap !== null && rightChild < leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
+			if (rightChildIndex < length) {
+				rightChild = this.heap[rightChildIndex]
+				if (
+					(swap === null && rightChild > element) ||
+					(swap !== null && rightChild > leftChild)
+				) {
+					swap = rightChildIndex
+				}
+			}
 
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
-        }
-    }
+			if (swap === null) break
+			this.swap(index, swap)
+			index = swap
+		}
+	}
 
-    front() {
+	front() {
+		return this.heap[0]
+	}
+
+	size() {
+		return this.heap.length
+	}
+
+	isEmpty() {
+		return this.size() === 0
+	}
+
+}
+
+
+class LastStoneWeight {
+	/**
+	 * https://leetcode.com/problems/last-stone-weight/
+	 * Time O(N * log(N)) | Space O(N)
+	 * @param {number[]} stones
+	 * @return {number}
+	 */
+	lastStoneWeight = (stones) => {
+
+	};
+
+
+
+	solve(stones) {
+		return this.lastStoneWeight(stones);
+	}
+}
+
+
+module.exports = { Problem: LastStoneWeight };
+   front() {
         return this.heap[0]
     }
 
@@ -94,17 +119,19 @@ module.exports = { Problem: WordLadder };) {
         return this.size() === 0
     }
 
+    top(){
+        return this.heap[0]
+    }
+
 }
 
-class KthLargestElementInAnArray {
-	solve(nums, k) {
-	// Your code here
+class MaxPriorityQueue {
 
-	}
-}
+    constructor() {
+        this.heap = []
+    }
 
-
-module.exports = { Problem: KthLargestElementInAnArray };ment) {
+    enqueue(element) {
         this.heap.push(element)
         this.bubbleUp()
     }

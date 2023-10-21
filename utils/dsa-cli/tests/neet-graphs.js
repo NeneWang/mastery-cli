@@ -1,7 +1,7 @@
 
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
-const { arrayToNodeHeadNeighbors } = require('./utils');
+const { arrayToNodeHeadNeighbors, arrayToBinaryTree, binaryTreeToArray } = require('./utils');
 
 
 class CloneGraph extends ProblemTests {
@@ -347,6 +347,63 @@ class SnakesAndLadders extends ProblemTests{
     }
 }
 
+class MinMutation extends ProblemTests{
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const minMutation = new this.Problem();
+        this.current_test_name = 'start = "AACCGGTT", end = "AACCGGTA", bank = ["AACCGGTA"] | 1';
+        const start = "AACCGGTT";
+        const end = "AACCGGTA";
+        const bank = ["AACCGGTA"];
+        assert.deepEqual(minMutation.solve(start, end, bank), 1);
+    }
+
+    test_2(){
+        const minMutation = new this.Problem();
+        this.current_test_name = 'start = "AACCGGTT", end = "AAACGGTA", bank = ["AACCGGTA","AACCGCTA","AAACGGTA"] | 2';
+        const start = "AACCGGTT";
+        const end = "AAACGGTA";
+        const bank = ["AACCGGTA","AACCGCTA","AAACGGTA"];
+        assert.deepEqual(minMutation.solve(start, end, bank), 2);
+    }
+}
+
+
+class ConvertSortedArrayToBinarySearchTree extends ProblemTests{
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const convertSortedArrayToBinarySearchTree = new this.Problem();
+        this.current_test_name = '[-10,-3,0,5,9] | [0,-3,9,-10,null,5]';
+        const nums = [-10,-3,0,5,9];
+        const root = convertSortedArrayToBinarySearchTree.solve(nums);
+        // console.log(root)
+        // console.log(arrayToBinaryTree([0,-3,9,-10,null,5]))
+        assert.deepEqual(root, arrayToBinaryTree([0,-3,9,-10,null,5]));
+    }
+
+    test_2(){
+        const convertSortedArrayToBinarySearchTree = new this.Problem();
+        this.current_test_name = '[1, 3] | [0,-3,9,-10,null,5]';
+        let nums = [1, 3];
+        const root = convertSortedArrayToBinarySearchTree.solve(nums);
+        assert.deepEqual(root, arrayToBinaryTree([3,1]));
+    }
+
+}
+
+
 
 const TEST_DICTIONARY = {
     'clone-graph': CloneGraph,
@@ -361,6 +418,8 @@ const TEST_DICTIONARY = {
     'word-ladder': wordLadder,
     'evaluate-division': EvaluateDivision,
     'snakes-and-ladders': SnakesAndLadders,
+    'minimum-genetic-mutation': MinMutation,
+    'convert-sorted-array-to-binary-search-tree': ConvertSortedArrayToBinarySearchTree
 }
 
 
