@@ -325,7 +325,7 @@ class EvaluateDivision extends ProblemTests {
 }
 
 
-class SnakesAndLadders extends ProblemTests{
+class SnakesAndLadders extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
@@ -336,19 +336,19 @@ class SnakesAndLadders extends ProblemTests{
     test_1() {
         const snakesAndLadders = new this.Problem();
         this.current_test_name = 'board = [[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,35,-1,-1,13,-1],[-1,-1,-1,-1,-1,-1],[-1,15,-1,-1,-1,-1]] | 4';
-        const board = [[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,35,-1,-1,13,-1],[-1,-1,-1,-1,-1,-1],[-1,15,-1,-1,-1,-1]];
+        const board = [[-1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1], [-1, 35, -1, -1, 13, -1], [-1, -1, -1, -1, -1, -1], [-1, 15, -1, -1, -1, -1]];
         assert.deepEqual(snakesAndLadders.solve(board), 4);
     }
 
-    test_2(){
+    test_2() {
         const snakesAndLadders = new this.Problem();
         this.current_test_name = 'board = [[-1,-1],[-1,3]] | 1';
-        const board = [[-1,-1],[-1,3]];
+        const board = [[-1, -1], [-1, 3]];
         assert.deepEqual(snakesAndLadders.solve(board), 1);
     }
 }
 
-class MinMutation extends ProblemTests{
+class MinMutation extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
@@ -356,7 +356,7 @@ class MinMutation extends ProblemTests{
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const minMutation = new this.Problem();
         this.current_test_name = 'start = "AACCGGTT", end = "AACCGGTA", bank = ["AACCGGTA"] | 1';
         const start = "AACCGGTT";
@@ -365,18 +365,18 @@ class MinMutation extends ProblemTests{
         assert.deepEqual(minMutation.solve(start, end, bank), 1);
     }
 
-    test_2(){
+    test_2() {
         const minMutation = new this.Problem();
         this.current_test_name = 'start = "AACCGGTT", end = "AAACGGTA", bank = ["AACCGGTA","AACCGCTA","AAACGGTA"] | 2';
         const start = "AACCGGTT";
         const end = "AAACGGTA";
-        const bank = ["AACCGGTA","AACCGCTA","AAACGGTA"];
+        const bank = ["AACCGGTA", "AACCGCTA", "AAACGGTA"];
         assert.deepEqual(minMutation.solve(start, end, bank), 2);
     }
 }
 
 
-class ConvertSortedArrayToBinarySearchTree extends ProblemTests{
+class ConvertSortedArrayToBinarySearchTree extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
@@ -384,28 +384,28 @@ class ConvertSortedArrayToBinarySearchTree extends ProblemTests{
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const convertSortedArrayToBinarySearchTree = new this.Problem();
         this.current_test_name = '[-10,-3,0,5,9] | [0,-3,9,-10,null,5]';
-        const nums = [-10,-3,0,5,9];
+        const nums = [-10, -3, 0, 5, 9];
         const root = convertSortedArrayToBinarySearchTree.solve(nums);
         // console.log(root)
         // console.log(arrayToBinaryTree([0,-3,9,-10,null,5]))
-        assert.deepEqual(root, arrayToBinaryTree([0,-3,9,-10,null,5]));
+        assert.deepEqual(root, arrayToBinaryTree([0, -3, 9, -10, null, 5]));
     }
 
-    test_2(){
+    test_2() {
         const convertSortedArrayToBinarySearchTree = new this.Problem();
         this.current_test_name = '[1, 3] | [0,-3,9,-10,null,5]';
         let nums = [1, 3];
         const root = convertSortedArrayToBinarySearchTree.solve(nums);
-        assert.deepEqual(root, arrayToBinaryTree([3,1]));
+        assert.deepEqual(root, arrayToBinaryTree([3, 1]));
     }
 
 }
 
 
-class NQueensII extends ProblemTests{
+class NQueensII extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
@@ -414,21 +414,21 @@ class NQueensII extends ProblemTests{
         this.tests.push(() => this.test_3());
     }
 
-    test_1(){
+    test_1() {
         const nQueens2 = new this.Problem();
         this.current_test_name = 'n = 4 | 2';
         const n = 4;
         assert.deepEqual(nQueens2.solve(n), 2);
     }
 
-    test_2(){
+    test_2() {
         const nQueens2 = new this.Problem();
         this.current_test_name = 'n = 1 | 1';
         const n = 1;
         assert.deepEqual(nQueens2.solve(n), 1);
     }
 
-    test_3(){
+    test_3() {
         const nQueens2 = new this.Problem();
         this.current_test_name = 'n = 2 | 0';
         const n = 2;
@@ -437,7 +437,7 @@ class NQueensII extends ProblemTests{
 
 }
 
-class SortList extends ProblemTests{
+class SortList extends ProblemTests {
 
     constructor(Problem) {
         super(Problem);
@@ -446,15 +446,15 @@ class SortList extends ProblemTests{
         this.tests.push(() => this.test_3());
     }
 
-    test_1(){
+    test_1() {
         const sortList = new this.Problem();
         this.current_test_name = '[-1,5,3,4,0] | [-1,0,3,4,5]';
-        const linkedList = arrayToListNode([-1,5,3,4,0]);
+        const linkedList = arrayToListNode([-1, 5, 3, 4, 0]);
         // console.log(linkedList)
-        assert.deepEqual(sortList.solve(linkedList), arrayToListNode([-1,0,3,4,5]));
+        assert.deepEqual(sortList.solve(linkedList), arrayToListNode([-1, 0, 3, 4, 5]));
     }
 
-    test_2(){
+    test_2() {
         const sortList = new this.Problem();
         this.current_test_name = '[] | []';
         const linkedList = arrayToListNode([]);
@@ -462,7 +462,7 @@ class SortList extends ProblemTests{
         assert.deepEqual(sortList.solve(linkedList), arrayToListNode([]));
     }
 
-    test_3(){
+    test_3() {
         const sortList = new this.Problem();
         this.current_test_name = '[-1, 5, 3, 4, 0] | [-1, 0, 3, 4, 5]';
         const linkedList = arrayToListNode([-1, 5, 3, 4, 0]);
@@ -474,74 +474,74 @@ class SortList extends ProblemTests{
 }
 
 
-class ConstructQuadTree extends ProblemTests{
+class ConstructQuadTree extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const constructQuadTree = new this.Problem();
         this.current_test_name = '[[0,1],[1,0]] | [[0,1],[1,0]]';
-        const grid = [[0,1],[1,0]];
+        const grid = [[0, 1], [1, 0]];
         console.log(constructQuadTree.solve(grid))
         // assert.deepEqual(constructQuadTree.solve(grid), arrayToBinaryTree([[0,1],[1,0]]));
         // throw new Error('Not implemented');
     }
 
 
-    test_2(){
+    test_2() {
         const constructQuadTree = new this.Problem();
         this.current_test_name = '[[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,1,1,1,1],[1, 1, 1, 1, 1, 1, 1, 1],[1,1,1,1,0,0,0,0],[1, 1, 1, 1, 0, 0, 0, 0],[1,1,1,1,0,0,0,0],[1, 1, 1, 1, 0, 0, 0, 0]] | [[0,1],[1,0]]';
-        const grid = [[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,1,1,1,1],[1, 1, 1, 1, 1, 1, 1, 1],[1,1,1,1,0,0,0,0],[1, 1, 1, 1, 0, 0, 0, 0],[1,1,1,1,0,0,0,0],[1, 1, 1, 1, 0, 0, 0, 0]];
+        const grid = [[1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0]];
         // assert.deepEqual(constructQuadTree.solve(grid), arrayToBinaryTree([[0,1],[1,0]]));
         console.log(constructQuadTree.solve(grid))
-    
+
     }
 
 }
 
 
-class SearchInsertPosition extends ProblemTests{
+class SearchInsertPosition extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
     }
 
-    test_1(){
+    test_1() {
         const searchInsertPosition = new this.Problem();
         this.current_test_name = '[1,3,5,6], 5 | 2';
-        const nums = [1,3,5,6];
+        const nums = [1, 3, 5, 6];
         const target = 5;
         assert.deepEqual(searchInsertPosition.solve(nums, target), 2);
     }
 
-    test_2(){
+    test_2() {
         const searchInsertPosition = new this.Problem();
         this.current_test_name = '[1,3,5,6], 2 | 1';
-        const nums = [1,3,5,6];
+        const nums = [1, 3, 5, 6];
         const target = 2;
         assert.deepEqual(searchInsertPosition.solve(nums, target), 1);
     }
 
-    test_3(){
+    test_3() {
         const searchInsertPosition = new this.Problem();
         this.current_test_name = '[1,3,5,6], 7 | 4';
-        const nums = [1,3,5,6];
+        const nums = [1, 3, 5, 6];
         const target = 7;
         assert.deepEqual(searchInsertPosition.solve(nums, target), 4);
     }
 
 }
 
-class SearchA2DMatrix extends ProblemTests{
+class SearchA2DMatrix extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
@@ -549,23 +549,23 @@ class SearchA2DMatrix extends ProblemTests{
     }
 
 
-    test_1(){
+    test_1() {
         const searchA2DMatrix = new this.Problem();
         this.current_test_name = 'matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3 | true';
-        const matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]];
+        const matrix = [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]];
         const target = 3;
         assert.deepEqual(searchA2DMatrix.solve(matrix, target), true);
     }
 
-    test_2(){
+    test_2() {
         const searchA2DMatrix = new this.Problem();
         this.current_test_name = 'matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13 | false';
-        const matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]];
+        const matrix = [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]];
         const target = 13;
         assert.deepEqual(searchA2DMatrix.solve(matrix, target), false);
     }
 
-    test_3(){
+    test_3() {
         const searchA2DMatrix = new this.Problem();
         this.current_test_name = 'matrix = [], target = 0 | false';
         const matrix = [];
@@ -575,7 +575,75 @@ class SearchA2DMatrix extends ProblemTests{
 
 }
 
-class FindFirstAndLastPositionOfElementInSortedArray extends ProblemTests{
+class FindFirstAndLastPositionOfElementInSortedArray extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        const findFirstAndLastPositionOfElementInSortedArray = new this.Problem();
+        this.current_test_name = 'nums = [5,7,7,8,8,10], target = 8 | [3,4]';
+        const nums = [5, 7, 7, 8, 8, 10];
+        const target = 8;
+        assert.deepEqual(findFirstAndLastPositionOfElementInSortedArray.solve(nums, target), [3, 4]);
+    }
+
+    test_2() {
+        const findFirstAndLastPositionOfElementInSortedArray = new this.Problem();
+        this.current_test_name = 'nums = [5,7,7,8,8,10], target = 6 | [-1,-1]';
+        const nums = [5, 7, 7, 8, 8, 10];
+        const target = 6;
+        assert.deepEqual(findFirstAndLastPositionOfElementInSortedArray.solve(nums, target), [-1, -1]);
+    }
+
+    test_3() {
+        const findFirstAndLastPositionOfElementInSortedArray = new this.Problem();
+        this.current_test_name = 'nums = [], target = 0 | [-1,-1]';
+        const nums = [];
+        const target = 0;
+        assert.deepEqual(findFirstAndLastPositionOfElementInSortedArray.solve(nums, target), [-1, -1]);
+    }
+
+}
+
+class FindMInimumInRotatedSortedArray extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        const findMinimumInRotatedSortedArray = new this.Problem();
+        this.current_test_name = 'nums = [3,4,5,1,2] | 1';
+        const nums = [3, 4, 5, 1, 2];
+        assert.deepEqual(findMinimumInRotatedSortedArray.solve(nums), 1);
+    }
+
+    test_2() {
+        const findMinimumInRotatedSortedArray = new this.Problem();
+        this.current_test_name = 'nums = [4,5,6,7,0,1,2] | 0';
+        const nums = [4, 5, 6, 7, 0, 1, 2];
+        assert.deepEqual(findMinimumInRotatedSortedArray.solve(nums), 0);
+    }
+
+    test_3() {
+        const findMinimumInRotatedSortedArray = new this.Problem();
+        this.current_test_name = 'nums = [11,13,15,17] | 11';
+        const nums = [11, 13, 15, 17];
+        assert.deepEqual(findMinimumInRotatedSortedArray.solve(nums), 11);
+    }
+
+}
+
+
+
+class MedianOfTwoSortedArrays extends ProblemTests {
 
     constructor(Problem){
         super(Problem);
@@ -585,30 +653,33 @@ class FindFirstAndLastPositionOfElementInSortedArray extends ProblemTests{
     }
 
     test_1(){
-        const findFirstAndLastPositionOfElementInSortedArray = new this.Problem();
-        this.current_test_name = 'nums = [5,7,7,8,8,10], target = 8 | [3,4]';
-        const nums = [5,7,7,8,8,10];
-        const target = 8;
-        assert.deepEqual(findFirstAndLastPositionOfElementInSortedArray.solve(nums, target), [3,4]);
+        
+        const nums1 = [1, 3];
+        const nums2 = [2];
+        const medianOfTwoSortedArrays = new this.Problem();
+        this.current_test_name = 'nums1 = [1,3], nums2 = [2] | 2.00000';
+        assert.deepEqual(medianOfTwoSortedArrays.solve(nums1, nums2), 2.00000);
+
     }
 
     test_2(){
-        const findFirstAndLastPositionOfElementInSortedArray = new this.Problem();
-        this.current_test_name = 'nums = [5,7,7,8,8,10], target = 6 | [-1,-1]';
-        const nums = [5,7,7,8,8,10];
-        const target = 6;
-        assert.deepEqual(findFirstAndLastPositionOfElementInSortedArray.solve(nums, target), [-1,-1]);
+        const nums1 = [1, 2];
+        const nums2 = [3, 4];
+        const medianOfTwoSortedArrays = new this.Problem();
+        this.current_test_name = 'nums1 = [1,2], nums2 = [3,4] | 2.50000';
+        assert.deepEqual(medianOfTwoSortedArrays.solve(nums1, nums2), 2.50000);
     }
 
     test_3(){
-        const findFirstAndLastPositionOfElementInSortedArray = new this.Problem();
-        this.current_test_name = 'nums = [], target = 0 | [-1,-1]';
-        const nums = [];
-        const target = 0;
-        assert.deepEqual(findFirstAndLastPositionOfElementInSortedArray.solve(nums, target), [-1,-1]);
+        const nums1 = [0, 0];
+        const nums2 = [0, 0];
+        const medianOfTwoSortedArrays = new this.Problem();
+        this.current_test_name = 'nums1 = [0,0], nums2 = [0,0] | 0.00000';
+        assert.deepEqual(medianOfTwoSortedArrays.solve(nums1, nums2), 0.00000);
     }
 
 }
+
 
 
 
@@ -633,7 +704,8 @@ const TEST_DICTIONARY = {
     'search-insert-position': SearchInsertPosition,
     'search-a-2d-matrix': SearchA2DMatrix,
     'find-first-and-last-position-of-element-in-sorted-array': FindFirstAndLastPositionOfElementInSortedArray,
-    
+    'find-minimum-in-rotated-sorted-array': FindMInimumInRotatedSortedArray,
+    'median-of-two-sorted-arrays': MedianOfTwoSortedArrays
 }
 
 
