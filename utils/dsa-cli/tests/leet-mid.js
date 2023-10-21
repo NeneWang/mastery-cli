@@ -667,6 +667,94 @@ class RemoveNthFromEnd extends ProblemTests {
 }
 
 
+class IPO extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+
+    test_1() {
+
+        const IPO = new this.Problem();
+        this.current_test_name = 'k = 2, W = 0, Profits = [1,2,3], Capital = [0,1,1] | 4';
+        const k = 2;
+        const W = 0;
+        const Profits = [1, 2, 3];
+        const Capital = [0, 1, 1];
+        assert.deepEqual(IPO.solve(k, W, Profits, Capital), 4);
+    }
+
+    test_2() {
+
+        const IPO = new this.Problem();
+        this.current_test_name = 'k = 1, W = 0, Profits = [1,2,3], Capital = [1,1,2] | 0';
+        const k = 1;
+        const W = 0;
+        const Profits = [1, 2, 3];
+        const Capital = [1, 1, 2];
+        assert.deepEqual(IPO.solve(k, W, Profits, Capital), 0);
+    }
+
+    test_3() {
+
+        const IPO = new this.Problem();
+        this.current_test_name = 'k = 2, W = 0, Profits = [1,2,3], Capital = [1,1,2] | 0';
+        const k = 2;
+        const W = 0;
+        const Profits = [1, 2, 3];
+        const Capital = [1, 1, 2];
+        assert.deepEqual(IPO.solve(k, W, Profits, Capital), 0);
+    }
+
+}
+
+
+class FindKPairsWithSmallestSums extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+    }
+
+    test_1() {
+        const nums = [1, 7, 11];
+        const nums2 = [2, 4, 6];
+        const k = 3;
+        const expected = [[1, 2], [1, 4], [1, 6]];
+        const structure = new this.Problem();
+        this.current_test_name = `${nums}, ${nums2}, ${k} => ${expected}`;
+        assert.deepEqual(structure.solve(nums, nums2, k), expected);
+
+    }
+
+    test_2(){
+        const nums = [1, 1, 2];
+        const nums2 = [1, 2, 3];
+        const k = 2;
+        const expected = [[1, 1], [1, 1]];
+        const structure = new this.Problem();
+        this.current_test_name = `${nums}, ${nums2}, ${k} => ${expected}`;
+        assert.deepEqual(structure.solve(nums, nums2, k), expected);
+    }
+
+    test_3(){
+        const nums = [1, 2];
+        const nums2 = [3];
+        const k = 3;
+        const expected = [[1, 3], [2, 3]];
+        const structure = new this.Problem();
+        this.current_test_name = `${nums}, ${nums2}, ${k} => ${expected}`;
+        assert.deepEqual(structure.solve(nums, nums2, k), expected);
+    }
+
+
+
+}
+
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
@@ -691,6 +779,8 @@ const TEST_DICTIONARY = {
     'simplify-path': SimplifyPath,
     'basic-calculator': BasicCalculator,
     'remove-nth-node-from-end-of-list': RemoveNthFromEnd,
+    'ipo': IPO,
+    'find-k-pairs-with-smallest-sums': FindKPairsWithSmallestSums,
 }
 
 module.exports = TEST_DICTIONARY;

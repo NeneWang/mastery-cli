@@ -645,15 +645,15 @@ class FindMInimumInRotatedSortedArray extends ProblemTests {
 
 class MedianOfTwoSortedArrays extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
     }
 
-    test_1(){
-        
+    test_1() {
+
         const nums1 = [1, 3];
         const nums2 = [2];
         const medianOfTwoSortedArrays = new this.Problem();
@@ -662,7 +662,7 @@ class MedianOfTwoSortedArrays extends ProblemTests {
 
     }
 
-    test_2(){
+    test_2() {
         const nums1 = [1, 2];
         const nums2 = [3, 4];
         const medianOfTwoSortedArrays = new this.Problem();
@@ -670,7 +670,7 @@ class MedianOfTwoSortedArrays extends ProblemTests {
         assert.deepEqual(medianOfTwoSortedArrays.solve(nums1, nums2), 2.50000);
     }
 
-    test_3(){
+    test_3() {
         const nums1 = [0, 0];
         const nums2 = [0, 0];
         const medianOfTwoSortedArrays = new this.Problem();
@@ -679,6 +679,8 @@ class MedianOfTwoSortedArrays extends ProblemTests {
     }
 
 }
+
+
 
 
 
