@@ -272,6 +272,41 @@ class wordLadder extends ProblemTests {
 }
 
 
+class EvaluateDivision extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+
+        const evaluateDivision = new this.Problem();
+        this.current_test_name = 'equations = [["a","b"],["b","c"]], values = [2.0,3.0], queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]] | [6.00000,0.50000,-1.00000,1.00000,-1.00000]';
+        const equations = [["a", "b"], ["b", "c"]];
+        const values = [2.0, 3.0];
+        const queries = [["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"]];
+
+        this.tests.push(() => this.test_2());
+        const results = evaluateDivision.solve(equations, values, queries);
+        assert.deepEqual(results, [6.00000, 0.50000, -1.00000, 1.00000, -1.00000]);
+    }
+
+    test_2() {
+        
+        const evaluateDivision = new this.Problem();
+        this.current_test_name = 'equations = [["a","b"],["b","c"],["bc","cd"]], values = [1.5,2.5,5.0], queries = [["a","c"],["c","b"],["bc","cd"],["cd","bc"]] | [3.75000,0.40000,5.00000,0.20000]';
+        const equations = [["a", "b"], ["b", "c"], ["bc", "cd"]];
+        const values = [1.5, 2.5, 5.0];
+        const queries = [["a", "c"], ["c", "b"], ["bc", "cd"], ["cd", "bc"]];
+        const results = evaluateDivision.solve(equations, values, queries);
+        assert.deepEqual(results, [3.75000, 0.40000, 5.00000, 0.20000]);
+    
+    }
+}
+
+
 
 const TEST_DICTIONARY = {
     'clone-graph': CloneGraph,
@@ -284,6 +319,7 @@ const TEST_DICTIONARY = {
     'surrounded-regions': SurroundedRegions,
     'walls-and-gates': WallsAndGates,
     'word-ladder': wordLadder,
+    'evaluate-division': EvaluateDivision,
 }
 
 
