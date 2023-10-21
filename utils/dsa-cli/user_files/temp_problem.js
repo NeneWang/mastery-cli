@@ -1,40 +1,49 @@
-class Candy {
-	solve(ratings) {
+class DeleteDuplicates {
+	solve(head) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Candy };le.exports = { Problem: SubstringWithConcatenationOfAllWords };romEnd };m: AverageOfLevels };nimumDifference };orts = { Problem: ConnectTree };titionList };
+module.exports = { Problem: DeleteDuplicates };  }
+
+
+module.exports = { Problem: RemoveNthFromEnd };m: AverageOfLevels };nimumDifference };orts = { Problem: ConnectTree };ur code here
+
 	}
 }
 
 
-module.exports = { Problem: IsSymmetric };
-    isEmpty() {
+module.exports = { Problem: IsSymmetric };) {
         return this.size() === 0
     }
 
 }
 
-class WordLadder {
+
+class RottingOranges {
 
 
     /**
-     * https://leetcode.com/problems/word-ladder/
+     * https://leetcode.com/problems/rotting-oranges/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
+     * @param {number[][]} grid
      * @return {number}
      */
-    ladderLength = function (beginWord, endWord, wordList) {
+    orangesRotting = function (grid) {
 		
-	};
+    };
 
 
-    solve(beingWord, endWord, wordList) {
+    solve(grid) {
+        return this.orangesRotting(grid);
+    }
+}
+
+
+module.exports = { Problem: RottingOranges };
+d, wordList) {
         return this.ladderLength(beingWord, endWord, wordList);
     }
 }

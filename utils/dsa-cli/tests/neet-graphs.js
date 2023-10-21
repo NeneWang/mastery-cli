@@ -294,7 +294,7 @@ class EvaluateDivision extends ProblemTests {
     }
 
     test_2() {
-        
+
         const evaluateDivision = new this.Problem();
         this.current_test_name = 'equations = [["a","b"],["b","c"],["bc","cd"]], values = [1.5,2.5,5.0], queries = [["a","c"],["c","b"],["bc","cd"],["cd","bc"]] | [3.75000,0.40000,5.00000,0.20000]';
         const equations = [["a", "b"], ["b", "c"], ["bc", "cd"]];
@@ -302,10 +302,50 @@ class EvaluateDivision extends ProblemTests {
         const queries = [["a", "c"], ["c", "b"], ["bc", "cd"], ["cd", "bc"]];
         const results = evaluateDivision.solve(equations, values, queries);
         assert.deepEqual(results, [3.75000, 0.40000, 5.00000, 0.20000]);
-    
+
+    }
+
+
+    test_3() {
+        /**
+         * Input: equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],["a","c"],["x","y"]]
+        Output: [0.50000,2.00000,-1.00000,-1.00000]
+         */
+
+        const evaluateDivision = new this.Problem();
+        this.current_test_name = 'equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],["a","c"],["x","y"]] | [0.50000,2.00000,-1.00000,-1.00000]';
+        const equations = [["a", "b"]];
+        const values = [0.5];
+        const queries = [["a", "b"], ["b", "a"], ["a", "c"], ["x", "y"]];
+        const results = evaluateDivision.solve(equations, values, queries);
+        assert.deepEqual(results, [0.50000, 2.00000, -1.00000, -1.00000]);
+
     }
 }
 
+
+class SnakesAndLadders extends ProblemTests{
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        const snakesAndLadders = new this.Problem();
+        this.current_test_name = 'board = [[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,35,-1,-1,13,-1],[-1,-1,-1,-1,-1,-1],[-1,15,-1,-1,-1,-1]] | 4';
+        const board = [[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,35,-1,-1,13,-1],[-1,-1,-1,-1,-1,-1],[-1,15,-1,-1,-1,-1]];
+        assert.deepEqual(snakesAndLadders.solve(board), 4);
+    }
+
+    test_2(){
+        const snakesAndLadders = new this.Problem();
+        this.current_test_name = 'board = [[-1,-1],[-1,3]] | 1';
+        const board = [[-1,-1],[-1,3]];
+        assert.deepEqual(snakesAndLadders.solve(board), 1);
+    }
+}
 
 
 const TEST_DICTIONARY = {
@@ -320,6 +360,7 @@ const TEST_DICTIONARY = {
     'walls-and-gates': WallsAndGates,
     'word-ladder': wordLadder,
     'evaluate-division': EvaluateDivision,
+    'snakes-and-ladders': SnakesAndLadders,
 }
 
 
