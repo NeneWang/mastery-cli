@@ -539,6 +539,77 @@ class SearchInsertPosition extends ProblemTests{
 
 }
 
+class SearchA2DMatrix extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+
+    test_1(){
+        const searchA2DMatrix = new this.Problem();
+        this.current_test_name = 'matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3 | true';
+        const matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]];
+        const target = 3;
+        assert.deepEqual(searchA2DMatrix.solve(matrix, target), true);
+    }
+
+    test_2(){
+        const searchA2DMatrix = new this.Problem();
+        this.current_test_name = 'matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13 | false';
+        const matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]];
+        const target = 13;
+        assert.deepEqual(searchA2DMatrix.solve(matrix, target), false);
+    }
+
+    test_3(){
+        const searchA2DMatrix = new this.Problem();
+        this.current_test_name = 'matrix = [], target = 0 | false';
+        const matrix = [];
+        const target = 0;
+        assert.deepEqual(searchA2DMatrix.solve(matrix, target), false);
+    }
+
+}
+
+class FindFirstAndLastPositionOfElementInSortedArray extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const findFirstAndLastPositionOfElementInSortedArray = new this.Problem();
+        this.current_test_name = 'nums = [5,7,7,8,8,10], target = 8 | [3,4]';
+        const nums = [5,7,7,8,8,10];
+        const target = 8;
+        assert.deepEqual(findFirstAndLastPositionOfElementInSortedArray.solve(nums, target), [3,4]);
+    }
+
+    test_2(){
+        const findFirstAndLastPositionOfElementInSortedArray = new this.Problem();
+        this.current_test_name = 'nums = [5,7,7,8,8,10], target = 6 | [-1,-1]';
+        const nums = [5,7,7,8,8,10];
+        const target = 6;
+        assert.deepEqual(findFirstAndLastPositionOfElementInSortedArray.solve(nums, target), [-1,-1]);
+    }
+
+    test_3(){
+        const findFirstAndLastPositionOfElementInSortedArray = new this.Problem();
+        this.current_test_name = 'nums = [], target = 0 | [-1,-1]';
+        const nums = [];
+        const target = 0;
+        assert.deepEqual(findFirstAndLastPositionOfElementInSortedArray.solve(nums, target), [-1,-1]);
+    }
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -560,6 +631,9 @@ const TEST_DICTIONARY = {
     'sort-list': SortList,
     // 'construct-quad-tree': ConstructQuadTree,
     'search-insert-position': SearchInsertPosition,
+    'search-a-2d-matrix': SearchA2DMatrix,
+    'find-first-and-last-position-of-element-in-sorted-array': FindFirstAndLastPositionOfElementInSortedArray,
+    
 }
 
 

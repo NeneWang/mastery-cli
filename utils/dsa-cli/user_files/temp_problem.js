@@ -6,10 +6,7 @@ class SubstringWithConcatenationOfAllWords {
 }
 
 
-module.exports = { Problem: SubstringWithConcatenationOfAllWords };romEnd };m: AverageOfLevels };nimumDifference };mmetric {
-	solve(root) {
-		// Your code here
-
+module.exports = { Problem: SubstringWithConcatenationOfAllWords };romEnd };ts = { Problem: GetMinimumDifference };orts = { Problem: ConnectTree };titionList };
 	}
 }
 
