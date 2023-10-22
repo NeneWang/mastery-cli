@@ -860,6 +860,26 @@ class MySqrt extends ProblemTests {
 
 }
 
+class Triangle extends ProblemTests {
+    constructor(Problem) {  
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[[2],[3,4],[6,5,7],[4,1,8,3]] => 11';
+        assert.equal(structure.solve([[2],[3,4],[6,5,7],[4,1,8,3]]), 11);
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[[2],[3,4],[6,5,7],[4,1,8,3]] => 11';
+        assert.equal(structure.solve([[2],[3,4],[6,5,7],[4,1,8,3]]), 11);
+    }
+}
+
 
 class MaxPointsOnALine extends ProblemTests {
 
@@ -914,6 +934,7 @@ const TEST_DICTIONARY = {
     'factorial-trailing-zeroes': FactorialTraillingZero,
     'sqrtx': MySqrt,
     'max-points-on-a-line': MaxPointsOnALine,
+    'triangle': Triangle
 }
 
 module.exports = TEST_DICTIONARY;
