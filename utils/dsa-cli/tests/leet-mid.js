@@ -861,7 +861,7 @@ class MySqrt extends ProblemTests {
 }
 
 class Triangle extends ProblemTests {
-    constructor(Problem) {  
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
@@ -870,13 +870,13 @@ class Triangle extends ProblemTests {
     test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[[2],[3,4],[6,5,7],[4,1,8,3]] => 11';
-        assert.equal(structure.solve([[2],[3,4],[6,5,7],[4,1,8,3]]), 11);
+        assert.equal(structure.solve([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]), 11);
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[[2],[3,4],[6,5,7],[4,1,8,3]] => 11';
-        assert.equal(structure.solve([[2],[3,4],[6,5,7],[4,1,8,3]]), 11);
+        assert.equal(structure.solve([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]), 11);
     }
 }
 
@@ -895,13 +895,85 @@ class MaxPointsOnALine extends ProblemTests {
     }
 
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]] => 4';
-        assert.equal(structure.solve([[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]), 4);
+        assert.equal(structure.solve([[1, 1], [3, 2], [5, 3], [4, 1], [2, 3], [1, 4]]), 4);
     }
 
 }
+
+
+
+class MinimumPathSum extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[[1,3,1],[1,5,1],[4,2,1]] => 7';
+        assert.equal(structure.solve([[1, 3, 1], [1, 5, 1], [4, 2, 1]]), 7);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '[[1,2,3],[4,5,6]] => 12';
+        assert.equal(structure.solve([[1, 2, 3], [4, 5, 6]]), 12);
+    }
+
+
+}
+
+
+class UniquePaths extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '3, 2 => 3';
+        assert.equal(structure.solve(3, 2), 3);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '7, 3 => 28';
+        assert.equal(structure.solve(7, 3), 28);
+    }
+
+}
+
+class UniquePathsII extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[[0,0,0],[0,1,0],[0,0,0]] => 2';
+        assert.equal(structure.solve([[0, 0, 0], [0, 1, 0], [0, 0, 0]]), 2);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '[[0,1],[0,0]] => 1';
+        assert.equal(structure.solve([[0, 1], [0, 0]]), 1);
+    }
+
+
+}
+
+
 
 
 const TEST_DICTIONARY = {
@@ -934,7 +1006,10 @@ const TEST_DICTIONARY = {
     'factorial-trailing-zeroes': FactorialTraillingZero,
     'sqrtx': MySqrt,
     'max-points-on-a-line': MaxPointsOnALine,
-    'triangle': Triangle
+    'triangle': Triangle,
+    'minimum-path-sum': MinimumPathSum,
+    'unique-paths': UniquePaths,
+    'unique-paths-ii': UniquePathsII
 }
 
 module.exports = TEST_DICTIONARY;
