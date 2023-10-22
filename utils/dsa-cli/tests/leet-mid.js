@@ -973,7 +973,54 @@ class UniquePathsII extends ProblemTests {
 
 }
 
+class BestTimeToBuyAndSellStockIII extends ProblemTests {
+    
+        constructor(Problem) {
+            super(Problem);
+            this.tests.push(() => this.test_1());
+        }
+    
+        test_1() {
+            const structure = new this.Problem();
+            this.current_test_name = '[3,3,5,0,0,3,1,4] => 6';
+            assert.equal(structure.solve([3, 3, 5, 0, 0, 3, 1, 4]), 6);
+        }
+    
+        test_2() {
+            const structure = new this.Problem();
+            this.current_test_name = '[1,2,3,4,5] => 4';
+            assert.equal(structure.solve([1, 2, 3, 4, 5]), 4);
+        }
+    
+        test_3() {
+            const structure = new this.Problem();
+            this.current_test_name = '[7,6,4,3,1] => 0';
+            assert.equal(structure.solve([7, 6, 4, 3, 1]), 0);
+        }
+}
 
+
+class BestTImeToBuyAndSellStockIV extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '2, [2,4,1] => 2';
+        assert.equal(structure.solve(2, [2, 4, 1]), 2);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '2, [3,2,6,5,0,3] => 7';
+        assert.equal(structure.solve(2, [3, 2, 6, 5, 0, 3]), 7);
+    }
+}
 
 
 const TEST_DICTIONARY = {
@@ -1009,7 +1056,9 @@ const TEST_DICTIONARY = {
     'triangle': Triangle,
     'minimum-path-sum': MinimumPathSum,
     'unique-paths': UniquePaths,
-    'unique-paths-ii': UniquePathsII
+    'unique-paths-ii': UniquePathsII,
+    'best-time-to-buy-and-sell-stock-iii': BestTimeToBuyAndSellStockIII,
+    'best-time-to-buy-and-sell-stock-iv': BestTImeToBuyAndSellStockIV
 }
 
 module.exports = TEST_DICTIONARY;
