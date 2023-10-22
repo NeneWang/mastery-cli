@@ -1,80 +1,116 @@
-class AddBinary {
-	solve(a, b) {
+class Candy {
+	solve(ratings) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: AddBinary };ports = { Problem: SubstringWithConcatenationOfAllWords };romEnd };ts = { Problem: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
+module.exports = { Problem: Candy };blem: KSmallestPairs }; SubstringWithConcatenationOfAllWords };romEnd };attenTree };;evels };nimumDifference };mmetric {
+	solve(root) {
+		// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: IsSymmetric };
-    isEmpty() {
+module.exports = { Problem: IsSymmetric };) {
         return this.size() === 0
     }
 
 }
 
-class WordLadder {
+
+class RottingOranges {
 
 
     /**
-     * https://leetcode.com/problems/word-ladder/
+     * https://leetcode.com/problems/rotting-oranges/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
+     * @param {number[][]} grid
      * @return {number}
      */
-    ladderLength = function (beginWord, endWord, wordList) {
+    orangesRotting = function (grid) {
 		
-	};
+    };
 
 
-    solve(beingWord, endWord, wordList) {
+    solve(grid) {
+        return this.orangesRotting(grid);
+    }
+}
+
+
+module.exports = { Problem: RottingOranges };
+d, wordList) {
         return this.ladderLength(beingWord, endWord, wordList);
     }
 }
 
 
-module.exports = { Problem: WordLadder };) {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
+module.exports = { Problem: WordLadder }; index + 2
+			let leftChild, rightChild
+			let swap = null
 
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild < element) {
-                    swap = leftChildIndex
-                }
-            }
+			if (leftChildIndex < length) {
+				leftChild = this.heap[leftChildIndex]
+				if (leftChild > element) {
+					swap = leftChildIndex
+				}
+			}
 
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild < element) ||
-                    (swap !== null && rightChild < leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
+			if (rightChildIndex < length) {
+				rightChild = this.heap[rightChildIndex]
+				if (
+					(swap === null && rightChild > element) ||
+					(swap !== null && rightChild > leftChild)
+				) {
+					swap = rightChildIndex
+				}
+			}
 
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
-        }
-    }
+			if (swap === null) break
+			this.swap(index, swap)
+			index = swap
+		}
+	}
 
-    front() {
+	front() {
+		return this.heap[0]
+	}
+
+	size() {
+		return this.heap.length
+	}
+
+	isEmpty() {
+		return this.size() === 0
+	}
+
+}
+
+
+class LastStoneWeight {
+	/**
+	 * https://leetcode.com/problems/last-stone-weight/
+	 * Time O(N * log(N)) | Space O(N)
+	 * @param {number[]} stones
+	 * @return {number}
+	 */
+	lastStoneWeight = (stones) => {
+
+	};
+
+
+
+	solve(stones) {
+		return this.lastStoneWeight(stones);
+	}
+}
+
+
+module.exports = { Problem: LastStoneWeight };
+   front() {
         return this.heap[0]
     }
 

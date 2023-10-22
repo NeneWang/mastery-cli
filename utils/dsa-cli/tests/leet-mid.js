@@ -784,6 +784,27 @@ class AddBinary extends ProblemTests {
 
 }
 
+class BiwiseAndOfNumbersRange extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '5, 7 => 4';
+        assert.equal(structure.solve(5, 7), 4);
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '0, 1 => 0';
+        assert.equal(structure.solve(0, 1), 0);
+    }
+
+}
+
 const TEST_DICTIONARY = {
     'h-index': HIndex,
     'insert-delete-getrandom-o1': InsertDeleteGetRandomO1,
@@ -809,7 +830,8 @@ const TEST_DICTIONARY = {
     'remove-nth-node-from-end-of-list': RemoveNthFromEnd,
     'ipo': IPO,
     'find-k-pairs-with-smallest-sums': FindKPairsWithSmallestSums,
-    'add-binary': AddBinary
+    'add-binary': AddBinary,
+    'bitwise-and-of-numbers-range': BiwiseAndOfNumbersRange,
 }
 
 module.exports = TEST_DICTIONARY;
