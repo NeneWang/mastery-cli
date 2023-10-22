@@ -6,41 +6,36 @@ class Candy {
 }
 
 
-module.exports = { Problem: Candy };le.exports = { Problem: SubstringWithConcatenationOfAllWords };romEnd };m: AverageOfLevels };nimumDifference };orts = { Problem: ConnectTree };ur code here
-
+module.exports = { Problem: Candy };le.exports = { Problem: SubstringWithConcatenationOfAllWords };romEnd };m: AverageOfLevels };nimumDifference };
+module.exports = { Problem: PartitionList };
 	}
 }
 
 
-module.exports = { Problem: IsSymmetric };) {
+module.exports = { Problem: IsSymmetric };
+    isEmpty() {
         return this.size() === 0
     }
 
 }
 
-
-class RottingOranges {
+class WordLadder {
 
 
     /**
-     * https://leetcode.com/problems/rotting-oranges/
+     * https://leetcode.com/problems/word-ladder/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {number[][]} grid
+     * @param {string} beginWord
+     * @param {string} endWord
+     * @param {string[]} wordList
      * @return {number}
      */
-    orangesRotting = function (grid) {
+    ladderLength = function (beginWord, endWord, wordList) {
 		
-    };
+	};
 
 
-    solve(grid) {
-        return this.orangesRotting(grid);
-    }
-}
-
-
-module.exports = { Problem: RottingOranges };
-d, wordList) {
+    solve(beingWord, endWord, wordList) {
         return this.ladderLength(beingWord, endWord, wordList);
     }
 }
@@ -120,19 +115,17 @@ module.exports = { Problem: LastStoneWeight };
         return this.size() === 0
     }
 
-    top(){
-        return this.heap[0]
-    }
-
 }
 
-class MaxPriorityQueue {
+class KthLargestElementInAnArray {
+	solve(nums, k) {
+	// Your code here
 
-    constructor() {
-        this.heap = []
-    }
+	}
+}
 
-    enqueue(element) {
+
+module.exports = { Problem: KthLargestElementInAnArray };ment) {
         this.heap.push(element)
         this.bubbleUp()
     }

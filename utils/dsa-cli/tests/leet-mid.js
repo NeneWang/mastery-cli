@@ -1022,6 +1022,24 @@ class BestTImeToBuyAndSellStockIV extends ProblemTests {
     }
 }
 
+class maximalSquare extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]] => 4';
+        assert.equal(structure.solve([["1", "0", "1", "0", "0"],
+        ["1", "0", "1", "1", "1"],
+        ["1", "1", "1", "1", "1"],
+        ["1", "0", "0", "1", "0"]]), 4);
+    }
+
+}
+
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
@@ -1058,7 +1076,8 @@ const TEST_DICTIONARY = {
     'unique-paths': UniquePaths,
     'unique-paths-ii': UniquePathsII,
     'best-time-to-buy-and-sell-stock-iii': BestTimeToBuyAndSellStockIII,
-    'best-time-to-buy-and-sell-stock-iv': BestTImeToBuyAndSellStockIV
+    'best-time-to-buy-and-sell-stock-iv': BestTImeToBuyAndSellStockIV,
+    'maximal-square': maximalSquare,
 }
 
 module.exports = TEST_DICTIONARY;
