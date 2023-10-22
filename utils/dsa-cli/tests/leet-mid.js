@@ -493,23 +493,23 @@ class MinimumAbsoluteDifferenceInBst extends ProblemTests {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
-    
+
     }
 
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[4,2,6,1,3] => 1';
-        const entry = arrayToBinaryTree([4,2,6,1,3])
+        const entry = arrayToBinaryTree([4, 2, 6, 1, 3])
         assert.equal(structure.solve(entry), 1);
     }
 
 
-    test_2(){
-        
+    test_2() {
+
         const structure = new this.Problem();
         this.current_test_name = '[1,0,48,null,null,12,49] => 1';
-        const entry = arrayToBinaryTree([1,0,48,null,null,12,49])
+        const entry = arrayToBinaryTree([1, 0, 48, null, null, 12, 49])
         assert.equal(structure.solve(entry), 1);
 
     }
@@ -518,7 +518,7 @@ class MinimumAbsoluteDifferenceInBst extends ProblemTests {
 
 
 class RemoveDuplicatesFromLinkedList extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
@@ -526,23 +526,23 @@ class RemoveDuplicatesFromLinkedList extends ProblemTests {
         this.tests.push(() => this.test_4());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[1,1,2] => [2]';
-        const entry = arrayToListNode([1,1,2])
+        const entry = arrayToListNode([1, 1, 2])
         assert.deepEqual(structure.solve(entry), arrayToListNode([2]));
 
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[1,1,2,3,3] => [2]';
-        const entry = arrayToListNode([1,1,2,3,3])
+        const entry = arrayToListNode([1, 1, 2, 3, 3])
         assert.deepEqual(structure.solve(entry), arrayToListNode([2]));
 
     }
 
-    test_3(){
+    test_3() {
         /**
          * Input: head = [1,2,3,3,4,4,5]
             Output: [1,2,5]
@@ -550,21 +550,21 @@ class RemoveDuplicatesFromLinkedList extends ProblemTests {
 
         const structure = new this.Problem();
         this.current_test_name = '[1,2,3,3,4,4,5] => [1,2,5]';
-        const entry = arrayToListNode([1,2,3,3,4,4,5])
-        assert.deepEqual(structure.solve(entry), arrayToListNode([1,2,5]));
+        const entry = arrayToListNode([1, 2, 3, 3, 4, 4, 5])
+        assert.deepEqual(structure.solve(entry), arrayToListNode([1, 2, 5]));
     }
 
-    test_4(){
+    test_4() {
         const structure = new this.Problem();
         this.current_test_name = '[1,1,1,2,3] => [2,3]';
-        const entry = arrayToListNode([1,1,1,2,3])
-        assert.deepEqual(structure.solve(entry), arrayToListNode([2,3]));
+        const entry = arrayToListNode([1, 1, 1, 2, 3])
+        assert.deepEqual(structure.solve(entry), arrayToListNode([2, 3]));
     }
 }
 
 class RotateList extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
@@ -572,19 +572,19 @@ class RotateList extends ProblemTests {
     }
 
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[1,2,3,4,5] | 2 => [4,5,1,2,3]';
-        const entry = arrayToListNode([1,2,3,4,5])
-        assert.deepEqual(structure.solve(entry, 2), arrayToListNode([4,5,1,2,3]));
+        const entry = arrayToListNode([1, 2, 3, 4, 5])
+        assert.deepEqual(structure.solve(entry, 2), arrayToListNode([4, 5, 1, 2, 3]));
 
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[0,1,2] | 4 => [2,0,1]';
-        const entry = arrayToListNode([0,1,2])
-        assert.deepEqual(structure.solve(entry, 4), arrayToListNode([2,0,1]));
+        const entry = arrayToListNode([0, 1, 2])
+        assert.deepEqual(structure.solve(entry, 4), arrayToListNode([2, 0, 1]));
 
     }
 
@@ -658,7 +658,7 @@ class RemoveNthFromEnd extends ProblemTests {
         assert.deepEqual(structure.removeNthFromEnd(arrayToListNode([1, 2, 3, 4, 5]), 2), arrayToListNode([1, 2, 3, 5]));
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[1] | 1 => []';
         assert.deepEqual(structure.removeNthFromEnd(arrayToListNode([1]), 1), arrayToListNode([]));
@@ -731,7 +731,7 @@ class FindKPairsWithSmallestSums extends ProblemTests {
 
     }
 
-    test_2(){
+    test_2() {
         const nums = [1, 1, 2];
         const nums2 = [1, 2, 3];
         const k = 2;
@@ -741,7 +741,7 @@ class FindKPairsWithSmallestSums extends ProblemTests {
         assert.deepEqual(structure.solve(nums, nums2, k), expected);
     }
 
-    test_3(){
+    test_3() {
         const nums = [1, 2];
         const nums2 = [3];
         const k = 3;
@@ -757,26 +757,26 @@ class FindKPairsWithSmallestSums extends ProblemTests {
 
 
 class AddBinary extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '"11", "1" => "100"';
         assert.equal(structure.solve('11', '1'), '100');
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '"1010", "1011" => "10101"';
         assert.equal(structure.solve('1010', '1011'), '10101');
     }
 
-    test_3(){
+    test_3() {
         const structure = new this.Problem();
         this.current_test_name = '"0", "0" => "0"';
         assert.equal(structure.solve('0', '0'), '0');
@@ -785,22 +785,77 @@ class AddBinary extends ProblemTests {
 }
 
 class BiwiseAndOfNumbersRange extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '5, 7 => 4';
         assert.equal(structure.solve(5, 7), 4);
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '0, 1 => 0';
         assert.equal(structure.solve(0, 1), 0);
+    }
+
+}
+
+
+class FactorialTraillingZero extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '3 => 0';
+        assert.equal(structure.solve(3), 0);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '5 => 1';
+        assert.equal(structure.solve(5), 1);
+    }
+
+    test_3() {
+        const structure = new this.Problem();
+        this.current_test_name = '0 => 0';
+        assert.equal(structure.solve(0), 0);
+    }
+
+
+}
+
+
+
+class MySqrt extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '4 => 2';
+        assert.equal(structure.solve(4), 2);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '8 => 2';
+        assert.equal(structure.solve(8), 2);
     }
 
 }
@@ -832,6 +887,8 @@ const TEST_DICTIONARY = {
     'find-k-pairs-with-smallest-sums': FindKPairsWithSmallestSums,
     'add-binary': AddBinary,
     'bitwise-and-of-numbers-range': BiwiseAndOfNumbersRange,
+    'factorial-trailing-zeroes': FactorialTraillingZero,
+    'my-sqrt': MySqrt,
 }
 
 module.exports = TEST_DICTIONARY;
