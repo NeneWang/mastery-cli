@@ -860,6 +860,30 @@ class MySqrt extends ProblemTests {
 
 }
 
+
+class MaxPointsOnALine extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[[1,1],[2,2],[3,3]] => 3';
+        assert.equal(structure.solve([[1, 1], [2, 2], [3, 3]]), 3);
+    }
+
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]] => 4';
+        assert.equal(structure.solve([[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]), 4);
+    }
+
+}
+
+
 const TEST_DICTIONARY = {
     'h-index': HIndex,
     'insert-delete-getrandom-o1': InsertDeleteGetRandomO1,
@@ -888,7 +912,8 @@ const TEST_DICTIONARY = {
     'add-binary': AddBinary,
     'bitwise-and-of-numbers-range': BiwiseAndOfNumbersRange,
     'factorial-trailing-zeroes': FactorialTraillingZero,
-    'my-sqrt': MySqrt,
+    'sqrtx': MySqrt,
+    'max-points-on-a-line': MaxPointsOnALine,
 }
 
 module.exports = TEST_DICTIONARY;

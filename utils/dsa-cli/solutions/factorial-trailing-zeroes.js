@@ -1,5 +1,5 @@
 class TrailingZeroes {
-    trailingZeroes(n) {
+    solve(n) {
       let zeroCount = 0;
       let currentMultiple = 5;
       while (n > 0) {

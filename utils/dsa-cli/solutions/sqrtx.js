@@ -1,5 +1,5 @@
 class MySqrt {
-    mySqrt(x) {
+    solve(x) {
       if (x < 2) return x;
   
       let x0 = x;
