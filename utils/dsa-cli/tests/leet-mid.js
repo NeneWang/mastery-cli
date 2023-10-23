@@ -974,29 +974,29 @@ class UniquePathsII extends ProblemTests {
 }
 
 class BestTimeToBuyAndSellStockIII extends ProblemTests {
-    
-        constructor(Problem) {
-            super(Problem);
-            this.tests.push(() => this.test_1());
-        }
-    
-        test_1() {
-            const structure = new this.Problem();
-            this.current_test_name = '[3,3,5,0,0,3,1,4] => 6';
-            assert.equal(structure.solve([3, 3, 5, 0, 0, 3, 1, 4]), 6);
-        }
-    
-        test_2() {
-            const structure = new this.Problem();
-            this.current_test_name = '[1,2,3,4,5] => 4';
-            assert.equal(structure.solve([1, 2, 3, 4, 5]), 4);
-        }
-    
-        test_3() {
-            const structure = new this.Problem();
-            this.current_test_name = '[7,6,4,3,1] => 0';
-            assert.equal(structure.solve([7, 6, 4, 3, 1]), 0);
-        }
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[3,3,5,0,0,3,1,4] => 6';
+        assert.equal(structure.solve([3, 3, 5, 0, 0, 3, 1, 4]), 6);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,3,4,5] => 4';
+        assert.equal(structure.solve([1, 2, 3, 4, 5]), 4);
+    }
+
+    test_3() {
+        const structure = new this.Problem();
+        this.current_test_name = '[7,6,4,3,1] => 0';
+        assert.equal(structure.solve([7, 6, 4, 3, 1]), 0);
+    }
 }
 
 

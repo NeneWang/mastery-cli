@@ -34,4 +34,22 @@ const sql = [
 ]
 
 
+const statistics = [
+    {
+        term: "Difference descriptive and inferential statistics",
+        prompt: "What is the difference between descriptive and inferential statistics?",
+        example: "Descriptive statistics is about describing the data, inferential statistics is about making conclusions (generalization) about the data.",
+        descriptive: "Techniques used in descriptive statistics include: measures of central tendency (mean, median, and mode), measures of dispersion (standard deviation, variance, percentiles, and quartiles), and measures of association (correlation, regression, and covariance).\n\
+        Techniques used in inferential statistics include: hypothesis testing (t-test, chi-square, and ANOVA), and regression analysis.",
+    },
+    {
+        term: "accuracy",
+        prompt: "Use example of accuracy",
+        description: "Accuracy is the relationship between the measuremen and the actual truth",
+        
+    }
+
+]
+
+
 module.export = { designing_good_charts, sql }
