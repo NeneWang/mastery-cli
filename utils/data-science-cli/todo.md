@@ -3,11 +3,14 @@
 
 ### Data Science
 
+- [ ] Mastering of SQL Joins
+- [ ] Pandas Problems
+- [ ] Mastering Matplotlib
+- [ ] Mastering Regex
 - [ ] Probability Intuition Uisng Jupyter Notebook
 - [ ] Mastering of each Data Science ALogirhtms found on the CTP notebook.
 - [ ] [Data Science Kit](https://github.com/jakevdp/PythonDataScienceHandbook/tree/master/notebooks)
 - [ ] Mastering of Seaborn
-- [ ] Mastering of SQL Joins
 - [ ] Mastering Pandas Operations
 - [ ] Mastering Kafka
 - [ ] [Linear Algebra](https://github.com/bvanderlei/jupyter-guide-to-linear-algebra/blob/main/Applications_EV.ipynb)
