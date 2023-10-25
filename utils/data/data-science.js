@@ -52,7 +52,7 @@ const statistics = [
         term: "Precision",
         prompt: "Use precision correctly in a setence, or what is it useful for?",
         description: "Precision is certaintity of each measurement (Inversely related to variance)",
-        example: "Precision is low if it changes everytime I re-measure it." 
+        example: "Precision is low if it changes everytime I re-measure it."
     },
     {
         term: "Resolution",
@@ -100,8 +100,8 @@ const statistics = [
         plt.show()"
     },
     {
-        term: "Calculate the variance",
-        prompt: "Calculate the variance of [ 8, 0, 4, 1, -2, 7] knowing that the mean is 3",
+        term: "Calculate the SAMPLE variance",
+        prompt: "Calculate the SAMPLE variance of [ 8, 0, 4, 1, -2, 7] knowing that the mean is 3",
         description: "Variance is the average (divide by n - 1) of the squared differences from the Mean",
         example: "8 - 3 = 5\n\
         0 - 3 = -3\n\
@@ -115,6 +115,150 @@ const statistics = [
         term: "Larger variance",
         prompt: "What does a larger variance mean?",
         example: "A larger variance means that the data is more spread out",
+    },
+    {
+        term: "diff Sample Variance and Population Variance",
+        prompt: "What is the difference between Sample Variance and Population Variance?",
+        example: "Sample Variance is the average (divide by n - 1) of the squared differences from the Mean\n\
+        Population Variance is the average (divide by n) of the squared differences from the Mean",
+        description: "This is given that population mean is a theorical quantity. Whereas the sample mean is an empirircal quantity"
+    },
+    {
+        term: "Standard Deviation",
+        prompt: "Whats Standard Deviation, how is it calculated?",
+        example: "Standard Deviation is the square root of the variance",
+    },
+    {
+        term: "Fano Factor",
+        prompt: "Whats Fano Factor, how is it calculated?",
+        example: "Fano Factor is the variance divided by the mean",
+        description: "Fano Factor = Variance / Mean"
+    },
+    {
+        term: "Coefficent of Variation",
+        prompt: "Whats Coefficent of Variation, how is it calculated?",
+        example: "Coefficent of Variation is the standard deviation divided by the mean",
+    },
+    {
+        term: "QQ Plots",
+        prompt: "What is a QQ Plot (Quantile Quantile plot)? What is it used for?",
+        example: "A QQ plot is a plot of the quantiles of two distributions against each other\n\
+        It is used to compare two distributions, For example checking if the observerd theorical distribution is the same as the theorical distribution",
+    },
+    {
+        term: "Statistical moments",
+        prompt: "How are Statistical Moment: Mean, Variance, Skewness, Kurtosis used for?",
+        example: "Mean: Center of the distribution\n\
+        Variance: Spread of the distribution\n\
+        Skewness: Symmetry of the distribution. When thre is a positive Skew: ot means the values are pulled to the right. When there is a negativeSkew values are pulled to the left\n\
+        Kurtosis: Tailedness of the distribution: High Kurtosis means that the distribution has heavy tails (fatter), Low Kurtosis means that the distribution has light tails (sharper high low change)",
+        description: "Skewness is the third moment, Kurtosis is the fourth moment"
+    },
+    {
+        term: "Comming with bins",
+        prompt: "What is the formula for comming with bins?",
+        example: "Number of bins = (max - min) / width of bins",
+        description: "Also calculated as guideneliens:\n\
+        Sturges: k = 1 + log2(n)\n\
+        Freedman-Diaconis Rule: k = 2 * IQR(x) / n^(1/3)\n\
+        Arbitrary: k = 40"
+    },
+    {
+        term: "Violin Plot",
+        prompt: "What is a Violin Plot? What is it used for?",
+        example: "A violing pinplot is created by rotating an histogram 90 degrees and mirroring it. It is used to show the distribution of the data\n\
+        This is useful when you want to show the distribution of the data, but also want to show the mean and standard deviation",
+    },
+    {
+        term: "What does entropy law say?",
+        prompt: "What does entropy information theory law say?",
+        example: "The less likely an event is, the more information it contains",
+        description: "Formula for entropy: \n\
+        H = -sum(p(x) * log2(p(x)))"
+    },
+    {
+        term: "high vs low entropy",
+        prompt: "What does high vs low entropy mean?",
+        example: "High entropy means that the data is more spread out, Low entropy means that the data is more concentrated (That they repeat, and therefore redundant)",
+        description: "Entropy differs from variance in entropy is nonlinear and makes no assumption about the distribution\n\n\
+        While variance depends on the validity of the mean therefore is appropriate for Gaussian distributions (roughly normal data"
+    },
+    {
+        term: "Z Transform Assumption",
+        prompt: "What is the key assumption that makes the z-transform valid?",
+        example: "The key assumption is that the data is normally distributed (Gaussian) Since Mean and standard devaitions are valid descriptions of the distribution's center tendency and dispersion",
+        description: "zi = (xi - mean) / standard deviation"
+    },
+    {
+        term: "Min Max Scalling",
+        prompt: "What is Min Max Scalling? What is it used for?",
+        example: "Min Max Scalling is a way to scale data between 0 and 1. It is used to normalize data",
+        description: "zi = (xi - min) / (max - min)"
+    },
+    {
+        term: "Outliers",
+        prompt: "What are outliers? Where do they come from?",
+        example: "Non cooperative, faulty sensors, faulty data, etc\n\
+        Outliers must be investigated and evaluated || Never ignore outliers",
+        description: "There are two ways to deal with them, either remove them or leave outliers and use robust data"
+    },
+    {
+        term: "Removing outliers: z-score method",
+        prompt: "How to remove outliers using z-score method?",
+        example: "Remove outliers that are more than 3 standard deviations away from the mean\n\
+        Recalculate the devuatuib treshold and remove the outliers and repeat until no more outliers",
+        description: "z = (x - mean) / standard deviation"
+    },
+    {
+        term: "Modified Z-score method",
+        prompt: "How to calculate the modified z score for non gaussian distributed data?",
+        example: "Modified z score = 0.6745 * (x - median) / MAD",
+        description: "MAD = Median Absolute Deviation \n\
+        MAD = median(|xi - median|)"
+    },
+    {
+        term: "Multivariate Outliers",
+        prompt: "How to calculate the zscore for multivariate data?",
+        example: "1) Compute the mean\n\
+        2) Compute the distance from each data point to the mean\n\
+        3) Convert distances to z-score: z = (x - mean) / standard deviation",
+    },
+    {
+        term: "Mass vs density in Proability",
+        prompt: "What is the difference between mass and density in probability?",
+        example: "Mass is the probability of a specific value | Set of exclusive discrete events\n\
+        Density is the probability of a range of values | Continuous events",
+        description: "Example of Density probability is the age, whereas you are usually 23.5 age instead of the exact one. The same goes with Salaries. "
+    },
+    {
+        term: "Cumulative Distribution Function",
+        prompt: "What is the Cumulative Distribution Function?",
+        example: "The Cumulative Distribution Function is the probability that a random variable X will take a value less than or equal to x",
+        description: "Example usage to answer: \n\
+        What is the probability of getting at least 1 std higher than the mean on the SAT?\n\
+        Answer: 1 - CDF(1)\n\
+        What is the probability of an elephant weighting less than 2std below the average?\n\
+        Answer: CDF(average-2)"
+    },
+    {
+        term: "Creating Sample",
+        prompt: "How do you answer to are giraffes taller than slow lorises?",
+        example: "1) Create a sample of giraffes and slow lorises\n\
+        2) Measure the heights of the animals & calculate the mean\n\
+        3) Compare the means of the two samples",
+        description: "The sample should be representative of the population, \n\
+        The sample can only represent from the population it was drawn from"
+    }, {
+        term: "Monte Carlo Sampling",
+        prompt: "What is Monte Carlo Sampling?",
+        example: "Is the same thing as random sampling from a distribution",
+        description: "Monte Carlo sampling solves really hard problem sby random sampling the solution space, instead of doing the real work."
+    },
+    {
+        term: "Sampling Variability",
+        prompt: "What is Sampling Variability?",
+        example: "Sampling Variability is the variability of the sample mean from one sample to another",
+        description: "This implies that a single sample mean is not a good estimate of the population parameter"
     }
 
 ]
