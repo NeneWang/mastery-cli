@@ -436,6 +436,75 @@ class OnesAndZeroes extends ProblemTests {
     }
 }
 
+class PaintHouse extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '[[17,2,17],[16,16,5],[14,3,19]]';
+        assert.equal(sub.solve([[17,2,17],[16,16,5],[14,3,19]]), 10);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '[[7,6,2]]';
+        assert.equal(sub.solve([[7,6,2]]), 2);
+    }
+}
+
+
+class PaintHouseII extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '[[1,5,3],[2,9,4]]';
+        assert.equal(sub.solve([[1,5,3],[2,9,4]]), 5);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '[[1,3],[2,4]]';
+        assert.equal(sub.solve([[1,3],[2,4]]), 5);
+    }
+
+}
+
+class SolvingQuestionsWithBrainPower extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '[[3,2],[4,3],[4,4],[2,5]]';
+        assert.equal(sub.mostPoints([[3,2],[4,3],[4,4],[2,5]]), 5);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '[[1,1],[2,2],[3,3],[4,4],[5,5]]';
+        assert.equal(sub.mostPoints([[1,1],[2,2],[3,3],[4,4],[5,5]]), 7);
+    }
+}
+
+
+
+
+
+
 
 
 
@@ -458,7 +527,10 @@ const TEST_DICTIONARY = {
     'unique-binary-search-trees': UniqueBinarySearchTrees,
     'unique-binary-search-trees-ii': UniqueBinarySearchTreesII,
     'perfect-squares': PerfectSquare,
-    'ones-and-zeroes': OnesAndZeroes
+    'ones-and-zeroes': OnesAndZeroes,
+    'paint-house': PaintHouse,
+    'paint-house-ii': PaintHouseII,
+    'solving-questions-with-brainpower': SolvingQuestionsWithBrainPower
 
 }
 

@@ -1,16 +1,12 @@
-class Solution {
-	solve(nums) {
-	// Your code here
+class Solution {	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Solution };
-}
-
-
-module.exports = { Problem: FindTheLongestValidObstacleCourseAtEachPosition };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
+module.exports = { Problem: Solution };ctSquares };olvingQuestionsWithBrainPower };blem: FindTheLongestValidObstacleCourseAtEachPosition };vels };nimumDifference };mmetric {
+	solve(root) {
+		// Your code here
 
 	}
 }
@@ -45,69 +41,40 @@ class WordLadder {
 }
 
 
-module.exports = { Problem: WordLadder }; index + 2
-			let leftChild, rightChild
-			let swap = null
+module.exports = { Problem: WordLadder };) {
+        let index = 0
+        const length = this.heap.length
+        const element = this.heap[0]
+        while (true) {
+            const leftChildIndex = 2 * index + 1
+            const rightChildIndex = 2 * index + 2
+            let leftChild, rightChild
+            let swap = null
 
-			if (leftChildIndex < length) {
-				leftChild = this.heap[leftChildIndex]
-				if (leftChild > element) {
-					swap = leftChildIndex
-				}
-			}
+            if (leftChildIndex < length) {
+                leftChild = this.heap[leftChildIndex]
+                if (leftChild < element) {
+                    swap = leftChildIndex
+                }
+            }
 
-			if (rightChildIndex < length) {
-				rightChild = this.heap[rightChildIndex]
-				if (
-					(swap === null && rightChild > element) ||
-					(swap !== null && rightChild > leftChild)
-				) {
-					swap = rightChildIndex
-				}
-			}
+            if (rightChildIndex < length) {
+                rightChild = this.heap[rightChildIndex]
+                if (
+                    (swap === null && rightChild < element) ||
+                    (swap !== null && rightChild < leftChild)
+                ) {
+                    swap = rightChildIndex
+                }
+            }
 
-			if (swap === null) break
-			this.swap(index, swap)
-			index = swap
-		}
-	}
+            if (swap === null) break
+            this.swap(index, swap)
+            index = swap
+        }
+    }
 
-	front() {
-		return this.heap[0]
-	}
-
-	size() {
-		return this.heap.length
-	}
-
-	isEmpty() {
-		return this.size() === 0
-	}
-
-}
-
-
-class LastStoneWeight {
-	/**
-	 * https://leetcode.com/problems/last-stone-weight/
-	 * Time O(N * log(N)) | Space O(N)
-	 * @param {number[]} stones
-	 * @return {number}
-	 */
-	lastStoneWeight = (stones) => {
-
-	};
-
-
-
-	solve(stones) {
-		return this.lastStoneWeight(stones);
-	}
-}
-
-
-module.exports = { Problem: LastStoneWeight };
-   front() {
+    front() {
         return this.heap[0]
     }
 
