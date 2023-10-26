@@ -367,19 +367,19 @@ class UniqueBinarySearchTreesII extends ProblemTests {
 
         assert.deepEqual(
             res, [
-                [1, null, 2, null, 3],
-                [1, null, 3, 2],
-                [2, 1, 3],
-                [3, 1, null, null, 2],
-                [3, 2, null, 1]
-            ]
+            [1, null, 2, null, 3],
+            [1, null, 3, 2],
+            [2, 1, 3],
+            [3, 1, null, null, 2],
+            [3, 2, null, 1]
+        ]
         )
     }
 
     test_2() {
         const sub = new this.Problem();
         this.current_test_name = '1 => [[1]]';
-        
+
         const solves = sub.solve(1);
         const res = solves.map(
             (row) => binaryTreeToArray(row)
@@ -390,6 +390,28 @@ class UniqueBinarySearchTreesII extends ProblemTests {
         ]);
     }
 
+}
+
+
+class PerfectSquare extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        const sub = new this.Problem();
+        this.current_test_name = '12';
+        assert.equal(sub.solve(12), 3);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '13';
+        assert.equal(sub.solve(13), 2);
+    }
 }
 
 
@@ -412,7 +434,9 @@ const TEST_DICTIONARY = {
     'best-time-to-buy-and-sell-stock-with-transaction-fee': BestTimeToBuyAndSellStockWithTransactionFee,
     'house-robber-iii': HouseRobberIII,
     'unique-binary-search-trees': UniqueBinarySearchTrees,
-    'unique-binary-search-trees-ii': UniqueBinarySearchTreesII
+    'unique-binary-search-trees-ii': UniqueBinarySearchTreesII,
+    'perfect-squares': PerfectSquare,
+
 }
 
 module.exports = TEST_DICTIONARY;
