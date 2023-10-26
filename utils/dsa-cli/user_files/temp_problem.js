@@ -1,75 +1,247 @@
-class PacificAtlantic {
+class DeleteAndEarn {
+	solve(nums) {
+	// Your code here
 
-    pacificAtlantic = function (heights) {
-
-
-        var search = (heights) => {
-            const [rows, cols] = [heights.length, heights[0].length];
-            const [pacificReachable, atlanticReachable] = [getMatrix(rows, cols), getMatrix(rows, cols)];/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
-
-            searchRows(heights, rows, cols, pacificReachable, atlanticReachable);
-            searchCols(heights, rows, cols, pacificReachable, atlanticReachable);
-
-            return [pacificReachable, atlanticReachable];
-        }
-
-        var getMatrix = (rows, cols) => new Array(rows).fill()/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
-            .map(() => new Array(cols).fill(false));
-
-        var searchRows = (heights, rows, cols, pacificReachable, atlanticReachable) => {
-            for (let row = 0; row < rows; row++) {/* Time O(ROWS) */
-                const [pacificStart, atlanticStart] = [0, (cols - 1)];
-
-                dfs(row, pacificStart, rows, cols, pacificReachable, heights);   /* Space O(ROWS * COLS) */
-                dfs(row, atlanticStart, rows, cols, atlanticReachable, heights); /* Space O(ROWS * COLS) */
-            }
-        }
-
-        var searchCols = (heights, rows, cols, pacificReachable, atlanticReachable) => {
-            for (let col = 0; col < cols; col++) {/* Time O(COLS) */
-                const [pacificStart, atlanticStart] = [0, (rows - 1)];
-
-                dfs(pacificStart, col, rows, cols, pacificReachable, heights);   /* Space O(ROWS * COLS) */
-                dfs(atlanticStart, col, rows, cols, atlanticReachable, heights); /* Space O(ROWS * COLS) */
-            }
-        }
-
-        const dfs = (row, col, rows, cols, isReachable, heights) => {
-            isReachable[row][col] = true;
-
-            for (const [_row, _col] of getNeighbors(row, rows, col, cols)) {
-                if (isReachable[_row][_col]) continue;
-
-                const isLower = heights[_row][_col] < heights[row][col];
-                if (isLower) continue;
+	}
+}
 
 
-                dfs(_row, _col, rows, cols, isReachable, heights);              /* Space O(ROWS * COLS) */
-            }
-        }
+module.exports = { Problem: DeleteAndEarn };{ Problem: SubstringWithConcatenationOfAllWords };ule.exports = { Problem: GetMinimumDifference };orts = { Problem: ConnectTree };titionList };
+	}
+}
 
-        var searchGrid = (heights, pacificReachable, atlanticReachable, intersection = []) => {
-            const [rows, cols] = [heights.length, heights[0].length];
 
-            // TODO Iterate over each of the rows, if it is reachable, push the intersections. Otherwise skip it.
-            
+module.exports = { Problem: IsSymmetric };
+    isEmpty() {
+        return this.size() === 0
+    }
 
-            return intersection;
-        }
+}
 
-        var getNeighbors = (row, rows, col, cols) => [[0, 1], [0, -1], [1, 0], [-1, 0]]
-            .map(([_row, _col]) => [(row + _row), (col + _col)])
-            .filter(([_row, _col]) => (0 <= _row) && (_row < rows) && (0 <= _col) && (_col < cols))
+class WordLadder {
 
-        const [pacificReachable, atlanticReachable] = search(heights);   /* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
 
-        return searchGrid(heights, pacificReachable, atlanticReachable);/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
-    };
+    /**
+     * https://leetcode.com/problems/word-ladder/
+     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
+     * @param {string} beginWord
+     * @param {string} endWord
+     * @param {string[]} wordList
+     * @return {number}
+     */
+    ladderLength = function (beginWord, endWord, wordList) {
+		
+	};
 
-    solve(heights) {
-        return this.pacificAtlantic(heights);
+
+    solve(beingWord, endWord, wordList) {
+        return this.ladderLength(beingWord, endWord, wordList);
     }
 }
 
 
-module.exports = { Problem: PacificAtlantic };
+module.exports = { Problem: WordLadder }; index + 2
+			let leftChild, rightChild
+			let swap = null
+
+			if (leftChildIndex < length) {
+				leftChild = this.heap[leftChildIndex]
+				if (leftChild > element) {
+					swap = leftChildIndex
+				}
+			}
+
+			if (rightChildIndex < length) {
+				rightChild = this.heap[rightChildIndex]
+				if (
+					(swap === null && rightChild > element) ||
+					(swap !== null && rightChild > leftChild)
+				) {
+					swap = rightChildIndex
+				}
+			}
+
+			if (swap === null) break
+			this.swap(index, swap)
+			index = swap
+		}
+	}
+
+	front() {
+		return this.heap[0]
+	}
+
+	size() {
+		return this.heap.length
+	}
+
+	isEmpty() {
+		return this.size() === 0
+	}
+
+}
+
+
+class LastStoneWeight {
+	/**
+	 * https://leetcode.com/problems/last-stone-weight/
+	 * Time O(N * log(N)) | Space O(N)
+	 * @param {number[]} stones
+	 * @return {number}
+	 */
+	lastStoneWeight = (stones) => {
+
+	};
+
+
+
+	solve(stones) {
+		return this.lastStoneWeight(stones);
+	}
+}
+
+
+module.exports = { Problem: LastStoneWeight };
+   front() {
+        return this.heap[0]
+    }
+
+    size() {
+        return this.heap.length
+    }
+
+    isEmpty() {
+        return this.size() === 0
+    }
+
+}
+
+class KthLargestElementInAnArray {
+	solve(nums, k) {
+	// Your code here
+
+	}
+}
+
+
+module.exports = { Problem: KthLargestElementInAnArray };ment) {
+        this.heap.push(element)
+        this.bubbleUp()
+    }
+
+    bubbleUp() {
+        let index = this.heap.length - 1
+        while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2)
+            if (this.heap[parentIndex] >= this.heap[index]) break
+            this.swap(parentIndex, index)
+            index = parentIndex
+        }
+    }
+
+    swap(index1, index2) {
+        const temp = this.heap[index1]
+        this.heap[index1] = this.heap[index2]
+        this.heap[index2] = temp
+    }
+
+    dequeue() {
+        const max = this.heap[0]
+        const end = this.heap.pop()
+        if (this.heap.length > 0) {
+            this.heap[0] = end
+            this.sinkDown()
+        }
+        return max
+    }
+
+    sinkDown() {
+        let index = 0
+        const length = this.heap.length
+        const element = this.heap[0]
+        while (true) {
+            const leftChildIndex = 2 * index + 1
+            const rightChildIndex = 2 * index + 2
+            let leftChild, rightChild
+            let swap = null
+
+            if (leftChildIndex < length) {
+                leftChild = this.heap[leftChildIndex]
+                if (leftChild > element) {
+                    swap = leftChildIndex
+                }
+            }
+
+            if (rightChildIndex < length) {
+                rightChild = this.heap[rightChildIndex]
+                if (
+                    (swap === null && rightChild > element) ||
+                    (swap !== null && rightChild > leftChild)
+                ) {
+                    swap = rightChildIndex
+                }
+            }
+
+            if (swap === null) break
+            this.swap(index, swap)
+            index = swap
+        }
+    }
+
+    front() {
+        return this.heap[0]
+    }
+
+    size() {
+        return this.heap.length
+    }
+
+    isEmpty() {
+        return this.size() === 0
+    }
+
+    top(){
+        return this.heap[0]
+    }
+
+
+}
+
+
+/** 
+ * https://leetcode.com/problems/find-median-from-data-stream/
+ * Your MedianFinder object will be instantiated and called as such:
+ * var obj = new MedianFinder()
+ * obj.addNum(num)
+ * var param_2 = obj.findMedian()
+ */
+class MedianFinder {
+    constructor() {
+        this.maxHeap = new MaxPriorityQueue()
+        this.minHeap = new MinPriorityQueue()
+    }
+
+    /* Time O(log(N)) | Space (N) */
+    insertNum(num) {
+    
+	}
+
+    addNum(num, heap = this.getHeap(num)) {
+     
+	}
+
+    getHeap(num, { maxHeap, minHeap } = this) {
+        
+    }
+
+    rebalance({ maxHeap, minHeap } = this) {
+    }
+
+    /* Time O(1) | Space (1) */
+    findMedian({ maxHeap, minHeap } = this) {
+    }
+
+}
+
+
+module.exports = { Problem: MedianFinder };
