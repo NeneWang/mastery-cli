@@ -213,8 +213,88 @@ class UncrossedLines extends ProblemTests {
         this.current_test_name = '[1,3,7,1,7,5], [1,9,2,5,1]';
         assert.equal(sub.solve([1,3,7,1,7,5], [1,9,2,5,1]), 2);
     }
+}
 
 
+class FindTheLongestValidObstacleCourseAtEachPosition extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '[1,2,3,2]';
+        assert.deepEqual(sub.solve([1,2,3,2]), [1,2,3,3]);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '[2,2,1]';
+        assert.deepEqual(sub.solve([2,2,1]), [1,2,1]);
+    }
+
+    test_3(){
+        const sub = new this.Problem();
+        this.current_test_name = '[3,1,5,6,4,2]';
+        assert.deepEqual(sub.solve([3,1,5,6,4,2]), [1,1,2,3,2,2]);
+    }
+
+}
+
+
+class LongestIncreasingSubsequence extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '[10,9,2,5,3,7,101,18]';
+        assert.equal(sub.solve([10,9,2,5,3,7,101,18]), 4);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '[0,1,0,3,2,3]';
+        assert.equal(sub.solve([0,1,0,3,2,3]), 4);
+    }
+
+    test_3(){
+        const sub = new this.Problem();
+        this.current_test_name = '[7,7,7,7,7,7,7]';
+        assert.equal(sub.solve([7,7,7,7,7,7,7]), 1);
+    }
+
+}
+
+
+class BestTimeToBuyAndSellStockWithTransactionFee extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '[1,3,2,8,4,9], 2';
+        assert.equal(sub.solve([1,3,2,8,4,9], 2), 8);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '[1,3,7,5,10,3], 3';
+        assert.equal(sub.solve([1,3,7,5,10,3], 3), 6);
+    }
 }
 
 
@@ -230,6 +310,9 @@ const TEST_DICTIONARY = {
     'number-of-longest-increasing-subsequence': NumberOfLongestIncreasingSubsequence,
     'minimum-insertion-steps-to-make-a-string-palindrome': MinimumInsertionStepsToMakeAStringPalindrome,
     'uncrossed-lines': UncrossedLines,
+    'find-the-longest-valid-obstacle-course-at-each-position': FindTheLongestValidObstacleCourseAtEachPosition,
+    'longest-increasing-subsequence': LongestIncreasingSubsequence,
+    'best-time-to-buy-and-sell-stock-with-transaction-fee': BestTimeToBuyAndSellStockWithTransactionFee,
 }
 
 module.exports = TEST_DICTIONARY;
