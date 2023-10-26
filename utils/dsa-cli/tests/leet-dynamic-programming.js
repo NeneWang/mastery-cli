@@ -501,6 +501,28 @@ class SolvingQuestionsWithBrainPower extends ProblemTests {
 }
 
 
+class CountWaysToBuildGoodStrings extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '"Input: low = 3, high = 3, zero = 1, one = 1 | Output: 8';
+        assert.equal(sub.solve(3, 3, 1, 1), 8);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '"Input: low = 2, high = 3, zero = 1, one = 2 | Output: 5';
+        assert.equal(sub.solve(2, 3, 1, 2), 5);
+    }
+}
+
+
 
 
 
@@ -530,7 +552,8 @@ const TEST_DICTIONARY = {
     'ones-and-zeroes': OnesAndZeroes,
     'paint-house': PaintHouse,
     'paint-house-ii': PaintHouseII,
-    'solving-questions-with-brainpower': SolvingQuestionsWithBrainPower
+    'solving-questions-with-brainpower': SolvingQuestionsWithBrainPower,
+    'count-ways-to-build-good-strings': CountWaysToBuildGoodStrings,
 
 }
 

@@ -1,13 +1,13 @@
-class Solution {	// Your code here
+class Solution {
+	solve(low, high, zero, one) {
+	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Solution };ctSquares };olvingQuestionsWithBrainPower };blem: FindTheLongestValidObstacleCourseAtEachPosition };vels };nimumDifference };mmetric {
-	solve(root) {
-		// Your code here
-
+module.exports = { Problem: Solution };ainPower };blem: FindTheLongestValidObstacleCourseAtEachPosition };vels };nimumDifference };
+module.exports = { Problem: PartitionList };
 	}
 }
 
