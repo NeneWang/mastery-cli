@@ -1,78 +1,75 @@
+class PacificAtlantic {
+
+    pacificAtlantic = function (heights) {
 
 
-var setCellsToZero = (matrix) => {
-    const [rows, cols] = [matrix.length, matrix[0].length];
+        var search = (heights) => {
+            const [rows, cols] = [heights.length, heights[0].length];
+            const [pacificReachable, atlanticReachable] = [getMatrix(rows, cols), getMatrix(rows, cols)];/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
 
-    for (let row = 1; (row < rows); row++) {/* Time O(ROWS) */
-        for (let col = 1; (col < cols); col++) {/* Time O(COLS) */
-            const isZero = ((matrix[row][0] === 0) || (matrix[0][col] == 0));
-            if (!isZero) continue;
+            searchRows(heights, rows, cols, pacificReachable, atlanticReachable);
+            searchCols(heights, rows, cols, pacificReachable, atlanticReachable);
 
-            matrix[row][col] = 0;
+            return [pacificReachable, atlanticReachable];
         }
-    }
-}
 
-var setEdgesToZero = (matrix, isColZero = false) => {
-    const [rows, cols] = [matrix.length, matrix[0].length];
+        var getMatrix = (rows, cols) => new Array(rows).fill()/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
+            .map(() => new Array(cols).fill(false));
 
-    for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
-        if (matrix[row][0] === 0) isColZero = true;
+        var searchRows = (heights, rows, cols, pacificReachable, atlanticReachable) => {
+            for (let row = 0; row < rows; row++) {/* Time O(ROWS) */
+                const [pacificStart, atlanticStart] = [0, (cols - 1)];
 
-        for (let col = 1; (col < cols); col++) {/* Time O(COLS) */
-            const canSet = (matrix[row][col] === 0);
-            if (!canSet) continue;
-
-            matrix[0][col] = 0;
-            matrix[row][0] = 0;
+                dfs(row, pacificStart, rows, cols, pacificReachable, heights);   /* Space O(ROWS * COLS) */
+                dfs(row, atlanticStart, rows, cols, atlanticReachable, heights); /* Space O(ROWS * COLS) */
+            }
         }
+
+        var searchCols = (heights, rows, cols, pacificReachable, atlanticReachable) => {
+            for (let col = 0; col < cols; col++) {/* Time O(COLS) */
+                const [pacificStart, atlanticStart] = [0, (rows - 1)];
+
+                dfs(pacificStart, col, rows, cols, pacificReachable, heights);   /* Space O(ROWS * COLS) */
+                dfs(atlanticStart, col, rows, cols, atlanticReachable, heights); /* Space O(ROWS * COLS) */
+            }
+        }
+
+        const dfs = (row, col, rows, cols, isReachable, heights) => {
+            isReachable[row][col] = true;
+
+            for (const [_row, _col] of getNeighbors(row, rows, col, cols)) {
+                if (isReachable[_row][_col]) continue;
+
+                const isLower = heights[_row][_col] < heights[row][col];
+                if (isLower) continue;
+
+
+                dfs(_row, _col, rows, cols, isReachable, heights);              /* Space O(ROWS * COLS) */
+            }
+        }
+
+        var searchGrid = (heights, pacificReachable, atlanticReachable, intersection = []) => {
+            const [rows, cols] = [heights.length, heights[0].length];
+
+            // TODO Iterate over each of the rows, if it is reachable, push the intersections. Otherwise skip it.
+            
+
+            return intersection;
+        }
+
+        var getNeighbors = (row, rows, col, cols) => [[0, 1], [0, -1], [1, 0], [-1, 0]]
+            .map(([_row, _col]) => [(row + _row), (col + _col)])
+            .filter(([_row, _col]) => (0 <= _row) && (_row < rows) && (0 <= _col) && (_col < cols))
+
+        const [pacificReachable, atlanticReachable] = search(heights);   /* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
+
+        return searchGrid(heights, pacificReachable, atlanticReachable);/* Time O(ROWS * COLS) | Space O(ROWS * COLS) */
+    };
+
+    solve(heights) {
+        return this.pacificAtlantic(heights);
     }
-
-    return isColZero;
-}
-
-var setFirstRowZero = (matrix, cols = matrix[0].length) => {
-    for (let col = 0; (col < cols); col++) {/* Time O(COLS) */
-        matrix[0][col] = 0;
-    }
-}
-
-var setFirstColZero = (matrix, rows = matrix.length) => {
-    // TODO For each row, set the first element to zero
-    for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
-        matrix[row][0] = 0;
-    }
-}
-
-/**
- * Constant Space
- * Time O(ROWS * COLS) | Space (1)
- * https://leetcode.com/problems/set-matrix-zeroes/
- * @param {number[][]} matrix
- * @return {void} Do not return anything, modify matrix in-place instead.
- */
-const setZeroes = (matrix) => {
-
-
-    const isColZero = setEdgesToZero(matrix);/* Time O(ROWS * COLS) */
-
-    setCellsToZero(matrix);                  /* Time O(ROWS * COLS) */
-
-    const isZero = (matrix[0][0] === 0);
-    if (isZero) setFirstRowZero(matrix);     /* Time O(COLS) */
-
-    if (isColZero) setFirstColZero(matrix);  /* Time O(ROWS) */
 }
 
 
-class SetMatrixZeroes {
-
-
-
-    solve(matrix) {
-        return setZeroes(matrix);
-    }
-}
-
-
-module.exports = { Problem: SetMatrixZeroes };
+module.exports = { Problem: PacificAtlantic };
