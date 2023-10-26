@@ -415,6 +415,28 @@ class PerfectSquare extends ProblemTests {
 }
 
 
+class OnesAndZeroes extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+
+    }
+
+    test_1() {
+        const sub = new this.Problem();
+        this.current_test_name = '["10","0001","111001","1","0"], 5, 3';
+        assert.equal(sub.solve(["10", "0001", "111001", "1", "0"], 5, 3), 4);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '["10","0","1"], 1, 1';
+        assert.equal(sub.solve(["10", "0", "1"], 1, 1), 2);
+    }
+}
+
+
 
 
 
@@ -436,6 +458,7 @@ const TEST_DICTIONARY = {
     'unique-binary-search-trees': UniqueBinarySearchTrees,
     'unique-binary-search-trees-ii': UniqueBinarySearchTreesII,
     'perfect-squares': PerfectSquare,
+    'ones-and-zeroes': OnesAndZeroes
 
 }
 

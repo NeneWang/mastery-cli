@@ -1,10 +1,16 @@
-class Solution {	// Your code here
+class Solution {
+	solve(nums) {
+	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Solution };m: Solution };Solution };ule.exports = { Problem: FindTheLongestValidObstacleCourseAtEachPosition };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
+module.exports = { Problem: Solution };
+}
+
+
+module.exports = { Problem: FindTheLongestValidObstacleCourseAtEachPosition };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
 
 	}
 }
