@@ -1,46 +1,42 @@
-class Solution {	// Your code here
+class MaximumLengthOfPairChain {
+	solve(pairs) {
+	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Solution };lem: Problem };tArithmeticSubsequence };irChain };FindTheLongestValidObstacleCourseAtEachPosition };: GetMinimumDifference };mmetric {
-	solve(root) {
-		// Your code here
+module.exports = { Problem: MaximumLengthOfPairChain };FindTheLongestValidObstacleCourseAtEachPosition };eFromInPost };
+module.exports = { Problem: ConnectTree };ur code here
 
 	}
 }
 
 
-module.exports = { Problem: IsSymmetric };) {
+module.exports = { Problem: IsSymmetric };
+    isEmpty() {
         return this.size() === 0
     }
 
 }
 
-
-class RottingOranges {
+class WordLadder {
 
 
     /**
-     * https://leetcode.com/problems/rotting-oranges/
+     * https://leetcode.com/problems/word-ladder/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {number[][]} grid
+     * @param {string} beginWord
+     * @param {string} endWord
+     * @param {string[]} wordList
      * @return {number}
      */
-    orangesRotting = function (grid) {
+    ladderLength = function (beginWord, endWord, wordList) {
 		
-    };
+	};
 
 
-    solve(grid) {
-        return this.orangesRotting(grid);
-    }
-}
-
-
-module.exports = { Problem: RottingOranges };
-d, wordList) {
+    solve(beingWord, endWord, wordList) {
         return this.ladderLength(beingWord, endWord, wordList);
     }
 }

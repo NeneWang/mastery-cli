@@ -1,6 +1,8 @@
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
 
+const { arrayToListNode, arrayToBinaryTree, TreeNode } = require('./utils');
+
 class NthTribonacciNumber extends ProblemTests {
     constructor(Problem) {
         super(Problem);
@@ -298,6 +300,32 @@ class BestTimeToBuyAndSellStockWithTransactionFee extends ProblemTests {
 }
 
 
+class HouseRobberIII extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '[3,2,3,null,3,null,1]';
+        assert.equal(sub.solve(
+            arrayToBinaryTree([3,2,3,null,3,null,1]), 2), 7);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '[3,4,5,1,3,null,1]';
+        assert.equal(sub.solve(
+            arrayToBinaryTree([3,4,5,1,3,null,1]), 2), 9);
+
+    }
+
+}
+
+
 
 
 const TEST_DICTIONARY = {
@@ -313,6 +341,7 @@ const TEST_DICTIONARY = {
     'find-the-longest-valid-obstacle-course-at-each-position': FindTheLongestValidObstacleCourseAtEachPosition,
     'longest-increasing-subsequence': LongestIncreasingSubsequence,
     'best-time-to-buy-and-sell-stock-with-transaction-fee': BestTimeToBuyAndSellStockWithTransactionFee,
+    'house-robber-iii': HouseRobberIII,
 }
 
 module.exports = TEST_DICTIONARY;
