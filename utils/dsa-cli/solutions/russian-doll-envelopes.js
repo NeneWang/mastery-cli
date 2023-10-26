@@ -1,5 +1,5 @@
 class RussianDollEnvelopers {
-    lengthOfLIS(nums) {
+    solve(nums) {
       const dp = new Array(nums.length).fill(0);
       let len = 0;
       

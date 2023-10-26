@@ -1,12 +1,12 @@
-class DeleteAndEarn {
-	solve(nums) {
+class Solution {
+	solve(nums1, nums2) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: DeleteAndEarn };{ Problem: SubstringWithConcatenationOfAllWords };ule.exports = { Problem: GetMinimumDifference };orts = { Problem: ConnectTree };titionList };
+module.exports = { Problem: Solution };odule.exports = { Problem: LongestArithmeticSubsequenceGivenDifference };em: GetMinimumDifference };orts = { Problem: ConnectTree };titionList };
 	}
 }
 
