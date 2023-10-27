@@ -7,11 +7,11 @@ class Solution {
 
         // minDiffPrevDay and minDiffCurrDay record the minimum total job difficulty
         // for the current day and previous day, respectively
-        const minDiffPrevDay = new Array(n).fill(1000);
-        const minDiffCurrDay = new Array(n).fill(0);
+        let minDiffPrevDay = new Array(n).fill(1000);
+        let minDiffCurrDay = new Array(n).fill(0);
         let tmp;
 
-        const stack = [];
+        let stack = [];
 
         for (let day = 0; day < d; ++day) {
             // Use a monotonically decreasing stack to record job difficulties

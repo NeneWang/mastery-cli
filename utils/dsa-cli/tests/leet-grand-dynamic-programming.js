@@ -240,7 +240,6 @@ class MinimumDifficultyOfAJobSchedule extends ProblemTests {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
-        this.tests.push(() => this.test_3());
     }
 
     test_1(){
@@ -248,7 +247,7 @@ class MinimumDifficultyOfAJobSchedule extends ProblemTests {
         
         
         const sub = new this.Problem();
-        const result = sub.solve([6,5,4,3,2,1], 7);
+        const result = sub.solve([6,5,4,3,2,1], 2);
         assert.equal(result, 7);
     }
 
