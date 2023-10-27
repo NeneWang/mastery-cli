@@ -571,6 +571,66 @@ class DominoAndTrominoTiling extends ProblemTests {
     }
 }
 
+class CountVowelsPermutation extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '1 => 5';
+        assert.equal(sub.solve(1), 5);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '2 => 10';
+        assert.equal(sub.solve(2), 10);
+    }
+
+    test_3(){
+        const sub = new this.Problem();
+        this.current_test_name = '5 => 68';
+        assert.equal(sub.solve(5), 68);
+    }
+}
+
+class MaximumValueOfKCoinsFromPiles extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '[[1,100,3],[7,8,9]], 2 => 101';
+        assert.equal(sub.solve([[1,100,3],[7,8,9]], 2), 101);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '[[1,2,3],[1,2,3],[1,2,3],[1,2,3]], 4 => 7';
+        assert.equal(sub.solve([[1,2,3],[1,2,3],[1,2,3],[1,2,3]], 4), 7);
+    }
+
+    test_3(){
+        /**
+         * Input: piles = [[100],[100],[100],[100],[100],[100],[1,1,1,1,1,1,700]], k = 7
+         */
+        const sub = new this.Problem();
+        this.current_test_name = '[[100],[100],[100],[100],[100],[100],[1,1,1,1,1,1,700]], 7 => 706';
+        assert.equal(sub.solve([[100],[100],[100],[100],[100],[100],[1,1,1,1,1,1,700]], 7), 706);
+    }
+
+}
+
 
 
 
@@ -600,6 +660,8 @@ const TEST_DICTIONARY = {
     'count-ways-to-build-good-strings': CountWaysToBuildGoodStrings,
     'minimum-cost-for-tickets': MinCostTickets,
     'domino-and-tromino-tiling': DominoAndTrominoTiling,
+    'count-vowels-permutation': CountVowelsPermutation,
+    'maximum-value-of-k-coins-from-piles': MaximumValueOfKCoinsFromPiles,
 
 }
 

@@ -1,46 +1,48 @@
-class DominoAndTrominoTiling {
-	solve(n) {
+class Solution {
+	solve(piles, k) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: DominoAndTrominoTiling };ckets };FindTheLongestValidObstacleCourseAtEachPosition };: GetMinimumDifference };orts = { Problem: ConnectTree };titionList };
+module.exports = { Problem: Solution };noAndTrominoTiling };ckets };FindTheLongestValidObstacleCourseAtEachPosition };: GetMinimumDifference };mmetric {
+	solve(root) {
+		// Your code here
+
 	}
 }
 
 
-module.exports = { Problem: IsSymmetric };
-    isEmpty() {
-        return this.size() === 0
-    }
+module.exports = { Problem: IsSymmetric };x]) break
+			this.swap(parentIndex, index)
+			index = parentIndex
+		}
+	}
 
-}
+	swap(index1, index2) {
+		const temp = this.heap[index1]
+		this.heap[index1] = this.heap[index2]
+		this.heap[index2] = temp
+	}
 
-class WordLadder {
+	dequeue() {
+		const max = this.heap[0]
+		const end = this.heap.pop()
+		if (this.heap.length > 0) {
+			this.heap[0] = end
+			this.sinkDown()
+		}
+		return max
+	}
 
-
-    /**
-     * https://leetcode.com/problems/word-ladder/
-     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
-     * @return {number}
-     */
-    ladderLength = function (beginWord, endWord, wordList) {
-		
-	};
-
-
-    solve(beingWord, endWord, wordList) {
-        return this.ladderLength(beingWord, endWord, wordList);
-    }
-}
-
-
-module.exports = { Problem: WordLadder }; index + 2
+	sinkDown() {
+		let index = 0
+		const length = this.heap.length
+		const element = this.heap[0]
+		while (true) {
+			const leftChildIndex = 2 * index + 1
+			const rightChildIndex = 2 * index + 2
 			let leftChild, rightChild
 			let swap = null
 
@@ -114,19 +116,17 @@ module.exports = { Problem: LastStoneWeight };
         return this.size() === 0
     }
 
-    top(){
-        return this.heap[0]
-    }
-
 }
 
-class MaxPriorityQueue {
+class KthLargestElementInAnArray {
+	solve(nums, k) {
+	// Your code here
 
-    constructor() {
-        this.heap = []
-    }
+	}
+}
 
-    enqueue(element) {
+
+module.exports = { Problem: KthLargestElementInAnArray };ment) {
         this.heap.push(element)
         this.bubbleUp()
     }
