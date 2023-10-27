@@ -321,6 +321,55 @@ class MinimumCostToCutAStick extends ProblemTests {
 }
 
 
+class CountAllPossibleRoutes extends ProblemTests {
+    constructor(Problem){
+        super(Problem)
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "locations = [2,3,6,8,4], start = 1, finish = 3, fuel = 5 | 4";
+
+        const sub = new this.Problem();
+        const result = sub.solve([2,3,6,8,4], 1, 3, 5);
+        assert.equal(result, 4);
+
+    }
+
+    test_2(){
+        this.current_test_name = "locations = [4,3,1], start = 1, finish = 0, fuel = 6 | 5";
+        const sub = new this.Problem();
+        const result = sub.solve([4,3,1], 1, 0, 6);
+        assert.equal(result, 5);
+    }
+}
+
+class NumberOfWaysToFormATargetStringGivenADictionary extends ProblemTests {
+
+    constructor(Problem){  
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "words = [\"acca\",\"bbbb\",\"caca\"], target = \"aba\" | 6";
+        const sub = new this.Problem();
+        const result = sub.solve(["acca","bbbb","caca"], "aba");
+        assert.equal(result, 6);
+    }
+
+    test_2(){
+        this.current_test_name = "words = [\"abba\",\"baab\"], target = \"bab\" | 4";
+        const sub = new this.Problem();
+        const result = sub.solve(["abba","baab"], "bab");
+        assert.equal(result, 4);
+    }
+
+}
+
+
 
 const TEST_DICTIONARY = {
     "longest-string-chain": LongestStringChain,
@@ -334,7 +383,8 @@ const TEST_DICTIONARY = {
     'minimum-difficulty-of-a-job-schedule': MinimumDifficultyOfAJobSchedule,
     'strange-printer': StrangePrinter,
     'minimum-cost-to-cut-a-stick': MinimumCostToCutAStick,
-
+    'count-all-possible-routes': CountAllPossibleRoutes,
+    'number-of-ways-to-form-a-target-string-given-a-dictionary': NumberOfWaysToFormATargetStringGivenADictionary
 }
 
 module.exports = TEST_DICTIONARY;
