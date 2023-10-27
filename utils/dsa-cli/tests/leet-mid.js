@@ -52,8 +52,6 @@ class InsertDeleteGetRandomO1 extends ProblemTests {
         assert.equal(structure.RandomizedSet(), 2);
 
     }
-
-
 }
 
 class MinimumSizeSubArraySum extends ProblemTests {

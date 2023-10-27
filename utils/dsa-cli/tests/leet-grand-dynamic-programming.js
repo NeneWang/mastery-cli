@@ -478,6 +478,86 @@ class TossStrangeCoins extends ProblemTests {
     }
 }
 
+class MaximumNumberOfAchievableTransferRequests extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }   
+
+    test_1(){
+        this.current_test_name = "n = 5, requests = [[0,1],[1,0],[0,1],[1,2],[2,0],[3,4]] | 5";
+        const sub = new this.Problem();
+        const result = sub.solve(5, [[0,1],[1,0],[0,1],[1,2],[2,0],[3,4]]);
+        assert.equal(result, 5);
+    }
+
+    test_2(){
+        this.current_test_name = "n = 3, requests = [[0,0],[1,2],[2,1]] | 3";
+        const sub = new this.Problem();
+        const result = sub.solve(3, [[0,0],[1,2],[2,1]]);
+        assert.equal(result, 3);
+    }
+
+}
+
+class BestTeamWithNoConflicts extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "[1,3,5,10,15], [1,2,3,4,5] | 34";
+        const sub = new this.Problem();
+        const result = sub.solve([1,3,5,10,15], [1,2,3,4,5]);
+        assert.equal(result, 34);
+    }
+
+    test_2(){
+        this.current_test_name = "[4,5,6,5], [2,1,2,1] | 16";
+        const sub = new this.Problem();
+        const result = sub.solve([4,5,6,5], [2,1,2,1]);
+        assert.equal(result, 16);
+    }
+
+}
+
+class TallestBillboard extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "[1,2,3,6] | 6";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2,3,6]);
+        assert.equal(result, 6);
+    }
+
+    test_2(){
+        this.current_test_name = "[1,2,3,4,5,6] | 10";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2,3,4,5,6]);
+        assert.equal(result, 10);
+    }
+
+    test_3(){
+        this.current_test_name = "[1,2] | 0";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2]);
+        assert.equal(result, 0);
+    }
+    
+
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -498,6 +578,9 @@ const TEST_DICTIONARY = {
     'number-of-ways-of-cutting-a-pizza': NumberOfWaysOfCuttingAPizza,
     'scramble-string': ScrambleString,
     'toss-strange-coins': TossStrangeCoins,
+    'maximum-number-of-achievable-transfer-requests': MaximumNumberOfAchievableTransferRequests,
+    'best-team-with-no-conflicts': BestTeamWithNoConflicts,
+    'tallest-billboard': TallestBillboard,   
 
 }
 

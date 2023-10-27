@@ -1,250 +1,45 @@
-class ScreambleString {
-	solve(s1, s2) {
-	// Your code here
 
-	}
-}
+class TrappingRainWater {
+    trappingRainWater(height) {
 
+        const maxLeft = [];
+        const maxRight = [];
+        const minLeftRight = [];
 
-module.exports = { Problem: ScreambleString };Coins };OfCuttingAPizza };GivenADictionary };ourseAtEachPosition };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
+        let current = 0;
 
-	}
-}
+		//Create an array of the max lefts and max rights for each element in the heights
+        for (let i = 0; i < height.length; i++) {
+            maxLeft.push(current);
+            current = Math.max(current, height[i]);
+        }
+        current = 0;
+		//Note how maxRight is calculated by going from the mostright to the left.
+        // TODO Calculate from the right to the left the maximum found from that perspective
 
-
-module.exports = { Problem: IsSymmetric };
-    isEmpty() {
-        return this.size() === 0
-    }
-
-}
-
-class WordLadder {
-
-
-    /**
-     * https://leetcode.com/problems/word-ladder/
-     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
-     * @return {number}
-     */
-    ladderLength = function (beginWord, endWord, wordList) {
+        // because the elements were added reverse. 
+        maxRight.reverse();
 		
-	};
-
-
-    solve(beingWord, endWord, wordList) {
-        return this.ladderLength(beingWord, endWord, wordList);
-    }
-}
-
-
-module.exports = { Problem: WordLadder }; index + 2
-			let leftChild, rightChild
-			let swap = null
-
-			if (leftChildIndex < length) {
-				leftChild = this.heap[leftChildIndex]
-				if (leftChild > element) {
-					swap = leftChildIndex
-				}
-			}
-
-			if (rightChildIndex < length) {
-				rightChild = this.heap[rightChildIndex]
-				if (
-					(swap === null && rightChild > element) ||
-					(swap !== null && rightChild > leftChild)
-				) {
-					swap = rightChildIndex
-				}
-			}
-
-			if (swap === null) break
-			this.swap(index, swap)
-			index = swap
-		}
-	}
-
-	front() {
-		return this.heap[0]
-	}
-
-	size() {
-		return this.heap.length
-	}
-
-	isEmpty() {
-		return this.size() === 0
-	}
-
-}
-
-
-class LastStoneWeight {
-	/**
-	 * https://leetcode.com/problems/last-stone-weight/
-	 * Time O(N * log(N)) | Space O(N)
-	 * @param {number[]} stones
-	 * @return {number}
-	 */
-	lastStoneWeight = (stones) => {
-
-	};
-
-
-
-	solve(stones) {
-		return this.lastStoneWeight(stones);
-	}
-}
-
-
-module.exports = { Problem: LastStoneWeight };
-   front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
-}
-
-class MaxPriorityQueue {
-
-    constructor() {
-        this.heap = []
-    }
-
-    enqueue(element) {
-        this.heap.push(element)
-        this.bubbleUp()
-    }
-
-    bubbleUp() {
-        let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] >= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
+		// The smallest common area calculable of them	
+        for (let i = 0; i < height.length; i++) {
+            const minofLeftRight = Math.min(maxLeft[i], maxRight[i]);
+            minLeftRight.push(minofLeftRight);
         }
-    }
-
-    swap(index1, index2) {
-        const temp = this.heap[index1]
-        this.heap[index1] = this.heap[index2]
-        this.heap[index2] = temp
-    }
-
-    dequeue() {
-        const max = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.sinkDown()
-        }
-        return max
-    }
-
-    sinkDown() {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
-
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild > element) {
-                    swap = leftChildIndex
-                }
+		
+		// Then you can calculate the water amount by checking that if the size is larger than the minium left, then you can add that to the water amount..
+        let water = 0;
+        for (let i = 0; i < height.length; i++) {
+            if (minLeftRight[i] - height[i] > 0) {
+                water += minLeftRight[i] - height[i];
             }
-
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild > element) ||
-                    (swap !== null && rightChild > leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
-
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
         }
+
+        return water;
     }
 
-    front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
-
+    //Dont edit this.
+    solve = this.trappingRainWater;
 }
 
 
-/** 
- * https://leetcode.com/problems/find-median-from-data-stream/
- * Your MedianFinder object will be instantiated and called as such:
- * var obj = new MedianFinder()
- * obj.addNum(num)
- * var param_2 = obj.findMedian()
- */
-class MedianFinder {
-    constructor() {
-        this.maxHeap = new MaxPriorityQueue()
-        this.minHeap = new MinPriorityQueue()
-    }
-
-    /* Time O(log(N)) | Space (N) */
-    insertNum(num) {
-    
-	}
-
-    addNum(num, heap = this.getHeap(num)) {
-     
-	}
-
-    getHeap(num, { maxHeap, minHeap } = this) {
-        
-    }
-
-    rebalance({ maxHeap, minHeap } = this) {
-    }
-
-    /* Time O(1) | Space (1) */
-    findMedian({ maxHeap, minHeap } = this) {
-    }
-
-}
-
-
-module.exports = { Problem: MedianFinder };
+module.exports = { Problem: TrappingRainWater };
