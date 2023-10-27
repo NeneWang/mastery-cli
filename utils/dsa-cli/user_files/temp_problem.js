@@ -6,7 +6,7 @@ class Solution {
 }
 
 
-module.exports = { Problem: Solution };lem: MinimumCostForTickets };FindTheLongestValidObstacleCourseAtEachPosition };: GetMinimumDifference };orts = { Problem: ConnectTree };titionList };
+module.exports = { Problem: Solution };tVowelsPermutation };ckets };FindTheLongestValidObstacleCourseAtEachPosition };vels };nimumDifference };orts = { Problem: ConnectTree };titionList };
 	}
 }
 
