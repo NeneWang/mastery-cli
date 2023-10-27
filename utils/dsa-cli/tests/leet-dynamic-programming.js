@@ -544,6 +544,35 @@ class MinCostTickets extends ProblemTests {
 }
 
 
+class DominoAndTrominoTiling extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '3 => 5';
+        assert.equal(sub.solve(3), 5);
+    }
+
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '8 => 258';
+        assert.equal(sub.solve(8), 258);
+    }
+
+    test_3(){
+        const sub = new this.Problem();
+        this.current_test_name = '1 => 1';
+        assert.equal(sub.solve(1), 1);
+    }
+}
+
+
+
 
 
 
@@ -569,7 +598,8 @@ const TEST_DICTIONARY = {
     'paint-house-ii': PaintHouseII,
     'solving-questions-with-brainpower': SolvingQuestionsWithBrainPower,
     'count-ways-to-build-good-strings': CountWaysToBuildGoodStrings,
-    'minimum-cost-for-tickets': MinCostTickets
+    'minimum-cost-for-tickets': MinCostTickets,
+    'domino-and-tromino-tiling': DominoAndTrominoTiling,
 
 }
 
