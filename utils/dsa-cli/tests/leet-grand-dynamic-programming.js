@@ -95,8 +95,8 @@ class KeysKeyboard4 extends ProblemTests {
 class HandShakesThatDontCross extends ProblemTests {
     constructor(Problem) {
         super(Problem);
-        // this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
     }
 
     test_1(){
@@ -370,6 +370,38 @@ class NumberOfWaysToFormATargetStringGivenADictionary extends ProblemTests {
 }
 
 
+class NumberOfMusicPlaylists extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "N = 3, L = 3, K = 1 | 6";
+        const sub = new this.Problem();
+        const result = sub.solve(3, 3, 1);
+        assert.equal(result, 6);
+    }
+
+    test_2(){
+        this.current_test_name = "N = 2, L = 3, K = 0 | 6";
+        const sub = new this.Problem();
+        const result = sub.solve(2, 3, 0);
+        assert.equal(result, 6);
+    }
+
+    test_3(){
+        this.current_test_name = "N = 2, L = 3, K = 1 | 2";
+        const sub = new this.Problem();
+        const result = sub.solve(2, 3, 1);
+        assert.equal(result, 2);
+    }
+}
+
+
 
 const TEST_DICTIONARY = {
     "longest-string-chain": LongestStringChain,
@@ -384,7 +416,8 @@ const TEST_DICTIONARY = {
     'strange-printer': StrangePrinter,
     'minimum-cost-to-cut-a-stick': MinimumCostToCutAStick,
     'count-all-possible-routes': CountAllPossibleRoutes,
-    'number-of-ways-to-form-a-target-string-given-a-dictionary': NumberOfWaysToFormATargetStringGivenADictionary
+    'number-of-ways-to-form-a-target-string-given-a-dictionary': NumberOfWaysToFormATargetStringGivenADictionary,
+    'number-of-music-playlists': NumberOfMusicPlaylists,
 }
 
 module.exports = TEST_DICTIONARY;

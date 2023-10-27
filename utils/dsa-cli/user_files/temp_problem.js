@@ -1,246 +1,51 @@
-class NumberOfWaysToFormATargetStringGivenADictionary {	// Your code here
-
-	}
-}
-
-
-module.exports = { Problem: NumberOfWaysToFormATargetStringGivenADictionary };ourseAtEachPosition };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
-
-	}
-}
-
-
-module.exports = { Problem: IsSymmetric };
-    isEmpty() {
-        return this.size() === 0
-    }
-
-}
-
-class WordLadder {
-
+class CombinationSumII {
 
     /**
-     * https://leetcode.com/problems/word-ladder/
-     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
-     * @return {number}
+     * https://leetcode.com/problems/combination-sum-ii/
+     * Time O(2^N) | Space O(N)
+     * @param {number[]} candidates
+     * @param {number} target
+     * @return {number[][]}
      */
-    ladderLength = function (beginWord, endWord, wordList) {
-		
-	};
+    combinationSum2 = function (candidates, target) {
 
 
-    solve(beingWord, endWord, wordList) {
-        return this.ladderLength(beingWord, endWord, wordList);
-    }
-}
+        const dfs = (candidates, target, index = 0, combination = [], combinations = []) => {
+            const isBaseCase = target < 0;
+            if (isBaseCase) return combinations;
 
+            const isTarget = target === 0;
+            if (isTarget) {
+                if (combination.length) combinations.push(combination.slice());
 
-module.exports = { Problem: WordLadder }; index + 2
-			let leftChild, rightChild
-			let swap = null
-
-			if (leftChildIndex < length) {
-				leftChild = this.heap[leftChildIndex]
-				if (leftChild > element) {
-					swap = leftChildIndex
-				}
-			}
-
-			if (rightChildIndex < length) {
-				rightChild = this.heap[rightChildIndex]
-				if (
-					(swap === null && rightChild > element) ||
-					(swap !== null && rightChild > leftChild)
-				) {
-					swap = rightChildIndex
-				}
-			}
-
-			if (swap === null) break
-			this.swap(index, swap)
-			index = swap
-		}
-	}
-
-	front() {
-		return this.heap[0]
-	}
-
-	size() {
-		return this.heap.length
-	}
-
-	isEmpty() {
-		return this.size() === 0
-	}
-
-}
-
-
-class LastStoneWeight {
-	/**
-	 * https://leetcode.com/problems/last-stone-weight/
-	 * Time O(N * log(N)) | Space O(N)
-	 * @param {number[]} stones
-	 * @return {number}
-	 */
-	lastStoneWeight = (stones) => {
-
-	};
-
-
-
-	solve(stones) {
-		return this.lastStoneWeight(stones);
-	}
-}
-
-
-module.exports = { Problem: LastStoneWeight };
-   front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-}
-
-class KthLargestElementInAnArray {
-	solve(nums, k) {
-	// Your code here
-
-	}
-}
-
-
-module.exports = { Problem: KthLargestElementInAnArray };ment) {
-        this.heap.push(element)
-        this.bubbleUp()
-    }
-
-    bubbleUp() {
-        let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] >= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
-        }
-    }
-
-    swap(index1, index2) {
-        const temp = this.heap[index1]
-        this.heap[index1] = this.heap[index2]
-        this.heap[index2] = temp
-    }
-
-    dequeue() {
-        const max = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.sinkDown()
-        }
-        return max
-    }
-
-    sinkDown() {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
-
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild > element) {
-                    swap = leftChildIndex
-                }
+                return combinations
             }
 
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild > element) ||
-                    (swap !== null && rightChild > leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
+            for (let i = index; i < candidates.length; i++) {
+                const isDuplicate = (index < i) && (candidates[i - 1] === candidates[i]);
+                if (isDuplicate) continue;
+
+                backTrack(candidates, target, i, combination, combinations);
             }
 
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
+            return combinations;
         }
+
+        const backTrack = (candidates, target, i, combination, combinations) => {
+            // TODO Complete the backTrack function which adds the current element to the combination and then calls the dfs function.
+            // Pops it from the combiantion if found.
+            
+        }
+
+        candidates.sort((a, b) => a - b)
+
+        return dfs(candidates, target)
+    };
+
+    solve(candidates, target) {
+        return this.combinationSum2(candidates, target);
     }
-
-    front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
-
 }
 
 
-/** 
- * https://leetcode.com/problems/find-median-from-data-stream/
- * Your MedianFinder object will be instantiated and called as such:
- * var obj = new MedianFinder()
- * obj.addNum(num)
- * var param_2 = obj.findMedian()
- */
-class MedianFinder {
-    constructor() {
-        this.maxHeap = new MaxPriorityQueue()
-        this.minHeap = new MinPriorityQueue()
-    }
-
-    /* Time O(log(N)) | Space (N) */
-    insertNum(num) {
-    
-	}
-
-    addNum(num, heap = this.getHeap(num)) {
-     
-	}
-
-    getHeap(num, { maxHeap, minHeap } = this) {
-        
-    }
-
-    rebalance({ maxHeap, minHeap } = this) {
-    }
-
-    /* Time O(1) | Space (1) */
-    findMedian({ maxHeap, minHeap } = this) {
-    }
-
-}
-
-
-module.exports = { Problem: MedianFinder };
+module.exports = { Problem: CombinationSumII };

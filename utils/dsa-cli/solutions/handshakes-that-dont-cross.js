@@ -1,36 +1,23 @@
-class HandshakesThatDontCross {
-    constructor() {
-        this.m = 1000000007;
-    }
-    mul(a, b) {
-        return ((a % this.m) * (b % this.m)) % this.m;
-    }
-    
-    
-
+class HandShakesThatDontCross {
     solve(numPeople) {
-        const n = Math.floor(numPeople / 2);
-        const inv = new Array(n + 2);
-        inv[1] = 1;
-    
-        for (let i = 2; i < n + 2; i++) {
-            const k = Math.floor(this.m / i);
-            const r = this.m % i;
-            inv[i] = ((this.m - this.mul(k, inv[r])) % this.m + this.m) % this.m;
-        }
-    
-        let C = 1;
-        for (let i = 0; i < n; i++) {
-            C = this.mul(this.mul(2 * (2 * i + 1), inv[i + 2]), C);
-            C = C % this.m;
-        }
-    
-        console.log("C => ", C);
-    
-        return C;
+        const mod = 10 ** 9 + 7;
+        const f = Array(numPeople + 1).fill(0);
+        const dfs = (i) => {
+            if (i < 2) {
+                return 1;
+            }
+            if (f[i] !== 0) {
+                return f[i];
+            }
+            for (let l = 0; l < i; l += 2) {
+                const r = i - l - 2;
+                f[i] += Number((BigInt(dfs(l)) * BigInt(dfs(r))) % BigInt(mod));
+                f[i] %= mod;
+            }
+            return f[i];
+        };
+        return dfs(numPeople);
     }
-    
 }
 
-
-module.exports = { Problem: HandshakesThatDontCross };
+module.exports = { Problem: HandShakesThatDontCross };
