@@ -553,11 +553,80 @@ class TallestBillboard extends ProblemTests {
         const result = sub.solve([1,2]);
         assert.equal(result, 0);
     }
-    
-
 
 }
 
+
+class AllPossibleFullBinaryTrees extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+
+        /**
+         * Input: n = 7
+Output: [[0,0,0,null,null,0,0,null,null,0,0],[0,0,0,null,null,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,null,null,null,null,0,0],[0,0,0,0,0,null,null,0,0]]
+         */
+        this.current_test_name = "7 | [[0,0,0,null,null,0,0,null,null,0,0],[0,0,0,null,null,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,null,null,null,null,0,0],[0,0,0,0,0,null,null,0,0]]";
+        const sub = new this.Problem();
+        const result = sub.solve(
+          7
+        );
+
+        const res = []
+        for (const tree of result){
+            res.push(binaryTreeToArray(tree));
+        }
+
+        assert.deepEqual(res, 
+            [[0,0,0,null,null,0,0,null,null,0,0],[0,0,0,null,null,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,null,null,null,null,0,0],[0,0,0,0,0,null,null,0,0]]
+            )
+    }
+
+    test_2(){
+        this.current_test_name = "3 | [[0,0,0]]";
+        const sub = new this.Problem();
+        const result = sub.solve(3);
+        const res = []
+        for (const tree of result){
+            res.push(binaryTreeToArray(tree));
+        }
+        assert.deepEqual(res, [[0,0,0]]);
+    }
+}
+
+class MaximumProductOfSplittedBinaryTree extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());s
+    }
+
+    test_1(){
+        this.current_test_name = "[1,2,3,4,5,6] | 110";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2,3,4,5,6]);
+        assert.equal(result, 110);
+    }
+
+    test_2(){
+        this.current_test_name = "[1,null,2,3,4,null,null,5,6] | 90";
+        const sub = new this.Problem();
+        const result = sub.solve([1,null,2,3,4,null,null,5,6]);
+        assert.equal(result, 90);
+    }
+
+    test_3(){
+        this.current_test_name = "[2,3,9,10,7,8,6,5,4,11,1] | 1025";
+        const sub = new this.Problem();
+        const result = sub.solve([2,3,9,10,7,8,6,5,4,11,1]);
+        assert.equal(result, 1025);
+    }
+}
 
 
 const TEST_DICTIONARY = {
@@ -580,7 +649,10 @@ const TEST_DICTIONARY = {
     'toss-strange-coins': TossStrangeCoins,
     'maximum-number-of-achievable-transfer-requests': MaximumNumberOfAchievableTransferRequests,
     'best-team-with-no-conflicts': BestTeamWithNoConflicts,
-    'tallest-billboard': TallestBillboard,   
+    'tallest-billboard': TallestBillboard,  
+    'all-possible-full-binary-trees': AllPossibleFullBinaryTrees,
+    'maximum-product-of-splitted-binary-tree': MaximumProductOfSplittedBinaryTree,
+
 
 }
 
