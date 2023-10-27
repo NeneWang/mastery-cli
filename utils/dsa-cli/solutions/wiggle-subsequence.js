@@ -1,4 +1,4 @@
-class Solution {
+class WiggleSubsequence {
     solve(nums) {
         if (nums.length < 2)
             return nums.length;
@@ -15,4 +15,4 @@ class Solution {
     }
 }
 
-module.exports = { Problem: Solution }
+module.exports = { Problem: WiggleSubsequence }

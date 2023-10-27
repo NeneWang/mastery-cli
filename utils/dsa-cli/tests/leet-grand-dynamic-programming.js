@@ -8,7 +8,7 @@ class LongestStringChain extends ProblemTests {
     constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_2());
     }
 
     test_1() {
@@ -16,8 +16,9 @@ class LongestStringChain extends ProblemTests {
         const input = ["a", "b", "ba", "bca", "bda", "bdca"];
         const output = 4;
 
-        const result = this.problem.solve(input);
-        assert.strictEqual(result, output);
+        const sub = new this.Problem();
+        const result = sub.solve(input);
+        assert.equal(result, output);
     }
 
     test_2() {
@@ -25,7 +26,8 @@ class LongestStringChain extends ProblemTests {
         const input = ["xbc", "pcxbcf", "xb", "cxbc", "pcxbc"];
         const output = 5;
 
-        const result = this.problem.solve(input);
+        const sub = new this.Problem();
+        const result = sub.solve(input);
         assert.strictEqual(result, output);
     }
 }
@@ -44,7 +46,8 @@ class WiggleSubsequence extends ProblemTests {
         const output = 6;
         this.current_test_name = "1,7,4,9,2,5 | 6";
 
-        const result = this.problem.solve(input);
+        const sub = new this.Problem();
+        const result = sub.solve(input);
         assert.strictEqual(result, output);
     }
 
@@ -53,7 +56,8 @@ class WiggleSubsequence extends ProblemTests {
         const input = [1,17,5,10,13,15,10,5,16,8];
         const output = 7;
 
-        const result = this.problem.solve(input);
+        const sub = new this.Problem();
+        const result = sub.solve(input);
         assert.strictEqual(result, output);
     }
 }
@@ -72,7 +76,8 @@ class KeysKeyboard4 extends ProblemTests {
         const input = 3;
         const output = 3;
 
-        const result = this.problem.solve(input);
+        const sub = new this.Problem();
+        const result = sub.solve(input);
         assert.strictEqual(result, output);
     }
 
@@ -81,7 +86,8 @@ class KeysKeyboard4 extends ProblemTests {
         const input = 7;
         const output = 9;
 
-        const result = this.problem.solve(input);
+        const sub = new this.Problem();
+        const result = sub.solve(input);
         assert.strictEqual(result, output);
     }
 }
@@ -89,19 +95,23 @@ class KeysKeyboard4 extends ProblemTests {
 class HandShakesThatDontCross extends ProblemTests {
     constructor(Problem) {
         super(Problem);
-        this.tests.push(() => this.test_1());
-        this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
     }
 
     test_1(){
         this.current_test_name = "6 | 5";
-        const result = this.problem.solve(6);
+
+        const sub = new this.Problem();
+        const result = sub.solve(6);
         assert.equal(result, 5);
     }
     
     test_2(){
         this.current_test_name = "4 | 2";
-        const result = this.problem.solve(4);
+
+        const sub = new this.Problem();
+        const result = sub.solve(4);
         assert.equal(result, 2);
     }
 }
@@ -119,7 +129,8 @@ class DecodeWaysII extends ProblemTests {
         const input = "1*";
         const output = 18;
 
-        const result = this.problem.solve(input);
+        const sub = new this.Problem();
+        const result = sub.solve(input);
         assert.equal(result, output);
     }
 
@@ -129,7 +140,8 @@ class DecodeWaysII extends ProblemTests {
         const input = "2*";
         const output = 15;
 
-        const result = this.problem.solve(input);
+        const sub = new this.Problem();
+        const result = sub.solve(input);
         assert.equal(result, output);
     }
 }
@@ -147,7 +159,8 @@ class MaximumScoreFromPerformingMultiplicationOperations extends ProblemTests {
         const nums = [1,2,3], multipliers = [3,2,1];
         const output = 14;
 
-        const result = this.problem.solve(nums, multipliers);
+        const sub = new this.Problem();
+        const result = sub.solve(nums, multipliers);
         assert.equal(result, output);
     }
 
@@ -156,7 +169,37 @@ class MaximumScoreFromPerformingMultiplicationOperations extends ProblemTests {
         const nums = [-5,-3,-3,-2,7,1], multipliers = [-10,-5,3,4,6];
         const output = 102;
 
-        const result = this.problem.solve(nums, multipliers);
+        const sub = new this.Problem();
+        const result = sub.solve(nums, multipliers);
+        assert.equal(result, output);
+    }
+
+}
+
+class PaintHouseIII extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "houses = [0,0,0,0,0], cost = [[1,10],[10,1],[10,1],[1,10],[5,1]], m = 5, n = 2, target = 3 | 9";
+        const houses = [0,0,0,0,0], cost = [[1,10],[10,1],[10,1],[1,10],[5,1]], m = 5, n = 2, target = 3;
+        const output = 9;
+
+        const sub = new this.Problem();
+        const result = sub.solve(houses, cost, m, n, target);
+        assert.equal(result, output);
+    }
+
+    test_2(){
+        this.current_test_name = "houses = [0,2,1,2,0], cost = [[1,10],[10,1],[10,1],[1,10],[5,1]], m = 5, n = 2, target = 3 | 11";
+        const houses = [0,2,1,2,0], cost = [[1,10],[10,1],[10,1],[1,10],[5,1]], m = 5, n = 2, target = 3;
+        const output = 11;
+
+        const sub  = new this.Problem();
+        const result = sub.solve(houses, cost, m, n, target);
         assert.equal(result, output);
     }
 
@@ -171,7 +214,8 @@ const TEST_DICTIONARY = {
     "4-keys-keyboard": KeysKeyboard4,
     'handshakes-that-dont-cross': HandShakesThatDontCross,
     'decode-ways-ii': DecodeWaysII,
-    'maximum-score-from-performing-multiplication-operations': MaximumScoreFromPerformingMultiplicationOperations
+    'maximum-score-from-performing-multiplication-operations': MaximumScoreFromPerformingMultiplicationOperations,
+    'paint-house-iii': PaintHouseIII,
 
 }
 

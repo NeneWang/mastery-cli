@@ -1,4 +1,4 @@
-class Solution {
+class MaximumScoreFromPerformingMultiplication {
     solve(nums, multipliers) {
         const m = multipliers.length;
         const n = nums.length;
@@ -18,4 +18,4 @@ class Solution {
     }
 }
 
-module.exports = { Problem: Solution }
+module.exports = { Problem: MaximumScoreFromPerformingMultiplication }

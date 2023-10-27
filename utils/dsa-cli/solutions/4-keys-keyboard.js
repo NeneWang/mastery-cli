@@ -1,4 +1,4 @@
-class Solution {
+class KeysKeyboard4 {
     solve(n) {
         const dp = new Array(n + 1).fill(0);
         for (let i = 0; i <= n; i++) {
@@ -14,4 +14,4 @@ class Solution {
 }
 
 
-module.exports = { Problem: Solution };
+module.exports = { Problem: KeysKeyboard4 };

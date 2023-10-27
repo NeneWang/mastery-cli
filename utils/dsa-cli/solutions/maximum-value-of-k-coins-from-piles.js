@@ -1,4 +1,4 @@
-class Solution {
+class MaximumValueOfKCoinsFromPiles {
     solve(piles, k) {
         const n = piles.length;
         const dp = Array.from({ length: n + 1 }, () => Array(k + 1).fill(-1));
@@ -25,4 +25,4 @@ class Solution {
 }
 
 
-module.exports = { Problem: Solution };
+module.exports = { Problem: MaximumValueOfKCoinsFromPiles };
