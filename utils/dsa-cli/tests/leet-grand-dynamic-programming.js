@@ -425,6 +425,59 @@ class NumberOfWaysOfCuttingAPizza extends ProblemTests {
 
 }
 
+class ScrambleString extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "s1 = \"great\", s2 = \"rgeat\" | true";
+        const sub = new this.Problem();
+        const result = sub.solve("great", "rgeat");
+        assert.equal(result, true);
+    }
+
+    test_2(){
+        this.current_test_name = "s1 = \"abcde\", s2 = \"caebd\" | false";
+        const sub = new this.Problem();
+        const result = sub.solve("abcde", "caebd");
+        assert.equal(result, false);
+    }
+
+    test_3(){
+        this.current_test_name = "s1 = \"a\", s2 = \"a\" | true";
+        const sub = new this.Problem();
+        const result = sub.solve("a", "a");
+        assert.equal(result, true);
+    }
+}
+
+class TossStrangeCoins extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "[0.4], 1 | 0.40000";
+        const sub = new this.Problem();
+        const result = sub.solve([0.4], 1);
+        assert.equal(result, 0.40000);
+    }
+
+    test_2(){
+        this.current_test_name = "[0.5,0.5,0.5,0.5,0.5], 0 | 0.03125";
+        const sub = new this.Problem();
+        const result = sub.solve([0.5,0.5,0.5,0.5,0.5], 0);
+        assert.equal(result, 0.03125);
+    }
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -443,6 +496,9 @@ const TEST_DICTIONARY = {
     'number-of-ways-to-form-a-target-string-given-a-dictionary': NumberOfWaysToFormATargetStringGivenADictionary,
     'number-of-music-playlists': NumberOfMusicPlaylists,
     'number-of-ways-of-cutting-a-pizza': NumberOfWaysOfCuttingAPizza,
+    'scramble-string': ScrambleString,
+    'toss-strange-coins': TossStrangeCoins,
+
 }
 
 module.exports = TEST_DICTIONARY;
