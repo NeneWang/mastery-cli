@@ -522,11 +522,26 @@ class CountWaysToBuildGoodStrings extends ProblemTests {
     }
 }
 
+class MinCostTickets extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
 
+    test_1(){
+        const sub = new this.Problem();
+        this.current_test_name = '[1,4,6,7,8,20], [2,7,15]';
+        assert.equal(sub.solve([1,4,6,7,8,20], [2,7,15]), 11);
+    }
 
+    test_2(){
+        const sub = new this.Problem();
+        this.current_test_name = '[1,2,3,4,5,6,7,8,9,10,30,31], [2,7,15]';
+        assert.equal(sub.solve([1,2,3,4,5,6,7,8,9,10,30,31], [2,7,15]), 17);
+    }
 
-
-
+}
 
 
 
@@ -554,6 +569,7 @@ const TEST_DICTIONARY = {
     'paint-house-ii': PaintHouseII,
     'solving-questions-with-brainpower': SolvingQuestionsWithBrainPower,
     'count-ways-to-build-good-strings': CountWaysToBuildGoodStrings,
+    'minimum-cost-for-tickets': MinCostTickets
 
 }
 
