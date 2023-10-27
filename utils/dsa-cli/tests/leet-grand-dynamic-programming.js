@@ -401,6 +401,30 @@ class NumberOfMusicPlaylists extends ProblemTests {
     }
 }
 
+class NumberOfWaysOfCuttingAPizza extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "pizza = [\"A..\",\"AAA\",\"...\"], k = 3 | 3";
+        const sub = new this.Problem();
+        const result = sub.solve(["A..","AAA","..."], 3);
+        assert.equal(result, 3);
+    }
+
+    test_2(){
+        this.current_test_name = "pizza = [\"A..\",\"AA.\",\"...\"] | 1";
+        const sub = new this.Problem();
+        const result = sub.solve(["A..","AA.","..."], 1);
+        assert.equal(result, 1);
+    }
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -418,6 +442,7 @@ const TEST_DICTIONARY = {
     'count-all-possible-routes': CountAllPossibleRoutes,
     'number-of-ways-to-form-a-target-string-given-a-dictionary': NumberOfWaysToFormATargetStringGivenADictionary,
     'number-of-music-playlists': NumberOfMusicPlaylists,
+    'number-of-ways-of-cutting-a-pizza': NumberOfWaysOfCuttingAPizza,
 }
 
 module.exports = TEST_DICTIONARY;
