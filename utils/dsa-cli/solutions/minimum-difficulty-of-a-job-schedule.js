@@ -1,4 +1,4 @@
-class Solution {
+class MinimumDifficultyOfAJobSchedule {
     solve(jobDifficulty, d) {
         const n = jobDifficulty.length;
         if (n < d) {
@@ -56,4 +56,4 @@ class Solution {
     }
 }
 
-module.exports = { Problem: Solution };
+module.exports = { Problem: MinimumDifficultyOfAJobSchedule };

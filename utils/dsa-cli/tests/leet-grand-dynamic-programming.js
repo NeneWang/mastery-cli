@@ -261,6 +261,65 @@ class MinimumDifficultyOfAJobSchedule extends ProblemTests {
 }
 
 
+class StrangePrinter extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "aaabbb | 2";
+        
+        
+        const sub = new this.Problem();
+        const result = sub.solve("aaabbb");
+        assert.equal(result, 2);
+    }
+
+    test_2(){
+        this.current_test_name = "aba | 2";
+
+        const sub = new this.Problem();
+        const result = sub.solve("aba");
+        assert.equal(result, 2);
+    }
+
+}
+
+class MinimumCostToCutAStick extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "7, [1,3,4,5] | 16";
+        
+        
+        const sub = new this.Problem();
+        const result = sub.solve(7, [1,3,4,5]);
+        assert.equal(result, 16);
+    }
+
+    test_2(){
+        this.current_test_name = "9, [5,6,1,4,2] | 22";
+
+        const sub = new this.Problem();
+        const result = sub.solve(9, [5,6,1,4,2]);
+        assert.equal(result, 22);
+    }
+
+    test_3(){
+        this.current_test_name = ""
+    }
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -272,7 +331,9 @@ const TEST_DICTIONARY = {
     'maximum-score-from-performing-multiplication-operations': MaximumScoreFromPerformingMultiplicationOperations,
     'paint-house-iii': PaintHouseIII,
     'frog-jump': FrogJump,
-    'minimum-difficulty-of-a-job-schedule': MinimumDifficultyOfAJobSchedule
+    'minimum-difficulty-of-a-job-schedule': MinimumDifficultyOfAJobSchedule,
+    'strange-printer': StrangePrinter,
+    'minimum-cost-to-cut-a-stick': MinimumCostToCutAStick,
 
 }
 

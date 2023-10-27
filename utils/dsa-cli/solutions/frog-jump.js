@@ -1,4 +1,4 @@
-class Solution {
+class FrogJump {
     constructor() {
         this.mark = new Map();
         this.dp = new Array(2001).fill(null).map(() => new Array(2001).fill(false));
@@ -46,4 +46,4 @@ class Solution {
     }
 }
 
-module.exports = { Problem: Solution };
+module.exports = { Problem: FrogJump };
