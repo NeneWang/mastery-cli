@@ -205,6 +205,62 @@ class PaintHouseIII extends ProblemTests {
 
 }
 
+class FrogJump extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "[0,1,3,5,6,8,12,17] | true";
+        const input = [0,1,3,5,6,8,12,17];
+        const output = true;
+
+        const sub = new this.Problem();
+        const result = sub.solve(input);
+        assert.equal(result, output);
+    }
+
+    test_2(){
+        this.current_test_name = "[0,1,2,3,4,8,9,11] | false";
+        const input = [0,1,2,3,4,8,9,11];
+        const output = false;
+
+        const sub = new this.Problem();
+        const result = sub.solve(input);
+        assert.equal(result, output);
+    }
+}
+
+
+class MinimumDifficultyOfAJobSchedule extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "[6,5,4,3,2,1], 2 | 7";
+        
+        
+        const sub = new this.Problem();
+        const result = sub.solve([6,5,4,3,2,1], 7);
+        assert.equal(result, 7);
+    }
+
+    test_2(){
+        this.current_test_name = "[9,9,9], 4 | -1";
+
+        const sub = new this.Problem();
+        const result = sub.solve([9,9,9], 4);
+        assert.equal(result, -1);
+    }
+}
+
 
 
 
@@ -216,6 +272,8 @@ const TEST_DICTIONARY = {
     'decode-ways-ii': DecodeWaysII,
     'maximum-score-from-performing-multiplication-operations': MaximumScoreFromPerformingMultiplicationOperations,
     'paint-house-iii': PaintHouseIII,
+    'frog-jump': FrogJump,
+    'minimum-difficulty-of-a-job-schedule': MinimumDifficultyOfAJobSchedule
 
 }
 

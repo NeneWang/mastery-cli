@@ -6,4 +6,4 @@ class Solution {
 }
 
 
-module.exports = { Problem: Solution };;
+module.exports = { Problem: Solution };
