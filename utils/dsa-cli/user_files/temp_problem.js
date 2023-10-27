@@ -6,43 +6,41 @@ class Solution {
 }
 
 
-module.exports = { Problem: Solution };noAndTrominoTiling };ckets };FindTheLongestValidObstacleCourseAtEachPosition };: GetMinimumDifference };mmetric {
-	solve(root) {
-		// Your code here
-
+module.exports = { Problem: Solution };lem: MinimumCostForTickets };FindTheLongestValidObstacleCourseAtEachPosition };: GetMinimumDifference };orts = { Problem: ConnectTree };titionList };
 	}
 }
 
 
-module.exports = { Problem: IsSymmetric };x]) break
-			this.swap(parentIndex, index)
-			index = parentIndex
-		}
-	}
+module.exports = { Problem: IsSymmetric };
+    isEmpty() {
+        return this.size() === 0
+    }
 
-	swap(index1, index2) {
-		const temp = this.heap[index1]
-		this.heap[index1] = this.heap[index2]
-		this.heap[index2] = temp
-	}
+}
 
-	dequeue() {
-		const max = this.heap[0]
-		const end = this.heap.pop()
-		if (this.heap.length > 0) {
-			this.heap[0] = end
-			this.sinkDown()
-		}
-		return max
-	}
+class WordLadder {
 
-	sinkDown() {
-		let index = 0
-		const length = this.heap.length
-		const element = this.heap[0]
-		while (true) {
-			const leftChildIndex = 2 * index + 1
-			const rightChildIndex = 2 * index + 2
+
+    /**
+     * https://leetcode.com/problems/word-ladder/
+     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
+     * @param {string} beginWord
+     * @param {string} endWord
+     * @param {string[]} wordList
+     * @return {number}
+     */
+    ladderLength = function (beginWord, endWord, wordList) {
+		
+	};
+
+
+    solve(beingWord, endWord, wordList) {
+        return this.ladderLength(beingWord, endWord, wordList);
+    }
+}
+
+
+module.exports = { Problem: WordLadder }; index + 2
 			let leftChild, rightChild
 			let swap = null
 
