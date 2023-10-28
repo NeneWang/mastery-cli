@@ -964,6 +964,107 @@ class StoneGameIII extends ProblemTests {
     }
 }
 
+class StoneGameIV extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem)
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "n = 1 | true";
+        const sub = new this.Problem();
+        const result = sub.solve(1);
+        assert.equal(result, true);
+    }
+
+    test_2(){
+        this.current_test_name = "n = 2 | false";
+        const sub = new this.Problem();
+        const result = sub.solve(2);
+        assert.equal(result, false);
+    }
+
+}
+
+class MaximumNUmberOfEventsTHatCanBeAttentedII extends ProblemTests {
+    constructor(Problem){
+        super(Problem)
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = 'events = [[1,2,4],[3,4,3],[2,3,1]], k = 2 | 7';
+        const sub = new this.Problem();
+        const result = sub.solve([[1,2,4],[3,4,3],[2,3,1]], 2);
+        assert.equal(result, 7);
+    }
+
+    test_2(){
+        /**
+         * Input: events = [[1,2,4],[3,4,3],[2,3,10]], k = 2
+            Output: 10
+         */
+        
+        this.current_test_name = 'events = [[1,2,4],[3,4,3],[2,3,10]], k = 2 | 10';
+        const sub = new this.Problem();
+        const result = sub.solve([[1,2,4],[3,4,3],[2,3,10]], 2);
+        assert.equal(result, 10);
+    }
+
+    test_3(){
+        /**
+         * 
+            Input: events = [[1,1,1],[2,2,2],[3,3,3],[4,4,4]], k = 3
+            Output: 9
+         */
+        
+        this.current_test_name = 'events = [[1,1,1],[2,2,2],[3,3,3],[4,4,4]], k = 3 | 9';
+        const sub = new this.Problem();
+        const result = sub.solve([[1,1,1],[2,2,2],[3,3,3],[4,4,4]], 3);
+        assert.equal(result, 9);
+    }
+
+    
+
+}
+
+class MakeArrayStricklyIncreasing extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+        
+    }
+
+    test_1(){
+        this.current_test_name = "arr1 = [1,5,3,6,7], arr2 = [1,3,2,4] | 1";
+        const sub = new this.Problem();
+        const result = sub.solve([1,5,3,6,7], [1,3,2,4]);
+        assert.equal(result, 1);
+    }
+
+    test_2(){
+        this.current_test_name = "arr1 = [1,5,3,6,7], arr2 = [4,3,1] | 2";
+        const sub = new this.Problem();
+        const result = sub.solve([1,5,3,6,7], [4,3,1]);
+        assert.equal(result, 2);
+    }
+
+    test_3(){
+        this.current_test_name = "arr1 = [1,5,3,6,7], arr2 = [1,6,3,3] | -1";
+        const sub = new this.Problem();
+        const result = sub.solve([1,5,3,6,7], [1,6,3,3]);
+        assert.equal(result, -1);
+    }
+
+}
+
 
 const TEST_DICTIONARY = {
     "longest-string-chain": LongestStringChain,
@@ -1000,6 +1101,9 @@ const TEST_DICTIONARY = {
     'predict-the-winner': PredictTheWinner,
     'stone-game-ii': StoneGameII,
     'stone-game-iii': StoneGameIII,
+    'stone-game-iv': StoneGameIV,
+    'maximum-number-of-events-that-can-be-attended-ii': MaximumNUmberOfEventsTHatCanBeAttentedII,
+    'make-array-strictly-increasing': MakeArrayStricklyIncreasing
 
 
 }
