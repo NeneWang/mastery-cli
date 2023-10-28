@@ -713,18 +713,152 @@ class PartitionToKEqualSumSubsets extends ProblemTests {
         this.tests.push(() => this.test_1());
         // this.tests.push(() => this.test_2());
         // this.tests.push(() => this.test_3());
-    
+
     }
 
     test_1() {
         this.current_test_name = "[4,3,2,3,5,2,1], k = 4 | true";
         const sub = new this.Problem();
-        const result = sub.solve([4,3,2,3,5,2,1], 4);
+        const result = sub.solve([4, 3, 2, 3, 5, 2, 1], 4);
         assert.equal(result, true);
     }
 
+}
+
+class OptimalAccountBalancing extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        this.current_test_name = "[[0,1,10],[2,0,5]] | 2";
+        const sub = new this.Problem();
+        const result = sub.solve([[0, 1, 10], [2, 0, 5]]);
+        assert.equal(result, 2);
+    }
+
+    test_2() {
+        this.current_test_name = "[[0,1,10],[1,0,1],[1,2,5],[2,0,5]] | 1";
+        const sub = new this.Problem();
+        const result = sub.solve([[0, 1, 10], [1, 0, 1], [1, 2, 5], [2, 0, 5]]);
+        assert.equal(result, 1);
+    }
+}
 
 
+class ShortestPathVisitingAllNodes extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        this.current_test_name = "[[1,2,3],[0],[0],[0]] | 4";
+        const sub = new this.Problem();
+        const result = sub.solve([[1, 2, 3], [0], [0], [0]]);
+        assert.equal(result, 4);
+    }
+
+    test_2() {
+        this.current_test_name = "[[1],[0,2,4],[1,3,4],[2],[1,2]] | 4";
+        const sub = new this.Problem();
+        const result = sub.solve([[1], [0, 2, 4], [1, 3, 4], [2], [1, 2]]);
+        assert.equal(result, 4);
+    }
+
+}
+
+class SmallestSufficientTeams extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        this.current_test_name = "[[\"java\"],[\"nodejs\"],[\"nodejs\",\"reactjs\"]], [\"java\",\"nodejs\",\"reactjs\"] | [0,2]";
+        const sub = new this.Problem();
+        const result = sub.solve([["java"], ["nodejs"], ["nodejs", "reactjs"]], ["java", "nodejs", "reactjs"]);
+        assert.deepEqual(result, [0, 2]);
+    }
+
+    test_2() {
+        this.current_test_name = "[[\"algorithms\",\"math\",\"java\"],[\"algorithms\",\"math\",\"reactjs\"],[\"java\",\"csharp\",\"aws\"],[\"reactjs\",\"csharp\"],[\"csharp\",\"math\"],[\"aws\",\"java\"]], [\"algorithms\",\"math\",\"java\",\"reactjs\",\"csharp\",\"aws\"] | [1,2]";
+        const sub = new this.Problem();
+        const result = sub.solve([["algorithms", "math", "java"], ["algorithms", "math", "reactjs"], ["java", "csharp", "aws"], ["reactjs", "csharp"], ["csharp", "math"], ["aws", "java"]], ["algorithms", "math", "java", "reactjs", "csharp", "aws"]);
+        assert.deepEqual(result, [1, 2]);
+    }
+
+    test_3() {
+        this.current_test_name = ""
+    }
+
+}
+
+class NumberOfWaysToWearDifferentHatsToEachOther extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem)
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "[[3,4],[4,5],[5]] | 1";
+        const sub = new this.Problem();
+        const result = sub.solve([[3,4],[4,5],[5]]);
+        assert.equal(result, 1);
+    }
+
+    test_2(){
+        this.current_test_name = "[[3,5,1],[3,5] | 4";
+        const sub = new this.Problem();
+        const result = sub.solve([[3,5,1],[3,5]]);
+        assert.equal(result, 4);
+    }
+
+    test_3(){
+        this.current_test_name = "[[1,2,3,4],[1,2,3,4],[1,2,3,4],[1,2,3,4]] | 24";
+        const sub = new this.Problem();
+        const result = sub.solve([[1,2,3,4],[1,2,3,4],[1,2,3,4],[1,2,3,4]]);
+        assert.equal(result, 24);
+    }
+}
+
+class MaximizeScoreAfterNOperations extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem)
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "[1,2] | 1";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2]);
+        assert.equal(result, 1);
+    }
+
+    test_2(){
+        this.current_test_name = "[3,4,6,8] | 11";
+        const sub = new this.Problem();
+        const result = sub.solve([3,4,6,8]);
+        assert.equal(result, 11);
+    }
+
+    test_3(){
+        this.current_test_name = "[1,2,3,4,5,6] | 14";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2,3,4,5,6]);
+        assert.equal(result, 14);
+    }
 }
 
 
@@ -753,7 +887,12 @@ const TEST_DICTIONARY = {
     'maximum-product-of-splitted-binary-tree': MaximumProductOfSplittedBinaryTree,
     'binary-tree-cameras': BinaryTreeCameras,
     'number-of-ways-to-reorder-array-to-get-same-bst': NumberOfWaysToReorderArrayToGetSameBst,
-    'partition-to-k-equal-sum-subsets': PartitionToKEqualSumSubsets
+    'partition-to-k-equal-sum-subsets': PartitionToKEqualSumSubsets,
+    'optimal-account-balancing': OptimalAccountBalancing,
+    'shortest-path-visiting-all-nodes': ShortestPathVisitingAllNodes,
+    'smallest-sufficient-team': SmallestSufficientTeams,
+    'number-of-ways-to-wear-different-hats-to-each-other': NumberOfWaysToWearDifferentHatsToEachOther,
+    'maximize-score-after-n-operations': MaximizeScoreAfterNOperations
 }
 
 module.exports = TEST_DICTIONARY;

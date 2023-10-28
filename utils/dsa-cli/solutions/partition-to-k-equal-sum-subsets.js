@@ -1,5 +1,5 @@
-class Solution {
-    canPartitionKSubsets(arr, k) {
+class PartitionToKEqualSumSubsets {
+    solve(arr, k) {
         let totalArraySum = 0;
         const n = arr.length;
 
@@ -43,4 +43,4 @@ class Solution {
 }
 
 
-module.exports = { Problem: Solution };
+module.exports = { Problem: PartitionToKEqualSumSubsets };
