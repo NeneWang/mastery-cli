@@ -1039,7 +1039,7 @@ class MakeArrayStricklyIncreasing extends ProblemTests {
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
         this.tests.push(() => this.test_3());
-        
+
     }
 
     test_1(){
@@ -1064,6 +1064,56 @@ class MakeArrayStricklyIncreasing extends ProblemTests {
     }
 
 }
+
+class MaximumProfitInJobScheduling extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+
+    }
+
+    test_1(){
+        this.current_test_name = "startTime = [1,2,3,3], endTime = [3,4,5,6], profit = [50,10,40,70] | 120";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2,3,3], [3,4,5,6], [50,10,40,70]);
+        assert.equal(result, 120);
+    }
+
+    test_2(){
+        this.current_test_name = "startTime = [1,2,3,4,6], endTime = [3,5,10,6,9], profit = [20,20,100,70,60] | 150";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2,3,4,6], [3,5,10,6,9], [20,20,100,70,60]);
+        assert.equal(result, 150);
+
+    }
+
+}
+
+class SuperEggDrop extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "k = 1, n = 2 | 2";
+        const sub = new this.Problem();
+        const result = sub.solve(1, 2);
+        assert.equal(result, 2);
+    }
+
+    test_2(){
+        this.current_test_name = "k = 2, n = 6 | 3";
+        const sub = new this.Problem();
+        const result = sub.solve(2, 6);
+    }
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -1103,7 +1153,9 @@ const TEST_DICTIONARY = {
     'stone-game-iii': StoneGameIII,
     'stone-game-iv': StoneGameIV,
     'maximum-number-of-events-that-can-be-attended-ii': MaximumNUmberOfEventsTHatCanBeAttentedII,
-    'make-array-strictly-increasing': MakeArrayStricklyIncreasing
+    'make-array-strictly-increasing': MakeArrayStricklyIncreasing,
+    'maximum-profit-in-job-scheduling': MaximumProfitInJobScheduling,
+    'super-egg-drop': SuperEggDrop,
 
 
 }

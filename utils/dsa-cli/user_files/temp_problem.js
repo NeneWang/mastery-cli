@@ -1,48 +1,82 @@
-class GenerateParentesis {
+class SuperEggDrop {
+	solve(K, N) {
+	// Your code here
 
-    /**
-     * https://leetcode.com/problems/generate-parentheses
-     * Time O(((4^N) / (N * SQRT(N)))) | Space O(((4^N) / (N * SQRT(N))))
-     * Time O(2^N) | Space O(2^N)
-     * @param {number} n
-     * @return {string[]}
-     */
-    solve(n) {
-
-        const dfs = (n, combos = [], open = 0, close = 0, path = []) => {
-            const isBaseCase = path.length === (n * 2);
-            if (isBaseCase) {
-                combos.push(path.join(''));/* Space O(N + N) */
-
-                return combos;
-            }
-
-            const isOpen = open < n;
-            if (isOpen) backTrackOpen(n, combos, open, close, path);  /* Time O(2^N) | Space O(2^N) */
-
-            const isClose = close < open;
-            if (isClose) backTrackClose(n, combos, open, close, path);/* Time O(2^N) | Space O(2^N) */
-
-            return combos;
-        }
-
-        const backTrackOpen = (n, combos, open, close, path) => {
-            path.push('(');                             /*             | Space O(N) */
-            dfs(n, combos, (open + 1), close, path);/* Time O(2^N) | Space O(2^N) */
-            path.pop();
-        }
-
-        const backTrackClose = (n, combos, open, close, path) => {
-            path.push(')');                             /*             | Space O(N) */
-            dfs(n, combos, open, (close + 1), path);/* Time O(2^N) | Space O(2^N) */
-            path.pop();
-        }
-
-        return dfs(n);
-    }
-
-
+	}
 }
 
 
-module.exports = { Problem: GenerateParentesis };
+module.exports = { Problem: SuperEggDrop };e.exports = { Problem: MaximumProfitInJobScheduling };edII };s };p };/ substractLeftFrequency
+
+
+		// getSubString
+
+		// Your solution
+	}
+}
+
+
+module.exports = { Problem: MinWindow };
+
+
+     * @return {number}
+     */
+    top () {
+       
+	}
+
+    /**
+     * @return {number}
+     */
+    getMin () {
+       
+	}
+}
+
+
+module.exports = { Problem: MinStack };
+ node;
+        }
+        this.size++;
+        return this.size;
+    };
+    this.popRight = function () {
+        if (this.size == 0) return null;
+        const removedNode = this.right;
+        this.right = this.right.prev;
+        if (this.right) this.right.next = null;
+        this.size--;
+        return removedNode;
+    };
+    this.pushLeft = function (value) {
+        const node = new Node(value);
+        if (this.size == 0) {
+            this.left = node;
+            this.right = node;
+        } else {
+            this.left.prev = node;
+            node.next = this.left;
+            this.left = node;
+        }
+        this.size++;
+        return this.size;
+    };
+    this.popLeft = function () {
+        if (this.size == 0) return null;
+        const removedNode = this.left;
+        this.left = this.left.next;
+        if (this.left) this.left.prev = null;
+        this.size--;
+        return removedNode;
+    };
+}
+
+class MaxSlidingWindow {
+	solve(nums, k) {
+	// Your code here
+
+	}
+}
+
+
+module.exports = { Problem: MaxSlidingWindow };

@@ -394,4 +394,80 @@ class MaxHeap {
   }
 }
 
-module.exports = { LinkedList, bfs, MaxPriorityQueue, MinPriorityQueue, Queue, Node, MaxHeap, MinHeap }
+
+// Priority Queue Implementation
+class PriorityQueue {
+  constructor(comparator) {
+      this.heap = [];
+      this.comparator = comparator || ((a, b) => a - b);
+  }
+
+  add(item) {
+      this.heap.push(item);
+      this.bubbleUp(this.heap.length - 1);
+  }
+
+  peek() {
+      if (this.isEmpty()) {
+          throw new Error('Priority queue is empty.');
+      }
+      return this.heap[0];
+  }
+
+  poll() {
+      if (this.isEmpty()) {
+          throw new Error('Priority queue is empty.');
+      }
+      const root = this.heap[0];
+      const last = this.heap.pop();
+      if (this.heap.length > 0) {
+          this.heap[0] = last;
+          this.bubbleDown(0);
+      }
+      return root;
+  }
+
+  isEmpty() {
+      return this.heap.length === 0;
+  }
+
+  size() {
+      return this.heap.length;
+  }
+
+  bubbleUp(index) {
+      while (index > 0) {
+          const parentIndex = Math.floor((index - 1) / 2);
+          if (this.comparator(this.heap[index], this.heap[parentIndex]) >= 0) {
+              break;
+          }
+          [this.heap[index], this.heap[parentIndex]] = [this.heap[parentIndex], this.heap[index]];
+          index = parentIndex;
+      }
+  }
+
+  bubbleDown(index) {
+      while (true) {
+          const leftIndex = 2 * index + 1;
+          const rightIndex = 2 * index + 2;
+          let smallestIndex = index;
+
+          if (leftIndex < this.heap.length && this.comparator(this.heap[leftIndex], this.heap[smallestIndex]) < 0) {
+              smallestIndex = leftIndex;
+          }
+
+          if (rightIndex < this.heap.length && this.comparator(this.heap[rightIndex], this.heap[smallestIndex]) < 0) {
+              smallestIndex = rightIndex;
+          }
+
+          if (smallestIndex === index) {
+              break;
+          }
+
+          [this.heap[index], this.heap[smallestIndex]] = [this.heap[smallestIndex], this.heap[index]];
+          index = smallestIndex;
+      }
+  }
+}
+
+module.exports = { LinkedList, bfs, MaxPriorityQueue, MinPriorityQueue, Queue, Node, MaxHeap, MinHeap, PriorityQueue }
