@@ -942,6 +942,29 @@ class StoneGameII extends ProblemTests {
 }
 
 
+class StoneGameIII extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "[1,2,3,7] | \"Bob\"";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2,3,7]);
+        assert.equal(result, "Bob");
+    }
+
+    test_2(){
+        this.current_test_name = "[1,2,3,-9] | \"Alice\"";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2,3,-9]);
+        assert.equal(result, "Alice");
+    }
+}
+
+
 const TEST_DICTIONARY = {
     "longest-string-chain": LongestStringChain,
     "wiggle-subsequence": WiggleSubsequence,
@@ -976,6 +999,7 @@ const TEST_DICTIONARY = {
     'stone-game': StoneGame,
     'predict-the-winner': PredictTheWinner,
     'stone-game-ii': StoneGameII,
+    'stone-game-iii': StoneGameIII,
 
 
 }
