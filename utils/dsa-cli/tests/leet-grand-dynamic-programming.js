@@ -861,6 +861,86 @@ class MaximizeScoreAfterNOperations extends ProblemTests {
     }
 }
 
+class StoneGame extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem)
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "[5,3,4,5] | true";
+        const sub = new this.Problem();
+        const result = sub.solve([5,3,4,5]);
+        assert.equal(result, true);
+    }
+
+
+    test_2(){
+        this.current_test_name = "[1,2,3,4,5,6,7,8,9,10] | true";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2,3,4,5,6,7,8,9,10]);
+        assert.equal(result, true);
+    }
+}
+
+class PredictTheWinner extends ProblemTests {
+    constructor(Problem){
+        super(Problem)
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1(){
+        this.current_test_name = "[1,5,2] | false";
+        const sub = new this.Problem();
+        const result = sub.solve([1,5,2]);
+        assert.equal(result, false);
+    }
+
+    test_2(){
+        this.current_test_name = "[1,5,233,7] | true";
+        const sub = new this.Problem();
+        const result = sub.solve([1,5,233,7]);
+        assert.equal(result, true);
+    }
+
+    test_3(){
+        this.current_test_name = "[1,5,2,4,6] | true";
+        const sub = new this.Problem();
+        const result = sub.solve([1,5,2,4,6]);
+        assert.equal(result, true);
+    }
+
+
+}
+
+
+class StoneGameII extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "[2,7,9,4,4] | 10";
+        const sub = new this.Problem();
+        const result = sub.solve([2,7,9,4,4]);
+        assert.equal(result, 10);
+    }
+
+    test_2(){
+        this.current_test_name = "[1,2,3,4,5,100] | 104";
+        const sub = new this.Problem();
+        const result = sub.solve([1,2,3,4,5,100]);
+        assert.equal(result, 104);
+    }
+
+}
+
 
 const TEST_DICTIONARY = {
     "longest-string-chain": LongestStringChain,
@@ -892,7 +972,12 @@ const TEST_DICTIONARY = {
     'shortest-path-visiting-all-nodes': ShortestPathVisitingAllNodes,
     'smallest-sufficient-team': SmallestSufficientTeams,
     'number-of-ways-to-wear-different-hats-to-each-other': NumberOfWaysToWearDifferentHatsToEachOther,
-    'maximize-score-after-n-operations': MaximizeScoreAfterNOperations
+    'maximize-score-after-n-operations': MaximizeScoreAfterNOperations,
+    'stone-game': StoneGame,
+    'predict-the-winner': PredictTheWinner,
+    'stone-game-ii': StoneGameII,
+
+
 }
 
 module.exports = TEST_DICTIONARY;
