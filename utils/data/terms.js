@@ -17,7 +17,7 @@ const layer_2 = false;
 const layer_3 = false;
 
 // Code Interview related
-const interview_layer = false;
+const interview_layer = true;
 
 // Programming Frameworks Related
 const projects_layer = true;
@@ -88,8 +88,10 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(accounting, "accounting", { is_active: layer_2 }));
 
 
-    const { interview } = require('./interview');
+    const { interview, interview_filter_frequent, run_when_job } = require('./interview');
     decks.addDeck(new TermStorage(interview, "interview", { is_active: layer_3 }));
+    decks.addDeck(new TermStorage(interview_filter_frequent, "interview filter frequent", { is_active: interview_layer }));
+    decks.addDeck(new TermStorage(run_when_job, "run when job", { is_active: layer_3 }));
 
     const { pytorch_machine_learning_course, machine_learning_pandas_visualization, machine_learning_scikit_learn } = require('./ai_machine');
     decks.addDeck(new TermStorage(pytorch_machine_learning_course, "pytorch machine learning course", { is_active: layer_1 }));

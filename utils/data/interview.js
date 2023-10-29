@@ -1,4 +1,4 @@
-const interview = [
+const interview_all = [
     {
         term: "offer negotiation",
         prompt: "They offer you 75k, but based on your research you need to sastify a budget of 85k",
@@ -732,5 +732,244 @@ const interview = [
 ]
 
 
+// * List of questions to generate when a specific company found, not general passive type of questions.
+const run_when_job = [
 
-module.exports = {interview}
+    {
+        term: "career-goals",
+        prompt: "Where would you like to be in your career five years from now?",
+        description: "The interviewer is likely interested in understanding my career aspirations, my ability to set and achieve goals, and my potential fit with the company's long-term plans.",
+        example: "In five years, Perphaps is a little simple what I want to do, but I hope I can continue working as a software engineer in the company, my dreams is to be able to have a dependable job, and someday being able to make enough to start my own family, I love programming\n\
+        and I see myself as a senior software engineer, leading a team of talented engineers and contributing to cutting-edge technologies that have a positive impact on society. I'm committed to continuous learning and growth, and I plan to take on new challenges and responsibilities that will help me develop as a professional. I believe that this company's focus on employee development and innovation will provide me with the opportunities I need to achieve my goals and reach my full potential."
+    },
+    {
+        term: "ideal-company",
+        prompt: "What's your ideal company?",
+        description: "The interviewer is likely interested in understanding my values, my work preferences, and my potential fit with the company culture.",
+        example: "My ideal company is one that values innovation, collaboration, and social responsibility. I prefer a company culture that is inclusive, supportive, and encourages employees to pursue their passions and interests. Additionally, I value companies that are committed to giving back to their communities and have a positive impact on society. I believe that a company that aligns with my values and work preferences will help me thrive as a professional and contribute to the company's success."
+    },
+    {
+        term: "attracted",
+        prompt: "What attracted you to this company?",
+        description: "The interviewer is likely interested in understanding my motivation for applying, how well my skills align with the job requirements, and my potential fit with the company culture.",
+        example: "What attracted me to this company is its reputation for being a leader in the tech industry and its commitment to making a positive impact on society. The company's innovative projects and cutting-edge technologies inspire me, and I'm excited about the opportunity to work with a talented team of professionals. Additionally, the company's values, such as teamwork, integrity, and accountability, align with my own values and work ethic. I believe that this company is a great fit for me, and I'm excited to contribute to its continued success."
+    },
+    {
+        term: "industry-knowledge",
+        prompt: "What do you know about this industry?",
+        description: "The interviewer is likely interested in understanding my knowledge and understanding of the industry and how it aligns with the job requirements.",
+        example: "As a software engineer, I keep up-to-date with the latest developments and trends in the technology industry. I am aware that this industry is rapidly changing and growing, and there are new technologies emerging every day that could potentially disrupt the status quo. Additionally, I understand that the industry is highly competitive and requires continuous learning and adaptation to remain relevant. I am excited about the opportunity to contribute to this industry and learn new skills and technologies along the way."
+    },
+    {
+        term: "company-knowledge",
+        prompt: "What do you know about our company?",
+        description: "The interviewer is likely interested in understanding my interest in the company, how well I've researched the company, and my potential fit with the company culture.",
+        example: "I have done extensive research on your company and am impressed with your commitment to innovation and social responsibility. I am aware that your company has a reputation for being a leader in the tech industry and has won several awards for its innovative projects. Additionally, I appreciate the company's focus on employee growth and development and the positive impact it has on society. I am excited about the opportunity to work for a company that aligns with my values and work preferences."
+    },
+    {
+        term: "willingness-to-relocate",
+        prompt: "Are you willing to relocate?",
+        description: "The interviewer is likely interested in understanding my flexibility and willingness to move to a different location for the job.",
+        example: "Yes, I am willing to relocate for the job. I understand that this may involve uprooting my personal life, but I am willing to make that sacrifice to pursue my career goals and contribute to the success of the organization. Additionally, I see relocation as an opportunity to experience new cultures and meet new people, which I find exciting."
+    },
+    {
+        term: "questions-for-interviewer",
+        prompt: "Do you have any questions for me?",
+        description: "The interviewer is likely interested in understanding my interest in the job, the company, and the interviewer's experience.",
+        example: "Yes, I have a few questions. What qualities do you think are essential for success in this role? What does a typical day look like in this position? Can you tell me about a time when you faced a challenging situation in this company and how you overcame it? I appreciate the opportunity to learn more about this position and the company culture, and I'm looking forward to the possibility of joining your team."
+    },
+    // Salary Questions
+    {
+        term: "salary-expectations",
+        prompt: "What salary are you seeking?",
+        description: "The interviewer is likely interested in understanding my salary expectations and how they align with the job requirements and industry standards.",
+        example: "Based on my research and experience, I am seeking a salary that is competitive with industry standards and reflects the value that I can bring to the organization. I am flexible and willing to negotiate based on the specific details of the job and the benefits package."
+    },
+    {
+        term: "salary-history",
+        prompt: "What's your salary history?",
+        description: "The interviewer is likely interested in understanding my salary history and how it aligns with the job requirements and industry standards.",
+        example: "I prefer not to disclose my salary history, as I believe that salary should be determined based on the specific details of the job and the value that I can bring to the organization. However, based on my research and experience, I am seeking a salary that is competitive with industry standards and reflects the value that I can bring to the organization."
+    },
+    {
+        term: "salary-and-job-description",
+        prompt: "If I were to give you this salary you requested but let you write your job description for the next year, what would it say?",
+        description: "The interviewer is likely interested in understanding my career goals and how well they align with the job requirements.",
+        example: "If given the opportunity to write my job description for the next year, it would include a mix of challenging technical projects and opportunities for professional growth and development. I would be excited about taking on new challenges and learning new skills and technologies, while also contributing to the success of the organization. Additionally, I would prioritize collaboration and communication with my colleagues and ensure that my work aligns with the company's values and mission. I believe that this combination of technical expertise, creativity, and teamwork would enable me to make a significant contribution to the organization."
+    },
+    // Career Development Questions
+    {
+        term: "career-development",
+        prompt: "What are you looking for in terms of career development?",
+        description: "The interviewer is likely interested in understanding my career goals and how well they align with the job requirements.",
+        example: "In terms of career development, I am looking for opportunities to enhance my technical skills and gain experience in new technologies and methodologies. I am also interested in taking on leadership roles and mentoring junior team members. Additionally, I am interested in pursuing certifications in relevant fields and attending conferences and workshops to stay up-to-date with the latest industry trends and advancements. I am excited about the opportunity to work for a company that values employee growth and development and provides opportunities for professional advancement."
+    },
+    {
+        term: "self-improvement-in-next-year",
+        prompt: "How do you want to improve yourself in the next year?",
+        description: "The interviewer is likely interested in understanding my personal and professional development goals and how well they align with the job requirements.",
+        example: "In the next year, I am interested in improving my knowledge and skills in cloud computing technologies, machine learning, and data analysis. I am also interested in developing my project management skills and learning how to work more effectively in cross-functional teams. Additionally, I am committed to continuously improving my communication and leadership skills and becoming a more effective mentor and coach to junior team members."
+    },
+    {
+        term: "job-related-goals",
+        prompt: "What kind of goals would you have in mind if you got this job?",
+        description: "The interviewer is likely interested in understanding my specific goals and objectives for the job and how well they align with the company's mission and vision.",
+        example: "If I were to get this job, my goals would include contributing to the success of the organization by delivering high-quality software solutions, collaborating with cross-functional teams to achieve project goals, and continuously improving my technical and soft skills. Additionally, I would like to take on leadership roles and mentor junior team members to help them achieve their full potential. I believe that by achieving these goals, I can make a significant contribution to the organization and advance my career in the process."
+    },
+    {
+        term: "additional-training-suggestion",
+        prompt: "If I were to ask your last supervisor to provide you additional training or exposure, what would she suggest?",
+        description: "The interviewer is likely interested in understanding my previous job experience and how well it aligns with the job requirements.",
+        example: "If you were to ask my last supervisor to provide me with additional training or exposure, she would suggest that I take courses in cloud computing technologies and machine learning to enhance my technical skills. Additionally, she would recommend that I participate in leadership training and workshops to further develop my communication and management skills. My supervisor has always encouraged my growth and development and has provided me with opportunities to attend conferences and workshops to stay up-to-date with the latest industry trends and advancements."
+    },
+
+]
+
+// A highly focused interview filtered for software engineering. Optimized to skip weird questions or late-tier (opinionated).
+const interview_filter_frequent = [
+    {
+        term: "what-are-your-strengths",
+        prompt: "What are your strengths?",
+        description: "For the first question, the interviewer was looking to understand my experience leading a project, my role in the project, and the outcome of the project. The interviewer may have also been interested in my ability to manage projects, work within a team, and deliver projects on time and within budget.",
+        example: "The last project I headed up was a web application for a healthcare provider. The project involved designing and implementing a system that allowed patients to schedule appointments, view their medical records, and communicate with their healthcare provider securely. The outcome of the project was a success as we delivered the application on time and within budget. The healthcare provider reported increased patient satisfaction and improved efficiency in managing appointments and medical records."
+    },
+    // Behavioral Interview Questions:
+    {
+        term: "last-project-outcome",
+        prompt: "What was the last project you headed up, and what was its outcome?",
+        description: "For the first question, the interviewer was looking to understand my experience leading a project, my role in the project, and the outcome of the project. The interviewer may have also been interested in my ability to manage projects, work within a team, and deliver projects on time and within budget.",
+        example: "The last project I headed up was a web application for a healthcare provider. The project involved designing and implementing a system that allowed patients to schedule appointments, view their medical records, and communicate with their healthcare provider securely. The outcome of the project was a success as we delivered the application on time and within budget. The healthcare provider reported increased patient satisfaction and improved efficiency in managing appointments and medical records."
+    },
+    {
+        term: "above-and-beyond",
+        prompt: "Give me an example of a time that you felt you went above and beyond the call of duty at work.",
+        description: "For the second question, the interviewer was looking to assess my willingness to take initiative, my ability to collaborate and mentor others, and my commitment to the success of the project and the team.",
+        example: "I can recall a time when I volunteered to mentor a junior developer who was struggling with a complex project. I spent several extra hours each week working with them, reviewing code, answering questions, and providing guidance. As a result, the project was completed on time and the junior developer gained valuable experience and confidence. I felt that going above and beyond to help the team member was a small effort for me, but it made a significant impact on the project and the person's career."
+    },
+    {
+        term: "work-criticism",
+        prompt: "Can you describe a time when your work was criticized?",
+        description: "For the third question, the interviewer was looking to assess my ability to handle criticism constructively and professionally, my problem-solving skills, and my ability to communicate effectively with clients and stakeholders.",
+        example: "There was a time when a client criticized my work on a project. They were unhappy with the performance of a feature that I had implemented. I took the criticism positively and spent time analyzing the issue, debugging the code, and conducting extensive testing to identify the root cause. I also communicated with the client to understand their specific requirements and made necessary changes to the feature. In the end, the client was satisfied with the improvements made, and the project moved forward smoothly. I learned that constructive feedback is an essential part of growth, and it's essential to respond to criticism positively and take it as an opportunity to improve."
+    },
+    {
+        term: "not-pulling-weight",
+        prompt: "Have you ever been on a team where someone was not pulling their own weight? How did you handle it?",
+        description: "The interviewer is likely interested in understanding how I deal with challenging situations, how I work with others, and my problem-solving skills.",
+        example: "Yes, I have been on a team where someone was not pulling their own weight. I approached the team member privately and asked if they needed help with the project or if there was something that was hindering their progress. After understanding their situation, I worked with them to create a plan to get them back on track. This allowed the project to move forward, and we successfully delivered it on time and within budget."
+    },
+    {
+        term: "difficult-feedback",
+        prompt: "Tell me about a time when you had to give someone difficult feedback. How did you handle it?",
+        description: "The interviewer is likely interested in understanding how I deal with challenging situations, how I communicate with others, and my problem-solving skills.",
+        example: "I had to give a team member difficult feedback about their performance on a project. I scheduled a one-on-one meeting with them to discuss my observations and concerns, and I provided specific examples to help them understand my feedback. I also offered suggestions for improvement and asked if they had any questions or concerns. It was a difficult conversation, but the team member appreciated the feedback and made necessary changes to their work. In the end, the project was successful, and the team member's performance improved."
+    },
+    {
+        term: "greatest-failure",
+        prompt: "What is your greatest failure, and what did you learn from it?",
+        description: "The interviewer is likely interested in understanding how I deal with failure, how I learn from my mistakes, and my problem-solving skills.",
+        example: "My greatest failure was when I underestimated the complexity of a project and did not communicate the risks effectively to my team and stakeholders. As a result, the project was delayed, and we had to allocate additional resources to complete it. I learned that it's essential to communicate effectively with my team and stakeholders, to manage risks proactively, and to be realistic about project timelines and requirements. Since then, I have developed better project management skills, including risk management and effective communication.",
+    },
+    {
+        term: "dealing-with-irritations",
+        prompt: "What irritates you about other people, and how do you deal with it?",
+        description: "The interviewer is likely interested in understanding how I handle difficult situations, how I manage conflicts, and my problem-solving skills.",
+        example: "One thing that irritates me is when team members do not follow through on their commitments. To deal with this, I communicate my expectations clearly, and I follow up regularly to ensure that tasks are completed on time. I also try to understand their perspective and offer support if necessary. I believe that building strong relationships and maintaining open communication is crucial to resolving conflicts and managing irritations effectively."
+    },
+    {
+        term: "disagreement-with-supervisor",
+        prompt: "If I were your supervisor and asked you to do something that you disagreed with, what would you do?",
+        description: "The interviewer is likely interested in understanding how I handle conflicting situations, how I communicate with my supervisor, and my problem-solving skills.",
+        example: "If my supervisor asked me to do something I disagreed with, I would express my concerns respectfully and clearly. I would provide my reasons for disagreeing and suggest alternative approaches that align with our goals and values. If my supervisor insisted on their approach, I would follow their instructions while continuing to provide feedback and suggestions for improvement. I believe that open communication and mutual respect are crucial to building a successful working relationship with a supervisor."
+    },
+    {
+        term: "difficult-period-in-life",
+        prompt: "What was the most difficult period in your life, and how did you deal with it?",
+        description: "The interviewer is likely interested in understanding how I deal with difficult situations, how I manage stress, and my problem-solving skills.",
+        example: "The most difficult period in my life was when I lost a close family member unexpectedly. I took time off work to grieve and sought support from family and friends. I also engaged in self-care activities, such as exercise and meditation, to manage my stress and emotions. I learned the importance of prioritizing my mental and emotional health and seeking support from others during challenging times. I believe that this experience has helped me develop resilience and empathy, which are essential skills in any role."
+    },
+    {
+        term: "doing-something-wrong",
+        prompt: "Give me an example of a time you did something wrong. How did you handle it?",
+        description: "The interviewer is likely interested in understanding how I handle mistakes, how I take responsibility for my actions, and my problem-solving skills.",
+        example: "I once made a mistake in a project where I accidentally deleted some important data. I immediately reported the error to my supervisor and worked with them to recover the data. I also took responsibility for my mistake and apologized to the team and stakeholders. Afterward, I conducted a thorough analysis of the incident to identify the root cause and implemented measures to prevent similar mistakes in the future. I believe that taking responsibility for my actions, learning from my mistakes, and implementing improvements are essential skills for any professional."
+    },
+    {
+        term: "dealing-with-conflict",
+        prompt: "Tell me about a time where you had to deal with conflict on the job.",
+        description: "The interviewer is likely interested in understanding how I handle conflicts, how I communicate with others, and my problem-solving skills.",
+        example: "I had to deal with conflict on a project where two team members had different ideas about how to approach a task. I facilitated a meeting where both team members could express their concerns and ideas, and we reached a compromise that incorporated the best aspects of both approaches. In the end, we were able to complete the project successfully and even came up with a new innovative solution that satisfied both team members. It was a great example of teamwork and collaboration."
+    },
+    {
+        term: "illegal-activity",
+        prompt: "If you found out your company was doing something against the law, like fraud, what would you do?",
+        description: "The interviewer is likely interested in understanding my ethical principles, my sense of responsibility, and my problem-solving skills.",
+        example: "If I found out my company was engaged in fraudulent activity, I would immediately report it to the appropriate authorities, such as a regulatory agency or law enforcement. I would also inform my supervisor and HR, and I would cooperate fully with any investigation that follows. I believe that honesty and integrity are essential values for any professional, and I would prioritize doing the right thing, even if it means putting my job at risk. It's crucial to uphold these ethical principles not only for your personal integrity but also to maintain the reputation and credibility of the organization."
+    },
+    {
+        term: "difficult-assignment",
+        prompt: "What assignment was too difficult for you, and how did you resolve the issue?",
+        description: "The interviewer is likely interested in understanding how I handle difficult tasks, how I problem-solve, and my ability to learn and grow.",
+        example: "I once had an assignment where I had to redesign alegacy system with limited documentation, and I found it challenging to understand the codebase and determine the best approach to take. However, I knew it was an excellent opportunity to learn and grow as a developer. To tackle the issue, I took a systematic approach, breaking down the problem into smaller components and seeking advice from colleagues who had experience with similar systems. I also invested time in learning new technologies and best practices, which helped me overcome the challenges I faced. Eventually, I was able to complete the assignment successfully, and it became one of my most significant accomplishments at the company. I learned the value of persistence and determination when faced with challenging situations."
+    },
+    {
+        term: "difficult-decision",
+        prompt: "What's the most difficult decision you've made in the last two years and how did you come to that decision?",
+        description: "The interviewer is likely interested in understanding my decision-making process, how I handle difficult choices, and my ability to take risks.",
+        example: "The most difficult decision I made in the last two years was deciding to leave my previous job and pursue a new opportunity. I had been with my previous company for several years, and I had established strong relationships with my colleagues and supervisors. However, I knew that I needed a new challenge and an opportunity to grow professionally. To make the decision, I weighed the pros and cons of leaving, talked to mentors and friends, and evaluated the new opportunity's potential risks and rewards. Ultimately, I decided to take the leap, and it was one of the best decisions I've made in my career. It allowed me to grow as a professional, expand my skillset, and make new connections in the industry."
+    },
+    {
+        term: "multiple-tasks",
+        prompt: "Describe how you would handle a situation if you were required to finish multiple tasks by the end of the day, and there was no conceivable way that you could finish them.",
+        description: "The interviewer is likely interested in understanding how I prioritize tasks, how I communicate with colleagues, and my problem-solving skills.",
+        example: "If I were required to finish multiple tasks by the end of the day and there was no conceivable way that I could finish them all, I would first prioritize the tasks based on their level of importance and urgency. Then, I would communicate with my supervisor and colleagues, explain the situation, and ask for assistance or help with delegating tasks. I believe that communication is key in such situations, and it's better to be transparent and seek help when needed rather than risking missing deadlines or producing subpar work. Together, we would find a solution that works best for everyone, and we would make sure that all critical tasks are completed on time and to the best of our ability."
+    },
+    {
+        term: "tell-me-about-yourself",
+        prompt: "Tell me about yourself.",
+        description: "The interviewer is likely interested in understanding my background, experience, and how well I align with the job requirements.",
+        example: "I am a highly motivated and skilled software engineer with X years of experience in developing and implementing software solutions for various industries. I have expertise in multiple programming languages, database design, and agile development methodologies. Additionally, I have excellent communication skills and enjoy collaborating with teams to produce high-quality deliverables. In my previous positions, I have demonstrated my ability to think creatively, solve complex problems, and deliver projects on time and within budget. I am passionate about keeping up-to-date with the latest technologies and industry trends and am excited about the opportunity to learn new skills and contribute to the success of the organization."
+    },
+    {
+        term: "strengths",
+        prompt: "What are your strengths?",
+        description: "The interviewer is likely interested in understanding my self-awareness, my ability to assess my own skills, and how well those strengths align with the job requirements.",
+        example: "One of my greatest strengths is my ability to work well under pressure. I thrive in fast-paced environments, and I'm always able to prioritize tasks effectively and deliver quality results on time. Another strength is my attention to detail, which allows me to spot even the smallest mistakes and ensure that everything is of the highest quality. Lastly, I believe that my ability to communicate effectively and work collaboratively with others is another significant strength that I bring to the table."
+    },
+    {
+        term: "weaknesses",
+        prompt: "What are your weaknesses?",
+        description: "The interviewer is likely interested in understanding my self-awareness, my ability to identify areas for improvement, and my willingness to work on those weaknesses.",
+        example: "One of my weaknesses is my tendency to take on too much responsibility and struggle with delegating tasks. However, I'm aware of this tendency and have been working on developing my delegation skills, which has led to more effective teamwork and better time management. Another weakness is public speaking, which I've been working on by taking public speaking courses and practicing in front of others. I believe that by acknowledging our weaknesses and actively working on them, we can become better professionals and leaders."
+    },
+    {
+        term: "professional-accomplishment",
+        prompt: "Tell me about your proudest professional accomplishment.",
+        description: "The interviewer is interested in learning about a specific professional accomplishment that I'm proud of and the impact it had. They may also be looking to understand my motivations and what drives me in my work.",
+        example: "My proudest professional accomplishment was leading a team that developed a new software product from scratch. We worked tirelessly for months, conducting user research, designing the product, coding, and testing it. It was a complex project that required coordination and collaboration across multiple departments. After launch, the product was very successful, exceeding revenue targets and receiving positive feedback from users. I was proud of what we had accomplished and the impact our product had on the company and its customers. This experience taught me the importance of teamwork, determination, and attention to detail in achieving success."
+    },
+    {
+        term: "problem-solving-initiative",
+        prompt: "Describe a time when you saw some problem and took the initiative to correct it rather than waiting for someone else to do it.",
+        description: "The interviewer is interested in understanding my problem-solving skills, my ability to take initiative, and my proactivity in the workplace. They may also be looking to assess my level of responsibility and accountability.",
+        example: "In my previous job, I noticed that our team's communication had become very disorganized and inefficient. Important messages were getting lost, deadlines were being missed, and progress was stagnating. Rather than waiting for someone else to take action, I decided to take the initiative to address the problem. I started by creating a team communication plan, setting clear guidelines for how we would communicate and collaborate on projects. I also implemented a project management tool to help us track progress and deadlines. As a result of my efforts, our team's productivity increased, deadlines were met, and communication became more effective. This experience taught me the importance of being proactive and taking responsibility for solving problems."
+    },
+    {
+        term: "creative-with-work",
+        prompt: "Give me an example of a time you were able to be creative with your work. What was exciting or difficult about it?",
+        description: "The interviewer wants to assess my ability to be creative and innovative in problem-solving and completing tasks. They also want to learn about how I approach challenges and what I find exciting or difficult in doing so.",
+        example: "In my previous role as a marketing specialist, I was tasked with creating a campaign to promote a new product launch. I wanted to do something unique and memorable, so I came up with the idea of creating a virtual reality experience that would allow customers to try out the product in a fun and immersive way. This was exciting because it was something that had never been done before by the company, but it was also difficult because it required a lot of coordination with different teams and a tight timeline. However, I was able to successfully execute the campaign, which led to increased sales and positive customer feedback."
+    },
+    {
+        term: "dissatisfied-in-work",
+        prompt: "Tell me about a time you were dissatisfied in your work. What could have been done to make it better?",
+        description: "The interviewer wants to learn about my ability to identify and address problems or challenges in the workplace, as well as my willingness to seek solutions and take action. They also want to see if I have the ability to offer constructive feedback to my employer.",
+        example: "There was a time in my previous job where I felt like my work was becoming stagnant and unchallenging. I spoke with my supervisor about my concerns and suggested taking on new projects or responsibilities that would allow me to grow and develop my skills. Unfortunately, due to the company's structure and workload, it wasn't possible to immediately assign me new tasks. However, my supervisor recognized my enthusiasm and willingness to take on new challenges, and worked with me to identify areas where I could add value and provided me with additional training opportunities. This helped me to regain my sense of purpose and motivation in the job."
+    },
+
+
+]
+
+
+
+module.exports = { interview: interview_all, interview_filter_frequent, run_when_job }
