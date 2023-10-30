@@ -48,6 +48,32 @@ const arrayToListNode = (array) => {
 };
 
 
+const arrayToRandomNode = (array) => {
+
+    class Node {
+        constructor(val, next, random) {
+            this.val = val;
+            this.next = next;
+            this.random = random;
+        }
+    }
+
+    if (!array || array.length == 0) {
+        return null;
+    }
+
+    let head = new Node(array[0]);
+    let node = head;
+
+    for (let i = 1; i < array.length; i++) {
+        node.next = new Node(array[i]);
+        node = node.next;
+    }
+
+    return head;
+}
+
+
 function arrayToNodeHeadNeighbors(array) {
     const nodes = [];
     for (let i = 0; i < array.length; i++) {
@@ -116,4 +142,4 @@ function binaryTreeToArray(root) {
 
 
 
-module.exports = { ListNode, Node, arrayToListNode, arrayToNodeHeadNeighbors, TreeNode, arrayToBinaryTree, binaryTreeToArray };
+module.exports = { ListNode, Node, arrayToListNode, arrayToNodeHeadNeighbors, TreeNode, arrayToBinaryTree, binaryTreeToArray, arrayToRandomNode };

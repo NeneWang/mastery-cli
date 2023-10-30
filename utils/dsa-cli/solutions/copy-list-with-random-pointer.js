@@ -1,13 +1,6 @@
-class Node {
-    constructor(val, next, random) {
-        this.val = val;
-        this.next = next;
-        this.random = random;
-    }
-}
 
 class Solution {
-    copyRandomList(head) {
+    solve(head) {
         if (!head) {
             return head;
         }
@@ -49,6 +42,13 @@ class Solution {
         }
         
         return headNew;
+    }
+}
+class Node {
+    constructor(val, next, random) {
+        this.val = val;
+        this.next = next;
+        this.random = random;
     }
 }
 

@@ -1,12 +1,21 @@
-class MakeArrayStricklyIncreasing {
-	solve(arr1, arr2) {
+class MaximumProfitInJobScheduling {
+	solve(startTime, endTime, profit) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: MakeArrayStricklyIncreasing };ntsTHatCanBeAttentedII };s };osition };: GetMinimumDifference };orts = { Problem: ConnectTree };titionList };
+module.exports = { Problem: MaximumProfitInJobScheduling };edII };s };osition };vels };;
+}
+
+
+
+
+class IsSymmetric {
+	solve(root) {
+		// Your code here
+
 	}
 }
 
@@ -114,19 +123,17 @@ module.exports = { Problem: LastStoneWeight };
         return this.size() === 0
     }
 
-    top(){
-        return this.heap[0]
-    }
-
 }
 
-class MaxPriorityQueue {
+class KthLargestElementInAnArray {
+	solve(nums, k) {
+	// Your code here
 
-    constructor() {
-        this.heap = []
-    }
+	}
+}
 
-    enqueue(element) {
+
+module.exports = { Problem: KthLargestElementInAnArray };ment) {
         this.heap.push(element)
         this.bubbleUp()
     }

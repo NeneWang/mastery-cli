@@ -1,7 +1,7 @@
 
 const assert = require('assert');
 const ProblemTests = require('./problem-test');
-const { arrayToListNode } = require('./utils');
+const { arrayToListNode, arrayToRandomNode } = require('./utils');
 
 class AddTwoNumbers extends ProblemTests {
     constructor(Problem) {
@@ -36,15 +36,37 @@ class CopyListWithRandomPointer extends ProblemTests {
     constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
-        // this.tests.push(() => this.test_2());
-        // this.tests.push(() => this.test_3());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
 
     }
 
     test_1() {
         this.current_test_name = "[[7,null],[13,0],[11,4],[10,2],[1,0]] => [[7,null],[13,0],[11,4],[10,2],[1,0]]"
         const problemToTest = new this.Problem();
-        assert.deepEqual(problemToTest.solve([[7, null], [13, 0], [11, 4], [10, 2], [1, 0]]), [[7, null], [13, 0], [11, 4], [10, 2], [1, 0]]);
+        const head = arrayToRandomNode([[7, null], [13, 0], [11, 4], [10, 2], [1, 0]]);
+        const sol = arrayToRandomNode([[7, null], [13, 0], [11, 4], [10, 2], [1, 0]]);
+        assert.deepEqual(problemToTest.solve(head), sol);
+        assert.notEqual(problemToTest.solve(head), head);
+     
+    }
+
+    test_2(){
+        this.current_test_name = "[[1,1],[2,1]] => [[1,1],[2,1]]"
+        const problemToTest = new this.Problem();
+        const head = arrayToRandomNode([[1,1],[2,1]]);
+        const sol = arrayToRandomNode([[1,1],[2,1]]);
+        assert.deepEqual(problemToTest.solve(head), sol);
+        assert.notEqual(problemToTest.solve(head), head);
+    }
+
+    test_3(){
+        this.current_test_name = "[[3,null],[3,0],[3,null]] => [[3,null],[3,0],[3,null]]"
+        const problemToTest = new this.Problem();
+        const head = arrayToRandomNode([[3,null],[3,0],[3,null]]);
+        const sol = arrayToRandomNode([[3,null],[3,0],[3,null]]);
+        assert.deepEqual(problemToTest.solve(head), sol);
+        assert.notEqual(problemToTest.solve(head), head);
     }
 
 
@@ -410,6 +432,7 @@ class ReverseLinkedList extends ProblemTests {
     }
 }
 
+
 class ReverseNodesInKGroup extends ProblemTests {
 
     constructor(Problem) {
@@ -487,7 +510,7 @@ class FindDuplicate extends ProblemTests{
 
 const PROBLEM_DICT = {
     'add-two-numbers': AddTwoNumbers,
-    // 'copy-list-with-random-pointer': CopyListWithRandomPointer, // Too hard to test.
+    'copy-list-with-random-pointer': CopyListWithRandomPointer, // Too hard to test.
     'find-the-duplicate-number': FindTHeDuplicateNumber,
     'linked-list-cycle': LinkedListCycle,
     'lru-cache': LRUCache,
@@ -498,6 +521,7 @@ const PROBLEM_DICT = {
     'reverse-linked-list': ReverseLinkedList,
     'reverse-nodes-in-k-group': ReverseNodesInKGroup,
     'find-duplicate': FindDuplicate,
+    
 }
 
 

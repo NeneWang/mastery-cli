@@ -1563,5 +1563,10 @@
         "file_path": "copy-list-with-random-pointer-c3.js",
         "difficulty": 2,
         "problem_slug": "copy-list-with-random-pointer"
+    },
+    {
+        "file_path": "reverse-linked-list-c1.js",
+        "difficulty": 2,
+        "problem_slug": "reverse-linked-list"
     }
 ]

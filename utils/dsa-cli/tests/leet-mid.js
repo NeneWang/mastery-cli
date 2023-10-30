@@ -628,7 +628,7 @@ class BasicCalculator extends ProblemTests {
         this.tests.push(() => this.test_3());
         this.tests.push(() => this.test_4());
         this.tests.push(() => this.test_5());
-        
+
     }
 
     test_1() {
@@ -1059,6 +1059,36 @@ class maximalSquare extends ProblemTests {
 
 }
 
+class ReverseLinkedListII extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        /**
+         * Input: head = [1,2,3,4,5], left = 2, right = 4
+            Output: [1,4,3,2,5]
+         */
+
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,3,4,5], 2, 4 => [1,4,3,2,5]';
+        assert.deepEqual(structure.solve(arrayToListNode([1,2,3,4,5]), 2, 4), arrayToListNode([1,4,3,2,5]));
+    }
+
+    test_2(){
+        /**
+         * Input: head = [5], left = 1, right = 1
+            Output: [5]
+         */
+
+        const structure = new this.Problem();
+        this.current_test_name = '[5], 1, 1 => [5]';
+        assert.deepEqual(structure.solve(arrayToListNode([5]), 1, 1), arrayToListNode([5]));
+    }
+}
+
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
@@ -1097,6 +1127,7 @@ const TEST_DICTIONARY = {
     'best-time-to-buy-and-sell-stock-iii': BestTimeToBuyAndSellStockIII,
     'best-time-to-buy-and-sell-stock-iv': BestTImeToBuyAndSellStockIV,
     'maximal-square': maximalSquare,
+    'reverse-linked-list-ii': ReverseLinkedListII,
 }
 
 module.exports = TEST_DICTIONARY;

@@ -53,6 +53,7 @@ const dsa = [
         prompt: "Think about how you could use linked list generalizations to solve your most current problem or in previous dsa/projects?",
         description: "\n\
         - Check EDGE CASES - null input? Larger linkedList than the other? Carryover?\n\
+        - Reversing just mean, flipping the pointers direction\n\
         "
     }
 ]
