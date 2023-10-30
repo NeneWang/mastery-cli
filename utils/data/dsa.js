@@ -47,6 +47,13 @@ const dsa = [
         description: "\n\
         - Check if by sorting either end or start of the range can help\n\
         - If we iterate over the sorted intervals is there a rule we can squeeze to modify a counting value?",
+    },
+    {
+        term: "Linked List Problems Generalizations",
+        prompt: "Think about how you could use linked list generalizations to solve your most current problem or in previous dsa/projects?",
+        description: "\n\
+        - Check EDGE CASES - null input? Larger linkedList than the other? Carryover?\n\
+        "
     }
 ]
 

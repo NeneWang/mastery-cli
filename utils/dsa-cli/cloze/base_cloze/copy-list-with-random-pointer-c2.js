@@ -29,11 +29,10 @@ class Solution {
         ptr = head;
 
         // Now link the random pointers of the new nodes created.
-        // Iterate the newly created list and use the original nodes random pointers,
+        // TODO Iterate the newly created list and use the original nodes random pointers,
         // to assign references to random pointers for cloned nodes.
         while (ptr) {
-            ptr.next.random = ptr.random ? ptr.random.next : null;
-            ptr = ptr.next ? ptr.next.next : null;
+            
         }
 
         // Unweave the linked list to get back the original linked list and the cloned list.

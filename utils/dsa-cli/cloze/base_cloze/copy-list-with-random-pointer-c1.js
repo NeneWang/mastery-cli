@@ -12,18 +12,15 @@ class Solution {
             return head;
         }
 
-        // Creating a new weaved list of original and copied nodes.
+        // TODO Creating a new weaved list of original and copied nodes.
         let ptr = head;
         while (ptr) {
             // Cloned node
-            const newNode = new Node(ptr.val, null, null);
 
             // Inserting the cloned node just next to the original node.
             // If A->B->C is the original linked list,
             // Linked list after weaving cloned nodes would be A->A'->B->B'->C->C'
-            newNode.next = ptr.next;
-            ptr.next = newNode;
-            ptr = newNode.next;
+           
         }
 
         ptr = head;

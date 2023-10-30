@@ -36,16 +36,13 @@ class Solution {
             ptr = ptr.next ? ptr.next.next : null;
         }
 
-        // Unweave the linked list to get back the original linked list and the cloned list.
+        // TODO Unweave the linked list to get back the original linked list and the cloned list.
         // i.e. A->A'->B->B'->C->C' would be broken to A->B->C and A'->B'->C'
         let ptrOldList = head; // A->B->C
         let ptrNewList = head.next; // A'->B'->C'
         const headNew = head.next;
         while (ptrOldList) {
-            ptrOldList.next = ptrOldList.next ? ptrOldList.next.next : null;
-            ptrNewList.next = ptrNewList.next ? ptrNewList.next.next : null;
-            ptrOldList = ptrOldList.next;
-            ptrNewList = ptrNewList.next;
+            
         }
         
         return headNew;

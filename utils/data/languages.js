@@ -153,6 +153,11 @@ const python = [
         math.floor(1.5)\n\
         math.ceil(1.5)"
     
+    },
+    {
+        term: "Infinite",
+        prompt: "How to create an infinite number (very large number)?",
+        example: "float('inf')"
     }
 ]
 

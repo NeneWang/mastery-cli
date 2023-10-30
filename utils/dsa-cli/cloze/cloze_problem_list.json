@@ -1548,5 +1548,20 @@
         "file_path": "basic-calculator-c3.js",
         "difficulty": 3,
         "problem_slug": "basic-calculator"
+    },
+    {
+        "file_path": "copy-list-with-random-pointer-c1.js",
+        "difficulty": 2,
+        "problem_slug": "copy-list-with-random-pointer"
+    },
+    {
+        "file_path": "copy-list-with-random-pointer-c2.js",
+        "difficulty": 2,
+        "problem_slug": "copy-list-with-random-pointer"
+    },
+    {
+        "file_path": "copy-list-with-random-pointer-c3.js",
+        "difficulty": 2,
+        "problem_slug": "copy-list-with-random-pointer"
     }
 ]
