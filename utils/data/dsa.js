@@ -21,13 +21,39 @@ const dsa = [
         Not Cache-Friendly: Heaps are not cache-friendly, as the elements are not stored contiguously in memory, which can lead to cache misses and slow down the performance of the application.\
         Complexity: Heaps can be complex to implement, especially when compared to simpler data structures such as arrays or linked lists.\
         In summary, heaps have advantages such as fast insertion and extraction, efficient priority queue, sorting, and memory management. However, they also have some disadvantages such as slow random access, not being cache-friendly and complexity to implement. It's worth noting that using Heaps is not always the best option, it depends on the problem and the use case, for instance, if you require random access or cache-friendliness, then you might want to consider other data structures like balanced trees."
+    },
+    {
+        term: "Iteration Generalizations",
+        prompt: "How could you use iteration generalizations to solve your most current problem or in previous dsa/projects?",
+        description: "\n\
+        - If you ran an operation after certain separator, check if at the end of the loop you need to run the operation again because the sep is not htere\n\
+        ",
+        example: "On calculator iteration, there was no + - in the end(likely) but you still had to add the number generated into the stack. As well as solving all the non-inside parenthesis operations"
+    },
+    {
+        term: "Stack Problems Generalizations",
+        prompt: "Think about how you could use stack generalizations to solve your most current problem or in previous dsa/projects?",
+        descriptions: "\n\
+        - Check if by reordering we can find a better solution (Reverse, Special?)\n\
+        - Check what would happen to the logic if things are reordered\n\
+        - Does having multiple stack help?\n\
+        ",
+        example: "On Calculator problem, having the reorderring of the stack made sense because you wouldnt have the issue with minus simbols, when collapsing the parenthesis\n\
+        It was also important to consider the effects of multiple stacks."
+    },
+    {
+        term: "Intervals Problems Generalizations",
+        prompt: "Think about how you could use intervals generalizations to solve your most current problem or in previous dsa/projects?",
+        description: "\n\
+        - Check if by sorting either end or start of the range can help\n\
+        - If we iterate over the sorted intervals is there a rule we can squeeze to modify a counting value?",
     }
 ]
 
 
 const system_design = [
     {
-        term: "Load Balancing Algorithms", 
+        term: "Load Balancing Algorithms",
         description: "Load balancing refers to efficiently distributing incoming network traffic across a group of backend servers, also known as a server farm or server pool.",
         prompt: "When would it be useful to have Load balancing going on?"
     },
@@ -286,8 +312,8 @@ const designPatterns = [
         term: "Decorator Design Pattern", description: "The Decorator pattern is a way to add new behavior to an object without changing the object's class. Imagine you're a student and you want to decorate a plain notebook with stickers, pictures and drawings. The notebook is your object and the stickers, pictures and drawings are the new behavior you want to add. (The important thing is to make it work at runtime.)",
         prompt: "Provide an example of how could you use this Design Pattern?"
     },
-    { 
-        term: "Proxy Pattern", description: "A class that functions as an interface to a particular resource. That resource may be remote, expensive to construct, or may require logging or some other functionality.", prompt: "Name an example in how you could use this pattern on", example: "Creating a protection proxy: For protecting business logic", 
+    {
+        term: "Proxy Pattern", description: "A class that functions as an interface to a particular resource. That resource may be remote, expensive to construct, or may require logging or some other functionality.", prompt: "Name an example in how you could use this pattern on", example: "Creating a protection proxy: For protecting business logic",
     },
 
 ];
