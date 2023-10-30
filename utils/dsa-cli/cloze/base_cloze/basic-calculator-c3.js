@@ -27,34 +27,12 @@ class Calculate {
       let n = 0;
       const stack = [];
   
-      for (let i = s.length - 1; i >= 0; i--) {
-        const ch = s.charAt(i);
-  
-        if (/\d/.test(ch)) {
-          // Forming the operand - in reverse order.
-          operand = Math.pow(10, n) * parseInt(ch, 10) + operand;
-          n += 1;
-        } else if (ch !== ' ') {
-          if (n !== 0) {
-            // Save the operand on the stack
-            // As we encounter some non-digit.
-            stack.push(operand);
-            n = 0;
-            operand = 0;
-          }
-          if (ch === '(') {
-            const res = this.evaluateExpr(stack);
-            stack.pop();
-  
-            // Append the evaluated result to the stack.
-            // This result could be of a sub-expression within the parenthesis.
-            stack.push(res);
-          } else {
-            // For other non-digits just push onto the stack.
-            stack.push(ch);
-          }
-        }
-      }
+        // TODO Use a for loop to iterate over the string from the end to the beginning
+        //  If the current character is a digit, then we need to form the operand by multiplying the digit with 10^digit_position and adding it to the operand
+        // otherwise as long as it is not a space, we either push the operand, and reset.
+        // If it is the start then we evaluate the expression of the stack and push the result
+        // Otherwise we push the character (Will be a sign or a parenthesis) "(")
+
   
       // Push the last operand to the stack, if any.
       if (n !== 0) {

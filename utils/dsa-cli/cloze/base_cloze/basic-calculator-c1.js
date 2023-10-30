@@ -3,10 +3,10 @@ class Calculate {
       // If the stack is empty or the expression starts with
       // a symbol, then append 0 to the stack.
       // i.e. [1, '-', 2, '-'] becomes [1, '-', 2, '-', 0]
-      if (stack.length === 0 || typeof stack[stack.length - 1] !== 'number') {
-        stack.push(0);
-      }
-  
+      // TODO Guard agains empty and [0, -] types of stack
+      
+      
+      
       let res = stack.pop();
   
       // Evaluate the expression until we get a corresponding ')'

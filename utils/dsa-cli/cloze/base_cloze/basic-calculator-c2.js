@@ -7,19 +7,7 @@ class Calculate {
         stack.push(0);
       }
   
-      let res = stack.pop();
-  
-      // Evaluate the expression until we get a corresponding ')'
-      while (stack.length > 0 && stack[stack.length - 1] !== ')') {
-        const sign = stack.pop();
-  
-        if (sign === '+') {
-          res += stack.pop();
-        } else {
-          res -= stack.pop();
-        }
-      }
-      return res;
+      // TODO Initialize res as the last element of the stack. Thne based on the sign sum or rest the next stack element
     }
   
     solve(s) {

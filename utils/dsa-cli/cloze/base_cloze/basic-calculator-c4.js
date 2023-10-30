@@ -59,10 +59,11 @@ class Calculate {
       // Push the last operand to the stack, if any.
       if (n !== 0) {
         stack.push(operand);
-      }
-  
+      } 
+       // TODO If there is a number left, push it to the stack an return a last evaluation (Outside of parenthenses)
+      
       // Evaluate any remaining expressions in the stack.
-      return this.evaluateExpr(stack);
+      
     }
   }
   

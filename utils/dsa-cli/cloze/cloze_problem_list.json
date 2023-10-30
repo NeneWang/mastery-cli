@@ -1523,5 +1523,30 @@
         "file_path": "candy-c3.js",
         "difficulty": 1,
         "problem_slug": "candy"
+    },
+    {
+        "file_path": "simplify-path-c1.js",
+        "difficulty": 1,
+        "problem_slug": "simplify-path"
+    },
+    {
+        "file_path": "simplify-path-c2.js",
+        "difficulty": 1,
+        "problem_slug": "simplify-path"
+    },
+    {
+        "file_path": "basic-calculator-c1.js",
+        "difficulty": 3,
+        "problem_slug": "basic-calculator"
+    },
+    {
+        "file_path": "basic-calculator-c2.js",
+        "difficulty": 3,
+        "problem_slug": "basic-calculator"
+    },
+    {
+        "file_path": "basic-calculator-c3.js",
+        "difficulty": 3,
+        "problem_slug": "basic-calculator"
     }
 ]
