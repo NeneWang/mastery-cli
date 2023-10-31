@@ -1530,6 +1530,38 @@ const dotNet = [
         }]",
         example: "public async Task<ActionResult<AppUser>> GetUserAsync(int id)\n\
         var user = await _content.Users.FindAsync(id);]"
+    },
+    {
+        term: "POST Request accept in Body",
+        prompt: "How to make an endpoint that accepts a POST request with User Data in the body?",
+        example: "\n\
+        First create an DTO called UserDto\n\
+        Then\n\
+        [HttpPost]\n\
+        public void Post()\n\
+        {\n\
+        }"
+    },
+    {
+        term: "Create JWT Token",
+        prompt: "How to create a JWT Token?",
+        example: "Create a new class called TokenService\n\
+        using API.Interfaces;\n\
+        using Microsoft.IdentityModel.Tokens;\n\
+        using System.IdentityModel.Tokens.Jwt;\n\
+        using System.Security.Claims;\n\
+        \n\
+        namespace API.Services\n\
+        {\n\
+            public class TokenService\n\
+            {\n\
+              ...\n\
+            Add hat service into the startup.cs\n\
+            services.AddScoped<ITokenService, TokenService>();\n\
+            ",
+
+
+
     }
 
 
@@ -1926,7 +1958,7 @@ const postgresql = [
     FROM RankedTimeslots rt\n\
     JOIN users u ON rt.user_id = u.id\n\
     ORDER BY rt.timeslot_local DESC;",
-    description: "table: timeslot {event_guid: string, timeslot_local: datetime}\n\
+        description: "table: timeslot {event_guid: string, timeslot_local: datetime}\n\
     table: event {guid: string, user_id: int, timestamp_local: datetime}\n\
     table: users {id: int, first_name: string}"
     },
@@ -1942,8 +1974,8 @@ const postgresql = [
             store_id\n\
         HAVING\n\
             SUM(units_sold) > (SELECT AVG(units_sold) FROM sales);",
-            description: "table: sales {units_sold: int, store_id: int}"
-        
+        description: "table: sales {units_sold: int, store_id: int}"
+
     }
 
 ]
