@@ -1568,5 +1568,20 @@
         "file_path": "reverse-linked-list-c1.js",
         "difficulty": 2,
         "problem_slug": "reverse-linked-list"
+    },
+    {
+        "file_path": "remove-nth-node-from-end-of-list-c1.js",
+        "difficulty": 1,
+        "problem_slug": "remove-nth-node-from-end-of-list"
+    },
+    {
+        "file_path": "remove-nth-node-from-end-of-list-c2.js",
+        "difficulty": 1,
+        "problem_slug": "remove-nth-node-from-end-of-list"
+    },
+    {
+        "file_path": "remove-nth-node-from-end-of-list-c3.js",
+        "difficulty": 1,
+        "problem_slug": "remove-nth-node-from-end-of-list"
     }
 ]

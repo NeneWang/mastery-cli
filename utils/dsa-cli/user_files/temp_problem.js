@@ -1,150 +1,22 @@
-class MaximumProfitInJobScheduling {
-	solve(startTime, endTime, profit) {
-	// Your code here
-
-	}
-}
 
 
-module.exports = { Problem: MaximumProfitInJobScheduling };edII };s };osition };vels };;
-}
+class MinPriorityQueue {
 
-
-
-
-class IsSymmetric {
-	solve(root) {
-		// Your code here
-
-	}
-}
-
-
-module.exports = { Problem: IsSymmetric };
-    isEmpty() {
-        return this.size() === 0
+    constructor() {
+        this.heap = []
     }
 
-}
-
-class WordLadder {
-
-
-    /**
-     * https://leetcode.com/problems/word-ladder/
-     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
-     * @return {number}
-     */
-    ladderLength = function (beginWord, endWord, wordList) {
-		
-	};
-
-
-    solve(beingWord, endWord, wordList) {
-        return this.ladderLength(beingWord, endWord, wordList);
-    }
-}
-
-
-module.exports = { Problem: WordLadder }; index + 2
-			let leftChild, rightChild
-			let swap = null
-
-			if (leftChildIndex < length) {
-				leftChild = this.heap[leftChildIndex]
-				if (leftChild > element) {
-					swap = leftChildIndex
-				}
-			}
-
-			if (rightChildIndex < length) {
-				rightChild = this.heap[rightChildIndex]
-				if (
-					(swap === null && rightChild > element) ||
-					(swap !== null && rightChild > leftChild)
-				) {
-					swap = rightChildIndex
-				}
-			}
-
-			if (swap === null) break
-			this.swap(index, swap)
-			index = swap
-		}
-	}
-
-	front() {
-		return this.heap[0]
-	}
-
-	size() {
-		return this.heap.length
-	}
-
-	isEmpty() {
-		return this.size() === 0
-	}
-
-}
-
-
-class LastStoneWeight {
-	/**
-	 * https://leetcode.com/problems/last-stone-weight/
-	 * Time O(N * log(N)) | Space O(N)
-	 * @param {number[]} stones
-	 * @return {number}
-	 */
-	lastStoneWeight = (stones) => {
-
-	};
-
-
-
-	solve(stones) {
-		return this.lastStoneWeight(stones);
-	}
-}
-
-
-module.exports = { Problem: LastStoneWeight };
-   front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-}
-
-class KthLargestElementInAnArray {
-	solve(nums, k) {
-	// Your code here
-
-	}
-}
-
-
-module.exports = { Problem: KthLargestElementInAnArray };ment) {
+    enqueue(element) {
         this.heap.push(element)
-        this.bubbleUp()
+        this.sinkDown()
     }
 
-    bubbleUp() {
+    sinkDown() {
         let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] >= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
+        // TODO Complete the sinkDown function which bubbles up the element to the correct position. until it is index 0
+        while (true) {
+            // TODO You can get the parent index by using the formula: Math.floor((index - 1) / 2)
+            
         }
     }
 
@@ -155,16 +27,16 @@ module.exports = { Problem: KthLargestElementInAnArray };ment) {
     }
 
     dequeue() {
-        const max = this.heap[0]
+        const min = this.heap[0]
         const end = this.heap.pop()
         if (this.heap.length > 0) {
             this.heap[0] = end
-            this.sinkDown()
+            this.bubbleUp()
         }
-        return max
+        return min
     }
 
-    sinkDown() {
+    bubbleUp() {
         let index = 0
         const length = this.heap.length
         const element = this.heap[0]
@@ -176,7 +48,7 @@ module.exports = { Problem: KthLargestElementInAnArray };ment) {
 
             if (leftChildIndex < length) {
                 leftChild = this.heap[leftChildIndex]
-                if (leftChild > element) {
+                if (leftChild < element) {
                     swap = leftChildIndex
                 }
             }
@@ -184,8 +56,8 @@ module.exports = { Problem: KthLargestElementInAnArray };ment) {
             if (rightChildIndex < length) {
                 rightChild = this.heap[rightChildIndex]
                 if (
-                    (swap === null && rightChild > element) ||
-                    (swap !== null && rightChild > leftChild)
+                    (swap === null && rightChild < element) ||
+                    (swap !== null && rightChild < leftChild)
                 ) {
                     swap = rightChildIndex
                 }
@@ -209,48 +81,34 @@ module.exports = { Problem: KthLargestElementInAnArray };ment) {
         return this.size() === 0
     }
 
-    top(){
-        return this.heap[0]
-    }
-
-
 }
 
-
-/** 
- * https://leetcode.com/problems/find-median-from-data-stream/
- * Your MedianFinder object will be instantiated and called as such:
- * var obj = new MedianFinder()
- * obj.addNum(num)
- * var param_2 = obj.findMedian()
- */
-class MedianFinder {
-    constructor() {
-        this.maxHeap = new MaxPriorityQueue()
-        this.minHeap = new MinPriorityQueue()
-    }
-
-    /* Time O(log(N)) | Space (N) */
-    insertNum(num) {
+class KthLargestElementInAnArray {
+	    /**
+     * https://leetcode.com/problems/kth-largest-element-in-an-array/
+     * Time O(N * log(K)) | Space O(K)
+     * @param {number[]} nums
+     * @param {number} k
+     * @return {number}
+     */
+        findKthLargest = function (nums, k) {
+            const minHeap = new MinPriorityQueue()
     
-	}
-
-    addNum(num, heap = this.getHeap(num)) {
-     
-	}
-
-    getHeap(num, { maxHeap, minHeap } = this) {
-        
-    }
-
-    rebalance({ maxHeap, minHeap } = this) {
-    }
-
-    /* Time O(1) | Space (1) */
-    findMedian({ maxHeap, minHeap } = this) {
-    }
-
+            for (const num of nums) {
+                minHeap.enqueue(num);
+    
+                const isAtCapacity = k < minHeap.size();
+                if (isAtCapacity) minHeap.dequeue();
+            }
+    
+            return minHeap.front()
+        }
+    
+    
+        solve(nums, k) {
+            return this.findKthLargest(nums, k);
+        }
 }
 
 
-module.exports = { Problem: MedianFinder };
+module.exports = { Problem: KthLargestElementInAnArray };
