@@ -507,6 +507,56 @@ class FindDuplicate extends ProblemTests{
 }
 
 
+class RemoveDuplicatesFromLinkedList extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "[1,1,2] => [1,2]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1,1,2]);
+        const result = problemToTest.solve(list);
+        assert.equal(result.val, 1);
+        // assert.equal(result.next.val, 2);
+    }
+
+    
+
+}
+
+class RemoveDuplicatesFromSortedListII extends ProblemTests{
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        this.current_test_name = "[1,2,3,3,4,4,5] => [1,2,5]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1,2,3,3,4,4,5]);
+        const result = problemToTest.solve(list);
+        assert.equal(result.val, 1);
+        assert.equal(result.next.val, 2);
+        assert.equal(result.next.next.val, 5);
+    }
+
+    test_2(){
+        this.current_test_name = "[1,1,1,2,3] => [2,3]"
+        const problemToTest = new this.Problem();
+        const list = arrayToListNode([1,1,1,2,3]);
+        const result = problemToTest.solve(list);
+        assert.equal(result.val, 2);
+        assert.equal(result.next.val, 3);
+    }
+
+
+}
+
 
 const PROBLEM_DICT = {
     'add-two-numbers': AddTwoNumbers,
@@ -521,7 +571,8 @@ const PROBLEM_DICT = {
     'reverse-linked-list': ReverseLinkedList,
     'reverse-nodes-in-k-group': ReverseNodesInKGroup,
     'find-duplicate': FindDuplicate,
-    
+    'remove-duplicates-from-linkedlist': RemoveDuplicatesFromLinkedList,
+    'remove-duplicates-from-sorted-list-ii': RemoveDuplicatesFromSortedListII,
 }
 
 

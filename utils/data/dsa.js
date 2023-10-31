@@ -54,6 +54,7 @@ const dsa = [
         description: "\n\
         - Check EDGE CASES - null input? Larger linkedList than the other? Carryover?\n\
         - Reversing just mean, flipping the pointers direction\n\
+        - Consider having two points, and the distance between them\n\
         "
     }
 ]

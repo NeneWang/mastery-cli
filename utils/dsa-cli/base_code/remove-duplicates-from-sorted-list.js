@@ -1,7 +1,16 @@
-class DeleteDuplicates {	// Your code here
-
-	}
+class RemoveDuplicatesFromLinkedList {
+    solve(linkedList) {
+    }
 }
 
+// This is an input class. Do not edit.
+class LinkedList {
+    constructor(value) {
+      this.value = value;
+      this.next = null;
+    }
+  }
 
-module.exports = { Problem: DeleteDuplicates };
+
+
+module.exports = { Problem: RemoveDuplicatesFromLinkedList };

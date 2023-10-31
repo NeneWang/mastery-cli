@@ -1,4 +1,4 @@
-class DeleteDuplicates {
+class RemoveDuplicatesFromSortedListII {
     solve(head) {
       // Sentinel node
       const sentinel = new ListNode(0);
@@ -36,5 +36,5 @@ class DeleteDuplicates {
     this.next = null;
   }
   
-  module.exports = { Problem: DeleteDuplicates, ListNode };
+  module.exports = { Problem: RemoveDuplicatesFromSortedListII, ListNode };
   
