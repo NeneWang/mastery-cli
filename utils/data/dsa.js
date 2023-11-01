@@ -55,6 +55,7 @@ const dsa = [
         - Check EDGE CASES - null input? Larger linkedList than the other? Carryover?\n\
         - Reversing just mean, flipping the pointers direction\n\
         - Consider having two points, and the distance between them\n\
+        - Consider having a double linked list so that you can retrieve the first and last as well as adding them in both ways (Combines well with hashmap)\n\
         "
     }
 ]
@@ -323,6 +324,15 @@ const designPatterns = [
     },
     {
         term: "Proxy Pattern", description: "A class that functions as an interface to a particular resource. That resource may be remote, expensive to construct, or may require logging or some other functionality.", prompt: "Name an example in how you could use this pattern on", example: "Creating a protection proxy: For protecting business logic",
+    },
+    {
+        term: "Promises vs Observables",
+        description: "Promise: \n\
+        provides a single future value, is not lazy, can not be cancelled.\n\n\n\
+        Observable: \n\
+        provides multiple future values, is lazy, can be cancelled.",
+        prompt: "When would you use one over the other? What are the advantages and disadvantages of each?",
+        example: "Use promises for populating a site page statically, or get a report, while if you want a dynamic page, or a stream of data, use observables."
     },
 
 ];

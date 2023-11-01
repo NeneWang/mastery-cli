@@ -307,17 +307,17 @@
     {
         "file_path": "koko-eating-bananas-c1.js",
         "difficulty": 1,
-        "problem_slug": "key-based-value-store"
+        "problem_slug": "koko-eating-bananas"
     },
     {
         "file_path": "koko-eating-bananas-c2.js",
         "difficulty": 1,
-        "problem_slug": "key-based-value-store"
+        "problem_slug": "koko-eating-bananas"
     },
     {
         "file_path": "koko-eating-bananas-c3.js",
         "difficulty": 1,
-        "problem_slug": "key-based-value-store"
+        "problem_slug": "koko-eating-bananas"
     },
     {
         "file_path": "median-sorted-arrays-c1.js",
@@ -1583,5 +1583,20 @@
         "file_path": "remove-nth-node-from-end-of-list-c3.js",
         "difficulty": 1,
         "problem_slug": "remove-nth-node-from-end-of-list"
+    },
+    {
+        "file_path": "rotate-list-c1.js",
+        "difficulty": 1,
+        "problem_slug": "rotate-list"
+    },
+    {
+        "file_path": "rotate-list-c2.js",
+        "difficulty": 1,
+        "problem_slug": "rotate-list"
+    },
+    {
+        "file_path": "rotate-list-c3.js",
+        "difficulty": 1,
+        "problem_slug": "rotate-list"
     }
 ]
