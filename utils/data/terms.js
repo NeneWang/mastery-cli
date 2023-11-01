@@ -61,8 +61,10 @@ async function populateMasterDeck() {
 
 
 
-    const { pragmatic_programmer } = require('./soft_skill_book_game.js');
+    const { pragmatic_programmer, life_game_lessons, survival_game_lessons,
+        life_lessons, hackathon_lessons, experiments_lessons } = require('./soft_skill_book_game.js');
     decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(life_game_lessons, "life game lessons", { is_active: layer_1 }));
 
     const { designPatterns, dsa, system_design } = require('./dsa');
     decks.addDeck(new TermStorage(designPatterns, "design patterns", { is_active: interview_layer }));

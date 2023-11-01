@@ -105,6 +105,19 @@ const life_game_lessons = [
         Keep some on different language and design it so that they are integrated into different aspects of your daily life\n\
         SO that there is a motivation to continue upgrading them."
     },
+    {
+        term: "TW Un-managed Warfare Tactics",
+        description: "Always allow for enemies to attack you, ensamble a trap so they must attack (siege)\n\
+        Create a all covering deense to set against their attacks. And ensamble fast moving pieces (horses) to attack tactically, ",
+        prompt: "How could your apply this into your life or dev?",
+        example: "Perphaps designing "
+    },
+    {
+        term: "TW Set a trap before an attack",
+        description: "Making them believe that they can come out of their cities. with their large armies, then ambushing and releasing living hell upon them.",
+        prompt: "How could your apply this into your life or dev?",
+        example: "Perphaps designing and preparing gaps on your projects explainations and thesis so you prepare more in those parts for the interviewers questions."
+    }
     
 ]
 
@@ -112,8 +125,6 @@ const life_game_lessons = [
  * Some of the lessons learnt are not applicable to the daily life 
  */
 const survival_game_lessons = [
-    {
-    }
 ]
 
 
@@ -126,8 +137,10 @@ const life_lessons = [
  */
 const hackathon_lessons = [
     {
-        term: "Having a buddy",
-
+        term: "Having a buddy forces you to fill the work",
+        description: "Having a buddy forces you to makes you work",
+        prompt: "How can you apply this to your life?",
+        example: "Focusmate is a good way to force you to work."
     }
 ]
 
@@ -142,4 +155,5 @@ const experiments_lessons = [
 
 
 
-module.exports = { pragmatic_programmer };
+module.exports = { pragmatic_programmer, life_game_lessons,
+    survival_game_lessons, life_lessons, hackathon_lessons, experiments_lessons };
