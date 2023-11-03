@@ -91,7 +91,7 @@
     },
     {
         "file_path": "min-window-c1.js",
-        "difficulty": 1,
+        "difficulty": 2,
         "problem_slug": "min-window"
     },
     {
@@ -1628,5 +1628,30 @@
         "file_path": "symmetrc-tree-c3.js",
         "difficulty": 1,
         "problem_slug": "symmetrc-tree"
+    },
+    {
+        "file_path": "flatten-binary-tree-to-linked-list-c1",
+        "difficulty": 2,
+        "problem_slug": "flatten-binary-tree-to-linked-list"
+    },
+    {
+        "file_path": "flatten-binary-tree-to-linked-list-c2",
+        "difficulty": 2,
+        "problem_slug": "flatten-binary-tree-to-linked-list"
+    },
+    {
+        "file_path": "flatten-binary-tree-to-linked-list-c3",
+        "difficulty": 2,
+        "problem_slug": "flatten-binary-tree-to-linked-list"
+    },
+    {
+        "file_path": "flatten-binary-tree-to-linked-list-c4",
+        "difficulty": 2,
+        "problem_slug": "flatten-binary-tree-to-linked-list"
+    },
+    {
+        "file_path": "flatten-binary-tree-to-linked-list-c5",
+        "difficulty": 2,
+        "problem_slug": "flatten-binary-tree-to-linked-list"
     }
 ]
