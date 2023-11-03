@@ -1613,5 +1613,20 @@
         "file_path": "same-tree-c3.js",
         "difficulty": 1,
         "problem_slug": "same-tree"
+    },
+    {
+        "file_path": "symmetrc-tree-c1.js",
+        "difficulty": 1,
+        "problem_slug": "symmetrc-tree"
+    },
+    {
+        "file_path": "symmetrc-tree-c2.js",
+        "difficulty": 1,
+        "problem_slug": "symmetrc-tree"
+    },
+    {
+        "file_path": "symmetrc-tree-c3.js",
+        "difficulty": 1,
+        "problem_slug": "symmetrc-tree"
     }
 ]

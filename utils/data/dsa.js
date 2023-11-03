@@ -57,6 +57,20 @@ const dsa = [
         - Consider having two points, and the distance between them\n\
         - Consider having a double linked list so that you can retrieve the first and last as well as adding them in both ways (Combines well with hashmap)\n\
         "
+    },
+    {
+        term: 'Binary Problems Generalizations',
+        prompt: "Think about how you could use binary generalizations to solve your most current problem or in previous dsa/projects?",
+        description: "\n\
+        - There is heavy logic in checking if both are null or some is Null when checking similitudes\n\
+        - When building up a binary tree, consider having left right points and an hashmap if we using the windows.",
+    },
+    {
+        term: "Graph Problems Generalizations",
+        prompt: "Think about how you could use graph generalizations to solve your most current problem or in previous dsa/projects?",
+        description: "\n\
+        - Recoloring the graph for previus steps, and remembering inside of them by coloring\n\
+        "
     }
 ]
 

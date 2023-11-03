@@ -158,6 +158,12 @@ const python = [
         term: "Infinite",
         prompt: "How to create an infinite number (very large number)?",
         example: "float('inf')"
+    },
+    {
+        term: "Non local variable",
+        prompt: "How to create a non local variable?",
+        example: "nonlocal a",
+        description: "For example you want to use a variable thats on the parent function"
     }
 ]
 

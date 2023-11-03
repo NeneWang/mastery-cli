@@ -4,6 +4,8 @@ description: You are given the head of a singly linked-list. The list can be rep
 tags: [ neetcode, medium, linked-list]
 link: https://leetcode.com/problems/reorder-list/
 images: [https://assets.leetcode.com/uploads/2021/03/04/reorder1linked-list.jpg, https://assets.leetcode.com/uploads/2021/03/04/reorder2linked-list.jpg]
+hints: [
+'https://twitter.com/i/status/1720446908957630801']
 ---
 
 ### Description
