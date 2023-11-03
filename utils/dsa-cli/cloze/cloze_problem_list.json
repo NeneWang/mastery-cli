@@ -1598,5 +1598,20 @@
         "file_path": "rotate-list-c3.js",
         "difficulty": 1,
         "problem_slug": "rotate-list"
+    },
+    {
+        "file_path": "same-tree-c1.js",
+        "difficulty": 1,
+        "problem_slug": "same-tree"
+    },
+    {
+        "file_path": "same-tree-c2.js",
+        "difficulty": 1,
+        "problem_slug": "same-tree"
+    },
+    {
+        "file_path": "same-tree-c3.js",
+        "difficulty": 1,
+        "problem_slug": "same-tree"
     }
 ]
