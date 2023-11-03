@@ -26,7 +26,7 @@ const dtypes = {
     d_6: 'd_6',
 
 
-    // 100-1000
+    // 1000-10000
     ld_1: 'ld_1',
     ld_2: 'ld_2',
     ld_3: 'ld_3',
@@ -40,9 +40,9 @@ const dtypes = {
 }
 
 const mathSimple = [
-    { formula_name: "sum_simple", "form": "y = sd_1 + sd_2 ", "replace": ['sd_1', 'sd_2'], "calculates": ['y'], },
-    { formula_name: "subs_simple", "form": "y = sd_1 - md_2 ", "replace": ['sd_1', 'md_2'], "calculates": ['y'], },
-    { formula_name: "sub_simple", "form": "y = sd_1 - sd_2 ", "replace": ['sd_1', 'sd_2'], "calculates": ['y'] },
+    { formula_name: "sum_simple", "form": "y = ld_1 + ld_2 ", "replace": ['ld_1', 'ld_2'], "calculates": ['y'], },
+    { formula_name: "subs_simple", "form": "y = ld_1 - md_2 ", "replace": ['ld_1', 'md_2'], "calculates": ['y'], },
+    { formula_name: "sub_simple", "form": "y = ld_1 - ld_2 ", "replace": ['ld_1', 'ld_2'], "calculates": ['y'] },
     { formula_name: "mult_simple", "form": "y = sd_1 * sd_2", "replace": ['sd_1', 'sd_2'], "calculates": ['y'] },
     { formula_name: "div_simple", "form": "y = sd_1 / sd_2 ", "replace": ['sd_1', 'sd_2'], "calculates": ['y'], "ans_constraint": ".2" },
     { formula_name: "precedence", "form": "y=sd_2/sd_3*sd_4+3*sd_5+sd_1%1/2", "replace": ['sd_1', 'sd_2', "sd_3", "sd_4", "sd_5"], "calculates": ["y"], "ans_constraint": ".0" },
@@ -87,7 +87,7 @@ const qmathformulas = [] //To be returned as the set of problems availale
 
 // Adding the modules that are of interest
 
-// qmathformulas.push(...mathSimple);
+qmathformulas.push(...mathSimple);
 // qmathformulas.push(...business_marketing);
 // qmathformulas.push(...algebra_properties);
 qmathformulas.push(...statistics_basics);

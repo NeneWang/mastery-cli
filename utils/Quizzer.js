@@ -189,8 +189,9 @@ class Quizzer {
             return constants.getRandomInt(50 - ATLEAST) + ATLEAST;
         }
         else if (type == "ld") {
-            ATLEAST = 100;
-            return constants.getRandomInt(1000 - ATLEAST) + ATLEAST;
+
+            // 1000-10000
+            return constants.getRandomInt(10000 - ATLEAST) + ATLEAST;
         }
     }
 

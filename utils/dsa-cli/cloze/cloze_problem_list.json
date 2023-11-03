@@ -1653,5 +1653,20 @@
         "file_path": "flatten-binary-tree-to-linked-list-c5",
         "difficulty": 2,
         "problem_slug": "flatten-binary-tree-to-linked-list"
+    },
+    {
+        "file_path": "sum-root-to-leaf-numbers-c1.js",
+        "difficulty": 1,
+        "problem_slug": "sum-root-to-leaf-numbers"
+    },
+    {
+        "file_path": "sum-root-to-leaf-numbers-c2.js",
+        "difficulty": 1,
+        "problem_slug": "sum-root-to-leaf-numbers"
+    },
+    {
+        "file_path": "sum-root-to-leaf-numbers-c3.js",
+        "difficulty": 1,
+        "problem_slug": "sum-root-to-leaf-numbers"
     }
 ]
