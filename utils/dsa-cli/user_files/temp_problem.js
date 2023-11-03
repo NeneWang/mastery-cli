@@ -1,52 +1,48 @@
 
+class ReorderList {
+    solve(head) {
 
-const dfs = (str, index, memo) => {
-    // TODO Perform both Num Decodings for the next index and the next two indexes.
-   
-	let count = numDecodings(str, index + 1, memo);
-	if(isTwoDigit(str, index)){
-		count += numDecodings(str, index + 2, memo);
-	}
-	memo.set(index, count);
-    return count;
-}
+        const getMid = (head) => {
+            let [slow, fast] = [head, head];
+            // TODO Complete the getMid function, which obtains the mid by having a faster node.
 
-var isTwoDigit = (str, index) => {
-    const twoDigit = Number(str.slice(index, (index + 2)));
+            return slow;
+        }
 
-    return (10 <= twoDigit) && (twoDigit <= 26);
-}
+        const reverse = (head) => {
+            let [prev, curr, next] = [null, head, null];
 
+            while (curr) {                      /* Time O(N) */
+                next = curr.next;
+                curr.next = prev;
 
+                prev = curr;
+                curr = next;
+            }
 
-/**
- * DP - Top Down
- * Hash Map - Memoization
- * Time O(N) | Space O(N)
- * https://leetcode.com/problems/decode-ways/
- * @param {string} s
- * @return {number}
- */
-const numDecodings = (str, index = 0, memo = new Map()) => {
+            return prev;
+        }
 
+        const reorder = (l1, l2) => {
+            let [first, next, second] = [l1, null, l2];
 
-    const caseThereIsNoLeftOrZero = !str.length || (str[index] === '0');
-    if (caseThereIsNoLeftOrZero) return 0;
+            while (second.next) {              /* Time O(N) */
+                next = first.next;
+                first.next = second;
+                first = next;
 
-    const isCaseReachedEnd = index === str.length;
-    if (isCaseReachedEnd) return 1;
+                next = second.next;
+                second.next = first;
+                second = next;
+            }
+        }
 
-    if (memo.has(index)) return memo.get(index);
+        const mid = getMid(head);           /* Time O(N) */
+        const reveredFromMid = reverse(mid);/* Time O(N) */
 
-    return dfs(str, index, memo);
-};
-
-class DecodeWays {
-
-
-    solve(str) {
-        return numDecodings(str);
+        reorder(head, reveredFromMid);      /* Time O(N) */
     }
 }
 
-module.exports = { Problem: DecodeWays };
+
+module.exports = { Problem: ReorderList };
