@@ -1,44 +1,42 @@
+class ContainerWithMostWater {
+    maxArea(height) {
 
 
-var getNeighbors = (row, rows, col, cols) => [[0, 1], [0, -1], [1, 0], [-1, 0]]
-    .map(([_row, _col]) => [(row + _row), (col + _col)])
-    .filter(([_row, _col]) => (0 <= _row) && (_row < rows) && (0 <= _col) && (_col < cols))
+	    // Returns the heigths of the left and right given the arr of heights and 
+        const getHeights = (height, left, right) => [height[left], height[right]];
 
-const dfs = (grid, row, rows, col, cols) => {
-    const isBaseCase = grid[row][col] === '0';
-    if (isBaseCase) return;
-
-    grid[row][col] = '0';
-
-    for (const [_row, _col] of getNeighbors(row, rows, col, cols)) {
-        dfs(grid, _row, rows, _col, cols);      /* Space O(ROWS * COLS) */
-    }
-}
-
-class NumberOfIslands {
-
-
-    /**
-     * https://leetcode.com/problems/number-of-islands/
-     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {character[][]} grid
-     * @return {number}
-     */
-    numIslands(grid, connectedComponents = 0) {
-
-        const [rows, cols] = [grid.length, grid[0].length]
-
-        // TODO Iterate over each of the rows and cols, and if it is an island, increment the connectedComponents and dfs to block other connected ndodes.
+	    // gets Area by passing in the heights arr, the left and right index
+        // TODO Complete the getArea function
 
         
+	    // Initial values
+        let [left, right, max] = [0, height.length - 1, 0];
 
-        return connectedComponents
-    };
+	    // While the left is younger than the right one go and tr getting the heights and then calculate the area. 
+        while (left < right) {
+            const [leftHeight, rightHeight] = getHeights(height, left, right);
+            const area = getArea(height, left, right);
 
-    solve(grid) {
-        return this.numIslands(grid)
+            max = Math.max(max, area);
+		
+	    // Update the boundaries if the left is smaller 
+            const isRightGreater = leftHeight <= rightHeight;
+            if (isRightGreater) left++;
+
+	    //The same for the less, until it finds the perfect boundary	
+            const isRightLess = rightHeight < leftHeight;
+            if (isRightLess) right--;
+        }
+
+        return max;
+    }
+
+
+    solve(heights) {
+        return this.maxArea(heights);
+
     }
 }
 
 
-module.exports = { Problem: NumberOfIslands };
+module.exports = { Problem: ContainerWithMostWater };
