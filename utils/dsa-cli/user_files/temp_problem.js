@@ -1,9 +1,9 @@
-class Matrix01 {
-	solve(arr, start) {
+class AllPathsFromSourceToTarget {
+	solve(graphs) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Matrix01 };dge };entualSafeStates };Increasing };lors };;eduling };edII };s };
+module.exports = { Problem: AllPathsFromSourceToTarget };derRoutesToMakeAllPathLeadToTheCityZero };

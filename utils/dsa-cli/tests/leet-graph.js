@@ -314,14 +314,14 @@ class Matrix01 extends ProblemTests {
 
     }
 
-    test2(){
+    test2() {
         /**
          * Input: mat = [[0,0,0],[0,1,0],[1,1,1]]
             Output: [[0,0,0],[0,1,0],[1,2,1]]
          */
 
-        const mat = [[0,0,0],[0,1,0],[1,1,1]];
-        const expected = [[0,0,0],[0,1,0],[1,2,1]];
+        const mat = [[0, 0, 0], [0, 1, 0], [1, 1, 1]];
+        const expected = [[0, 0, 0], [0, 1, 0], [1, 2, 1]];
         this.current_test_name = 'mat | expected'
         const structure = new this.Problem()
         const actual = structure.solve(mat);
@@ -329,6 +329,137 @@ class Matrix01 extends ProblemTests {
     }
 
 }
+
+class TimeNeededToInformAllEmployees extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: n = 1, headID = 0, manager = [-1], informTime = [0]
+            Output: 0
+            Explanation: The head of the company is the only employee in the company.
+         */
+
+        const n = 1;
+        const headID = 0;
+        const manager = [-1];
+        const informTime = [0];
+        const expected = 0;
+        this.current_test_name = 'n | headID | manager | informTime | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(n, headID, manager, informTime);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2() {
+        /**
+         * Input: n = 6, headID = 2, manager = [2,2,-1,2,2,2], informTime = [0,0,1,0,0,0]
+            Output: 1
+            Explanation: The head of the company with id = 2 is the direct manager of all the employees in the company and needs 1 minute to inform them all.
+            The tree structure of the employees in the company is shown.
+         */
+
+        const n = 6;
+        const headID = 2;
+        const manager = [2, 2, -1, 2, 2, 2];
+        const informTime = [0, 0, 1, 0, 0, 0];
+        const expected = 1;
+        this.current_test_name = 'n | headID | manager | informTime | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(n, headID, manager, informTime);
+        assert.deepEqual(actual, expected);
+    }
+}
+
+
+class ReorderRoutesToMakeAllPathLeadToTheCity extends ProblemTests {
+    constructor(Problem) {
+        super(Problem)
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: n = 6, connections = [[0,1],[1,3],[2,3],[4,0],[4,5]]
+            Output: 3
+            Explanation: Change the direction of edges show in red such that each node can reach the city 0 (capital).
+         */
+        const n = 6;
+        const connections = [[0, 1], [1, 3], [2, 3], [4, 0], [4, 5]];
+        const expected = 3;
+        this.current_test_name = 'n | connections | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(n, connections);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2() {
+        /**
+         * Input: n = 5, connections = [[1,0],[1,2],[3,2],[3,4]]
+            Output: 2
+            Explanation: Change the direction of edges show in red such that each node can reach the node 0 (capital).
+         */
+
+        const n = 5;
+        const connections = [[1, 0], [1, 2], [3, 2], [3, 4]];
+        const expected = 2;
+        this.current_test_name = 'n | connections | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(n, connections);
+        assert.deepEqual(actual, expected);
+
+
+    }
+}
+
+class AllPathsFromSourceToTarget extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * 
+            Input: graph = [[1,2],[3],[3],[]]
+            Output: [[0,1,3],[0,2,3]]
+            Explanation: There are two paths: 0 -> 1 -> 3 and 0 -> 2 -> 3.
+         */
+        const graph = [[1, 2], [3], [3], []];
+        const expected = [[0, 1, 3], [0, 2, 3]];
+        this.current_test_name = 'graph | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(graph);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2(){
+        /**
+             * Input: graph = [[4,3,1],[3,2,4],[3],[4],[]]
+            Output: [[0,4],[0,3,4],[0,1,3,4],[0,1,2,3,4],[0,1,4]]
+         */
+        const graph = [[4,3,1],[3,2,4],[3],[4],[]];
+        const expected = [[0,4],[0,3,4],[0,1,3,4],[0,1,2,3,4],[0,1,4]];
+        this.current_test_name = 'graph | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(graph);
+        assert.deepEqual(actual, expected);
+    }
+
+}
+
+
+
+
+
 
 const TEST_DICTIONARY = {
     'number-of-provinces': NumberOfProvinces,
@@ -338,8 +469,11 @@ const TEST_DICTIONARY = {
     'nearest-exit-from-entrance-in-maze': NearestExitFromEntranceInMaze,
     'shortest-bridge': ShortestBridge,
     'jump-game-iii': JumpGameIII,
-    '01-matrix': Matrix01
-    
+    '01-matrix': Matrix01,
+    'time-needed-to-inform-all-employees': TimeNeededToInformAllEmployees,
+    'reorder-routes-to-make-all-paths-lead-to-the-city-zero': ReorderRoutesToMakeAllPathLeadToTheCity,
+    'all-paths-from-source-to-target': AllPathsFromSourceToTarget
+
 
 }
 
