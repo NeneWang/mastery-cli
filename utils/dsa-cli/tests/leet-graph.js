@@ -246,21 +246,88 @@ class ShortestBridge extends ProblemTests {
         assert.deepEqual(actual, expected);
     }
 
-    test3(){
+    test3() {
         const grid = [
-            [1,1,1,1,1],
-            [1,0,0,0,1],
-            [1,0,1,0,1],
-            [1,0,0,0,1],
-            [1,1,1,1,1]
+            [1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 1],
+            [1, 0, 1, 0, 1],
+            [1, 0, 0, 0, 1],
+            [1, 1, 1, 1, 1]
         ];
-        
+
         const expected = 1;
         this.current_test_name = 'grid | expected'
         const structure = new this.Problem()
         const actual = structure.solve(grid);
         assert.deepEqual(actual, expected);
     }
+}
+
+
+class JumpGameIII extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        const arr = [4, 2, 3, 0, 3, 1, 2];
+        const start = 5;
+        const expected = true;
+        this.current_test_name = 'arr | start | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(arr, start);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2() {
+        const arr = [4, 2, 3, 0, 3, 1, 2];
+        const start = 0;
+        const expected = true;
+        this.current_test_name = 'arr | start | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(arr, start);
+        assert.deepEqual(actual, expected);
+    }
+}
+
+class Matrix01 extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: mat = [[0,0,0],[0,1,0],[0,0,0]]
+            Output: [[0,0,0],[0,1,0],[0,0,0]]
+         */
+
+        const mat = [[0, 0, 0], [0, 1, 0], [0, 0, 0]];
+        const expected = [[0, 0, 0], [0, 1, 0], [0, 0, 0]];
+        this.current_test_name = 'mat | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(mat);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2(){
+        /**
+         * Input: mat = [[0,0,0],[0,1,0],[1,1,1]]
+            Output: [[0,0,0],[0,1,0],[1,2,1]]
+         */
+
+        const mat = [[0,0,0],[0,1,0],[1,1,1]];
+        const expected = [[0,0,0],[0,1,0],[1,2,1]];
+        this.current_test_name = 'mat | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(mat);
+        assert.deepEqual(actual, expected);
+    }
+
 }
 
 const TEST_DICTIONARY = {
@@ -270,6 +337,9 @@ const TEST_DICTIONARY = {
     'shortest-path-with-alternating-colors': ShortedPathWithAlternatingColors,
     'nearest-exit-from-entrance-in-maze': NearestExitFromEntranceInMaze,
     'shortest-bridge': ShortestBridge,
+    'jump-game-iii': JumpGameIII,
+    '01-matrix': Matrix01
+    
 
 }
 

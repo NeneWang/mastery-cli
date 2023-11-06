@@ -1,9 +1,9 @@
-class ShortestBridge {
-	solve(grid) {
+class Matrix01 {
+	solve(arr, start) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: ShortestBridge };roblem: RearestExitFromEntranceInMaze };eduling };edII };s };
+module.exports = { Problem: Matrix01 };dge };entualSafeStates };Increasing };lors };;eduling };edII };s };
