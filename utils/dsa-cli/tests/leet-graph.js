@@ -122,7 +122,7 @@ class ShortedPathWithAlternatingColors extends ProblemTests {
             ['X', 'X', 'X', 'X'],
             ['X', 'O', 'X', 'X']
         ];
-        this.current_test_name = 'board | expected'
+        this.current_test_name = `${board} | ${expected}`
         const structure = new this.Problem()
         structure.solve(board);
         assert.deepEqual(board, expected);
@@ -139,7 +139,7 @@ class ShortedPathWithAlternatingColors extends ProblemTests {
             ['O', 'O', 'O'],
             ['O', 'O', 'O']
         ];
-        this.current_test_name = 'board | expected'
+        this.current_test_name = `${board} | ${expected}`
         const structure = new this.Problem()
         structure.solve(board);
         assert.deepEqual(board, expected);
@@ -163,7 +163,7 @@ class NearestExitFromEntranceInMaze extends ProblemTests {
         ];
         const entrance = [1, 2];
         const expected = 1;
-        this.current_test_name = 'maze | entrance | expected'
+        this.current_test_name = `${maze} | ${entrance} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(maze, entrance);
         assert.deepEqual(actual, expected);
@@ -188,7 +188,7 @@ class NearestExitFromEntranceInMaze extends ProblemTests {
         ];
         const entrance = [1, 0];
         const expected = 2;
-        this.current_test_name = 'maze | entrance | expected'
+        this.current_test_name = `${maze} | ${entrance} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(maze, entrance);
         assert.deepEqual(actual, expected);
@@ -205,7 +205,7 @@ class NearestExitFromEntranceInMaze extends ProblemTests {
         ];
         const entrance = [0, 0];
         const expected = -1;
-        this.current_test_name = 'maze | entrance | expected'
+        this.current_test_name = `${maze} | ${entrance} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(maze, entrance);
         assert.deepEqual(actual, expected);
@@ -227,7 +227,7 @@ class ShortestBridge extends ProblemTests {
             [1, 0]
         ];
         const expected = 1;
-        this.current_test_name = 'grid | expected'
+        this.current_test_name = `${grid} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(grid);
         assert.deepEqual(actual, expected);
@@ -240,7 +240,7 @@ class ShortestBridge extends ProblemTests {
             [0, 0, 1]
         ];
         const expected = 2;
-        this.current_test_name = 'grid | expected'
+        this.current_test_name = `${grid} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(grid);
         assert.deepEqual(actual, expected);
@@ -256,7 +256,7 @@ class ShortestBridge extends ProblemTests {
         ];
 
         const expected = 1;
-        this.current_test_name = 'grid | expected'
+        this.current_test_name = `${grid} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(grid);
         assert.deepEqual(actual, expected);
@@ -275,7 +275,7 @@ class JumpGameIII extends ProblemTests {
         const arr = [4, 2, 3, 0, 3, 1, 2];
         const start = 5;
         const expected = true;
-        this.current_test_name = 'arr | start | expected'
+        this.current_test_name = `${arr} | ${start} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(arr, start);
         assert.deepEqual(actual, expected);
@@ -285,7 +285,7 @@ class JumpGameIII extends ProblemTests {
         const arr = [4, 2, 3, 0, 3, 1, 2];
         const start = 0;
         const expected = true;
-        this.current_test_name = 'arr | start | expected'
+        this.current_test_name = `${arr} | ${start} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(arr, start);
         assert.deepEqual(actual, expected);
@@ -350,7 +350,7 @@ class TimeNeededToInformAllEmployees extends ProblemTests {
         const manager = [-1];
         const informTime = [0];
         const expected = 0;
-        this.current_test_name = 'n | headID | manager | informTime | expected'
+        this.current_test_name = `${n} | ${headID} | ${manager} | ${informTime} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(n, headID, manager, informTime);
         assert.deepEqual(actual, expected);
@@ -369,7 +369,7 @@ class TimeNeededToInformAllEmployees extends ProblemTests {
         const manager = [2, 2, -1, 2, 2, 2];
         const informTime = [0, 0, 1, 0, 0, 0];
         const expected = 1;
-        this.current_test_name = 'n | headID | manager | informTime | expected'
+        this.current_test_name = `${n} | ${headID} | ${manager} | ${informTime} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(n, headID, manager, informTime);
         assert.deepEqual(actual, expected);
@@ -393,7 +393,7 @@ class ReorderRoutesToMakeAllPathLeadToTheCity extends ProblemTests {
         const n = 6;
         const connections = [[0, 1], [1, 3], [2, 3], [4, 0], [4, 5]];
         const expected = 3;
-        this.current_test_name = 'n | connections | expected'
+        this.current_test_name = `${n} | ${connections}| ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(n, connections);
         assert.deepEqual(actual, expected);
@@ -409,7 +409,7 @@ class ReorderRoutesToMakeAllPathLeadToTheCity extends ProblemTests {
         const n = 5;
         const connections = [[1, 0], [1, 2], [3, 2], [3, 4]];
         const expected = 2;
-        this.current_test_name = 'n | connections | expected'
+        this.current_test_name = `${n} | ${connections}| ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(n, connections);
         assert.deepEqual(actual, expected);
@@ -435,20 +435,20 @@ class AllPathsFromSourceToTarget extends ProblemTests {
          */
         const graph = [[1, 2], [3], [3], []];
         const expected = [[0, 1, 3], [0, 2, 3]];
-        this.current_test_name = 'graph | expected'
+        this.current_test_name = `${graph} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(graph);
         assert.deepEqual(actual, expected);
     }
 
-    test2(){
+    test2() {
         /**
              * Input: graph = [[4,3,1],[3,2,4],[3],[4],[]]
             Output: [[0,4],[0,3,4],[0,1,3,4],[0,1,2,3,4],[0,1,4]]
          */
-        const graph = [[4,3,1],[3,2,4],[3],[4],[]];
-        const expected = [[0,4],[0,3,4],[0,1,3,4],[0,1,2,3,4],[0,1,4]];
-        this.current_test_name = 'graph | expected'
+        const graph = [[4, 3, 1], [3, 2, 4], [3], [4], []];
+        const expected = [[0, 4], [0, 3, 4], [0, 1, 3, 4], [0, 1, 2, 3, 4], [0, 1, 4]];
+        this.current_test_name = `${graph} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(graph);
         assert.deepEqual(actual, expected);
@@ -456,6 +456,152 @@ class AllPathsFromSourceToTarget extends ProblemTests {
 
 }
 
+
+class CriticalConnectionsInANetwork extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: n = 4, connections = [[0,1],[1,2],[2,0],[1,3]]
+            Output: [[1,3]]
+            Explanation: [[3,1]] is also accepted.
+         */
+        const n = 4;
+        const connections = [[0, 1], [1, 2], [2, 0], [1, 3]];
+        const expected = [[1, 3]];
+        this.current_test_name = `${n} | ${connections} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, connections);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2() {
+        /**
+         * Input: n = 2, connections = [[0,1]]
+            Output: [[0,1]]
+         */
+        const n = 2;
+        const connections = [[0, 1]];
+        const expected = [[0, 1]];
+        this.current_test_name = `${n} | ${connections} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, connections);
+        assert.deepEqual(actual, expected);
+
+    }
+}
+
+
+class NumberOfEnclaves extends ProblemTests {
+    constructor(Problem) {
+        super(Problem)
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: grid = [[0,0,0,0],[1,0,1,0],[0,1,1,0],[0,0,0,0]]
+            Output: 3
+            Explanation: There are three 1s that are enclosed by 0s, and one 1 that is not enclosed because its on the boundary.
+         */
+
+        const grid = [[0, 0, 0, 0], [1, 0, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]];
+        const expected = 3;
+        this.current_test_name = `${grid} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(grid);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2() {
+        /**
+         * Input: grid = [[0,1,1,0],[0,0,1,0],[0,0,1,0],[0,0,0,0]]
+            Output: 0
+            Explanation: All 1s are either on the boundary or can reach the boundary.
+         */
+
+        const grid = [[0, 1, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 0, 0]];
+        const expected = 0;
+        this.current_test_name = `${grid} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(grid);
+        assert.deepEqual(actual, expected);
+    }
+}
+
+
+class NumberOfClosedIslands extends ProblemTests {
+    constructor(Problem) {
+        super(Problem)
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+        this.tests.push(() => this.test3());
+    }
+
+    test1() {
+        /**
+         * Input: grid = [[1,1,1,1,1,1,1,0],[1,0,0,0,0,1,1,0],[1,0,1,0,1,1,1,0],[1,0,0,0,0,1,0,1],[1,1,1,1,1,1,1,0]]
+            Output: 2
+            Explanation: 
+            Islands in gray are closed because they are completely surrounded by water (group of 1s).
+         */
+
+        const grid = [[1, 1, 1, 1, 1, 1, 1, 0], [1, 0, 0, 0, 0, 1, 1, 0], [1, 0, 1, 0, 1, 1, 1, 0], [1, 0, 0, 0, 0, 1, 0, 1], [1, 1, 1, 1, 1, 1, 1, 0]];
+        const expected = 2;
+        this.current_test_name = `${grid} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(grid);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2() {
+        /**
+         * Input: grid = [[0,0,1,0,0],[0,1,0,1,0],[0,1,1,1,0]]
+            Output: 1
+         */
+
+        const grid = [[0, 0, 1, 0, 0], [0, 1, 0, 1, 0], [0, 1, 1, 1, 0]];
+        const expected = 1;
+        this.current_test_name = `${grid} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(grid);
+        assert.deepEqual(actual, expected);
+    }
+
+    test3(){
+        /**
+         * Input: grid = [[1,1,1,1,1,1,1],
+               [1,0,0,0,0,0,1],
+               [1,0,1,1,1,0,1],
+               [1,0,1,0,1,0,1],
+               [1,0,1,1,1,0,1],
+               [1,0,0,0,0,0,1],
+               [1,1,1,1,1,1,1]]
+            Output: 2
+         */
+
+            const grid = [[1,1,1,1,1,1,1],
+                [1,0,0,0,0,0,1],
+                [1,0,1,1,1,0,1],
+                [1,0,1,0,1,0,1],
+                [1,0,1,1,1,0,1],
+                [1,0,0,0,0,0,1],
+                [1,1,1,1,1,1,1]];
+            const expected = 2;
+            this.current_test_name = `${grid} | ${expected}`
+            const structure = new this.Problem()
+            const actual = structure.solve(grid);
+            assert.deepEqual(actual, expected);
+
+    }
+}
 
 
 
@@ -472,7 +618,11 @@ const TEST_DICTIONARY = {
     '01-matrix': Matrix01,
     'time-needed-to-inform-all-employees': TimeNeededToInformAllEmployees,
     'reorder-routes-to-make-all-paths-lead-to-the-city-zero': ReorderRoutesToMakeAllPathLeadToTheCity,
-    'all-paths-from-source-to-target': AllPathsFromSourceToTarget
+    'all-paths-from-source-to-target': AllPathsFromSourceToTarget,
+    'critical-connections-in-a-network': CriticalConnectionsInANetwork,
+    'number-of-enclaves': NumberOfEnclaves,
+    'number-of-closed-islands': NumberOfClosedIslands,
+    
 
 
 }
