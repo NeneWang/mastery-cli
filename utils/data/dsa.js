@@ -71,6 +71,12 @@ const dsa = [
         description: "\n\
         - Recoloring the graph for previus steps, and remembering inside of them by coloring\n\
         "
+    },
+    {
+        term: "Graph Theory",
+        prompt: "What are the advantages of using Graph Theory?",
+        description: "\n\
+        "
     }
 ]
 
