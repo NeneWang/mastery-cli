@@ -745,20 +745,153 @@ class GraphValidTree extends ProblemTests {
         assert.deepEqual(actual, expected);
     }
 
-    test2(){
+    test2() {
         /**
          * Input: n = 5, edges = [[0,1],[1,2],[2,3],[1,3],[1,4]]
             Output: false
          */
 
         const n = 5;
-        const edges = [[0,1],[1,2],[2,3],[1,3],[1,4]];
+        const edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]];
         const expected = false;
         this.current_test_name = `${n} | ${edges} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(n, edges);
         assert.deepEqual(actual, expected);
     }
+}
+
+class AccountsMerge extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: accounts = [["John","johnsmith@mail.com","john_newyork@mail.com"],["John","johnsmith@mail.com","john00@mail.com"],["Mary","mary@mail.com"],["John","johnnybravo@mail.com"]]
+            Output: [["John","john00@mail.com","john_newyork@mail.com","johnsmith@mail.com"],["Mary","mary@mail.com"],["John","johnnybravo@mail.com"]]
+            Explanation:
+            The first and second John's are the same person as they have the common email "johnsmith@mail.com".
+            The third John and Mary are different people as none of their email addresses are used by other accounts.
+            We could return these lists in any order, for example the answer [['Mary', 'mary@mail.com'], ['John', 'johnnybravo@mail.com'], 
+            ['John', 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com']] would still be accepted.
+         */
+
+        const inputs = [["John", "johnsmith@mail.com", "john_newyork@mail.com"], ["John", "johnsmith@mail.com", "john00@mail.com"], ["Mary", "mary@mail.com"], ["John", "johnnybravo@mail.com"]]
+        const output =
+            [
+                [
+                    'John',
+                    'johnsmith@mail.com',
+                    'john_newyork@mail.com',
+                    'john00@mail.com'
+                ],
+                [
+                    'Mary',
+                    'mary@mail.com'
+                ],
+                [
+                    'John',
+                    'johnnybravo@mail.com'
+                ]
+            ]
+
+        // [["John","john00@mail.com","john_newyork@mail.com","johnsmith@mail.com"],["Mary","mary@mail.com"],["John","johnnybravo@mail.com"]]
+        const expected = output;
+        this.current_test_name = `${inputs} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(inputs);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2() {
+
+        /**
+         * Input: accounts = [["Gabe","Gabe0@m.co","Gabe3@m.co","Gabe1@m.co"],["Kevin","Kevin3@m.co","Kevin5@m.co","Kevin0@m.co"],["Ethan","Ethan5@m.co","Ethan4@m.co","Ethan0@m.co"],["Hanzo","Hanzo3@m.co","Hanzo1@m.co","Hanzo0@m.co"],["Fern","Fern5@m.co","Fern1@m.co","Fern0@m.co"]]
+            Output: [["Ethan","Ethan0@m.co","Ethan4@m.co","Ethan5@m.co"],["Gabe","Gabe0@m.co","Gabe1@m.co","Gabe3@m.co"],["Hanzo","Hanzo0@m.co","Hanzo1@m.co","Hanzo3@m.co"],["Kevin","Kevin0@m.co","Kevin3@m.co","Kevin5@m.co"],["Fern","Fern0@m.co","Fern1@m.co","Fern5@m.co"]]
+         */
+        const accounts = [["Gabe", "Gabe0@m.co", "Gabe3@m.co", "Gabe1@m.co"], ["Kevin", "Kevin3@m.co", "Kevin5@m.co", "Kevin0@m.co"], ["Ethan", "Ethan5@m.co", "Ethan4@m.co", "Ethan0@m.co"], ["Hanzo", "Hanzo3@m.co", "Hanzo1@m.co", "Hanzo0@m.co"], ["Fern", "Fern5@m.co", "Fern1@m.co", "Fern0@m.co"]]
+        const output = [
+            [
+              'Gabe',
+              'Gabe0@m.co',
+              'Gabe3@m.co',
+              'Gabe1@m.co'
+            ],
+            [
+              'Kevin',
+              'Kevin3@m.co',
+              'Kevin5@m.co',
+              'Kevin0@m.co'
+            ],
+            [
+              'Ethan',
+              'Ethan5@m.co',
+              'Ethan4@m.co',
+              'Ethan0@m.co'
+            ],
+            [
+              'Hanzo',
+              'Hanzo3@m.co',
+              'Hanzo1@m.co',
+              'Hanzo0@m.co'
+            ],
+            [
+              'Fern',
+              'Fern5@m.co',
+              'Fern1@m.co',
+              'Fern0@m.co'
+            ]
+          ]
+        const expected = output;
+        this.current_test_name = `${accounts} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(accounts);
+        assert.deepEqual(actual, expected);
+    }
+}
+
+class SatisfiabilityOfEqualityEquations extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: equations = ["a==b","b!=a"]
+            Output: false
+            Explanation: If we assign say, a = 1 and b = 1, then the first equation is satisfied, but not the second.  There is no way to assign the variables to satisfy both equations.
+         */
+
+        const equations = ["a==b", "b!=a"];
+        const expected = false;
+        this.current_test_name = `${equations} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(equations);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2() {
+        /**
+         * Input: equations = ["b==a","a==b"]
+            Output: true
+            Explanation: We could assign a = 1 and b = 1 to satisfy both equations.
+         */
+
+        const equations = ["b==a", "a==b"];
+        const expected = true;
+        this.current_test_name = `${equations} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(equations);
+        assert.deepEqual(actual, expected);
+    }
+
 
 }
 
@@ -785,10 +918,9 @@ const TEST_DICTIONARY = {
     'find-the-town-judge': FindTheTownJudge,
     'minimum-number-of-vertices-to-reach-all-nodes': MinimumNumberOfVerticesToReachAllNodes,
     'is-graph-bipartite': IsGraphBipartite,
-    'graph-valid-tree': GraphValidTree
-
-
-
+    'graph-valid-tree': GraphValidTree,
+    'accounts-merge': AccountsMerge,
+    'satisfiability-of-equality-equations': SatisfiabilityOfEqualityEquations
 }
 
 module.exports = TEST_DICTIONARY;

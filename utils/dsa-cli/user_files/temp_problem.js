@@ -6,4 +6,4 @@ class GraphValidTree {
 }
 
 
-module.exports = { Problem: GraphValidTree };oblem: MinimumNumberOfVerticesToReachAllNodes };ToTheCityZero };
+module.exports = { Problem: GraphValidTree };orts = { Problem: ReorderRoutesToMakeAllPathLeadToTheCityZero };
