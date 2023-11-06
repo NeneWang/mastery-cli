@@ -1,7 +1,7 @@
 ---
 title: Course Schedule
 description: Return true if you can finish all courses. Otherwise, return false.
-tags: [ neetcode, medium, graphs, topological-sort]
+tags: [ neetcode, medium, graphs, topological-sort, standard-traversal]
 link: https://leetcode.com/problems/course-schedule/
 images: []
 hints: ["https://wngnelson.com/assets/img_src/dsa/course_schedule.gif"]

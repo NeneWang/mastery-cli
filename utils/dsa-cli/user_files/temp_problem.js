@@ -1,9 +1,9 @@
-class ShortestPathWithAlternatingColors {
-	solve(board) {
+class ShortestBridge {
+	solve(grid) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: ShortestPathWithAlternatingColors };
+module.exports = { Problem: ShortestBridge };roblem: RearestExitFromEntranceInMaze };eduling };edII };s };

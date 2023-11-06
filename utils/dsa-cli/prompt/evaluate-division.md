@@ -1,7 +1,7 @@
 ---
 title: Evaluate Division
 description: Return the answers to all queries. If a single answer cannot be determined, return -1.0.
-tags: [graph, medium]
+tags: [graph, medium, standard-traversal]
 link: 
 images: []
 ---

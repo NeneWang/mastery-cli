@@ -91,8 +91,8 @@ class KeyAndRooms extends ProblemTests {
         assert.equal(actual, expected);
     }
 
-    test2(){
-        const rooms = [[1,3],[3,0,1],[2],[0]];
+    test2() {
+        const rooms = [[1, 3], [3, 0, 1], [2], [0]];
         const expected = false;
         this.current_test_name = '[[1,3],[3,0,1],[2],[0]] | false'
         const structure = new this.Problem()
@@ -103,42 +103,42 @@ class KeyAndRooms extends ProblemTests {
 }
 
 class ShortedPathWithAlternatingColors extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test1());
         this.tests.push(() => this.test2());
     }
 
-    test1(){
+    test1() {
         const board = [
-            ['X','X','X','X'],
-            ['X','O','O','X'],
-            ['X','X','O','X'],
-            ['X','O','X','X']
-          ];
+            ['X', 'X', 'X', 'X'],
+            ['X', 'O', 'O', 'X'],
+            ['X', 'X', 'O', 'X'],
+            ['X', 'O', 'X', 'X']
+        ];
         const expected = [
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','X','X','X'],
-            ['X','O','X','X']
-          ];
+            ['X', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'X'],
+            ['X', 'O', 'X', 'X']
+        ];
         this.current_test_name = 'board | expected'
         const structure = new this.Problem()
         structure.solve(board);
         assert.deepEqual(board, expected);
     }
 
-    test2(){
+    test2() {
         const board = [
-            ['O','O','O'],
-            ['O','O','O'],
-            ['O','O','O']
-          ];
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O']
+        ];
         const expected = [
-            ['O','O','O'],
-            ['O','O','O'],
-            ['O','O','O']
-          ];
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O']
+        ];
         this.current_test_name = 'board | expected'
         const structure = new this.Problem()
         structure.solve(board);
@@ -146,12 +146,130 @@ class ShortedPathWithAlternatingColors extends ProblemTests {
     }
 }
 
+class NearestExitFromEntranceInMaze extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+        this.tests.push(() => this.test3());
+    }
+
+    test1() {
+        const maze = [
+            ['+', '+', '.', '+'],
+            ['.', '+', '.', '+'],
+            ['+', '+', '+', '+']
+        ];
+        const entrance = [1, 2];
+        const expected = 1;
+        this.current_test_name = 'maze | entrance | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(maze, entrance);
+        assert.deepEqual(actual, expected);
+    }
+
+
+    test2() {
+        /**
+         * Input: maze = [["+","+","+"],[".",".","."],["+","+","+"]], entrance = [1,0]
+            Output: 2
+            Explanation: There is 1 exit in this maze at [1,2].
+            [1,0] does not count as an exit since it is the entrance cell.
+            Initially, you are at the entrance cell [1,0].
+            - You can reach [1,2] by moving 2 steps right.
+            Thus, the nearest exit is [1,2], which is 2 steps away.
+         */
+
+        const maze = [
+            ['+', '+', '+'],
+            ['.', '.', '.'],
+            ['+', '+', '+']
+        ];
+        const entrance = [1, 0];
+        const expected = 2;
+        this.current_test_name = 'maze | entrance | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(maze, entrance);
+        assert.deepEqual(actual, expected);
+    }
+
+    test3() {
+        /**
+         * Input: maze = [[".","+"]], entrance = [0,0]
+            Output: -1
+            Explanation: There are no exits in this maze.
+         */
+        const maze = [
+            ['.', '+']
+        ];
+        const entrance = [0, 0];
+        const expected = -1;
+        this.current_test_name = 'maze | entrance | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(maze, entrance);
+        assert.deepEqual(actual, expected);
+    }
+
+}
+
+
+class ShortestBridge extends ProblemTests {
+    constructor(Problem) {
+        super(Problem)
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        const grid = [
+            [0, 1],
+            [1, 0]
+        ];
+        const expected = 1;
+        this.current_test_name = 'grid | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(grid);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2() {
+        const grid = [
+            [0, 1, 0],
+            [0, 0, 0],
+            [0, 0, 1]
+        ];
+        const expected = 2;
+        this.current_test_name = 'grid | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(grid);
+        assert.deepEqual(actual, expected);
+    }
+
+    test3(){
+        const grid = [
+            [1,1,1,1,1],
+            [1,0,0,0,1],
+            [1,0,1,0,1],
+            [1,0,0,0,1],
+            [1,1,1,1,1]
+        ];
+        
+        const expected = 1;
+        this.current_test_name = 'grid | expected'
+        const structure = new this.Problem()
+        const actual = structure.solve(grid);
+        assert.deepEqual(actual, expected);
+    }
+}
 
 const TEST_DICTIONARY = {
     'number-of-provinces': NumberOfProvinces,
     'find-eventual-safe-states': FindEventualSafeStates,
     'key-and-rooms': KeyAndRooms,
-    'shortest-path-with-alternating-colors': ShortedPathWithAlternatingColors
+    'shortest-path-with-alternating-colors': ShortedPathWithAlternatingColors,
+    'nearest-exit-from-entrance-in-maze': NearestExitFromEntranceInMaze,
+    'shortest-bridge': ShortestBridge,
 
 }
 
