@@ -11,9 +11,8 @@ class KthSmallestElementInABST {
         const stack = [];
       
         while (true) {
+          // TODO Perform Inorder pushes from the left
           while (root !== null) {
-            stack.push(root);
-            root = root.left;
           }
           root = stack.pop();
           if (--k === 0) return root.val;

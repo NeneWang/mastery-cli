@@ -1668,5 +1668,20 @@
         "file_path": "sum-root-to-leaf-numbers-c3.js",
         "difficulty": 1,
         "problem_slug": "sum-root-to-leaf-numbers"
+    },
+    {
+        "file_path": "kth-smallest-element-in-a-bst-c1.js",
+        "difficulty": 1,
+        "problem_slug": "kth-smallest-element-in-a-bst"
+    },
+    {
+        "file_path": "kth-smallest-element-in-a-bst-c2.js",
+        "difficulty": 1,
+        "problem_slug": "kth-smallest-element-in-a-bst"
+    },
+    {
+        "file_path": "kth-smallest-element-in-a-bst-c3.js",
+        "difficulty": 1,
+        "problem_slug": "kth-smallest-element-in-a-bst"
     }
 ]

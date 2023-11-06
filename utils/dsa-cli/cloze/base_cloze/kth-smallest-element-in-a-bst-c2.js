@@ -15,8 +15,8 @@ class KthSmallestElementInABST {
             stack.push(root);
             root = root.left;
           }
-          root = stack.pop();
-          if (--k === 0) return root.val;
+          // TODO Get the root node by popping, and check if k is 0
+          
           root = root.right;
         }
       }

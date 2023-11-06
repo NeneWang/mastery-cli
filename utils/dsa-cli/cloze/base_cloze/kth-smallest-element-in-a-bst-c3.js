@@ -17,7 +17,8 @@ class KthSmallestElementInABST {
           }
           root = stack.pop();
           if (--k === 0) return root.val;
-          root = root.right;
+          // TODO Perform Inorder pushes from the right
+          
         }
       }
 
