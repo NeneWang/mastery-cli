@@ -3,7 +3,7 @@ class GraphValidTree {
 
     validTree = function (n, edges, root = 0) {
 
-        dfs = (node, graph, visited) => {
+        const dfs = (node, graph, visited) => {
             if (visited.has(node)) return;
             visited.add(node);
 

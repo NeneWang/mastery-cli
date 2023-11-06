@@ -575,7 +575,7 @@ class NumberOfClosedIslands extends ProblemTests {
         assert.deepEqual(actual, expected);
     }
 
-    test3(){
+    test3() {
         /**
          * Input: grid = [[1,1,1,1,1,1,1],
                [1,0,0,0,0,0,1],
@@ -587,21 +587,181 @@ class NumberOfClosedIslands extends ProblemTests {
             Output: 2
          */
 
-            const grid = [[1,1,1,1,1,1,1],
-                [1,0,0,0,0,0,1],
-                [1,0,1,1,1,0,1],
-                [1,0,1,0,1,0,1],
-                [1,0,1,1,1,0,1],
-                [1,0,0,0,0,0,1],
-                [1,1,1,1,1,1,1]];
-            const expected = 2;
-            this.current_test_name = `${grid} | ${expected}`
-            const structure = new this.Problem()
-            const actual = structure.solve(grid);
-            assert.deepEqual(actual, expected);
+        const grid = [[1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 1, 0, 1],
+        [1, 0, 1, 0, 1, 0, 1],
+        [1, 0, 1, 1, 1, 0, 1],
+        [1, 0, 0, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1]];
+        const expected = 2;
+        this.current_test_name = `${grid} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(grid);
+        assert.deepEqual(actual, expected);
 
     }
 }
+
+class FindTheTownJudge extends ProblemTests {
+    constructor(Problem) {
+        super(Problem)
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: n = 2, trust = [[1,2]]
+            Output: 2
+         */
+        const n = 2;
+        const trust = [[1, 2]];
+        const expected = 2;
+        this.current_test_name = `${n} | ${trust} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, trust);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2() {
+        /**
+         * Input: n = 3, trust = [[1,3],[2,3]]
+            Output: 3
+         */
+        const n = 3;
+        const trust = [[1, 3], [2, 3]];
+        const expected = 3;
+        this.current_test_name = `${n} | ${trust} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, trust);
+        assert.deepEqual(actual, expected);
+    }
+}
+
+class MinimumNumberOfVerticesToReachAllNodes extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem)
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: n = 6, edges = [[0,1],[0,2],[2,5],[3,4],[4,2]]
+            Output: [0,3]
+            Explanation: It's not possible to reach all the nodes from a single vertex. From 0 we can reach [0,1,2,5]. From 3 we can reach [3,4,2,5]. So we output [0,3].
+         */
+
+        const n = 6;
+        const edges = [[0, 1], [0, 2], [2, 5], [3, 4], [4, 2]];
+        const expected = [0, 3];
+        this.current_test_name = `${n} | ${edges} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, edges);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2() {
+        /**
+         * Input: n = 5, edges = [[0,1],[2,1],[3,1],[1,4],[2,4]]
+            Output: [0,2,3]
+            Explanation: Notice that vertices 0, 3 and 2 are not reachable from any other node, so we must include them. Also any of these vertices can reach nodes 1 and 4.
+         */
+
+        const n = 5;
+        const edges = [[0, 1], [2, 1], [3, 1], [1, 4], [2, 4]];
+        const expected = [0, 2, 3];
+        this.current_test_name = `${n} | ${edges} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, edges);
+        assert.deepEqual(actual, expected);
+    }
+}
+
+class IsGraphBipartite extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem)
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: graph = [[1,3],[0,2],[1,3],[0,2]]
+            Output: true
+            Explanation: We can divide the vertices into two groups: {0, 2} and {1, 3}.
+         */
+
+        const graph = [[1, 3], [0, 2], [1, 3], [0, 2]];
+        const expected = true;
+        this.current_test_name = `${graph} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(graph);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2() {
+        /**
+         * Input: graph = [[1,3],[0,2],[1,3],[0,2]]
+            Output: true
+            Explanation: We can partition the nodes into two sets: {0, 2} and {1, 3}.
+         */
+
+        const graph = [[1, 2, 3], [0, 2], [0, 1, 3], [0, 2]];
+        const expected = false;
+        this.current_test_name = `${graph} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(graph);
+        assert.deepEqual(actual, expected);
+
+    }
+}
+
+
+class GraphValidTree extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+
+        /**
+        * Input: n = 5, edges = [[0,1],[0,2],[0,3],[1,4]]
+            Output: true
+        */
+
+        const n = 5;
+        const edges = [[0, 1], [0, 2], [0, 3], [1, 4]];
+        const expected = true;
+        this.current_test_name = `${n} | ${edges} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, edges);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2(){
+        /**
+         * Input: n = 5, edges = [[0,1],[1,2],[2,3],[1,3],[1,4]]
+            Output: false
+         */
+
+        const n = 5;
+        const edges = [[0,1],[1,2],[2,3],[1,3],[1,4]];
+        const expected = false;
+        this.current_test_name = `${n} | ${edges} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, edges);
+        assert.deepEqual(actual, expected);
+    }
+
+}
+
 
 
 
@@ -622,7 +782,11 @@ const TEST_DICTIONARY = {
     'critical-connections-in-a-network': CriticalConnectionsInANetwork,
     'number-of-enclaves': NumberOfEnclaves,
     'number-of-closed-islands': NumberOfClosedIslands,
-    
+    'find-the-town-judge': FindTheTownJudge,
+    'minimum-number-of-vertices-to-reach-all-nodes': MinimumNumberOfVerticesToReachAllNodes,
+    'is-graph-bipartite': IsGraphBipartite,
+    'graph-valid-tree': GraphValidTree
+
 
 
 }
