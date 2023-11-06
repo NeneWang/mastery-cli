@@ -816,36 +816,36 @@ class AccountsMerge extends ProblemTests {
         const accounts = [["Gabe", "Gabe0@m.co", "Gabe3@m.co", "Gabe1@m.co"], ["Kevin", "Kevin3@m.co", "Kevin5@m.co", "Kevin0@m.co"], ["Ethan", "Ethan5@m.co", "Ethan4@m.co", "Ethan0@m.co"], ["Hanzo", "Hanzo3@m.co", "Hanzo1@m.co", "Hanzo0@m.co"], ["Fern", "Fern5@m.co", "Fern1@m.co", "Fern0@m.co"]]
         const output = [
             [
-              'Gabe',
-              'Gabe0@m.co',
-              'Gabe3@m.co',
-              'Gabe1@m.co'
+                'Gabe',
+                'Gabe0@m.co',
+                'Gabe3@m.co',
+                'Gabe1@m.co'
             ],
             [
-              'Kevin',
-              'Kevin3@m.co',
-              'Kevin5@m.co',
-              'Kevin0@m.co'
+                'Kevin',
+                'Kevin3@m.co',
+                'Kevin5@m.co',
+                'Kevin0@m.co'
             ],
             [
-              'Ethan',
-              'Ethan5@m.co',
-              'Ethan4@m.co',
-              'Ethan0@m.co'
+                'Ethan',
+                'Ethan5@m.co',
+                'Ethan4@m.co',
+                'Ethan0@m.co'
             ],
             [
-              'Hanzo',
-              'Hanzo3@m.co',
-              'Hanzo1@m.co',
-              'Hanzo0@m.co'
+                'Hanzo',
+                'Hanzo3@m.co',
+                'Hanzo1@m.co',
+                'Hanzo0@m.co'
             ],
             [
-              'Fern',
-              'Fern5@m.co',
-              'Fern1@m.co',
-              'Fern0@m.co'
+                'Fern',
+                'Fern5@m.co',
+                'Fern1@m.co',
+                'Fern0@m.co'
             ]
-          ]
+        ]
         const expected = output;
         this.current_test_name = `${accounts} | ${expected}`
         const structure = new this.Problem()
@@ -894,14 +894,14 @@ class SatisfiabilityOfEqualityEquations extends ProblemTests {
 }
 
 class LexicographicallySmallestEquivalentString extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem)
         this.tests.push(() => this.test1());
         this.tests.push(() => this.test2());
         this.tests.push(() => this.test3());
     }
 
-    test1(){
+    test1() {
         /**
          * Input: s1 = "parker", s2 = "morris", baseStr = "parser"
             Output: "makkek"
@@ -914,7 +914,7 @@ class LexicographicallySmallestEquivalentString extends ProblemTests {
         const s2 = "morris";
         const baseStr = "parser";
         const expected = "makkek";
-        
+
         this.current_test_name = `${s1} | ${s2} | ${baseStr} | ${expected}`
         const structure = new this.Problem()
         const actual = structure.solve(s1, s2, baseStr);
@@ -922,7 +922,7 @@ class LexicographicallySmallestEquivalentString extends ProblemTests {
 
     }
 
-    test2(){
+    test2() {
         /**
          * Input: s1 = "hello", s2 = "world", baseStr = "hold"
             Output: "hdld"
@@ -941,7 +941,7 @@ class LexicographicallySmallestEquivalentString extends ProblemTests {
         assert.deepEqual(actual, expected);
     }
 
-    test3(){
+    test3() {
         /**
          * Input: s1 = "leetcode", s2 = "programs", baseStr = "sourcecode"
             Output: "aauaaaaada"
@@ -964,7 +964,7 @@ class LexicographicallySmallestEquivalentString extends ProblemTests {
 
 class SimilarStringGroups extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         /**
          * Input: strs = ["tars","rats","arts","star"]
             Output: 2
@@ -974,8 +974,8 @@ class SimilarStringGroups extends ProblemTests {
         this.tests.push(() => this.test2());
     }
 
-    test1(){
-        const strs = ["tars","rats","arts","star"];
+    test1() {
+        const strs = ["tars", "rats", "arts", "star"];
         const expected = 2;
         this.current_test_name = `${strs} | ${expected}`
         const structure = new this.Problem()
@@ -983,8 +983,8 @@ class SimilarStringGroups extends ProblemTests {
         assert.deepEqual(actual, expected);
     }
 
-    test2(){
-        const strs = ["omv","ovm"];
+    test2() {
+        const strs = ["omv", "ovm"];
         const expected = 1;
         this.current_test_name = `${strs} | ${expected}`
         const structure = new this.Problem()
@@ -993,6 +993,62 @@ class SimilarStringGroups extends ProblemTests {
     }
 
 }
+
+class AlienDictionary extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem)
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: words = ["wrt","wrf","er","ett","rftt"]
+            Output: "wertf" 
+         */
+
+        const words = ["wrt", "wrf", "er", "ett", "rftt"];
+        const expected = "wertf";
+        this.current_test_name = `${words} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(words);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2() {
+        /**
+         * Input: words = ["z","x"]
+            Output: "zx"
+         */
+
+        const words = ["z", "x"];
+        const expected = "zx";
+        this.current_test_name = `${words} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(words);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test3(){
+        /**
+         * Input: words = ["z","x","z"]
+            Output: ""
+            Explanation: The order is invalid, so return "".
+         */
+
+        const words = ["z", "x", "z"];
+        const expected = "";
+        this.current_test_name = `${words} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(words);
+        assert.deepEqual(actual, expected);
+    }
+
+}
+
 
 
 
@@ -1021,7 +1077,8 @@ const TEST_DICTIONARY = {
     'accounts-merge': AccountsMerge,
     'satisfiability-of-equality-equations': SatisfiabilityOfEqualityEquations,
     'lexicographically-smallest-equivalent-string': LexicographicallySmallestEquivalentString,
-    'similar-string-groups': SimilarStringGroups
+    'similar-string-groups': SimilarStringGroups,
+    'alien-dictionary': AlienDictionary
 }
 
 module.exports = TEST_DICTIONARY;

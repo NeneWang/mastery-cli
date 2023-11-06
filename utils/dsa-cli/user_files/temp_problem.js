@@ -1,9 +1,9 @@
-class LexicographicallySmallestEquivalentString {
-	solve(s1, s2, baseStr) {
+class Solution {
+	solve(strs){
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: LexicographicallySmallestEquivalentString }; };
+module.exports = { Problem: Solution };xports = { Problem: SatisfiabilityOfEqualityEquations };estEquivalentString }; };
