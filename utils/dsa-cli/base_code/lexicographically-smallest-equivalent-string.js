@@ -6,4 +6,4 @@ class LexicographicallySmallestEquivalentString {
 }
 
 
-module.exports = { Problem: LexicographicallySmallestEquivalentString }; };
+module.exports = { Problem: LexicographicallySmallestEquivalentString };

@@ -891,7 +891,106 @@ class SatisfiabilityOfEqualityEquations extends ProblemTests {
         const actual = structure.solve(equations);
         assert.deepEqual(actual, expected);
     }
+}
 
+class LexicographicallySmallestEquivalentString extends ProblemTests {
+    constructor(Problem){
+        super(Problem)
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+        this.tests.push(() => this.test3());
+    }
+
+    test1(){
+        /**
+         * Input: s1 = "parker", s2 = "morris", baseStr = "parser"
+            Output: "makkek"
+            Explanation: Based on the equivalency information in s1 and s2, we can group their characters as [m,p], [a,o], [k,r,s], [e,i].
+            The characters in each group are equivalent and sorted in lexicographical order.
+            So the answer is "makkek".
+         */
+
+        const s1 = "parker";
+        const s2 = "morris";
+        const baseStr = "parser";
+        const expected = "makkek";
+        
+        this.current_test_name = `${s1} | ${s2} | ${baseStr} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(s1, s2, baseStr);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2(){
+        /**
+         * Input: s1 = "hello", s2 = "world", baseStr = "hold"
+            Output: "hdld"
+            Explanation: Based on the equivalency information in s1 and s2, we can group their characters as [h,w], [d,e,o], [l,r].
+            So only the second letter 'o' in baseStr is changed to 'd', the answer is "hdld".
+         */
+
+        const s1 = "hello";
+        const s2 = "world";
+        const baseStr = "hold";
+        const expected = "hdld";
+
+        this.current_test_name = `${s1} | ${s2} | ${baseStr} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(s1, s2, baseStr);
+        assert.deepEqual(actual, expected);
+    }
+
+    test3(){
+        /**
+         * Input: s1 = "leetcode", s2 = "programs", baseStr = "sourcecode"
+            Output: "aauaaaaada"
+            Explanation: We group the equivalent characters in s1 and s2 as [a,o,e,r,s,c], [l,p], [g,t] and [d,m], thus all letters in baseStr except 'u' and 'd' are transformed to 'a', the answer is "aauaaaaada".
+         */
+
+        const s1 = "leetcode";
+        const s2 = "programs";
+        const baseStr = "sourcecode";
+        const expected = "aauaaaaada";
+
+        this.current_test_name = `${s1} | ${s2} | ${baseStr} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(s1, s2, baseStr);
+        assert.deepEqual(actual, expected);
+    }
+
+}
+
+
+class SimilarStringGroups extends ProblemTests {
+
+    constructor(Problem){
+        /**
+         * Input: strs = ["tars","rats","arts","star"]
+            Output: 2
+         */
+        super(Problem)
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1(){
+        const strs = ["tars","rats","arts","star"];
+        const expected = 2;
+        this.current_test_name = `${strs} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(strs);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2(){
+        const strs = ["omv","ovm"];
+        const expected = 1;
+        this.current_test_name = `${strs} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(strs);
+        assert.deepEqual(actual, expected);
+    }
 
 }
 
@@ -920,7 +1019,9 @@ const TEST_DICTIONARY = {
     'is-graph-bipartite': IsGraphBipartite,
     'graph-valid-tree': GraphValidTree,
     'accounts-merge': AccountsMerge,
-    'satisfiability-of-equality-equations': SatisfiabilityOfEqualityEquations
+    'satisfiability-of-equality-equations': SatisfiabilityOfEqualityEquations,
+    'lexicographically-smallest-equivalent-string': LexicographicallySmallestEquivalentString,
+    'similar-string-groups': SimilarStringGroups
 }
 
 module.exports = TEST_DICTIONARY;
