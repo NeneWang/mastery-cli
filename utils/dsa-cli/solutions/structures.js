@@ -402,6 +402,25 @@ class PriorityQueue {
       this.comparator = comparator || ((a, b) => a - b);
   }
 
+  enqueue(item) {
+      this.heap.push(item);
+      this.bubbleUp(this.heap.length - 1);
+  }
+
+  dequeue() {
+      if (this.isEmpty()) {
+          throw new Error('Priority queue is empty.');
+      }
+      const root = this.heap[0];
+      const last = this.heap.pop();
+      if (this.heap.length > 0) {
+          this.heap[0] = last;
+          this.bubbleDown(0);
+      }
+
+      return root;
+    }
+
   add(item) {
       this.heap.push(item);
       this.bubbleUp(this.heap.length - 1);

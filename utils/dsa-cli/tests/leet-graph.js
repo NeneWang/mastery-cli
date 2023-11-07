@@ -1096,10 +1096,10 @@ class SortItemsByGroupsRespectingDependencies extends ProblemTests {
 
 }
 
-class LargestColorValueInADirectedGraph extends ProblemTests {  
+class LargestColorValueInADirectedGraph extends ProblemTests {
 
     constructor(Problem) {
-    
+
         super(Problem);
         this.tests.push(() => this.test1());
         this.tests.push(() => this.test2());
@@ -1121,7 +1121,7 @@ class LargestColorValueInADirectedGraph extends ProblemTests {
         assert.deepEqual(actual, expected);
     }
 
-    test2(){
+    test2() {
         /**
          * Input: colors = "a", edges = [[0,0]]
             Output: -1
@@ -1136,7 +1136,61 @@ class LargestColorValueInADirectedGraph extends ProblemTests {
         const actual = structure.solve(colors, edges);
         assert.deepEqual(actual, expected);
     }
+}
 
+class CheapestFlightsWithinKStops extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1(){
+        /**
+         * Input: n = 4, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], src = 0, dst = 3, k = 1
+            Output: 700
+            Explanation:
+            The graph is shown above.
+            The optimal path with at most 1 stop from city 0 to 3 is marked in red and has cost 100 + 600 = 700.
+            Note that the path through cities [0,1,2,3] is cheaper but is invalid because it uses 2 stops.
+         */
+
+        const n = 4;
+        const flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]];
+        const src = 0;
+        const dst = 3;
+        const k = 1;
+        const expected = 700;
+        this.current_test_name = `${n} | ${flights} | ${src} | ${dst} | ${k} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, flights, src, dst, k);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2(){
+        /**
+         * Input: n = 3, flights = [[0,1,100],[1,2,100],[0,2,500]], src = 0, dst = 2, k = 1
+            Output: 200
+            Explanation:
+            The graph is shown above.
+            The optimal path with at most 1 stop from city 0 to 2 is marked in red and has cost 100 + 100 = 200.
+         */
+
+        const n = 3;
+        const flights = [[0,1,100],[1,2,100],[0,2,500]];
+        const src = 0;
+        const dst = 2;
+        const k = 1;
+        const expected = 200;
+
+        this.current_test_name = `${n} | ${flights} | ${src} | ${dst} | ${k} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, flights, src, dst, k);
+        assert.deepEqual(actual, expected);
+    
+    }
 
 }
 
@@ -1173,7 +1227,8 @@ const TEST_DICTIONARY = {
     'similar-string-groups': SimilarStringGroups,
     'alien-dictionary': AlienDictionary,
     'sort-items-by-groups-respecting-dependencies': SortItemsByGroupsRespectingDependencies,
-    'largest-color-value-in-a-directed-graph': LargestColorValueInADirectedGraph
+    'largest-color-value-in-a-directed-graph': LargestColorValueInADirectedGraph,
+    'cheapest-flights-within-k-stops': CheapestFlightsWithinKStops,
 }
 
 module.exports = TEST_DICTIONARY;

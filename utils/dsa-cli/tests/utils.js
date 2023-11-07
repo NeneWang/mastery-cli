@@ -141,6 +141,51 @@ function binaryTreeToArray(root) {
 }
 
 
+class PriorityQueue {
+    constructor() {
+        this.elements = [];
+    }
+
+    enqueue(element, priority) {
+        const queueElement = { element, priority };
+        let added = false;
+
+        for (let i = 0; i < this.elements.length; i++) {
+            if (queueElement.priority < this.elements[i].priority) {
+                this.elements.splice(i, 0, queueElement);
+                added = true;
+                break;
+            }
+        }
+
+        if (!added) {
+            this.elements.push(queueElement);
+        }
+    }
+
+    dequeue() {
+        if (!this.isEmpty()) {
+            return this.elements.shift().element;
+        }
+        return null;
+    }
+
+    peek() {
+        if (!this.isEmpty()) {
+            return this.elements[0].element;
+        }
+        return null;
+    }
+
+    isEmpty() {
+        return this.elements.length === 0;
+    }
+
+    size() {
+        return this.elements.length;
+    }
+}
 
 
-module.exports = { ListNode, Node, arrayToListNode, arrayToNodeHeadNeighbors, TreeNode, arrayToBinaryTree, binaryTreeToArray, arrayToRandomNode };
+
+module.exports = { ListNode, Node, arrayToListNode, arrayToNodeHeadNeighbors, TreeNode, arrayToBinaryTree, binaryTreeToArray, arrayToRandomNode, PriorityQueue };

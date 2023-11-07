@@ -1,9 +1,9 @@
-class FindTheTownJudge {
-	solve(mat) {
+class Problem {
+	solve(words) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: FindTheTownJudge };;Islands }; SortItemsByGroupsRespectingDependencies };tring }; };
+module.exports = { Problem: Problem };module.exports = { Problem: CheapestFlightsWithinKStops };tEquivalentString }; };
