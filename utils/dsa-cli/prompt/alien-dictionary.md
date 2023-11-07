@@ -14,7 +14,7 @@ You are given a list of strings words from the alien language's dictionary. Now 
 
 If this claim is incorrect, and the given arrangement of string in words cannot correspond to any order of letters, return "".
 
-Otherwise, return a string of the unique letters in the new alien language sorted in lexicographically increasing order by the new language's rules. If there are multiple solutions, return any of them.
+Otherwise, return a string of the unique letters in the new alien language sorted in lexicographically increasing order by the new language's rulesw. If there are multiple solutions, return any of them.
 
 
 ### Example 1

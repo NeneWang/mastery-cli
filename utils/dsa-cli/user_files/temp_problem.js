@@ -1,9 +1,9 @@
-class Solution {
-	solve(strs){
+class FindTheTownJudge {
+	solve(mat) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Solution };xports = { Problem: SatisfiabilityOfEqualityEquations };estEquivalentString }; };
+module.exports = { Problem: FindTheTownJudge };;Islands }; SortItemsByGroupsRespectingDependencies };tring }; };

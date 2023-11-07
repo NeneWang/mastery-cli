@@ -1032,7 +1032,7 @@ class AlienDictionary extends ProblemTests {
 
     }
 
-    test3(){
+    test3() {
         /**
          * Input: words = ["z","x","z"]
             Output: ""
@@ -1048,6 +1048,99 @@ class AlienDictionary extends ProblemTests {
     }
 
 }
+
+class SortItemsByGroupsRespectingDependencies extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        // this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: n = 8, m = 2, group = [-1,-1,1,0,0,1,0,-1], beforeItems = [[],[6],[5],[6],[3,6],[],[],[]]
+            Output: [6,3,4,1,5,2,0,7]
+         */
+
+
+        const n = 8;
+        const m = 2;
+        const group = [-1, -1, 1, 0, 0, 1, 0, -1];
+        const beforeItems = [[], [6], [5], [6], [3, 6], [], [], []];
+        const expected = [6, 3, 4, 1, 5, 2, 0, 7];
+        this.current_test_name = `${n} | ${m} | ${group} | ${beforeItems} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, m, group, beforeItems);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2() {
+        /**
+         * Input: n = 8, m = 2, group = [-1,-1,1,0,0,1,0,-1], beforeItems = [[],[6],[5],[6],[3],[],[4],[]]
+            Output: []
+            Explanation: This is the same as example 1 except that 4 needs to be before 6 in the sorted list.
+         */
+
+        const n = 8;
+        const m = 2;
+        const group = [-1, -1, 1, 0, 0, 1, 0, -1];
+        const beforeItems = [[], [6], [5], [6], [3], [], [4], []];
+        const expected = [];
+        this.current_test_name = `${n} | ${m} | ${group} | ${beforeItems} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, m, group, beforeItems);
+        assert.deepEqual(actual, expected);
+    }
+
+}
+
+class LargestColorValueInADirectedGraph extends ProblemTests {  
+
+    constructor(Problem) {
+    
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: colors = "abaca", edges = [[0,1],[0,2],[2,3],[3,4]]
+            Output: 3
+            Explanation: The path 0 -> 2 -> 3 -> 4 contains 3 nodes that are colored "a" (red in the above image).
+         */
+
+        const colors = "abaca";
+        const edges = [[0, 1], [0, 2], [2, 3], [3, 4]];
+        const expected = 3;
+        this.current_test_name = `${colors} | ${edges} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(colors, edges);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2(){
+        /**
+         * Input: colors = "a", edges = [[0,0]]
+            Output: -1
+            Explanation: There is no path from node 0 to node 0.
+         */
+
+        const colors = "a";
+        const edges = [[0, 0]];
+        const expected = -1;
+        this.current_test_name = `${colors} | ${edges} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(colors, edges);
+        assert.deepEqual(actual, expected);
+    }
+
+
+}
+
+
 
 
 
@@ -1078,7 +1171,9 @@ const TEST_DICTIONARY = {
     'satisfiability-of-equality-equations': SatisfiabilityOfEqualityEquations,
     'lexicographically-smallest-equivalent-string': LexicographicallySmallestEquivalentString,
     'similar-string-groups': SimilarStringGroups,
-    'alien-dictionary': AlienDictionary
+    'alien-dictionary': AlienDictionary,
+    'sort-items-by-groups-respecting-dependencies': SortItemsByGroupsRespectingDependencies,
+    'largest-color-value-in-a-directed-graph': LargestColorValueInADirectedGraph
 }
 
 module.exports = TEST_DICTIONARY;
