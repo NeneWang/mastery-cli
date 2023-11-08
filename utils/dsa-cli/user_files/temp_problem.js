@@ -1,9 +1,9 @@
-class TheMazeIII {
-	solve(maze, start, dest) {
+class MinCostConnectPoints {
+	solve(points) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: TheMazeIII };
+module.exports = { Problem: MinCostConnectPoints };ectingCitiesWithMinimumCost };;endencies };tring }; };

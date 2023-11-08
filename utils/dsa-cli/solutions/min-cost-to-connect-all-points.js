@@ -1,83 +1,49 @@
 class MinCostConnectPoints {
-
-
-    /**
-     * Prim's algorithm
-     * https://leetcode.com/problems/min-cost-to-connect-all-points/solution/
-     * @param {number[][]} points
-     * @return {number}
-     */
-    minCostConnectPoints = (points) => {
-
-
-        const initGraph = (points) => ({
-            graph: new Array(points.length).fill().map(() => []),
-            seen: new Array(points.length).fill(false),
-            minHeap: new MinPriorityQueue()
-        })
-
-        const buildGraph = (points) => {
-            const { graph, seen, minHeap } = initGraph(points);
-
-            for (let src = 0; src < (points.length - 1); src++) {
-                for (let dst = (src + 1); (dst < points.length); dst++) {
-                    const cost = getCost(points, src, dst);
-
-                    graph[src].push([dst, cost]);
-                    graph[dst].push([src, cost]);
-                }
-            }
-
-            const [src, cost, priority] = [0, 0, 0];
-            const node = [src, cost];
-
-            minHeap.enqueue(node, priority);
-
-            return { graph, seen, minHeap };
-        }
-
-        const getCost = (points, src, dst) => {
-            const [[x1, y1], [x2, y2]] = [points[src], points[dst]];
-
-            return (Math.abs(x1 - x2) + Math.abs(y1 - y2));
-        }
-
-        const search = (points, graph, seen, minHeap, nodeCount = 0, cost = 0) => {
-            while (nodeCount < points.length) {
-                let [src, srcCost] = minHeap.dequeue().element;
-
-                if (seen[src]) continue;
-                seen[src] = true;
-
-                cost += srcCost;
-                nodeCount += 1;
-
-                checkNeighbors(graph, src, seen, minHeap);
-            }
-
-            return cost;
-        }
-
-        const checkNeighbors = (graph, src, seen, minHeap) => {
-            for (const [dst, dstCost] of graph[src]) {
-                if (seen[dst]) continue;
-
-                minHeap.enqueue([dst, dstCost], dstCost);
-            }
-        }
-
-        const isBaseCase = ((points.length === 0) || (1000 <= points.length));
-        if (isBaseCase) return 0;
-
-        const { graph, seen, minHeap } = buildGraph(points);
-
-        return search(points, graph, seen, minHeap);
-    };
-
     solve(points) {
-        return this.minCostConnectPoints(points);
+        return minCostConnectPoints(points);
     }
 }
+
+let minCostConnectPoints = function(points) {
+    let n = points.length;
+    let mstCost = 0;
+    let edgesUsed = 0;
+
+    // Track nodes which are visited.
+    let inMST = Array(n).fill(false);
+
+    let minDist = Array(n).fill(Number.MAX_SAFE_INTEGER);
+    minDist[0] = 0;
+
+    while (edgesUsed < n) {
+        let currMinEdge = Number.MAX_SAFE_INTEGER;
+        let currNode = -1;
+
+        // Pick least weight node which is not in MST.
+        for (let node = 0; node < n; ++node) {
+            if (!inMST[node] && currMinEdge > minDist[node]) {
+                currMinEdge = minDist[node];
+                currNode = node;
+            }
+        }
+
+        mstCost += currMinEdge;
+        edgesUsed++;
+        inMST[currNode] = true;
+
+        // Update adjacent nodes of current node.
+        for (let nextNode = 0; nextNode < n; ++nextNode) {
+            let weight = Math.abs(points[currNode][0] - points[nextNode][0]) + 
+                         Math.abs(points[currNode][1] - points[nextNode][1]);
+
+            if (!inMST[nextNode] && minDist[nextNode] > weight) {
+                minDist[nextNode] = weight;
+            }
+        }
+    }
+
+    return mstCost;
+};
 
 
 module.exports = { Problem: MinCostConnectPoints };

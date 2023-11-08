@@ -1349,7 +1349,89 @@ class TheMazeIII extends ProblemTests {
 }
 
 
+class ConnectingCitiesWithMinimumCost extends ProblemTests {
 
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1(){
+        /**
+         * Input: n = 3, connections = [[1,2,5],[1,3,6],[2,3,1]]
+            Output: 6
+            Explanation: Choosing any 2 edges will connect all cities so we choose the minimum 2.
+         */
+
+        const n = 3;
+        const connections = [[1,2,5],[1,3,6],[2,3,1]];
+        const expected = 6;
+        this.current_test_name = `${n} | ${connections} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, connections);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2(){
+        /**
+         * Input: n = 4, connections = [[1,2,3],[3,4,4]]
+            Output: -1
+            Explanation: There is no way to connect all cities even if all edges are used.
+         */
+
+        const n = 4;
+        const connections = [[1,2,3],[3,4,4]];
+        const expected = -1;
+        this.current_test_name = `${n} | ${connections} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, connections);
+        assert.deepEqual(actual, expected);
+
+    }
+}
+
+
+class MinCostConnectAllPoints extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1(){
+        /**
+         * Input: points = [[0,0],[2,2],[3,10],[5,2],[7,0]]
+            Output: 20
+         */
+
+        const points = [[0,0],[2,2],[3,10],[5,2],[7,0]];
+        const expected = 20;
+        this.current_test_name = `${points} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(points);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2(){
+        /**
+         * Input: points = [[3,12],[-2,5],[-4,1]]
+            Output: 18
+         */
+
+        const points = [[3,12],[-2,5],[-4,1]];
+        const expected = 18;
+        this.current_test_name = `${points} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(points);
+        assert.deepEqual(actual, expected);
+
+    }
+
+}
 
 
 
@@ -1385,7 +1467,9 @@ const TEST_DICTIONARY = {
     'cheapest-flights-within-k-stops': CheapestFlightsWithinKStops,
     'path-with-maximum-probability': PathWithMaximumProbability,
     'the-maze-ii': TheMazeII,
-    'the-maze-iii': TheMazeIII
+    'the-maze-iii': TheMazeIII,
+    'connecting-cities-with-minimum-cost': ConnectingCitiesWithMinimumCost,
+    'min-cost-to-connect-all-points': MinCostConnectAllPoints
 }
 
 module.exports = TEST_DICTIONARY;
