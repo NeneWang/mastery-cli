@@ -1683,5 +1683,25 @@
         "file_path": "kth-smallest-element-in-a-bst-c3.js",
         "difficulty": 1,
         "problem_slug": "kth-smallest-element-in-a-bst"
+    },
+    {
+        "file_path": "evaluate-division-c1.js",
+        "difficulty": 1,
+        "problem_slug": "evaluate-division"
+    },
+    {
+        "file_path": "evaluate-division-c2.js",
+        "difficulty": 1,
+        "problem_slug": "evaluate-division"
+    },
+    {
+        "file_path": "evaluate-division-c3.js",
+        "difficulty": 1,
+        "problem_slug": "evaluate-division"
+    },
+    {
+        "file_path": "evaluate-division-c4.js",
+        "difficulty": 1,
+        "problem_slug": "evaluate-division"
     }
 ]

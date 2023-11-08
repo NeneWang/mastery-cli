@@ -50,12 +50,14 @@ class CalcEquation {
     const results = [];
 
     for (const [dividend, divisor] of queries) {
-      if (!graph.has(dividend) || !graph.has(divisor)) {
-        // case 1): either node does not exist
-        results.push(-1.0);
+      // TODO If the dividend or divisor is not in the graph, then push -1.0 to the results.
+      if (true) {
+        // TODO case 1): either node does not existing
+
       } else if (dividend === divisor) {
-        // case 2): origin and destination are the same node
-        results.push(1.0);
+        // TODO case 2): origin and destination are the same node
+        
+        
       } else {
         const visited = new Set();
         const ret = backtrackEvaluate(dividend, divisor, 1, visited);

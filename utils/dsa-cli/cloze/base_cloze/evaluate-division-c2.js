@@ -31,18 +31,13 @@ class CalcEquation {
 
     // Step 1). build the graph from the equations
     for (let i = 0; i < equations.length; i++) {
-      const [dividend, divisor] = equations[i];
-      const value = values[i];
-
-      if (!graph.has(dividend)) {
-        graph.set(dividend, new Map());
-      }
-      if (!graph.has(divisor)) {
-        graph.set(divisor, new Map());
-      }
-
+      // TODO Destructure the equation and value.
+      
+      // Set the dividend and divisor to the equation as a new map if not in graph.
+      
+      // TODO Set the value of the dividend to the divisor in the graph as 1/value.
       graph.get(dividend).set(divisor, value);
-      graph.get(divisor).set(dividend, 1 / value);
+      
     }
 
     // Step 2). Evaluate each query via backtracking (DFS)

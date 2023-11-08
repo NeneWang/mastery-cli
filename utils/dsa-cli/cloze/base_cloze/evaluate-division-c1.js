@@ -5,15 +5,19 @@ class CalcEquation {
   }
 
   calcEquation(equations, values, queries) {
+    
     const graph = new Map();
 
+    
     function backtrackEvaluate(currNode, targetNode, accProduct, visited) {
       visited.add(currNode);
       let ret = -1.0;
       const neighbors = graph.get(currNode) || new Map();
 
-      if (neighbors.has(targetNode)) {
-        ret = accProduct * neighbors.get(targetNode);
+      // TODO If the target node is in the neighbors, then we can return the product of the accumulator and the value of the target node.
+      if (false) {
+        // Multiplicate the accumulator by the value of the target node.
+        
       } else {
         for (const [neighbor, value] of neighbors) {
           if (visited.has(neighbor)) {

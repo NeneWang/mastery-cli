@@ -47,6 +47,7 @@ class CalcEquation {
 
     // Step 2). Evaluate each query via backtracking (DFS)
     // by verifying if there exists a path from dividend to divisor
+    
     const results = [];
 
     for (const [dividend, divisor] of queries) {
@@ -57,9 +58,12 @@ class CalcEquation {
         // case 2): origin and destination are the same node
         results.push(1.0);
       } else {
+        // TODO Call backtrackEvaluate with the dividend, divisor, 1, and a new set.
+        // Create the visited.
         const visited = new Set();
-        const ret = backtrackEvaluate(dividend, divisor, 1, visited);
-        results.push(ret);
+        
+        // TODO Push the result of backtrackEvaluate to the results.
+        
       }
     }
 
