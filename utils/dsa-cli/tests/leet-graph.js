@@ -1434,6 +1434,55 @@ class MinCostConnectAllPoints extends ProblemTests {
 }
 
 
+class OptimizeWaterDistributionInAVillage extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1(){
+        /**
+         * Input: n = 3, wells = [1,2,2], pipes = [[1,2,1],[2,3,1]]
+            Output: 3
+            Explanation: 
+            The image shows the costs of connecting houses using pipes.
+            The best strategy is to build a well in the first house with cost 1 and connect the other houses to it with cost 2 so the total cost is 3.
+         */
+
+        const n = 3;
+        const wells = [1,2,2];
+        const pipes = [[1,2,1],[2,3,1]];
+        const expected = 3;
+        this.current_test_name = `${n} | ${wells} | ${pipes} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, wells, pipes);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2(){
+        /**
+         * Input: n = 2, wells = [1,1], pipes = [[1,2,1]]
+            Output: 2
+         
+         */
+
+        const n = 2;
+        const wells = [1,1];
+        const pipes = [[1,2,1]];
+        const expected = 2;
+        this.current_test_name = `${n} | ${wells} | ${pipes} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, wells, pipes);
+        assert.deepEqual(actual, expected);
+    }
+
+
+}
+
+
 
 
 
@@ -1469,7 +1518,8 @@ const TEST_DICTIONARY = {
     'the-maze-ii': TheMazeII,
     'the-maze-iii': TheMazeIII,
     'connecting-cities-with-minimum-cost': ConnectingCitiesWithMinimumCost,
-    'min-cost-to-connect-all-points': MinCostConnectAllPoints
+    'min-cost-to-connect-all-points': MinCostConnectAllPoints,
+    'optimize-water-distribution-in-a-village': OptimizeWaterDistributionInAVillage
 }
 
 module.exports = TEST_DICTIONARY;

@@ -1,9 +1,7 @@
-class MinCostConnectPoints {
-	solve(points) {
-	// Your code here
+class Solution {	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: MinCostConnectPoints };ectingCitiesWithMinimumCost };;endencies };tring }; };
+module.exports = { Problem: Solution };xports = { Problem: MinCostConnectPoints };ectingCitiesWithMinimumCost };;;ndencies };tring }; };
