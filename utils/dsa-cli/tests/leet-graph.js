@@ -1293,6 +1293,61 @@ class TheMazeII extends ProblemTests {
 
 }
 
+class TheMazeIII extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: maze = [[0,0,0,0,0],[1,1,0,0,1],[0,0,0,0,0],[0,1,0,0,1],[0,1,0,0,0]], ball = [4,3], hole = [0,1]
+            Output: "lul"
+            Explanation: There are two shortest ways for the ball to drop into the hole.
+            The first way is left -> up -> left, represented by "lul".
+            The second way is up -> left, represented by 'ul'.
+            Both ways have shortest distance 6, but the first way is lexicographically smaller because 'l' < 'u'. So the output is "lul".
+         */
+
+        const maze = [[0, 0, 0, 0, 0],
+        [1, 1, 0, 0, 1],
+        [0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 1],
+        [0, 1, 0, 0, 0]];
+        const ball = [4, 3];
+        const hole = [0, 1];
+        const expected = "lul";
+        this.current_test_name = `${maze} | ${ball} | ${hole} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(maze, ball, hole);
+        assert.deepEqual(actual, expected);
+    }
+
+    test2() {
+        /**
+         * Input: maze = [[0,0,0,0,0],[1,1,0,0,1],[0,0,0,0,0],[0,1,0,0,1],[0,1,0,0,0]], ball = [4,3], hole = [3,0]
+            Output: "impossible"
+            Explanation: The ball cannot reach the hole.
+         */
+
+        const maze = [[0, 0, 0, 0, 0],
+        [1, 1, 0, 0, 1],
+        [0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 1],
+        [0, 1, 0, 0, 0]];
+
+        const ball = [4, 3];
+        const hole = [3, 0];
+        const expected = "impossible";
+        this.current_test_name = `${maze} | ${ball} | ${hole} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(maze, ball, hole);
+        assert.deepEqual(actual, expected);
+    }
+
+}
+
 
 
 
@@ -1329,7 +1384,8 @@ const TEST_DICTIONARY = {
     'largest-color-value-in-a-directed-graph': LargestColorValueInADirectedGraph,
     'cheapest-flights-within-k-stops': CheapestFlightsWithinKStops,
     'path-with-maximum-probability': PathWithMaximumProbability,
-    'the-maze-ii': TheMazeII
+    'the-maze-ii': TheMazeII,
+    'the-maze-iii': TheMazeIII
 }
 
 module.exports = TEST_DICTIONARY;
