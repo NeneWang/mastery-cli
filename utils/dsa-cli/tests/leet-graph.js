@@ -1146,7 +1146,7 @@ class CheapestFlightsWithinKStops extends ProblemTests {
         this.tests.push(() => this.test2());
     }
 
-    test1(){
+    test1() {
         /**
          * Input: n = 4, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], src = 0, dst = 3, k = 1
             Output: 700
@@ -1157,7 +1157,7 @@ class CheapestFlightsWithinKStops extends ProblemTests {
          */
 
         const n = 4;
-        const flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]];
+        const flights = [[0, 1, 100], [1, 2, 100], [2, 0, 100], [1, 3, 600], [2, 3, 200]];
         const src = 0;
         const dst = 3;
         const k = 1;
@@ -1169,7 +1169,7 @@ class CheapestFlightsWithinKStops extends ProblemTests {
 
     }
 
-    test2(){
+    test2() {
         /**
          * Input: n = 3, flights = [[0,1,100],[1,2,100],[0,2,500]], src = 0, dst = 2, k = 1
             Output: 200
@@ -1179,7 +1179,7 @@ class CheapestFlightsWithinKStops extends ProblemTests {
          */
 
         const n = 3;
-        const flights = [[0,1,100],[1,2,100],[0,2,500]];
+        const flights = [[0, 1, 100], [1, 2, 100], [0, 2, 500]];
         const src = 0;
         const dst = 2;
         const k = 1;
@@ -1189,8 +1189,107 @@ class CheapestFlightsWithinKStops extends ProblemTests {
         const structure = new this.Problem()
         const actual = structure.solve(n, flights, src, dst, k);
         assert.deepEqual(actual, expected);
-    
+
     }
+
+}
+
+class PathWithMaximumProbability extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: n = 3, edges = [[0,1],[1,2],[0,2]], succProb = [0.5,0.5,0.2], start = 0, end = 2
+            Output: 0.25000
+            Explanation: There are two paths from start to end, one having a probability of success = 0.2 and the other has 0.5 * 0.5 = 0.25.
+         */
+
+        const n = 3;
+        const edges = [[0, 1], [1, 2], [0, 2]];
+        const succProb = [0.5, 0.5, 0.2];
+        const start = 0;
+        const end = 2;
+        const expected = 0.25000;
+        this.current_test_name = `${n} | ${edges} | ${succProb} | ${start} | ${end} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, edges, succProb, start, end);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2() {
+        /**
+         * Input: n = 3, edges = [[0,1],[1,2],[0,2]], succProb = [0.5,0.5,0.3], start = 0, end = 2
+         * Output: 0.30000
+         * Explaination: The probability for the path 0 -> 2 is 0.5 * 0.3 = 0.15 (not 0.3)
+         */
+
+        const n = 3;
+        const edges = [[0, 1], [1, 2], [0, 2]];
+        const succProb = [0.5, 0.5, 0.3];
+        const start = 0;
+        const end = 2;
+        const expected = 0.30000;
+        this.current_test_name = `${n} | ${edges} | ${succProb} | ${start} | ${end} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(n, edges, succProb, start, end);
+        assert.deepEqual(actual, expected);
+    }
+}
+
+class TheMazeII extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test1());
+        this.tests.push(() => this.test2());
+    }
+
+    test1() {
+        /**
+         * Input: maze = [[0,0,0,0,0],[1,1,0,0,1],[0,0,0,0,0],[0,1,0,0,1],[0,1,0,0,0]], start = [0,4], destination = [4,4]
+            Output: 12
+            Explanation: One possible way is : left -> down -> left -> down -> right -> down -> right.
+            The length of the path is 1 + 1 + 3 + 1 + 2 + 2 + 2 = 12.
+         */
+        const maze = [
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0],
+            [1, 1, 0, 1, 1],
+            [0, 0, 0, 0, 0]
+        ];
+        const start = [0, 4];
+        const dest = [4, 4];
+        const expected = 12;
+        this.current_test_name = `${maze} | ${start} | ${dest} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(maze, start, dest);
+        assert.deepEqual(actual, expected);
+
+    }
+
+    test2() {
+        /**
+         * Input: maze = [[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]], start = [0,4], destination = [3,2]
+            Output: -1
+            Explanation: There is no way for the ball to stop at the destination. Notice that you can pass through the destination but you cannot stop there.
+         */
+
+        const maze = [[0, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 1, 0], [1, 1, 0, 1, 1], [0, 0, 0, 0, 0]];
+        const start = [0, 4];
+        const destination = [3, 2];
+        const expected = -1;
+        this.current_test_name = `${maze} | ${start} | ${destination} | ${expected}`
+        const structure = new this.Problem()
+        const actual = structure.solve(maze, start, destination);
+        assert.deepEqual(actual, expected);
+    }
+
 
 }
 
@@ -1229,6 +1328,8 @@ const TEST_DICTIONARY = {
     'sort-items-by-groups-respecting-dependencies': SortItemsByGroupsRespectingDependencies,
     'largest-color-value-in-a-directed-graph': LargestColorValueInADirectedGraph,
     'cheapest-flights-within-k-stops': CheapestFlightsWithinKStops,
+    'path-with-maximum-probability': PathWithMaximumProbability,
+    'the-maze-ii': TheMazeII
 }
 
 module.exports = TEST_DICTIONARY;
