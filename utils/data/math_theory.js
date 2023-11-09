@@ -5,3 +5,7 @@
  * 
  * Numbers Theory: https://www.youtube.com/playlist?list=PL22w63XsKjqwAgBzVFVqZNMcVKpOOAA7c
  */
+
+/**
+ * Also for linear algebra and the like.
+ */

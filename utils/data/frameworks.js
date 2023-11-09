@@ -1890,6 +1890,47 @@ const angular = [
         }\n\n\
         ### TODO Example of how to use it suppose the \n",
     },
+    // NgRx State, Action, Reducer, Effect Problems
+    {
+        term: "ngrx | State",
+        prompt: "What is a State in used for ngrx?",
+        description: "Is the container of the state to help writting consistent applications",
+    }, 
+    {
+        
+    },
+
+    // TODO IMPROVE test related questions
+    {
+        "term": "Test a Component with Input Property",
+        "prompt": "Create a unit test for a component that accepts an input property and displays its value in the template.",
+        "example": "Write a test that sets the input property, renders the component, and asserts that the template displays the input value correctly.",
+        "description": "In the test, you'll use TestBed to configure the testing module, create the component, set the input property, and use Jasmine's expect to assert the expected behavior."
+    },
+    {
+        "term": "Test a Component with Output EventEmitter",
+        "prompt": "Write unit tests for a component that emits an event using an EventEmitter when a button is clicked.",
+        "example": "Create a test that clicks the button in the component, captures the emitted event, and verifies its value.",
+        "description": "In this test, you'll configure the testing module, create the component, trigger a button click event, and use Jasmine's expect to verify the emitted event."
+    },
+    {
+        "term": "Test a Service with HttpClient",
+        "prompt": "Write unit tests for an Angular service that makes HTTP GET and POST requests using HttpClient.",
+        "example": "Create tests that mock HttpClient requests and responses, and verify that the service handles them correctly.",
+        "description": "In these tests, you'll use HttpClientTestingModule to mock HTTP requests, inject the service, and use Jasmine's expect to check the service's behavior based on the mocked requests."
+    },
+    {
+        "term": "Testing Route Navigation",
+        "prompt": "Write unit tests for a component that navigates to a different route when a button is clicked.",
+        "example": "Create tests that click the button in the component and verify that the router navigates to the expected route.",
+        "description": "You'll configure TestBed to test the component, use Jasmine's spyOn to mock the router's navigate method, simulate a button click, and assert the router navigation."
+    },
+    {
+        "term": "Testing Form Validation",
+        "prompt": "Write unit tests for a form in an Angular component that validates user input and displays error messages.",
+        "example": "Create tests that set form values, trigger validation, and check if error messages are displayed as expected.",
+        "description": "In these tests, you'll configure TestBed, create the component with a form, set form values, and use Jasmine's expect to verify the presence and content of error messages."
+    }
 ]
 
 const npm = [
