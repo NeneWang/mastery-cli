@@ -1728,5 +1728,20 @@
         "file_path": "course-schedule-ii-c5.js",
         "difficulty": 2,
         "problem_slug": "course-schedule-ii"
+    },
+    {
+        "file_path": "snakes-and-ladders-c1.js",
+        "difficulty": 2,
+        "problem_slug": "snakes-and-ladders"
+    },
+    {
+        "file_path": "snakes-and-ladders-c2.js",
+        "difficulty": 2,
+        "problem_slug": "snakes-and-ladders"
+    },
+    {
+        "file_path": "snakes-and-ladders-c3.js",
+        "difficulty": 2,
+        "problem_slug": "snakes-and-ladders"
     }
 ]

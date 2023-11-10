@@ -1,72 +1,46 @@
-class CourseSchedule {
+
+/**
+ * Greedy - Max
+ * Time O(N) | Space O(1)
+ * https://leetcode.com/problems/house-robber-ii/
+ * @param {number[]} nums
+ * @return {number}
+ */
+const rob = (nums) => {
+    // TODO Detect basecase when there is no houses. then return - and if the length is one then return the first house.
+    
+    // TODO Otherwise run the search twice, once from the first house to the second last house and the second time from the second house to the last house.
+    // Either from 0 to pre-last one or from 1 to the last one.
+    
+    
+    // TODO Return the max of the two searches.
+    return Math.max(left, right);
+};
 
 
+const search = (nums, start, end) => {
+    let [left, mid] = [0, 0];
 
-    /**
-     * https://leetcode.com/problems/course-schedule-ii/
-     * Time O(V + E) | Space O(V + E)
-     * @param {number} numCourses
-     * @param {number[][]} prerequisites
-     * @return {number[]}
-     */
+    for (let i = start; i <= end; i++) {/* Time O(N) */
+        const temp = mid;
+        const right = nums[i];
+        const house = left + right;
 
-    findOrder(numCourses, prerequisites) {
-        let isPossible = true;
-        const adjList = new Map();
-        const indegree = new Array(numCourses).fill(0);
-        const topologicalOrder = new Array(numCourses);
-
-        // Create the adjacency list representation of the graph
-        for (let i = 0; i < prerequisites.length; i++) {
-            const dest = prerequisites[i][0];
-            const src = prerequisites[i][1];
-            const lst = adjList.get(src) || [];
-            lst.push(dest);
-            adjList.set(src, lst);
-
-            // Record in-degree of each vertex
-            indegree[dest]++;
-        }
-
-        // Add all vertices with 0 in-degree to the queue
-        const q = [];
-        for (let i = 0; i < numCourses; i++) {
-            if (indegree[i] === 0) {
-                q.push(i);
-            }
-        }
-
-        let i = 0;
-        // Process until the queue becomes empty
-        while (q.length > 0) {
-            const node = q.shift();
-            topologicalOrder[i++] = node;
-
-            // Reduce the in-degree of each neighbor by 1
-            if (adjList.has(node)) {
-                for (const neighbor of adjList.get(node)) {
-                    indegree[neighbor]--;
-
-                    // If in-degree of a neighbor becomes 0, add it to the queue
-                    if (indegree[neighbor] === 0) {
-                        q.push(neighbor);
-                    }
-                }
-            }
-        }
-
-        // Check to see if topological sort is possible or not
-        if (i === numCourses) {
-            return topologicalOrder;
-        }
-
-        return [];
+        mid = Math.max(mid, house);
+        left = temp;
     }
 
-    solve(numCourses, prerequisistes) {
-        return this.findOrder(numCourses, prerequisistes);
+    return mid;
+}
+
+
+class HouseRobberII {
+
+
+    solve(nums) {
+        return rob(nums);
     }
 }
 
 
-module.exports = { Problem: CourseSchedule };
+module.exports = { Problem: HouseRobberII };
