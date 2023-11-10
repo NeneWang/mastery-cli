@@ -1703,5 +1703,30 @@
         "file_path": "evaluate-division-c4.js",
         "difficulty": 1,
         "problem_slug": "evaluate-division"
+    },
+    {
+        "file_path": "course-schedule-ii-c1.js",
+        "difficulty": 2,
+        "problem_slug": "course-schedule-ii"
+    },
+    {
+        "file_path": "course-schedule-ii-c2.js",
+        "difficulty": 2,
+        "problem_slug": "course-schedule-ii"
+    },
+    {
+        "file_path": "course-schedule-ii-c3.js",
+        "difficulty": 2,
+        "problem_slug": "course-schedule-ii"
+    },
+    {
+        "file_path": "course-schedule-ii-c4.js",
+        "difficulty": 2,
+        "problem_slug": "course-schedule-ii"
+    },
+    {
+        "file_path": "course-schedule-ii-c5.js",
+        "difficulty": 2,
+        "problem_slug": "course-schedule-ii"
     }
 ]

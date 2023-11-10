@@ -16,18 +16,9 @@ class CourseSchedule {
         const indegree = new Array(numCourses).fill(0);
         const topologicalOrder = new Array(numCourses);
 
-        // Create the adjacency list representation of the graph
-        for (let i = 0; i < prerequisites.length; i++) {
-            const dest = prerequisites[i][0];
-            const src = prerequisites[i][1];
-            const lst = adjList.get(src) || [];
-            lst.push(dest);
-            adjList.set(src, lst);
-
-            // Record in-degree of each vertex
-            indegree[dest]++;
-        }
-
+        // TODO Create the adjacency list representation of the graph
+        
+        
         // Add all vertices with 0 in-degree to the queue
         const q = [];
         for (let i = 0; i < numCourses; i++) {

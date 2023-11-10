@@ -1089,6 +1089,76 @@ class ReverseLinkedListII extends ProblemTests {
     }
 }
 
+class CourseScheduleII extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test_3());
+        // this.tests.push(() => this.test_4());
+    }
+
+    test_1(){
+        /**
+         * Input: numCourses = 2, prerequisites = [[1,0]]
+            Output: [0,1]
+            Explanation: There are a total of 2 courses to take.
+            To take course 1 you should have finished course 0. So it is possible.
+         */
+
+        const structure = new this.Problem();
+        this.current_test_name = '2, [[1,0]] => [0,1]';
+        assert.deepEqual(structure.solve(2, [[1,0]]), [0,1]);
+        
+    }
+
+    // test_2(){
+    //     /**
+    //      * [[5,8],[3,5],[1,9],[4,5],[0,2],[7,8],[4,9]]
+    //      * numCourses = 10
+    //      * expected:
+    //      * [9,8,7,6,5,4,3,2,1,0]
+    //      */
+
+    //     const structure = new this.Problem();
+    //     this.current_test_name = '10, [[5,8],[3,5],[1,9],[4,5],[0,2],[7,8],[4,9]] => [9,8,7,6,5,4,3,2,1,0]';
+    //     assert.deepEqual(structure.solve(10, [[5,8],[3,5],[1,9],[4,5],[0,2],[7,8],[4,9]]), [9,8,7,6,5,4,3,2,1,0]);
+    // }
+
+    // test_3(){
+    //     /**
+    //      * Input
+    //         10
+    //         [[5,8],[3,5],[1,9],[4,5],[0,2],[7,8],[4,9]]
+    //         Expected
+    //         [9,8,7,6,5,4,3,2,1,0]
+    //      */
+
+    //     const structure = new this.Problem();
+    //     this.current_test_name = '10, [[5,8],[3,5],[1,9],[4,5],[0,2],[7,8],[4,9]] => [9,8,7,6,5,4,3,2,1,0]';
+    //     assert.deepEqual(structure.solve(10, [[5,8],[3,5],[1,9],[4,5],[0,2],[7,8],[4,9]]), [9,8,7,6,5,4,3,2,1,0]);
+
+    // }
+
+    // test_4(){
+    //     /**
+    //      * Input
+    //         10
+    //         [[5,8],[3,5],[1,9],[4,5],[0,2],[7,8],[4,9]]
+    //         Expected
+    //         [9,8,7,6,5,4,3,2,1,0]
+    //      */
+
+    //     const structure = new this.Problem();
+    //     this.current_test_name = '10, [[5,8],[3,5],[1,9],[4,5],[0,2],[7,8],[4,9]] => [9,8,7,6,5,4,3,2,1,0]';
+    //     assert.deepEqual(structure.solve(10, [[5,8],[3,5],[1,9],[4,5],[0,2],[7,8],[4,9]]), [9,8,7,6,5,4,3,2,1,0]);
+    // }
+
+
+
+}
+
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
@@ -1128,6 +1198,7 @@ const TEST_DICTIONARY = {
     'best-time-to-buy-and-sell-stock-iv': BestTImeToBuyAndSellStockIV,
     'maximal-square': maximalSquare,
     'reverse-linked-list-ii': ReverseLinkedListII,
+    'course-schedule-ii': CourseScheduleII
 }
 
 module.exports = TEST_DICTIONARY;

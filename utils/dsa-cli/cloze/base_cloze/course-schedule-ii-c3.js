@@ -37,22 +37,15 @@ class CourseSchedule {
         }
 
         let i = 0;
-        // Process until the queue becomes empty
+        // TODO Process until the queue becomes empty
         while (q.length > 0) {
-            const node = q.shift();
-            topologicalOrder[i++] = node;
+
 
             // Reduce the in-degree of each neighbor by 1
-            if (adjList.has(node)) {
-                for (const neighbor of adjList.get(node)) {
-                    indegree[neighbor]--;
 
-                    // If in-degree of a neighbor becomes 0, add it to the queue
-                    if (indegree[neighbor] === 0) {
-                        q.push(neighbor);
-                    }
-                }
-            }
+
+            // If in-degree of a neighbor becomes 0, add it to the queue
+
         }
 
         // Check to see if topological sort is possible or not

@@ -28,13 +28,9 @@ class CourseSchedule {
             indegree[dest]++;
         }
 
-        // Add all vertices with 0 in-degree to the queue
-        const q = [];
-        for (let i = 0; i < numCourses; i++) {
-            if (indegree[i] === 0) {
-                q.push(i);
-            }
-        }
+        // TODO Add all vertices with 0 in-degree to the queue
+        
+        
 
         let i = 0;
         // Process until the queue becomes empty

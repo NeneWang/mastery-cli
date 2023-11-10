@@ -19,18 +19,12 @@ class SnakesAndLadders {
     dist[1] = 0;
 
     while (q.length > 0) {
-      const curr = q.shift();
-      for (let _n = curr + 1; _n <= Math.min(curr + 6, n * n); _n++) {
-        const [r, c] = cells[_n];
-        const dest = board[r][c] !== -1 ? board[r][c] : _n;
+      // TODO shift the queue and by each next step, 
+      // TODO If it is board[r][c] == -1 then we know that has the destination should be that.
 
-        // If not updated then update it, the sooner, the smaller the step, therefore first in.
-        if (dist[dest] === -1) {
-          dist[dest] = dist[curr] + 1;
-          // push it, to explore
-          q.push(dest);
-        }
-      }
+      // If not updated then update it, the sooner, the smaller the step, therefore first in.
+      // push it, to explore
+
     }
 
     return dist[n * n];

@@ -37,7 +37,7 @@ class CourseSchedule {
         }
 
         let i = 0;
-        // Process until the queue becomes empty
+        // TODO Process until the queue becomes empty
         while (q.length > 0) {
             const node = q.shift();
             topologicalOrder[i++] = node;
@@ -53,13 +53,13 @@ class CourseSchedule {
                     }
                 }
             }
+
+         
         }
 
-        // Check to see if topological sort is possible or not
-        if (i === numCourses) {
-            return topologicalOrder;
-        }
-
+        // TODO Check to see if topological sort is possible or not
+        
+        
         return [];
     }
 

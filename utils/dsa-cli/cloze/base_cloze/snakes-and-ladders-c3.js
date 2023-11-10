@@ -14,9 +14,10 @@ class SnakesAndLadders {
       columns.reverse();
     }
 
-    const dist = new Array(n * n + 1).fill(-1);
-    const q = [1];
-    dist[1] = 0;
+    // TODO set the base distance array to -1 and size n * n + 1
+    // Start with the queue as the 1.
+    // Set the distance of 1 to 0. (since it starts there)
+    
 
     while (q.length > 0) {
       const curr = q.shift();
@@ -33,7 +34,8 @@ class SnakesAndLadders {
       }
     }
 
-    return dist[n * n];
+    // TODO Return the distance of the last one
+    
   }
 }
 
