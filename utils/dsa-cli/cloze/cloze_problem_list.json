@@ -1743,5 +1743,20 @@
         "file_path": "snakes-and-ladders-c3.js",
         "difficulty": 2,
         "problem_slug": "snakes-and-ladders"
+    },
+    {
+        "file_path": "minimum-genetic-mutation-c1.js",
+        "difficulty": 1,
+        "problem_slug": "minimum-genetic-mutation"
+    },
+    {
+        "file_path": "minimum-genetic-mutation-c2.js",
+        "difficulty": 1,
+        "problem_slug": "minimum-genetic-mutation"
+    },
+    {
+        "file_path": "minimum-genetic-mutation-c3.js",
+        "difficulty": 1,
+        "problem_slug": "minimum-genetic-mutation"
     }
 ]

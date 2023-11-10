@@ -8,10 +8,18 @@
  */
 const rob = (nums) => {
     // TODO Detect basecase when there is no houses. then return - and if the length is one then return the first house.
-    
+	 if(nums.length == 0){
+	 return 0
+	}
+	if(nums.length == 1){
+		return nums[1]
+	}
     // TODO Otherwise run the search twice, once from the first house to the second last house and the second time from the second house to the last house.
     // Either from 0 to pre-last one or from 1 to the last one.
     
+	const left = search(nums, 0, nums.length - 2);
+	const right = search(nums, 1, nums.length - 1);
+
     
     // TODO Return the max of the two searches.
     return Math.max(left, right);

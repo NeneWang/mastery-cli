@@ -76,6 +76,10 @@ const dsa = [
         term: "Graph Theory",
         prompt: "What are the advantages of using Graph Theory?",
         description: "\n\
+        - If the graph to be done on is a array, it might make sense to have another arrays to keep track of other values, such as distance, neighbors, etc, and using index as identifiers.\n\
+        - If the permutation of a node is limited by its contstraints, e.g. a gene with 8 characters or combinations rom a specific set, then we can craft it's neighbors.\n\
+        - If the nodes have dependencies, then making a dependicies list, and starting form the ones with non, is a smart strategy.\n\
+        - Usueful variables are: to keep track | \n\
         "
     }
 ]
