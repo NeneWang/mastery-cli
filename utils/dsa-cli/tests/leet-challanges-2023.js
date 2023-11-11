@@ -66,11 +66,37 @@ class CountNumberOfHomogenousSubstrings extends ProblemTests {
 
 }
 
+class DesignGraphWithShortestPathCalculator extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        // this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test3());
+    }
+
+    test_1() {
+        /**
+         * Graph g = new Graph(4, [[0, 2, 5], [0, 1, 2], [1, 2, 1], [3, 0, 3]]);
+            g.shortestPath(3, 2); // return 6. The shortest path from 3 to 2 in the first diagram above is 3 -> 0 -> 1 -> 2 with a total cost of 3 + 2 + 1 = 6.
+            g.shortestPath(0, 3); // return -1. There is no path from 0 to 3.
+            g.addEdge([1, 3, 4]); // We add an edge from node 1 to node 3, and we get the second diagram above.
+            g.shortestPath(0, 3); // return 6. The shortest path from 0 to 3 now is 0 -> 1 -> 3 with a total cost of 2 + 4 = 6.
+         */
+
+        const graph = new this.Problem(4, [[0, 2, 5], [0, 1, 2], [1, 2, 1], [3, 0, 3]]);
+        assert.equal(graph.shortestPath(3, 2), 6);
+        assert.equal(graph.shortestPath(0, 3), -1);
+        graph.addEdge([1, 3, 4]);
+        assert.equal(graph.shortestPath(0, 3), 6);
+    }
+
+}
+
 
 const TEST_DICTIONARY = {
     "eliminate-maximum-number-of-monsters": EliminateMaximumNumberOfMonsters,
     "count-number-of-homogenous-substrings": CountNumberOfHomogenousSubstrings,
-
+    'design-graph-with-shortest-path-calculator': DesignGraphWithShortestPathCalculator,
 }
 
 

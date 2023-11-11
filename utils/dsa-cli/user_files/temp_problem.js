@@ -1,54 +1,259 @@
+class Solution {	// Your code here
 
-/**
- * Greedy - Max
- * Time O(N) | Space O(1)
- * https://leetcode.com/problems/house-robber-ii/
- * @param {number[]} nums
- * @return {number}
+	}
+}
+
+
+module.exports = { Problem: Solution };
+
+	}
+}
+
+
+module.exports = { Problem: EliminateMaximumNumberOfMonsters };;;;ndencies };tring }; }; };vels };nimumDifference };
+module.exports = { Problem: PartitionList };
+	}
+}
+
+
+module.exports = { Problem: IsSymmetric };) {
+        return this.size() === 0
+    }
+
+}
+
+
+class RottingOranges {
+
+
+    /**
+     * https://leetcode.com/problems/rotting-oranges/
+     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
+     * @param {number[][]} grid
+     * @return {number}
+     */
+    orangesRotting = function (grid) {
+		
+    };
+
+
+    solve(grid) {
+        return this.orangesRotting(grid);
+    }
+}
+
+
+module.exports = { Problem: RottingOranges };
+d, wordList) {
+        return this.ladderLength(beingWord, endWord, wordList);
+    }
+}
+
+
+module.exports = { Problem: WordLadder }; index + 2
+			let leftChild, rightChild
+			let swap = null
+
+			if (leftChildIndex < length) {
+				leftChild = this.heap[leftChildIndex]
+				if (leftChild > element) {
+					swap = leftChildIndex
+				}
+			}
+
+			if (rightChildIndex < length) {
+				rightChild = this.heap[rightChildIndex]
+				if (
+					(swap === null && rightChild > element) ||
+					(swap !== null && rightChild > leftChild)
+				) {
+					swap = rightChildIndex
+				}
+			}
+
+			if (swap === null) break
+			this.swap(index, swap)
+			index = swap
+		}
+	}
+
+	front() {
+		return this.heap[0]
+	}
+
+	size() {
+		return this.heap.length
+	}
+
+	isEmpty() {
+		return this.size() === 0
+	}
+
+}
+
+
+class LastStoneWeight {
+	/**
+	 * https://leetcode.com/problems/last-stone-weight/
+	 * Time O(N * log(N)) | Space O(N)
+	 * @param {number[]} stones
+	 * @return {number}
+	 */
+	lastStoneWeight = (stones) => {
+
+	};
+
+
+
+	solve(stones) {
+		return this.lastStoneWeight(stones);
+	}
+}
+
+
+module.exports = { Problem: LastStoneWeight };
+   front() {
+        return this.heap[0]
+    }
+
+    size() {
+        return this.heap.length
+    }
+
+    isEmpty() {
+        return this.size() === 0
+    }
+
+    top(){
+        return this.heap[0]
+    }
+
+}
+
+class MaxPriorityQueue {
+
+    constructor() {
+        this.heap = []
+    }
+
+    enqueue(element) {
+        this.heap.push(element)
+        this.bubbleUp()
+    }
+
+    bubbleUp() {
+        let index = this.heap.length - 1
+        while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2)
+            if (this.heap[parentIndex] >= this.heap[index]) break
+            this.swap(parentIndex, index)
+            index = parentIndex
+        }
+    }
+
+    swap(index1, index2) {
+        const temp = this.heap[index1]
+        this.heap[index1] = this.heap[index2]
+        this.heap[index2] = temp
+    }
+
+    dequeue() {
+        const max = this.heap[0]
+        const end = this.heap.pop()
+        if (this.heap.length > 0) {
+            this.heap[0] = end
+            this.sinkDown()
+        }
+        return max
+    }
+
+    sinkDown() {
+        let index = 0
+        const length = this.heap.length
+        const element = this.heap[0]
+        while (true) {
+            const leftChildIndex = 2 * index + 1
+            const rightChildIndex = 2 * index + 2
+            let leftChild, rightChild
+            let swap = null
+
+            if (leftChildIndex < length) {
+                leftChild = this.heap[leftChildIndex]
+                if (leftChild > element) {
+                    swap = leftChildIndex
+                }
+            }
+
+            if (rightChildIndex < length) {
+                rightChild = this.heap[rightChildIndex]
+                if (
+                    (swap === null && rightChild > element) ||
+                    (swap !== null && rightChild > leftChild)
+                ) {
+                    swap = rightChildIndex
+                }
+            }
+
+            if (swap === null) break
+            this.swap(index, swap)
+            index = swap
+        }
+    }
+
+    front() {
+        return this.heap[0]
+    }
+
+    size() {
+        return this.heap.length
+    }
+
+    isEmpty() {
+        return this.size() === 0
+    }
+
+    top(){
+        return this.heap[0]
+    }
+
+
+}
+
+
+/** 
+ * https://leetcode.com/problems/find-median-from-data-stream/
+ * Your MedianFinder object will be instantiated and called as such:
+ * var obj = new MedianFinder()
+ * obj.addNum(num)
+ * var param_2 = obj.findMedian()
  */
-const rob = (nums) => {
-    // TODO Detect basecase when there is no houses. then return - and if the length is one then return the first house.
-	 if(nums.length == 0){
-	 return 0
-	}
-	if(nums.length == 1){
-		return nums[1]
-	}
-    // TODO Otherwise run the search twice, once from the first house to the second last house and the second time from the second house to the last house.
-    // Either from 0 to pre-last one or from 1 to the last one.
-    
-	const left = search(nums, 0, nums.length - 2);
-	const right = search(nums, 1, nums.length - 1);
-
-    
-    // TODO Return the max of the two searches.
-    return Math.max(left, right);
-};
-
-
-const search = (nums, start, end) => {
-    let [left, mid] = [0, 0];
-
-    for (let i = start; i <= end; i++) {/* Time O(N) */
-        const temp = mid;
-        const right = nums[i];
-        const house = left + right;
-
-        mid = Math.max(mid, house);
-        left = temp;
+class MedianFinder {
+    constructor() {
+        this.maxHeap = new MaxPriorityQueue()
+        this.minHeap = new MinPriorityQueue()
     }
 
-    return mid;
+    /* Time O(log(N)) | Space (N) */
+    insertNum(num) {
+    
+	}
+
+    addNum(num, heap = this.getHeap(num)) {
+     
+	}
+
+    getHeap(num, { maxHeap, minHeap } = this) {
+        
+    }
+
+    rebalance({ maxHeap, minHeap } = this) {
+    }
+
+    /* Time O(1) | Space (1) */
+    findMedian({ maxHeap, minHeap } = this) {
+    }
+
 }
 
 
-class HouseRobberII {
-
-
-    solve(nums) {
-        return rob(nums);
-    }
-}
-
-
-module.exports = { Problem: HouseRobberII };
+module.exports = { Problem: MedianFinder };
