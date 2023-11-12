@@ -1,13 +1,15 @@
-class BusRoutes {
-	solve(routes, source, target) {
+class CampusBikes {
+	solve(workers, bikes) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: BusRoutes };testPathCalculator };ngs };sters };;;endencies };tring }; }; };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
+module.exports = { Problem: CampusBikes };em: EliminateMaximumNumberOfMonsters };ependencies };tring }; }; };t = next;
+  }
 
+module.exports = { Problem: ConnectTree };titionList };
 	}
 }
 

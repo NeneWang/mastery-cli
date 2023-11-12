@@ -132,12 +132,84 @@ class BusRoutes extends ProblemTests {
     }
 }
 
+class SquirrelSimulation extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test3());
+    }
+
+    test_1() {
+
+        /**
+         * Input: height = 5, width = 7, tree = [2,2], squirrel = [4,4], nuts = [[3,0], [2,5]]
+            Output: 12
+            Explanation: The squirrel should go to the nut at [2, 5] first to achieve a minimal distance.
+         */
+
+        const input = [5, 7, [2, 2], [4, 4], [[3, 0], [2, 5]]];
+
+        const output = 12;
+        this.current_test_name = `${input} | ${output}`;
+        const structure = new this.Problem()
+        const result = structure.solve(...input);
+        assert(result === output);
+    }
+
+    test_2() {
+        /**
+         * Input: height = 1, width = 3, tree = [0,1], squirrel = [0,0], nuts = [[0,2]]
+            Output: 3
+         */
+
+        const input = [1, 3, [0, 1], [0, 0], [[0, 2]]];
+
+        const output = 3;
+        this.current_test_name = `${input} | ${output}`;
+        const structure = new this.Problem()
+        const result = structure.solve(...input);
+        assert(result === output);
+    }
+}
+
+class CampusBikes extends ProblemTests{
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const input = [[[0,0],[2,1]], [[1,2],[3,3]]];
+        const output = [1,0];
+        this.current_test_name = `${input} | ${output}`;
+        const structure = new this.Problem()
+        const result = structure.solve(...input);
+        assert.deepEqual(result, output);
+    }
+
+    test_2(){
+        const input = [[[0,0],[1,1],[2,0]], [[1,0],[2,2],[2,1]]];
+        const output = [0,2,1];
+        this.current_test_name = `${input} | ${output}`;
+        const structure = new this.Problem()
+        const result = structure.solve(...input);
+        assert.deepEqual(result, output);
+    }
+
+}
+
 
 const TEST_DICTIONARY = {
     "eliminate-maximum-number-of-monsters": EliminateMaximumNumberOfMonsters,
     "count-number-of-homogenous-substrings": CountNumberOfHomogenousSubstrings,
     'design-graph-with-shortest-path-calculator': DesignGraphWithShortestPathCalculator,
     'bus-routes': BusRoutes,
+    'squirrel-simulation': SquirrelSimulation,
+    'campus-bikes': CampusBikes,
 }
 
 
