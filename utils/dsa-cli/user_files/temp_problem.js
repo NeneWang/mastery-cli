@@ -1,15 +1,11 @@
-class CampusBikes {
-	solve(workers, bikes) {
-	// Your code here
+class DesignGraphWithShortestPathCalculator {	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: CampusBikes };em: EliminateMaximumNumberOfMonsters };ependencies };tring }; }; };t = next;
-  }
+module.exports = { Problem: DesignGraphWithShortestPathCalculator };ulation };s };;;tEquivalentString }; }; };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
 
-module.exports = { Problem: ConnectTree };titionList };
 	}
 }
 
@@ -117,19 +113,17 @@ module.exports = { Problem: LastStoneWeight };
         return this.size() === 0
     }
 
-    top(){
-        return this.heap[0]
-    }
-
 }
 
-class MaxPriorityQueue {
+class KthLargestElementInAnArray {
+	solve(nums, k) {
+	// Your code here
 
-    constructor() {
-        this.heap = []
-    }
+	}
+}
 
-    enqueue(element) {
+
+module.exports = { Problem: KthLargestElementInAnArray };ment) {
         this.heap.push(element)
         this.bubbleUp()
     }

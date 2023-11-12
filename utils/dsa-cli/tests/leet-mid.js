@@ -643,19 +643,19 @@ class BasicCalculator extends ProblemTests {
         assert.equal(structure.solve(' 2-1 + 2 '), 3);
     }
 
-    test_3(){
+    test_3() {
         const structure = new this.Problem();
         this.current_test_name = '"(1+(4+5+2)-3)+(6+8)" => 23';
         assert.equal(structure.solve('(1+(4+5+2)-3)+(6+8)'), 23);
     }
 
-    test_4(){
+    test_4() {
         const structure = new this.Problem();
         this.current_test_name = '"-2+ 1" => -1';
         assert.equal(structure.solve('-2+ 1'), -1);
     }
 
-    test_5(){
+    test_5() {
         const structure = new this.Problem();
         this.current_test_name = '"- (3 + (4 + 5))" => -12';
         assert.equal(structure.solve('- (3 + (4 + 5))'), -12);
@@ -1060,13 +1060,13 @@ class maximalSquare extends ProblemTests {
 }
 
 class ReverseLinkedListII extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         /**
          * Input: head = [1,2,3,4,5], left = 2, right = 4
             Output: [1,4,3,2,5]
@@ -1074,10 +1074,10 @@ class ReverseLinkedListII extends ProblemTests {
 
         const structure = new this.Problem();
         this.current_test_name = '[1,2,3,4,5], 2, 4 => [1,4,3,2,5]';
-        assert.deepEqual(structure.solve(arrayToListNode([1,2,3,4,5]), 2, 4), arrayToListNode([1,4,3,2,5]));
+        assert.deepEqual(structure.solve(arrayToListNode([1, 2, 3, 4, 5]), 2, 4), arrayToListNode([1, 4, 3, 2, 5]));
     }
 
-    test_2(){
+    test_2() {
         /**
          * Input: head = [5], left = 1, right = 1
             Output: [5]
@@ -1091,7 +1091,7 @@ class ReverseLinkedListII extends ProblemTests {
 
 class CourseScheduleII extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         // this.tests.push(() => this.test_2());
@@ -1099,7 +1099,7 @@ class CourseScheduleII extends ProblemTests {
         // this.tests.push(() => this.test_4());
     }
 
-    test_1(){
+    test_1() {
         /**
          * Input: numCourses = 2, prerequisites = [[1,0]]
             Output: [0,1]
@@ -1109,8 +1109,8 @@ class CourseScheduleII extends ProblemTests {
 
         const structure = new this.Problem();
         this.current_test_name = '2, [[1,0]] => [0,1]';
-        assert.deepEqual(structure.solve(2, [[1,0]]), [0,1]);
-        
+        assert.deepEqual(structure.solve(2, [[1, 0]]), [0, 1]);
+
     }
 
     // test_2(){
@@ -1159,6 +1159,54 @@ class CourseScheduleII extends ProblemTests {
 
 }
 
+class Combinations extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+    }
+
+    test_1() {
+        /**
+         * Input: n = 4, k = 2
+            Output:
+            [
+            [2,4],
+            [3,4],
+            [2,3],
+            [1,2],
+            [1,3],
+            [1,4],
+            ]
+         */
+
+        const structure = new this.Problem();
+        this.current_test_name = '4, 2 => [[2,4],[3,4],[2,3],[1,2],[1,3],[1,4]]';
+        assert.deepEqual(structure.solve(4, 2).length, [[2, 4], [3, 4], [2, 3], [1, 2], [1, 3], [1, 4]].length);
+    }
+
+    test_2() {
+        /**
+         * Input: n = 4, k = 2
+            Output:
+            [
+            [2,4],
+            [3,4],
+            [2,3],
+            [1,2],
+            [1,3],
+            [1,4],
+            ]
+         */
+
+        const structural = new this.Problem();
+        this.current_test_name = '4, 2 => [[2,4],[3,4],[2,3],[1,2],[1,3],[1,4]]';
+        assert.deepEqual(structural.solve(4, 2), [[2, 4], [3, 4], [2, 3], [1, 2], [1, 3], [1, 4]]);
+    }
+
+}
+
+
+
 
 const TEST_DICTIONARY = {
     'h-index': HIndex,
@@ -1198,7 +1246,8 @@ const TEST_DICTIONARY = {
     'best-time-to-buy-and-sell-stock-iv': BestTImeToBuyAndSellStockIV,
     'maximal-square': maximalSquare,
     'reverse-linked-list-ii': ReverseLinkedListII,
-    'course-schedule-ii': CourseScheduleII
+    'course-schedule-ii': CourseScheduleII,
+    'combinations': Combinations
 }
 
 module.exports = TEST_DICTIONARY;
