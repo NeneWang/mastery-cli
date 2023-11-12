@@ -92,11 +92,52 @@ class DesignGraphWithShortestPathCalculator extends ProblemTests {
 
 }
 
+class BusRoutes extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        const input = [[1, 2, 7], [3, 6, 7]];
+        const output = 2;
+        this.current_test_name = `${input} | ${output}`;
+
+        const structure = new this.Problem()
+        const result = structure.solve(input, output);
+        assert(result);
+
+    }
+
+    test_2() {
+        const input = [[1, 2, 7], [3, 6, 7], [3, 6, 7]];
+        const output = 2;
+        this.current_test_name = `${input} | ${output}`;
+
+        const structure = new this.Problem()
+        const result = structure.solve(input, output);
+        assert(result);
+    }
+
+    test_3() {
+        const input = [[1, 2, 7], [3, 6, 7], [3, 6, 7], [3, 6, 7]];
+        const output = 2;
+        this.current_test_name = `${input} | ${output}`;
+
+        const structure = new this.Problem()
+        const result = structure.solve(input, output);
+        assert(result);
+    }
+}
+
 
 const TEST_DICTIONARY = {
     "eliminate-maximum-number-of-monsters": EliminateMaximumNumberOfMonsters,
     "count-number-of-homogenous-substrings": CountNumberOfHomogenousSubstrings,
     'design-graph-with-shortest-path-calculator': DesignGraphWithShortestPathCalculator,
+    'bus-routes': BusRoutes,
 }
 
 

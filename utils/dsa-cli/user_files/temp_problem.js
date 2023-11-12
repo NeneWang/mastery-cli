@@ -1,50 +1,41 @@
-class Solution {	// Your code here
+class BusRoutes {
+	solve(routes, source, target) {
+	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Solution };
+module.exports = { Problem: BusRoutes };testPathCalculator };ngs };sters };;;endencies };tring }; }; };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
 
 	}
 }
 
 
-module.exports = { Problem: EliminateMaximumNumberOfMonsters };;;;ndencies };tring }; }; };vels };nimumDifference };
-module.exports = { Problem: PartitionList };
-	}
-}
-
-
-module.exports = { Problem: IsSymmetric };) {
+module.exports = { Problem: IsSymmetric };
+    isEmpty() {
         return this.size() === 0
     }
 
 }
 
-
-class RottingOranges {
+class WordLadder {
 
 
     /**
-     * https://leetcode.com/problems/rotting-oranges/
+     * https://leetcode.com/problems/word-ladder/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {number[][]} grid
+     * @param {string} beginWord
+     * @param {string} endWord
+     * @param {string[]} wordList
      * @return {number}
      */
-    orangesRotting = function (grid) {
+    ladderLength = function (beginWord, endWord, wordList) {
 		
-    };
+	};
 
 
-    solve(grid) {
-        return this.orangesRotting(grid);
-    }
-}
-
-
-module.exports = { Problem: RottingOranges };
-d, wordList) {
+    solve(beingWord, endWord, wordList) {
         return this.ladderLength(beingWord, endWord, wordList);
     }
 }
