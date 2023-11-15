@@ -118,7 +118,7 @@ const life_game_lessons = [
         prompt: "How could your apply this into your life or dev?",
         example: "Perphaps designing and preparing gaps on your projects explainations and thesis so you prepare more in those parts for the interviewers questions."
     }
-    
+
 ]
 
 /**
@@ -129,7 +129,13 @@ const survival_game_lessons = [
 
 
 const life_lessons = [
-
+    {
+        term: "How to study in live sessions?",
+        prompt: "Knowing the following tips, plan how you will take notes and prepare for the next college session",
+        description: "1. If you cant follow up. Try takingscreenshots, and make comments under the screenshots. (Very useful for  programming classes.)\n\
+        2. After completing a homework, try memoizing the learnings into mappings-cli. Usually those are worth more than creating cards from lessons.\n\
+        3. Is a good idea to have a todolist trello to add what groups of sessions to be studied at home."
+    }
 ]
 
 /**
@@ -155,5 +161,7 @@ const experiments_lessons = [
 
 
 
-module.exports = { pragmatic_programmer, life_game_lessons,
-    survival_game_lessons, life_lessons, hackathon_lessons, experiments_lessons };
+module.exports = {
+    pragmatic_programmer, life_game_lessons,
+    survival_game_lessons, life_lessons, hackathon_lessons, experiments_lessons
+};

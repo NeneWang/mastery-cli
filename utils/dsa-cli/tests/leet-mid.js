@@ -1205,6 +1205,62 @@ class Combinations extends ProblemTests {
 
 }
 
+class MaximumElementAfterDecreasingAndRearranging extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        /**
+         * Input: arr = [2,2,1,2,1]
+        Output: 2
+        Explanation: 
+        We can satisfy the conditions by rearranging arr so it becomes [1,2,2,2,1].
+        The largest element in arr is 2.
+         */
+
+        const structure = new this.Problem();
+        this.current_test_name = '[2,2,1,2,1] => 2';
+        assert.deepEqual(structure.solve([2, 2, 1, 2, 1]), 2);
+
+    }
+
+    test_2() {
+        /**
+         * Input: arr = [100,1,1000]
+            Output: 3
+            Explanation: 
+            One possible way to satisfy the conditions is by doing the following:
+            1. Rearrange arr so it becomes [1,100,1000].
+            2. Decrease the value of the second element to 2.
+            3. Decrease the value of the third element to 3.
+            Now arr = [1,2,3], which satisfies the conditions.
+            The largest element in arr is 3.
+         */
+
+        const structure = new this.Problem();
+        this.current_test_name = '[100,1,1000] => 3';
+        assert.deepEqual(structure.solve([100, 1, 1000]), 3);
+    }
+
+    test_3() {
+        /**
+         * Input: arr = [1,2,3,4,5]
+            Output: 5
+            Explanation: The array already satisfies the conditions, and the largest element is 5.
+         */
+
+        const structure = new this.Problem();
+        this.current_test_name = '[1,2,3,4,5] => 5';
+        assert.deepEqual(structure.solve([1, 2, 3, 4, 5]), 5);
+    }
+
+
+
+}
 
 
 
@@ -1247,7 +1303,8 @@ const TEST_DICTIONARY = {
     'maximal-square': maximalSquare,
     'reverse-linked-list-ii': ReverseLinkedListII,
     'course-schedule-ii': CourseScheduleII,
-    'combinations': Combinations
+    'combinations': Combinations,
+    'maximum-element-after-decreasing-and-rearranging': MaximumElementAfterDecreasingAndRearranging
 }
 
 module.exports = TEST_DICTIONARY;

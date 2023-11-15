@@ -1890,46 +1890,127 @@ const angular = [
         }\n\n\
         ### TODO Example of how to use it suppose the \n",
     },
-    // NgRx State, Action, Reducer, Effect Problems
+    // TODO Add more of NgRx State, Action, Reducer, Effect Problems https://www.youtube.com/watch?v=f97ICOaekNU
     {
         term: "ngrx | State",
         prompt: "What is a State in used for ngrx?",
         description: "Is the container of the state to help writting consistent applications",
-    }, 
-    {
-        
     },
+    {
+        term: "Lazy Loading and Child Routes",
+        prompt: "How to add lazy loading and child routes?",
+        description: "Here is what you would have int he dashboard.module.ts\n\n\
+        const routes: Routes = [\n\
+                  {\n\
+                    path: 'feature',\n\
+                component: FeatureComponent,\n\
+                children: [\n\
+                      { path: 'child-route-1', component: ChildRoute1Component },\n\
+                  { path: 'child-route-2', component: ChildRoute2Component },\n\
+                  // Add more child routes as needed\n\
+            ],\n\
+          },\n\
+        ];\n\
+            \n\
+            @NgModule({\n\
+              imports: [RouterModule.forChild(routes)],\n\
+              exports: [RouterModule],\n\
+        })\n\
+        export class FeatureNameRoutingModule {}\n\n\
+            Then in the app-routing.module.ts\n\n\
+            const routes: Routes = [\n\
+                // Other routes\n\
+            {\n\
+                path: 'feature-name',\n\
+                loadChildren: () =>\n\
+                import('./path-to-feature-name/feature-name.module').then(\n\
+                    (m) => m.FeatureNameModule\n\
+                ),\n\
+        },\n\
+        ];\n\
+            \n\
+            @NgModule({\n\
+            imports: [RouterModule.forRoot(routes)],\n\
+            exports: [RouterModule],\n\
+        })\n\
+        export class AppRoutingModule {}\n\
+        ",
+        example: "ng generate module dashboard --route dashboard"
+    },
+    {
+        term: "Auth Guard",
+        prompt: "How to create an Auth Guard?",
+        example: "ng generate guard auth/auth --implements CanActivate",
+        description: "An Example of how guard is generated.\n\
+        import { Injectable } from '@angular/core';\n\
+        import {\n\
+              CanActivate,\n\
+              ActivatedRouteSnapshot,\n\
+              RouterStateSnapshot,\n\
+              Router,\n\
+        } from '@angular/router';\n\
+        import { AuthService } from './auth.services';\n\
+        \n\
+        @Injectable({\n\
+              providedIn: 'root',\n\
+    })\n\
+        export class AuthGuard implements CanActivate {\n\
+              constructor(private authService: AuthService, private router: Router) {}\n\
+        \n\
+          canActivate(\n\
+                route: ActivatedRouteSnapshot,\n\
+                state: RouterStateSnapshot\n\
+              ): boolean {\n\
+                if (this.authService.isAuthenticatedUser()) {\n\
+                  return true;\n\
+            }\n\
+        \n\
+            // Redirect to the login page if not authenticated\n\
+            this.router.navigate(['/login']);\n\
+            return false;\n\
+          }\n\
+        }\n\n\n\
+        Then whenever we want to guard the authentication\n\
+        import { NgModule } from '@angular/core';\n\\n\import { RouterModule, Routes } from '@angular/router';\n\import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';\n\import { HomeScreenComponent } from './home-screen/home-screen.component';\n\import { NotAllowedComponent } from './not-allowed/not-allowed.component';\n\import { AuthGuard } from '../auth/auth.guard';\n\\n\const routes: Routes = [\n\  {\n\    path: '',\n\    canActivate: [AuthGuard],\n\\n\    component: DashboardHomeComponent,\n\  },\n\  {\n\    path: 'home',\n\    component: HomeScreenComponent\n\  }\n\];\n\\n\\n\@NgModule({\n\  imports: [RouterModule.forChild(routes)],\n\  exports: [RouterModule],\n\  declarations: [\n\    NotAllowedComponent\n\  ],\n\})\n\export class DashboardModule { }\n\
+        "
+    },
+    {
+        term: "Expand Postman mock json server",
+        prompt: "add the parameters to: localhost:3000/enrollments to also expand course and students data on the union",
+        example: " ?_expand=course&_expand=student",
+        description: '\n\
+        "students": [\n\
+            {\n\
+              "name": "Frederik",\n\
+              "lastname": "Hettinger",\n\
+              "average": 12,\n\
+              "minor": "District Division Developer",\n\
+              "credits": 59,\n\
+              "major": "Corporate Communications Assistant",\n\
+              "id": 1\n\
+            },\n\n\
+            "enrollments": [\n\
+                {\n\
+                  "id": 1,\n\
+                  "courseId": 1,\n\
+                  "studentId": 3 \n\
+                }\n\
+              ]\n\n\
+              \n\n\
+              "users": [\n\
+                {\n\
+                  "name": "admin",\n\
+                  "lastName": "admin",\n\
+                  "email": "fake@mail.com",\n\
+                  "password": "123456",\n\
+                  "token": "jgfdsSfvcdskjdsfDSF435324ikdsad",\n\
+                  "role": "ADMIN",\n\
+                  "id": 1\n\
+                }\n\
+              ]'
+    },
+    {
 
-    // TODO IMPROVE test related questions
-    {
-        "term": "Test a Component with Input Property",
-        "prompt": "Create a unit test for a component that accepts an input property and displays its value in the template.",
-        "example": "Write a test that sets the input property, renders the component, and asserts that the template displays the input value correctly.",
-        "description": "In the test, you'll use TestBed to configure the testing module, create the component, set the input property, and use Jasmine's expect to assert the expected behavior."
-    },
-    {
-        "term": "Test a Component with Output EventEmitter",
-        "prompt": "Write unit tests for a component that emits an event using an EventEmitter when a button is clicked.",
-        "example": "Create a test that clicks the button in the component, captures the emitted event, and verifies its value.",
-        "description": "In this test, you'll configure the testing module, create the component, trigger a button click event, and use Jasmine's expect to verify the emitted event."
-    },
-    {
-        "term": "Test a Service with HttpClient",
-        "prompt": "Write unit tests for an Angular service that makes HTTP GET and POST requests using HttpClient.",
-        "example": "Create tests that mock HttpClient requests and responses, and verify that the service handles them correctly.",
-        "description": "In these tests, you'll use HttpClientTestingModule to mock HTTP requests, inject the service, and use Jasmine's expect to check the service's behavior based on the mocked requests."
-    },
-    {
-        "term": "Testing Route Navigation",
-        "prompt": "Write unit tests for a component that navigates to a different route when a button is clicked.",
-        "example": "Create tests that click the button in the component and verify that the router navigates to the expected route.",
-        "description": "You'll configure TestBed to test the component, use Jasmine's spyOn to mock the router's navigate method, simulate a button click, and assert the router navigation."
-    },
-    {
-        "term": "Testing Form Validation",
-        "prompt": "Write unit tests for a form in an Angular component that validates user input and displays error messages.",
-        "example": "Create tests that set form values, trigger validation, and check if error messages are displayed as expected.",
-        "description": "In these tests, you'll configure TestBed, create the component with a form, set form values, and use Jasmine's expect to verify the presence and content of error messages."
     }
 ]
 
