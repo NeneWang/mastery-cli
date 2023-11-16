@@ -1,4 +1,9 @@
 class SortList {
+    constructor() {
+        this.tail = new ListNode();
+        this.nextSubList = new ListNode();
+    }
+
     solve(head) {
         return sortList(head);
     }
@@ -6,7 +11,12 @@ class SortList {
 
 var sortList = function (head) {
 
+
     const merge = (list1, list2) => {
+        /**
+         * Create a pointer that will be used to store the res pointer.
+         * 
+         */
         let pointer = new ListNode(0, null)
         const res = pointer;
         while (list1 && list2) {

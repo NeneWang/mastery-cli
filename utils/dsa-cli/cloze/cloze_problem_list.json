@@ -1758,5 +1758,20 @@
         "file_path": "minimum-genetic-mutation-c3.js",
         "difficulty": 1,
         "problem_slug": "minimum-genetic-mutation"
+    },
+    {
+        "file_path": "sort-list-c1",
+        "difficulty": 1,
+        "problem_slug": "sort-list"
+    },
+    {
+        "file_path": "sort-list-c2",
+        "difficulty": 1,
+        "problem_slug": "sort-list"
+    },
+    {
+        "file_path": "sort-list-c3",
+        "difficulty": 1,
+        "problem_slug": "sort-list"
     }
 ]

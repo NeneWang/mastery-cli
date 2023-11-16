@@ -1,4 +1,9 @@
 class SortList {
+    constructor() {
+        this.tail = new ListNode();
+        this.nextSubList = new ListNode();
+    }
+
     solve(head) {
         return sortList(head);
     }
