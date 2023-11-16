@@ -1773,5 +1773,20 @@
         "file_path": "sort-list-c3",
         "difficulty": 1,
         "problem_slug": "sort-list"
+    },
+    {
+        "file_path": "construct-quad-tree-c1.js",
+        "difficulty": 1,
+        "problem_slug": "construct-quad-tree"
+    },
+    {
+        "file_path": "construct-quad-tree-c2.js",
+        "difficulty": 1,
+        "problem_slug": "construct-quad-tree"
+    },
+    {
+        "file_path": "construct-quad-tree-c3.js",
+        "difficulty": 1,
+        "problem_slug": "construct-quad-tree"
     }
 ]

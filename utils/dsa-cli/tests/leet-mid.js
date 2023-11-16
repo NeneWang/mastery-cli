@@ -1262,6 +1262,39 @@ class MaximumElementAfterDecreasingAndRearranging extends ProblemTests {
 
 }
 
+class FindUniqueBinaryString extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        this.tests.push(() => this.test_3());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '["01","10"] => "11" | "00"';
+        const candRepsponses = ['11', '00'];
+        assert.equal(candRepsponses.includes(structure.solve(["01", "10"])), true);
+
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '["00","01"] => "11" | "10"';
+        const candRepsponses = ['11', '10'];
+        assert.equal(candRepsponses.includes(structure.solve(["00", "01"])), true);
+
+    }
+
+    test_3() {
+        const structure = new this.Problem();
+        this.current_test_name = '["111","011","001"] => "101" | "110" | "000" | "010" | "100"';
+        const candRepsponses = ['101', '110', '000', '010', '100'];
+        assert.equal(candRepsponses.includes(structure.solve(["111", "011", "001"])), true);
+    }
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -1304,7 +1337,8 @@ const TEST_DICTIONARY = {
     'reverse-linked-list-ii': ReverseLinkedListII,
     'course-schedule-ii': CourseScheduleII,
     'combinations': Combinations,
-    'maximum-element-after-decreasing-and-rearranging': MaximumElementAfterDecreasingAndRearranging
+    'maximum-element-after-decreasing-and-rearranging': MaximumElementAfterDecreasingAndRearranging,
+    'find-unique-binary-string': FindUniqueBinaryString,
 }
 
 module.exports = TEST_DICTIONARY;
