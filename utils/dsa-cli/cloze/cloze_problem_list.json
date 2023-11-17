@@ -1788,5 +1788,15 @@
         "file_path": "construct-quad-tree-c3.js",
         "difficulty": 1,
         "problem_slug": "construct-quad-tree"
+    },
+    {
+        "file_path": "search-insert-position-c1.js",
+        "difficulty": 1,
+        "problem_slug": "search-insert-position"
+    },
+    {
+        "file_path": "search-insert-position-c2.js",
+        "difficulty": 1,
+        "problem_slug": "search-insert-position"
     }
 ]
