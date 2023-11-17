@@ -1798,5 +1798,10 @@
         "file_path": "search-insert-position-c2.js",
         "difficulty": 1,
         "problem_slug": "search-insert-position"
+    },
+    {
+        "file_path": "find-peak-element-c1.js", 
+        "difficulty": 1,
+        "problem_slug": "find-peak-element"
     }
 ]

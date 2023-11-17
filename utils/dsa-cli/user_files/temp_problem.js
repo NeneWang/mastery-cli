@@ -1,18 +1,13 @@
-class MinCostConnectPoints {
-	solve(points) {
+class CampusBikes {
+	solve(workers, bikes) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: MinCostConnectPoints };em: SquirelSiimulation };s };;;;ndencies };tring }; }; };// Your code here
+module.exports = { Problem: CampusBikes }; = { Problem: SquirelSiimulation };s };;;endencies };tring }; }; };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
 
-	}
-}
-
-
-module.exports = { Problem: PartitionList };
 	}
 }
 

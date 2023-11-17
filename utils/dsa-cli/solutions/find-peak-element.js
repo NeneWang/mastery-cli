@@ -1,5 +1,5 @@
 class FindPeakElement {
-  solve(nums, target) {
+  solve(nums) {
      let left = 0;  let right = nums.length - 1;
 
      while(left < right){
