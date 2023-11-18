@@ -2010,7 +2010,11 @@ const angular = [
               ]'
     },
     {
-
+        term: 'Create Shared Module',
+        prompt: "Create a shared module.",
+        example: "ng generate module shared",
+        description: 'This will create into  `src/app/shared/shared.module.ts` \n\
+        Now you can create a component with ng g c shared/<component> and will update the shared.module.ts file with the component.'
     }
 ]
 
