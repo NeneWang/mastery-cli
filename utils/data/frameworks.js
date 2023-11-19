@@ -2015,6 +2015,57 @@ const angular = [
         example: "ng generate module shared",
         description: 'This will create into  `src/app/shared/shared.module.ts` \n\
         Now you can create a component with ng g c shared/<component> and will update the shared.module.ts file with the component.'
+    },
+    {
+        term: "Reducers",
+        description: "An example reducer in counter.reduce.ts\n\
+        \n\
+        import { Action, createReducer, on } from '@ngrx/store';\\n\
+        import * as CounterActions from './counter.actions';\\n\
+        import { AppState } from './app.state';\\n\
+        \\n\
+        export const initialState: AppState = {\\n\
+          counter: 0\\n\
+        };\\n\
+        \\n\
+        const _counterReducer = createReducer(\\n\
+          initialState,\\n\
+          on(CounterActions.increment, state => ({ ...state, counter: state.counter + 1 })),\\n\
+          on(CounterActions.decrement, state => ({ ...state, counter: state.counter - 1 })),\\n\
+          on(CounterActions.reset, state => ({ ...state, counter: 0 }))\\n\
+        );\\n\
+        \\n\
+        export function counterReducer(state: AppState | undefined, action: Action) {\\n\
+          return _counterReducer(state, action);\\n\
+        }",
+        prompt: "Complete the reducer to create a 'duplicate'  action",
+        example: "on(CounterActions.duplicate, state => ({ ...state, counter: state.counter * 2 })),"
+    },
+    {
+        term: "Using the store",
+        description: "\n\
+        import { NgModule } from '@angular/core';\\n\
+        import { CommonModule } from '@angular/common';\\n\
+        import { CounterComponent } from './counter/counter.component';\\n\
+        import { counterReducer } from './counter.reducer';\\n\
+        import { StoreModule } from '@ngrx/store';\\n\
+        \\n\
+        @NgModule({\\n\
+        declarations: [\\n\
+            CounterComponent\\n\
+        ],\\n\
+        imports: [\\n\
+            CommonModule,\\n\
+            StoreModule.forFeature('counter', counterReducer)\\n\
+        ],\\n\
+        exports: [\\n\
+            CounterComponent\\n\
+        ]\\n\
+        })\\n\
+        export class SharedModule { }",
+        prompt: "Import and use the reducer for userReducer",
+        example: "import {UserReducer} from './user.reducer;\n\
+        "
     }
 ]
 
