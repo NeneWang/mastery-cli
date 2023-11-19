@@ -20,14 +20,8 @@ var sortList = function (head) {
         let pointer = new ListNode(0, null)
         const res = pointer;
         while (list1 && list2) {
-            if (list1.val > list2.val) {
-                pointer.next = list2
-                list2 = list2.next
-            } else {
-                pointer.next = list1
-                list1 = list1.next
-            }
-            pointer = pointer.next
+            // TODO Create a Merge of the Linked list
+            
         }
 
         if (list1) {

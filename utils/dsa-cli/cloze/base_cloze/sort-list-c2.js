@@ -50,11 +50,8 @@ var sortList = function (head) {
         return head;
     }
 
-    const middle = getMiddle(head)
-    const left = sortList(head)
-    const right = sortList(middle)
-
-    return merge(left, right);
+    // TODO Get the middle, Sort, head and middle. Then merge
+    
 };
 
 class ListNode {
