@@ -1798,5 +1798,30 @@
         "file_path": "find-peak-element-c1.js", 
         "difficulty": 1,
         "problem_slug": "find-peak-element"
+    },
+    {
+        "file_path": "median-of-two-sorted-arrays-c1.js",
+        "difficulty": 2,
+        "problem_slug": "median-of-two-sorted-arrays"
+    },
+    {
+        "file_path": "median-of-two-sorted-arrays-c2.js",
+        "difficulty": 2,
+        "problem_slug": "median-of-two-sorted-arrays"
+    },
+    {
+        "file_path": "median-of-two-sorted-arrays-c3.js",
+        "difficulty": 2,
+        "problem_slug": "median-of-two-sorted-arrays"
+    },
+    {
+        "file_path": "median-of-two-sorted-arrays-c4.js",
+        "difficulty": 2,
+        "problem_slug": "median-of-two-sorted-arrays"
+    },
+    {
+        "file_path": "median-of-two-sorted-arrays-c5.js",
+        "difficulty": 2,
+        "problem_slug": "median-of-two-sorted-arrays"
     }
 ]
