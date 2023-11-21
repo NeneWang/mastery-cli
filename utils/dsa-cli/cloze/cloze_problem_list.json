@@ -1823,5 +1823,10 @@
         "file_path": "median-of-two-sorted-arrays-c5.js",
         "difficulty": 2,
         "problem_slug": "median-of-two-sorted-arrays"
+    },
+    {
+        "file_path": "count-nice-pairs-in-an-array-c1.js",
+        "difficulty": 2,
+        "problem_slug": "count-nice-pairs-in-an-array"
     }
 ]

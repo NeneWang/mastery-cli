@@ -202,6 +202,37 @@ class CampusBikes extends ProblemTests{
 
 }
 
+class CountNicePairsInAnArray extends ProblemTests {
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+        // this.tests.push(() => this.test3());
+    }
+
+    test_1() {
+        const input = [42, 11, 1, 97];
+        const output = 2;
+        this.current_test_name = `${input} | ${output}`;
+
+        const structure = new this.Problem()
+        const result = structure.solve(input, output);
+        assert(result);
+    }
+
+    test_2() {
+        const input = [13, 10, 35, 24, 76];
+        const output = 4;
+        this.current_test_name = `${input} | ${output}`;
+
+        const structure = new this.Problem()
+        const result = structure.solve(input, output);
+        assert(result);
+    }
+
+}
+
 
 const TEST_DICTIONARY = {
     "eliminate-maximum-number-of-monsters": EliminateMaximumNumberOfMonsters,
@@ -210,6 +241,7 @@ const TEST_DICTIONARY = {
     'bus-routes': BusRoutes,
     'squirrel-simulation': SquirrelSimulation,
     'campus-bikes': CampusBikes,
+    'count-nice-pairs-in-an-array': CountNicePairsInAnArray,
 }
 
 
