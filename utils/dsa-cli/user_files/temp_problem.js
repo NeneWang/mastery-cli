@@ -1,252 +1,37 @@
-class CountNicePairsInAnArray {
-	solve(nums) {
-	// Your code here
-
-	}
-}
-
-
-module.exports = { Problem: CountNicePairsInAnArray };ngCitiesWithMinimumCost };};ndencies };tring }; }; };vels };nimumDifference };mmetric {
-	solve(root) {
-		// Your code here
-
-	}
-}
-
-
-module.exports = { Problem: IsSymmetric };
-    isEmpty() {
-        return this.size() === 0
+class RotateRight {
+    solve(head, k) {
+      // Base cases
+      if (head === null) return null;
+      if (head.next === null) return head;
+  
+      // Close the linked list into a ring
+      let oldTail = head;
+      let n = 1;
+      while (oldTail.next !== null) {
+        oldTail = oldTail.next;
+        n++;
+      }
+      oldTail.next = head;
+  
+      // Find new tail: (n - k % n - 1)th node
+      // and new head: (n - k % n)th node
+      let newTail = head;
+      for (let i = 0; i < n - k % n - 1; i++) {
+        newTail = newTail.next;
+      }
+      let newHead = newTail.next;
+  
+      // TODO Break the ring and return the new head
+      const end = newTail.next;
+		newTail.next = null;
+	return end;
     }
-
-}
-
-class WordLadder {
-
-
-    /**
-     * https://leetcode.com/problems/word-ladder/
-     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
-     * @return {number}
-     */
-    ladderLength = function (beginWord, endWord, wordList) {
-		
-	};
-
-
-    solve(beingWord, endWord, wordList) {
-        return this.ladderLength(beingWord, endWord, wordList);
-    }
-}
-
-
-module.exports = { Problem: WordLadder }; index + 2
-			let leftChild, rightChild
-			let swap = null
-
-			if (leftChildIndex < length) {
-				leftChild = this.heap[leftChildIndex]
-				if (leftChild > element) {
-					swap = leftChildIndex
-				}
-			}
-
-			if (rightChildIndex < length) {
-				rightChild = this.heap[rightChildIndex]
-				if (
-					(swap === null && rightChild > element) ||
-					(swap !== null && rightChild > leftChild)
-				) {
-					swap = rightChildIndex
-				}
-			}
-
-			if (swap === null) break
-			this.swap(index, swap)
-			index = swap
-		}
-	}
-
-	front() {
-		return this.heap[0]
-	}
-
-	size() {
-		return this.heap.length
-	}
-
-	isEmpty() {
-		return this.size() === 0
-	}
-
-}
-
-
-class LastStoneWeight {
-	/**
-	 * https://leetcode.com/problems/last-stone-weight/
-	 * Time O(N * log(N)) | Space O(N)
-	 * @param {number[]} stones
-	 * @return {number}
-	 */
-	lastStoneWeight = (stones) => {
-
-	};
-
-
-
-	solve(stones) {
-		return this.lastStoneWeight(stones);
-	}
-}
-
-
-module.exports = { Problem: LastStoneWeight };
-   front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
-}
-
-class MaxPriorityQueue {
-
-    constructor() {
-        this.heap = []
-    }
-
-    enqueue(element) {
-        this.heap.push(element)
-        this.bubbleUp()
-    }
-
-    bubbleUp() {
-        let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] >= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
-        }
-    }
-
-    swap(index1, index2) {
-        const temp = this.heap[index1]
-        this.heap[index1] = this.heap[index2]
-        this.heap[index2] = temp
-    }
-
-    dequeue() {
-        const max = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.sinkDown()
-        }
-        return max
-    }
-
-    sinkDown() {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
-
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild > element) {
-                    swap = leftChildIndex
-                }
-            }
-
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild > element) ||
-                    (swap !== null && rightChild > leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
-
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
-        }
-    }
-
-    front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
-
-}
-
-
-/** 
- * https://leetcode.com/problems/find-median-from-data-stream/
- * Your MedianFinder object will be instantiated and called as such:
- * var obj = new MedianFinder()
- * obj.addNum(num)
- * var param_2 = obj.findMedian()
- */
-class MedianFinder {
-    constructor() {
-        this.maxHeap = new MaxPriorityQueue()
-        this.minHeap = new MinPriorityQueue()
-    }
-
-    /* Time O(log(N)) | Space (N) */
-    insertNum(num) {
-    
-	}
-
-    addNum(num, heap = this.getHeap(num)) {
-     
-	}
-
-    getHeap(num, { maxHeap, minHeap } = this) {
-        
-    }
-
-    rebalance({ maxHeap, minHeap } = this) {
-    }
-
-    /* Time O(1) | Space (1) */
-    findMedian({ maxHeap, minHeap } = this) {
-    }
-
-}
-
-
-module.exports = { Problem: MedianFinder };
+  }
+  
+  function ListNode(val) {
+    this.val = val;
+    this.next = null;
+  }
+  
+  module.exports = { Problem: RotateRight, ListNode };
+  

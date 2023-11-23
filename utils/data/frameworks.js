@@ -2158,7 +2158,16 @@ const postgresql = [
 ]
 
 
+const reactnative = [
+    {
+        term: "start new React Native Ap",
+        prompt: "How to start a new React Native App?",
+        example: "npx react-native init AwesomeProject",
+    }
+]
+
+
 module.exports = {
     react_terms, apex, flutter: flutter_dart, IDE_S, chrome_extensions, python_frameworks, react_typescript,
-    dotNet, angular
+    dotNet, angular, reactnative
 };

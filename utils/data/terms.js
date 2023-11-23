@@ -39,7 +39,7 @@ async function populateMasterDeck() {
 
     const { react_terms, apex, flutter, IDE_S, chrome_extensions, python_frameworks, react_typescript, dotNet, angular } = require('./frameworks');
     decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(apex, "apex", { is_active: projects_layer }));
+    decks.addDeck(new TermStorage(apex, "apex", { is_active: layer_3 }));
     decks.addDeck(new TermStorage(flutter, "flutter", { is_active: projects_layer }));
     decks.addDeck(new TermStorage(IDE_S, "IDEs", { is_active: projects_layer }));
     decks.addDeck(new TermStorage(chrome_extensions, "chrome extensions", { is_active: projects_layer }));
