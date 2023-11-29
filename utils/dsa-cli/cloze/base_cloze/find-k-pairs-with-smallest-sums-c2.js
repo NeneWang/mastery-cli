@@ -13,12 +13,11 @@ class KSmallestPairs {
       visited.add(JSON.stringify([0, 0]));
   
       while (k-- > 0 && !minHeap.isEmpty()) {
-        const top = minHeap.extractMin();
-        const i = top[1];
-        const j = top[2];
-  
-        ans.push([nums1[i], nums2[j]]);
-  
+        // TODO Extract the the minimum from top. 
+        // Get the i, j, and pij tp ams.
+        
+        
+        
         if (i + 1 < m && !visited.has(JSON.stringify([i + 1, j]))) {
           minHeap.insert([nums1[i + 1] + nums2[j], i + 1, j]);
           visited.add(JSON.stringify([i + 1, j]));

@@ -8,10 +8,12 @@ class KSmallestPairs {
       const ans = [];
       const visited = new Set();
   
-      const minHeap = new MinHeap((a, b) => a[2] - b[2]);
-      minHeap.insert([nums1[0] + nums2[0], 0, 0]);
-      visited.add(JSON.stringify([0, 0]));
-  
+      // TODO  Create a min heap that is sorted  by the sum of the two numbers's indices (elemnt 3).
+      
+      
+      // TODO Stringify the x, y indices and add it to the visited list.
+      
+      
       while (k-- > 0 && !minHeap.isEmpty()) {
         const top = minHeap.extractMin();
         const i = top[1];
