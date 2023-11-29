@@ -8,7 +8,7 @@ class KSmallestPairs {
       const ans = [];
       const visited = new Set();
   
-      const minHeap = new MinHeap((a, b) => a[2] - b[2]);
+      const minHeap = new MinHeap((a, b) => a[0] - b[0]);
       minHeap.insert([nums1[0] + nums2[0], 0, 0]);
       visited.add(JSON.stringify([0, 0]));
   

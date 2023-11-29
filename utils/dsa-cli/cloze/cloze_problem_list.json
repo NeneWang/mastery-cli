@@ -1828,5 +1828,16 @@
         "file_path": "count-nice-pairs-in-an-array-c1.js",
         "difficulty": 2,
         "problem_slug": "count-nice-pairs-in-an-array"
+    },
+    {
+        "file_path": "single-number-c1.js",
+        "difficulty": 1,
+        "problem_slug": "single-number"
+    },
+    {
+        "file_path": "reverse-bits-c1.js",
+        "difficulty": 1,
+        "problem_slug": "reverse-bits"
     }
+
 ]
