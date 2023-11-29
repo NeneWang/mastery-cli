@@ -1838,6 +1838,11 @@
         "file_path": "reverse-bits-c1.js",
         "difficulty": 1,
         "problem_slug": "reverse-bits"
+    },
+    {
+        "file_path": "single-number-c1.js",
+        "difficulty": 1,
+        "problem_slug": "single-number"
     }
 
 ]

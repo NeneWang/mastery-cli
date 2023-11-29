@@ -1318,6 +1318,27 @@ class FindPeakElement extends ProblemTests {
 
 }
 
+class SingleNumberII extends ProblemTests {
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[2,2,3,2] => 3';
+        assert.equal(structure.solve([2,2,3,2]), 3);
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[0,1,0,1,0,1,99] => 99';
+        assert.equal(structure.solve([0,1,0,1,0,1,99]), 99);
+    }
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -1362,7 +1383,8 @@ const TEST_DICTIONARY = {
     'combinations': Combinations,
     'maximum-element-after-decreasing-and-rearranging': MaximumElementAfterDecreasingAndRearranging,
     'find-unique-binary-string': FindUniqueBinaryString,
-    'find-peak-element': FindPeakElement
+    'find-peak-element': FindPeakElement,
+    'single-number-ii': SingleNumberII
 }
 
 module.exports = TEST_DICTIONARY;

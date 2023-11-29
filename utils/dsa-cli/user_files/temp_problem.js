@@ -1,41 +1,50 @@
-class CampusBikes {
-	solve(workers, bikes) {
-	// Your code here
+class Solution {	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: CampusBikes };NumberOfHomogenousSubstrings };n };s };};;ndencies };tring }; }; };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
+module.exports = { Problem: Solution };re
+
+	}
+}
+
+
+module.exports = { Problem: ConnectingCitiesWithMinimumCost };};ndencies };tring }; }; };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
 
 	}
 }
 
 
 module.exports = { Problem: IsSymmetric };
-    isEmpty() {
-        return this.size() === 0
-    }
+
 
 }
 
-class WordLadder {
+
+module.exports = { Problem: MergeKSortedLists };
+ttingOranges {
 
 
     /**
-     * https://leetcode.com/problems/word-ladder/
+     * https://leetcode.com/problems/rotting-oranges/
      * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
+     * @param {number[][]} grid
      * @return {number}
      */
-    ladderLength = function (beginWord, endWord, wordList) {
+    orangesRotting = function (grid) {
 		
-	};
+    };
 
 
-    solve(beingWord, endWord, wordList) {
+    solve(grid) {
+        return this.orangesRotting(grid);
+    }
+}
+
+
+module.exports = { Problem: RottingOranges };
+d, wordList) {
         return this.ladderLength(beingWord, endWord, wordList);
     }
 }
@@ -115,19 +124,17 @@ module.exports = { Problem: LastStoneWeight };
         return this.size() === 0
     }
 
-    top(){
-        return this.heap[0]
-    }
-
 }
 
-class MaxPriorityQueue {
+class KthLargestElementInAnArray {
+	solve(nums, k) {
+	// Your code here
 
-    constructor() {
-        this.heap = []
-    }
+	}
+}
 
-    enqueue(element) {
+
+module.exports = { Problem: KthLargestElementInAnArray };ment) {
         this.heap.push(element)
         this.bubbleUp()
     }
