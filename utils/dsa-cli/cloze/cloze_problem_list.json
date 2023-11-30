@@ -1843,6 +1843,11 @@
         "file_path": "single-number-c1.js",
         "difficulty": 1,
         "problem_slug": "single-number"
+    },
+    {
+        "file_path": "factorial-trailing-zeroes-c1.js",
+        "difficulty": 1,
+        "problem_slug": "factorial-trailing-zeroes"
     }
 
 ]

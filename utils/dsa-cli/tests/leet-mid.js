@@ -1339,6 +1339,29 @@ class SingleNumberII extends ProblemTests {
 
 }
 
+class SumOfAbsoluteDifferenceInASortedArray extends ProblemTests {
+
+    constructor(Problem){
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1(){
+        const structure = new this.Problem();
+        this.current_test_name = '[2,3,5] => [4,3,5]';
+        assert.deepEqual(structure.solve([2,3,5]), [4,3,5]);
+    }
+
+    test_2(){
+        const structure = new this.Problem();
+        this.current_test_name = '[1,4,6,8,10] => [24,15,13,15,21]';
+        assert.deepEqual(structure.solve([1,4,6,8,10]), [24,15,13,15,21]);
+    }
+
+
+}
+
 
 
 const TEST_DICTIONARY = {
@@ -1384,7 +1407,8 @@ const TEST_DICTIONARY = {
     'maximum-element-after-decreasing-and-rearranging': MaximumElementAfterDecreasingAndRearranging,
     'find-unique-binary-string': FindUniqueBinaryString,
     'find-peak-element': FindPeakElement,
-    'single-number-ii': SingleNumberII
+    'single-number-ii': SingleNumberII,
+    'sum-of-absolute-differences-in-a-sorted-array': SumOfAbsoluteDifferenceInASortedArray
 }
 
 module.exports = TEST_DICTIONARY;
