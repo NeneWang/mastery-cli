@@ -1,10 +1,13 @@
-class BinaryTreeCameras {	// Your code here
+class SquirelSiimulation {
+	solve(height, width, tree, squirrel, nuts) {
+	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: BinaryTreeCameras };m: CountNicePairsInAnArray };SquirelSiimulation };s };;;;EquivalentString }; }; };: GetMinimumDifference };orts = { Problem: ConnectTree };titionList };
+module.exports = { Problem: SquirelSiimulation };s };;;;ndencies };tring }; }; };: GetMinimumDifference };
+module.exports = { Problem: PartitionList };
 	}
 }
 
@@ -112,19 +115,17 @@ module.exports = { Problem: LastStoneWeight };
         return this.size() === 0
     }
 
-    top(){
-        return this.heap[0]
-    }
-
 }
 
-class MaxPriorityQueue {
+class KthLargestElementInAnArray {
+	solve(nums, k) {
+	// Your code here
 
-    constructor() {
-        this.heap = []
-    }
+	}
+}
 
-    enqueue(element) {
+
+module.exports = { Problem: KthLargestElementInAnArray };ment) {
         this.heap.push(element)
         this.bubbleUp()
     }

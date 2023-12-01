@@ -1840,9 +1840,9 @@
         "problem_slug": "reverse-bits"
     },
     {
-        "file_path": "single-number-c1.js",
+        "file_path": "single-number-ii-c1.js",
         "difficulty": 1,
-        "problem_slug": "single-number"
+        "problem_slug": "single-number-ii"
     },
     {
         "file_path": "factorial-trailing-zeroes-c1.js",
