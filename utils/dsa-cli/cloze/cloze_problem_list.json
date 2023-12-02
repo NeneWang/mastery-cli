@@ -1848,6 +1848,21 @@
         "file_path": "factorial-trailing-zeroes-c1.js",
         "difficulty": 1,
         "problem_slug": "factorial-trailing-zeroes"
+    },
+    {
+        "file_path": "sqrtx-c1.js",
+        "difficulty": 1,
+        "problem_slug": "sqrtx"
+    },
+    {
+        "file_path": "sqrtx-c2.js",
+        "difficulty": 1,
+        "problem_slug": "sqrtx"
+    },
+    {
+        "file_path": "sqrtx-c3.js",
+        "difficulty": 1,
+        "problem_slug": "sqrtx"
     }
 
 ]
