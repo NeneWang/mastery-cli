@@ -2163,6 +2163,36 @@ const reactnative = [
         term: "start new React Native Ap",
         prompt: "How to start a new React Native App?",
         example: "npx react-native init AwesomeProject",
+    },
+    {
+        term: "How to start an expo",
+        prompt: "How to start an expo Porject and how to run it?",
+        example: "expo init my-new-project\n\
+        cd my-new-project\n\
+        expo start",
+
+    },
+    {
+        term: "Flatlist",
+        prompt: "How to create a Flatlist? What are flatlist useful for?",
+        example: "Flatlist are useful for rendering a list of items on a performant way, to avoid having items rendered on the application.\n\
+        \n\
+        <FlatList\n\
+        data={DATA}\n\
+        renderItem={renderItem}\n\
+        keyExtractor={item => item.id}\n\
+        />",
+        description: "A performant interface for rendering basic, flat lists, supporting the most handy features:\n\
+        Fully cross-platform.\n\
+        Optional horizontal mode.\n\
+        Configurable viewability callbacks.\n\
+        Header support.\n\
+        Footer support.\n\
+        Separator support.\n\
+        Pull to Refresh.\n\
+        Scroll loading.\n\
+        ScrollToIndex support.\n\
+        Multiple column support."
     }
 ]
 
