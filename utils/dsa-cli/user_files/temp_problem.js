@@ -1,32 +1,44 @@
-class MinMutation {
-  solve(start, end, bank) {
-    const queue = [];
-    const seen = new Set();
-    queue.push(start);
-    seen.add(start);
+class GenerateParentesis {
 
-    let steps = 0;
+    /**
+     * https://leetcode.com/problems/generate-parentheses
+     * Time O(((4^N) / (N * SQRT(N)))) | Space O(((4^N) / (N * SQRT(N))))
+     * Time O(2^N) | Space O(2^N)
+     * @param {number} n
+     * @return {string[]}
+     */
+    solve(n) {
 
-    while (queue.length > 0) {
-      const nodesInQueue = queue.length;
+        const dfs = (n, combos = [], open = 0, close = 0, path = []) => {
+            const isBaseCase = path.length === (n * 2);
+            if (isBaseCase) {
+                combos.push(path.join(''));/* Space O(N + N) */
 
-      for (let j = 0; j < nodesInQueue; j++) {
-        const node = queue.shift();
+                return combos;
+            }
 
-        if (node === end) {
-          return steps;
+            const isOpen = open < n;
+            if (isOpen) backTrackOpen(n, combos, open, close, path);  /* Time O(2^N) | Space O(2^N) */
+
+            const isClose = close < open;
+            if (isClose) backTrackClose(n, combos, open, close, path);/* Time O(2^N) | Space O(2^N) */
+
+            return combos;
         }
 
-        // TODO Craft the candidate neighbor and check if it is in the bank
+        const backTrackOpen = (n, combos, open, close, path) => {
+            path.push('(');                             /*             | Space O(N) */
+            dfs(n, combos, (open + 1), close, path);/* Time O(2^N) | Space O(2^N) */
+            path.pop();
+        }
 
-            // Remember to check if it has been seen and add it to the queue + seen
-      }
+        //TODO Backtrack Close
 
-      steps++;
+        return dfs(n);
     }
 
-    return -1;
-  }
+
 }
 
-module.exports = { Problem: MinMutation };
+
+module.exports = { Problem: GenerateParentesis };
