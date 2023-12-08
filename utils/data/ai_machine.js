@@ -313,6 +313,32 @@ const machine_learning_scikit_learn = [
 ]
 
 
-module.exports = { pytorch_machine_learning_course, machine_learning_pandas_visualization, machine_learning_scikit_learn }
+const ai_theory = [
+    {
+        term: 'ai-framework',
+        prompt: "Explain the following 6 steps on ai problems:",
+        description: "1. Problem Definition \n\
+        2. Data \n\
+        3. Evaluation \n\
+        4. Features \n\
+        5. Modelling \n\
+        6. Experimentation",
+        example: "1. Problem Definition - What is the problem we are trying to solve? \n\
+        2. Data - What data do we have to solve the problem? \n\
+        3. Evaluation - How do we know if our model is good? \n\
+        4. Features - What features should we use to solve the problem? \n\
+        5. Modelling - What model should we use to solve the problem? \n\
+        6. Experimentation - How can we improve the model?",
+
+
+
+    }
+]
+
+module.exports = {
+    pytorch_machine_learning_course, machine_learning_pandas_visualization,
+    machine_learning_scikit_learn,
+    ai_theory
+}
 
 

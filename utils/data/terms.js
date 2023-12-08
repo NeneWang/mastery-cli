@@ -95,10 +95,13 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(interview_filter_frequent, "interview filter frequent", { is_active: interview_layer }));
     decks.addDeck(new TermStorage(run_when_job, "run when job", { is_active: layer_3 }));
 
-    const { pytorch_machine_learning_course, machine_learning_pandas_visualization, machine_learning_scikit_learn } = require('./ai_machine');
-    decks.addDeck(new TermStorage(pytorch_machine_learning_course, "pytorch machine learning course", { is_active: layer_1 }));
-    decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas", { is_active: layer_1 }));
-    decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn", { is_active: layer_1 }));
+    const { pytorch_machine_learning_course, machine_learning_pandas_visualization, machine_learning_scikit_learn, ai_theory } = require('./ai_machine');
+    decks.addDeck(new TermStorage(pytorch_machine_learning_course, "pytorch machine learning course", { is_active: interview_layer }));
+    decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas", { is_active: interview_layer }));
+    decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn", { is_active: interview_layer }));
+    decks.addDeck(new TermStorage(ai_theory, "ai theory", { is_active: interview_layer }));
+    
+
 
     const { designing_good_charts, sql } = require('./data-science');
     decks.addDeck(new TermStorage(designing_good_charts, "designing good charts", { is_active: layer_1 }));
@@ -125,6 +128,10 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(r, "r", { is_active: projects_layer }));
     decks.addDeck(new TermStorage(matlab, "matlab", { is_active: projects_layer }));
     decks.addDeck(new TermStorage(kotlin, "kotlin", { is_active: projects_layer }));
+
+
+
+
 
     return decks;
 }
