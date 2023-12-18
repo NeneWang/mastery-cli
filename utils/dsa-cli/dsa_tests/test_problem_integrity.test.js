@@ -12,7 +12,7 @@ const to_test = {
     'exact-category': false, // Tests that the number of categories available are exact, which means, that no porblem should have a tag from another category.
     'basic': true,
     'runnable': true,
-    'cloze': false, // Test that cloze cards are populable. Also that the solution exists.
+    'cloze': true, // Test that cloze cards are populable. Also that the solution exists.
 }
 
 describe('Problem integrity', function () {
@@ -33,13 +33,13 @@ describe('Problem integrity', function () {
             prev_count = problems_found[cloze_card.problem_slug] || 0;
             problems_found[cloze_card.problem_slug] = prev_count + 1;
 
-            if(problem == null || problem == undefined){
+            if(problem == null || problem == undefined || true){
                 console.log("_____________ Problem found at _____________")
                 console.log("cloze_card.problem_slug", cloze_card.problem_slug);
                 console.log("cloze_card.file_path", cloze_card.file_path);
                 console.log("problem", problem);
             }
-            assert(problem != null || problem != undefined);
+            assert(problem != null && problem != undefined);
         }
 
         const problems_count = Object.keys(problems_found).length;

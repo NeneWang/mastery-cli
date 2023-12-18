@@ -1045,19 +1045,19 @@
         "problem_slug": "surrounded-regions"
     },
     {
-        "file_path": "wall-and-gates-c1.js",
+        "file_path": "walls-and-gates-c1.js",
         "difficulty": 1,
-        "problem_slug": "wall-and-gates"
+        "problem_slug": "walls-and-gates"
     },
     {
-        "file_path": "wall-and-gates-c2.js",
+        "file_path": "walls-and-gates-c2.js",
         "difficulty": 1,
-        "problem_slug": "wall-and-gates"
+        "problem_slug": "walls-and-gates"
     },
     {
-        "file_path": "wall-and-gates-c3.js",
+        "file_path": "walls-and-gates-c3.js",
         "difficulty": 1,
-        "problem_slug": "wall-and-gates"
+        "problem_slug": "walls-and-gates"
     },
     {
         "file_path": "word-ladder-c1.js",
@@ -1615,19 +1615,19 @@
         "problem_slug": "same-tree"
     },
     {
-        "file_path": "symmetrc-tree-c1.js",
+        "file_path": "symmetric-tree-c1.js",
         "difficulty": 1,
-        "problem_slug": "symmetrc-tree"
+        "problem_slug": "symmetric-tree"
     },
     {
-        "file_path": "symmetrc-tree-c2.js",
+        "file_path": "symmetric-tree-c2.js",
         "difficulty": 1,
-        "problem_slug": "symmetrc-tree"
+        "problem_slug": "symmetric-tree"
     },
     {
-        "file_path": "symmetrc-tree-c3.js",
+        "file_path": "symmetric-tree-c3.js",
         "difficulty": 1,
-        "problem_slug": "symmetrc-tree"
+        "problem_slug": "symmetric-tree"
     },
     {
         "file_path": "flatten-binary-tree-to-linked-list-c1",
@@ -1833,11 +1833,6 @@
         "file_path": "single-number-c1.js",
         "difficulty": 1,
         "problem_slug": "single-number"
-    },
-    {
-        "file_path": "reverse-bits-c1.js",
-        "difficulty": 1,
-        "problem_slug": "reverse-bits"
     },
     {
         "file_path": "single-number-ii-c1.js",
