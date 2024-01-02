@@ -1,248 +1,75 @@
-class CountNicePairsInAnArray {
-	solve(nums) {
-	// Your code here
-
-	}
-}
-
-
-module.exports = { Problem: CountNicePairsInAnArray };SquirelSiimulation };s };;};ndencies };tring }; }; };: GetMinimumDifference };orts = { Problem: ConnectTree };ur code here
-
-	}
-}
-
-
-module.exports = { Problem: IsSymmetric };
-    isEmpty() {
-        return this.size() === 0
-    }
-
-}
-
-class WordLadder {
-
-
-    /**
-     * https://leetcode.com/problems/word-ladder/
-     * Time O(ROWS * COLS) | Space O(ROWS * COLS)
-     * @param {string} beginWord
-     * @param {string} endWord
-     * @param {string[]} wordList
-     * @return {number}
-     */
-    ladderLength = function (beginWord, endWord, wordList) {
-		
-	};
-
-
-    solve(beingWord, endWord, wordList) {
-        return this.ladderLength(beingWord, endWord, wordList);
-    }
-}
-
-
-module.exports = { Problem: WordLadder }; index + 2
-			let leftChild, rightChild
-			let swap = null
-
-			if (leftChildIndex < length) {
-				leftChild = this.heap[leftChildIndex]
-				if (leftChild > element) {
-					swap = leftChildIndex
-				}
-			}
-
-			if (rightChildIndex < length) {
-				rightChild = this.heap[rightChildIndex]
-				if (
-					(swap === null && rightChild > element) ||
-					(swap !== null && rightChild > leftChild)
-				) {
-					swap = rightChildIndex
-				}
-			}
-
-			if (swap === null) break
-			this.swap(index, swap)
-			index = swap
-		}
-	}
-
-	front() {
-		return this.heap[0]
-	}
-
-	size() {
-		return this.heap.length
-	}
-
-	isEmpty() {
-		return this.size() === 0
-	}
-
-}
-
-
-class LastStoneWeight {
-	/**
-	 * https://leetcode.com/problems/last-stone-weight/
-	 * Time O(N * log(N)) | Space O(N)
-	 * @param {number[]} stones
-	 * @return {number}
-	 */
-	lastStoneWeight = (stones) => {
-
-	};
-
-
-
-	solve(stones) {
-		return this.lastStoneWeight(stones);
-	}
-}
-
-
-module.exports = { Problem: LastStoneWeight };
-   front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-}
-
-class KthLargestElementInAnArray {
-	solve(nums, k) {
-	// Your code here
-
-	}
-}
-
-
-module.exports = { Problem: KthLargestElementInAnArray };ment) {
-        this.heap.push(element)
-        this.bubbleUp()
-    }
-
-    bubbleUp() {
-        let index = this.heap.length - 1
-        while (index > 0) {
-            const parentIndex = Math.floor((index - 1) / 2)
-            if (this.heap[parentIndex] >= this.heap[index]) break
-            this.swap(parentIndex, index)
-            index = parentIndex
-        }
-    }
-
-    swap(index1, index2) {
-        const temp = this.heap[index1]
-        this.heap[index1] = this.heap[index2]
-        this.heap[index2] = temp
-    }
-
-    dequeue() {
-        const max = this.heap[0]
-        const end = this.heap.pop()
-        if (this.heap.length > 0) {
-            this.heap[0] = end
-            this.sinkDown()
-        }
-        return max
-    }
-
-    sinkDown() {
-        let index = 0
-        const length = this.heap.length
-        const element = this.heap[0]
-        while (true) {
-            const leftChildIndex = 2 * index + 1
-            const rightChildIndex = 2 * index + 2
-            let leftChild, rightChild
-            let swap = null
-
-            if (leftChildIndex < length) {
-                leftChild = this.heap[leftChildIndex]
-                if (leftChild > element) {
-                    swap = leftChildIndex
-                }
-            }
-
-            if (rightChildIndex < length) {
-                rightChild = this.heap[rightChildIndex]
-                if (
-                    (swap === null && rightChild > element) ||
-                    (swap !== null && rightChild > leftChild)
-                ) {
-                    swap = rightChildIndex
-                }
-            }
-
-            if (swap === null) break
-            this.swap(index, swap)
-            index = swap
-        }
-    }
-
-    front() {
-        return this.heap[0]
-    }
-
-    size() {
-        return this.heap.length
-    }
-
-    isEmpty() {
-        return this.size() === 0
-    }
-
-    top(){
-        return this.heap[0]
-    }
-
-
-}
-
-
-/** 
- * https://leetcode.com/problems/find-median-from-data-stream/
- * Your MedianFinder object will be instantiated and called as such:
- * var obj = new MedianFinder()
- * obj.addNum(num)
- * var param_2 = obj.findMedian()
- */
-class MedianFinder {
+class SortList {
     constructor() {
-        this.maxHeap = new MaxPriorityQueue()
-        this.minHeap = new MinPriorityQueue()
+        this.tail = new ListNode();
+        this.nextSubList = new ListNode();
     }
 
-    /* Time O(log(N)) | Space (N) */
-    insertNum(num) {
-    
-	}
+    solve(head) {
+        return sortList(head);
+    }
+}
 
-    addNum(num, heap = this.getHeap(num)) {
-     
-	}
+var sortList = function (head) {
 
-    getHeap(num, { maxHeap, minHeap } = this) {
-        
+
+    const merge = (list1, list2) => {
+        /**
+         * Create a pointer that will be used to store the res pointer.
+         * 
+         */
+        let pointer = new ListNode(0, null)
+        const res = pointer;
+        while (list1 && list2) {
+            // TODO Create a Merge of the Linked list
+           if(list1.val > list2.val){
+				res.next = new ListNode(list2.val, null);
+
+		   } else{
+		   
+				res.next = new ListNode(list1.val, null);
+		   }
+
+			res = res.next;
+        }
+
+        if (list1) {
+            pointer.next = list1
+        } else {
+            pointer.next = list2
+        }
+
+        return res.next;
     }
 
-    rebalance({ maxHeap, minHeap } = this) {
+    const getMiddle = (header) => {
+        middlePtr = null;
+        while (header && header.next) {
+            middlePtr = middlePtr != null ? middlePtr.next : header;
+            header = header.next.next;
+        }
+
+        const mid = middlePtr.next;
+        middlePtr.next = null
+        return mid;
     }
 
-    /* Time O(1) | Space (1) */
-    findMedian({ maxHeap, minHeap } = this) {
+    if (!head || !head.next) {
+        return head;
     }
 
+    const middle = getMiddle(head)
+    const left = sortList(head)
+    const right = sortList(middle)
+
+    return merge(left, right);
+};
+
+class ListNode {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
+    }
 }
 
 
-module.exports = { Problem: MedianFinder };
+module.exports = { Problem: SortList };
