@@ -2,5 +2,53 @@
     {
         "name": "Entropy",
         "problem": "probability_intuition/descriptive_statistics/entropy.ipynb"
+    },
+    {
+        "name": "visual-seaborn",
+        "problem": "data_science/visual-seaborn.ipynb"
+    },
+    {
+        "name": "01_pandas",
+        "problem": "machine_learning/01_pandas.ipynb"
+    },
+    {
+        "name": "01-pandas-Exercise.ipynb",
+        "problem": "machine_learning/01-pandas-Exercise.ipynb"
+    },
+    {
+        "name": "02-Exercise-EDA",
+        "problem": "machine_learning/02-Exercise-EDA.ipynb"
+    },
+    {
+        "name": "03-Exercise-Logistic-Regression",
+        "problem": "machine_learning/03-Exercise-Logistic-Regression.ipynb"
+    },
+    {
+        "name": "04-Regression",
+        "problem": "machine_learning/04-Regression.ipynb"
+    },
+    {
+        "name": "05-RandomForests",
+        "problem": "machine_learning/05-RandomForests.ipynb"
+    },
+    {
+        "name": "06-Image-Classification-Exercise",
+        "problem": "machine_learning/06-Image-Classification-Exercise.ipynb"
+    },
+    {
+        "name": "07-NLP",
+        "problem": "machine_learning/07-NLP.ipynb"
+    },
+    {
+        "name": "08-data-visualization",
+        "problem": "machine_learning/08-data-visualization.ipynb"
+    },
+    {
+        "name": "09-ab-testing",
+        "problem": "machine_learning/09-ab-testing.ipynb"
+    },
+    {
+        "name": "10-neural-libs",
+        "problem": "machine_learning/10-neural-libs.ipynb"
     }
 ]
