@@ -122,6 +122,20 @@ class Maid {
 		clipboard.copy(projectDirectory);
 	}
 
+	openJupyter = ({ FILE = "/machine_learning/01_pandas.ipynb" } = {}) => {
+		const projectDirectory = getMaidDirectory();
+		const jupyter_folder = "/utils/data-science-cli/problems";
+
+		clipboard.copy(FILE)
+		const jupyterCommand = `jupyter notebook --notebook-dir=${projectDirectory}/${jupyter_folder}`;
+		this.say(jupyterCommand);
+		console.log(`Copied to clipboard: ${FILE}`);
+		exec(jupyterCommand);
+
+
+
+	}
+
 
 	/**
 	 * Cleans the terminal
@@ -841,7 +855,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 		commitMessage = CONSTANTS.default_commit_message;
 	}
 
-	
+
 
 
 	// If any category found then increase the score please.

@@ -60,7 +60,9 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.code.code)) {
 		maid.tellCurrentDirectory();
 	}
-
+	else if(input.includes(cmInfo.commands.jupyter.code)) {
+		maid.openJupyter();
+	}
 	else if (input.includes(cmInfo.commands.report.code)) {
 		maid.dayReport();
 	}

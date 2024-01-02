@@ -35,7 +35,7 @@ const flags = {
 		default: false,
 		alias: 'a',
 		desc: 'Get all algorithms'
-	}
+	},
 };
 
 class Command {
@@ -68,6 +68,7 @@ class CommandsInformation {
 			dsa: new Command("Random Data structures and algorithms", 'dsa'),
 			cloze: new Command("Cloze algorithm", 'cloze'),
 			cses: new Command("Algo Cloze study session", 'cses'),
+			jupyter: new Command("Jupyter notebook", 'jupyter'),
 
 		};
 	}
