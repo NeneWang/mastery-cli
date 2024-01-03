@@ -50,5 +50,29 @@
     {
         "name": "10-neural-libs",
         "problem": "machine_learning/10-neural-libs.ipynb"
+    },
+    {
+        "name": "min max scaling",
+        "problem": "normalization_outliers/minMaxScaling.ipynb"
+    },
+    {
+        "name": "multivarDistance",
+        "problem": "normalization_outliers/multivarDistance.ipynb"
+    },
+    {
+        "name": "normOutliers",
+        "problem": "normalization_outliers/normOutliers.ipynb"
+    },
+    {
+        "name": "QQ",
+        "problem": "normalization_outliers/QQ.ipynb"
+    },
+    {
+        "name": "cdfs",
+        "problem": "prob_theory/cdfs.ipynb"
+    },
+    {
+        "name": "computeProbs",
+        "problem": "prob_theory/computeProbs.ipynb"
     }
 ]

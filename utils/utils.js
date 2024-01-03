@@ -131,9 +131,12 @@ class Maid {
 		this.say(jupyterCommand);
 		console.log(`Copied to clipboard: ${FILE}`);
 		exec(jupyterCommand);
+	}
 
-
-
+	openRandomJupyter = () => {
+		const DataScienceCLI = require('./data-science-cli/index');
+		const selectedProblem = DataScienceCLI.getRandomProblem();
+		openJupyter({ FILE: "/utils/" + selectedProblem.problem });
 	}
 
 
