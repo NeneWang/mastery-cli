@@ -2,6 +2,11 @@ const { Quizzer } = require('./Quizzer');
 const constants = require('./constants');
 const DSATrainer = require('./dsa-cli/dsa-trainer');
 const DEBUG = false;
+const { cloze_problems_list } = require('./dsa-cli/cloze');
+const DSAConstants = require('./dsa-cli/constants');
+
+
+const { TermScheduler } = require('./termScheduler');
 /**
  * This class also supports DSATrainer Implementation.
  */
@@ -85,6 +90,44 @@ class QuizzerWithDSA extends Quizzer {
 
         const problem_status = this.dsaTrainer.openRandomClozeDSAProblem();
         return problem_status;
+    }
+
+    
+
+    cloze_study_session = async () => {
+
+        // Pick all the available string keys.
+
+        await this.dsaTrainer.loaded_problem_manager;
+        const cloze_problems = cloze_problems_list;
+        const clozeScheduler = new TermScheduler({
+            cards_category: "Algo"
+        });
+        await clozeScheduler.setLearningCards(cloze_problems);
+        let exit = false;
+
+        const printCardsLeft = (cardsLeft, cardsLearnt) => {
+            console.log(`\nAlgorithms left: ${cardsLeft} || Algorithms completed: ${cardsLearnt}\n`);
+        }
+
+        while (!clozeScheduler.is_completed && !exit) {
+            const [cardsLeft, cardsLearnt] = [clozeScheduler.getCardsToLearn(), clozeScheduler.getCardsLearnt()];
+
+            const card = await clozeScheduler.getCard();
+            let problem = this.dsaTrainer.problems_manager.getProblem(card.problem_slug);
+
+            console.log("Card", card);
+            problem.is_cloze = true;
+            const solution_metadata = await this.dsaTrainer.solveProblem(problem, { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path });
+
+            const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
+            clozeScheduler.solveCard(answerIsCorrect);
+            await clozeScheduler.saveCards();
+            printCardsLeft(cardsLeft, cardsLearnt);
+        }
+
+        // Populate the cloze names, and iterate while loop until all of them are completed
+
     }
 
 }

@@ -296,55 +296,6 @@ class Quizzer {
     }
 
 
-
-    cloze_study_session = async () => {
-
-        // Pick all the available string keys.
-        const dsaTrainer = new DSATrainer({
-            skip_problem: ["hello-world", "simple-sum"]
-        })
-
-        await dsaTrainer.loaded_problem_manager;
-        // const cloze_names = dsaTrainer.problem_manager.clozeProblemSlugs;
-        const cloze_problems = cloze_problems_list;
-
-        // console.log("Running Cloze Study Session");
-        // console.log(cloze_problems);
-        const clozeScheduler = new TermScheduler({
-            cards_category: "Algo"
-        });
-        await clozeScheduler.setLearningCards(cloze_problems);
-        let exit = false;
-
-        const printCardsLeft = (cardsLeft, cardsLearnt) => {
-            console.log(`\nAlgorithms left: ${cardsLeft} || Algorithms completed: ${cardsLearnt}\n`);
-        }
-
-        const exitMethod = () => {
-            exit = true;
-            return false;
-        }
-        while (!clozeScheduler.is_completed && !exit) {
-            const [cardsLeft, cardsLearnt] = [clozeScheduler.getCardsToLearn(), clozeScheduler.getCardsLearnt()];
-
-            const card = await clozeScheduler.getCard();
-            let problem = dsaTrainer.problems_manager.getProblem(card.problem_slug);
-
-            console.log("Card", card);
-            problem.is_cloze = true;
-            const solution_metadata = await dsaTrainer.solveProblem(problem, { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path });
-
-            const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
-            clozeScheduler.solveCard(answerIsCorrect);
-            await clozeScheduler.saveCards();
-            printCardsLeft(cardsLeft, cardsLearnt);
-        }
-
-        // Populate the cloze names, and iterate while loop until all of them are completed
-
-    }
-
-
     study_session = async (masterDeck) => {
         //Pick a term deck Suppose is given
 
