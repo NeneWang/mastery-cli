@@ -57,7 +57,8 @@ const { Demo, EDemo } = demos;
 		maid.tellCurrentDirectory();
 	}
 	else if(input.includes(cmInfo.commands.jupyter.code)) {
-		utils.openRandomJupyter();
+		// utils.openRandomJupyter();
+		maid.openRandomJupyter();
 	}
 	else if (input.includes(cmInfo.commands.report.code)) {
 		maid.dayReport();

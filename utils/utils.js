@@ -134,9 +134,12 @@ class Maid {
 	}
 
 	openRandomJupyter = () => {
-		const DataScienceCLI = require('./data-science-cli/index');
-		const selectedProblem = DataScienceCLI.getRandomProblem();
-		openJupyter({ FILE: "/utils/" + selectedProblem.problem });
+		const { getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
+		const selectedProblem = getRandomProblem();
+		copyFileToTemp(selectedProblem.problem);
+		// this.openJupyter({ FILE: "/" + selectedProblem.problem });
+
+		// /utils/data_science/visual-seaborn.ipynb
 	}
 
 
