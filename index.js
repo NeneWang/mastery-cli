@@ -37,12 +37,8 @@ const { Demo, EDemo } = demos;
 	const dsaTrainer = new DSATrainer({
 		skip_problems: ["hello-world", "simple-sum"]
 	});
-
-	// console.log(terms);
+	
 	const mQuizer = new QuizzerWithDSA(constants.qmathformulas, constants.qmathenabled, masterDeck);
-
-
-	// console.log(getAbsoluteUri("./img/unicorn.png"))
 	const options = Object.keys(cmInfo.commands);
 	input.includes(options[0]) && cli_meow.showHelp(0);
 	debug && log(flags);
@@ -61,7 +57,7 @@ const { Demo, EDemo } = demos;
 		maid.tellCurrentDirectory();
 	}
 	else if(input.includes(cmInfo.commands.jupyter.code)) {
-		maid.openJupyter();
+		utils.openRandomJupyter();
 	}
 	else if (input.includes(cmInfo.commands.report.code)) {
 		maid.dayReport();
@@ -76,15 +72,22 @@ const { Demo, EDemo } = demos;
 		maid.populateMissingReport();
 		// as until the response is right?
 		
-		const _ = await mQuizer.askQuestion();
+		if (flags.all){
+
+			const _ = await mQuizer.askQuestion();
+		}else{
+			const _ = await mQuizer.askQuestion({disable_dsa: true, disable_math: true});
+
+		}
+
 		await maid.provideMissingReport({ run_dsa: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
 		
 		// Slight optimization.
 		const commit_res = await commit_push_results;
 		comments_to_populate = commit_res.comments_to_populate;
-
-		// console.log("Comments to populate:", comments_to_populate.comments_to_populate)
 		utils.printComments(comments_to_populate);
+
+
 
 		await maid.askToClean();
 	}

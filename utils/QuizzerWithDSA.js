@@ -13,7 +13,7 @@ class QuizzerWithDSA extends Quizzer {
         });
     }
 
-    async askQuestion({ ask_until_one_is_correct = true, } = {}) {
+    async askQuestion({ ask_until_one_is_correct = true, disable_math = false, disable_dsa = false } = {}) {
         let exit = false;
         const problem_types = ['math', 'term', 'cloze-algo'];
 
@@ -29,7 +29,16 @@ class QuizzerWithDSA extends Quizzer {
          * @returns {boolean} true if answer is correct, false otherwise
          */
         const askQuestionRandom = async ({ exitMethod = () => { }, force_mode = true } = {}) => {
-            const problem_type_selected = constants.get_random(problem_types);
+            let problem_type_selected = constants.get_random(problem_types);
+            
+            if (disable_math && problem_type_selected === 'math') {
+                problem_type_selected = 'term';
+            }
+
+            if (disable_dsa && problem_type_selected === 'cloze-algo') {
+                problem_type_selected = 'term';
+            }
+
             switch (problem_type_selected) {
                 case 'math':
                     return await this.ask_math_question({ exitMethod: exitMethod });
