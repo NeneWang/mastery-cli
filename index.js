@@ -58,7 +58,8 @@ const { Demo, EDemo } = demos;
 	}
 	else if(input.includes(cmInfo.commands.jupyter.code)) {
 		// utils.openRandomJupyter();
-		maid.openRandomJupyter();
+		const res = await maid.openRandomJupyter();
+		console.log("Maid responded with", res);
 	}
 	else if (input.includes(cmInfo.commands.report.code)) {
 		maid.dayReport();
@@ -122,7 +123,7 @@ const { Demo, EDemo } = demos;
 		mQuizer.cloze_study_session();
 	}
 	else if (input.includes(cmInfo.commands.jses.code)) {
-		
+		mQuizer.jupyter_study_session();
 	}
 	else if (input.includes(cmInfo.commands.dsa.code)) {
 		// const dsa_is_correct = await dsaTrainer.openRandomProblem();

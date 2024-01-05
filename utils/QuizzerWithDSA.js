@@ -1,10 +1,11 @@
 const { Quizzer } = require('./Quizzer');
+const { Maid } = require('./utils');
 const constants = require('./constants');
 const DSATrainer = require('./dsa-cli/dsa-trainer');
 const DEBUG = false;
 const { cloze_problems_list } = require('./dsa-cli/cloze');
 const DSAConstants = require('./dsa-cli/constants');
-
+const { getProblemsData, getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
 
 const { TermScheduler } = require('./termScheduler');
 /**
@@ -125,9 +126,39 @@ class QuizzerWithDSA extends Quizzer {
             await clozeScheduler.saveCards();
             printCardsLeft(cardsLeft, cardsLearnt);
         }
+    }
 
-        // Populate the cloze names, and iterate while loop until all of them are completed
+    jupyter_study_session = async () => {
 
+        // Pick all the available string keys.
+
+        const jupyter_problems = getProblemsData();
+        const jupyterScheduler = new TermScheduler({
+            cards_category: "Jupyter"
+        });
+        await jupyterScheduler.setLearningCards(jupyter_problems);
+        let exit = false;
+
+        const printCardsLeft = (cardsLeft, cardsLearnt) => {
+            console.log(`\nJupyter left: ${cardsLeft} || Jupyter completed: ${cardsLearnt}\n`);
+        }
+
+        let maid = new Maid();
+        maid.runServer();
+
+        while (!jupyterScheduler.is_completed && !exit) {
+            const [cardsLeft, cardsLearnt] = [jupyterScheduler.getCardsToLearn(), jupyterScheduler.getCardsLearnt()];
+
+            const card = await jupyterScheduler.getCard();
+            
+            console.log("Card", card.problem);
+            const answerIsCorrect = await maid.openJupyter({FILE: card.problem});
+
+            jupyterScheduler.solveCard(answerIsCorrect);
+            await jupyterScheduler.saveCards();
+            printCardsLeft(cardsLeft, cardsLearnt);
+        }
+    
     }
 
 }

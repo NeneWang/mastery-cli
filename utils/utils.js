@@ -97,6 +97,9 @@ class FeatureExtraction {
 	}
 };
 
+
+const { getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
+
 class Maid {
 
 	constructor(name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
@@ -122,25 +125,36 @@ class Maid {
 		clipboard.copy(projectDirectory);
 	}
 
-	openJupyter = ({ FILE = "/machine_learning/01_pandas.ipynb" } = {}) => {
+	runServer = () => {
+
 		const projectDirectory = getMaidDirectory();
 		const jupyter_folder = "/utils/data-science-cli/problems";
 
-		clipboard.copy(FILE)
 		const jupyterCommand = `jupyter notebook --notebook-dir=${projectDirectory}/${jupyter_folder}`;
-		this.say(jupyterCommand);
-		console.log(`Copied to clipboard: ${FILE}`);
 		exec(jupyterCommand);
 	}
 
-	openRandomJupyter = () => {
-		const { getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
-		const selectedProblem = getRandomProblem();
-		copyFileToTemp(selectedProblem.problem);
-		// this.openJupyter({ FILE: "/" + selectedProblem.problem });
+	openJupyter = async ({ FILE = "/machine_learning/01_pandas.ipynb" } = {}) => {
+		
+		copyFileToTemp(FILE);
+		
+		const correctPrompt = new Confirm("Was the notebook solved correctly?", { initial: true });
+		const response = await correctPrompt.run();
+		if (response) {
+			await increasePerformance("jupyter");
+		}
+		return response;
 
-		// /utils/data_science/visual-seaborn.ipynb
 	}
+
+	openRandomJupyter = async () => {
+		const selectedProblem = getRandomProblem();
+		this.runServer();
+		
+		return this.openJupyter({ FILE: "/" + selectedProblem.problem });
+	}
+
+	
 
 
 	/**
