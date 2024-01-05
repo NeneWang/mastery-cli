@@ -110,6 +110,7 @@ const python = [
     },
     {
         "term": "Queue (list or deque-based)",
+        prompt: "How to create a queue using a list or a deque? (Python)",
         "example": "from collections import deque\n\
             queue = deque()\n\
             queue.append(1)\n\
@@ -124,6 +125,7 @@ const python = [
         self.is_end_of_word = False\n\
     \n\
     # Create and manipulate tries with TrieNode instances.",
+        prompt: "How to create a trie using Python?",
         "description": "A trie is a tree-like data structure used for storing a dynamic set of strings. It's particularly useful for string manipulation and searching, such as autocomplete and spell-checking."
     },
     {

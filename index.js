@@ -76,7 +76,7 @@ const { Demo, EDemo } = demos;
 
 			const _ = await mQuizer.askQuestion();
 		}else{
-			const _ = await mQuizer.askQuestion({disable_dsa: true, disable_math: true});
+			const _ = await mQuizer.askQuestion({disable_dsa: true});
 
 		}
 
