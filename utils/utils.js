@@ -319,7 +319,11 @@ class Maid {
 			for (const column of columns) {
 
 				for (const [key, value] of Object.entries(userPerformanceData?.[column])) {
-					userPerformanceData[column][key] = parseFloat(value.toFixed(2));
+					let message = parseFloat(value.toFixed(2));
+					if (message < 0){
+						message = chalk.red(message);
+					}
+					userPerformanceData[column][key] = message;
 				}
 			}
 			return userPerformanceData;
