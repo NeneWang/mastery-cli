@@ -6,9 +6,9 @@ class MinimumTotal {
         if (col > 0) {
           smallestAbove = triangle[row - 1][col - 1];
         }
-        if (col < row) {
-          smallestAbove = Math.min(smallestAbove, triangle[row - 1][col]);
-        }
+
+        // TODO as long as it is not the last col, compute tcurrent smallest on top as the smaller between the prev top and right top
+        
         triangle[row][col] += smallestAbove;
       }
     }

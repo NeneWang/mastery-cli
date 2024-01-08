@@ -320,9 +320,6 @@ class Maid {
 
 				for (const [key, value] of Object.entries(userPerformanceData?.[column])) {
 					let message = parseFloat(value.toFixed(2));
-					if (message < 0){
-						message = chalk.red(message);
-					}
 					userPerformanceData[column][key] = message;
 				}
 			}
@@ -346,7 +343,10 @@ class Maid {
 					// Then search for the performance, and give the difference between the required and the actual performed
 					const day_requirement = settings.day;
 					const day_performance = userPerformanceData?.["today"]?.[requirement_key] ?? 0;
-					const day_difference = day_requirement - day_performance;
+					let day_difference = day_requirement - day_performance;
+					if (day_difference < 0) {
+						day_difference = "✅";
+					}
 					features_accomplished_today[`d: ${requirement_key}`] = { miss: day_difference, type: "day", req: day_requirement };
 
 
@@ -357,7 +357,10 @@ class Maid {
 					// Then search for the performance, and give the difference between the required and the actual performed
 					const week_requirement = settings.week;
 					const week_performance = userPerformanceData?.['week_sum']?.[requirement_key] ?? 0;
-					const week_difference = week_requirement - week_performance;
+					let week_difference = week_requirement - week_performance;
+					if (week_difference < 0) {
+						week_difference = '✅';
+					}
 					features_accomplished_today[`w: ${requirement_key}`] = { miss: week_difference, type: "week", req: week_requirement };
 				}
 			}
