@@ -2,6 +2,8 @@ class MinimumTotal {
   minimumTotal(triangle) {
     for (let row = 1; row < triangle.length; row++) {
       for (let col = 0; col <= row; col++) {
+        
+        // TODO compute smallestAbove as: Infinity;
         let smallestAbove = Infinity;
         if (col > 0) {
           smallestAbove = triangle[row - 1][col - 1];
