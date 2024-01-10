@@ -1,27 +1,40 @@
-class MinimumTotal {
-  minimumTotal(triangle) {
-    for (let row = 1; row < triangle.length; row++) {
-      for (let col = 0; col <= row; col++) {
-        let smallestAbove = Infinity;
-        if (col > 0) {
-          smallestAbove = triangle[row - 1][col - 1];
-        }
-        if (col < row) {
-          smallestAbove = Math.min(smallestAbove, triangle[row - 1][col]);
-        }
 
-        // TODO Recompute the cost that it would take to reach that step.
-        
-      }
+
+/** 
+ * https://leetcode.com/problems/design-twitter/
+ * Your Twitter object will be instantiated and called as such:
+ * var obj = new Twitter()
+ * obj.postTweet(userId,tweetId)
+ * var param_2 = obj.getNewsFeed(userId)
+ * obj.follow(followerId,followeeId)
+ * obj.unfollow(followerId,followeeId)
+ */
+class Twitter {
+    constructor() {
+        this.tweets = [];
+        this.following = new Map();
     }
 
-    // TODO Return the minimum in the last row
-    
-  }
+    postTweet(userId, tweetId, { tweets } = this) {
+        tweets.push({ authorId: userId, id: tweetId });
+    }
 
-  solve(triangle) {
-    return this.minimumTotal(triangle);
-  }
+    getNewsFeed(userId, newsIDs = [], { tweets, following } = this) {
+        // Get the last 10 news feed for the user if is author or is being follwoed by them.
+        
+        return newsIDs;
+    }
+
+    follow(followerId, followeeId, { following } = this) {
+        if (!following.has(followerId)) following.set(followerId, new Set());
+
+        following.get(followerId).add(followeeId);
+    }
+
+    unfollow(followerId, followeeId, { following } = this) {
+        if (following.has(followerId)) following.get(followerId).delete(followeeId);
+    }
 }
 
-module.exports = { Problem: MinimumTotal };
+
+module.exports = { Problem: Twitter };

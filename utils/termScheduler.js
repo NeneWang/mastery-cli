@@ -126,7 +126,7 @@ class TermScheduler {
      * @param {bool} loadLastCardsFirst If true, then load the last cards first. Otherwise load the first cards first.
      * @returns {Promise} Promise that resolves when the cards are loaded.
      */
-    async setLearningCards(cards, { cleanIfDifferent = true, onlyAddIfNotThere = true, loadLastCardsFirst = true, ask_if_to_use_old_queue = false, shuffle=false, reset_scheduler = false } = {}) {
+    async setLearningCards(cards, { cleanIfDifferent = true, onlyAddIfNotThere = true, loadLastCardsFirst = false, ask_if_to_use_old_queue = false, shuffle=false, reset_scheduler = false } = {}) {
 
 
         if (loadLastCardsFirst) {
@@ -135,6 +135,7 @@ class TermScheduler {
         }else if (shuffle){
             cards = cards.sort(() => Math.random() - 0.5);
         }
+
 
 
 
