@@ -80,6 +80,118 @@ Math Problems:
 mastery math
 ```
 
+## Code Story Highlights
+
+- Usage of datastruture like queues:
+  - For implementing whats next feature and to go over again problems that you had your dificulties solving.
+- usage of Design Patterns:
+  - Strategy Pattern for DSA Problems.
+- SOLID Patterns
+  - Liskov Substitution Principle for Different variants of Quizzer and QuizzerWithDSA. Which methods of Quizzer ccan be called for QuizzerWithDSA without breaking it.
+- Multithreading optimization Throguh Javascripti runtime environment:
+  - For fetching data such as reports while doing something else
+  - Such as creating a new Process without substituting the current threads
+- Testing:
+  - Functional Testing: Core functions requirements such as that it could run for all DSA problems.
+    - Quality Assurance 
+  - Many were TDD: much of the features had unit tests created since the code base were large with mocks and stubs for each expected specificatin
+  - Examples in the Queues, (Term Schedulers), Quizzer Classes 
+- Cool JS features:
+  - Printing Tables
+![](./img/2024-01-10-15-36-29.png)
+
+
+### Notes
+
+
+**Strategy Pattern**
+
+Imagine that you have to get to the airport. You can catch a bus, order a cab, or get on your bicycle. These are your transportation strategies. You can pick one of the strategies depending on factors such as budget or time constraints.
+
+In the same way you can think of each algorithm as just a different strategy looking to the objective of being ran with some inputs for some outputs.
+
+**Solid Principles**
+
+    S - Single-responsiblity Principle
+    O - Open-closed Principle
+    L - Liskov Substitution Principle
+    I - Interface Segregation Principle
+    D - Dependency Inversion Principle
+
+Listov Substitution Principle:
+This means that every subclass or derived class should be substitutable for their base or parent class.
+
+
+
+
+**Optimization**
+
+async/await: The async/await syntax, introduced in ECMAScript 2017 (ES8), provides a more intuitive way to work with asynchronous code. The async keyword is used to define asynchronous functions, and the await keyword is used within these functions to pause execution until a promise is resolved. This makes asynchronous code appear more like synchronous code, which can be easier to understand.
+
+**Testing**
+
+Scope:
+
+    Unit Testing:
+        Focuses on testing individual components or units of code in isolation, such as functions, methods, or classes.
+        The primary goal is to ensure that each unit of code works correctly as per its design and specifications.
+        Typically written and executed by developers during the coding phase.
+
+    Functional Testing:
+        Focuses on testing the entire software application or specific functionalities as a whole.
+        The primary goal is to verify that the software functions correctly according to specified requirements, user expectations, and the intended use cases.
+        Conducted on a fully integrated and assembled system.
+
+Isolation:
+
+    Unit Testing:
+        Isolates the unit being tested from the rest of the application by using mock objects, stubs, or other techniques.
+        Dependencies on external systems, components, or services are typically simulated or replaced.
+
+    Functional Testing:
+        Does not isolate individual units but tests the application in a real-world environment with all its components, including external dependencies.
+
+Test Scope:
+
+    Unit Testing:
+        Tests focus on the smallest code units, such as individual functions or methods.
+        Granular and fine-grained tests are common, targeting specific code paths and edge cases.
+
+    Functional Testing:
+        Tests cover a broader scope and assess the software's functionality from a user's perspective.
+        Typically, high-level test scenarios and user interactions are tested.
+
+Timing:
+
+    Unit Testing:
+        Typically performed during the development phase, often concurrently with code writing.
+        Helps developers catch and fix issues early in the development process.
+
+    Functional Testing:
+        Usually conducted after unit testing, during the testing or quality assurance phase, and sometimes during the user acceptance testing (UAT) phase.
+
+Test Environment:
+
+    Unit Testing:
+        Executes in a controlled environment, with a focus on the unit's specific logic and behavior.
+        Dependencies are often replaced with mock objects or stubs.
+
+    Functional Testing:
+        Executes in a more realistic environment that mirrors the production setup, including databases, external services, and user interfaces.
+
+Test Objective:
+
+    Unit Testing:
+        Primarily focuses on verifying the correctness of individual code units and their interactions.
+        Aims to detect and resolve bugs at the code level.
+
+    Functional Testing:
+        Focuses on validating that the software meets functional requirements and user expectations.
+        Aims to ensure that the software functions correctly as a whole.
+
+
+
+****
 
 #### Credits and Updates
 
