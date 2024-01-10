@@ -9,11 +9,14 @@ class MinimumTotal {
         if (col < row) {
           smallestAbove = Math.min(smallestAbove, triangle[row - 1][col]);
         }
-        triangle[row][col] += smallestAbove;
+
+        // TODO Recompute the cost that it would take to reach that step.
+        
       }
     }
 
-    return Math.min(...triangle[triangle.length - 1]);
+    // TODO Return the minimum in the last row
+    
   }
 
   solve(triangle) {

@@ -120,7 +120,11 @@ const { Demo, EDemo } = demos;
 		mQuizer.study_session(masterDeck);
 	}
 	else if (input.includes(cmInfo.commands.cses.code)) {
-		mQuizer.cloze_study_session();
+		let reset = false;
+		if (flags.reset){
+			reset = true;
+		}	
+		mQuizer.cloze_study_session({reset_scheduler: reset});
 	}
 	else if (input.includes(cmInfo.commands.jses.code)) {
 		mQuizer.jupyter_study_session();

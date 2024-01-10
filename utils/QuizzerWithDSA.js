@@ -93,9 +93,10 @@ class QuizzerWithDSA extends Quizzer {
         return problem_status;
     }
 
+
     
 
-    cloze_study_session = async () => {
+    cloze_study_session = async ({reset_scheduler = false}) => {
 
         // Pick all the available string keys.
 
@@ -104,7 +105,7 @@ class QuizzerWithDSA extends Quizzer {
         const clozeScheduler = new TermScheduler({
             cards_category: "Algo"
         });
-        await clozeScheduler.setLearningCards(cloze_problems);
+        await clozeScheduler.setLearningCards(cloze_problems, {shuffle: true, reset_scheduler: reset_scheduler});
         let exit = false;
 
         const printCardsLeft = (cardsLeft, cardsLearnt) => {

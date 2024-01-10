@@ -126,22 +126,26 @@ class TermScheduler {
      * @param {bool} loadLastCardsFirst If true, then load the last cards first. Otherwise load the first cards first.
      * @returns {Promise} Promise that resolves when the cards are loaded.
      */
-    async setLearningCards(cards, { cleanIfDifferent = true, onlyAddIfNotThere = true, loadLastCardsFirst = true, ask_if_to_use_old_queue = false } = {}) {
+    async setLearningCards(cards, { cleanIfDifferent = true, onlyAddIfNotThere = true, loadLastCardsFirst = true, ask_if_to_use_old_queue = false, shuffle=false, reset_scheduler = false } = {}) {
 
 
         if (loadLastCardsFirst) {
             // Reverse the cards:list order
             cards = cards.reverse();
+        }else if (shuffle){
+            cards = cards.sort(() => Math.random() - 0.5);
         }
+
+
 
         await this.loadQueues(); // Load first then compare if to add a card into the queue or not.
 
 
         //Add new cards
-        if (cleanIfDifferent) {
+        if (cleanIfDifferent || reset_scheduler) {
             // Only populate if the amount of cards already loaded are less than the new cards that are found on the masterDeck
 
-            if (this.cardsCount != cards.length) {
+            if (this.cardsCount != cards.length || reset_scheduler) {
                 // Clean all cards
                 // Start from zero if the cards changed
                 console.log(`Difference in length ${this.cardsCount} ${cards.length}`);
