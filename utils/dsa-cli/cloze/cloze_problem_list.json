@@ -1873,6 +1873,11 @@
         "file_path": "triangle-c3.js",
         "difficulty": 1,
         "problem_slug": "triangle"
+    },
+    {
+        "file_path": "edit-distance-c1.js",
+        "difficulty": 1,
+        "problem_slug": "edit-distance"
     }
 
 ]

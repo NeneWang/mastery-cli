@@ -55,8 +55,21 @@ const API_design = [
         description: "The Leaky Abstraction Antipattern\n\n\
         The Next release Design Fix Antipattern: Design improvements that would result in breaking changes get moved as technical \
         debt to the backlog. \n\n\
-        The Heroic Design Effort Antipattern: ",
-        prompt: "Think about an occurance with such antipattern an dhow you coul fix it.",
+        The Heroic Design Effort Antipattern.\n\
+        The Unused API Antipattern: If an API is going unused and there is no such validation, expect the api to break,",
+        prompt: "Think about an occurance with such antipattern an dhow you coul fix it or do respct to that design.",
+    },
+    {
+        term: "The Agile Manifesto Revisited",
+        description: "\n\
+        • Our highest priority should be to satisfy the customer. \n\
+        • We should welcome changing requirements, even late in development. \n\
+        • We must strive to deliver working software frequently.\n\
+        • Business people and developers must work together daily.\n\
+        • Working software is the primary measure of progress.\n\
+        • Be attentive to technical excellence and good design, as this enhances agility.\n\
+        • Seek the simple by maximizing the amount of work not done.",
+        prompt: "Imaging you were to start a new Project (DD Engine) What policies would you implement as a project manager?"
     }
 ]
 

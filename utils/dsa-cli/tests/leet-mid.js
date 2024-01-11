@@ -1297,112 +1297,132 @@ class FindUniqueBinaryString extends ProblemTests {
 
 class FindPeakElement extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[1,2,3,1] => 2';
-        assert.equal(structure.solve([1,2,3,1]), 2);
+        assert.equal(structure.solve([1, 2, 3, 1]), 2);
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[1,2,1,3,5,6,4] => 1 | 5';
-        const candRepsponses = [1,5];
-        assert.equal(candRepsponses.includes(structure.solve([1,2,1,3,5,6,4])), true);
+        const candRepsponses = [1, 5];
+        assert.equal(candRepsponses.includes(structure.solve([1, 2, 1, 3, 5, 6, 4])), true);
     }
 
 }
 
-class SingleNumber extends ProblemTests{
-    constructor(Problem){
+class SingleNumber extends ProblemTests {
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[2,2,1] => 1';
-        assert.equal(structure.solve([2,2,1]), 1);
+        assert.equal(structure.solve([2, 2, 1]), 1);
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[4,1,2,1,2] => 4';
-        assert.equal(structure.solve([4,1,2,1,2]), 4);
+        assert.equal(structure.solve([4, 1, 2, 1, 2]), 4);
     }
 }
 
 
 class SingleNumberII extends ProblemTests {
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[2,2,3,2] => 3';
-        assert.equal(structure.solve([2,2,3,2]), 3);
+        assert.equal(structure.solve([2, 2, 3, 2]), 3);
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[0,1,0,1,0,1,99] => 99';
-        assert.equal(structure.solve([0,1,0,1,0,1,99]), 99);
+        assert.equal(structure.solve([0, 1, 0, 1, 0, 1, 99]), 99);
     }
 
 }
 
 class SumOfAbsoluteDifferenceInASortedArray extends ProblemTests {
 
-    constructor(Problem){
+    constructor(Problem) {
         super(Problem);
         this.tests.push(() => this.test_1());
         this.tests.push(() => this.test_2());
     }
 
-    test_1(){
+    test_1() {
         const structure = new this.Problem();
         this.current_test_name = '[2,3,5] => [4,3,5]';
-        assert.deepEqual(structure.solve([2,3,5]), [4,3,5]);
+        assert.deepEqual(structure.solve([2, 3, 5]), [4, 3, 5]);
     }
 
-    test_2(){
+    test_2() {
         const structure = new this.Problem();
         this.current_test_name = '[1,4,6,8,10] => [24,15,13,15,21]';
-        assert.deepEqual(structure.solve([1,4,6,8,10]), [24,15,13,15,21]);
+        assert.deepEqual(structure.solve([1, 4, 6, 8, 10]), [24, 15, 13, 15, 21]);
     }
 }
 
 
 class MinimumTotal extends ProblemTests {
-    
-        constructor(Problem){
-            super(Problem);
-            this.tests.push(() => this.test_1());
-            this.tests.push(() => this.test_2());
-        }
-    
-        test_1(){
-            const structure = new this.Problem();
-            this.current_test_name = '[[2],[3,4],[6,5,7],[4,1,8,3]] => 11';
-            assert.equal(structure.solve([[2],[3,4],[6,5,7],[4,1,8,3]]), 11);
-        }
-    
-        test_2(){
-            const structure = new this.Problem();
-            this.current_test_name = '[[2],[3,4],[6,5,7],[4,1,8,3]] => 11';
-            assert.equal(structure.solve([[2],[3,4],[6,5,7],[4,1,8,3]]), 11);
-        }
+
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
     }
 
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '[[2],[3,4],[6,5,7],[4,1,8,3]] => 11';
+        assert.equal(structure.solve([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]), 11);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '[[2],[3,4],[6,5,7],[4,1,8,3]] => 11';
+        assert.equal(structure.solve([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]), 11);
+    }
+}
+
+
+class MinDistance extends ProblemTests {
+    constructor(Problem) {
+        super(Problem);
+        this.tests.push(() => this.test_1());
+        this.tests.push(() => this.test_2());
+    }
+
+    test_1() {
+        const structure = new this.Problem();
+        this.current_test_name = '"horse", "ros" => 3';
+        assert.equal(structure.solve('horse', 'ros'), 3);
+    }
+
+    test_2() {
+        const structure = new this.Problem();
+        this.current_test_name = '"intention", "execution" => 5';
+        assert.equal(structure.solve('intention', 'execution'), 5);
+    }
+}
 
 
 const TEST_DICTIONARY = {
@@ -1451,7 +1471,8 @@ const TEST_DICTIONARY = {
     'single-number-ii': SingleNumberII,
     'sum-of-absolute-differences-in-a-sorted-array': SumOfAbsoluteDifferenceInASortedArray,
     'single-number': SingleNumber,
-    'triangle': MinimumTotal
+    'triangle': MinimumTotal,
+    'min-distance': MinDistance
 }
 
 module.exports = TEST_DICTIONARY;
