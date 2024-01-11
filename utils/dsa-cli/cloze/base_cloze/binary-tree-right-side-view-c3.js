@@ -13,12 +13,8 @@ class BinaryTreeRightSideView {
                 let prev = null;
     
                 for (let i = (queue.length - 1); 0 <= i; i--) {
-                    const node = queue.shift();
-    
-                    prev = node;
-    
-                    if (node.left) queue.push(node.left);
-                    if (node.right) queue.push(node.right);
+                    
+                    // TODO Unishift the node, and update prev. Also do your do dilligence with the right and left nodes.
                 }
     
                 rightSide.push(prev.val);
