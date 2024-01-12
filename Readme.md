@@ -173,7 +173,9 @@ This is an example of how the strucutre supports both itself and their children 
 Listov Substitution Principle:
 This means that every subclass or derived class should be substitutable for their base or parent class.
 
+**Deliverate Practice and the Scheduling System**
 
+Deliberate practice refers to a special type of practice that is purposeful and systematic. While regular practice might include mindless repetitions, deliberate practice requires focused attention and is conducted with the specific goal of improving performance.
 
 
 **Optimization**

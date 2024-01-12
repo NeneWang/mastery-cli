@@ -181,19 +181,19 @@ class Maid {
 	dayReport = async () => {
 		const todaydate = getToday()
 
-		if (Settings?.report_settings?.performance_summary) {
+		if (Settings?.report_show?.performance_summary) {
 			this.say(`Performance Report: ${todaydate}`, false)
 			await this.performanceReport();
 
 		}
 
-		if (Settings?.report_settings?.whether) {
+		if (Settings?.report_show?.whether) {
 			this.say(`Weather Report: ${todaydate}`, false)
 			// console.log('Weather\n')
 			const _ = await weatherReport();
 		}
 
-		if (Settings?.report_settings?.missing_report) {
+		if (Settings?.report_show?.missing_report) {
 			this.say(`Missing Report: ${todaydate}, dsa enabled: ${true}`, false)
 			await this.provideMissingReport({ run_dsa: true });
 		}
