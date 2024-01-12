@@ -110,14 +110,30 @@ class TermStorage {
     }
 
 
+    /**
+     * Returns list of deck title. e.g.
+     * [kotlin, java, javascript...]
+     */
     get deck_titles() {
         const deck_names = [this.deck_name];
         for (const deck of this.decks) {
-
             deck_names.push(...deck.deck_titles);
         }
         return deck_names;
     }
+
+    /**
+     * Returns list of deck titles with the count of cards inside: e.g.:
+     * [kotlin - 3, java - 5, javascript - 10...]
+     */
+    get deck_titles_with_count(){
+        const deck_names = [`${this.deck_name} - ${this.terms.length} cards`];
+        for (const deck of this.decks) {
+            deck_names.push(...deck.deck_titles_with_count);
+        }
+        return deck_names;
+    }
+
 
     /**
      * Follows the design of array.push, easier to memorize

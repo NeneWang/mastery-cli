@@ -344,7 +344,7 @@ class Quizzer {
         // If want new session
 
         // For now just load a new one everytime.
-        const titles = masterDeck.deck_titles;
+        const titles = masterDeck.deck_titles_with_count;
 
         const ms_deck = new AutoComplete({
             name: 'StudyOption',

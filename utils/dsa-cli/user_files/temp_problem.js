@@ -1,49 +1,51 @@
-
-class DailyTemperatures {
-
+class CombinationSumII {
 
     /**
-     * https://leetcode.com/problems/daily-temperatures
-     * Time O(N) | Space O(N)
-     * @param {number[]} temperatures
-     * @return {number[]}
+     * https://leetcode.com/problems/combination-sum-ii/
+     * Time O(2^N) | Space O(N)
+     * @param {number[]} candidates
+     * @param {number} target
+     * @return {number[][]}
      */
-    solve(temperatures, stack = []) {
+    combinationSum2 = function (candidates, target) {
 
-		
-        const canShrink = (stack, temperatures, day) => {
-			// TODO: Complete the function
-            
-            // Previous day as the output of the stack
-            // Then get and compare with the temperature of the previous and current termperature to compute if it is warmer
-            	
-			// If the stack is less than 0 means that there is not to compare (last one cannot shrink)
-            
-        }
 
-		// Create the array of things to print
-        const days = Array(temperatures.length).fill(0); // [0, 0, 0, 0]
+        const dfs = (candidates, target, index = 0, combination = [], combinations = []) => {
+            const isBaseCase = target < 0;
+            if (isBaseCase) return combinations;
 
-		// For each day 
-        for (let day = 0; day < temperatures.length; day++) {/* Time O(N + N) */
-			console.log("Day", day);
-			// While it can shrink which means that the current day is hotter than the previous one, then continue popping the previous cold day until it finds the one with the last one that is cold. days to wait being the difference between day and previous date.
-            while (canShrink(stack, temperatures, day)) {    /* Time O(N + N) */
-                const prevColdDay = stack.pop();
-                const daysToWait = (day - prevColdDay);
+            const isTarget = target === 0;
+            if (isTarget) {
+                if (combination.length) combinations.push(combination.slice());
 
-                days[prevColdDay] = daysToWait;              /* Ignore Space O(N) */
+                return combinations
             }
 
-            stack.push(day); // Push into the stack the last temperature checked   which will be the last cold temperature to be used to calculate the difference (Since the while-loop will break once the colder temperature is detected)
+            for (let i = index; i < candidates.length; i++) {
+                const isDuplicate = (index < i) && (candidates[i - 1] === candidates[i]);
+                if (isDuplicate) continue;
+
+                backTrack(candidates, target, i, combination, combinations);
+            }
+
+            return combinations;
         }
 
-		console.log("Days:", days);
+        const backTrack = (candidates, target, i, combination, combinations) => {
+            // TODO Complete the backTrack function which adds the current element to the combination and then calls the dfs function.
+            // Pops it from the combiantion if found.
+            
+        }
 
-        return days;
+        candidates.sort((a, b) => a - b)
+
+        return dfs(candidates, target)
+    };
+
+    solve(candidates, target) {
+        return this.combinationSum2(candidates, target);
     }
-
 }
 
 
-module.exports = { Problem: DailyTemperatures };
+module.exports = { Problem: CombinationSumII };

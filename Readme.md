@@ -92,6 +92,7 @@ mastery math
   - For implementing whats next feature and to go over again problems that you had your dificulties solving.
 - usage of Design Patterns:
   - Strategy Pattern for DSA Problems.
+  - Composite Pattern: TermStorage: 
 - SOLID Patterns
   - Liskov Substitution Principle for Different variants of Quizzer and QuizzerWithDSA. Which methods of Quizzer ccan be called for QuizzerWithDSA without breaking it.
 - Multithreading optimization Throguh Javascripti runtime environment:
@@ -105,6 +106,10 @@ mastery math
 - Cool JS features:
   - Printing Tables
 ![](./img/2024-01-10-15-36-29.png)
+- Features Feedback Loop API
+  - How Cloze DSA idea came out. Because sometimes you dont need to know the whole problem, but just the part that you are having trouble with.
+  - Term Scheduler + Mini Term Scheduler: For example you want to look at problems you did wrong but also have a pile for learning, Working Set and Finished set while the other only sastified with one pile but is good so it implements in a format similar to the Term Scheduler: This was because there was no Internet sometimes, or the backend suddenly broke and it was waiting too long for an API requeust. So I made it instead internally using internal storage..
+  - Unused API Removed: Like CSV Support for flashcards.
 
 
 ### Notes
@@ -115,6 +120,47 @@ mastery math
 Imagine that you have to get to the airport. You can catch a bus, order a cab, or get on your bicycle. These are your transportation strategies. You can pick one of the strategies depending on factors such as budget or time constraints.
 
 In the same way you can think of each algorithm as just a different strategy looking to the objective of being ran with some inputs for some outputs.
+
+**Composite Pattern**
+
+Advantage and Reasoning
+
+This wa advantageous because the client api had the flexibility to work with the individual components, lets say, 'kotlin flashcards' in the same way it would trat the entire hierarchy e.g. 'programming flashcards'.
+
+This is an example of how the strucutre supports both itself and their children components:
+
+```js
+
+
+    /**
+     * Returns list of deck title. e.g.
+     * [kotlin, java, javascript...]
+     */
+    get deck_titles() {
+        const deck_names = [this.deck_name];
+        for (const deck of this.decks) {
+            deck_names.push(...deck.deck_titles);
+        }
+        return deck_names;
+    }
+
+    
+    /**
+     * Returns list of deck titles with the count of cards inside: e.g.:
+     * [kotlin - 3, java - 5, javascript - 10...]
+     */
+    get deck_titles_with_count(){
+        const deck_names = [`${this.deck_name} - ${this.terms.length}`];
+        for (const deck of this.decks) {
+            deck_names.push(...deck.deck_titles_with_count);
+        }
+        return deck_names;
+    }
+
+```
+
+![](./img/2024-01-12-11-57-29.png)
+
 
 **Solid Principles**
 
@@ -208,7 +254,6 @@ express
 markdown-it-toc-done-right
 "esm": "^3.2.25",
 ```
-
 
 Added
 

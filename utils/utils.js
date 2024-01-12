@@ -236,7 +236,7 @@ class Maid {
 		if (algo_missing) {
 			
 			const objectives = {
-				'This Year': 'Finish the projects: \n\
+				'year2024': 'Finish the projects: \n\
 				[ ] Ecommerce AI: Clean up, make queries faster and cheaper\n\
 				[ ] Portfolio (Allow Multiple people to use, use Java Spring Backend + Oracle)\n\
 				[ ] PytorchGame that players competes with Pytorch() \n\
@@ -244,7 +244,7 @@ class Maid {
 				[ ] DSA Multi, Blog \n\
 				[ ] Talking Game - Sales + Interview that uses NLP\n\
 				[ ] Create Presentations for each of them.',
-				'This Month': 'Finish the projects: \n\
+				'Month1': 'Finish the projects: \n\
 				[ ] Promethues: Finance: Publish + Presentation: Deplyment\n\
 				[ ] DSA make it multiplayer',
 				'Daily': '\n\
