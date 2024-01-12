@@ -137,7 +137,7 @@ class Quizzer {
         // Create miniqueue
         // If there is more than one scheduler elements add the first one it to the mini queue's potential_questions
         if (lgtermScheduler.length > 0) {
-            const firstElement = lgtermScheduler.deque();
+            const firstElement = lgtermScheduler.dequeue();
             potential_questions.push(firstElement);
         }
 
