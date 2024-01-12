@@ -138,10 +138,10 @@ class Quizzer {
         // If there is more than one scheduler elements add the first one it to the mini queue's potential_questions
         if (lgtermScheduler.length > 0) {
 
-            // If larger than three spawn the last three.
+            // If larger than three assign the last three in the queue.
             if (lgtermScheduler.length > 3) {
                 const lastThree = lgtermScheduler.elements.slice(-3);
-                potential_questions.push(...lastThree);
+                potential_questions = lastThree;
             } else {
                 const firstElement = lgtermScheduler.dequeue();
                 potential_questions.push(firstElement);
