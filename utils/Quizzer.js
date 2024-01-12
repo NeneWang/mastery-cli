@@ -170,18 +170,16 @@ class Quizzer {
             const response = await this.ask_term_question(card, { exitMethod: wrappedExitMethod });
             if (response == true) {
                 // increase the terms
-
-
                 
             } else {
                 if (!lgtermScheduler.has(card)) {
                     // Add to the long term memory only if it was never added yet.
                     lgtermScheduler.enqueue(card);
-                    attempts += 1;
-                    attempts_timestamps.push(new Date());
                     await lgtermScheduler.save();
                 }
             }
+            attempts += 1;
+            attempts_timestamps.push(new Date());
             
             miniTermScheduler.solveCard(response);
         }
