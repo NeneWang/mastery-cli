@@ -248,9 +248,9 @@ class Maid {
 				[ ] Promethues: Finance: Publish + Presentation: Deplyment\n\
 				[ ] DSA make it multiplayer',
 				'Daily': '\n\
-				[ ] Cloze CSES + Speaking Youtube\n\
-				[ ] @: feat + pro + Leetvisualstudio + Read:20 Pages.\n\
-				[ ] @Night: Gym + Projects/Tutorials that are more frontend.',
+				[ ] Cloze CSES + Speaking While CourseVideo\n\
+				[ ] @: feat: backend|CMD + pro + Leetvisualstudio + Read:20 Pages.\n\
+				[ ] @Night: Gym + Projects/Tutorials Visuals => Game|Mobile|Web',
 			}
 
 			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
