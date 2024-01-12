@@ -173,12 +173,12 @@ class Quizzer {
                 if (!lgtermScheduler.has(card)) {
                     // Add to the long term memory only if it was never added yet.
                     lgtermScheduler.enqueue(card);
-                    await lgtermScheduler.save();
                     attempts += 1;
                     attempts_timestamps.push(new Date());
                 }
             }
             
+            await lgtermScheduler.save();
             miniTermScheduler.solveCard(response);
         }
 
