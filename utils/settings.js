@@ -36,7 +36,7 @@ module.exports = Settings = {
     ],
 
     // Reporting
-    "report_settings": {
+    "report_show": {
         "week_features": true,
         "performance_summary": true,
         "weather": false,
@@ -44,6 +44,7 @@ module.exports = Settings = {
         "Objectives Journal": true,
         "ask_if_algo_missing": true, // Prompts if the users wants to do an algorithm practice if the user has not done any yet.
     },
+    "week_is_since_today": true, // If true, it will count the week since today. Otherwise, it will count the week since the current days sunday.
     "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss"], // commits │ feat │ math_ss │ ref │ fix  │ algo │ acad │ pro  │ terms │ algo_w │ test │ tesrasd │ commits} │ terms}
     "objectives_features": [
         { 
