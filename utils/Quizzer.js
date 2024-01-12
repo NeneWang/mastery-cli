@@ -127,13 +127,13 @@ class Quizzer {
         let attempts_timestamps = [];
 
         let exit_force_method = false;
-        
+
         // Long term memory. using named: lgterm_forced_terms
-        const lgtermScheduler = new StorableQueue({name: "lgterm_forced_terms"});
+        const lgtermScheduler = new StorableQueue({ name: "lgterm_forced_terms" });
         // Try loading.
         await lgtermScheduler.load();
-        
-        
+
+
         // Create miniqueue
         // If there is more than one scheduler elements add the first one it to the mini queue's potential_questions
         if (lgtermScheduler.length > 0) {
@@ -149,7 +149,7 @@ class Quizzer {
             exit_force_method = true;
         }
 
-        
+
         while (miniTermScheduler.cardsCount != 0 && !exit_force_method) {
             // Print the statistics
             console.log(`queue: ${miniTermScheduler.cardsCount}/${total_cards}`);
@@ -159,17 +159,18 @@ class Quizzer {
             if (response == true) {
                 // increase the terms
 
-                
 
-            }else if (!lgtermScheduler.has(card)){
-                // Add to the long term memory only if it was never added yet.
-                lgtermScheduler.enqueue(card);
-                await lgtermScheduler.save();
+
+            } else {
+                if (!lgtermScheduler.has(card)) {
+                    // Add to the long term memory only if it was never added yet.
+                    lgtermScheduler.enqueue(card);
+                    await lgtermScheduler.save();
+                    miniTermScheduler.solveCard(response);
+                    attempts += 1;
+                    attempts_timestamps.push(new Date());
+                }
             }
-
-            miniTermScheduler.solveCard(response);
-            attempts += 1;
-            attempts_timestamps.push(new Date());
         }
 
         return attempts;
