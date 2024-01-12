@@ -123,13 +123,20 @@ class TermStorage {
     }
 
     /**
-     * Returns list of deck titles with the count of cards inside: e.g.:
-     * [kotlin - 3, java - 5, javascript - 10...]
+     * Returns dict of deck titles with the count of cards inside: deckname
+     *  e.g.:
+     * {
+     *      kotlin - 3: Kotlin, 
+     *      java - 5: Java, 
+     *      javascript - 10: javascript...
+     * }
      */
-    get deck_titles_with_count(){
-        const deck_names = [`${this.deck_name} - ${this.terms.length} cards`];
+    get deck_titles_with_count() {
+        const deck_names = {
+            [`${this.deck_name} - ${this.terms.length} cards`]: this.deck_name
+        };
         for (const deck of this.decks) {
-            deck_names.push(...deck.deck_titles_with_count);
+            Object.assign(deck_names, deck.deck_titles_with_count);
         }
         return deck_names;
     }
@@ -145,7 +152,7 @@ class TermStorage {
 
             return;
         }
-        if (term.term == "" ) {
+        if (term.term == "") {
             return;
         }
 

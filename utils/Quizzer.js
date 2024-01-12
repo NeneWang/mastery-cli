@@ -344,15 +344,20 @@ class Quizzer {
         // If want new session
 
         // For now just load a new one everytime.
-        const titles = masterDeck.deck_titles_with_count;
+        const dictOptions = masterDeck.deck_titles_with_count;
 
         const ms_deck = new AutoComplete({
             name: 'StudyOption',
             message: 'Choose deck to study',
-            choices: titles
+            choices: Object.keys(dictOptions)
         });
 
-        let deck_selected = await ms_deck.run();
+        
+
+        let deck_selected_key = await ms_deck.run();
+
+        let deck_selected = dictOptions[deck_selected_key];
+
         const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
 
         const studyScheduler = new TermScheduler({ cards_category: deck_selected });
