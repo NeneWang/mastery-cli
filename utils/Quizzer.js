@@ -346,17 +346,21 @@ class Quizzer {
         // For now just load a new one everytime.
         const dictOptions = masterDeck.deck_titles_with_count;
 
+        let titles = Object.keys(dictOptions)
+        // Sort by count(from dict Options)
+        titles.sort((a, b) => dictOptions[b].count - dictOptions[a].count);
+
         const ms_deck = new AutoComplete({
             name: 'StudyOption',
             message: 'Choose deck to study',
-            choices: Object.keys(dictOptions)
+            choices: titles
         });
 
         
 
         let deck_selected_key = await ms_deck.run();
 
-        let deck_selected = dictOptions[deck_selected_key];
+        let deck_selected = dictOptions[deck_selected_key].name;
 
         const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
 
