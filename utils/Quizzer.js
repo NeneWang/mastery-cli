@@ -139,7 +139,7 @@ class Quizzer {
         if (lgtermScheduler.length > 0) {
 
             // If larger than three assign the last three in the queue.
-            if (lgtermScheduler.length > 3) {
+            if (lgtermScheduler.length >= 3) {
                 const lastThree = lgtermScheduler.elements.slice(-3);
                 potential_questions = lastThree;
             } else {
