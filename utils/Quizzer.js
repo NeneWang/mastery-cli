@@ -141,11 +141,15 @@ class Quizzer {
             // If larger than three assign the last three in the queue.
             if (lgtermScheduler.length >= 3) {
                 const lastThree = lgtermScheduler.elements.slice(-3);
+                // Remove the last three from the queue
+                lgtermScheduler.elements = lgtermScheduler.elements.slice(0, -3);
                 potential_questions = lastThree;
+
             } else {
                 const firstElement = lgtermScheduler.dequeue();
                 potential_questions.push(firstElement);
             }
+            await lgtermScheduler.save();
 
         }
 
@@ -175,10 +179,10 @@ class Quizzer {
                     lgtermScheduler.enqueue(card);
                     attempts += 1;
                     attempts_timestamps.push(new Date());
+                    await lgtermScheduler.save();
                 }
             }
             
-            await lgtermScheduler.save();
             miniTermScheduler.solveCard(response);
         }
 
