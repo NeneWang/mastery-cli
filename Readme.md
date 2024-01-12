@@ -27,6 +27,12 @@ Recommended:
 Install nvim
 ```
 
+## Version
+
+```
+
+```
+
 
 ## Usage
 
