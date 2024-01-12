@@ -254,15 +254,9 @@ class Maid {
 			}
 
 			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
-			console.log(objectives);
-			console.log("Daily DSA Missing run algorithms?")
-
 			const response = await dsaPrompt.run();
 			if (response) {
-
-
 				const dsaTrainer = new DSATrainer();
-
 				const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
 
 				if (dsa_is_correct) {

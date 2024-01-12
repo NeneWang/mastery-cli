@@ -42,7 +42,6 @@ class Term {
         return /^https?:\/\//i.test(url);
     }
 
-
     pushCategory = (subcategory) => {
         this.category += this.category == "" ? subcategory : ` > ${subcategory}`;
     }
