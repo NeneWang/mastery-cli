@@ -235,12 +235,28 @@ class Maid {
 		const algo_missing = missingFeatReport.includes(CONSTANTS.algo_name);
 		if (algo_missing) {
 			
-			const objectives = [
-				''
-			]
+			const objectives = {
+				'This Year': 'Finish the projects: \n\
+				[ ] Ecommerce AI: Clean up, make queries faster and cheaper\n\
+				[ ] Portfolio (Allow Multiple people to use, use Java Spring Backend + Oracle)\n\
+				[ ] PytorchGame that players competes with Pytorch() \n\
+				[ ] Promethues: Finance + Presentation (Multiple users)\n\
+				[ ] DSA Multi, Blog \n\
+				[ ] Talking Game - Sales + Interview that uses NLP\n\
+				[ ] Create Presentations for each of them.',
+				'This Month': 'Finish the projects: \n\
+				[ ] Promethues: Finance: Publish + Presentation: Deplyment\n\
+				[ ] DSA make it multiplayer',
+				'Daily': '\n\
+				[ ] Cloze CSES + Speaking Youtube\n\
+				[ ] @: feat + pro + Leetvisualstudio + Read:20 Pages.\n\
+				[ ] @Night: Gym + Projects/Tutorials that are more frontend.',
+			}
 
 			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
+			console.log(objectives);
 			console.log("Daily DSA Missing run algorithms?")
+
 			const response = await dsaPrompt.run();
 			if (response) {
 
