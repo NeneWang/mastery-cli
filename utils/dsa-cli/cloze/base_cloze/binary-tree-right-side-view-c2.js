@@ -9,10 +9,12 @@ class BinaryTreeRightSideView {
      */
     rightSideView = function (root) {
         const bfs = (queue, rightSide = []) => {
-            while (queue.length) {
+            // TODO Use the correct control.
+            while (true) {
                 let prev = null;
     
-                for (let i = (queue.length - 1); 0 <= i; i--) {
+                // TODO Create the for loop. Important where You start!
+                for (;;) {
                     const node = queue.shift();
     
                     prev = node;
@@ -20,8 +22,9 @@ class BinaryTreeRightSideView {
                     if (node.left) queue.push(node.left);
                     if (node.right) queue.push(node.right);
                 }
+
+                // TODO Add the last previous value
     
-                rightSide.push(prev.val);
             }
     
             return rightSide;

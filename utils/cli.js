@@ -36,6 +36,12 @@ const flags = {
 		alias: 'a',
 		desc: 'Get all algorithms'
 	},
+	reset: {
+		type: 'boolean',
+		default: false,
+		alias: 'r',
+		desc: 'Reset the scheduler'
+	}
 };
 
 class Command {

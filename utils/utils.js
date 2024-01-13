@@ -181,19 +181,19 @@ class Maid {
 	dayReport = async () => {
 		const todaydate = getToday()
 
-		if (Settings?.report_settings?.performance_summary) {
+		if (Settings?.report_show?.performance_summary) {
 			this.say(`Performance Report: ${todaydate}`, false)
 			await this.performanceReport();
 
 		}
 
-		if (Settings?.report_settings?.whether) {
+		if (Settings?.report_show?.whether) {
 			this.say(`Weather Report: ${todaydate}`, false)
 			// console.log('Weather\n')
 			const _ = await weatherReport();
 		}
 
-		if (Settings?.report_settings?.missing_report) {
+		if (Settings?.report_show?.missing_report) {
 			this.say(`Missing Report: ${todaydate}, dsa enabled: ${true}`, false)
 			await this.provideMissingReport({ run_dsa: true });
 		}
@@ -234,14 +234,29 @@ class Maid {
 	requests_if_run_dsa_trainer = async (missingFeatReport) => {
 		const algo_missing = missingFeatReport.includes(CONSTANTS.algo_name);
 		if (algo_missing) {
+			
+			const objectives = {
+				'year2024': 'Finish the projects: \n\
+				[ ] Ecommerce AI: Clean up, make queries faster and cheaper\n\
+				[ ] Portfolio (Allow Multiple people to use, use Java Spring Backend + Oracle)\n\
+				[ ] PytorchGame that players competes with Pytorch() \n\
+				[ ] Promethues: Finance + Presentation (Multiple users)\n\
+				[ ] DSA Multi, Blog \n\
+				[ ] Talking Game - Sales + Interview that uses NLP\n\
+				[ ] Create Presentations for each of them.',
+				'Month1': 'Finish the projects: \n\
+				[ ] Promethues: Finance: Publish + Presentation: Deplyment\n\
+				[ ] DSA make it multiplayer',
+				'Daily': '\n\
+				[ ] Cloze CSES + Speaking While CourseVideo\n\
+				[ ] @: feat: backend|CMD + pro + Leetvisualstudio + Read:20 Pages.\n\
+				[ ] @Night: Gym + Projects/Tutorials Visuals => Game|Mobile|Web',
+			}
+
 			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
-			console.log("Daily DSA Missing run algorithms?")
 			const response = await dsaPrompt.run();
 			if (response) {
-
-
 				const dsaTrainer = new DSATrainer();
-
 				const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
 
 				if (dsa_is_correct) {
@@ -319,7 +334,8 @@ class Maid {
 			for (const column of columns) {
 
 				for (const [key, value] of Object.entries(userPerformanceData?.[column])) {
-					userPerformanceData[column][key] = parseFloat(value.toFixed(2));
+					let message = parseFloat(value.toFixed(2));
+					userPerformanceData[column][key] = message;
 				}
 			}
 			return userPerformanceData;
@@ -342,7 +358,10 @@ class Maid {
 					// Then search for the performance, and give the difference between the required and the actual performed
 					const day_requirement = settings.day;
 					const day_performance = userPerformanceData?.["today"]?.[requirement_key] ?? 0;
-					const day_difference = day_requirement - day_performance;
+					let day_difference = day_requirement - day_performance;
+					if (day_difference < 0) {
+						day_difference = "✅";
+					}
 					features_accomplished_today[`d: ${requirement_key}`] = { miss: day_difference, type: "day", req: day_requirement };
 
 
@@ -353,7 +372,10 @@ class Maid {
 					// Then search for the performance, and give the difference between the required and the actual performed
 					const week_requirement = settings.week;
 					const week_performance = userPerformanceData?.['week_sum']?.[requirement_key] ?? 0;
-					const week_difference = week_requirement - week_performance;
+					let week_difference = week_requirement - week_performance;
+					if (week_difference < 0) {
+						week_difference = '✅';
+					}
 					features_accomplished_today[`w: ${requirement_key}`] = { miss: week_difference, type: "week", req: week_requirement };
 				}
 			}

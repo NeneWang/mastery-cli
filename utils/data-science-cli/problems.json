@@ -70,5 +70,9 @@
     {
         "name": "cdfs",
         "problem": "prob_theory/cdfs.ipynb"
+    },
+    {
+        "name": "computeProbs",
+        "problem": "prob_theory/computeProbs.ipynb"
     }
 ]

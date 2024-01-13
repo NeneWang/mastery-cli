@@ -12,6 +12,8 @@ class BinaryTreeRightSideView {
             while (queue.length) {
                 let prev = null;
     
+
+
                 for (let i = (queue.length - 1); 0 <= i; i--) {
                     const node = queue.shift();
     
@@ -26,10 +28,10 @@ class BinaryTreeRightSideView {
     
             return rightSide;
         }
-        const isBaseCase = root === null;
-        if (isBaseCase) return [];
 
-        return bfs([root]);
+        // TODO If is base case where root is null return non. Otherwsie the BFS
+
+        
     };
 
 

@@ -8,18 +8,17 @@ const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = re
 
 const constants = require('./constants');
 const DSAConstants = require('./dsa-cli/constants');
-
 const Parser = require('expr-eval').Parser;
-const parser = new Parser();
+
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals, get_random_of_size } = constants;
 const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
 
 const { TermScheduler } = require('./termScheduler');
 const { MiniTermScheduler } = require('./miniTermScheduler');
-const DSATrainer = require('./dsa-cli/dsa-trainer');
-const { cloze_problems_list } = require('./dsa-cli/cloze');
+const { StorableQueue } = require('./StorableQueue');
 
+const parser = new Parser();
 
 // const DEBUG = true
 const DEBUG = false
@@ -90,11 +89,9 @@ class Quizzer {
         return await get_random(potential_questions);
     }
 
-    pick_term_question = async () => {
-        if (DEBUG) console.log("Picking terms from:", this.terms)
-        let potential_questions = this.terms
-        /**
-         *  Terms Structure:
+    /**
+     * Picks a term from the list of terms in this Quizzer
+     *  *  Terms Structure:
             {
                 term: 'Singleton Pattern',
                 example: '',
@@ -104,10 +101,12 @@ class Quizzer {
                 prompt: 'Use the term',
                 formula_name: 'singleton-pattern'
             }
-         */
+     * @returns {TermStructure} term_selected
+     */
+    pick_term_question = async () => {
+        if (DEBUG) console.log("Picking terms from:", this.terms)
+        let potential_questions = this.terms;
         potential_questions = await this.getYoungest(potential_questions, { randomOffline: true })
-
-        // if (DEBUG) console.log("Left with", potential_questions)
 
         return get_random(potential_questions);
     }
@@ -128,31 +127,64 @@ class Quizzer {
         let attempts_timestamps = [];
 
         let exit_force_method = false;
+
+        // Long term memory. using named: lgterm_forced_terms
+        const lgtermScheduler = new StorableQueue({ name: "lgterm_forced_terms" });
+        // Try loading.
+        await lgtermScheduler.load();
+
+
         // Create miniqueue
+        // If there is more than one scheduler elements add the first one it to the mini queue's potential_questions
+        if (lgtermScheduler.length > 0) {
+
+            // If larger than three assign the last three in the queue.
+            if (lgtermScheduler.length >= 3) {
+                const lastThree = lgtermScheduler.elements.slice(-3);
+                // Remove the last three from the queue
+                lgtermScheduler.elements = lgtermScheduler.elements.slice(0, -3);
+                potential_questions = lastThree;
+
+            } else {
+                const firstElement = lgtermScheduler.dequeue();
+                potential_questions.push(firstElement);
+            }
+            await lgtermScheduler.save();
+
+        }
+
+
         const total_cards = potential_questions.length;
-        const miniqueue = new MiniTermScheduler(potential_questions);
+        const miniTermScheduler = new MiniTermScheduler(potential_questions);
         const wrappedExitMethod = () => {
             exitMethod();
             exit_force_method = true;
         }
 
-        while (miniqueue.cardsCount != 0 && !exit_force_method) {
+
+        while (miniTermScheduler.cardsCount != 0 && !exit_force_method) {
             // Print the statistics
-            console.log(`queue: ${miniqueue.cardsCount}/${total_cards}`);
-            const card = miniqueue.getCard();
+            console.log(`queue: ${miniTermScheduler.cardsCount}/${total_cards}`);
+            const card = miniTermScheduler.getCard();
             // console.log("card", card);
             const response = await this.ask_term_question(card, { exitMethod: wrappedExitMethod });
             if (response == true) {
                 // increase the terms
+                
+            } else {
+                if (!lgtermScheduler.has(card)) {
+                    // Add to the long term memory only if it was never added yet.
+                    lgtermScheduler.enqueue(card);
+                    await lgtermScheduler.save();
+                }
             }
-
-            miniqueue.solveCard(response);
             attempts += 1;
             attempts_timestamps.push(new Date());
+            
+            miniTermScheduler.solveCard(response);
         }
 
         return attempts;
-
     }
 
 
@@ -312,7 +344,11 @@ class Quizzer {
         // If want new session
 
         // For now just load a new one everytime.
-        const titles = masterDeck.deck_titles;
+        const dictOptions = masterDeck.deck_titles_with_count;
+
+        let titles = Object.keys(dictOptions)
+        // Sort by count(from dict Options)
+        titles.sort((a, b) => dictOptions[b].count - dictOptions[a].count);
 
         const ms_deck = new AutoComplete({
             name: 'StudyOption',
@@ -320,7 +356,12 @@ class Quizzer {
             choices: titles
         });
 
-        let deck_selected = await ms_deck.run();
+        
+
+        let deck_selected_key = await ms_deck.run();
+
+        let deck_selected = dictOptions[deck_selected_key].name;
+
         const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
 
         const studyScheduler = new TermScheduler({ cards_category: deck_selected });

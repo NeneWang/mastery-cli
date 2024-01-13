@@ -42,7 +42,6 @@ class Term {
         return /^https?:\/\//i.test(url);
     }
 
-
     pushCategory = (subcategory) => {
         this.category += this.category == "" ? subcategory : ` > ${subcategory}`;
     }
@@ -110,14 +109,37 @@ class TermStorage {
     }
 
 
+    /**
+     * Returns list of deck title. e.g.
+     * [kotlin, java, javascript...]
+     */
     get deck_titles() {
         const deck_names = [this.deck_name];
         for (const deck of this.decks) {
-
             deck_names.push(...deck.deck_titles);
         }
         return deck_names;
     }
+
+    /**
+     * Returns dict of deck titles with the count of cards inside: deckname
+     *  e.g.:
+     * {
+     *      kotlin - 3: {count: 3, name: kotlin}, 
+     *      java - 5: {count: 5, name: java}
+     *      javascript - 10: {count: 10, name: javascript}
+     * }
+     */
+    get deck_titles_with_count() {
+        const deck_names = {
+            [`${this.deck_name} - ${this.terms.length} cards`]: {name: this.deck_name, count: this.terms.length}
+        };
+        for (const deck of this.decks) {
+            Object.assign(deck_names, deck.deck_titles_with_count);
+        }
+        return deck_names;
+    }
+
 
     /**
      * Follows the design of array.push, easier to memorize
@@ -129,7 +151,7 @@ class TermStorage {
 
             return;
         }
-        if (term.term == "" ) {
+        if (term.term == "") {
             return;
         }
 

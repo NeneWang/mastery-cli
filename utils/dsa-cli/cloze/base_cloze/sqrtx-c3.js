@@ -15,7 +15,9 @@ function binarySearchIntuition(x){
     mid = Math.floor(left + (right - left) / 2);
     num = mid * mid;
 
-    // TODO Compute the mid, and the number as the mid*mid
+    // If the number is larger than the target set right voundary as mid - 1.
+
+    // And so on using Binary search. (left = mid + 1) if is lesser.
     
   }
 

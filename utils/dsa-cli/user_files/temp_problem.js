@@ -1,32 +1,51 @@
-class MinMutation {
-  solve(start, end, bank) {
-    const queue = [];
-    const seen = new Set();
-    queue.push(start);
-    seen.add(start);
+class CombinationSumII {
 
-    let steps = 0;
+    /**
+     * https://leetcode.com/problems/combination-sum-ii/
+     * Time O(2^N) | Space O(N)
+     * @param {number[]} candidates
+     * @param {number} target
+     * @return {number[][]}
+     */
+    combinationSum2 = function (candidates, target) {
 
-    while (queue.length > 0) {
-      const nodesInQueue = queue.length;
 
-      for (let j = 0; j < nodesInQueue; j++) {
-        const node = queue.shift();
+        const dfs = (candidates, target, index = 0, combination = [], combinations = []) => {
+            const isBaseCase = target < 0;
+            if (isBaseCase) return combinations;
 
-        if (node === end) {
-          return steps;
+            const isTarget = target === 0;
+            if (isTarget) {
+                if (combination.length) combinations.push(combination.slice());
+
+                return combinations
+            }
+
+            for (let i = index; i < candidates.length; i++) {
+                const isDuplicate = (index < i) && (candidates[i - 1] === candidates[i]);
+                if (isDuplicate) continue;
+
+                backTrack(candidates, target, i, combination, combinations);
+            }
+
+            return combinations;
         }
 
-        // TODO Craft the candidate neighbor and check if it is in the bank
+        const backTrack = (candidates, target, i, combination, combinations) => {
+            // TODO Complete the backTrack function which adds the current element to the combination and then calls the dfs function.
+            // Pops it from the combiantion if found.
+            
+        }
 
-            // Remember to check if it has been seen and add it to the queue + seen
-      }
+        candidates.sort((a, b) => a - b)
 
-      steps++;
+        return dfs(candidates, target)
+    };
+
+    solve(candidates, target) {
+        return this.combinationSum2(candidates, target);
     }
-
-    return -1;
-  }
 }
 
-module.exports = { Problem: MinMutation };
+
+module.exports = { Problem: CombinationSumII };
