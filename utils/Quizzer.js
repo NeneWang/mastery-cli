@@ -515,7 +515,7 @@ class Quizzer {
             } catch (Exception) {
                 // Do nothing, doesnt matter offline.
                 console.log("- Server Offline - ")
-                console.log(Exception)
+                // console.log(Exception)
             }
 
 
