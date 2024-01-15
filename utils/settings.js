@@ -16,6 +16,7 @@ module.exports = Settings = {
     //Quick quizes enabled when commiting, 
     "terms_force_mode_cards": 3, //Cards fetched when in force mode.
     "show_again_failed_terms": true, // If a user commits a mistake in a term, it will be stored to be used on next quiz.
+    "blog_special_commits": true, // If true, when a special commit category is commited, it will store the commit message.
     "commit_categories": [
         {
             "code": "feat",

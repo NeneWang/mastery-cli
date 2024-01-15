@@ -99,6 +99,7 @@ class FeatureExtraction {
 
 
 const { getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
+const { get } = require('node:http');
 
 class Maid {
 
@@ -257,7 +258,7 @@ class Maid {
 			const response = await dsaPrompt.run();
 			if (response) {
 				const dsaTrainer = new DSATrainer(
-					
+
 				);
 				const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
 
@@ -831,13 +832,17 @@ class CommitCategoryType {
 
 };
 
-let ECommitCategory = {
-	FEAT: new CommitCategoryType('feat ', [':tada:', ':santa:', ':gift:']),
-	FIX: new CommitCategoryType('fix ', [':hammer:', ':shipit:', ':ambulance:']),
-	REFACTOR: new CommitCategoryType('ref ', [':ghost:', ':pencil2:'], feature_name = "Refactoring"),
-	ACADEMY: new CommitCategoryType('acad ', [':triangular_ruler:', ":japanese_castle:", ":factory:"]),
-	ALGO: new CommitCategoryType('algo ', [':herb:', ":crown:", ":japanese_goblin:"]),
-	PROJECT: new CommitCategoryType('pro ', [":crown:"])
+
+const getCommitCategories = () => {
+	let commitCategories = {}
+	const commit_categories_settings = Settings.commit_categories ?? [];
+
+	for (const commit_categories_setting_row of commit_categories_settings) {
+		const code_key = commit_categories_setting_row.code;
+		commitCategories[code_key] = new CommitCategoryType(code_key, commit_categories_setting_row.icon_list, commit_categories_setting_row.code);
+	}
+
+	return commitCategories;
 }
 
 /**
@@ -887,7 +892,21 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 	}
 }
 
-const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true, debug = false, comments_to_populate = [] } = {}) => {
+/**
+ * Pushes to origin with a commit message
+ * If it contains any of the specials categories (configurable in settings.js) it will log it in the feature (habit) database.
+ * @param {bool} addMaidEmoji ?= true : If to whether to add a maid emoji
+ * @param {bool} addCommitEmoji ?= true : If to whether to add a commit emoji
+ 
+ * @param {bool} debug ?= false : If to whether to debug api responses, etc.
+ * @param {List: [date: comment]} comments_to_populate ?= [] : List of comments to populate
+ * 
+ * @Setting {bool} log_special_categories ?= true : Setting to whether to log special categories
+ * 
+ * @returns {List: [date: comment]}
+ * 
+ */
+const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { debug = false, comments_to_populate = [] } = {}) => {
 
 
 	let commitMessage = process.argv[3];
@@ -906,12 +925,9 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 	commitCat = commitCategory(commitMessage);
 	// Log special categories
 
-	if (log_special_categories) {
-		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: false });
-		// console.log("comments_to_populate", comments_to_populate)
+	if (Settings.blog_special_commits ?? false) {
+		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: true });
 	}
-
-
 
 	// Removed await statement for hopes of faster responsee load
 	increasePerformance("commits");
@@ -980,25 +996,21 @@ const printComments = (comments) => {
  * @param {string} commitMessage message to commit
  * @param {ECommitCategory} category category of the commit
  * @param {bool} print_previous_commits ?= true : If to whether to print previous commits
- * @param {ECommitCategory[]} special_categories ?= [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code] : Special categories to log
  * @param {bool} debug ?= false : If to whether to debug api responses, etc.
  * @returns {List: [date: comment]}
  */
-const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_populate = [], { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
+const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_populate = [], { print_previous_commits = true, debug = false } = {}) => {
 	// if (true) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
-	if (special_categories.includes(category.code)) {
-		// Log the commit message in the comments database
-		postCommentFromTerm(category.code, commitMessage);
-		const res = await getComments(category?.code ?? "log");
-		comments_to_populate = res.data;
-		// console.log("comments_to_populate | special category", comments_to_populate)
-		if (print_previous_commits) {
-			// if (true) console.log("Printing previous commit")
-			// Print previous commits
-			// console.log("res received", res.data);
-			printComments(comments_to_populate);
-		}
+
+	// Log the commit message in the comments database
+	postCommentFromTerm(category.code, commitMessage);
+	const res = await getComments(category?.code ?? "log");
+	comments_to_populate = res.data;
+	// console.log("comments_to_populate | special category", comments_to_populate)
+	if (print_previous_commits) {
+		printComments(comments_to_populate);
 	}
+
 
 	return comments_to_populate;
 
@@ -1006,16 +1018,28 @@ const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_p
 
 
 
+/**
+ * 
+ * @param {string} commitMessage Message to commit
+ * @param {bool} strict If true, it will only detect categories when they appear followed by '|' e.g. 'feat |'
+ * @returns {string} category code e.g. 'feat'
+ */
 const commitCategory = (commitMessage, strict = false, { debug = false } = {}) => {
-	if (strict) {
-		// TODO Strictly runs with space in between?
-		;
-	}
 
-	for (category of Object.values(ECommitCategory)) {
+
+	for (category of Object.values(getCommitCategories())) {
 		if (debug) console.log("commitMessage", commitMessage)
-		if (commitMessage.includes(category.code)) {
-			return category;
+
+		if (strict) {
+			if (commitMessage.includes(category.code + " |")) {
+				return category;
+			}
+
+		}
+		else {
+			if (commitMessage.includes(category.code)) {
+				return category;
+			}
 		}
 	}
 	return ""; //No category at all.
