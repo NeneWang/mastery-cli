@@ -19,6 +19,7 @@ const { getMaidDirectory } = require('./utils_functions');
 const DSATrainer = require('./dsa-cli/dsa-trainer');
 
 const Settings = require('./settings.js');
+const DEV_MODE = Settings.dev_mode ?? false;
 
 const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
@@ -79,7 +80,6 @@ class WeatherInformation {
 		const notes = Object.keys(COLORWEATHERMAP).map((weatherlabel) => {
 			return { key: weatherlabel, style: bg(COLORWEATHERMAP[weatherlabel]) };
 		})
-		// console.log('notes', notes);
 		console.log(annotation(notes))
 	}
 }
@@ -209,24 +209,20 @@ class Maid {
 			if (!this.missingFeatReport) {
 				const _ = await this.populateMissingReport();
 			}
-			
-			if (Settings?.report_show?.week_features) {
-				
-				console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: `)}`)
-				// console.table(this.missingFeatReport);
-			}
+
 
 			if (Settings?.report_show?.obj_ournal) {
-				const objectives = Settings.objectives_features;
-				console.log(objectives);
+				const journal_notes = Settings.journal_notes;
+				console.log(journal_notes);
 			}
 
 			if (ask_if_dsa_missing) {
+
 				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
 			}
 		}
 		catch (err) {
-			console.log("Error in provideMissingReport", err)
+			if (DEV_MODE) console.log("Error in provideMissingReport", err)
 		}
 	}
 
@@ -269,10 +265,14 @@ class Maid {
 			this.missingFeatReport = res.data;
 		}
 		catch (err) {
-			console.log("API call", `${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
-			console.log("Error in populateMissingReport", err)
-			if (Settings.show_http_errors) {
-				console.log(err);
+			if (DEV_MODE) {
+
+
+				console.log("API call", `${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
+				console.log("Error in populateMissingReport", err)
+				if (Settings.show_http_errors) {
+					console.log(err);
+				}
 			}
 		}
 	}
@@ -286,38 +286,7 @@ class Maid {
 			}
 		});
 
-		const feat_rules = {
-			commits: {
-				day: 3,
-			},
-			math_ss: {
-				day: 1,
-			},
-			algo_w: {
-				description: "Weighted algorithms\n\
-				easy: 1\n\
-				medium: 2\n\
-				hard: 4\n",
-				week: 7
-			},
-			terms: {
-				description: "Terminologies practiced",
-				week: 100
-			},
-			pro: {
-				description: "Professional Projects",
-				week: 3 * 5
-			},
-			feat: {
-				description: "Features for personal projects",
-				week: 1 * 5 + 2 * 3
-			},
-			acad: {
-				description: "Academic Projects / Assignments / notes added",
-				week: 1 * 5
-			}
-		}
-
+		const feat_rules = getObjectiveFeatures();
 		let userPerformanceData = await res.data;
 
 		function parseDecimalsColumns(userPerformanceData, columns = ["week_average", "week_average_exclude_today"]) {
@@ -432,7 +401,7 @@ class Maid {
 		// Filter where only userPerformanceData that are highlighted in the table_feat show are allowed "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss"],
 		// console.log(userPerformanceData)
 		let filtered_data = filterProperties(userPerformanceData, Settings.table_feat_show);
-		// console.log(filtered_data)
+
 
 		console.table(filtered_data);
 		console.table(feat_accomplished_until_today);
@@ -457,7 +426,8 @@ class Maid {
 	printPerformanceStat(label, userPerformanceData) {
 		let statPerformance = userPerformanceData[label]
 		statPerformance = formatObjectFeatures(statPerformance)
-		console.log(label, statPerformance);
+
+		if (DEV_MODE) console.log(label, statPerformance);
 	}
 
 
@@ -480,9 +450,9 @@ class Maid {
 
 		})
 		// KEEP for debugging. It will throw error if any of the values are undefined
-		// console.log("bars used:", bars)
 
-		console.log(bar(bars))
+
+		if (DEV_MODE) console.log(bar(bars))
 
 	}
 
@@ -738,6 +708,60 @@ updateConcept = async (problem_name, success = true, debug = false) => {
 }
 
 
+/**
+ * based on the `objectives_features` at Settings returns in the format of:
+ * 
+	const feat_rules = {
+		terms: {
+			description: "Terminologies practiced",
+			week: 100
+		},
+		pro: {
+			description: "Professional Projects",
+			week: 3 * 5
+		},
+		feat: {
+			description: "Features for personal projects",
+			week: 1 * 5 + 2 * 3
+		},
+		acad: {
+			description: "Academic Projects / Assignments / notes added",
+			week: 1 * 5
+		}
+		...
+	}
+	 */
+function getObjectiveFeatures() {
+
+	const feat_rules = Settings.objectives_features ?? [];
+	/** Receives in the format of:
+	 * 
+	 * [
+		{
+			"feature_key": "commits",
+			"description": "The number of git commits to be done",
+			"req_type": "day",
+			"requirement": 3
+		},
+		{
+			"feature_key": "feat",
+			"description": "The amount of Personal Project Features to be released",
+			"req_type": "week",
+			"requirement": 11
+		},
+	 */
+
+	// Format in the expected format.
+	let feat_map = {};
+	for (const feat_rule of feat_rules) {
+		// connect the feature lapse to the requiremnett
+		feat_map[feat_rule.feature_key] = {}
+		feat_map[feat_rule.feature_key][feat_rule.req_type] = feat_rule.requirement;
+	}
+
+	return feat_map;
+
+}
 
 function getKeyByValue(object, value) {
 	return Object.keys(object).find(key => object[key] === value);
@@ -958,7 +982,7 @@ const getComments = async (term, count = 5) => {
 	}
 	catch (err) {
 		console.log("Error in getComments", URL)
-	
+
 	}
 	// return res.data;
 }
@@ -996,7 +1020,7 @@ const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_p
 	// Log the commit message in the comments database
 	postCommentFromTerm(category.code, commitMessage);
 	const res = await getComments(category?.code ?? "");
-	comments_to_populate = res?.data??'';
+	comments_to_populate = res?.data ?? '';
 	// console.log("comments_to_populate | special category", comments_to_populate)
 
 

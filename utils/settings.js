@@ -4,7 +4,7 @@ module.exports = Settings = {
 
     // Developer Settings
     "show_http_errors": false, // If failed connection to the server, it will show the error.
-    "dev_mode": true, //If true, it will print communication receips
+    "dev_mode": true, //If true, it will print communication receipts
 
     // DSA 
     "quiz_enabled": [
@@ -36,13 +36,12 @@ module.exports = Settings = {
     "ask_quiz_when_commit": true,
     "ask_if_algo_missing_when_commit": true,
     'show_past_commits_features_after_quiz': true, // If true, it will show the past commits features after the quiz.
-
+    "journal_notes": "Work hard every day",
     // Reporting
     "report_show": {
         "performance_summary": true,
         "weather": false,
         "missing_report": true,
-        "week_features": true, // Only works if missing_report is true
         "obj_ournal": true, // Only works if missing_report is true
         "ask_if_algo_missing": true,  // Only works if missing_report is true. If true, it will ask if the user wants to solve the missing algo problems.
     },
