@@ -212,7 +212,8 @@ class Maid {
 			// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
 			const missingFeatReport = this.missingFeatReport;
 			if (missingFeatReport ? false : true) {
-				console.log("Missing Reports Missing: received: ", missingFeatReport ?? "")
+				console.log("Missing Reports Missing: received: ")
+				console.table(missingFeatReport);
 			}
 
 			if (Settings?.report_show?.week_features) {
