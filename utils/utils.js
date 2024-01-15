@@ -209,13 +209,7 @@ class Maid {
 			if (!this.missingFeatReport) {
 				const _ = await this.populateMissingReport();
 			}
-			// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
-			const missingFeatReport = this.missingFeatReport;
-			if (missingFeatReport ? false : true) {
-				console.log("Missing Reports Missing: received: ")
-				console.table(this.missingFeatReport);
-			}
-
+			
 			if (Settings?.report_show?.week_features) {
 				
 				console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: `)}`)
