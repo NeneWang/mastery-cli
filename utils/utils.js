@@ -1007,10 +1007,7 @@ const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_p
 	const res = await getComments(category?.code ?? "log");
 	comments_to_populate = res.data;
 	// console.log("comments_to_populate | special category", comments_to_populate)
-	if (print_previous_commits) {
-		printComments(comments_to_populate);
-	}
-
+	
 
 	return comments_to_populate;
 
