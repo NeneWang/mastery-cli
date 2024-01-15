@@ -51,7 +51,7 @@ class QuizzerWithDSA extends Quizzer {
 
                 case 'term':
                     if (force_mode) {
-                        return await this.forceLearnMode({ exitMethod: exitMethod });
+                        return await this.forceLearnTermQuestions({ exitMethod: exitMethod });
                     }
                     return await this.pick_and_ask_term_question({ exitMethod: exitMethod });
 

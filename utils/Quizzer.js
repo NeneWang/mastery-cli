@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const axios = require('axios');
 const clipboard = require('copy-paste')
+const Settings = require('./settings');
 
 
 
@@ -117,7 +118,7 @@ class Quizzer {
      * @param {function} exitMethod the exit method
      * @returns 
      */
-    forceLearnMode = async ({ debug = false, exitMethod = () => { } } = {}) => {
+    forceLearnTermQuestions = async ({ debug = false, exitMethod = () => { } } = {}) => {
         let potential_questions = this.terms;
 
         potential_questions = await this.getYoungest(potential_questions, { limit: 2, randomOffline: true });
@@ -170,7 +171,7 @@ class Quizzer {
             const response = await this.ask_term_question(card, { exitMethod: wrappedExitMethod });
             if (response == true) {
                 // increase the terms
-                
+
             } else {
                 if (!lgtermScheduler.has(card)) {
                     // Add to the long term memory only if it was never added yet.
@@ -180,7 +181,7 @@ class Quizzer {
             }
             attempts += 1;
             attempts_timestamps.push(new Date());
-            
+
             miniTermScheduler.solveCard(response);
         }
 
@@ -294,24 +295,27 @@ class Quizzer {
 
 
         const askQuestionRandom = async ({ exitMethod = () => { }, force_mode = true } = {}) => {
-            const askMath = constants.getRandomBool(0.1); // If to whether ask for a math or terminology question
-            // const askMath = false; //Too easy for now.
-            if (askMath) {
-                return await this.ask_math_question({ exitMethod: exitMethod })
-            } else {
-                if (force_mode) {
-                    return await this.forceLearnMode();
-
-                } else {
-
-                    return await this.pick_and_ask_term_question({ exitMethod: exitMethod })
-                }
+            let questionTypes = ['math', 'term'];
+            if (Settings?.quiz_enabled) {
+                questionTypes = Settings.quiz_enabled;
             }
+
+            const questionType = questionTypes[constants.getRandomInt(questionTypes.length)];
+
+            switch (questionType) {
+                case "math":
+                    return await this.ask_math_question({ exitMethod: exitMethod });
+                case "term":
+                    return await this.forceLearnTermQuestions({ exitMethod: exitMethod });
+
+                default:
+                    return await this.ask_math_question({ exitMethod: exitMethod });
+            }
+
         };
         let answerIsCorrect = false;
         if (ask_until_one_is_correct)
             while (!answerIsCorrect && !exit) {
-                if (DEBUG) console.log("Answer is correct", answerIsCorrect, "exit", exit);
                 answerIsCorrect = await askQuestionRandom({ exitMethod: exitMethod });
             }
         else {
@@ -356,7 +360,7 @@ class Quizzer {
             choices: titles
         });
 
-        
+
 
         let deck_selected_key = await ms_deck.run();
 
