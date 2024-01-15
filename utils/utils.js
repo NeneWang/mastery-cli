@@ -217,8 +217,9 @@ class Maid {
 			}
 
 			if (Settings?.report_show?.week_features) {
-				const missingFormatedAsStr = this.missingFeatReport.join(", ")
-				console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
+				
+				console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: `)}`)
+				console.table(this.missingFeatReport);
 			}
 
 			if (Settings?.report_show?.obj_ournal) {
