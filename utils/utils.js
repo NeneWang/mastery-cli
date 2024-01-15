@@ -946,7 +946,9 @@ const commitpush = async (addCommitEmoji = true, { debug = false, comments_to_po
  */
 const getComments = async (term, count = 5) => {
 
-
+	if (term == undefined || term == "") {
+		return {};
+	}
 	const URL = `${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`;
 	try {
 		const res = await axios.get(URl, {
