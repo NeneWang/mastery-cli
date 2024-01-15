@@ -100,6 +100,7 @@ class FeatureExtraction {
 
 const { getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
 const { get } = require('node:http');
+const { strict } = require('node:assert');
 
 class Maid {
 
@@ -188,15 +189,14 @@ class Maid {
 
 		}
 
-		if (Settings?.report_show?.whether) {
+		if (Settings?.report_show?.weather ?? false) {
 			this.say(`Weather Report: ${todaydate}`, false)
-			// console.log('Weather\n')
-			const _ = await weatherReport();
+			await weatherReport();
 		}
 
 		if (Settings?.report_show?.missing_report) {
 			this.say(`Missing Report: ${todaydate}, dsa enabled: ${true}`, false)
-			await this.provideMissingReport({ run_dsa: true });
+			await this.provideMissingReport({ ask_if_dsa_missing: Settings?.report_show?.ask_if_algo_missing ?? false });
 		}
 	}
 
@@ -204,7 +204,7 @@ class Maid {
 	 * Prints the missing objectives
 	 * !important: To prepopulate the msising report first!!
 	 */
-	provideMissingReport = async ({ run_dsa = false } = {}) => {
+	provideMissingReport = async ({ ask_if_dsa_missing = false } = {}) => {
 		try {
 			if (!this.missingFeatReport) {
 				const _ = await this.populateMissingReport();
@@ -214,10 +214,18 @@ class Maid {
 			if (missingFeatReport ? false : true) {
 				console.log("Missing Reports Missing: received: ", missingFeatReport ?? "")
 			}
-			const missingFormatedAsStr = this.missingFeatReport.join(", ")
-			console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
-			if (run_dsa) {
 
+			if (Settings?.report_show?.week_features) {
+				const missingFormatedAsStr = this.missingFeatReport.join(", ")
+				console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
+			}
+
+			if (Settings?.report_show?.obj_ournal) {
+				const objectives = Settings.objectives_features;
+				console.log(objectives);
+			}
+
+			if (ask_if_dsa_missing) {
 				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
 			}
 		}
@@ -236,23 +244,7 @@ class Maid {
 		const algo_missing = missingFeatReport.includes(CONSTANTS.algo_name);
 		if (algo_missing) {
 
-			const objectives = {
-				'year2024': 'Finish the projects: \n\
-				[ ] Ecommerce AI: Clean up, make queries faster and cheaper\n\
-				[ ] Portfolio (Allow Multiple people to use, use Java Spring Backend + Oracle)\n\
-				[ ] PytorchGame that players competes with Pytorch() \n\
-				[ ] Promethues: Finance + Presentation (Multiple users)\n\
-				[ ] DSA Multi, Blog \n\
-				[ ] Talking Game - Sales + Interview that uses NLP\n\
-				[ ] Create Presentations for each of them.',
-				'Month1': 'Finish the projects: \n\
-				[ ] Promethues: Finance: Publish + Presentation: Deplyment\n\
-				[ ] DSA make it multiplayer',
-				'Daily': '\n\
-				[ ] Cloze CSES + Speaking While CourseVideo\n\
-				[ ] @: feat: backend|CMD + pro + Leetvisualstudio + Read:20 Pages.\n\
-				[ ] @Night: Gym + Projects/Tutorials Visuals => Game|Mobile|Web',
-			}
+
 
 			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
 			const response = await dsaPrompt.run();
@@ -739,8 +731,9 @@ increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
 }
 
 updateConcept = async (problem_name, success = true, debug = false) => {
+	const URL = `${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}`
 	try {
-		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}`)
+		const res = await axios.post(URL)
 		if (debug) console.log(res.data)
 	}
 	catch (err) {
@@ -906,7 +899,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
  * @returns {List: [date: comment]}
  * 
  */
-const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { debug = false, comments_to_populate = [] } = {}) => {
+const commitpush = async (addCommitEmoji = true, { debug = false, comments_to_populate = [] } = {}) => {
 
 
 	let commitMessage = process.argv[3];
@@ -922,7 +915,7 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { debug = 
 
 
 	// If any category found then increase the score please.
-	commitCat = commitCategory(commitMessage);
+	commitCat = commitCategory(commitMessage, true);
 	// Log special categories
 
 	if (Settings.blog_special_commits ?? false) {
@@ -953,22 +946,22 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { debug = 
  */
 const getComments = async (term, count = 5) => {
 
-	// let res = [];
-	// await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
-	// 	headers: {
-	// 		'Accept-Encoding': 'application/json'
-	// 	}
-	// }).then(results => res = results.data).catch(err => console.log(err));
 
-	// Do it with await syntax as well
-	const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
-		headers: {
-			'Accept-Encoding': 'application/json'
+	const URL = `${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`;
+	try {
+		const res = await axios.get(URl, {
+			headers: {
+				'Accept-Encoding': 'application/json'
+			}
 		}
-	}
-	);
+		);
 
-	return res;
+		return res;
+	}
+	catch (err) {
+		console.log("Error in getComments", URL)
+	
+	}
 	// return res.data;
 }
 
@@ -1004,10 +997,10 @@ const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_p
 
 	// Log the commit message in the comments database
 	postCommentFromTerm(category.code, commitMessage);
-	const res = await getComments(category?.code ?? "log");
-	comments_to_populate = res.data;
+	const res = await getComments(category?.code ?? "");
+	comments_to_populate = res?.data??'';
 	// console.log("comments_to_populate | special category", comments_to_populate)
-	
+
 
 	return comments_to_populate;
 

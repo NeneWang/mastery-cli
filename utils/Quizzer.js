@@ -45,7 +45,7 @@ class Quizzer {
      * OUT: 
      * - {form, replace}
      */
-    getYoungest = async (potential_questions, { limit = 3, account_id = Settings.account_id??1, debug = false, randomOffline = false } = {}) => {
+    getYoungest = async (potential_questions, { limit = 3, account_id = Settings.account_id ?? 1, debug = false, randomOffline = false } = {}) => {
 
         if (randomOffline) {
             return get_random_of_size(potential_questions, { count: limit });
@@ -575,17 +575,21 @@ class Quizzer {
      * @param term :str # Term (slug) used e.g. singleton-pattern
      */
     printPreviousTerms = async (term) => {
+        const URL = `${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=5`;
+        try {
 
+            const res = await axios.get(URL, {
+                headers: {
+                    'Accept-Encoding': 'application/json'
+                }
+            });
 
-        const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=5`, {
-            headers: {
-                'Accept-Encoding': 'application/json'
+            for (const row in res.data) {
+                const obj = res.data[row]
+                console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
             }
-        });
-
-        for (const row in res.data) {
-            const obj = res.data[row]
-            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
+        } catch {
+            console.log(`Error attempting to fetch from ${URL}`);
         }
 
     }
