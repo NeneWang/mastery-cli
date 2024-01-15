@@ -11,7 +11,7 @@ module.exports = Settings = {
     "quiz_enabled": [
         "math",
         "term",
-    ],
+    ], //math, term sopported ONLY
     "ask_if_algo_missing_when_commit": true,
     //Quick quizes enabled when commiting, 
     "terms_force_mode_cards": 3, //Cards fetched when in force mode.

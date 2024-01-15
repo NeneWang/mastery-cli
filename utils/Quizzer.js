@@ -19,6 +19,7 @@ const { TermScheduler } = require('./termScheduler');
 const { MiniTermScheduler } = require('./miniTermScheduler');
 const { StorableQueue } = require('./StorableQueue');
 
+
 const parser = new Parser();
 
 // const DEBUG = true
@@ -44,7 +45,7 @@ class Quizzer {
      * OUT: 
      * - {form, replace}
      */
-    getYoungest = async (potential_questions, { limit = 3, account_id = 1, debug = false, randomOffline = false } = {}) => {
+    getYoungest = async (potential_questions, { limit = 3, account_id = Settings.account_id??1, debug = false, randomOffline = false } = {}) => {
 
         if (randomOffline) {
             return get_random_of_size(potential_questions, { count: limit });
@@ -607,7 +608,7 @@ class Quizzer {
         try {
 
             const data = {
-                'account_id': CONSTANTS.ACCOUNT_ID ?? 1, //1
+                'account_id': Settings.account_id ?? 1, //1
                 'body': user_res ?? "",
                 'title': term_selected.term ?? "title",
                 'concept_slug': term_selected.formula_name ?? "slug"

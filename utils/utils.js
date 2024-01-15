@@ -135,9 +135,9 @@ class Maid {
 	}
 
 	openJupyter = async ({ FILE = "/machine_learning/01_pandas.ipynb" } = {}) => {
-		
+
 		copyFileToTemp(FILE);
-		
+
 		const correctPrompt = new Confirm("Was the notebook solved correctly?", { initial: true });
 		const response = await correctPrompt.run();
 		if (response) {
@@ -150,11 +150,11 @@ class Maid {
 	openRandomJupyter = async () => {
 		const selectedProblem = getRandomProblem();
 		this.runServer();
-		
+
 		return this.openJupyter({ FILE: "/" + selectedProblem.problem });
 	}
 
-	
+
 
 
 	/**
@@ -234,7 +234,7 @@ class Maid {
 	requests_if_run_dsa_trainer = async (missingFeatReport) => {
 		const algo_missing = missingFeatReport.includes(CONSTANTS.algo_name);
 		if (algo_missing) {
-			
+
 			const objectives = {
 				'year2024': 'Finish the projects: \n\
 				[ ] Ecommerce AI: Clean up, make queries faster and cheaper\n\
@@ -256,7 +256,9 @@ class Maid {
 			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
 			const response = await dsaPrompt.run();
 			if (response) {
-				const dsaTrainer = new DSATrainer();
+				const dsaTrainer = new DSATrainer(
+					
+				);
 				const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
 
 				if (dsa_is_correct) {
@@ -274,11 +276,11 @@ class Maid {
 	populateMissingReport = async () => {
 
 		try {
-			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
+			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
 			this.missingFeatReport = res.data;
 		}
 		catch (err) {
-			console.log("API call", `${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
+			console.log("API call", `${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
 			console.log("Error in populateMissingReport", err)
 			if (Settings.show_http_errors) {
 				console.log(err);
@@ -289,7 +291,7 @@ class Maid {
 
 	performanceReport = async ({ version = "tables" } = {}) => {
 
-		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/report/${CONSTANTS.ACCOUNT_ID}`, {
+		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/report/${Settings.account_id ?? 1}`, {
 			headers: {
 				'Accept-Encoding': 'application/json'
 			}
@@ -860,7 +862,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 	try {
 
 		const data = {
-			'account_id': CONSTANTS.ACCOUNT_ID ?? 1, //1
+			'account_id': Settings.account_id ?? 1, //1
 			'body': user_res ?? "",
 			'title': term_selected ?? "title",
 			'concept_slug': term_selected ?? "slug"
