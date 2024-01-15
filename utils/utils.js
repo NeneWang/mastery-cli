@@ -213,13 +213,13 @@ class Maid {
 			const missingFeatReport = this.missingFeatReport;
 			if (missingFeatReport ? false : true) {
 				console.log("Missing Reports Missing: received: ")
-				console.table(missingFeatReport);
+				console.table(this.missingFeatReport);
 			}
 
 			if (Settings?.report_show?.week_features) {
 				
 				console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: `)}`)
-				console.table(this.missingFeatReport);
+				// console.table(this.missingFeatReport);
 			}
 
 			if (Settings?.report_show?.obj_ournal) {
