@@ -737,7 +737,7 @@ updateConcept = async (problem_name, success = true, debug = false) => {
 		if (debug) console.log(res.data)
 	}
 	catch (err) {
-		console.warn(err);
+		console.warn('error in updateConcept');
 	}
 }
 

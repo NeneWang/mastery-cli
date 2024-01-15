@@ -73,7 +73,7 @@ class Quizzer {
 
         } catch (e) {
             // Such as no internet connection
-            if (debug) console.warn(e)
+            if (debug) console.warn('Error at getting Youngest')
 
             CONSTANTS.online = false; //Lets mark it as such case for this call.
 
