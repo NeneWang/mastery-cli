@@ -4,16 +4,15 @@ module.exports = Settings = {
 
     // Developer Settings
     "show_http_errors": false, // If failed connection to the server, it will show the error.
-    "dev_mode": true, //If true, it will print communication receipts
+    "dev_mode": true, // If true, it will print communication receipts
 
     // DSA 
     "quiz_enabled": [
         "math",
         "term",
-    ], //math, term, algorithm, cloze-algo
-    //Quick quizes enabled when commiting, 
+    ], // math, term, algorithm, cloze-algo
+    // Quick quizes enabled when commiting, 
     "terms_force_mode_cards": 3, //Cards fetched when in force mode.
-    "show_again_failed_terms": true, // If a user commits a mistake in a term, it will be stored to be used on next quiz.
     "blog_special_commits": true, // If true, when a special commit category is commited, it will store the commit message.
     "commit_categories": [
         {
@@ -90,6 +89,4 @@ module.exports = Settings = {
         },
     ],
 
-    // DSA Problems.
-    "cloze_dsa_randomized": true, // If true, it will randomize the cloze problems. Otherwise it will be ordered by the problem type + category
 }

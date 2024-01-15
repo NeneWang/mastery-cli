@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 const axios = require('axios');
-const clipboard = require('copy-paste')
 const Settings = require('./settings');
 
 
@@ -8,7 +7,6 @@ const Settings = require('./settings');
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = require('enquirer');
 
 const constants = require('./constants');
-const DSAConstants = require('./dsa-cli/constants');
 const Parser = require('expr-eval').Parser;
 
 
@@ -20,7 +18,6 @@ const { MiniTermScheduler } = require('./miniTermScheduler');
 const { StorableQueue } = require('./StorableQueue');
 
 
-const parser = new Parser();
 
 // const DEBUG = true
 const DEBUG = false
@@ -156,13 +153,16 @@ class Quizzer {
         }
 
 
+
         const total_cards = potential_questions.length;
+        
+        
         const miniTermScheduler = new MiniTermScheduler(potential_questions);
         const wrappedExitMethod = () => {
             exitMethod();
             exit_force_method = true;
         }
-
+        
 
         while (miniTermScheduler.cardsCount != 0 && !exit_force_method) {
             // Print the statistics
@@ -210,6 +210,16 @@ class Quizzer {
         return variables;
     }
 
+    /**
+     * Depending on the random type, it will return a random number from different ranges:
+     * - d: 2- 100
+     * - sd: 2-20
+     * - md: 2-50
+     * - ld: 2-10000
+     * 
+     * @param {Enumerator: String} type "d | sd | md | ld"
+     * @returns 
+     */
     getRandomFromType(type) {
         const ETypes = {};
         let ATLEAST = 2;
@@ -256,6 +266,12 @@ class Quizzer {
         return { "question_prompt": humanQuestion, "expectedAnswer": variables?.[calculates], "form:": question.form };
     };
 
+    /**
+     * Replaces the string in format of %d with a random number
+     * @param {string} formString the string to replace variables in
+     * @param {dict} variables Variables that will be replaced in the formString
+     * @returns {string} formString with variables replaced
+     */
     replaceStringVariables(formString, variables) {
         for (const variablename of Object.keys(variables)) {
             formString = formString.replace(variablename, variables[variablename]);
