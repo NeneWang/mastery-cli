@@ -80,6 +80,11 @@ class Quizzer {
         return potential_questions;
     }
 
+    /**
+     * Picks a math question from the list of math questions in this Quizzer. 
+     * 1-15-2021: It will just shuffle the list and pick the first one. No internet required. This is done to accelerate the process.
+     * @returns {QuestionStructure} question_selected
+     */
     pick_math_question = async () => {
 
         let potential_questions = this.enabledqmathformulas;
@@ -155,14 +160,14 @@ class Quizzer {
 
 
         const total_cards = potential_questions.length;
-        
-        
+
+
         const miniTermScheduler = new MiniTermScheduler(potential_questions);
         const wrappedExitMethod = () => {
             exitMethod();
             exit_force_method = true;
         }
-        
+
 
         while (miniTermScheduler.cardsCount != 0 && !exit_force_method) {
             // Print the statistics
@@ -438,6 +443,12 @@ class Quizzer {
         }
     }
 
+
+    /**
+     * 
+     * @param {method} param0 
+     * @returns 
+     */
     async pick_and_ask_term_question({ exitMethod = () => { } } = {}) {
         // Fetches a random term form with the youngest one, unless there is no internet
 

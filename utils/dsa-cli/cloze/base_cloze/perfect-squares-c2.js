@@ -1,4 +1,4 @@
-class PerfectSquares {
+class PerfectSquaresC1 {
     solve(n) {
         const dp = new Array(n + 1).fill(Infinity);
         dp[0] = 0;
@@ -9,16 +9,13 @@ class PerfectSquares {
         }
 
         for (let i = 1; i <= n; ++i) {
-            for (const square of squares) {
-                if (i < square) {
-                    break;
-                }
-                dp[i] = Math.min(dp[i], dp[i - square] + 1);
-            }
+            // TODO Loop for each square until the larger one is found, so is bad.
+
+            // Readapt the smallest square at that point as either itself or The count of mvoements previously + 1
         }
 
         return dp[n];
     }
 }
 
-module.exports = { Problem: PerfectSquares };
+module.exports = { Problem: PerfectSquaresC1 };

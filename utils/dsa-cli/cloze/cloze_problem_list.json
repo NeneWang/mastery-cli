@@ -1878,6 +1878,22 @@
         "file_path": "edit-distance-c1.js",
         "difficulty": 1,
         "problem_slug": "edit-distance"
+    },
+    {
+        "file_path": "perfect-squares-c1",
+        "difficulty": 1,
+        "problem_slug": "perfect-squares"
+    },
+    {
+        "file_path": "perfect-squares-c2",
+        "difficulty": 1,
+        "problem_slug": "perfect-squares"
+    },
+    {
+        "file_path": "perfect-squares-c3",
+        "difficulty": 1,
+        "problem_slug": "perfect-squares"
     }
+
 
 ]

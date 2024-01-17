@@ -174,7 +174,6 @@ const countDecimals = (value) => {
     return 0;
 };
 
-
 /**
  * Returns whether the user wants to exit.
  * @param {str} res : User input
@@ -272,6 +271,8 @@ const openEditorPlatformAgnostic = async (editor_instruction, {absolute_temp_fil
         await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
     }
 }
+
+
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
