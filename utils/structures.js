@@ -84,8 +84,9 @@ class TermStorage {
      * @param {List[JsonText]} terms Terms to be added to this deck
      * @param {string} deck_name The deckname, optional if is the parent deckname
      * @param {List[TermStorage]} decks The decks required for the Storages
+     * @param {boolean} is_active If the deck is active or not; by default is false
      */
-    constructor(terms = [], deck_name = "", { decks = [], is_active = true } = {}) {
+    constructor(terms = [], deck_name = "", { decks = [], is_active = false } = {}) {
         this.terms = terms;
         this.deck_name = deck_name;
         this.is_active = is_active;
@@ -118,9 +119,9 @@ class TermStorage {
             if (mask.decksToEnable.includes(this.deck_name)) {
                 this.is_active = mask.enabled;
             }
-            for (const deck of this.decks) {
-                deck.applyMask(mask);
-            }
+        }
+        for (const deck of this.decks) {
+            deck.applyMasks(masks);
         }
     }
 
@@ -302,9 +303,6 @@ class DeckMask {
         this.account_id = account_id;
     }
 
-    get decksToEnable() {
-        return this.decksToEnable.map(deck => deck.deck_name);
-    }
 
 
     get asJson() {
