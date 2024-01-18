@@ -22,6 +22,8 @@ const interview_layer = true;
 // Programming Frameworks Related
 const projects_layer = true;
 
+const testing_layer = true;
+
 // Studying for Class Targetted. Start exclusive boolean this 1 month before finals.
 const study_cisc = false;
 
