@@ -149,14 +149,16 @@ class Maid {
 
 	}
 
+	/**
+	 * Opens a random jupyter notebook from the list of problems
+	 * @returns {bool} if the problem was solved correctly
+	 */
 	openRandomJupyter = async () => {
 		const selectedProblem = getRandomProblem();
 		this.runServer();
 
 		return this.openJupyter({ FILE: "/" + selectedProblem.problem });
 	}
-
-
 
 
 	/**
@@ -180,13 +182,19 @@ class Maid {
 
 	}
 
+	/**
+	 * Prints the day report based on the settings
+	 * - Performance Report: A table report stating the counts of each feature
+	 * - Weather Report: A bar chart of the weather for the next 7 days
+	 * - Missing Report: A list of the missing features for the day
+	 * 		- If the if `ask-if-algo-missing` is true, it will ask if the user wants to run the `algo` trainer (If the user haven't completed his first algorithm in the day.)
+	 */
 	dayReport = async () => {
 		const todaydate = getToday()
 
 		if (Settings?.report_show?.performance_summary) {
 			this.say(`Performance Report: ${todaydate}`, false)
 			await this.performanceReport();
-
 		}
 
 		if (Settings?.report_show?.weather ?? false) {
@@ -206,16 +214,16 @@ class Maid {
 	 */
 	provideMissingReport = async ({ ask_if_dsa_missing = false } = {}) => {
 		try {
+			
 			if (!this.missingFeatReport) {
 				const _ = await this.populateMissingReport();
 			}
-
-
+			
 			if (Settings?.report_show?.obj_ournal) {
 				const journal_notes = Settings.journal_notes;
 				console.log(journal_notes);
 			}
-
+			
 			if (ask_if_dsa_missing) {
 
 				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
@@ -685,10 +693,18 @@ getArrayLastXDays = (days = 7) => {
 	return pastDays;
 }
 
-
-increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
+/**
+ * Increase the performance of a feature; Day performances are such as commits, features, etc.
+ * @param {str} feature_name: The name of the feature to increase
+ * @param {int} increaseBY: The amount to increase the feature by; default 1
+ * @param {bool} debug ?= false : If to whether to debug api responses, etc.; default false
+ * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
+ * 
+ * @returns {List: [date: comment]}
+ */
+increasePerformance = async (feature_name, increaseBY = 1, debug = false, account_id = Settings.account_id ?? 1) => {
 	try {
-		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}`)
+		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}&account_id=${account_id}`)
 		if (debug) console.log(res.data);
 	} catch (err) {
 		if (debug) console.warn(err);
@@ -696,8 +712,18 @@ increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
 
 }
 
-updateConcept = async (problem_name, success = true, debug = false) => {
-	const URL = `${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}`
+
+/**
+ * Updates the count of times a concept has been practiced e.g. `algebra-problem-1` or 'js-how-to-loop'
+ * @param {str} problem_name: The name of the problem to update
+ * @param {bool} success ?= true : If to whether to increase the success count or the fail count
+ * @param {bool} debug ?= false : If to whether to debug api responses, etc.
+ * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
+ * 
+ * @returns {"message": f"Success updating {concept_term}, {conceptSelected.correct_times}"}
+ */
+updateConcept = async (problem_name, success = true, debug = false, account_id = Settings.account_id ?? 1) => {
+	const URL = `${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}&account_id=${account_id}`
 	try {
 		const res = await axios.post(URL)
 		if (debug) console.log(res.data)
@@ -773,10 +799,10 @@ const getCredentialNames = (credentialDict) => {
 	})
 }
 
+/**
+ * Retrieves fromt the json the proper credentials as n object
+ */
 const getCredentialInformation = (credentialsDict, credential_name) => {
-	/**
-	 * Retrieves fromt he json the proper credentials as n object
-	 */
 
 	res = credentialsDict.filter(
 		(cred) => cred.name == credential_name

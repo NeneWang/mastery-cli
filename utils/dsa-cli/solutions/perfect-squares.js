@@ -21,4 +21,6 @@ class PerfectSquares {
     }
 }
 
+
+
 module.exports = { Problem: PerfectSquares };

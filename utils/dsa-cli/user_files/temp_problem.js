@@ -1,51 +1,67 @@
-class CombinationSumII {
 
-    /**
-     * https://leetcode.com/problems/combination-sum-ii/
-     * Time O(2^N) | Space O(N)
-     * @param {number[]} candidates
-     * @param {number} target
-     * @return {number[][]}
-     */
-    combinationSum2 = function (candidates, target) {
+class CharacterReplacement {
+    solve(s, k) {
+		
+		// Add Right Frequency to the map. 
+        const addRightFrequency = (s, right, map) => {
+            // Gets the character on the right, and the index code there, 
+			const char = s[right];
+            const index = getCode(char);
+			// Increase that on the map of counts
+            map[index]++;
 
+            return map[index];
+        };
 
-        const dfs = (candidates, target, index = 0, combination = [], combinations = []) => {
-            const isBaseCase = target < 0;
-            if (isBaseCase) return combinations;
+		// Substract the frequency on the left
+        const subtractLeftFrequency = (s, left, map) => {
 
-            const isTarget = target === 0;
-            if (isTarget) {
-                if (combination.length) combinations.push(combination.slice());
+            const char = s[left];
+            const index = getCode(char);
 
-                return combinations
-            }
+            map[index]--;
 
-            for (let i = index; i < candidates.length; i++) {
-                const isDuplicate = (index < i) && (candidates[i - 1] === candidates[i]);
-                if (isDuplicate) continue;
+            return map[index];
+        };
+		
+		// Getting the encode by substracting the character with A characterCode
+        const getCode = (char) => char.charCodeAt(0) - 'A'.charCodeAt(0);
 
-                backTrack(candidates, target, i, combination, combinations);
-            }
+		// Lets the left, right, longest to be all 0 at the start
+        let [left, right, longest, max] = new Array(4).fill(0);
+        const frequencyMap = new Array(26).fill(0);
 
-            return combinations;
-        }
-
-        const backTrack = (candidates, target, i, combination, combinations) => {
-            // TODO Complete the backTrack function which adds the current element to the combination and then calls the dfs function.
-            // Pops it from the combiantion if found.
+        while (right < s.length) {
+			
+            // TODO Complete the following code so that hte right frequency is added to the map
+            // Starting with the right Keep increasing the right boundaries frequencies until reaches max length
             
+			// longest being either the current count of that letter, or the longest letter seen on the past. Longest being the count of word with the longest leter found
+			
+			// Get the windoes length
+            let window = right - left + 1;
+            
+			// We can move the slider where `k` beign the amount of changes we can make, and windows - longest beng the longest letter seen (that we can ignore because it moves at the same time) and the distance of letters.
+			const canSlide = k < window - longest;
+            if (canSlide) {
+				// If we can slide then we need to update the frequency map of the current letters being seen.
+                subtractLeftFrequency(s, left, frequencyMap);
+                left++;
+            }
+			
+			// Recalculate the windows size after sliding
+            window = right - left + 1;
+
+			//Max Length is the length of the longest substring containing the same letter that can be obtained after performing at most k operations.
+            max = Math.max(max, window);
+
+            right++;
         }
 
-        candidates.sort((a, b) => a - b)
-
-        return dfs(candidates, target)
-    };
-
-    solve(candidates, target) {
-        return this.combinationSum2(candidates, target);
+        return max;
     }
 }
 
 
-module.exports = { Problem: CombinationSumII };
+
+module.exports = { Problem: CharacterReplacement };

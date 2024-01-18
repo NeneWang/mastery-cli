@@ -1,6 +1,6 @@
 module.exports = Settings = {
     // User ID Provided Mastery Site.
-    "account_id": 1,
+    "account_id": 2,
 
     // Developer Settings
     "show_http_errors": false, // If failed connection to the server, it will show the error.
@@ -39,7 +39,7 @@ module.exports = Settings = {
     // Reporting
     "report_show": {
         "performance_summary": true,
-        "weather": false,
+        "weather": true,
         "missing_report": true,
         "obj_ournal": true, // Only works if missing_report is true
         "ask_if_algo_missing": true,  // Only works if missing_report is true. If true, it will ask if the user wants to solve the missing algo problems.
