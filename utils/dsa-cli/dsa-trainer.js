@@ -14,6 +14,7 @@ const { Toggle, AutoComplete, Input } = require('enquirer');
 const { ProblemMetadata } = require('./structures');
 const fs = require('fs');
 const { show_image_if_isurl } = require('./functions');
+const Settings = require('../settings');
 
 
 const DEBUG = false;
@@ -188,7 +189,7 @@ class DSATrainer {
     async postProblemSolution(problem, { attempts_timestamp = [], comments = [], comm = "" } = { }) {
         const absoluteFilePath = this.problems_manager.absolute_problem_file_path;
 
-        const ACCOUNT_ID = constants.CONSTANTS.ACCOUNT_ID
+        const ACCOUNT_ID = Settings.account_id ?? 1;
 
         const formData = new FormData();
         formData.append('file', fs.createReadStream(absoluteFilePath), {

@@ -8,6 +8,7 @@ const DSAConstants = require('./dsa-cli/constants');
 const { getProblemsData, getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
 
 const { TermScheduler } = require('./termScheduler');
+const settings = require('./settings');
 /**
  * This class also supports DSATrainer Implementation.
  */
@@ -21,7 +22,8 @@ class QuizzerWithDSA extends Quizzer {
 
     async askQuestion({ ask_until_one_is_correct = true, disable_math = false, disable_dsa = false } = {}) {
         let exit = false;
-        const problem_types = ['math', 'term', 'cloze-algo'];
+        let problem_types = ['math', 'term'];
+        problem_types = settings.quiz_enabled??problem_types;
 
         const exitMethod = () => {
             if (DEBUG) console.log("Exit method requested");
@@ -37,21 +39,13 @@ class QuizzerWithDSA extends Quizzer {
         const askQuestionRandom = async ({ exitMethod = () => { }, force_mode = true } = {}) => {
             let problem_type_selected = constants.get_random(problem_types);
             
-            if (disable_math && problem_type_selected === 'math') {
-                problem_type_selected = 'term';
-            }
-
-            if (disable_dsa && problem_type_selected === 'cloze-algo') {
-                problem_type_selected = 'term';
-            }
-
             switch (problem_type_selected) {
                 case 'math':
                     return await this.ask_math_question({ exitMethod: exitMethod });
 
                 case 'term':
                     if (force_mode) {
-                        return await this.forceLearnMode({ exitMethod: exitMethod });
+                        return await this.forceLearnTermQuestions({ exitMethod: exitMethod });
                     }
                     return await this.pick_and_ask_term_question({ exitMethod: exitMethod });
 

@@ -1,11 +1,19 @@
 // Language speciifc questions for code interview practice. Such as Python, Swift, Javascript, Dart.
+// Mischallaneus Features might be also added ONLY if they are used in the common day.
 
-// Make sure for all know how to instantiate the specific structures. Please dont go very specific into some niche libraries, but focus on the main libraries as well as the focus that will be in programming interviews.
+/* Make sure for all know how to instantiate the specific structures.
+ Please dont go very specific into some niche libraries, but focus on the main libraries as well as the 
+ focus that will be for refreshing before programming interviews.
+ 
+ Therfore Priority queue should be as follow:
+ 1. Python: Datastrucutres Libs available. Modern Architecture.
+ 2. Swift: Requested for Mobile
+ 3. c# : requested for mantainance. Also quite the beautigul language.
+ 4. Java: requested for mantainance
+
+ */
 
 
-/* TODO For Python
-- [ ] 
-*/
 const python = [
     {
         term: "set | add, remove, check if contains",
@@ -99,6 +107,43 @@ const python = [
          and removal of the smallest element have O(log n) time complexity."
     },
     {
+        term: "Heap Q In Practice",
+        prompt: "Use heapq in practice for capturing the next Smallest uggly number to compute the next ugly numbers",
+        description: ":m Complete:\n\
+        ## [Complete Import]\n\
+        \nclass Solution:\n\
+            def nthUglyNumber(self, n: int) -> int:\n\
+                heap = [1]\n\
+                visited = {1}\n\
+        \n\
+                for t in range(n):\n\
+                    ## [Get the smallest Pop]\n\
+                    for i in [2, 3, 5]:\n\
+                        computed = smallestuggly * i\n\
+                        if computed not in visited:\n\
+                            visited.add(computed)\n\
+                            ## [Psuh into the heap the smallest]\n\
+                return smallestuggly",
+        example:
+            "import heapq\n\
+        \nclass Solution:\n\
+            def nthUglyNumber(self, n: int) -> int:\n\
+                heap = [1]\n\
+                visited = {1}\n\
+        \n\
+                for t in range(n):\n\
+                    smallestuggly= heapq.heappop(heap)\n\
+                    for i in [2, 3, 5]:\n\
+                        computed = smallestuggly * i\n\
+                        if computed not in visited:\n\
+                            visited.add(computed)\n\
+                            heapq.heappush(heap, computed)\n\
+                return smallestuggly"
+
+
+
+    },
+    {
         "term": "Linked List",
         "example": "class Node:\n\
       def __init__(self, data):\n\
@@ -154,7 +199,7 @@ const python = [
         example: "import math\n\
         math.floor(1.5)\n\
         math.ceil(1.5)"
-    
+
     },
     {
         term: "Infinite",
@@ -345,6 +390,12 @@ const js = [
         term: "Check key in map",
         example: "if ('j' in {'j': 1}) { console.log('j is in the map'); }",
         prompt: "How to check if a key is in a map: e.g. j in {'j': 1}?"
+    },
+    {
+        term: "JS | Min Max Integer",
+        example: "Number.MAX_SAFE_INTEGER\n\
+        Number.MIN_SAFE_INTEGER",
+        prompt: "How to get the max and min integer in JS?"
     }
 ]
 

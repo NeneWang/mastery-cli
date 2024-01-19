@@ -1,4 +1,4 @@
-const { isAxiosError } = require("axios");
+const Settings = require("./settings.js");
 
 /**
  * Terms, standard accepted for the Quizzler
@@ -65,7 +65,7 @@ class Terminology extends Term {
      * @param {String} description Description  which should appear or the definition
      * @param {Optional Arguments} param2 {example: If there is an example, auto_image: bool: If to autoamtically fetch an image from the web.}
      */
-    constructor(term, description = "", { example = "", autom_image = false, prompt = "Use this on an example", attachment = "" } = {}) {
+    constructor(term, description = "", { example = "", autom_image = false, H = "Use this on an example", attachment = "" } = {}) {
 
         super(term, example, description, prompt, { attachment: attachment });
 
@@ -84,8 +84,9 @@ class TermStorage {
      * @param {List[JsonText]} terms Terms to be added to this deck
      * @param {string} deck_name The deckname, optional if is the parent deckname
      * @param {List[TermStorage]} decks The decks required for the Storages
+     * @param {boolean} is_active If the deck is active or not; by default is false
      */
-    constructor(terms = [], deck_name = "", { decks = [], is_active = true } = {}) {
+    constructor(terms = [], deck_name = "", { decks = [], is_active = false } = {}) {
         this.terms = terms;
         this.deck_name = deck_name;
         this.is_active = is_active;
@@ -105,6 +106,22 @@ class TermStorage {
         for (const deck of decks) {
             // console.log("Adding deck: ", deck);
             this.addDeck(deck);
+        }
+    }
+
+
+    /**
+     * 
+     * @param {[DeckMask]} masks List of masks to apply to the deck
+     */
+    applyMasks(masks) {
+        for (const mask of masks) {
+            if (mask.decksToEnable.includes(this.deck_name)) {
+                this.is_active = mask.enabled;
+            }
+        }
+        for (const deck of this.decks) {
+            deck.applyMasks(masks);
         }
     }
 
@@ -132,7 +149,7 @@ class TermStorage {
      */
     get deck_titles_with_count() {
         const deck_names = {
-            [`${this.deck_name} - ${this.terms.length} cards`]: {name: this.deck_name, count: this.terms.length}
+            [`${this.deck_name} - ${this.terms.length} cards`]: { name: this.deck_name, count: this.terms.length }
         };
         for (const deck of this.decks) {
             Object.assign(deck_names, deck.deck_titles_with_count);
@@ -270,5 +287,33 @@ class Queue {
 
 }
 
+class DeckMask {
+    /**
+     * 
+     * @param {string} mask_name Name of this mask, used as a sharable identifier
+     * @optionalparam {string[]} decksToEnableStrings 
+     * @optionalparam {boolean} enabled; defaults to true
+     * @optionalparam {int} account_id; defaults to Settings.account_id
+     * @returns {DeckMask}
+     */
+    constructor(mask_name, { decksToEnableStrings = [], enabled = true, account_id = Settings.account_id } = {}) {
+        this.mask_name = mask_name;
+        this.decksToEnable = decksToEnableStrings;
+        this.enabled = enabled;
+        this.account_id = account_id;
+    }
 
-module.exports = { Term, Terminology, TermStorage, Queue };
+
+
+    get asJson() {
+        return {
+            mask_name: this.mask_name,
+            decks: this.decksToEnable,
+            enabled: this.enabled,
+            account_id: this.account_id
+        }
+    }
+}
+
+
+module.exports = { Term, Terminology, TermStorage, Queue, DeckMask };

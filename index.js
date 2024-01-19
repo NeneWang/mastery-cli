@@ -18,12 +18,13 @@ const { populateMasterDeck: populateMasterDeck } = require("./utils/data/terms")
 const DSATrainer = require('./utils/dsa-cli/dsa-trainer');
 const { QuizzerWithDSA } = require('./utils/QuizzerWithDSA');
 
+
 const cli_meow = cli[0]
 const cmInfo = cli[1]
 const flags = cli_meow.flags;
 const input = cli_meow.input;
 
-let{ debug } = flags;
+let { debug } = flags;
 debug = debug ?? false;
 const { getTalk, Maid } = utils;
 const { Demo, EDemo } = demos;
@@ -37,14 +38,14 @@ const { Demo, EDemo } = demos;
 	const dsaTrainer = new DSATrainer({
 		skip_problems: ["hello-world", "simple-sum"]
 	});
-	
+
 	const mQuizer = new QuizzerWithDSA(constants.qmathformulas, constants.qmathenabled, masterDeck);
 	const options = Object.keys(cmInfo.commands);
 	input.includes(options[0]) && cli_meow.showHelp(0);
 	debug && log(flags);
 
 	maid.clearOnTalk = true;
-	
+
 
 	if (input.includes(cmInfo.commands.chart.code)) {
 		// Demo for showing charts
@@ -56,7 +57,7 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.code.code)) {
 		maid.tellCurrentDirectory();
 	}
-	else if(input.includes(cmInfo.commands.jupyter.code)) {
+	else if (input.includes(cmInfo.commands.jupyter.code)) {
 		// utils.openRandomJupyter();
 		const res = await maid.openRandomJupyter();
 		console.log("Maid responded with", res);
@@ -70,24 +71,23 @@ const { Demo, EDemo } = demos;
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
 		let comments_to_populate = [];
-		const commit_push_results = utils.commitpush({ comments_to_populate: comments_to_populate });
-		maid.populateMissingReport();
-		// as until the response is right?
-		
-		if (flags.all){
-
+		if (Settings.ask_quiz_when_commit) {
 			const _ = await mQuizer.askQuestion();
-		}else{
-			const _ = await mQuizer.askQuestion({disable_dsa: true});
 
 		}
+		maid.populateMissingReport();
 
-		await maid.provideMissingReport({ run_dsa: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
-		
+
+		await maid.provideMissingReport({ ask_if_dsa_missing: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
+
 		// Slight optimization.
-		const commit_res = await commit_push_results;
+		const commit_res = await utils.commitpush();
 		comments_to_populate = commit_res.comments_to_populate;
-		utils.printComments(comments_to_populate);
+
+		if (Settings.show_past_commits_features_after_quiz) {
+
+			utils.printComments(comments_to_populate);
+		}
 
 
 
@@ -121,10 +121,10 @@ const { Demo, EDemo } = demos;
 	}
 	else if (input.includes(cmInfo.commands.cses.code)) {
 		let reset = false;
-		if (flags.reset){
+		if (flags.reset) {
 			reset = true;
-		}	
-		mQuizer.cloze_study_session({reset_scheduler: reset});
+		}
+		mQuizer.cloze_study_session({ reset_scheduler: reset });
 	}
 	else if (input.includes(cmInfo.commands.jses.code)) {
 		mQuizer.jupyter_study_session();
@@ -133,7 +133,7 @@ const { Demo, EDemo } = demos;
 		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
 
 		const updateAlgorithmPerformance = (problem_response) => {
-			if (Settings.dev_mode ) console.log("updateAlgorithmPerformance: ", problem_response);
+			if (Settings.dev_mode) console.log("updateAlgorithmPerformance: ", problem_response);
 
 			const dsa_is_correct = problem_response.is_problem_solved;
 			if (dsa_is_correct) {
@@ -157,7 +157,7 @@ const { Demo, EDemo } = demos;
 		}
 
 	}
-	else if(input.includes(cmInfo.commands.cloze.code)) {
+	else if (input.includes(cmInfo.commands.cloze.code)) {
 		const problem_response = await dsaTrainer.openRandomClozeDSAProblem();
 		console.log("problem_response of cloze", problem_response)
 	}

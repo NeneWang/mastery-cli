@@ -1,13 +1,12 @@
 const chalk = require('chalk');
 const axios = require('axios');
-const clipboard = require('copy-paste')
+const Settings = require('./settings');
 
 
 
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = require('enquirer');
 
 const constants = require('./constants');
-const DSAConstants = require('./dsa-cli/constants');
 const Parser = require('expr-eval').Parser;
 
 
@@ -18,7 +17,7 @@ const { TermScheduler } = require('./termScheduler');
 const { MiniTermScheduler } = require('./miniTermScheduler');
 const { StorableQueue } = require('./StorableQueue');
 
-const parser = new Parser();
+
 
 // const DEBUG = true
 const DEBUG = false
@@ -43,7 +42,7 @@ class Quizzer {
      * OUT: 
      * - {form, replace}
      */
-    getYoungest = async (potential_questions, { limit = 3, account_id = 1, debug = false, randomOffline = false } = {}) => {
+    getYoungest = async (potential_questions, { limit = 3, account_id = Settings.account_id ?? 1, debug = false, randomOffline = false } = {}) => {
 
         if (randomOffline) {
             return get_random_of_size(potential_questions, { count: limit });
@@ -71,7 +70,7 @@ class Quizzer {
 
         } catch (e) {
             // Such as no internet connection
-            if (debug) console.warn(e)
+            if (debug) console.warn('Error at getting Youngest')
 
             CONSTANTS.online = false; //Lets mark it as such case for this call.
 
@@ -81,6 +80,11 @@ class Quizzer {
         return potential_questions;
     }
 
+    /**
+     * Picks a math question from the list of math questions in this Quizzer. 
+     * 1-15-2021: It will just shuffle the list and pick the first one. No internet required. This is done to accelerate the process.
+     * @returns {QuestionStructure} question_selected
+     */
     pick_math_question = async () => {
 
         let potential_questions = this.enabledqmathformulas;
@@ -117,7 +121,7 @@ class Quizzer {
      * @param {function} exitMethod the exit method
      * @returns 
      */
-    forceLearnMode = async ({ debug = false, exitMethod = () => { } } = {}) => {
+    forceLearnTermQuestions = async ({ debug = false, exitMethod = () => { } } = {}) => {
         let potential_questions = this.terms;
 
         potential_questions = await this.getYoungest(potential_questions, { limit: 2, randomOffline: true });
@@ -154,7 +158,10 @@ class Quizzer {
         }
 
 
+
         const total_cards = potential_questions.length;
+
+
         const miniTermScheduler = new MiniTermScheduler(potential_questions);
         const wrappedExitMethod = () => {
             exitMethod();
@@ -170,7 +177,7 @@ class Quizzer {
             const response = await this.ask_term_question(card, { exitMethod: wrappedExitMethod });
             if (response == true) {
                 // increase the terms
-                
+
             } else {
                 if (!lgtermScheduler.has(card)) {
                     // Add to the long term memory only if it was never added yet.
@@ -180,7 +187,7 @@ class Quizzer {
             }
             attempts += 1;
             attempts_timestamps.push(new Date());
-            
+
             miniTermScheduler.solveCard(response);
         }
 
@@ -208,6 +215,16 @@ class Quizzer {
         return variables;
     }
 
+    /**
+     * Depending on the random type, it will return a random number from different ranges:
+     * - d: 2- 100
+     * - sd: 2-20
+     * - md: 2-50
+     * - ld: 2-10000
+     * 
+     * @param {Enumerator: String} type "d | sd | md | ld"
+     * @returns 
+     */
     getRandomFromType(type) {
         const ETypes = {};
         let ATLEAST = 2;
@@ -254,6 +271,12 @@ class Quizzer {
         return { "question_prompt": humanQuestion, "expectedAnswer": variables?.[calculates], "form:": question.form };
     };
 
+    /**
+     * Replaces the string in format of %d with a random number
+     * @param {string} formString the string to replace variables in
+     * @param {dict} variables Variables that will be replaced in the formString
+     * @returns {string} formString with variables replaced
+     */
     replaceStringVariables(formString, variables) {
         for (const variablename of Object.keys(variables)) {
             formString = formString.replace(variablename, variables[variablename]);
@@ -294,24 +317,27 @@ class Quizzer {
 
 
         const askQuestionRandom = async ({ exitMethod = () => { }, force_mode = true } = {}) => {
-            const askMath = constants.getRandomBool(0.1); // If to whether ask for a math or terminology question
-            // const askMath = false; //Too easy for now.
-            if (askMath) {
-                return await this.ask_math_question({ exitMethod: exitMethod })
-            } else {
-                if (force_mode) {
-                    return await this.forceLearnMode();
-
-                } else {
-
-                    return await this.pick_and_ask_term_question({ exitMethod: exitMethod })
-                }
+            let questionTypes = ['math', 'term'];
+            if (Settings?.quiz_enabled) {
+                questionTypes = Settings.quiz_enabled;
             }
+
+            const questionType = questionTypes[constants.getRandomInt(questionTypes.length)];
+
+            switch (questionType) {
+                case "math":
+                    return await this.ask_math_question({ exitMethod: exitMethod });
+                case "term":
+                    return await this.forceLearnTermQuestions({ exitMethod: exitMethod });
+
+                default:
+                    return await this.ask_math_question({ exitMethod: exitMethod });
+            }
+
         };
         let answerIsCorrect = false;
         if (ask_until_one_is_correct)
             while (!answerIsCorrect && !exit) {
-                if (DEBUG) console.log("Answer is correct", answerIsCorrect, "exit", exit);
                 answerIsCorrect = await askQuestionRandom({ exitMethod: exitMethod });
             }
         else {
@@ -356,7 +382,7 @@ class Quizzer {
             choices: titles
         });
 
-        
+
 
         let deck_selected_key = await ms_deck.run();
 
@@ -417,6 +443,12 @@ class Quizzer {
         }
     }
 
+
+    /**
+     * 
+     * @param {method} param0 
+     * @returns 
+     */
     async pick_and_ask_term_question({ exitMethod = () => { } } = {}) {
         // Fetches a random term form with the youngest one, unless there is no internet
 
@@ -570,17 +602,21 @@ class Quizzer {
      * @param term :str # Term (slug) used e.g. singleton-pattern
      */
     printPreviousTerms = async (term) => {
+        const URL = `${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=5`;
+        try {
 
+            const res = await axios.get(URL, {
+                headers: {
+                    'Accept-Encoding': 'application/json'
+                }
+            });
 
-        const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=5`, {
-            headers: {
-                'Accept-Encoding': 'application/json'
+            for (const row in res.data) {
+                const obj = res.data[row]
+                console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
             }
-        });
-
-        for (const row in res.data) {
-            const obj = res.data[row]
-            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
+        } catch {
+            console.log(`Error attempting to fetch from ${URL}`);
         }
 
     }
@@ -603,7 +639,7 @@ class Quizzer {
         try {
 
             const data = {
-                'account_id': CONSTANTS.ACCOUNT_ID ?? 1, //1
+                'account_id': Settings.account_id ?? 1, //1
                 'body': user_res ?? "",
                 'title': term_selected.term ?? "title",
                 'concept_slug': term_selected.formula_name ?? "slug"

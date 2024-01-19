@@ -1,12 +1,10 @@
-class PerfectSquares {
+class PerfectSquaresC1 {
     solve(n) {
         const dp = new Array(n + 1).fill(Infinity);
         dp[0] = 0;
 
-        const squares = [];
-        for (let i = 1; i * i <= n; ++i) {
-            squares.push(i * i);
-        }
+        // TODO Precaluclate squares using target n as the upper boundary
+        
 
         for (let i = 1; i <= n; ++i) {
             for (const square of squares) {
@@ -21,6 +19,4 @@ class PerfectSquares {
     }
 }
 
-
-
-module.exports = { Problem: PerfectSquares };
+module.exports = { Problem: PerfectSquaresC1 };

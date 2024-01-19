@@ -41,6 +41,11 @@ const getDirAbsoluteUri = (fileimage = './img/unicorn.png', subdirectory = './da
     return (absolutePath.toString());
 };
 
+/**
+ * 
+ * @param {string} directoryPath './data/priorities'
+ * @returns Promise that resolves to the files in the directory
+ */
 const getFilesInDirectory = (directoryPath = './data/priorities') => {
     const absolutePath = path.resolve(path.join(__dirname, directoryPath));
 
@@ -60,13 +65,22 @@ const getFilesInDirectory = (directoryPath = './data/priorities') => {
 
 
 
-
+/**
+ * Return the absolute path of the codebase
+ * @returns {str} Formatted full Directory of the codebase e.g. C:/github/testing/mastery-cli
+ */
 const getMaidDirectory = () => {
     // Note it should take from the root.
     const absolutePath = path.resolve(path.join(__dirname, '../'));
     return (absolutePath.toString());
 };
 
+
+/**
+ * Shows an image, if it is a url then it will fetch it, otherwise it will read it from the local file
+ * @param {string} image_file Image of the file to show
+ * @param {is_url} is_url Whether the image is a url or not
+ */
 async function show_image(image_file, { is_url = false } = {}) {
     // let ima
     let image_file_dir = is_url ? image_file : getDirAbsoluteUri(image_file);
@@ -96,6 +110,9 @@ async function show_image(image_file, { is_url = false } = {}) {
 };
 
 
+/**
+ * Prints the image if it is a url
+ */
 async function show_image_if_isurl(message) {
     // check if is url if not, then just print the message
     let is_url = message.startsWith("http"); // Includes https
@@ -157,7 +174,6 @@ const countDecimals = (value) => {
     return 0;
 };
 
-
 /**
  * Returns whether the user wants to exit.
  * @param {str} res : User input
@@ -214,7 +230,10 @@ function printMarked(content, { use_markdown = true, markdown_token = ":m" } = {
     }
 }
 
-
+/**
+ * Open the editor with the given instruction
+ * @param {Awaited<void>} Returns once the editor is closed
+ */
 const openEditorWithCommand = async (instruction) => {
     await exec(`${instruction}`, (error, stdout, stderr) => {
         if (error) {
@@ -252,6 +271,8 @@ const openEditorPlatformAgnostic = async (editor_instruction, {absolute_temp_fil
         await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
     }
 }
+
+
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,

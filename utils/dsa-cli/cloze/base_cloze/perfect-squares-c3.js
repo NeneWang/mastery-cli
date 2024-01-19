@@ -1,4 +1,4 @@
-class PerfectSquares {
+class PerfectSquaresC1 {
     solve(n) {
         const dp = new Array(n + 1).fill(Infinity);
         dp[0] = 0;
@@ -8,7 +8,9 @@ class PerfectSquares {
             squares.push(i * i);
         }
 
-        for (let i = 1; i <= n; ++i) {
+
+        // TODO Loop Each number from 1 to n
+        for (;;) {
             for (const square of squares) {
                 if (i < square) {
                     break;
@@ -17,10 +19,9 @@ class PerfectSquares {
             }
         }
 
-        return dp[n];
+        // TODO Return the last element of the dp array
+        
     }
 }
 
-
-
-module.exports = { Problem: PerfectSquares };
+module.exports = { Problem: PerfectSquaresC1 };

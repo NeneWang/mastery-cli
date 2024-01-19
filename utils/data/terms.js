@@ -10,23 +10,25 @@
 
 
 
-const { TermStorage } = require('../structures');
-
-const layer_1 = false;
-const layer_2 = false;
-const layer_3 = false;
-
-// Code Interview related
-const interview_layer = true;
-
-// Programming Frameworks Related
-const projects_layer = true;
-
-// Studying for Class Targetted. Start exclusive boolean this 1 month before finals.
-const study_cisc = false;
+const { TermStorage, DeckMask } = require('../structures');
 
 
-const study_legacy = false;
+
+const engineerMask = new DeckMask(
+    "engineer-prep",
+    {
+        decksToEnableStrings: [
+            "design patterns",
+            "dsa",
+            "system design",
+            "coder terms",
+            "unit testing",
+            "js advanced",
+            "best practices"
+        ]
+    }
+)
+
 
 /**
  * 
@@ -38,100 +40,98 @@ async function populateMasterDeck() {
     let decks = new TermStorage([], "Academic Terms");
 
     const { react_terms, apex, flutter, IDE_S, chrome_extensions, python_frameworks, react_typescript, dotNet, angular } = require('./frameworks');
-    decks.addDeck(new TermStorage(react_terms, "react terms", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(apex, "apex", { is_active: layer_3 }));
-    decks.addDeck(new TermStorage(flutter, "flutter", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(IDE_S, "IDEs", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(chrome_extensions, "chrome extensions", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(python_frameworks, "python frameworks", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(react_typescript, "react typescript", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(dotNet, "dot net", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(angular, "angular", { is_active: projects_layer }));
+    decks.addDeck(new TermStorage(react_terms, "react terms"));
+    decks.addDeck(new TermStorage(apex, "apex"));
+    decks.addDeck(new TermStorage(flutter, "flutter"));
+    decks.addDeck(new TermStorage(IDE_S, "IDEs"));
+    decks.addDeck(new TermStorage(chrome_extensions, "chrome extensions"));
+    decks.addDeck(new TermStorage(python_frameworks, "python frameworks"));
+    decks.addDeck(new TermStorage(react_typescript, "react typescript"));
+    decks.addDeck(new TermStorage(dotNet, "dot net"));
+    decks.addDeck(new TermStorage(angular, "angular"));
 
 
 
     const { network, network_midterm, artificialIntelligence, artificialIntelligence_2, algebra, calculousOne, network_final } = require("./spring-senior");
-    decks.addDeck(new TermStorage(network, "network", { is_active: study_legacy }));
-    decks.addDeck(new TermStorage(network_midterm, "network midterm", { is_active: study_legacy }));
-    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence", { is_active: false }));
-    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2", { is_active: false }));
-    decks.addDeck(new TermStorage(algebra, "algebra", { is_active: study_legacy }));
-    decks.addDeck(new TermStorage(calculousOne, "calculus one", { is_active: study_legacy }));
-    decks.addDeck(new TermStorage(network_final, "network final", { is_active: study_legacy }));
+    decks.addDeck(new TermStorage(network, "network"));
+    decks.addDeck(new TermStorage(network_midterm, "network midterm"));
+    decks.addDeck(new TermStorage(artificialIntelligence, "artificial intelligence"));
+    decks.addDeck(new TermStorage(artificialIntelligence_2, "artificial intelligence 2"));
+    decks.addDeck(new TermStorage(algebra, "algebra"));
+    decks.addDeck(new TermStorage(calculousOne, "calculus one"));
+    decks.addDeck(new TermStorage(network_final, "network final"));
 
 
 
     const { pragmatic_programmer, life_game_lessons, survival_game_lessons,
         life_lessons, hackathon_lessons, experiments_lessons } = require('./soft_skill_book_game.js');
-    decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer", { is_active: layer_1 }));
-    decks.addDeck(new TermStorage(life_game_lessons, "life game lessons", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(pragmatic_programmer, "pragmatic programmer"));
+    decks.addDeck(new TermStorage(life_game_lessons, "life game lessons"));
 
     const { designPatterns, dsa, system_design } = require('./dsa');
-    decks.addDeck(new TermStorage(designPatterns, "design patterns", { is_active: interview_layer }));
-    decks.addDeck(new TermStorage(dsa, "dsa", { is_active: interview_layer }))
-    decks.addDeck(new TermStorage(system_design, "system design", { is_active: interview_layer }));
+    decks.addDeck(new TermStorage(designPatterns, "design patterns"));
+    decks.addDeck(new TermStorage(dsa, "dsa")),
+    decks.addDeck(new TermStorage(system_design, "system design"));
 
     const { aws_services, aws_glossary, coderTerms, unit_testing, js_advanced, best_practices } = require('./programmer_experience');
-    decks.addDeck(new TermStorage(aws_glossary, "aws glossary", { is_active: layer_1 }));
-    decks.addDeck(new TermStorage(aws_services, "aws services", { is_active: layer_1 }));
-    decks.addDeck(new TermStorage(coderTerms, "coder terms", { is_active: interview_layer }));
-    decks.addDeck(new TermStorage(unit_testing, "unit testing", { is_active: interview_layer }));
-    decks.addDeck(new TermStorage(js_advanced, "js advanced", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(best_practices, "best practices", { is_active: interview_layer }));
+    decks.addDeck(new TermStorage(aws_glossary, "aws glossary"));
+    decks.addDeck(new TermStorage(aws_services, "aws services"));
+    decks.addDeck(new TermStorage(coderTerms, "coder terms"));
+    decks.addDeck(new TermStorage(unit_testing, "unit testing"));
+    decks.addDeck(new TermStorage(js_advanced, "js advanced"));
+    decks.addDeck(new TermStorage(best_practices, "best practices"));
 
 
     // Includes UX, system Design
     const { system_design_project } = require('./design');
-    decks.addDeck(new TermStorage(system_design_project, "system design", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(system_design_project, "system design"));
 
 
     // Includes Marketing, Accounting.
     const { accounting } = require('./business_terms');
-    decks.addDeck(new TermStorage(accounting, "accounting", { is_active: layer_2 }));
+    decks.addDeck(new TermStorage(accounting, "accounting"));
 
 
     const { interview, interview_filter_frequent, run_when_job } = require('./interview');
-    decks.addDeck(new TermStorage(interview, "interview", { is_active: layer_3 }));
-    decks.addDeck(new TermStorage(interview_filter_frequent, "interview filter frequent", { is_active: interview_layer }));
-    decks.addDeck(new TermStorage(run_when_job, "run when job", { is_active: layer_3 }));
+    decks.addDeck(new TermStorage(interview, "interview"));
+    decks.addDeck(new TermStorage(interview_filter_frequent, "interview filter frequent"));
+    decks.addDeck(new TermStorage(run_when_job, "run when job"));
 
     const { pytorch_machine_learning_course, machine_learning_pandas_visualization, machine_learning_scikit_learn, ai_theory } = require('./ai_machine');
-    decks.addDeck(new TermStorage(pytorch_machine_learning_course, "pytorch machine learning course", { is_active: interview_layer }));
-    decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas", { is_active: interview_layer }));
-    decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn", { is_active: interview_layer }));
-    decks.addDeck(new TermStorage(ai_theory, "ai theory", { is_active: interview_layer }));
+    decks.addDeck(new TermStorage(pytorch_machine_learning_course, "pytorch machine learning course"));
+    decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas"));
+    decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn"));
+    decks.addDeck(new TermStorage(ai_theory, "ai theory"));
     
 
 
     const { designing_good_charts, sql } = require('./data-science');
-    decks.addDeck(new TermStorage(designing_good_charts, "designing good charts", { is_active: layer_1 }));
-    decks.addDeck(new TermStorage(sql, "sql", { is_active: layer_1 }));
+    decks.addDeck(new TermStorage(designing_good_charts, "designing good charts"));
+    decks.addDeck(new TermStorage(sql, "sql"));
 
     const { aws_certification_associate_developer } = require('./aws_certifications');
-    decks.addDeck(new TermStorage(aws_certification_associate_developer, "aws associate dev", { is_active: layer_2 }));
+    decks.addDeck(new TermStorage(aws_certification_associate_developer, "aws associate dev"));
 
 
     // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
     const { salesforce_experience } = require('./salesforce_certification');
-    decks.addDeck(new TermStorage(salesforce_experience, "salesforce experience", { is_active: layer_2 }));
+    decks.addDeck(new TermStorage(salesforce_experience, "salesforce experience"));
 
     const { python, swift, js, dart, php, java, csharp, cpp, typescript, r, matlab, kotlin } = require('./languages');
-    decks.addDeck(new TermStorage(python, "python", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(swift, "swift", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(js, "js", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(dart, "dart", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(php, "php", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(java, "java", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(csharp, "csharp", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(cpp, "cpp", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(typescript, "typescript", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(r, "r", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(matlab, "matlab", { is_active: projects_layer }));
-    decks.addDeck(new TermStorage(kotlin, "kotlin", { is_active: projects_layer }));
+    decks.addDeck(new TermStorage(python, "python"));
+    decks.addDeck(new TermStorage(swift, "swift"));
+    decks.addDeck(new TermStorage(js, "js"));
+    decks.addDeck(new TermStorage(dart, "dart"));
+    decks.addDeck(new TermStorage(php, "php"));
+    decks.addDeck(new TermStorage(java, "java"));
+    decks.addDeck(new TermStorage(csharp, "csharp"));
+    decks.addDeck(new TermStorage(cpp, "cpp"));
+    decks.addDeck(new TermStorage(typescript, "typescript"));
+    decks.addDeck(new TermStorage(r, "r"));
+    decks.addDeck(new TermStorage(matlab, "matlab"));
+    decks.addDeck(new TermStorage(kotlin, "kotlin"));
 
-
-
-
+    decks.applyMasks([engineerMask]);
 
     return decks;
 }
