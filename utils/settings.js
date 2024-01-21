@@ -35,7 +35,7 @@ module.exports = Settings = {
     "ask_quiz_when_commit": true,
     "ask_if_algo_missing_when_commit": true,
     'show_past_commits_features_after_quiz': true, // If true, it will show the past commits features after the quiz.
-    "journal_notes": "Work hard every day",
+    "journal_notes": "Dont give up, you are so close. Dont go other path, DONT GIVE UP, Just DO IT, Just a little More!",
     // Reporting
     "report_show": {
         "performance_summary": true,
