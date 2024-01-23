@@ -73,11 +73,12 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(dsa, "dsa")),
     decks.addDeck(new TermStorage(system_design, "system design"));
 
-    const { aws_services, aws_glossary, coderTerms, unit_testing, js_advanced, best_practices } = require('./programmer_experience');
+    const { aws_services, aws_glossary, coderTerms, unit_testing, docker, js_advanced, best_practices } = require('./programmer_experience');
     decks.addDeck(new TermStorage(aws_glossary, "aws glossary"));
     decks.addDeck(new TermStorage(aws_services, "aws services"));
     decks.addDeck(new TermStorage(coderTerms, "coder terms"));
     decks.addDeck(new TermStorage(unit_testing, "unit testing"));
+    decks.addDeck(new TermStorage(docker, 'docker'));
     decks.addDeck(new TermStorage(js_advanced, "js advanced"));
     decks.addDeck(new TermStorage(best_practices, "best practices"));
 
