@@ -95,6 +95,26 @@ const aws_certification_cloud_practitioner = [
         example: "Dedicated Hosts - Existing server-bound licenses\n\
         Amazon EC2 Capacity blocks for ML - ML and machine learning worklouad\n\
         On-Demand Instances - Critical business workloads"
+    },
+    {
+        term: "Taking advantage of EBS",
+        description: "“Amazon Elastic Block Store (EBS) is an easy to use, high-performance, block-storage service designed for use with Amazon Elastic Compute Cloud (EC2) for both throughput and transaction intensive workloads at any scale. A broad range of workloads, such as relational and non-relational databases, enterprise applications, containerized applications, big data analytics engines, file systems, and media workflows are widely deployed on Amazon EBS.\n\
+        \n\
+        You can choose from different volume types to balance optimal price and performance. You can achieve single-digit-millisecond latency for high-performance database workloads or gigabyte per second throughput for large, sequential workloads. You can change volume types, tune performance, or increase volume size without disrupting your critical applications, so you have cost-effective storage when you need it.”\n\
+        \n\
+        EBS volumes preserve their data through instance stops and terminations, can be easily backed up with EBS snapshots, can be removed from one instance and reattached to another, and support full-volume encryption",
+        prompt: "Think of an usage purpose for EBS considering it's features",
+        example: "You can use it for a self-hosted database that requires a nightly shutdown for maintenance and cost-saving purposes"
+    },
+    {
+        term: "Regions and availability zones",
+        description: "Region is a geographical area that has two or more Availability Zones. Each Region is completely independent.\n\
+        Availability Zone (AZ) is an area with either one or more discrete Data Centres (building filled with servers), each with redundant power, networking, and connectivity, housed in separate facilities. If there are more than one data centre, they are counted as one AZ because they are located close together. Each Availability Zone is isolated, but the Availability Zones in a Region are connected through low-latency links.\n\
+        --NOTES--\n\
+        --Edge Locations are endpoints used for caching content. They are located in most of the major cities around the world and are specifically used by CloudFront to distribute AWS content closer to end-users to reduce latency",
+    },
+    {
+        
     }
 ]
 

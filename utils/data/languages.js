@@ -241,7 +241,9 @@ const python = [
         ",
         example: "pathmask ^= (1 << node.val)\n\
         pathmask == 0 or (pathmask & (pathmask - 1)) == 0\n\
+        Example run \n\
         1000 & 0111 = 0000\n\
+        1100 & 1011 = 1000\n\
         "
     }
 ]
