@@ -111,10 +111,52 @@ const aws_certification_cloud_practitioner = [
         description: "Region is a geographical area that has two or more Availability Zones. Each Region is completely independent.\n\
         Availability Zone (AZ) is an area with either one or more discrete Data Centres (building filled with servers), each with redundant power, networking, and connectivity, housed in separate facilities. If there are more than one data centre, they are counted as one AZ because they are located close together. Each Availability Zone is isolated, but the Availability Zones in a Region are connected through low-latency links.\n\
         --NOTES--\n\
-        --Edge Locations are endpoints used for caching content. They are located in most of the major cities around the world and are specifically used by CloudFront to distribute AWS content closer to end-users to reduce latency",
+        --Edge Locations are endpoints used for caching content. They are located in most of the major cities around the world and are specifically used by CloudFront to distribute AWS content closer to end-users to reduce latency\n\
+        to help lower latency and improve performance for users.",
+        prompt: "taking that into account, if you were to develop a caching system for optimal loadin gtimes, how would you scale your application?",
+        example: "Identify the region might play, and perhaps which ability zone to separate the group of users (that might play concurrently) and offer cachin in edge locations for faster downloads in the cities where you display ads."
     },
     {
-        
+        term: "Estimating costs",
+        description: "B- Cost Allocation tags: To forecast your costs, use the AWS Cost Explorer. Use cost allocation tags to divide your resources into groups, and then estimate the costs for each group.\n\
+        C - AWS Pricing Calculator To estimate a bill, use the AWS Pricing Calculator (formerly AWS Simply Monthly Calculator)\n\
+        D - AWS Total Cost of Ownership (TCO) Calculator: to compare the cost of running your applications in an on-premises or colocation environment to AWS",
+        prompt: "Select the tools for the following Manager asks you : 1- to separate and understand how much each project\n\ 2- To estimate the bill whether we use a new service \n\
+        3- To check if to upgrade to aws",
+        example: "B, C, D"
+    },
+    {
+        term: "Consolidated Billing for AWS Organizations",
+        description: "Consolidated billing has the following benefits:\n\
+        One bill – You get one bill for multiple accounts.\n\
+        Easy tracking – You can track the charges across multiple accounts and download the combined cost and usage data.\n\
+        Combined usage – You can combine the usage across all accounts in the organization to share the volume pricing discounts, Reserved Instance discounts, and Savings Plans. This can result in a lower charge for your project, department, or company than with individual standalone accounts. For more information, see Volume discounts.\n\
+        No extra fee – Consolidated billing is offered at no additional cost.",
+        prompt: "Explain to your manager, what alternatives to do if we have multiple aws accounts",
+        example: "It would be eaier, since we can consolidate"
+    },
+    {
+        term: "Savings Reserved Instances",
+        description: "Standard Reserved Instances provide you with a significant discount compared to On-Demand Instance pricing, and can be purchased for a 1-year or 3-year term. Customers have the flexibility to change the Availability Zone, the instance size, and networking type of their Standard Reserved Instances.\n\
+        \n\
+        Purchase Convertible Reserved Instances if you need additional flexibility, such as the ability to use different instance families, operating systems, or tenancies over the Reserved Instance term\n\
+        Standard RIs: These provide the most significant discount (up to 72% off On-Demand) and are best suited for steady-state usage.\n\
+        Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value. Like Standard RIs, Convertible RIs are best suited for steady-state usage.\n\
+        Scheduled RIs: These are available to launch within the time windows you reserve. This option allows you to match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month.",
+        prompt: "If you already know that you will need certain instance for a time, then what should you do to save costs? And what if you know that might need to upgrade it? What if you only want to run during a fraction of scheduled time?",
+        example: "Standard RI: are good if you are sure you dont need to change. Convertible RIS are best suited if you might want to upgrade the instane type. And Scheduled RI, so you an optimize over the specific running schedule."
+    },
+    {
+        term: "Elastic and Cost of Total Ownership",
+        description: "Cost of Total Ownership refers to the purchase price of an asset plus costs of operation over its life span\n\
+        The Reduction of Elastic Cloud Computing (EC2) is that Reduces the cost by paying only what you use. \n\n\
+        A core reason organizations adopt a cloud IT infrastructure is to save money. The traditional approach of analyzing Total Cost of Ownership no longer applies when you move to the cloud. Cloud services provide the opportunity for you to use only what you need and pay only for what you use. We refer to this new paradigm as the Total Cost of Operation. You can use Total Cost of Operation (TCO) analysis methodologies to compare the costs of owning a traditional data center with the costs of operating your environment using AWS Cloud services",
+        prompt: "In what situations would you choose using Elastic Computing?",
+        example: "When you want to reduce the cost of total ownership\n\ Instead of running your own machiens."
+    },
+    {
+        term: "AWS Artifact",
+        description: ""
     }
 ]
 
