@@ -211,6 +211,38 @@ const python = [
         prompt: "How to create a non local variable?",
         example: "nonlocal a",
         description: "For example you want to use a variable thats on the parent function"
+    },
+    {
+        term: "Using Bit mask to figure out if it was either even or only one repetition",
+        prompt: "Knowing that python supports up to 32 bit integers complete teh following, using bitmask strategy so that in the base case returns 1 if numbers on the sequence were repeated odd times or is there is only one digit repeated once",
+        description: ":m ```py\n\
+        class Solution:\n\
+            def pseudoPalindromicPaths(self, root: Optional[TreeNode]) -> int:\n\
+                \n\
+                def dfs(node, pathmask=0):\n\
+                    # Base case\n\
+                    count = 0\n\
+                    ### TODO \n\
+                    if not node.left and not node.right:\n\
+                        if ### TODO:\n\
+                            return 1\n\
+                        return 0\n\
+                                \n\
+                    if node.left:\n\
+                        count += dfs(node.left, pathmask)\n\
+                    if node.right:\n\
+                        count += dfs(node.right, pathmask)\n\
+                    return count\n\
+                \n\
+                if not root:\n\
+                    return 0\n\
+                return dfs(root)\n\
+        ```\n\
+        ",
+        example: "pathmask ^= (1 << node.val)\n\
+        pathmask == 0 or (pathmask & (pathmask - 1)) == 0\n\
+        1000 & 0111 = 0000\n\
+        "
     }
 ]
 

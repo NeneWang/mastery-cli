@@ -110,7 +110,7 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(designing_good_charts, "designing good charts"));
     decks.addDeck(new TermStorage(sql, "sql"));
 
-    const { aws_certification_associate_developer } = require('./aws_certifications');
+    const { aws_certification_associate_developer, aws_localstack } = require('./aws_certifications');
     decks.addDeck(new TermStorage(aws_certification_associate_developer, "aws associate dev"));
 
 

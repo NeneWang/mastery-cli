@@ -1,4 +1,104 @@
 
+
+
+const aws_localstack = [
+    {
+        prompt: "How do you start localstack?",
+        example: "localstack start -d",
+    },
+    {
+        prompt: "Create a bucket named riskzone and display the list of buckets",
+        example: "awslocal s3 mb s3://riskzone\n\
+        awslocal s3api list-buckets",
+    }
+]
+
+// My postgresql
+// docker pull postgres
+// docker run -d --name postgresCont -p 5432:5432 -e POSTGRES_PASSWORD=pass123 postgres
+// docker exec -it postgresCont bash
+const psql =[
+    {
+        prompt: "List all databases and all users",
+        example: "\\l \n\
+        \\du",
+
+    },
+    {
+        prompt: "Create adatabase named riskzone and connect ot the database",
+        example: "CREATE DATABASE riskzone;\n\
+        \\c riskzone",
+    },
+    {
+        prompt: "Create a user named no_one \n\
+        Create a user named no_one with password pass123",
+        example: "CREATE USER no_one;\n\
+        CREATE usUSER no_two with login password `qwerty`;"
+    },
+    {
+        prompt: "Remove Database named riskzone",
+        example: "DROP DATABASE riskzone;"
+    }
+]
+
+const aws_certification_cloud_practitioner = [
+    {
+        term: "Shared Responsibility Model",
+        description: "The Customer is responsible for:\n\
+        - Customer Data\n\
+        - Platform, Applications, Identity & Access Management\n\
+        - Operating System, Network & Firewall Configuration\n\
+        - Client-Side Data Encryption\n\
+        - Server-Side Data Encryption\n\
+        - Networking Traffic Protection",
+        prompt: "List 2 responsibilities of the customer in the Shared Responsibility Model\n\ And how would you ensure that?",
+    },
+    {
+        term: "Cost Allocation Tags",
+        description: "Cost allocation tags are key-value pairs that enable you to categorize your AWS costs. For example, you can define a tag key named Department and a tag value named Sales for all the resources in your sales department, and a tag key named Department and a tag value named Engineering for all the resources in your engineering department. You can then view the total costs for each department using the cost allocation tags.",
+        prompt: "how can you use cost allocation tags to categorize your AWS costs?",
+    },
+    {
+        term: "AWS Weel Architecture Framework | Design Principles",
+        description: "Here the design principles for operational excellence in the cloud\n\
+        Perform operations as code: In the cloud, you can apply the same engineering discipline that you use for application code to your entire environment. You can define your entire workload (applications, infrastructure, etc.) as code and update it with code. You can script your operations procedures and automate their process by launching them in response to events. By performing operations as code, you limit human error and create consistent responses to events.\n\
+        \n\
+        Make frequent, small, reversible changes: Design workloads that are scaleable and loosely coupled to permit components to be updated regularly. Automated deployment techniques together with smaller, incremental changes reduces the blast radius and allows for faster reversal when failures occur. This increases confidence to deliver beneficial changes to your workload while maintaining quality and adapting quickly to changes in market conditions.\n\
+        \n\
+        Refine operations procedures frequently: As you evolve your workloads, evolve your operations appropriately. As you use operations procedures, look for opportunities to improve them. Hold regular reviews and validate that all procedures are effective and that teams are familiar with them. Where gaps are identified, update procedures accordingly. Communicate procedural updates to all stakeholders and teams. Gamify your operations to share best practices and educate teams.\n\
+        \n\
+        Anticipate failure: Perform “pre-mortem” exercises to identify potential sources of failure so that they can be removed or mitigated. Test your failure scenarios and validate your understanding of their impact. Test your response procedures to ensure they are effective and that teams are familiar with their process. Set up regular game days to test workload and team responses to simulated events.\n\
+        \n\
+        Learn from all operational failures: Drive improvement through lessons learned from all operational events and failures. Share what is learned across teams and through the entire organization.\n\
+        \n\
+        Use managed services: Reduce operational burden by using AWS managed services where possible. Build operational procedures around interactions with those services.\n\
+        \n\
+        Implement observability for actionable insights: Gain a comprehensive understanding of workload behavior, performance, reliability, cost, and health. Establish key performance indicators (KPIs) and leverage observability telemetry to make informed decisions and take prompt action when business outcomes are at risk. Proactively improve performance, reliability, and cost based on actionable observability data. ",
+        prompt: "Using of the design principles, Ideate a strategy that implments such design prinicple"
+    },
+    {
+        term: "Grouping of AWS Services",
+        description: "\n\
+        AWS Trusted Advisor\n\
+        AWS Partner Network\n",
+        prompt: "Select one, indicate when you would use them",
+        example: "\
+        AWS Trusted Advisor - To check for recommendations such as saving money, security suggestions, cost optimization features\n\
+        AWS Partner Network - If a company \n"
+    },
+    {
+        term: "AWS EC2 Pricing Models",
+        description: "On-Demand Instances:      Business-critical events or workloads that require capacity assurance     Workloads that need to meet regulatory requirements for high availability     Disaster recovery  \n\
+        Amazon EC2 Capacity blocks for ML: Training and fine-tuning ML models Running experiments and building prototypes Planning for future surges in demand for ML applications \n\
+        Dedicated Hosts: Users looking to save money on licensing costs Workloads that need to run on dedicated physical servers Users looking to offload host maintenance onto AWS, while controlling their maintenance event schedules to suit their business’s operational needs",
+        prompt: "Which pricing model would you use existing server bound licenses? \n\ How about for ML and machine learning worklouad ? How about for Capacity Reservation? during critical business workloads?",
+        example: "Dedicated Hosts - Existing server-bound licenses\n\
+        Amazon EC2 Capacity blocks for ML - ML and machine learning worklouad\n\
+        On-Demand Instances - Critical business workloads"
+    }
+]
+
+
 const aws_certification_associate_developer = [
     {
         prompt: "A startup with newly created AWS account is testing different EC2 instances. They have used Burstable performance instance - T2.micro - for 35 seconds and stopped the instance.  At the end of the month, what is the instance usage duration that the company is charged for?",
@@ -856,5 +956,5 @@ const aws_certification_associate_developer = [
 
 
 module.exports = {
-    aws_certification_associate_developer
+    aws_certification_associate_developer, aws_localstack
 }
