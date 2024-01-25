@@ -2,14 +2,18 @@
 
 ![](https://media.giphy.com/media/eveBk0ptKzjqUe0iTg/giphy.gif)
 
-Your assistant to improve as a programmer. Flashcards, DSA Practice, Statistics, and habit hooks. For example, everytime you commit code, you could have a random flashcard being prompted (or even a random DSA problem suggestion to be completed!). Designed to work offline, but when connected to the internet assists you to collect your progress and sync it with your other devices. 
+Mastery CLI: Your Command Line Assistant for Programmer Development"
 
+Mastery CLI is a comprehensive tool designed to boost your programming skills. It features flashcards, DSA practice, statistics, and habit hooks. For instance, every commit now triggers a random flashcard or suggests a DSA problem to solve, fostering continuous learning.
 
-Other main features include:
-- Helping you keep track on your personal goal projects e.g. Doing some commit in a project on a daily basi
-- More than 150 programming problems (with tests that work offline)
+Key Highlights:
 
-
+- Easily track personal project goals, such as daily commits.
+- Access over 150 offline programming problems with accompanying offline tests and a built-in compiler.
+- Seamlessly collect and sync progress across devices when connected to the internet.
+- Establish habit hooks, like integrating flashcards and math practice into your development cycle.
+- Utilize an offline algorithm that identifies weaknesses and generates quick flashcards for memory refresh.
+- Enjoy free flashcard decks covering Computer Science Architecture, Networking, AWS, System Design, Design Patterns, and more. Plus, easily share your flashcard decks.
 
 
 ## Install
@@ -21,16 +25,10 @@ npm install -g mastery-cli
 - You need to install nvim for the dsa option to work
 - Eventually you would be able to select your own editor.
 
-Recommended:
+Recommended for doing dsa problems:
 
 ```
 Install nvim
-```
-
-## Version
-
-```
-
 ```
 
 
