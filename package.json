@@ -1,7 +1,7 @@
 {
 	"name": "mastery-cli",
 	"description": "Continuous learning for engineers",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"license": "UNLICENSED",
 	"bin": {
 		"m-cli": "index.js",
