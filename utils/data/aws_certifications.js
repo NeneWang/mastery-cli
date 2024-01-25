@@ -80,11 +80,13 @@ const aws_certification_cloud_practitioner = [
         term: "Grouping of AWS Services",
         description: "\n\
         AWS Trusted Advisor\n\
-        AWS Partner Network\n",
+        AWS Partner Network\n\
+        AWS Artifact\n",
         prompt: "Select one, indicate when you would use them",
         example: "\
         AWS Trusted Advisor - To check for recommendations such as saving money, security suggestions, cost optimization features\n\
-        AWS Partner Network - If a company \n"
+        AWS Partner Network - If a company \n\
+        AWS Artifact - AWS and ISV security and compliance reports (Including thridaprty, terminate reports, etc)"
     },
     {
         term: "AWS EC2 Pricing Models",
@@ -110,6 +112,7 @@ const aws_certification_cloud_practitioner = [
         term: "Regions and availability zones",
         description: "Region is a geographical area that has two or more Availability Zones. Each Region is completely independent.\n\
         Availability Zone (AZ) is an area with either one or more discrete Data Centres (building filled with servers), each with redundant power, networking, and connectivity, housed in separate facilities. If there are more than one data centre, they are counted as one AZ because they are located close together. Each Availability Zone is isolated, but the Availability Zones in a Region are connected through low-latency links.\n\
+        Within the constructs of AWS, customers are encouraged to run their workloads in more than one Availability Zone. This ensures that customer applications can withstand even a complete Availability Zone failure - a very rare event in itself. This recommendation stands for real-time SIP infrastructure as well.\n\
         --NOTES--\n\
         --Edge Locations are endpoints used for caching content. They are located in most of the major cities around the world and are specifically used by CloudFront to distribute AWS content closer to end-users to reduce latency\n\
         to help lower latency and improve performance for users.",
@@ -155,8 +158,46 @@ const aws_certification_cloud_practitioner = [
         example: "When you want to reduce the cost of total ownership\n\ Instead of running your own machiens."
     },
     {
-        term: "AWS Artifact",
-        description: ""
+        term: "System Design best practices",
+        description: "\n\
+        Design Best practices \n\
+        Loose coupling - As application complexity increases, a desirable attribute of an IT system is that it can be broken into smaller, loosely coupled components. This means that IT systems should be designed in a way that reduces interdependencies—a change or a failure in one component should not cascade to other components\n\
+        IAM Best Practices - To help secure your AWS resources, follow these recommendations for the AWS Identity and Access Management (IAM) service:\n\
+        IAM Best Practices\n\
+        --Lock away your AWS account root user access keys\n\
+        --Create individual IAM users\n\
+        --Use groups to assign permissions to IAM users\n\
+        --Grant least privilege\n\
+        --Get started using permissions with AWS managed policies\n\
+        --Use customer managed policies instead of inline policies\n\
+        --Use access levels to review IAM permissions\n\
+        --Configure a strong password policy for your users\n\
+        --Enable MFA – These are not physical MFA tokens typically\n\
+        --Use roles for applications that run on Amazon EC2 instances\n\
+        --Use roles to delegate permissions\n\
+        --Do not share access keys\n\
+        --Rotate credentials regularly\n\
+        --Remove unnecessary credentials\n\
+        --Use policy conditions for extra security\n\
+        --Monitor activity in your AWS account\n\
+        ",
+        prompt: "Design a workflow that follows the best practices",
+    },
+    {
+        term: "efs vs s3 vs ebs",
+        description: "EBS: Elastic Block Storage: use case is more easily understood than the other two. It must be paired with an EC2 instance. So when you need a high-performance storage service for a single instance, use EBS.\n\
+        EFS:Scaleable File Storage |  may be used whenever you need a shared file storage option for multiple EC2 instances with automatic, high-performance scaling. \n\
+        This makes it a great candidate for file storage for content management systems; for lift and shift operations, as its autoscaling potential means you do not need to re-architect; for application development, as EFS’s shareable file storage is ideal for storing code and media files.\n\
+        S3 is good at storing long-term data due to its archiving system. Things like reports and records, which may go unused for years, can be stored on S3 at a lower cost than the other two storage services discussed. \n\
+        As already stated, S3 is also useful for storing data on which complex queries may be run. This makes it useful for data related to customer purchases, behaviour or profiles, because that data can be easily queried and fed into analytics tools.\n\
+        This  capacity for interfacing with other tools also makes S3 great for back-up and restoration, as it can be paired with Amazon Glacier for even more secure backing up.\n\
+        S3 also supports static websites, so if you need to host a static HTML page, S3 is a good choice.",
+        prompt: "Design scenrios to use efs, s3 or ebs",
+        example: "If I have an app on an ec2 that is the only one that needs to access the data, then I would use ebs. If I have multiple ec2 instances that need to access the same data, then I would use efs. If I have a static website at low cost, then I would use s3."
+    },
+    {
+        term: "Key features aws RDS",
+        description: "Automatic Scaling, Durability of up to 99.95, "
     }
 ]
 

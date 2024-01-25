@@ -1,65 +1,41 @@
-class SortList {
-    constructor() {
-        this.tail = new ListNode();
-        this.nextSubList = new ListNode();
-    }
+class ThreeNumberSum {
+    threeSum(array) {
 
-    solve(head) {
-        return sortList(head);
-    }
-}
+        const res = [];
+        array.sort((a, b) => a - b)
 
-var sortList = function (head) {
+        for (let i = 0; i < array.length; i++) {
+            const a = array[i];
+            if (a > 0) break;
+            if (i > 0 && a === array[i - 1]) continue;
 
-    const merge = (list1, list2) => {
-        let pointer = new ListNode(0, null)
-        const res = pointer;
-        while (list1 && list2) {
-            if (list1.val > list2.val) {
-                pointer.next = list2
-                list2 = list2.next
-            } else {
-                pointer.next = list1
-                list1 = list1.next
+            let l = i + 1;
+            let r = array.length - 1;
+            while (l < r) {
+                const threeSum = a + array[l] + array[r];
+                if (threeSum > 0) {
+                    r--;
+                } else if (threeSum < 0) {
+                    l++;
+                } else {
+                    res.push([a, array[l], array[r]]);
+                    l++;
+                    r--;
+                    // ## CREATE code to skip duplicates in js
+					if(a[l] == a[l-1] && l < r){
+						l++;
+
+					}
+
+				}
             }
-            pointer = pointer.next
         }
-
-        if (list1) {
-            pointer.next = list1
-        } else {
-            pointer.next = list2
-        }
-
-        return res.next;
+        return res;
     }
-
-    const getMiddle = (header) => {
-        middlePtr = null;
-        while (header && header.next) {
-            middlePtr = middlePtr != null ? middlePtr.next : header;
-            header = header.next.next;
-        }
-
-        const mid = middlePtr.next;
-        middlePtr.next = null
-        return mid;
-    }
-
-    if (!head || !head.next) {
-        return head;
-    }
-
-    // TODO Get the middle, Sort, head and middle. Then merge
-    
-};
-
-class ListNode {
-    constructor(val) {
-        this.val = val;
-        this.next = null;
+    solve(array) {
+        return this.threeSum(array);
     }
 }
 
 
-module.exports = { Problem: SortList };
+module.exports = { Problem: ThreeNumberSum };
