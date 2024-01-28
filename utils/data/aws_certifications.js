@@ -158,10 +158,11 @@ const aws_certification_cloud_practitioner = [
         example: "When you want to reduce the cost of total ownership\n\ Instead of running your own machiens."
     },
     {
-        term: "System Design best practices",
+        term: "IAM Best Practices and AWS Best Practices",
         description: "\n\
         Design Best practices \n\
-        Loose coupling - As application complexity increases, a desirable attribute of an IT system is that it can be broken into smaller, loosely coupled components. This means that IT systems should be designed in a way that reduces interdependencies—a change or a failure in one component should not cascade to other components\n\
+        Loose coupling - As application complexity increases, a desirable attribute of an IT system is that it can be broken into smaller, loosely coupled components. \n\
+        This means that IT systems should be designed in a way that reduces interdependencies—a change or a failure in one component should not cascade to other components\n\
         IAM Best Practices - To help secure your AWS resources, follow these recommendations for the AWS Identity and Access Management (IAM) service:\n\
         IAM Best Practices\n\
         --Lock away your AWS account root user access keys\n\
@@ -196,8 +197,83 @@ const aws_certification_cloud_practitioner = [
         example: "If I have an app on an ec2 that is the only one that needs to access the data, then I would use ebs. If I have multiple ec2 instances that need to access the same data, then I would use efs. If I have a static website at low cost, then I would use s3."
     },
     {
+        term: "redshift",
+        prompt: "What is aws redshift? When it is used for? Whats it's advantage?",
+        example: "AWS Redshift, Redshift shines in its ability to handle huge volumes of data — capable of processing structured and unstructured data in the range of exabytes (1018 bytes). However, the service can also be used for large-scale data migrations. \n\
+        Used when data to be analyzed is humongus. Petabyte Scales. To run Real time analytics,. Combination of data sources. Business Intelligence. and Log analysis.\n\
+        Used for data encryption, familiar tools, intelligent potimization, automate repetitive tasks. Concurrent scales. "
 
+    },
+    {
+        term: "Inherited Controls",
+        description: "Inherited controls are controls that are inherited from other entities, such as the underlying infrastructure, operating system, or database layer. These controls are inherited by the customer and are not assessed by AWS. For example, AWS manages controls related to the physical and environmental security of the data centers, but the customer inherits those controls and is responsible for assessing them. Inherited controls are not included in the scope of the AWS SOC reports.",
+        prompt: "If you were to create your own cloud service what else would you consider as an inherited control?",
+        example: "The underlying infrastructure, operating system, or database instance."
+    },
+    {
+        term: "Shared Controls",
+        description: " Controls which apply to both the infrastructure layer and customer layers, but in completely separate contexts or perspectives. In a shared control, AWS provides the requirements for the infrastructure and the customer must provide their own control implementation within their use of AWS services. For example:\n\n\
+        Patch Management – AWS is responsible for patching and fixing flaws within the infrastructure, but customers are responsible for patching their guest OS and applications.\n\
+        Configuration Management – AWS maintains the configuration of its infrastructure devices, but a customer is responsible for configuring their own guest operating systems, databases, and applications.\n\
+        Awareness & Training - AWS trains AWS employees, but a customer must train their own employees.",
+        prompt: "Understanding your controls. What are your cofniguration and awraness responsabilities? if you use aws?",
+        example: "To Configure your own guest operating systems, databases, and applications. And to train your own employees."
+    },
+    {
+        term: "AWS IAM vs AWS Organizations",
+        description: "AWS IAM is an AWS service that enables you to manage access to AWS services and resources securely. Using IAM, you can create and manage AWS users and groups, and use permissions to allow and deny their access to AWS resources.\n\
+        \n\
+        AWS Organizations is an account management service that enables you to consolidate multiple AWS accounts into an organization that you create and centrally manage. AWS Organizations includes account management and consolidated billing capabilities that enable you to better meet the budgetary, security, and compliance needs of your business. As an administrator of an organization, you can create accounts in your organization and invite existing accounts to join the organization. You can organize those accounts into groups and attach policy-based controls. You can apply policies across your organization to control access to AWS services, resources, and regions, and you can automate the creation of new accounts as your business needs grow.",
+        prompt: "What would you need if you need to create an account? How about if you need to manage access to aws services?",
+        example: "AWS IAM to manage access to aws services. AWS Organizations to manage accounts."
+    },
+    {
+        term: "Changes in AWS regions",
+        description: "Costs of the AWS Services can be different for each region because the cost, taxes, manpower, etc for the physical infrastructure and data centers are different from Region to Region.\n\
+        --Latency depends on physical location. When your application is being accessed by your users, it should be blazing fast. So you need to identify the locations of your target audience and choose the region having a smaller latency for your customers.\n\
+        --Data sovereignty compliance differs across the nations of the world. Considerations will need to be taken when using AWS in an unfamiliar location.\n\
+        --Most of the AWS Services and features are Region dependent, and just a few ones are Region independent. Also, sometimes it happens that some services are not available in all the regions",
+        prompt: "Before choosing to pay for a region, or use certain technology for a region, what should you consider?",
+        example: "Costs, Latency, Data sovereignty compliance, AWS Services and features"
+    },
+    {
+        term: "EC2 Regular, Spot, Optimized, Dedicated Instance, Dedicated Host",
+        description: "\
+        Regular Instances: These are the normal instances that you launch in AWS. They are billed at the On-Demand rate. are shared between multiple customers\n\n\
+        Spot Instance: Save money  (50-90%)by purchasing the hourly compute power of someone elses unused ec2 instance. Useful for tunning tasks that aren't critical. Fault-tolerant workloads. Such as: batch jobs, compute-intensive analysis, temporary autoo-scaling to meet a short-term spike, or another similar usage\n\n\
+        Optimized EC2 Instance: Designed to deliver an optimized service level for a specific area. (Storage, memory, compute. Standard network bandwidth ,dedicated cpus. \n\
+        Dedicated Instance: VPC isntances that are blocked for use by a single customer\n\
+        Dedicated Host: To enable isolation, give visiibility of the physical host. This is required if hte framework and libraries requires or restricts into a specific server \n\
+        ",
+        prompt: "If you were to use ec2, what would you use for a fault-tolerant workload? What if you need to use a specific framework and libraries that are licensed to a single server?",
+        example: "Spot Instance, Dedicated Host"
+    },
+    {
+        term: "Which of the following AWS Services can be used to serve large amounts of online video content?",
+        description: "Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds, all within a developer-friendly environment. CloudFront is integrated with AWS – both physical locations that are directly connected to the AWS global infrastructure, as well as other AWS services. CloudFront works seamlessly with services including AWS Shield for DDoS mitigation, Amazon S3, Elastic Load Balancing or Amazon EC2 as origins for your applications, and Lambda@Edge to run custom code closer to customers’ users and to customize the user experience. Lastly, if you use AWS origins such as Amazon S3, Amazon EC2 or Elastic Load Balancing, you don’t pay for any data transferred between these services and CloudFront.",
+        prompt: "Which of the following AWS Services can be used to serve large amounts of online video content?",
+        example: "Amazon CloudFront"
+    },
+    {
+        term: "cloud-native, Partner network, hybrid architecture and on-premises",
+        description: "Cloud-native architecture is an approach to building and running applications that exploits the advantages of the cloud computing delivery model. Cloud-native is about how applications are created and deployed, not where. While today public cloud impacts the thinking about best practices for cloud-native architectures, cloud-native is not a public cloud-only phenomenon. It is entirely possible to adopt cloud-native practices and build cloud-native applications on-premises.\n\
+        \n\
+        AWS Partner Network (APN) is the global partner program for technology and consulting businesses who leverage Amazon Web Services to build solutions and services for customers. The APN helps companies build, market, and sell their AWS offerings by providing valuable business, technical, and marketing support.\n\
+        \n\
+        Hybrid architecture is a computing environment that uses a mix of on-premises, private cloud and third-party, public cloud services with orchestration between the two platforms. By allowing workloads to move between private and public clouds as computing needs and costs change, hybrid cloud gives businesses greater flexibility and more data deployment options.\n\
+        \n\
+        On-premises (sometimes abbreviated as \"on-prem\") is a term meaning \"on-site\". It refers to the location of hardware or software within the confines of an enterprise rather than at a remote facility such as a server farm or cloud. The term is sometimes used to contrast with a similar term: off-premises, which refers to assets that are located outside of the physical confines of an enterprise's property. The term is also used in the phrase \"on-premises software\", which is a counterpart of \"software as a service\" (SaaS).",
+        prompt: "What is the difference between cloud-native, Partner network, hybrid architecture and on-premises?",
+        example: "Cloud-native is about how applications are created and deployed, not where. refers to an application that was designed to reside in the cloud from the start. Cloud native involves cloud technologies like microservices, container orchestrators, and auto scaling.\n\
+        AWS Partner Network (APN) is the global partner program for technology and consulting businesses who leverage Amazon Web Services to build solutions and services for customers. \n\
+        Hybrid architecture is a computing environment that uses a mix of on-premises, private cloud and third-party, public cloud services with orchestration between the two platforms. \n\
+        On-premises (sometimes abbreviated as \"on-prem\") is a term meaning \"on-site\". It refers to the location of hardware or software within the confines of an enterprise rather than at a remote facility such as a server farm or cloud."
+    },
+    {
+        term: "AWS IAM Users, Groups, Policies and Roles",
+        
     }
+
 ]
 
 
