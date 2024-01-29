@@ -29,6 +29,100 @@ const designing_good_charts = [
     }
 ]
 
+
+// No programming questions, largely be conceptualized on what the things are about.
+const numpy = [
+    {
+        term: "Why is numpy preferred?",
+        prompt: "Why is numpy preferred? | How are Numpy arrays better than Python's lists?",
+        example: "Suports multi-dimensional arrays. Provides efficien functions for complex computational arrays. Takes the weaknesses of Python such as Dynamically typed.S ",
+    },
+    {
+        term: "What are ndarrays in Numpy?",
+        prompt: "What are ndarrays features in Numpy?",
+        example: "When the size of ndarrays is changed, it results in a new array and the original array is deleted.\n\
+        The ndarrays are bound to store homogeneous data.\n\
+        They provide functions to perform advanced mathematical operations in an efficient manner"
+    },
+    {
+        term: "How to reverse a Numpy array",
+        prompt: "How to reverse a Numpy array",
+        description: "Use flipud() to reverse the order of elements in an array along the first axis",
+        example: "np.flipud(arr)"   
+    },
+    {
+        term: "Calgulate frequency",
+        prompt: "How to calculate the frequency of a Numpy array",
+        description: "Use bincount() to calculate the frequency of a Numpy array\n\
+        :m ```py\n\
+        import numpy as np\n\
+        arr = np.array([1, 2, 1, 3, 5, 0, 0, 0, 2, 3])\n\n\
+        [3 2 2 2 0 1]\n\
+        ```",
+        example: "np.bincount(arr)"
+    },
+    {
+        term: 'arr[:, 0]',
+        prompt: "What will the folllowing print?",
+        description: "import numpy as np\n\
+        \n\
+        arr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])\n\
+        new_arr = arr[:, 0]\n\
+        print(new_arr)",
+        example: "[1, 5]"
+    },
+    {
+        term: "Multiply 2 numpy array matrices | Multiply 2 numpy array vectors",
+        prompt: "Multiply 2 numpy array matrices | Multiply 2 numpy array vectors",
+        description: 'A = np.arange(15,24).reshape(3,3)\n\
+        B = np.arange(20,29).reshape(3,3)\n\
+        print("A: ",A)\n\
+        print("B: ",B)\n\
+        \n\
+        # Multiply A and B\n\
+        print("Result: ", result)',
+        example: "result = A.dot(B)"
+    },
+    {
+        term: "Verctorized add",
+        prompt: "What will the following print?",
+        description: "\n\
+        Function Vectorization technically means that the function is applied to all elements in the array. Typically, certain python functionalities on arrays (such as loops) are slower in nature because python arrays can contain elements of different data types. Since the C program expects a specific datatype, there are chances of compiler optimisation which makes C code run faster. Since NumPy arrays support storing elements of a single datatype, most of the implementations of the functions written in NumPy meant for arithmetic, logical operations etc have optimised C program code under their hood. Additionally, NumPy also helps developers create their own vectorised functions by following the below steps.\n\
+        \n\
+        def add(arr1, arr2):\n\
+            return (arr1 + arr2)\n\
+        \n\
+        arr1 = np.array([1,2,3])\n\
+        arr2 = np.array([4,5,6])\n\
+        \n\
+        #vectorize add method\n\
+        vectorized_add = np.vectorize(add)\n\
+        \n\
+        #call vectorized method\n\
+        result = vectorized_add(arr1, arr2)\n\n\
+        print(result)",
+        example: "[5, 7, 9]"
+    },
+    {
+        term: "VStack() in Numpy() || hstack() in Numpy()",
+        prompt: "Main difference is that the hstack method combines arrays horizontally whereas the vstack method combines arrays vertically.\n\
+        What will the following print?",
+        description: '\n\
+        ```py \n\
+        import numpy as np\n\
+        a = np.array([1,2,3])\n\
+        b = np.array([4,5,6])\n\
+        \n\
+        # vstack arrays\n\
+        c = np.vstack((a,b))\n\
+        print("After vstack: \n",c)\n\
+        # hstack arrays\n\
+        d = np.hstack((a,b))\n\
+        print("After hstack: \n",d)'
+
+    }
+]
+
 const sql = [
     {}
 ]
