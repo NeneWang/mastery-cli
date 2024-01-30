@@ -118,8 +118,21 @@ const numpy = [
         print("After vstack: \n",c)\n\
         # hstack arrays\n\
         d = np.hstack((a,b))\n\
-        print("After hstack: \n",d)'
-
+        print("After hstack: \n",d)',
+        example: "After vstack: \n [[1 2 3]\n\
+        [4 5 6]]\n\
+        After hstack: \n [1 2 3 4 5 6]"
+    },
+    {
+        term: "Create an 2d matrix with arange",
+        prompt: "Create a 2d matri with arange that is 4 rows and 2 columns",
+        answer: "```py\n\
+        import numpy as np\n\
+        \n\
+        arr = np.arange(8).reshape(4,2)"
+    },
+    {
+        term: ""
     }
 ]
 

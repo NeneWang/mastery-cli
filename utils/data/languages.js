@@ -202,6 +202,13 @@ const python = [
 
     },
     {
+        term: "Floor vs Truncate",
+        prompt: "What is the difference between floor e.g. (a//b) and truncate? int(a/b)",
+        example: "floor(-1.5) = -2\n\
+        truncate(-1.5) = -1"
+
+    },
+    {
         term: "Infinite",
         prompt: "How to create an infinite number (very large number)?",
         example: "float('inf')"

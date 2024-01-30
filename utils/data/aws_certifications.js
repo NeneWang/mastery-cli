@@ -181,7 +181,7 @@ const aws_certification_cloud_practitioner = [
         --Use policy conditions for extra security\n\
         --Monitor activity in your AWS account\n\
         ",
-        prompt: "Design a workflow that follows the best practices",
+        prompt: "Design a workflow that follows the best practices for system design",
     },
     {
         term: "efs vs s3 vs ebs",
@@ -196,8 +196,7 @@ const aws_certification_cloud_practitioner = [
         example: "If I have an app on an ec2 that is the only one that needs to access the data, then I would use ebs. If I have multiple ec2 instances that need to access the same data, then I would use efs. If I have a static website at low cost, then I would use s3."
     },
     {
-        term: "Key features aws RDS",
-        description: "Automatic Scaling, Durability of up to 99.95, "
+
     }
 ]
 
