@@ -237,6 +237,11 @@ const analysisAlgorithmClass = [
         "prompt": "Is the statement true or false?",
         "example": "False\n\
         : The statement f(x) = Θ(g(x)) indicates that f(x) grows at the same rate as g(x), within constant factors, for sufficiently large x. However, 2^x grows exponentially, whereas x^10 grows polynomially, so their growth rates are not comparable, making the statement false."
+    },
+    {
+        term: "explain why doesnt make sense",
+        prompt: "Why does it not make sense to say that the runing time of an algorithm A is at least O(n^2)",
+        example: "Because O(n^2) is an upper bound, so it makes no sense to say that the running time of an algorithm is at least faster than slower than n^2."
     }
 ]
 
