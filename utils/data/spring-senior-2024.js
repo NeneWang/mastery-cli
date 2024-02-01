@@ -226,7 +226,7 @@ const analysisAlgorithmClass = [
         g(x) = x^2 + x\n\
         statement: f(x) = ω(g(x))",
         "prompt": "Is the statement true or false?",
-        "example": "False\n\
+        "example": "False\n\\n\
         : The statement f(x) = ω(g(x)) means that f(x) grows strictly faster than g(x) for sufficiently large x. However, both functions have the leading term of x^2, meaning they grow at similar rates, not strictly one faster than the other."
     },
     {
