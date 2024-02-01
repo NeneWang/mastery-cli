@@ -565,14 +565,15 @@ class Quizzer {
                 ISANSWERCORRECT = response;
             }
 
-            try {
+            // Ignore because we will not be increasing the score.
+            // try {
 
-                if (constants.CONSTANTS.online) {
-                    const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
-                }
-            } catch {
-                // Do nothing.
-            }
+            //     if (constants.CONSTANTS.online) {
+            //         const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
+            //     }
+            // } catch {
+            //     // Do nothing.
+            // }
 
 
             return ISANSWERCORRECT

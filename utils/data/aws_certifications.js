@@ -271,7 +271,13 @@ const aws_certification_cloud_practitioner = [
     },
     {
         term: "AWS IAM Users, Groups, Policies and Roles",
-        
+        description: "    IAM Users: An IAM user is a unique identity within your AWS account that can be granted permissions to access resources and perform actions. Users can be created within your AWS account and can be assigned a unique set of credentials, such as an access key and secret key, which are used to authenticate their access to AWS resources.\n\n\
+        IAM Groups: An IAM group is a collection of IAM users that you can manage as a single entity. Groups allow you to grant permissions to multiple users at once, and make it easier to manage permissions as your user base grows. For example, you could create a group for all users in your development team, and grant them permissions to access the necessary resources for their work.\n\n\
+        IAM Policies: An IAM policy is a document that defines the permissions that can be granted to an IAM user, group, or role. Policies are written in JSON and can be used to grant permissions to access specific AWS services, resources, or actions. For example, you could create a policy that allows a user to read and write to a specific S3 bucket.\n\n\
+        IAM Roles: An IAM role is similar to a user or group, but is intended to be assumed by an AWS service or application. Instead of being associated with a set of credentials, roles are assumed by a service, such as an EC2 instance, and are granted permissions to access resources. Roles can also be assumed by external identity providers, such as your organization's identity provider (IdP).",
+        prompt: "You want to allow a multiple devs to login, and create some type of roles for machiens to login on with specific permissions. What would you use?",
+        example: "IAM Users are required to be used for devs to login You can assign them under IAM Groups whcih share the same IAM Policies. IAM Roles are used for machines to login with specific permissions."
+
     }
 
 ]
