@@ -841,7 +841,7 @@ const weatherReport = async () => {
 		}
 	});
 	weatherData = new WeatherInformation(res);
-	// console.log(weatherData.json)
+	console.log(weatherData.json)
 	// console.log(weatherData.days_report)
 	weatherData.chartWeatherBar()
 

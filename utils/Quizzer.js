@@ -472,6 +472,9 @@ class Quizzer {
                     prompt: 'Use the term',
                     formula_name: 'singleton-pattern'
                 }
+                
+                2024-02-01 13:23:13
+                - Remove updateConcept no increase is required
              */
 
             //If both the term and the description are "" or have no length or are null then assume is a bad term.
@@ -564,16 +567,6 @@ class Quizzer {
                 const response = await is_correct.run();
                 ISANSWERCORRECT = response;
             }
-
-            // Ignore because we will not be increasing the score.
-            // try {
-
-            //     if (constants.CONSTANTS.online) {
-            //         const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
-            //     }
-            // } catch {
-            //     // Do nothing.
-            // }
 
 
             return ISANSWERCORRECT
