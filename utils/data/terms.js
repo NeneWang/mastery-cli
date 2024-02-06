@@ -29,6 +29,15 @@ const engineerMask = new DeckMask(
     }
 )
 
+const cloudMask = new DeckMask(
+    "cloud-prep",
+    {
+        decksToEnableStrings: [
+            "aws cloud practitioner"
+        ]
+    }
+)
+
 
 /**
  * 
@@ -110,8 +119,10 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(designing_good_charts, "designing good charts"));
     decks.addDeck(new TermStorage(sql, "sql"));
 
-    const { aws_certification_associate_developer, aws_localstack } = require('./aws_certifications');
+    const { aws_certification_associate_developer, aws_localstack, aws_certification_cloud_practitioner } = require('./aws_certifications');
     decks.addDeck(new TermStorage(aws_certification_associate_developer, "aws associate dev"));
+    decks.addDeck(new TermStorage(aws_localstack, "aws localstack"));
+    decks.addDeck(new TermStorage(aws_certification_cloud_practitioner, "aws cloud practitioner"));
 
 
     // decks.addDeck(new TermStorage(test, "test", {is_active: true}));
@@ -132,7 +143,8 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(matlab, "matlab"));
     decks.addDeck(new TermStorage(kotlin, "kotlin"));
 
-    decks.applyMasks([engineerMask]);
+    // decks.applyMasks([engineerMask]);
+    decks.applyMasks([cloudMask]);
 
     return decks;
 }

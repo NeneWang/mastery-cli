@@ -219,15 +219,15 @@ class Maid {
 				const _ = await this.populateMissingReport();
 			}
 			
+			if (ask_if_dsa_missing) {
+
+				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
+			}
 			if (Settings?.report_show?.obj_ournal) {
 				const journal_notes = Settings.journal_notes;
 				console.log(journal_notes);
 			}
 			
-			if (ask_if_dsa_missing) {
-
-				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
-			}
 		}
 		catch (err) {
 			if (DEV_MODE) console.log("Error in provideMissingReport", err)

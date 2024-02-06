@@ -1265,5 +1265,5 @@ const aws_certification_associate_developer = [
 
 
 module.exports = {
-    aws_certification_associate_developer, aws_localstack
+    aws_certification_associate_developer, aws_localstack, aws_certification_cloud_practitioner
 }
