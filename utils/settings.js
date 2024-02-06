@@ -35,11 +35,12 @@ module.exports = Settings = {
     "ask_quiz_when_commit": true,
     "ask_if_algo_missing_when_commit": true,
     'show_past_commits_features_after_quiz': true, // If true, it will show the past commits features after the quiz.
-    "journal_notes": "Obsess about your current projects. Dont try to seek for new ones. Focus on maximizing learning from the current. If you are learning something new, try to relate it ot the current work.",
+    "journal_notes": "Obsess about your current projects. Dont try to seek for new ones. Focus on maximizing learning for the current project. \n\
+    Don't learn something new until the current project is maximized.",
     // Reporting
     "report_show": {
         "performance_summary": true,
-        "weather": true,
+        "weather": false,
         "missing_report": true,
         "obj_ournal": true, // Only works if missing_report is true
         "ask_if_algo_missing": true,  // Only works if missing_report is true. If true, it will ask if the user wants to solve the missing algo problems.
