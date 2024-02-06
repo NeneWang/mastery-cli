@@ -36,7 +36,7 @@ module.exports = Settings = {
     "ask_if_algo_missing_when_commit": true,
     'show_past_commits_features_after_quiz': true, // If true, it will show the past commits features after the quiz.
     "journal_notes": "Obsess about your current projects. Dont try to seek for new ones. Focus on maximizing learning for the current project. \n\
-    Don't learn something new until the current project is maximized.",
+    Don't learn something new until the current project is maximized. \n Money will come naturally when you have strong craftmanship. be so good, that you wont be ignored.",
     // Reporting
     "report_show": {
         "performance_summary": true,
