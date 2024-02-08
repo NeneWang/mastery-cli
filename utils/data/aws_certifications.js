@@ -454,6 +454,33 @@ const aws_certification_cloud_practitioner = [
         Incident Detection and response starts from Enterprise: Enhanced monitoring.",
         prompt: "When does the Incident Detection and response (enhanced monitoring) start and why would you use each of them for?",
         example: "Enterprise"
+    },
+    {
+        term: "Amazon VPC",
+        description: "A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud. You can specify an IP address range for the VPC, add subnets, add gateways, and associate security groups.",
+        prompt: "Why would you use Amazon VPC?",
+        example: "You can use Amazon VPC to launch AWS resources into a virtual network that you've defined. This virtual network closely resembles a traditional network that you'd operate in your own data center, with the benefits of using the scalable infrastructure of AWS."
+    },
+    {
+        term: "Amazon Subnet",
+        description: "A subnet is a range of IP addresses in your VPC. You launch AWS resources, such as Amazon EC2 instances, into your subnets. You can connect a subnet to the internet, other VPCs, and your own data centers, and route traffic to and from your subnets using route tables.",
+        prompt: "Why would you use Amazon Subnet?",
+        example: "You can use Amazon Subnet to divide a VPC into multiple networks. This allows you to have multiple layers of security, and to route traffic between the subnets."
+    },
+    {
+        term: "Amazon Route Tables",
+        description: "A route table contains a set of rules, called routes, that are used to determine where network traffic from your VPC is directed. You can explicitly associate a subnet with a particular route table. Otherwise, the subnet is implicitly associated with the main route table.\n\
+        Each route in a route table specifies the range of IP addresses where you want the traffic to go (the destination) and the gateway, network interface, or connection through which to send the traffic (the target).",
+        prompt: "Why would you use Amazon Route Tables?",
+        example: "You can use Amazon Route Tables to determine where network traffic from your VPC is directed. You can explicitly associate a subnet with a particular route table. Otherwise, the subnet is implicitly associated with the main route table."
+
+    },
+    {
+        term: "AWS Private Global Network",
+        description: "AWS provides a high-performance, and low-latency private global network that delivers a secure cloud computing environment to support your networking needs. AWS Regions are connected to multiple Internet Service Providers (ISPs) as well as to a private global network backbone, which provides improved network performance for cross-Region traffic sent by customers.",
+        prompt: "Why would you use AWS Private Global Network?",
+        example: "You can use AWS Private Global Network to deliver a secure cloud computing environment to support your networking needs. AWS Regions are connected to multiple Internet Service Providers (ISPs) as well as to a private global network backbone, which provides improved network performance for cross-Region traffic sent by customers."
+
     }
 
 ]
