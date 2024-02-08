@@ -8,7 +8,7 @@ module.exports = Settings = {
 
     // DSA 
     "quiz_enabled": [
-        "math",
+        // "math",
         "term",
     ], // math, term, algorithm, cloze-algo
     // Quick quizes enabled when commiting, 

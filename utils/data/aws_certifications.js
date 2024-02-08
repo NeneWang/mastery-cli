@@ -402,8 +402,59 @@ const aws_certification_cloud_practitioner = [
         AWS Managed Services starts from enterpreise On-Ramp\n\
         AWS re:Post starts from enterpreise On-Ramp\n\
         \n\
-        Incident Detection and response starts from Enterprise: Enhanced monitoring."
+        Incident Detection and response starts from Enterprise: Enhanced monitoring.",
+        prompt: "When does the full set of AWS Trusted Advisor checks start?",
+        example: "Business"
     },
+    
+    {
+        term: "AWS Support, Starting from... ",
+        description: "\n\
+        Full set of AWS Trusted Advisor checks starts from Business\n\
+        Programmatic Case Management starts from Business\n\
+        Third Party Software Support starts from Business\n\
+        \n\
+        Technical Account Management starts from enterpreise On-Ramp\n\
+        Billing Assistance starts from enterpreise On-Ramp\n\
+        AWS Managed Services starts from enterpreise On-Ramp\n\
+        AWS re:Post starts from enterpreise On-Ramp\n\
+        \n\
+        Incident Detection and response starts from Enterprise: Enhanced monitoring.",
+        prompt: "When does the Programmatic Case Management, Third Party Software Support start? and when would you use each of them for?",
+        example: "Business"
+    },
+    {
+        term: "AWS Support, Starting from... ",
+        description: "\n\
+        Full set of AWS Trusted Advisor checks starts from Business\n\
+        Programmatic Case Management starts from Business\n\
+        Third Party Software Support starts from Business\n\
+        \n\
+        Technical Account Management starts from enterpreise On-Ramp\n\
+        Billing Assistance starts from enterpreise On-Ramp\n\
+        AWS Managed Services starts from enterpreise On-Ramp\n\
+        AWS re:Post starts from enterpreise On-Ramp\n\
+        \n\
+        Incident Detection and response starts from Enterprise: Enhanced monitoring.",
+        prompt: "When does the Technical Account Management, Billing Assistance, AWS Managed Services, AWS re:Post start and why would you use each of them for?",
+        example: "Enterprise On-Ramp"
+    },
+    {
+        term: "AWS Support, Starting from... ",
+        description: "\n\
+        Full set of AWS Trusted Advisor checks starts from Business\n\
+        Programmatic Case Management starts from Business\n\
+        Third Party Software Support starts from Business\n\
+        \n\
+        Technical Account Management starts from enterpreise On-Ramp\n\
+        Billing Assistance starts from enterpreise On-Ramp\n\
+        AWS Managed Services starts from enterpreise On-Ramp\n\
+        AWS re:Post starts from enterpreise On-Ramp\n\
+        \n\
+        Incident Detection and response starts from Enterprise: Enhanced monitoring.",
+        prompt: "When does the Incident Detection and response (enhanced monitoring) start and why would you use each of them for?",
+        example: "Enterprise"
+    }
 
 ]
 
@@ -1261,7 +1312,7 @@ const aws_certification_associate_developer = [
         example: `AWS::AccountId  Using CloudFormation, you can create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances), and AWS CloudFormation takes care of provisioning and configuring those resources for you.`
     },
     {
-        
+
     }
 
 ]
