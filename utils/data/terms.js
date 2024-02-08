@@ -27,7 +27,7 @@ const engineerMask = new DeckMask(
             "best practices"
         ]
     }
-)
+);
 
 const cloudMask = new DeckMask(
     "cloud-prep",
@@ -36,8 +36,17 @@ const cloudMask = new DeckMask(
             "aws cloud practitioner"
         ]
     }
-)
+);
 
+const Fall2024Related = new DeckMask(
+
+    "spring-2024",
+    {
+        decksToEnableStrings: [
+            "analysisAlgorithmClass"]
+
+    }
+);
 
 
 // TODO
@@ -99,7 +108,7 @@ async function populateMasterDeck() {
     const { designPatterns, dsa, system_design } = require('./dsa');
     decks.addDeck(new TermStorage(designPatterns, "design patterns"));
     decks.addDeck(new TermStorage(dsa, "dsa")),
-    decks.addDeck(new TermStorage(system_design, "system design"));
+        decks.addDeck(new TermStorage(system_design, "system design"));
 
     const { aws_services, aws_glossary, coderTerms, unit_testing, docker, js_advanced, best_practices } = require('./programmer_experience');
     decks.addDeck(new TermStorage(aws_glossary, "aws glossary"));
@@ -131,7 +140,7 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(machine_learning_pandas_visualization, "machine learning pandas"));
     decks.addDeck(new TermStorage(machine_learning_scikit_learn, "machine learning scikit learn"));
     decks.addDeck(new TermStorage(ai_theory, "ai theory"));
-    
+
 
 
     const { designing_good_charts, sql } = require('./data-science');
@@ -162,8 +171,12 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(matlab, "matlab"));
     decks.addDeck(new TermStorage(kotlin, "kotlin"));
 
+    const { analysisAlgorithmClass } = require('./spring-senior-2024.js');
+    decks.addDeck(new TermStorage(analysisAlgorithmClass, "analysisAlgorithmClass"));
+
+
     // decks.applyMasks([engineerMask]);
-    decks.applyMasks([cloudMask]);
+    decks.applyMasks([cloudMask, Fall2024Related]);
 
     return decks;
 }

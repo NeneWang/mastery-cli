@@ -211,4 +211,12 @@ const analysisAlgorithmClass = [
 ]
 
 
+module.exports = {
+    analysisAlgorithmClass
+}
+
+
+
+
+
 
