@@ -1260,6 +1260,9 @@ const aws_certification_associate_developer = [
         `AWS::StackName` - Returns the name of the stack as specified with the aws cloudformation create-stack command, such as "teststack".',
         example: `AWS::AccountId  Using CloudFormation, you can create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances), and AWS CloudFormation takes care of provisioning and configuring those resources for you.`
     },
+    {
+        
+    }
 
 ]
 

@@ -39,6 +39,25 @@ const cloudMask = new DeckMask(
 )
 
 
+
+// TODO
+const Spring2024Related = new DeckMask(
+    "spring-2024",
+    {
+        decksToEnableStrings: [
+            // Algorithms Class + Algorithms Classifications
+
+
+            // Interview Questions for Pandas, Numpy, Matplotlib, Seaborn, Scikit Learn + Data algorithms and Tools 
+            // Data Science Interview Prompts
+
+            // Swift Experience + Swift UI + Swift Interview Questions + Some Swift Lirbaries implementations
+
+        ]
+    }
+)
+
+
 /**
  * 
  * @returns Master Deck containing all the cards

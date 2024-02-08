@@ -252,6 +252,12 @@ const python = [
         1000 & 0111 = 0000\n\
         1100 & 1011 = 1000\n\
         "
+    },
+    {
+        term: "Character to int and int to char",
+        prompt: "How to convert in python int to char and char to int?",
+        example: "ord('a')\n\
+        chr(97)"
     }
 ]
 
