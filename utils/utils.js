@@ -694,7 +694,7 @@ getArrayLastXDays = (days = 7) => {
 }
 
 /**
- * Increase the performance of a feature; Day performances are such as commits, features, etc.
+Waiting for pgAdmin 4 to start... * Increase the performance of a feature; Day performances are such as commits, features, etc.
  * @param {str} feature_name: The name of the feature to increase
  * @param {int} increaseBY: The amount to increase the feature by; default 1
  * @param {bool} debug ?= false : If to whether to debug api responses, etc.; default false
