@@ -74,7 +74,7 @@ module.exports = Settings = {
             2 - Medium \n\
             3 - Hard",
             "req_type": "week",
-            "requirement": 1
+            "requirement": 10
         },
         {
             "feature_key": "pro",
@@ -82,12 +82,12 @@ module.exports = Settings = {
             "req_type": "week",
             "requirement": 14
         },
-        {
-            "feature_key": "terms",
-            "description": "The number of terms to be learned",
-            "req_type": "week",
-            "requirement": 100
-        },
+        // {
+        //     "feature_key": "terms",
+        //     "description": "The number of terms to be learned",
+        //     "req_type": "week",
+        //     "requirement": 100
+        // },
     ],
 
 }
