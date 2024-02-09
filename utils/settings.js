@@ -46,7 +46,7 @@ module.exports = Settings = {
         "ask_if_algo_missing": true,  // Only works if missing_report is true. If true, it will ask if the user wants to solve the missing algo problems.
     },
     "week_is_since_today": true, // If true, it will count the week since today. Otherwise, it will count the week since the current days sunday.
-    "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss"], // commits │ feat │ math_ss │ ref │ fix  │ algo │ acad │ pro  │ terms │ algo_w │ test │ tesrasd │ commits} │ terms}
+    "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss", "terms"], // commits │ feat │ math_ss │ ref │ fix  │ algo │ acad │ pro  │ terms │ algo_w │ test │ tesrasd │ commits} │ terms}
     "objectives_features": [
         {
             "feature_key": "commits",
