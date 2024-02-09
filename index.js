@@ -73,6 +73,7 @@ const { Demo, EDemo } = demos;
 		let comments_to_populate = [];
 		if (Settings.ask_quiz_when_commit) {
 			const _ = await mQuizer.askQuestion();
+			
 
 		}
 		maid.populateMissingReport();

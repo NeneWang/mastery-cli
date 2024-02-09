@@ -1,5 +1,5 @@
 const { Quizzer } = require('./Quizzer');
-const { Maid } = require('./utils');
+const { Maid, increasePerformance } = require('./utils');
 const constants = require('./constants');
 const DSATrainer = require('./dsa-cli/dsa-trainer');
 const DEBUG = false;
@@ -20,10 +20,10 @@ class QuizzerWithDSA extends Quizzer {
         });
     }
 
-    async askQuestion({ ask_until_one_is_correct = true, disable_math = false, disable_dsa = false } = {}) {
+    async askQuestion({ ask_until_one_is_correct = true, disable_math = false, disable_dsa = false, increase_performance = true } = {}) {
         let exit = false;
         let problem_types = ['math', 'term'];
-        problem_types = settings.quiz_enabled??problem_types;
+        problem_types = settings.quiz_enabled ?? problem_types;
 
         const exitMethod = () => {
             if (DEBUG) console.log("Exit method requested");
@@ -38,23 +38,49 @@ class QuizzerWithDSA extends Quizzer {
          */
         const askQuestionRandom = async ({ exitMethod = () => { }, force_mode = true } = {}) => {
             let problem_type_selected = constants.get_random(problem_types);
-            
+
             switch (problem_type_selected) {
                 case 'math':
-                    return await this.ask_math_question({ exitMethod: exitMethod });
+                    const math_answered = await this.ask_math_question({ exitMethod: exitMethod });
+                    if (math_answered && increase_performance) {
+
+                        increasePerformance('math_ss');
+
+                    }
+                    return math_answered;
 
                 case 'term':
                     if (force_mode) {
-                        return await this.forceLearnTermQuestions({ exitMethod: exitMethod });
+                        const term_answered = await this.forceLearnTermQuestions({ exitMethod: exitMethod });
+                        if (term_answered && increase_performance) {
+
+                            increasePerformance('terms');
+
+                        }
+                        return term_answered;
+                    } else {
+
+                        const term_answered = await this.pick_and_ask_term_question({ exitMethod: exitMethod });
+                        if (term_answered && increase_performance) {
+
+                            increasePerformance('terms');
+
+                        }
                     }
-                    return await this.pick_and_ask_term_question({ exitMethod: exitMethod });
 
                 case 'algorithm':
                     // Wont be called for now
-                    return await this.ask_algorithm_question({ exitMethod: exitMethod });
+                    const algo_answered = await this.ask_algorithm_question({ exitMethod: exitMethod });
+                    if (algo_answered && increase_performance) {
+                        increasePerformance('algo_w');
+                    }
+
+                    return algo_answered;
 
                 case 'cloze-algo':
-                    return await this.ask_cloze_algorithm_question({ exitMethod: exitMethod });
+                    const cloze_answered = await this.ask_cloze_algorithm_question({ exitMethod: exitMethod });
+
+                    return cloze_answered;
 
                 default:
                     return false;
@@ -88,9 +114,9 @@ class QuizzerWithDSA extends Quizzer {
     }
 
 
-    
 
-    cloze_study_session = async ({reset_scheduler = false}) => {
+
+    cloze_study_session = async ({ reset_scheduler = false }) => {
 
         // Pick all the available string keys.
 
@@ -99,7 +125,7 @@ class QuizzerWithDSA extends Quizzer {
         const clozeScheduler = new TermScheduler({
             cards_category: "Algo"
         });
-        await clozeScheduler.setLearningCards(cloze_problems, {shuffle: true, reset_scheduler: reset_scheduler});
+        await clozeScheduler.setLearningCards(cloze_problems, { shuffle: true, reset_scheduler: reset_scheduler });
         let exit = false;
 
         const printCardsLeft = (cardsLeft, cardsLearnt) => {
@@ -145,15 +171,15 @@ class QuizzerWithDSA extends Quizzer {
             const [cardsLeft, cardsLearnt] = [jupyterScheduler.getCardsToLearn(), jupyterScheduler.getCardsLearnt()];
 
             const card = await jupyterScheduler.getCard();
-            
+
             console.log("Card", card.problem);
-            const answerIsCorrect = await maid.openJupyter({FILE: card.problem});
+            const answerIsCorrect = await maid.openJupyter({ FILE: card.problem });
 
             jupyterScheduler.solveCard(answerIsCorrect);
             await jupyterScheduler.saveCards();
             printCardsLeft(cardsLeft, cardsLearnt);
         }
-    
+
     }
 
 }
