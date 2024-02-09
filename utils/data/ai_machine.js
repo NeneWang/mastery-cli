@@ -337,9 +337,6 @@ const ai_theory = [
         4. Features - What features should we use to solve the problem? \n\
         5. Modelling - What model should we use to solve the problem? \n\
         6. Experimentation - How can we improve the model?",
-
-
-
     }
 ]
 
