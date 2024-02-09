@@ -704,6 +704,7 @@ getArrayLastXDays = (days = 7) => {
  */
 increasePerformance = async (feature_name, increaseBY = 1, debug = false, account_id = Settings.account_id ?? 1) => {
 	try {
+		console.log(`Increasing performance ${feature_name} for ${account_id}`)
 		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}&account_id=${account_id}`)
 		if (debug) console.log(res.data);
 	} catch (err) {
