@@ -140,7 +140,10 @@ class Maid {
 
 		copyFileToTemp(FILE);
 
-		const correctPrompt = new Confirm("Was the notebook solved correctly?", { initial: true });
+		const correctPrompt = new Confirm({
+			name: 'notebook',
+			message: "Was the notebook solved correctly?",
+			initial: true });
 		const response = await correctPrompt.run();
 		if (response) {
 			await increasePerformance("jupyter");
@@ -170,10 +173,12 @@ class Maid {
 
 	// Prompts y/n question to clean, if y, cleans.
 	askToClean = async () => {
-		this.say("Would you like me to clean up the terminal?", false)
 
 		// const response = question('clean', 'y/n', { type: 'confirm' });
-		const cleanPrompt = new Confirm("Clean", { initial: true });
+		const cleanPrompt = new Confirm({
+			name: 'clean',
+			message: "Would you like me to clean up the terminal?", 
+			initial: true });
 		const response = await cleanPrompt.run();
 		console.log(response)
 		if (response) {
@@ -246,7 +251,10 @@ class Maid {
 
 
 
-			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
+			const dsaPrompt = new Confirm({ 
+				name: 'dsa',
+				message: "Daily DSA Missing; Run algorithms?",
+				initial: true });
 			const response = await dsaPrompt.run();
 			if (response) {
 				const dsaTrainer = new DSATrainer(
