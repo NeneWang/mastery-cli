@@ -1,6 +1,6 @@
 module.exports = Settings = {
     // User ID Provided Mastery Site.
-    "account_id": 2,
+    "account_id": 1,
 
     // Developer Settings
     "show_http_errors": false, // If failed connection to the server, it will show the error.

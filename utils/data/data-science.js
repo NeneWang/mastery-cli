@@ -370,5 +370,11 @@ const statistics = [
 
 ]
 
+// Samples of great difficult queries, and attempt to replicate them. Collected from job exp, interview questions.
+const sql_queries = [
+    {}
+]
+
+
 
 module.export = { designing_good_charts, sql }
