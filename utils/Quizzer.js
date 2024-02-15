@@ -562,8 +562,12 @@ class Quizzer {
             // if ask_if_correct is true then ask if it is corerect and update after showing examples
 
             if (ask_if_correct) {
-                console.log("Is your response acceptable?");
-                const is_correct = new Confirm("Is the response correct?", { initial: true });
+                const is_correct = new Confirm(
+                    {
+                        name: 'is_correct',
+                        message: "Is the response correct?",
+                        initial: true
+                    });
                 const response = await is_correct.run();
                 ISANSWERCORRECT = response;
             }
