@@ -2,7 +2,7 @@ const chalk = require('chalk');
 const axios = require('axios');
 const clipboard = require('copy-paste')
 
-const chart = require('@wangnene2/chart')
+const chart = require('terminal-charter')
 const { exec } = require('node:child_process');
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquirer');
 
@@ -10,7 +10,7 @@ const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquir
 const init = require('../utils/init');
 const constants = require('./constants');
 
-const { bar, bg, annotation } = chart;
+const { bar, bg, annotation, radar } = chart;
 const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
@@ -143,7 +143,8 @@ class Maid {
 		const correctPrompt = new Confirm({
 			name: 'notebook',
 			message: "Was the notebook solved correctly?",
-			initial: true });
+			initial: true
+		});
 		const response = await correctPrompt.run();
 		if (response) {
 			await increasePerformance("jupyter");
@@ -177,8 +178,9 @@ class Maid {
 		// const response = question('clean', 'y/n', { type: 'confirm' });
 		const cleanPrompt = new Confirm({
 			name: 'clean',
-			message: "Would you like me to clean up the terminal?", 
-			initial: true });
+			message: "Would you like me to clean up the terminal?",
+			initial: true
+		});
 		const response = await cleanPrompt.run();
 		console.log(response)
 		if (response) {
@@ -211,6 +213,8 @@ class Maid {
 			this.say(`Missing Report: ${todaydate}, dsa enabled: ${true}`, false)
 			await this.provideMissingReport({ ask_if_dsa_missing: Settings?.report_show?.ask_if_algo_missing ?? false });
 		}
+
+
 	}
 
 	/**
@@ -219,11 +223,11 @@ class Maid {
 	 */
 	provideMissingReport = async ({ ask_if_dsa_missing = false } = {}) => {
 		try {
-			
+
 			if (!this.missingFeatReport) {
 				const _ = await this.populateMissingReport();
 			}
-			
+
 			if (ask_if_dsa_missing) {
 
 				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
@@ -232,7 +236,7 @@ class Maid {
 				const journal_notes = Settings.journal_notes;
 				console.log(journal_notes);
 			}
-			
+
 		}
 		catch (err) {
 			if (DEV_MODE) console.log("Error in provideMissingReport", err)
@@ -251,10 +255,11 @@ class Maid {
 
 
 
-			const dsaPrompt = new Confirm({ 
+			const dsaPrompt = new Confirm({
 				name: 'dsa',
 				message: "Daily DSA Missing; Run algorithms?",
-				initial: true });
+				initial: true
+			});
 			const response = await dsaPrompt.run();
 			if (response) {
 				const dsaTrainer = new DSATrainer(
@@ -418,9 +423,30 @@ class Maid {
 		// console.log(userPerformanceData)
 		let filtered_data = filterProperties(userPerformanceData, Settings.table_feat_show);
 
+		/**
+		 * 
+		 * @param {Object} userPerformanceData [{feature_name: 'miss': -2, type: 'day', 'req': 3}...]
+		 * @returns {Object[]} Something like this: [{ name: "STR", value: 4 }, { name: "DEX", value: 1 }, { name: "VIT", value: 6 }, { name: "INT", value: 5 }, { name: "WIS", value: 3 }, { name: "HP", value: 6 } ]
+		 */
+		function computeRadioDict(userPerformanceData) {
+			let radioDict = [];
+			for (const [feature_name, feature_data] of Object.entries(userPerformanceData)) {
+				
+				const denominator = typeof (feature_data).miss == 'number' ? feature_data.req - feature_data.miss : feature_data.req;
+				let score = Math.floor((denominator / feature_data.req) * 6);
+				radioDict.push({ name: feature_name, value: score ?? 6 });
+			}
+			return radioDict;
+		}
+
 
 		console.table(filtered_data);
 		console.table(feat_accomplished_until_today);
+		const computed_radio = computeRadioDict(feat_accomplished_until_today);
+		// console.log(computed_radio);
+		const radarDisplay = radar(computed_radio)
+		console.log(radarDisplay.render)
+		console.log(annotation(radarDisplay.labelsWithColors))
 
 	}
 

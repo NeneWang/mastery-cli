@@ -89,9 +89,7 @@ const { Demo, EDemo } = demos;
 
 			utils.printComments(comments_to_populate);
 		}
-
-
-
+		
 		await maid.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {

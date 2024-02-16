@@ -372,7 +372,14 @@ const statistics = [
 
 // Samples of great difficult queries, and attempt to replicate them. Collected from job exp, interview questions.
 const sql_queries = [
-    {}
+    {
+        term: "Sample Join",
+        prompt: "Get the user id and connector from the users and connectors table, You have the connector guid",
+        example: "SELECT c.user_id, u.timezone \n\
+        FROM connector AS c \n\
+        JOIN users AS u ON u.id = c.user_id \n\
+        WHERE c.guid = '196c878d-d63e-41cf-ba9a-0a9b5d74dc7c';"
+    }
 ]
 
 

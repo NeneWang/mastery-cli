@@ -481,7 +481,13 @@ const aws_certification_cloud_practitioner = [
         prompt: "Why would you use AWS Private Global Network?",
         example: "You can use AWS Private Global Network to deliver a secure cloud computing environment to support your networking needs. AWS Regions are connected to multiple Internet Service Providers (ISPs) as well as to a private global network backbone, which provides improved network performance for cross-Region traffic sent by customers."
 
-    }
+    },
+    {
+        term: "What is VPC peering?",
+        description: "A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IPv4 addresses or IPv6 addresses. Instances in either VPC can communicate with each other as if they are within the same network. You can create a VPC peering connection between your own VPCs, or with a VPC in another AWS account. The VPCs can be in different Regions (also known as an inter-Region VPC peering connection)",
+        prompt: "Why would you use VPC peering?",
+        example: "You can use VPC peering to route traffic between two VPCs using private IPv4 addresses or IPv6 addresses. Instances in either VPC can communicate with each other as if they are within the same network. You can create a VPC peering connection between your own VPCs, or with a VPC in another AWS account. The VPCs can be in different Regions (also known as an inter-Region VPC peering connection)."
+    },
 
 ]
 

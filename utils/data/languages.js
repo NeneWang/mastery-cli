@@ -258,6 +258,15 @@ const python = [
         prompt: "How to convert in python int to char and char to int?",
         example: "ord('a')\n\
         chr(97)"
+    },
+    {
+        term: "heapq",
+        prompt: "Use heapq to create a list, add and pop the smallest element",
+        example: "import heapq\n\
+        heap = [3, 1, 2]\n\
+        heapq.heapify(heap)\n\
+        heapq.heappush(heap, 4)\n\
+        min_element = heapq.heappop(heap)"
     }
 ]
 
@@ -443,7 +452,7 @@ const js = [
         example: "Number.MAX_SAFE_INTEGER\n\
         Number.MIN_SAFE_INTEGER",
         prompt: "How to get the max and min integer in JS?"
-    }
+    },
 ]
 
 const dart = [
