@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Term</title>
+    <title>JSDoc: Source: dsa-cli/settings-manager.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,265 +17,54 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Term</h1>
+    <h1 class="page-title">Source: dsa-cli/settings-manager.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
-    
-        <h2><span class="attribs"><span class="type-signature"></span></span>Term<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description"><p>Terms, standard accepted for the Quizzler</p></div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="Term"><span class="type-signature"></span>new Term<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures.js.html">structures.js</a>, <a href="structures.js.html#line6">line 6</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="auto_newline"><span class="type-signature"></span>auto_newline<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    <p>REMEMBER: To add the new item into asJson!!</p>
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures.js.html">structures.js</a>, <a href="structures.js.html#line13">line 13</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="slugify"><span class="type-signature"></span>slugify<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    <p>Slugify the term</p>
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures.js.html">structures.js</a>, <a href="structures.js.html#line37">line 37</a>
-    </li></ul></dd>
-    
-
-    
-
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const {getDirAbsoluteUri} = require('./functions');
 
-    
-</dl>
-
-
 
+/**
+ * @Class to manage the settings.json file
+ */
+class SettingsManager {
+    // Updates the json editor and allows edition of the settings.json file
 
+    constructor() {
+        this.settings_path = "./user_files/temp_settings.json";
+        this.settings_path = getDirAbsoluteUri(this.settings_path);
+        this._settings = require(this.settings_path);
+    }
 
 
-        
-    
+    get settings() {
+        return this._settings;
+    }
 
-    
+    editSettings(){
+        // Opens the settings.json file in the default editor
+        const { exec } = require('node:child_process')
+        exec(`start ${this.settings_path}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+            }
+            console.log(`Continue running`);
+        });
+    }
+}
 
-    
 
-    
-</article>
+module.exports = SettingsManager;
 
-</section>
+</code></pre>
+        </article>
+    </section>
 
 
 

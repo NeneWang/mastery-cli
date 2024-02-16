@@ -26,9 +26,26 @@ class DSATrainer {
 
     /**
      * Creates a new DSATrainer object
-     * @param {List[str]} skip_problems A list of problems to skip (problems slug names)
+     * @param {List} [skip_problems]: List[str] A list of problems to skip (problems slug names)
      */
     constructor({ skip_problems = ["hello-world", "simple-sum"] } = {}) {
+        /**
+         * @property {SettingsManager} settings_manager - Configurations management such as which code editor to use.
+         * @property {ProblemsManager} problems_manager - management of DSA Problems
+         * 
+         * @property {ProblemsManager} loaded_problem_manager - management of DSA Problems once it finishes loading.
+         * @property {Object} user_settings - User settings configured on `settings.json`
+         * @property {string[]} skip_problems - A list of problems to skip (problems slug names)
+         * 
+         * @property {StorableReport} problemReport - A report of the problems solved by the user
+         * @property {string[]} order_categories - The order of the categories to be solved
+         * 
+         * @property {ProblemMetaData[]} first_non_completed_category_non_completed_problems - A list of problems that are not completed yet
+         * 
+         * @property {ProblemMetaData[]} first_non_only_hard_left_category_non_hard_problems - A list of problems that are not completed yet, and are not hard
+         * @property {ProblemMetaData[]} completed_problems_sorted_by_times_completed - A list of problems that are not completed yet, sorted by the number of times they have been completed
+         * @property {String} uploadCodeFileUrl - The url to upload the code file
+         */
         this.settings_manager = new SettingsManager();
         this.problems_manager = new ProblemsManager({ skip_problems: skip_problems });
 
@@ -98,7 +115,7 @@ class DSATrainer {
     /**
      * Gets a list of problems that are not completed yet 
      * !note that the the this wont work if problem_manager is not loaded
-     * @returns {List[ProblemMetaData]} A list of problems that are not completed yet
+     * @returns {ProblemMetaData[]} A list of problems that are not completed yet
      */
     getFirstNonCompletedCategoryNonCompletedProblems() {
 
@@ -121,7 +138,7 @@ class DSATrainer {
 
     /**
      * 
-     * @returns {List[ProblemMetaData]} A list of problems that are not completed yet, and are not hard
+     * @returns {ProblemMetaData[]} A list of problems that are not completed yet, and are not hard
      */
     getFirstNonOnlyHardLeftCategoryNonHardProblems() {
         for (let category of this.order_categories) {
@@ -147,7 +164,7 @@ class DSATrainer {
 
     /**
      * 
-     * @returns {List[ProblemMetaData]} A list of problems that are not completed yet, sorted by the number of times they have been completed
+     * @returns {ProblemMetaData[]} A list of problems that are not completed yet, sorted by the number of times they have been completed
      */
     getCompletedProblemsSortedByTimesCompleted() {
         const completed_problems = this.problems_manager.getProblems().filter(problem => this.problemReport.isProblemCompleted(problem.slug));

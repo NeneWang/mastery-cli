@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>DSATrainer<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>DSATrainer<span class="signature">(skip_problems<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>DSATrainer - Responsible of presenting problems, and interacting with problems managers, settings, and others charts and user data visualization</p></div>
         
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="DSATrainer"><span class="type-signature"></span>new DSATrainer<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="DSATrainer"><span class="type-signature"></span>new DSATrainer<span class="signature">(skip_problems<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -71,9 +71,13 @@
     <thead>
     <tr>
         
+        <th>Name</th>
+        
 
         <th>Type</th>
 
+        
+        <th>Attributes</th>
         
 
         
@@ -87,16 +91,33 @@
 
         <tr>
             
+                <td class="name"><code>skip_problems</code></td>
+            
 
             <td class="type">
+            
+                
+<span class="param-type">List</span>
+
+
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>List[str] A list of problems to skip (problems slug names)</p></td>
         </tr>
 
     
@@ -183,6 +204,350 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="settings_manager"><span class="type-signature"></span>settings_manager<span class="type-signature"></span></h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>settings_manager</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SettingsManager</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Configurations management such as which code editor to use.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>problems_manager</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#ProblemsManager">ProblemsManager</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>management of DSA Problems</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>loaded_problem_manager</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#ProblemsManager">ProblemsManager</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>management of DSA Problems once it finishes loading.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>user_settings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>User settings configured on <code>settings.json</code></p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>skip_problems</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A list of problems to skip (problems slug names)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>problemReport</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="StorableReport.html">StorableReport</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A report of the problems solved by the user</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>order_categories</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The order of the categories to be solved</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>first_non_completed_category_non_completed_problems</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;ProblemMetaData></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A list of problems that are not completed yet</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>first_non_only_hard_left_category_non_hard_problems</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;ProblemMetaData></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A list of problems that are not completed yet, and are not hard</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>completed_problems_sorted_by_times_completed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;ProblemMetaData></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A list of problems that are not completed yet, sorted by the number of times they have been completed</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>uploadCodeFileUrl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The url to upload the code file</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line49">line 49</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -193,7 +558,7 @@
     
 
     
-    <h4 class="name" id="getCompletedProblemsSortedByTimesCompleted"><span class="type-signature"></span>getCompletedProblemsSortedByTimesCompleted<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getCompletedProblemsSortedByTimesCompleted"><span class="type-signature"></span>getCompletedProblemsSortedByTimesCompleted<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;ProblemMetaData>}</span></h4>
     
 
     
@@ -241,7 +606,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line152">line 152</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line169">line 169</a>
     </li></ul></dd>
     
 
@@ -269,7 +634,23 @@
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>A list of problems that are not completed yet, sorted by the number of times they have been completed</p>
+</div>
 
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;ProblemMetaData></span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -283,7 +664,7 @@
     
 
     
-    <h4 class="name" id="getFirstNonCompletedCategoryNonCompletedProblems"><span class="type-signature"></span>getFirstNonCompletedCategoryNonCompletedProblems<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getFirstNonCompletedCategoryNonCompletedProblems"><span class="type-signature"></span>getFirstNonCompletedCategoryNonCompletedProblems<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;ProblemMetaData>}</span></h4>
     
 
     
@@ -336,7 +717,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line103">line 103</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line120">line 120</a>
     </li></ul></dd>
     
 
@@ -364,7 +745,23 @@
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>A list of problems that are not completed yet</p>
+</div>
 
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;ProblemMetaData></span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -378,7 +775,7 @@
     
 
     
-    <h4 class="name" id="getFirstNonOnlyHardLeftCategoryNonHardProblems"><span class="type-signature"></span>getFirstNonOnlyHardLeftCategoryNonHardProblems<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getFirstNonOnlyHardLeftCategoryNonHardProblems"><span class="type-signature"></span>getFirstNonOnlyHardLeftCategoryNonHardProblems<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;ProblemMetaData>}</span></h4>
     
 
     
@@ -426,7 +823,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line126">line 126</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line143">line 143</a>
     </li></ul></dd>
     
 
@@ -454,7 +851,23 @@
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>A list of problems that are not completed yet, and are not hard</p>
+</div>
 
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;ProblemMetaData></span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -638,7 +1051,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line72">line 72</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line89">line 89</a>
     </li></ul></dd>
     
 
@@ -730,7 +1143,7 @@
             <td class="type">
             
                 
-<span class="param-type">ProblemMetadata</span>
+<span class="param-type"><a href="ProblemMetadata.html">ProblemMetadata</a></span>
 
 
             
@@ -781,7 +1194,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line431">line 431</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line448">line 448</a>
     </li></ul></dd>
     
 
@@ -1051,7 +1464,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line382">line 382</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line399">line 399</a>
     </li></ul></dd>
     
 
@@ -1161,7 +1574,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line162">line 162</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line179">line 179</a>
     </li></ul></dd>
     
 
@@ -1271,7 +1684,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line56">line 56</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line73">line 73</a>
     </li></ul></dd>
     
 
@@ -1471,7 +1884,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line663">line 663</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line680">line 680</a>
     </li></ul></dd>
     
 
@@ -1565,7 +1978,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line647">line 647</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line664">line 664</a>
     </li></ul></dd>
     
 
@@ -1725,7 +2138,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line317">line 317</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line334">line 334</a>
     </li></ul></dd>
     
 
@@ -1833,7 +2246,7 @@
             <td class="type">
             
                 
-<span class="param-type">ProblemMetadata</span>
+<span class="param-type"><a href="ProblemMetadata.html">ProblemMetadata</a></span>
 
 
             
@@ -1925,7 +2338,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line285">line 285</a>
+        <a href="dsa-cli_dsa-trainer.js.html">dsa-cli/dsa-trainer.js</a>, <a href="dsa-cli_dsa-trainer.js.html#line302">line 302</a>
     </li></ul></dd>
     
 
@@ -1971,13 +2384,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Mastery CLI</a></h2><h3>Classes</h3><ul><li><a href="DSATrainer.html">DSATrainer</a></li><li><a href="DeckMask.html">DeckMask</a></li><li><a href="FeatureExtraction.html">FeatureExtraction</a></li><li><a href="QuizzerWithDSA.html">QuizzerWithDSA</a></li><li><a href="Term.html">Term</a></li><li><a href="TermStorage.html">TermStorage</a></li><li><a href="Terminology.html">Terminology</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-calculator-tutorial.html">calculator-tutorial</a></li><li><a href="tutorial-getting-started.html">Getting Started</a></li><li><a href="tutorial-program-tutorial.html">program-tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#PEOPLE_MEMORY">PEOPLE_MEMORY</a></li><li><a href="global.html#ProblemsManager">ProblemsManager</a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#commitCategory">commitCategory</a></li><li><a href="global.html#commitpush">commitpush</a></li><li><a href="global.html#countDecimals">countDecimals</a></li><li><a href="global.html#createCompiledJson">createCompiledJson</a></li><li><a href="global.html#dfd">dfd</a></li><li><a href="global.html#get">get</a></li><li><a href="global.html#getAbsoluteUri">getAbsoluteUri</a></li><li><a href="global.html#getComments">getComments</a></li><li><a href="global.html#getCredentialInformation">getCredentialInformation</a></li><li><a href="global.html#getDirAbsoluteUri">getDirAbsoluteUri</a></li><li><a href="global.html#getFilesInDirectory">getFilesInDirectory</a></li><li><a href="global.html#getMaidDirectory">getMaidDirectory</a></li><li><a href="global.html#getObjectiveFeatures">getObjectiveFeatures</a></li><li><a href="global.html#getPromptDict">getPromptDict</a></li><li><a href="global.html#getRandomBool">getRandomBool</a></li><li><a href="global.html#get_random">get_random</a></li><li><a href="global.html#get_random_of_size">get_random_of_size</a></li><li><a href="global.html#increasePerformance">increasePerformance</a></li><li><a href="global.html#logCommitIfSpecialCategory">logCommitIfSpecialCategory</a></li><li><a href="global.html#openEditorPlatformAgnostic">openEditorPlatformAgnostic</a></li><li><a href="global.html#openEditorWithCommand">openEditorWithCommand</a></li><li><a href="global.html#populateLastDaysFeaturesBarCharts">populateLastDaysFeaturesBarCharts</a></li><li><a href="global.html#populateLastDaysPerformanceReport">populateLastDaysPerformanceReport</a></li><li><a href="global.html#postCommentFromTerm">postCommentFromTerm</a></li><li><a href="global.html#printComments">printComments</a></li><li><a href="global.html#printMarked">printMarked</a></li><li><a href="global.html#show_image">show_image</a></li><li><a href="global.html#show_image_if_isurl">show_image_if_isurl</a></li><li><a href="global.html#updateConcept">updateConcept</a></li><li><a href="global.html#user_requests_calc">user_requests_calc</a></li><li><a href="global.html#user_requests_exit">user_requests_exit</a></li><li><a href="global.html#user_requests_skip">user_requests_skip</a></li><li><a href="global.html#value">value</a></li></ul>
+    <h2><a href="index.html">Mastery CLI</a></h2><h3>Modules</h3><ul><li><a href="module-dsa-cli.html">dsa-cli</a></li></ul><h3>Classes</h3><ul><li><a href="DSATrainer.html">DSATrainer</a></li><li><a href="DeckMask.html">DeckMask</a></li><li><a href="FeatureExtraction.html">FeatureExtraction</a></li><li><a href="ProblemMetadata.html">ProblemMetadata</a></li><li><a href="global.html#ProblemsManager">ProblemsManager</a></li><li><a href="QuizzerWithDSA.html">QuizzerWithDSA</a></li><li><a href="Term.html">Term</a></li><li><a href="TermStorage.html">TermStorage</a></li><li><a href="Terminology.html">Terminology</a></li><li><a href="to%2520manage%2520the%2520settings.json%2520file.html">json file</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-calculator-tutorial.html">calculator-tutorial</a></li><li><a href="tutorial-getting-started.html">Getting Started</a></li><li><a href="tutorial-program-tutorial.html">program-tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#PEOPLE_MEMORY">PEOPLE_MEMORY</a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#commitCategory">commitCategory</a></li><li><a href="global.html#commitpush">commitpush</a></li><li><a href="global.html#countDecimals">countDecimals</a></li><li><a href="global.html#createCompiledJson">createCompiledJson</a></li><li><a href="global.html#dfd">dfd</a></li><li><a href="global.html#get">get</a></li><li><a href="global.html#getAbsoluteUri">getAbsoluteUri</a></li><li><a href="global.html#getComments">getComments</a></li><li><a href="global.html#getCredentialInformation">getCredentialInformation</a></li><li><a href="global.html#getDirAbsoluteUri">getDirAbsoluteUri</a></li><li><a href="global.html#getFilesInDirectory">getFilesInDirectory</a></li><li><a href="global.html#getMaidDirectory">getMaidDirectory</a></li><li><a href="global.html#getObjectiveFeatures">getObjectiveFeatures</a></li><li><a href="global.html#getPromptDict">getPromptDict</a></li><li><a href="global.html#getRandomBool">getRandomBool</a></li><li><a href="global.html#get_random">get_random</a></li><li><a href="global.html#get_random_of_size">get_random_of_size</a></li><li><a href="global.html#increasePerformance">increasePerformance</a></li><li><a href="global.html#logCommitIfSpecialCategory">logCommitIfSpecialCategory</a></li><li><a href="global.html#openEditorPlatformAgnostic">openEditorPlatformAgnostic</a></li><li><a href="global.html#openEditorWithCommand">openEditorWithCommand</a></li><li><a href="global.html#populateLastDaysFeaturesBarCharts">populateLastDaysFeaturesBarCharts</a></li><li><a href="global.html#populateLastDaysPerformanceReport">populateLastDaysPerformanceReport</a></li><li><a href="global.html#postCommentFromTerm">postCommentFromTerm</a></li><li><a href="global.html#printComments">printComments</a></li><li><a href="global.html#printMarked">printMarked</a></li><li><a href="global.html#show_image">show_image</a></li><li><a href="global.html#show_image_if_isurl">show_image_if_isurl</a></li><li><a href="global.html#updateConcept">updateConcept</a></li><li><a href="global.html#user_requests_calc">user_requests_calc</a></li><li><a href="global.html#user_requests_exit">user_requests_exit</a></li><li><a href="global.html#user_requests_skip">user_requests_skip</a></li><li><a href="global.html#value">value</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Feb 16 2024 11:31:25 GMT-0500 (Eastern Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Feb 16 2024 12:05:27 GMT-0500 (Eastern Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

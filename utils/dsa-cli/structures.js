@@ -5,6 +5,25 @@ const {getDirAbsoluteUri} = require('./functions');
 const SOLUTION_DIR = 'solutions'
 
 
+/**
+ * Represents the metadata of a problem
+ * @class {Object} ProblemMetadata
+ * @property {string} slug - The slug of the problem
+ * @property {string} file_path - The path of the file
+ * @property {string} test_slug - The test slug
+ * @property {string} name - The name of the problem
+ * @property {string} description - The description of the problem
+ * @property {string} difficulty - The difficulty of the problem
+ * @property {string[]} tags - The tags of the problem
+ * @property {string} link - The link of the problem
+ * @property {string} absolute_solution_path - The absolute solution path
+ * @property {string[]} hints - The hints of the problem
+ * @property {Object} asJson - The json representation of the problem
+ */
+
+/**
+ * @type {ProblemMetadata}
+ */
 class ProblemMetadata {
     constructor(slug, { name = "", description = "", difficulty = "EASY", tags = [], link = "", hints = [] } = {}) {
         this.slug = slug;
