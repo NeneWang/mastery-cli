@@ -708,7 +708,6 @@ Waiting for pgAdmin 4 to start... * Increase the performance of a feature; Day p
  * @param {bool} debug ?= false : If to whether to debug api responses, etc.; default false
  * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
  * 
- * @returns {List: [date: comment]}
  */
 increasePerformance = async (feature_name, increaseBY = 1, debug = true, account_id = Settings.account_id ?? 1) => {
 	try {
