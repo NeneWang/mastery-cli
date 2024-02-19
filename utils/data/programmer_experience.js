@@ -4,8 +4,6 @@
  * The advantage of devops is that tit is usually definition based, so I should be able to go throught the list and get as much of these definitions based problems.
  */
 
-const { example } = require("yargs");
-
 
 const aws_glossary = [
     {

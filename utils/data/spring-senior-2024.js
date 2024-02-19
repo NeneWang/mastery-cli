@@ -109,6 +109,14 @@ const analysisAlgorithmClass = [
         example: "x = 16"
     },
     {
+        term: "Exponent logarithms",
+        prompt: "How much is ? in log2(5)^3 = ? * log2(5)",
+        example: "3. Since it is 3 * log2(5)",
+    },
+    {
+        term: "Exponent sums"
+    },
+    {
         term: "How many operations per second?",
         description: "Consider an algorithm that demands 23 ∗ n^2 per n input operation. The  amount of operations per second to complete an input size of 100 in 10 minutes",
         prompt: "How many operations per second?",
