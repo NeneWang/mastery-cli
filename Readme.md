@@ -18,10 +18,12 @@ Key Highlights:
 - Enjoy free flashcard decks covering Computer Science Architecture, Networking, AWS, System Design, Design Patterns, and more. Plus, easily share your flashcard decks.
 
 
-## Install
+## Install and Test.
 
 ```
 npm install -g mastery-cli
+mastery quiz
+mastery report
 ```
 
 - You need to install nvim for the dsa option to work
