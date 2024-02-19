@@ -114,7 +114,29 @@ const analysisAlgorithmClass = [
         example: "3. Since it is 3 * log2(5)",
     },
     {
-        term: "Exponent sums"
+        term: "logarihthm sums",
+        prompt: "How much is ? in log2(5) + log2(5) = ?",
+        example: "2 * log2(5)"
+    },
+    {
+        term: "logarithm products",
+        prompt: "How much is ? in log2(5) * log2(10) = ?",
+        example: "log2(50)"
+    },
+    {
+        term: "logarithm division",
+        prompt: "How much is ? in log2(5) / log2(10) = ?",
+        example: "log10(5)"
+    },
+    {
+        term: "logarithm division II",
+        prompt: "How much is ? in log3(8) / log3(2) = ?",
+        example: "3 because log2(8) = 3"
+    },
+    {
+        term: "logarithm division III",
+        prompt: "How much is ? in log2(16) / log2(4) = ?",
+        example: "2 because log4(16) = 2"
     },
     {
         term: "How many operations per second?",
