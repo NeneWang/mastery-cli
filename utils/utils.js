@@ -444,9 +444,17 @@ class Maid {
 		console.table(feat_accomplished_until_today);
 		const computed_radio = computeRadioDict(feat_accomplished_until_today);
 		// console.log(computed_radio);
-		const radarDisplay = radar(computed_radio)
-		console.log(radarDisplay.render)
-		console.log(annotation(radarDisplay.labelsWithColors))
+
+		try{
+			const radarDisplay = radar(computed_radio)
+			console.log(radarDisplay.render)
+			console.log(annotation(radarDisplay.labelsWithColors))
+
+		}
+		catch(err){
+			// console.log("Error in radar display", err)
+		}
+		
 
 	}
 
