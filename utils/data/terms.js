@@ -34,7 +34,8 @@ const cloudMask = new DeckMask(
     {
         decksToEnableStrings: [
             "aws cloud practitioner"
-        ]
+        ],
+        enabled: false
     }
 );
 

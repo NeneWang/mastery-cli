@@ -136,6 +136,11 @@ const numpy = [
     }
 ]
 
+
+const pandas = [
+    
+]
+
 const sql = [
     {}
 ]
@@ -367,8 +372,10 @@ const statistics = [
         example: "Sampling Variability is the variability of the sample mean from one sample to another",
         description: "This implies that a single sample mean is not a good estimate of the population parameter"
     }
-
+    
 ]
+
+
 
 // Samples of great difficult queries, and attempt to replicate them. Collected from job exp, interview questions.
 const sql_queries = [
