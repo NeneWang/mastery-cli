@@ -131,14 +131,21 @@ const numpy = [
         \n\
         arr = np.arange(8).reshape(4,2)"
     },
-    {
-        term: ""
-    }
 ]
 
 
 const pandas = [
-    
+
+    // Ilocs and range selections: https://jakevdp.github.io/PythonDataScienceHandbook/03.02-data-indexing-and-selection.html
+
+    // Operations in pandas: https://jakevdp.github.io/PythonDataScienceHandbook/03.03-operations-in-pandas.html
+
+    // Handling Na values: https://jakevdp.github.io/PythonDataScienceHandbook/03.04-missing-values.html
+    // Fillings, strategies and axis, Dropping: Dropping specifics, and axis
+    // {
+    //     term: ""
+    // }
+
 ]
 
 const sql = [
