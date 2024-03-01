@@ -9,7 +9,10 @@ let settings = {};
     async () => {
         const { JsonDB, Config } = await import('node-json-db');
         try {
-            settings = new JsonDB(new Config(absolute_settings_uri, true, false, '/'));
+            const settingsDB = new JsonDB(new Config(absolute_settings_uri, true, false, '/'));
+            console.log(`Loaded settings from ${absolute_settings_uri}`);
+            settings = await settingsDB.getData('/');
+            console.log(settings ?? "No settings found");
             return true;
         } catch {
             return false;
@@ -17,7 +20,7 @@ let settings = {};
     }
 )();
 
-module.exports = Settings = settings ?? {
+module.exports = settings != {} ? settings : {
     // User ID Provided Mastery Site.
     "account_id": 1,
 
