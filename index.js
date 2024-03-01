@@ -72,18 +72,16 @@ const { Demo, EDemo } = demos;
 	else if (input.includes(cmInfo.commands.coa.code)) {
 		let comments_to_populate = [];
 		// Slight optimization.
-		const commit_res = await utils.commitpush();
 		
 		if (Settings.ask_quiz_when_commit) {
 			const _ = await mQuizer.askQuestion();
-			
-
 		}
 		maid.populateMissingReport();
-
-
+		
+		
 		await maid.provideMissingReport({ ask_if_dsa_missing: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
-
+		
+		const commit_res = await utils.commitpush();
 		comments_to_populate = commit_res.comments_to_populate;
 
 		if (Settings.show_past_commits_features_after_quiz) {
