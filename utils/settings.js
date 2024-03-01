@@ -18,19 +18,18 @@ const absolute_settings_uri = getDirAbsoluteUri(`data/settings.json`);
 let settings = {};
 
 // Async function to load the settings from the settings.json file
-(
+
+
+module.exports = (
     async () => {
         const { JsonDB, Config } = await import('node-json-db');
         try {
             const settingsDB = new JsonDB(new Config(absolute_settings_uri, true, false, '/'));
             console.log(`Loaded settings from ${absolute_settings_uri}`);
             settings = await settingsDB.getData('/');
-            console.log("Settings", settings);
-            return true;
+            return settings;
         } catch {
-            return false;
+            return {};
         }
     }
-)();
-
-module.exports = settings;
+)();;
