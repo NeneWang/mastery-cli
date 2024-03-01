@@ -1,3 +1,5 @@
+const path = require("path");
+
 // Import from settings.json from /data/settings.json
 /**
  * Gets directory path
