@@ -1,4 +1,23 @@
-module.exports = Settings = {
+// Import from settings.json from /data/settings.json
+const { getDirAbsoluteUri } = require('./utils_functions');
+
+const absolute_settings_uri = getDirAbsoluteUri(`data/settings.json`);
+let settings = {};
+
+// Async function to load the settings from the settings.json file
+(
+    async () => {
+        const { JsonDB, Config } = await import('node-json-db');
+        try {
+            settings = new JsonDB(new Config(absolute_settings_uri, true, false, '/'));
+            return true;
+        } catch {
+            return false;
+        }
+    }
+)();
+
+module.exports = Settings = settings ?? {
     // User ID Provided Mastery Site.
     "account_id": 1,
 
