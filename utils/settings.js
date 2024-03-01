@@ -25,6 +25,7 @@ let settings = {};
             const settingsDB = new JsonDB(new Config(absolute_settings_uri, true, false, '/'));
             console.log(`Loaded settings from ${absolute_settings_uri}`);
             settings = await settingsDB.getData('/');
+            console.log("Settings", settings);
             return true;
         } catch {
             return false;
