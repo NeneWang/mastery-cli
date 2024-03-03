@@ -2,7 +2,7 @@ const chalk = require('chalk');
 const axios = require('axios');
 const clipboard = require('copy-paste')
 
-const chart = require('@wangnene2/chart')
+const chart = require('terminal-charter')
 const { exec } = require('node:child_process');
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquirer');
 
@@ -10,7 +10,7 @@ const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquir
 const init = require('../utils/init');
 const constants = require('./constants');
 
-const { bar, bg, annotation } = chart;
+const { bar, bg, annotation, radar } = chart;
 const Parser = require('expr-eval').Parser;
 const parser = new Parser();
 
@@ -19,6 +19,7 @@ const { getMaidDirectory } = require('./utils_functions');
 const DSATrainer = require('./dsa-cli/dsa-trainer');
 
 const Settings = require('./settings.js');
+const DEV_MODE = Settings.dev_mode ?? false;
 
 const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
@@ -79,7 +80,6 @@ class WeatherInformation {
 		const notes = Object.keys(COLORWEATHERMAP).map((weatherlabel) => {
 			return { key: weatherlabel, style: bg(COLORWEATHERMAP[weatherlabel]) };
 		})
-		// console.log('notes', notes);
 		console.log(annotation(notes))
 	}
 }
@@ -96,6 +96,11 @@ class FeatureExtraction {
 		this.style = style;
 	}
 };
+
+
+const { getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
+const { get } = require('node:http');
+const { strict } = require('node:assert');
 
 class Maid {
 
@@ -122,6 +127,43 @@ class Maid {
 		clipboard.copy(projectDirectory);
 	}
 
+	runServer = () => {
+
+		const projectDirectory = getMaidDirectory();
+		const jupyter_folder = "/utils/data-science-cli/problems";
+
+		const jupyterCommand = `jupyter notebook --notebook-dir=${projectDirectory}/${jupyter_folder}`;
+		exec(jupyterCommand);
+	}
+
+	openJupyter = async ({ FILE = "/machine_learning/01_pandas.ipynb" } = {}) => {
+
+		copyFileToTemp(FILE);
+
+		const correctPrompt = new Confirm({
+			name: 'notebook',
+			message: "Was the notebook solved correctly?",
+			initial: true
+		});
+		const response = await correctPrompt.run();
+		if (response) {
+			await increasePerformance("jupyter");
+		}
+		return response;
+
+	}
+
+	/**
+	 * Opens a random jupyter notebook from the list of problems
+	 * @returns {bool} if the problem was solved correctly
+	 */
+	openRandomJupyter = async () => {
+		const selectedProblem = getRandomProblem();
+		this.runServer();
+
+		return this.openJupyter({ FILE: "/" + selectedProblem.problem });
+	}
+
 
 	/**
 	 * Cleans the terminal
@@ -132,10 +174,13 @@ class Maid {
 
 	// Prompts y/n question to clean, if y, cleans.
 	askToClean = async () => {
-		this.say("Would you like me to clean up the terminal?", false)
 
 		// const response = question('clean', 'y/n', { type: 'confirm' });
-		const cleanPrompt = new Confirm("Clean", { initial: true });
+		const cleanPrompt = new Confirm({
+			name: 'clean',
+			message: "Would you like me to clean up the terminal?",
+			initial: true
+		});
 		const response = await cleanPrompt.run();
 		console.log(response)
 		if (response) {
@@ -144,50 +189,57 @@ class Maid {
 
 	}
 
+	/**
+	 * Prints the day report based on the settings
+	 * - Performance Report: A table report stating the counts of each feature
+	 * - Weather Report: A bar chart of the weather for the next 7 days
+	 * - Missing Report: A list of the missing features for the day
+	 * 		- If the if `ask-if-algo-missing` is true, it will ask if the user wants to run the `algo` trainer (If the user haven't completed his first algorithm in the day.)
+	 */
 	dayReport = async () => {
 		const todaydate = getToday()
 
-		if (Settings?.report_settings?.performance_summary) {
+		if (Settings?.report_show?.performance_summary) {
 			this.say(`Performance Report: ${todaydate}`, false)
 			await this.performanceReport();
-
 		}
 
-		if (Settings?.report_settings?.whether) {
+		if (Settings?.report_show?.weather ?? false) {
 			this.say(`Weather Report: ${todaydate}`, false)
-			// console.log('Weather\n')
-			const _ = await weatherReport();
+			await weatherReport();
 		}
 
-		if (Settings?.report_settings?.missing_report) {
+		if (Settings?.report_show?.missing_report) {
 			this.say(`Missing Report: ${todaydate}, dsa enabled: ${true}`, false)
-			await this.provideMissingReport({ run_dsa: true });
+			await this.provideMissingReport({ ask_if_dsa_missing: Settings?.report_show?.ask_if_algo_missing ?? false });
 		}
+
+
 	}
 
 	/**
 	 * Prints the missing objectives
 	 * !important: To prepopulate the msising report first!!
 	 */
-	provideMissingReport = async ({ run_dsa = false } = {}) => {
+	provideMissingReport = async ({ ask_if_dsa_missing = false } = {}) => {
 		try {
+
 			if (!this.missingFeatReport) {
 				const _ = await this.populateMissingReport();
 			}
-			// console.log("Missing Feats: ", this.missingFeatReport?.length??123);
-			const missingFeatReport = this.missingFeatReport;
-			if (missingFeatReport ? false : true) {
-				console.log("Missing Reports Missing: received: ", missingFeatReport ?? "")
-			}
-			const missingFormatedAsStr = this.missingFeatReport.join(", ")
-			console.log(`${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` Missing: ${missingFormatedAsStr}  `)}`)
-			if (run_dsa) {
+
+			if (ask_if_dsa_missing) {
 
 				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
 			}
+			if (Settings?.report_show?.obj_ournal) {
+				const journal_notes = Settings.journal_notes;
+				console.log(journal_notes);
+			}
+
 		}
 		catch (err) {
-			console.log("Error in provideMissingReport", err)
+			if (DEV_MODE) console.log("Error in provideMissingReport", err)
 		}
 	}
 
@@ -200,14 +252,19 @@ class Maid {
 	requests_if_run_dsa_trainer = async (missingFeatReport) => {
 		const algo_missing = missingFeatReport.includes(CONSTANTS.algo_name);
 		if (algo_missing) {
-			const dsaPrompt = new Confirm("Daily DSA Missing run algorithms?", { initial: true });
-			console.log("Daily DSA Missing run algorithms?")
+
+
+
+			const dsaPrompt = new Confirm({
+				name: 'dsa',
+				message: "Daily DSA Missing; Run algorithms?",
+				initial: true
+			});
 			const response = await dsaPrompt.run();
 			if (response) {
+				const dsaTrainer = new DSATrainer(
 
-
-				const dsaTrainer = new DSATrainer();
-
+				);
 				const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
 
 				if (dsa_is_correct) {
@@ -225,14 +282,18 @@ class Maid {
 	populateMissingReport = async () => {
 
 		try {
-			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
+			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
 			this.missingFeatReport = res.data;
 		}
 		catch (err) {
-			console.log("API call", `${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${CONSTANTS.ACCOUNT_ID}`)
-			console.log("Error in populateMissingReport", err)
-			if (Settings.show_http_errors) {
-				console.log(err);
+			if (DEV_MODE) {
+
+
+				console.log("API call", `${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
+				console.log("Error in populateMissingReport", err)
+				if (Settings.show_http_errors) {
+					console.log(err);
+				}
 			}
 		}
 	}
@@ -240,44 +301,13 @@ class Maid {
 
 	performanceReport = async ({ version = "tables" } = {}) => {
 
-		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/report/${CONSTANTS.ACCOUNT_ID}`, {
+		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/report/${Settings.account_id ?? 1}`, {
 			headers: {
 				'Accept-Encoding': 'application/json'
 			}
 		});
 
-		const feat_rules = {
-			commits: {
-				day: 3,
-			},
-			math_ss: {
-				day: 1,
-			},
-			algo_w: {
-				description: "Weighted algorithms\n\
-				easy: 1\n\
-				medium: 2\n\
-				hard: 4\n",
-				week: 7
-			},
-			terms: {
-				description: "Terminologies practiced",
-				week: 100
-			},
-			pro: {
-				description: "Professional Projects",
-				week: 3 * 5
-			},
-			feat: {
-				description: "Features for personal projects",
-				week: 1 * 5 + 2 * 3
-			},
-			acad: {
-				description: "Academic Projects / Assignments / notes added",
-				week: 1 * 5
-			}
-		}
-
+		const feat_rules = getObjectiveFeatures();
 		let userPerformanceData = await res.data;
 
 		function parseDecimalsColumns(userPerformanceData, columns = ["week_average", "week_average_exclude_today"]) {
@@ -285,7 +315,8 @@ class Maid {
 			for (const column of columns) {
 
 				for (const [key, value] of Object.entries(userPerformanceData?.[column])) {
-					userPerformanceData[column][key] = parseFloat(value.toFixed(2));
+					let message = parseFloat(value.toFixed(2));
+					userPerformanceData[column][key] = message;
 				}
 			}
 			return userPerformanceData;
@@ -308,7 +339,10 @@ class Maid {
 					// Then search for the performance, and give the difference between the required and the actual performed
 					const day_requirement = settings.day;
 					const day_performance = userPerformanceData?.["today"]?.[requirement_key] ?? 0;
-					const day_difference = day_requirement - day_performance;
+					let day_difference = day_requirement - day_performance;
+					if (day_difference < 0) {
+						day_difference = "✅";
+					}
 					features_accomplished_today[`d: ${requirement_key}`] = { miss: day_difference, type: "day", req: day_requirement };
 
 
@@ -319,7 +353,10 @@ class Maid {
 					// Then search for the performance, and give the difference between the required and the actual performed
 					const week_requirement = settings.week;
 					const week_performance = userPerformanceData?.['week_sum']?.[requirement_key] ?? 0;
-					const week_difference = week_requirement - week_performance;
+					let week_difference = week_requirement - week_performance;
+					if (week_difference < 0) {
+						week_difference = '✅';
+					}
 					features_accomplished_today[`w: ${requirement_key}`] = { miss: week_difference, type: "week", req: week_requirement };
 				}
 			}
@@ -385,10 +422,39 @@ class Maid {
 		// Filter where only userPerformanceData that are highlighted in the table_feat show are allowed "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss"],
 		// console.log(userPerformanceData)
 		let filtered_data = filterProperties(userPerformanceData, Settings.table_feat_show);
-		// console.log(filtered_data)
+
+		/**
+		 * 
+		 * @param {Object} userPerformanceData [{feature_name: 'miss': -2, type: 'day', 'req': 3}...]
+		 * @returns {Object[]} Something like this: [{ name: "STR", value: 4 }, { name: "DEX", value: 1 }, { name: "VIT", value: 6 }, { name: "INT", value: 5 }, { name: "WIS", value: 3 }, { name: "HP", value: 6 } ]
+		 */
+		function computeRadioDict(userPerformanceData) {
+			let radioDict = [];
+			for (const [feature_name, feature_data] of Object.entries(userPerformanceData)) {
+				
+				const denominator = typeof (feature_data).miss == 'number' ? feature_data.req - feature_data.miss : feature_data.req;
+				let score = Math.floor((denominator / feature_data.req) * 6);
+				radioDict.push({ name: feature_name, value: score ?? 6 });
+			}
+			return radioDict;
+		}
+
 
 		console.table(filtered_data);
 		console.table(feat_accomplished_until_today);
+		const computed_radio = computeRadioDict(feat_accomplished_until_today);
+		// console.log(computed_radio);
+
+		try{
+			const radarDisplay = radar(computed_radio)
+			console.log(radarDisplay.render)
+			console.log(annotation(radarDisplay.labelsWithColors))
+
+		}
+		catch(err){
+			// console.log("Error in radar display", err)
+		}
+		
 
 	}
 
@@ -410,7 +476,8 @@ class Maid {
 	printPerformanceStat(label, userPerformanceData) {
 		let statPerformance = userPerformanceData[label]
 		statPerformance = formatObjectFeatures(statPerformance)
-		console.log(label, statPerformance);
+
+		if (DEV_MODE) console.log(label, statPerformance);
 	}
 
 
@@ -433,9 +500,9 @@ class Maid {
 
 		})
 		// KEEP for debugging. It will throw error if any of the values are undefined
-		// console.log("bars used:", bars)
 
-		console.log(bar(bars))
+
+		if (DEV_MODE) console.log(bar(bars))
 
 	}
 
@@ -668,10 +735,18 @@ getArrayLastXDays = (days = 7) => {
 	return pastDays;
 }
 
-
-increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
+/**
+Waiting for pgAdmin 4 to start... * Increase the performance of a feature; Day performances are such as commits, features, etc.
+ * @param {str} feature_name: The name of the feature to increase
+ * @param {int} increaseBY: The amount to increase the feature by; default 1
+ * @param {bool} debug ?= false : If to whether to debug api responses, etc.; default false
+ * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
+ * 
+ */
+increasePerformance = async (feature_name, increaseBY = 1, debug = true, account_id = Settings.account_id ?? 1) => {
 	try {
-		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}`)
+		console.log(`Increasing performance ${feature_name} for ${account_id}`)
+		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}&account_id=${account_id}`)
 		if (debug) console.log(res.data);
 	} catch (err) {
 		if (debug) console.warn(err);
@@ -679,17 +754,82 @@ increasePerformance = async (feature_name, increaseBY = 1, debug = false) => {
 
 }
 
-updateConcept = async (problem_name, success = true, debug = false) => {
+
+/**
+ * Updates the count of times a concept has been practiced e.g. `algebra-problem-1` or 'js-how-to-loop'
+ * @param {str} problem_name: The name of the problem to update
+ * @param {bool} success ?= true : If to whether to increase the success count or the fail count
+ * @param {bool} debug ?= false : If to whether to debug api responses, etc.
+ * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
+ * 
+ * @returns {"message": f"Success updating {concept_term}, {conceptSelected.correct_times}"}
+ */
+updateConcept = async (problem_name, success = true, debug = false, account_id = Settings.account_id ?? 1) => {
+	const URL = `${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}&account_id=${account_id}`
 	try {
-		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}`)
+		const res = await axios.post(URL)
 		if (debug) console.log(res.data)
 	}
 	catch (err) {
-		console.warn(err);
+		console.warn('error in updateConcept');
 	}
 }
 
 
+/**
+ * based on the `objectives_features` at Settings returns in the format of:
+ * 
+	const feat_rules = {
+		terms: {
+			description: "Terminologies practiced",
+			week: 100
+		},
+		pro: {
+			description: "Professional Projects",
+			week: 3 * 5
+		},
+		feat: {
+			description: "Features for personal projects",
+			week: 1 * 5 + 2 * 3
+		},
+		acad: {
+			description: "Academic Projects / Assignments / notes added",
+			week: 1 * 5
+		}
+		...
+	}
+	 */
+function getObjectiveFeatures() {
+
+	const feat_rules = Settings.objectives_features ?? [];
+	/** Receives in the format of:
+	 * 
+	 * [
+		{
+			"feature_key": "commits",
+			"description": "The number of git commits to be done",
+			"req_type": "day",
+			"requirement": 3
+		},
+		{
+			"feature_key": "feat",
+			"description": "The amount of Personal Project Features to be released",
+			"req_type": "week",
+			"requirement": 11
+		},
+	 */
+
+	// Format in the expected format.
+	let feat_map = {};
+	for (const feat_rule of feat_rules) {
+		// connect the feature lapse to the requiremnett
+		feat_map[feat_rule.feature_key] = {}
+		feat_map[feat_rule.feature_key][feat_rule.req_type] = feat_rule.requirement;
+	}
+
+	return feat_map;
+
+}
 
 function getKeyByValue(object, value) {
 	return Object.keys(object).find(key => object[key] === value);
@@ -701,10 +841,10 @@ const getCredentialNames = (credentialDict) => {
 	})
 }
 
+/**
+ * Retrieves fromt the json the proper credentials as n object
+ */
 const getCredentialInformation = (credentialsDict, credential_name) => {
-	/**
-	 * Retrieves fromt he json the proper credentials as n object
-	 */
 
 	res = credentialsDict.filter(
 		(cred) => cred.name == credential_name
@@ -743,7 +883,7 @@ const weatherReport = async () => {
 		}
 	});
 	weatherData = new WeatherInformation(res);
-	// console.log(weatherData.json)
+	console.log(weatherData.json)
 	// console.log(weatherData.days_report)
 	weatherData.chartWeatherBar()
 
@@ -773,13 +913,17 @@ class CommitCategoryType {
 
 };
 
-let ECommitCategory = {
-	FEAT: new CommitCategoryType('feat ', [':tada:', ':santa:', ':gift:']),
-	FIX: new CommitCategoryType('fix ', [':hammer:', ':shipit:', ':ambulance:']),
-	REFACTOR: new CommitCategoryType('ref ', [':ghost:', ':pencil2:'], feature_name = "Refactoring"),
-	ACADEMY: new CommitCategoryType('acad ', [':triangular_ruler:', ":japanese_castle:", ":factory:"]),
-	ALGO: new CommitCategoryType('algo ', [':herb:', ":crown:", ":japanese_goblin:"]),
-	PROJECT: new CommitCategoryType('pro ', [":crown:"])
+
+const getCommitCategories = () => {
+	let commitCategories = {}
+	const commit_categories_settings = Settings.commit_categories ?? [];
+
+	for (const commit_categories_setting_row of commit_categories_settings) {
+		const code_key = commit_categories_setting_row.code;
+		commitCategories[code_key] = new CommitCategoryType(code_key, commit_categories_setting_row.icon_list, commit_categories_setting_row.code);
+	}
+
+	return commitCategories;
 }
 
 /**
@@ -804,7 +948,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 	try {
 
 		const data = {
-			'account_id': CONSTANTS.ACCOUNT_ID ?? 1, //1
+			'account_id': Settings.account_id ?? 1, //1
 			'body': user_res ?? "",
 			'title': term_selected ?? "title",
 			'concept_slug': term_selected ?? "slug"
@@ -829,7 +973,21 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 	}
 }
 
-const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_special_categories = true, debug = false, comments_to_populate = [] } = {}) => {
+/**
+ * Pushes to origin with a commit message
+ * If it contains any of the specials categories (configurable in settings.js) it will log it in the feature (habit) database.
+ * @param {bool} addMaidEmoji ?= true : If to whether to add a maid emoji
+ * @param {bool} addCommitEmoji ?= true : If to whether to add a commit emoji
+ 
+ * @param {bool} debug ?= false : If to whether to debug api responses, etc.
+ * @param {List: [date: comment]} comments_to_populate ?= [] : List of comments to populate
+ * 
+ * @Setting {bool} log_special_categories ?= true : Setting to whether to log special categories
+ * 
+ * @returns {List: [date: comment]}
+ * 
+ */
+const commitpush = async (addCommitEmoji = true, { debug = false, comments_to_populate = [] } = {}) => {
 
 
 	let commitMessage = process.argv[3];
@@ -841,19 +999,16 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
 		commitMessage = CONSTANTS.default_commit_message;
 	}
 
-	
+
 
 
 	// If any category found then increase the score please.
-	commitCat = commitCategory(commitMessage);
+	commitCat = commitCategory(commitMessage, true);
 	// Log special categories
 
-	if (log_special_categories) {
-		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: false });
-		// console.log("comments_to_populate", comments_to_populate)
+	if (Settings.blog_special_commits ?? false) {
+		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: true });
 	}
-
-
 
 	// Removed await statement for hopes of faster responsee load
 	increasePerformance("commits");
@@ -879,22 +1034,24 @@ const commitpush = async (addMaidEmoji = true, addCommitEmoji = true, { log_spec
  */
 const getComments = async (term, count = 5) => {
 
-	// let res = [];
-	// await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
-	// 	headers: {
-	// 		'Accept-Encoding': 'application/json'
-	// 	}
-	// }).then(results => res = results.data).catch(err => console.log(err));
-
-	// Do it with await syntax as well
-	const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`, {
-		headers: {
-			'Accept-Encoding': 'application/json'
-		}
+	if (term == undefined || term == "") {
+		return {};
 	}
-	);
+	const URL = `${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`;
+	try {
+		const res = await axios.get(URl, {
+			headers: {
+				'Accept-Encoding': 'application/json'
+			}
+		}
+		);
 
-	return res;
+		return res;
+	}
+	catch (err) {
+		console.log("Error in getComments", URL)
+
+	}
 	// return res.data;
 }
 
@@ -922,25 +1079,18 @@ const printComments = (comments) => {
  * @param {string} commitMessage message to commit
  * @param {ECommitCategory} category category of the commit
  * @param {bool} print_previous_commits ?= true : If to whether to print previous commits
- * @param {ECommitCategory[]} special_categories ?= [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code] : Special categories to log
  * @param {bool} debug ?= false : If to whether to debug api responses, etc.
  * @returns {List: [date: comment]}
  */
-const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_populate = [], { print_previous_commits = true, special_categories = [ECommitCategory.ACADEMY.code, ECommitCategory.ALGO.code, ECommitCategory.FEAT.code, ECommitCategory.PROJECT.code], debug = false } = {}) => {
+const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_populate = [], { print_previous_commits = true, debug = false } = {}) => {
 	// if (true) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
-	if (special_categories.includes(category.code)) {
-		// Log the commit message in the comments database
-		postCommentFromTerm(category.code, commitMessage);
-		const res = await getComments(category?.code ?? "log");
-		comments_to_populate = res.data;
-		// console.log("comments_to_populate | special category", comments_to_populate)
-		if (print_previous_commits) {
-			// if (true) console.log("Printing previous commit")
-			// Print previous commits
-			// console.log("res received", res.data);
-			printComments(comments_to_populate);
-		}
-	}
+
+	// Log the commit message in the comments database
+	postCommentFromTerm(category.code, commitMessage);
+	const res = await getComments(category?.code ?? "");
+	comments_to_populate = res?.data ?? '';
+	// console.log("comments_to_populate | special category", comments_to_populate)
+
 
 	return comments_to_populate;
 
@@ -948,16 +1098,28 @@ const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_p
 
 
 
+/**
+ * 
+ * @param {string} commitMessage Message to commit
+ * @param {bool} strict If true, it will only detect categories when they appear followed by '|' e.g. 'feat |'
+ * @returns {string} category code e.g. 'feat'
+ */
 const commitCategory = (commitMessage, strict = false, { debug = false } = {}) => {
-	if (strict) {
-		// TODO Strictly runs with space in between?
-		;
-	}
 
-	for (category of Object.values(ECommitCategory)) {
+
+	for (category of Object.values(getCommitCategories())) {
 		if (debug) console.log("commitMessage", commitMessage)
-		if (commitMessage.includes(category.code)) {
-			return category;
+
+		if (strict) {
+			if (commitMessage.includes(category.code + " |")) {
+				return category;
+			}
+
+		}
+		else {
+			if (commitMessage.includes(category.code)) {
+				return category;
+			}
 		}
 	}
 	return ""; //No category at all.

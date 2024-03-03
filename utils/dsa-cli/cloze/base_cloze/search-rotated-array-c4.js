@@ -30,12 +30,10 @@ class SearchRotatedArray {
                 const isInRange = target <= rightNum;
 
                 // TODO Move left to mid + 1 if the target is greater and is in range
-                const isTargetGreater = isGreater && isInRange;
-                if (isTargetGreater) left = mid + 1;
+                
 
                 // TODO Move right to mid - 1 if the target is less or is not in range
-                const isTargetLess = !(isGreater && isInRange);
-                if (isTargetLess) right = mid - 1;
+                
             }
         }
 

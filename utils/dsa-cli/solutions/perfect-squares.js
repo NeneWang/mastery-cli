@@ -1,25 +1,26 @@
 class PerfectSquares {
-    isSquare(n) {
-        const sq = Math.sqrt(n);
-        return n === sq * sq;
-    }
-
     solve(n) {
-        while (n % 4 === 0)
-            n /= 4;
-        if (n % 8 === 7)
-            return 4;
+        const dp = new Array(n + 1).fill(Infinity);
+        dp[0] = 0;
 
-        if (this.isSquare(n))
-            return 1;
-
+        const squares = [];
         for (let i = 1; i * i <= n; ++i) {
-            if (this.isSquare(n - i * i))
-                return 2;
+            squares.push(i * i);
         }
 
-        return 3;
+        for (let i = 1; i <= n; ++i) {
+            for (const square of squares) {
+                if (i < square) {
+                    break;
+                }
+                dp[i] = Math.min(dp[i], dp[i - square] + 1);
+            }
+        }
+
+        return dp[n];
     }
 }
+
+
 
 module.exports = { Problem: PerfectSquares };

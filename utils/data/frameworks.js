@@ -2146,6 +2146,10 @@ const xcodeIOS = [
     }
 ]
 
+const IOSDevelopment = {
+    // Threads, queues, cores, 
+}
+
 
 module.exports = {
     react_terms, apex, flutter: flutter_dart, IDE_S, chrome_extensions, python_frameworks, react_typescript,

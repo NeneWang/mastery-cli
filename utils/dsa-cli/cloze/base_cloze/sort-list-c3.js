@@ -36,8 +36,10 @@ var sortList = function (head) {
 
     const getMiddle = (header) => {
         middlePtr = null;
+        // TODO Implement Get Middle. Advance middle ptr if middle ptr not null then next otherwise header.
         while (header && header.next) {
             middlePtr = middlePtr != null ? middlePtr.next : header;
+            // Advance 
             header = header.next.next;
         }
 

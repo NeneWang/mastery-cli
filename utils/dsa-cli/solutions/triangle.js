@@ -1,27 +1,24 @@
 class MinimumTotal {
-    constructor() {
-      this.memoTable = new Map();
-      this.triangle = [];
-    }
-  
-    minPath(row, col) {
-      const params = row + ":" + col;
-      if (this.memoTable.has(params)) {
-        return this.memoTable.get(params);
+  minimumTotal(triangle) {
+    for (let row = 1; row < triangle.length; row++) {
+      for (let col = 0; col <= row; col++) {
+        let smallestAbove = Infinity;
+        if (col > 0) {
+          smallestAbove = triangle[row - 1][col - 1];
+        }
+        if (col < row) {
+          smallestAbove = Math.min(smallestAbove, triangle[row - 1][col]);
+        }
+        triangle[row][col] += smallestAbove;
       }
-      let path = this.triangle[row][col];
-      if (row < this.triangle.length - 1) {
-        path += Math.min(this.minPath(row + 1, col), this.minPath(row + 1, col + 1));
-      }
-      this.memoTable.set(params, path);
-      return path;
     }
-  
-    solve(triangle) {
-      this.triangle = triangle;
-      return this.minPath(0, 0);
-    }
+
+    return Math.min(...triangle[triangle.length - 1]);
   }
-  
-  module.exports = { Problem: MinimumTotal };
-  
+
+  solve(triangle) {
+    return this.minimumTotal(triangle);
+  }
+}
+
+module.exports = { Problem: MinimumTotal };

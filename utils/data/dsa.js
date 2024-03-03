@@ -134,7 +134,7 @@ const system_design = [
         prompt: "How could you improve the current Fault Tolerance of your project?"
     },
     {
-        term: "Availability", description: "A System is said to be available if it is operational. The availability of a system is the percentage it remains usable during its lifetime, excluding time for maintenance, repair, or other problems it might suffer.",
+        term: "Availability", description: "A System is said to be available if it is operational Availability refers to the percentage of time that the infrastructure, system, or solution remains operational under normal circumstances in order to serve its intended purpose. Highly available systems are reliable in the sense that they continue operating even when critical components fail. They are also resilient, meaning that they are able to simply handle failure without service disruption or data loss, and seamlessly recover from such failure.",
         prompt: "What would be the availability percentage of your current project?"
     },
     {

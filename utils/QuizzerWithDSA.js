@@ -1,7 +1,14 @@
 const { Quizzer } = require('./Quizzer');
+const { Maid, increasePerformance } = require('./utils');
 const constants = require('./constants');
 const DSATrainer = require('./dsa-cli/dsa-trainer');
 const DEBUG = false;
+const { cloze_problems_list } = require('./dsa-cli/cloze');
+const DSAConstants = require('./dsa-cli/constants');
+const { getProblemsData, getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
+
+const { TermScheduler } = require('./termScheduler');
+const settings = require('./settings');
 /**
  * This class also supports DSATrainer Implementation.
  */
@@ -13,9 +20,10 @@ class QuizzerWithDSA extends Quizzer {
         });
     }
 
-    async askQuestion({ ask_until_one_is_correct = true, } = {}) {
+    async askQuestion({ ask_until_one_is_correct = true, disable_math = false, disable_dsa = false, increase_performance = true } = {}) {
         let exit = false;
-        const problem_types = ['math', 'term', 'cloze-algo'];
+        let problem_types = ['math', 'term'];
+        problem_types = settings.quiz_enabled ?? problem_types;
 
         const exitMethod = () => {
             if (DEBUG) console.log("Exit method requested");
@@ -29,23 +37,50 @@ class QuizzerWithDSA extends Quizzer {
          * @returns {boolean} true if answer is correct, false otherwise
          */
         const askQuestionRandom = async ({ exitMethod = () => { }, force_mode = true } = {}) => {
-            const problem_type_selected = constants.get_random(problem_types);
+            let problem_type_selected = constants.get_random(problem_types);
+
             switch (problem_type_selected) {
                 case 'math':
-                    return await this.ask_math_question({ exitMethod: exitMethod });
+                    const math_answered = await this.ask_math_question({ exitMethod: exitMethod });
+                    if (math_answered && increase_performance) {
+
+                        increasePerformance('math_ss');
+
+                    }
+                    return math_answered;
 
                 case 'term':
                     if (force_mode) {
-                        return await this.forceLearnMode({ exitMethod: exitMethod });
+                        const term_answered = await this.forceLearnTermQuestions({ exitMethod: exitMethod });
+                        if (term_answered && increase_performance) {
+
+                            increasePerformance('terms');
+
+                        }
+                        return term_answered;
+                    } else {
+
+                        const term_answered = await this.pick_and_ask_term_question({ exitMethod: exitMethod });
+                        if (term_answered && increase_performance) {
+
+                            increasePerformance('terms');
+
+                        }
                     }
-                    return await this.pick_and_ask_term_question({ exitMethod: exitMethod });
 
                 case 'algorithm':
                     // Wont be called for now
-                    return await this.ask_algorithm_question({ exitMethod: exitMethod });
+                    const algo_answered = await this.ask_algorithm_question({ exitMethod: exitMethod });
+                    if (algo_answered && increase_performance) {
+                        increasePerformance('algo_w');
+                    }
+
+                    return algo_answered;
 
                 case 'cloze-algo':
-                    return await this.ask_cloze_algorithm_question({ exitMethod: exitMethod });
+                    const cloze_answered = await this.ask_cloze_algorithm_question({ exitMethod: exitMethod });
+
+                    return cloze_answered;
 
                 default:
                     return false;
@@ -76,6 +111,75 @@ class QuizzerWithDSA extends Quizzer {
 
         const problem_status = this.dsaTrainer.openRandomClozeDSAProblem();
         return problem_status;
+    }
+
+
+
+
+    cloze_study_session = async ({ reset_scheduler = false }) => {
+
+        // Pick all the available string keys.
+
+        await this.dsaTrainer.loaded_problem_manager;
+        const cloze_problems = cloze_problems_list;
+        const clozeScheduler = new TermScheduler({
+            cards_category: "Algo"
+        });
+        await clozeScheduler.setLearningCards(cloze_problems, { shuffle: true, reset_scheduler: reset_scheduler });
+        let exit = false;
+
+        const printCardsLeft = (cardsLeft, cardsLearnt) => {
+            console.log(`\nAlgorithms left: ${cardsLeft} || Algorithms completed: ${cardsLearnt}\n`);
+        }
+
+        while (!clozeScheduler.is_completed && !exit) {
+            const [cardsLeft, cardsLearnt] = [clozeScheduler.getCardsToLearn(), clozeScheduler.getCardsLearnt()];
+
+            const card = await clozeScheduler.getCard();
+            let problem = this.dsaTrainer.problems_manager.getProblem(card.problem_slug);
+
+            console.log("Card", card);
+            problem.is_cloze = true;
+            const solution_metadata = await this.dsaTrainer.solveProblem(problem, { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path });
+
+            const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
+            clozeScheduler.solveCard(answerIsCorrect);
+            await clozeScheduler.saveCards();
+            printCardsLeft(cardsLeft, cardsLearnt);
+        }
+    }
+
+    jupyter_study_session = async () => {
+
+        // Pick all the available string keys.
+
+        const jupyter_problems = getProblemsData();
+        const jupyterScheduler = new TermScheduler({
+            cards_category: "Jupyter"
+        });
+        await jupyterScheduler.setLearningCards(jupyter_problems);
+        let exit = false;
+
+        const printCardsLeft = (cardsLeft, cardsLearnt) => {
+            console.log(`\nJupyter left: ${cardsLeft} || Jupyter completed: ${cardsLearnt}\n`);
+        }
+
+        let maid = new Maid();
+        maid.runServer();
+
+        while (!jupyterScheduler.is_completed && !exit) {
+            const [cardsLeft, cardsLearnt] = [jupyterScheduler.getCardsToLearn(), jupyterScheduler.getCardsLearnt()];
+
+            const card = await jupyterScheduler.getCard();
+
+            console.log("Card", card.problem);
+            const answerIsCorrect = await maid.openJupyter({ FILE: card.problem });
+
+            jupyterScheduler.solveCard(answerIsCorrect);
+            await jupyterScheduler.saveCards();
+            printCardsLeft(cardsLeft, cardsLearnt);
+        }
+
     }
 
 }

@@ -1,4 +1,497 @@
 
+
+
+const aws_localstack = [
+    {
+        prompt: "How do you start localstack?",
+        example: "localstack start -d",
+    },
+    {
+        prompt: "Create a bucket named riskzone and display the list of buckets",
+        example: "awslocal s3 mb s3://riskzone\n\
+        awslocal s3api list-buckets",
+    }
+]
+
+// My postgresql
+// docker pull postgres
+// docker run -d --name postgresCont -p 5432:5432 -e POSTGRES_PASSWORD=pass123 postgres
+// docker exec -it postgresCont bash
+const psql =[
+    {
+        prompt: "List all databases and all users",
+        example: "\\l \n\
+        \\du",
+
+    },
+    {
+        prompt: "Create adatabase named riskzone and connect ot the database",
+        example: "CREATE DATABASE riskzone;\n\
+        \\c riskzone",
+    },
+    {
+        prompt: "Create a user named no_one \n\
+        Create a user named no_one with password pass123",
+        example: "CREATE USER no_one;\n\
+        CREATE usUSER no_two with login password `qwerty`;"
+    },
+    {
+        prompt: "Remove Database named riskzone",
+        example: "DROP DATABASE riskzone;"
+    }
+]
+
+const aws_certification_cloud_practitioner = [
+    {
+        term: "Shared Responsibility Model",
+        description: "The Customer is responsible for:\n\
+        - Customer Data\n\
+        - Platform, Applications, Identity & Access Management\n\
+        - Operating System, Network & Firewall Configuration\n\
+        - Client-Side Data Encryption\n\
+        - Server-Side Data Encryption\n\
+        - Networking Traffic Protection",
+        prompt: "List 2 responsibilities of the customer in the Shared Responsibility Model\n\ And how would you ensure that?",
+    },
+    {
+        term: "Cost Allocation Tags",
+        description: "Cost allocation tags are key-value pairs that enable you to categorize your AWS costs. For example, you can define a tag key named Department and a tag value named Sales for all the resources in your sales department, and a tag key named Department and a tag value named Engineering for all the resources in your engineering department. You can then view the total costs for each department using the cost allocation tags.",
+        prompt: "how can you use cost allocation tags to categorize your AWS costs?",
+    },
+    {
+        term: "AWS Weel Architecture Framework | Design Principles",
+        description: "Here the design principles for operational excellence in the cloud\n\
+        Perform operations as code: In the cloud, you can apply the same engineering discipline that you use for application code to your entire environment. You can define your entire workload (applications, infrastructure, etc.) as code and update it with code. You can script your operations procedures and automate their process by launching them in response to events. By performing operations as code, you limit human error and create consistent responses to events.\n\
+        \n\
+        Make frequent, small, reversible changes: Design workloads that are scaleable and loosely coupled to permit components to be updated regularly. Automated deployment techniques together with smaller, incremental changes reduces the blast radius and allows for faster reversal when failures occur. This increases confidence to deliver beneficial changes to your workload while maintaining quality and adapting quickly to changes in market conditions.\n\
+        \n\
+        Refine operations procedures frequently: As you evolve your workloads, evolve your operations appropriately. As you use operations procedures, look for opportunities to improve them. Hold regular reviews and validate that all procedures are effective and that teams are familiar with them. Where gaps are identified, update procedures accordingly. Communicate procedural updates to all stakeholders and teams. Gamify your operations to share best practices and educate teams.\n\
+        \n\
+        Anticipate failure: Perform “pre-mortem” exercises to identify potential sources of failure so that they can be removed or mitigated. Test your failure scenarios and validate your understanding of their impact. Test your response procedures to ensure they are effective and that teams are familiar with their process. Set up regular game days to test workload and team responses to simulated events.\n\
+        \n\
+        Learn from all operational failures: Drive improvement through lessons learned from all operational events and failures. Share what is learned across teams and through the entire organization.\n\
+        \n\
+        Use managed services: Reduce operational burden by using AWS managed services where possible. Build operational procedures around interactions with those services.\n\
+        \n\
+        Implement observability for actionable insights: Gain a comprehensive understanding of workload behavior, performance, reliability, cost, and health. Establish key performance indicators (KPIs) and leverage observability telemetry to make informed decisions and take prompt action when business outcomes are at risk. Proactively improve performance, reliability, and cost based on actionable observability data. ",
+        prompt: "Using of the design principles, Ideate a strategy that implments such design prinicple"
+    },
+    {
+        term: "Grouping of AWS Services",
+        description: "\n\
+        AWS Trusted Advisor\n\
+        AWS Partner Network\n\
+        AWS Artifact\n",
+        prompt: "Select one, indicate when you would use them",
+        example: "\
+        AWS Trusted Advisor - To check for recommendations such as saving money, security suggestions, cost optimization features\n\
+        AWS Partner Network - If a company \n\
+        AWS Artifact - AWS and ISV security and compliance reports (Including thridaprty, terminate reports, etc)"
+    },
+    {
+        term: "AWS EC2 Pricing Models",
+        description: "On-Demand Instances:      Business-critical events or workloads that require capacity assurance     Workloads that need to meet regulatory requirements for high availability     Disaster recovery  \n\
+        Amazon EC2 Capacity blocks for ML: Training and fine-tuning ML models Running experiments and building prototypes Planning for future surges in demand for ML applications \n\
+        Dedicated Hosts: Users looking to save money on licensing costs Workloads that need to run on dedicated physical servers Users looking to offload host maintenance onto AWS, while controlling their maintenance event schedules to suit their business’s operational needs",
+        prompt: "Which pricing model would you use existing server bound licenses? \n\ How about for ML and machine learning worklouad ? How about for Capacity Reservation? during critical business workloads?",
+        example: "Dedicated Hosts - Existing server-bound licenses\n\
+        Amazon EC2 Capacity blocks for ML - ML and machine learning worklouad\n\
+        On-Demand Instances - Critical business workloads"
+    },
+    {
+        term: "Taking advantage of EBS",
+        description: "“Amazon Elastic Block Store (EBS) is an easy to use, high-performance, block-storage service designed for use with Amazon Elastic Compute Cloud (EC2) for both throughput and transaction intensive workloads at any scale. A broad range of workloads, such as relational and non-relational databases, enterprise applications, containerized applications, big data analytics engines, file systems, and media workflows are widely deployed on Amazon EBS.\n\
+        \n\
+        You can choose from different volume types to balance optimal price and performance. You can achieve single-digit-millisecond latency for high-performance database workloads or gigabyte per second throughput for large, sequential workloads. You can change volume types, tune performance, or increase volume size without disrupting your critical applications, so you have cost-effective storage when you need it.”\n\
+        \n\
+        EBS volumes preserve their data through instance stops and terminations, can be easily backed up with EBS snapshots, can be removed from one instance and reattached to another, and support full-volume encryption",
+        prompt: "Think of an usage purpose for EBS considering it's features",
+        example: "You can use it for a self-hosted database that requires a nightly shutdown for maintenance and cost-saving purposes"
+    },
+    {
+        term: "Regions and availability zones",
+        description: "Region is a geographical area that has two or more Availability Zones. Each Region is completely independent.\n\
+        Availability Zone (AZ) is an area with either one or more discrete Data Centres (building filled with servers), each with redundant power, networking, and connectivity, housed in separate facilities. If there are more than one data centre, they are counted as one AZ because they are located close together. Each Availability Zone is isolated, but the Availability Zones in a Region are connected through low-latency links.\n\
+        Within the constructs of AWS, customers are encouraged to run their workloads in more than one Availability Zone. This ensures that customer applications can withstand even a complete Availability Zone failure - a very rare event in itself. This recommendation stands for real-time SIP infrastructure as well.\n\
+        --NOTES--\n\
+        --Edge Locations are endpoints used for caching content. They are located in most of the major cities around the world and are specifically used by CloudFront to distribute AWS content closer to end-users to reduce latency\n\
+        to help lower latency and improve performance for users.",
+        prompt: "taking that into account, if you were to develop a caching system for optimal loadin gtimes, how would you scale your application?",
+        example: "Identify the region might play, and perhaps which ability zone to separate the group of users (that might play concurrently) and offer cachin in edge locations for faster downloads in the cities where you display ads."
+    },
+    {
+        term: "Estimating costs",
+        description: "B- Cost Allocation tags: To forecast your costs, use the AWS Cost Explorer. Use cost allocation tags to divide your resources into groups, and then estimate the costs for each group.\n\
+        C - AWS Pricing Calculator To estimate a bill, use the AWS Pricing Calculator (formerly AWS Simply Monthly Calculator)\n\
+        D - AWS Total Cost of Ownership (TCO) Calculator: to compare the cost of running your applications in an on-premises or colocation environment to AWS",
+        prompt: "Select the tools for the following Manager asks you : 1- to separate and understand how much each project\n\ 2- To estimate the bill whether we use a new service \n\
+        3- To check if to upgrade to aws",
+        example: "B, C, D"
+    },
+    {
+        term: "Consolidated Billing for AWS Organizations",
+        description: "Consolidated billing has the following benefits:\n\
+        One bill – You get one bill for multiple accounts.\n\
+        Easy tracking – You can track the charges across multiple accounts and download the combined cost and usage data.\n\
+        Combined usage – You can combine the usage across all accounts in the organization to share the volume pricing discounts, Reserved Instance discounts, and Savings Plans. This can result in a lower charge for your project, department, or company than with individual standalone accounts. For more information, see Volume discounts.\n\
+        No extra fee – Consolidated billing is offered at no additional cost.",
+        prompt: "Explain to your manager, what alternatives to do if we have multiple aws accounts",
+        example: "It would be eaier, since we can consolidate"
+    },
+    {
+        term: "Savings Reserved Instances",
+        description: "Standard Reserved Instances provide you with a significant discount compared to On-Demand Instance pricing, and can be purchased for a 1-year or 3-year term. Customers have the flexibility to change the Availability Zone, the instance size, and networking type of their Standard Reserved Instances.\n\
+        \n\
+        Purchase Convertible Reserved Instances if you need additional flexibility, such as the ability to use different instance families, operating systems, or tenancies over the Reserved Instance term\n\
+        Standard RIs: These provide the most significant discount (up to 72% off On-Demand) and are best suited for steady-state usage.\n\
+        Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value. Like Standard RIs, Convertible RIs are best suited for steady-state usage.\n\
+        Scheduled RIs: These are available to launch within the time windows you reserve. This option allows you to match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month.",
+        prompt: "If you already know that you will need certain instance for a time, then what should you do to save costs? And what if you know that might need to upgrade it? What if you only want to run during a fraction of scheduled time?",
+        example: "Standard RI: are good if you are sure you dont need to change. Convertible RIS are best suited if you might want to upgrade the instane type. And Scheduled RI, so you an optimize over the specific running schedule."
+    },
+    {
+        term: "Elastic and Cost of Total Ownership",
+        description: "Cost of Total Ownership refers to the purchase price of an asset plus costs of operation over its life span\n\
+        The Reduction of Elastic Cloud Computing (EC2) is that Reduces the cost by paying only what you use. \n\n\
+        A core reason organizations adopt a cloud IT infrastructure is to save money. The traditional approach of analyzing Total Cost of Ownership no longer applies when you move to the cloud. Cloud services provide the opportunity for you to use only what you need and pay only for what you use. We refer to this new paradigm as the Total Cost of Operation. You can use Total Cost of Operation (TCO) analysis methodologies to compare the costs of owning a traditional data center with the costs of operating your environment using AWS Cloud services",
+        prompt: "In what situations would you choose using Elastic Computing?",
+        example: "When you want to reduce the cost of total ownership\n\ Instead of running your own machiens."
+    },
+    {
+        term: "IAM Best Practices and AWS Best Practices",
+        description: "\n\
+        Design Best practices \n\
+        Loose coupling - As application complexity increases, a desirable attribute of an IT system is that it can be broken into smaller, loosely coupled components. \n\
+        This means that IT systems should be designed in a way that reduces interdependencies—a change or a failure in one component should not cascade to other components\n\
+        IAM Best Practices - To help secure your AWS resources, follow these recommendations for the AWS Identity and Access Management (IAM) service:\n\
+        IAM Best Practices\n\
+        --Lock away your AWS account root user access keys\n\
+        --Create individual IAM users\n\
+        --Use groups to assign permissions to IAM users\n\
+        --Grant least privilege\n\
+        --Get started using permissions with AWS managed policies\n\
+        --Use customer managed policies instead of inline policies\n\
+        --Use access levels to review IAM permissions\n\
+        --Configure a strong password policy for your users\n\
+        --Enable MFA – These are not physical MFA tokens typically\n\
+        --Use roles for applications that run on Amazon EC2 instances\n\
+        --Use roles to delegate permissions\n\
+        --Do not share access keys\n\
+        --Rotate credentials regularly\n\
+        --Remove unnecessary credentials\n\
+        --Use policy conditions for extra security\n\
+        --Monitor activity in your AWS account\n\
+        ",
+        prompt: "Design a workflow that follows the best practices for system design",
+    },
+    {
+        term: "efs vs s3 vs ebs",
+        description: "EBS: Elastic Block Storage: use case is more easily understood than the other two. It must be paired with an EC2 instance. So when you need a high-performance storage service for a single instance, use EBS.\n\
+        EFS:Scaleable File Storage |  may be used whenever you need a shared file storage option for multiple EC2 instances with automatic, high-performance scaling. \n\
+        This makes it a great candidate for file storage for content management systems; for lift and shift operations, as its autoscaling potential means you do not need to re-architect; for application development, as EFS’s shareable file storage is ideal for storing code and media files.\n\
+        S3 is good at storing long-term data due to its archiving system. Things like reports and records, which may go unused for years, can be stored on S3 at a lower cost than the other two storage services discussed. \n\
+        As already stated, S3 is also useful for storing data on which complex queries may be run. This makes it useful for data related to customer purchases, behaviour or profiles, because that data can be easily queried and fed into analytics tools.\n\
+        This  capacity for interfacing with other tools also makes S3 great for back-up and restoration, as it can be paired with Amazon Glacier for even more secure backing up.\n\
+        S3 also supports static websites, so if you need to host a static HTML page, S3 is a good choice.",
+        prompt: "Design scenrios to use efs, s3 or ebs",
+        example: "If I have an app on an ec2 that is the only one that needs to access the data, then I would use ebs. If I have multiple ec2 instances that need to access the same data, then I would use efs. If I have a static website at low cost, then I would use s3."
+    },
+    {
+        term: "redshift",
+        prompt: "What is aws redshift? When it is used for? Whats it's advantage?",
+        example: "AWS Redshift, Redshift shines in its ability to handle huge volumes of data — capable of processing structured and unstructured data in the range of exabytes (1018 bytes). However, the service can also be used for large-scale data migrations. \n\
+        Used when data to be analyzed is humongus. Petabyte Scales. To run Real time analytics,. Combination of data sources. Business Intelligence. and Log analysis.\n\
+        Used for data encryption, familiar tools, intelligent potimization, automate repetitive tasks. Concurrent scales. "
+
+    },
+    {
+        term: "Inherited Controls",
+        description: "Inherited controls are controls that are inherited from other entities, such as the underlying infrastructure, operating system, or database layer. These controls are inherited by the customer and are not assessed by AWS. For example, AWS manages controls related to the physical and environmental security of the data centers, but the customer inherits those controls and is responsible for assessing them. Inherited controls are not included in the scope of the AWS SOC reports.",
+        prompt: "If you were to create your own cloud service what else would you consider as an inherited control?",
+        example: "The underlying infrastructure, operating system, or database instance."
+    },
+    {
+        term: "Shared Controls",
+        description: " Controls which apply to both the infrastructure layer and customer layers, but in completely separate contexts or perspectives. In a shared control, AWS provides the requirements for the infrastructure and the customer must provide their own control implementation within their use of AWS services. For example:\n\n\
+        Patch Management – AWS is responsible for patching and fixing flaws within the infrastructure, but customers are responsible for patching their guest OS and applications.\n\
+        Configuration Management – AWS maintains the configuration of its infrastructure devices, but a customer is responsible for configuring their own guest operating systems, databases, and applications.\n\
+        Awareness & Training - AWS trains AWS employees, but a customer must train their own employees.",
+        prompt: "Understanding your controls. What are your cofniguration and awraness responsabilities? if you use aws?",
+        example: "To Configure your own guest operating systems, databases, and applications. And to train your own employees."
+    },
+    {
+        term: "AWS IAM vs AWS Organizations",
+        description: "AWS IAM is an AWS service that enables you to manage access to AWS services and resources securely. Using IAM, you can create and manage AWS users and groups, and use permissions to allow and deny their access to AWS resources.\n\
+        \n\
+        AWS Organizations is an account management service that enables you to consolidate multiple AWS accounts into an organization that you create and centrally manage. AWS Organizations includes account management and consolidated billing capabilities that enable you to better meet the budgetary, security, and compliance needs of your business. As an administrator of an organization, you can create accounts in your organization and invite existing accounts to join the organization. You can organize those accounts into groups and attach policy-based controls. You can apply policies across your organization to control access to AWS services, resources, and regions, and you can automate the creation of new accounts as your business needs grow.",
+        prompt: "What would you need if you need to create an account? How about if you need to manage access to aws services?",
+        example: "AWS IAM to manage access to aws services. AWS Organizations to manage accounts."
+    },
+    {
+        term: "Changes in AWS regions",
+        description: "Costs of the AWS Services can be different for each region because the cost, taxes, manpower, etc for the physical infrastructure and data centers are different from Region to Region.\n\
+        --Latency depends on physical location. When your application is being accessed by your users, it should be blazing fast. So you need to identify the locations of your target audience and choose the region having a smaller latency for your customers.\n\
+        --Data sovereignty compliance differs across the nations of the world. Considerations will need to be taken when using AWS in an unfamiliar location.\n\
+        --Most of the AWS Services and features are Region dependent, and just a few ones are Region independent. Also, sometimes it happens that some services are not available in all the regions",
+        prompt: "Before choosing to pay for a region, or use certain technology for a region, what should you consider?",
+        example: "Costs, Latency, Data sovereignty compliance, AWS Services and features"
+    },
+    {
+        term: "EC2 Regular, Spot, Optimized, Dedicated Instance, Dedicated Host",
+        description: "\
+        Regular Instances: These are the normal instances that you launch in AWS. They are billed at the On-Demand rate. are shared between multiple customers\n\n\
+        Spot Instance: Save money  (50-90%)by purchasing the hourly compute power of someone elses unused ec2 instance. Useful for tunning tasks that aren't critical. Fault-tolerant workloads. Such as: batch jobs, compute-intensive analysis, temporary autoo-scaling to meet a short-term spike, or another similar usage\n\n\
+        Optimized EC2 Instance: Designed to deliver an optimized service level for a specific area. (Storage, memory, compute. Standard network bandwidth ,dedicated cpus. \n\
+        Dedicated Instance: VPC isntances that are blocked for use by a single customer\n\
+        Dedicated Host: To enable isolation, give visiibility of the physical host. This is required if hte framework and libraries requires or restricts into a specific server \n\
+        ",
+        prompt: "If you were to use ec2, what would you use for a fault-tolerant workload? What if you need to use a specific framework and libraries that are licensed to a single server?",
+        example: "Spot Instance, Dedicated Host"
+    },
+    {
+        term: "Which of the following AWS Services can be used to serve large amounts of online video content?",
+        description: "Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds, all within a developer-friendly environment. CloudFront is integrated with AWS – both physical locations that are directly connected to the AWS global infrastructure, as well as other AWS services. CloudFront works seamlessly with services including AWS Shield for DDoS mitigation, Amazon S3, Elastic Load Balancing or Amazon EC2 as origins for your applications, and Lambda@Edge to run custom code closer to customers’ users and to customize the user experience. Lastly, if you use AWS origins such as Amazon S3, Amazon EC2 or Elastic Load Balancing, you don’t pay for any data transferred between these services and CloudFront.",
+        prompt: "Which of the following AWS Services can be used to serve large amounts of online video content?",
+        example: "Amazon CloudFront"
+    },
+    {
+        term: "cloud-native, Partner network, hybrid architecture and on-premises",
+        description: "Cloud-native architecture is an approach to building and running applications that exploits the advantages of the cloud computing delivery model. Cloud-native is about how applications are created and deployed, not where. While today public cloud impacts the thinking about best practices for cloud-native architectures, cloud-native is not a public cloud-only phenomenon. It is entirely possible to adopt cloud-native practices and build cloud-native applications on-premises.\n\
+        \n\
+        AWS Partner Network (APN) is the global partner program for technology and consulting businesses who leverage Amazon Web Services to build solutions and services for customers. The APN helps companies build, market, and sell their AWS offerings by providing valuable business, technical, and marketing support.\n\
+        \n\
+        Hybrid architecture is a computing environment that uses a mix of on-premises, private cloud and third-party, public cloud services with orchestration between the two platforms. By allowing workloads to move between private and public clouds as computing needs and costs change, hybrid cloud gives businesses greater flexibility and more data deployment options.\n\
+        \n\
+        On-premises (sometimes abbreviated as \"on-prem\") is a term meaning \"on-site\". It refers to the location of hardware or software within the confines of an enterprise rather than at a remote facility such as a server farm or cloud. The term is sometimes used to contrast with a similar term: off-premises, which refers to assets that are located outside of the physical confines of an enterprise's property. The term is also used in the phrase \"on-premises software\", which is a counterpart of \"software as a service\" (SaaS).",
+        prompt: "What is the difference between cloud-native, Partner network, hybrid architecture and on-premises?",
+        example: "Cloud-native is about how applications are created and deployed, not where. refers to an application that was designed to reside in the cloud from the start. Cloud native involves cloud technologies like microservices, container orchestrators, and auto scaling.\n\
+        AWS Partner Network (APN) is the global partner program for technology and consulting businesses who leverage Amazon Web Services to build solutions and services for customers. \n\
+        Hybrid architecture is a computing environment that uses a mix of on-premises, private cloud and third-party, public cloud services with orchestration between the two platforms. \n\
+        On-premises (sometimes abbreviated as \"on-prem\") is a term meaning \"on-site\". It refers to the location of hardware or software within the confines of an enterprise rather than at a remote facility such as a server farm or cloud."
+    },
+    {
+        term: "AWS IAM Users, Groups, Policies and Roles",
+        description: "    IAM Users: An IAM user is a unique identity within your AWS account that can be granted permissions to access resources and perform actions. Users can be created within your AWS account and can be assigned a unique set of credentials, such as an access key and secret key, which are used to authenticate their access to AWS resources.\n\n\
+        IAM Groups: An IAM group is a collection of IAM users that you can manage as a single entity. Groups allow you to grant permissions to multiple users at once, and make it easier to manage permissions as your user base grows. For example, you could create a group for all users in your development team, and grant them permissions to access the necessary resources for their work.\n\n\
+        IAM Policies: An IAM policy is a document that defines the permissions that can be granted to an IAM user, group, or role. Policies are written in JSON and can be used to grant permissions to access specific AWS services, resources, or actions. For example, you could create a policy that allows a user to read and write to a specific S3 bucket.\n\n\
+        IAM Roles: An IAM role is similar to a user or group, but is intended to be assumed by an AWS service or application. Instead of being associated with a set of credentials, roles are assumed by a service, such as an EC2 instance, and are granted permissions to access resources. Roles can also be assumed by external identity providers, such as your organization's identity provider (IdP).",
+        prompt: "You want to allow a multiple devs to login, and create some type of roles for machiens to login on with specific permissions. What would you use?",
+        example: "IAM Users are required to be used for devs to login You can assign them under IAM Groups whcih share the same IAM Policies. IAM Roles are used for machines to login with specific permissions."
+
+    },
+    {
+        term: "VPC Networks",
+        description: "A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud. You can launch your AWS resources, such as Amazon EC2 instances, into your VPC. You can specify an IP address range for the VPC, add subnets, associate security groups, and configure route tables.\n\n\
+        AWS Virtual Private Network (VPN) solutions establish secure connections via the public internet between your on-premises networks, remote offices, client devices, and the AWS global network\n\
+        Reduced Latency: VPC networks often provide more direct network paths between services and resources, reducing the number of hops data must traverse compared to public internet routing. This can significantly reduce latency, making data exchange faster.\n\
+        Higher Bandwidth: Within a VPC, the available bandwidth is typically higher than that available over the public internet. This is because cloud providers allocate more network resources within their infrastructure to support internal traffic, allowing for higher throughput.\n\
+        Network Isolation: Traffic within a VPC does not compete with public internet traffic, which can be subject to congestion and variable performance. This isolation helps ensure consistent network performance, making data exchanges within a VPC more reliable\n\n\
+        Optimized Routing: Cloud providers optimize the internal routing of traffic within their networks. When you connect services over a VPC, data packets travel through optimized paths, improving efficiency and reducing transmission times.\n\
+        Enhanced Security: While not directly related to speed, the enhanced security of VPC connections can indirectly contribute to faster data exchange. Secure connections (like those in a VPC) reduce the risk of data interception and tampering, which can cause delays and require data to be resent. By providing a more secure environment, VPCs help ensure that data exchanges are not only faster but also more reliable.",
+        prompt: "Deisgn a scenario where you would use VPC networks",
+        example: "You can use VPC networks to establish secure connections via the public internet between your on-premises networks, remote offices, client devices, and the AWS global network. You can also use VPC networks to reduce latency, increase bandwidth, isolate network traffic, optimize routing, and enhance security."
+    },
+    {
+        term: "VPN: Virtual Private Network",
+        description: "A virtual private network (VPN) uses encryption to create a private network over the top of a public network. VPN traffic passes through publicly shared Internet infrastructure – routers, switches, etc. – but the traffic is scrambled and not visible to anyone.",
+        prompt: "What is VPN In aws, and when would you use it?",
+        example: "A VPC will have a dedicated subnet and VLAN that are only accessible by the VPC customer. This prevents anyone else within the public cloud from accessing computing resources within the VPC – effectively placing the 'Reserved' sign on the table. The VPC customer connects via VPN to their VPC, so that data passing into and out of the VPC is not visible to other public cloud users.\n\n\
+        Example usages:\n\
+        Access a VPC.\n\
+        Access a peered VPC.\n\
+        Access an on-premises network.\n\
+        Access the internet.\n\
+        Client-to-client access.\n\
+        Restrict access to your network."
+    },
+    {
+        term: "VLAN: Virtual Local Area Network",
+        description: "A LAN is a local area network, or a group of computing devices that are all connected to each other without the use of the Internet. A VLAN is a virtual LAN. Like a subnet, a VLAN is a way of partitioning a network, but the partitioning takes place at a different layer within the OSI model (layer 2 instead of layer 3).",
+        prompt: "What is VLAN In aws, and when would you use it?",
+
+    },
+    {
+        term: "AWS Lambda",
+        description: "AWS Lambda is a compute service that lets you run code without provisioning or managing servers. Lambda runs your code only when needed and scales automatically, from a few requests per day to thousands per second. You pay only for the compute time that you consume—there is no charge when your code is not running. With Lambda, you can run code for virtually any type of application or backend service, all with zero administration. Lambda runs your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning and automatic scaling, code monitoring and logging.",
+        prompt: "What is AWS Lambda? When would you use it?",
+        example: "Processing uploaded S3 objects.\n\
+        Document editing and conversion in a hurry.\n\
+        Cleaning up the backend.\n\
+        Creating and operating serverless websites.\n\
+        Real-time processing of bulk data.\n\
+        Rendering pages in real-time.\n\
+        Automated backups.\n\
+        Email Campaigns using AWS Lambda & SES."
+    },
+    {
+        term: "AWS Personal Health Dashboard",
+        description: "The AWS Personal Health Dashboard provides alerts and remediation guidance when AWS is experiencing events that may impact you. The dashboard displays relevant and timely information to help you manage events in progress, and provides proactive notification to help you plan for scheduled activities. The dashboard also provides relevant support contact information to help you get assistance in resolving issues.\n\
+        It is available to all AWS customers at no additional cost.\n\
+        It provides a personalized view of the health of the specific services that are powering your workloads, not just the overall status of AWS services.\n\
+        It will proactively notify you through alerts if AWS experiences any events that may affect your resources, helping provide quick visibility and guidance.\n\
+        Customers with Business or Enterprise support plans also have API access to the events on the Personal Health Dashboard to integrate with their own systems.",
+        prompt: "Name a sample alert that you would receive from the AWS Personal Health Dashboard",
+        example: "One sample alert you may receive from the AWS Personal Health Dashboard is an open event. The AWS Personal Health Dashboard monitors the health of AWS services powering your workloads and applications. It will proactively notify you if AWS experiences any events that could potentially affect your resources. Some examples of open events you could be alerted about are performance issues or availability problems with services like EC2, RDS, S3 etc. The alert helps provide quick visibility into any ongoing issues and guidance to minimize impact on your applications. You can click on the event from the notification bell icon in the AWS console to get more details on the issue from the AWS Health Dashboard."        
+    },
+    {
+        term: "Trusted Advisor",
+        description: "AWS Trusted Advisor provides recommendations to help optimize your AWS environment. It continuously monitors your AWS resources and accounts for various best practice checks across categories like cost optimization, security, performance and fault tolerance. Some key use cases of Trusted Advisor include:\n\
+        Cost Optimization - It identifies unused or underutilized resources that can help reduce costs like unused EC2 instances, EBS volumes etc.\n\
+        Security - It checks your environment against security best practices and points out any gaps or issues that need attention.\n\
+        Performance - The performance checks help optimize configuration of resources like databases, caching etc to ensure optimal performance.\n\
+        Fault Tolerance - It recommends ways to improve fault tolerance of your applications and workloads running on AWS\n\
+        Service Limits - It provides visibility into your service limits and usage to help you request limit increases as needed. e.g. EC2 instance limits - It notifies you if you are approaching the maximum number of On-Demand Instances or Spot Instances allowed in each region.\n\
+        Operational Excellence - It provides recommendations to improve operational excellence of your environment. - The goal is to efficiently operate infrastructure and applications while meeting business requirements through standardized, automated processes and continuous monitoring and learning. e.g. ",
+        prompt: "What are the key use cases of Trusted Advisor?",
+        example: "Cost Optimization, Security, Performance, Fault Tolerance, Service Limits, Operational Excellence"
+     },
+    {
+        term: "AWS Config",
+        description: "“AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources.\n\
+        Config continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations\n\
+        against desired configurations. With Config, you can review changes in configurations and relationships between AWS resources, dive into detailed \n\
+        resource configuration histories, and determine your overall compliance against the configurations specified in your internal guidelines.\n\
+        This enables you to simplify compliance auditing, security analysis, change management, and operational troubleshooting.\n\n\
+        It provides a detailed inventory of all your AWS resources along with their configurations. This includes information like what each resource is configured with, how resources are related to each other through dependencies.\n\n\
+        It maintains a configuration history of your AWS resources so you can see how the configurations and relationships change over time. This helps troubleshoot issues by accessing last known good configurations.\n\n\
+        It supports configuration change notifications so you are notified when a resource is created, updated or deleted. This helps with audit logging and security monitoring.\n\n\
+        You can develop AWS Config rules to specify desired configurations for resources. It then evaluates your resources against these rules and notifies you of any deviations or drifts from desired state.\n\n\
+        The configuration history and change notifications provided by AWS Config can help with auditing by relating configuration changes to AWS CloudTrail events. This gives full visibility into who made changes and their impact.\n\n\
+        It helps improve overall security and governance of your AWS infrastructure by continuously monitoring configurations and detecting vulnerabilities or compliance violations.",
+        prompt: "Further explain, how would you use any of the features of AWS Config in your organization?",
+    },
+    {
+        term: "AWS CloudTrail vs Cloud Watch",
+        description: "\n\
+        CloudTrail is an auditing service that records API calls and events within your AWS account. This includes actions taken through the AWS Management Console, command line tools, and SDKs. CloudTrail provides a history of these actions and events for auditing, tracking changes, and troubleshooting issues.\n\n\
+        CloudWatch is a monitoring service that collects metrics and logs from AWS resources like EC2 instances, databases etc and also 3rd party applications. It provides visibility into resource utilization, application performance and overall operational health of resources. Some key capabilities include metrics and alarms to create custom metrics, set threshold",
+        prompt: "Where do you need to send logs to in order to analyze cloud trial logs?",
+        example: "To analyze CloudTrail logs, you need to send them to CloudWatch Logs. This allows you to establish monitoring and alerting based on API activity recorded in CloudTrail logs. For example, alarms on specific API calls that create or delete security groups or network configurations."
+
+    },
+    {
+        term: "What was AWS OpsWorks?",
+        description: "AWS OpsWorks is a configuration management service that helps you build and operate highly dynamic applications, and propagate changes instantly.",
+        prompt: "wHy is aws transitioning away from OpsWork?",
+        example: "AWS OpsWorks is transitioning away from the OpsWorks Stacks service to focus on AWS OpsWorks for Chef Automate and AWS OpsWorks for Puppet Enterprise.\n\n\
+        OpsWorks Stacks reached its end of life date in December 2021. AWS recommends customers migrate any existing OpsWorks Stacks instances to other AWS services like EC2, ECS, or Lambda.\n\
+        Some key reasons for the transition include:\n\
+        OpsWorks for Chef Automate and OpsWorks for Puppet Enterprise provide configuration management capabilities directly integrated with the Chef Automate and Puppet Enterprise products. This allows customers to leverage the full feature set of these configuration management tools.\n\
+        AWS aims to focus on configuration management services that are tightly integrated with specific configuration management vendors like Chef and Puppet, rather than maintaining a custom configuration management layer like OpsWorks Stacks.\n\
+        Migrating to other AWS services gives customers more flexibility and access to newer features compared to the older OpsWorks Stacks product. Services like EC2, ECS and Lambda are more actively developed by AWS.\n\
+        "
+    },
+    {
+        term: "AWS Support Plans | Case Serverity/Response Times",
+        description: "Developer: General guidance: <24 hours. System impaired: <12 hours.\n\
+        Business: General guidance: <24 hours. System impaired: <12 hours. Production System Impaired: <4hours, Production System Down: <1Hour\n\
+        Enterprise On-Ramp: General guidance: <24 hours. System impaired: <12 hours. Production System Impaired: <1 hour, Production System Down: <30 minutes\n\
+        Enterprise: General guidance: <24 hours. System impaired: <12 hours. Production System Impaired: <1 hour, Production System Down: <15 minutes",
+        prompt: "What are System Down impairment repsponse for 15 min, 30 min and 1 hour plans? (name htem in order)",
+        example: "Enterprise, Enterprise On-Ramp, Business"
+    },
+    {
+        term: "AWS Support, Starting from... ",
+        description: "\n\
+        Full set of AWS Trusted Advisor checks starts from Business\n\
+        Programmatic Case Management starts from Business\n\
+        Third Party Software Support starts from Business\n\
+        \n\
+        Technical Account Management starts from enterpreise On-Ramp\n\
+        Billing Assistance starts from enterpreise On-Ramp\n\
+        AWS Managed Services starts from enterpreise On-Ramp\n\
+        AWS re:Post starts from enterpreise On-Ramp\n\
+        \n\
+        Incident Detection and response starts from Enterprise: Enhanced monitoring.",
+        prompt: "When does the full set of AWS Trusted Advisor checks start?",
+        example: "Business"
+    },
+    
+    {
+        term: "AWS Support, Starting from... ",
+        description: "\n\
+        Full set of AWS Trusted Advisor checks starts from Business\n\
+        Programmatic Case Management starts from Business\n\
+        Third Party Software Support starts from Business\n\
+        \n\
+        Technical Account Management starts from enterpreise On-Ramp\n\
+        Billing Assistance starts from enterpreise On-Ramp\n\
+        AWS Managed Services starts from enterpreise On-Ramp\n\
+        AWS re:Post starts from enterpreise On-Ramp\n\
+        \n\
+        Incident Detection and response starts from Enterprise: Enhanced monitoring.",
+        prompt: "When does the Programmatic Case Management, Third Party Software Support start? and when would you use each of them for?",
+        example: "Business"
+    },
+    {
+        term: "AWS Support, Starting from... ",
+        description: "\n\
+        Full set of AWS Trusted Advisor checks starts from Business\n\
+        Programmatic Case Management starts from Business\n\
+        Third Party Software Support starts from Business\n\
+        \n\
+        Technical Account Management starts from enterpreise On-Ramp\n\
+        Billing Assistance starts from enterpreise On-Ramp\n\
+        AWS Managed Services starts from enterpreise On-Ramp\n\
+        AWS re:Post starts from enterpreise On-Ramp\n\
+        \n\
+        Incident Detection and response starts from Enterprise: Enhanced monitoring.",
+        prompt: "When does the Technical Account Management, Billing Assistance, AWS Managed Services, AWS re:Post start and why would you use each of them for?",
+        example: "Enterprise On-Ramp"
+    },
+    {
+        term: "AWS Support, Starting from... ",
+        description: "\n\
+        Full set of AWS Trusted Advisor checks starts from Business\n\
+        Programmatic Case Management starts from Business\n\
+        Third Party Software Support starts from Business\n\
+        \n\
+        Technical Account Management starts from enterpreise On-Ramp\n\
+        Billing Assistance starts from enterpreise On-Ramp\n\
+        AWS Managed Services starts from enterpreise On-Ramp\n\
+        AWS re:Post starts from enterpreise On-Ramp\n\
+        \n\
+        Incident Detection and response starts from Enterprise: Enhanced monitoring.",
+        prompt: "When does the Incident Detection and response (enhanced monitoring) start and why would you use each of them for?",
+        example: "Enterprise"
+    },
+    {
+        term: "Amazon VPC",
+        description: "A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud. You can specify an IP address range for the VPC, add subnets, add gateways, and associate security groups.",
+        prompt: "Why would you use Amazon VPC?",
+        example: "You can use Amazon VPC to launch AWS resources into a virtual network that you've defined. This virtual network closely resembles a traditional network that you'd operate in your own data center, with the benefits of using the scalable infrastructure of AWS."
+    },
+    {
+        term: "Amazon Subnet",
+        description: "A subnet is a range of IP addresses in your VPC. You launch AWS resources, such as Amazon EC2 instances, into your subnets. You can connect a subnet to the internet, other VPCs, and your own data centers, and route traffic to and from your subnets using route tables.",
+        prompt: "Why would you use Amazon Subnet?",
+        example: "You can use Amazon Subnet to divide a VPC into multiple networks. This allows you to have multiple layers of security, and to route traffic between the subnets."
+    },
+    {
+        term: "Amazon Route Tables",
+        description: "A route table contains a set of rules, called routes, that are used to determine where network traffic from your VPC is directed. You can explicitly associate a subnet with a particular route table. Otherwise, the subnet is implicitly associated with the main route table.\n\
+        Each route in a route table specifies the range of IP addresses where you want the traffic to go (the destination) and the gateway, network interface, or connection through which to send the traffic (the target).",
+        prompt: "Why would you use Amazon Route Tables?",
+        example: "You can use Amazon Route Tables to determine where network traffic from your VPC is directed. You can explicitly associate a subnet with a particular route table. Otherwise, the subnet is implicitly associated with the main route table."
+
+    },
+    {
+        term: "AWS Private Global Network",
+        description: "AWS provides a high-performance, and low-latency private global network that delivers a secure cloud computing environment to support your networking needs. AWS Regions are connected to multiple Internet Service Providers (ISPs) as well as to a private global network backbone, which provides improved network performance for cross-Region traffic sent by customers.",
+        prompt: "Why would you use AWS Private Global Network?",
+        example: "You can use AWS Private Global Network to deliver a secure cloud computing environment to support your networking needs. AWS Regions are connected to multiple Internet Service Providers (ISPs) as well as to a private global network backbone, which provides improved network performance for cross-Region traffic sent by customers."
+
+    },
+    {
+        term: "What is VPC peering?",
+        description: "A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IPv4 addresses or IPv6 addresses. Instances in either VPC can communicate with each other as if they are within the same network. You can create a VPC peering connection between your own VPCs, or with a VPC in another AWS account. The VPCs can be in different Regions (also known as an inter-Region VPC peering connection)",
+        prompt: "Why would you use VPC peering?",
+        example: "You can use VPC peering to route traffic between two VPCs using private IPv4 addresses or IPv6 addresses. Instances in either VPC can communicate with each other as if they are within the same network. You can create a VPC peering connection between your own VPCs, or with a VPC in another AWS account. The VPCs can be in different Regions (also known as an inter-Region VPC peering connection)."
+    },
+
+]
+
+
 const aws_certification_associate_developer = [
     {
         prompt: "A startup with newly created AWS account is testing different EC2 instances. They have used Burstable performance instance - T2.micro - for 35 seconds and stopped the instance.  At the end of the month, what is the instance usage duration that the company is charged for?",
@@ -684,177 +1177,180 @@ const aws_certification_associate_developer = [
         `SSH Keys` - Are locally generated public-private key pair that you can associate with your IAM user to communicate with CodeCommit repositories over SSH. \n\n\
         `AWS access keys` - You can use these keys with the credential helper included with the AWS CLI to communicate with CodeCommit repositories over HTTPS."
     },
-    // {
-    //     prompt: "A company is creating a gaming application that will be deployed on mobile devices. The application will send data to a Lambda function-based RESTful API. The application will assign each API request a unique identifier. The volume of API requests from the application can randomly vary at any given time of day. During request throttling, the application might need to retry requests. The API must be able to address duplicate requests without inconsistencies or data loss.\n\n\
-    //     Which of the following would you recommend to handle these requirements?",
-    //     example: "Persist the unique identifier for each request in a DynamoDB table. Change the Lambda function to check the table for the identifier before processing the request  DynamoDB is a fully managed, serverless, key-value NoSQL database designed to run high-performance applications at any scale. DynamoDB offers built-in security, continuous backups, automated multi-Region replication, in-memory caching, and data import and export tools. On-demand backup and restore allows you to create full backups of your DynamoDB. Point-in-time recovery (PITR) helps protect your DynamoDB tables from accidental write or delete operations. PITR provides continuous backups of your DynamoDB table data, and you can restore that table to any point in time up to the second during the preceding 35 days.  These features ensure that there is no data loss for the application, thereby meeting a key requirement for the given use case. The solution should also be able to address any duplicate requests without inconsistencies, so the Lambda function should be changed to inspect the table for the given identifier and process the request only if the identifier is unique.",
-    //     attachment: "./img/2023-04-24-09-36-32.png",
-    //     description: "Incorrect options:  Persist the unique identifier for each request in an ElastiCache for Memcached cache. Change the Lambda function to check the cache for the identifier before processing the request - Memcached is designed for simplicity and it does not offer any snapshot or replication features. This can lead to data loss for applications. Therefore, this option is not the right fit for the given use case.\n\
-    //     Persist the unique identifier for each request in an RDS MySQL table. Change the Lambda function to check the table for the identifier before processing the request - DynamoDB is a better fit than RDS MySQL to handle massive traffic spikes for write requests. DynamoDB is a key-value and document database that supports tables of virtually any size with horizontal scaling. DynamoDB scales to more than 10 trillion requests per day and with tables that have more than ten million read and write requests per second and petabytes of data storage. DynamoDB can be used to build applications that need consistent single-digit millisecond performance. MySQL RDS can be scaled vertically, however, it cannot match the performance benefits offered by DynamoDB for the given use case.  Persist the unique identifier for each request in a DynamoDB table. Change the Lambda function to send a client error response when the function receives a duplicate request - The solution should be able to address any duplicates without any inconsistencies. If Lambda sends a client error response upon receiving a duplicate request, it represents an inconsistent response. So this option is incorrect."
-    // },
-    // {
-    //     prompt: "A development team at a social media company uses AWS Lambda for its serverless stack on AWS Cloud. For a new deployment, the Team Lead wants to send only a certain portion of the traffic to the new Lambda version. In case the deployment goes wrong, the solution should also support the ability to roll back to a previous version of the Lambda function, with MIMINUM downtime for the application.   As a Developer Associate, which of the following options would you recommend to address this use-case?",
-    //     example: "Set up the application to use an alias that points to the current version. Deploy the new version of the code and configure the alias to send 10% of the users to this new version. If the deployment goes wrong, reset the alias to point all traffic to the current version  You can use versions to manage the deployment of your AWS Lambda functions. For example, you can publish a new version of a function for beta testing without affecting users of the stable production version. You can change the function code and settings only on the unpublished version of a function. When you publish a version, the code and most of the settings are locked to ensure a consistent experience for users of that version.  You can create one or more aliases for your AWS Lambda function. A Lambda alias is like a pointer to a specific Lambda function version. You can use routing configuration on an alias to send a portion of traffic to a Lambda function version. For example, you can reduce the risk of deploying a new version by configuring the alias to send most of the traffic to the existing version, and only a small percentage of traffic to the new version.",
-    //     attachment: "./img/2023-04-24-09-40-21.png",
-    //     description: "Incorrect Options: Set up the application to use an alias that points to the current version. Deploy the new version of the code and configure alias to send all users to this new version. If the deployment goes wrong, reset the alias to point to the current version - In this case, the application uses an alias to send all traffic to the new version which does not meet the requirement of sending only a certain portion of the traffic to the new Lambda version. In addition, if the deployment goes wrong, the application would see a downtime. Hence this option is incorrect.  Set up the application to directly deploy the new Lambda version. If the deployment goes wrong, reset the application back to the current version using the version number in the ARN - In this case, the application sends all traffic to the new version which does not meet the requirement of sending only a certain portion of the traffic to the new Lambda version. In addition, if the deployment goes wrong, the application would see a downtime. Hence this option is incorrect.  Set up the application to have multiple alias of the Lambda function. Deploy the new version of the code. Configure a new alias that points to the current alias of the Lambda function for handling 10% of the traffic. If the deployment goes wrong, reset the new alias to point all traffic to the most recent working alias of the Lambda function - This option has been added as a distractor. The alias for a Lambda function can only point to a Lambda function version. It cannot point to another alias."
-    // },
-    // {
-    //     prompt: "You have deployed a Java application to an EC2 instance where it uses the X-Ray SDK. When testing from your personal computer, the application sends data to X-Ray but when the application runs from within EC2, the application fails to send data to X-Ray.  Provide 3 ways of debugging the issue.",
-    //     example: "EC2 X-Ray Daemon - The AWS X-Ray daemon is a software application that listens for traffic on UDP port 2000, gathers raw segment data, and relays it to the AWS X-Ray API. The daemon logs could help with figuring out the problem.  \n\
-    //     EC2 Instance Role - The X-Ray daemon uses the AWS SDK to upload trace data to X-Ray, and it needs AWS credentials with permission to do that. On Amazon EC2, the daemon uses the instance's instance profile role automatically. Eliminates API permission issues (in case the role doesn't have IAM permissions to write data to the X-Ray service)  \n\
-    //     CloudTrail - With CloudTrail, you can log, continuously monitor, and retain account activity related to actions across your AWS infrastructure. You can use AWS CloudTrail to answer questions such as - “Who made an API call to modify this resource?”. CloudTrail provides event history of your AWS account activity thereby enabling governance, compliance, operational auditing, and risk auditing of your AWS account. You can check CloudTrail to see if any API call is being denied on X-Ray.",
-    //     attachment: "./img/2023-04-24-09-44-35.png",
-    //     description: "Incorrect: X-Ray sampling  By customizing sampling rules, you can control the amount of data that you record, and modify sampling behavior on the fly without modifying or redeploying your code. Sampling rules tell the X-Ray SDK how many requests to record for a set of criteria. X-Ray SDK applies a sampling algorithm to determine which requests get traced however because our application is failing to send data to X-Ray it does not help in determining the cause of failure."
-    // },
-    // {
-    //     prompt: "As an AWS Certified Developer Associate, you have been asked to create an AWS Elastic Beanstalk environment to handle deployment for an application that has high traffic and high availability needs. You need to deploy the new version using Beanstalk while making sure that performance and availability are not affected.\n\n\
-    //     Design an optimal way to do this while keeping the solution cost-effective?",
-    //     attachment: "./img/2023-04-24-09-48-22.png",
-    //     example: "AWS Elastic Beanstalk offers several deployment policies and settings. Choosing the right deployment policy for your application is a tradeoff based on a few considerations and depends on your business needs.\n\
-    //     \nDeploy using 'Rolling with additional batch' deployment policy - With this method, Elastic Beanstalk launches an extra batch of instances, then performs a rolling deployment. Launching the extra batch takes time, and ensures that the same bandwidth is retained throughout the deployment. This policy also avoids any reduced availability, although at a cost of an even longer deployment time compared to the Rolling method. Finally, this option is suitable if you must maintain the same bandwidth throughout the deployment.",
-    //     description: "Incorrect options: Deploy using 'Immutable' deployment policy - A slower deployment method, that ensures your new application version is always deployed to new instances, instead of updating existing instances. It also has the additional advantage of a quick and safe rollback in case the deployment fails. With this method, Elastic Beanstalk performs an immutable update to deploy your application. In an immutable update, a second Auto Scaling group is launched in your environment and the new version serves traffic alongside the old version until the new instances pass health checks.  Deploy using 'All at once' deployment policy - This is the quickest deployment method. Suitable if you can accept a short loss of service, and if quick deployments are important to you. With this method, Elastic Beanstalk deploys the new application version to each instance. Then, the web proxy or application server might need to restart. As a result, your application might be unavailable to users (or have low availability) for a short time.  Deploy using 'Rolling' deployment policy - With this method, your application is deployed to your environment one batch of instances at a time. Most bandwidth is retained throughout the deployment. Avoids downtime and minimizes reduced availability, at a cost of a longer deployment time. Suitable if you can't accept any period of completely lost service. The use case states that the application has high traffic and high availability requirements, so full capacity must be maintained during deployments, hence rolling with additional batch deployment is a better fit than the rolling deployment."
+    {
+        prompt: "A company is creating a gaming application that will be deployed on mobile devices. The application will send data to a Lambda function-based RESTful API. The application will assign each API request a unique identifier. The volume of API requests from the application can randomly vary at any given time of day. During request throttling, the application might need to retry requests. The API must be able to address duplicate requests without inconsistencies or data loss.\n\n\
+        Which of the following would you recommend to handle these requirements?",
+        example: "Persist the unique identifier for each request in a DynamoDB table. Change the Lambda function to check the table for the identifier before processing the request  DynamoDB is a fully managed, serverless, key-value NoSQL database designed to run high-performance applications at any scale. DynamoDB offers built-in security, continuous backups, automated multi-Region replication, in-memory caching, and data import and export tools. On-demand backup and restore allows you to create full backups of your DynamoDB. Point-in-time recovery (PITR) helps protect your DynamoDB tables from accidental write or delete operations. PITR provides continuous backups of your DynamoDB table data, and you can restore that table to any point in time up to the second during the preceding 35 days.  These features ensure that there is no data loss for the application, thereby meeting a key requirement for the given use case. The solution should also be able to address any duplicate requests without inconsistencies, so the Lambda function should be changed to inspect the table for the given identifier and process the request only if the identifier is unique.",
+        attachment: "./img/2023-04-24-09-36-32.png",
+        description: "Incorrect options:  Persist the unique identifier for each request in an ElastiCache for Memcached cache. Change the Lambda function to check the cache for the identifier before processing the request - Memcached is designed for simplicity and it does not offer any snapshot or replication features. This can lead to data loss for applications. Therefore, this option is not the right fit for the given use case.\n\
+        Persist the unique identifier for each request in an RDS MySQL table. Change the Lambda function to check the table for the identifier before processing the request - DynamoDB is a better fit than RDS MySQL to handle massive traffic spikes for write requests. DynamoDB is a key-value and document database that supports tables of virtually any size with horizontal scaling. DynamoDB scales to more than 10 trillion requests per day and with tables that have more than ten million read and write requests per second and petabytes of data storage. DynamoDB can be used to build applications that need consistent single-digit millisecond performance. MySQL RDS can be scaled vertically, however, it cannot match the performance benefits offered by DynamoDB for the given use case.  Persist the unique identifier for each request in a DynamoDB table. Change the Lambda function to send a client error response when the function receives a duplicate request - The solution should be able to address any duplicates without any inconsistencies. If Lambda sends a client error response upon receiving a duplicate request, it represents an inconsistent response. So this option is incorrect."
+    },
+    {
+        prompt: "A development team at a social media company uses AWS Lambda for its serverless stack on AWS Cloud. For a new deployment, the Team Lead wants to send only a certain portion of the traffic to the new Lambda version. In case the deployment goes wrong, the solution should also support the ability to roll back to a previous version of the Lambda function, with MIMINUM downtime for the application.   As a Developer Associate, which of the following options would you recommend to address this use-case?",
+        example: "Set up the application to use an alias that points to the current version. Deploy the new version of the code and configure the alias to send 10% of the users to this new version. If the deployment goes wrong, reset the alias to point all traffic to the current version  You can use versions to manage the deployment of your AWS Lambda functions. For example, you can publish a new version of a function for beta testing without affecting users of the stable production version. You can change the function code and settings only on the unpublished version of a function. When you publish a version, the code and most of the settings are locked to ensure a consistent experience for users of that version.  You can create one or more aliases for your AWS Lambda function. A Lambda alias is like a pointer to a specific Lambda function version. You can use routing configuration on an alias to send a portion of traffic to a Lambda function version. For example, you can reduce the risk of deploying a new version by configuring the alias to send most of the traffic to the existing version, and only a small percentage of traffic to the new version.",
+        attachment: "./img/2023-04-24-09-40-21.png",
+        description: "Incorrect Options: Set up the application to use an alias that points to the current version. Deploy the new version of the code and configure alias to send all users to this new version. If the deployment goes wrong, reset the alias to point to the current version - In this case, the application uses an alias to send all traffic to the new version which does not meet the requirement of sending only a certain portion of the traffic to the new Lambda version. In addition, if the deployment goes wrong, the application would see a downtime. Hence this option is incorrect.  Set up the application to directly deploy the new Lambda version. If the deployment goes wrong, reset the application back to the current version using the version number in the ARN - In this case, the application sends all traffic to the new version which does not meet the requirement of sending only a certain portion of the traffic to the new Lambda version. In addition, if the deployment goes wrong, the application would see a downtime. Hence this option is incorrect.  Set up the application to have multiple alias of the Lambda function. Deploy the new version of the code. Configure a new alias that points to the current alias of the Lambda function for handling 10% of the traffic. If the deployment goes wrong, reset the new alias to point all traffic to the most recent working alias of the Lambda function - This option has been added as a distractor. The alias for a Lambda function can only point to a Lambda function version. It cannot point to another alias."
+    },
+    {
+        prompt: "You have deployed a Java application to an EC2 instance where it uses the X-Ray SDK. When testing from your personal computer, the application sends data to X-Ray but when the application runs from within EC2, the application fails to send data to X-Ray.  Provide 3 ways of debugging the issue.",
+        example: "EC2 X-Ray Daemon - The AWS X-Ray daemon is a software application that listens for traffic on UDP port 2000, gathers raw segment data, and relays it to the AWS X-Ray API. The daemon logs could help with figuring out the problem.  \n\
+        EC2 Instance Role - The X-Ray daemon uses the AWS SDK to upload trace data to X-Ray, and it needs AWS credentials with permission to do that. On Amazon EC2, the daemon uses the instance's instance profile role automatically. Eliminates API permission issues (in case the role doesn't have IAM permissions to write data to the X-Ray service)  \n\
+        CloudTrail - With CloudTrail, you can log, continuously monitor, and retain account activity related to actions across your AWS infrastructure. You can use AWS CloudTrail to answer questions such as - “Who made an API call to modify this resource?”. CloudTrail provides event history of your AWS account activity thereby enabling governance, compliance, operational auditing, and risk auditing of your AWS account. You can check CloudTrail to see if any API call is being denied on X-Ray.",
+        attachment: "./img/2023-04-24-09-44-35.png",
+        description: "Incorrect: X-Ray sampling  By customizing sampling rules, you can control the amount of data that you record, and modify sampling behavior on the fly without modifying or redeploying your code. Sampling rules tell the X-Ray SDK how many requests to record for a set of criteria. X-Ray SDK applies a sampling algorithm to determine which requests get traced however because our application is failing to send data to X-Ray it does not help in determining the cause of failure."
+    },
+    {
+        prompt: "As an AWS Certified Developer Associate, you have been asked to create an AWS Elastic Beanstalk environment to handle deployment for an application that has high traffic and high availability needs. You need to deploy the new version using Beanstalk while making sure that performance and availability are not affected.\n\n\
+        Design an optimal way to do this while keeping the solution cost-effective?",
+        attachment: "./img/2023-04-24-09-48-22.png",
+        example: "AWS Elastic Beanstalk offers several deployment policies and settings. Choosing the right deployment policy for your application is a tradeoff based on a few considerations and depends on your business needs.\n\
+        \nDeploy using 'Rolling with additional batch' deployment policy - With this method, Elastic Beanstalk launches an extra batch of instances, then performs a rolling deployment. Launching the extra batch takes time, and ensures that the same bandwidth is retained throughout the deployment. This policy also avoids any reduced availability, although at a cost of an even longer deployment time compared to the Rolling method. Finally, this option is suitable if you must maintain the same bandwidth throughout the deployment.",
+        description: "Incorrect options: Deploy using 'Immutable' deployment policy - A slower deployment method, that ensures your new application version is always deployed to new instances, instead of updating existing instances. It also has the additional advantage of a quick and safe rollback in case the deployment fails. With this method, Elastic Beanstalk performs an immutable update to deploy your application. In an immutable update, a second Auto Scaling group is launched in your environment and the new version serves traffic alongside the old version until the new instances pass health checks.  Deploy using 'All at once' deployment policy - This is the quickest deployment method. Suitable if you can accept a short loss of service, and if quick deployments are important to you. With this method, Elastic Beanstalk deploys the new application version to each instance. Then, the web proxy or application server might need to restart. As a result, your application might be unavailable to users (or have low availability) for a short time.  Deploy using 'Rolling' deployment policy - With this method, your application is deployed to your environment one batch of instances at a time. Most bandwidth is retained throughout the deployment. Avoids downtime and minimizes reduced availability, at a cost of a longer deployment time. Suitable if you can't accept any period of completely lost service. The use case states that the application has high traffic and high availability requirements, so full capacity must be maintained during deployments, hence rolling with additional batch deployment is a better fit than the rolling deployment."
 
-    // },
-    // {
-    //     prompt: "Your global organization has an IT infrastructure that is deployed using CloudFormation on AWS Cloud. One employee, in us-east-1 Region, has created a stack 'Application1' and made an exported output with the name 'ELBDNSName'. Another employee has created a stack for a different application 'Application2' in us-east-2 Region and also exported an output with the name 'ELBDNSName'. The first employee wanted to deploy the CloudFormation stack 'Application1' in us-east-2, but it got an error. What is the cause of the error?",
-    //     example: `"Exported Output Values in CloudFormation must have unique names within a single Region"  Using CloudFormation, you can create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances), and AWS CloudFormation takes care of provisioning and configuring those resources for you.  A CloudFormation template has an optional Outputs section which declares output values that you can import into other stacks (to create cross-stack references), return in response (to describe stack calls), or view on the AWS CloudFormation console. For example, you can output the S3 bucket name for a stack to make the bucket easier to find.  You can use the Export Output Values to export the name of the resource output for a cross-stack reference. For each AWS account, export names must be unique within a region. In this case, we would have a conflict within us-east-2.`,
-    //     attachment: "./img/2023-04-24-10-04-14.png",
-    //     description: "Using CloudFormation, you can create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances), and AWS CloudFormation takes care of provisioning and configuring those resources for you.  A CloudFormation template has an optional Outputs section which declares output values that you can import into other stacks (to create cross-stack references), return in response (to describe stack calls), or view on the AWS CloudFormation console. For example, you can output the S3 bucket name for a stack to make the bucket easier to find.  You can use the Export Output Values to export the name of the resource output for a cross-stack reference. For each AWS account, export names must be unique within a region. In this case, we would have a conflict within us-east-2."
-    // },
-    // {
-    //     prompt: "A multi-national company has just moved to AWS Cloud and it has configured forecast-based AWS Budgets alerts for cost management. However, no alerts have been received even though the account and the budgets have been created almost three weeks ago.  What could be the issue with the AWS Budgets configuration?",
-    //     example: "Correct option:  AWS Budgets lets customers set custom budgets and receive alerts if their costs or usage exceed (or are forecasted to exceed) their budgeted amount.",
-    //     description: "AWS requires approximately 5 weeks of usage data to generate budget forecasts - AWS requires approximately 5 weeks of usage data to generate budget forecasts. If you set a budget to alert based on a forecasted amount, this budget alert isn't triggered until you have enough historical usage information." + `Incorrect options:  Budget forecast has been created from an account that does not have enough privileges - This is an incorrect statement. If the user account does not have enough privileges, the user will not be able to create the budget at all.  Amazon CloudWatch could be down and hence alerts are not being sent - Amazon CloudWatch is fully managed by AWS, this option has been added as a distractor.  Account has to be part of AWS Organizations to receive AWS Budget alerts - This is an incorrect statement. Stand-alone accounts too can create budgets and being part of an Organization is not mandatory to use AWS Budgets.`
-    // },
-    // {
-    //     prompt: "A development team has configured inbound traffic for the relevant ports in both the Security Group of the EC2 instance as well as the Network Access Control List (NACL) of the subnet for the EC2 instance. The team is, however, unable to connect to the service running on the Amazon EC2 instance.\n\n\
-    //     Ideate a possible fix for this issue",
-    //     example: "Security Groups are stateful, so allowing inbound traffic to the necessary ports enables the connection. Network ACLs are stateless, so you must allow both inbound and outbound traffic - Security groups are stateful, so allowing inbound traffic to the necessary ports enables the connection. Network ACLs are stateless, so you must allow both inbound and outbound traffic.",
-    //     description: "To enable the connection to a service running on an instance, the associated network ACL must allow both inbound traffic on the port that the service is listening on as well as allow outbound traffic from ephemeral ports. When a client connects to a server, a random port from the ephemeral port range (1024-65535) becomes the client's source port.  The designated ephemeral port then becomes the destination port for return traffic from the service, so outbound traffic from the ephemeral port must be allowed in the network ACL.  By default, network ACLs allow all inbound and outbound traffic. If your network ACL is more restrictive, then you need to explicitly allow traffic from the ephemeral port range.  If you accept traffic from the internet, then you also must establish a route through an internet gateway. If you accept traffic over VPN or AWS Direct Connect, then you must establish a route through a virtual private gateway.\n\n\
-    //     Incorrect options:  Network ACLs are stateful, so allowing inbound traffic to the necessary ports enables the connection. Security Groups are stateless, so you must allow both inbound and outbound traffic - This is incorrect as already discussed.  IAM Role defined in the Security Group is different from the IAM Role that is given access in the Network ACLs - This is a made-up option and just added as a distractor.  Rules associated with Network ACLs should never be modified from the command line. An attempt to modify rules from the command line blocks the rule and results in an erratic behavior - This option is a distractor. AWS does not support modifying rules of Network ACLs from the command line tool."
-    // },
-    // {
-    //     prompt: "A media company has created a video streaming application and it would like their Brazilian users to be served by the company's Brazilian servers. Other users around the globe should not be able to access the servers through DNS queries.  Which Route 53 routing policy meets this requirement?\n\
-    //     \n\
-    //     Weighted | Failover | latency | Geolocation",
-    //     example: `Geolocation  Geolocation routing lets you choose the resources that serve your traffic based on the geographic location of your users, meaning the location that DNS queries originate from. For example, you might want all queries from Europe to be routed to an ELB load balancer in the Frankfurt region. You can also use geolocation routing to restrict distribution of content to only the locations in which you have distribution rights  You can create a default record that handles both queries from IP addresses that aren't mapped to any location and queries that come from locations that you haven't created geolocation records for. If you don't create a default record, Route 53 returns a "no answer" response for queries from those locations.`,
-    //     attachment: "./img/2023-04-24-10-12-59.png",
-    //     description: "Incorrect options: Failover - Failover routing lets you route traffic to a resource when the resource is healthy or to a different resource when the first resource is unhealthy.  Latency - If your application is hosted in multiple AWS Regions, you can improve performance for your users by serving their requests from the AWS Region that provides the lowest latency.  Weighted - Use this policy to route traffic to multiple resources in proportions that you specify."
-    // },
-    // {
-    //     prompt: "A Developer has been entrusted with the job of securing certain S3 buckets that are shared by a large team of users. Last time, a bucket policy was changed, the bucket was erroneously available for everyone, outside the organization too.  \n\
-    //     Which feature/service will help the developer identify similar security issues with minimum effort?",
-    //     example: "IAM Access Analyzer - AWS IAM Access Analyzer helps you identify the resources in your organization and accounts, such as Amazon S3 buckets or IAM roles, that are shared with an external entity. This lets you identify unintended access to your resources and data, which is a security risk.  You can set the scope for the analyzer to an organization or an AWS account. This is your zone of trust. The analyzer scans all of the supported resources within your zone of trust. When Access Analyzer finds a policy that allows access to a resource from outside of your zone of trust, it generates an active finding.",
-    //     description: `Incorrect options:  Access Advisor feature on IAM console - To help identify the unused roles, IAM reports the last-used timestamp that represents when a role was last used to make an AWS request. Your security team can use this information to identify, analyze, and then confidently remove unused roles. This helps improve the security posture of your AWS environments. This does not provide information about non-IAM entities such as S3, hence it's not a correct choice here.  S3 Object Lock - S3 Object Lock enables you to store objects using a "Write Once Read Many" (WORM) model. S3 Object Lock can help prevent accidental or inappropriate deletion of data, it is not the right choice for the current scenario.  S3 Analytics - By using Amazon S3 analytics Storage Class Analysis you can analyze storage access patterns to help you decide when to transition the right data to the right storage class. You cannot use S3 Analytics to identify unintended access to your S3 resources.`
-    // },
-    // {
-    //     prompt: "An e-commerce company has developed an API that is hosted on Amazon ECS. Variable traffic spikes on the application are causing order processing to take too long. The application processes orders using Amazon SQS queues. The ApproximateNumberOfMessagesVisible metric spikes at very high values throughout the day which triggers the CloudWatch alarm. Other ECS metrics for the API containers are well within limits.\n\
-    //     Design a way to improve performance while keeping cost low",
-    //     example: "Use backlog per instance metric with target tracking scaling policy - If you use a target tracking scaling policy based on a custom Amazon SQS queue metric, dynamic scaling can adjust to the demand curve of your application more effectively.  The issue with using a CloudWatch Amazon SQS metric like ApproximateNumberOfMessagesVisible for target tracking is that the number of messages in the queue might not change proportionally to the size of the Auto Scaling group that processes messages from the queue. That's because the number of messages in your SQS queue does not solely define the number of instances needed. The number of instances in your Auto Scaling group can be driven by multiple factors, including how long it takes to process a message and the acceptable amount of latency (queue delay).  The solution is to use a backlog per instance metric with the target value being the acceptable backlog per instance to maintain. You can calculate these numbers as follows:  Backlog per instance: To calculate your backlog per instance, start with the ApproximateNumberOfMessages queue attribute to determine the length of the SQS queue (number of messages available for retrieval from the queue). Divide that number by the fleet's running capacity, which for an Auto Scaling group is the number of instances in the InService state, to get the backlog per instance.  Acceptable backlog per instance: To calculate your target value, first determine what your application can accept in terms of latency. Then, take the acceptable latency value and divide it by the average time that an EC2 instance takes to process a message.  To illustrate with an example, let's say that the current ApproximateNumberOfMessages is 1500 and the fleet's running capacity is 10. If the average processing time is 0.1 seconds for each message and the longest acceptable latency is 10 seconds, then the acceptable backlog per instance is 10 / 0.1, which equals 100. This means that 100 is the target value for your target tracking policy. If the backlog per instance is currently at 150 (1500 / 10), your fleet scales out, and it scales out by five instances to maintain proportion to the target value.",
-    //     description: "Incorrect options:  Use Docker swarm - A Docker swarm is a container orchestration tool, meaning that it allows the user to manage multiple containers deployed across multiple host machines. A swarm consists of multiple Docker hosts which run in swarm mode and act as managers (to manage membership and delegation) and workers (which run swarm services).  Use ECS service scheduler - Amazon ECS provides a service scheduler (for long-running tasks and applications), the ability to run tasks manually (for batch jobs or single run tasks), with Amazon ECS placing tasks on your cluster for you. You can specify task placement strategies and constraints that allow you to run tasks in the configuration you choose, such as spread out across Availability Zones. It is also possible to integrate with custom or third-party schedulers.  Use ECS step scaling policy - Although Amazon ECS Service Auto Scaling supports using Application Auto Scaling step scaling policies, AWS recommends using target tracking scaling policies instead. For example, if you want to scale your service when CPU utilization falls below or rises above a certain level, create a target tracking scaling policy based on the CPU utilization metric provided by Amazon ECS.  With step scaling policies, you create and manage the CloudWatch alarms that trigger the scaling process. If the target tracking alarms don't work for your use case, you can use step scaling. You can also use target tracking scaling with step scaling for an advanced scaling policy configuration. For example, you can configure a more aggressive response when utilization reaches a certain level.  Step Scaling scales your cluster on various lengths of steps based on different ranges of thresholds. Target tracking on the other hand intelligently picks the smart lengths needed for the given configuration."
-    // },
-    // {
-    //     prompt: "A Developer at a company is working on a CloudFormation template to set up resources. Resources will be defined using code and provisioned based on certain conditions defined in the Conditions section.\n\
-    //     Which sections (3) of a CloudFormation template CAN be associated with Condition?:\n\
-    //     Parameters | Resources | Conditions | Ouputs",
-    //     example: "Resources, Conditions, Outputs\n\n\
-    //     Resources - Resources section describes the resources that you want to provision in your AWS CloudFormation stacks. You can associate conditions with the resources that you want to conditionally create.  Conditions - You actually define conditions in this section of the CloudFormation template  Outputs - The optional Outputs section declares output values that you can import into other stacks (to create cross-stack references), return in response (to describe stack calls), or view on the AWS CloudFormation console. For example, you can output the S3 bucket name for a stack to make the bucket easier to find. You can associate conditions with the outputs that you want to conditionally create.",
-    //     description: "The optional Conditions section contains statements that define the circumstances under which entities are created or configured. For example, you can create a condition and then associate it with a resource or output so that AWS CloudFormation only creates the resource or output if the condition is true.  You might use conditions when you want to reuse a template that can create resources in different contexts, such as a test environment versus a production environment. In your template, you can add an EnvironmentType input parameter, which accepts either prod or test as inputs. For the production environment, you might include Amazon EC2 instances with certain capabilities; however, for the test environment, you want to use reduced capabilities to save money.  Conditions cannot be used within the Parameters section. After you define all your conditions, you can associate them with resources and resource properties only in the Resources and Outputs sections of a template."
-    // },
-    // {
-    //     prompt: "As part of his development work, an AWS Certified Developer Associate is creating policies and attaching them to IAM identities. After creating necessary Identity-based policies, he is now creating Resource-based policies.  Which is the only resource-based policy that the IAM service supports?",
-    //     description: ":m You manage access in AWS by creating policies and attaching them to IAM identities (users, groups of users, or roles) or AWS resources. A policy is an object in AWS that, when associated with an identity or resource, defines their permissions. Resource-based policies are JSON policy documents that you attach to a resource such as an Amazon S3 bucket. These policies grant the specified principal permission to perform specific actions on that resource and define under what conditions this applies.\n\
-    //     INCORRECT:\n\
-    //     `AWS Organizations Service Control Policies (SCP)` - If you enable all features of AWS organization, then you can apply service control policies (SCPs) to any or all of your accounts. SCPs are JSON policies that specify the maximum permissions for an organization or organizational unit (OU). The SCP limits permissions for entities in member accounts, including each AWS account root user. An explicit deny in any of these policies overrides the allow.  \n\
-    //     `Access control list (ACL)` - Access control lists (ACLs) are service policies that allow you to control which principals in another account can access a resource. ACLs cannot be used to control access for a principal within the same account. Amazon S3, AWS WAF, and Amazon VPC are examples of services that support ACLs.  \n\
-    //     `Permissions boundary` - AWS supports permissions boundaries for IAM entities (users or roles). A permissions boundary is an advanced feature for using a managed policy to set the maximum permissions that an identity-based policy can grant to an IAM entity. An entity's permissions boundary allows it to perform only the actions that are allowed by both its identity-based policies and its permissions boundaries.",
-    //     example: ":m `Trust policy` - Trust policies define which principal entities (accounts, users, roles, and federated users) can assume the role. An IAM role is both an identity and a resource that supports resource-based policies. For this reason, you must attach both a trust policy and an identity-based policy to an IAM role. The IAM service supports only one type of resource-based policy called a role trust policy, which is attached to an IAM role.",
+    },
+    {
+        prompt: "Your global organization has an IT infrastructure that is deployed using CloudFormation on AWS Cloud. One employee, in us-east-1 Region, has created a stack 'Application1' and made an exported output with the name 'ELBDNSName'. Another employee has created a stack for a different application 'Application2' in us-east-2 Region and also exported an output with the name 'ELBDNSName'. The first employee wanted to deploy the CloudFormation stack 'Application1' in us-east-2, but it got an error. What is the cause of the error?",
+        example: `"Exported Output Values in CloudFormation must have unique names within a single Region"  Using CloudFormation, you can create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances), and AWS CloudFormation takes care of provisioning and configuring those resources for you.  A CloudFormation template has an optional Outputs section which declares output values that you can import into other stacks (to create cross-stack references), return in response (to describe stack calls), or view on the AWS CloudFormation console. For example, you can output the S3 bucket name for a stack to make the bucket easier to find.  You can use the Export Output Values to export the name of the resource output for a cross-stack reference. For each AWS account, export names must be unique within a region. In this case, we would have a conflict within us-east-2.`,
+        attachment: "./img/2023-04-24-10-04-14.png",
+        description: "Using CloudFormation, you can create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances), and AWS CloudFormation takes care of provisioning and configuring those resources for you.  A CloudFormation template has an optional Outputs section which declares output values that you can import into other stacks (to create cross-stack references), return in response (to describe stack calls), or view on the AWS CloudFormation console. For example, you can output the S3 bucket name for a stack to make the bucket easier to find.  You can use the Export Output Values to export the name of the resource output for a cross-stack reference. For each AWS account, export names must be unique within a region. In this case, we would have a conflict within us-east-2."
+    },
+    {
+        prompt: "A multi-national company has just moved to AWS Cloud and it has configured forecast-based AWS Budgets alerts for cost management. However, no alerts have been received even though the account and the budgets have been created almost three weeks ago.  What could be the issue with the AWS Budgets configuration?",
+        example: "Correct option:  AWS Budgets lets customers set custom budgets and receive alerts if their costs or usage exceed (or are forecasted to exceed) their budgeted amount.",
+        description: "AWS requires approximately 5 weeks of usage data to generate budget forecasts - AWS requires approximately 5 weeks of usage data to generate budget forecasts. If you set a budget to alert based on a forecasted amount, this budget alert isn't triggered until you have enough historical usage information." + `Incorrect options:  Budget forecast has been created from an account that does not have enough privileges - This is an incorrect statement. If the user account does not have enough privileges, the user will not be able to create the budget at all.  Amazon CloudWatch could be down and hence alerts are not being sent - Amazon CloudWatch is fully managed by AWS, this option has been added as a distractor.  Account has to be part of AWS Organizations to receive AWS Budget alerts - This is an incorrect statement. Stand-alone accounts too can create budgets and being part of an Organization is not mandatory to use AWS Budgets.`
+    },
+    {
+        prompt: "A development team has configured inbound traffic for the relevant ports in both the Security Group of the EC2 instance as well as the Network Access Control List (NACL) of the subnet for the EC2 instance. The team is, however, unable to connect to the service running on the Amazon EC2 instance.\n\n\
+        Ideate a possible fix for this issue",
+        example: "Security Groups are stateful, so allowing inbound traffic to the necessary ports enables the connection. Network ACLs are stateless, so you must allow both inbound and outbound traffic - Security groups are stateful, so allowing inbound traffic to the necessary ports enables the connection. Network ACLs are stateless, so you must allow both inbound and outbound traffic.",
+        description: "To enable the connection to a service running on an instance, the associated network ACL must allow both inbound traffic on the port that the service is listening on as well as allow outbound traffic from ephemeral ports. When a client connects to a server, a random port from the ephemeral port range (1024-65535) becomes the client's source port.  The designated ephemeral port then becomes the destination port for return traffic from the service, so outbound traffic from the ephemeral port must be allowed in the network ACL.  By default, network ACLs allow all inbound and outbound traffic. If your network ACL is more restrictive, then you need to explicitly allow traffic from the ephemeral port range.  If you accept traffic from the internet, then you also must establish a route through an internet gateway. If you accept traffic over VPN or AWS Direct Connect, then you must establish a route through a virtual private gateway.\n\n\
+        Incorrect options:  Network ACLs are stateful, so allowing inbound traffic to the necessary ports enables the connection. Security Groups are stateless, so you must allow both inbound and outbound traffic - This is incorrect as already discussed.  IAM Role defined in the Security Group is different from the IAM Role that is given access in the Network ACLs - This is a made-up option and just added as a distractor.  Rules associated with Network ACLs should never be modified from the command line. An attempt to modify rules from the command line blocks the rule and results in an erratic behavior - This option is a distractor. AWS does not support modifying rules of Network ACLs from the command line tool."
+    },
+    {
+        prompt: "A media company has created a video streaming application and it would like their Brazilian users to be served by the company's Brazilian servers. Other users around the globe should not be able to access the servers through DNS queries.  Which Route 53 routing policy meets this requirement?\n\
+        \n\
+        Weighted | Failover | latency | Geolocation",
+        example: `Geolocation  Geolocation routing lets you choose the resources that serve your traffic based on the geographic location of your users, meaning the location that DNS queries originate from. For example, you might want all queries from Europe to be routed to an ELB load balancer in the Frankfurt region. You can also use geolocation routing to restrict distribution of content to only the locations in which you have distribution rights  You can create a default record that handles both queries from IP addresses that aren't mapped to any location and queries that come from locations that you haven't created geolocation records for. If you don't create a default record, Route 53 returns a "no answer" response for queries from those locations.`,
+        attachment: "./img/2023-04-24-10-12-59.png",
+        description: "Incorrect options: Failover - Failover routing lets you route traffic to a resource when the resource is healthy or to a different resource when the first resource is unhealthy.  Latency - If your application is hosted in multiple AWS Regions, you can improve performance for your users by serving their requests from the AWS Region that provides the lowest latency.  Weighted - Use this policy to route traffic to multiple resources in proportions that you specify."
+    },
+    {
+        prompt: "A Developer has been entrusted with the job of securing certain S3 buckets that are shared by a large team of users. Last time, a bucket policy was changed, the bucket was erroneously available for everyone, outside the organization too.  \n\
+        Which feature/service will help the developer identify similar security issues with minimum effort?",
+        example: "IAM Access Analyzer - AWS IAM Access Analyzer helps you identify the resources in your organization and accounts, such as Amazon S3 buckets or IAM roles, that are shared with an external entity. This lets you identify unintended access to your resources and data, which is a security risk.  You can set the scope for the analyzer to an organization or an AWS account. This is your zone of trust. The analyzer scans all of the supported resources within your zone of trust. When Access Analyzer finds a policy that allows access to a resource from outside of your zone of trust, it generates an active finding.",
+        description: `Incorrect options:  Access Advisor feature on IAM console - To help identify the unused roles, IAM reports the last-used timestamp that represents when a role was last used to make an AWS request. Your security team can use this information to identify, analyze, and then confidently remove unused roles. This helps improve the security posture of your AWS environments. This does not provide information about non-IAM entities such as S3, hence it's not a correct choice here.  S3 Object Lock - S3 Object Lock enables you to store objects using a "Write Once Read Many" (WORM) model. S3 Object Lock can help prevent accidental or inappropriate deletion of data, it is not the right choice for the current scenario.  S3 Analytics - By using Amazon S3 analytics Storage Class Analysis you can analyze storage access patterns to help you decide when to transition the right data to the right storage class. You cannot use S3 Analytics to identify unintended access to your S3 resources.`
+    },
+    {
+        prompt: "An e-commerce company has developed an API that is hosted on Amazon ECS. Variable traffic spikes on the application are causing order processing to take too long. The application processes orders using Amazon SQS queues. The ApproximateNumberOfMessagesVisible metric spikes at very high values throughout the day which triggers the CloudWatch alarm. Other ECS metrics for the API containers are well within limits.\n\
+        Design a way to improve performance while keeping cost low",
+        example: "Use backlog per instance metric with target tracking scaling policy - If you use a target tracking scaling policy based on a custom Amazon SQS queue metric, dynamic scaling can adjust to the demand curve of your application more effectively.  The issue with using a CloudWatch Amazon SQS metric like ApproximateNumberOfMessagesVisible for target tracking is that the number of messages in the queue might not change proportionally to the size of the Auto Scaling group that processes messages from the queue. That's because the number of messages in your SQS queue does not solely define the number of instances needed. The number of instances in your Auto Scaling group can be driven by multiple factors, including how long it takes to process a message and the acceptable amount of latency (queue delay).  The solution is to use a backlog per instance metric with the target value being the acceptable backlog per instance to maintain. You can calculate these numbers as follows:  Backlog per instance: To calculate your backlog per instance, start with the ApproximateNumberOfMessages queue attribute to determine the length of the SQS queue (number of messages available for retrieval from the queue). Divide that number by the fleet's running capacity, which for an Auto Scaling group is the number of instances in the InService state, to get the backlog per instance.  Acceptable backlog per instance: To calculate your target value, first determine what your application can accept in terms of latency. Then, take the acceptable latency value and divide it by the average time that an EC2 instance takes to process a message.  To illustrate with an example, let's say that the current ApproximateNumberOfMessages is 1500 and the fleet's running capacity is 10. If the average processing time is 0.1 seconds for each message and the longest acceptable latency is 10 seconds, then the acceptable backlog per instance is 10 / 0.1, which equals 100. This means that 100 is the target value for your target tracking policy. If the backlog per instance is currently at 150 (1500 / 10), your fleet scales out, and it scales out by five instances to maintain proportion to the target value.",
+        description: "Incorrect options:  Use Docker swarm - A Docker swarm is a container orchestration tool, meaning that it allows the user to manage multiple containers deployed across multiple host machines. A swarm consists of multiple Docker hosts which run in swarm mode and act as managers (to manage membership and delegation) and workers (which run swarm services).  Use ECS service scheduler - Amazon ECS provides a service scheduler (for long-running tasks and applications), the ability to run tasks manually (for batch jobs or single run tasks), with Amazon ECS placing tasks on your cluster for you. You can specify task placement strategies and constraints that allow you to run tasks in the configuration you choose, such as spread out across Availability Zones. It is also possible to integrate with custom or third-party schedulers.  Use ECS step scaling policy - Although Amazon ECS Service Auto Scaling supports using Application Auto Scaling step scaling policies, AWS recommends using target tracking scaling policies instead. For example, if you want to scale your service when CPU utilization falls below or rises above a certain level, create a target tracking scaling policy based on the CPU utilization metric provided by Amazon ECS.  With step scaling policies, you create and manage the CloudWatch alarms that trigger the scaling process. If the target tracking alarms don't work for your use case, you can use step scaling. You can also use target tracking scaling with step scaling for an advanced scaling policy configuration. For example, you can configure a more aggressive response when utilization reaches a certain level.  Step Scaling scales your cluster on various lengths of steps based on different ranges of thresholds. Target tracking on the other hand intelligently picks the smart lengths needed for the given configuration."
+    },
+    {
+        prompt: "A Developer at a company is working on a CloudFormation template to set up resources. Resources will be defined using code and provisioned based on certain conditions defined in the Conditions section.\n\
+        Which sections (3) of a CloudFormation template CAN be associated with Condition?:\n\
+        Parameters | Resources | Conditions | Ouputs",
+        example: "Resources, Conditions, Outputs\n\n\
+        Resources - Resources section describes the resources that you want to provision in your AWS CloudFormation stacks. You can associate conditions with the resources that you want to conditionally create.  Conditions - You actually define conditions in this section of the CloudFormation template  Outputs - The optional Outputs section declares output values that you can import into other stacks (to create cross-stack references), return in response (to describe stack calls), or view on the AWS CloudFormation console. For example, you can output the S3 bucket name for a stack to make the bucket easier to find. You can associate conditions with the outputs that you want to conditionally create.",
+        description: "The optional Conditions section contains statements that define the circumstances under which entities are created or configured. For example, you can create a condition and then associate it with a resource or output so that AWS CloudFormation only creates the resource or output if the condition is true.  You might use conditions when you want to reuse a template that can create resources in different contexts, such as a test environment versus a production environment. In your template, you can add an EnvironmentType input parameter, which accepts either prod or test as inputs. For the production environment, you might include Amazon EC2 instances with certain capabilities; however, for the test environment, you want to use reduced capabilities to save money.  Conditions cannot be used within the Parameters section. After you define all your conditions, you can associate them with resources and resource properties only in the Resources and Outputs sections of a template."
+    },
+    {
+        prompt: "As part of his development work, an AWS Certified Developer Associate is creating policies and attaching them to IAM identities. After creating necessary Identity-based policies, he is now creating Resource-based policies.  Which is the only resource-based policy that the IAM service supports?",
+        description: ":m You manage access in AWS by creating policies and attaching them to IAM identities (users, groups of users, or roles) or AWS resources. A policy is an object in AWS that, when associated with an identity or resource, defines their permissions. Resource-based policies are JSON policy documents that you attach to a resource such as an Amazon S3 bucket. These policies grant the specified principal permission to perform specific actions on that resource and define under what conditions this applies.\n\
+        INCORRECT:\n\
+        `AWS Organizations Service Control Policies (SCP)` - If you enable all features of AWS organization, then you can apply service control policies (SCPs) to any or all of your accounts. SCPs are JSON policies that specify the maximum permissions for an organization or organizational unit (OU). The SCP limits permissions for entities in member accounts, including each AWS account root user. An explicit deny in any of these policies overrides the allow.  \n\
+        `Access control list (ACL)` - Access control lists (ACLs) are service policies that allow you to control which principals in another account can access a resource. ACLs cannot be used to control access for a principal within the same account. Amazon S3, AWS WAF, and Amazon VPC are examples of services that support ACLs.  \n\
+        `Permissions boundary` - AWS supports permissions boundaries for IAM entities (users or roles). A permissions boundary is an advanced feature for using a managed policy to set the maximum permissions that an identity-based policy can grant to an IAM entity. An entity's permissions boundary allows it to perform only the actions that are allowed by both its identity-based policies and its permissions boundaries.",
+        example: ":m `Trust policy` - Trust policies define which principal entities (accounts, users, roles, and federated users) can assume the role. An IAM role is both an identity and a resource that supports resource-based policies. For this reason, you must attach both a trust policy and an identity-based policy to an IAM role. The IAM service supports only one type of resource-based policy called a role trust policy, which is attached to an IAM role.",
 
-    // },
-    // {
-    //     prompt: "An E-commerce business, has its applications built on a fleet of Amazon EC2 instances, spread across various Regions and AZs. The technical team has suggested using Elastic Load Balancers for better architectural design.  What characteristics of an Elastic Load Balancer make it a winning choice? (Select two)",
-    //     example: "A load balancer accepts incoming traffic from clients and routes requests to its registered targets (such as EC2 instances) in one or more Availability Zones. The load balancer also monitors the health of its registered targets and ensures that it routes traffic only to healthy targets. When the load balancer detects an unhealthy target, it stops routing traffic to that target. It then resumes routing traffic to that target when it detects that the target is healthy again.  Elastic Load Balancing supports three types of load balancers:  Application Load Balancers  Network Load Balancers  Classic Load Balancers  Separate public traffic from private traffic - The nodes of an internet-facing load balancer have public IP addresses. Load balancers route requests to your targets using private IP addresses. Therefore, your targets do not need public IP addresses to receive requests from users over the internet.  Build a highly available system - Elastic Load Balancing provides fault tolerance for your applications by automatically balancing traffic across targets – Amazon EC2 instances, containers, IP addresses, and Lambda functions – in multiple Availability Zones while ensuring only healthy targets receive traffic.",
-    //     description: "Incorrect options:  The Load Balancer communicates with the underlying EC2 instances using their public IPs - This is an incorrect statement. The Load Balancer communicates with the underlying EC2 instances using their private IPs.  Improve vertical scalability of the system - This is an incorrect statement. Elastic Load Balancers can connect with Auto Scaling groups to provide horizontal scaling.  Deploy EC2 instances across multiple AWS Regions - A Load Balancer can target EC2 instances only within an AWS Region."
-    // },
-    // {
-    //     prompt: "A firm runs its technology operations on a fleet of Amazon EC2 instances. The firm needs a certain software to be available on the instances to support their daily workflows. The developer team has been told to use the user data feature of EC2 instances.  \n\
-    //     Describe at least 1 (2max) default behaviors of the user data feature. How does the suer data run when the instance is launched?\n\
-    //     How are the privileges of the user data scripts defined?",
-    //     example: "Correct options:  User Data is generally used to perform common automated configuration tasks and even run scripts after the instance starts. When you launch an instance in Amazon EC2, you can pass two types of user data - shell scripts and cloud-init directives. You can also pass this data into the launch wizard as plain text or as a file.  By default, scripts entered as user data are executed with root user privileges - Scripts entered as user data are executed as the root user, hence do not need the sudo command in the script. Any files you create will be owned by root; if you need non-root users to have file access, you should modify the permissions accordingly in the script.  By default, user data runs only during the boot cycle when you first launch an instance - By default, user data scripts and cloud-init directives run only during the boot cycle when you first launch an instance. You can update your configuration to ensure that your user data scripts and cloud-init directives run every time you restart your instance.",
-    //     description: "Incorrect options:  By default, user data is executed every time an EC2 instance is re-started - As discussed above, this is not a default configuration of the system. But, can be achieved by explicitly configuring the instance.  When an instance is running, you can update user data by using root user credentials - You can't change the user data if the instance is running (even by using root user credentials), but you can view it.  By default, scripts entered as user data do not have root user privileges for executing - Scripts entered as user data are executed as the root user, hence do not need the sudo command in the script."
-    // },
-    // {
-    //     prompt: "You are a developer in a manufacturing company that has several servers on-site. The company decides to move new development to the cloud using serverless technology. You decide to use the AWS Serverless Application Model (AWS SAM) and work with an AWS SAM template file to represent your serverless architecture.  \n\
-    //     Which are valid serverless resource types? (3)\n\
-    //     AWS::Serverless::UserPool | AWS::Serverless::SimpleTable | AWS::Serverless::Api | AWS::Serverless:: Function",
-    //     example: ":m `AWS::Serverless::Function` - This resource creates a Lambda function, IAM execution role, and event source mappings that trigger the function.  \n\
-    //     `AWS::Serverless::Api` - This creates a collection of Amazon API Gateway resources and methods that can be invoked through HTTPS endpoints. It is useful for advanced use cases where you want full control and flexibility when you configure your APIs.  \n\
-    //     `AWS::Serverless::SimpleTable` - This creates a DynamoDB table with a single attribute primary key. It is useful when data only needs to be accessed via a primary key.  Reference:",
-    //     description: "The AWS Serverless Application Model (SAM) is an open-source framework for building serverless applications. It provides shorthand syntax to express functions, APIs, databases, and event source mappings. With just a few lines per resource, you can define the application you want and model it using YAML.  SAM supports the following resource types:  AWS::Serverless::Api  AWS::Serverless::Application  AWS::Serverless::Function  AWS::Serverless::HttpApi  AWS::Serverless::LayerVersion  AWS::Serverless::SimpleTable  AWS::Serverless::StateMachine  UserPool applies to the Cognito service which is used for authentication for mobile app and web. There is no resource named UserPool in the Serverless Application Model."
-    // },
-    // {
-    //     prompt: ':m A data analytics company processes Internet-of-Things (IoT) data using Amazon Kinesis. The development team has noticed that the IoT data feed into Kinesis experiences periodic spikes. The PutRecords API call occasionally fails and the logs show that the failed call returns the response shown below:\n\n\
-    //     ```\n\
-    //     HTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>\n{\n "FailedRecordCount": 2,\n "Records": [\n {\n "SequenceNumber": "49543463076548007577105092703039560359975228518395012686",\n "ShardId": "shardId-000000000000"\n },\n {\n "ErrorCode": "ProvisionedThroughputExceededException",\n "ErrorMessage": "Rate exceeded for shard shardId-000000000001 in stream exampleStreamName under account 111111111111."\n },\n {\n "ErrorCode": "InternalFailure",\n "ErrorMessage": "Internal service failure."\n }\n ]\n}\n```\n\
-    //     \n Design an option to recommend to address this use case?',
-    //     example: "Use an error retry and exponential backoff mechanism  \n\
-    //     Decrease the frequency or size of your requests  \n\
-    //     You can use PutRecords API call to write multiple data records into a Kinesis data stream in a single call. Each PutRecords request can support up to 500 records. Each record in the request can be as large as 1 MiB, up to a limit of 5 MiB for the entire request, including partition keys. Each shard can support writes up to 1,000 records per second, up to a maximum data write of 1 MiB per second.  The response Records array includes both successfully and unsuccessfully processed records. Kinesis Data Streams attempts to process all records in each PutRecords request. A single record failure does not stop the processing of subsequent records. As a result, PutRecords doesn't guarantee the ordering of records. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error and can be one of the following values: ProvisionedThroughputExceededException or InternalFailure. ProvisionedThroughputExceededException indicates that the request rate for the stream is too high, or the requested data is too large for the available throughput. Reduce the frequency or size of your requests.  To address the given use case, you can apply these best practices:  Reshard your stream to increase the number of shards in the stream.  Reduce the frequency or size of your requests.  Distribute read and write operations as evenly as possible across all of the shards in Data Streams.  Use an error retry and exponential backoff mechanism.",
-    //     description: "Incorrect options:  Merge the shards to decrease the number of shards in the stream  Increase the frequency or size of your requests  These two options contradict the explanation provided above, so these options are incorrect.  Decrease the number of KCL consumers - This option has been added as a distractor. The number of KCL consumers is irrelevant for the given use case since the ProvisionedThroughputExceededException is due to the PutRecords API call being used by the producers."
+    },
+    {
+        prompt: "An E-commerce business, has its applications built on a fleet of Amazon EC2 instances, spread across various Regions and AZs. The technical team has suggested using Elastic Load Balancers for better architectural design.  What characteristics of an Elastic Load Balancer make it a winning choice? (Select two)",
+        example: "A load balancer accepts incoming traffic from clients and routes requests to its registered targets (such as EC2 instances) in one or more Availability Zones. The load balancer also monitors the health of its registered targets and ensures that it routes traffic only to healthy targets. When the load balancer detects an unhealthy target, it stops routing traffic to that target. It then resumes routing traffic to that target when it detects that the target is healthy again.  Elastic Load Balancing supports three types of load balancers:  Application Load Balancers  Network Load Balancers  Classic Load Balancers  Separate public traffic from private traffic - The nodes of an internet-facing load balancer have public IP addresses. Load balancers route requests to your targets using private IP addresses. Therefore, your targets do not need public IP addresses to receive requests from users over the internet.  Build a highly available system - Elastic Load Balancing provides fault tolerance for your applications by automatically balancing traffic across targets – Amazon EC2 instances, containers, IP addresses, and Lambda functions – in multiple Availability Zones while ensuring only healthy targets receive traffic.",
+        description: "Incorrect options:  The Load Balancer communicates with the underlying EC2 instances using their public IPs - This is an incorrect statement. The Load Balancer communicates with the underlying EC2 instances using their private IPs.  Improve vertical scalability of the system - This is an incorrect statement. Elastic Load Balancers can connect with Auto Scaling groups to provide horizontal scaling.  Deploy EC2 instances across multiple AWS Regions - A Load Balancer can target EC2 instances only within an AWS Region."
+    },
+    {
+        prompt: "A firm runs its technology operations on a fleet of Amazon EC2 instances. The firm needs a certain software to be available on the instances to support their daily workflows. The developer team has been told to use the user data feature of EC2 instances.  \n\
+        Describe at least 1 (2max) default behaviors of the user data feature. How does the suer data run when the instance is launched?\n\
+        How are the privileges of the user data scripts defined?",
+        example: "Correct options:  User Data is generally used to perform common automated configuration tasks and even run scripts after the instance starts. When you launch an instance in Amazon EC2, you can pass two types of user data - shell scripts and cloud-init directives. You can also pass this data into the launch wizard as plain text or as a file.  By default, scripts entered as user data are executed with root user privileges - Scripts entered as user data are executed as the root user, hence do not need the sudo command in the script. Any files you create will be owned by root; if you need non-root users to have file access, you should modify the permissions accordingly in the script.  By default, user data runs only during the boot cycle when you first launch an instance - By default, user data scripts and cloud-init directives run only during the boot cycle when you first launch an instance. You can update your configuration to ensure that your user data scripts and cloud-init directives run every time you restart your instance.",
+        description: "Incorrect options:  By default, user data is executed every time an EC2 instance is re-started - As discussed above, this is not a default configuration of the system. But, can be achieved by explicitly configuring the instance.  When an instance is running, you can update user data by using root user credentials - You can't change the user data if the instance is running (even by using root user credentials), but you can view it.  By default, scripts entered as user data do not have root user privileges for executing - Scripts entered as user data are executed as the root user, hence do not need the sudo command in the script."
+    },
+    {
+        prompt: "You are a developer in a manufacturing company that has several servers on-site. The company decides to move new development to the cloud using serverless technology. You decide to use the AWS Serverless Application Model (AWS SAM) and work with an AWS SAM template file to represent your serverless architecture.  \n\
+        Which are valid serverless resource types? (3)\n\
+        AWS::Serverless::UserPool | AWS::Serverless::SimpleTable | AWS::Serverless::Api | AWS::Serverless:: Function",
+        example: ":m `AWS::Serverless::Function` - This resource creates a Lambda function, IAM execution role, and event source mappings that trigger the function.  \n\
+        `AWS::Serverless::Api` - This creates a collection of Amazon API Gateway resources and methods that can be invoked through HTTPS endpoints. It is useful for advanced use cases where you want full control and flexibility when you configure your APIs.  \n\
+        `AWS::Serverless::SimpleTable` - This creates a DynamoDB table with a single attribute primary key. It is useful when data only needs to be accessed via a primary key.  Reference:",
+        description: "The AWS Serverless Application Model (SAM) is an open-source framework for building serverless applications. It provides shorthand syntax to express functions, APIs, databases, and event source mappings. With just a few lines per resource, you can define the application you want and model it using YAML.  SAM supports the following resource types:  AWS::Serverless::Api  AWS::Serverless::Application  AWS::Serverless::Function  AWS::Serverless::HttpApi  AWS::Serverless::LayerVersion  AWS::Serverless::SimpleTable  AWS::Serverless::StateMachine  UserPool applies to the Cognito service which is used for authentication for mobile app and web. There is no resource named UserPool in the Serverless Application Model."
+    },
+    {
+        prompt: ':m A data analytics company processes Internet-of-Things (IoT) data using Amazon Kinesis. The development team has noticed that the IoT data feed into Kinesis experiences periodic spikes. The PutRecords API call occasionally fails and the logs show that the failed call returns the response shown below:\n\n\
+        ```\n\
+        HTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>\n{\n "FailedRecordCount": 2,\n "Records": [\n {\n "SequenceNumber": "49543463076548007577105092703039560359975228518395012686",\n "ShardId": "shardId-000000000000"\n },\n {\n "ErrorCode": "ProvisionedThroughputExceededException",\n "ErrorMessage": "Rate exceeded for shard shardId-000000000001 in stream exampleStreamName under account 111111111111."\n },\n {\n "ErrorCode": "InternalFailure",\n "ErrorMessage": "Internal service failure."\n }\n ]\n}\n```\n\
+        \n Design an option to recommend to address this use case?',
+        example: "Use an error retry and exponential backoff mechanism  \n\
+        Decrease the frequency or size of your requests  \n\
+        You can use PutRecords API call to write multiple data records into a Kinesis data stream in a single call. Each PutRecords request can support up to 500 records. Each record in the request can be as large as 1 MiB, up to a limit of 5 MiB for the entire request, including partition keys. Each shard can support writes up to 1,000 records per second, up to a maximum data write of 1 MiB per second.  The response Records array includes both successfully and unsuccessfully processed records. Kinesis Data Streams attempts to process all records in each PutRecords request. A single record failure does not stop the processing of subsequent records. As a result, PutRecords doesn't guarantee the ordering of records. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error and can be one of the following values: ProvisionedThroughputExceededException or InternalFailure. ProvisionedThroughputExceededException indicates that the request rate for the stream is too high, or the requested data is too large for the available throughput. Reduce the frequency or size of your requests.  To address the given use case, you can apply these best practices:  Reshard your stream to increase the number of shards in the stream.  Reduce the frequency or size of your requests.  Distribute read and write operations as evenly as possible across all of the shards in Data Streams.  Use an error retry and exponential backoff mechanism.",
+        description: "Incorrect options:  Merge the shards to decrease the number of shards in the stream  Increase the frequency or size of your requests  These two options contradict the explanation provided above, so these options are incorrect.  Decrease the number of KCL consumers - This option has been added as a distractor. The number of KCL consumers is irrelevant for the given use case since the ProvisionedThroughputExceededException is due to the PutRecords API call being used by the producers."
 
-    // },
-    // {
-    //     prompt: "A developer is testing Amazon Simple Queue Service (SQS) queues in a development environment. The queue along with all its contents has to be deleted after testing.  \n\
-    //     Which SQS API should be used for this requirement?",
-    //     example: "DeleteQueue - Deletes the queue specified by the QueueUrl, regardless of the queue's contents. When you delete a queue, any messages in the queue are no longer available.  When you delete a queue, the deletion process takes up to 60 seconds. Requests you send involving that queue during the 60 seconds might succeed. For example, a SendMessage request might succeed, but after 60 seconds the queue and the message you sent no longer exist.  When you delete a queue, you must wait at least 60 seconds before creating a queue with the same name.",
-    //     description: "Incorrect options:  PurgeQueue - Deletes the messages in a queue specified by the QueueURL parameter. When you use the PurgeQueue action, you can't retrieve any messages deleted from a queue. The queue however remains.  RemoveQueue - This is an invalid option, given only as a distractor.  RemovePermission - Revokes any permissions in the queue policy that matches the specified Label parameter.  Reference:"
-    // },
-    // {
-    //     prompt: "A SaaS company runs a HealthCare web application that is used worldwide by users. There have been requests by mobile developers to expose public APIs for the application-specific functionality. You decide to make the APIs available to mobile developers as product offerings.\n\
-    //     Which AWS Usage Plan will you use to meet this requirement?",
-    //     example: "Use API Gateway Usage Plans\n\
-    //     Amazon API Gateway is an AWS service for creating, publishing, maintaining, monitoring, and securing REST, HTTP, and WebSocket APIs at any scale. API developers can create APIs that access AWS or other web services, as well as data stored in the AWS Cloud.\n\n\
-    //     A usage plan specifies who can access one or more deployed API stages and methods—and also how much and how fast they can access them. The plan uses API keys to identify API clients and meters access to the associated API stages for each key.  You can configure usage plans and API keys to allow customers to access selected APIs at agreed-upon request rates and quotas that meet their business requirements and budget constraints.",
-    //     attachment: "./img/2023-04-24-11-28-33.png",
-    //     description: "Incorrect options:  Use AWS Billing Usage Plans - AWS Billing and Cost Management is the service that you use to pay your AWS bill, monitor your usage, and analyze and control your costs. There is no such thing as AWS Billing Usage Plans. You cannot use AWS Billing to set up public APIs for the application.  Use CloudFront Usage Plans - Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds, all within a developer-friendly environment. There is no such thing as CloudFront Usage Plans. You cannot use CloudFront to set up public APIs for the application.  Use AWS Lambda Custom Authorizers - Lambda is a separate service than Gateway API, therefore, it cannot be used to determine the API usage limits."
-    // },
-    // {
-    //     prompt: "The manager at an IT company wants to set up member access to user-specific folders in an Amazon S3 bucket - bucket-a. So, user x can only access files in his folder - bucket-a/user/user-x/ and user y can only access files in her folder - bucket-a/user/user-y/ and so on.\n\
-    //     Which IAM Policy will you use to meet this requirement?\n\
-    //     IAM policy condition | IAM policy principal | IAM Policy resource | IAM policy variables",
-    //     attachment: "./img/2023-04-24-11-33-02.png",
-    //     example: `IAM policy variables  Instead of creating individual policies for each user, you can use policy variables and create a single policy that applies to multiple users (a group policy). Policy variables act as placeholders. When you make a request to AWS, the placeholder is replaced by a value from the request when the policy is evaluated.  \n\
-    //     As an example, the following policy gives each of the users in the group full programmatic access to a user-specific object (their own "home directory") in Amazon S3.`,
-    //     desccription: 'Incorrect options:  \n\n\
-    //     IAM policy principal - You can use the Principal element in a policy to specify the principal that is allowed or denied access to a resource (In IAM, a principal is a person or application that can make a request for an action or operation on an AWS resource. The principal is authenticated as the AWS account root user or an IAM entity to make requests to AWS). You cannot use the Principal element in an IAM identity-based policy. You can use it in the trust policies for IAM roles and in resource-based policies.\n\n\
-    //     IAM policy condition - The Condition element (or Condition block) lets you specify conditions for when a policy is in effect, like so - "Condition" : { "StringEquals" : { "aws:username" : "johndoe" }}. This can not be used to address the requirements of the given use-case.  \n\n\
-    //     IAM policy resource - The Resource element specifies the object or objects that the statement covers. You specify a resource using an ARN. This can not be used to address the requirements of the given use-case.'
-    // },
-    // {
-    //     prompt: "You are running workloads on AWS and have embedded RDS database connection strings within each web server hosting your applications. After failing a security audit, you are looking at a different approach to store your secrets securely and automatically rotate the database credentials.\n\
-    //     Which AWS service will you use to meet this requirement?",
-    //     example: "AWS Secrets Manager enables you to easily rotate, manage, and retrieve database credentials, API keys, and other secrets throughout their lifecycle. Users and applications retrieve secrets with a call to Secrets Manager APIs, eliminating the need to hardcode sensitive information in plain text. Secrets Manager offers secret rotation with built-in integration for Amazon RDS, Amazon Redshift, and Amazon DocumentDB.",
-    //     attachment: "./img/2023-04-24-11-35-48.png",
-    //     description: ":m Incorrect options:  \n\
-    //     `SSM Parameter Store` - AWS Systems Manager Parameter Store provides secure, hierarchical storage for configuration data management and secrets management. You can store data such as passwords, database strings, and license codes as parameter values. SSM Parameter Store cannot be used to automatically rotate the database credentials.  \n\n\
-    //     `Systems Manager` - AWS Systems Manager gives you visibility and control of your infrastructure on AWS. Systems Manager provides a unified user interface so you can view operational data from multiple AWS services and allows you to automate operational tasks across your AWS resources. Systems Manager cannot be used to store your secrets securely and automatically rotate the database credentials.\n\n\
-    //     `KMS` - AWS Key Management Service (KMS) makes it easy for you to create and manage cryptographic keys and control their use across a wide range of AWS services and in your applications. KMS cannot be used to store your secrets securely and automatically rotate the database credentials."
-    // },
-    // {
-    //     prompt: "Your company has configured AWS Organizations to manage multiple AWS accounts. Within each AWS account, there are many CloudFormation scripts running. Your manager has requested that each script output the account number of the account the script was executed in.\n\
-    //     Which Pseudo parameter will you use to get this information?",
-    //     description: ':m Pseudo parameters are parameters that are predefined by AWS CloudFormation. You do not declare them in your template. Use them the same way as you would a parameter, as the argument for the Ref function.  \n\
-    //     `AWS::AccountId` returns the AWS account ID of the account in which the stack is being created.  \n\
-    //     Incorrect options:  \n\
-    //     `AWS::NoValue` - This removes the corresponding resource property when specified as a return value in the Fn::If intrinsic function.  \n\
-    //     `AWS::Region` - Returns a string representing the AWS Region in which the encompassing resource is being created, such as us-west-2.  \n\
-    //     `AWS::StackName` - Returns the name of the stack as specified with the aws cloudformation create-stack command, such as "teststack".',
-    //     example: `AWS::AccountId  Using CloudFormation, you can create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances), and AWS CloudFormation takes care of provisioning and configuring those resources for you.`
-    // },
+    },
+    {
+        prompt: "A developer is testing Amazon Simple Queue Service (SQS) queues in a development environment. The queue along with all its contents has to be deleted after testing.  \n\
+        Which SQS API should be used for this requirement?",
+        example: "DeleteQueue - Deletes the queue specified by the QueueUrl, regardless of the queue's contents. When you delete a queue, any messages in the queue are no longer available.  When you delete a queue, the deletion process takes up to 60 seconds. Requests you send involving that queue during the 60 seconds might succeed. For example, a SendMessage request might succeed, but after 60 seconds the queue and the message you sent no longer exist.  When you delete a queue, you must wait at least 60 seconds before creating a queue with the same name.",
+        description: "Incorrect options:  PurgeQueue - Deletes the messages in a queue specified by the QueueURL parameter. When you use the PurgeQueue action, you can't retrieve any messages deleted from a queue. The queue however remains.  RemoveQueue - This is an invalid option, given only as a distractor.  RemovePermission - Revokes any permissions in the queue policy that matches the specified Label parameter.  Reference:"
+    },
+    {
+        prompt: "A SaaS company runs a HealthCare web application that is used worldwide by users. There have been requests by mobile developers to expose public APIs for the application-specific functionality. You decide to make the APIs available to mobile developers as product offerings.\n\
+        Which AWS Usage Plan will you use to meet this requirement?",
+        example: "Use API Gateway Usage Plans\n\
+        Amazon API Gateway is an AWS service for creating, publishing, maintaining, monitoring, and securing REST, HTTP, and WebSocket APIs at any scale. API developers can create APIs that access AWS or other web services, as well as data stored in the AWS Cloud.\n\n\
+        A usage plan specifies who can access one or more deployed API stages and methods—and also how much and how fast they can access them. The plan uses API keys to identify API clients and meters access to the associated API stages for each key.  You can configure usage plans and API keys to allow customers to access selected APIs at agreed-upon request rates and quotas that meet their business requirements and budget constraints.",
+        attachment: "./img/2023-04-24-11-28-33.png",
+        description: "Incorrect options:  Use AWS Billing Usage Plans - AWS Billing and Cost Management is the service that you use to pay your AWS bill, monitor your usage, and analyze and control your costs. There is no such thing as AWS Billing Usage Plans. You cannot use AWS Billing to set up public APIs for the application.  Use CloudFront Usage Plans - Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds, all within a developer-friendly environment. There is no such thing as CloudFront Usage Plans. You cannot use CloudFront to set up public APIs for the application.  Use AWS Lambda Custom Authorizers - Lambda is a separate service than Gateway API, therefore, it cannot be used to determine the API usage limits."
+    },
+    {
+        prompt: "The manager at an IT company wants to set up member access to user-specific folders in an Amazon S3 bucket - bucket-a. So, user x can only access files in his folder - bucket-a/user/user-x/ and user y can only access files in her folder - bucket-a/user/user-y/ and so on.\n\
+        Which IAM Policy will you use to meet this requirement?\n\
+        IAM policy condition | IAM policy principal | IAM Policy resource | IAM policy variables",
+        attachment: "./img/2023-04-24-11-33-02.png",
+        example: `IAM policy variables  Instead of creating individual policies for each user, you can use policy variables and create a single policy that applies to multiple users (a group policy). Policy variables act as placeholders. When you make a request to AWS, the placeholder is replaced by a value from the request when the policy is evaluated.  \n\
+        As an example, the following policy gives each of the users in the group full programmatic access to a user-specific object (their own "home directory") in Amazon S3.`,
+        desccription: 'Incorrect options:  \n\n\
+        IAM policy principal - You can use the Principal element in a policy to specify the principal that is allowed or denied access to a resource (In IAM, a principal is a person or application that can make a request for an action or operation on an AWS resource. The principal is authenticated as the AWS account root user or an IAM entity to make requests to AWS). You cannot use the Principal element in an IAM identity-based policy. You can use it in the trust policies for IAM roles and in resource-based policies.\n\n\
+        IAM policy condition - The Condition element (or Condition block) lets you specify conditions for when a policy is in effect, like so - "Condition" : { "StringEquals" : { "aws:username" : "johndoe" }}. This can not be used to address the requirements of the given use-case.  \n\n\
+        IAM policy resource - The Resource element specifies the object or objects that the statement covers. You specify a resource using an ARN. This can not be used to address the requirements of the given use-case.'
+    },
+    {
+        prompt: "You are running workloads on AWS and have embedded RDS database connection strings within each web server hosting your applications. After failing a security audit, you are looking at a different approach to store your secrets securely and automatically rotate the database credentials.\n\
+        Which AWS service will you use to meet this requirement?",
+        example: "AWS Secrets Manager enables you to easily rotate, manage, and retrieve database credentials, API keys, and other secrets throughout their lifecycle. Users and applications retrieve secrets with a call to Secrets Manager APIs, eliminating the need to hardcode sensitive information in plain text. Secrets Manager offers secret rotation with built-in integration for Amazon RDS, Amazon Redshift, and Amazon DocumentDB.",
+        attachment: "./img/2023-04-24-11-35-48.png",
+        description: ":m Incorrect options:  \n\
+        `SSM Parameter Store` - AWS Systems Manager Parameter Store provides secure, hierarchical storage for configuration data management and secrets management. You can store data such as passwords, database strings, and license codes as parameter values. SSM Parameter Store cannot be used to automatically rotate the database credentials.  \n\n\
+        `Systems Manager` - AWS Systems Manager gives you visibility and control of your infrastructure on AWS. Systems Manager provides a unified user interface so you can view operational data from multiple AWS services and allows you to automate operational tasks across your AWS resources. Systems Manager cannot be used to store your secrets securely and automatically rotate the database credentials.\n\n\
+        `KMS` - AWS Key Management Service (KMS) makes it easy for you to create and manage cryptographic keys and control their use across a wide range of AWS services and in your applications. KMS cannot be used to store your secrets securely and automatically rotate the database credentials."
+    },
+    {
+        prompt: "Your company has configured AWS Organizations to manage multiple AWS accounts. Within each AWS account, there are many CloudFormation scripts running. Your manager has requested that each script output the account number of the account the script was executed in.\n\
+        Which Pseudo parameter will you use to get this information?",
+        description: ':m Pseudo parameters are parameters that are predefined by AWS CloudFormation. You do not declare them in your template. Use them the same way as you would a parameter, as the argument for the Ref function.  \n\
+        `AWS::AccountId` returns the AWS account ID of the account in which the stack is being created.  \n\
+        Incorrect options:  \n\
+        `AWS::NoValue` - This removes the corresponding resource property when specified as a return value in the Fn::If intrinsic function.  \n\
+        `AWS::Region` - Returns a string representing the AWS Region in which the encompassing resource is being created, such as us-west-2.  \n\
+        `AWS::StackName` - Returns the name of the stack as specified with the aws cloudformation create-stack command, such as "teststack".',
+        example: `AWS::AccountId  Using CloudFormation, you can create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances), and AWS CloudFormation takes care of provisioning and configuring those resources for you.`
+    },
+    {
+
+    }
 
 ]
 
 
 module.exports = {
-    aws_certification_associate_developer
+    aws_certification_associate_developer, aws_localstack, aws_certification_cloud_practitioner
 }

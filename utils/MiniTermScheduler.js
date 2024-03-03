@@ -23,6 +23,12 @@ class MiniTermScheduler {
         return this.working_set.elements;
     }
 
+    /**
+     * Takes in true or false for whether the card was correct or not.
+     * Algorithm: if correct, then remove the card from the working set.
+     * @param {boolean} wasCorrect 
+     * @returns {int} Count of the cards left to learn in the working set.
+     */
     solveCard(wasCorrect) {
         const card = this.working_set.dequeue();
 

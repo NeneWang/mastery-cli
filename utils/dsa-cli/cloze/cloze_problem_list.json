@@ -1045,19 +1045,19 @@
         "problem_slug": "surrounded-regions"
     },
     {
-        "file_path": "wall-and-gates-c1.js",
+        "file_path": "walls-and-gates-c1.js",
         "difficulty": 1,
-        "problem_slug": "wall-and-gates"
+        "problem_slug": "walls-and-gates"
     },
     {
-        "file_path": "wall-and-gates-c2.js",
+        "file_path": "walls-and-gates-c2.js",
         "difficulty": 1,
-        "problem_slug": "wall-and-gates"
+        "problem_slug": "walls-and-gates"
     },
     {
-        "file_path": "wall-and-gates-c3.js",
+        "file_path": "walls-and-gates-c3.js",
         "difficulty": 1,
-        "problem_slug": "wall-and-gates"
+        "problem_slug": "walls-and-gates"
     },
     {
         "file_path": "word-ladder-c1.js",
@@ -1615,19 +1615,19 @@
         "problem_slug": "same-tree"
     },
     {
-        "file_path": "symmetrc-tree-c1.js",
+        "file_path": "symmetric-tree-c1.js",
         "difficulty": 1,
-        "problem_slug": "symmetrc-tree"
+        "problem_slug": "symmetric-tree"
     },
     {
-        "file_path": "symmetrc-tree-c2.js",
+        "file_path": "symmetric-tree-c2.js",
         "difficulty": 1,
-        "problem_slug": "symmetrc-tree"
+        "problem_slug": "symmetric-tree"
     },
     {
-        "file_path": "symmetrc-tree-c3.js",
+        "file_path": "symmetric-tree-c3.js",
         "difficulty": 1,
-        "problem_slug": "symmetrc-tree"
+        "problem_slug": "symmetric-tree"
     },
     {
         "file_path": "flatten-binary-tree-to-linked-list-c1",
@@ -1760,17 +1760,17 @@
         "problem_slug": "minimum-genetic-mutation"
     },
     {
-        "file_path": "sort-list-c1",
+        "file_path": "sort-list-c1.js",
         "difficulty": 1,
         "problem_slug": "sort-list"
     },
     {
-        "file_path": "sort-list-c2",
+        "file_path": "sort-list-c2.js",
         "difficulty": 1,
         "problem_slug": "sort-list"
     },
     {
-        "file_path": "sort-list-c3",
+        "file_path": "sort-list-c3.js",
         "difficulty": 1,
         "problem_slug": "sort-list"
     },
@@ -1785,17 +1785,12 @@
         "problem_slug": "construct-quad-tree"
     },
     {
-        "file_path": "construct-quad-tree-c3.js",
-        "difficulty": 1,
-        "problem_slug": "construct-quad-tree"
-    },
-    {
         "file_path": "search-insert-position-c1.js",
         "difficulty": 1,
         "problem_slug": "search-insert-position"
     },
     {
-        "file_path": "search-insert-position-c2.js",
+    "file_path": "search-insert-position-c2.js",
         "difficulty": 1,
         "problem_slug": "search-insert-position"
     },
@@ -1803,5 +1798,102 @@
         "file_path": "find-peak-element-c1.js", 
         "difficulty": 1,
         "problem_slug": "find-peak-element"
+    },
+    {
+        "file_path": "median-of-two-sorted-arrays-c1.js",
+        "difficulty": 2,
+        "problem_slug": "median-of-two-sorted-arrays"
+    },
+    {
+        "file_path": "median-of-two-sorted-arrays-c2.js",
+        "difficulty": 2,
+        "problem_slug": "median-of-two-sorted-arrays"
+    },
+    {
+        "file_path": "median-of-two-sorted-arrays-c3.js",
+        "difficulty": 2,
+        "problem_slug": "median-of-two-sorted-arrays"
+    },
+    {
+        "file_path": "median-of-two-sorted-arrays-c4.js",
+        "difficulty": 2,
+        "problem_slug": "median-of-two-sorted-arrays"
+    },
+    {
+        "file_path": "median-of-two-sorted-arrays-c5.js",
+        "difficulty": 2,
+        "problem_slug": "median-of-two-sorted-arrays"
+    },
+    {
+        "file_path": "count-nice-pairs-in-an-array-c1.js",
+        "difficulty": 2,
+        "problem_slug": "count-nice-pairs-in-an-array"
+    },
+    {
+        "file_path": "single-number-c1.js",
+        "difficulty": 1,
+        "problem_slug": "single-number"
+    },
+    {
+        "file_path": "single-number-ii-c1.js",
+        "difficulty": 1,
+        "problem_slug": "single-number-ii"
+    },
+    {
+        "file_path": "factorial-trailing-zeroes-c1.js",
+        "difficulty": 1,
+        "problem_slug": "factorial-trailing-zeroes"
+    },
+    {
+        "file_path": "sqrtx-c1.js",
+        "difficulty": 1,
+        "problem_slug": "sqrtx"
+    },
+    {
+        "file_path": "sqrtx-c2.js",
+        "difficulty": 1,
+        "problem_slug": "sqrtx"
+    },
+    {
+        "file_path": "sqrtx-c3.js",
+        "difficulty": 1,
+        "problem_slug": "sqrtx"
+    },
+    {
+        "file_path": "triangle-c1.js",
+        "difficulty": 1,
+        "problem_slug": "triangle"
+    },
+    {
+        "file_path": "triangle-c2.js",
+        "difficulty": 1,
+        "problem_slug": "triangle"
+    },
+    {
+        "file_path": "triangle-c3.js",
+        "difficulty": 1,
+        "problem_slug": "triangle"
+    },
+    {
+        "file_path": "edit-distance-c1.js",
+        "difficulty": 1,
+        "problem_slug": "edit-distance"
+    },
+    {
+        "file_path": "perfect-squares-c1",
+        "difficulty": 1,
+        "problem_slug": "perfect-squares"
+    },
+    {
+        "file_path": "perfect-squares-c2",
+        "difficulty": 1,
+        "problem_slug": "perfect-squares"
+    },
+    {
+        "file_path": "perfect-squares-c3",
+        "difficulty": 1,
+        "problem_slug": "perfect-squares"
     }
+
+
 ]

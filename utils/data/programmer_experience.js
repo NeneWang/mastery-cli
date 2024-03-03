@@ -4,8 +4,6 @@
  * The advantage of devops is that tit is usually definition based, so I should be able to go throught the list and get as much of these definitions based problems.
  */
 
-const { example } = require("yargs");
-
 
 const aws_glossary = [
     {
@@ -435,34 +433,69 @@ const coderTerms = [
         example: "In Notion page, as automatically can be linked on github, also better for search"
     },
     {
-        "term": "CASCADE",
-        "prompt": "What does cascade deletion option do? When to use it?",
-        "example": "When a row in the parent table is deleted, all associated rows in the child table are also deleted. It is useful when you want to ensure that child records are always deleted along with the parent record to maintain data integrity."
+        term: "CASCADE",
+        prompt: "What does cascade deletion option do? When to use it?",
+        example: "When a row in the parent table is deleted, all associated rows in the child table are also deleted. It is useful when you want to ensure that child records are always deleted along with the parent record to maintain data integrity."
     },
     {
-        "term": "SET NULL",
-        "prompt": "What does set null deletion option do? When to use it?",
-        "example": "When a row in the parent table is deleted, the foreign key columns in the child table are set to NULL. It is useful when you want to remove the association between the parent and child records without deleting the child records themselves."
+        term: "SET NULL",
+        prompt: "What does set null deletion option do? When to use it?",
+        example: "When a row in the parent table is deleted, the foreign key columns in the child table are set to NULL. It is useful when you want to remove the association between the parent and child records without deleting the child records themselves."
     },
     {
-        "term": "SET DEFAULT",
-        "prompt": "What does set default deletion option do? When to use it?",
-        "example": "When a row in the parent table is deleted, the foreign key columns in the child table are set to their default values defined in the table schema. It is useful when you want to provide default values for the foreign key columns instead of leaving them NULL."
+        term: "SET DEFAULT",
+        prompt: "What does set default deletion option do? When to use it?",
+        example: "When a row in the parent table is deleted, the foreign key columns in the child table are set to their default values defined in the table schema. It is useful when you want to provide default values for the foreign key columns instead of leaving them NULL."
     },
     {
-        "term": "RESTRICT",
-        "prompt": "What does restrict deletion option do? When to use it?",
-        "example": "Prevents deletion of a row in the parent table if there are associated rows in the child table. It enforces referential integrity and avoids orphaned child records. It is useful when you want to ensure that the parent record cannot be deleted as long as there are associated child records."
+        term: "RESTRICT",
+        prompt: "What does restrict deletion option do? When to use it?",
+        example: "Prevents deletion of a row in the parent table if there are associated rows in the child table. It enforces referential integrity and avoids orphaned child records. It is useful when you want to ensure that the parent record cannot be deleted as long as there are associated child records."
     },
     {
-        "term": "NO ACTION",
-        "prompt": "What does no action deletion option do? When to use it?",
-        "example": "Similar to RESTRICT, it prevents deletion of a row in the parent table if there are associated rows in the child table. However, it may depend on the database engine's default behavior for handling such cases. It is useful when you want to rely on the default behavior of the database engine for handling referential integrity."
+        term: "NO ACTION",
+        prompt: "What does no action deletion option do? When to use it?",
+        example: "Similar to RESTRICT, it prevents deletion of a row in the parent table if there are associated rows in the child table. However, it may depend on the database engine's default behavior for handling such cases. It is useful when you want to rely on the default behavior of the database engine for handling referential integrity."
     },
     {
-        "term": "SET DEFAULT/SET NULL with a default value",
-        "prompt": "What does set default/set null with a default value deletion option do? When to use it?",
-        "example": "In this approach, the foreign key columns are set to a specific default value defined in the table schema when a row in the parent table is deleted. It is useful when you want to maintain referential integrity and still have a valid foreign key value by setting a predefined default value for the foreign key columns."
+        term: "SET DEFAULT/SET NULL with a default value",
+        prompt: "What does set default/set null with a default value deletion option do? When to use it?",
+        example: "In this approach, the foreign key columns are set to a specific default value defined in the table schema when a row in the parent table is deleted. It is useful when you want to maintain referential integrity and still have a valid foreign key value by setting a predefined default value for the foreign key columns."
+    },
+    // Sprint and Project management.
+    {
+        term: "Sprint Advantages",
+        prompt: "What are the advantages of sprints?",
+        example: "\
+        Changing requirements are a normal thing, but when they are changing on a daily basis and changing the requirements in the middle of a sprint then this is not an environment conducive to software being developed in any meaningful and qualitative way. In other words, TDD is the least of your problems here, they are more fundamental.\n\n\
+        You mention sprints, meaning that you are performing some kind of Agile development, which is a good thing. Handling development in short quick sprints works well on projects for when priorities and requirements are volatile and could change in the middle of the project. The serious issue is that you have requirements drastically changing on your development and test teams in the middle of a sprint.\n\n\
+        The sprint priorities should not change once the sprint has started. The sprint is supposed to be an agreement between the stakeholders and the development team that the following agreed upon features and user stories will be delivered and tested by a specific date. The stakeholders do not uphold their end of the agreement when they start changing their expectations for the sprint after development has begun.\n\n\
+        So the stakeholders weren't being careful or thoughtful of what they were asking for, so they will change their expectations immediately. Do the developers then have the luxury of pushing the delivery date for the features? Often not. At best the stakeholders were being negligent or incompetent and the developers pay the price in overtime to meet the date anyway. Sometimes even the stakeholders do this purposely knowing that they can get more work out of their salaried developers.\n\n\
+        What should honestly happen when the core requirements change to the point where the current work for the sprint would be useless is to immediately halt sprint development until a new sprint can be planned based on the new requirements. There is certainly no reason to continue on for the next week and a half developing software that the business has already told you that would not in anyway be useful to them at all.\n\n\
+        What is happening really is that the business stakeholders are failing the development team by not maintaining or meeting the sprint commitment. They demonstrate either complete lack of competence in determining what they want in software or they have a complete lack of respect for the development team and how quality software is produced."
+    },
+    {
+        term: "Sprints do and donts",
+        description: "\n\n\
+        Do:\n\
+            Make sure the team sets and understands the sprint goal and how success will be measured. This is the key to keeping everyone aligned and moving forward toward a common destination.\n\
+            Do ensure you have a well-groomed backlog with your priorities and dependencies in order. This can be a big challenge that could derail the process if it’s not properly managed.\n\
+            Ensure you have a good understanding of velocity, and that it reflects things like leave and team meetings.\n\
+            Do use the sprint planning meeting to flesh out intimate details of the work that needs to get done. Encourage team members to sketch out tasks for all stories, bugs, and tasks that come into the sprint.\n\
+            Leave out work where you wont be able to get the dependencies done, like work from another team, designs, and legal sign-off.\n\
+            Finally, once a decision or plan is made, make sure someone captures that information in your project management or collaboration tool, like your Jira tickets. That way, both the decision and the rationale are easy for everyone to see later.\n\
+        While youre working on being a scrum all-star with these “dos,” watch out for a few red flags too:\n\
+        \n\n\n\
+        Don't:\n\
+            Dont pull in too many stories, overestimate velocity, or pull in tasks that cant be completed in the sprint. You dont want to set yourself or your team up for failure.\n\
+            Dont forget about quality or technical debt. Make sure to budget time for QA and non-feature work, like bugs and engineering health.\n\
+            Dont let the team have a fuzzy view of what's in the sprint. Nail it down, and dont focus so much on moving fast that you forget to make sure everyones moving in the same direction.\n\
+            Also, dont take on a large amount of unknown or high-risk work. Break down stories that are large or have high uncertainty, and don't be afraid to leave some of that work for the next sprint.\n\
+            If you hear concerns from the team, whether its about velocity, low-certainty work, or work they think is bigger than what they estimated, dont ignore it. Address the issue, and recalibrate when necessary.\n\
+        ",
+        prompt: "Think of your last sprint, what did you do well and what could you improve?",
+        eample: "I could have determined not only the stories abut also the technical debt stories. \n\
+        Avoid adding highrisk work."
     }
 
 
@@ -1117,6 +1150,6 @@ const regex = [
 ]
 
 
-module.exports = { aws_glossary, aws_services, coderTerms, unit_testing, js_advanced, best_practices, git, regex };
+module.exports = { aws_glossary, aws_services, coderTerms, docker, unit_testing, js_advanced, best_practices, git, regex };
 
 

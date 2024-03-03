@@ -7,7 +7,7 @@ class SingleNumber {
      * @return {number}
      */
     singleNumber = function (nums, xor = 0) {
-        for (num of nums) {
+        for (const num of nums) {
             xor ^= num;
         }
 

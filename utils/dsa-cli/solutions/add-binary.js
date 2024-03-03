@@ -1,18 +1,34 @@
 class AddBinary {
     solve(a, b) {
-        let x = BigInt("0b" + a);
-        let y = BigInt("0b" + b);
-        let zero = BigInt(0);
-        let carry, answer;
+        const n = Math.max(a.length, b.length);
+        a = a.padStart(n, '0');
+        b = b.padStart(n, '0');
 
-        while (y !== zero) {
-            answer = x ^ y;
-            carry = (x & y) << BigInt(1);
-            x = answer;
-            y = carry;
+        let carry = 0;
+        const answer = [];
+
+        for (let i = n - 1; i >= 0; i--) {
+            if (a[i] === '1') {
+                carry += 1;
+            }
+            if (b[i] === '1') {
+                carry += 1;
+            }
+
+            if (carry % 2 === 1) {
+                answer.push('1');
+            } else {
+                answer.push('0');
+            }
+
+            carry = Math.floor(carry / 2);
         }
 
-        return x.toString(2);
+        if (carry === 1) {
+            answer.push('1');
+        }
+
+        return answer.reverse().join('');
     }
 }
 

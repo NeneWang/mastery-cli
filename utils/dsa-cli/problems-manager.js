@@ -13,8 +13,24 @@ const { cloze_problems_list } = require('./cloze');
 
 const DEBUG = false;
 
+/**
+ * @class ProblemsManager - Management of the problems
+ * 
+ * @param {string[]} skip_problems - The list of problems to skip
+ */
 class ProblemsManager {
     constructor({ skip_problems = [] } = {}) {
+        /**
+         *  * @property {dict<ProblemMetadata>} problems - The dictionary of problems
+            * @property {string[]} skip_problems - The list of problems to skip
+            * @property {string} temp_problem_filepath - The path of the temporary problem file
+            * @property {string} absolute_problem_file_path - The absolute path of the temporary problem file
+            * @property {string} solution_filepath - The path of the solution file
+            * @property {string} markdown_filepath - The path of the markdown file
+            * @property {string} base_code_filepath - The path of the base code file
+            * @property {string} tests_filepath - The path of the tests file
+            * @property {string} cloze_problem_base_filepath - The path of the cloze problem base file
+         */
         this.problems = {};
         this.skip_problems = skip_problems;
         this.temp_problem_filepath = './user_files/temp_problem.js';

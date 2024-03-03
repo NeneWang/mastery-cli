@@ -1,5 +1,5 @@
 
-const chart = require('@wangnene2/chart')
+const chart = require('terminal-charter')
 const { bar, scatter, bg, fg, heatmap } = chart;
 
 const EDemo = {

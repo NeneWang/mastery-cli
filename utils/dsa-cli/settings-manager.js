@@ -1,5 +1,9 @@
 const {getDirAbsoluteUri} = require('./functions');
 
+
+/**
+ * @Class to manage the settings.json file
+ */
 class SettingsManager {
     // Updates the json editor and allows edition of the settings.json file
 

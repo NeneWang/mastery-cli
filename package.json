@@ -1,7 +1,7 @@
 {
 	"name": "mastery-cli",
 	"description": "Continuous learning for engineers",
-	"version": "1.0.12",
+	"version": "1.0.20",
 	"license": "UNLICENSED",
 	"bin": {
 		"m-cli": "index.js",
@@ -22,10 +22,11 @@
 	],
 	"scripts": {
 		"format": "prettier --write \"./**/*.{js,json}\"",
-		"tests": "mocha tests/*"
+		"tests": "mocha tests/*",
+		"doc": "jsdoc -c jsdoc.json"
 	},
 	"dependencies": {
-		"@wangnene2/chart": "^1.0.15",
+		"terminal-charter": "^1.0.15",
 		"axios": "^1.5.1",
 		"chalk": "^4.1.2",
 		"cli-alerts": "^1.2.2",
@@ -49,6 +50,7 @@
 	},
 	"devDependencies": {
 		"mocha": "^10.2.0",
-		"prettier": "^2.8.0"
+		"prettier": "^2.8.0",
+		"taffydb": "^2.7.3"
 	}
 }

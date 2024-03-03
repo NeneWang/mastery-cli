@@ -1,24 +1,22 @@
 const chalk = require('chalk');
 const axios = require('axios');
-const clipboard = require('copy-paste')
+const Settings = require('./settings');
 
 
 
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = require('enquirer');
 
 const constants = require('./constants');
-const DSAConstants = require('./dsa-cli/constants');
-
 const Parser = require('expr-eval').Parser;
-const parser = new Parser();
+
 
 const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals, get_random_of_size } = constants;
 const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
 
 const { TermScheduler } = require('./termScheduler');
 const { MiniTermScheduler } = require('./miniTermScheduler');
-const DSATrainer = require('./dsa-cli/dsa-trainer');
-const { cloze_problems_list } = require('./dsa-cli/cloze');
+const { StorableQueue } = require('./StorableQueue');
+
 
 
 // const DEBUG = true
@@ -44,7 +42,7 @@ class Quizzer {
      * OUT: 
      * - {form, replace}
      */
-    getYoungest = async (potential_questions, { limit = 3, account_id = 1, debug = false, randomOffline = false } = {}) => {
+    getYoungest = async (potential_questions, { limit = 3, account_id = Settings.account_id ?? 1, debug = false, randomOffline = false } = {}) => {
 
         if (randomOffline) {
             return get_random_of_size(potential_questions, { count: limit });
@@ -72,7 +70,7 @@ class Quizzer {
 
         } catch (e) {
             // Such as no internet connection
-            if (debug) console.warn(e)
+            if (debug) console.warn('Error at getting Youngest')
 
             CONSTANTS.online = false; //Lets mark it as such case for this call.
 
@@ -82,6 +80,11 @@ class Quizzer {
         return potential_questions;
     }
 
+    /**
+     * Picks a math question from the list of math questions in this Quizzer. 
+     * 1-15-2021: It will just shuffle the list and pick the first one. No internet required. This is done to accelerate the process.
+     * @returns {QuestionStructure} question_selected
+     */
     pick_math_question = async () => {
 
         let potential_questions = this.enabledqmathformulas;
@@ -90,11 +93,9 @@ class Quizzer {
         return await get_random(potential_questions);
     }
 
-    pick_term_question = async () => {
-        if (DEBUG) console.log("Picking terms from:", this.terms)
-        let potential_questions = this.terms
-        /**
-         *  Terms Structure:
+    /**
+     * Picks a term from the list of terms in this Quizzer
+     *  *  Terms Structure:
             {
                 term: 'Singleton Pattern',
                 example: '',
@@ -104,10 +105,12 @@ class Quizzer {
                 prompt: 'Use the term',
                 formula_name: 'singleton-pattern'
             }
-         */
+     * @returns {TermStructure} term_selected
+     */
+    pick_term_question = async () => {
+        if (DEBUG) console.log("Picking terms from:", this.terms)
+        let potential_questions = this.terms;
         potential_questions = await this.getYoungest(potential_questions, { randomOffline: true })
-
-        // if (DEBUG) console.log("Left with", potential_questions)
 
         return get_random(potential_questions);
     }
@@ -118,7 +121,7 @@ class Quizzer {
      * @param {function} exitMethod the exit method
      * @returns 
      */
-    forceLearnMode = async ({ debug = false, exitMethod = () => { } } = {}) => {
+    forceLearnTermQuestions = async ({ debug = false, exitMethod = () => { } } = {}) => {
         let potential_questions = this.terms;
 
         potential_questions = await this.getYoungest(potential_questions, { limit: 2, randomOffline: true });
@@ -128,31 +131,67 @@ class Quizzer {
         let attempts_timestamps = [];
 
         let exit_force_method = false;
+
+        // Long term memory. using named: lgterm_forced_terms
+        const lgtermScheduler = new StorableQueue({ name: "lgterm_forced_terms" });
+        // Try loading.
+        await lgtermScheduler.load();
+
+
         // Create miniqueue
+        // If there is more than one scheduler elements add the first one it to the mini queue's potential_questions
+        if (lgtermScheduler.length > 0) {
+
+            // If larger than three assign the last three in the queue.
+            if (lgtermScheduler.length >= 3) {
+                const lastThree = lgtermScheduler.elements.slice(-3);
+                // Remove the last three from the queue
+                lgtermScheduler.elements = lgtermScheduler.elements.slice(0, -3);
+                potential_questions = lastThree;
+
+            } else {
+                const firstElement = lgtermScheduler.dequeue();
+                potential_questions.push(firstElement);
+            }
+            await lgtermScheduler.save();
+
+        }
+
+
+
         const total_cards = potential_questions.length;
-        const miniqueue = new MiniTermScheduler(potential_questions);
+
+
+        const miniTermScheduler = new MiniTermScheduler(potential_questions);
         const wrappedExitMethod = () => {
             exitMethod();
             exit_force_method = true;
         }
 
-        while (miniqueue.cardsCount != 0 && !exit_force_method) {
+
+        while (miniTermScheduler.cardsCount != 0 && !exit_force_method) {
             // Print the statistics
-            console.log(`queue: ${miniqueue.cardsCount}/${total_cards}`);
-            const card = miniqueue.getCard();
+            console.log(`queue: ${miniTermScheduler.cardsCount}/${total_cards}`);
+            const card = miniTermScheduler.getCard();
             // console.log("card", card);
             const response = await this.ask_term_question(card, { exitMethod: wrappedExitMethod });
             if (response == true) {
                 // increase the terms
-            }
 
-            miniqueue.solveCard(response);
+            } else {
+                if (!lgtermScheduler.has(card)) {
+                    // Add to the long term memory only if it was never added yet.
+                    lgtermScheduler.enqueue(card);
+                    await lgtermScheduler.save();
+                }
+            }
             attempts += 1;
             attempts_timestamps.push(new Date());
+
+            miniTermScheduler.solveCard(response);
         }
 
         return attempts;
-
     }
 
 
@@ -176,6 +215,16 @@ class Quizzer {
         return variables;
     }
 
+    /**
+     * Depending on the random type, it will return a random number from different ranges:
+     * - d: 2- 100
+     * - sd: 2-20
+     * - md: 2-50
+     * - ld: 2-10000
+     * 
+     * @param {Enumerator: String} type "d | sd | md | ld"
+     * @returns 
+     */
     getRandomFromType(type) {
         const ETypes = {};
         let ATLEAST = 2;
@@ -222,6 +271,12 @@ class Quizzer {
         return { "question_prompt": humanQuestion, "expectedAnswer": variables?.[calculates], "form:": question.form };
     };
 
+    /**
+     * Replaces the string in format of %d with a random number
+     * @param {string} formString the string to replace variables in
+     * @param {dict} variables Variables that will be replaced in the formString
+     * @returns {string} formString with variables replaced
+     */
     replaceStringVariables(formString, variables) {
         for (const variablename of Object.keys(variables)) {
             formString = formString.replace(variablename, variables[variablename]);
@@ -262,24 +317,27 @@ class Quizzer {
 
 
         const askQuestionRandom = async ({ exitMethod = () => { }, force_mode = true } = {}) => {
-            const askMath = constants.getRandomBool(0.1); // If to whether ask for a math or terminology question
-            // const askMath = false; //Too easy for now.
-            if (askMath) {
-                return await this.ask_math_question({ exitMethod: exitMethod })
-            } else {
-                if (force_mode) {
-                    return await this.forceLearnMode();
-
-                } else {
-
-                    return await this.pick_and_ask_term_question({ exitMethod: exitMethod })
-                }
+            let questionTypes = ['math', 'term'];
+            if (Settings?.quiz_enabled) {
+                questionTypes = Settings.quiz_enabled;
             }
+
+            const questionType = questionTypes[constants.getRandomInt(questionTypes.length)];
+
+            switch (questionType) {
+                case "math":
+                    return await this.ask_math_question({ exitMethod: exitMethod });
+                case "term":
+                    return await this.forceLearnTermQuestions({ exitMethod: exitMethod });
+
+                default:
+                    return await this.ask_math_question({ exitMethod: exitMethod });
+            }
+
         };
         let answerIsCorrect = false;
         if (ask_until_one_is_correct)
             while (!answerIsCorrect && !exit) {
-                if (DEBUG) console.log("Answer is correct", answerIsCorrect, "exit", exit);
                 answerIsCorrect = await askQuestionRandom({ exitMethod: exitMethod });
             }
         else {
@@ -293,55 +351,6 @@ class Quizzer {
     // Returns the term deck name (key), in which is stored the term's deck.
     async pick_terms_deck() {
         return ""
-    }
-
-
-
-    cloze_study_session = async () => {
-
-        // Pick all the available string keys.
-        const dsaTrainer = new DSATrainer({
-            skip_problem: ["hello-world", "simple-sum"]
-        })
-
-        await dsaTrainer.loaded_problem_manager;
-        // const cloze_names = dsaTrainer.problem_manager.clozeProblemSlugs;
-        const cloze_problems = cloze_problems_list;
-
-        // console.log("Running Cloze Study Session");
-        // console.log(cloze_problems);
-        const clozeScheduler = new TermScheduler({
-            cards_category: "Algo"
-        });
-        await clozeScheduler.setLearningCards(cloze_problems);
-        let exit = false;
-
-        const printCardsLeft = (cardsLeft, cardsLearnt) => {
-            console.log(`\nAlgorithms left: ${cardsLeft} || Algorithms completed: ${cardsLearnt}\n`);
-        }
-
-        const exitMethod = () => {
-            exit = true;
-            return false;
-        }
-        while (!clozeScheduler.is_completed && !exit) {
-            const [cardsLeft, cardsLearnt] = [clozeScheduler.getCardsToLearn(), clozeScheduler.getCardsLearnt()];
-
-            const card = await clozeScheduler.getCard();
-            let problem = dsaTrainer.problems_manager.getProblem(card.problem_slug);
-
-            console.log("Card", card);
-            problem.is_cloze = true;
-            const solution_metadata = await dsaTrainer.solveProblem(problem, { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path });
-
-            const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
-            clozeScheduler.solveCard(answerIsCorrect);
-            await clozeScheduler.saveCards();
-            printCardsLeft(cardsLeft, cardsLearnt);
-        }
-
-        // Populate the cloze names, and iterate while loop until all of them are completed
-
     }
 
 
@@ -361,7 +370,11 @@ class Quizzer {
         // If want new session
 
         // For now just load a new one everytime.
-        const titles = masterDeck.deck_titles;
+        const dictOptions = masterDeck.deck_titles_with_count;
+
+        let titles = Object.keys(dictOptions)
+        // Sort by count(from dict Options)
+        titles.sort((a, b) => dictOptions[b].count - dictOptions[a].count);
 
         const ms_deck = new AutoComplete({
             name: 'StudyOption',
@@ -369,7 +382,12 @@ class Quizzer {
             choices: titles
         });
 
-        let deck_selected = await ms_deck.run();
+
+
+        let deck_selected_key = await ms_deck.run();
+
+        let deck_selected = dictOptions[deck_selected_key].name;
+
         const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
 
         const studyScheduler = new TermScheduler({ cards_category: deck_selected });
@@ -425,6 +443,12 @@ class Quizzer {
         }
     }
 
+
+    /**
+     * 
+     * @param {method} param0 
+     * @returns 
+     */
     async pick_and_ask_term_question({ exitMethod = () => { } } = {}) {
         // Fetches a random term form with the youngest one, unless there is no internet
 
@@ -448,6 +472,9 @@ class Quizzer {
                     prompt: 'Use the term',
                     formula_name: 'singleton-pattern'
                 }
+                
+                2024-02-01 13:23:13
+                - Remove updateConcept no increase is required
              */
 
             //If both the term and the description are "" or have no length or are null then assume is a bad term.
@@ -523,7 +550,7 @@ class Quizzer {
             } catch (Exception) {
                 // Do nothing, doesnt matter offline.
                 console.log("- Server Offline - ")
-                console.log(Exception)
+                // console.log(Exception)
             }
 
 
@@ -535,19 +562,14 @@ class Quizzer {
             // if ask_if_correct is true then ask if it is corerect and update after showing examples
 
             if (ask_if_correct) {
-                console.log("Is your response acceptable?");
-                const is_correct = new Confirm("Is the response correct?", { initial: true });
+                const is_correct = new Confirm(
+                    {
+                        name: 'is_correct',
+                        message: "Is the response correct?",
+                        initial: true
+                    });
                 const response = await is_correct.run();
                 ISANSWERCORRECT = response;
-            }
-
-            try {
-
-                if (constants.CONSTANTS.online) {
-                    const __ = await updateConcept(term_selected.formula_name, ISANSWERCORRECT);
-                }
-            } catch {
-                // Do nothing.
             }
 
 
@@ -578,17 +600,21 @@ class Quizzer {
      * @param term :str # Term (slug) used e.g. singleton-pattern
      */
     printPreviousTerms = async (term) => {
+        const URL = `${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=5`;
+        try {
 
+            const res = await axios.get(URL, {
+                headers: {
+                    'Accept-Encoding': 'application/json'
+                }
+            });
 
-        const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=5`, {
-            headers: {
-                'Accept-Encoding': 'application/json'
+            for (const row in res.data) {
+                const obj = res.data[row]
+                console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
             }
-        });
-
-        for (const row in res.data) {
-            const obj = res.data[row]
-            console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
+        } catch {
+            console.log(`Error attempting to fetch from ${URL}`);
         }
 
     }
@@ -611,7 +637,7 @@ class Quizzer {
         try {
 
             const data = {
-                'account_id': CONSTANTS.ACCOUNT_ID ?? 1, //1
+                'account_id': Settings.account_id ?? 1, //1
                 'body': user_res ?? "",
                 'title': term_selected.term ?? "title",
                 'concept_slug': term_selected.formula_name ?? "slug"

@@ -35,6 +35,12 @@ const flags = {
 		default: false,
 		alias: 'a',
 		desc: 'Get all algorithms'
+	},
+	reset: {
+		type: 'boolean',
+		default: false,
+		alias: 'r',
+		desc: 'Reset the scheduler'
 	}
 };
 
@@ -65,9 +71,11 @@ class CommandsInformation {
 			clean: new Command("Prompts if to clean the terminal", "clean"),
 			code: new Command("Outputs the directory and copies it to clipboard of the maid cli root files", "code"),
 			ses: new Command("Study session", 'ses'),
-			dsa: new Command("Random Data structures and algorithms", 'dsa'),
+			dsa: new Command("Select Data structures and algorithms to solve", 'dsa'),
 			cloze: new Command("Cloze algorithm", 'cloze'),
 			cses: new Command("Algo Cloze study session", 'cses'),
+			jupyter: new Command("Select Jupyter notebook Problem to solve", 'jupyter'),
+			jses: new Command("Jupyter (Data science) study session",	 'jses'),
 
 		};
 	}

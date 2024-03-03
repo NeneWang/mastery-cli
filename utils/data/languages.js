@@ -1,11 +1,19 @@
 // Language speciifc questions for code interview practice. Such as Python, Swift, Javascript, Dart.
+// Mischallaneus Features might be also added ONLY if they are used in the common day.
 
-// Make sure for all know how to instantiate the specific structures. Please dont go very specific into some niche libraries, but focus on the main libraries as well as the focus that will be in programming interviews.
+/* Make sure for all know how to instantiate the specific structures.
+ Please dont go very specific into some niche libraries, but focus on the main libraries as well as the 
+ focus that will be for refreshing before programming interviews.
+ 
+ Therfore Priority queue should be as follow:
+ 1. Python: Datastrucutres Libs available. Modern Architecture.
+ 2. Swift: Requested for Mobile
+ 3. c# : requested for mantainance. Also quite the beautigul language.
+ 4. Java: requested for mantainance
+
+ */
 
 
-/* TODO For Python
-- [ ] 
-*/
 const python = [
     {
         term: "set | add, remove, check if contains",
@@ -99,6 +107,43 @@ const python = [
          and removal of the smallest element have O(log n) time complexity."
     },
     {
+        term: "Heap Q In Practice",
+        prompt: "Use heapq in practice for capturing the next Smallest uggly number to compute the next ugly numbers",
+        description: ":m Complete:\n\
+        ## [Complete Import]\n\
+        \nclass Solution:\n\
+            def nthUglyNumber(self, n: int) -> int:\n\
+                heap = [1]\n\
+                visited = {1}\n\
+        \n\
+                for t in range(n):\n\
+                    ## [Get the smallest Pop]\n\
+                    for i in [2, 3, 5]:\n\
+                        computed = smallestuggly * i\n\
+                        if computed not in visited:\n\
+                            visited.add(computed)\n\
+                            ## [Psuh into the heap the smallest]\n\
+                return smallestuggly",
+        example:
+            "import heapq\n\
+        \nclass Solution:\n\
+            def nthUglyNumber(self, n: int) -> int:\n\
+                heap = [1]\n\
+                visited = {1}\n\
+        \n\
+                for t in range(n):\n\
+                    smallestuggly= heapq.heappop(heap)\n\
+                    for i in [2, 3, 5]:\n\
+                        computed = smallestuggly * i\n\
+                        if computed not in visited:\n\
+                            visited.add(computed)\n\
+                            heapq.heappush(heap, computed)\n\
+                return smallestuggly"
+
+
+
+    },
+    {
         "term": "Linked List",
         "example": "class Node:\n\
       def __init__(self, data):\n\
@@ -110,6 +155,7 @@ const python = [
     },
     {
         "term": "Queue (list or deque-based)",
+        prompt: "How to create a queue using a list or a deque? (Python)",
         "example": "from collections import deque\n\
             queue = deque()\n\
             queue.append(1)\n\
@@ -124,6 +170,7 @@ const python = [
         self.is_end_of_word = False\n\
     \n\
     # Create and manipulate tries with TrieNode instances.",
+        prompt: "How to create a trie using Python?",
         "description": "A trie is a tree-like data structure used for storing a dynamic set of strings. It's particularly useful for string manipulation and searching, such as autocomplete and spell-checking."
     },
     {
@@ -152,7 +199,14 @@ const python = [
         example: "import math\n\
         math.floor(1.5)\n\
         math.ceil(1.5)"
-    
+
+    },
+    {
+        term: "Floor vs Truncate",
+        prompt: "What is the difference between floor e.g. (a//b) and truncate? int(a/b)",
+        example: "floor(-1.5) = -2\n\
+        truncate(-1.5) = -1"
+
     },
     {
         term: "Infinite",
@@ -164,6 +218,55 @@ const python = [
         prompt: "How to create a non local variable?",
         example: "nonlocal a",
         description: "For example you want to use a variable thats on the parent function"
+    },
+    {
+        term: "Using Bit mask to figure out if it was either even or only one repetition",
+        prompt: "Knowing that python supports up to 32 bit integers complete teh following, using bitmask strategy so that in the base case returns 1 if numbers on the sequence were repeated odd times or is there is only one digit repeated once",
+        description: ":m ```py\n\
+        class Solution:\n\
+            def pseudoPalindromicPaths(self, root: Optional[TreeNode]) -> int:\n\
+                \n\
+                def dfs(node, pathmask=0):\n\
+                    # Base case\n\
+                    count = 0\n\
+                    ### TODO \n\
+                    if not node.left and not node.right:\n\
+                        if ### TODO:\n\
+                            return 1\n\
+                        return 0\n\
+                                \n\
+                    if node.left:\n\
+                        count += dfs(node.left, pathmask)\n\
+                    if node.right:\n\
+                        count += dfs(node.right, pathmask)\n\
+                    return count\n\
+                \n\
+                if not root:\n\
+                    return 0\n\
+                return dfs(root)\n\
+        ```\n\
+        ",
+        example: "pathmask ^= (1 << node.val)\n\
+        pathmask == 0 or (pathmask & (pathmask - 1)) == 0\n\
+        Example run \n\
+        1000 & 0111 = 0000\n\
+        1100 & 1011 = 1000\n\
+        "
+    },
+    {
+        term: "Character to int and int to char",
+        prompt: "How to convert in python int to char and char to int?",
+        example: "ord('a')\n\
+        chr(97)"
+    },
+    {
+        term: "heapq",
+        prompt: "Use heapq to create a list, add and pop the smallest element",
+        example: "import heapq\n\
+        heap = [3, 1, 2]\n\
+        heapq.heapify(heap)\n\
+        heapq.heappush(heap, 4)\n\
+        min_element = heapq.heappop(heap)"
     }
 ]
 
@@ -343,7 +446,13 @@ const js = [
         term: "Check key in map",
         example: "if ('j' in {'j': 1}) { console.log('j is in the map'); }",
         prompt: "How to check if a key is in a map: e.g. j in {'j': 1}?"
-    }
+    },
+    {
+        term: "JS | Min Max Integer",
+        example: "Number.MAX_SAFE_INTEGER\n\
+        Number.MIN_SAFE_INTEGER",
+        prompt: "How to get the max and min integer in JS?"
+    },
 ]
 
 const dart = [

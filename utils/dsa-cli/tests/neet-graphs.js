@@ -486,7 +486,7 @@ class ConstructQuadTree extends ProblemTests {
         const constructQuadTree = new this.Problem();
         this.current_test_name = '[[0,1],[1,0]] | [[0,1],[1,0]]';
         const grid = [[0, 1], [1, 0]];
-        console.log(constructQuadTree.solve(grid))
+        // console.log(constructQuadTree.solve(grid))
         // assert.deepEqual(constructQuadTree.solve(grid), arrayToBinaryTree([[0,1],[1,0]]));
         // throw new Error('Not implemented');
     }
@@ -497,7 +497,7 @@ class ConstructQuadTree extends ProblemTests {
         this.current_test_name = '[[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,1,1,1,1],[1, 1, 1, 1, 1, 1, 1, 1],[1,1,1,1,0,0,0,0],[1, 1, 1, 1, 0, 0, 0, 0],[1,1,1,1,0,0,0,0],[1, 1, 1, 1, 0, 0, 0, 0]] | [[0,1],[1,0]]';
         const grid = [[1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0]];
         // assert.deepEqual(constructQuadTree.solve(grid), arrayToBinaryTree([[0,1],[1,0]]));
-        console.log(constructQuadTree.solve(grid))
+        // console.log(constructQuadTree.solve(grid))
 
     }
 
@@ -707,7 +707,8 @@ const TEST_DICTIONARY = {
     'search-a-2d-matrix': SearchA2DMatrix,
     'find-first-and-last-position-of-element-in-sorted-array': FindFirstAndLastPositionOfElementInSortedArray,
     'find-minimum-in-rotated-sorted-array': FindMInimumInRotatedSortedArray,
-    'median-of-two-sorted-arrays': MedianOfTwoSortedArrays
+    'median-of-two-sorted-arrays': MedianOfTwoSortedArrays,
+    'construct-quad-tree': ConstructQuadTree
 }
 
 
