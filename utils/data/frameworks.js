@@ -2102,8 +2102,52 @@ const postgresql = [
 
 ]
 
+const xcodeIOS = [
+    {
+        term: "Shortcut Commit Files in XCODE",
+        prompt: "(1) Shortcut Commit Files in XCODE \n\
+        (2) Adding a component.",
+        example: "(1) Command + Option + C\n\
+        (2) Shift + Command + L",
+
+    },
+    {
+        term: "Switch values, changed",
+        prompt: "Complete the folloing so that it changes the text color on switch",
+        description:"@objc func switchValueChanged() {\\n\
+            if ### COMOPLETE {\\n\
+                MorePetsTxtField.textColor = UIColor.black\\n\
+            } else {\\n\
+                MorePetsTxtField.textColor = UIColor.gray\\n\
+            }\\n\
+            With the followind added into: super.viewDidLoad()\n\
+            MorePetsSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)\n\
+        }",
+        example: "MorePetsSwitch.isOn"
+    },
+    {
+        term: "Present Alert Controller",
+        prompt: "Create an alert that says hello how are you and show it. with an action that says close",
+        description: "let alertController = UIAlertController(title: \"My Introduction\", message: introduction, preferredStyle: .alert)\\n\
+        \\n\
+        let action = UIAlertAction(title: \"Nice to meet you!\", style: .default, handler: nil)\\n\
+        \\n\
+        alertController.addAction(action)\\n\
+        \\n\
+        present(alertController, animated: true, completion: nil)",
+        example: "let alertController = UIAlertController(title: \"My Introduction\", message: introduction, preferredStyle: .alert)\\n\
+        \\n\
+        let action = UIAlertAction(title: \"Nice to meet you!\", style: .default, handler: nil)\\n\
+        \\n\
+        alertController.addAction(action)\\n\
+        \\n\
+        present(alertController, animated: true, completion: nil)"
+        
+    }
+]
+
 
 module.exports = {
     react_terms, apex, flutter: flutter_dart, IDE_S, chrome_extensions, python_frameworks, react_typescript,
-    dotNet, angular
+    dotNet, angular, xcodeIOS
 };
