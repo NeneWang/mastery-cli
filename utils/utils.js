@@ -11,14 +11,15 @@ const init = require('../utils/init');
 const constants = require('./constants');
 
 const { bar, bg, annotation, radar } = chart;
-const Parser = require('expr-eval').Parser;
-const parser = new Parser();
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 const { getMaidDirectory } = require('./utils_functions');
 const DSATrainer = require('./dsa-cli/dsa-trainer');
 
 const Settings = require('./settings.js');
+const SettingsManager = require('./SettingsManager.js');
+
+
 const DEV_MODE = Settings.dev_mode ?? false;
 
 const { Quizzer: FlashQuizzer } = require(
@@ -99,8 +100,6 @@ class FeatureExtraction {
 
 
 const { getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
-const { get } = require('node:http');
-const { strict } = require('node:assert');
 
 class Maid {
 
@@ -109,6 +108,55 @@ class Maid {
 		this.headerColor = headerColor;
 		this.clearOnTalk = clearOnTalk;
 		this.missing_features_today = []; //To be populated when required.
+	}
+
+	login = async () => {
+		// await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
+		let questionEmail = new Input({
+			name: 'email',
+			message: 'What is your email?'
+		});
+				
+		const email = await questionEmail.run();
+
+		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/cli-login?email=${email}`)
+		console.log('Login data');
+		console.log(res.data);
+
+		// load settings from Json.
+		const settingsManager = new SettingsManager();
+		let current_settings = settingsManager.getSettings();
+
+		const databaseSettings = res?.['settings_json'] ?? {};
+		if (databaseSettings == {}){
+			console.log("There must been an error in the database");
+			return;
+		}
+
+		const useRemoteDatabasePrompt = new Confirm({
+			name: 'useRemoteDatabase',
+			message: "Use remote database settings (will overwrite local)?",
+			initial: true
+		});
+
+		const useRemoteDatabase = await useRemoteDatabasePrompt.run();
+		// Update current Id and upload the settings database
+		
+		if (useRemoteDatabase){
+			current_settings = databaseSettings;
+		}
+		
+		current_settings.account_id = res.data.account_id;
+		settingsManager.saveSettings(current_settings, {
+			overwrite: true
+		});
+		
+
+
+	}
+
+	backup = () => {
+
 	}
 
 	getMaidHeader = () => {
@@ -883,7 +931,7 @@ const weatherReport = async () => {
 		}
 	});
 	weatherData = new WeatherInformation(res);
-	console.log(weatherData.json)
+	// console.log(weatherData.json)
 	// console.log(weatherData.days_report)
 	weatherData.chartWeatherBar()
 

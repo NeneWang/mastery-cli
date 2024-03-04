@@ -75,8 +75,9 @@ class CommandsInformation {
 			cloze: new Command("Cloze algorithm", 'cloze'),
 			cses: new Command("Algo Cloze study session", 'cses'),
 			jupyter: new Command("Select Jupyter notebook Problem to solve", 'jupyter'),
-			jses: new Command("Jupyter (Data science) study session",	 'jses'),
-
+			jses: new Command("Jupyter (Data science) study session", 'jses'),
+			login: new Command("Login to get settings.json given a user.", 'login'),
+			backup: new Command("Backup the settings.json", 'backup'),
 		};
 	}
 

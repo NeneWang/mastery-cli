@@ -159,7 +159,14 @@ const { Demo, EDemo } = demos;
 		const problem_response = await dsaTrainer.openRandomClozeDSAProblem();
 		console.log("problem_response of cloze", problem_response)
 	}
-	// else if (input.includes(cmInfo.commands.dsa.code)) {
+	else if(input.includes(cmInfo.commands.login.code)){
+		await maid.login()
+
+	}else if(input.includes(cmInfo.commands.backup.code)){
+		
+		// maid.backup()
+
+	}	
 	else {
 		cli_meow.showHelp(0);
 		maid.askToClean();
