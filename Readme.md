@@ -22,6 +22,7 @@ Key Highlights:
 
 ```
 npm install -g mastery-cli
+mastery report
 mastery quiz
 mastery report
 ```
