@@ -95,7 +95,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/core" "^0.14.0"
 
-"@jimp/custom@^0.16.13", "@jimp/custom@>=0.3.5":
+"@jimp/custom@^0.16.13":
   version "0.16.13"
   resolved "https://registry.npmjs.org/@jimp/custom/-/custom-0.16.13.tgz"
   integrity sha512-LTATglVUPGkPf15zX1wTMlZ0+AU7cGEGF6ekVF1crA8eHUWsGjrYTB+Ht4E3HTrCok8weQG+K01rJndCp/l4XA==
@@ -149,7 +149,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.14.0"
 
-"@jimp/plugin-blit@^0.16.13", "@jimp/plugin-blit@>=0.3.5":
+"@jimp/plugin-blit@^0.16.13":
   version "0.16.13"
   resolved "https://registry.npmjs.org/@jimp/plugin-blit/-/plugin-blit-0.16.13.tgz"
   integrity sha512-8Z1k96ZFxlhK2bgrY1JNWNwvaBeI/bciLM0yDOni2+aZwfIIiC7Y6PeWHTAvjHNjphz+XCt01WQmOYWCn0ML6g==
@@ -165,7 +165,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.14.0"
 
-"@jimp/plugin-blur@^0.16.13", "@jimp/plugin-blur@>=0.3.5":
+"@jimp/plugin-blur@^0.16.13":
   version "0.16.13"
   resolved "https://registry.npmjs.org/@jimp/plugin-blur/-/plugin-blur-0.16.13.tgz"
   integrity sha512-PvLrfa8vkej3qinlebyhLpksJgCF5aiysDMSVhOZqwH5nQLLtDE9WYbnsofGw4r0VVpyw3H/ANCIzYTyCtP9Cg==
@@ -198,7 +198,7 @@
     "@jimp/utils" "^0.14.0"
     tinycolor2 "^1.4.1"
 
-"@jimp/plugin-color@^0.16.13", "@jimp/plugin-color@>=0.8.0":
+"@jimp/plugin-color@^0.16.13":
   version "0.16.13"
   resolved "https://registry.npmjs.org/@jimp/plugin-color/-/plugin-color-0.16.13.tgz"
   integrity sha512-xW+9BtEvoIkkH/Wde9ql4nAFbYLkVINhpgAE7VcBUsuuB34WUbcBl/taOuUYQrPEFQJ4jfXiAJZ2H/rvKjCVnQ==
@@ -247,7 +247,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.14.0"
 
-"@jimp/plugin-crop@^0.16.13", "@jimp/plugin-crop@>=0.3.5":
+"@jimp/plugin-crop@^0.16.13":
   version "0.16.13"
   resolved "https://registry.npmjs.org/@jimp/plugin-crop/-/plugin-crop-0.16.13.tgz"
   integrity sha512-WEl2tPVYwzYL8OKme6Go2xqiWgKsgxlMwyHabdAU4tXaRwOCnOI7v4021gCcBb9zn/oWwguHuKHmK30Fw2Z/PA==
@@ -409,7 +409,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.14.0"
 
-"@jimp/plugin-resize@^0.16.13", "@jimp/plugin-resize@>=0.3.5", "@jimp/plugin-resize@>=0.8.0":
+"@jimp/plugin-resize@^0.16.13":
   version "0.16.13"
   resolved "https://registry.npmjs.org/@jimp/plugin-resize/-/plugin-resize-0.16.13.tgz"
   integrity sha512-qoqtN8LDknm3fJm9nuPygJv30O3vGhSBD2TxrsCnhtOsxKAqVPJtFVdGd/qVuZ8nqQANQmTlfqTiK9mVWQ7MiQ==
@@ -425,7 +425,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.14.0"
 
-"@jimp/plugin-rotate@^0.16.13", "@jimp/plugin-rotate@>=0.3.5":
+"@jimp/plugin-rotate@^0.16.13":
   version "0.16.13"
   resolved "https://registry.npmjs.org/@jimp/plugin-rotate/-/plugin-rotate-0.16.13.tgz"
   integrity sha512-Ev+Jjmj1nHYw897z9C3R9dYsPv7S2/nxdgfFb/h8hOwK0Ovd1k/+yYS46A0uj/JCKK0pQk8wOslYBkPwdnLorw==
@@ -441,7 +441,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.14.0"
 
-"@jimp/plugin-scale@^0.16.13", "@jimp/plugin-scale@>=0.3.5":
+"@jimp/plugin-scale@^0.16.13":
   version "0.16.13"
   resolved "https://registry.npmjs.org/@jimp/plugin-scale/-/plugin-scale-0.16.13.tgz"
   integrity sha512-05POQaEJVucjTiSGMoH68ZiELc7QqpIpuQlZ2JBbhCV+WCbPFUBcGSmE7w4Jd0E2GvCho/NoMODLwgcVGQA97A==
@@ -1644,7 +1644,7 @@ marked-terminal@^5.1.1:
     node-emoji "^1.11.0"
     supports-hyperlinks "^2.2.0"
 
-"marked@^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0", marked@^4.2.12:
+marked@^4.2.12:
   version "4.2.12"
   resolved "https://registry.npmjs.org/marked/-/marked-4.2.12.tgz"
   integrity sha512-yr8hSKa3Fv4D3jdZmtMMPghgVt6TWbk86WQaWhDloQjRSQhMMYCAro7jP7VDJrjjdV8pxVxMssXS8B8Y5DZ5aw==

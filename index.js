@@ -74,7 +74,7 @@ const { Demo, EDemo } = demos;
 		// Slight optimization.
 		const commit_res = await utils.commitpush();
 		
-		if (Settings.ask_quiz_when_commit) {
+		if (Settings.ask_quiz_when_commit && commit_res) {
 			const _ = await mQuizer.askQuestion();
 		}
 		maid.populateMissingReport();
