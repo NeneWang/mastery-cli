@@ -22,6 +22,7 @@ const SettingsManager = require('./SettingsManager.js');
 
 const DEV_MODE = Settings.dev_mode ?? false;
 
+
 const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer"
 );
@@ -1001,22 +1002,18 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 			'title': term_selected ?? "title",
 			'concept_slug': term_selected ?? "slug"
 		}
+		
 
-		axios({
-			method: 'post',
-			url: `${APIDICT.DEPLOYED_MAID}/comment`,
-			headers: {},
-			data: data
-		});
+		// axios(
 
 		if (debug) console.log("Comment has been made", data);
 
 
 	} catch (err) {
 		if (debug) console.log("Probably no connection, comment has not been made")
-		if (debug) {
-			console.log(err)
-		}
+		// if (debug) {
+		// 	console.log(err)
+		// }
 
 	}
 }

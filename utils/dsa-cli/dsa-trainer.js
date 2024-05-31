@@ -396,7 +396,7 @@ class DSATrainer {
     * @param {boolean} open_test_cases If true, the test cases file will be opened
     * @returns {Promise} A promise that resolves when the problem is opened
      */
-    async openProblemMetadataInTerminal(problem, { open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
+    async openProblemMetadataInTerminal(problem, { copy_to_clipboard=false, open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
 
 
         let problem_details = this.problems_manager.getProblem(problem.slug);
@@ -419,6 +419,12 @@ class DSATrainer {
         renderPromptDescription(promblem_prompt, problem_details, { is_cloze: problem.is_cloze ?? false });
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
+
+        if (copy_to_clipboard){
+            // Copy base problem 
+            const _ = await this.problems_manager.copyTempToClipboard();
+        }
+
         if (open_problem_temporal) {
             const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
         }
@@ -453,7 +459,15 @@ class DSATrainer {
 
         // console.log("Keys from prompt_dict", Object.keys(prompt_dict));
         let problem_details = this.problems_manager.getProblem(problem.slug);
-        await this.openProblemMetadataInTerminal(problem);
+        if (Settings.dsa_language_mode == "PSEUDOCODE"){
+            this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_solution: true, copy_to_clipboard: true });
+            // Copy at problem to clipboard
+        }else{
+            await this.openProblemMetadataInTerminal(problem);
+
+        }
+
+
         
         let hints = problem
         let question_state_flag = true;
@@ -465,6 +479,19 @@ class DSATrainer {
             "Modify": async () => {
                 question_state_flag = true;
                 await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
+            },
+            "Approve Solution": async () => {
+                question_state_flag = false;
+                // Approve the solution
+                console.log("Approving solution");
+                return {
+                    status: constants.ProblemStatus.solved,
+                    details: {
+                        failed_attempts: 0,
+                    },
+                    problem_details: problem_details,
+                    is_pseudocode: true, 
+                };
             },
             
             'Run Tests': async () => {

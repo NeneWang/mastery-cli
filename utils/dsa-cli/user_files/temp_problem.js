@@ -1,53 +1,47 @@
-class SearchRange {
-    solve(nums, target) {
-      const firstOccurrence = this.findBound(nums, target, true);
-  
-      if (firstOccurrence === -1) {
-        return [-1, -1];
-      }
-  
-      const lastOccurrence = this.findBound(nums, target, false);
-  
-      return [firstOccurrence, lastOccurrence];
-    }
-  
-    findBound(nums, target, isFirst) {
-      const N = nums.length;
-      let begin = 0;
-      let end = N - 1;
-  
-      while (begin <= end) {
-        const mid = Math.floor((begin + end) / 2);
-  
-        if (nums[mid] === target) {
-          if (isFirst) {
-            // This means we found our lower bound.
-            if (mid === begin || nums[mid - 1] !== target) {
-              return mid;
-            }
-  
-            // Search on the left side for the bound.
-            end = mid - 1;
-          } else {
-            // This means we found our upper bound.
-            if (mid === end || nums[mid + 1] !== target) {
-              return mid;
-            }
-  
-            // Search on the right side for the bound.
-            begin = mid + 1;
-          }
-        } else if (nums[mid] > target) {
-          end = mid - 1;
-        } else {
-          begin = mid + 1;
-        }
-      }
-  
-      return -1;
-    }
-  }
-  
-  module.exports = { Problem: SearchRange };
-  
 
+
+/** 
+ * https://leetcode.com/problems/design-twitter/
+ * Your Twitter object will be instantiated and called as such:
+ * var obj = new Twitter()
+ * obj.postTweet(userId,tweetId)
+ * var param_2 = obj.getNewsFeed(userId)
+ * obj.follow(followerId,followeeId)
+ * obj.unfollow(followerId,followeeId)
+ */
+class Twitter {
+    constructor() {
+        this.tweets = [];
+        this.following = new Map();
+    }
+
+    postTweet(userId, tweetId, { tweets } = this) {
+        tweets.push({ authorId: userId, id: tweetId });
+    }
+
+    getNewsFeed(userId, newsIDs = [], { tweets, following } = this) {
+        for (let i = (tweets.length - 1); ((0 <= i) && (newsIDs.length < 10)); i--) {
+            const tweet = tweets[i];
+
+            const isAuthor = tweet.authorId === userId
+            const isFollowing = following?.get(userId)?.has(tweet.authorId);
+            const canAddTweet = isAuthor || isFollowing
+            if (canAddTweet) newsIDs.push(tweet.id);
+        }
+
+        return newsIDs;
+    }
+
+    follow(followerId, followeeId, { following } = this) {
+        // TODO Follow the followee by adding the followeeId to the following of the followerId.
+        // Make sure it works even if the followerId does not exist
+        
+    }
+
+    unfollow(followerId, followeeId, { following } = this) {
+        if (following.has(followerId)) following.get(followerId).delete(followeeId);
+    }
+}
+
+
+module.exports = { Problem: Twitter };

@@ -4,6 +4,7 @@
   "quiz_enabled": [
     "term"
   ],
+  "dsa_language_mode": "PSEUDOCODE",
   "terms_force_mode_cards": 3,
   "blog_special_commits": true,
   "commit_categories": [

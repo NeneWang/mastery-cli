@@ -1,4 +1,6 @@
 const fs = require('fs');
+
+const clipboard = require('copy-paste')
 const { getDirAbsoluteUri, openEditorPlatformAgnostic, get_random } = require('./functions');
 const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
@@ -276,6 +278,35 @@ class ProblemsManager {
 
 
     /**
+     * Copies the file from problem_file_path content to the temp_problem_filepath.
+     */
+    copyTempToClipboard(){
+        const { getDirAbsoluteUri } = require('./functions');
+        const temp_problem_filepath = './user_files/temp_problem.js';
+        const absolute_problem_file_path = getDirAbsoluteUri(temp_problem_filepath, "./");
+
+        fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
+            if (err) {
+                console.log(err)
+                return false
+            }
+            clipboard.copy(data);
+        });
+
+    }
+
+
+    /**
+     * Copies the prompt to the clipboard
+     */
+    copyPromptToCliboard(){
+
+    }
+
+
+
+
+    /**
      * Opens the temporal problem file in the editor (Can be customized which to use).
      * @param {str} editor_instruction The instruction to open the file in the editor. Default is "start".
      */
@@ -340,7 +371,6 @@ class ProblemsManager {
      * @param {string} editor_instruction The instruction to open the file in the editor. Default is "start"
      * 
      */
-
     async openPromptMarkdownFile(problem_slug, { editor_instruction = "start" } = {}) {
 
 

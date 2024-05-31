@@ -615,6 +615,7 @@ class Quizzer {
             }
         } catch {
             console.log(`Error attempting to fetch from ${URL}`);
+            console.log('Called for previous term at', URL )
         }
 
     }
