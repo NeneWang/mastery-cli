@@ -1,47 +1,72 @@
 
 
-/** 
- * https://leetcode.com/problems/design-twitter/
- * Your Twitter object will be instantiated and called as such:
- * var obj = new Twitter()
- * obj.postTweet(userId,tweetId)
- * var param_2 = obj.getNewsFeed(userId)
- * obj.follow(followerId,followeeId)
- * obj.unfollow(followerId,followeeId)
- */
-class Twitter {
-    constructor() {
-        this.tweets = [];
-        this.following = new Map();
-    }
+var setCellsToZero = (matrix) => {
+    const [rows, cols] = [matrix.length, matrix[0].length];
 
-    postTweet(userId, tweetId, { tweets } = this) {
-        tweets.push({ authorId: userId, id: tweetId });
-    }
+    // TODO Loop through the matrix and set the cell to zero if the first row or column is zero
+    
+    
+}
 
-    getNewsFeed(userId, newsIDs = [], { tweets, following } = this) {
-        for (let i = (tweets.length - 1); ((0 <= i) && (newsIDs.length < 10)); i--) {
-            const tweet = tweets[i];
+var setEdgesToZero = (matrix, isColZero = false) => {
+    const [rows, cols] = [matrix.length, matrix[0].length];
 
-            const isAuthor = tweet.authorId === userId
-            const isFollowing = following?.get(userId)?.has(tweet.authorId);
-            const canAddTweet = isAuthor || isFollowing
-            if (canAddTweet) newsIDs.push(tweet.id);
+    for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
+        if (matrix[row][0] === 0) isColZero = true;
+
+        for (let col = 1; (col < cols); col++) {/* Time O(COLS) */
+            const canSet = (matrix[row][col] === 0);
+            if (!canSet) continue;
+
+            matrix[0][col] = 0;
+            matrix[row][0] = 0;
         }
-
-        return newsIDs;
     }
 
-    follow(followerId, followeeId, { following } = this) {
-        // TODO Follow the followee by adding the followeeId to the following of the followerId.
-        // Make sure it works even if the followerId does not exist
-        
-    }
+    return isColZero;
+}
 
-    unfollow(followerId, followeeId, { following } = this) {
-        if (following.has(followerId)) following.get(followerId).delete(followeeId);
+var setFirstRowZero = (matrix, cols = matrix[0].length) => {
+    for (let col = 0; (col < cols); col++) {/* Time O(COLS) */
+        matrix[0][col] = 0;
+    }
+}
+
+var setFirstColZero = (matrix, rows = matrix.length) => {
+    for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
+        matrix[row][0] = 0;
+    }
+}
+
+/**
+ * Constant Space
+ * Time O(ROWS * COLS) | Space (1)
+ * https://leetcode.com/problems/set-matrix-zeroes/
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+const setZeroes = (matrix) => {
+
+
+    const isColZero = setEdgesToZero(matrix);/* Time O(ROWS * COLS) */
+
+    setCellsToZero(matrix);                  /* Time O(ROWS * COLS) */
+
+    const isZero = (matrix[0][0] === 0);
+    if (isZero) setFirstRowZero(matrix);     /* Time O(COLS) */
+
+    if (isColZero) setFirstColZero(matrix);  /* Time O(ROWS) */
+}
+
+
+class SetMatrixZeroes {
+
+
+
+    solve(matrix) {
+        return setZeroes(matrix);
     }
 }
 
 
-module.exports = { Problem: Twitter };
+module.exports = { Problem: SetMatrixZeroes };

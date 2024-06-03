@@ -239,9 +239,13 @@ const openEditorPlatformAgnostic = async (editor_instruction, { absolute_temp_fi
     const os = require('os');
 
     if (os.platform() === 'win32') {
+        if (editor_instruction === "code") {
+            openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
+        }else{
+            console.log(`Windows | start ${editor_instruction} ${absolute_temp_file_path}`);
+            await openEditorWithCommand(`start ${editor_instruction} ${absolute_temp_file_path}`);
 
-        console.log(`Windows | start ${editor_instruction} ${absolute_temp_file_path}`);
-        await openEditorWithCommand(`start ${editor_instruction} ${absolute_temp_file_path}`);
+        }
 
     } else if (os.platform() === 'linux') {
         console.log('Linux');

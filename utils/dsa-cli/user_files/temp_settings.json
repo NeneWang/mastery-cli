@@ -9,5 +9,5 @@
         "code": "code",
         "default": "start"
     },
-    "editor": "nvim"
+    "editor": "code"
 }

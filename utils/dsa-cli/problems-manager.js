@@ -1,7 +1,5 @@
 const fs = require('fs');
-
 const clipboard = require('copy-paste')
-const { getDirAbsoluteUri, openEditorPlatformAgnostic, get_random } = require('./functions');
 const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
 const { exec } = require('node:child_process');
@@ -9,6 +7,7 @@ const { getPromptDict } = require('./prompt');
 const constants = require('./constants');
 const { cloze_problems_list } = require('./cloze');
 
+const { getDirAbsoluteUri, openEditorPlatformAgnostic, get_random } = require('./functions');
 
 
 

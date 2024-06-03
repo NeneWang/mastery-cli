@@ -493,6 +493,13 @@ class DSATrainer {
                     is_pseudocode: true, 
                 };
             },
+            "pass": async() => {
+                // same as quit. just renaming.
+                question_state_flag = false;
+                return { status: constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
+
+
+            },
             
             'Run Tests': async () => {
                 try {
