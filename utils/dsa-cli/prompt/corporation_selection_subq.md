@@ -1,9 +1,6 @@
 ---
-title: 
-description: 
-tags: []
-link: 
-images: []
+title: Corporation Selection Subquery
+tags: [snowflake]
 ---
 
 ### Description
