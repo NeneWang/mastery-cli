@@ -5,6 +5,9 @@ const MARKDOWN_PROBLEMS = [
     },
     {
         "name": "corporation_count_repetitions"
+    },
+    {
+        "name": "corporation_updates"
     }
 ]
 
