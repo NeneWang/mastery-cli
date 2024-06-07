@@ -1,9 +1,9 @@
-class FindMin {
-	solve(nums) {
+class MinimumSizeSubArraySum {
+	solve(nums, target) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: FindMin };
+module.exports = { Problem: MinimumSizeSubArraySum };

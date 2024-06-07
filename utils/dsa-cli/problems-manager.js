@@ -381,12 +381,13 @@ class ProblemsManager {
 
                 });
             });
-            return true;
+            return {problem_extension: extension, temp_extension: extension, status: true};
         } catch (err) {
             console.error(err);
-            return false;
+            return {problem_extension: extension, temp_extension: extension, status: false};
 
         }
+
     }
 
     async openSolutionFile(problem_slug, { editor_instruction = "start" } = {}) {
