@@ -6,5 +6,5 @@
  */
 
 const DSATrainer = require("./dsa-trainer");
-module.exports = { DSATrainer };
+module.exports = { };
 

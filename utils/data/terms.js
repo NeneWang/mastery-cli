@@ -39,15 +39,21 @@ const cloudMask = new DeckMask(
     }
 );
 
-const Fall2024Related = new DeckMask(
+const longTermCareer = new DeckMask(
 
-    "spring-2024",
+    "long-term-engineer",
     {
         decksToEnableStrings: [
-            "analysisAlgorithmClass"]
+            "analysisAlgorithmClass",
+            "discrete_math"
+        
+        ]
 
     }
 );
+
+
+
 
 
 // TODO
@@ -74,8 +80,14 @@ const Spring2024Related = new DeckMask(
  */
 async function populateMasterDeck() {
     terms = []
+    
 
     let decks = new TermStorage([], "Academic Terms");
+
+
+    const { discrete_math } = require('./math_theory');
+    decks.addDeck(new TermStorage(discrete_math, "discrete_math"));
+
 
     const { react_terms, apex, flutter, IDE_S, chrome_extensions, python_frameworks, react_typescript, dotNet, angular } = require('./frameworks');
     decks.addDeck(new TermStorage(react_terms, "react terms"));
@@ -177,7 +189,7 @@ async function populateMasterDeck() {
 
 
     // decks.applyMasks([engineerMask]);
-    decks.applyMasks([cloudMask, Fall2024Related]);
+    decks.applyMasks([cloudMask, longTermCareer]);
 
     return decks;
 }

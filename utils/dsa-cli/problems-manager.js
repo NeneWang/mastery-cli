@@ -35,6 +35,7 @@ class ProblemsManager {
         this.problems = {};
         this.skip_problems = skip_problems;
         this.temp_problem_filepath = './user_files/temp_problem.js';
+        this.temp_solution_filepath = './user_files/temp_solution.js';
         this.absolute_problem_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
         this.solution_filepath = './solutions/';
         this.markdown_filepath = './prompt/';
@@ -276,10 +277,13 @@ class ProblemsManager {
     }
 
 
+    
+
+
     /**
      * Copies the file from problem_file_path content to the temp_problem_filepath.
      */
-    copyTempToClipboard(){
+    copyTempToClipboard() {
         const { getDirAbsoluteUri } = require('./functions');
         const temp_problem_filepath = './user_files/temp_problem.js';
         const absolute_problem_file_path = getDirAbsoluteUri(temp_problem_filepath, "./");
@@ -298,7 +302,7 @@ class ProblemsManager {
     /**
      * Copies the prompt to the clipboard
      */
-    copyPromptToCliboard(){
+    copyPromptToCliboard() {
 
     }
 
@@ -310,20 +314,85 @@ class ProblemsManager {
      * @param {str} editor_instruction The instruction to open the file in the editor. Default is "start".
      */
     async openTemporalProblemFile({ editor_instruction = "" } = {}) {
-        const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
+        // const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
+        const absolute_problem_file_path = this.findFileWithFilepath(this.temp_problem_filepath, "");
 
-        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_problem_file_path })
 
+    }
+
+    findFileWithFilepath(filepath, problemSlug){
+        let absolute_temp_file_path = "";
+        const extensions = ['.py', '.js', '.md', '.java', '.cpp']; // Add more extensions as needed
+    
+        for (const ext of extensions) {
+            const filePath = getDirAbsoluteUri(filepath + problemSlug + ext, "./");
+            if (fs.existsSync(filePath)) {
+                absolute_temp_file_path = filePath;
+                break;
+            }
+        }
+
+        return absolute_temp_file_path;
+    }
+
+
+    
+
+    /**
+     * Copies the file from problem_file_path to the temp_problem_filepath.
+     * @param {str} problem_file_path The path to the file to copy
+     * @param {str} base The path to the file to copy from e.g. base_code'
+     */
+    copySolutionToSol(problem_slug) {
+        try {
+            // console.log("Copying file from", problem_file_path, "to", this.temp_problem_filepath)
+            const absolute_temp_file_path = getDirAbsoluteUri(this.temp_solution_filepath, "./");
+            let absolute_problem_file_path = this.findFileWithFilepath(this.solution_filepath, problem_slug);
+            console.log('Copying solution to sol', absolute_problem_file_path, absolute_temp_file_path);
+            // console.log("Opening file: " + absolute_problem_file_path, "from source,", problem_file_path);
+            fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
+                if (err) {
+
+                    console.log(err)
+                    return false
+                }
+
+                fs.writeFile(absolute_temp_file_path, data, 'utf8', function (err) {
+                    if (err) {
+                        console.log(err)
+                        return false
+                    };
+
+                });
+            });
+            return true;
+        } catch (err) {
+            console.error(err);
+            return false;
+
+        }
     }
 
     async openSolutionFile(problem_slug, { editor_instruction = "start" } = {}) {
-        const absolute_temp_file_path = getDirAbsoluteUri(this.solution_filepath + problem_slug + '.js', "./");
+       
+        let absolute_temp_file_path = this.findFileWithFilepath(this.solution_filepath, problem_slug);
+    
+        if (!absolute_temp_file_path) {
+            console.log("No solution file found with the supported extensions.");
+        }
+    
+        console.log("absolute_temp_file_path", absolute_temp_file_path);
+    
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path });
+    }
+
+    async openTemporalSolutionFile({ editor_instruction = "start" } = {}) {
+        const absolute_temp_file_path = getDirAbsoluteUri(this.temp_solution_filepath, "./");
 
         await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
 
     }
-
-
 
     async openBaseCodeFile(problem_slug, { editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.base_code_filepath + problem_slug + '.js', "./");
