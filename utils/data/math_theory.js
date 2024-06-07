@@ -28,4 +28,7 @@ const discrete_math = [
 ]
 
 
+module.exports = { discrete_math };
+
+
 

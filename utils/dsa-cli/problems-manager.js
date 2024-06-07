@@ -279,7 +279,7 @@ class ProblemsManager {
     /**
      * Copies the file from problem_file_path content to the temp_problem_filepath.
      */
-    copyTempToClipboard(){
+    copyTempToClipboard() {
         const { getDirAbsoluteUri } = require('./functions');
         const temp_problem_filepath = './user_files/temp_problem.js';
         const absolute_problem_file_path = getDirAbsoluteUri(temp_problem_filepath, "./");
@@ -298,7 +298,7 @@ class ProblemsManager {
     /**
      * Copies the prompt to the clipboard
      */
-    copyPromptToCliboard(){
+    copyPromptToCliboard() {
 
     }
 
@@ -317,13 +317,25 @@ class ProblemsManager {
     }
 
     async openSolutionFile(problem_slug, { editor_instruction = "start" } = {}) {
-        const absolute_temp_file_path = getDirAbsoluteUri(this.solution_filepath + problem_slug + '.js', "./");
-
-        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
-
+        let absolute_temp_file_path = "";
+        const extensions = ['.py', '.js', '.md', '.java', '.cpp']; // Add more extensions as needed
+    
+        for (const ext of extensions) {
+            const filePath = getDirAbsoluteUri(this.solution_filepath + problem_slug + ext, "./");
+            if (fs.existsSync(filePath)) {
+                absolute_temp_file_path = filePath;
+                break;
+            }
+        }
+    
+        if (!absolute_temp_file_path) {
+            console.log("No solution file found with the supported extensions.");
+        }
+    
+        console.log("absolute_temp_file_path", absolute_temp_file_path);
+    
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path });
     }
-
-
 
     async openBaseCodeFile(problem_slug, { editor_instruction = "start" } = {}) {
         const absolute_temp_file_path = getDirAbsoluteUri(this.base_code_filepath + problem_slug + '.js', "./");
