@@ -8,6 +8,9 @@ const MARKDOWN_PROBLEMS = [
     },
     {
         "name": "corporation_updates"
+    },
+    {
+        "name": "corporate_gb_plus"
     }
 ]
 

@@ -1,9 +1,15 @@
-class FindMin {
-	solve(nums) {
-	// Your code here
-
+class ListNode {
+	constructor(val = 0, next = null) {
+		this.val = val;
+		this.next = next;
 	}
 }
 
 
-module.exports = { Problem: FindMin };
+class AddTwoNumbers {
+	
+
+}
+
+
+module.exports = { Problem: AddTwoNumbers };
