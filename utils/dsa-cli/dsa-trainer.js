@@ -15,6 +15,7 @@ const { ProblemMetadata } = require('./structures');
 const fs = require('fs');
 const { show_image_if_isurl } = require('./functions');
 const Settings = require('../settings');
+const { copy } = require('copy-paste');
 
 
 const DEBUG = false;
@@ -423,14 +424,24 @@ class DSATrainer {
         if (copy_to_clipboard){
             // Copy base problem 
             const _ = await this.problems_manager.copyTempToClipboard();
+            this.problems_manager.copySolutionToSol(problem.slug);
+
         }
 
         if (open_problem_temporal) {
             const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
         }
 
+
+
+
         if (open_solution) {
-            const _ = await this.problems_manager.openSolutionFile(problem.slug, { editor_instruction: editor_instruction });
+            if(copy_to_clipboard){
+                this.problems_manager.openTemporalSolutionFile({ editor_instruction: editor_instruction });
+            }else{
+
+                const _ = await this.problems_manager.openSolutionFile(problem.slug, { editor_instruction: editor_instruction });
+            }
         }
         if (open_basecode) {
             const _ = await this.problems_manager.openBaseCodeFile(problem.slug, { editor_instruction: editor_instruction });
@@ -451,7 +462,7 @@ class DSATrainer {
      * @param {ProblemMetadata} problem The problem to open and test
      * @returns {constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
      */
-    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], hintsGiven = [] } = {}) {
+    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], hintsGiven = [], copyProblemToTempInstead=true } = {}) {
         if (DEBUG) console.log(
             "Opening problem: ", problem.slug,
         );
