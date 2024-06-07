@@ -14,11 +14,17 @@ class Pseudocode extends ProblemTests {
         }
 }
 
+const problems = [
+    'score-of-a-string',
+    'corporation_count_repetitions'
 
+];
 
 // All problems here are pseudocodes problems. no tests.
-const TEST_DICTIONARY = {
-    'score-of-a-string': Pseudocode
+let TEST_DICTIONARY = {};
+
+for (let problem of problems) {
+    TEST_DICTIONARY[problem] = Pseudocode;
 }
 
 module.exports = TEST_DICTIONARY;
