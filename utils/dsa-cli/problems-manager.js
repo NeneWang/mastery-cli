@@ -35,7 +35,7 @@ class ProblemsManager {
         this.problems = {};
         this.skip_problems = skip_problems;
         this.temp_problem_filepath = './user_files/temp_problem.js';
-        this.temp_solution_filepath = './user_files/temp_solution.js';
+        this.temp_solution_filepath = './user_files/temp_solution';
         this.absolute_problem_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
         this.solution_filepath = './solutions/';
         this.markdown_filepath = './prompt/';
@@ -320,20 +320,33 @@ class ProblemsManager {
         await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_problem_file_path })
 
     }
-
-    findFileWithFilepath(filepath, problemSlug){
-        let absolute_temp_file_path = "";
-        const extensions = ['.py', '.js', '.md', '.java', '.cpp']; // Add more extensions as needed
     
+    /**
+     * Returns the absolute path of the file with the filepath and problem_slug.
+     * @param {string} filepath The path to the file to find
+     * @param {string} problemSlug The slug of the problem to find
+     * @param {dict} options The options to pass to the function
+     * @option {bool} return_extension If true, returns the extension of the file found. as [absolute_temp_file_path, extension_detected]
+     * @returns {string} The absolute path of the file with the filepath and problem_slug if enabled.
+     */
+    findFileWithFilepath(filepath, problemSlug, {return_extension = false} = {}){
+        let absolute_temp_file_path = "";
+        const extensions = ['.py', '.js', '.md', '.java', '.cpp', 'ipynb']; // Add more extensions as needed
+    
+        let extension_detected = "";
         for (const ext of extensions) {
             const filePath = getDirAbsoluteUri(filepath + problemSlug + ext, "./");
             if (fs.existsSync(filePath)) {
                 absolute_temp_file_path = filePath;
+                extension_detected = ext;
                 break;
             }
         }
-
-        return absolute_temp_file_path;
+        if (return_extension){
+            return [absolute_temp_file_path, extension_detected];
+        }else{
+            return absolute_temp_file_path;
+        }
     }
 
 
@@ -347,9 +360,11 @@ class ProblemsManager {
     copySolutionToSol(problem_slug) {
         try {
             // console.log("Copying file from", problem_file_path, "to", this.temp_problem_filepath)
-            const absolute_temp_file_path = getDirAbsoluteUri(this.temp_solution_filepath, "./");
-            let absolute_problem_file_path = this.findFileWithFilepath(this.solution_filepath, problem_slug);
-            console.log('Copying solution to sol', absolute_problem_file_path, absolute_temp_file_path);
+            let [absolute_problem_file_path, extension] = this.findFileWithFilepath(this.solution_filepath, problem_slug, {return_extension: true});
+            let absolute_temp_problem_file_path = getDirAbsoluteUri(this.temp_solution_filepath, "./") + extension;
+
+
+            console.log('Copying solution to sol', absolute_problem_file_path, absolute_temp_problem_file_path);
             // console.log("Opening file: " + absolute_problem_file_path, "from source,", problem_file_path);
             fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
                 if (err) {
@@ -358,7 +373,7 @@ class ProblemsManager {
                     return false
                 }
 
-                fs.writeFile(absolute_temp_file_path, data, 'utf8', function (err) {
+                fs.writeFile(absolute_temp_problem_file_path, data, 'utf8', function (err) {
                     if (err) {
                         console.log(err)
                         return false
@@ -366,17 +381,18 @@ class ProblemsManager {
 
                 });
             });
-            return true;
+            return {problem_extension: extension, temp_extension: extension, status: true};
         } catch (err) {
             console.error(err);
-            return false;
+            return {problem_extension: extension, temp_extension: extension, status: false};
 
         }
+
     }
 
     async openSolutionFile(problem_slug, { editor_instruction = "start" } = {}) {
        
-        let absolute_temp_file_path = this.findFileWithFilepath(this.solution_filepath, problem_slug);
+        let absolute_temp_file_path= this.findFileWithFilepath(this.solution_filepath, problem_slug);
     
         if (!absolute_temp_file_path) {
             console.log("No solution file found with the supported extensions.");
@@ -387,8 +403,9 @@ class ProblemsManager {
         await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path });
     }
 
-    async openTemporalSolutionFile({ editor_instruction = "start" } = {}) {
-        const absolute_temp_file_path = getDirAbsoluteUri(this.temp_solution_filepath, "./");
+    async openTemporalSolutionFile({ editor_instruction = "start", extension='.js' } = {}) {
+        
+        const absolute_temp_file_path = getDirAbsoluteUri(this.temp_solution_filepath, "./") + extension;
 
         await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
 

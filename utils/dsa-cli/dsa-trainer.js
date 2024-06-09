@@ -399,7 +399,7 @@ class DSATrainer {
      */
     async openProblemMetadataInTerminal(problem, { copy_to_clipboard=false, open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
 
-
+        let problem_extension='.js'
         let problem_details = this.problems_manager.getProblem(problem.slug);
         /**
             slug: 'character-replacement',
@@ -424,7 +424,8 @@ class DSATrainer {
         if (copy_to_clipboard){
             // Copy base problem 
             const _ = await this.problems_manager.copyTempToClipboard();
-            this.problems_manager.copySolutionToSol(problem.slug);
+            const copyResults = this.problems_manager.copySolutionToSol(problem.slug);
+            problem_extension = copyResults?.["problem_extension"] ?? '.js';
 
         }
 
@@ -437,7 +438,7 @@ class DSATrainer {
 
         if (open_solution) {
             if(copy_to_clipboard){
-                this.problems_manager.openTemporalSolutionFile({ editor_instruction: editor_instruction });
+                this.problems_manager.openTemporalSolutionFile({ editor_instruction: editor_instruction, extension: problem_extension});
             }else{
 
                 const _ = await this.problems_manager.openSolutionFile(problem.slug, { editor_instruction: editor_instruction });

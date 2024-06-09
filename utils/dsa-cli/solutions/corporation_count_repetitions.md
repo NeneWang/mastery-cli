@@ -19,14 +19,13 @@ Select table of entities and their frequency of emails in the state of `Florida`
 
 | entity_email                 | count |
 | ---------------------------- | ----- |
-| admin@uplegacy.com           | 1     |
-| nsowani@eofficesolutions.net | 42    |
-| NGARCIA@TAXPRONET.COM        | 26    |
-| govdocs@corpcreations.com    | 3849  |
-| KBERGER132@HOTMAIL.COM       | 1     |
-| gracefrancesca1180@gmail.com | 1     |
-| asuperiorpavers@yahoo.com    | 1     |
-
+| admin@uplegacycom           | 1     |
+| nsowani@eofficesolutionsnet | 42    |
+| NGARCIA@TAXPRONETCOM        | 26    |
+| govdocs@corpcreationscom    | 3849  |
+| KBERGER132@HOTMAILCOM       | 1     |
+| gracefrancesca1180@gmailcom | 1     |
+| asuperiorpavers@yahoocom    | 1     |
 
 ```sql
 select ENTITY_EMAIL,count(1) from CORPORATION where ENTITY_EMAIL is not null AND status='A' AND pf_state='FL' group by ENTITY_EMAIL;
