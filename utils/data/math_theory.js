@@ -76,13 +76,16 @@ const probability = [
     {
         term: "Calculate the probability of a score falling within a certain range in a normal distribution.",
         description: "In a standardized test, the scores are normally distributed with a mean (μ) of 500 and a standard deviation (σ) of 100.\n\
-        \[ Z_{400} = \frac{400 - 500}{100} = \frac{-100}{100} = -1 \]\n\
+        \[ Z = \frac{X - \mu}{\sigma} \]\n\
+        where:\n\
+        - \(X\) is the value\n\
+        - \(\mu\) is the mean\n\
+        - \(\sigma\) is the standard deviation\n\
         Used to model the number of events occurring in a fixed interval of time or space, assuming events occur with a known constant rate and are independent.\n\
         Number of phone calls received in an hour, defects in a product",
         prompt: "What is the probability that a randomly selected score is between 400 and 600?",
         answer: "0.6827"
-    }
-
+    },
     
 
 

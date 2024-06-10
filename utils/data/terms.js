@@ -45,7 +45,8 @@ const longTermCareer = new DeckMask(
     {
         decksToEnableStrings: [
             "analysisAlgorithmClass",
-            "discrete_math"
+            "discrete_math",
+            "probability",
         
         ]
 
@@ -85,8 +86,9 @@ async function populateMasterDeck() {
     let decks = new TermStorage([], "Academic Terms");
 
 
-    const { discrete_math } = require('./math_theory');
+    const { discrete_math, probability } = require('./math_theory');
     decks.addDeck(new TermStorage(discrete_math, "discrete_math"));
+    decks.addDeck(new TermStorage(probability, "probability"));
 
 
     const { react_terms, apex, flutter, IDE_S, chrome_extensions, python_frameworks, react_typescript, dotNet, angular } = require('./frameworks');
