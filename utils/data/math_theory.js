@@ -27,6 +27,9 @@ const discrete_math = [
     }
 ]
 
+/**
+ * Best approach: To use the desmos calculator all the time. Is better for visualization instead of formula memorization.
+ */
 const probability = [
     {
         term: "Provide your strategy to calculate the mean of the following discrete probability distribution.",
@@ -52,11 +55,36 @@ const probability = [
     {
         term: "Give strategy for calculating the probability of exactly 3 events occurring in a Poisson distribution.",
         description: "The average rate (λ) is 2.5 events per interval.\n\
-            The Poisson probability of exactly \( k \) events is given by:\n\
-            \[ P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!} \]",
+        Used to model the number of events occurring in a fixed interval of time or space, assuming events occur with a known constant rate and are independent.\n\
+        Number of phone calls received in an hour, defects in a product,.\n\
+        The Poisson probability of exactly \( k \) events is given by:\n\
+        \[ P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!} \]\n\
+        Feel free to chart it here: https://www.desmos.com/calculator/mlnz3udnud",
         prompt: "What is the probability of exactly 3 events occurring?",
         answer: "0.2138"
     },
+    {
+        term: "Calculate the probability of exactly 4 successes in a binomial distribution.",
+        description: "The number of trials (n) is 10 and the probability of success (p) is 0.3.\n\
+        Used when there are only two possible outcomes for each trial and the probability of success is constant for each trial, such as success/failure, yes/no, etc.\n\
+        Coin flips, pass/fail rates, success rates in repeated trials.\n\
+        \[ P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} \]\n\
+        Feel free to use the desmos calculator here: https://www.desmos.com/calculator/ssjogie3ep",
+        prompt: "What is the probability of exactly 4 successes?",
+        answer: "0.2001"
+    },
+    {
+        term: "Calculate the probability of a score falling within a certain range in a normal distribution.",
+        description: "In a standardized test, the scores are normally distributed with a mean (μ) of 500 and a standard deviation (σ) of 100.\n\
+        \[ Z_{400} = \frac{400 - 500}{100} = \frac{-100}{100} = -1 \]\n\
+        Used to model the number of events occurring in a fixed interval of time or space, assuming events occur with a known constant rate and are independent.\n\
+        Number of phone calls received in an hour, defects in a product",
+        prompt: "What is the probability that a randomly selected score is between 400 and 600?",
+        answer: "0.6827"
+    }
+
+    
+
 
 
 ]
