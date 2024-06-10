@@ -44,9 +44,9 @@ const longTermCareer = new DeckMask(
     "long-term-engineer",
     {
         decksToEnableStrings: [
-            "analysisAlgorithmClass",
             "discrete_math",
             "probability",
+            "analysisAlgorithmClass",
         
         ]
 

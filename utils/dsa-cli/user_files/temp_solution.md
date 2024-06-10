@@ -1,51 +1,59 @@
-Sure, here is a problem involving a normal distribution along with a contextual example and the explanation of the solution:
+Let's clarify the transition matrix and the meaning of each column and row.
 
-```javascript
-const discrete_math = [
-    {
-        term: "Calculate the probability of a score falling within a certain range in a normal distribution.",
-        description: "In a standardized test, the scores are normally distributed with a mean (μ) of 500 and a standard deviation (σ) of 100.",
-        prompt: "What is the probability that a randomly selected score is between 400 and 600?",
-        answer: "0.6827"
-    }
-]
-```
-
-### Contextual Use Example
-In the context of education, standardized tests such as the SAT are often normally distributed. Understanding the distribution of scores helps educators, students, and policymakers analyze performance and make informed decisions. For instance, knowing the probability that a student's score falls within a certain range can help identify students who may need additional support or those who are excelling.
-
-### Explanation of Solution
-
-**Term:** Calculate the probability of a score falling within a certain range in a normal distribution.  
-**Description:** In a standardized test, the scores are normally distributed with a mean (\(\mu\)) of 500 and a standard deviation (\(\sigma\)) of 100.  
-**Prompt:** What is the probability that a randomly selected score is between 400 and 600?  
-**Answer:** 0.6827  
-
-**Solution:**  
-For a normal distribution, the probability that a score falls within a certain range can be found using the Z-score formula:
-\[ Z = \frac{X - \mu}{\sigma} \]
+### Problem Statement
+**Term:** Calculate the steady-state probabilities of a Markov Chain.  
+**Description:** Consider a weather system where the weather can be either Sunny (S) or Rainy (R). The transition probabilities are given by the following matrix:
+\[ P = \begin{bmatrix} 0.8 & 0.2 \\ 0.6 & 0.4 \end{bmatrix} \]
 where:
-- \(X\) is the value
-- \(\mu\) is the mean
-- \(\sigma\) is the standard deviation
+- The first row represents the current state being Sunny.
+- The second row represents the current state being Rainy.
+- The first column represents the transition to Sunny.
+- The second column represents the transition to Rainy.
 
-First, calculate the Z-scores for the values 400 and 600.
+### Explanation
+The matrix \( P \) can be interpreted as follows:
+\[ P = \begin{bmatrix} P(S \rightarrow S) & P(S \rightarrow R) \\ P(R \rightarrow S) & P(R \rightarrow R) \end{bmatrix} \]
+\[ P = \begin{bmatrix} 0.8 & 0.2 \\ 0.6 & 0.4 \end{bmatrix} \]
 
-For \(X = 400\):
-\[ Z_{400} = \frac{400 - 500}{100} = \frac{-100}{100} = -1 \]
+- \( P(S \rightarrow S) = 0.8 \): The probability of transitioning from Sunny to Sunny.
+- \( P(S \rightarrow R) = 0.2 \): The probability of transitioning from Sunny to Rainy.
+- \( P(R \rightarrow S) = 0.6 \): The probability of transitioning from Rainy to Sunny.
+- \( P(R \rightarrow R) = 0.4 \): The probability of transitioning from Rainy to Rainy.
 
-For \(X = 600\):
-\[ Z_{600} = \frac{600 - 500}{100} = \frac{100}{100} = 1 \]
+### Solution
+To find the steady-state probabilities, let's denote:
+- \( \pi_S \) as the steady-state probability of being Sunny.
+- \( \pi_R \) as the steady-state probability of being Rainy.
 
-Next, use the standard normal distribution table (or a calculator) to find the probabilities corresponding to these Z-scores.
+The steady-state probabilities satisfy the following system of equations:
+\[ \pi_S = \pi_S \cdot 0.8 + \pi_R \cdot 0.6 \]
+\[ \pi_R = \pi_S \cdot 0.2 + \pi_R \cdot 0.4 \]
 
-The probability corresponding to \(Z = -1\) is approximately 0.1587, and the probability corresponding to \(Z = 1\) is approximately 0.8413.
+Additionally, the sum of the steady-state probabilities must equal 1:
+\[ \pi_S + \pi_R = 1 \]
 
-The probability that a score is between 400 and 600 is:
-\[ P(400 < X < 600) = P(Z < 1) - P(Z < -1) \]
-\[ P(400 < X < 600) = 0.8413 - 0.1587 \]
-\[ P(400 < X < 600) = 0.6826 \]
+Solving these equations:
 
-Therefore, the probability that a randomly selected score is between 400 and 600 is approximately 0.6827.
+1. From the first equation:
+\[ \pi_S = 0.8 \pi_S + 0.6 \pi_R \]
+\[ \pi_S - 0.8 \pi_S = 0.6 \pi_R \]
+\[ 0.2 \pi_S = 0.6 \pi_R \]
+\[ \pi_S = 3 \pi_R \]
 
-In summary, this means there is about a 68.27% chance that a student's score on this standardized test will fall between 400 and 600, given the normal distribution of scores with a mean of 500 and a standard deviation of 100.
+2. Substitute \( \pi_S = 3 \pi_R \) into the normalization condition:
+\[ 3 \pi_R + \pi_R = 1 \]
+\[ 4 \pi_R = 1 \]
+\[ \pi_R = \frac{1}{4} \]
+\[ \pi_R = 0.25 \]
+
+3. Now, substitute \( \pi_R \) back to find \( \pi_S \):
+\[ \pi_S = 3 \pi_R \]
+\[ \pi_S = 3 \cdot 0.25 \]
+\[ \pi_S = 0.75 \]
+
+Therefore, the steady-state probabilities are:
+\[ P(Sunny) = 0.75 \]
+\[ P(Rainy) = 0.25 \]
+
+### Summary
+The steady-state probabilities indicate that, in the long run, the weather system will be Sunny 75% of the time and Rainy 25% of the time.
