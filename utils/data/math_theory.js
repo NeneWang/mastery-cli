@@ -180,7 +180,7 @@ const probability = [
 
 
 
-module.exports = { discrete_math };
+module.exports = { discrete_math, probability };
 
 
 
