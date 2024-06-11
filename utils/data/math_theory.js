@@ -110,7 +110,7 @@ const probability = [
         term: "Probability of a best-of-7 series going to 7 games",
         description: "Google: Two teams play a series of games (best of 7 — whoever wins 4 games first)\n\
          in which each team has a 50% chance of winning any given round (no draws allowed).",
-         prompt:  "What is the probability that the series goes to 7 games?",
+        prompt: "What is the probability that the series goes to 7 games?",
         example: "0.3125: To go to 7 games, each team must win 3 games in the first 6 games.\n\
          The probability of any specific sequence of 3 wins for one team and 3 wins for the other\n\
           is (0.5)^6. There are C(6,3) such sequences, where C(n, k) is the binomial coefficient. \n\
@@ -181,13 +181,15 @@ const probability = [
         example: "The number of paths is given by the multinomial coefficient C(9,3,3,3) = 9!/(3!3!3!) = 84."
     },
     {
-        "term": "Number of ways to distribute 8 identical balls into 4 distinct boxes",
-        "description": "Imagine you have 8 identical balls and 4 distinct boxes. You want to know the number of ways to distribute the balls into the boxes. The formula to calculate combinations with repetition is C(n+r-1, r), where n is the number of items to choose and r is the number of choices.",
-        "prompt": "How many ways can you distribute the 8 balls into 4 boxes?",
-        "example": "The number of ways is given by the combination formula with repetition C(8+4-1, 4-1) = C(11, 3) = 11!/(3!8!) = 165."
-    }   
-
-  ,{
+        term: "Number of ways to distribute 8 identical balls into 4 distinct boxes",
+        description: "Imagine you have 8 identical balls and 4 distinct boxes. You want to know the number of ways to distribute the balls into the boxes. \n\
+         The formula to calculate combinations with repetition is C(n+r-1, r-1),\n\
+         Imagine: **|***|*|** ; ***|***|*|* => The idea is to view how many ways to place this separator bars: or think what postitions 1-13 can I place the bar into?.\n\
+         where n is the number of items to choose and r is the number of choices.",
+        prompt: "How many ways can you distribute the 8 balls into 4 boxes?",
+        example: "The number of ways is given by the combination formula with repetition: C(8+4-1, 4-1) = C(11, 3) = 11!/(3!8!) = 165."
+    },
+    {
         term: "Probability of having the disease given a positive test result",
         description: "Amazon: One in a thousand people have a particular disease, and the test for the disease is 98% correct\n\
          in testing for the disease. On the other hand, the test has a 1% error rate if the person being tested does not have the disease.\n\
@@ -204,28 +206,46 @@ const probability = [
     {
         term: "Probability of flipping the unfair coin",
         description: "Facebook: Assume two coins, one fair (having one head and one tails) and the other unfair (having both sides tails).",
-        prompt: "You pick one at random, flip it five times, and observe that it comes up as tails all five times. What is the probability that you are flipping the unfair coin?",
-        example: "Using Bayes' Theorem: P(Unfair|5 tails) = [P(5 tails|Unfair) * P(Unfair)] / [P(5 tails|Unfair) * P(Unfair) + P(5 tails|Fair) * P(Fair)] = [1 * 0.5] / [1 * 0.5 + (1/2)^5 * 0.5] = 0.96875."
+        prompt: "You pick one at random, flip it five times, and observe that it comes up as tails all five times.\n\
+         What is the probability that you are flipping the unfair coin?",
+        example: "Using Bayes' Theorem:\n\
+        P(Unfair|5 tails) = \n\
+        [P(5 tails|Unfair) * P(Unfair)] / [P(5 tails|Unfair) * P(Unfair) + P(5 tails|Fair) * P(Fair)]\n\
+        = [1 * 0.5] / [1 * 0.5 + (1/2)^5 * 0.5] = 0.96875."
     },
     {
-        term: "Probability that Player A wins",
-        description: "Goldman Sachs: Players A and B are playing a game where they take turns flipping a biased coin, with p probability of landing on heads (and winning). Player A starts the game, and then the players pass the coin back and forth until one person flips heads and wins.",
-        prompt: "What is the probability that A wins?",
-        example: "The probability that A wins is given by summing the probabilities of all scenarios where A wins: P(A wins) = p + (1-p)^2 * p + (1-p)^4 * p + ... = p / (1 - (1-p)^2) = p / (2-p)."
+        term: "Positive product with distinct numbers",
+        description: "Imagine you have the list of numbers:  -4, -3, -2, -1, 1, 2, 3, 4, 5.\n\
+         You need to select 4 distinct numbers from this list such that the product of the four numbers is positive.",
+        prompt: "In how many ways can the selections be made so that the product of the four numbers\n\
+         is positive and the numbers are distinct?",
+        example: "The number of ways is given by: Selection of all positive C(5, 4)\n\
+        Select where 2 positives and 2 negatives: C(5, 2)\n\
+         C(5, 4) + C(5, 2) * C(4, 2) = 5 + 10 * 6 = 65."
     },
-    {
-        term: "Probability that it is rainy given friends' statements",
-        description: "Microsoft: Three friends in Seattle each told you it is rainy, and each person has a 1/3 probability of lying.",
-        prompt: "What is the probability that Seattle is rainy, assuming that the likelihood of rain on any given day is 0.25?",
-        example: "Using Bayes' Theorem: P(Rain|All say rainy) = [P(All say rainy|Rain) * P(Rain)] / [P(All say rainy|Rain) * P(Rain) + P(All say rainy|No Rain) * P(No Rain)] = [(2/3)^3 * 0.25] / [(2/3)^3 * 0.25 + (1/3)^3 * 0.75] = 0.524."
-    },
-    {
-        term: "Probability that two random chords intersect",
-        description: "Bloomberg: You draw a circle and choose two chords at random.",
-        prompt: "What is the probability that those chords will intersect?",
-        example: "The probability that two random chords in a circle will intersect is 1/3 or approximately 0.333. This is derived from geometric probability principles."
-    }
-    
+    // {
+    //     term: "Probability that Player A wins",
+    //     description: "Goldman Sachs: Players A and B are playing a game where they take turns flipping \n\
+    //     a biased coin, with p probability of landing on heads (and winning).\n\
+    //      Player A starts the game, and then the players pass the coin back and forth until one person flips\n\
+    //       heads and wins.",
+    //     prompt: "What is the probability that A wins?",
+    //     example: "The probability that A wins is given by summing the probabilities of all scenarios \n\
+    //     where A wins: P(A wins) = p + (1-p)^2 * p + (1-p)^4 * p + ... = p / (1 - (1-p)^2) = p / (2-p)."
+    // },
+    // {
+    //     term: "Probability that it is rainy given friends' statements",
+    //     description: "Microsoft: Three friends in Seattle each told you it is rainy, and each person has a 1/3 probability of lying.",
+    //     prompt: "What is the probability that Seattle is rainy, assuming that the likelihood of rain on any given day is 0.25?",
+    //     example: "Using Bayes' Theorem: P(Rain|All say rainy) = [P(All say rainy|Rain) * P(Rain)] / [P(All say rainy|Rain) * P(Rain) + P(All say rainy|No Rain) * P(No Rain)] = [(2/3)^3 * 0.25] / [(2/3)^3 * 0.25 + (1/3)^3 * 0.75] = 0.524."
+    // },
+    // {
+    //     term: "Probability that two random chords intersect",
+    //     description: "Bloomberg: You draw a circle and choose two chords at random.",
+    //     prompt: "What is the probability that those chords will intersect?",
+    //     example: "The probability that two random chords in a circle will intersect is 1/3 or approximately 0.333. This is derived from geometric probability principles."
+    // }
+
 
 ]
 
