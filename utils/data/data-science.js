@@ -149,7 +149,12 @@ const pandas = [
 ]
 
 const sql = [
-    {}
+    {
+        term: "date selections with operation",
+        prompt: "Select timestamp and column add_1 which is timestamp + 1 second and another as 1 hour",
+        example: "SELECT timestamp, timestamp + INTERVAL 1 SECOND AS add_1, timestamp + INTERVAL 1 HOUR AS add_1_hour",
+
+    }
 ]
 
 

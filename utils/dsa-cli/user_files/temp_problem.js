@@ -1,9 +1,7 @@
-class SetMatrixZeroes {
-	solve(matrix) {
-	// Your code here
+class Node {	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: SetMatrixZeroes };
+module.exports = { Problem: Node };

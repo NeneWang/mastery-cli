@@ -1,77 +1,56 @@
 
-
-var setCellsToZero = (matrix) => {
-    const [rows, cols] = [matrix.length, matrix[0].length];
-
-    for (let row = 1; (row < rows); row++) {/* Time O(ROWS) */
-        for (let col = 1; (col < cols); col++) {/* Time O(COLS) */
-            const isZero = ((matrix[row][0] === 0) || (matrix[0][col] == 0));
-            if (!isZero) continue;
-
-            matrix[row][col] = 0;
+class Solution {
+    solve(head) {
+        if (!head) {
+            return head;
         }
-    }
-}
 
-var setEdgesToZero = (matrix, isColZero = false) => {
-    const [rows, cols] = [matrix.length, matrix[0].length];
+        // Creating a new weaved list of original and copied nodes.
+        let ptr = head;
+        while (ptr) {
+            // Cloned node
+            const newNode = new Node(ptr.val, null, null);
 
-    for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
-        if (matrix[row][0] === 0) isColZero = true;
-
-        for (let col = 1; (col < cols); col++) {/* Time O(COLS) */
-            const canSet = (matrix[row][col] === 0);
-            if (!canSet) continue;
-
-            matrix[0][col] = 0;
-            matrix[row][0] = 0;
+            // Inserting the cloned node just next to the original node.
+            // If A->B->C is the original linked list,
+            // Linked list after weaving cloned nodes would be A->A'->B->B'->C->C'
+            newNode.next = ptr.next;
+            ptr.next = newNode;
+            ptr = newNode.next;
         }
+
+        ptr = head;
+
+        // Now link the random pointers of the new nodes created.
+        // Iterate the newly created list and use the original nodes random pointers,
+        // to assign references to random pointers for cloned nodes.
+        while (ptr) {
+            ptr.next.random = ptr.random ? ptr.random.next : null;
+            ptr = ptr.next ? ptr.next.next : null;
+        }
+
+        // Unweave the linked list to get back the original linked list and the cloned list.
+        // i.e. A->A'->B->B'->C->C' would be broken to A->B->C and A'->B'->C'
+        let ptrOldList = head; // A->B->C
+        let ptrNewList = head.next; // A'->B'->C'
+        const headNew = head.next;
+        while (ptrOldList) {
+            ptrOldList.next = ptrOldList.next ? ptrOldList.next.next : null;
+            ptrNewList.next = ptrNewList.next ? ptrNewList.next.next : null;
+            ptrOldList = ptrOldList.next;
+            ptrNewList = ptrNewList.next;
+        }
+        
+        return headNew;
     }
-
-    return isColZero;
 }
-
-var setFirstRowZero = (matrix, cols = matrix[0].length) => {
-    for (let col = 0; (col < cols); col++) {/* Time O(COLS) */
-        matrix[0][col] = 0;
-    }
-}
-
-var setFirstColZero = (matrix, rows = matrix.length) => {
-    for (let row = 0; (row < rows); row++) {/* Time O(ROWS) */
-        matrix[row][0] = 0;
-    }
-}
-
-/**
- * Constant Space
- * Time O(ROWS * COLS) | Space (1)
- * https://leetcode.com/problems/set-matrix-zeroes/
- * @param {number[][]} matrix
- * @return {void} Do not return anything, modify matrix in-place instead.
- */
-const setZeroes = (matrix) => {
-
-
-    const isColZero = setEdgesToZero(matrix);/* Time O(ROWS * COLS) */
-
-    setCellsToZero(matrix);                  /* Time O(ROWS * COLS) */
-
-    const isZero = (matrix[0][0] === 0);
-    if (isZero) setFirstRowZero(matrix);     /* Time O(COLS) */
-
-    if (isColZero) setFirstColZero(matrix);  /* Time O(ROWS) */
-}
-
-
-class SetMatrixZeroes {
-
-
-
-    solve(matrix) {
-        return setZeroes(matrix);
+class Node {
+    constructor(val, next, random) {
+        this.val = val;
+        this.next = next;
+        this.random = random;
     }
 }
 
 
-module.exports = { Problem: SetMatrixZeroes };
+module.exports = { Problem: Solution };

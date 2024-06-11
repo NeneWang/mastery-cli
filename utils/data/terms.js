@@ -46,6 +46,7 @@ const longTermCareer = new DeckMask(
         decksToEnableStrings: [
             "discrete_math",
             "probability",
+            "sql"
         
         ]
 
