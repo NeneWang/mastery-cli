@@ -1,9 +1,15 @@
-class MinimumSizeSubArraySum {
-	solve(nums, target) {
-	// Your code here
-
+class ListNode {
+	constructor(val = 0, next = null) {
+		this.val = val;
+		this.next = next;
 	}
 }
 
 
-module.exports = { Problem: MinimumSizeSubArraySum };
+class AddTwoNumbers {
+	
+
+}
+
+
+module.exports = { Problem: AddTwoNumbers };
