@@ -122,7 +122,7 @@ const probability = [
         prompt: "What is the probability of getting two sixes in a row?",
         example: "The sequences that give two sixes in a row are: (6,6,X) and (X,6,6),\n\
          where X is any number from 1 to 6 except 6. The probability for each sequence is\n\
-        (1/6)^2 * (5/6) + (5/6) * (1/6)^2 = 2 * (1/6)^2 * (5/6) = 2 * 1/36 * 5/6 = 2 * 11/216 = 0.51"
+        (1/6)^2 * (5/6) + (5/6) * (1/6)^2 + (1/6)^3 = 11/216 = 0.051"
     },
     {
         term: "Probability of three dice in strictly increasing order",
