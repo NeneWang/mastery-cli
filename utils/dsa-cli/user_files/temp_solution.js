@@ -1,56 +1,30 @@
-
-class Solution {
-    solve(head) {
-        if (!head) {
-            return head;
-        }
-
-        // Creating a new weaved list of original and copied nodes.
-        let ptr = head;
-        while (ptr) {
-            // Cloned node
-            const newNode = new Node(ptr.val, null, null);
-
-            // Inserting the cloned node just next to the original node.
-            // If A->B->C is the original linked list,
-            // Linked list after weaving cloned nodes would be A->A'->B->B'->C->C'
-            newNode.next = ptr.next;
-            ptr.next = newNode;
-            ptr = newNode.next;
-        }
-
-        ptr = head;
-
-        // Now link the random pointers of the new nodes created.
-        // Iterate the newly created list and use the original nodes random pointers,
-        // to assign references to random pointers for cloned nodes.
-        while (ptr) {
-            ptr.next.random = ptr.random ? ptr.random.next : null;
-            ptr = ptr.next ? ptr.next.next : null;
-        }
-
-        // Unweave the linked list to get back the original linked list and the cloned list.
-        // i.e. A->A'->B->B'->C->C' would be broken to A->B->C and A'->B'->C'
-        let ptrOldList = head; // A->B->C
-        let ptrNewList = head.next; // A'->B'->C'
-        const headNew = head.next;
-        while (ptrOldList) {
-            ptrOldList.next = ptrOldList.next ? ptrOldList.next.next : null;
-            ptrNewList.next = ptrNewList.next ? ptrNewList.next.next : null;
-            ptrOldList = ptrOldList.next;
-            ptrNewList = ptrNewList.next;
-        }
-        
-        return headNew;
+class RemoveNthFromEnd {
+    removeNthFromEnd(head, n) {
+      const dummy = new ListNode(0);
+      dummy.next = head;
+      let first = dummy;
+      let second = dummy;
+  
+      // Advances first pointer so that the gap between first and second is n nodes apart
+      for (let i = 1; i <= n + 1; i++) {
+        first = first.next;
+      }
+  
+      // Move first to the end, maintaining the gap
+      while (first !== null) {
+        first = first.next;
+        second = second.next;
+      }
+  
+      second.next = second.next.next;
+      return dummy.next;
     }
-}
-class Node {
-    constructor(val, next, random) {
-        this.val = val;
-        this.next = next;
-        this.random = random;
-    }
-}
-
-
-module.exports = { Problem: Solution };
+  }
+  
+  function ListNode(val) {
+    this.val = val;
+    this.next = null;
+  }
+  
+  module.exports = { Problem: RemoveNthFromEnd, ListNode };
+  

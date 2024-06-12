@@ -16,7 +16,8 @@ class Pseudocode extends ProblemTests {
 
 const problems = [
     'score-of-a-string',
-    'corporation_count_repetitions'
+    'corporation_count_repetitions',
+    'longest-palindromic-subsequence'
 
 ];
 
