@@ -199,7 +199,8 @@ const probability = [
         example: "Using Bayes' Theorem: \n\
         P(Disease|Positive) = [P(Positive|Disease) * P(Disease)] / PPositive =\n\
         \n\
-        We also have that P(Disease) = P(Disease| Positive) * P(Positive) + P(Positive | No disease) * P(No disease)\n\
+        We also have that P(positive) = P(Positive | Disease) * PDisease + P(Positive | No Disease) * P(No Disease) \n\
+        ''' = 0.98 * 1/1000 + .1 * 999/1000 = .01097\n\
         P(Disease|Positive) = [P(Positive|Disease) * P(Disease)] / [P(Positive|Disease) * P(Disease) + P(Positive|No Disease) * P(No Disease)]\n\
          [0.98 * 0.001] / [0.98 * 0.001 + 0.01 * 0.999] ≈ 0.893."
     },
