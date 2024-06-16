@@ -211,7 +211,6 @@ const probability = [
         \n\
         We also have that P(positive) = P(Positive | Disease) * PDisease + P(Positive | No Disease) * P(No Disease) \n\
         ''' = 0.98 * 1/1000 + .1 * 999/1000 = .01097\n\
-        We also have that P(Positive)=P (Positive | Disease) * P(Disease)+P(Positive | No Disease)⋅\n\
         P(Disease|Positive) = [P(Positive|Disease) * P(Disease)] / [P(Positive|Disease) * P(Disease) + P(Positive|No Disease) * P(No Disease)]\n\
          [0.98 * 0.001] / [0.98 * 0.001 + 0.01 * 0.999] ≈ 8.925% = 0.089"
     },
