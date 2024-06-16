@@ -209,6 +209,8 @@ const probability = [
         example: "Using Bayes' Theorem: \n\
         P(Disease|Positive) = [P(Positive|Disease) * P(Disease)] / PPositive =\n\
         \n\
+        We also have that P(positive) = P(Positive | Disease) * PDisease + P(Positive | No Disease) * P(No Disease) \n\
+        ''' = 0.98 * 1/1000 + .1 * 999/1000 = .01097\n\
         We also have that P(Positive)=P (Positive | Disease) * P(Disease)+P(Positive | No Disease)⋅\n\
         P(Disease|Positive) = [P(Positive|Disease) * P(Disease)] / [P(Positive|Disease) * P(Disease) + P(Positive|No Disease) * P(No Disease)]\n\
          [0.98 * 0.001] / [0.98 * 0.001 + 0.01 * 0.999] ≈ 8.925% = 0.089"
@@ -233,28 +235,33 @@ const probability = [
         Select where 2 positives and 2 negatives: C(5, 2)\n\
          C(5, 4) + C(5, 2) * C(4, 2) = 5 + 10 * 6 = 65."
     },
-    // {
-    //     term: "Probability that Player A wins",
-    //     description: "Goldman Sachs: Players A and B are playing a game where they take turns flipping \n\
-    //     a biased coin, with p probability of landing on heads (and winning).\n\
-    //      Player A starts the game, and then the players pass the coin back and forth until one person flips\n\
-    //       heads and wins.",
-    //     prompt: "What is the probability that A wins?",
-    //     example: "The probability that A wins is given by summing the probabilities of all scenarios \n\
-    //     where A wins: P(A wins) = p + (1-p)^2 * p + (1-p)^4 * p + ... = p / (1 - (1-p)^2) = p / (2-p)."
-    // },
-    // {
-    //     term: "Probability that it is rainy given friends' statements",
-    //     description: "Microsoft: Three friends in Seattle each told you it is rainy, and each person has a 1/3 probability of lying.",
-    //     prompt: "What is the probability that Seattle is rainy, assuming that the likelihood of rain on any given day is 0.25?",
-    //     example: "Using Bayes' Theorem: P(Rain|All say rainy) = [P(All say rainy|Rain) * P(Rain)] / [P(All say rainy|Rain) * P(Rain) + P(All say rainy|No Rain) * P(No Rain)] = [(2/3)^3 * 0.25] / [(2/3)^3 * 0.25 + (1/3)^3 * 0.75] = 0.524."
-    // },
-    // {
-    //     term: "Probability that two random chords intersect",
-    //     description: "Bloomberg: You draw a circle and choose two chords at random.",
-    //     prompt: "What is the probability that those chords will intersect?",
-    //     example: "The probability that two random chords in a circle will intersect is 1/3 or approximately 0.333. This is derived from geometric probability principles."
-    // }
+    {
+        term: "5.8 Probability that Player A wins",
+        description: "Goldman Sachs: Players A and B are playing a game where they take turns flipping \n\
+        a biased coin, with p probability of landing on heads (and winning).\n\
+         Player A starts the game, and then the players pass the coin back and forth until one person flips\n\
+          heads and wins.",
+        prompt: "What is the probability that A wins?",
+        example: "The probability that A wins is given by summing the probabilities of all scenarios \n\
+        where A wins: P(A wins) = p + (1-p)^2 * p + (1-p)^4 * p + ... = p / (1 - (1-p)^2) = p / (2-p)."
+    },
+    {
+        term: "5.9 Probability that it is rainy given friends' statements",
+        description: "Microsoft: Three friends in Seattle each told you it is rainy, and each person has a 1/3 probability of lying.",
+        prompt: "What is the probability that Seattle is rainy, assuming that the likelihood of rain on any given day is 0.25?",
+        example: "Using Bayes' Theorem: P(Rain|All say rainy) = \n\
+        [P(All say rainy|Rain) * P(Rain)] / [P(All say rainy|Rain) * P(Rain) + P(All say rainy|No Rain) * P(No Rain)] = \n\
+        [(2/3)^3 * 0.25] / [(2/3)^3 * 0.25 + (1/3)^3 * 0.75] = 0.524."
+    },
+    {
+        term: "5.10 Probability that two random chords intersect",
+        description: "Bloomberg: You draw a circle and choose two chords at random.",
+        prompt: "What is the probability that those chords will intersect?",
+        example: "The probability that two random chords in a circle will intersect is 1/3 or approximately 0.333.\n\
+        \frac{1}{2} C\binom{4}{2}=\frac{1}{2} \cdot \frac{4!}{2!2!}=\frac{1}{2}\cdot 6 = 3\n\
+        $$\n\
+        "
+    }
 
 
 ]
