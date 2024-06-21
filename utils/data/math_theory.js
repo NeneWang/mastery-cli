@@ -81,6 +81,7 @@ const probability = [
         - \(X\) is the value\n\
         - \(\mu\) is the mean\n\
         - \(\sigma\) is the standard deviation\n\
+        Know that: NORM.S.DIST(-1, TRUE) = 0.8413\n\
         Used to model the number of events occurring in a fixed interval of time or space, assuming events occur with a known constant rate and are independent.\n\
         Number of phone calls received in an hour, defects in a product",
         prompt: "What is the probability that a randomly selected score is between 400 and 600?",
@@ -250,9 +251,100 @@ const probability = [
         \frac{1}{2} C\binom{4}{2}=\frac{1}{2} \cdot \frac{4!}{2!2!}=\frac{1}{2}\cdot 6 = 3\n\
         $$\n\
         "
+    },
+    {
+        "term": "5.11 Morgan Stanley",
+        "description": "You and your friend are playing a game. The two of you will continue to toss a coin until the sequence HH or TH shows up. If HH shows up first, you win. If TH shows up first, your friend wins. What is the probability of you winning?",
+        "prompt": "Calculate the probability that you win the game.",
+        "example": "If T is ever flipped, you cannot reach HH before your friend reaches TH, since the first heads thereafter will result in them winning. Therefore, the probability of you winning is limited to just flipping HH initially, given by:\n\
+    P(HH) = 1/2 * 1/2 = 1/4\n\
+    Thus, you have a 1/4 chance of winning, while your friend has a 3/4 chance.",
+        "link": "https://hackmd.io/@n_1IfOpxQPSjyRrn5yedJw/BJLL8viSA#Solution-511"
+    },
+    {
+        "term": "5.13 Facebook",
+        "description": "Facebook has a content team that labels pieces of content on the platform as either spam or not spam. 90% of them are diligent raters and will mark 20% of the content as spam and 80% as non-spam. The remaining 10% are not diligent raters and will mark 0% of the content as spam and 100% as non-spam. Assume the pieces of content are labeled independently of one another, for every rater. Given that a rater has labeled four pieces of content as good, what is the probability that this rater is a diligent rater?",
+        "prompt": "Calculate the probability that the rater is diligent given they labeled four pieces of content as good.",
+        "example": "Let D denote the case where a rater is diligent, and E the case where a rater is non-diligent. Further, let 4N denote the case where four pieces of content are labeled as non-spam. Using Bayes' theorem, we have:\n\
+    P(D | 4N) = P(4N | D) * P(D) / (P(4N | D) * P(D) + P(4N | E) * P(E))\n\
+    Given that P(D) = 0.9, P(E) = 0.1, P(4N | D) = 0.8^4, and P(4N | E) = 1, we get:\n\
+    P(D | 4N) = (0.8^4 * 0.9) / (0.8^4 * 0.9 + 1 * 0.1) = 0.79\n\
+    Thus, the probability that the rater is diligent is 79%."
+    },
+    {
+        "term": "5.14 D.E. Shaw",
+        "description": "A couple has two children. You discover that one of their children is a boy. What is the probability that the second child is also a boy?",
+        "prompt": "Determine the probability that the second child is a boy given that one of the children is a boy.",
+        "example": "Let B represent a boy and G represent a girl. The possible genders of the two children are: BB, BG, GB, GG. Given that one child is a boy, the valid sample space is reduced to BB, BG, GB. Since all these options are equally likely, the probability that the second child is also a boy is:\n\
+    P(BB | at least one boy) = 1/3"
+    },
+    {
+        "term": "5.15 JP Morgan",
+        "description": "A desk has eight drawers. There is a probability of 1/2 that someone placed a letter in one of the desk's eight drawers and a probability of 1/2 that this person did not place a letter in any of the desk's eight drawers. You open the first 7 drawers and find that they are all empty. What is the probability that the 8th drawer has a letter in it?",
+        "prompt": "Calculate the probability that the 8th drawer has a letter given that the first 7 drawers are empty.",
+        "example": "Let A denote the event that there is a letter in the 8th drawer, and B denote the event that the first 7 drawers are all empty. The probability of B occurring can be found by conditioning on whether a letter was put in the drawers or not. Therefore:\n\
+        P(B) = (1/2)*(1/8) + (1/2)*(1) = 9/16\n\
+        For A and B to both occur, we have:\n\
+        P(A ∩ B) = (1/2)*(1/8) = 1/16\n\
+        Therefore:\n\
+        P(A | B) = P(A ∩ B) / P(B) = 1/9"
+    },
+    {
+        "term": "5.16 Optiver",
+        "description": "Two players are playing in a tennis match, and are at deuce (that is, they will play back and forth until one person has scored two more points than the other). The first player has a 60% chance of winning every point, and the second player has a 40% chance of winning every point. What is the probability that the first player wins the match?",
+        "prompt": "Determine the probability that the first player wins the match given the winning probabilities of each point.",
+        "example": "Let p be the probability that the first player wins. Assume the score is 0-0 on a relative basis. If the first player wins a game (with probability 0.6), then two outcomes are possible: with probability 0.6 the first player wins, and with probability 0.4 the score is back to 0-0, with p being the probability of the first player winning overall. Similarly, if the first player loses a game (with probability 0.4), then with probability 0.6 the score is back to 0-0 (with p being the probability of the first player winning), or, with probability 0.4, the first player loses. Therefore, we have:\n\
+        p = 0.6^2 + 2(0.6)(0.4)p\n\
+        Solving this yields the following for p: p ≈ 0.692\n\
+        The key idea is that, after two points, either the game is over, or we're back where we started."
+    },
+    {
+        "term": "5.17 Facebook",
+        "description": "Say you have a deck of 50 cards made up of cards in 5 different colors, with 10 cards of each color, numbered 1 through 10. What is the probability that two cards you pick at random do not have the same color and are also not the same number?",
+        "prompt": "Calculate the probability that two cards picked at random from a deck of 50 cards of 5 colors and 10 numbers each do not have the same color and are not the same number.",
+        "example": "The first card will always be a unique color and number. Let A be the event that the color of card 2 does not match that of card 1, and let B be the event that the number of card 2 does not match that of card 1. We want to find P(A ∩ B). Since the two events are mutually exclusive, we have P(A ∩ B) = P(A)P(B|A).\n\
+            For A to occur, there are 40 remaining cards of a different color from card 1 (out of 49 total remaining cards). Thus, P(A) = 40/49.\n\
+            For B to occur, of the 40 remaining cards, 36 of them (9 in each of the other 4 colors) do not have the same number as card 1. Thus, P(B|A) = 36/40.\n\
+            Therefore, P(A ∩ B) = (40/49) * (36/40) = 36/49."
+    },
+    {
+        "term": "5.17 Facebook",
+        "description": "Say you have a deck of 50 cards made up of cards in 5 different colors, with 10 cards of each color, numbered 1 through 10. What is the probability that two cards you pick at random do not have the same color and are also not the same number?",
+        "prompt": "Calculate the probability that two cards picked at random from a deck of 50 cards of 5 colors and 10 numbers each do not have the same color and are not the same number.",
+        "example": "The first card will always be a unique color and number. Let A be the event that the color of card 2 does not match that of card 1, and let B be the event that the number of card 2 does not match that of card 1. We want to find P(A ∩ B). Since the two events are mutually exclusive, we have P(A ∩ B) = P(A)P(B|A).\n\
+            For A to occur, there are 40 remaining cards of a different color from card 1 (out of 49 total remaining cards). Thus, P(A) = 40/49.\n\
+            For B to occur, of the 40 remaining cards, 36 of them (9 in each of the other 4 colors) do not have the same number as card 1. Thus, P(B|A) = 36/40.\n\
+            Therefore, P(A ∩ B) = (40/49) * (36/40) = 36/49."
+    },
+    {
+        "term": "5.18 SIG",
+        "description": "Suppose you have ten fair dice. If you randomly throw these dice simultaneously, what is the probability that the sum of all the top faces is divisible by 6?",
+        "prompt": "Calculate the probability that the sum of the top faces of ten fair dice is divisible by 6.",
+        "example": "Consider the first nine dice. The sum of those nine dice will be either 0, 1, 2, 3, 4, or 5 modulo 6. Regardless of that sum, exactly one value for the tenth die will make the sum of all 10 divisible by 6. For instance, if the sum of the first nine dice is 1 modulo 6, the sum of all ten dice will be divisible by 6 only when the tenth die shows a 5. Thus, the probability is 1/6 for any number of dice, so the answer is 1/6."
+    },
+    {
+        "term": "5.19 Morgan Stanley",
+        "description": "A and B play the following game: a number k from 1-6 is chosen, and A and B will toss a die until the first person throws a die showing side k, after which that person is awarded $100 and the game is over. How much is A willing to pay to play first in this game?",
+        "prompt": "Determine how much A is willing to pay to play first in the game.",
+        "example": "To assess the amount A is willing to pay, we need to calculate the expected probabilities of winning for each player, assuming A goes first. Let P(A) be the probability that A wins, and P(B) be the probability that B wins. We can use the following recursive formulation:\n\
+            P(A) = 1/6 + 5/6(1 - P(B))\n\
+            Since A wins immediately with a 1/6 chance (the first roll is k), or with a 5/6 chance (assuming the first roll is not k), A wins if B does not win, with B now going first. Notice that if A doesn't roll k immediately, then P(B) = P(A), since the game is symmetric with B going first. Thus, we have:\n\
+            P(A) = 1/6 + 5/6(1 - P(A))\n\
+            Solving this yields P(A) = 6/11, and P(B) = 5/11. Since the payout is $100, A is willing to pay an amount up to the difference in expected values of going first, which is $100 * (6/11 - 5/11) = $100/11, or about $9.09."
+    },
+    {
+        "term": "5.20 Airbnb",
+        "description": "You are given an unfair coin having an unknown bias towards heads or tails. How can you generate fair odds using this coin?",
+        "prompt": "Describe a method to generate fair odds using an unfair coin with an unknown bias.",
+        "example": "Let P(H) be the probability of landing on heads, and P(T) be the probability of landing tails for any given flip, where P(H) + P(T) = 1. Note that it is impossible to generate fair odds using only one flip. If we use two flips, we have four outcomes: HH, HT, TH, and TT. Of these outcomes, two (HT, TH) have equal probabilities since P(H) * P(T) = P(T) * P(H). We can disregard HH and TT, and assign heads to the HT outcome and tails to the TH outcome. Thus, by flipping the coin twice, we generate fair odds."
+    },
+    {
+        "term": "5.21 SIG",
+        "description": "Suppose you are given a white cube that is broken into 3 x 3 x 3 = 27 pieces. However, before the cube was broken, all 6 of its faces were painted green. You randomly pick a small cube and see that 5 faces are white. What is the probability that the bottom face is also white?",
+        "prompt": "Determine the probability that the bottom face of the selected cube is white given that 5 faces are white.",
+        "example": "If you randomly pick a small cube and see that 5 faces are white, this cube must be one of the 8 corner pieces of the larger cube, as only corner pieces can have 5 white faces. Each corner piece has exactly one face painted green, so the probability that the bottom face is white is:\n\
+            P(white bottom face) = 7/8"
     }
-
-
 ]
 
 
