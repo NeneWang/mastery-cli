@@ -27,6 +27,8 @@ const problems = [
     'balance-a-binary-search-tree',
     'count-substrings-without-repeating-character',
     
+    'longest-palindromic-subsequence'
+
 ];
 
 // All problems here are pseudocodes problems. no tests.

@@ -1,29 +1,131 @@
 
 
-The intuition is to do the reverse inorder traversal of the BST. This way, we visit the nodes in descending order. We keep track of the total sum of the nodes visited so far and update the value of the current node with the total sum. We then move to the left child and repeat the process.
+
+Illustration:
+
+![search-tree-oncept](https://leetcode.com/problems/longest-palindromic-subsequence/Figures/516/516-1.png)
+
 
 ```python
 class Solution:
-    def bstToGst(self, root):
-        # Store the inorder traversal in an array.
-        self.inorder_traversal = []
-        self.total = 0
+    def longestPalindromeSubseq(self, s: str) -> int:
+        """
+        The question here is: Is there a way to make some advantage of previous max
 
-        self.inorder(root)
+        - Does compression help?
+        - Requires to compress together where =s
+                - does trie help?
+        att2: Using a trie? that markes nested 
+        """
+        memo = {}
 
-        return root
+        def palin(l, r):
+            if (l, r) in memo:
+                return memo[(l, r)]
+            if l == r:
+                return 1
+            if l > r:
+                return 0
+            
+            
+            if s[l] == s[r]:
+                memo[(l, r)] = palin(l+1, r-1) + 2
+            else:
+                memo[(l, r)] =  max(palin(l+1, r), palin(l, r-1))
+            return memo[(l, r)]
+        return palin(0, len(s)-1)
 
-    def inorder(self, root):
-        if root is None:
-            return
-        self.inorder(root.right)
-        self.total += root.val
-        root.val = self.total
-        self.inorder(root.left)
+        
+```
+
+### Other Languages
+
+```cpp
+class Solution {
+public:
+    int longestPalindromeSubseq(string s) {
+        int n = s.size();
+        vector<vector<int>> memo(n, vector<int>(n));
+        return lps(s, 0, n - 1, memo);
+    }
+
+    int lps(string s, int i, int j, vector<vector<int>>& memo) {
+        if (memo[i][j] != 0) {
+            return memo[i][j];
+        }
+        if (i > j) {
+            return 0;
+        }
+        if (i == j) {
+            return 1;
+        }
+
+        if (s[i] == s[j]) {
+            memo[i][j] = lps(s, i + 1, j - 1, memo) + 2;
+        } else {
+            memo[i][j] = max(lps(s, i + 1, j, memo), lps(s, i, j - 1, memo));
+        }
+        return memo[i][j];
+    }
+};
+```
+
+
+```java
+class Solution {
+    public int longestPalindromeSubseq(String s) {
+        int n = s.length();
+        int[][] memo = new int[n][n];
+        return lps(s, 0, n - 1, memo);
+    }
+
+    private int lps(String s, int i, int j, int[][] memo) {
+        if (memo[i][j] != 0) {
+            return memo[i][j];
+        }
+        if (i > j) {
+            return 0;
+        }
+        if (i == j) {
+            return 1;
+        }
+
+        if (s.charAt(i) == s.charAt(j)) {
+            memo[i][j] = lps(s, i + 1, j - 1, memo) + 2;
+        } else {
+            memo[i][j] = Math.max(lps(s, i + 1, j, memo), lps(s, i, j - 1, memo));
+        }
+        return memo[i][j];
+    }
+}
 ```
 
 
 
+<<<<<<< HEAD
+=======
+### Solution using Iterative apporach
+
+```python
+class Solution:
+    def longestPalindromeSubseq(self, s: str) -> int:
+        n = len(s)
+        dp, dpPrev = [0] * n, [0] * n
+
+        for i in range(n - 1, -1, -1):
+            dp[i] = 1
+            for j in range(i + 1, n):
+                if s[i] == s[j]:
+                    dp[j] = dpPrev[j - 1] + 2
+                else:
+                    dp[j] = max(dpPrev[j], dp[j - 1])
+            dpPrev = dp[:]
+
+        return dp[n - 1]
+```
+
+
+>>>>>>> 164c36ab9813ccfb7329be13e0632eb6c366aa9c
 
 
 

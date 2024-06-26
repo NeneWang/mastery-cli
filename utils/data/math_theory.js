@@ -142,17 +142,27 @@ const probability = [
     },
     // Combinatorics break.
     {
-        "term": "Number of ways to arrange 5 books on a shelf",
-        "description": "Imagine you have 5 different books and you want to arrange them on a shelf.\n\
+        term: "Number of ways to arrange 5 books on a shelf",
+        descripton: "Imagine you have 5 different books and you want to arrange them on a shelf.\n\
          The formula to calculate permutations is \n\
          \t\tnPr = (n!) / (n-r)\n\
          , where n is the total number of items and r is the number of items to be arranged.",
-        "prompt": "How many ways are there to arrange the books?",
-        "example": "The number of arrangements is given by the permutation formula P(5, 5) = 5! = 120."
+        prompt: "How many ways are there to arrange the books?",
+        example: "The number of arrangements is given by the permutation formula P(5, 5) = 5! = 120."
+    },
+    {   
+        term: "Number of ways to get to bottom corner",
+        description: "Imagine you are at the top-left corner of a 12x32 grid and want to reach the bottom-right corner by moving only right or down.\n\
+            The formula to claculate combinations where we have repeated elements is \n\
+            \t\tC(n+r-1, r-1)\n\
+            or\n\
+            n! / (n1! n2!...nn!)",
+        prompt: "How many different paths can you take?",
+        example: "The number of paths you can take is (12 + 32 -2)! / (12-1)! * (32-1)!"
     },
     {
-        "term": "Number of ways to select a president, vice president, and secretary from a group of 10 people",
-        "description": "You have a group of 10 people, and you need to choose a president, a vice president, and a secretary. The formula to calculate permutations is nPr = (n!) / (n-r), where n is the total number of items and r is the number of items to be arranged.",
+        term: "Number of ways to select a president, vice president, and secretary from a group of 10 people",
+        description: "You have a group of 10 people, and you need to choose a president, a vice president, and a secretary. The formula to calculate permutations is nPr = (n!) / (n-r), where n is the total number of items and r is the number of items to be arranged.",
         "prompt": "How many ways can you choose the three positions?",
         "example": "The number of ways to choose is given by the permutation formula P(10, 3) = 10!/(10-3)! = 720."
     },
@@ -203,7 +213,7 @@ const probability = [
         We also have that P(positive) = P(Positive | Disease) * PDisease + P(Positive | No Disease) * P(No Disease) \n\
         ''' = 0.98 * 1/1000 + .1 * 999/1000 = .01097\n\
         P(Disease|Positive) = [P(Positive|Disease) * P(Disease)] / [P(Positive|Disease) * P(Disease) + P(Positive|No Disease) * P(No Disease)]\n\
-         [0.98 * 0.001] / [0.98 * 0.001 + 0.01 * 0.999] ≈ 0.893."
+         [0.98 * 0.001] / [0.98 * 0.001 + 0.01 * 0.999] ≈ 8.925% = 0.089"
     },
     {
         term: "Probability of flipping the unfair coin",

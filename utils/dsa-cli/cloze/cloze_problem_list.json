@@ -1880,20 +1880,27 @@
         "problem_slug": "edit-distance"
     },
     {
-        "file_path": "perfect-squares-c1",
+        "file_path": "perfect-squares-c1.js",
         "difficulty": 1,
         "problem_slug": "perfect-squares"
     },
     {
-        "file_path": "perfect-squares-c2",
+        "file_path": "perfect-squares-c2.js",
         "difficulty": 1,
         "problem_slug": "perfect-squares"
     },
     {
-        "file_path": "perfect-squares-c3",
+        "file_path": "perfect-squares-c3.js",
         "difficulty": 1,
         "problem_slug": "perfect-squares"
+    },
+    {
+        "file_path": "longest-palindromic-subsequence-c1.md",
+        "difficulty": 1,
+        "problem_slug": "longest-palindromic-subsequence"
     }
+
+    
 
 
 ]
