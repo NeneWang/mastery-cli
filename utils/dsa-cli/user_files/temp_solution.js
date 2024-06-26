@@ -1,54 +1,33 @@
-class PaintHouse {
-    solve(costs) {
-        if (costs.length === 0) return 0;
-        
-        let previousRow = [...costs[costs.length - 1]]; // Make a copy of the last row
-        
-        for (let n = costs.length - 2; n >= 0; n--) {
-            const currentRow = [...costs[n]]; // Make a copy of the current row
-
-            // Total cost of painting the nth house red.
-            currentRow[0] += Math.min(previousRow[1], previousRow[2]);
-            // Total cost of painting the nth house green.
-            currentRow[1] += Math.min(previousRow[0], previousRow[2]);
-            // Total cost of painting the nth house blue.
-            currentRow[2] += Math.min(previousRow[0], previousRow[1]);
-            
-            previousRow = currentRow;
-        }
-        
-        return Math.min(...previousRow);
-    }
+class TallestBillboard {
+  solve( rods ) {
+     return tallestBillboard(rods);
+  }
 }
 
-module.exports = { Problem: PaintHouse };
-class RemoveNthFromEnd {
-    removeNthFromEnd(head, n) {
-      const dummy = new ListNode(0);
-      dummy.next = head;
-      let first = dummy;
-      let second = dummy;
-  
-      // Advances first pointer so that the gap between first and second is n nodes apart
-      for (let i = 1; i <= n + 1; i++) {
-        first = first.next;
-      }
-  
-      // Move first to the end, maintaining the gap
-      while (first !== null) {
-        first = first.next;
-        second = second.next;
-      }
-  
-      second.next = second.next.next;
-      return dummy.next;
+var tallestBillboard = function(rods) {
+    // dp[taller - shorter] = taller
+    let dp = {0: 0};
+    
+    for (const r of rods) {
+        // dp.copy() means we don't add r to these stands.
+        const new_dp = {...dp};
+        for (const [diff, taller] of Object.entries(dp)) {
+            const shorter = taller - parseInt(diff);
+            
+            // Add r to the taller stand, thus the height difference is increased to diff + r.
+            new_dp[parseInt(diff) + r] = Math.max(new_dp[parseInt(diff) + r] || 0, taller + r);
+            
+            // Add r to the shorter stand, the height difference is expressed as abs(shorter + r - taller).
+            const new_diff = Math.abs(shorter + r - taller);
+            const new_taller = Math.max(shorter + r, taller);
+            new_dp[new_diff] = Math.max(new_dp[new_diff] || 0, new_taller);
+        }
+        dp = new_dp;
     }
-  }
-  
-  function ListNode(val) {
-    this.val = val;
-    this.next = null;
-  }
-  
-  module.exports = { Problem: RemoveNthFromEnd, ListNode };
-  
+    
+    // Return the maximum height with 0 difference.
+    return dp[0] || 0;
+};
+
+
+module.exports = { Problem: TallestBillboard };
