@@ -19,8 +19,14 @@ const problems = [
     'corporation_count_repetitions',
     'brick-wall',
     'task-scheduler',
-    'find-the-celebrity'
-
+    'find-the-celebrity',
+    'longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit',
+    'minimum-number-of-k-consecutive-bit-flips',
+    'put-boxes-into-the-warehouse-ii',
+    'binary-search-tree-to-greater-sum-tree',
+    'balance-a-binary-search-tree',
+    'count-substrings-without-repeating-character',
+    
 ];
 
 // All problems here are pseudocodes problems. no tests.

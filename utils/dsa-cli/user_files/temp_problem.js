@@ -1,7 +1,7 @@
-class Node {	// Your code here
+class Solution {	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: Node };
+module.exports = { Problem: Solution };
