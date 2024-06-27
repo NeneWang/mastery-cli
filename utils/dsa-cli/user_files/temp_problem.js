@@ -1,9 +1,9 @@
-class TallestBillboard {
-	solve( rods ) {
+class MinimumCostForTickets {
+	solve(days, costs) {
 	// Your code here
 
 	}
 }
 
 
-module.exports = { Problem: TallestBillboard };
+module.exports = { Problem: MinimumCostForTickets };
