@@ -124,6 +124,14 @@ const { Demo, EDemo } = demos;
 		}
 		mQuizer.cloze_study_session({ reset_scheduler: reset });
 	}
+	else if (input.includes(cmInfo.commands.amses.code)) {
+		let reset = false;
+		if (flags.reset) {
+			reset = true;
+		}
+		mQuizer.algorithm_mastery_session();
+
+	}
 	else if (input.includes(cmInfo.commands.jses.code)) {
 		mQuizer.jupyter_study_session();
 	}

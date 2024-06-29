@@ -9,6 +9,7 @@ const { getProblemsData, getRandomProblem, copyFileToTemp } = require('./data-sc
 
 const { TermScheduler } = require('./termScheduler');
 const settings = require('./settings');
+const utils = require('terminal-charter/lib/utils');
 /**
  * This class also supports DSATrainer Implementation.
  */
@@ -148,6 +149,68 @@ class QuizzerWithDSA extends Quizzer {
             printCardsLeft(cardsLeft, cardsLearnt);
         }
     }
+
+    algorithm_mastery_session = async ({problems_count = 5} = {}) =>{
+        /**
+         * Takes 10 problems, asks, in a queue until they are completed.
+         */
+
+        await this.dsaTrainer.loaded_problem_manager;
+        const problems = this.dsaTrainer.problems_manager.getProblems({count: problems_count});
+
+        
+        const getRandomsFromArray = (arr, k) => {
+            let shuffled = arr.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, k);
+        }
+
+        // select 10 problems
+        const selected_problems = getRandomsFromArray(problems, problems_count);
+
+        const amsesScheduler = new TermScheduler({
+            cards_category: "amses_session"
+        });
+        const mapped_problems = selected_problems.map(problem => {
+            return {
+                problem_slug: problem.slug,
+                file_path: problem.file_path
+            }
+        });
+        await amsesScheduler.setLearningCards(mapped_problems, { shuffle: true, reset_scheduler: false });
+        let exit = false;
+
+        const printCardsLeft = (cardsLeft, cardsLearnt) => {
+            const total_problems = selected_problems.length;
+            const table = {
+                "Problems left": cardsLeft,
+                "Problems completed": cardsLearnt,
+                "Total problems": total_problems
+            }
+            console.table(table);
+        }
+
+        while (!amsesScheduler.is_completed && !exit) {
+            const [cardsLeft, cardsLearnt] = [amsesScheduler.getCardsToLearn(), amsesScheduler.getCardsLearnt()];
+
+            const card = await amsesScheduler.getCard();
+            let problem = this.dsaTrainer.problems_manager.getProblem(card.problem_slug);
+
+            const solution_metadata = await this.dsaTrainer.solveProblem(problem);
+
+            const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
+            amsesScheduler.solveCard(answerIsCorrect);
+            await amsesScheduler.saveCards();
+            printCardsLeft(cardsLeft, cardsLearnt);
+        }
+
+
+
+    }
+
+    
+
+
+
 
     jupyter_study_session = async () => {
 

@@ -74,6 +74,7 @@ class CommandsInformation {
 			dsa: new Command("Select Data structures and algorithms to solve", 'dsa'),
 			cloze: new Command("Cloze algorithm", 'cloze'),
 			cses: new Command("Algo Cloze study session", 'cses'),
+			amses: new Command("Algo Mastery Session Ten random Algorithms Queue Challange", 'amses'),
 			jupyter: new Command("Select Jupyter notebook Problem to solve", 'jupyter'),
 			jses: new Command("Jupyter (Data science) study session", 'jses'),
 			login: new Command("Login to get settings.json given a user.", 'login'),

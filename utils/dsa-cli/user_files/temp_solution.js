@@ -1,54 +1,28 @@
-class PaintHouse {
-    solve(costs) {
-        if (costs.length === 0) return 0;
-        
-        let previousRow = [...costs[costs.length - 1]]; // Make a copy of the last row
-        
-        for (let n = costs.length - 2; n >= 0; n--) {
-            const currentRow = [...costs[n]]; // Make a copy of the current row
-
-            // Total cost of painting the nth house red.
-            currentRow[0] += Math.min(previousRow[1], previousRow[2]);
-            // Total cost of painting the nth house green.
-            currentRow[1] += Math.min(previousRow[0], previousRow[2]);
-            // Total cost of painting the nth house blue.
-            currentRow[2] += Math.min(previousRow[0], previousRow[1]);
-            
-            previousRow = currentRow;
-        }
-        
-        return Math.min(...previousRow);
-    }
+class MinimumCostForTickets {
+  solve(days, costs) {
+     return minCostTickets(days, costs);
+  }
 }
 
-module.exports = { Problem: PaintHouse };
-class RemoveNthFromEnd {
-    removeNthFromEnd(head, n) {
-      const dummy = new ListNode(0);
-      dummy.next = head;
-      let first = dummy;
-      let second = dummy;
-  
-      // Advances first pointer so that the gap between first and second is n nodes apart
-      for (let i = 1; i <= n + 1; i++) {
-        first = first.next;
-      }
-  
-      // Move first to the end, maintaining the gap
-      while (first !== null) {
-        first = first.next;
-        second = second.next;
-      }
-  
-      second.next = second.next.next;
-      return dummy.next;
+module.exports = { Problem: MinimumCostForTickets };
+
+function minCostTickets(days, costs) {
+    const lastDay = days[days.length - 1];
+    const dp = new Array(lastDay + 1).fill(0);
+
+    let i = 0;
+    for (let day = 1; day <= lastDay; day++) {
+        if (day < days[i]) {
+            dp[day] = dp[day - 1];
+        } else {
+            i++;
+            dp[day] = Math.min(
+                dp[day - 1] + costs[0],
+                dp[Math.max(0, day - 7)] + costs[1],
+                dp[Math.max(0, day - 30)] + costs[2]
+            );
+        }
     }
-  }
-  
-  function ListNode(val) {
-    this.val = val;
-    this.next = null;
-  }
-  
-  module.exports = { Problem: RemoveNthFromEnd, ListNode };
-  
+
+    return dp[lastDay];
+}
