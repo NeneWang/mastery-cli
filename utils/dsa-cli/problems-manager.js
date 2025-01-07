@@ -293,7 +293,10 @@ class ProblemsManager {
                 console.log(err)
                 return false
             }
-            clipboard.copy(data);
+            try{
+                clipboard.copy(data);
+            }
+            catch(err){}
         });
 
     }

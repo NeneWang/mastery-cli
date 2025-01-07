@@ -173,7 +173,13 @@ class Maid {
 	tellCurrentDirectory = () => {
 		const projectDirectory = getMaidDirectory();
 		this.say(projectDirectory);
-		clipboard.copy(projectDirectory);
+		try{
+			
+			clipboard.copy(projectDirectory);
+		}
+		catch(err){
+			// console.log("Error copying to clipboard", err);
+		}
 	}
 
 	runServer = () => {
@@ -600,7 +606,12 @@ class Maid {
 			const credentialSelected = getCredentialInformation(credentials, credentialNameSelected);
 			console.log(credentialSelected);
 			console.log(`Password copied to clipboard, ${credentialSelected.password}`)
-			clipboard.copy(credentialSelected.password)
+			try{
+
+				clipboard.copy(credentialSelected.password)
+			}
+			catch(err){
+			}
 
 			// Show credentials available
 

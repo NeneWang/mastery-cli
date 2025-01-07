@@ -43,6 +43,14 @@ mastery
 m-cli
 ```
 
+### Settings.
+
+Change the editor in 
+
+```
+utils/dsa-cli/user_files/temp_settings.json
+```
+
 ## Usage
 
 Commiting a code and pushing it to HEAD

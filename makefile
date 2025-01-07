@@ -16,7 +16,7 @@ tests:
 
 new:
 	npm version patch -m "${m}"
-	npm publish
+	npm publishƒ
 
 uninstall:
 	npm uninstall -g mastery-cli
