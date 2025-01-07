@@ -6,7 +6,8 @@
 	"bin": {
 		"m-cli": "index.js",
 		"maid": "index.js",
-		"mastery": "index.js"
+		"mastery": "index.js",
+		"mcli": "index.js"
 	},
 	"author": {
 		"name": "nenwang",

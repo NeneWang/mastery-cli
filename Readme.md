@@ -22,27 +22,33 @@ Key Highlights:
 
 ```
 npm install -g mastery-cli
-mastery report
-mastery quiz
-mastery report
+mcli report
+mcli quiz
+mcli report
 ```
 
 - You need to install nvim for the dsa option to work
 - Eventually you would be able to select your own editor.
 
-Recommended for doing dsa problems:
+
+## Help
+
+We support multiple ways to call the cli, for instance, you can use `mastery-cli`, `mastery`, or `mcli` to access the tool. 
+
+Supported calls:
 
 ```
-Install nvim
+mcli
+mastery
+m-cli
 ```
-
 
 ## Usage
 
 Commiting a code and pushing it to HEAD
 
 ```
-mastery coa "Commit message"
+mcli coa "Commit message"
 ```
 
 
@@ -51,43 +57,70 @@ mastery coa "Commit message"
 Reporting:
 
 ```
-mastery report
+mcli report
 ```
 
 
 Help 
 
 ```
-mastery --help
+mcli --help
 ```
 
 
-### DSA 
+### Data Structures and Algorithms 
+We have a collection of DSA problems that you can solve.
 
-View DSA problems
+View DSA problems:
+```
+mcli dsa
+```
 
-```
-mastery dsa
-```
+- We keep track of solved problems, as well as new problems.
+
+
 
 
 View all DSA Problems
 
 ```
-mastery dsa --all
+mcli dsa --all
 ```
 
 ### Flashcards
 
 ```
-mastery term
+mcli term
 ```
 
 Math Problems:
 
 ```
-mastery math
+mcli math
 ```
+
+
+
+
+# Developer Notes
+
+If you are a developer feel free to contribute the project, for installing as a adeveloper:
+
+Make sure you have both `git` and `node` installed.
+
+```
+git clone https://github.com/NeneWang/mastery-cli.git
+cd mastery-cli
+npm install
+npm link
+```
+
+That's it!, you can now run `mastery` from the command line.
+
+
+
+### Organization
+
 Advantage and Reasoning
 
 This wa advantageous because the client api had the flexibility to work with the individual components, lets say, 'kotlin flashcards' in the same way it would trat the entire hierarchy e.g. 'programming flashcards'.

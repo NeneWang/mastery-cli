@@ -1,9 +1,12 @@
-class MinimumCostForTickets {
-	solve(days, costs) {
-	// Your code here
+class RemoveNthFromEnd {	// Your code here
 
-	}
 }
 
 
-module.exports = { Problem: MinimumCostForTickets };
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+  }
+
+
+module.exports = { Problem: RemoveNthFromEnd };

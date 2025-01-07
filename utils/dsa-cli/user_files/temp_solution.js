@@ -1,28 +1,30 @@
-class MinimumCostForTickets {
-  solve(days, costs) {
-     return minCostTickets(days, costs);
-  }
-}
-
-module.exports = { Problem: MinimumCostForTickets };
-
-function minCostTickets(days, costs) {
-    const lastDay = days[days.length - 1];
-    const dp = new Array(lastDay + 1).fill(0);
-
-    let i = 0;
-    for (let day = 1; day <= lastDay; day++) {
-        if (day < days[i]) {
-            dp[day] = dp[day - 1];
-        } else {
-            i++;
-            dp[day] = Math.min(
-                dp[day - 1] + costs[0],
-                dp[Math.max(0, day - 7)] + costs[1],
-                dp[Math.max(0, day - 30)] + costs[2]
-            );
-        }
+class RemoveNthFromEnd {
+    removeNthFromEnd(head, n) {
+      const dummy = new ListNode(0);
+      dummy.next = head;
+      let first = dummy;
+      let second = dummy;
+  
+      // Advances first pointer so that the gap between first and second is n nodes apart
+      for (let i = 1; i <= n + 1; i++) {
+        first = first.next;
+      }
+  
+      // Move first to the end, maintaining the gap
+      while (first !== null) {
+        first = first.next;
+        second = second.next;
+      }
+  
+      second.next = second.next.next;
+      return dummy.next;
     }
-
-    return dp[lastDay];
-}
+  }
+  
+  function ListNode(val) {
+    this.val = val;
+    this.next = null;
+  }
+  
+  module.exports = { Problem: RemoveNthFromEnd, ListNode };
+  
