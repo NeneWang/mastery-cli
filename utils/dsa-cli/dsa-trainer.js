@@ -430,7 +430,9 @@ class DSATrainer {
         }
 
         if (open_problem_temporal) {
+            console.log("Opening temporal file")
             const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
+
         }
 
 
@@ -471,13 +473,13 @@ class DSATrainer {
 
         // console.log("Keys from prompt_dict", Object.keys(prompt_dict));
         let problem_details = this.problems_manager.getProblem(problem.slug);
-        if (Settings.dsa_language_mode == "PSEUDOCODE"){
-            this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_solution: true, copy_to_clipboard: true });
-            // Copy at problem to clipboard
-        }else{
+        // if (Settings.dsa_language_mode == "PSEUDOCODE"){
+        //     this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_solution: true, copy_to_clipboard: true });
+        //     // Copy at problem to clipboard
+        // }else{
             await this.openProblemMetadataInTerminal(problem);
 
-        }
+        // }
 
 
         
@@ -491,6 +493,7 @@ class DSATrainer {
             "Modify": async () => {
                 question_state_flag = true;
                 await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
+               
             },
             "Approve Solution": async () => {
                 question_state_flag = false;

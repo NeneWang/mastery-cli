@@ -34,7 +34,7 @@ class ProblemsManager {
          */
         this.problems = {};
         this.skip_problems = skip_problems;
-        this.temp_problem_filepath = './user_files/temp_problem.js';
+        this.temp_problem_filepath = './user_files/temp_problem';
         this.temp_solution_filepath = './user_files/temp_solution';
         this.absolute_problem_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
         this.solution_filepath = './solutions/';
@@ -319,7 +319,7 @@ class ProblemsManager {
     async openTemporalProblemFile({ editor_instruction = "" } = {}) {
         // const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
         const absolute_problem_file_path = this.findFileWithFilepath(this.temp_problem_filepath, "");
-
+        console.log("absolute_temp_file_path", absolute_problem_file_path);
         await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_problem_file_path })
 
     }

@@ -252,7 +252,7 @@ const openEditorPlatformAgnostic = async (editor_instruction, { absolute_temp_fi
         await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
     } else if (os.platform() === 'darwin') {
         console.log('macOS');
-        await openEditorWithCommand(`open -a ${editor_instruction} ${absolute_temp_file_path}`);
+        await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);
     } else {
         console.log('Unknown operating system');
         await openEditorWithCommand(`${editor_instruction} ${absolute_temp_file_path}`);

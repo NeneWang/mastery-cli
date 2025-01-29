@@ -268,6 +268,3 @@ Added
 ```js
 node-fetch => For fetching images 
 ```
-
-
-
