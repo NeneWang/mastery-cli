@@ -102,6 +102,21 @@ class FeatureExtraction {
 
 const { getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
 
+function withOnlineCheck(fn) {
+	return async function (...args) {
+		if (!Settings?.online) {
+			if (!Settings?.dev_mode) {
+				console.log('Offline, modify in data\\settings.json');
+			}
+			return {};
+		}
+		return await fn.apply(this, args);
+	};
+}
+
+
+
+
 class Maid {
 
 	constructor(name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
@@ -109,10 +124,33 @@ class Maid {
 		this.headerColor = headerColor;
 		this.clearOnTalk = clearOnTalk;
 		this.missing_features_today = []; //To be populated when required.
+
+		this.populateMissingReport = withOnlineCheck(this.populateMissingReport.bind(this));
+		this.login = withOnlineCheck(this.login.bind(this));
+		this.dayReport = withOnlineCheck(this.dayReport.bind(this));
+		this.provideMissingReport = withOnlineCheck(this.provideMissingReport.bind(this));
+		this.populateMissingReport = withOnlineCheck(this.populateMissingReport.bind(this));
+		this.performanceReport = withOnlineCheck(this.performanceReport.bind(this));
+		this.services = withOnlineCheck(this.services.bind(this));
+		
+
+
 	}
+
+	
 
 	login = async () => {
 		// await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
+
+
+		if(!Settings?.online){
+			if(!Settings?.dev_mode){
+				console.log('Offline, should not get comments');
+			}
+			return {}
+		}
+
+
 		let questionEmail = new Input({
 			name: 'email',
 			message: 'What is your email?'
@@ -156,9 +194,6 @@ class Maid {
 
 	}
 
-	backup = () => {
-
-	}
 
 	getMaidHeader = () => {
 		return `${chalk.hex(this.headerColor).inverse(` ${this.name}: `)}`;
@@ -253,12 +288,6 @@ class Maid {
 	 */
 	dayReport = async () => {
 
-
-		if(!Settings?.online){
-			this.say("currently offline, please visit: data\\settings.js")
-			return;
-		}
-
 		const todaydate = getToday()
 
 		if (Settings?.report_show?.performance_summary) {
@@ -343,6 +372,7 @@ class Maid {
 	 *  */
 	populateMissingReport = async () => {
 
+
 		try {
 			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
 			this.missingFeatReport = res.data;
@@ -386,14 +416,7 @@ class Maid {
 		}
 
 		userPerformanceData = parseDecimalsColumns(userPerformanceData, ["week_average", "week_average_exclude_today"]);
-		function createFeaturesMap(feat_rules) {
-			let feat_map = {};
-			for (const [key, value] of Object.entries(feat_rules)) {
-				feat_map[key] = 0;
-			}
-			return feat_map;
-		}
-
+	
 		function updateRequirements(features_accomplished_today, feat_rules, userPerformanceData) {
 			for (const [requirement_key, settings] of Object.entries(feat_rules)) {
 				// Check if it requires a 'day' required performance
@@ -424,10 +447,6 @@ class Maid {
 			}
 		}
 
-		function visualsUpdateMap(features_accomplished_today) {
-			// Do visual 
-			// Consult for needed to accomplish today (as -number something or X as finished)
-		}
 
 		function filterProperties(userPerformanceData, properties = [], abreviations = { "week_sum_exclude_today": "week_sum_ex", "week_average_exclude_today": "weeK_avg_ex" }) {
 			/**
@@ -477,7 +496,6 @@ class Maid {
 		}
 
 		// Create the requirements per Day
-		// const feat_accomplished_until_today = createFeaturesMap(feat_rules);
 		const feat_accomplished_until_today = {};
 		updateRequirements(feat_accomplished_until_today, feat_rules, userPerformanceData);
 
@@ -593,7 +611,6 @@ class Maid {
 
 		// if services == get_credi
 
-		console.log("service Selected", serviceSelected);
 		if (serviceSelected == choices[CHOICE_CREDENTIAL].value && Settings.account_settings.access_credentials_enabled) {
 
 			console.log('Retrieve credentials for...')
@@ -810,11 +827,8 @@ Waiting for pgAdmin 4 to start... * Increase the performance of a feature; Day p
  * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
  * 
  */
-increasePerformance = async (feature_name, increaseBY = 1, debug = true, account_id = Settings.account_id ?? 1) => {
-	if (!Settings?.online){
-		console.log('Not online, check: utils\\constants.js');
-		return
-	}
+increasePerformance = withOnlineCheck(async (feature_name, increaseBY = 1, debug = true, account_id = Settings.account_id ?? 1) => {
+	
 	try {
 		console.log(`Increasing performance ${feature_name} for ${account_id}`)
 		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}&account_id=${account_id}`)
@@ -823,7 +837,7 @@ increasePerformance = async (feature_name, increaseBY = 1, debug = true, account
 		if (debug) console.warn(err);
 	}
 
-}
+})
 
 
 /**
@@ -835,7 +849,7 @@ increasePerformance = async (feature_name, increaseBY = 1, debug = true, account
  * 
  * @returns {"message": f"Success updating {concept_term}, {conceptSelected.correct_times}"}
  */
-updateConcept = async (problem_name, success = true, debug = false, account_id = Settings.account_id ?? 1) => {
+updateConcept = withOnlineCheck(async (problem_name, success = true, debug = false, account_id = Settings.account_id ?? 1) => {
 	const URL = `${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}&account_id=${account_id}`
 	try {
 		const res = await axios.post(URL)
@@ -844,7 +858,7 @@ updateConcept = async (problem_name, success = true, debug = false, account_id =
 	catch (err) {
 		console.warn('error in updateConcept');
 	}
-}
+})
 
 
 /**
@@ -947,19 +961,17 @@ const getTalk = async flags => {
 
 
 
-const weatherReport = async () => {
+const weatherReport = withOnlineCheck(async () => {
 	const res = await axios.get(APIDICT.WEATHER, {
 		headers: {
 			'Accept-Encoding': 'application/json'
 		}
 	});
 	weatherData = new WeatherInformation(res);
-	// console.log(weatherData.json)
-	// console.log(weatherData.days_report)
 	weatherData.chartWeatherBar()
 
 
-}
+})
 
 class CommitCategoryType {
 	constructor(code, icon_list, feature_name = "") {
@@ -1101,6 +1113,13 @@ const commitpush = async (addCommitEmoji = true, { debug = false, comments_to_po
  */
 const getComments = async (term, count = 5) => {
 
+	if(!Settings?.online){
+		if(!Settings?.dev_mode){
+			console.log('Offline, should not get comments');
+		}
+		return {}
+	}
+	
 	if (term == undefined || term == "") {
 		return {};
 	}
@@ -1117,9 +1136,11 @@ const getComments = async (term, count = 5) => {
 	}
 	catch (err) {
 		console.log("Error in getComments", URL)
+		return {}
 
-	}
-	// return res.data;
+		}
+		return {}
+
 }
 
 
