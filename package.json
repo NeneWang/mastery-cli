@@ -26,7 +26,6 @@
 		"doc": "jsdoc -c jsdoc.json"
 	},
 	"dependencies": {
-		"terminal-charter": "^1.0.15",
 		"axios": "^1.5.1",
 		"chalk": "^4.1.2",
 		"cli-alerts": "^1.2.2",
@@ -46,6 +45,7 @@
 		"meow": "^9.0.0",
 		"node-fetch": "^3.3.2",
 		"node-json-db": "^2.1.4",
+		"terminal-charter": "^1.0.15",
 		"terminal-image": "^2.0.0"
 	},
 	"devDependencies": {

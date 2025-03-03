@@ -1,6 +1,7 @@
 {
   "show_http_errors": false,
   "dev_mode": false,
+  "online":false,
   "quiz_enabled": [
     "term"
   ],

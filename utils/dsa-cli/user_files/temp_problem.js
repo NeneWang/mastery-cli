@@ -1,129 +1,53 @@
+class LargestRectangleArea {
 
 
+    /**
+     * https://leetcode.com/problems/largest-rectangle-in-histogram/solution/
+     * Time O(N) | Space O(N)
+     * @param {number[]} heights
+     * @return {number}
+     */
+    solve(heights) {
+        const fillStack = (heights, stack = [], maxArea = 0) => {
+            for (let index = 0; index < heights.length; index++) {/* Time O(N + N) */
+                let start = index;
 
-Illustration:
+                const isCurrHeightLess = ([prevIndex, prevHeight], currHeight) => currHeight < prevHeight;
+                const canShrink = () => isCurrHeightLess(stack[stack.length - 1], heights[index]);
+                while (stack.length && canShrink()) {             /* Time O(N + N) */
+                    const [_index, _height] = stack.pop();
+                    const width = index - _index;
+                    const area = _height * width;
 
-![search-tree-oncept](https://leetcode.com/problems/longest-palindromic-subsequence/Figures/516/516-1.png)
+                    maxArea = Math.max(maxArea, area);
+                    start = _index;
+                }
 
+                stack.push([start, heights[index]]);            /* Space O(N) */
+            }
 
-```python
-class Solution:
-    def longestPalindromeSubseq(self, s: str) -> int:
-        """
-        The question here is: Is there a way to make some advantage of previous max
-
-        - Does compression help?
-        - Requires to compress together where =s
-                - does trie help?
-        att2: Using a trie? that markes nested 
-        """
-        memo = {}
-
-        def palin(l, r):
-            if (l, r) in memo:
-                return memo[(l, r)]
-            if l == r:
-                return 1
-            if l > r:
-                return 0
-            
-            
-            if s[l] == s[r]:
-                memo[(l, r)] = palin(l+1, r-1) + 2
-            else:
-                memo[(l, r)] =  max(palin(l+1, r), palin(l, r-1))
-            return memo[(l, r)]
-        return palin(0, len(s)-1)
-
-        
-```
-
-### Other Languages
-
-```cpp
-class Solution {
-public:
-    int longestPalindromeSubseq(string s) {
-        int n = s.size();
-        vector<vector<int>> memo(n, vector<int>(n));
-        return lps(s, 0, n - 1, memo);
-    }
-
-    int lps(string s, int i, int j, vector<vector<int>>& memo) {
-        if (memo[i][j] != 0) {
-            return memo[i][j];
-        }
-        if (i > j) {
-            return 0;
-        }
-        if (i == j) {
-            return 1;
+            return { stack, maxArea }
         }
 
-        if (s[i] == s[j]) {
-            memo[i][j] = lps(s, i + 1, j - 1, memo) + 2;
-        } else {
-            memo[i][j] = max(lps(s, i + 1, j, memo), lps(s, i, j - 1, memo));
-        }
-        return memo[i][j];
-    }
-};
-```
+        const getMaxArea = (heights, stack, maxArea) => {
+            for (const [index, height] of stack) {              /* Time O(N) */
+                const width = heights.length - index;
+                const area = height * width;
 
+                maxArea = Math.max(maxArea, area);
+            }
 
-```java
-class Solution {
-    public int longestPalindromeSubseq(String s) {
-        int n = s.length();
-        int[][] memo = new int[n][n];
-        return lps(s, 0, n - 1, memo);
-    }
-
-    private int lps(String s, int i, int j, int[][] memo) {
-        if (memo[i][j] != 0) {
-            return memo[i][j];
-        }
-        if (i > j) {
-            return 0;
-        }
-        if (i == j) {
-            return 1;
+            return maxArea;
         }
 
-        if (s.charAt(i) == s.charAt(j)) {
-            memo[i][j] = lps(s, i + 1, j - 1, memo) + 2;
-        } else {
-            memo[i][j] = Math.max(lps(s, i + 1, j, memo), lps(s, i, j - 1, memo));
-        }
-        return memo[i][j];
-    }
+        const { stack, maxArea } = fillStack(heights);        /* Time O(N) | Space O(N) */
+
+        return getMaxArea(heights, stack, maxArea);           /* Time O(N) */
+    };
+
+
+
 }
-```
 
 
-
-### Solution using Iterative apporach
-
-```python
-class Solution:
-    def longestPalindromeSubseq(self, s: str) -> int:
-        n = len(s)
-        dp, dpPrev = [0] * n, [0] * n
-
-        for i in range(n - 1, -1, -1):
-            dp[i] = 1
-            for j in range(i + 1, n):
-                if s[i] == s[j]:
-                    dp[j] = dpPrev[j - 1] + 2
-                else:
-                    dp[j] = max(dpPrev[j], dp[j - 1])
-            dpPrev = dp[:]
-
-        return dp[n - 1]
-```
-
-
-
-
-
-
+module.exports = { Problem: LargestRectangleArea };

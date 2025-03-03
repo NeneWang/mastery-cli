@@ -40,7 +40,7 @@ const createCompiledJson = () => {
             const prompt_file_path = getDirAbsoluteUri(PROMPT_FILE, './prompt/');
             fs.writeFile(prompt_file_path, json, (err) => {
                 if (err) throw err;
-                console.log('The file has been saved!');
+                // console.log('The file has been saved!');
             });
         })
         .catch((error) => {

@@ -17,7 +17,8 @@ class Pseudocode extends ProblemTests {
 const problems = [
     'score-of-a-string',
     'corporation_count_repetitions',
-    'longest-palindromic-subsequence'
+    'longest-palindromic-subsequence',
+    'different-ways-to-add-parentheses'
 
 ];
 
@@ -31,3 +32,4 @@ for (let problem of problems) {
 module.exports = TEST_DICTIONARY;
 
 
+ 
