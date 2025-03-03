@@ -72,7 +72,7 @@ class Quizzer {
             // Such as no internet connection
             if (debug) console.warn('Error at getting Youngest')
 
-            CONSTANTS.online = false; //Lets mark it as such case for this call.
+            Settings.online = false; //Lets mark it as such case for this call.
 
             // get random 3 list of 3 problems
             potential_questions = get_random_of_size(potential_questions, { count: limit });
@@ -491,7 +491,7 @@ class Quizzer {
                 throw ("isInvalidData: term_selected:", term_selected);
             }
 
-            const isOfflineMessage = CONSTANTS.online ? "" : `|${chalk.hex(CONSTANTS.CUTEYELLOW).inverse(' offline ')}`
+            const isOfflineMessage = Settings?.online ? "" : `|${chalk.hex(CONSTANTS.CUTEYELLOW).inverse(' offline ')}`
             console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `)}|${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` ${term_selected.category} `)}${isOfflineMessage}`);
 
             if (term_selected?.attachment ?? false) {
@@ -537,7 +537,7 @@ class Quizzer {
 
                 // console.log("Submitting answer..., for sure...")
                 this.printExample(term_selected)
-                if (constants.CONSTANTS.online) this.postCommentFromTerm(term_selected, user_res, true);
+                if (Settings?.online) this.postCommentFromTerm(term_selected, user_res, true);
                 const _ = await increasePerformance("terms");
 
 
@@ -546,7 +546,7 @@ class Quizzer {
                  * date: submission answer
                  * ....
                  */
-                if (constants.CONSTANTS.online) await this.printPreviousTerms(term_selected.formula_name)
+                if (Settings?.online) await this.printPreviousTerms(term_selected.formula_name)
             } catch (Exception) {
                 // Do nothing, doesnt matter offline.
                 console.log("- Server Offline - ")
@@ -575,8 +575,11 @@ class Quizzer {
 
             return ISANSWERCORRECT
         } catch (err) {
-            if (true) console.log("Failed at: ask_term_question |  term_selected", term_selected)
-            if (true) console.log(err)
+            if (Settings?.dev_mode){
+                console.log("Failed at: ask_term_question |  term_selected", term_selected)
+                console.log(err)
+
+            }
             return false; // if in a session, this will skip the card because this is improperly made.
         }
 
@@ -717,7 +720,7 @@ class Quizzer {
 
             }
 
-            if (CONSTANTS.online) {
+            if (Settings?.online) {
 
                 const _ = await updateConcept(question_form.formula_name, answerIsCorrect);
             }
