@@ -61,7 +61,6 @@ const cfa_interest_rates = [
         Holding period return = $1500 / $10,000 * 100\n\
         Holding period return = 15%"
     }
-    
 ]
 
 

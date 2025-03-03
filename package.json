@@ -1,12 +1,13 @@
 {
 	"name": "mastery-cli",
 	"description": "Continuous learning for engineers",
-	"version": "1.0.22",
+	"version": "1.0.27",
 	"license": "UNLICENSED",
 	"bin": {
 		"m-cli": "index.js",
 		"maid": "index.js",
-		"mastery": "index.js"
+		"mastery": "index.js",
+		"mcli": "index.js"
 	},
 	"author": {
 		"name": "nenwang",

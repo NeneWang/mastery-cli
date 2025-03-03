@@ -17,9 +17,20 @@ class Pseudocode extends ProblemTests {
 const problems = [
     'score-of-a-string',
     'corporation_count_repetitions',
+    'brick-wall',
+    'task-scheduler',
+    'find-the-celebrity',
+    'longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit',
+    'minimum-number-of-k-consecutive-bit-flips',
+    'put-boxes-into-the-warehouse-ii',
+    'binary-search-tree-to-greater-sum-tree',
+    'balance-a-binary-search-tree',
+    'count-substrings-without-repeating-character',
+    
     'longest-palindromic-subsequence',
-    'different-ways-to-add-parentheses'
-
+    
+    'longest-substring-without-repeating-characters',
+    
 ];
 
 // All problems here are pseudocodes problems. no tests.
