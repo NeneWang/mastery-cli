@@ -112,7 +112,7 @@ mcli math
 
 # Developer Notes
 
-If you are a developer feel free to contribute the project, for installing as a adeveloper:
+If you are a developer feel free to contribute the project, for installing as a  developer:
 
 Make sure you have both `git` and `node` installed.
 
@@ -125,6 +125,18 @@ npm link
 
 That's it!, you can now run `mastery` from the command line.
 
+
+### Documentation
+
+Genearate Documentaiton running:
+
+```
+npm run doc
+```
+
+Obsidian Documentation:
+
+obsidian://open?vault=GDD&file=3%20-%20projects%2FP1%20-%20Mastery%20CLI%2F1%20-%20Roadmap
 
 
 ### Organization

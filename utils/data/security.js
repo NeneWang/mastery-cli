@@ -1,7 +1,5 @@
 
 // Red Team
-const security_vulnerabilities = [];
-
 
 // Blue Team
 const securing_applications = [

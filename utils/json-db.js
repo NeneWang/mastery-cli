@@ -1,6 +1,5 @@
 
 (async () => {
-    // const { default: terminalImage } = await import('terminal-image');
     const { JsonDB, Config } = await import('node-json-db');
 
 

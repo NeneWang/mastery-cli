@@ -13,7 +13,6 @@ const { renderPromptDescription, get_random, getCurrentDateTimeIso } = require('
 const { Toggle, AutoComplete, Input } = require('enquirer');
 const { ProblemMetadata } = require('./structures');
 const fs = require('fs');
-const { show_image_if_isurl } = require('./functions');
 const Settings = require('../settings');
 const { copy } = require('copy-paste');
 
@@ -544,8 +543,6 @@ class DSATrainer {
                 }
                 question_state_flag = true;
                 
-                console.log(hintsGiven)
-                show_image_if_isurl(hintsMssage);
 
             },
             "Copy Link": async () => {

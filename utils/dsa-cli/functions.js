@@ -67,27 +67,6 @@ const getMaidDirectory = () => {
 };
 
 
-async function show_image_if_isurl(message) {
-    // check if is url if not, then just print the message
-    let is_url = message.startsWith("http"); // Includes https
-    try {
-        if (is_url) {
-
-            const { default: terminalImage } = await import('terminal-image');
-            const { default: fetch } = await import('node-fetch');
-            const response = await fetch(message);
-            const buffer = await response.arrayBuffer();
-            const image = await terminalImage.buffer(Buffer.from(buffer));
-            console.log(image);
-        } else {
-            console.log(`Hint: ${message}`)
-        }
-    }
-    catch (err) {
-        console.log("Error while attempting to fetch image", err);
-    }
-};
-
 const appendQuotes = (message) => {
     return `"${message}"`;
 };
@@ -261,31 +240,10 @@ const openEditorPlatformAgnostic = async (editor_instruction, { absolute_temp_fi
 
 
 
-async function show_image_if_isurl(message) {
-    // check if is url if not, then just print the message
-    let is_url = message.startsWith("http"); // Includes https
-    try {
-        if (is_url) {
-
-            const { default: terminalImage } = await import('terminal-image');
-            const { default: fetch } = await import('node-fetch');
-            const response = await fetch(message);
-            const buffer = await response.arrayBuffer();
-            const image = await terminalImage.buffer(Buffer.from(buffer));
-            console.log(image);
-        } else {
-            console.log(`Hint: ${message}`)
-        }
-    }
-    catch (err) {
-        console.log("Error while attempting to fetch image", err);
-    }
-};
-
 
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, appendQuotes, formatObjectFeatures, getRandomInt,
     getRandomBool, countDecimals, getMaidDirectory, getFilesInDirectory, renderPromptDescription,
-    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic, looselyDeepEqual, get_random, getCurrentDateTimeIso, show_image_if_isurl
+    writeUnresolvedClass, getCurrentDate, openEditorPlatformAgnostic, looselyDeepEqual, get_random, getCurrentDateTimeIso
 };
