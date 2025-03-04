@@ -81,3 +81,5 @@ utils/dsa-cli/data/db.json
 utils/dsa-cli/user_files/temp_problem.js
 utils/dsa-cli/user_files/temp_settings.json
 utils/dsa-cli/user_files/temp_problem.js
+.gitignore/*
+.vscode/*
