@@ -207,44 +207,6 @@ class QuizzerWithDSA extends Quizzer {
 
     }
 
-    
-
-
-
-
-    // jupyter_study_session = async () => {
-
-    //     // Pick all the available string keys.
-
-    //     const jupyter_problems = getProblemsData();
-    //     const jupyterScheduler = new TermScheduler({
-    //         cards_category: "Jupyter"
-    //     });
-    //     await jupyterScheduler.setLearningCards(jupyter_problems);
-    //     let exit = false;
-
-    //     const printCardsLeft = (cardsLeft, cardsLearnt) => {
-    //         console.log(`\nJupyter left: ${cardsLeft} || Jupyter completed: ${cardsLearnt}\n`);
-    //     }
-
-    //     let maid = new Maid();
-    //     maid.runServer();
-
-    //     while (!jupyterScheduler.is_completed && !exit) {
-    //         const [cardsLeft, cardsLearnt] = [jupyterScheduler.getCardsToLearn(), jupyterScheduler.getCardsLearnt()];
-
-    //         const card = await jupyterScheduler.getCard();
-
-    //         console.log("Card", card.problem);
-    //         const answerIsCorrect = await maid.openJupyter({ FILE: card.problem });
-
-    //         jupyterScheduler.solveCard(answerIsCorrect);
-    //         await jupyterScheduler.saveCards();
-    //         printCardsLeft(cardsLeft, cardsLearnt);
-    //     }
-
-    // }
-
 }
 
 module.exports = { QuizzerWithDSA };
