@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { StorableQueue } = require('../utils/StorableQueue');
+const { StorableQueue } = require('../src/StorableQueue');
 
 describe('Queue', () => {
     beforeEach(async () => {

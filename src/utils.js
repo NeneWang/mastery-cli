@@ -7,14 +7,14 @@ const { exec } = require('node:child_process');
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquirer');
 
 
-const init = require('../utils/init');
-const constants = require('./constants');
+const init = require('./init.js');
+const constants = require('./constants.js');
 
 const { bar, bg, annotation, radar } = chart;
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
-const { getMaidDirectory } = require('./utils_functions');
-const DSATrainer = require('./dsa-cli/dsa-trainer');
+const { getMaidDirectory } = require('./utils_functions.js');
+const DSATrainer = require('./dsa-cli/dsa-trainer.js');
 
 const Settings = require('./settings.js');
 const SettingsManager = require('./SettingsManager.js');
@@ -24,7 +24,7 @@ const DEV_MODE = Settings.dev_mode ?? false;
 
 
 const { Quizzer: FlashQuizzer } = require(
-	"./Quizzer"
+	"./Quizzer.js"
 );
 
 // https://www.npmjs.com/package/chalk

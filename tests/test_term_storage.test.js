@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { Term, TermStorage } = require('../utils/structures');
+const { Term, TermStorage } = require('../src/structures');
 
 describe("TermStorage tests", () => {
     const term1 = new Term("term1", "example1", "description1", "prompt1");

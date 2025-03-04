@@ -2,8 +2,8 @@
  * Testing the Quizzler such as adding different 
  */
 
-const utils = require('../utils/utils');
-const { TermStorage } = require('../utils/structures');
+const utils = require('../src/utils');
+const { TermStorage } = require('../src/structures');
 
 
 describe("Quizzler Terminology Tests", () => {

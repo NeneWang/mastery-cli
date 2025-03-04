@@ -1,6 +1,6 @@
 const { qmathformulas } = require('./terms_data/math_formulas.js');
 const { termJson } = require('./terms_data/terms.js');
-const { Term, Terminology, TermStorage } = require('./structures');
+const { Term, Terminology, TermStorage } = require('./structures.js');
 const { CURRENCY_SIMBOLS } = require('./terms_data/currency.js');
 
 const path = require("path");

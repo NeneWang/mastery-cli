@@ -40,7 +40,7 @@ class DataScienceExtension {
 	runServer = () => {
 
 		const projectDirectory = getMaidDirectory();
-		const jupyter_folder = "/utils/data-science-cli/problems";
+		const jupyter_folder = "/src/data-science-cli/problems";
 
 		const jupyterCommand = `jupyter notebook --notebook-dir=${projectDirectory}/${jupyter_folder}`;
 		exec(jupyterCommand);

@@ -7,16 +7,16 @@
  * @author Nelson <github.com/neneWang>
  */
 
-const cli = require('./utils/cli');
-const log = require('./utils/log');
-const utils = require('./utils/utils');
-const { increasePerformance } = require('./utils/utils');
-const constants = require('./utils/constants');
-const demos = require('./utils/demo');
-const Settings = require('./utils/settings');
-const { populateMasterDeck } = require("./utils/terms_data/terms");
-const DSATrainer = require('./utils/dsa-cli/dsa-trainer');
-const { QuizzerWithDSA } = require('./utils/QuizzerWithDSA');
+const cli = require('./src/cli');
+const log = require('./src/log');
+const utils = require('./src/utils');
+const { increasePerformance } = require('./src/utils');
+const constants = require('./src/constants');
+const demos = require('./src/demo');
+const Settings = require('./src/settings');
+const { populateMasterDeck } = require("./src/terms_data/terms");
+const DSATrainer = require('./src/dsa-cli/dsa-trainer');
+const { QuizzerWithDSA } = require('./src/QuizzerWithDSA');
 
 
 const cli_meow = cli[0]
@@ -27,7 +27,7 @@ const input = cli_meow.input;
 let { debug } = flags;
 debug = debug ?? false;
 const { getTalk, Mastery } = utils;
-const DataScienceExtension = require('./utils/extensions/data-science-cli/extension');
+const DataScienceExtension = require('./src/extensions/data-science-cli/extension');
 
 
 const { Demo, EDemo } = demos;
