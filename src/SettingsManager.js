@@ -40,7 +40,7 @@ class SettingsManager {
          */
         const user_account_id = this._settings.user_account_id;
         // If no account id then tha
-        const url = `${APIDICT.DEPLOYED_MAID}/utils/${user_account_id}/settings`;
+        const url = `${APIDICT.DEPLOYED_MAID}/src/${user_account_id}/settings`;
         axios({
             method: 'post',
             url: url,

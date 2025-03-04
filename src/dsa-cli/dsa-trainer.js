@@ -61,7 +61,7 @@ class DSATrainer {
         this.first_non_only_hard_left_category_non_hard_problems = this.getFirstNonOnlyHardLeftCategoryNonHardProblems();
         this.completed_problems_sorted_by_times_completed = this.getCompletedProblemsSortedByTimesCompleted();
 
-        this.uploadCodeFileUrl = `${constants.CONSTANTS.API_URL}/utils/upload_file`;
+        this.uploadCodeFileUrl = `${constants.CONSTANTS.API_URL}/src/upload_file`;
         this.uploadCodeMetadataUrl = `${constants.CONSTANTS.API_URL}/performance/code_file`;
     }
 
