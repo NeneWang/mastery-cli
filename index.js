@@ -14,7 +14,7 @@ const { increasePerformance } = require('./utils/utils');
 const constants = require('./utils/constants');
 const demos = require('./utils/demo');
 const Settings = require('./utils/settings');
-const { populateMasterDeck: populateMasterDeck } = require("./utils/terms_data/terms");
+const { populateMasterDeck } = require("./utils/terms_data/terms");
 const DSATrainer = require('./utils/dsa-cli/dsa-trainer');
 const { QuizzerWithDSA } = require('./utils/QuizzerWithDSA');
 
@@ -26,12 +26,20 @@ const input = cli_meow.input;
 
 let { debug } = flags;
 debug = debug ?? false;
-const { getTalk, Maid } = utils;
+const { getTalk, Mastery } = utils;
+const DataScienceExtension = require('./utils/extensions/data-science-cli/extension');
+
+
 const { Demo, EDemo } = demos;
 
+function applyMixin(targetInstance, mixin) {
+    Object.assign(targetInstance, mixin);
+}
 
 (async () => {
-	const maid = new Maid();
+	const mastery = new Mastery();
+	applyMixin(mastery, new DataScienceExtension());
+	
 
 	/**This is quite the expensive operation, ideally you put this on the end. */
 	const masterDeck = await populateMasterDeck();
@@ -44,7 +52,7 @@ const { Demo, EDemo } = demos;
 	input.includes(options[0]) && cli_meow.showHelp(0);
 	debug && log(flags);
 
-	maid.clearOnTalk = true;
+	mastery.clearOnTalk = true;
 
 
 	if (input.includes(cmInfo.commands.chart.code)) {
@@ -55,19 +63,19 @@ const { Demo, EDemo } = demos;
 
 	}
 	else if (input.includes(cmInfo.commands.code.code)) {
-		maid.tellCurrentDirectory();
+		mastery.tellCurrentDirectory();
 	}
 	else if (input.includes(cmInfo.commands.jupyter.code)) {
 		// utils.openRandomJupyter();
-		const res = await maid.openRandomJupyter();
+		const res = await mastery.openRandomJupyter();
 		console.log("Maid responded with", res);
 	}
 	else if (input.includes(cmInfo.commands.report.code)) {
-		maid.dayReport();
+		mastery.dayReport();
 	}
 	else if (input.includes(cmInfo.commands.talk.code)) {
 		let message = await getTalk(flags);
-		maid.say(message, true);
+		mastery.say(message, true);
 	}
 	else if (input.includes(cmInfo.commands.coa.code)) {
 		let comments_to_populate = [];
@@ -77,10 +85,10 @@ const { Demo, EDemo } = demos;
 		if (Settings.ask_quiz_when_commit && commit_res) {
 			const _ = await mQuizer.askQuestion();
 		}
-		maid.populateMissingReport();
+		mastery.populateMissingReport();
 		
 		
-		await maid.provideMissingReport({ ask_if_dsa_missing: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
+		await mastery.provideMissingReport({ ask_if_dsa_missing: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
 		
 		comments_to_populate = commit_res.comments_to_populate;
 
@@ -89,17 +97,17 @@ const { Demo, EDemo } = demos;
 			utils.printComments(comments_to_populate);
 		}
 		
-		await maid.askToClean();
+		await mastery.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.services.code)) {
 		// Gets all services, keeps asking for things here, which service to get
-		maid.services();
+		mastery.services();
 	}
 	else if (input.includes(cmInfo.commands.ask.code)) {
-		maid.ask();
+		mastery.ask();
 	}
 	else if (input.includes(cmInfo.commands.update.code)) {
-		maid.say("Auto updating sir!")
+		mastery.say("Auto updating sir!")
 		utils.autorelease()
 	}
 	else if (input.includes(cmInfo.commands.math.code)) {
@@ -112,7 +120,7 @@ const { Demo, EDemo } = demos;
 		mQuizer.pick_and_ask_term_question();
 	}
 	else if (input.includes(cmInfo.commands.clean.code)) {
-		maid.askToClean();
+		mastery.askToClean();
 	}
 	else if (input.includes(cmInfo.commands.ses.code)) {
 		mQuizer.study_session(masterDeck);
@@ -133,7 +141,7 @@ const { Demo, EDemo } = demos;
 
 	}
 	else if (input.includes(cmInfo.commands.jses.code)) {
-		mQuizer.jupyter_study_session();
+		// mQuizer.jupyter_study_session();
 	}
 	else if (input.includes(cmInfo.commands.dsa.code)) {
 		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
@@ -168,7 +176,7 @@ const { Demo, EDemo } = demos;
 		console.log("problem_response of cloze", problem_response)
 	}
 	else if(input.includes(cmInfo.commands.login.code)){
-		await maid.login()
+		await mastery.login()
 
 	}else if(input.includes(cmInfo.commands.backup.code)){
 		
@@ -177,7 +185,7 @@ const { Demo, EDemo } = demos;
 	}	
 	else {
 		cli_meow.showHelp(0);
-		maid.askToClean();
+		mastery.askToClean();
 	}
 
 

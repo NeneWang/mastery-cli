@@ -100,7 +100,6 @@ class FeatureExtraction {
 };
 
 
-const { getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
 
 function withOnlineCheck(fn) {
 	return async function (...args) {
@@ -117,7 +116,7 @@ function withOnlineCheck(fn) {
 
 
 
-class Maid {
+class Mastery {
 
 	constructor(name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
 		this.name = name;
@@ -217,42 +216,6 @@ class Maid {
 		}
 	}
 
-	runServer = () => {
-
-		const projectDirectory = getMaidDirectory();
-		const jupyter_folder = "/utils/data-science-cli/problems";
-
-		const jupyterCommand = `jupyter notebook --notebook-dir=${projectDirectory}/${jupyter_folder}`;
-		exec(jupyterCommand);
-	}
-
-	openJupyter = async ({ FILE = "/machine_learning/01_pandas.ipynb" } = {}) => {
-
-		copyFileToTemp(FILE);
-
-		const correctPrompt = new Confirm({
-			name: 'notebook',
-			message: "Was the notebook solved correctly?",
-			initial: true
-		});
-		const response = await correctPrompt.run();
-		if (response) {
-			await increasePerformance("jupyter");
-		}
-		return response;
-
-	}
-
-	/**
-	 * Opens a random jupyter notebook from the list of problems
-	 * @returns {bool} if the problem was solved correctly
-	 */
-	openRandomJupyter = async () => {
-		const selectedProblem = getRandomProblem();
-		this.runServer();
-
-		return this.openJupyter({ FILE: "/" + selectedProblem.problem });
-	}
 
 
 	/**
@@ -1227,6 +1190,6 @@ const autorelease = () => {
 
 module.exports = {
 	getTalk, commitpush, autorelease, printComments,
-	Maid, getToday, FlashQuizzer, increasePerformance,
+	Mastery, getToday, FlashQuizzer, increasePerformance,
 	commitCategory, logCommitIfSpecialCategory, postCommentFromTerm, getComments
 };
