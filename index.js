@@ -14,7 +14,7 @@ const { increasePerformance } = require('./utils/utils');
 const constants = require('./utils/constants');
 const demos = require('./utils/demo');
 const Settings = require('./utils/settings');
-const { populateMasterDeck: populateMasterDeck } = require("./utils/data/terms");
+const { populateMasterDeck: populateMasterDeck } = require("./utils/terms_data/terms");
 const DSATrainer = require('./utils/dsa-cli/dsa-trainer');
 const { QuizzerWithDSA } = require('./utils/QuizzerWithDSA');
 

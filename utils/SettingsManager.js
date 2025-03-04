@@ -7,7 +7,7 @@ const { APIDICT } = require('./constants');
 class SettingsManager {
     constructor({
     } = {}) {
-        this.settings_path = getDirAbsoluteUri(`data/settings.json`);
+        this.settings_path = getDirAbsoluteUri(`./settings.json`);
         this._settings = require(this.settings_path);
     }
 
