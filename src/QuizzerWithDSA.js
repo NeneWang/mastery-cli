@@ -1,5 +1,4 @@
 const { Quizzer } = require('./Quizzer');
-const { increasePerformance } = require('./utils');
 const constants = require('./constants');
 const DSATrainer = require('./extensions/dsa-cli/dsa-trainer');
 const DEBUG = false;
@@ -43,38 +42,24 @@ class QuizzerWithDSA extends Quizzer {
             switch (problem_type_selected) {
                 case 'math':
                     const math_answered = await this.ask_math_question({ exitMethod: exitMethod });
-                    if (math_answered && increase_performance) {
-
-                        increasePerformance('math_ss');
-
-                    }
+                    
                     return math_answered;
 
                 case 'term':
                     if (force_mode) {
                         const term_answered = await this.forceLearnTermQuestions({ exitMethod: exitMethod });
-                        if (term_answered && increase_performance) {
-
-                            increasePerformance('terms');
-
-                        }
+                        
                         return term_answered;
                     } else {
 
                         const term_answered = await this.pick_and_ask_term_question({ exitMethod: exitMethod });
-                        if (term_answered && increase_performance) {
-
-                            increasePerformance('terms');
-
-                        }
+                       
                     }
 
                 case 'algorithm':
                     // Wont be called for now
                     const algo_answered = await this.ask_algorithm_question({ exitMethod: exitMethod });
-                    if (algo_answered && increase_performance) {
-                        increasePerformance('algo_w');
-                    }
+                   
 
                     return algo_answered;
 
