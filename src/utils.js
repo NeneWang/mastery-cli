@@ -12,6 +12,7 @@ const constants = require('./constants.js');
 
 const { bar, bg, annotation, radar } = chart;
 
+const { QuizzerWithDSA } = require('./QuizzerWithDSA');
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 const { getMaidDirectory } = require('./utils_functions.js');
 
@@ -117,12 +118,14 @@ function withOnlineCheck(fn) {
 
 class Mastery {
 
-	constructor(Settings = {}, name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
+	constructor(Settings = {},masterDeck,name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
 		this.Settings = Settings;
 		this.name = name;
 		this.headerColor = headerColor;
 		this.clearOnTalk = clearOnTalk;
 		this.missing_features_today = []; //To be populated when required.
+
+		this.mQuizer = new QuizzerWithDSA(constants.qmathformulas, constants.qmathenabled, masterDeck);
 
 		this.populateMissingReport = withOnlineCheck(this.populateMissingReport.bind(this));
 		this.login = withOnlineCheck(this.login.bind(this));
@@ -135,6 +138,25 @@ class Mastery {
 
 		this.commandHandlers = {
 			'hello': ()=>{this.say('Hello!')},
+			'code': ()=>{this.tellCurrentDirectory()},
+			'jupyter': ()=>{this.openRandomJupyter()},
+			'report': ()=>{this.dayReport()},
+			'talk': ()=>{this.ask()},
+			'coa':async  ()=>{
+				let comments_to_populate = [];
+				const commit_res = await commitpush();
+
+				if (Settings.ask_quiz_when_commit && commit_res) {
+					const _ = await this.mQuizer.askQuestion();
+				}
+				mastery.populateMissingReport();
+			},
+			'services': ()=>{this.services()},
+			'math': ()=>{this.mQuizer.ask_math_question()},
+			'quiz': ()=>{this.mQuizer.askQuestion()},
+			'term': ()=>{this.mQuizer.pick_and_ask_term_question()},
+			'clean': ()=>{this.askToClean()},
+
 		};
 	}
 

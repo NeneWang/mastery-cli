@@ -52,31 +52,35 @@ function applyMixin(targetInstance, mixin) {
 
 
 (async () => {
-	const mastery = new Mastery(Settings);
+	const masterDeck = await populateMasterDeck();
+	const mastery = new Mastery(Settings, masterDeck);
 	applyMixin(mastery, new DataScienceExtension);
 	applyMixin(mastery, new MasteryDSAExtension);
 	
 
 	/**This is quite the expensive operation, ideally you put this on the end. */
-	const masterDeck = await populateMasterDeck();
 	// const dsaTrainer = new DSATrainer({
 	// 	skip_problems: ["hello-world", "simple-sum"]
 	// });
 
-	const mQuizer = new QuizzerWithDSA(constants.qmathformulas, constants.qmathenabled, masterDeck);
 	const options = Object.keys(cmInfo.commands);
 	input.includes(options[0]) && cli_meow.showHelp(0);
 	debug && log(flags);
 
 	mastery.clearOnTalk = true;
 
-
+	var functionCalled = false;
 	for (const command of Object.keys(mastery.commandHandlers)) {
         if (input.includes(command)) {
+			functionCalled = true;
             const res = await mastery.commandHandlers[command]();
             return; // Stop after executing the first matched command
         }
     }
+	if (!functionCalled) {
+		cli_meow.showHelp(0);
+		mastery.askToClean();
+	}
 
 	// if (input.includes(cmInfo.commands.chart.code)) {
 	// 	// Demo for showing charts
