@@ -779,7 +779,7 @@ Waiting for pgAdmin 4 to start... * Increase the performance of a feature; Day p
  * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
  * 
  */
-increasePerformance = withOnlineCheck(async (feature_name, increaseBY = 1, debug = true, account_id = Settings.account_id ?? 1) => {
+increasePerformance = async (feature_name, increaseBY = 1, debug = true, account_id = Settings.account_id ?? 1) => {
 	
 	try {
 		console.log(`Increasing performance ${feature_name} for ${account_id}`)
@@ -789,7 +789,7 @@ increasePerformance = withOnlineCheck(async (feature_name, increaseBY = 1, debug
 		if (debug) console.warn(err);
 	}
 
-})
+}
 
 
 /**
