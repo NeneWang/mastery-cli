@@ -781,6 +781,14 @@ Waiting for pgAdmin 4 to start... * Increase the performance of a feature; Day p
  */
 increasePerformance = async (feature_name, increaseBY = 1, debug = true, account_id = Settings.account_id ?? 1) => {
 	
+	if(!Settings?.online){
+		if(!Settings?.dev_mode){
+			console.log('Offline, modify in data\\settings.json');
+		}
+		return {};
+	}
+
+
 	try {
 		console.log(`Increasing performance ${feature_name} for ${account_id}`)
 		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}&account_id=${account_id}`)
