@@ -1,6 +1,7 @@
 const { JsonDB, Config } = require("node-json-db");
 const { getCurrentDate, getDirAbsoluteUri } = require("./functions");
 const path = require('path');
+const fs = require('fs');
 const DEBUG = false;
 
 
@@ -13,12 +14,25 @@ class StorableReport {
         this.autosave = autosave;
 
         const fullPath = path.join(__dirname, 'data', 'db.json'); // assuming the file should be stored in a "data" subdirectory
+        this.fullPath = fullPath;
+        try {
+            this.db = new JsonDB(new Config(fullPath, true, false, "/"));
+        }
+        catch (error) {
+            this.createBackup();
 
-        this.db = new JsonDB(new Config(fullPath, true, false, "/"));
+        }
         this.getReport().then(reportData => {
             if (DEBUG) console.log("ReportData", reportData);
             this.report = reportData;
         });
+    }
+
+
+
+    createBackup() {
+        const backupPath = `${this.fullPath}.${Date.now()}.bak`;
+        fs.renameSync(this.fullPath, backupPath);
     }
 
     getDate() {
@@ -104,8 +118,18 @@ class StorableReport {
             this.report = data;
             return data;
         } catch (error) {
-            console.error(error);
-            return {};
+            try {
+
+                this.createBackup();
+                const data = await this.db.getData("/");
+                this.report = data;
+                return data;
+            } catch (error) {
+
+                console.log('error at get')
+                console.error(error);
+                return {};
+            }
         }
     }
 

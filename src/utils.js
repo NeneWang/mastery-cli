@@ -14,7 +14,6 @@ const { bar, bg, annotation, radar } = chart;
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 const { getMaidDirectory } = require('./utils_functions.js');
-const DSATrainer = require('./dsa-cli/dsa-trainer.js');
 
 const Settings = require('./settings.js');
 const SettingsManager = require('./SettingsManager.js');
@@ -118,7 +117,8 @@ function withOnlineCheck(fn) {
 
 class Mastery {
 
-	constructor(name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
+	constructor(Settings = {}, name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
+		this.Settings = Settings;
 		this.name = name;
 		this.headerColor = headerColor;
 		this.clearOnTalk = clearOnTalk;
@@ -133,7 +133,9 @@ class Mastery {
 		this.services = withOnlineCheck(this.services.bind(this));
 		
 
-
+		this.commandHandlers = {
+			'hello': ()=>{this.say('Hello!')},
+		};
 	}
 
 	
@@ -282,10 +284,6 @@ class Mastery {
 				const _ = await this.populateMissingReport();
 			}
 
-			if (ask_if_dsa_missing) {
-
-				await this.requests_if_run_dsa_trainer(this.missingFeatReport);
-			}
 			if (Settings?.report_show?.obj_ournal) {
 				const journal_notes = Settings.journal_notes;
 				console.log(journal_notes);
@@ -297,37 +295,6 @@ class Mastery {
 		}
 	}
 
-	/**
-	 * if `algo` not included on the missing Feat Report: 
-	 * 	- ask to run `algo`
-	 * 	- if yes, run `algo`
-	 * 
-	 */
-	requests_if_run_dsa_trainer = async (missingFeatReport) => {
-		const algo_missing = missingFeatReport.includes(CONSTANTS.algo_name);
-		if (algo_missing) {
-
-
-
-			const dsaPrompt = new Confirm({
-				name: 'dsa',
-				message: "Daily DSA Missing; Run algorithms?",
-				initial: true
-			});
-			const response = await dsaPrompt.run();
-			if (response) {
-				const dsaTrainer = new DSATrainer(
-
-				);
-				const dsa_is_correct = await dsaTrainer.showRecommendedProblems();
-
-				if (dsa_is_correct) {
-					await increasePerformance("algo");
-				}
-			}
-		}
-		return;
-	}
 
 
 	/**

@@ -13,7 +13,7 @@ const { renderPromptDescription, get_random, getCurrentDateTimeIso } = require('
 const { Toggle, AutoComplete, Input } = require('enquirer');
 const { ProblemMetadata } = require('./structures');
 const fs = require('fs');
-const Settings = require('../settings');
+const Settings = require('../../settings');
 const { copy } = require('copy-paste');
 
 
@@ -337,7 +337,7 @@ class DSATrainer {
         if (populate_problem) {
 
             if (populate_with_cloze_filepath != "") {
-
+                    
                 this.problems_manager.populateTemplate({ file_path: populate_with_cloze_filepath }, { base: base });
             } else {
 
@@ -399,6 +399,8 @@ class DSATrainer {
     async openProblemMetadataInTerminal(problem, { copy_to_clipboard=false, open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
 
         let problem_extension='.js'
+        
+        console.log('OPEN METADATA');
         let problem_details = this.problems_manager.getProblem(problem.slug);
         /**
             slug: 'character-replacement',
@@ -413,6 +415,7 @@ class DSATrainer {
 
         let promblem_prompt = await getPromptDict(problem.slug);
 
+        console.log('OPEN METADATA');
 
 
         if (DEBUG) console.log("Problem prompt selected: ", promblem_prompt, "for problem", problem, "cloze?", problem.is_cloze);
@@ -476,6 +479,9 @@ class DSATrainer {
         //     this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_solution: true, copy_to_clipboard: true });
         //     // Copy at problem to clipboard
         // }else{
+
+
+        console.log('GOT HERE');
             await this.openProblemMetadataInTerminal(problem);
 
         // }
@@ -485,8 +491,11 @@ class DSATrainer {
         let hints = problem
         let question_state_flag = true;
         let did_pass_all_tests_before = false;
+
+        console.log('GOT HERE');
         let cloze_problem_list = this.problems_manager.getProblemClozes(problem.slug);
 
+        console.log('GOT HERE');
         const choices = {
 
             "Modify": async () => {
@@ -787,11 +796,12 @@ class DSATrainer {
 
         const problem_selected = await prompt.run();
 
-
         const getProblem = (choice_selected) => {
+
             if (choice_selected == current_problem_prompt) {
                 return this.problems_manager.getProblem(this.getCurrentProblem());
             }
+
             const problem_slug = formattedProblems[problem_selected];
             const problem = this.problems_manager.getProblem(problem_slug);
             this.setCurrentProblem(problem_slug);
@@ -802,7 +812,9 @@ class DSATrainer {
         // return await this.openAndTest(problem);
 
         const problem = getProblem(problem_selected);
-        const is_new_problem = problem_selected != current_problem_prompt;
+
+        // const is_new_problem = problem_selected != current_problem_prompt;
+        const is_new_problem = true;
         const problem_response = await this.solveProblem(problem, { populate_problem: is_new_problem });
 
         problem_response.is_problem_solved = problem_response.status == constants.ProblemStatus.solved;

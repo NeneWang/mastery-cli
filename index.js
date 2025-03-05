@@ -15,7 +15,6 @@ const constants = require('./src/constants');
 const demos = require('./src/demo');
 const Settings = require('./src/settings');
 const { populateMasterDeck } = require("./src/terms_data/terms");
-const DSATrainer = require('./src/dsa-cli/dsa-trainer');
 const { QuizzerWithDSA } = require('./src/QuizzerWithDSA');
 
 
@@ -26,26 +25,43 @@ const input = cli_meow.input;
 
 let { debug } = flags;
 debug = debug ?? false;
+
+
 const { getTalk, Mastery } = utils;
+
+
+// extensions TODO: Automate this things once located at the extensions folder
+
+const DSATrainer = require('./src/extensions/dsa-cli/dsa-trainer');
 const DataScienceExtension = require('./src/extensions/data-science-cli/extension');
+const MasteryDSAExtension = require('./src/extensions/dsa-cli/extension');
 
 
 const { Demo, EDemo } = demos;
 
 function applyMixin(targetInstance, mixin) {
     Object.assign(targetInstance, mixin);
+
+    if (mixin.getHandles) {
+        const commands = mixin.getHandles({flags: flags});
+        Object.entries(commands).forEach(([command, handler]) => {
+            targetInstance.commandHandlers[command] = handler.bind(targetInstance);
+        });
+    }
 }
 
+
 (async () => {
-	const mastery = new Mastery();
-	applyMixin(mastery, new DataScienceExtension());
+	const mastery = new Mastery(Settings);
+	applyMixin(mastery, new DataScienceExtension);
+	applyMixin(mastery, new MasteryDSAExtension);
 	
 
 	/**This is quite the expensive operation, ideally you put this on the end. */
 	const masterDeck = await populateMasterDeck();
-	const dsaTrainer = new DSATrainer({
-		skip_problems: ["hello-world", "simple-sum"]
-	});
+	// const dsaTrainer = new DSATrainer({
+	// 	skip_problems: ["hello-world", "simple-sum"]
+	// });
 
 	const mQuizer = new QuizzerWithDSA(constants.qmathformulas, constants.qmathenabled, masterDeck);
 	const options = Object.keys(cmInfo.commands);
@@ -55,138 +71,109 @@ function applyMixin(targetInstance, mixin) {
 	mastery.clearOnTalk = true;
 
 
-	if (input.includes(cmInfo.commands.chart.code)) {
-		// Demo for showing charts
-		const demo = new Demo;
-		demo.chartDemo(EDemo.BAR);
-		demo.heatmap();
+	for (const command of Object.keys(mastery.commandHandlers)) {
+        if (input.includes(command)) {
+            const res = await mastery.commandHandlers[command]();
+            return; // Stop after executing the first matched command
+        }
+    }
 
-	}
-	else if (input.includes(cmInfo.commands.code.code)) {
-		mastery.tellCurrentDirectory();
-	}
-	else if (input.includes(cmInfo.commands.jupyter.code)) {
-		// utils.openRandomJupyter();
-		const res = await mastery.openRandomJupyter();
-		console.log("Maid responded with", res);
-	}
-	else if (input.includes(cmInfo.commands.report.code)) {
-		mastery.dayReport();
-	}
-	else if (input.includes(cmInfo.commands.talk.code)) {
-		let message = await getTalk(flags);
-		mastery.say(message, true);
-	}
-	else if (input.includes(cmInfo.commands.coa.code)) {
-		let comments_to_populate = [];
-		// Slight optimization.
-		const commit_res = await utils.commitpush();
+	// if (input.includes(cmInfo.commands.chart.code)) {
+	// 	// Demo for showing charts
+	// 	const demo = new Demo;
+	// 	demo.chartDemo(EDemo.BAR);
+	// 	demo.heatmap();
+
+	// }
+	// else if (input.includes(cmInfo.commands.code.code)) {
+	// 	mastery.tellCurrentDirectory();
+	// }
+	// else if (input.includes(cmInfo.commands.jupyter.code)) {
+	// 	const res = await mastery.openRandomJupyter();
+	// 	console.log("Maid responded with", res);
+	// }
+	// else if (input.includes(cmInfo.commands.report.code)) {
+	// 	mastery.dayReport();
+	// }
+	// else if (input.includes(cmInfo.commands.talk.code)) {
+	// 	let message = await getTalk(flags);
+	// 	mastery.say(message, true);
+	// }
+	// else if (input.includes(cmInfo.commands.coa.code)) {
+	// 	let comments_to_populate = [];
+	// 	// Slight optimization.
+	// 	const commit_res = await utils.commitpush();
 		
-		if (Settings.ask_quiz_when_commit && commit_res) {
-			const _ = await mQuizer.askQuestion();
-		}
-		mastery.populateMissingReport();
+	// 	if (Settings.ask_quiz_when_commit && commit_res) {
+	// 		const _ = await mQuizer.askQuestion();
+	// 	}
+	// 	mastery.populateMissingReport();
 		
 		
-		await mastery.provideMissingReport({ ask_if_dsa_missing: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
+	// 	await mastery.provideMissingReport({ ask_if_dsa_missing: true }); // In hopes that it is already populated because ask question shouldbe fairly fast.
 		
-		comments_to_populate = commit_res.comments_to_populate;
+	// 	comments_to_populate = commit_res.comments_to_populate;
 
-		if (Settings.show_past_commits_features_after_quiz) {
+	// 	if (Settings.show_past_commits_features_after_quiz) {
 
-			utils.printComments(comments_to_populate);
-		}
+	// 		utils.printComments(comments_to_populate);
+	// 	}
 		
-		await mastery.askToClean();
-	}
-	else if (input.includes(cmInfo.commands.services.code)) {
-		// Gets all services, keeps asking for things here, which service to get
-		mastery.services();
-	}
-	else if (input.includes(cmInfo.commands.ask.code)) {
-		mastery.ask();
-	}
-	else if (input.includes(cmInfo.commands.update.code)) {
-		mastery.say("Auto updating sir!")
-		utils.autorelease()
-	}
-	else if (input.includes(cmInfo.commands.math.code)) {
-		mQuizer.ask_math_question();
-	}
-	else if (input.includes(cmInfo.commands.quiz.code)) {
-		mQuizer.askQuestion();
-	}
-	else if (input.includes(cmInfo.commands.term.code)) {
-		mQuizer.pick_and_ask_term_question();
-	}
-	else if (input.includes(cmInfo.commands.clean.code)) {
-		mastery.askToClean();
-	}
-	else if (input.includes(cmInfo.commands.ses.code)) {
-		mQuizer.study_session(masterDeck);
-	}
-	else if (input.includes(cmInfo.commands.cses.code)) {
-		let reset = false;
-		if (flags.reset) {
-			reset = true;
-		}
-		mQuizer.cloze_study_session({ reset_scheduler: reset });
-	}
-	else if (input.includes(cmInfo.commands.amses.code)) {
-		let reset = false;
-		if (flags.reset) {
-			reset = true;
-		}
-		mQuizer.algorithm_mastery_session();
+	// 	await mastery.askToClean();
+	// }
+	// else if (input.includes(cmInfo.commands.services.code)) {
+	// 	// Gets all services, keeps asking for things here, which service to get
+	// 	mastery.services();
+	// }
+	// else if (input.includes(cmInfo.commands.ask.code)) {
+	// 	mastery.ask();
+	// }
+	// else if (input.includes(cmInfo.commands.update.code)) {
+	// 	mastery.say("Auto updating sir!")
+	// 	utils.autorelease()
+	// }
+	// else if (input.includes(cmInfo.commands.math.code)) {
+	// 	mQuizer.ask_math_question();
+	// }
+	// else if (input.includes(cmInfo.commands.quiz.code)) {
+	// 	mQuizer.askQuestion();
+	// }
+	// else if (input.includes(cmInfo.commands.term.code)) {
+	// 	mQuizer.pick_and_ask_term_question();
+	// }
+	// else if (input.includes(cmInfo.commands.clean.code)) {
+	// 	mastery.askToClean();
+	// }
+	// else if (input.includes(cmInfo.commands.ses.code)) {
+	// 	mQuizer.study_session(masterDeck);
+	// }
+	// else if (input.includes(cmInfo.commands.cses.code)) {
+	// 	let reset = false;
+	// 	if (flags.reset) {
+	// 		reset = true;
+	// 	}
+	// 	mQuizer.cloze_study_session({ reset_scheduler: reset });
+	// }
+	// else if (input.includes(cmInfo.commands.amses.code)) {
+	// 	let reset = false;
+	// 	if (flags.reset) {
+	// 		reset = true;
+	// 	}
+	// 	mQuizer.algorithm_mastery_session();
 
-	}
-	else if (input.includes(cmInfo.commands.jses.code)) {
-		// mQuizer.jupyter_study_session();
-	}
-	else if (input.includes(cmInfo.commands.dsa.code)) {
-		// const dsa_is_correct = await dsaTrainer.openRandomProblem();
+	// }
+	// else if(input.includes(cmInfo.commands.login.code)){
+	// 	await mastery.login()
 
-		const updateAlgorithmPerformance = (problem_response) => {
-			if (Settings.dev_mode) console.log("updateAlgorithmPerformance: ", problem_response);
-
-			const dsa_is_correct = problem_response.is_problem_solved;
-			if (dsa_is_correct) {
-				(async () => {
-
-					await increasePerformance("algo_w", problem_response.score_to_increase);
-					await increasePerformance("algo", 1);
-
-				})();
-
-			}
-		}
-
-		if (flags.all) {
-			console.log("all")
-			const problem_response = await dsaTrainer.showMenuOfProblems();
-			updateAlgorithmPerformance(problem_response);
-		} else {
-			const problem_response = await dsaTrainer.showRecommendedProblems();
-			updateAlgorithmPerformance(problem_response);
-		}
-
-	}
-	else if (input.includes(cmInfo.commands.cloze.code)) {
-		const problem_response = await dsaTrainer.openRandomClozeDSAProblem();
-		console.log("problem_response of cloze", problem_response)
-	}
-	else if(input.includes(cmInfo.commands.login.code)){
-		await mastery.login()
-
-	}else if(input.includes(cmInfo.commands.backup.code)){
+	// }else if(input.includes(cmInfo.commands.backup.code)){
 		
-		// maid.backup()
+	// 	// maid.backup()
 
-	}	
-	else {
-		cli_meow.showHelp(0);
-		mastery.askToClean();
-	}
+	// }	
+	// else {
+	// 	cli_meow.showHelp(0);
+	// 	mastery.askToClean();
+	// }
 
 
 })();

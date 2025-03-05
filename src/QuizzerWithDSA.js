@@ -1,10 +1,10 @@
 const { Quizzer } = require('./Quizzer');
 const { Mastery: Maid, increasePerformance } = require('./utils');
 const constants = require('./constants');
-const DSATrainer = require('./dsa-cli/dsa-trainer');
+const DSATrainer = require('./extensions/dsa-cli/dsa-trainer');
 const DEBUG = false;
-const { cloze_problems_list } = require('./dsa-cli/cloze');
-const DSAConstants = require('./dsa-cli/constants');
+const { cloze_problems_list } = require('./extensions/dsa-cli/cloze');
+const DSAConstants = require('./extensions/dsa-cli/constants');
 // const { getProblemsData, getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
 
 const { TermScheduler } = require('./termScheduler');
