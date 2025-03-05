@@ -149,7 +149,7 @@ class Mastery {
 				if (Settings.ask_quiz_when_commit && commit_res) {
 					const _ = await this.mQuizer.askQuestion();
 				}
-				mastery.populateMissingReport();
+				this.populateMissingReport();
 			},
 			'services': ()=>{this.services()},
 			'math': ()=>{this.mQuizer.ask_math_question()},
