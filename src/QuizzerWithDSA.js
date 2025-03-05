@@ -1,5 +1,5 @@
 const { Quizzer } = require('./Quizzer');
-const { Mastery: Maid, increasePerformance } = require('./utils');
+const { increasePerformance } = require('./utils');
 const constants = require('./constants');
 const DSATrainer = require('./extensions/dsa-cli/dsa-trainer');
 const DEBUG = false;
