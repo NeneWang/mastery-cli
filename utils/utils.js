@@ -98,7 +98,6 @@ class FeatureExtraction {
 };
 
 
-const { getRandomProblem, copyFileToTemp } = require('./data-science-cli/index');
 const { get } = require('node:http');
 const { strict } = require('node:assert');
 
@@ -134,34 +133,6 @@ class Maid {
 
 		const jupyterCommand = `jupyter notebook --notebook-dir=${projectDirectory}/${jupyter_folder}`;
 		exec(jupyterCommand);
-	}
-
-	openJupyter = async ({ FILE = "/machine_learning/01_pandas.ipynb" } = {}) => {
-
-		copyFileToTemp(FILE);
-
-		const correctPrompt = new Confirm({
-			name: 'notebook',
-			message: "Was the notebook solved correctly?",
-			initial: true
-		});
-		const response = await correctPrompt.run();
-		if (response) {
-			await increasePerformance("jupyter");
-		}
-		return response;
-
-	}
-
-	/**
-	 * Opens a random jupyter notebook from the list of problems
-	 * @returns {bool} if the problem was solved correctly
-	 */
-	openRandomJupyter = async () => {
-		const selectedProblem = getRandomProblem();
-		this.runServer();
-
-		return this.openJupyter({ FILE: "/" + selectedProblem.problem });
 	}
 
 
@@ -503,11 +474,11 @@ class Maid {
 	services = async () => {
 
 		const choices = [
-			'get_credential',
-			'forecast_costs',
-			'usd_to_ars',
-			'currency_exchange',
-			'create_credential',
+			// 'get_credential',
+			// 'forecast_costs',
+			// 'usd_to_ars',
+			// 'currency_exchange',
+			// 'create_credential',
 			'swap_double_single_quotes'
 		]
 

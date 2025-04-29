@@ -13,8 +13,6 @@
   "opts": {
     "recurse": true,
     "destination": "./docs/",
-    "template": "./custom-template",
-    "tutorials": "./tutorials",
-    "readme": "./tutorials/getting-started.md"
+    "template": "./custom_modules/custom-template"
   }
 }
