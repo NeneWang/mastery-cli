@@ -100,6 +100,8 @@ class FeatureExtraction {
 };
 
 
+const { get } = require('node:http');
+const { strict } = require('node:assert');
 
 function withOnlineCheck(fn) {
 	return async function (...args) {
@@ -231,15 +233,17 @@ class Mastery {
 	tellCurrentDirectory = () => {
 		const projectDirectory = getMaidDirectory();
 		this.say(projectDirectory);
-		try{
-			
-			clipboard.copy(projectDirectory);
-		}
-		catch(err){
-			// console.log("Error copying to clipboard", err);
-		}
+		clipboard.copy(projectDirectory);
 	}
 
+	runServer = () => {
+
+		const projectDirectory = getMaidDirectory();
+		const jupyter_folder = "/utils/data-science-cli/problems";
+
+		const jupyterCommand = `jupyter notebook --notebook-dir=${projectDirectory}/${jupyter_folder}`;
+		exec(jupyterCommand);
+	}
 
 
 	/**
@@ -543,11 +547,11 @@ class Mastery {
 	services = async () => {
 
 		const choices = [
-			'get_credential',
-			'forecast_costs',
-			'usd_to_ars',
-			'currency_exchange',
-			'create_credential',
+			// 'get_credential',
+			// 'forecast_costs',
+			// 'usd_to_ars',
+			// 'currency_exchange',
+			// 'create_credential',
 			'swap_double_single_quotes'
 		]
 
