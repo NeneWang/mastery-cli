@@ -1189,6 +1189,11 @@ const autorelease = () => {
 	}
 }
 
+
+const inreasePerformanceOffline = (feature_name, increaseBY = 1, debug = true) => {
+
+}
+
 module.exports = {
 	getTalk, commitpush, autorelease, printComments,
 	Mastery, getToday, FlashQuizzer, increasePerformance,

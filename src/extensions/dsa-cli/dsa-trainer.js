@@ -14,7 +14,6 @@ const { Toggle, AutoComplete, Input } = require('enquirer');
 const { ProblemMetadata } = require('./structures');
 const fs = require('fs');
 const Settings = require('../../settings');
-const { copy } = require('copy-paste');
 
 
 const DEBUG = false;

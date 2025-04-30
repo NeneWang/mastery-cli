@@ -4,7 +4,7 @@ class StorableQueue {
     constructor({ name = "" } = {}) {
         this.elements = [];
         this.name = name;
-        this.absolute_uri = getDirAbsoluteUri(`temp/${this.name}`);
+        this.absolute_uri = getDirAbsoluteUri(`./user_data/temp/${this.name}`);
     }
 
     async load() {

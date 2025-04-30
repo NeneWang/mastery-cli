@@ -76,67 +76,6 @@ const getMaidDirectory = () => {
 };
 
 
-/**
- * Shows an image, if it is a url then it will fetch it, otherwise it will read it from the local file
- * @param {string} image_file Image of the file to show
- * @param {is_url} is_url Whether the image is a url or not
- */
-async function show_image(image_file, { is_url = false } = {}) {
-    // let ima
-    // let image_file_dir = is_url ? image_file : getDirAbsoluteUri(image_file);
-    // try {
-    //     if (is_url) {
-
-    //         const { default: terminalImage } = await import('terminal-image');
-    //         const {default: fetch} = await import('node-fetch');
-    //         const response = await fetch(image_file_dir);
-    //         const buffer = await response.arrayBuffer();
-    //         const image = await terminalImage.buffer(Buffer.from(buffer));
-    //         console.log(image);
-    //     } else {
-
-    //         //If it is not url, finds the absolute path of the local file
-    //         const fs = await import('fs').then((mod) => mod.promises);
-    //         const { default: terminalImage } = await import('terminal-image');
-    //         // console.log("reading from path: " + image_file_dir)node
-    //         const data = await fs.readFile(image_file_dir);
-    //         const image = await terminalImage.buffer(data);
-    //         console.log(image);
-    //     }
-    // }
-    // catch (err) {
-    //     console.log("Error while attempting to fetch image", err, image_file_dir);
-    // }
-
-    console.log(image_file);
-};
-
-
-/**
- * Prints the image if it is a url
- */
-async function show_image_if_isurl(message) {
-    // check if is url if not, then just print the message
-    // let is_url = message.startsWith("http"); // Includes https
-    // try {
-    //     if (is_url) {
-
-    //         const { default: terminalImage } = await import('terminal-image');
-    //         const {default: fetch} = await import('node-fetch');
-    //         const response = await fetch(image_file_dir);
-    //         const buffer = await response.arrayBuffer();
-    //         const image = await terminalImage.buffer(Buffer.from(buffer));
-    //         console.log(image);
-    //     } else {
-    //         console.log(message)
-    //     }
-    // }
-    // catch (err) {
-    //     console.log("Error while attempting to fetch image", err, image_file_dir);
-    // }
-
-    console.log(message)
-};
 
 // https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}
 const getRandomMaidEmoji = () => {
@@ -280,6 +219,6 @@ const openEditorPlatformAgnostic = async (editor_instruction, {absolute_temp_fil
 
 module.exports = {
     getAbsoluteUri, getDirAbsoluteUri, getRandomMaidEmoji, appendQuotes, formatObjectFeatures, getRandomInt,
-    getRandomBool, countDecimals, show_image, getMaidDirectory, getFilesInDirectory, user_requests_exit,
-    user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic, show_image_if_isurl
+    getRandomBool, countDecimals, getMaidDirectory, getFilesInDirectory, user_requests_exit,
+    user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic
 };

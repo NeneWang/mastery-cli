@@ -25,7 +25,6 @@ class SettingsManager {
     }
 
     overwriteRemoteSettings() {
-        // TODO Check Code Upload Reference
         /**
          * 
             axios({

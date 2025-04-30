@@ -9,9 +9,9 @@ const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = re
 const constants = require('./constants');
 const Parser = require('expr-eval').Parser;
 
-
-const { MAID_NAME, getAbsoluteUri, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals, get_random_of_size } = constants;
-const { show_image, user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
+const { increasePerformance } = require('./utils');
+const {  getAbsoluteUri,  APIDICT, CONSTANTS, get_random, countDecimals, get_random_of_size } = constants;
+const { user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
 
 const { TermScheduler } = require('./termScheduler');
 const { MiniTermScheduler } = require('./MiniTermScheduler');
@@ -497,8 +497,6 @@ class Quizzer {
             if (term_selected?.attachment ?? false) {
                 let image_file = getAbsoluteUri(term_selected?.attachment);
                 console.log(`attachment: ${image_file}`);
-                // Also print the attachment image if possible
-                const _ = await show_image(term_selected?.attachment, { is_url: term_selected.attachment_is_url });
             }
 
 
@@ -712,8 +710,6 @@ class Quizzer {
 
                 if (res == question_prompt.expectedAnswer) {
                     answerIsCorrect = true;
-                    const _ = await increasePerformance("math_ss");
-                    // if (DEBUG) console.log("Success at:", question_prompt)
                     console.log("correct!");
                     break;
                 }
