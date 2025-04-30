@@ -44,7 +44,7 @@ const parser = new Parser();
 
 const { MAID_NAME, getRandomMaidEmoji, appendQuotes, APIDICT, CONSTANTS, get_random, formatObjectFeatures, countDecimals } = constants;
 const { getMaidDirectory } = require('./utils_functions');
-const DSATrainer = require('./dsa-cli/dsa-trainer');
+const DSATrainer = require('./extensions/dsa-cli/dsa-trainer');
 
 const Settings = require('./settings.js');
 const DEV_MODE = Settings.dev_mode ?? false;

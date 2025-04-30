@@ -29,12 +29,9 @@ const { getTalk, Mastery } = utils;
 
 // extensions TODO: Automate this things once located at the extensions folder
 
-const DSATrainer = require('./src/extensions/dsa-cli/dsa-trainer');
-const DataScienceExtension = require('./src/extensions/data-science-cli/extension');
+// const DataScienceExtension = require('./src/extensions/data-science-cli/extension');
 const MasteryDSAExtension = require('./src/extensions/dsa-cli/extension');
 
-
-const { Demo, EDemo } = demos;
 
 function applyMixin(targetInstance, mixin) {
     Object.assign(targetInstance, mixin);
@@ -51,7 +48,7 @@ function applyMixin(targetInstance, mixin) {
 (async () => {
 	const masterDeck = await populateMasterDeck();
 	const mastery = new Mastery(Settings, masterDeck);
-	applyMixin(mastery, new DataScienceExtension);
+	// applyMixin(mastery, new DataScienceExtension);
 	applyMixin(mastery, new MasteryDSAExtension);
 	
 

@@ -2,7 +2,6 @@ const fs = require('fs');
 const clipboard = require('copy-paste')
 const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
-const { exec } = require('node:child_process');
 const { getPromptDict } = require('./prompt');
 const constants = require('./constants');
 const { cloze_problems_list } = require('./cloze');
@@ -200,8 +199,8 @@ class ProblemsManager {
      * Populates the template with the code inside of problem.file_path
      * @param {dict<problem>} problem The problem to populate the template with
      */
-    populateTemplate(problem, { base = "" } = {}) {
-        if (true) console.log("Populating template with ", problem, " and base ", base, "that was the base");
+    populateTemplate(problem, { base = "base_code" } = {}) {
+        if (true) console.log("Populating template with ", problem.file_path, "problem", problem, " and base ", base, "that was the base");
         if (base != "") {
             return this.copyFileToTemp(problem.file_path, { base: base });
         }
@@ -223,9 +222,12 @@ class ProblemsManager {
      * @returns {boolean}
      */
     async runProblem(problemMetadata) {
-        if (DEBUG) console.log("Getting temp_file_path from ", this.temp_problem_filepath);
-        delete require.cache[require.resolve(this.temp_problem_filepath)] // delete the cache of the file
-        const { Problem } = require(this.temp_problem_filepath);
+        // This can only be run with the .js 
+
+        const temp_js_problem_filepath = this.temp_problem_filepath + '.js';
+        if (DEBUG) console.log("Getting temp_file_path from ", temp_js_problem_filepath);
+        delete require.cache[require.resolve(temp_js_problem_filepath)] // delete the cache of the file
+        const { Problem } = require(temp_js_problem_filepath);
 
         if (DEBUG) console.log("metadata", problemMetadata.asJson);
 
@@ -247,9 +249,13 @@ class ProblemsManager {
      */
     copyFileToTemp(problem_file_path, { base = "./base_code/" } = {}) {
         try {
+
+            const parts = problem_file_path.split(".");
+            const extension = parts[parts.length - 1];
+
             // console.log("Copying file from", problem_file_path, "to", this.temp_problem_filepath)
             const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, base);
-            const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
+            const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./") + '.' + extension;
 
 
             // console.log("Opening file: " + absolute_problem_file_path, "from source,", problem_file_path);
@@ -317,7 +323,6 @@ class ProblemsManager {
      * @param {str} editor_instruction The instruction to open the file in the editor. Default is "start".
      */
     async openTemporalProblemFile({ editor_instruction = "" } = {}) {
-        // const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./");
         const absolute_problem_file_path = this.findFileWithFilepath(this.temp_problem_filepath, "");
         console.log("absolute_temp_file_path", absolute_problem_file_path);
         await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_problem_file_path })

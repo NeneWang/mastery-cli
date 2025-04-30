@@ -2,8 +2,8 @@ const { Quizzer } = require('./Quizzer');
 const constants = require('./constants');
 const DSATrainer = require('./extensions/dsa-cli/dsa-trainer');
 const DEBUG = false;
-const { cloze_problems_list } = require('./dsa-cli/cloze');
-const DSAConstants = require('./dsa-cli/constants');
+const { cloze_problems_list } = require('./extensions/dsa-cli/cloze');
+const DSAConstants = require('./extensions/dsa-cli/constants');
 
 const { TermScheduler } = require('./termScheduler');
 const settings = require('./settings');

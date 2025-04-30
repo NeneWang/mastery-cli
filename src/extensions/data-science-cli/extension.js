@@ -1,5 +1,5 @@
 
-const { getRandomProblem, copyFileToTemp } = require('./index');
+// const { getRandomProblem, copyFileToTemp } = require('./index');
 const { increasePerformance } = require('../../utils');
 const { getMaidDirectory } = require('../../utils_functions');
 const { exec } = require('node:child_process');
