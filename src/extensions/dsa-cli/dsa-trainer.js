@@ -202,7 +202,7 @@ class DSATrainer {
     }
 
 
-    async postProblemSolution(problem, { attempts_timestamp = [], comments = [], comm = "" } = { }) {
+    async postProblemSolution(problem, { attempts_timestamp = [], comments = [], comm = "" } = {}) {
         const absoluteFilePath = this.problems_manager.absolute_problem_file_path;
 
         const ACCOUNT_ID = Settings.account_id ?? 1;
@@ -334,10 +334,9 @@ class DSATrainer {
         populate_problem = true,
         populate_with_cloze_filepath = "", base = "" } = {}) {
         if (populate_problem) {
-
             if (populate_with_cloze_filepath != "") {
-                    
-                this.problems_manager.populateTemplate({ file_path: populate_with_cloze_filepath }, { base: base });
+
+                this.problems_manager.populateTemplate(problem, { base: base });
             } else {
 
                 this.problems_manager.populateTemplate(problem);
@@ -395,11 +394,11 @@ class DSATrainer {
     * @param {boolean} open_test_cases If true, the test cases file will be opened
     * @returns {Promise} A promise that resolves when the problem is opened
      */
-    async openProblemMetadataInTerminal(problem, { copy_to_clipboard=false, open_problem_temporal = true, open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
+    async openProblemMetadataInTerminal(problem, { copy_to_clipboard = false, open_problem_temporal = true,
+        open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
 
-        let problem_extension='.js'
-        
-        console.log('OPEN METADATA');
+        let problem_extension = '.js'
+
         let problem_details = this.problems_manager.getProblem(problem.slug);
         /**
             slug: 'character-replacement',
@@ -414,7 +413,6 @@ class DSATrainer {
 
         let promblem_prompt = await getPromptDict(problem.slug);
 
-        console.log('OPEN METADATA');
 
 
         if (DEBUG) console.log("Problem prompt selected: ", promblem_prompt, "for problem", problem, "cloze?", problem.is_cloze);
@@ -422,7 +420,7 @@ class DSATrainer {
 
         const editor_instruction = this.user_settings.common_editors[this.user_settings.editor];
 
-        if (copy_to_clipboard){
+        if (copy_to_clipboard) {
             // Copy base problem 
             const _ = await this.problems_manager.copyTempToClipboard();
             const copyResults = this.problems_manager.copySolutionToSol(problem.slug);
@@ -431,7 +429,6 @@ class DSATrainer {
         }
 
         if (open_problem_temporal) {
-            console.log("Opening temporal file")
             const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
 
         }
@@ -440,9 +437,9 @@ class DSATrainer {
 
 
         if (open_solution) {
-            if(copy_to_clipboard){
-                this.problems_manager.openTemporalSolutionFile({ editor_instruction: editor_instruction, extension: problem_extension});
-            }else{
+            if (copy_to_clipboard) {
+                this.problems_manager.openTemporalSolutionFile({ editor_instruction: editor_instruction, extension: problem_extension });
+            } else {
 
                 const _ = await this.problems_manager.openSolutionFile(problem.slug, { editor_instruction: editor_instruction });
             }
@@ -466,43 +463,30 @@ class DSATrainer {
      * @param {ProblemMetadata} problem The problem to open and test
      * @returns {constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
      */
-    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], hintsGiven = [], copyProblemToTempInstead=true } = {}) {
+    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], hintsGiven = [], copyProblemToTempInstead = true } = {}) {
         if (DEBUG) console.log(
             "Opening problem: ", problem.slug,
         );
-        // Print the problem markdown.
-
-        // console.log("Keys from prompt_dict", Object.keys(prompt_dict));
         let problem_details = this.problems_manager.getProblem(problem.slug);
-        // if (Settings.dsa_language_mode == "PSEUDOCODE"){
-        //     this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_solution: true, copy_to_clipboard: true });
-        //     // Copy at problem to clipboard
-        // }else{
-
-
-        console.log('GOT HERE');
-            await this.openProblemMetadataInTerminal(problem);
+        await this.openProblemMetadataInTerminal(problem);
 
         // }
 
 
-        
+
         let hints = problem
         let question_state_flag = true;
         let did_pass_all_tests_before = false;
 
-        console.log('GOT HERE');
         let cloze_problem_list = this.problems_manager.getProblemClozes(problem.slug);
-
-        console.log('GOT HERE');
         const choices = {
 
-            "Modify": async () => {
+            "modify - Open Code Editor": async () => {
                 question_state_flag = true;
                 await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
-               
+
             },
-            "Approve Solution": async () => {
+            "force approval ": async () => {
                 question_state_flag = false;
                 // Approve the solution
                 console.log("Approving solution");
@@ -512,18 +496,18 @@ class DSATrainer {
                         failed_attempts: 0,
                     },
                     problem_details: problem_details,
-                    is_pseudocode: true, 
+                    is_pseudocode: true,
                 };
             },
-            "pass": async() => {
+            "pass - Re enqueue at the end": async () => {
                 // same as quit. just renaming.
                 question_state_flag = false;
                 return { status: constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
 
 
             },
-            
-            'Run Tests': async () => {
+
+            'execute test cases - Only works for JS problems': async () => {
                 try {
                     // Sometimes errors can occur.
                     const did_pass_all_tests = await this.problems_manager.runProblem(problem);
@@ -542,57 +526,57 @@ class DSATrainer {
                 }
             },
 
-            "Hint": async () => {
+            "hint": async () => {
                 // TO Complete
                 let hintsMssage = "No hints available";
-                if(hintsGiven.length < problem.hints.length){
+                if (hintsGiven.length < problem.hints.length) {
                     hintsMssage = problem.hints[hintsGiven.length];
                     hintsGiven.push(hintsMssage);
                 }
                 question_state_flag = true;
-                
+
 
             },
-            "Copy Link": async () => {
+            "copy Link - Original Leetcode/available repository link": async () => {
                 question_state_flag = true;
                 // console.log(problem_details)
                 console.log("Copy Link: ", problem_details?.link ?? "");
 
             }
             ,
-            "Show solution": async () => {
+            "solution - reveal/edit solution": async () => {
                 question_state_flag = true;
                 this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_solution: true });
 
                 // return constants.ProblemStatus.unsolved;
             },
-            "Re Base": async () => {
+            "reset to base template": async () => {
                 question_state_flag = true;
                 // Repopulates the 
                 // this.problems_manager.repopulateCode(problem.slug);
                 this.problems_manager.populateTemplate(problem);
                 // return constants.ProblemStatus.unsolved;
             },
-            'Post Solution': async () => {
-                question_state_flag = true;
-                this.postProblemSolution(problem, { attempts_timestamp: attempts_timestamp, comments: comments });
+            // 'Post Solution': async () => {
+            //     question_state_flag = true;
+            //     this.postProblemSolution(problem, { attempts_timestamp: attempts_timestamp, comments: comments });
 
-            },
-            'Comment': async () => {
-                question_state_flag = true;
-                // Ask for comment
-                const prompt_comment = new Input(
-                    {
-                        name: 'comment',
-                    }
-                )
+            // },
+            // 'comment': async () => {
+            //     question_state_flag = true;
+            //     // Ask for comment
+            //     const prompt_comment = new Input(
+            //         {
+            //             name: 'comment',
+            //         }
+            //     )
 
-                const comment = await prompt_comment.run();
-                comments.push(comment);
-                console.log("All Comments: ");
-                console.log(comments);
-            },
-            'Quit': async () => {
+            //     const comment = await prompt_comment.run();
+            //     comments.push(comment);
+            //     console.log("All Comments: ");
+            //     console.log(comments);
+            // },
+            'quit': async () => {
                 question_state_flag = false;
                 return { status: constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
             }
@@ -600,22 +584,22 @@ class DSATrainer {
         }
 
         const choices_dev_mode = {
-            "Edit BaseJS": async () => {
+            "base - reveal/edit base template ": async () => {
                 // Open the problem's base
 
                 question_state_flag = true;
                 this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_basecode: true });
             },
-            "Edit Markdown prompt": async () => {
+            "markdown - reveal/edit markdown prompt": async () => {
                 // Open the problem's base
 
                 question_state_flag = true;
                 this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_markdown: true });
             },
-            "Open test cases": async () => {
-                question_state_flag = true;
-                this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_test_cases: true });
-            }
+            // "Open test cases": async () => {
+            //     question_state_flag = true;
+            //     this.openProblemMetadataInTerminal(problem, { open_problem_temporal: false, open_test_cases: true });
+            // }
         }
 
 

@@ -354,20 +354,8 @@ class Quizzer {
     }
 
 
-    study_session = async (masterDeck) => {
+    study_session = async (masterDeck = this.masterDeck) => {
         //Pick a term deck Suppose is given
-
-        // const id_deck = "Cloud-pattern";
-
-
-        //Populates with the right terms deck using the queue
-
-        // Can you enqueue multiples?
-        // Create a queue and store them all there. Try loading then if there is nothing to be loaded, just open it.
-
-
-        // If True ask if to continue previous .
-        // If want new session
 
         // For now just load a new one everytime.
         const dictOptions = masterDeck.deck_titles_with_count;

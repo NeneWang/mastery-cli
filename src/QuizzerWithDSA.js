@@ -101,14 +101,14 @@ class QuizzerWithDSA extends Quizzer {
 
 
 
-    cloze_study_session = async ({ reset_scheduler = false }) => {
+    cloze_study_session = async ({ reset_scheduler = false } = {}) => {
 
         // Pick all the available string keys.
 
         await this.dsaTrainer.loaded_problem_manager;
         const cloze_problems = cloze_problems_list;
         const clozeScheduler = new TermScheduler({
-            cards_category: "Algo"
+            cards_category: "cloze_study_sesssion"
         });
         await clozeScheduler.setLearningCards(cloze_problems, { shuffle: true, reset_scheduler: reset_scheduler });
         let exit = false;
@@ -134,38 +134,47 @@ class QuizzerWithDSA extends Quizzer {
         }
     }
 
-    // jupyter_study_session = async () => {
+    
+    algorithmic_study_session = async ({ reset_scheduler = false, 
+        filter = {
+            easy: true,
+            medium: false,
+            hard: false,
+        }
+     } = {}) => {
 
-    //     // Pick all the available string keys.
+        // Pick all the available string keys.
 
-    //     const jupyter_problems = getProblemsData();
-    //     const jupyterScheduler = new TermScheduler({
-    //         cards_category: "Jupyter"
-    //     });
-    //     await jupyterScheduler.setLearningCards(jupyter_problems);
-    //     let exit = false;
+        await this.dsaTrainer.loaded_problem_manager;
+        const problems_list = this.dsaTrainer.problems_manager.getProblems();
 
-    //     const printCardsLeft = (cardsLeft, cardsLearnt) => {
-    //         console.log(`\nJupyter left: ${cardsLeft} || Jupyter completed: ${cardsLearnt}\n`);
-    //     }
 
-    //     let maid = new Maid();
-    //     maid.runServer();
+        const dsaScheduler = new TermScheduler({
+            cards_category: "algorithmic_session"
+        });
 
-    //     while (!jupyterScheduler.is_completed && !exit) {
-    //         const [cardsLeft, cardsLearnt] = [jupyterScheduler.getCardsToLearn(), jupyterScheduler.getCardsLearnt()];
 
-    //         const card = await jupyterScheduler.getCard();
+        await dsaScheduler.setLearningCards(problems_list, { shuffle: true, reset_scheduler: reset_scheduler });
+        let exit = false;
 
-    //         console.log("Card", card.problem);
-    //         const answerIsCorrect = await maid.openJupyter({ FILE: card.problem });
+        const printCardsLeft = (cardsLeft, cardsLearnt) => {
+            console.log(`\nAlgorithms left: ${cardsLeft} || Algorithms completed: ${cardsLearnt}\n`);
+        }
 
-    //         jupyterScheduler.solveCard(answerIsCorrect);
-    //         await jupyterScheduler.saveCards();
-    //         printCardsLeft(cardsLeft, cardsLearnt);
-    //     }
+        while (!dsaScheduler.is_completed && !exit) {
+            const [cardsLeft, cardsLearnt] = [dsaScheduler.getCardsToLearn(), dsaScheduler.getCardsLearnt()];
 
-    // }
+            const card = await dsaScheduler.getCard();
+            
+            const solution_metadata = await this.dsaTrainer.solveProblem(card, { base: DSAConstants.PATHS.base });
+
+            const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
+            dsaScheduler.solveCard(answerIsCorrect);
+            await dsaScheduler.saveCards();
+            printCardsLeft(cardsLeft, cardsLearnt);
+        }
+    }
+
 
 }
 

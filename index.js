@@ -31,6 +31,7 @@ const { getTalk, Mastery } = utils;
 
 // const DataScienceExtension = require('./src/extensions/data-science-cli/extension');
 const MasteryDSAExtension = require('./src/extensions/dsa-cli/extension');
+const DemoExtension = require('./src/extensions/demo/extension');
 
 
 function applyMixin(targetInstance, mixin) {
@@ -50,6 +51,7 @@ function applyMixin(targetInstance, mixin) {
 	const mastery = new Mastery(Settings, masterDeck);
 	// applyMixin(mastery, new DataScienceExtension);
 	applyMixin(mastery, new MasteryDSAExtension);
+	applyMixin(mastery, new DemoExtension);
 	
 
 	/**This is quite the expensive operation, ideally you put this on the end. */

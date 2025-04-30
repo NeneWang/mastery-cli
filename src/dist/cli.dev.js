@@ -28,12 +28,6 @@ var flags = {
     type: "boolean",
     alias: "v",
     desc: "Print CLI version"
-  },
-  type: {
-    type: 'string',
-    "default": 'chuck',
-    alias: 't',
-    desc: 'What kind of jokes do you want [chuck|nerdy] ?'
   }
 };
 

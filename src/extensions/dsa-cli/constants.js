@@ -3,7 +3,8 @@
 const constants = {
     DEV_MODE: true,
     PATHS: {
-        base_cloze: "./cloze/base_cloze/"
+        base_cloze: "./cloze/base_cloze/",
+        base: './base/'
     },
     ProblemStatus: {
         solved: "solved",

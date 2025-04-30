@@ -1,13 +1,9 @@
 
-const { getRandomProblem, copyFileToTemp } = require('./index');
 const { increasePerformance } = require('../../utils');
-const { getMaidDirectory } = require('../../utils_functions');
-
-
-
-const { exec } = require('node:child_process');
 const { Toggle, Confirm, prompt, AutoComplete, Survey, Input } = require('enquirer');
 const DSATrainer = require('./dsa-trainer.js');
+const { ExtensionModel } = require('../models');
+
 
 dsaTrainer = new DSATrainer({
 	skip_problems: ["hello-world", "simple-sum"]
@@ -15,9 +11,17 @@ dsaTrainer = new DSATrainer({
 
 const Settings = require('../../settings');
 
-class MasteryDSAExtension {
+class MasteryDSAExtension extends ExtensionModel {
 
-	
+	constructor() {
+		super(
+			"MasteryDSAExtension",
+			"1.0.0",
+			"Mastery DSA Extension",
+			"Official",
+			"MIT"
+		);
+	}
 
 	provideMissingReport = async ({ ask_if_dsa_missing = false } = {}) => {
 		try {
@@ -117,6 +121,9 @@ class MasteryDSAExtension {
 			cloze: async () => {
 				const problem_response = await dsaTrainer.openRandomClozeDSAProblem();
 				console.log("problem_response of cloze", problem_response)
+			},
+			about_dsa: async () => {
+				console.log("About DSA")
 			}
 		}
 	}

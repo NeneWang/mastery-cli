@@ -120,7 +120,7 @@ function withOnlineCheck(fn) {
 
 class Mastery {
 
-	constructor(Settings = {},masterDeck,name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
+	constructor(Settings = {}, masterDeck, name = MAID_NAME, headerColor = '#1da1f2', clearOnTalk = false) {
 		this.Settings = Settings;
 		this.name = name;
 		this.headerColor = headerColor;
@@ -136,40 +136,63 @@ class Mastery {
 		this.populateMissingReport = withOnlineCheck(this.populateMissingReport.bind(this));
 		this.performanceReport = withOnlineCheck(this.performanceReport.bind(this));
 		this.services = withOnlineCheck(this.services.bind(this));
-		
+
 
 		this.commandHandlers = {
-			'hello': ()=>{this.say('Hello!')},
-			'code': ()=>{this.tellCurrentDirectory()},
-			'jupyter': ()=>{this.openRandomJupyter()},
-			'report': ()=>{this.dayReport()},
-			'talk': ()=>{this.ask()},
-			'coa':async  ()=>{
-				let comments_to_populate = [];
-				const commit_res = await commitpush();
+			'hello': () => { this.say('Hello!') },
+			'code': () => { this.tellCurrentDirectory() },
+			'coco': () => { 
+				console.log("COA");
+				this.say("COA");
 
-				if (Settings.ask_quiz_when_commit && commit_res) {
-					const _ = await this.mQuizer.askQuestion();
-				}
-				this.populateMissingReport();
+				const run = async () => {
+					const commit_res = await commitpush();
+
+					if (Settings.ask_quiz_when_commit && commit_res) {
+						await this.mQuizer.askQuestion();
+					}
+
+					this.populateMissingReport();
+				};
+
+				run();
+			 },
+			'coa': () => {
+				console.log("COA");
+				this.say("COA");
+
+				// const run = async () => {
+				// 	const commit_res = await commitpush();
+
+				// 	if (Settings.ask_quiz_when_commit && commit_res) {
+				// 		await this.mQuizer.askQuestion();
+				// 	}
+
+				// 	this.populateMissingReport();
+				// };
+
+				// run();
 			},
-			'services': ()=>{this.services()},
-			'math': ()=>{this.mQuizer.ask_math_question()},
-			'quiz': ()=>{this.mQuizer.askQuestion()},
-			'term': ()=>{this.mQuizer.pick_and_ask_term_question()},
-			'clean': ()=>{this.askToClean()},
+			'services': () => { this.services() },
+			'math': () => { this.mQuizer.ask_math_question() },
+			'quiz': () => { this.mQuizer.askQuestion() },
+			'term': () => { this.mQuizer.pick_and_ask_term_question() },
+			'clean': () => { this.askToClean() },
+			'ses': () => { this.mQuizer.study_session() },
+			'cses': () => { this.mQuizer.cloze_study_session() },
+			'amses': () => { this.mQuizer.algorithmic_study_session() },
 
 		};
 	}
 
-	
+
 
 	login = async () => {
 		// await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
 
 
-		if(!Settings?.online){
-			if(!Settings?.dev_mode){
+		if (!Settings?.online) {
+			if (!Settings?.dev_mode) {
 				console.log('Offline, should not get comments');
 			}
 			return {}
@@ -180,7 +203,7 @@ class Mastery {
 			name: 'email',
 			message: 'What is your email?'
 		});
-				
+
 		const email = await questionEmail.run();
 
 		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/cli-login?email=${email}`)
@@ -192,7 +215,7 @@ class Mastery {
 		let current_settings = settingsManager.getSettings();
 
 		const databaseSettings = res?.['settings_json'] ?? {};
-		if (databaseSettings == {}){
+		if (databaseSettings == {}) {
 			console.log("There must been an error in the database");
 			return;
 		}
@@ -205,16 +228,16 @@ class Mastery {
 
 		const useRemoteDatabase = await useRemoteDatabasePrompt.run();
 		// Update current Id and upload the settings database
-		
-		if (useRemoteDatabase){
+
+		if (useRemoteDatabase) {
 			current_settings = databaseSettings;
 		}
-		
+
 		current_settings.account_id = res.data.account_id;
 		settingsManager.saveSettings(current_settings, {
 			overwrite: true
 		});
-		
+
 
 
 	}
@@ -372,7 +395,7 @@ class Mastery {
 		}
 
 		userPerformanceData = parseDecimalsColumns(userPerformanceData, ["week_average", "week_average_exclude_today"]);
-	
+
 		function updateRequirements(features_accomplished_today, feat_rules, userPerformanceData) {
 			for (const [requirement_key, settings] of Object.entries(feat_rules)) {
 				// Check if it requires a 'day' required performance
@@ -467,7 +490,7 @@ class Mastery {
 		function computeRadioDict(userPerformanceData) {
 			let radioDict = [];
 			for (const [feature_name, feature_data] of Object.entries(userPerformanceData)) {
-				
+
 				const denominator = typeof (feature_data).miss == 'number' ? feature_data.req - feature_data.miss : feature_data.req;
 				let score = Math.floor((denominator / feature_data.req) * 6);
 				radioDict.push({ name: feature_name, value: score ?? 6 });
@@ -481,16 +504,16 @@ class Mastery {
 		const computed_radio = computeRadioDict(feat_accomplished_until_today);
 		// console.log(computed_radio);
 
-		try{
+		try {
 			const radarDisplay = radar(computed_radio)
 			console.log(radarDisplay.render)
 			console.log(annotation(radarDisplay.labelsWithColors))
 
 		}
-		catch(err){
+		catch (err) {
 			// console.log("Error in radar display", err)
 		}
-		
+
 
 	}
 
@@ -586,11 +609,11 @@ class Mastery {
 			const credentialSelected = getCredentialInformation(credentials, credentialNameSelected);
 			console.log(credentialSelected);
 			console.log(`Password copied to clipboard, ${credentialSelected.password}`)
-			try{
+			try {
 
 				clipboard.copy(credentialSelected.password)
 			}
-			catch(err){
+			catch (err) {
 			}
 
 			// Show credentials available
@@ -784,9 +807,9 @@ Waiting for pgAdmin 4 to start... * Increase the performance of a feature; Day p
  * 
  */
 const increasePerformance = async (feature_name, increaseBY = 1, debug = true, account_id = Settings.account_id ?? 1) => {
-	
-	if(!Settings?.online){
-		if(!Settings?.dev_mode){
+
+	if (!Settings?.online) {
+		if (!Settings?.dev_mode) {
 			console.log('Offline, modify in data\\settings.json');
 		}
 		return {};
@@ -1000,7 +1023,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
 			'title': term_selected ?? "title",
 			'concept_slug': term_selected ?? "slug"
 		}
-		
+
 
 		// axios(
 
@@ -1042,9 +1065,6 @@ const commitpush = async (addCommitEmoji = true, { debug = false, comments_to_po
 		commitMessage = CONSTANTS.default_commit_message;
 	}
 
-
-
-
 	// If any category found then increase the score please.
 	commitCat = commitCategory(commitMessage, true);
 	// Log special categories
@@ -1077,13 +1097,13 @@ const commitpush = async (addCommitEmoji = true, { debug = false, comments_to_po
  */
 const getComments = async (term, count = 5) => {
 
-	if(!Settings?.online){
-		if(!Settings?.dev_mode){
+	if (!Settings?.online) {
+		if (!Settings?.dev_mode) {
 			console.log('Offline, should not get comments');
 		}
 		return {}
 	}
-	
+
 	if (term == undefined || term == "") {
 		return {};
 	}
@@ -1102,8 +1122,8 @@ const getComments = async (term, count = 5) => {
 		console.log("Error in getComments", URL)
 		return {}
 
-		}
-		return {}
+	}
+	return {}
 
 }
 

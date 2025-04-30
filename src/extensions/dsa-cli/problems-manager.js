@@ -54,7 +54,7 @@ class ProblemsManager {
 
     /**
      * 
-     * @param {string} problemSlug SLug of the problem to be skipped
+     * @param {string} problemSlug Slug of the problem where you want to get the metadata from.
      * @returns 
      */
     getProblem(problemSlug) {
@@ -200,7 +200,7 @@ class ProblemsManager {
      * @param {dict<problem>} problem The problem to populate the template with
      */
     populateTemplate(problem, { base = "base_code" } = {}) {
-        if (true) console.log("Populating template with ", problem.file_path, "problem", problem, " and base ", base, "that was the base");
+        if (DEBUG) console.log("Populating template with ", problem.file_path, "problem", problem, " and base ", base, "that was the base");
         if (base != "") {
             return this.copyFileToTemp(problem.file_path, { base: base });
         }
@@ -419,8 +419,16 @@ class ProblemsManager {
 
     }
 
-    async openBaseCodeFile(problem_slug, { editor_instruction = "start" } = {}) {
+    async openBaseCodeFile(problem_slug, { editor_instruction = "start", create_if_inexistent  = true } = {}) {
+        console.log("Opening base code file for problem", this.base_code_filepath + problem_slug + '.js');
         const absolute_temp_file_path = getDirAbsoluteUri(this.base_code_filepath + problem_slug + '.js', "./");
+        const template_base = getDirAbsoluteUri(this.base_code_filepath + 'base.js', "./");
+
+        // Check if the file exists, if not, create it with the template base.
+        if (create_if_inexistent && !fs.existsSync(absolute_temp_file_path)) {
+            console.log("File does not exist, creating it with the template base.");
+            fs.copyFileSync(template_base, absolute_temp_file_path);
+        }
 
         await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
 
@@ -468,10 +476,13 @@ class ProblemsManager {
 
 
         // Find the test_case_name
-
+        console.log("Attempting to open markdown file for problem", problem_slug, "with path", this.markdown_filepath + problem_slug + '.md');
         const absolute_temp_file_path = getDirAbsoluteUri(this.markdown_filepath + problem_slug + '.md', "./");
 
-        await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
+        console.log("absolute_temp_file_path", absolute_temp_file_path);
+
+
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
     }
 
 
