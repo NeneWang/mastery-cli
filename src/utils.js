@@ -157,22 +157,6 @@ class Mastery {
 
 				run();
 			 },
-			'coa': () => {
-				console.log("COA");
-				this.say("COA");
-
-				// const run = async () => {
-				// 	const commit_res = await commitpush();
-
-				// 	if (Settings.ask_quiz_when_commit && commit_res) {
-				// 		await this.mQuizer.askQuestion();
-				// 	}
-
-				// 	this.populateMissingReport();
-				// };
-
-				// run();
-			},
 			'services': () => { this.services() },
 			'math': () => { this.mQuizer.ask_math_question() },
 			'quiz': () => { this.mQuizer.askQuestion() },
