@@ -142,7 +142,6 @@ class Mastery {
 			'hello': () => { this.say('Hello!') },
 			'code': () => { this.tellCurrentDirectory() },
 			'co': () => { 
-				console.log("COA");
 				this.say("COA");
 
 				const run = async () => {
@@ -222,19 +221,12 @@ class Mastery {
 			overwrite: true
 		});
 
-
-
 	}
-
-
-	getMaidHeader = () => {
-		return `${chalk.hex(this.headerColor).inverse(` ${this.name}: `)}`;
-	};
 
 	say(message, clearOnTalk = this.clearOnTalk) {
 
 		if (clearOnTalk) init(true);
-		console.log(`${this.getMaidHeader()} ${chalk(message)}`);
+		console.log(` ${chalk(message)}`);
 	}
 
 	tellCurrentDirectory = () => {
