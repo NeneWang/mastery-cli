@@ -67,7 +67,7 @@ class CommandsInformation {
 			cloze: new Command('Run a cloze-type algorithm exercise', 'cloze'),
 			cses: new Command('Start a cloze algorithm-based study session', 'cses'),
 			amses: new Command('Launch a mastery session with ten random algorithm challenges in a queue', 'amses'),
-			backup: new Command('Back up the settings.json file', 'backup'),
+			// backup: new Command('Back up the settings.json file', 'backup'),
 			report: new Command('Generate a report that includes weather data', 'report'),
 			code: new Command('Output the root directory of the mastery CLI and copy the path to clipboard', 'code'),
 			settings: new Command('Output the root directory of the settings file and copy the path to clipboard', 'code'),
