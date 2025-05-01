@@ -56,7 +56,7 @@ class CommandsInformation {
 
 	constructor() {
 		this.commands = {
-			coa: new Command('Commit changes and push to origin using the Questins pipeline', 'coa'),
+			co: new Command('Commit changes and push to origin using the Questins pipeline', 'coa'),
 			// services: new Command('Access secondary services such as currency conversion and credential requests', 'services'),
 			math: new Command('Execute a mathematics-related prompt', 'math'),
 			term: new Command('Execute a terminology-based prompt', 'term'),
