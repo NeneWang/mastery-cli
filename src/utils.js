@@ -141,7 +141,7 @@ class Mastery {
 		this.commandHandlers = {
 			'hello': () => { this.say('Hello!') },
 			'code': () => { this.tellCurrentDirectory() },
-			'co': () => { 
+			'coa': () => { 
 				this.say("COA");
 
 				const run = async () => {
