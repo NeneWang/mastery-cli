@@ -109,6 +109,7 @@ class LocalStorage {
             // find the experience needed for the current level
             for (const level in Object.keys(this.experience_to_levelup_after_level)) {
                 if ( level <= current_level) {
+                    console.log('experience needed', level, this.experience_to_levelup_after_level[level]);
                     experience_needed = this.experience_to_levelup_after_level[level];
                 }
             }
