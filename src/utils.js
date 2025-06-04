@@ -160,7 +160,10 @@ class Mastery {
 
 				run();
 			},
-			'skills': () => {
+			'poh': () => {
+				this.pushOriginHead();
+			},
+			'skill': () => {
 				this.getSkillReports();
 			},
 			'services': () => { this.services() },
@@ -172,7 +175,7 @@ class Mastery {
 			'ses': () => { this.mQuizer.study_session() },
 			'cses': () => { this.mQuizer.cloze_study_session() },
 			'amses': () => { this.mQuizer.algorithmic_study_session() },
-			'report': () => {this.generateOfflinePerformanceReport( { localStorageInstance, version: "tables" }) },
+			'report': () => { this.generateOfflinePerformanceReport({ localStorageInstance, version: "tables" }) },
 		};
 	}
 
@@ -829,25 +832,25 @@ class Mastery {
 		 * @param {bool} debug ?= false : If to whether to debug api responses, etc.
 		 * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
 		 */
-		localStorageInstance.log_feat(feature_name, {score: value});
+		localStorageInstance.log_feat(feature_name, { score: value });
 	}
 
 	// log_skill_experience(skill_name, { score = 1, deck_id ='', deck_term = "", comment="", reattempts=0 } = {}) {
-	logSkillExperience(skill_name, {score=1, deck_id = '', deck_term = "", comment="", reattempts=0} = {}) {
-		
+	logSkillExperience(skill_name, { score = 1, deck_id = '', deck_term = "", comment = "", reattempts = 0 } = {}) {
+
 		localStorageInstance.log_skill_experience(
-			skill_name, 
-			{ 
-				score: score, 
-				deck_id: deck_id, 
-				deck_term: deck_term, 
-				comment: comment, 
-				reattempts: reattempts 
+			skill_name,
+			{
+				score: score,
+				deck_id: deck_id,
+				deck_term: deck_term,
+				comment: comment,
+				reattempts: reattempts
 			}
 		);
 	}
 
-	getSkillReports(){
+	getSkillReports() {
 		// wait for load.
 		{
 			localStorageInstance.load().then(() => {
@@ -1141,7 +1144,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
  * @returns {List: [date: comment]}
  * 
  */
-const commitpush = async (addCommitEmoji = false, {  } = {}) => {
+const commitpush = async (addCommitEmoji = false, { } = {}) => {
 
 
 	let commitMessage = process.argv[3];
@@ -1149,7 +1152,7 @@ const commitpush = async (addCommitEmoji = false, {  } = {}) => {
 	// 	console.log(commitMessage)
 
 	// }
-	if (commitMessage == undefined) {
+	if (commitMessage == undefined || commitMessage == "") {
 		commitMessage = CONSTANTS.default_commit_message;
 	}
 
@@ -1165,7 +1168,12 @@ const commitpush = async (addCommitEmoji = false, {  } = {}) => {
 	// commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
 	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
+	console.log(`Pushed commit: ${commitMessage}`);
+	return true;
+}
 
+const pushOriginHead = () => {
+	exec(`git push origin HEAD `);
 	return true;
 }
 

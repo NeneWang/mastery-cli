@@ -45,8 +45,8 @@ class LocalStorage {
          *     2023-09-25: {experience: 10, level: 1},
          *    }
          * }
-        *  */   
-       
+        *  */
+
         this.experience_to_levelup_after_level = {
             0: 2, //after level 0, you need 2 exp to level up
             5: 10, //after level 5, you need 10 exp to level up
@@ -108,17 +108,17 @@ class LocalStorage {
 
             // find the experience needed for the current level
             for (const level in this.experience_to_levelup_after_level) {
-                if ( level <= current_level) {
-                    console.log('experience needed', level, this.experience_to_levelup_after_level[level]);
+                if (level <= current_level) {
+
                     experience_needed = this.experience_to_levelup_after_level[level];
                 }
             }
-            
-            console.log("Current Level", current_level, "Remaining Experience", remaining_experience, "Experience Needed", experience_needed);
+
+
             if (remaining_experience >= experience_needed) {
                 remaining_experience -= experience_needed;
                 current_level++;
-            }else{
+            } else {
                 remaining_experience = 0;
             }
         }
@@ -126,15 +126,15 @@ class LocalStorage {
 
     }
 
-    log_skill_experience(skill_name, { score = 1, deck_id ='', deck_term = "", comment="", reattempts=0 } = {}) {
-        if (deck_term == '' ){
+    log_skill_experience(skill_name, { score = 1, deck_id = '', deck_term = "", comment = "", reattempts = 0 } = {}) {
+        if (deck_term == '') {
             deck_term = skill_name;
         }
-        if (deck_id == '' ){
+        if (deck_id == '') {
             deck_id = skill_name;
         }
 
-    
+
 
         const date = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
         if (!this.skill_based_stats[skill_name]) {
@@ -177,7 +177,7 @@ class LocalStorage {
 
     }
 
-    get_skills_reports({windows_n = 30, filter = [], compare_prev = true, console_report=true, hide_no_progress=true} = {}) {
+    get_skills_reports({ windows_n = 30, filter = [], compare_prev = true, console_report = true, hide_no_progress = true } = {}) {
         /** Gets current skill experience as a  dict conntaining the difference in progress
          *  between now and before the windows n started.
          *  Genertes the table report on its own. by default hides the skills that had no progress.
@@ -250,7 +250,7 @@ class LocalStorage {
             const previousExp = beforeWindowsLevel[skill].exp;
             // console.log("Current Level", currentLevel, "Current Exp", currentExp, "Previous Level", previousLevel, "Previous Exp", previousExp);
             // console.log("Skill", skill, "Last Level", lastLevel[skill], "Before Windows Level", beforeWindowsLevel[skill]);
-            if ((currentLevel > previousLevel || currentExp > previousExp)|| !hide_no_progress) {
+            if ((currentLevel > previousLevel || currentExp > previousExp) || !hide_no_progress) {
                 if (console_report) {
                     console.log(`${skill}: Level ${previousLevel} -> ${currentLevel}, Exp ${previousExp} -> ${currentExp}`);
                 }
