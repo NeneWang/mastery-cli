@@ -1141,33 +1141,33 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
  * @returns {List: [date: comment]}
  * 
  */
-const commitpush = async (addCommitEmoji = true, { debug = false, comments_to_populate = [] } = {}) => {
+const commitpush = async (addCommitEmoji = false, {  } = {}) => {
 
 
 	let commitMessage = process.argv[3];
-	if (debug) {
-		console.log(commitMessage)
+	// if (debug) {
+	// 	console.log(commitMessage)
 
-	}
-	if (commitMessage == undefined) {
-		commitMessage = CONSTANTS.default_commit_message;
-	}
+	// }
+	// if (commitMessage == undefined) {
+	// 	commitMessage = CONSTANTS.default_commit_message;
+	// }
 
-	// If any category found then increase the score please.
-	commitCat = commitCategory(commitMessage, true);
-	// Log special categories
+	// // If any category found then increase the score please.
+	// commitCat = commitCategory(commitMessage, true);
+	// // Log special categories
 
-	if (Settings.blog_special_commits ?? false) {
-		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: true });
-	}
+	// if (Settings.blog_special_commits ?? false) {
+	// 	comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: true });
+	// }
 
 
-	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
+	// commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
 	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
 	if (true) console.log(`Pushed to origin with commit message: ${commitMessage}`);
 
-	return { comments_to_populate: comments_to_populate, commit_category: commitCat, commit_message: commitMessage };
+	return
 }
 
 /**
