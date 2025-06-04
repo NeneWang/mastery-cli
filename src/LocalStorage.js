@@ -112,12 +112,13 @@ class LocalStorage {
                     experience_needed = this.experience_to_levelup_after_level[level];
                 }
             }
-
+            
+            console.log("Current Level", current_level, "Remaining Experience", remaining_experience, "Experience Needed", experience_needed);
             if (remaining_experience >= experience_needed) {
                 remaining_experience -= experience_needed;
                 current_level++;
             }else{
-                break; // If not enough experience to level up, break the loop
+                remaining_experience = 0;
             }
         }
         return current_level;

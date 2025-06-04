@@ -1149,9 +1149,9 @@ const commitpush = async (addCommitEmoji = false, {  } = {}) => {
 	// 	console.log(commitMessage)
 
 	// }
-	// if (commitMessage == undefined) {
-	// 	commitMessage = CONSTANTS.default_commit_message;
-	// }
+	if (commitMessage == undefined) {
+		commitMessage = CONSTANTS.default_commit_message;
+	}
 
 	// // If any category found then increase the score please.
 	// commitCat = commitCategory(commitMessage, true);
