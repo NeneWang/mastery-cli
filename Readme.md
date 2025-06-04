@@ -76,6 +76,15 @@ mcli --help
 ```
 
 
+## Skills Integration
+
+Now you can track locally the type of cards you are studying, and the type of problems you are solving.
+You will be able to see the progress of your skills, and the type of problems you are solving.
+
+```
+mcli skill
+```
+
 ### Data Structures and Algorithms 
 We have a collection of DSA problems that you can solve.
 

@@ -147,8 +147,9 @@ class Mastery {
 			'hello': () => { this.say('Hello!') },
 			'code': () => { this.tellCurrentDirectory() },
 			'coa': () => {
-
+				
 				const run = async () => {
+					console.log('will be running commit push')
 					const commit_res = await commitpush();
 
 					if (Settings.ask_quiz_when_commit && commit_res) {
@@ -1144,7 +1145,7 @@ const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
  * @returns {List: [date: comment]}
  * 
  */
-const commitpush = async (addCommitEmoji = false, { } = {}) => {
+const commitpush = () => {
 
 
 	let commitMessage = process.argv[3];
