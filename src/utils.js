@@ -834,7 +834,7 @@ class Mastery {
 
 	// log_skill_experience(skill_name, { score = 1, deck_id ='', deck_term = "", comment="", reattempts=0 } = {}) {
 	logSkillExperience(skill_name, {score=1, deck_id = '', deck_term = "", comment="", reattempts=0} = {}) {
-		console.log("Logging skill experience", skill_name, score, deck_id, deck_term, comment, reattempts);
+		
 		localStorageInstance.log_skill_experience(
 			skill_name, 
 			{ 
