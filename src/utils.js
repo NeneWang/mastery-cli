@@ -1165,9 +1165,8 @@ const commitpush = async (addCommitEmoji = false, {  } = {}) => {
 	// commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
 	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
-	if (true) console.log(`Pushed to origin with commit message: ${commitMessage}`);
 
-	return
+	return true;
 }
 
 /**
