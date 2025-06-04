@@ -9,7 +9,6 @@ const { Toggle, Confirm, prompt, AutoComplete, Survey, Input, multiselect } = re
 const constants = require('./constants');
 const Parser = require('expr-eval').Parser;
 
-const { increasePerformance } = require('./utils');
 const { getAbsoluteUri, APIDICT, CONSTANTS, get_random, countDecimals, get_random_of_size } = constants;
 const { user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
 
