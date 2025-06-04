@@ -176,7 +176,10 @@ class Mastery {
 			'ses': () => { this.mQuizer.study_session() },
 			'cses': () => { this.mQuizer.cloze_study_session() },
 			'amses': () => { this.mQuizer.algorithmic_study_session() },
-			'report': () => { this.generateOfflinePerformanceReport({ localStorageInstance, version: "tables" }) },
+			'report': () => {
+				this.getSkillReports();
+				this.generateOfflinePerformanceReport({ localStorageInstance, version: "tables" })
+			},
 		};
 	}
 
@@ -421,7 +424,7 @@ class Mastery {
 			// console.log(today_scores);
 			// console.log("Week Scores", week_scores);
 			// console.log("User Performance Data", userPerformanceData);
-			
+
 			console.table(userPerformanceData);
 
 
@@ -846,7 +849,7 @@ class Mastery {
 		);
 	}
 
-	getSkillReports() {
+	getSkillReports({ cleanScreen = false } = {}) {
 		// wait for load.
 		{
 			localStorageInstance.load().then(() => {
@@ -855,7 +858,10 @@ class Mastery {
 				const windows_days_ago = new Date();
 				windows_days_ago.setDate(windows_days_ago.getDate() - windows_n);
 				const windows_days_ago_str = windows_days_ago.toISOString().slice(0, 10);
-				this.say(`Skill Reports from ${windows_days_ago_str} -> ${today}\n`);
+
+				if (cleanScreen) {
+					this.say(`Skill Reports from ${windows_days_ago_str} -> ${today}\n`);
+				}
 				localStorageInstance.get_skills_reports({
 					'windows_n': windows_n,
 				});
