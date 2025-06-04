@@ -147,11 +147,11 @@ class Mastery {
 			'hello': () => { this.say('Hello!') },
 			'code': () => { this.tellCurrentDirectory() },
 			'coa': () => {
-				
-				const run = async () => {
-					console.log('will be running commit push')
-					const commit_res = await commitpush();
 
+				const run = async () => {
+
+					this.increasePerformance('commit', { score: 1 });
+					const commit_res = await commitpush();
 					if (Settings.ask_quiz_when_commit && commit_res) {
 						await this.mQuizer.askQuestion();
 					}
@@ -359,88 +359,77 @@ class Mastery {
 
 
 	async generateOfflinePerformanceReport({ localStorageInstance, version = "tables" } = {}) {
-		const feat_rules = getObjectiveFeatures();
+		try {
+			await localStorageInstance.load();
 
-		const today_scores = localStorageInstance.get_day_logs().selected_date;
-		const week_scores = localStorageInstance.get_week_log();
+			const feat_rules = getObjectiveFeatures();
 
-		let userPerformanceData = {
-			today: {},
-			week_sum: {},
-			week_average: {},
-			week_average_exclude_today: {}
-		};
+			// Use built-in day and week methods
+			const today_scores = localStorageInstance.get_day_logs({ windows_n: 0 }).selected_date;
+			const week_scores = localStorageInstance.get_week_log();
 
-		// Fill today and week sum
-		for (const feat in today_scores) {
-			userPerformanceData.today[feat] = today_scores[feat].value;
-		}
-		for (const feat in week_scores) {
-			const total = week_scores[feat].value;
-			const today = userPerformanceData.today[feat] ?? 0;
-			userPerformanceData.week_sum[feat] = total;
-			userPerformanceData.week_average[feat] = total / 7;
-			userPerformanceData.week_average_exclude_today[feat] = (total - today) / 6;
-		}
+			let userPerformanceData = {
+				today: {},
+				week_sum: {},
+				week_average: {},
+				week_average_exclude_today: {}
+			};
 
-		// Round decimals
-		for (const column of ["week_average", "week_average_exclude_today"]) {
-			for (const key in userPerformanceData[column]) {
-				userPerformanceData[column][key] = parseFloat(userPerformanceData[column][key].toFixed(2));
+			// Fill in today and week data
+			for (const feat in today_scores) {
+				userPerformanceData.today[feat] = today_scores[feat].value;
 			}
-		}
-
-		// Evaluate against feat_rules
-		const features_accomplished_today = {};
-		for (const [requirement_key, settings] of Object.entries(feat_rules)) {
-			if (settings.day) {
-				const actual = userPerformanceData.today[requirement_key] ?? 0;
-				const diff = settings.day - actual;
-				features_accomplished_today[`d: ${requirement_key}`] = {
-					miss: diff < 0 ? "✅" : diff,
-					type: "day",
-					req: settings.day
-				};
+			for (const feat in week_scores) {
+				const total = week_scores[feat].value;
+				const today = userPerformanceData.today[feat] ?? 0;
+				userPerformanceData.week_sum[feat] = total;
+				userPerformanceData.week_average[feat] = total / 7;
+				userPerformanceData.week_average_exclude_today[feat] = (total - today) / 6;
 			}
 
-			if (settings.week) {
-				const actual = userPerformanceData.week_sum[requirement_key] ?? 0;
-				const diff = settings.week - actual;
-				features_accomplished_today[`w: ${requirement_key}`] = {
-					miss: diff < 0 ? "✅" : diff,
-					type: "week",
-					req: settings.week
-				};
+			// Round decimals
+			for (const column of ["week_average", "week_average_exclude_today"]) {
+				for (const key in userPerformanceData[column]) {
+					userPerformanceData[column][key] = parseFloat(userPerformanceData[column][key].toFixed(2));
+				}
 			}
+
+			// Evaluate performance against rules
+			const features_accomplished_today = {};
+			for (const [requirement_key, settings] of Object.entries(feat_rules)) {
+				if (settings.day) {
+					const actual = userPerformanceData.today[requirement_key] ?? 0;
+					const diff = settings.day - actual;
+					features_accomplished_today[`d: ${requirement_key}`] = {
+						miss: diff < 0 ? "✅" : diff,
+						type: "day",
+						req: settings.day
+					};
+				}
+				if (settings.week) {
+					const actual = userPerformanceData.week_sum[requirement_key] ?? 0;
+					const diff = settings.week - actual;
+					features_accomplished_today[`w: ${requirement_key}`] = {
+						miss: diff < 0 ? "✅" : diff,
+						type: "week",
+						req: settings.week
+					};
+				}
+			}
+
+			// console.log("Offline Performance Report");
+			// console.log(today_scores);
+			// console.log("Week Scores", week_scores);
+			// console.log("User Performance Data", userPerformanceData);
+			
+			console.table(userPerformanceData);
+
+
+		} catch (err) {
+			console.error("Error generating offline performance report", err);
 		}
-
-		// Print formatted tables
-		console.log("\n📊 Today’s Performance");
-		console.table(userPerformanceData.today);
-
-		console.log("\n📈 Weekly Total");
-		console.table(userPerformanceData.week_sum);
-
-		console.log("\n📊 Weekly Average (7 days)");
-		console.table(userPerformanceData.week_average);
-
-		console.log("\n📉 Weekly Avg Excluding Today (6 days)");
-		console.table(userPerformanceData.week_average_exclude_today);
-
-		console.log("\n✅ Requirement Check");
-		const formatted = Object.entries(features_accomplished_today).map(([feat, res]) => ({
-			Feature: feat,
-			Type: res.type,
-			Required: res.req,
-			Miss: res.miss
-		}));
-		console.table(formatted);
-
-		return {
-			features_accomplished_today,
-			userPerformanceData
-		};
 	}
+
 
 
 
@@ -833,21 +822,27 @@ class Mastery {
 		 * @param {bool} debug ?= false : If to whether to debug api responses, etc.
 		 * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
 		 */
-		localStorageInstance.log_feat(feature_name, { score: value });
+		localStorageInstance.load().then(() => {
+			localStorageInstance.log_feat(feature_name, { score: value });
+		}).catch((err) => {
+			console.error("Error increasing performance", err);
+		});
+
 	}
 
 	// log_skill_experience(skill_name, { score = 1, deck_id ='', deck_term = "", comment="", reattempts=0 } = {}) {
 	logSkillExperience(skill_name, { score = 1, deck_id = '', deck_term = "", comment = "", reattempts = 0 } = {}) {
-
-		localStorageInstance.log_skill_experience(
-			skill_name,
-			{
+		localStorageInstance.load().then(() => {
+			localStorageInstance.log_skill_experience(skill_name, {
 				score: score,
 				deck_id: deck_id,
 				deck_term: deck_term,
 				comment: comment,
 				reattempts: reattempts
-			}
+			});
+		}).catch((err) => {
+			console.error("Error logging skill experience", err);
+		}
 		);
 	}
 

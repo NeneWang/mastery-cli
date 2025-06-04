@@ -94,8 +94,8 @@ class QuizzerWithDSA extends Quizzer {
                     
 
 
-                    this.masteryManager.increasePerformance({
-                        type_of_problem,
+                    this.masteryManager.increasePerformance(
+                        type_of_problem,{
                         increaseBy: 1
                     });
                 }

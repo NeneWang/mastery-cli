@@ -21,7 +21,6 @@ describe("Quizzler Terminology Tests", () => {
         let decks = new TermStorage(terms, "Academic Terms");
         let rootDeck = new TermStorage([], "Master Deck");
         rootDeck.addDeck(decks);
-        console.log("rootDeck", rootDeck.listTerms);
         const mQuizer = new utils.FlashQuizzer([], [], rootDeck);;
         return mQuizer
 
