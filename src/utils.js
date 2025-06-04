@@ -27,6 +27,11 @@ const { Quizzer: FlashQuizzer } = require(
 	"./Quizzer.js"
 );
 
+const { LocalStorage } = require('./LocalStorage.js');
+
+const localStorageInstance = new LocalStorage();
+localStorageInstance.load();
+
 // https://www.npmjs.com/package/chalk
 
 class DayWeather {
@@ -127,7 +132,7 @@ class Mastery {
 		this.clearOnTalk = clearOnTalk;
 		this.missing_features_today = []; //To be populated when required.
 
-		this.mQuizer = new QuizzerWithDSA(constants.qmathformulas, constants.qmathenabled, masterDeck);
+		this.mQuizer = new QuizzerWithDSA(constants.qmathformulas, constants.qmathenabled, masterDeck, this);
 
 		this.populateMissingReport = withOnlineCheck(this.populateMissingReport.bind(this));
 		this.login = withOnlineCheck(this.login.bind(this));
@@ -141,8 +146,7 @@ class Mastery {
 		this.commandHandlers = {
 			'hello': () => { this.say('Hello!') },
 			'code': () => { this.tellCurrentDirectory() },
-			'coa': () => { 
-				this.say("COA");
+			'coa': () => {
 
 				const run = async () => {
 					const commit_res = await commitpush();
@@ -155,16 +159,20 @@ class Mastery {
 				};
 
 				run();
-			 },
+			},
+			'skills': () => {
+				this.getSkillReports();
+			},
 			'services': () => { this.services() },
 			'math': () => { this.mQuizer.ask_math_question() },
 			'quiz': () => { this.mQuizer.askQuestion() },
+			'imath': () => { this.increasePerformance('math_ss') },
 			'term': () => { this.mQuizer.pick_and_ask_term_question() },
 			'clean': () => { this.askToClean() },
 			'ses': () => { this.mQuizer.study_session() },
 			'cses': () => { this.mQuizer.cloze_study_session() },
 			'amses': () => { this.mQuizer.algorithmic_study_session() },
-
+			'report': () => {this.generateOfflinePerformanceReport( { localStorageInstance, version: "tables" }) },
 		};
 	}
 
@@ -344,6 +352,92 @@ class Mastery {
 			}
 		}
 	}
+
+
+	async generateOfflinePerformanceReport({ localStorageInstance, version = "tables" } = {}) {
+		const feat_rules = getObjectiveFeatures();
+
+		const today_scores = localStorageInstance.get_day_logs().selected_date;
+		const week_scores = localStorageInstance.get_week_log();
+
+		let userPerformanceData = {
+			today: {},
+			week_sum: {},
+			week_average: {},
+			week_average_exclude_today: {}
+		};
+
+		// Fill today and week sum
+		for (const feat in today_scores) {
+			userPerformanceData.today[feat] = today_scores[feat].value;
+		}
+		for (const feat in week_scores) {
+			const total = week_scores[feat].value;
+			const today = userPerformanceData.today[feat] ?? 0;
+			userPerformanceData.week_sum[feat] = total;
+			userPerformanceData.week_average[feat] = total / 7;
+			userPerformanceData.week_average_exclude_today[feat] = (total - today) / 6;
+		}
+
+		// Round decimals
+		for (const column of ["week_average", "week_average_exclude_today"]) {
+			for (const key in userPerformanceData[column]) {
+				userPerformanceData[column][key] = parseFloat(userPerformanceData[column][key].toFixed(2));
+			}
+		}
+
+		// Evaluate against feat_rules
+		const features_accomplished_today = {};
+		for (const [requirement_key, settings] of Object.entries(feat_rules)) {
+			if (settings.day) {
+				const actual = userPerformanceData.today[requirement_key] ?? 0;
+				const diff = settings.day - actual;
+				features_accomplished_today[`d: ${requirement_key}`] = {
+					miss: diff < 0 ? "✅" : diff,
+					type: "day",
+					req: settings.day
+				};
+			}
+
+			if (settings.week) {
+				const actual = userPerformanceData.week_sum[requirement_key] ?? 0;
+				const diff = settings.week - actual;
+				features_accomplished_today[`w: ${requirement_key}`] = {
+					miss: diff < 0 ? "✅" : diff,
+					type: "week",
+					req: settings.week
+				};
+			}
+		}
+
+		// Print formatted tables
+		console.log("\n📊 Today’s Performance");
+		console.table(userPerformanceData.today);
+
+		console.log("\n📈 Weekly Total");
+		console.table(userPerformanceData.week_sum);
+
+		console.log("\n📊 Weekly Average (7 days)");
+		console.table(userPerformanceData.week_average);
+
+		console.log("\n📉 Weekly Avg Excluding Today (6 days)");
+		console.table(userPerformanceData.week_average_exclude_today);
+
+		console.log("\n✅ Requirement Check");
+		const formatted = Object.entries(features_accomplished_today).map(([feat, res]) => ({
+			Feature: feat,
+			Type: res.type,
+			Required: res.req,
+			Miss: res.miss
+		}));
+		console.table(formatted);
+
+		return {
+			features_accomplished_today,
+			userPerformanceData
+		};
+	}
+
 
 
 	performanceReport = async ({ version = "tables" } = {}) => {
@@ -726,6 +820,52 @@ class Mastery {
 
 	}
 
+	increasePerformance(feature_name, feature_key = 'feat', value = 1, debug = false, account_id = Settings.account_id ?? 1) {
+		/**
+		 * Increases the performance of a feature by the value specified.
+		 * @param {str} feature_name: The name of the feature to increase
+		 * @param {str} feature_key: The key of the feature to increase, e.g. 'feat', 'acad', 'pro', etc.
+		 * @param {int} value: The value to increase the performance by, default 1
+		 * @param {bool} debug ?= false : If to whether to debug api responses, etc.
+		 * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
+		 */
+		localStorageInstance.log_feat(feature_name, {score: value});
+	}
+
+	// log_skill_experience(skill_name, { score = 1, deck_id ='', deck_term = "", comment="", reattempts=0 } = {}) {
+	logSkillExperience(skill_name, {score=1, deck_id = '', deck_term = "", comment="", reattempts=0} = {}) {
+		console.log("Logging skill experience", skill_name, score, deck_id, deck_term, comment, reattempts);
+		localStorageInstance.log_skill_experience(
+			skill_name, 
+			{ 
+				score: score, 
+				deck_id: deck_id, 
+				deck_term: deck_term, 
+				comment: comment, 
+				reattempts: reattempts 
+			}
+		);
+	}
+
+	getSkillReports(){
+		// wait for load.
+		{
+			localStorageInstance.load().then(() => {
+				const today = new Date().toISOString().slice(0, 10);
+				const windows_n = 30;
+				const windows_days_ago = new Date();
+				windows_days_ago.setDate(windows_days_ago.getDate() - windows_n);
+				const windows_days_ago_str = windows_days_ago.toISOString().slice(0, 10);
+				this.say(`Skill Reports from ${windows_days_ago_str} -> ${today}\n`);
+				localStorageInstance.get_skills_reports({
+					'windows_n': windows_n,
+				});
+			}).catch((err) => {
+				console.error("Error loading skills reports", err);
+			});
+		}
+	}
+
 }
 
 
@@ -772,34 +912,6 @@ getArrayLastXDays = (days = 7) => {
 
 	// console.log(pastDays);
 	return pastDays;
-}
-
-/**
-Waiting for pgAdmin 4 to start... * Increase the performance of a feature; Day performances are such as commits, features, etc.
- * @param {str} feature_name: The name of the feature to increase
- * @param {int} increaseBY: The amount to increase the feature by; default 1
- * @param {bool} debug ?= false : If to whether to debug api responses, etc.; default false
- * @param {int} account_id ?= 1 : The account id to increase the performance; default Settings account_id or 1
- * 
- */
-const increasePerformance = async (feature_name, increaseBY = 1, debug = true, account_id = Settings.account_id ?? 1) => {
-
-	if (!Settings?.online) {
-		if (!Settings?.dev_mode) {
-			console.log('Offline, modify in data\\settings.json');
-		}
-		return {};
-	}
-
-
-	try {
-		console.log(`Increasing performance ${feature_name} for ${account_id}`)
-		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/day_performance/${feature_name}?increase_score=true&value=${increaseBY}&account_id=${account_id}`)
-		if (debug) console.log(res.data);
-	} catch (err) {
-		if (debug) console.warn(err);
-	}
-
 }
 
 
@@ -1049,13 +1161,6 @@ const commitpush = async (addCommitEmoji = true, { debug = false, comments_to_po
 		comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: true });
 	}
 
-	// Removed await statement for hopes of faster responsee load
-	increasePerformance("commits");
-	if (commitCat?.code) {
-		increasePerformance(commitCat.code);
-		if (addCommitEmoji) commitMessage = commitMessage + " " + commitCat.randomIcon();
-	}
-
 
 	commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
@@ -1192,6 +1297,7 @@ const inreasePerformanceOffline = (feature_name, increaseBY = 1, debug = true) =
 
 module.exports = {
 	getTalk, commitpush, autorelease, printComments,
-	Mastery, getToday, FlashQuizzer, increasePerformance,
-	commitCategory, logCommitIfSpecialCategory, postCommentFromTerm, getComments
+	Mastery, getToday, FlashQuizzer,
+	commitCategory, logCommitIfSpecialCategory, postCommentFromTerm, getComments,
+	localStorageInstance
 };

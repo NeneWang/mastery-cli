@@ -10,7 +10,7 @@ const constants = require('./constants');
 const Parser = require('expr-eval').Parser;
 
 const { increasePerformance } = require('./utils');
-const {  getAbsoluteUri,  APIDICT, CONSTANTS, get_random, countDecimals, get_random_of_size } = constants;
+const { getAbsoluteUri, APIDICT, CONSTANTS, get_random, countDecimals, get_random_of_size } = constants;
 const { user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
 
 const { TermScheduler } = require('./termScheduler');
@@ -24,13 +24,14 @@ const DEBUG = false
 
 class Quizzer {
 
-    constructor(qmathformulas, qmathenabled, masterDeck, alsoAskTerms = true) {
+    constructor(qmathformulas, qmathenabled, masterDeck, masteryManager) {
 
         const terms = []
         terms.push(...masterDeck.listTerms());
         this.masterDeck = masterDeck;
         this.terms = terms;
         this.enabledqmathformulas = qmathenabled;
+        this.masteryManager = masteryManager;
     }
 
 
@@ -119,7 +120,7 @@ class Quizzer {
      * Runs terms questions until the terms are done.
      * @param {boolean} debug the debug flag
      * @param {function} exitMethod the exit method
-     * @returns 
+     * @returns {int} attempts: The amount of attempts made to learn the terms.
      */
     forceLearnTermQuestions = async ({ debug = false, exitMethod = () => { } } = {}) => {
         let potential_questions = this.terms;
@@ -519,26 +520,6 @@ class Quizzer {
                 return false;
             }
 
-            try {
-
-                // console.log("Submitting answer..., for sure...")
-                this.printExample(term_selected)
-                if (Settings?.online) this.postCommentFromTerm(term_selected, user_res, true);
-                const _ = await increasePerformance("terms");
-
-
-                /**
-                 * date: submission answer
-                 * date: submission answer
-                 * ....
-                 */
-                if (Settings?.online) await this.printPreviousTerms(term_selected.formula_name)
-            } catch (Exception) {
-                // Do nothing, doesnt matter offline.
-                console.log("- Server Offline - ")
-                // console.log(Exception)
-            }
-
 
             let ISANSWERCORRECT = true
             // Print the correct example term if exists
@@ -556,12 +537,24 @@ class Quizzer {
                     });
                 const response = await is_correct.run();
                 ISANSWERCORRECT = response;
+
+                if (is_correct) {
+
+                    this.masteryManager.logSkillExperience(term_selected.category, {
+                        score: ISANSWERCORRECT ? 1 : 0,
+                        deck_id: term_selected.category,
+                        deck_term: term_selected.term,
+                        comment: user_res
+                    }
+                    );
+
+                }
             }
 
 
             return ISANSWERCORRECT
         } catch (err) {
-            if (Settings?.dev_mode){
+            if (Settings?.dev_mode) {
                 console.log("Failed at: ask_term_question |  term_selected", term_selected)
                 console.log(err)
 
@@ -604,7 +597,7 @@ class Quizzer {
             }
         } catch {
             console.log(`Error attempting to fetch from ${URL}`);
-            console.log('Called for previous term at', URL )
+            console.log('Called for previous term at', URL)
         }
 
     }

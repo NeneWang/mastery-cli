@@ -12,79 +12,101 @@ const utils = require('terminal-charter/lib/utils');
  * This class also supports DSATrainer Implementation.
  */
 class QuizzerWithDSA extends Quizzer {
-    constructor(questions, enabled, masterDeck) {
-        super(questions, enabled, masterDeck);
+
+    constructor(questions, enabled, masterDeck, masteryManager) {
+
+
+        super(questions, enabled, masterDeck, masteryManager);
         this.dsaTrainer = new DSATrainer({
             skip_problems: ["hello-world", "simple-sum"]
         });
+        this.masteryManager = masteryManager;
+
     }
-
-    async askQuestion({ ask_until_one_is_correct = true, disable_math = false, disable_dsa = false, increase_performance = true } = {}) {
+    async askQuestion({
+        ask_until_one_is_correct = true,
+        disable_math = false,
+        disable_dsa = false,
+        increase_performance = true
+    } = {}) {
         let exit = false;
-        let problem_types = ['math', 'term'];
-        problem_types = settings.quiz_enabled ?? problem_types;
 
+        // Determine enabled problem types
+        let problem_types = Array.isArray(settings.quiz_enabled) && settings.quiz_enabled.length > 0
+            ? settings.quiz_enabled
+            : ['math', 'term'];
+
+        if (disable_math) {
+            problem_types = problem_types.filter(type => type !== 'math');
+        }
+        if (disable_dsa) {
+            problem_types = problem_types.filter(type => !['algorithm', 'cloze-algo'].includes(type));
+        }
+
+        // Exit handler
         const exitMethod = () => {
             if (DEBUG) console.log("Exit method requested");
             exit = true;
             return false;
         };
 
-        /**
-         * Returns true if answer is correct, false otherwise using a random question method.
-         * @param {emthod} exitMethod 
-         * @returns {boolean} true if answer is correct, false otherwise
-         */
+        // Core random question dispatcher
         const askQuestionRandom = async ({ exitMethod = () => { }, force_mode = true } = {}) => {
-            let problem_type_selected = constants.get_random(problem_types);
+            const problem_type_selected = constants.get_random(problem_types);
 
             switch (problem_type_selected) {
-                case 'math':
-                    const math_answered = await this.ask_math_question({ exitMethod: exitMethod });
-                    
-                    return math_answered;
+                case 'math': {
+                    const answered = await this.ask_math_question({ exitMethod });
+                    return { answered_correctly: answered, type_of_problem: 'math' };
+                }
+                case 'term': {
+                    const method = force_mode
+                        ? this.forceLearnTermQuestions
+                        : this.pick_and_ask_term_question;
 
-                case 'term':
-                    if (force_mode) {
-                        const term_answered = await this.forceLearnTermQuestions({ exitMethod: exitMethod });
-                        
-                        return term_answered;
-                    } else {
-
-                        const term_answered = await this.pick_and_ask_term_question({ exitMethod: exitMethod });
-                       
-                    }
-
-                case 'algorithm':
-                    // Wont be called for now
-                    const algo_answered = await this.ask_algorithm_question({ exitMethod: exitMethod });
-                   
-
-                    return algo_answered;
-
-                case 'cloze-algo':
-                    const cloze_answered = await this.ask_cloze_algorithm_question({ exitMethod: exitMethod });
-
-                    return cloze_answered;
-
+                    const answered = await method.call(this, { exitMethod });
+                    return { answered_correctly: answered, type_of_problem: 'term' };
+                }
+                case 'algorithm': {
+                    const answered = await this.ask_algorithm_question({ exitMethod });
+                    return { answered_correctly: answered, type_of_problem: 'algorithm' };
+                }
+                case 'cloze-algo': {
+                    const answered = await this.ask_cloze_algorithm_question({ exitMethod });
+                    return { answered_correctly: answered, type_of_problem: 'cloze-algo' };
+                }
                 default:
-                    return false;
+                    return { answered_correctly: false, type_of_problem: 'unknown' };
             }
-        }
+        };
 
         let answerIsCorrect = false;
-        if (ask_until_one_is_correct)
+
+        if (ask_until_one_is_correct) {
             while (!answerIsCorrect && !exit) {
                 if (DEBUG) console.log("Answer is correct", answerIsCorrect, "exit", exit);
-                answerIsCorrect = await askQuestionRandom({ exitMethod: exitMethod });
+                const { answered_correctly, type_of_problem } = await askQuestionRandom({ exitMethod });
+                answerIsCorrect = answered_correctly;
+
+                if (DEBUG) console.log("Answer is correct", answerIsCorrect, "type of problem", type_of_problem);
+
+                if (answerIsCorrect && increase_performance) {
+                    
+
+
+                    this.masteryManager.increasePerformance({
+                        type_of_problem,
+                        increaseBy: 1
+                    });
+                }
             }
-        else {
-            const _ = askQuestionRandom();
+        } else {
+            await askQuestionRandom({ exitMethod });
         }
 
-        return true;
-
+        return { success: answerIsCorrect, exited: exit };
     }
+
 
     ask_algorithm_question = () => {
         const problem_status = this.dsaTrainer.openRandomProblem();
@@ -134,14 +156,14 @@ class QuizzerWithDSA extends Quizzer {
         }
     }
 
-    
-    algorithmic_study_session = async ({ reset_scheduler = false, 
+
+    algorithmic_study_session = async ({ reset_scheduler = false,
         filter = {
             easy: true,
             medium: false,
             hard: false,
         }
-     } = {}) => {
+    } = {}) => {
 
         // Pick all the available string keys.
 
@@ -165,7 +187,7 @@ class QuizzerWithDSA extends Quizzer {
             const [cardsLeft, cardsLearnt] = [dsaScheduler.getCardsToLearn(), dsaScheduler.getCardsLearnt()];
 
             const card = await dsaScheduler.getCard();
-            
+
             const solution_metadata = await this.dsaTrainer.solveProblem(card, { base: DSAConstants.PATHS.base });
 
             const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;

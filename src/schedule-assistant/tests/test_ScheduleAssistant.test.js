@@ -21,7 +21,6 @@ describe("ScheduleAssistant", () => {
         const scheduleAssistant = new ScheduleAssistant();
         const reportCreated = scheduleAssistant.createReportPrompt({ weekday: "Monday" });
         console.log("reportCreated", JSON.stringify(reportCreated));
-        // console.log("reportCreated length", reportCreated?.fields?.length);
 
     });
 

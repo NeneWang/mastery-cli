@@ -183,7 +183,7 @@ const probability = [
         term: "Number of ways to arrange the letters in the word 'BOOK'",
         description: "You have the word 'BOOK', and you want to arrange its letters. The formula to calculate permutations is nPr = (n!) / (n-r), where n is the total number of items and r is the number of items to be arranged.",
         prompt: "How many different arrangements are possible?",
-        example: "The number of arrangements is given by the permutation formula P(4, 4) = 4! = 24."
+        example: "The number of arrangements is given by the permutation formula P(4, 2) = 4! / 2!= 24 / 2 = 12."
     },
     {
         term: "Number of paths in a 3D space from (0,0,0) to (3,3,3)",
