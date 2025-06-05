@@ -115,7 +115,7 @@ class QuizzerWithDSA extends Quizzer {
 
 
 
-    cloze_study_session = async ({ reset_scheduler = false }) => {
+    cloze_study_session = async ({ reset_scheduler = false, md_pseudo_mode = false }) => {
 
         // Pick all the available string keys.
 
@@ -139,7 +139,7 @@ class QuizzerWithDSA extends Quizzer {
 
             console.log("Card", card);
             problem.is_cloze = true;
-            const solution_metadata = await this.dsaTrainer.solveProblem(problem, { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path });
+            const solution_metadata = await this.dsaTrainer.solveProblem(problem, { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path, md_pseudo_mode: md_pseudo_mode });
 
             const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
             clozeScheduler.solveCard(answerIsCorrect);

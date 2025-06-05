@@ -5,7 +5,7 @@ const DSATrainer = require('./dsa-trainer.js');
 const { ExtensionModel } = require('../models');
 
 
-dsaTrainer = new DSATrainer({
+let dsaTrainer = new DSATrainer({
 	skip_problems: ["hello-world", "simple-sum"]
 });
 
@@ -13,13 +13,14 @@ const Settings = require('../../settings');
 
 class MasteryDSAExtension extends ExtensionModel {
 
-	constructor() {
+	constructor({masteryManager} = {}) {
 		super(
 			"MasteryDSAExtension",
 			"1.0.0",
 			"Mastery DSA Extension",
 			"Official",
-			"MIT"
+			"MIT",
+			{ masteryManager }
 		);
 	}
 
@@ -93,15 +94,22 @@ class MasteryDSAExtension extends ExtensionModel {
 		return {
 			dsa: async () => {
 
-				const updateAlgorithmPerformance = (problem_response) => {
+				const updateAlgorithmPerformance = (problem_response, {performance_feature="algo"} = {}) => {
 					if (Settings.dev_mode) console.log("updateAlgorithmPerformance: ", problem_response);
 
 					const dsa_is_correct = problem_response.is_problem_solved;
 					if (dsa_is_correct) {
 						(async () => {
-
-							await increasePerformance("algo_w", problem_response.score_to_increase);
-							await increasePerformance("algo", 1);
+							this.masteryManager.logSkillExperience(
+								performance_feature,
+								{
+									score: problem_response.score_to_increase,
+									deck_id: problem_response.slug,
+									comment: `${new Date()}`,
+									increased_performance: true,
+									performance_feature: performance_feature
+								}
+							)
 
 						})();
 
@@ -111,10 +119,12 @@ class MasteryDSAExtension extends ExtensionModel {
 				if (flags.all) {
 					console.log("all")
 					const problem_response = await dsaTrainer.showMenuOfProblems();
-					// updateAlgorithmPerformance(problem_response);
+					updateAlgorithmPerformance(problem_response);
 				} else {
-					const problem_response = await dsaTrainer.showRecommendedProblems();
-					// updateAlgorithmPerformance(problem_response);
+					const problem_response = await dsaTrainer.showRecommendedProblems({
+						md_pseudo_mode: true,
+					});
+					updateAlgorithmPerformance(problem_response);
 				}
 
 			},

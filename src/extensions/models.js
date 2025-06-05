@@ -2,12 +2,13 @@
 // Extension Model with basic structure and methods
 
 class ExtensionModel {
-    constructor(name, version, description, author, license="MIT") {
+    constructor(name, version, description, author, license="MIT", {masteryManager} = {}) {
         this.name = name;
         this.version = version;
         this.description = description;
         this.author = author;
         this.license = license;
+        this.masteryManager = masteryManager || null; // Optional mastery manager for handling mastery-related tasks
     }
     
     getDetails() {

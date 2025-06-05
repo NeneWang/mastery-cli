@@ -107,6 +107,7 @@ class FeatureExtraction {
 
 const { get } = require('node:http');
 const { strict } = require('node:assert');
+const { parse } = require('node:path');
 
 function withOnlineCheck(fn) {
 	return async function (...args) {
@@ -150,19 +151,27 @@ class Mastery {
 
 				const run = async () => {
 
-					this.increasePerformance('commit', { score: 1 });
-					const commit_res = await commitpush();
-					if (Settings.ask_quiz_when_commit && commit_res) {
+					commitpush();
+					this.increasePerformance('feat', { score: 1 });
+					if (Settings.ask_quiz_when_commit) {
 						await this.mQuizer.askQuestion();
 					}
 
-					this.populateMissingReport();
 				};
 
 				run();
 			},
 			'poh': () => {
-				this.pushOriginHead();
+
+				const run = async () => {
+
+					this.pushOriginHead();
+					this.increasePerformance('feat', { score: 1 });
+					if (Settings.ask_quiz_when_commit) {
+						await this.mQuizer.askQuestion();
+					}
+				}
+				run();
 			},
 			'skill': () => {
 				this.getSkillReports();
@@ -175,7 +184,17 @@ class Mastery {
 			'clean': () => { this.askToClean() },
 			'ses': () => { this.mQuizer.study_session() },
 			'cses': () => { this.mQuizer.cloze_study_session() },
+			'mcses': () => {
+				this.mQuizer.cloze_study_session({
+					md_pseudo_mode: true
+				})
+			},
 			'amses': () => { this.mQuizer.algorithmic_study_session() },
+			'mamses': () => {
+				this.mQuizer.algorithmic_study_session({
+					md_pseudo_mode: true
+				})
+			},
 			'report': () => {
 				this.getSkillReports();
 				this.generateOfflinePerformanceReport({ localStorageInstance, version: "tables" })
@@ -369,32 +388,35 @@ class Mastery {
 
 			// Use built-in day and week methods
 			const today_scores = localStorageInstance.get_day_logs({ windows_n: 0 }).selected_date;
+			const yesterday_scores = localStorageInstance.get_day_logs({ windows_n: 1 }).selected_date;
 			const week_scores = localStorageInstance.get_week_log();
 
 			let userPerformanceData = {
 				today: {},
 				week_sum: {},
-				week_average: {},
-				week_average_exclude_today: {}
+				week_average: {}
 			};
 
 			// Fill in today and week data
 			for (const feat in today_scores) {
 				userPerformanceData.today[feat] = today_scores[feat].value;
 			}
+
+			const roundDec = (number) => {
+				try{
+					return parseFloat(number.toFixed(2));
+				}catch{
+					return number;
+				}
+			}
+
+
 			for (const feat in week_scores) {
 				const total = week_scores[feat].value;
 				const today = userPerformanceData.today[feat] ?? 0;
-				userPerformanceData.week_sum[feat] = total;
-				userPerformanceData.week_average[feat] = total / 7;
-				userPerformanceData.week_average_exclude_today[feat] = (total - today) / 6;
-			}
-
-			// Round decimals
-			for (const column of ["week_average", "week_average_exclude_today"]) {
-				for (const key in userPerformanceData[column]) {
-					userPerformanceData[column][key] = parseFloat(userPerformanceData[column][key].toFixed(2));
-				}
+				userPerformanceData.today[feat] = today;
+				userPerformanceData.week_sum[feat] = `${total - today} -> ${total}`;
+				userPerformanceData.week_average[feat] = `${roundDec((total - today) / 6)} -> ${roundDec(total / 7)}`;
 			}
 
 			// Evaluate performance against rules
@@ -816,7 +838,7 @@ class Mastery {
 
 	}
 
-	increasePerformance(feature_name, feature_key = 'feat', value = 1, debug = false, account_id = Settings.account_id ?? 1) {
+	increasePerformance(feature_name, feature_key = 'feat', value = 1) {
 		/**
 		 * Increases the performance of a feature by the value specified.
 		 * @param {str} feature_name: The name of the feature to increase
@@ -834,7 +856,7 @@ class Mastery {
 	}
 
 	// log_skill_experience(skill_name, { score = 1, deck_id ='', deck_term = "", comment="", reattempts=0 } = {}) {
-	logSkillExperience(skill_name, { score = 1, deck_id = '', deck_term = "", comment = "", reattempts = 0 } = {}) {
+	logSkillExperience(skill_name, { score = 1, deck_id = '', deck_term = "", comment = "", reattempts = 0, increase_performance=false, performance_feature='term' } = {}) {
 		localStorageInstance.load().then(() => {
 			localStorageInstance.log_skill_experience(skill_name, {
 				score: score,
@@ -843,6 +865,9 @@ class Mastery {
 				comment: comment,
 				reattempts: reattempts
 			});
+			if(increase_performance) {
+				localStorageInstance.log_feat(performance_feature, { score: score });
+			}
 		}).catch((err) => {
 			console.error("Error logging skill experience", err);
 		}

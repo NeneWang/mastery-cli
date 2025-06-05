@@ -90,15 +90,6 @@ class QuizzerWithDSA extends Quizzer {
 
                 if (DEBUG) console.log("Answer is correct", answerIsCorrect, "type of problem", type_of_problem);
 
-                if (answerIsCorrect && increase_performance) {
-                    
-
-
-                    this.masteryManager.increasePerformance(
-                        type_of_problem,{
-                        increaseBy: 1
-                    });
-                }
             }
         } else {
             await askQuestionRandom({ exitMethod });
@@ -123,7 +114,7 @@ class QuizzerWithDSA extends Quizzer {
 
 
 
-    cloze_study_session = async ({ reset_scheduler = false } = {}) => {
+    cloze_study_session = async ({ reset_scheduler = false, md_pseudo_mode=false } = {}) => {
 
         // Pick all the available string keys.
 
@@ -147,7 +138,10 @@ class QuizzerWithDSA extends Quizzer {
 
             console.log("Card", card);
             problem.is_cloze = true;
-            const solution_metadata = await this.dsaTrainer.solveProblem(problem, { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path });
+            const solution_metadata = await this.dsaTrainer.solveProblem(problem, 
+                { base: DSAConstants.PATHS.base_cloze, populate_with_cloze_filepath: card.file_path,
+                    md_pseudo_mode: md_pseudo_mode
+                 });
 
             const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
             clozeScheduler.solveCard(answerIsCorrect);
@@ -162,7 +156,8 @@ class QuizzerWithDSA extends Quizzer {
             easy: true,
             medium: false,
             hard: false,
-        }
+        },
+        md_pseudo_mode = false
     } = {}) => {
 
         // Pick all the available string keys.
@@ -188,7 +183,9 @@ class QuizzerWithDSA extends Quizzer {
 
             const card = await dsaScheduler.getCard();
 
-            const solution_metadata = await this.dsaTrainer.solveProblem(card, { base: DSAConstants.PATHS.base });
+            const solution_metadata = await this.dsaTrainer.solveProblem(card, { base: DSAConstants.PATHS.base,
+                md_pseudo_mode: md_pseudo_mode
+             });
 
             const answerIsCorrect = solution_metadata.status == DSAConstants.ProblemStatus.solved;
             dsaScheduler.solveCard(answerIsCorrect);

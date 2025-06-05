@@ -183,7 +183,7 @@ class DSATrainer {
         return problem_response;
     }
 
-    async openRandomClozeDSAProblem() {
+    async openRandomClozeDSAProblem({ md_pseudo_mode = false } = {}) {
         // const _ = await this.problemReport.getReport();
         await this.loaded_problem_manager;
         const selectedClozeProblem = this.problems_manager.getRandomProblemSlugWithCloze();
@@ -195,7 +195,8 @@ class DSATrainer {
         // Populate with that problem slug
         // this.problems_manager.copyFileToTemp(selectedClozeProblem.file_path, { base: constants.PATHS.base_cloze });
         problem.is_cloze = true;
-        const problem_response = await this.solveProblem(problem, { base: constants.PATHS.base_cloze, populate_with_cloze_filepath: selectedClozeProblem.file_path });
+        const problem_response = await this.solveProblem(problem,
+            { base: constants.PATHS.base_cloze, populate_with_cloze_filepath: selectedClozeProblem.file_path, md_pseudo_mode: md_pseudo_mode });
 
         problem_response.is_problem_solved = problem_response.problem_status == constants.ProblemStatus.solved;
         return problem_response;
@@ -332,7 +333,7 @@ class DSATrainer {
      */
     async solveProblem(problem, { tryUntilSolved: try_until_solved = true, store_progress = true,
         populate_problem = true,
-        populate_with_cloze_filepath = "", base = "" } = {}) {
+        populate_with_cloze_filepath = "", base = "", md_pseudo_mode = false } = {}) {
         if (populate_problem) {
             if (populate_with_cloze_filepath != "") {
 
@@ -351,9 +352,10 @@ class DSATrainer {
         };
 
         // Try to solve the problem once.
-        let results = await this.openAndTest(problem, { failed_attempts: statusMetadata.failed_attempts });
+        let results = await this.openAndTest(problem, { failed_attempts: statusMetadata.failed_attempts, md_pseudo_mode: md_pseudo_mode });
         let status = results.status;
         this.updateProblemStatus(problem, results, statusMetadata);
+        statusMetadata.md_pseudo_mode = md_pseudo_mode;
 
 
 
@@ -377,7 +379,7 @@ class DSATrainer {
                 continue; // Try again
             }
 
-            const results = await this.openAndTest(problem, { failed_attempts: statusMetadata.failed_attempts });
+            const results = await this.openAndTest(problem, { failed_attempts: statusMetadata.failed_attempts, md_pseudo_mode: md_pseudo_mode });
             status = results.status;
             this.updateProblemStatus(problem, results, statusMetadata);
 
@@ -394,10 +396,10 @@ class DSATrainer {
     * @param {boolean} open_test_cases If true, the test cases file will be opened
     * @returns {Promise} A promise that resolves when the problem is opened
      */
-    async openProblemMetadataInTerminal(problem, { copy_to_clipboard = false, open_problem_temporal = true,
-        open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false } = {}) {
+    async openProblemMetadataInTerminal(problem, { copy_to_clipboard = true, open_problem_temporal = true,
+        open_solution = false, open_basecode = false, open_markdown = false, open_test_cases = false, md_pseudo_mode = false } = {}) {
 
-        let problem_extension = '.js'
+        let problem_extension = ''
 
         let problem_details = this.problems_manager.getProblem(problem.slug);
         /**
@@ -429,7 +431,16 @@ class DSATrainer {
         }
 
         if (open_problem_temporal) {
-            const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
+            if (md_pseudo_mode) {
+                const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction, force_extension: '.md' });
+
+            }
+            else if (problem_extension != "") {
+                const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction, force_extension: problem_extension });
+            }
+            else {
+                const _ = await this.problems_manager.openTemporalProblemFile({ editor_instruction: editor_instruction });
+            }
 
         }
 
@@ -463,12 +474,14 @@ class DSATrainer {
      * @param {ProblemMetadata} problem The problem to open and test
      * @returns {constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
      */
-    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], hintsGiven = [], copyProblemToTempInstead = true } = {}) {
+    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], hintsGiven = [], copyProblemToTempInstead = true, md_pseudo_mode = false } = {}) {
         if (DEBUG) console.log(
             "Opening problem: ", problem.slug,
         );
         let problem_details = this.problems_manager.getProblem(problem.slug);
-        await this.openProblemMetadataInTerminal(problem);
+        await this.openProblemMetadataInTerminal(problem, {
+            md_pseudo_mode: md_pseudo_mode
+        });
 
         // }
 
@@ -483,7 +496,7 @@ class DSATrainer {
 
             "modify - Open Code Editor": async () => {
                 question_state_flag = true;
-                await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true }); //By default opens the temrporal probelm file
+                await this.openProblemMetadataInTerminal(problem, { open_problem_temporal: true, md_pseudo_mode: md_pseudo_mode }); //By default opens the temrporal probelm file
 
             },
             "force approval ": async () => {
@@ -493,7 +506,7 @@ class DSATrainer {
                 return {
                     status: constants.ProblemStatus.solved,
                     details: {
-                        failed_attempts: 0,
+                        failed_attempts: failed_attempts
                     },
                     problem_details: problem_details,
                     is_pseudocode: true,
@@ -505,25 +518,6 @@ class DSATrainer {
                 return { status: constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
 
 
-            },
-
-            'execute test cases - Only works for JS problems': async () => {
-                try {
-                    // Sometimes errors can occur.
-                    const did_pass_all_tests = await this.problems_manager.runProblem(problem);
-                    if (did_pass_all_tests) {
-                        did_pass_all_tests_before = true;
-
-                    } else {
-                        failed_attempts += 1;
-                        attempts_timestamp.push(getCurrentDateTimeIso());
-                    }
-                    return { status: constants.ProblemStatus.unsolved, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
-                }
-                catch (e) {
-                    console.log("Error running tests: ", e);
-                    return false;
-                }
             },
 
             "hint": async () => {
@@ -605,7 +599,30 @@ class DSATrainer {
 
 
         if (constants.DEV_MODE) Object.assign(choices, choices_dev_mode); // Add dev mode choices
+        if (!md_pseudo_mode) {
+            Object.assign(choices, {
 
+
+                'execute test cases - Only works for JS problems': async () => {
+                    try {
+                        // Sometimes errors can occur.
+                        const did_pass_all_tests = await this.problems_manager.runProblem(problem);
+                        if (did_pass_all_tests) {
+                            did_pass_all_tests_before = true;
+
+                        } else {
+                            failed_attempts += 1;
+                            attempts_timestamp.push(getCurrentDateTimeIso());
+                        }
+                        return { status: constants.ProblemStatus.unsolved, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
+                    }
+                    catch (e) {
+                        console.log("Error running tests: ", e);
+                        return false;
+                    }
+                },
+            });
+        }
         if (cloze_problem_list.length > 0) {
 
             Object.assign(choices, {

@@ -526,6 +526,7 @@ class Quizzer {
 
 
             // if ask_if_correct is true then ask if it is corerect and update after showing examples
+            printMarked(term_selected?.example ?? "", { use_markdown: true });
 
             if (ask_if_correct) {
                 const is_correct = new Confirm(
@@ -538,12 +539,14 @@ class Quizzer {
                 ISANSWERCORRECT = response;
 
                 if (is_correct) {
-
-                    this.masteryManager.logSkillExperience(term_selected.category, {
+                    
+                    const _ = await this.masteryManager.logSkillExperience(term_selected.category, {
                         score: ISANSWERCORRECT ? 1 : 0,
                         deck_id: term_selected.category,
                         deck_term: term_selected.term,
-                        comment: user_res
+                        comment: user_res,
+                        increased_performance: true,
+                        performance_feature: 'term'
                     }
                     );
 

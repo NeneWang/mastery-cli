@@ -49,9 +49,9 @@ class LocalStorage {
 
         this.experience_to_levelup_after_level = {
             0: 2, //after level 0, you need 2 exp to level up
-            5: 10, //after level 5, you need 10 exp to level up
-            10: 20, //after level 10, you need 20 exp to level up
-            15: 30, //after level 15, you need 30 exp to level up
+            5: 5, //after level 5, you need 10 exp to level up
+            10: 7, //after level 10, you need 20 exp to level up
+            15: 10, //after level 15, you need 30 exp to level up
         };
 
     }
@@ -93,7 +93,9 @@ class LocalStorage {
         this.save();
     }
 
-    calculate_level_based_on_experience(experience) {
+    calculate_level_based_on_experience(experience,
+        { previous_level = 0, celebrate_new_level = true, skill_level = "" } = {}
+    ) {
         /**
          * Calculates the level based on the experience.
          * The experience to level up is defined in the this.experience_to_levelup_after_level object.
@@ -122,6 +124,13 @@ class LocalStorage {
                 remaining_experience = 0;
             }
         }
+
+        if (celebrate_new_level) {
+            if (current_level > previous_level) {
+                console.log(`\n🎉 ${skill_level} leveled up from ${previous_level} -> ${current_level} 🎉\n`)
+            }
+        }
+
         return current_level;
 
     }
@@ -161,9 +170,13 @@ class LocalStorage {
             });
         }
 
+        const previousLevel = this.skill_based_stats[skill_name].skill_level;
+
 
         //  // Check if the skill level needs to be updated
-        this.skill_based_stats[skill_name].skill_level = this.calculate_level_based_on_experience(this.skill_based_stats[skill_name].skill_exp);
+        this.skill_based_stats[skill_name].skill_level = this.calculate_level_based_on_experience(this.skill_based_stats[skill_name].skill_exp,
+            { previous_level: previousLevel, celebrate_new_level: true, skill_level: skill_name }
+        );
         // store current experience and level in the experience_records
         if (!this.skill_based_stats[skill_name].experience_records) {
             this.skill_based_stats[skill_name].experience_records = {};
@@ -177,7 +190,7 @@ class LocalStorage {
 
     }
 
-    get_skills_reports({ windows_n = 30, filter = [], compare_prev = true, console_report = true, hide_no_progress = true } = {}) {
+    get_skills_reports({ windows_n = 7, filter = [], compare_prev = true, console_report = true, hide_no_progress = true } = {}) {
         /** Gets current skill experience as a  dict conntaining the difference in progress
          *  between now and before the windows n started.
          *  Genertes the table report on its own. by default hides the skills that had no progress.
@@ -185,6 +198,7 @@ class LocalStorage {
 
         const today = new Date();
         const selected_date = new Date(today);
+        let windows_end_date = undefined;
 
         const lastLevel = {}
         /**
@@ -239,23 +253,24 @@ class LocalStorage {
         /**
          * skillname: level progress 1 -> 2, exp progress 10 -> 20
          */
-
-        for (const skill in lastLevel) {
-            if (!beforeWindowsLevel[skill]) {
-                beforeWindowsLevel[skill] = { level: 0, exp: 0, date: '' };
-            }
-            const currentLevel = lastLevel[skill].level;
-            const currentExp = lastLevel[skill].exp;
-            const previousLevel = beforeWindowsLevel[skill].level;
-            const previousExp = beforeWindowsLevel[skill].exp;
-            // console.log("Current Level", currentLevel, "Current Exp", currentExp, "Previous Level", previousLevel, "Previous Exp", previousExp);
-            // console.log("Skill", skill, "Last Level", lastLevel[skill], "Before Windows Level", beforeWindowsLevel[skill]);
-            if ((currentLevel > previousLevel || currentExp > previousExp) || !hide_no_progress) {
-                if (console_report) {
-                    console.log(`${skill}: Level ${previousLevel} -> ${currentLevel}, Exp ${previousExp} -> ${currentExp}`);
+        if (console_report) {
+            for (const skill in lastLevel) {
+                if (!beforeWindowsLevel[skill]) {
+                    beforeWindowsLevel[skill] = { level: 0, exp: 0, date: '' };
                 }
-            } else if (hide_no_progress) {
-                delete lastLevel[skill]; // remove skills with no progress
+                const currentLevel = lastLevel[skill].level;
+                const currentExp = lastLevel[skill].exp;
+                const previousLevel = beforeWindowsLevel[skill].level;
+                const previousExp = beforeWindowsLevel[skill].exp;
+                // console.log("Current Level", currentLevel, "Current Exp", currentExp, "Previous Level", previousLevel, "Previous Exp", previousExp);
+                // console.log("Skill", skill, "Last Level", lastLevel[skill], "Before Windows Level", beforeWindowsLevel[skill]);
+                if ((currentLevel > previousLevel || currentExp > previousExp) || !hide_no_progress) {
+                    if (console_report) {
+                        console.log(`${skill}: Level ${previousLevel} -> ${currentLevel}, Exp ${previousExp} -> ${currentExp}`);
+                    }
+                } else if (hide_no_progress) {
+                    delete lastLevel[skill]; // remove skills with no progress
+                }
             }
         }
 

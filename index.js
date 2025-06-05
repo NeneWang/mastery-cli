@@ -50,7 +50,7 @@ function applyMixin(targetInstance, mixin) {
 	const masterDeck = await populateMasterDeck();
 	const mastery = new Mastery(Settings, masterDeck);
 	// applyMixin(mastery, new DataScienceExtension);
-	applyMixin(mastery, new MasteryDSAExtension);
+	applyMixin(mastery, new MasteryDSAExtension({ masteryManager: mastery }));
 	applyMixin(mastery, new DemoExtension);
 	
 
