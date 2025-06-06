@@ -199,6 +199,21 @@ class Mastery {
 				this.getSkillReports();
 				this.generateOfflinePerformanceReport({ localStorageInstance, version: "tables" })
 			},
+			'entries': () => {
+				// take the next parameter as the target to search.
+				let skill_name = process.argv[3] ?? "";
+				let deck_term = process.argv[4] ?? "";
+
+				if (skill_name == "") {
+					console.log("Please provide a skill name to search for entries");
+					return;
+				}
+
+				this.get_entries({
+					skill_name: skill_name,
+					deck_term: deck_term,
+				});
+			}
 		};
 	}
 
@@ -303,6 +318,26 @@ class Mastery {
 
 	}
 
+	get_entries = ({ head = 5, skill_name = "", deck_term = "" }) => {
+
+		localStorageInstance.load().then(() => {
+			/**
+			 * Returns the entries of the skill_name in the deck_term
+			 * @param {number} head - The number of entries to return
+			 * @param {string} skill_name - The name of the skill to search for
+			 * @param {string} deck_term - The term of the deck to search for
+			*/
+			const entries = localStorageInstance.get_entries({ head, skill_name, deck_term });
+			if (entries.length == 0) {
+				console.log(`No entries found for ${skill_name} in ${deck_term}`);
+			}
+			else {
+				console.table(entries);
+			}
+			return entries;
+		});
+	}
+
 	/**
 	 * Prints the day report based on the settings
 	 * - Performance Report: A table report stating the counts of each feature
@@ -403,9 +438,9 @@ class Mastery {
 			}
 
 			const roundDec = (number) => {
-				try{
+				try {
 					return parseFloat(number.toFixed(2));
-				}catch{
+				} catch {
 					return number;
 				}
 			}
@@ -856,7 +891,7 @@ class Mastery {
 	}
 
 	// log_skill_experience(skill_name, { score = 1, deck_id ='', deck_term = "", comment="", reattempts=0 } = {}) {
-	logSkillExperience(skill_name, { score = 1, deck_id = '', deck_term = "", comment = "", reattempts = 0, increase_performance=false, performance_feature='term' } = {}) {
+	logSkillExperience(skill_name, { score = 1, deck_id = '', deck_term = "", comment = "", reattempts = 0, increase_performance = false, performance_feature = 'term' } = {}) {
 		localStorageInstance.load().then(() => {
 			localStorageInstance.log_skill_experience(skill_name, {
 				score: score,
@@ -865,7 +900,7 @@ class Mastery {
 				comment: comment,
 				reattempts: reattempts
 			});
-			if(increase_performance) {
+			if (increase_performance) {
 				localStorageInstance.log_feat(performance_feature, { score: score });
 			}
 		}).catch((err) => {
@@ -1182,17 +1217,6 @@ const commitpush = () => {
 	if (commitMessage == undefined || commitMessage == "") {
 		commitMessage = CONSTANTS.default_commit_message;
 	}
-
-	// // If any category found then increase the score please.
-	// commitCat = commitCategory(commitMessage, true);
-	// // Log special categories
-
-	// if (Settings.blog_special_commits ?? false) {
-	// 	comments_to_populate = await logCommitIfSpecialCategory(commitMessage, commitCat, comments_to_populate, { print_previous_commits: true });
-	// }
-
-
-	// commitMessage = appendQuotes(commitMessage + " " + getRandomMaidEmoji());
 
 	exec(`git add --all && git commit -m ${commitMessage} && git push origin HEAD `);
 	console.log(`Pushed commit: ${commitMessage}`);

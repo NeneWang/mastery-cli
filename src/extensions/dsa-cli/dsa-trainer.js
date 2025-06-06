@@ -445,13 +445,10 @@ class DSATrainer {
         }
 
 
-
-
         if (open_solution) {
             if (copy_to_clipboard) {
                 this.problems_manager.openTemporalSolutionFile({ editor_instruction: editor_instruction, extension: problem_extension });
             } else {
-
                 const _ = await this.problems_manager.openSolutionFile(problem.slug, { editor_instruction: editor_instruction });
             }
         }
@@ -474,7 +471,7 @@ class DSATrainer {
      * @param {ProblemMetadata} problem The problem to open and test
      * @returns {constants.ProblemStatus} The status of the problem (aborted | solved | unsolved)
      */
-    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], hintsGiven = [], copyProblemToTempInstead = true, md_pseudo_mode = false } = {}) {
+    async openAndTest(problem, { failed_attempts = 0, attempts_timestamp = [], comments = [], hintsGiven = [], copyProblemToTempInstead = true, md_pseudo_mode = false, store_to_stash = true } = {}) {
         if (DEBUG) console.log(
             "Opening problem: ", problem.slug,
         );
@@ -485,7 +482,19 @@ class DSATrainer {
 
         // }
 
+        const stash_current_temp = (res) => {
+            let extension = 'md';
+            // get the extension of the problem file
+            if (res.problem_details.file_path) {
+                extension = res.problem_details.file_path.split('.').pop();
+            }
 
+            // stashfilename as `slug-{current datetime}.{extension}` 
+            let stash_file_name = `${res.problem_details.slug}-${getCurrentDateTimeIso()}`;
+            this.problems_manager.copyTempToStash(
+                { stash_file_name: stash_file_name });
+            res.problem_details.stash_file_name = stash_file_name;
+        }
 
         let hints = problem
         let question_state_flag = true;
@@ -503,7 +512,7 @@ class DSATrainer {
                 question_state_flag = false;
                 // Approve the solution
                 console.log("Approving solution");
-                return {
+                const res = {
                     status: constants.ProblemStatus.solved,
                     details: {
                         failed_attempts: failed_attempts
@@ -511,13 +520,14 @@ class DSATrainer {
                     problem_details: problem_details,
                     is_pseudocode: true,
                 };
+                stash_current_temp(res);
+
+                return res;
             },
             "pass - Re enqueue at the end": async () => {
                 // same as quit. just renaming.
                 question_state_flag = false;
                 return { status: constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
-
-
             },
 
             "hint": async () => {
@@ -551,25 +561,7 @@ class DSATrainer {
                 this.problems_manager.populateTemplate(problem);
                 // return constants.ProblemStatus.unsolved;
             },
-            // 'Post Solution': async () => {
-            //     question_state_flag = true;
-            //     this.postProblemSolution(problem, { attempts_timestamp: attempts_timestamp, comments: comments });
 
-            // },
-            // 'comment': async () => {
-            //     question_state_flag = true;
-            //     // Ask for comment
-            //     const prompt_comment = new Input(
-            //         {
-            //             name: 'comment',
-            //         }
-            //     )
-
-            //     const comment = await prompt_comment.run();
-            //     comments.push(comment);
-            //     console.log("All Comments: ");
-            //     console.log(comments);
-            // },
             'quit': async () => {
                 question_state_flag = false;
                 return { status: constants.ProblemStatus.aborted, problem_details: problem_details, details: { failed_attempts: failed_attempts } };
@@ -650,30 +642,30 @@ class DSATrainer {
         }
 
         let res = constants.ProblemStatus.unsolved;
-        while (question_state_flag) {
 
-            const selectable_choices_prompt = {};
-            // Remove Submit, if test never passed before
-            if (did_pass_all_tests_before) {
+        const selectable_choices_prompt = {};
+        // Remove Submit, if test never passed before
+        if (did_pass_all_tests_before || md_pseudo_mode) {
 
-                Object.assign(selectable_choices_prompt, {
-                    'Submit': async () => {
-                        if (!did_pass_all_tests_before) {
-                            console.log("You must pass all tests before submitting!");
-                            // return false;
-                            this.postProblemSolution(problem, { attempts_timestamp: attempts_timestamp, comments: comments });
-
-                        } else {
-                            console.log("Submission running", constants.ProblemStatus.solved);
-                            question_state_flag = false;
-                            // TODO Submit the current code that was there at least. to an post documnet.
-
-                            return { status: constants.ProblemStatus.solved, details: { failed_attempts: failed_attempts }, problem_details: problem_details };
-
-                        }
+            Object.assign(selectable_choices_prompt, {
+                'Submit': async () => {
+                    if(md_pseudo_mode){
+                        console.log("Storing in stash");
                     }
-                })
-            }
+                    if (!did_pass_all_tests_before) {
+                        console.log("You must pass all tests before submitting!");
+                        // return false;
+                        this.postProblemSolution(problem, { attempts_timestamp: attempts_timestamp, comments: comments });
+
+                    } else {
+                        console.log("Submission running", constants.ProblemStatus.solved);
+                        question_state_flag = false;
+
+                        return { status: constants.ProblemStatus.solved, details: { failed_attempts: failed_attempts }, problem_details: problem_details };
+
+                    }
+                }
+            })
 
             Object.assign(selectable_choices_prompt, choices)
             // New prompt has to 
@@ -716,12 +708,15 @@ class DSATrainer {
     /**
      * Renders a menu of recommended problems, and allows the user to select a problem to solve
      */
-    async showRecommendedProblems() {
+    async showRecommendedProblems({ md_pseudo_mode = false } = {}) {
 
         const recommended_problems = await this.getRecommendedProblems();
         const problem_slugs = recommended_problems.map(problem => problem.slug);
 
-        return await this.showMenuOfProblems({ allow_continue_last: true, show_progress: true, show_tags: true, show_specific_problems: problem_slugs });
+        return await this.showMenuOfProblems({
+            allow_continue_last: true, show_progress: true,
+            show_tags: true, show_specific_problems: problem_slugs, md_pseudo_mode: md_pseudo_mode
+        });
 
     }
 
@@ -732,7 +727,7 @@ class DSATrainer {
      * @param {list[str]} show_specific_problems List of slugs of problems to show. If empty, all problems will be shown.
      * @returns 
      */
-    async showMenuOfProblems({ allow_continue_last = true, show_progress = true, show_tags = true, show_specific_problems = [] } = {}) {
+    async showMenuOfProblems({ allow_continue_last = true, show_progress = true, show_tags = true, show_specific_problems = [], md_pseudo_mode = false } = {}) {
         const _ = await this.problemReport.getReport();
 
 
@@ -815,7 +810,7 @@ class DSATrainer {
 
         // const is_new_problem = problem_selected != current_problem_prompt;
         const is_new_problem = true;
-        const problem_response = await this.solveProblem(problem, { populate_problem: is_new_problem });
+        const problem_response = await this.solveProblem(problem, { populate_problem: is_new_problem, md_pseudo_mode: md_pseudo_mode });
 
         problem_response.is_problem_solved = problem_response.status == constants.ProblemStatus.solved;
         return problem_response;

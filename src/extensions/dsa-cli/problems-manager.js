@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const clipboard = require('copy-paste')
 const { TEST_DICTIONARY } = require('./tests');
 const { ProblemMetadata } = require('./structures');
@@ -7,7 +8,6 @@ const constants = require('./constants');
 const { cloze_problems_list } = require('./cloze');
 
 const { getDirAbsoluteUri, openEditorPlatformAgnostic, get_random } = require('./functions');
-
 
 
 
@@ -247,45 +247,148 @@ class ProblemsManager {
      * @param {str} problem_file_path The path to the file to copy
      * @param {str} base The path to the file to copy from e.g. base_code'
      */
+
     copyFileToTemp(problem_file_path, { base = "./base_code/", do_all_markdown = false } = {}) {
         try {
-
             const parts = problem_file_path.split(".");
+            let source_extension = parts[parts.length - 1];
+            let target_extension = 'md';
 
-            let extension = 'md'
-
+            // If do_all_markdown is true, use the file's extension as the markdown extension.
             if (do_all_markdown) {
-                extension = parts[parts.length - 1];
+                target_extension = parts[parts.length - 1];
             }
-            // console.log("Copying file from", problem_file_path, "to", this.temp_problem_filepath)
+
             const absolute_problem_file_path = getDirAbsoluteUri(problem_file_path, base);
-                const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./") + '.' + extension;
+            const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./") + '.' + target_extension;
+
+            // Read the file content
+            fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
+                if (err) {
+                    console.log(err);
+                    return false;
+                }
+
+                let wrappedContent = data;
+                if (target_extension === 'md') {
+                    const codeBlockMap = {
+                        '.js': 'js',
+                        '.py': 'python',
+                        '.java': 'java',
+                        '.html': 'html',
+                        '.css': 'css',
+                        '.c': 'c',
+                        '.cpp': 'cpp',
+                        '.rb': 'ruby',
+                        '.go': 'go',
+                        // Add more file types as needed
+                    };
 
 
-                // console.log("Opening file: " + absolute_problem_file_path, "from source,", problem_file_path);
-                fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
-                    if (err) {
+                    const codeLang = codeBlockMap['.' + source_extension] || '';
 
-                        console.log(err)
-                        return false
+                    // If the file is a recognized source file (e.g., .js, .py), wrap it inside a code block
+                    if (codeLang) {
+                        wrappedContent = `\n\`\`\`${codeLang}\n${data}\n\`\`\`\n`;
+                    } else {
+                        // Default markdown block if the extension is not recognized
+                        wrappedContent = `\n\`\`\`\n${data}\n\`\`\`\n`;
                     }
 
-                    fs.writeFile(absolute_temp_file_path, data, 'utf8', function (err) {
-                        if (err) {
-                            console.log(err)
-                            return false
-                        };
+                }
 
-                    });
+                fs.writeFile(absolute_temp_file_path, wrappedContent, 'utf8', function (err) {
+                    if (err) {
+                        console.log(err);
+                        return false;
+                    }
+                    console.log(`File successfully written to ${absolute_temp_file_path}`);
                 });
-                return true;
-            } catch (err) {
-                console.error(err);
-                return false;
+            });
 
-            }
+            return true;
+        } catch (err) {
+            console.error("Unexpected error:", err);
+            return false;
         }
+    }
 
+    copyTempToStash({ stash_file_name = "", force_extension = "", temp_file_extension = ".js" } = {}) {
+        try {
+            let extension = 'md';
+            const timestamp = new Date().toISOString(); // ISO format for the timestamp
+            const timestamp_date = Date().split('T')[0]; 
+
+            if (force_extension !== "") {
+                extension = force_extension;
+            }
+
+            const absolute_temp_file_path = getDirAbsoluteUri(this.temp_problem_filepath, "./") + '.' + extension;
+            const stash_directory = path.join(__dirname, 'user_files', 'stash'); // Adjusted path joining
+            const target_file_name = `stash_${timestamp_date}.md`;  // The target file where all data will be appended
+            const target_file_path = path.join(stash_directory, target_file_name);
+
+            // Log paths to debug
+            console.log("Absolute Temp File Path: ", absolute_temp_file_path);
+            console.log("Stash Directory: ", stash_directory);
+            console.log("Target File Path: ", target_file_path);
+
+            // Check if the stash directory exists, create it if not
+            if (!fs.existsSync(stash_directory)) {
+                console.log("Directory does not exist. Creating:", stash_directory);
+                fs.mkdirSync(stash_directory, { recursive: true });
+            }
+
+            // Read the file from the temporary location
+            fs.readFile(absolute_temp_file_path, 'utf8', function (err, data) {
+                if (err) {
+                    console.log("Error reading the file:", err);
+                    return false;
+                }
+
+                // Prepare the header with the stash file name and current date
+                const header = `\n### ${stash_file_name} - ${timestamp}\n\n`;  // Markdown header with name and timestamp
+
+                // Hash map (dictionary) to map file extensions to their respective code block languages
+                const codeBlockMap = {
+                    '.js': 'js',
+                    '.py': 'python',
+                    '.java': 'java',
+                    '.html': 'html',
+                    '.css': 'css',
+                    '.c': 'c',
+                    '.cpp': 'cpp',
+                    '.rb': 'ruby',
+                    '.go': 'go',
+                    // Add more file types and their corresponding language for syntax highlighting
+                };
+
+                // Default to plain code block if the extension is not in the map
+                const codeLang = codeBlockMap[temp_file_extension.toLowerCase()] || '';
+
+                // Wrap the content in the appropriate code block
+                let wrappedContent = codeLang ? `\n\`\`\`${codeLang}\n${data}\n\`\`\`\n` : `\n\`\`\`\n${data}\n\`\`\`\n`;
+
+                // Combine the header and the wrapped content
+                const contentToAppend = header + wrappedContent;
+
+                // Append the data to the stash.md file
+                fs.appendFile(target_file_path, contentToAppend, 'utf8', function (err) {
+                    if (err) {
+                        console.log("Error appending the file:", err);
+                        return false;
+                    }
+                    console.log("Data successfully appended to:", target_file_path);
+                });
+            });
+
+            return true;
+
+        } catch (err) {
+            console.error("Unexpected error:", err);
+            return false;
+        }
+    }
 
 
 
@@ -294,30 +397,30 @@ class ProblemsManager {
      * Copies the file from problem_file_path content to the temp_problem_filepath.
      */
     copyTempToClipboard() {
-            const { getDirAbsoluteUri } = require('./functions');
-            const temp_problem_filepath = './user_files/temp_problem.js';
-            const absolute_problem_file_path = getDirAbsoluteUri(temp_problem_filepath, "./");
+        const { getDirAbsoluteUri } = require('./functions');
+        const temp_problem_filepath = './user_files/temp_problem.js';
+        const absolute_problem_file_path = getDirAbsoluteUri(temp_problem_filepath, "./");
 
-            fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
-                if (err) {
-                    console.log(err)
-                    return false
-                }
-                try {
-                    clipboard.copy(data);
-                }
-                catch (err) { }
-            });
+        fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
+            if (err) {
+                console.log(err)
+                return false
+            }
+            try {
+                clipboard.copy(data);
+            }
+            catch (err) { }
+        });
 
-        }
+    }
 
 
-        /**
-         * Copies the prompt to the clipboard
-         */
-        copyPromptToCliboard() {
+    /**
+     * Copies the prompt to the clipboard
+     */
+    copyPromptToCliboard() {
 
-        }
+    }
 
 
 
@@ -326,152 +429,152 @@ class ProblemsManager {
      * Opens the temporal problem file in the editor (Can be customized which to use).
      * @param {str} editor_instruction The instruction to open the file in the editor. Default is "start".
      */
-    async openTemporalProblemFile({ editor_instruction = "", force_extension="" } = {}) {
-            const absolute_problem_file_path = this.findFileWithFilepath(this.temp_problem_filepath, "", {force_extension: force_extension});
-            console.log("absolute_temp_file_path", absolute_problem_file_path);
-            await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_problem_file_path })
+    async openTemporalProblemFile({ editor_instruction = "", force_extension = "" } = {}) {
+        const absolute_problem_file_path = this.findFileWithFilepath(this.temp_problem_filepath, "", { force_extension: force_extension });
+        console.log("absolute_temp_file_path", absolute_problem_file_path);
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_problem_file_path })
 
+    }
+
+    /**
+     * Returns the absolute path of the file with the filepath and problem_slug.
+     * @param {string} filepath The path to the file to find
+     * @param {string} problemSlug The slug of the problem to find
+     * @param {dict} options The options to pass to the function
+     * @option {bool} return_extension If true, returns the extension of the file found. as [absolute_temp_file_path, extension_detected]
+     * @returns {string} The absolute path of the file with the filepath and problem_slug if enabled.
+     */
+    findFileWithFilepath(filepath, problemSlug, { return_extension = false, force_extension = "" } = {}) {
+        let absolute_temp_file_path = "";
+        let extensions = ['.py', '.js', '.md', '.java', '.cpp', 'ipynb']; // Add more extensions as needed
+        if (force_extension != "") {
+            extensions = [force_extension];
         }
 
-        /**
-         * Returns the absolute path of the file with the filepath and problem_slug.
-         * @param {string} filepath The path to the file to find
-         * @param {string} problemSlug The slug of the problem to find
-         * @param {dict} options The options to pass to the function
-         * @option {bool} return_extension If true, returns the extension of the file found. as [absolute_temp_file_path, extension_detected]
-         * @returns {string} The absolute path of the file with the filepath and problem_slug if enabled.
-         */
-        findFileWithFilepath(filepath, problemSlug, { return_extension = false, force_extension="" } = {}){
-            let absolute_temp_file_path = "";
-            let extensions = ['.py', '.js', '.md', '.java', '.cpp', 'ipynb']; // Add more extensions as needed
-            if (force_extension != "") {
-                extensions = [force_extension];
+        let extension_detected = "";
+        for (const ext of extensions) {
+            const filePath = getDirAbsoluteUri(filepath + problemSlug + ext, "./");
+            if (fs.existsSync(filePath)) {
+                absolute_temp_file_path = filePath;
+                extension_detected = ext;
+                break;
             }
+        }
+        if (return_extension) {
+            return [absolute_temp_file_path, extension_detected];
+        } else {
+            return absolute_temp_file_path;
+        }
+    }
 
-            let extension_detected = "";
-            for (const ext of extensions) {
-                const filePath = getDirAbsoluteUri(filepath + problemSlug + ext, "./");
-                if (fs.existsSync(filePath)) {
-                    absolute_temp_file_path = filePath;
-                    extension_detected = ext;
-                    break;
+
+
+
+    /**
+     * Copies the file from problem_file_path to the temp_problem_filepath.
+     * @param {str} problem_file_path The path to the file to copy
+     * @param {str} base The path to the file to copy from e.g. base_code'
+     */
+    copySolutionToSol(problem_slug) {
+        try {
+            // console.log("Copying file from", problem_file_path, "to", this.temp_problem_filepath)
+            let [absolute_problem_file_path, extension] = this.findFileWithFilepath(this.solution_filepath, problem_slug, { return_extension: true });
+            let absolute_temp_problem_file_path = getDirAbsoluteUri(this.temp_solution_filepath, "./") + extension;
+
+
+            // console.log('Copying solution to sol', absolute_problem_file_path, absolute_temp_problem_file_path);
+            // console.log("Opening file: " + absolute_problem_file_path, "from source,", problem_file_path);
+            fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
+                if (err) {
+
+                    console.log(err)
+                    return false
                 }
-            }
-            if (return_extension) {
-                return [absolute_temp_file_path, extension_detected];
-            } else {
-                return absolute_temp_file_path;
-            }
-        }
 
-
-
-
-        /**
-         * Copies the file from problem_file_path to the temp_problem_filepath.
-         * @param {str} problem_file_path The path to the file to copy
-         * @param {str} base The path to the file to copy from e.g. base_code'
-         */
-        copySolutionToSol(problem_slug) {
-            try {
-                // console.log("Copying file from", problem_file_path, "to", this.temp_problem_filepath)
-                let [absolute_problem_file_path, extension] = this.findFileWithFilepath(this.solution_filepath, problem_slug, { return_extension: true });
-                let absolute_temp_problem_file_path = getDirAbsoluteUri(this.temp_solution_filepath, "./") + extension;
-
-
-                console.log('Copying solution to sol', absolute_problem_file_path, absolute_temp_problem_file_path);
-                // console.log("Opening file: " + absolute_problem_file_path, "from source,", problem_file_path);
-                fs.readFile(absolute_problem_file_path, 'utf8', function (err, data) {
+                fs.writeFile(absolute_temp_problem_file_path, data, 'utf8', function (err) {
                     if (err) {
-
                         console.log(err)
                         return false
-                    }
+                    };
 
-                    fs.writeFile(absolute_temp_problem_file_path, data, 'utf8', function (err) {
-                        if (err) {
-                            console.log(err)
-                            return false
-                        };
-
-                    });
                 });
-                return { problem_extension: extension, temp_extension: extension, status: true };
-            } catch (err) {
-                console.error(err);
-                return { problem_extension: extension, temp_extension: extension, status: false };
-
-            }
+            });
+            return { problem_extension: extension, temp_extension: extension, status: true };
+        } catch (err) {
+            console.error(err);
+            return { problem_extension: extension, temp_extension: extension, status: false };
 
         }
+
+    }
 
     async openSolutionFile(problem_slug, { editor_instruction = "start" } = {}) {
 
-            let absolute_temp_file_path = this.findFileWithFilepath(this.solution_filepath, problem_slug);
+        let absolute_temp_file_path = this.findFileWithFilepath(this.solution_filepath, problem_slug);
 
-            if (!absolute_temp_file_path) {
-                console.log("No solution file found with the supported extensions.");
-            }
-
-            console.log("absolute_temp_file_path", absolute_temp_file_path);
-
-            await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path });
+        if (!absolute_temp_file_path) {
+            console.log("No solution file found with the supported extensions.");
         }
 
-    async openTemporalSolutionFile({ editor_instruction = "start", extension='.js' } = {}) {
+        console.log("absolute_temp_file_path", absolute_temp_file_path);
 
-            const absolute_temp_file_path = getDirAbsoluteUri(this.temp_solution_filepath, "./") + extension;
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path });
+    }
 
-            await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
+    async openTemporalSolutionFile({ editor_instruction = "start", extension = '.js' } = {}) {
 
+        const absolute_temp_file_path = getDirAbsoluteUri(this.temp_solution_filepath, "./") + extension;
+
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
+
+    }
+
+    async openBaseCodeFile(problem_slug, { editor_instruction = "start", create_if_inexistent = true } = {}) {
+        console.log("Opening base code file for problem", this.base_code_filepath + problem_slug + '.js');
+        const absolute_temp_file_path = getDirAbsoluteUri(this.base_code_filepath + problem_slug + '.js', "./");
+        const template_base = getDirAbsoluteUri(this.base_code_filepath + 'base.js', "./");
+
+        // Check if the file exists, if not, create it with the template base.
+        if (create_if_inexistent && !fs.existsSync(absolute_temp_file_path)) {
+            console.log("File does not exist, creating it with the template base.");
+            fs.copyFileSync(template_base, absolute_temp_file_path);
         }
 
-    async openBaseCodeFile(problem_slug, { editor_instruction = "start", create_if_inexistent  = true } = {}) {
-            console.log("Opening base code file for problem", this.base_code_filepath + problem_slug + '.js');
-            const absolute_temp_file_path = getDirAbsoluteUri(this.base_code_filepath + problem_slug + '.js', "./");
-            const template_base = getDirAbsoluteUri(this.base_code_filepath + 'base.js', "./");
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
 
-            // Check if the file exists, if not, create it with the template base.
-            if (create_if_inexistent && !fs.existsSync(absolute_temp_file_path)) {
-                console.log("File does not exist, creating it with the template base.");
-                fs.copyFileSync(template_base, absolute_temp_file_path);
-            }
-
-            await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
-
-        }
+    }
 
 
 
     async openTestCaseFile(problem_slug, { editor_instruction = "start" } = {}) {
-            const problem_metadata = this.problems[problem_slug];
-            const tags = problem_metadata.tags;
+        const problem_metadata = this.problems[problem_slug];
+        const tags = problem_metadata.tags;
 
-            // Identify the correct category by filtering the Constant.PROBLEM_CATEGORIES by the tags
-            const categoriesObjects = Object.values(constants.PROBLEM_CATEGORIES);
-            const categories_slugs = categoriesObjects.map(category => category.slug); //Names of the testfiles
+        // Identify the correct category by filtering the Constant.PROBLEM_CATEGORIES by the tags
+        const categoriesObjects = Object.values(constants.PROBLEM_CATEGORIES);
+        const categories_slugs = categoriesObjects.map(category => category.slug); //Names of the testfiles
 
-            const categories = categories_slugs.filter(test_file_name =>
-                tags.includes(test_file_name)
-            ) ?? [];
+        const categories = categories_slugs.filter(test_file_name =>
+            tags.includes(test_file_name)
+        ) ?? [];
 
 
-            const category_slug_detected = categories.length > 0 ? categories[0] : "";
+        const category_slug_detected = categories.length > 0 ? categories[0] : "";
 
-            if (category_slug_detected === "") {
-                throw ("No category detected, Doesnt open any", "categories", categories);
-            }
-
-            const category_testslug = categoriesObjects.filter(category => category.slug === category_slug_detected)[0].test_problem_slug;
-            console.log("Category testslug", category_testslug);
-            const absolute_temp_file_path = getDirAbsoluteUri(this.tests_filepath
-                + category_testslug + '.js', "./"
-            );
-            console.log("absolute_temp_file_path", absolute_temp_file_path);
-
-            await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
-
+        if (category_slug_detected === "") {
+            throw ("No category detected, Doesnt open any", "categories", categories);
         }
+
+        const category_testslug = categoriesObjects.filter(category => category.slug === category_slug_detected)[0].test_problem_slug;
+        console.log("Category testslug", category_testslug);
+        const absolute_temp_file_path = getDirAbsoluteUri(this.tests_filepath
+            + category_testslug + '.js', "./"
+        );
+        console.log("absolute_temp_file_path", absolute_temp_file_path);
+
+        await openEditorPlatformAgnostic(editor_instruction, absolute_temp_file_path)
+
+    }
 
     /**
      * 
@@ -482,20 +585,20 @@ class ProblemsManager {
     async openPromptMarkdownFile(problem_slug, { editor_instruction = "start" } = {}) {
 
 
-            // Find the test_case_name
-            console.log("Attempting to open markdown file for problem", problem_slug, "with path", this.markdown_filepath + problem_slug + '.md');
-            const absolute_temp_file_path = getDirAbsoluteUri(this.markdown_filepath + problem_slug + '.md', "./");
+        // Find the test_case_name
+        console.log("Attempting to open markdown file for problem", problem_slug, "with path", this.markdown_filepath + problem_slug + '.md');
+        const absolute_temp_file_path = getDirAbsoluteUri(this.markdown_filepath + problem_slug + '.md', "./");
 
-            console.log("absolute_temp_file_path", absolute_temp_file_path);
-
-
-            await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
-        }
+        console.log("absolute_temp_file_path", absolute_temp_file_path);
 
 
-
-
-
+        await openEditorPlatformAgnostic(editor_instruction, { absolute_temp_file_path: absolute_temp_file_path })
     }
+
+
+
+
+
+}
 
 module.exports = ProblemsManager;

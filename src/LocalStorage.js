@@ -4,6 +4,12 @@ const { getDirAbsoluteUri } = require('./utils_functions');
  * Used for storing user data in a local storage.
  */
 
+
+const _SettingsManager = require('./SettingsManager.js');
+const SettingsManager = new _SettingsManager();
+const settings = SettingsManager.getSettings();
+
+
 class LocalStorage {
     constructor(name = "local_storage", base_dir = "user_data/temp/") {
         /**
@@ -436,6 +442,81 @@ class LocalStorage {
         });
 
         return monthScores;
+
+    }
+    /**
+     * Returns the first n characters of the given string.
+     * @param {string} str The string to truncate.
+     * @param {number} n The number of characters to return.
+     * @returns {string} The first n characters of the string, or the entire string if n is greater than the string length.
+     */
+    truncateString(str, n) {
+        if (n >= str.length) {
+            return str;
+        }
+        return str.substring(0, n);
+    }
+
+    get_entries({ head = 5, skill_name = "", deck_term = "" } = {}) {
+        /**
+         * Fetch from skill based stats on that specific skill
+         */
+
+        if (skill_name == "" && deck_term == "") {
+            return [];
+        }
+
+        const entries = [];
+        if (deck_term != "" && skill_name != "") {
+            /**
+             * Search for the skill name and deck term in the journal
+             */
+            if (this.skill_based_stats[skill_name] && this.skill_based_stats[skill_name].journal) {
+                const journal = this.skill_based_stats[skill_name].journal;
+                const dates = Object.keys(journal).sort(); // Get sorted dates
+                for (let i = dates.length - 1; i >= 0; i--) { // Iterate in reverse order
+                    const date = dates[i];
+                    if (entries.length >= head) {
+                        break; // Limit to the specified head count
+                    }
+                    const logs = journal[date].filter(log => log.deck_term === deck_term);
+                    for (let j = 0; j < logs.length && entries.length < head; j++) {
+                        if (entries.length >= head) {
+                            break; // Limit to the specified head count
+                        }
+                        entries.push({ date, log: this.truncateString(logs[j].comment, 40) });
+                    }
+                }
+            }
+
+            return entries;
+        }
+
+        if (skill_name != "" && deck_term == "") {
+            if (this.skill_based_stats[skill_name] && this.skill_based_stats[skill_name].journal) {
+
+                // loop for each entire on each date until head is reached
+                // console.log("Skill based stats journal", this.skill_based_stats[skill_name]);
+                const dates = Object.keys(this.skill_based_stats[skill_name].journal).sort();
+                for (let i = dates.length - 1; i >= 0; i--) {
+                    const date = dates[i];
+                    if (entries.length >= head) {
+                        break; // Limit to the specified head count
+                    }
+                    const logs = this.skill_based_stats[skill_name].journal[date];
+                    for (let j = 0; j < logs.length && entries.length <= head; j++) {
+                        if (entries.length >= head) {
+                            break; // Limit to the specified head count
+                        }
+                        entries.push({ date, log: logs[j].comment, deck_term: this.truncateString(logs[j].deck_term, 20) });
+                    }
+                }
+
+            } else {
+                return [];
+            }
+            return entries;
+        }
 
     }
 

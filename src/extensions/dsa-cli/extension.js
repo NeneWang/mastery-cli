@@ -13,7 +13,7 @@ const Settings = require('../../settings');
 
 class MasteryDSAExtension extends ExtensionModel {
 
-	constructor({masteryManager} = {}) {
+	constructor({ masteryManager } = {}) {
 		super(
 			"MasteryDSAExtension",
 			"1.0.0",
@@ -85,56 +85,66 @@ class MasteryDSAExtension extends ExtensionModel {
 		}
 	}
 
-	getHandles({flags = {}} = {}) {
+	updateAlgorithmPerformance = (problem_response, { performance_feature = "algo" } = {}) => {
+		if (Settings.dev_mode) console.log("updateAlgorithmPerformance: ", problem_response);
+		
+		const dsa_is_correct = problem_response.is_problem_solved;
+		// console.log("problem_response", problem_response)
+		if (dsa_is_correct) {
+			(async () => {
+				this.masteryManager.logSkillExperience(
+					performance_feature,
+					{
+						score: problem_response.score_to_increase,
+						deck_id: 'algo',
+						deck_term: problem_response.problem_details.slug,
+						comment: problem_response?.problem_details?.stash_file_name ?? `${new Date()}`,
+						increased_performance: true,
+						performance_feature: performance_feature
+					}
+				)
+			})();
+		}
+	}
+
+	getHandles({ flags = {} } = {}) {
 
 		dsaTrainer = new DSATrainer({
 			skip_problems: ["hello-world", "simple-sum"]
 		});
-		
+
 		return {
 			dsa: async () => {
-
-				const updateAlgorithmPerformance = (problem_response, {performance_feature="algo"} = {}) => {
-					if (Settings.dev_mode) console.log("updateAlgorithmPerformance: ", problem_response);
-
-					const dsa_is_correct = problem_response.is_problem_solved;
-					if (dsa_is_correct) {
-						(async () => {
-							this.masteryManager.logSkillExperience(
-								performance_feature,
-								{
-									score: problem_response.score_to_increase,
-									deck_id: problem_response.slug,
-									comment: `${new Date()}`,
-									increased_performance: true,
-									performance_feature: performance_feature
-								}
-							)
-
-						})();
-
-					}
-				}
-
 				if (flags.all) {
 					console.log("all")
 					const problem_response = await dsaTrainer.showMenuOfProblems();
-					updateAlgorithmPerformance(problem_response);
+					this.updateAlgorithmPerformance(problem_response);
 				} else {
 					const problem_response = await dsaTrainer.showRecommendedProblems({
 						md_pseudo_mode: true,
 					});
-					updateAlgorithmPerformance(problem_response);
+					this.updateAlgorithmPerformance(problem_response);
 				}
-
+			},
+			mdsa: async () => {
+				if (flags.all) {
+					console.log("all")
+					const problem_response = await dsaTrainer.showMenuOfProblems({
+						md_pseudo_mode: true,
+					});
+					this.updateAlgorithmPerformance(problem_response);
+				}
+				else {
+					const problem_response = await dsaTrainer.showRecommendedProblems({
+						md_pseudo_mode: true,
+					});
+					this.updateAlgorithmPerformance(problem_response);
+				}
 			},
 			cloze: async () => {
 				const problem_response = await dsaTrainer.openRandomClozeDSAProblem();
 				console.log("problem_response of cloze", problem_response)
 			},
-			about_dsa: async () => {
-				console.log("About DSA")
-			}
 		}
 	}
 

@@ -822,20 +822,6 @@ const getToday = () => {
 }
 
 
-const getTalk = async flags => {
-	if (flags.type == 'chuck') {
-		const res = await axios.get(APIDICT.CHUCK, {
-			headers: {
-				'Accept-Encoding': 'application/json'
-			}
-		});
-		message = res.data.value;
-	} else if (flags.type) {
-		message = flags.type;
-	}
-	return message;
-};
-
 
 
 
