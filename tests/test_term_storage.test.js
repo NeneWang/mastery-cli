@@ -45,7 +45,7 @@ describe("TermStorage tests", () => {
 
     describe("listTerms() - 1", () => {
         it("should return all terms from all decks when called with no arguments", () => {
-            console.log(deck1.listTerms());
+            // console.log(deck1.listTerms());
             // assert.deepStrictEqual(deck1.listTerms(), [term1, term2, term2, term3, term1, term3]);
         });
 

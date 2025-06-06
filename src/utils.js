@@ -238,7 +238,7 @@ class Mastery {
 
 		const email = await questionEmail.run();
 
-		const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/cli-login?email=${email}`)
+		const res = await axios.post(`${APIDICT.DEPLOYED_MAIDAPI}/cli-login?email=${email}`)
 		console.log('Login data');
 		console.log(res.data);
 
@@ -398,14 +398,14 @@ class Mastery {
 
 
 		try {
-			const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
+			const res = await axios.get(`${APIDICT.DEPLOYED_MAIDAPI}/account/missing_performance_today/${Settings.account_id ?? 1}`)
 			this.missingFeatReport = res.data;
 		}
 		catch (err) {
 			if (DEV_MODE) {
 
 
-				console.log("API call", `${APIDICT.DEPLOYED_MAID}/account/missing_performance_today/${Settings.account_id ?? 1}`)
+				console.log("API call", `${APIDICT.DEPLOYED_MAIDAPI}/account/missing_performance_today/${Settings.account_id ?? 1}`)
 				console.log("Error in populateMissingReport", err)
 				if (Settings.show_http_errors) {
 					console.log(err);
@@ -495,7 +495,7 @@ class Mastery {
 
 	performanceReport = async ({ version = "tables" } = {}) => {
 
-		const res = await axios.get(`${APIDICT.DEPLOYED_MAID}/account/report/${Settings.account_id ?? 1}`, {
+		const res = await axios.get(`${APIDICT.DEPLOYED_MAIDAPI}/account/report/${Settings.account_id ?? 1}`, {
 			headers: {
 				'Accept-Encoding': 'application/json'
 			}
@@ -716,7 +716,7 @@ class Mastery {
 		if (serviceSelected == choices[CHOICE_CREDENTIAL].value && Settings.account_settings.access_credentials_enabled) {
 
 			console.log('Retrieve credentials for...')
-			const creds = await axios.get(`${APIDICT.DEPLOYED_MAID}/services`, {
+			const creds = await axios.get(`${APIDICT.DEPLOYED_MAIDAPI}/services`, {
 				headers: {
 					'Accept-Encoding': 'application/json'
 				}
@@ -790,7 +790,7 @@ class Mastery {
 
 			const dataToPost = { "name": answers.name, "password": answers.password, "account_user": answers.account_user };
 
-			const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/services`, dataToPost);
+			const res = await axios.post(`${APIDICT.DEPLOYED_MAIDAPI}/services`, dataToPost);
 			const response_data = res.data;
 			response_data.password = "*********************";
 			// this.say(response_data);
@@ -990,7 +990,7 @@ getArrayLastXDays = (days = 7) => {
  * @returns {"message": f"Success updating {concept_term}, {conceptSelected.correct_times}"}
  */
 updateConcept = withOnlineCheck(async (problem_name, success = true, debug = false, account_id = Settings.account_id ?? 1) => {
-	const URL = `${APIDICT.DEPLOYED_MAID}/concept_metadata/${problem_name}?success=${success}&account_id=${account_id}`
+	const URL = `${APIDICT.DEPLOYED_MAIDAPI}/concept_metadata/${problem_name}?success=${success}&account_id=${account_id}`
 	try {
 		const res = await axios.post(URL)
 		if (debug) console.log(res.data)
@@ -1246,7 +1246,7 @@ const getComments = async (term, count = 5) => {
 	if (term == undefined || term == "") {
 		return {};
 	}
-	const URL = `${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=${count}`;
+	const URL = `${APIDICT.DEPLOYED_MAIDAPI}/comment/term/${term}?format_simple=true&limit=${count}`;
 	try {
 		const res = await axios.get(URl, {
 			headers: {

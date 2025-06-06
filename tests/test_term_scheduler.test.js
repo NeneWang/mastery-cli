@@ -102,7 +102,6 @@ describe("Testing Behaviour", () => {
     }
     assert.strictEqual(termScheduler.learning_queue.length, 0); // No cards to have
     assert.strictEqual(termScheduler.working_set.length, 0); // No cards to have
-    console.log(termScheduler.learned_queue.length, termScheduler.learned_queue)
     assert.strictEqual(termScheduler.learned_queue.length, cardsCount); // Should contain all cards
     // Shouldnt be able to solve this card if there is more.
   });

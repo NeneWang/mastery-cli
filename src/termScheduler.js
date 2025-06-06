@@ -87,7 +87,7 @@ class TermScheduler {
             this.learned_queue.enqueue(learnedCard);
 
             if (!this.learning_queue.isEmpty) {
-                console.log("Adding queue into the card after putting one from working to learnd")
+                
                 const newCard = this.learning_queue.dequeue();
 
                 this.working_set.enqueue(newCard);
@@ -149,7 +149,7 @@ class TermScheduler {
             if (this.cardsCount != cards.length || reset_scheduler) {
                 // Clean all cards
                 // Start from zero if the cards changed
-                console.log(`Difference in length ${this.cardsCount} ${cards.length}`);
+                // console.log(`Difference in length ${this.cardsCount} ${cards.length}`);
                 this.cleanCards();
 
                 for (const card of cards) {

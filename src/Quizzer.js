@@ -56,7 +56,7 @@ class Quizzer {
 
 
             if (DEBUG) console.log("problem_names", problem_names)
-            const res = await axios.post(`${APIDICT.DEPLOYED_MAID}/concept_metadata/youngests/?account_id=${account_id}&limit=${limit}`, problem_names);
+            const res = await axios.post(`${APIDICT.DEPLOYED_MAIDAPI}/concept_metadata/youngests/?account_id=${account_id}&limit=${limit}`, problem_names);
             const response_data = res.data;
             // if (DEBUG) console.log(response_data)
             // if (DEBUG) console.log("response_data", response_data);
@@ -584,7 +584,7 @@ class Quizzer {
      * @param term :str # Term (slug) used e.g. singleton-pattern
      */
     printPreviousTerms = async (term) => {
-        const URL = `${APIDICT.DEPLOYED_MAID}/comment/term/${term}?format_simple=true&limit=5`;
+        const URL = `${APIDICT.DEPLOYED_MAIDAPI}/comment/term/${term}?format_simple=true&limit=5`;
         try {
 
             const res = await axios.get(URL, {
@@ -630,7 +630,7 @@ class Quizzer {
 
             axios({
                 method: 'post',
-                url: `${APIDICT.DEPLOYED_MAID}/comment`,
+                url: `${APIDICT.DEPLOYED_MAIDAPI}/comment`,
                 headers: {},
                 data: data
             });

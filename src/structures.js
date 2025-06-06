@@ -5,7 +5,12 @@ const Settings = require("./settings.js");
  */
 class Term {
 
-    constructor(term, example = "", description = "", prompt = "Use the term", { priority = 5, tags = [], category = "", references = "", attachment = "", auto_newline = true } = {}) {
+    constructor(term, example = "", description = "", prompt = "Use the term",
+        {
+            priority = 5, tags = [], category = "", references = "",
+            attachment = "", auto_newline = true,
+            reference_page = "", reference_line = -1, module_name = ""
+        } = {}) {
         /**
          * REMEMBER: To add the new item into asJson!!
          */
@@ -29,6 +34,10 @@ class Term {
         this.slug = this.slugify(this.term);
         this.formula_name = this.slug;
         this.attachment_is_url = this.isOnlineResource(attachment);
+        this.reference_page = reference_page;
+        this.reference_line = reference_line;
+        this.module_name = module_name;
+
     }
 
     /**
@@ -86,12 +95,14 @@ class TermStorage {
      * @param {List[TermStorage]} decks The decks required for the Storages
      * @param {boolean} is_active If the deck is active or not; by default is false
      */
-    constructor(terms = [], deck_name = "", { decks = [], is_active = false } = {}) {
+    constructor(terms = [], deck_name = "", 
+        { decks = [], is_active = false, module_name="" } = {}) {
         this.terms = terms;
         this.deck_name = deck_name;
         this.is_active = is_active;
         this.decks = decks;
         this.priority = 5; //By default
+        this.module_name = module_name;
     }
 
     /**

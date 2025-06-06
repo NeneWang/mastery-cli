@@ -24,7 +24,7 @@ let { debug } = flags;
 debug = debug ?? false;
 
 
-const { getTalk, Mastery } = utils;
+const { Mastery } = utils;
 
 
 // extensions TODO: Automate this things once located at the extensions folder
@@ -49,15 +49,9 @@ function applyMixin(targetInstance, mixin) {
 (async () => {
 	const masterDeck = await populateMasterDeck();
 	const mastery = new Mastery(Settings, masterDeck);
-	// applyMixin(mastery, new DataScienceExtension);
+	
 	applyMixin(mastery, new MasteryDSAExtension({ masteryManager: mastery }));
 	applyMixin(mastery, new DemoExtension);
-	
-
-	/**This is quite the expensive operation, ideally you put this on the end. */
-	// const dsaTrainer = new DSATrainer({
-	// 	skip_problems: ["hello-world", "simple-sum"]
-	// });
 
 	const options = Object.keys(cmInfo.commands);
 	input.includes(options[0]) && cli_meow.showHelp(0);

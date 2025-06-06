@@ -13,7 +13,8 @@ class StorableQueue {
 
             const db = new JsonDB(new Config(this.absolute_uri, true, false, '/'));
             this.elements = await db.getData('/elements');
-            console.log(`Loaded ${this.length} from ${this.name} | ${this.absolute_uri}`);
+            
+            // console.log(`Loaded ${this.length} from ${this.name} | ${this.absolute_uri}`);
             return true;
         } catch {
             return false;

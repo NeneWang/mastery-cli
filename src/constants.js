@@ -33,21 +33,16 @@ function get_random_of_size(list, { count = 1 } = {}) {
     return listOfRandomProblems;
 
 }
-const MAID_NAME = "Mastery";
+const MASTERY_MANAGER_NAME = "MCLI";
 
-// const MAID_EMOJIS = ["genie_woman", "elf_woman", "construction_worker_woman", "zombie_woman", "policewoman",
-//     "mage_woman", "sauna_woman", "woman_juggling", "woman_pilot", "woman_office_worker",
-//     "woman_health_worker"];
 const MAID_EMOJIS = ["", ""]
 
 
 let APIDICT = {
     CHUCK: 'http://api.chucknorris.io/jokes/random',
     WEATHER: 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/New%20york?unitGroup=metric&include=days%2Cevents&key=WR8T3G2K9PYXY26YF6VCRV7YN&contentType=json',
-    LOCAL_MAID: 'http://127.0.0.1:8000',
-    // DEPLOYED_MAID: 'https://jmmgskxdgn.us-east-1.awsapprunner.com',
-    // DEPLOYED_MAID: 'http://127.0.0.1:8000/ma',
-    DEPLOYED_MAID: 'https://crvmb5tnnr.us-east-1.awsapprunner.com/ma',
+    LOCAL_MAIDAPI: 'http://127.0.0.1:8000',
+    DEPLOYED_MAIDAPI: 'https://crvmb5tnnr.us-east-1.awsapprunner.com/ma',
     CURRENCY_EXCHANGE: 'https://api.apilayer.com/exchangerates_data',
     CURRENCY_EXCHANGE_KEY: '3zPc7CzmznmueYsu3SttUWIE2QZ3ODYd'
 }
@@ -160,7 +155,7 @@ const countDecimals = (value) => {
 }
 
 module.exports = {
-    MAID_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
+    MAID_NAME: MASTERY_MANAGER_NAME, MAID_EMOJIS, getRandomMaidEmoji, get_random,
     appendQuotes, APIDICT, CURRENCY_SIMBOLS, CONSTANTS, formatObjectFeatures,
     qmathformulas, qmathenabled: qmathformulas, getRandomInt, countDecimals, termsEnabled, getRandomBool, getAbsoluteUri, getDirAbsoluteUri,
     get_random_of_size

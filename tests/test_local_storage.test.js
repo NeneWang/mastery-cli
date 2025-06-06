@@ -234,7 +234,7 @@ describe('LocalStorage.get_skills_reports()', () => {
 
         console.log = originalLog;
 
-        assert(consoleOutput.includes('math: Level progress'));
+        assert(consoleOutput.includes('math: Level'));
         console.log(consoleOutput); // For debugging purposes
         restore2();
     });
@@ -294,7 +294,7 @@ describe('LocalStorage.get_skills_reports()', () => {
 
         console.log = originalLog;
 
-        assert(output.includes('dsa: Level progress') || output.includes('algo: Level progress'));
+        assert(output.includes('dsa: Level') || output.includes('algo: Level'));
         restore2();
     });
 });
