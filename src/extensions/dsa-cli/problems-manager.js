@@ -317,7 +317,7 @@ class ProblemsManager {
         try {
             let extension = 'md';
             const timestamp = new Date().toISOString(); // ISO format for the timestamp
-            const timestamp_date = Date().split('T')[0]; 
+            const timestamp_date = timestamp.split('T')[0]; 
 
             if (force_extension !== "") {
                 extension = force_extension;
@@ -329,8 +329,8 @@ class ProblemsManager {
             const target_file_path = path.join(stash_directory, target_file_name);
 
             // Log paths to debug
-            console.log("Absolute Temp File Path: ", absolute_temp_file_path);
-            console.log("Stash Directory: ", stash_directory);
+            // console.log("Absolute Temp File Path: ", absolute_temp_file_path);
+            // console.log("Stash Directory: ", stash_directory);
             console.log("Target File Path: ", target_file_path);
 
             // Check if the stash directory exists, create it if not

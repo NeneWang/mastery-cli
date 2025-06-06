@@ -77,9 +77,11 @@ assets/img/.DS_Store
 
 # VSCode related files #
 # .vscode
+**/stash/**
 utils/dsa-cli/data/db.json
 utils/dsa-cli/user_files/temp_problem.js
 utils/dsa-cli/user_files/temp_settings.json
 utils/dsa-cli/user_files/temp_problem.js
 .gitignore/*
 .vscode/*
+src/extensions/dsa-cli/data/db.json

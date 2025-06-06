@@ -5,9 +5,6 @@ const { getDirAbsoluteUri } = require('./utils_functions');
  */
 
 
-const _SettingsManager = require('./SettingsManager.js');
-const SettingsManager = new _SettingsManager();
-const settings = SettingsManager.getSettings();
 
 
 class LocalStorage {
