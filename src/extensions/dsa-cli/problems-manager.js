@@ -317,7 +317,7 @@ class ProblemsManager {
         try {
             let extension = 'md';
             const timestamp = new Date().toISOString(); // ISO format for the timestamp
-            const timestamp_date = timestamp.split('T')[0]; 
+            const timestamp_date = timestamp.split('T')[0];
 
             if (force_extension !== "") {
                 extension = force_extension;
@@ -421,8 +421,6 @@ class ProblemsManager {
     copyPromptToCliboard() {
 
     }
-
-
 
 
     /**
@@ -583,7 +581,6 @@ class ProblemsManager {
      * 
      */
     async openPromptMarkdownFile(problem_slug, { editor_instruction = "start" } = {}) {
-
 
         // Find the test_case_name
         console.log("Attempting to open markdown file for problem", problem_slug, "with path", this.markdown_filepath + problem_slug + '.md');
