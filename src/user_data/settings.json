@@ -32,7 +32,6 @@
   "journal_notes": "Obsess about your current projects. Dont try to seek for new ones. Focus on maximizing learning for the current project. \nDon't learn something new until the current project is maximized. \nMoney will come naturally when you have strong craftmanship. be so good, that you wont be ignored.",
   "report_show": {
     "performance_summary": true,
-    "weather": false,
     "missing_report": true,
     "obj_ournal": true,
     "ask_if_algo_missing": true

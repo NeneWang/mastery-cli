@@ -24,7 +24,8 @@ let { debug } = flags;
 debug = debug ?? false;
 
 
-const { getTalk, Mastery } = utils;
+const { getTalk } = utils;
+const { Mastery } = require('./src/core/Mastery');
 
 
 // extensions TODO: Automate this things once located at the extensions folder
