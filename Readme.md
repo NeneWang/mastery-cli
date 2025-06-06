@@ -13,9 +13,16 @@ Key Highlights:
 - Easily track personal project goals, such as daily commits.
 - Access over 150 offline programming problems with accompanying offline tests and a built-in compiler.
 - Seamlessly collect and sync progress across devices when connected to the internet.
-- Establish habit hooks, like integrating flashcards and math practice into your development cycle.
+- Establish habit hooks that integrate flashcards and math practice into your development cycle.
 - Utilize an offline algorithm that identifies weaknesses and generates quick flashcards for memory refresh.
-- Enjoy free flashcard decks covering Computer Science Architecture, Networking, AWS, System Design, Design Patterns, and more. Plus, easily share your flashcard decks.
+- Enjoy free flashcard decks covering Computer Science Architecture, Networking, AWS, System Design and Design Patterns.
+- Commit and push code with `mcli coa` and automatically receive a DSA problem or flashcard.
+- Get tomorrow's weather forecast and perform quick currency conversions directly from the CLI.
+- Maintain an events database with publish and edit features for tracking your progress.
+- Automatically test algorithm problems and visualize your activity with heatmaps.
+- Prioritize learning with a skill-tree structure and generate decks from spreadsheets or grouped JSON data.
+- Quickly convert images to ASCII for use in terminals or reports.
+- Keep momentum with study sessions like `mcli ses`, `cses`, and `amses`.
 
 
 ## Install and Test.
@@ -114,6 +121,21 @@ Math Problems:
 
 ```
 mcli math
+```
+
+### Study Sessions and Utilities
+
+Manage continuous practice and assorted utilities with these commands:
+
+```bash
+mcli ses       # Start a regular study session
+mcli cses      # Begin a cloze study session (also available as mcses)
+mcli amses     # Tackle ten random DSA challenges in a row
+mcli cloze     # Open a single cloze DSA problem
+mcli services  # Access conversions and credential helpers
+mcli clean     # Prompt to tidy up the terminal
+mcli code      # Print the root directory path
+mcli settings  # Show the settings file location
 ```
 
 
@@ -269,23 +291,3 @@ Test Objective:
     Functional Testing:
         Focuses on validating that the software meets functional requirements and user expectations.
         Aims to ensure that the software functions correctly as a whole.
-
-
-
-****
-
-#### Credits and Updates
-
-- Removing the following libraries to make the program shorter.
-
-```
-express
-markdown-it-toc-done-right
-"esm": "^3.2.25",
-```
-
-Added
-
-```js
-node-fetch => For fetching images 
-```
