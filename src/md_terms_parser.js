@@ -142,7 +142,7 @@ function parseMarkdownIntoDeck(filePath, { module_name = 'Markdown Terms Parser'
     if (category === "") {
         category = module_name;
     }
-
+    console.log(`Parsing terms from ${filePath}#23 in category: ${category}`);
     for (const entry of parsedData.entries) {
         const term = new Term(
             entry.header,
@@ -155,6 +155,7 @@ function parseMarkdownIntoDeck(filePath, { module_name = 'Markdown Terms Parser'
                 module_name: module_name,
                 category: category
             });
+            // console.log("created new terms", term);
         termsList.push(term);
     }
 

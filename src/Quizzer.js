@@ -489,6 +489,16 @@ class Quizzer {
             }
 
             const isOfflineMessage = Settings?.online ? "" : `|${chalk.hex(CONSTANTS.CUTEYELLOW).inverse(' offline ')}`
+            // console.log(term_selected);
+            // console.trace()
+            if (term_selected?.reference_page ?? false) {
+                if ((term_selected?.reference_line ?? false) && term_selected.reference_line > 0) {
+                    console.log(`${term_selected?.reference_page}#${term_selected?.reference_line}`);
+                } else {
+                    console.log(`${term_selected?.reference_page}`);
+
+                }
+            }
             console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(` ${term_selected.term} `)}|${chalk.hex(CONSTANTS.PUNCHPINK).inverse(` ${term_selected.category} `)}${isOfflineMessage}`);
 
             if (term_selected?.attachment ?? false) {
@@ -512,7 +522,6 @@ class Quizzer {
             // Check for escape methods
 
             if (user_requests_calc(user_res)) {
-                const { exec } = require('child_process');
                 openEditorPlatformAgnostic('node')
                 // Make the user lose one point for using the calculator.
                 return false;

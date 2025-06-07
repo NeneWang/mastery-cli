@@ -125,7 +125,18 @@ const getRandomBool = (chances = 0.5) => {
 }
 
 function populateTerms(termJson) {
-    return termJson.map(obj => new Term(obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "", obj?.references ?? "", obj?.category ?? "", obj?.attachment));
+    return termJson.map(obj => new Term(obj?.term ?? "", obj?.example ?? "",
+        obj?.description ?? "", obj?.prompt ?? "",
+        {
+            references: obj?.references ?? "",
+            category: obj?.category ?? "", attachment: obj?.attachment,
+            reference_line: obj?.reference_line ?? -1,
+            reference_page: obj?.reference_page ?? "",
+            module_name: obj?.module_name ?? "",
+            priority: obj?.priority ?? 5,
+            auto_newline: obj?.auto_newline ?? true
+            
+        }));
 }
 
 const terms = populateTerms(termJson);

@@ -38,6 +38,12 @@ class Term {
         this.reference_line = reference_line;
         this.module_name = module_name;
 
+        // if(term=="definition2"){
+        //     console.log("Term is definition2, this is a bug, please report it.");
+        //     console.trace();
+        //     console.log("Term: ", this);
+        // }
+
     }
 
     /**
@@ -95,8 +101,8 @@ class TermStorage {
      * @param {List[TermStorage]} decks The decks required for the Storages
      * @param {boolean} is_active If the deck is active or not; by default is false
      */
-    constructor(terms = [], deck_name = "", 
-        { decks = [], is_active = false, module_name="" } = {}) {
+    constructor(terms = [], deck_name = "",
+        { decks = [], is_active = false, module_name = "" } = {}) {
         this.terms = terms;
         this.deck_name = deck_name;
         this.is_active = is_active;
@@ -223,8 +229,13 @@ class TermStorage {
                 const newterm = new Term(
                     obj?.term ?? "", obj?.example ?? "", obj?.description ?? "", obj?.prompt ?? "",
                     {
-                        references: obj?.references ?? "", attachment: obj?.attachment,
-                        priority: this.priority
+                        references: obj?.references ?? "",
+                        category: obj?.category ?? "", attachment: obj?.attachment,
+                        reference_line: obj?.reference_line ?? -1,
+                        reference_page: obj?.reference_page ?? "",
+                        module_name: obj?.module_name ?? "",
+                        priority: this.priority ?? 5,
+                        auto_newline: obj?.auto_newline ?? true
                     }
                 )
                 newterm.pushCategory(this.deck_name ?? "");
