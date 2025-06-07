@@ -17,6 +17,8 @@ const CONTENT_FILES =[
 ]
 
 module.exports = {
+    // src\data\user_data\terms_modules\b01-flowers\index.js
+    module_path: 'b01-flowers',
     ABOUT: ABOUT,
     CONTENT_FOLDERS: CONTENT_FOLDERS,
     CONTENT_FILES: CONTENT_FILES,

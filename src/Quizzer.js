@@ -12,6 +12,15 @@ const Parser = require('expr-eval').Parser;
 const { getAbsoluteUri, APIDICT, CONSTANTS, get_random, countDecimals, get_random_of_size } = constants;
 const { user_requests_exit, user_requests_skip, user_requests_calc, printMarked, openEditorPlatformAgnostic } = require('./utils_functions');
 
+const {
+    parseMarkdownCards,
+    parseMarkdownIntoDeck,
+    parseMarkdownCardsFromFolder,
+    parseMarkdownCardsFromTermsModules,
+    retrieve_terms_modules,
+    retrieve_terms_as_decks
+} = require('./md_terms_parser');
+
 const { TermScheduler } = require('./termScheduler');
 const { MiniTermScheduler } = require('./MiniTermScheduler');
 const { StorableQueue } = require('./StorableQueue');
@@ -358,11 +367,17 @@ class Quizzer {
         //Pick a term deck Suppose is given
 
         // For now just load a new one everytime.
+        const termsModules = retrieve_terms_as_decks();
+        for (const key of Object.keys(termsModules)) {
+            masterDeck.addDeck(termsModules[key]);
+        }
         const dictOptions = masterDeck.deck_titles_with_count;
 
-        let titles = Object.keys(dictOptions)
+        const allTermsModules = { ...dictOptions, ...termsModules };
+        let titles = [...Object.keys(dictOptions),];
+
         // Sort by count(from dict Options)
-        titles.sort((a, b) => dictOptions[b].count - dictOptions[a].count);
+        titles.sort((a, b) => allTermsModules[b].count - allTermsModules[a].count);
 
         const ms_deck = new AutoComplete({
             name: 'StudyOption',
@@ -374,7 +389,7 @@ class Quizzer {
 
         let deck_selected_key = await ms_deck.run();
 
-        let deck_selected = dictOptions[deck_selected_key].name;
+        let deck_selected = allTermsModules[deck_selected_key].name;
 
         const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
 
@@ -412,12 +427,6 @@ class Quizzer {
 
             const answered_correctly = await this.ask_term_question(card_to_ask, { exitMethod: exitMethod });
             // To here
-
-
-
-            // console.log(answered_correctly);
-            // console.log("Answered");
-            // showProgress(studyScheduler.getCardsToLearn(), studyScheduler.getCardsLearnt());
 
             studyScheduler.solveCard(answered_correctly);
             await studyScheduler.saveCards();
@@ -539,7 +548,7 @@ class Quizzer {
                 ISANSWERCORRECT = response;
 
                 if (is_correct) {
-                    
+
                     const _ = await this.masteryManager.logSkillExperience(term_selected.category, {
                         score: ISANSWERCORRECT ? 1 : 0,
                         deck_id: term_selected.category,

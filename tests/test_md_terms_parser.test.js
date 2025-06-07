@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseMarkdownCards } = require('../src/md_terms_parser.js');
+const { parseMarkdownCards, parseMarkdownIntoDeck, parseMarkdownCardsFromTermsModules} = require('../src/md_terms_parser.js');
 // const fs = require('fs');
 const path = require('path');
 
@@ -44,12 +44,6 @@ describe('parseMarkdownCards', () => {
         assert.strictEqual(result.entries.length, 0);
     });
 
-    it('should handle files with empty prompt and answer', () => {
-        const filePath = path.join(__dirname, 'test_data', 'empty_prompt_answer.md');
-        const result = parseMarkdownCards(filePath);
-        assert.strictEqual(result.entries[0].prompt, null);
-        assert.strictEqual(result.entries[0].answer, '');
-    });
 
     it('should handle multiline answer with ??x x??', () => {
         const filePath = path.join(__dirname, 'test_data', 'multiline_answer_2.md');
@@ -79,7 +73,7 @@ describe('parseMarkdownCards', () => {
         // Term C
         assert.strictEqual(result.entries[2].header, 'Term C');
         assert.strictEqual(result.entries[2].description.startsWith('Only a description for C'), true);
-        assert.strictEqual(result.entries[2].prompt, null);
+        assert.strictEqual(result.entries[2].prompt, 'Term C');
         assert.strictEqual(result.entries[2].answer, '');
     });
 
@@ -98,7 +92,7 @@ describe('parseMarkdownCards', () => {
         });
 
 
-        
+
         assert.deepStrictEqual(result.entries[1], {
             header: 'Third Line',
             description: 'Third Line',
@@ -111,12 +105,51 @@ describe('parseMarkdownCards', () => {
         // Entry without #### but followed by ?x
         assert.deepStrictEqual(result.entries[2], {
             header: 'Fallback header',
-            description: 'Fallback header\n',
-            prompt: null,
+            description: 'Some explanation\nFallback header\n',
+            prompt: 'Fallback header',
             answer: 'Quick answer line',
             reference_line: 6
         });
     });
+
+    it('handle wiki sample', () => {
+
+        const filePath = path.join(__dirname, 'test_data', 'wiki_sample.md');
+        const result = parseMarkdownIntoDeck(filePath, 'botanic');
+    }
+    )
+
+    it('attempt parse module', () => {
+
+
+        const ABOUT = {
+            title: "Flowers",
+            skill_category: "botany",
+            author: "n3wang",
+
+        }
+
+        const CONTENT_FOLDERS = [
+            "wiki"
+        ]
+
+        const CONTENT_FILES = [
+            "00-languages_definitions.md",
+        ]
+
+        const module_exports = {
+            module_path: 'b01-flowers',
+            ABOUT: ABOUT,
+            CONTENT_FOLDERS: CONTENT_FOLDERS,
+            CONTENT_FILES: CONTENT_FILES,
+        }
+
+        const result = parseMarkdownCardsFromTermsModules([module_exports]);
+        // console.log("==========================")
+        // console.log(result);
+
+    })
+
 
 
 });

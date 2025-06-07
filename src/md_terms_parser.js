@@ -1,4 +1,7 @@
 const fs = require('fs');
+const { Term, DeckMask, TermStorage } = require('./structures.js');
+const { getDirAbsoluteUri } = require('./utils_functions.js');
+
 
 function parseMarkdownCards(filePath) {
     const lines = fs.readFileSync(filePath, 'utf-8').split(/\r?\n/);
@@ -10,6 +13,9 @@ function parseMarkdownCards(filePath) {
 
     let i = 0;
     let currentEntry = null;
+
+    let last_connected_paragraph = '';
+    let last_connected_paragraph_line = 0;
 
     while (i < lines.length) {
         const line = lines[i].trim();
@@ -26,12 +32,13 @@ function parseMarkdownCards(filePath) {
             if (currentEntry) {
                 result.entries.push(currentEntry);
             }
+            const header = line.replace(/^#+/, '').trim()
             currentEntry = {
-                header: line.replace(/^#+/, '').trim(),
+                header: header,
                 description: '',
-                prompt: null,
+                prompt: header,
                 answer: '',
-                reference_line: i + 1 
+                reference_line: i + 1
             };
             i++;
             continue;
@@ -43,8 +50,8 @@ function parseMarkdownCards(filePath) {
                 let previousLine = lines[i - 1].trim();
                 currentEntry = {
                     header: previousLine,
-                    description: previousLine,
-                    prompt: null,
+                    description: last_connected_paragraph,
+                    prompt: previousLine,
                     answer: '',
                     reference_line: i
                 };
@@ -65,7 +72,7 @@ function parseMarkdownCards(filePath) {
                 result.entries.push(singleLineEntry);
             }
 
-        } 
+        }
 
         // Prompt line
         if (line.startsWith('?p:') && currentEntry) {
@@ -99,6 +106,21 @@ function parseMarkdownCards(filePath) {
             currentEntry.description += line;
         }
 
+        // if line is empty, finish the connected paragraph
+        if (line === '') {
+            last_connected_paragraph = '';
+            last_connected_paragraph_line = i;
+
+        } else {
+            // if the line is not empty, we can connect it to the last paragraph
+            if (last_connected_paragraph !== '') {
+                last_connected_paragraph += '\n' + line;
+            } else {
+
+                last_connected_paragraph = line;
+            }
+        }
+
         i++;
     }
 
@@ -109,7 +131,108 @@ function parseMarkdownCards(filePath) {
     return result;
 }
 
+function parseMarkdownIntoDeck(filePath, { module_name = 'Markdown Terms Parser', category = "" } = {}) {
+    /**
+     * Return as a list of Term objects
+     */
+
+    const parsedData = parseMarkdownCards(filePath);
+    const termsList = [];
+
+    if (category === "") {
+        category = module_name;
+    }
+
+    for (const entry of parsedData.entries) {
+        const term = new Term(
+            entry.header,
+            entry.answer || '',
+            entry.description || '',
+            entry.prompt || '',
+            {
+                reference_page: filePath,
+                reference_line: entry.reference_line || -1,
+                module_name: module_name,
+                category: category
+            });
+        termsList.push(term);
+    }
+
+    return termsList;
+
+}
+
+function parseMarkdownCardsFromFolder(folderPath) {
+    const files = fs.readdirSync(folderPath);
+    const terms = [];
+    for (const file of files) {
+        const filePath = `${folderPath}/${file}`;
+        if (fs.statSync(filePath).isFile() && file.endsWith('.md')) {
+            const parsedTerms = parseMarkdownIntoDeck(filePath);
+            terms.push(...parsedTerms);
+        }
+    }
+    return terms;
+}
+
+
+function parseMarkdownCardsFromTermsModules(termsModules) {
+    const decks = {};
+    for (const module of termsModules) {
+        const terms = [];
+        if (module.CONTENT_FOLDERS) {
+            for (const folder of module.CONTENT_FOLDERS) {
+                const folderPath = getDirAbsoluteUri(`user_data/terms_modules/${module.module_path}/${folder}`)
+                const parsedTerms = parseMarkdownCardsFromFolder(folderPath);
+                terms.push(...parsedTerms);
+            }
+        }
+        if (module.CONTENT_FILES) {
+            for (const file of module.CONTENT_FILES) {
+                // const filePath = `src/data/user_data/terms_modules/${module.ABOUT.skill_category}/${file}`;
+                const filePath = getDirAbsoluteUri(`user_data/terms_modules/${module.module_path}/${file}`);
+                const parsedTerms = parseMarkdownIntoDeck(filePath, { module_name: module.ABOUT.title, category: module.ABOUT.skill_category });
+                terms.push(...parsedTerms);
+            }
+        }
+        if (module) {
+
+            decks[module.module_path] = new TermStorage(
+                terms, module.ABOUT.skill_category
+            );
+        }
+    }
+    return decks;
+}
+
+
+function retrieve_terms_modules() {
+    const termsModules = {};
+    const termsModulesPath = getDirAbsoluteUri('user_data/terms_modules');
+    const moduleFolders = fs.readdirSync(termsModulesPath).filter(file => fs.statSync(`${termsModulesPath}/${file}`).isDirectory());
+
+    for (const folder of moduleFolders) {
+        const modulePath = `${termsModulesPath}/${folder}/index.js`;
+        if (fs.existsSync(modulePath)) {
+            const moduleExports = require(modulePath);
+            termsModules[moduleExports.module_path] = moduleExports;
+        }
+    }
+    return termsModules;
+}
+
+function retrieve_terms_as_decks() {
+    const termsModules = retrieve_terms_modules();
+    return parseMarkdownCardsFromTermsModules(Object.values(termsModules));
+}
+
+
 
 module.exports = {
-    parseMarkdownCards
+    parseMarkdownCards,
+    parseMarkdownIntoDeck,
+    parseMarkdownCardsFromFolder,
+    parseMarkdownCardsFromTermsModules,
+    retrieve_terms_modules,
+    retrieve_terms_as_decks
 }
