@@ -71,6 +71,12 @@ const Spring2024Related = new DeckMask(
 )
 
 
+
+function getMasksByAlgorithm(){
+
+    return [cloudMask, longTermCareer]
+}
+
 /**
  * 
  * @returns Master Deck containing all the cards
@@ -187,7 +193,8 @@ async function populateMasterDeck() {
 
 
     // decks.applyMasks([engineerMask]);
-    decks.applyMasks([cloudMask, longTermCareer]);
+    const masks = getMasksByAlgorithm();
+    decks.applyMasks(masks);
 
     return decks;
 }

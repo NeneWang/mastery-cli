@@ -1,5 +1,4 @@
 const chalk = require('chalk');
-const axios = require('axios');
 const clipboard = require('copy-paste')
 
 const chart = require('terminal-charter')
@@ -237,45 +236,6 @@ class Mastery {
 		}
 
 
-		let questionEmail = new Input({
-			name: 'email',
-			message: 'What is your email?'
-		});
-
-		const email = await questionEmail.run();
-
-		const res = await axios.post(`${APIDICT.DEPLOYED_MAIDAPI}/cli-login?email=${email}`)
-		console.log('Login data');
-		console.log(res.data);
-
-		// load settings from Json.
-		const settingsManager = new SettingsManager();
-		let current_settings = settingsManager.getSettings();
-
-		const databaseSettings = res?.['settings_json'] ?? {};
-		if (databaseSettings == {}) {
-			console.log("There must been an error in the database");
-			return;
-		}
-
-		const useRemoteDatabasePrompt = new Confirm({
-			name: 'useRemoteDatabase',
-			message: "Use remote database settings (will overwrite local)?",
-			initial: true
-		});
-
-		const useRemoteDatabase = await useRemoteDatabasePrompt.run();
-		// Update current Id and upload the settings database
-
-		if (useRemoteDatabase) {
-			current_settings = databaseSettings;
-		}
-
-		current_settings.account_id = res.data.account_id;
-		settingsManager.saveSettings(current_settings, {
-			overwrite: true
-		});
-
 	}
 
 	say(message, clearOnTalk = this.clearOnTalk) {
@@ -360,11 +320,6 @@ class Mastery {
 			await this.performanceReport();
 		}
 
-		if (Settings?.report_show?.weather ?? false) {
-			this.say(`Weather Report: ${todaydate}`, false)
-			await weatherReport();
-		}
-
 		if (Settings?.report_show?.missing_report) {
 			this.say(`Missing Report: ${todaydate}, dsa enabled: ${true}`, false)
 			await this.provideMissingReport({ ask_if_dsa_missing: Settings?.report_show?.ask_if_algo_missing ?? false });
@@ -402,22 +357,6 @@ class Mastery {
 	 *  */
 	populateMissingReport = async () => {
 
-
-		try {
-			const res = await axios.get(`${APIDICT.DEPLOYED_MAIDAPI}/account/missing_performance_today/${Settings.account_id ?? 1}`)
-			this.missingFeatReport = res.data;
-		}
-		catch (err) {
-			if (DEV_MODE) {
-
-
-				console.log("API call", `${APIDICT.DEPLOYED_MAIDAPI}/account/missing_performance_today/${Settings.account_id ?? 1}`)
-				console.log("Error in populateMissingReport", err)
-				if (Settings.show_http_errors) {
-					console.log(err);
-				}
-			}
-		}
 	}
 
 
@@ -501,149 +440,6 @@ class Mastery {
 
 	performanceReport = async ({ version = "tables" } = {}) => {
 
-		const res = await axios.get(`${APIDICT.DEPLOYED_MAIDAPI}/account/report/${Settings.account_id ?? 1}`, {
-			headers: {
-				'Accept-Encoding': 'application/json'
-			}
-		});
-
-		const feat_rules = getObjectiveFeatures();
-		let userPerformanceData = await res.data;
-
-		function parseDecimalsColumns(userPerformanceData, columns = ["week_average", "week_average_exclude_today"]) {
-
-			for (const column of columns) {
-
-				for (const [key, value] of Object.entries(userPerformanceData?.[column])) {
-					let message = parseFloat(value.toFixed(2));
-					userPerformanceData[column][key] = message;
-				}
-			}
-			return userPerformanceData;
-
-		}
-
-		userPerformanceData = parseDecimalsColumns(userPerformanceData, ["week_average", "week_average_exclude_today"]);
-
-		function updateRequirements(features_accomplished_today, feat_rules, userPerformanceData) {
-			for (const [requirement_key, settings] of Object.entries(feat_rules)) {
-				// Check if it requires a 'day' required performance
-				if (settings.day) {
-					// Then search for the performance, and give the difference between the required and the actual performed
-					const day_requirement = settings.day;
-					const day_performance = userPerformanceData?.["today"]?.[requirement_key] ?? 0;
-					let day_difference = day_requirement - day_performance;
-					if (day_difference < 0) {
-						day_difference = "✅";
-					}
-					features_accomplished_today[`d: ${requirement_key}`] = { miss: day_difference, type: "day", req: day_requirement };
-
-
-				}
-
-				// Check if it requires a 'week' required performance
-				if (settings.week) {
-					// Then search for the performance, and give the difference between the required and the actual performed
-					const week_requirement = settings.week;
-					const week_performance = userPerformanceData?.['week_sum']?.[requirement_key] ?? 0;
-					let week_difference = week_requirement - week_performance;
-					if (week_difference < 0) {
-						week_difference = '✅';
-					}
-					features_accomplished_today[`w: ${requirement_key}`] = { miss: week_difference, type: "week", req: week_requirement };
-				}
-			}
-		}
-
-
-		function filterProperties(userPerformanceData, properties = [], abreviations = { "week_sum_exclude_today": "week_sum_ex", "week_average_exclude_today": "weeK_avg_ex" }) {
-			/**
-			 * e.g. userPerformanceData in:
-			 *  {'2023-05-20': { commits: 2, acad: 2, terms: 4 },
-				today: { test: 12, tesrasd: 2, 'commits}': 6, 'terms}': 10 },
-				month: {
-					commits: 154,
-					feat: 20,
-					math_ss: 24,
-					ref: 1,
-					fix: 3,
-					algo: 2,
-					acad: 18,
-					pro: 16,
-					terms: 686,
-					algo_w: 4,
-					test: 12,
-					tesrasd: 2,
-					'commits}': 6,
-					'terms}': 10
-				}
-				}
-				and properties: [feat]
-				should result in:
-				{'2023-05-20': { feat: 20 },
-				today: { feat: 20 },
-				month: { feat: 20 }
-				}
-			*/
-			// Iterate over the keys of the userPerformanceData object
-			let filteredData = {};
-			for (let date in userPerformanceData) {
-				const naming = abreviations[date] ?? date;
-				// For each key, create a new object that only contains the desired properties
-				filteredData[naming] = properties.reduce((obj, prop) => {
-					// If the current performance data has the current property, add it to the new object
-					if (userPerformanceData[date][prop]) {
-						obj[prop] = userPerformanceData[date][prop];
-					}
-					return obj;
-				}, {});
-			}
-
-			// Return the filtered data
-			return filteredData;
-		}
-
-		// Create the requirements per Day
-		const feat_accomplished_until_today = {};
-		updateRequirements(feat_accomplished_until_today, feat_rules, userPerformanceData);
-
-		// Filter where only userPerformanceData that are highlighted in the table_feat show are allowed "table_feat_show": ["commits", "feat", "algo_w", "pro", "math_ss"],
-		// console.log(userPerformanceData)
-		let filtered_data = filterProperties(userPerformanceData, Settings.table_feat_show);
-
-		/**
-		 * 
-		 * @param {Object} userPerformanceData [{feature_name: 'miss': -2, type: 'day', 'req': 3}...]
-		 * @returns {Object[]} Something like this: [{ name: "STR", value: 4 }, { name: "DEX", value: 1 }, { name: "VIT", value: 6 }, { name: "INT", value: 5 }, { name: "WIS", value: 3 }, { name: "HP", value: 6 } ]
-		 */
-		function computeRadioDict(userPerformanceData) {
-			let radioDict = [];
-			for (const [feature_name, feature_data] of Object.entries(userPerformanceData)) {
-
-				const denominator = typeof (feature_data).miss == 'number' ? feature_data.req - feature_data.miss : feature_data.req;
-				let score = Math.floor((denominator / feature_data.req) * 6);
-				radioDict.push({ name: feature_name, value: score ?? 6 });
-			}
-			return radioDict;
-		}
-
-
-		console.table(filtered_data);
-		console.table(feat_accomplished_until_today);
-		const computed_radio = computeRadioDict(feat_accomplished_until_today);
-		// console.log(computed_radio);
-
-		try {
-			const radarDisplay = radar(computed_radio)
-			console.log(radarDisplay.render)
-			console.log(annotation(radarDisplay.labelsWithColors))
-
-		}
-		catch (err) {
-			// console.log("Error in radar display", err)
-		}
-
-
 	}
 
 
@@ -721,34 +517,11 @@ class Mastery {
 
 		if (serviceSelected == choices[CHOICE_CREDENTIAL].value && Settings.account_settings.access_credentials_enabled) {
 
-			console.log('Retrieve credentials for...')
-			const creds = await axios.get(`${APIDICT.DEPLOYED_MAIDAPI}/services`, {
-				headers: {
-					'Accept-Encoding': 'application/json'
-				}
-			});
-			const credentials = await creds.data;
-			const cred_names = getCredentialNames(credentials)
-			const credentialSelect = new AutoComplete({
-				name: 'credentialSelect',
-				message: 'Which Credential?',
-				choices: cred_names
-			})
-			const credentialNameSelected = await credentialSelect.run()
-			const credentialSelected = getCredentialInformation(credentials, credentialNameSelected);
-			console.log(credentialSelected);
-			console.log(`Password copied to clipboard, ${credentialSelected.password}`)
-			try {
-
-				clipboard.copy(credentialSelected.password)
-			}
-			catch (err) {
-			}
 
 			// Show credentials available
 
 		} else if (serviceSelected == choices[CHOICE_USD_TO_ARS].value) {
-			this.createConversion();
+			
 		} else if (serviceSelected == choices[CHOICE_CURRENCY_EXCHANGE].value) {
 			// Prompt from what to what to exchange.
 
@@ -767,40 +540,10 @@ class Mastery {
 			let fromCurrencySelected = await fromCurrency.run();
 			let toCurrencySelected = await toCurrency.run();
 
-			this.createConversion(fromCurrencySelected, toCurrencySelected);
-
 		}
 		else if (serviceSelected == choices[CHOICE_CREATE_CREDENTIAL].value) {
 
 
-			const question = [
-				{
-					type: 'input',
-					name: 'name',
-					message: 'Service name?'
-				},
-				{
-					type: 'password',
-					name: 'password',
-					message: 'password?'
-				},
-				{
-					type: 'input',
-					name: 'account_user',
-					message: 'account user?'
-				}
-			]
-
-			let answers = await prompt(question)
-
-
-			const dataToPost = { "name": answers.name, "password": answers.password, "account_user": answers.account_user };
-
-			const res = await axios.post(`${APIDICT.DEPLOYED_MAIDAPI}/services`, dataToPost);
-			const response_data = res.data;
-			response_data.password = "*********************";
-			// this.say(response_data);
-			console.log("created service", response_data);
 		}
 		else if (serviceSelected == choices[CHOICE_SWAP_QUOTES].value) {
 			let input = await Input({
@@ -859,23 +602,6 @@ class Mastery {
 
 		}
 
-
-	}
-
-	async createConversion(from = 'USD', to = 'ARS') {
-
-		var config = {
-			method: 'get',
-			url: `${APIDICT.CURRENCY_EXCHANGE}/convert?to=${to}&from=${from}&amount=1`,
-			headers: {
-				'apikey': APIDICT.CURRENCY_EXCHANGE_KEY,
-				'Accept-Encoding': 'application/json'
-			}
-
-		};
-		const res = await axios(config);
-		const exchangeRes = await res.data
-		this.say(`${from} to ${to} during ${exchangeRes.date} is around ${exchangeRes?.info?.rate} ${constants.CURRENCY_SIMBOLS[to]} per ${constants.CURRENCY_SIMBOLS[from]}`)
 
 	}
 
@@ -996,14 +722,7 @@ getArrayLastXDays = (days = 7) => {
  * @returns {"message": f"Success updating {concept_term}, {conceptSelected.correct_times}"}
  */
 updateConcept = withOnlineCheck(async (problem_name, success = true, debug = false, account_id = Settings.account_id ?? 1) => {
-	const URL = `${APIDICT.DEPLOYED_MAIDAPI}/concept_metadata/${problem_name}?success=${success}&account_id=${account_id}`
-	try {
-		const res = await axios.post(URL)
-		if (debug) console.log(res.data)
-	}
-	catch (err) {
-		console.warn('error in updateConcept');
-	}
+
 })
 
 
@@ -1090,34 +809,8 @@ const getToday = () => {
 }
 
 
-const getTalk = async flags => {
-	if (flags.type == 'chuck') {
-		const res = await axios.get(APIDICT.CHUCK, {
-			headers: {
-				'Accept-Encoding': 'application/json'
-			}
-		});
-		message = res.data.value;
-	} else if (flags.type) {
-		message = flags.type;
-	}
-	return message;
-};
 
 
-
-
-const weatherReport = withOnlineCheck(async () => {
-	const res = await axios.get(APIDICT.WEATHER, {
-		headers: {
-			'Accept-Encoding': 'application/json'
-		}
-	});
-	weatherData = new WeatherInformation(res);
-	weatherData.chartWeatherBar()
-
-
-})
 
 class CommitCategoryType {
 	constructor(code, icon_list, feature_name = "") {
@@ -1155,48 +848,7 @@ const getCommitCategories = () => {
 	return commitCategories;
 }
 
-/**
-	 * Based on a term and response written by the user it should post things in the comments based on that.
-		* @param {Term Structure} term_selected: The term which response was answered
-		* @param {str} user_res: Response answered by the user on the terminal
-		* @param {bool} debug ?= False : If to whether to debug api responses, etc.
-	 */
-const postCommentFromTerm = async (term_selected, user_res, debug = false) => {
-	/**Expected Body Structure: for `https://jmmgskxdgn.us-east-1.awsapprunner.com/comment`
-	 * {
-		"account_id": 0,
-		"body": "string",
-		"title": "string",
-		"concept_slug": "string"
-		}
-	 */
 
-	if (debug) console.log("Posting comment", term_selected, user_res)
-
-
-	try {
-
-		const data = {
-			'account_id': Settings.account_id ?? 1, //1
-			'body': user_res ?? "",
-			'title': term_selected ?? "title",
-			'concept_slug': term_selected ?? "slug"
-		}
-
-
-		// axios(
-
-		if (debug) console.log("Comment has been made", data);
-
-
-	} catch (err) {
-		if (debug) console.log("Probably no connection, comment has not been made")
-		// if (debug) {
-		// 	console.log(err)
-		// }
-
-	}
-}
 
 /**
  * Pushes to origin with a commit message
@@ -1249,25 +901,6 @@ const getComments = async (term, count = 5) => {
 		return {}
 	}
 
-	if (term == undefined || term == "") {
-		return {};
-	}
-	const URL = `${APIDICT.DEPLOYED_MAIDAPI}/comment/term/${term}?format_simple=true&limit=${count}`;
-	try {
-		const res = await axios.get(URl, {
-			headers: {
-				'Accept-Encoding': 'application/json'
-			}
-		}
-		);
-
-		return res;
-	}
-	catch (err) {
-		console.log("Error in getComments", URL)
-		return {}
-
-	}
 	return {}
 
 }
@@ -1290,28 +923,6 @@ const printComments = (comments) => {
 }
 
 
-
-/**
- * logs commit message in comments database if category is special
- * @param {string} commitMessage message to commit
- * @param {ECommitCategory} category category of the commit
- * @param {bool} print_previous_commits ?= true : If to whether to print previous commits
- * @param {bool} debug ?= false : If to whether to debug api responses, etc.
- * @returns {List: [date: comment]}
- */
-const logCommitIfSpecialCategory = async (commitMessage, category, comments_to_populate = [], { print_previous_commits = true, debug = false } = {}) => {
-	// if (true) console.log("Logging commit message in comments database?", category.code, special_categories, special_categories.includes(category.code))
-
-	// Log the commit message in the comments database
-	postCommentFromTerm(category.code, commitMessage);
-	const res = await getComments(category?.code ?? "");
-	comments_to_populate = res?.data ?? '';
-	// console.log("comments_to_populate | special category", comments_to_populate)
-
-
-	return comments_to_populate;
-
-}
 
 
 
@@ -1360,8 +971,8 @@ const inreasePerformanceOffline = (feature_name, increaseBY = 1, debug = true) =
 }
 
 module.exports = {
-	getTalk, commitpush, autorelease, printComments,
+	commitpush, autorelease, printComments,
 	Mastery, getToday, FlashQuizzer,
-	commitCategory, logCommitIfSpecialCategory, postCommentFromTerm, getComments,
+	commitCategory, getComments,
 	localStorageInstance
 };

@@ -1,5 +1,4 @@
 const chalk = require('chalk');
-const axios = require('axios');
 const Settings = require('./settings');
 
 
@@ -58,35 +57,6 @@ class Quizzer {
             return get_random_of_size(potential_questions, { count: limit });
         }
 
-        try {
-            // Filter only if they have formula_name property
-            potential_questions = potential_questions.filter(x => x?.formula_name != undefined)
-            const problem_names = potential_questions.map(x => x.formula_name)
-            // Filter only if they have formula_name property again?
-
-
-            if (DEBUG) console.log("problem_names", problem_names)
-            const res = await axios.post(`${APIDICT.DEPLOYED_MAIDAPI}/concept_metadata/youngests/?account_id=${account_id}&limit=${limit}`, problem_names);
-            const response_data = res.data;
-            // if (DEBUG) console.log(response_data)
-            // if (DEBUG) console.log("response_data", response_data);
-            // let potential_questions = potential_questions.filter(formula_name)
-
-            // Filter where they have those.
-            // if (DEBUG) console.log("Response Potentail and response", potential_questions, response_data)
-            potential_questions = potential_questions.filter(question => response_data.indexOf(question.formula_name) !== -1)
-            if (DEBUG) console.log("Response filtered", potential_questions)
-            // return get_random(potential_questions);
-
-        } catch (e) {
-            // Such as no internet connection
-            if (debug) console.warn('Error at getting Youngest')
-
-            Settings.online = false; //Lets mark it as such case for this call.
-
-            // get random 3 list of 3 problems
-            potential_questions = get_random_of_size(potential_questions, { count: limit });
-        }
         return potential_questions;
     }
 
@@ -600,70 +570,6 @@ class Quizzer {
         }
     }
 
-    /**
-     * Print from the term used
-     * @param term :str # Term (slug) used e.g. singleton-pattern
-     */
-    printPreviousTerms = async (term) => {
-        const URL = `${APIDICT.DEPLOYED_MAIDAPI}/comment/term/${term}?format_simple=true&limit=5`;
-        try {
-
-            const res = await axios.get(URL, {
-                headers: {
-                    'Accept-Encoding': 'application/json'
-                }
-            });
-
-            for (const row in res.data) {
-                const obj = res.data[row]
-                console.log(`${chalk.hex(CONSTANTS.CUTEBLUE).inverse(`${Object.keys(obj)?.[0]} ` ?? "date")} ${Object.values(obj)?.[0] ?? "1"}`);
-            }
-        } catch {
-            console.log(`Error attempting to fetch from ${URL}`);
-            console.log('Called for previous term at', URL)
-        }
-
-    }
-
-    /**
-     * Based on a term and response written by the user it should post things in the comments based on that.
-        * @param {Term Structure} term_selected: The term which response was answered
-        * @param {str} user_res: Response answered by the user on the terminal
-        * @param {bool} debug ?= False : If to whether to debug api responses, etc.
-     */
-    async postCommentFromTerm(term_selected, user_res, debug = false) {
-        /**Expected Body Structure: for `https://jmmgskxdgn.us-east-1.awsapprunner.com/comment`
-         * {
-            "account_id": 0,
-            "body": "string",
-            "title": "string",
-            "concept_slug": "string"
-            }
-         */
-        try {
-
-            const data = {
-                'account_id': Settings.account_id ?? 1, //1
-                'body': user_res ?? "",
-                'title': term_selected.term ?? "title",
-                'concept_slug': term_selected.formula_name ?? "slug"
-            }
-
-            axios({
-                method: 'post',
-                url: `${APIDICT.DEPLOYED_MAIDAPI}/comment`,
-                headers: {},
-                data: data
-            });
-
-        } catch (err) {
-            if (DEBUG) console.log("Probably no connection, comment has not been made")
-            if (debug) {
-                console.log(err)
-            }
-        }
-
-    }
 
     async ask_math_question({ exitMethod = () => { } } = {}) {
 

@@ -5,7 +5,6 @@ const { marked } = require('marked');
 const TerminalRenderer = require('marked-terminal');
 const constants = require("./constants");
 const { exec } = require('child_process');
-const axios = require('axios');
 
 const DEBUG = false;
 
