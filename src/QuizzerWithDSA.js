@@ -13,7 +13,8 @@ const utils = require('terminal-charter/lib/utils');
  */
 class QuizzerWithDSA extends Quizzer {
 
-    constructor(questions, enabled, masterDeck, masteryManager) {
+    constructor(questions, enabled,
+         masterDeck, masteryManager) {
 
 
         super(questions, enabled, masterDeck, masteryManager);

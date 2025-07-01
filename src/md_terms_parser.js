@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { Term, DeckMask, TermStorage } = require('./structures.js');
 const { getDirAbsoluteUri } = require('./utils_functions.js');
+const path = require('path');
 
 
 function parseMarkdownCards(filePath) {
@@ -15,6 +16,7 @@ function parseMarkdownCards(filePath) {
     let currentEntry = null;
 
     let last_connected_paragraph = '';
+    let last_line = '';
     let last_connected_paragraph_line = 0;
 
     while (i < lines.length) {
@@ -86,6 +88,18 @@ function parseMarkdownCards(filePath) {
             const isMultiLine = (line === '??x');
             let answerLines = [];
 
+            // if there was an anwsert that means that there is another question and a new rntry should be entered.
+            if (currentEntry.answer !== '') {
+                result.entries.push(currentEntry);
+                currentEntry = {
+                    header: last_line,
+                    description: last_connected_paragraph,
+                    prompt: last_line,
+                    answer: '',
+                    reference_line: i + 1
+                };
+            }
+
             i++;
             while (i < lines.length) {
                 const answerLine = lines[i];
@@ -101,7 +115,7 @@ function parseMarkdownCards(filePath) {
         }
 
         // Description block (multi-line before ?x or ?p or next ####)
-        if (currentEntry && !line.startsWith('?') && !line.startsWith('####')) {
+        if (currentEntry?.answer == '' && currentEntry && !line.startsWith('?') && !line.startsWith('####')) {
             if (currentEntry.description !== '') currentEntry.description += '\n';
             currentEntry.description += line;
         }
@@ -122,6 +136,7 @@ function parseMarkdownCards(filePath) {
         }
 
         i++;
+        last_line = line; 
     }
 
     if (currentEntry) {
@@ -163,36 +178,140 @@ function parseMarkdownIntoDeck(filePath, { module_name = 'Markdown Terms Parser'
 
 }
 
-function parseMarkdownCardsFromFolder(folderPath) {
+function parseMarkdownCardsFromFolder(folderPath, { module_name = '', category = "" } = {}) {
     const files = fs.readdirSync(folderPath);
     const terms = [];
     for (const file of files) {
         const filePath = `${folderPath}/${file}`;
         if (fs.statSync(filePath).isFile() && file.endsWith('.md')) {
-            const parsedTerms = parseMarkdownIntoDeck(filePath);
+            const parsedTerms = parseMarkdownIntoDeck(filePath, {
+                module_name: module_name,
+                category: category
+            });
             terms.push(...parsedTerms);
         }
     }
     return terms;
 }
 
-
-function parseMarkdownCardsFromTermsModules(termsModules) {
+function parseMarkdownCardsFromTermsModules(termsModules, { useCacheIfNotFound = true } = {}) {
     const decks = {};
     for (const module of termsModules) {
         const terms = [];
+        const moduleCacheDir = getDirAbsoluteUri(`user_data/terms_modules/${module.module_path}/cache_md`); // Cache directory for markdown files
+        const moduleCacheJson = getDirAbsoluteUri(`user_data/terms_modules/${module.module_path}/cache.json`); // Cache file for terms
+
+        const shouldCacheContent = module.CACHE_CONTENT !== false; // Default to true if not explicitly false
+
+        // Ensure cache directory exists
+        if (shouldCacheContent && !fs.existsSync(moduleCacheDir)) {
+            fs.mkdirSync(moduleCacheDir, { recursive: true });
+        }
+
         if (module.CONTENT_FOLDERS) {
             for (const folder of module.CONTENT_FOLDERS) {
-                const folderPath = getDirAbsoluteUri(`user_data/terms_modules/${module.module_path}/${folder}`)
-                const parsedTerms = parseMarkdownCardsFromFolder(folderPath);
+                const folderPath = getDirAbsoluteUri(`user_data/terms_modules/${module.module_path}/${folder}`);
+                const parsedTerms = parseMarkdownCardsFromFolder(folderPath, {
+                    module_name: module.ABOUT.title,
+                    category: module.ABOUT.skill_category
+                });
                 terms.push(...parsedTerms);
             }
         }
+
+        if (module.EXTERNAL_CONTENT_FOLDERS) {
+            let folderExists = false;
+            for (const folder of module.EXTERNAL_CONTENT_FOLDERS) {
+                // for now print the content on that folder
+
+                console.log(`External folder: ${folder}`);
+
+                if (!fs.existsSync(folder)) {
+                    console.warn(`External folder ${folder} does not exist. Attepting to use cache.`);
+                    continue;
+                } else {
+                    // If at least one folder exists, we can set the flag
+                    folderExists = true;
+                }
+
+                const folderPath = folder;
+                const parsedTerms = parseMarkdownCardsFromFolder(folderPath, {
+                    module_name: module.ABOUT.title,
+                    category: module.ABOUT.skill_category
+                });
+                terms.push(...parsedTerms);
+
+                // Cache the markdown files
+                if (shouldCacheContent) {
+                    const files = fs.readdirSync(folderPath);
+                    for (const file of files) {
+                        const filePath = path.join(folderPath, file);
+                        if (fs.statSync(filePath).isFile() && file.endsWith('.md')) {
+                            const cachedFilePath = path.join(moduleCacheDir, path.basename(filePath));
+                            if (useCacheIfNotFound && !fs.existsSync(cachedFilePath)) {
+
+                                fs.writeFileSync(cachedFilePath, fs.readFileSync(filePath, 'utf-8')); // Cache the markdown file
+                                console.log(`Caching markdown file: ${cachedFilePath}`);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (useCacheIfNotFound) {
+                let targetCacheLocation = getDirAbsoluteUri(`user_data/terms_modules/${module.module_path}/cache.json`);
+                if (!folderExists) {
+                    console.warn(`No external folders found for module ${module.ABOUT.title}. Using cache.`);
+
+                    if (!fs.existsSync(targetCacheLocation)) {
+                        console.warn(`Cache file ${targetCacheLocation} does not exist. Skipping.`);
+                        continue;
+                    }
+                    console.warn(`Loading terms from cache file: ${targetCacheLocation}`);
+                    // Load the terms from the cache file
+                    const cacheFileContent = fs.readFileSync(targetCacheLocation, 'utf-8');
+                    const cachedTerms = JSON.parse(cacheFileContent);
+                    for (const termData of cachedTerms) {
+                        // const cachedFilePath = path.join(moduleCacheDir, path.basename(termData.reference_page)); // Construct the cached file path
+                        // console.log(`Creating term from cached file: ${cachedFilePath}`);
+                        const term = new Term(
+                            termData.term,
+                            termData.example || '',
+                            termData.description || '',
+                            termData.prompt || '',
+                            {
+                                reference_page: termData.reference_page, // Use the cached file path
+                                reference_line: termData.reference_line || -1,
+                                module_name: module.ABOUT.module_name,
+                                category: module.ABOUT.category
+                            }
+                        );
+                        terms.push(term);
+                    }
+                }
+                else {
+                    // save the terms to a cache file
+                    const cacheFilePath = targetCacheLocation;
+                    // modify the cache file to include the module name and category
+                    for (const term of terms) {
+                        const cachedFilePath = path.join(moduleCacheDir, path.basename(term.reference_page)); // Construct the cached file path
+                        term.reference_page = cachedFilePath; // Update the reference page to the cached file path
+                    }
+                    fs.writeFileSync(cacheFilePath, JSON.stringify(terms, null, 2));
+                }
+            }
+
+
+        }
+
         if (module.CONTENT_FILES) {
             for (const file of module.CONTENT_FILES) {
-                // const filePath = `src/data/user_data/terms_modules/${module.ABOUT.skill_category}/${file}`;
                 const filePath = getDirAbsoluteUri(`user_data/terms_modules/${module.module_path}/${file}`);
-                const parsedTerms = parseMarkdownIntoDeck(filePath, { module_name: module.ABOUT.title, category: module.ABOUT.skill_category });
+
+                // Check if the markdown file is cached
+                // const cachedFilePath = path.join(moduleCacheDir, path.basename(filePath));
+                let parsedTerms;
+                parsedTerms = parseMarkdownIntoDeck(filePath, { module_name: module.ABOUT.title, category: module.ABOUT.skill_category });
                 terms.push(...parsedTerms);
             }
         }
@@ -205,7 +324,6 @@ function parseMarkdownCardsFromTermsModules(termsModules) {
     }
     return decks;
 }
-
 
 function retrieve_terms_modules() {
     const termsModules = {};

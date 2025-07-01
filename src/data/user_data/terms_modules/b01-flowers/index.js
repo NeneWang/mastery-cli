@@ -12,8 +12,12 @@ const CONTENT_FOLDERS = [
 ]
 
 
-const CONTENT_FILES =[
+const CONTENT_FILES = [
     "00-languages_definitions.md",
+]
+
+const EXTERNAL_CONTENT_FOLDERS = [
+    "E:\\Documents\\obsidian\\general-docs-public\\4 - academia-project\\K1 - cfa"
 ]
 
 module.exports = {
@@ -22,6 +26,7 @@ module.exports = {
     ABOUT: ABOUT,
     CONTENT_FOLDERS: CONTENT_FOLDERS,
     CONTENT_FILES: CONTENT_FILES,
+    EXTERNAL_CONTENT_FOLDERS: EXTERNAL_CONTENT_FOLDERS
 }
 
 

@@ -1,9 +1,12 @@
 {
   "show_http_errors": false,
   "dev_mode": false,
-  "online":false,
+  "online": false,
   "quiz_enabled": [
     "term"
+  ],
+  "external_term_modules": [
+    "E:\\Documents\\obsidian\\general-docs-public\\4 - academia-project\\K1 - cfa"
   ],
   "dsa_language_mode": "PSEUDOCODE",
   "terms_force_mode_cards": 3,

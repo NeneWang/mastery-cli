@@ -2,6 +2,7 @@ const assert = require('assert');
 const { parseMarkdownCards, parseMarkdownIntoDeck, parseMarkdownCardsFromTermsModules} = require('../src/md_terms_parser.js');
 // const fs = require('fs');
 const path = require('path');
+const { EXTERNAL_CONTENT_FOLDERS } = require('../src/data/user_data/terms_modules/b01-flowers/index.js');
 
 describe('parseMarkdownCards', () => {
     it('should parse a simple markdown file', () => {
@@ -145,10 +146,24 @@ describe('parseMarkdownCards', () => {
         }
 
         const result = parseMarkdownCardsFromTermsModules([module_exports]);
-        // console.log("==========================")
-        // console.log(result);
+    });
 
-    })
+    it('should parse from external folder', () => {
+        
+        const ABOUT = {
+            title: "Flowers",
+            skill_category: "botany",
+            author: "n3wang",
+
+        }
+        const module_exports = {
+            ABOUT: ABOUT,
+            EXTERNAL_CONTENT_FOLDERS: ['E:\\Documents\\obsidian\\general-docs-public\\4 - academia-project\\K1 - cfa\\Kaplan notes']
+        }
+        const result = parseMarkdownCardsFromTermsModules([module_exports]);
+        console.log("========= RESULT =========");
+        console.log(result);
+    });
 
 
 

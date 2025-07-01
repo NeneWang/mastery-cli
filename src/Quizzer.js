@@ -32,7 +32,8 @@ const DEBUG = false
 
 class Quizzer {
 
-    constructor(qmathformulas, qmathenabled, masterDeck, masteryManager) {
+    constructor(qmathformulas, qmathenabled,
+         masterDeck, masteryManager) {
 
         const terms = []
         terms.push(...masterDeck.listTerms());
@@ -363,7 +364,7 @@ class Quizzer {
     }
 
 
-    study_session = async (masterDeck = this.masterDeck) => {
+    study_session = async (masterDeck = this.masterDeck, {reverse=false, size_study_deck=-1}= {}) => {
         //Pick a term deck Suppose is given
 
         // For now just load a new one everytime.
@@ -391,8 +392,10 @@ class Quizzer {
 
         let deck_selected = allTermsModules[deck_selected_key].name;
 
-        const selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
-
+        let selected_terms = masterDeck.listTerms({ get_only: [deck_selected] });
+        // if (reverse) {
+            selected_terms = selected_terms.reverse();
+        // }   
         const studyScheduler = new TermScheduler({ cards_category: deck_selected });
 
         await studyScheduler.setLearningCards(selected_terms); // Populate the right cards.

@@ -108,6 +108,7 @@ class FeatureExtraction {
 const { get } = require('node:http');
 const { strict } = require('node:assert');
 const { parse } = require('node:path');
+const { reverse } = require('node:dns');
 
 function withOnlineCheck(fn) {
 	return async function (...args) {
@@ -183,6 +184,11 @@ class Mastery {
 			'term': () => { this.mQuizer.pick_and_ask_term_question() },
 			'clean': () => { this.askToClean() },
 			'ses': () => { this.mQuizer.study_session() },
+			'lastses': () => {
+				this.mQuizer.study_session(
+					{ reverse: true }
+				)
+			},
 			'cses': () => { this.mQuizer.cloze_study_session() },
 			'mcses': () => {
 				this.mQuizer.cloze_study_session({

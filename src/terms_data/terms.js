@@ -186,8 +186,6 @@ async function populateMasterDeck() {
     decks.addDeck(new TermStorage(analysisAlgorithmClass, "analysisAlgorithmClass"));
 
 
-    // decks.applyMasks([engineerMask]);
-    decks.applyMasks([cloudMask, longTermCareer]);
 
     return decks;
 }
