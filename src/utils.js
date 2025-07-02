@@ -165,7 +165,7 @@ class Mastery {
 
 				const run = async () => {
 
-					this.pushOriginHead();
+					pushOriginHead();
 					this.increasePerformance('feat', { score: 1 });
 					if (Settings.ask_quiz_when_commit) {
 						await this.mQuizer.askQuestion();

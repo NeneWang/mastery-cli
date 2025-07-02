@@ -88,7 +88,6 @@ function parseMarkdownCards(filePath) {
 
             // if there was an anwsert that means that there is another question and a new rntry should be entered.
             if (currentEntry.answer !== '') {
-                result.entries.push(currentEntry);
                 currentEntry = {
                     header: last_line,
                     description: last_connected_paragraph,
@@ -109,9 +108,7 @@ function parseMarkdownCards(filePath) {
                 i++;
             }
             currentEntry.answer = answerLines.join('\n');
-             if (currentEntry) {
-                result.entries.push(currentEntry);
-            }
+            
             continue;
         }
 
