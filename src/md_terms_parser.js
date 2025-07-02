@@ -30,10 +30,8 @@ function parseMarkdownCards(filePath) {
         }
 
         // New entry
-        if (line.startsWith('####')) {
-            if (currentEntry) {
-                result.entries.push(currentEntry);
-            }
+        if (line.startsWith('####') || line.startsWith('###') || line.startsWith('##')) {
+           
             const header = line.replace(/^#+/, '').trim()
             currentEntry = {
                 header: header,
@@ -77,7 +75,7 @@ function parseMarkdownCards(filePath) {
         }
 
         // Prompt line
-        if (line.startsWith('?p:') && currentEntry) {
+        if ((line.startsWith('?p:') || line.startsWith('p:') || line.startsWith(':p')) && currentEntry) {
             currentEntry.prompt = line.slice(3).trim();
             i++;
             continue;
@@ -111,6 +109,9 @@ function parseMarkdownCards(filePath) {
                 i++;
             }
             currentEntry.answer = answerLines.join('\n');
+             if (currentEntry) {
+                result.entries.push(currentEntry);
+            }
             continue;
         }
 
@@ -153,14 +154,16 @@ function parseMarkdownIntoDeck(filePath, { module_name = 'Markdown Terms Parser'
 
     const parsedData = parseMarkdownCards(filePath);
     const termsList = [];
+    const filename = path.basename(filePath);
 
     if (category === "") {
         category = module_name;
     }
-    console.log(`Parsing terms from ${filePath}#23 in category: ${category}`);
+    let entry_number = 0;
     for (const entry of parsedData.entries) {
+        entry_number++;
         const term = new Term(
-            entry.header,
+            `${entry_number} - ${entry.header}`,
             entry.answer || '',
             entry.description || '',
             entry.prompt || '',
@@ -168,7 +171,7 @@ function parseMarkdownIntoDeck(filePath, { module_name = 'Markdown Terms Parser'
                 reference_page: filePath,
                 reference_line: entry.reference_line || -1,
                 module_name: module_name,
-                category: category
+                category: filename.replace('.md', '').replace(/ /g, '').replace(/[^a-zA-Z]/g, '')
             });
             // console.log("created new terms", term);
         termsList.push(term);
@@ -292,12 +295,23 @@ function parseMarkdownCardsFromTermsModules(termsModules, { useCacheIfNotFound =
                 else {
                     // save the terms to a cache file
                     const cacheFilePath = targetCacheLocation;
+                    const cachedTerms = terms.map(term => ({
+                        term: term.term,
+                        example: term.example,
+                        description: term.description,
+                        prompt: term.prompt,
+                        reference_page: term.reference_page, // Use the cached file path
+                        reference_line: term.reference_line || -1,
+                        module_name: term.module_name,
+                        category: term.category
+                    }));
+
                     // modify the cache file to include the module name and category
-                    for (const term of terms) {
+                    for (const term of cachedTerms) {
                         const cachedFilePath = path.join(moduleCacheDir, path.basename(term.reference_page)); // Construct the cached file path
                         term.reference_page = cachedFilePath; // Update the reference page to the cached file path
                     }
-                    fs.writeFileSync(cacheFilePath, JSON.stringify(terms, null, 2));
+                    fs.writeFileSync(cacheFilePath, JSON.stringify(cachedTerms, null, 2));
                 }
             }
 

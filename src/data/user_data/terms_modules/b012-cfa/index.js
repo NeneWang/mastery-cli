@@ -8,7 +8,7 @@ const ABOUT = {
 
 
 const EXTERNAL_CONTENT_FOLDERS = [
-    "E:\\Documents\\obsidian\\general-doccs-public\\4 - academia-project\\K1 - cfa\\Kaplan notes"
+    "E:\\Documents\\obsidian\\general-docs-public\\content\\K1 - cfa\\Kaplan notes"
 ]
 
 module.exports = {
